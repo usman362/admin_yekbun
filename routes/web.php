@@ -100,6 +100,13 @@ use App\Models\Story;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('test',function(){
+    App\Models\Ringtone::create([
+        'fileName' => '1',
+        'filePath' => '2',
+        'fileSize' => '3'
+    ]);
+});
 
 $controller_path = 'App\Http\Controllers';
 
