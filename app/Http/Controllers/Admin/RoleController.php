@@ -56,8 +56,8 @@ class RoleController extends Controller
         $validated = $request->validated();
 
         $role = Role::find($id);
-        if ($role->name === 'Super Admin')
-            abort(403);
+        // if ($role->name === 'Super Admin')
+        //     abort(403);
         $role->fill($validated);
         $role->syncPermissions($validated['permissions']?? []);
         $role->save();

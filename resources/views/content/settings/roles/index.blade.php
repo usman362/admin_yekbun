@@ -43,9 +43,9 @@
         <div class="d-flex justify-content-between align-items-end">
           <div class="role-heading">
             <h4 class="mb-1">{{ $role->name }}</h4>
-            @if ($role->name !== 'Super Admin')
+            {{-- @if ($role->name !== 'Super Admin') --}}
             <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#editRoleModal{{ $role->id }}" class="role-edit-modal"><small>Edit Role</small></a>
-            @endif
+            {{-- @endif --}}
           </div>
           @if ($role->name !== 'Super Admin')
           <form action="{{ route('settings.team.roles.destroy', $role->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="POST">
