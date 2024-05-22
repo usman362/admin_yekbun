@@ -1,8 +1,3 @@
-<style>
-    .select2-container {
-        z-index: 5000;
-    }
-</style>
 <form id="editForm{{ $donation->id }}" action="{{ route('donations.update', $donation->id) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf

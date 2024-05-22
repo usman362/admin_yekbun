@@ -4,11 +4,6 @@
 
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-icons.css')}}" />
-<style>
-    .select2-container {
-        z-index: 5000;
-    }
-</style>
 @endsection
 
 @section('vendor-style')

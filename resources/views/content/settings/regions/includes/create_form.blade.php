@@ -28,8 +28,10 @@
     </div>
 </form>
 
+@push('scripts')
 <script>
-    window.addEventListener('load', function () {
+    $(document).ready(function(){
         $("#inputCountryId").select2();
     });
 </script>
+@endpush

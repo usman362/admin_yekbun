@@ -1,7 +1,4 @@
 <style>
-    .select2-container {
-        z-index: 5000;
-    }
     .select2-container--default .select2-selection--single .select2-selection__arrow b{
       border-style: none;
     }
@@ -41,21 +38,21 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-              
-                
+
+
                    <div class="col-md-12">
                     <label class="form-label" for="fullname">Status</label>
                     <select class="form-select" aria-label="Default select example" name="status">
                         <option selected value="">Select</option>
                         <option value="0">UnPublish</option>
                         <option value="1">Publish</option>
-                        
+
                     </select>
                     @error('status')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-  
+
             </div>
         </div>
     </div>

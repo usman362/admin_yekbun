@@ -5,11 +5,6 @@
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-icons.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
-<style>
-    .select2-container {
-        z-index: 5000;
-    }
-</style>
 @endsection
 
 @section('vendor-script')
@@ -145,7 +140,7 @@
                     <option>reason5</option>
                 </select>
               </x-modal>
-       
+
             </td>
           </tr>
           @empty

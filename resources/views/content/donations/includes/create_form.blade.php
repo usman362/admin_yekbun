@@ -1,8 +1,3 @@
-<style>
-    .select2-container {
-        z-index: 5000;
-    }
-</style>
 <form id="createForm" action="{{ route('donations.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="showCreateFormModal" value="1">
