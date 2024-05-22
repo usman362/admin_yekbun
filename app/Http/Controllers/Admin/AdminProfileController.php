@@ -31,7 +31,9 @@ class AdminProfileController extends Controller
         $profile->last_name = $request->last_name;
         $profile->email  = $request->email;
         $profile->phone  = $request->phone;
-        $profile->password  = Hash::make($request->password);
+        if(!empty($request->password) && $request->password !== ""){
+            $profile->password  = Hash::make($request->password);
+        }
         // unlink($profile->image);
         if($request->has('image')){
             $image_path = Helpers::fileUpload($request->image,'images/user');
