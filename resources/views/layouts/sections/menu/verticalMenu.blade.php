@@ -82,17 +82,17 @@ $configData = Helper::appClasses();
       <ul class="menu-sub">
         <li class="menu-item  {{ Request::is('users/standard') ? 'active' : '' }}">
           <a href="{{url('/users/standard')}}" class="menu-link">
-            <div>Standard</div>
+            <div>Educated Users</div>
           </a>
         </li>
         <li class="menu-item  {{ Request::is('users/premium') ? 'active' : '' }}">
           <a href="{{url('/users/premium')}}" class="menu-link">
-            <div>Premium</div>
+            <div>Cultivated Users</div>
           </a>
         </li>
         <li class="menu-item  {{ Request::is('users/vip') ? 'active' : '' }}">
           <a href="{{url('/users/vip')}}" class="menu-link">
-            <div>VIP</div>
+            <div>Academic Users</div>
           </a>
         </li>
         <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }}">
