@@ -34,14 +34,17 @@ class PermissionsSeeder extends Seeder
         }
 
         // Create super admin
-        $superadmin = User::where('email', 'superadmin@gmail.com')->first();
+        $superadmin = User::where('email', 'admin@gmail.com')->first();
         if(! $superadmin) {
             $superadmin = User::create([
                 'name' => 'Super Admin',
-                'email' => 'superadmin@gmail.com',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('123456'),
-                'is_admin_user' => true,
-                'is_superadmin' => true,
+                'is_admin_user' => 1,
+                'is_superadmin' => 1,
+                'status' => 1,
+                'level' => 1,
+                "is_verfied" => 1,
             ]);
         }
 
