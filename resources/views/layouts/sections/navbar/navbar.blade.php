@@ -486,7 +486,7 @@ $navbarDetached = ($navbarDetached ?? '');
                                 data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
                                     <img src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != "NULL" ? asset('storage/'.Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
-                                        alt class="w-px-40 h-auto rounded-circle">
+                                        alt class="w-px-40 h-px-40 rounded-circle">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -496,7 +496,7 @@ $navbarDetached = ($navbarDetached ?? '');
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
                                                     <img src="{{ Auth::user() && Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
-                                                        alt class="w-px-40 h-auto rounded-circle">
+                                                        alt class="w-px-40 h-px-40 rounded-circle">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
