@@ -64,8 +64,8 @@ class RingtoneController extends Controller
                 } catch (\Throwable $e) {
                     return back()->with('success', $response_msg.' ringtone has been updated');
                 }
-                return back()->with('success', $response_msg.' ringtone has been updated');
             }
+            return back()->with('success', $response_msg.' ringtone has been updated');
         } else {
             return redirect()->back();
         }
@@ -95,8 +95,9 @@ class RingtoneController extends Controller
         $ringtone = Ringtone::find($id);
         try {
             $ringtone->delete();
-        } catch (\Throwable $e) {
             return back()->with('success', 'Ringtone has been deleted');
+        } catch (\Exception $e) {
+            return back()->with('error', $e);
         }
     }
 }
