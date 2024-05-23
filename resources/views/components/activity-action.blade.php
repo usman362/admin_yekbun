@@ -32,7 +32,7 @@ try{
     } elseif (in_array($event, $modelEvents)) {
         $subjectTypeArr = explode("\\", $action->subject_type);
         $subjectName = $subjectTypeArr[count($subjectTypeArr) - 1];
-        
+
         $causerName = auth()->user()->id === $causer->id? 'you': $causer->name;
         $name = "<strong><i>$subjectName</i></strong> $event by <strong>{$causerName}</strong>";
     }
@@ -56,7 +56,7 @@ try{
             </div> -->
             <div class="d-flex justify-content-start align-items-center user-name">
                 <div class="avatar-wrapper">
-                    <div class="avatar avatar-sm me-3"><img src="{{$causer->image? url('storage/' . $causer->image): 'https://www.w3schools.com/howto/img_avatar.png' }}" alt="Avatar" class="rounded-circle"></div>
+                    <div class="avatar avatar-sm me-3"><img src="{{$causer->image ? asset('storage/' . $causer->image): 'https://www.w3schools.com/howto/img_avatar.png' }}" alt="Avatar" class="rounded-circle"></div>
                 </div>
                 <div class="d-flex flex-column">
                     <a href="javascript:void(0)" class="text-body text-truncate">

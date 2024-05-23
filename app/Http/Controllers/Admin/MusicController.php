@@ -96,25 +96,21 @@ class MusicController extends Controller
         ]);
 
         //   $music_implode = implode('' , $request->audio_paths);
-        $music = new Music();
-        $music->category_id = $request->category_id;
-        $music->artist_id = $request->artist_id;
-        $music->audio = $request->audio_paths ?? [];
-        $music->status = $request->status;
-        $music->type = $request->type;
+        try {
+            foreach($request->audio_paths as $audioPath){
+                $music = new Music();
+                $music->category_id = $request->category_id;
+                $music->artist_id = $request->artist_id;
+                $music->audio = $audioPath ?? [];
+                $music->status = $request->status;
+                $music->type = $request->type;
+                $music->save();
+            }
 
-        if ($music->save()) {
-            if ($type == 'music') {
-                return redirect()->back()->with('success', 'Music Has been inserted');
-            } else {
-                return redirect()->back()->with('success', 'Songs Has been inserted');
-            }
-        } else {
-            if ($type == 'music') {
-                return redirect()->back()->with('error', 'Failed to add music');
-            } else {
-                return redirect()->back()->with('error', 'Failed to add sogns');
-            }
+            return redirect()->back()->with('success', $type.' Has been inserted');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add '.$type);
         }
     }
 

@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Song</label>
-                    <input type="file" name="audio" class="form-control" id="audioFile" accept="audio/*" multiple />
+                    <input type="file" name="audio[]" class="form-control" id="audioFile" accept="audio/*" multiple />
                     @error('video')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
