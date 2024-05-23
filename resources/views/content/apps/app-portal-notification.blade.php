@@ -28,7 +28,7 @@
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/js/app-ecommerce-product-list.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/app-ecommerce-product-list.js') }}"></script> --}}
 @endsection
 
 @section('content')
@@ -44,7 +44,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                   
+
                     <div class="card">
                         <!-- Notifications -->
                         <h5 class="card-header">Recent Devices</h5>

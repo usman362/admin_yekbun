@@ -2198,11 +2198,24 @@ $configData = Helper::appClasses();
         <div>App Info</div>
       </a>
     </li>
-    <li class="menu-item {{ Request::is('settings/app-setting/ringtone') ? 'active' : '' }}">
-      <a href="{{route('settings.appsetting.ringtone.index')}}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-music"></i>
-        <div>Add Ringtone</div>
-      </a>
+
+    <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active open' : (Request::is('settings/app-setting/call-ringtone') ? 'active open' : '') }}" style="">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-devices"></i>
+            <div>Add Ringtone</div>
+        </a>
+        <ul class="menu-sub">
+            <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active' : '' }}">
+                <a href="{{ route('settings.appsetting.message.ringtone') }}" class="menu-link">
+                    <div>Message Ringtone</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('settings/app-setting/call-ringtone') ? 'active' : '' }} ">
+                <a href="{{ route('settings.appsetting.call.ringtone') }}" class="menu-link">
+                    <div>Calls Ringtone</div>
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="menu-item {{ Request::is('settings/app-setting/maintainance') ? 'active' : '' }}">

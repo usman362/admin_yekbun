@@ -52,7 +52,7 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Language</th> 
+            <th>Language</th>
             <th>Translation</th>
           </tr>
         </thead>
@@ -96,7 +96,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              
+
             </div>
         </div>
     </div>
@@ -115,12 +115,12 @@
 </script>
 
 {{-- Create Vote model --}}
-{{-- <x-modal 
-id="createvotingModal" 
+{{-- <x-modal
+id="createvotingModal"
 title="Create Vote"
-saveBtnText="Create" 
+saveBtnText="Create"
 saveBtnType="submit"
-saveBtnForm="createForm" 
+saveBtnForm="createForm"
 size="lg">
  @include('content.include.voting.createForm')
 </x-modal> --}}

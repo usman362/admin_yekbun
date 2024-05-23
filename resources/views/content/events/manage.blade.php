@@ -28,7 +28,7 @@
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{asset('assets/js/app-ecommerce-product-list.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/app-ecommerce-product-list.js')}}"></script> --}}
 @endsection
 
 @section('content')
@@ -117,9 +117,9 @@
                 </div>
             </div>
 
-      
+
      <div style="margin-left: 20px;"  class="card">
-  
+
       <ul class="nav nav-tabs nav-fill" role="tablist">
       <li class="nav-item" role="presentation">
         <a type="button" class="nav-link {{ $view === 'new_request'? 'active': '' }}" href="?view=new_request" aria-selected="true"><i class="tf-icons bx bxs-edit me-1"></i> Active Events</a>
@@ -129,7 +129,7 @@
         <a type="button" class="nav-link {{ $view === 'request_on_hold'? 'active': '' }}" href="?view=request_on_hold" aria-selected="false" tabindex="-1"><i class="tf-icons bx bxs-edit me-1"></i> Blocked Events</a>
         <div class="{{ $view === 'request_on_hold'? 'tab--selected': '' }} tab__slider"></div>
       </li>
-     
+
     </ul>
         <div class="card-datatable table-responsive">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -188,18 +188,18 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                                
-                                
-                                
-                               
-                           
+
+
+
+
+
+
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
-                            
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
+
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
-                              
+
                               </td>
                         </tr>
                         <tr class="even">
@@ -225,9 +225,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
                         </tr>
@@ -254,9 +254,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
                         </tr>
@@ -283,9 +283,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
                         </tr>
@@ -312,12 +312,12 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                              
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
-                            
-                        
+
+
                               </td>
                         </tr>
                         <tr class="even">
@@ -343,9 +343,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
                         </tr>
@@ -372,9 +372,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                              
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
                         </tr>
@@ -401,8 +401,8 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                 
-                               
+
+
                             <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
@@ -430,13 +430,13 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                
-                       
-                                
-                                
-                                 
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+
+
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
                               </td>
                         </tr>
@@ -463,11 +463,11 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                   
-                               
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+
+
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                               <button type="submit" class="btn btn-sm btn-icon removebtnn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title=""><i class="bx bx-trash me-1 "></i></button>
-                              
+
                               </td>
                         </tr>
                     </tbody>
@@ -514,9 +514,9 @@
                            <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -543,9 +543,9 @@
                              <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -572,9 +572,9 @@
                               <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -601,9 +601,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -630,9 +630,9 @@
                              <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -659,9 +659,9 @@
                            <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -688,9 +688,9 @@
                              <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -717,9 +717,9 @@
                              <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -746,9 +746,9 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
@@ -775,19 +775,19 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--<button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a> 
+                                <a href="#"><button type="button" class="btn p-1 history_category_image"><i class="bx bx-check"></i></button></a>
                                  <!--<input type="file" id="history_category_image" class="form-control history_category_image" placeholder="Category Name" name="history_category_image">-->
-                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> 
+                            <a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a>
                                 <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>
                               </td>
                         </tr>
                     </tbody>
                 </table>
                 @endif
-             
+
             </div>
         </div>
-        
+
         <!-- Offcanvas to add new customer -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEcommerceCustomerAdd" aria-labelledby="offcanvasEcommerceCustomerAddLabel">
             <div class="offcanvas-header">
@@ -916,7 +916,7 @@
 <script>
     // function confirmAction(event, callback) {
         $(".removebtnn").click(function(){
-      
+
         Swal.fire({
             title: 'Are you sure?'
             , text: "Are you sure you want to delete this?"
@@ -958,10 +958,10 @@ $(".history_category_image").click(function(){
         callback();
       }
     });
-    
-    
+
+
     });
-  
+
 
 </script>
     <script>
@@ -991,8 +991,8 @@ $(".history_category_image").click(function(){
         }
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-    
-    
+
+
         <x-modal
 id="requestpopup"
 title="Detail of Air Jordan"

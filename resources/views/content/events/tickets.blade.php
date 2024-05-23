@@ -28,7 +28,7 @@
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{asset('assets/js/app-ecommerce-product-list.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/app-ecommerce-product-list.js')}}"></script> --}}
 @endsection
 
 @section('content')
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
 
 
 <div class="card">
-   
+
         <div class="card-datatable table-responsive">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                 <div class="card-header d-flex flex-wrap py-3 justify-content-between">
@@ -162,9 +162,9 @@
                               <td></td>
                                 <td></td>
                             <td>
-                        
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
-                                
+
                               </td>
                         </tr>
                         <tr class="even">
@@ -189,7 +189,7 @@
                               <td></td>
                                 <td></td>
                             <td>
-                          
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
                               </td>
                         </tr>
@@ -215,7 +215,7 @@
                               <td></td>
                                 <td></td>
                             <td>
-                        
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
                               </td>
                         </tr>
@@ -241,7 +241,7 @@
                               <td></td>
                                 <td></td>
                             <td>
-                        
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
                               </td>
                         </tr>
@@ -267,7 +267,7 @@
                               <td></td>
                                 <td></td>
                             <td>
-                        
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
                               </td>
                         </tr>
@@ -293,7 +293,7 @@
                                 <td></td>
                               <td></td>
                             <td>
-                            
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
                               </td>
                         </tr>
@@ -379,10 +379,10 @@
                             <td>
                                 <!--<button type="button" class="btn p-1 accept"><i class="bx bx-check"></i></button>-->
                                 <!--                                <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestDenied"><i class="bx bx-x"></i></button>-->
-                                
-                       
-                                
-                                
+
+
+
+
                             <!--    <button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestView"><i class="bx bx-block"></i></button>-->
                             <!--<a href="#"><button type="button" class="btn p-1" data-bs-toggle="modal" data-bs-target="#requestpopup"><i class="bx bx-show"></i></button></a> -->
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
@@ -410,7 +410,7 @@
                               <td></td>
                                 <td></td>
                             <td>
-                            
+
                                  <a  style="float:right;" href="https://yekbun.hellodev.site/app/invoice/list" class="btn btn-primary">View</a>
                               </td>
                         </tr>
@@ -569,9 +569,9 @@
         }
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-    
-    
-    
+
+
+
         <x-modal
 id="requestpopup"
 title="Detail of Air Jordan"

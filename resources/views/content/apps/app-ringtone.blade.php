@@ -28,7 +28,7 @@
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="{{ asset('assets/js/app-ecommerce-product-list.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/app-ecommerce-product-list.js') }}"></script> --}}
 @endsection
 
 @section('content')
@@ -54,7 +54,8 @@
                 <div>
                     <h4 class="fw-bold py-3 mb-4">
                         <span class="text-muted fw-light">App Setting/</span>
-                        Ringtones
+                        <?= $ringType == 1 ? "Message": "Call" ?>&nbspRingtone
+
                     </h4>
                 </div>
                 <div class="">
@@ -67,7 +68,7 @@
             <!-- Basic Bootstrap Table -->
             <div class="card">
                 <h5 class="card-header">Ringtone List</h5>
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap card-datatable">
                     <table class="table">
                         <thead>
                             <tr>
@@ -167,6 +168,7 @@
                                                             <div class="dz-message needsclick">
                                                                 Drop files here or click to upload
                                                             </div>
+                                                            <input type="hidden" name="ringType" value="<?= $ringType ?>" />
                                                         </div>
                                                     </div>
                                                 </div>

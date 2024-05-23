@@ -563,6 +563,9 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
             Route::post('app-setting/appinfo',[SettingController::class,'store_app_info'])->name('appsetting.appinfo.store');
 
+            Route::get('app-setting/message-ringtone', [RingtoneController::class, 'getMessage'])->name('appsetting.message.ringtone');
+            Route::get('app-setting/call-ringtone', [RingtoneController::class, 'getCall'])->name('appsetting.call.ringtone');
+
             Route::get('app-setting/ringtone', [RingtoneController::class, 'index'])->name('appsetting.ringtone.index');
 
             Route::post('app-setting/ringtone', [RingtoneController::class, 'store'])->name('appsetting.ringtone.store');

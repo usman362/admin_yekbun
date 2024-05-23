@@ -41,8 +41,8 @@
 <!-- Basic Bootstrap Table -->
 <div class="card">
     <h5 class="card-header">List of Language</h5>
-    <div class="table-responsive text-nowrap">
-        <table class="table">
+    <div class="card-datatable table-responsive">
+        <table class="datatables-basic table border-top">
             <thead>
                 <tr>
                     <th>#</th>

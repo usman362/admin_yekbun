@@ -19,6 +19,7 @@ class RingtoneController extends Controller
         $ringtones = Ringtone::all();
         return view("content.apps.app-ringtone",compact('ringtones'));
     }
+
     /**
      * Display a listing of the resource for message ringtone with ringType.
      *
@@ -50,16 +51,25 @@ class RingtoneController extends Controller
      */
     public function store(Request $request)
     {
+        $response_msg = $request->ringType == "1" ? "Message" : "Call";
         if(!empty($request->audio_paths)){
             foreach ($request->audio_paths as $key => $path) {
-                $ringtone = Ringtone::updateOrCreate(['_id' => $request->id], [
-                    'fileName' => $request->audio_filename[$key],
-                    'filePath' => $path,
-                    'fileSize' => $request->audio_size[$key]
-                ]);
+                try {
+                    $ringtone = Ringtone::updateOrCreate(['_id' => $request->id], [
+                        'fileName' => $request->audio_filename[$key],
+                        'filePath' => $path,
+                        'ringType' => intval($request->ringType),
+                        'fileSize' => $request->audio_size[$key]
+                    ]);
+                } catch (\Throwable $e) {
+                    return back()->with('success', $response_msg.' ringtone has been updated');
+                }
+                return back()->with('success', $response_msg.' ringtone has been updated');
             }
+        } else {
+            return redirect()->back();
         }
-        return back();
+
     }
 
     /**

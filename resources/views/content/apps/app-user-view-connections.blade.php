@@ -19,7 +19,7 @@
 <script src="{{asset('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js')}}"></script>
 @endsection
 <head>
-   
+
 <!-- Page Styles -->
 <link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/pages/app-logistics-fleet.css" />
 
@@ -29,7 +29,7 @@
 @section('page-script')
 <script>
    $('.accordion-header').click(function(){
-    $('.accordion-collapse').toggleClass('d-none'); 
+    $('.accordion-collapse').toggleClass('d-none');
 });
 </script>
 <script src="{{asset('assets/js/modal-edit-user.js')}}"></script>
@@ -57,7 +57,7 @@
             </div>
           </div>
         </div>
-      
+
         <h5 class="pb-2 border-bottom mb-4">Details</h5>
         <div class="info-container">
           <ul class="list-unstyled">
@@ -86,15 +86,15 @@
                   <br>
               <span>Germany</span>
             </li>
-            
-           
-           
+
+
+
           </ul>
-    
+
         </div>
       </div>
     </div>
-   
+
   </div>
   <!--/ User Sidebar -->
 
@@ -461,7 +461,7 @@
     <!-- /Connected Accounts -->
 
     <!-- Social Accounts -->
-  
+
   </div>
   <!-- /Social Accounts -->
 </div>
@@ -494,38 +494,9 @@
 
   <script src="https://dash.yekbun.net/assets/vendor/js/template-customizer.js"></script>
 
- 
+
   <script src="https://dash.yekbun.net/assets/js/config.js"></script>
 
-  <script>
-    window.templateCustomizer = new TemplateCustomizer({
-      cssPath: '',
-      themesPath: '',
-      defaultShowDropdownOnHover: true, // true/false (for horizontal layout only)
-      displayCustomizer: true,
-      lang: 'en',
-      pathResolver: function(path) {
-        var resolvedPaths = {
-          // Core stylesheets
-                      'core.css': 'https://dash.yekbun.net/assets/vendor/css/rtl/core.css?id=0286e38248768ef3ef97f053e1fb844e',
-            'core-dark.css': 'https://dash.yekbun.net/assets/vendor/css/rtl/core-dark.css?id=9a1c0d0fa7428bf3d11b21e15f6783c1',
-          
-          // Themes
-                      'theme-default.css': 'https://dash.yekbun.net/assets/vendor/css/rtl/theme-default.css?id=a2426eee52a0e09728b9fa06cefe0b4b',
-            'theme-default-dark.css':
-            'https://dash.yekbun.net/assets/vendor/css/rtl/theme-default-dark.css?id=ba148a35eca48e183e53bfae0dc8b265',
-                      'theme-bordered.css': 'https://dash.yekbun.net/assets/vendor/css/rtl/theme-bordered.css?id=72085df03150d888ef33d284f592b7cb',
-            'theme-bordered-dark.css':
-            'https://dash.yekbun.net/assets/vendor/css/rtl/theme-bordered-dark.css?id=58d9f2f33a506c99a780317a1cbbe6c7',
-                      'theme-semi-dark.css': 'https://dash.yekbun.net/assets/vendor/css/rtl/theme-semi-dark.css?id=b48dc34aaae1323386aed6029989ad09',
-            'theme-semi-dark-dark.css':
-            'https://dash.yekbun.net/assets/vendor/css/rtl/theme-semi-dark-dark.css?id=f7e984827d3560a67bcc51a41b10b024',
-                  }
-        return resolvedPaths[path] || path;
-      },
-      'controls': ["rtl","style","layoutType","showDropdownOnHover","layoutNavbarFixed","layoutFooterFixed","themes"],
-    });
-  </script>
   <!-- beautify ignore:end -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
