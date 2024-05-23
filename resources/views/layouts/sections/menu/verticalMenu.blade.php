@@ -2157,14 +2157,14 @@ $configData = Helper::appClasses();
         <div>Policy and Terms</div>
       </a>
     </li>
-    <li class="menu-item {{ Request::is('settings/yekbun-location/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
+    <li class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-map"></i>
         <div>Locations</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item {{ Request::is('settings/yekbun-location/countries') ? 'active' : '' }}">
-          <a href="{{url('/settings/yekbun-location/countries')}}" class="menu-link">
+        <li class="menu-item {{ Request::is('settings/countries') ? 'active' : '' }}">
+          <a href="{{url('/settings/countries')}}" class="menu-link">
             <div>Add Country</div>
           </a>
         </li>
@@ -2180,12 +2180,12 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
-    <li class="menu-item {{ Request::is('settings/countries') ? 'active' : '' }}">
-      <a href="{{url('/settings/countries')}}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-flag"></i>
-        <div>Add Country</div>
-      </a>
-    </li>
+    <li class="menu-item {{ Request::is('yekbun-location/countries') ? 'active' : '' }}">
+        <a href="{{url('/yekbun-location/countries')}}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-flag"></i>
+          <div>Add Country</div>
+        </a>
+      </li>
     <li class="menu-item {{ Request::is('app/popup') ? 'active' : '' }} ">
       <a href="{{url('/app/popup')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-message-square-add"></i>
