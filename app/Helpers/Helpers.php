@@ -213,4 +213,17 @@ class Helpers
 
   }
 
+  public static function formatDuration($durationInSeconds)
+    {
+        // Convert the duration to an integer to handle whole seconds
+        $seconds = (int) round($durationInSeconds);
+
+        // Calculate minutes and remaining seconds
+        $minutes = floor($seconds / 60);
+        $remainingSeconds = $seconds % 60;
+
+        // Format the result as mm:ss
+        return sprintf("%02d:%02d", $minutes, $remainingSeconds);
+    }
+
 }

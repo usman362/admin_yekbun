@@ -154,12 +154,9 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
         </thead>
         <tbody class="table-border-bottom-0">
           @forelse($music as $musics)
-          @php
-              $musicAudio = $musics->audio ? $musics->audio[0]  : '';
-          @endphp
           <tr>
             <td>{{ $loop->iteration }}</td>
-            <td><audio src="{{asset('storage/'.$musicAudio)}}" controls></audio></td>
+            <td><audio src="{{asset('storage/'.$musics->audio)}}" controls></audio></td>
             <td>{{$musics->music_category->name}}</td>
             {{-- <td>1</td> --}}
             <td>{{count($musics->songs)}}</td>

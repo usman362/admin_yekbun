@@ -87,7 +87,7 @@
                         <option selected value="">Select</option>
                         <option  value="1" {{ $artist->status == 1? 'selected': '' }}>Publish</option>
                         <option  value="0" {{ $artist->status == 0? 'selected': '' }}>UnPublish</option>
-  
+
                     </select>
 
                 </div>
@@ -118,11 +118,11 @@
                                                             <div class="dz-success-mark"></div>
                                                             <div class="dz-error-mark"></div>
                                                             <div class="dz-error-message"><span data-dz-errormessage></span></div>
-                                                          
+
                                                         </div>
                                                         <div class="dz-filename" data-dz-name></div>
                                                             <div class="dz-size" data-dz-size></div>
-                                                    
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,6 +138,8 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            acceptedFiles: 'image/*',  // Accept only images
+            maxFiles: 1,  // Allow only one file to be selected
             sending: function(file, xhr, formData) {
                 formData.append('folder', 'music');
             },

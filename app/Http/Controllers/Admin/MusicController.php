@@ -97,20 +97,19 @@ class MusicController extends Controller
 
         //   $music_implode = implode('' , $request->audio_paths);
         try {
-            foreach($request->audio_paths as $audioPath){
+            foreach ($request->audio_paths as $audioPath) {
                 $music = new Music();
                 $music->category_id = $request->category_id;
                 $music->artist_id = $request->artist_id;
-                $music->audio = $audioPath ?? [];
+                $music->audio = $audioPath;
                 $music->status = $request->status;
                 $music->type = $request->type;
                 $music->save();
             }
 
-            return redirect()->back()->with('success', $type.' Has been inserted');
-
+            return redirect()->back()->with('success', $type . ' Has been inserted');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to add '.$type);
+            return redirect()->back()->with('error', 'Failed to add ' . $type);
         }
     }
 
@@ -240,22 +239,24 @@ class MusicController extends Controller
     {
 
         $validated = $request->validated();
-        $uploadedFile = $validated['audio'];
+        try {
+            foreach ($request->audio_paths as $key => $audioPath) {
+                $song = new Song();
+                $song->name = $request->name;
+                $song->music_id = $request->music_id;
+                $song->album_id = $request->album_id;
+                $song->artist_id = $request->artist_id;
+                $song->audio = $audioPath;
+                $song->file_size = $request->file_size[$key];
+                $song->length = $request->length[$key];
+                $song->status = $request->status;
+                $song->save();
+            }
 
-        // Generate a unique name for the file, or use the original file name
-        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
-
-        // Get the folder name from the request or use 'files' as the default folder
-        $folder = $request->folder ?? 'files';
-
-        // Store the file in the 'public' disk (configured in config/filesystems.php)
-        $filePath = $uploadedFile->storeAs("/music", $uniqueName, "public");
-
-        $validated['audio'] = "storage/" . $filePath; // public url and storage is the base URL
-
-        Song::create($validated);
-
-        return back()->with("success", "Song successfully added.");
+            return back()->with("success", "Song successfully added.");
+        } catch (\Exception $e) {
+            return back()->with("error", "Failed to add Song ");
+        }
     }
 
     public function deleteSong($id)

@@ -9,10 +9,13 @@
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css " rel="stylesheet">
 @endsection
 
 @section('vendor-script')
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js"></script>
 @endsection
 
 @section('content')
@@ -28,7 +31,7 @@
                         <div class="content-left">
                             <span>Total Video Clips</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{count($video)}}</h4>
+                                <h4 class="mb-0 me-2">{{ count($video) }}</h4>
                                 {{-- <h4 class="mb-0 me-2">21,459</h4> --}}
                                 {{-- <small class="text-success">(+29%)</small> --}}
                             </div>
@@ -48,7 +51,7 @@
                         <div class="content-left">
                             <span>Total Artist</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{count($artists)}}</h4>
+                                <h4 class="mb-0 me-2">{{ count($artists) }}</h4>
                                 {{-- <h4 class="mb-0 me-2">4,567</h4>
                                 <small class="text-success">(+18%)</small> --}}
                             </div>
@@ -68,7 +71,7 @@
                         <div class="content-left">
                             <span>Total Album</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{count($albums)}}</h4>
+                                <h4 class="mb-0 me-2">{{ count($albums) }}</h4>
                                 {{-- <h4 class="mb-0 me-2">19,860</h4> --}}
                                 {{-- <small class="text-danger">(-14%)</small> --}}
                             </div>
@@ -88,7 +91,7 @@
                         <div class="content-left">
                             <span>Total Size</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{$video->sum('file_size')}}</h4>
+                                <h4 class="mb-0 me-2">{{ $video->sum('file_size') }}</h4>
                                 {{-- <h4 class="mb-0 me-2">237</h4> --}}
                                 {{-- <small class="text-success">(+42%)</small> --}}
                             </div>
@@ -126,33 +129,30 @@
             <table class="table">
                 <thead>
                     <tr>
-                      <th>#</th>
-                   <th>Thumbnail</th>
-                      <th>Category</th>
-                      <th>Total Tracks</th>
-                      <th>Total Time </th>
-                      <th>Total Size </th>
-                      <th>Actions</th>
+                        <th>#</th>
+                        <th>Thumbnail</th>
+                        <th>Category</th>
+                        <th>Total Tracks</th>
+                        <th>Total Time </th>
+                        <th>Total Size </th>
+                        <th>Actions</th>
                     </tr>
-                  </thead>
-                  <tbody class="table-border-bottom-0">
+                </thead>
+                <tbody class="table-border-bottom-0">
 
                     <tr>
-                      <td>1</td>
-                      <td><img height="50px" width="50%" src="https://www.w3schools.com/howto/img_avatar.png" alt=""></td>
-                      <td>Roxen</td>
-                      <td>1</td>
-                      <td>2h 30min</td>
-                      <td>1.39 GB</td>
-                      <td>
-                        <a
-                        href="{{route('video-clips.clips',['id' => 123])}}"
-                        class="btn btn-primary"
-                        data-bs-placement="top"
-                        data-bs-html="true"
-                        data-bs-original-title="Edit">View</a>
-                        <!--<a  href="" class="btn btn-primary" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">Edit</a>-->
-                          {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createcategoryModal">{{ $type == 'music' ? 'Edit' : 'Add Song' }}</button> --}}
+                        <td>1</td>
+                        <td><img height="50px" width="50%" src="https://www.w3schools.com/howto/img_avatar.png"
+                                alt=""></td>
+                        <td>Roxen</td>
+                        <td>1</td>
+                        <td>2h 30min</td>
+                        <td>1.39 GB</td>
+                        <td>
+                            <a href="{{ route('video-clips.clips', ['id' => 123]) }}" class="btn btn-primary"
+                                data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">View</a>
+                            <!--<a  href="" class="btn btn-primary" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">Edit</a>-->
+                            {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createcategoryModal">{{ $type == 'music' ? 'Edit' : 'Add Song' }}</button> --}}
                         </td>
                     </tr>
 
@@ -160,7 +160,7 @@
                       <td class="text-center" colspan="7"><b>No music found. Please add a music...<b></td>
                     </tr> --}}
 
-                  </tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -210,9 +210,9 @@
                                                     @endcan
                                                 </button>
                                                 @can('music.delete')
-                                                    <button type="button" class="btn btn-sm btn-icon"
-                                                        data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                                                        data-bs-html="true" data-bs-original-title="Remove"><i
+                                                    <button type="button" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
+                                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                        data-bs-original-title="Remove"><i
                                                             class="bx bx-trash me-1"></i></button>
                                                 @endcan
                                             </div>
@@ -266,6 +266,9 @@
                 }
             });
         }
+    </script>
+    <script>
+        $('.dropify').dropify();
     </script>
     <script>
         function drpzone_init() {

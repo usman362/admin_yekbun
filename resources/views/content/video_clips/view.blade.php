@@ -134,7 +134,7 @@ $type='musics';
 
    <!-- Basic Bootstrap Table -->
 <div class="card">
-        <h5 class="card-header">Music List</h5>
+        <h5 class="card-header">Songs List</h5>
         <div class="table-responsive text-nowrap">
             <table class="table border-top">
                 <thead>
@@ -158,7 +158,7 @@ $type='musics';
                         <td>
 
                                 {{-- <audio src="https://dash.yekbun.net/file_example_MP3_1MG.mp3" controls="" width="20"></audio> --}}
-                                <audio src="{{asset($song->audio)}}" controls="" width="20"></audio>
+                                <audio src="{{asset('storage/'.$song->audio)}}" controls="" width="20"></audio>
 
                         </td>
                         {{-- <td>1.125</td> --}}

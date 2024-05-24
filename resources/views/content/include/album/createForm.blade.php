@@ -116,6 +116,8 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
+                acceptedFiles: 'audio/*',  // Accept only images
+                maxFiles: 1,  // Allow only one file to be selected
                 sending: function (file, xhr, formData) {
                     formData.append('folder', 'music');
                 },
@@ -171,6 +173,8 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
+                acceptedFiles: 'image/*',  // Accept only images
+                maxFiles: 1,  // Allow only one file to be selected
                 sending: function (file, xhr, formData) {
                     formData.append('folder', 'music');
                 },

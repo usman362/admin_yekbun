@@ -50,7 +50,7 @@
                                     Drop files here or click to upload
                                 </div>
                                 <div class="fallback">
-                                    <input type="file" name="image"  id="image" />
+                                    <input accept="image/*" type="file" name="image"  id="image" />
                                 </div>
                             </div>
                         </div>
@@ -105,6 +105,8 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
+                acceptedFiles: 'image/*',  // Accept only images
+                maxFiles: 1,  // Allow only one file to be selected
                 sending: function (file, xhr, formData) {
                     formData.append('folder', 'images');
                 },

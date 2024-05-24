@@ -40,7 +40,7 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-
+        dd($request->all());
         $request->validate([
             'artist_id' => 'required',
         ]);
@@ -149,7 +149,7 @@ class AlbumController extends Controller
         if(isset($album->image)){
             $image_path = public_path('storage/'.$album->image);
             if(file_exists($image_path)){
-                unlink($image_path);
+                // unlink($image_path);
             }
         }
 

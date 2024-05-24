@@ -13,9 +13,9 @@
     @method('put')
     <div class="hidden-inputs">
         @if(isset($musics->audio))
-        @foreach($musics->audio as $path)
-            <input type="hidden" name="audio_paths[]" value="{{ $path }}" data-path="{{ $path }}">
-        @endforeach
+        {{-- @foreach($musics->audio as $path) --}}
+            <input type="hidden" name="audio_paths[]" value="{{ $musics->audio }}" data-path="{{ $musics->audio }}">
+        {{-- @endforeach --}}
         @endif
     </div>
     <div class="row">
@@ -181,10 +181,9 @@
             });
 
             @if(isset($musics->audio))
-            @foreach ($musics->audio as $audio)
                 $("document").ready(()=>{
-                    var path = "{{ asset('storage/'.$audio) }}";
-                    let name = "{{ basename($audio) }}";
+                    var path = "{{ asset('storage/'.$musics->audio) }}";
+                    let name = "{{ basename($musics->audio) }}";
                     const parts = name.split("___");
                     console.log(path);
                     imageUrlToFile(path,parts).then((file) => {
@@ -201,7 +200,7 @@
                         file['addPathToDataset'] = true;
                         dropzoneMulti.on('addedfile', function (file) {
                             if (file.addPathToDataset)
-                                file.previewElement.dataset.path = '{{ $audio }}';
+                                file.previewElement.dataset.path = '{{ $musics->audio }}';
                         });
                         file['upload'] = {
                             bytesSent: 0 ,
@@ -217,7 +216,6 @@
                         dropzoneMulti.files.push(file);
                     });
                 });
-            @endforeach
             @endif
 
         })
