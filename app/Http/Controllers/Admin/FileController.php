@@ -37,11 +37,13 @@ class FileController extends Controller
             $audio = new \wapmorgan\Mp3Info\Mp3Info($request->file('file'), true);
             $durationInSeconds = $audio->duration;
         } catch (\Exception $e) {
-
+            $durationInSeconds = '';
         }
 
-        // Format duration in minutes:seconds
-        $formattedDuration = Helpers::formatDuration($durationInSeconds);
+        if($durationInSeconds !== ''){
+            // Format duration in minutes:seconds
+            $formattedDuration = Helpers::formatDuration($durationInSeconds);
+        }
 
         return [
             'status' => true,

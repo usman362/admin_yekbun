@@ -40,7 +40,6 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'artist_id' => 'required',
         ]);
