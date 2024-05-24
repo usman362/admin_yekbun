@@ -52,17 +52,12 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title">Settings</h1>
                 </div>
-                <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="{{ url('/') }}">
-                        <i class="tio-home mr-1"></i> Dashboard
-                    </a>
-                </div>
             </div>
 
         </div>
         <br>
         <div class="row">
-            <div class="col-lg-3">
+            {{-- <div class="col-lg-3">
 
                 <div class="navbar-vertical navbar-expand-lg mb-3 mb-lg-5">
 
@@ -100,185 +95,186 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="col-lg-9">
-                <form action="{{route('admin_profile.store')}}" method="post" enctype="multipart/form-data" id="admin-settings-form">
+            </div> --}}
+            <div class="col-lg-12">
+
+                <form action="{{ route('admin_profile.store') }}" method="post" enctype="multipart/form-data"
+                    id="admin-settings-form">
                     @csrf
-                    <div class="card mb-3 mb-lg-5" id="generalDiv">
+                <div class="card mb-3 mb-lg-5" id="generalDiv">
 
-                        <div class="profile-cover">
-                            <div class="profile-cover-img-wrapper"></div>
-                        </div>
-                        <style>
-                            .card>.profile-cover,
-                            .card>.profile-cover .profile-cover-img,
-                            .card>.profile-cover .profile-cover-img-wrapper {
-                                border-bottom-right-radius: 0;
-                                border-bottom-left-radius: 0;
-                            }
+                    <div class="profile-cover">
+                        <div class="profile-cover-img-wrapper"></div>
+                    </div>
+                    <style>
+                        .card>.profile-cover,
+                        .card>.profile-cover .profile-cover-img,
+                        .card>.profile-cover .profile-cover-img-wrapper {
+                            border-bottom-right-radius: 0;
+                            border-bottom-left-radius: 0;
+                        }
 
-                            @media (min-width: 992px) {
-                                .profile-cover {
-                                    height: 10rem;
-                                }
-                            }
-
+                        @media (min-width: 992px) {
                             .profile-cover {
-                                position: relative;
-                                height: 7.5rem;
-                                padding: 1.75rem 2rem;
-                                border-radius: 0.75rem;
-                            }
-
-                            .profile-cover-img-wrapper {
                                 height: 10rem;
                             }
+                        }
 
-                            .profile-cover-img-wrapper {
-                                position: absolute;
-                                top: 0;
-                                inset-inline-end: 0;
-                                inset-inline-start: 0;
-                                height: 7.5rem;
-                                background-color: #e7eaf3;
-                                border-radius: 0.75rem;
-                            }
+                        .profile-cover {
+                            position: relative;
+                            height: 7.5rem;
+                            padding: 1.75rem 2rem;
+                            border-radius: 0.75rem;
+                        }
 
-                            .avatar:not(img) {
-                                background-color: #fff;
-                            }
+                        .profile-cover-img-wrapper {
+                            height: 10rem;
+                        }
 
-                            .profile-cover-avatar {
-                                display: -ms-flexbox;
-                                display: flex;
-                                margin: -6.3rem auto 0.5rem;
-                            }
+                        .profile-cover-img-wrapper {
+                            position: absolute;
+                            top: 0;
+                            inset-inline-end: 0;
+                            inset-inline-start: 0;
+                            height: 7.5rem;
+                            background-color: #e7eaf3;
+                            border-radius: 0.75rem;
+                        }
 
-                            .avatar-uploader {
-                                cursor: pointer;
-                                display: inline-block;
-                                transition: .2s;
-                                margin-bottom: 0;
-                            }
+                        .avatar:not(img) {
+                            background-color: #fff;
+                        }
 
-                            .avatar-xxl {
-                                width: 7.875rem;
-                                height: 7.875rem;
-                            }
+                        .profile-cover-avatar {
+                            display: -ms-flexbox;
+                            display: flex;
+                            margin: -6.3rem auto 0.5rem;
+                        }
 
-                            .avatar-border-lg {
-                                border: 0.1875rem solid #fff;
-                            }
+                        .avatar-uploader {
+                            cursor: pointer;
+                            display: inline-block;
+                            transition: .2s;
+                            margin-bottom: 0;
+                        }
 
-                            .avatar-circle {
-                                border-radius: 50% !important;
-                            }
+                        .avatar-xxl {
+                            width: 7.875rem;
+                            height: 7.875rem;
+                        }
 
-                            .avatar {
-                                position: relative;
-                                display: inline-block;
-                                /*width: 7.625rem;*/
-                                /*height: 7.625rem;*/
-                                border-radius: 0.3125rem;
-                            }
+                        .avatar-border-lg {
+                            border: 0.1875rem solid #fff;
+                        }
 
-                            label {
-                                color: #334257;
-                                text-transform: capitalize;
-                            }
+                        .avatar-circle {
+                            border-radius: 50% !important;
+                        }
 
-                            label {
-                                display: inline-block;
-                                margin-bottom: 0.5rem;
-                            }
+                        .avatar {
+                            position: relative;
+                            display: inline-block;
+                            /*width: 7.625rem;*/
+                            /*height: 7.625rem;*/
+                            border-radius: 0.3125rem;
+                        }
 
-                            .avatar-circle .avatar-img,
-                            .avatar-circle .avatar-initials {
-                                border-radius: 50%;
-                            }
+                        label {
+                            color: #334257;
+                            text-transform: capitalize;
+                        }
 
-                            .avatar-img {
-                                display: block;
-                                max-width: 100%;
-                                height: 100%;
-                                -o-object-fit: cover;
-                                object-fit: cover;
-                                pointer-events: none;
-                                border-radius: 0.3125rem;
-                            }
+                        label {
+                            display: inline-block;
+                            margin-bottom: 0.5rem;
+                        }
 
-                            .avatar-uploader-input {
-                                position: absolute;
-                                top: 0;
-                                inset-inline-end: 0;
-                                inset-inline-start: 0;
-                                z-index: -1;
-                                opacity: 0;
-                                width: 100%;
-                                height: 100%;
-                                background-color: rgba(19, 33, 68, .25);
-                                border-radius: 50%;
-                                transition: .2s;
-                            }
+                        .avatar-circle .avatar-img,
+                        .avatar-circle .avatar-initials {
+                            border-radius: 50%;
+                        }
 
-                            .avatar-uploader-trigger {
-                                position: absolute;
-                                bottom: 0;
-                                inset-inline-end: 0;
-                                cursor: pointer;
-                                border-radius: 50%;
-                            }
+                        .avatar-img {
+                            display: block;
+                            max-width: 100%;
+                            height: 100%;
+                            -o-object-fit: cover;
+                            object-fit: cover;
+                            pointer-events: none;
+                            border-radius: 0.3125rem;
+                        }
 
-                            .avatar-xxl .avatar-uploader-icon {
-                                width: 2.1875rem;
-                                height: 2.1875rem;
-                            }
+                        .avatar-uploader-input {
+                            position: absolute;
+                            top: 0;
+                            inset-inline-end: 0;
+                            inset-inline-start: 0;
+                            z-index: -1;
+                            opacity: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(19, 33, 68, .25);
+                            border-radius: 50%;
+                            transition: .2s;
+                        }
 
-                            .shadow-soft {
-                                box-shadow: 0 3px 6px 0 rgba(140, 152, 164, .25) !important;
-                            }
+                        .avatar-uploader-trigger {
+                            position: absolute;
+                            bottom: 0;
+                            inset-inline-end: 0;
+                            cursor: pointer;
+                            border-radius: 50%;
+                        }
 
-                            .avatar-uploader-icon {
-                                display: -ms-inline-flexbox;
-                                display: inline-flex;
-                                -ms-flex-negative: 0;
-                                flex-shrink: 0;
-                                -ms-flex-pack: center;
-                                justify-content: center;
-                                -ms-flex-align: center;
-                                align-items: center;
-                                color: #677788;
-                                background-color: #fff;
-                                border-radius: 50%;
-                                transition: .2s;
-                            }
-                        </style>
+                        .avatar-xxl .avatar-uploader-icon {
+                            width: 2.1875rem;
+                            height: 2.1875rem;
+                        }
 
-                        <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar"
-                            for="avatarUploader">
-                            <img id="viewer"
-                                onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
-                                class="avatar-img"
-                                src="{{asset('storage/'.auth()->user()->image)}}"
-                                alt="Image">
-                            <input type="file" name="image" class="js-file-attach avatar-uploader-input"
-                                id="customFileEg1" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                            <label class="avatar-uploader-trigger" for="customFileEg1">
-                                <i class="tio-edit avatar-uploader-icon shadow-soft"></i>
-                            </label>
+                        .shadow-soft {
+                            box-shadow: 0 3px 6px 0 rgba(140, 152, 164, .25) !important;
+                        }
+
+                        .avatar-uploader-icon {
+                            display: -ms-inline-flexbox;
+                            display: inline-flex;
+                            -ms-flex-negative: 0;
+                            flex-shrink: 0;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            color: #677788;
+                            background-color: #fff;
+                            border-radius: 50%;
+                            transition: .2s;
+                        }
+                    </style>
+
+                    <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar"
+                        for="avatarUploader">
+                        <img id="viewer"
+                            onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
+                            class="avatar-img" src="{{ asset('storage/' . auth()->user()->image) }}" alt="Image">
+                        <input type="file" name="image" class="js-file-attach avatar-uploader-input" id="customFileEg1"
+                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                        <label class="avatar-uploader-trigger" for="customFileEg1">
+                            <i class="tio-edit avatar-uploader-icon shadow-soft"></i>
                         </label>
-
+                    </label>
+                    <div class="d-flex justify-content-center mb-2">
+                        <button type="submit" id="upload-btn" class="btn btn-primary" disabled>Upload</button>
                     </div>
-
-
+                </div>
+                </form>
+                <form action="{{ route('admin_profile.store') }}" method="post" enctype="multipart/form-data"
+                    id="admin-settings-form">
+                    @csrf
                     <div class="card mb-3 mb-lg-5">
                         <div class="card-header">
                             <h2 class="card-title h4"><i class="tio-info"></i> Basic information</h2>
                         </div>
-
                         <div class="card-body">
-
-
                             <div class="row form-group">
                                 <label for="firstNameLabel"
                                     class="col-sm-3 col-form-label input-label label-has-tooltip">Full name <i
@@ -295,7 +291,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <br>
                             <div class="row form-group">
                                 <label for="phoneLabel" class="col-sm-3 col-form-label input-label">Phone <span
@@ -305,11 +300,9 @@
                                         id="phoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+(xxx)xx-xxx-xxxxx"
                                         value="{{ auth()->user()->phone ?? '' }}"
                                         data-hs-mask-options="{
-                                           &quot;template&quot;: &quot;+(880)00-000-00000&quot;
-                                         }">
+                                           &quot;template&quot;: &quot;+(880)00-000-00000&quot;}">
                                 </div>
                             </div>
-
                             <br>
                             <div class="row form-group">
                                 <label for="newEmailLabel" class="col-sm-3 col-form-label input-label">Email</label>
@@ -319,79 +312,43 @@
                                         aria-label="Enter new email address">
                                 </div>
                             </div>
-
                             <br>
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">Save
-                                    changes</button>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </form>
-
-                <div id="passwordDiv" class="card mb-3 mb-lg-5">
-                    <div class="card-header">
-                        <h4 class="card-title"><i class="tio-lock"></i> Change your password</h4>
-                    </div>
-
-                    <div class="card-body">
-
-                        <form id="changePasswordForm" action="{{route('admin_profile.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-
                             <div class="row form-group">
-                                <label for="newPassword" class="col-sm-3 col-form-label input-label">New password</label>
-                                <div class="col-sm-9 input-group input-group-merge">
+                                <label for="newPassword" class="col-sm-3 col-form-label input-label">New Password</label>
+                                <div class="col-sm-9">
                                     <input type="password" name="password"
                                         class="js-toggle-password form-control form-control input-field" id="password"
-                                        placeholder="Enter new password" required=""
-                                        data-hs-toggle-password-options="{
-                                        &quot;target&quot;: &quot;#changePassTarget&quot;,
-                                        &quot;defaultClass&quot;: &quot;tio-hidden-outlined&quot;,
-                                        &quot;showClass&quot;: &quot;tio-visible-outlined&quot;,
-                                        &quot;classChangeTarget&quot;: &quot;#changePassIcon&quot;
-                                        }">
+                                        placeholder="Enter new password" required="">
                                 </div>
                             </div>
-
 
                             <br>
                             <div class="row form-group">
-                                <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label input-label">Confirm
-                                    password</label>
-                                <div class="col-sm-9 input-group input-group-merge">
+                                <label for="newPassword" class="col-sm-3 col-form-label input-label">Confirm
+                                    Password</label>
+                                <div class="col-sm-9">
                                     <input type="password" name="confirm_password"
                                         class="js-toggle-password form-control form-control input-field"
-                                        id="confirm_password" placeholder="Confirm your new password" required=""
-                                        data-hs-toggle-password-options="{
-                                                &quot;target&quot;: &quot;#changeConPassTarget&quot;,
-                                                &quot;defaultClass&quot;: &quot;tio-hidden-outlined&quot;,
-                                                &quot;showClass&quot;: &quot;tio-visible-outlined&quot;,
-                                                &quot;classChangeTarget&quot;: &quot;#changeConPassIcon&quot;
-                                                }">
+                                        id="confirm_password" placeholder="Confirm your new password" required="">
                                 </div>
                             </div>
-
                             <br>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary">Save
-                                    changes</button>
+                                    Changes</button>
                             </div>
-                        </form>
-
+                        </div>
                     </div>
+                </form>
 
-                </div>
-
-
-                <div id="stickyBlockEndPoint"></div>
             </div>
+
         </div>
 
     </div>
+
+    <div id="stickyBlockEndPoint"></div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sidebar/3.3.2/jquery.sidebar.min.js"
         integrity="sha512-sE4GyQp4GEFV4qtelZtk1VmjxViVV9zC3PnZCKEjmDIiNZ+MpY/53EKGk+eZUx4FvvH7F2QgduRa2Oxe/pK7fQ=="
@@ -804,5 +761,11 @@
         }
         checkedFunc()
         $('.switch--custom-label .toggle-switch-input').on('change', checkedFunc)
+
+        $('#customFileEg1').change(function(){
+            if($(this).val() !== null){
+                $('#upload-btn').attr('disabled',false);
+            }
+        });
     </script>
 @endsection

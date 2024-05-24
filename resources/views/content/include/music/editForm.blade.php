@@ -41,7 +41,7 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                
+
                 @if($musics->type != 'music')
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Artist</label>
@@ -60,7 +60,7 @@
                     <label class="form-label" for="fullname">Audio</label>
                     <input type="file" name="audio[]" class="form-control" id="audioFile{{ $musics->id }}" accept="audio/*" multiple />
                     <?php
-                      $getaudio = $value ?? null; 
+                      $getaudio = $value ?? null;
                     ?>
                     @error('audio')
                     <span class="text-danger">{{ $message }}</span>
@@ -88,7 +88,7 @@
                     <select class="form-select" aria-label="Default select example" name="status">
                         <option value="0" {{ $musics->status == 0 ? 'selected' : '' }}>UnPublish</option>
                         <option value="1" {{ $musics->status == 1 ? 'selected' : '' }}>Publish</option>
-    
+
                     </select>
                     @error('status')
                     <span class="text-danger">{{ $message }}</span>
@@ -105,7 +105,7 @@
 
 <script>
     'use strict';
-    
+
 
     // <div class="dz-filename" data-dz-name></div>
     //                                                     <div class="dz-size" data-dz-size></div>
@@ -114,7 +114,7 @@
 
     dropZoneInitFunctions.push(function () {
             // previewTemplate: Updated Dropzone default previewTemplate
-    
+
             const previewTemplate = `<div class="row">
                                             <div class="col-md-12 col-12 d-flex justify-content-center">
                                                 <div class="dz-preview dz-file-preview w-100">
@@ -131,7 +131,7 @@
                                                         </div>
                                                         <div class="dz-filename" data-dz-name></div>
                                                             <div class="dz-size" data-dz-size></div>
-                                                    
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,11 +161,11 @@
                 removedfile: function (file) {
                     const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
                     hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
-    
+
                     if (file.previewElement != null && file.previewElement.parentNode != null) {
                         file.previewElement.parentNode.removeChild(file.previewElement);
                     }
-    
+
                     $.ajax({
                         url: '{{ route("music.delete-audio", $musics->id) }}',
                         method: 'delete',
@@ -175,11 +175,11 @@
                         data: {path: file.previewElement.dataset.path},
                         success: function () {}
                     });
-                    
+
                     return this._updateMaxFilesReachedClass();
                 }
             });
-    
+
             @if(isset($musics->audio))
             @foreach ($musics->audio as $audio)
                 $("document").ready(()=>{
@@ -207,7 +207,7 @@
                             bytesSent: 0 ,
                             progress: 0 ,
                         };
-     
+
                     // Update the preview template to include the music title
 
                         dropzoneMulti.emit("addedfile", file , path);
@@ -238,7 +238,7 @@
 
 
 
-{{-- 
+{{--
 
 <script>
     document.getElementById("audioFile{{ $musics->id }}").addEventListener("change", function() {
@@ -253,8 +253,8 @@
             document.getElementById('audio{{ $musics->id }}').value = 'audio';
             document.getElementById('audio{{ $musics->id }}').value = title;
         }
-    
-    
+
+
     });
     </script> --}}
 

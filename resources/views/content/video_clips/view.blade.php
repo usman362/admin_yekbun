@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/dropzone/dropzone.css')}}" />
+<link href="
+https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
+" rel="stylesheet">
 
 @endsection
 
