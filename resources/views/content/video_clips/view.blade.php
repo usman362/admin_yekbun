@@ -122,7 +122,8 @@ $type='musics';
 <div class="d-flex justify-content-between">
   <div>
 <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">{{ $type == 'music' ? 'Music' : 'Song' }}/</span>{{ $type == 'music' ? 'All Music' : 'All Songs' }}
+    {{-- <span class="text-muted fw-light">{{ $type == 'music' ? 'Music' : 'Song' }}/</span>{{ $type == 'music' ? 'All Music' : 'All Songs' }} --}}
+    <span class="text-muted fw-light">Music/</span>{{$music->music_category->name ?? 'Songs'}}
 </h4>
 </div>
 <div class="">

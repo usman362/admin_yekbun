@@ -227,11 +227,11 @@ class MusicController extends Controller
             return $song;
         });
 
-
+        $music = Music::find($music_id);
         $music_category  = MusicCategory::get();
         $artists = Artist::get();
         $albums = Album::get();
-        return view('content.video_clips.view', compact('songs', 'music_category', 'artists', 'albums'));
+        return view('content.video_clips.view', compact('songs','music', 'music_category', 'artists', 'albums'));
     }
 
     public function store_song(Request $request)

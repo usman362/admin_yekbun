@@ -144,9 +144,9 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
         <thead>
           <tr>
             <th>#</th>
-         <th>Music</th>
-            <th>Category</th>
-            {{-- <th>Total Tracks</th> --}}
+         {{-- <th>Music</th> --}}
+            <th>Category Name</th>
+            <th>Total Tracks</th>
             <th>Total Time </th>
             <th>Total Size </th>
             <th>Actions</th>
