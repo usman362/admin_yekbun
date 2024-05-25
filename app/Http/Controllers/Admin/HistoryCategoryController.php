@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\HistoryCategory;
 use Illuminate\Http\Request;
@@ -37,17 +38,17 @@ class HistoryCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'history_category' => 'required'
         ]);
 
         $model = new HistoryCategory();
         $model->name = $request->history_category;
-        $img = $request->file('history_category_image');
-        $ext = rand().".".$img->getClientOriginalName();
-        $img->move("public/historyCategory/",$ext);
-        $model->image = $ext;
+        if(!empty($request->history_category_image)){
+            $imgPath = Helpers::fileUpload($request->history_category_image, "images/history_category");
+            $model->image = $imgPath;
+        }
         if($model->save()){
             return redirect()->route('history-category.index')->with('success', 'History Category Has been inserted');
         }else{
@@ -89,12 +90,9 @@ class HistoryCategoryController extends Controller
     {
         $history = HistoryCategory::findorFail($id);
         $history->name = $request->history_category;
-        if($request->file('history_category_image'))
-        {
-            $img = $request->file('history_category_image');
-            $ext = rand().".".$img->getClientOriginalName();
-            $img->move("public/historyCategory/",$ext);
-            $history->image = $ext;
+        if(!empty($request->history_category_image)){
+            $imgPath = Helpers::fileUpload($request->history_category_image, "images/history_category");
+            $history->image = $imgPath;
         }
         if($history->update()){
            return redirect()->route('history-category.index')->with('success', 'History Category Has been Updated');

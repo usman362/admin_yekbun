@@ -47,7 +47,7 @@
                     <tr>
                         <th>#</th>
                         <th>Artist</th>
-                        <th>Thumbnail </th>
+                        {{-- <th>Thumbnail </th> --}}
                         <th>Total Album </th>
                         <th>Actions</th>
                     </tr>
@@ -59,13 +59,13 @@
 
                             <td>{{++$key}}</td>
                             <td>{{ $album->artist->first_name }} {{ $album->artist->last_name }}</td>
-                            <td>
+                            {{-- <td>
                                 <div class="d-flex justify-content-start align-items-center user-name">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3"><img src="{{ $album->image ? asset('storage/'.$album->image) : asset('assets/img/10.png')}}" alt="Avatar" class="rounded-circle"></div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                             <td> 2</td>
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\VotingCategory;
 use Illuminate\Http\Request;
@@ -43,10 +44,10 @@ class VotingCategoryController extends Controller
 
         $model = new VotingCategory();
         $model->name = $request->vote_category;
-        $img = $request->file('vote_category_image');
-        $ext = rand().".".$img->getClientOriginalName();
-        $img->move("public/VotingCategory/",$ext);
-        $model->image = $ext;
+        if(!empty($request->vote_category_image)){
+            $imgPath = Helpers::fileUpload($request->vote_category_image, "images/voting_category");
+            $model->image = $imgPath;
+        }
         if($model->save()){
             return redirect()->route('vote-category.index')->with('success', 'Voting Category Has been inserted');
         }else{
@@ -86,15 +87,13 @@ class VotingCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-  
+
         $vote = VotingCategory::findorFail($id);
         $vote->name = $request->vote_category;
-        if($request->file('vote_category_image')){
-            $img = $request->file('vote_category_image');
-            $ext = rand().".".$img->getClientOriginalName();
-            $img->move("public/VotingCategory/",$ext);
-            $vote->image = $ext;
-            }
+        if(!empty($request->vote_category_image)){
+            $imgPath = Helpers::fileUpload($request->vote_category_image, "images/voting_category");
+            $vote->image = $imgPath;
+        }
         if($vote->update()){
            return redirect()->route('vote-category.index')->with('success', 'Voting Category Has been Updated');
        }else{

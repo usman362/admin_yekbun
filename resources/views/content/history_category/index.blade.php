@@ -81,7 +81,7 @@ s
         @forelse($history_category as $history)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td><img src="{{ asset('public/historyCategory'.'/'.$history->image) }}" width="100px"></td>
+            <td><img src="{{ asset('storage/'.$history->image) }}" width="100px"></td>
             <td>{{ $history->name ?? '' }}</td>
             <td>
                 <div class="dropdown d-inline-block">

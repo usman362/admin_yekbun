@@ -45,7 +45,7 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-             
+
                 <!-- <div class="col-md-12">
                     <label class="form-label" for="inputDescription">Images Upload</label>
                     <input type="file" class="form-control" name="image[]" accept="image/*" multiple>
@@ -137,7 +137,7 @@ dropZoneInitFunctions.push(function () {
                                                         </div>
                                                         <div class="dz-filename" data-dz-name></div>
                                                             <div class="dz-size" data-dz-size></div>
-                                                    
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,6 +153,7 @@ dropZoneInitFunctions.push(function () {
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            acceptedFiles: 'image/*',  // Accept only images
             sending: function (file, xhr, formData) {
                 formData.append('folder', 'history');
             },
@@ -181,7 +182,7 @@ dropZoneInitFunctions.push(function () {
                     data: {path: file.previewElement.dataset.path},
                     success: function () {}
                 });
-                
+
                 return this._updateMaxFilesReachedClass();
             }
         });
@@ -230,6 +231,7 @@ dropZoneInitFunctions.push(function () {
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            acceptedFiles: 'video/*',  // Accept only images
             sending: function (file, xhr, formData) {
                 formData.append('folder', 'history');
             },
@@ -258,7 +260,7 @@ dropZoneInitFunctions.push(function () {
                     data: {path: file.previewElement.dataset.path},
                     success: function () {}
                 });
-                
+
                 return this._updateMaxFilesReachedClass();
             }
         });

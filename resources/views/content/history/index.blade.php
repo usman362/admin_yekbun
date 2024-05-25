@@ -101,7 +101,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $historys->history_category->name ?? '' }}</td>
                 <td>{{ $historys->title ?? '' }}</td>
-                <td>{{  is_string($historys->video) ? $historys->video : ""}}</td>
+                <td><img src="{{ isset($historys->image[0]) ? asset('storage/'.$historys->image[0]) : ''}}" width="100" height="100" alt=""></td>
                 <td></td>
                 <td></td>
                 <td></td>

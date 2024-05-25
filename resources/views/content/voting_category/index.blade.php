@@ -47,7 +47,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $vote->name ?? '' }}</td>
-            <td><img src="{{ asset('public/VotingCategory'.'/'.$vote->image) }}" width="100px"></td>
+            <td><img src="{{ asset('storage/'.$vote->image) }}" width="100px"></td>
             <td>
                 <div class="dropdown d-inline-block">
                     <!-- Edit -->
@@ -103,7 +103,7 @@
                                         <br>
                                         <div class="col mb-3">
                                              <label for="nameLarge" class="form-label">Category Image</label>
-                                            <input type="file" id="nameLarge" class="form-control vote_category_image" data-default-file="{{ asset('public/VotingCategory'.'/'.$vote->image) }}" name="vote_category_image">
+                                            <input type="file" id="nameLarge" class="form-control vote_category_image" data-default-file="{{ asset('public/VotingCategory'.'/'.$vote->image) }}" name="vote_category_image" accept="image/*">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col mb-3">
                             <label for="nameLarge" class="form-label">Category Image</label>
-                            <input type="file" id="history_category_image" class="form-control vote_category_image"  name="vote_category_image">
+                            <input type="file" id="history_category_image" class="form-control vote_category_image"  name="vote_category_image" accept="image/*">
                         </div>
                     </form>
                 </div>

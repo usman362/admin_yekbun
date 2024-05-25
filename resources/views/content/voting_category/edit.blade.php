@@ -34,7 +34,7 @@
                     @csrf
                   @method('put')
                   <label class="form-label" for="fullname">Vote Category</label>
-                  <input type="text" id="fullname" class="form-control" placeholder="Jang" name="vote_category" value="{{ $vote_category->name ?? '' }}">
+                  <input type="text" id="fullname" class="form-control" placeholder="Jang" name="vote_category" value="{{ $vote_category->name ?? '' }}" accept="image/*">
                   @error('vote_category')
                   <span class="text-danger">{{ $message }}</span>
                   @enderror
