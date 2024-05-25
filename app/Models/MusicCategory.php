@@ -25,6 +25,6 @@ class MusicCategory extends Model
     }
 
     public function musics(){
-        return $this->hasMany(Music::class , 'category_id' , 'id');
+        return $this->hasMany(Music::class , 'category_id' , '_id');
     }
 }

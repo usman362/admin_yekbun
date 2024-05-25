@@ -67,7 +67,7 @@ class MusicController extends Controller
             // Add the formatted total time to the music item
             $musicItem->total_time_formatted = $formattedTime;
         });
-        $music_category  = MusicCategory::get();
+        $music_category  = MusicCategory::doesntHave('musics')->get();
         $artists = Artist::get();
         $albums = Album::get();
         return view('content.music.index', compact('music', 'music_category', 'artists', 'type', 'albums', 'totalSongsSize'));
