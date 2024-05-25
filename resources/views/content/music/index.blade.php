@@ -157,7 +157,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
           <tr>
             <td>{{ $loop->iteration }}</td>
             {{-- <td><audio src="{{asset('storage/'.$musics->audio)}}" controls></audio></td> --}}
-            <td>{{$musics->music_category->name}}</td>
+            <td>{{$musics->music_category->name ?? ''}}</td>
             {{-- <td>1</td> --}}
             <td>{{count($musics->songs)}}</td>
             {{-- <td>2h 30min</td> --}}
