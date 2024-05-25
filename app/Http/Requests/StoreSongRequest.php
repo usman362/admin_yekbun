@@ -26,7 +26,7 @@ class StoreSongRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'nullable',
             'music_id' => Rule::requiredIf(function () {
                 return empty($this->request->get('album_id'));
             }),

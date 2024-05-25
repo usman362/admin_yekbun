@@ -1216,7 +1216,7 @@ $configData = Helper::appClasses();
 
 
 
-    <li class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('album') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
+    <li class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('album') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-music"></i>
         <div>Music</div>
@@ -1234,6 +1234,14 @@ $configData = Helper::appClasses();
 
 
         </li>
+
+        <li class="menu-item {{ Request::is('music-category') ? 'active' : '' }}">
+            <a href="{{url('/music-category')}}" class="menu-link">
+              <div>Add Music Category</div>
+            </a>
+
+
+          </li>
 
 
 
@@ -2280,12 +2288,12 @@ $configData = Helper::appClasses();
             <div>Add/Manage Roles</div>
           </a>
         </li>
-        <li class="menu-item {{ Request::is('app/task/list') ? 'active' : '' }} ">
+        {{-- <li class="menu-item {{ Request::is('app/task/list') ? 'active' : '' }} ">
           <a href="{{url('/app/task/list')}}" class="menu-link">
             <div>Add Tasks</div>
           </a>
-        </li>
-        <li class="menu-item {{ Request::is('team/policy_and_terms') ? 'active open' : '' }}">
+        </li> --}}
+        {{-- <li class="menu-item {{ Request::is('team/policy_and_terms') ? 'active open' : '' }}">
           <a href="javascript:void(0)" class="menu-link menu-toggle">
             <div>Settings</div>
           </a>
@@ -2296,7 +2304,7 @@ $configData = Helper::appClasses();
               </a>
             </li>
           </ul>
-        </li>
+        </li> --}}
       </ul>
     </li>
     <li class="menu-item {{ Request::is('app-setting/department') ? 'active open' : '' }}">

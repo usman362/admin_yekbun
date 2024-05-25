@@ -146,7 +146,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
             <th>#</th>
          <th>Music</th>
             <th>Category</th>
-            <th>Total Tracks</th>
+            {{-- <th>Total Tracks</th> --}}
             <th>Total Time </th>
             <th>Total Size </th>
             <th>Actions</th>
@@ -156,7 +156,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
           @forelse($music as $musics)
           <tr>
             <td>{{ $loop->iteration }}</td>
-            <td><audio src="{{asset('storage/'.$musics->audio)}}" controls></audio></td>
+            {{-- <td><audio src="{{asset('storage/'.$musics->audio)}}" controls></audio></td> --}}
             <td>{{$musics->music_category->name}}</td>
             {{-- <td>1</td> --}}
             <td>{{count($musics->songs)}}</td>
@@ -167,7 +167,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
             <td>
               <a href="{{url('musics/'.$musics->id)}}" class="btn btn-primary" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">View</a>
               <!--<a  href="{{url('musics/1')}}" class="btn btn-primary" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">Edit</a>-->
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateMusicModal{{$musics->id}}">{{ $type == 'music' ? 'Edit' : 'Add Song' }}</button>
+                {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateMusicModal{{$musics->id}}">{{ $type == 'music' ? 'Edit' : 'Add Song' }}</button> --}}
               </td>
           </tr>
           {{-- edit modal --}}

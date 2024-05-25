@@ -234,22 +234,22 @@ class MusicController extends Controller
         return view('content.video_clips.view', compact('songs', 'music_category', 'artists', 'albums'));
     }
 
-    public function store_song(StoreSongRequest $request)
+    public function store_song(Request $request)
     // public function store_song()
     {
 
-        $validated = $request->validated();
+        // $validated = $request->validated();
         try {
             foreach ($request->audio_paths as $key => $audioPath) {
                 $song = new Song();
-                $song->name = $request->name;
+                $song->name = $request->name[$key];
                 $song->music_id = $request->music_id;
                 $song->album_id = $request->album_id;
                 $song->artist_id = $request->artist_id;
                 $song->audio = $audioPath;
                 $song->file_size = $request->file_size[$key];
                 $song->length = $request->length[$key];
-                $song->status = $request->status;
+                $song->status = (int)$request->status;
                 $song->save();
             }
 

@@ -4,16 +4,16 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-md-12">
-                    <input type="hidden" name="music_id" id="music_id" value="{{request()->music_id }}">
+                <input type="hidden" name="music_id" id="music_id" value="{{request()->music_id }}">
+                {{-- <div class="col-md-12">
                     <label class="form-label" for="fullname">Song Title</label>
                     <input type="text" id="video" class="form-control" placeholder="Title Will Add Automatically" name="name" value="" />
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
 
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <label class="form-label" for="fullname">Choose Artist</label>
                     <select class="form-select" aria-label="Default select example" name="artist_id">
                         <option selected>Select</option>
@@ -27,7 +27,7 @@
                     @error('category_id')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-12">
                     <div class="card">
                       <h5 class="card-header">Song Upload</h5>
@@ -106,6 +106,8 @@
                     '.hidden-inputs');
                 hiddenInputsContainer.innerHTML +=
                     `<input type="hidden" name="audio_paths[]" value="${response.path}" data-path="${response.path}">`;
+                hiddenInputsContainer.innerHTML +=
+                    `<input type="hidden" name="name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
                 hiddenInputsContainer.innerHTML +=
                     `<input type="hidden" name="length[]" value="${response.duration}">`;
                 hiddenInputsContainer.innerHTML +=
