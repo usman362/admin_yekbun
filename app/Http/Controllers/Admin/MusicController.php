@@ -30,7 +30,8 @@ class MusicController extends Controller
         // exit();
 
         $type  = $request->segments()[0];
-        $music  = Music::where('type', $type)->with('music_category')->with('songs')->get();
+        $music  = Music::where('type', $type)->with('music_category')
+        ->whereHas('music_category')->with('songs')->get();
         $totalSongsSize = 0;
 
         $music->each(function ($musicItem) use (&$totalSongsSize) {
@@ -220,7 +221,10 @@ class MusicController extends Controller
         // $music_category  = MusicCategory::get();
         // $artists = Artist::get();
         // return view('content.video_clips.view', compact('songs', 'music_category', 'artists'));
-        $songs = Song::where('music_id', $music_id)->get();
+        $songs = Song::where('music_id', $music_id)
+        ->whereHas('music',function($q){
+            $q->whereHas('music_category');
+        })->get();
         $songs->transform(function ($song) {
             $formattedDate = Carbon::parse($song->created_at)->format('j M Y');
             $song->upload_date = str_replace([' 0', '-0'], [' ', '-'], $formattedDate);
