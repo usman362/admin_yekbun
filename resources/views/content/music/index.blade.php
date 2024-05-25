@@ -130,7 +130,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 <div class="">
   @can('music.create')
-   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createcategoryModal">{{ $type == 'music' ? 'Add Category' : 'Add Song' }}</button>
+   {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createcategoryModal">{{ $type == 'music' ? 'Add Category' : 'Add Song' }}</button> --}}
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmusicModal">{{ $type == 'music' ? 'Add Music' : 'Add Song' }}</button>
   @endcan
 </div>

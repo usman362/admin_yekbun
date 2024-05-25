@@ -43,6 +43,6 @@ class Music extends Model
         return $this->belongsTo(Artist::class , 'artist_id');
     }
     public function songs(){
-        return $this->hasMany(Song::class , 'music_id');
+        return $this->hasMany(Song::class , 'music_id')->where('length','!=',null);
     }
 }
