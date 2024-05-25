@@ -62,7 +62,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $music->name ?? '' }}</td>
-                                <td><img src="{{asset('storage/'.$music->icon)}}" alt="" width="50"></td>
+                                <td><img src="{{ asset('storage/' . $music->icon) }}" alt="" width="50"></td>
                                 <td>
                                     <div class="d-flex justify-content-start align-items-center">
                                         @can('music.write')
@@ -72,20 +72,25 @@
                                                     data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit"><i
                                                         class="bx bx-edit"></i></button></span>
                                         @endcan
-                                        <form action="{{ route('music-category.destroy', $music->id) }}"
-                                            onsubmit="confirmAction(event, () => event.target.submit())" method="post"
-                                            class="d-inline">
-                                            @method('DELETE')
-                                            @csrf
-                                            @can('music.delete')
-                                                <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
-                                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                                    data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
-                                            @endcan
-                                        </form>
+                                        @if ($music->musics()->count() == 0)
+                                            <form action="{{ route('music-category.destroy', $music->id) }}"
+                                                onsubmit="confirmAction(event, () => event.target.submit())" method="post"
+                                                class="d-inline">
+                                                @method('DELETE')
+                                                @csrf
+                                                @can('music.delete')
+                                                    <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
+                                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                        data-bs-original-title="Remove"><i
+                                                            class="bx bx-trash me-1"></i></button>
+                                                @endcan
+                                            </form>
+                                        @endif
                                     </div>
                                     {{-- Edit Category Music Model --}}
-                                    <x-modal id="editmusiccategoryModal{{ $music->id }}" title="Edit Music Category" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{ $music->id }}" size="md">
+                                    <x-modal id="editmusiccategoryModal{{ $music->id }}" title="Edit Music Category"
+                                        saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{ $music->id }}"
+                                        size="md">
                                         @include('content.include.music_category.editForm')
                                     </x-modal>
                                 </td>
@@ -139,6 +144,6 @@
     function drpzone_init() {
         dropZoneInitFunctions.forEach(callback => callback());
     }
-  </script>
-  <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
+</script>
+<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 @endsection
