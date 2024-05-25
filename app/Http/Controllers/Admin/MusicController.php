@@ -98,15 +98,15 @@ class MusicController extends Controller
 
         //   $music_implode = implode('' , $request->audio_paths);
         try {
-            foreach ($request->audio_paths as $audioPath) {
+            // foreach ($request->audio_paths as $audioPath) {
                 $music = new Music();
                 $music->category_id = $request->category_id;
-                $music->artist_id = $request->artist_id;
-                $music->audio = $audioPath;
+                // $music->artist_id = $request->artist_id;
+                // $music->audio = $audioPath;
                 $music->status = $request->status;
                 $music->type = $request->type;
                 $music->save();
-            }
+            // }
 
             return redirect()->back()->with('success', $type . ' Has been inserted');
         } catch (\Exception $e) {
@@ -152,7 +152,7 @@ class MusicController extends Controller
         $music->name = $request->title;
         $music->category_id = $request->category_id;
         $music->artist_id = $request->artist_id;
-        $music->audio = $request->audio_paths ?? [];
+        // $music->audio = $request->audio_paths ?? [];
         $music->status = $request->status;
         if ($music->update()) {
             return redirect()->back()->with('success', 'Music Has been Updated');

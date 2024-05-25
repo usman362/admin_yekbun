@@ -34,7 +34,7 @@
                     @enderror
                 </div>
                 @endif
-               <div class="col-12">
+               {{-- <div class="col-12">
                   <div class="card">
                     <h5 class="card-header">Audio Upload</h5>
                     <div class="card-body">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-md-12">
                 <label class="form-label" for="fullname">Status</label>
                 <select class="form-select" aria-label="Default select example" name="status">

@@ -12,11 +12,11 @@
     @csrf
     @method('put')
     <div class="hidden-inputs">
-        @if(isset($musics->audio))
+        {{-- @if(isset($musics->audio)) --}}
         {{-- @foreach($musics->audio as $path) --}}
-            <input type="hidden" name="audio_paths[]" value="{{ $musics->audio }}" data-path="{{ $musics->audio }}">
+            {{-- <input type="hidden" name="audio_paths[]" value="{{ $musics->audio }}" data-path="{{ $musics->audio }}"> --}}
         {{-- @endforeach --}}
-        @endif
+        {{-- @endif --}}
     </div>
     <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -67,7 +67,7 @@
                     @enderror
                 </div> --}}
 
-                <div class="col-12">
+                {{-- <div class="col-12">
                     <div class="card">
                         <h5 class="card-header">Audio Upload</h5>
                         <div class="card-body">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Status</label>
@@ -180,7 +180,7 @@
                 }
             });
 
-            @if(isset($musics->audio))
+            {{--@if(isset($musics->audio))
                 $("document").ready(()=>{
                     var path = "{{ asset('storage/'.$musics->audio) }}";
                     let name = "{{ basename($musics->audio) }}";
@@ -216,7 +216,7 @@
                         dropzoneMulti.files.push(file);
                     });
                 });
-            @endif
+            @endif--}}
 
         })
     </script>
