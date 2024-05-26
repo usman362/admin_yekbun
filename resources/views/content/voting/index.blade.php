@@ -103,7 +103,7 @@
         <tbody class="table-border-bottom-0">
         @forelse($votes as $vote)
         <tr>
-            <td>{{$loop->iteration}}</td>
+            <td>{{ $vote->custom_id ?? $loop->iteration }}</td>
             <td>{{ $vote->voting_category->name?? '' }}</td>
             <td>{{ $vote->name ?? '' }}</td>
             {{-- <td><video loop="" class="rounded" controls="" style="width:150px; height:100px;">

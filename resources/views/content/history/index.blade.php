@@ -98,7 +98,7 @@
         <tbody class="table-border-bottom-0">
         @forelse($history as $historys)
             <tr>
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $historys->custom_id ?? $loop->iteration }}</td>
                 <td>{{ $historys->history_category->name ?? '' }}</td>
                 <td>{{ $historys->title ?? '' }}</td>
                 <td><img src="{{ isset($historys->image[0]) ? asset('storage/'.$historys->image[0]) : ''}}" width="100" height="100" alt=""></td>
