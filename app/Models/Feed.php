@@ -18,6 +18,17 @@ class Feed extends Model
         'type'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($feed) {
+            $lastFeed = self::orderBy('id', 'desc')->first();
+            $lastId = $lastFeed ? intval(substr($lastFeed->custom_id, 2)) : 99;
+            $feed->custom_id = 'FE-' . ($lastId + 1);
+        });
+    }
+
     public function background(){
         return $this->hasMany(BackgroundFeed::class  , 'id' , 'background_id');
     }

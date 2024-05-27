@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Feed Background')
+@section('title', 'Emojis')
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
@@ -86,21 +86,21 @@
         }
     </style>
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Feeds </span> /Add Background
+        <span class="text-muted fw-light">Feeds </span> /Add Emoji
     </h4>
 
 
     <ul class="nav nav-pills flex-column flex-md-row mb-3 d-flex justify-content-end align-item-end">
 
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createcategoryModal">Add Background</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEmojiModal">Add Emoji</button>
     </ul>
     <!--/ User Sidebar -->
 
     <div class="col-xl-12 col-lg-12 col-md-12 order-0 order-md-12">
         <div class="row">
-            @foreach ($background_post as $key => $background_posts)
+            @foreach ($emojis as $key => $emoji)
             @php
-                $date = \Carbon\Carbon::parse($background_posts->created_at);
+                $date = \Carbon\Carbon::parse($emoji->created_at);
                 $formattedDate = $date->format('D d M g:i a');
             @endphp
                 <div class="col-lg-3">
@@ -112,12 +112,12 @@
                                 <!-- User meta -->
                                 <div class="user-block">
                                     <div class="user-info">
-                                        <span class="d-flex"><a href="#">{{$background_posts->name}}</a></span>
+                                        <span class="d-flex"><a href="#">{{$emoji->name}}</a></span>
                                         <span class="time">{{$formattedDate}}</span>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end align-item-end">
-                                    <form action="{{ route('feed.background.delete',$background_posts->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                    <form action="{{ route('feed.emoji.delete',$emoji->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
@@ -129,8 +129,8 @@
                             <div class="card-body">
                                 <div class="post-image">
                                     <a data-fancybox="post1" data-lightbox-type="comments">
-                                        <img src="{{ asset('storage/'.$background_posts->image) }}" style="width: 375px;height:264px"
-                                            data-demo-src="{{ asset('storage/'.$background_posts->image) }}"
+                                        <img src="{{ asset('storage/'.$emoji->image) }}" style="width: 375px;height:264px"
+                                            data-demo-src="{{ asset('storage/'.$emoji->image) }}"
                                             data-user-popover="1" alt="">
                                     </a>
                                 </div>
@@ -155,10 +155,10 @@
 
 
 
-    <x-modal id="createcategoryModal" title="Add Background" saveBtnText="Add" saveBtnType="submit" saveBtnForm="createForm"
+    <x-modal id="createEmojiModal" title="Add Emoji" saveBtnText="Add" saveBtnType="submit" saveBtnForm="createForm"
         size="md">
 
-        @include('content.include.FeedBackground.createForm')
+        @include('content.include.emoji.createForm')
     </x-modal>
     <!-- /Modal -->
 @endsection

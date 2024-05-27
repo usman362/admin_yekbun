@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\FeedReason;
 use Illuminate\Http\Request;
 
 class ReasonController extends Controller
@@ -14,7 +15,8 @@ class ReasonController extends Controller
      */
     public function index()
     {
-        return view('content.settings.reasons.index');
+        $reasons = FeedReason::all();
+        return view('content.settings.reasons.index', compact('reasons'));
     }
 
     /**
@@ -35,7 +37,20 @@ class ReasonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'reason' => 'required',
+        ]);
+        $status = empty($request->id) ? 'Created' : 'Updated';
+        try {
+            $reason = FeedReason::updateOrCreate(
+                ['_id' => $request->reason_id],
+                $validatedData
+            );
+            return redirect()->route('reasons.index')->with('success', 'Feed Reason Has been ' . $status);
+        } catch (\Exception $e) {
+            return redirect()->route('reasons.index')->with('error', 'Failed to ' . $status . ' Feed Reason');
+        }
     }
 
     /**
@@ -80,6 +95,11 @@ class ReasonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reason = FeedReason::find($id);
+        if ($reason->delete()) {
+            return redirect()->route('reasons.index')->with('success', 'Feed Reason Deleted Successfully');
+        } else {
+            return redirect()->route('reasons.index')->with('error', 'Failed to Delete Feed Reason');
+        }
     }
 }

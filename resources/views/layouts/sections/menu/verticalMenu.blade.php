@@ -174,11 +174,6 @@ $configData = Helper::appClasses();
             </li>
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
-                <div>Prefix</div>
-              </a>
-            </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
                 <div>Policy and Terms</div>
               </a>
             </li>
@@ -315,18 +310,6 @@ $configData = Helper::appClasses();
 
             </li>
 
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-
-
-
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
                 <div>Policy and Terms</div>
@@ -416,17 +399,6 @@ $configData = Helper::appClasses();
             </li>
 
 
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-
-
-
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
                 <div>Policy and Terms</div>
@@ -504,17 +476,6 @@ $configData = Helper::appClasses();
 
 
             </li>
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-
 
 
             <li class="menu-item ">
@@ -653,25 +614,6 @@ $configData = Helper::appClasses();
 
             </li>
 
-
-
-            <li class="menu-item {{ Request::is('feeds-policy_and_terms') ? 'active' : '' }}">
-              <a href="{{url('feeds-policy_and_terms')}}" class="menu-link">
-                <div>Policy and Terms</div>
-              </a>
-
-
-            </li>
-
-
-
-            <li class="menu-item {{ Request::is('feeds-prefix') ? 'active' : '' }}">
-              <a href="{{url('feeds-prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
           </ul>
         </li>
       </ul>
@@ -743,16 +685,6 @@ $configData = Helper::appClasses();
             <li class="menu-item {{ Request::is('reason') ? 'active' : '' }}">
               <a href="{{url('/reason')}}" class="menu-link">
                 <div>Reasons</div>
-              </a>
-
-
-            </li>
-
-
-
-            <li class="menu-item  {{ Request::is('prefix') ? 'active' : '' }}">
-              <a href="{{url('/prefix')}}" class="menu-link">
-                <div>Prefix</div>
               </a>
 
 
@@ -1058,14 +990,6 @@ $configData = Helper::appClasses();
             </li>
 
 
-
-            <li class="menu-item {{ Request::is('wishes/setting/prefix') ? 'active' : '' }}">
-              <a href="{{ url('wishes/setting/prefix') }}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
           </ul>
         </li>
       </ul>
@@ -1179,15 +1103,6 @@ $configData = Helper::appClasses();
 
             </li>
 
-            <li class="menu-item  {{ Request::is('settings/stories/prefix') ? 'active' : '' }}">
-              <a href="{{url('/settings/stories/prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-
-
 
             <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
               <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
@@ -1286,11 +1201,7 @@ $configData = Helper::appClasses();
                 <div>Pricing</div>
               </a>
             </li>
-            <li class="menu-item {{ Request::is('setting/music/prefix') ? 'active' : '' }}">
-              <a href="{{url('/setting/music/prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-            </li>
+
           </ul>
         </li>
       </ul>
@@ -1363,14 +1274,6 @@ $configData = Helper::appClasses();
             </li>
 
 
-
-            <li class="menu-item {{ Request::is('settings/voting/prefix') ? 'active' : '' }}">
-              <a href="{{url('/settings/voting/prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
           </ul>
         </li>
       </ul>
@@ -1414,7 +1317,7 @@ $configData = Helper::appClasses();
 
 
 
-        <li class="menu-item {{ Request::is('settings/history/*') ? 'active open' : '' }}">
+        {{-- <li class="menu-item {{ Request::is('settings/history/*') ? 'active open' : '' }}">
           <a href="javascript:void(0)" class="menu-link menu-toggle">
             <div>Settings</div>
           </a>
@@ -1432,7 +1335,7 @@ $configData = Helper::appClasses();
 
             </li>
           </ul>
-        </li>
+        </li> --}}
       </ul>
     </li>
 
@@ -1470,28 +1373,6 @@ $configData = Helper::appClasses();
           </a>
 
 
-        </li>
-
-
-
-        <li class="menu-item {{ Request::is('settings/donation/*') ? 'active open' : '' }}">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-
-
-          <ul class="menu-sub">
-
-
-
-            <li class="menu-item {{ Request::is('settings/donation/prefix') ? 'active' : '' }}">
-              <a href="{{url('/settings/donation/prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-          </ul>
         </li>
       </ul>
     </li>
@@ -1532,27 +1413,6 @@ $configData = Helper::appClasses();
 
         </li>
 
-
-
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-
-
-          <ul class="menu-sub">
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-          </ul>
-        </li>
       </ul>
     </li>
 
@@ -1804,18 +1664,7 @@ $configData = Helper::appClasses();
             <div>Add/Manage Movies</div>
           </a>
         </li>
-        <li class="menu-item {{ Request::is('movie/setting/*') ? 'active open' : '' }}">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item {{ Request::is('movie/setting/prefix') ? 'active' : '' }}">
-              <a href="{{ url('/movie/setting/prefix') }}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-            </li>
-          </ul>
-        </li>
+
       </ul>
     </li>
     <li class="menu-item {{ Request::is('series/*') ? 'active open' : '' }}">
@@ -1828,18 +1677,6 @@ $configData = Helper::appClasses();
           <a href="{{ url('/series/series') }}" class="menu-link">
             <div>Add/Manage Series</div>
           </a>
-        </li>
-        <li class="menu-item {{ Request::is('series/setting/*') ? 'active open' : '' }}">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item {{ Request::is('series/setting/prefix') ? 'active' : '' }}">
-              <a href="{{ url('/series/setting/prefix') }}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-            </li>
-          </ul>
         </li>
       </ul>
     </li>
@@ -2130,7 +1967,7 @@ $configData = Helper::appClasses();
     <li class="menu-item {{ Request::is('policy_and_terms') ? 'active' : '' }}">
       <a href="{{url('/policy_and_terms')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-list-ul"></i>
-        <div>Policy and Terms</div>
+        <div>App Terms</div>
       </a>
     </li>
     <li class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
