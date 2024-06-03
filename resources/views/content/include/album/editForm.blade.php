@@ -39,10 +39,10 @@
                     <label class="form-label" for="fullname">Artist</label>
                     <select class="form-select" aria-label="Default select example" name="artist_id">
                         <option selected value="">Select</option>
-                        @foreach ($artist as $artists)
-                            <option value="{{ $artists->id }}"
-                                {{ $artists->id == $album->artist_id ? 'selected' : '' }}>
-                                {{ $artists->first_name ?? '' }}</option>
+                        @foreach ($artists as $artist)
+                            <option value="{{ $artist->id }}"
+                                {{ $artist->id == $album->artist_id ? 'selected' : '' }}>
+                                {{ $artist->first_name ?? '' }}</option>
                         @endforeach
                     </select>
                     @error('artist_id')

@@ -239,24 +239,20 @@ class MusicController extends Controller
     }
 
     public function store_song(Request $request)
-    // public function store_song()
     {
-
-        // $validated = $request->validated();
         try {
-            foreach ($request->audio_paths as $key => $audioPath) {
+            foreach ($request->songs as $key => $audioPath) {
                 $song = new Song();
-                $song->name = $request->name[$key];
+                $song->name = $request->songs_file_name[$key] ?? '';
                 $song->music_id = $request->music_id;
                 $song->album_id = $request->album_id;
                 $song->artist_id = $request->artist_id;
                 $song->audio = $audioPath;
-                $song->file_size = $request->file_size[$key];
-                $song->length = $request->length[$key];
+                $song->file_size = $request->songs_file_size[$key] ?? '';
+                $song->length = $request->songs_file_length[$key] ?? '';
                 $song->status = (int)$request->status;
                 $song->save();
             }
-
             return back()->with("success", "Song successfully added.");
         } catch (\Exception $e) {
             return back()->with("error", "Failed to add Song ");

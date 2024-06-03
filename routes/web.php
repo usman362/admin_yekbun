@@ -287,7 +287,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::resource('/music', MusicController::class);
     Route::get('/musics/{id}/{status}', [MusicController::class, 'status'])->name('musics-status');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
-
+    Route::get('get-songs',[MusicController::class, 'getSongs'])->name('get.songs');
     Route::post('musics/store_song', [MusicController::class, 'store_song'])->name('musics.store_song');
     Route::delete('musics/delete_song/{id}', [MusicController::class, 'deleteSong'])->name('musics.delete_song');
     //   Route::get('musics/{music_id}', [MusicController::class, 'video']);
@@ -310,6 +310,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::resource('/artist', ArtistController::class);
     Route::get('/artists/{id}/{status}', [ArtistController::class, 'status'])->name('artists-status');
+    Route::get('/get-artist-detail', [ArtistController::class, 'getArtistDetail'])->name('get.artist.detail');
 
     // Route::resource('/artist', ArtistController::class);
     // Route::get('/artists/{id}/{status}', [ArtistController::class, 'status'])->name('artists-status');
@@ -317,14 +318,14 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/artists/{id}/image', [ArtistController::class, 'deleteArtistImage'])->name('artists.delete-img');
 
     Route::resource('/album', AlbumController::class);
-
-    Route::resource('/album', AlbumController::class);
+    Route::get('get-albums',[AlbumController::class,'getAlbums'])->name('get.albums');
     Route::delete('/album/{id}/album', [AlbumController::class, 'deleteAlbum'])->name('album.delete-audio');
     Route::delete('/album/{id}/image', [AlbumController::class, 'deleteAlbumImage'])->name('album.delete-img');
     //   Route::get('albums', [AlbumController::class, 'viewpage']);
     Route::get('albums/{id}', [AlbumController::class, 'viewpage']);
 
     Route::resource('/video-clips', VideoClipController::class);
+    Route::get('get-video-clips',[VideoClipController::class,'getVideoClips'])->name('get.video-clips');
     Route::get('/video-clips/{id}/clips', $controller_path . '\VideoClipController@detail')->name('video-clips.clips');
     Route::get('/video-clips/{id}/{status}', [VideoClipController::class, 'status'])->name('video-clips-status');
     Route::delete('/video-clips/{id}/clip', [VideoClipController::class, 'deleteVideo'])->name(

@@ -17,9 +17,9 @@ class AlbumController extends Controller
      */
     public function index()
     {
-         $artist = Artist::get();
-         $albums = Album::with('artist')->get();
-       return view('content.album.index' , compact('albums' , 'artist'));
+        $artists = Artist::get();
+        $albums = Album::with('artist')->get();
+        return view('content.album.index', compact('albums', 'artists'));
     }
 
     /**
@@ -47,13 +47,13 @@ class AlbumController extends Controller
         $album  = new Album();
         $album->artist_id = $request->artist_id;
         $album->title = $request->title;
-        $album->album = $request->album??[];
-        $album->image = $request->image??'';
+        $album->album = $request->album ?? [];
+        $album->image = $request->image ?? '';
         $album->status = $request->status;
 
-        if($album->save()){
-            return redirect()->route('album.index')->with('success' , 'Album Created Successfully');
-        }else{
+        if ($album->save()) {
+            return redirect()->route('album.index')->with('success', 'Album Created Successfully');
+        } else {
             return redirect()->route('album.index')->with('error', 'Album not created');
         }
     }
@@ -92,8 +92,8 @@ class AlbumController extends Controller
         $album = Album::findorFail($id);
         $album->artist_id = $request->artist_id;
         $album->title = $request->title;
-        $album->album = $request->album??[];
-        $album->image = $request->image??'';
+        $album->album = $request->album ?? [];
+        $album->image = $request->image ?? '';
         $album->status = $request->status;
 
         // if($request->hasFile('image')){
@@ -107,32 +107,29 @@ class AlbumController extends Controller
         //     }
         // }
 
-    //     $albums = collect([]);
-    //     if($request->file('album')){
-    //     foreach($request->file('album') as $value){
-    //          if(isset($album->album)){
-    //             $album_path = public_path('storage/'.$album->album);
-    //             if(file_exists($album_path)){
-    //                 unlink($album_path);
-    //             }
-    //             $path = $value->store('/images/album/album/','public');
-    //             $albums->push($path);
-    //             $album->album = $albums;
-    //          }
-    //     }
-    // }else{
-    //     $oldalbum  = $album->album;
-    //     $album->album = $oldalbum;
-    // }
+        //     $albums = collect([]);
+        //     if($request->file('album')){
+        //     foreach($request->file('album') as $value){
+        //          if(isset($album->album)){
+        //             $album_path = public_path('storage/'.$album->album);
+        //             if(file_exists($album_path)){
+        //                 unlink($album_path);
+        //             }
+        //             $path = $value->store('/images/album/album/','public');
+        //             $albums->push($path);
+        //             $album->album = $albums;
+        //          }
+        //     }
+        // }else{
+        //     $oldalbum  = $album->album;
+        //     $album->album = $oldalbum;
+        // }
 
-        if($album->update()){
+        if ($album->update()) {
             return redirect()->route('album.index')->with('success', 'Album  Has been Updated');
-
-        }else{
+        } else {
             return redirect()->route('album.index')->with('success', 'Album not updated');
-
         }
-
     }
 
 
@@ -145,9 +142,9 @@ class AlbumController extends Controller
     public function destroy($id)
     {
         $album = Album::findorFail($id);
-        if(isset($album->image)){
-            $image_path = public_path('storage/'.$album->image);
-            if(file_exists($image_path)){
+        if (isset($album->image)) {
+            $image_path = public_path('storage/' . $album->image);
+            if (file_exists($image_path)) {
                 // unlink($image_path);
             }
         }
@@ -160,13 +157,11 @@ class AlbumController extends Controller
         //         }
         //     }
         // }
-         if($album->delete($album->id)){
+        if ($album->delete($album->id)) {
             return redirect()->route('album.index')->with('success', 'Album Has been Deleted');
-
-         }else{
+        } else {
             return redirect()->route('album.index')->with('success', 'Album not Deleted');
-
-         }
+        }
     }
 
     public function deleteAlbum(Request $request, $id)
@@ -200,10 +195,11 @@ class AlbumController extends Controller
             'status' => true
         ];
     }
-    public function viewpage($id){
+    public function viewpage($id)
+    {
         $all_albums = Album::with('artist')->get();
         $albums = Album::where('_id', $id)->with('artist')->get()->first;
-        $album =$albums->title;
+        $album = $albums->title;
         $artist = Artist::get();
         $artists = $artist;
         $songs = Song::where('album_id', $id)->with('artist')->get();

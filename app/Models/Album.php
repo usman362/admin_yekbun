@@ -15,18 +15,30 @@ class Album extends Model
 
     protected $casts = [
         'album' => 'array'
-     ];
-     protected $attributes = [
+    ];
+    protected $attributes = [
         'album' => '[]'
-     ];
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($history) {
+            $lastHistory = self::orderBy('id', 'desc')->first();
+            $lastId = $lastHistory ? intval(substr($lastHistory->custom_id, 2)) : 99;
+            $history->custom_id = 'ALB-' . ($lastId + 1);
+        });
+    }
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults();
     }
-    
-    public function artist(){
-          return $this->belongsTo(Artist::class, 'artist_id');
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class, 'artist_id');
     }
 
     // protected function image(): Attribute

@@ -8,6 +8,7 @@ use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Models\MusicCategory;
 use Carbon\Carbon;
+
 class VideoClipController extends Controller
 {
     /**
@@ -16,13 +17,13 @@ class VideoClipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-   {
+    {
         $video  = VideoClip::with('music_category')->get();
         $music_category  = MusicCategory::get();
         $artists = Artist::get();
         $albums = Album::get();
 
-        return view('content.video_clips.index' , compact('video' , 'music_category' , 'artists', 'albums'));
+        return view('content.video_clips.index', compact('video', 'music_category', 'artists', 'albums'));
     }
 
     /**
@@ -31,8 +32,8 @@ class VideoClipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-     {
-         //     return view('content.video_clips.create' , compact('music_category'));
+    {
+        //     return view('content.video_clips.create' , compact('music_category'));
     }
 
     /**
@@ -43,56 +44,23 @@ class VideoClipController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->dd();
         $validated = $request->validate([
-            'name'=>'required',
-            'artist_id'=>'required',
-            'video'=>'nullable',
-            'thumbnail'=>'nullable',
-            'file_size' => 'nullable',
-            'length' => 'nullable',
-            'status'=>'required',
+            'video_file_name' => 'required',
+            'artist_id' => 'required',
+            'video' => 'nullable',
+            'thumbnail' => 'nullable',
+            'video_file_size' => 'nullable',
+            'video_file_length' => 'nullable',
+            'status' => 'required',
         ]);
 
-        $uploadedFile = $validated['video'];
-
-        // Generate a unique name for the file, or use the original file name
-        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
-
-        // Get the folder name from the request or use 'files' as the default folder
-        $folder = $request->folder ?? 'files';
-
-        // Store the file in the 'public' disk (configured in config/filesystems.php)
-        $filePath = $uploadedFile->storeAs("/video_clips", $uniqueName, "public");
-
-        $validated['video'] = "storage/".$filePath; // public url and storage is the base URL
-
-        $uploadedFile = $validated['thumbnail'];
-
-        // Generate a unique name for the file, or use the original file name
-        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
-
-        // Get the folder name from the request or use 'files' as the default folder
-        $folder = $request->folder ?? 'files';
-
-        // Store the file in the 'public' disk (configured in config/filesystems.php)
-        $filePath = $uploadedFile->storeAs("/images", $uniqueName, "public");
-
-        $validated['thumbnail'] = "storage/".$filePath;
-
-    //   $music_implode = implode('' , $request->audio_paths);
-    VideoClip::create($validated);
-    //   $video = new VideoClip();
-    //   $video->name = $request->name;
-    // //   $video->category_id = $request->category_id;
-    //   $video->artist_id = $request->artist_id;
-    //   $video->video = $request->video_paths??[];
-    //   $video->status = $request->status;
-
-        // if($video->save()){
+        try {
+            VideoClip::create($validated);
             return redirect()->back()->with('success', 'Video clip Has been added');
-        // }else{
-        //     return redirect()->back()->with('error', 'Failed to add video clip');
-        // }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add video clip');
+        }
     }
 
     /**
@@ -107,7 +75,7 @@ class VideoClipController extends Controller
         $artists = Artist::get();
         $content_type = 'video-clip';
         // dd($artists);
-        return view('content.video_clips.video-clip-detail', compact('content_type','artists'));
+        return view('content.video_clips.video-clip-detail', compact('content_type', 'artists'));
         //
     }
 
@@ -137,7 +105,7 @@ class VideoClipController extends Controller
     {
         $video = VideoClip::findorFail($id);
         $music_category = MusicCategory::get();
-        return view('content.video_clips.edit' , compact('music_category' , 'video'));
+        return view('content.video_clips.edit', compact('music_category', 'video'));
     }
 
     /**
@@ -156,12 +124,10 @@ class VideoClipController extends Controller
         $video->artist_id = $request->artist_id;
         $video->video = $request->video_paths ?? [];
         $video->status = $request->status;
-        if($video->update()){
+        if ($video->update()) {
             return redirect()->back()->with('success', 'Video Has been Updated');
-
-        }else{
+        } else {
             return redirect()->back()->with('success', 'Video not updated');
-
         }
     }
 
@@ -183,40 +149,38 @@ class VideoClipController extends Controller
         //     }
         // }
 
-        if($video->video){
-            $file_path = public_path('storage/'.$video->video);
-            if(file_exists($file_path)){
+        if ($video->video) {
+            $file_path = public_path('storage/' . $video->video);
+            if (file_exists($file_path)) {
                 unlink($file_path);
             }
         }
 
 
-        if($video->thumbnail){
-            $file_path = public_path('storage/'.$video->thumbnail);
-            if(file_exists($file_path)){
+        if ($video->thumbnail) {
+            $file_path = public_path('storage/' . $video->thumbnail);
+            if (file_exists($file_path)) {
                 unlink($file_path);
             }
         }
 
-        if($video->delete($video->id)){
-        //    return redirect()->route('video-clips.index')->with('success', 'Video  Has been Deleted');
+        if ($video->delete($video->id)) {
+            //    return redirect()->route('video-clips.index')->with('success', 'Video  Has been Deleted');
             return redirect()->back()->with('success', 'Video  Has been Deleted');
-
-        }else{
-        //    return redirect()->route('video-clips.index')->with('error', 'Video not Deleted');
+        } else {
+            //    return redirect()->route('video-clips.index')->with('error', 'Video not Deleted');
             return redirect()->back()->with('error', 'Video not Deleted');
-
         }
     }
-    public function status($id , $status){
+    public function status($id, $status)
+    {
         $video = VideoClip::find($id);
 
         $video->status = $status;
-        if($video->update()){
+        if ($video->update()) {
             return redirect()->route('video-clips.index')->with('success', 'Status Has been Updated');
-        }else{
+        } else {
             return redirect()->route('video-clips.index')->with('error', 'Status is not changed');
-
         }
     }
 

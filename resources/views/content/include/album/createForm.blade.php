@@ -1,4 +1,4 @@
-<form id="createForm" method="POST" action="{{ route('album.store') }}" enctype="multipart/form-data">
+<form id="{{ isset($form) ? $form : 'createForm'}}" method="POST" action="{{ route('album.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="hidden-inputs"></div>
     <div class="row">
@@ -15,8 +15,8 @@
                     <label class="form-label" for="fullname">Artist</label>
                     <select class="form-select" aria-label="Default select example" name="artist_id">
                         <option selected value="">Select</option>
-                        @foreach($artist as $artists)
-                        <option value="{{ $artists->id }}">{{ $artists->first_name ?? '' }}</option>
+                        @foreach($artists as $artist)
+                        <option value="{{ $artist->id }}">{{ $artist->first_name ?? '' }}</option>
                         @endforeach
                     </select>
                     @error('artist_id')
@@ -28,7 +28,7 @@
                     <div class="card">
                         <h5 class="card-header">Image</h5>
                         <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-img">
+                            <div class="dropzone needsclick" action="/" id="dropzone-album-img">
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload
                                 </div>
@@ -44,7 +44,7 @@
                     <div class="card">
                         <h5 class="card-header">Album</h5>
                         <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-audio">
+                            <div class="dropzone needsclick" action="/" id="dropzone-album">
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload
                                 </div>
@@ -55,15 +55,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                {{-- <div class="col-md-12">
-                    <label class="form-label" for="fullname">Album</label>
-                    <input type="file" name="album[]" class="form-control" id="audioFile" multiple />
-                    @error('album')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>   --}}
                    <div class="col-md-12">
                     <label class="form-label" for="fullname">Status</label>
                     <select class="form-select" aria-label="Default select example" name="status">

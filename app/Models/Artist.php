@@ -33,6 +33,18 @@ class Artist extends Model
         return $this->hasMany(Music::class , 'artist_id' , 'id');
     }
 
+    public function songs(){
+        return $this->hasMany(Song::class , 'artist_id' , 'id');
+    }
+
+    public function albums(){
+        return $this->hasMany(Album::class , 'artist_id' , 'id');
+    }
+
+    public function videos(){
+        return $this->hasMany(VideoClip::class , 'artist_id' , 'id');
+    }
+
     public function province()
     {
         return $this->belongsTo(Region::class, 'province_id');

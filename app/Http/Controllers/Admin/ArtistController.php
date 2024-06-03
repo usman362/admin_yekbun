@@ -7,6 +7,9 @@ use App\Models\Artist;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Album;
+use App\Models\Song;
+use App\Models\VideoClip;
 
 class ArtistController extends Controller
 {
@@ -183,5 +186,16 @@ class ArtistController extends Controller
         return [
             'status' => true
         ];
+    }
+
+    public function getArtistDetail(Request $request)
+    {
+        $artist = Artist::find($request->id);
+        $albums = Album::where('artist_id',$artist->id)->with(['artist'=>function($q){
+            $q->with('songs');
+        }])->get();
+        $songs = Song::where('artist_id',$artist->id)->get();
+        $clips = VideoClip::where('artist_id',$artist->id)->get();
+        return response()->json(['albums' => $albums,'songs' => $songs,'clips' => $clips],200);
     }
 }

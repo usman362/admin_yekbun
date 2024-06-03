@@ -12,13 +12,16 @@ class VideoClip extends Model
 
     protected $fillable = [
         'name',
+        'video_file_name',
         'category_id',
         'music_id',
         'artist_id',
         'thumbnail',
         'video',
         'file_size',
+        'video_file_size',
         'length',
+        'video_file_length',
         'status',
     ];
 
@@ -28,6 +31,17 @@ class VideoClip extends Model
     //  protected $attributes = [
     //     'video' => '[]'
     //  ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($history) {
+            $lastHistory = self::orderBy('id', 'desc')->first();
+            $lastId = $lastHistory ? intval(substr($lastHistory->custom_id, 2)) : 99;
+            $history->custom_id = 'VC-' . ($lastId + 1);
+        });
+    }
 
     public function music_category(){
         return $this->belongsTo(MusicCategory::class , 'category_id' );
