@@ -1162,46 +1162,18 @@ $configData = Helper::appClasses();
           <a href="{{url('/artist')}}" class="menu-link">
             <div>Add Artist</div>
           </a>
-
-
         </li>
-
-
-
-        <li class="menu-item {{ Request::is('album') ? 'active' : '' }}">
-          <a href="{{url('/album')}}" class="menu-link">
-            <div>Add Album</div>
-          </a>
-
-
-        </li>
-
-
-
-        <li class="menu-item {{ Request::is('video-clips') ? 'active' : '' }}">
-          <a href="{{url('/video-clips')}}" class="menu-link">
-            {{-- <div>Add Video Clips</div> --}}
-            <div>Manage Video Clips</div>
-          </a>
-
-
-        </li>
-
-
 
         <li class="menu-item {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/*') ? 'active open' : '' }}">
           <a href="javascript:void(0)" class="menu-link menu-toggle">
             <div>Settings</div>
           </a>
-
-
           <ul class="menu-sub">
             <li class="menu-item {{ Request::is('setting/music/pricing') ? 'active' : '' }}">
               <a href="{{url('/setting/music/pricing')}}" class="menu-link">
                 <div>Pricing</div>
               </a>
             </li>
-
           </ul>
         </li>
       </ul>
