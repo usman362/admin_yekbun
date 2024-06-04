@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Song;
+use Exception;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -40,21 +41,34 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
+        $request->dd();
         $request->validate([
             'artist_id' => 'required',
         ]);
 
-        $album  = new Album();
-        $album->artist_id = $request->artist_id;
-        $album->title = $request->title;
-        $album->album = $request->album ?? [];
-        $album->image = $request->image ?? '';
-        $album->status = $request->status;
-
-        if ($album->save()) {
+        try {
+            $album  = new Album();
+            $album->artist_id = $request->artist_id;
+            $album->title = $request->title;
+            // $album->album = $request->album ?? [];
+            $album->image = $request->image ?? '';
+            $album->status = $request->status;
+            $album->save();
+            foreach ($request->album as $key => $audioPath) {
+                $song = new Song();
+                $song->name = $request->album_file_name[$key] ?? '';
+                $song->music_id = $request->music_id;
+                $song->album_id = $album->id;
+                $song->artist_id = $request->artist_id;
+                $song->audio = $audioPath;
+                $song->file_size = $request->album_file_size[$key] ?? '';
+                $song->length = $request->album_file_length[$key] ?? '';
+                $song->status = (int)$request->status;
+                $song->save();
+            }
             return redirect()->route('album.index')->with('success', 'Album Created Successfully');
-        } else {
-            return redirect()->route('album.index')->with('error', 'Album not created');
+        } catch (Exception $e) {
+            return back()->with('error', 'Album not created');
         }
     }
 

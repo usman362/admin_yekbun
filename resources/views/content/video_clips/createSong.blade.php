@@ -24,7 +24,7 @@
                         <select class="form-select" aria-label="Select Music" name="music_id">
                             <option selected>Select</option>
                             @foreach ($musics as $music)
-                                <option value="{{ $music->id }}">{{ $music->music_category->name ?? '' }}</option>
+                                <option value="{{ $music->id }}">{{ $music->music_category->name ?? 'N/A' }}</option>
                             @endforeach
                         </select>
                         @error('music_id')
@@ -39,7 +39,7 @@
                         <select class="form-select" aria-label="Default select example" name="artist_id">
                             <option selected>Select</option>
                             @foreach ($artists as $artist)
-                                <option value="{{ $artist->id }}">{{ $artist->first_name . ' ' . $artist->last_name ?? '' }}
+                                <option value="{{ $artist->id }}">{{ ($artist->first_name ?? '') . ' ' . ($artist->last_name ?? '') }}
                                 </option>
                             @endforeach
                         </select>

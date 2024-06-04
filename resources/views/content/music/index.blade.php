@@ -163,7 +163,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
             {{-- <td>2h 30min</td> --}}
             <td>{{$musics->total_time_formatted}}</td>
             {{-- <td>1.39 GB</td> --}}
-            <td>{{$musics->total_size < 100 ? $musics->total_size." MB" : ($musics->total_size/1024) . " GB"}}</td>
+            <td>{{$musics->total_size < 1024 ? $musics->total_size." MB" : ($musics->total_size/1024) . " GB"}}</td>
             <td>
               <a href="{{url('musics/'.$musics->id)}}" class="btn btn-primary" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">Manage</a>
               <!--<a  href="{{url('musics/1')}}" class="btn btn-primary" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">Edit</a>-->

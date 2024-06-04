@@ -150,7 +150,7 @@
 
     {{-- Album Modal --}}
     <x-modal id="createalbumModal" title="Create Album" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createAlbumForm" size="md">
+        saveBtnForm="createalbumForm" size="md">
         @include('content.include.album.createForm', ['form' => 'createalbumForm'])
     </x-modal>
 
@@ -428,11 +428,10 @@
 
             // Initialize multiple Dropzones
             document.addEventListener('DOMContentLoaded', function() {
-                // initializeDropzone('#dropzone-img', 'image', 'images', 'image/*');
                 initializeDropzone('#dropzone-artist-img', 'image', 'images', 'image/*');
                 initializeDropzone('#dropzone-album-img', 'image', 'images', 'image/*');
                 initializeDropzone('#dropzone-video', 'video', 'videos', 'video/*');
-                initializeDropzone('#dropzone-album', 'album', 'audios', 'audio/*');
+                initializeDropzone('#dropzone-album', 'album[]', 'audios', 'audio/*',100);
                 initializeDropzone('#dropzone-song', 'songs[]', 'audios', 'audio/*', 100);
                 initializeDropzone('#dropzone-audio', 'audio', 'audios', 'audio/*');
 
@@ -493,8 +492,10 @@
                             if (response.albums && response.albums.length > 0) {
                                 response.albums.forEach(album => {
                                     let totalFileSize = 0;
-                                    if (album.artist.songs && album.artist.songs.length > 0) {
-                                        totalFileSize = album.artist.songs.reduce((sum, song) =>
+                                    if (album.artist.songs && album.artist.songs.length >
+                                        0) {
+                                        totalFileSize = album.artist.songs.reduce((sum,
+                                                song) =>
                                             sum + parseFloat(song.file_size), 0);
                                     }
                                     $('#albums-tbody').append(`

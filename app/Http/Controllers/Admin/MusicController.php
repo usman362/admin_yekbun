@@ -31,13 +31,12 @@ class MusicController extends Controller
 
         $type  = $request->segments()[0];
         $music  = Music::where('type', $type)->with('music_category')
-        ->whereHas('music_category')->with('songs')->get();
+            ->whereHas('music_category')->with('songs')->get();
         $totalSongsSize = 0;
 
         $music->each(function ($musicItem) use (&$totalSongsSize) {
             // Extract the size values using pluck
             $sizeValues = $musicItem->songs->pluck('file_size')->flatten();
-
             // Calculate the total size using sum
             $totalSize = $sizeValues->sum();
 
@@ -52,17 +51,20 @@ class MusicController extends Controller
                 return $carry + $minutes * 60 + $seconds;
             }, 0);
 
-            // Calculate hours and minutes
+            // Calculate hours, minutes, and seconds
             $hours = floor($totalTimeInSeconds / 3600);
             $minutes = floor(($totalTimeInSeconds % 3600) / 60);
+            $seconds = $totalTimeInSeconds % 60;
 
-            // Format the total time as "2h 30min"
+            // Format the total time as "2h 30min 45sec"
             $formattedTime = '';
             if ($hours > 0) {
                 $formattedTime .= $hours . 'h ';
             }
-            $formattedTime .= $minutes . 'min';
-            $formattedTime .= $totalTimeInSeconds . 'sec';
+            if ($minutes > 0) {
+                $formattedTime .= $minutes . 'min ';
+            }
+            $formattedTime .= $seconds . 'sec';
 
             // Add the formatted total time to the music item
             $musicItem->total_time_formatted = $formattedTime;
@@ -99,13 +101,13 @@ class MusicController extends Controller
         //   $music_implode = implode('' , $request->audio_paths);
         try {
             // foreach ($request->audio_paths as $audioPath) {
-                $music = new Music();
-                $music->category_id = $request->category_id;
-                // $music->artist_id = $request->artist_id;
-                // $music->audio = $audioPath;
-                $music->status = $request->status;
-                $music->type = $request->type;
-                $music->save();
+            $music = new Music();
+            $music->category_id = $request->category_id;
+            // $music->artist_id = $request->artist_id;
+            // $music->audio = $audioPath;
+            $music->status = $request->status;
+            $music->type = $request->type;
+            $music->save();
             // }
 
             return redirect()->back()->with('success', $type . ' Has been inserted');
@@ -222,9 +224,9 @@ class MusicController extends Controller
         // $artists = Artist::get();
         // return view('content.video_clips.view', compact('songs', 'music_category', 'artists'));
         $songs = Song::where('music_id', $music_id)
-        ->whereHas('music',function($q){
-            $q->whereHas('music_category');
-        })->get();
+            ->whereHas('music', function ($q) {
+                $q->whereHas('music_category');
+            })->get();
         $songs->transform(function ($song) {
             $formattedDate = Carbon::parse($song->created_at)->format('j M Y');
             $song->upload_date = str_replace([' 0', '-0'], [' ', '-'], $formattedDate);
@@ -235,7 +237,7 @@ class MusicController extends Controller
         $music_category  = MusicCategory::get();
         $artists = Artist::get();
         $albums = Album::get();
-        return view('content.video_clips.view', compact('songs','music', 'music_category', 'artists', 'albums'));
+        return view('content.video_clips.view', compact('songs', 'music', 'music_category', 'artists', 'albums'));
     }
 
     public function store_song(Request $request)
