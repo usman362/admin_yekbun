@@ -12,15 +12,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class News extends Model
 {
     use HasFactory, LogsActivity;
-    
- 
+
+
     // public $image_urls = [];
     // protected $appends = ['image_urls'];
-    protected $fillable=[
+    protected $fillable = [
         'title',
         'description',
-        'category_id',
+        'user_type',
         'image',
+        'image_type',
+        'start_date',
+        'end_date',
+        'comments',
+        'voice_comments',
+        'share',
+        'emotion',
         'status'
     ];
 
@@ -28,16 +35,17 @@ class News extends Model
         'created_at' => 'datetime:Y-m-d H:i:s', // Adjust the format to match your database
         'image' => 'array',
     ];
-     protected $attributes = [
+    protected $attributes = [
         'image' => '[]'
-     ];
+    ];
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults();
     }
 
-    public function news_category(){
-        return $this->belongsTo(NewsCategory::class , 'category_id' );
+    public function news_category()
+    {
+        return $this->belongsTo(NewsCategory::class, 'category_id');
     }
 
     // public function getImageUrlsAttribute(){
@@ -46,7 +54,8 @@ class News extends Model
     //     },$this->image);
     // }
 
-    public function gallery(){
+    public function gallery()
+    {
         return $this->hasMany(PostGallery::class);
     }
 }

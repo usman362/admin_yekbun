@@ -97,8 +97,19 @@
                                         <!-- Edit -->
                                         <span data-bs-toggle="modal" data-bs-target="#editModal{{ $artist->id }}">
                                             <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4"
-                                                data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit"><i
-                                                    class="bx bx-edit"></i></button>
+                                                data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5" d="M4.76562 22.0449H20.7656" stroke="#1C274C"
+                                                        stroke-width="1.5" stroke-linecap="round" />
+                                                    <path
+                                                        d="M15.3952 2.96634L14.6537 3.70785L7.83668 10.5248C7.37495 10.9866 7.14409 11.2174 6.94554 11.472C6.71133 11.7723 6.51053 12.0972 6.3467 12.4409C6.20781 12.7324 6.10457 13.0421 5.89807 13.6616L5.02307 16.2866L4.80918 16.9282C4.70757 17.2331 4.78691 17.5692 5.01413 17.7964C5.24135 18.0236 5.57745 18.103 5.8823 18.0014L6.52396 17.7875L9.14897 16.9125L9.14902 16.9125C9.76846 16.706 10.0782 16.6027 10.3696 16.4638C10.7134 16.3 11.0383 16.0992 11.3386 15.865C11.5931 15.6665 11.824 15.4356 12.2857 14.9739L12.2857 14.9739L19.1027 8.15687L19.8442 7.41537C21.0728 6.1868 21.0728 4.19491 19.8442 2.96634C18.6156 1.73778 16.6237 1.73778 15.3952 2.96634Z"
+                                                        stroke="#1C274C" stroke-width="1.5" />
+                                                    <path opacity="0.5"
+                                                        d="M14.654 3.70801C14.654 3.70801 14.7467 5.2837 16.1371 6.67402C17.5274 8.06434 19.1031 8.15703 19.1031 8.15703M6.52433 17.7876L5.02344 16.2867"
+                                                        stroke="#1C274C" stroke-width="1.5" />
+                                                </svg>
+                                            </button>
                                         </span>
                                     @endcan
                                     @can('location.delete')
@@ -110,7 +121,22 @@
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
                                                 data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                                data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
+                                                data-bs-original-title="Remove"><svg width="25" height="25"
+                                                    viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5"
+                                                        d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492"
+                                                        stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5"
+                                                        stroke-linecap="round" />
+                                                    <path
+                                                        d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492"
+                                                        stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C"
+                                                        stroke-width="1.5" stroke-linecap="round" />
+                                                    <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C"
+                                                        stroke-width="1.5" stroke-linecap="round" />
+                                                </svg>
+                                            </button>
                                         </form>
                                     @endcan
                                 </div>
@@ -431,7 +457,7 @@
                 initializeDropzone('#dropzone-artist-img', 'image', 'images', 'image/*');
                 initializeDropzone('#dropzone-album-img', 'image', 'images', 'image/*');
                 initializeDropzone('#dropzone-video', 'video', 'videos', 'video/*');
-                initializeDropzone('#dropzone-album', 'album[]', 'audios', 'audio/*',100);
+                initializeDropzone('#dropzone-album', 'album[]', 'audios', 'audio/*', 100);
                 initializeDropzone('#dropzone-song', 'songs[]', 'audios', 'audio/*', 100);
                 initializeDropzone('#dropzone-audio', 'audio', 'audios', 'audio/*');
 
@@ -478,9 +504,33 @@
                                             <td>${new Date(song.created_at).toLocaleDateString()}</td>
                                             <td>${song.file_size} MB</td>
                                             <td>${song.length}</td>
-                                            <td><button class="btn btn-sm btn-primary">Option</button></td>
-                                        </tr>
-                                    `);
+                                            <td>
+                                                <div class="d-flex justify-content-start align-items-center">
+                                                                            <!-- Edit -->
+                                        <span data-bs-toggle="modal" data-bs-target="#editModal663e99ae96f497f4a30daf5e">
+                                            <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                  <path d="M12.9648 9.43994C11.308 9.43994 9.96484 8.0968 9.96484 6.43994C9.96484 4.78309 11.308 3.43994 12.9648 3.43994C14.6217 3.43994 15.9648 4.78309 15.9648 6.43994C15.9648 8.0968 14.6217 9.43994 12.9648 9.43994Z" stroke="#1C274C" stroke-width="1.5"/>
+                                                  <path d="M6.46484 21.4399C4.80799 21.4399 3.46484 20.0968 3.46484 18.4399C3.46484 16.7831 4.80799 15.4399 6.46484 15.4399C8.1217 15.4399 9.46484 16.7831 9.46484 18.4399C9.46484 20.0968 8.1217 21.4399 6.46484 21.4399Z" stroke="#1C274C" stroke-width="1.5"/>
+                                                  <path d="M19.4648 21.4399C17.808 21.4399 16.4648 20.0968 16.4648 18.4399C16.4648 16.7831 17.808 15.4399 19.4648 15.4399C21.1217 15.4399 22.4648 16.7831 22.4648 18.4399C22.4648 20.0968 21.1217 21.4399 19.4648 21.4399Z" stroke="#1C274C" stroke-width="1.5"/>
+                                                  <path opacity="0.5" d="M20.9648 13.44C20.9648 11.0506 19.9173 8.90583 18.2565 7.43994M4.96484 13.44C4.96484 11.0506 6.01237 8.90583 7.67322 7.43994M10.9648 21.1879C11.6041 21.3525 12.2742 21.44 12.9648 21.44C13.6554 21.44 14.3256 21.3525 14.9648 21.1879" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                  </svg>
+                                            </button>
+                                        </span>
+                                                                                                                <!-- Delete -->
+                                        <form action="" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                            <input type="hidden" name="_method" value="DELETE">                                            <input type="hidden" name="_token" value="P2GphXsWsIoO5MpOgpPReWUlCM6tWrDDpLT6h7KW">                                            <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                     	</div>
+                                           </td>
+                                        </tr>`);
                                 });
                             } else {
                                 $('#songs-tbody').append(
@@ -506,7 +556,31 @@
                                             <td>${album.total_sales || 'N/A'}</td>
                                             <td>${album.price || 'N/A'}</td>
                                             <td>${totalFileSize.toFixed(2)} MB</td>
-                                            <td><button class="btn btn-sm btn-primary">Option</button></td>
+                                            <td>
+                                                <div class="d-flex justify-content-start align-items-center">
+                                                                            <!-- Edit -->
+                                        <span data-bs-toggle="modal" data-bs-target="#editModal663e99ae96f497f4a30daf5e">
+                                            <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5" d="M4.76562 22.0449H20.7656" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M15.3952 2.96634L14.6537 3.70785L7.83668 10.5248C7.37495 10.9866 7.14409 11.2174 6.94554 11.472C6.71133 11.7723 6.51053 12.0972 6.3467 12.4409C6.20781 12.7324 6.10457 13.0421 5.89807 13.6616L5.02307 16.2866L4.80918 16.9282C4.70757 17.2331 4.78691 17.5692 5.01413 17.7964C5.24135 18.0236 5.57745 18.103 5.8823 18.0014L6.52396 17.7875L9.14897 16.9125L9.14902 16.9125C9.76846 16.706 10.0782 16.6027 10.3696 16.4638C10.7134 16.3 11.0383 16.0992 11.3386 15.865C11.5931 15.6665 11.824 15.4356 12.2857 14.9739L12.2857 14.9739L19.1027 8.15687L19.8442 7.41537C21.0728 6.1868 21.0728 4.19491 19.8442 2.96634C18.6156 1.73778 16.6237 1.73778 15.3952 2.96634Z" stroke="#1C274C" stroke-width="1.5"></path>
+                                                    <path opacity="0.5" d="M14.654 3.70801C14.654 3.70801 14.7467 5.2837 16.1371 6.67402C17.5274 8.06434 19.1031 8.15703 19.1031 8.15703M6.52433 17.7876L5.02344 16.2867" stroke="#1C274C" stroke-width="1.5"></path>
+                                                </svg>
+                                            </button>
+                                        </span>
+                                                                                                                <!-- Delete -->
+                                        <form action="" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                            <input type="hidden" name="_method" value="DELETE">                                            <input type="hidden" name="_token" value="P2GphXsWsIoO5MpOgpPReWUlCM6tWrDDpLT6h7KW">                                            <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                                                    </div>
+                                            </td>
                                         </tr>
                                     `);
                                 });
@@ -528,7 +602,22 @@
                                             <td>${new Date(video.created_at).toLocaleDateString()}</td>
                                             <td>${video.video_file_size} MB</td>
                                             <td>${video.video_file_length || 'N/A'}</td>
-                                            <td><button class="btn btn-sm btn-primary">Option</button></td>
+                                            <td>
+                                                <div class="d-flex justify-content-start align-items-center">
+                                                                            <!-- Edit -->
+                                                                                                                <!-- Delete -->
+                                        <form action="" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                            <input type="hidden" name="_method" value="DELETE">                                            <input type="hidden" name="_token" value="P2GphXsWsIoO5MpOgpPReWUlCM6tWrDDpLT6h7KW">                                            <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                    <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                                                    </div>
+                                            </td>
                                         </tr>
                                     `);
                                 });

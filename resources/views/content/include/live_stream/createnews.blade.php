@@ -1,7 +1,8 @@
 <style>
     .btn-close {
-        position: fixed;
-        right: 32px;
+        position: fixed !important;
+        right: 100px !important;
+        top: 30px !important;
     }
 
     .dz-message {
@@ -97,7 +98,8 @@
 
         </div>
         <div class="bs-stepper-content">
-            <form id="createForm" method="POST" action="https://dashboard.yekbun.net/news" enctype="multipart/form-data">
+            <form id="createForm" method="POST" action="{{ route('admin_activity.store_news') }}"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="hidden-inputs"></div>
 
@@ -114,34 +116,6 @@
                                             data-default-file="{{ asset('assets/img/spiderfull.png') }}" />
                                     </div>
                                     <!--code-->
-                                    <div style="padding:0px 2.75rem;">
-                                        <div style="border-radius:5px 5px 5px 5px;"
-                                            class="d-flex justify-content-start mt-5 ">
-                                            <div style="width:-webkit-fill-available;" class="">
-                                                <div style="width:-webkit-fill-available;" class="btn-group"
-                                                    role="group" aria-label="Basic example">
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">All
-                                                        User</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                                                    <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                                                </div>
-                                            </div>
-                                            <div style="margin-left:10px;"
-                                                class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                                                <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="padding:0px 2.75rem;" class="col-md-12">
-                                        <input type="text" id="fullname" class="form-control mt-3"
-                                            placeholder="News Title" name="title ">
-                                    </div>
                                 </div>
                                 <!--image 1 end-->
 
@@ -179,36 +153,6 @@
 
                                     <!--2 image second tab-->
                                     <!--line here-->
-                                    <div style="padding:0px 2.75rem;">
-                                        <div style="border-radius:5px 5px 5px 5px;"
-                                            class="d-flex justify-content-start mt-5 ">
-
-                                            <div style="width:-webkit-fill-available;" class="">
-                                                <div style="width:-webkit-fill-available;" class="btn-group"
-                                                    role="group" aria-label="Basic example">
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">All
-                                                        User</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                                                </div>
-                                            </div>
-                                            <div style="margin-left:10px;"
-                                                class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                                                <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div style="padding:0px 2.75rem;" class="col-md-12">
-
-                                        <input type="text" id="fullname" class="form-control mt-3"
-                                            placeholder="News Title" name="title ">
-                                    </div>
 
                                     <hr style="width: 131px;margin: auto;margin-top:20px;">
                                     <div style="padding:0px 2.75rem;">
@@ -242,8 +186,8 @@
 
                                 <!--3 image new-->
                                 <!--3 image new-->
-                                <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;"
-                                    id="image33" class="col-sm-12 image-content1 row ">
+                                <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;" id="image33"
+                                    class="col-sm-12 image-content1 row ">
 
                                     <!--3 image 1st tab-->
                                     <div class="col-sm-12 image-changecontent2" id="imagechangetwo1">
@@ -298,37 +242,6 @@
 
                                     </div>
                                     <!--3 image 2nd tab-->
-                                    <div style="padding:0px 2.75rem;">
-                                        <div style="border-radius:5px 5px 5px 5px;"
-                                            class="d-flex justify-content-start mt-5 ">
-
-                                            <div style="width:-webkit-fill-available;" class="">
-                                                <div style="width:-webkit-fill-available;" class="btn-group"
-                                                    role="group" aria-label="Basic example">
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">All
-                                                        User</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                                                </div>
-                                            </div>
-                                            <div style="margin-left:10px;"
-                                                class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                                                <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div style="padding:0px 2.75rem;" class="col-md-12">
-
-                                        <input type="text" id="fullname" class="form-control mt-3"
-                                            placeholder="News Title" name="title ">
-                                    </div>
 
                                     <div>
 
@@ -431,39 +344,6 @@
                                     <!--four tab 2-->
 
                                     <!--add upp-->
-                                    <div style="padding:0px 2.75rem;">
-                                        <div style="border-radius:5px 5px 5px 5px;"
-                                            class="d-flex justify-content-start mt-5 ">
-
-                                            <div style="width:-webkit-fill-available;" class="">
-                                                <div style="width:-webkit-fill-available;" class="btn-group"
-                                                    role="group" aria-label="Basic example">
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">All
-                                                        User</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                                                    <button type="button"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                                                </div>
-                                            </div>
-
-                                            <div style="margin-left:10px;"
-                                                class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                                                <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div style="padding:0px 2.75rem;" class="col-md-12">
-
-                                        <input type="text" id="fullname" class="form-control mt-3"
-                                            placeholder="News Title" name="title ">
-                                    </div>
-                                    <!--add upp-->
 
                                     <hr style="width: 131px;margin: auto;margin-top:20px;">
 
@@ -478,7 +358,8 @@
                                                     data-default3="{{ asset('assets/img/fourdef2.png') }}"
                                                     width="80" height="80"
                                                     class="carousel-inner imagechangefour"
-                                                    data-contentfour2="#imagecontentfour1"></object>
+                                                    data-contentfour2="#imagecontentfour1"
+                                                    data-value="modern"></object>
                                             </div>
                                             <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
                                                 <h6 style="text-align:center;">Elegant</h6>
@@ -488,19 +369,57 @@
                                                     data-default3="{{ asset('assets/img/fourdef1.png') }}"
                                                     width="80" height="80"
                                                     class="carousel-inner imagechangefour"
-                                                    data-contentfour2="#imagecontentfour2"></object>
+                                                    data-contentfour2="#imagecontentfour2"
+                                                    data-value="elegant"></object>
                                             </div>
+                                            <input type="hidden" name="image_style" id="image_style" value="modern">
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div style="padding:0px 2.75rem;">
+                                <div style="border-radius:5px 5px 5px 5px;"
+                                    class="d-flex justify-content-start mt-5 ">
+                                    <div style="width:-webkit-fill-available;" class="">
+                                        <div style="width:-webkit-fill-available;" class="btn-group" role="group"
+                                            aria-label="Basic example">
+                                            <label for="all"
+                                                class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
+                                                <input type="radio" class="form-check-input" name="user_type"
+                                                    value="all" id="all" checked/>All</label>
+                                            <label for="standard"
+                                                class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
+                                                <input type="radio" class="form-check-input" name="user_type"
+                                                    value="standard" id="standard" />Standard</label>
+                                            <label for="premium"
+                                                class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                                                <input type="radio" class="form-check-input" name="user_type"
+                                                    value="premium" id="premium" />Premium</label>
+                                            <label for="vip"
+                                                class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                                                <input type="radio" class="form-check-input" name="user_type"
+                                                    value="vip" id="vip" />VIP</label>
+                                            <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
+                                        </div>
+                                    </div>
+                                    {{-- <div style="margin-left:10px;"
+                                        class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
+                                        <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
+                                    </div> --}}
+                                </div>
+                            </div>
+
+                            <div style="padding:0px 2.75rem;" class="col-md-12">
+                                <input type="text" id="title" class="form-control mt-3"
+                                    placeholder="News Title" name="title">
+                            </div>
 
                             <div style="padding:0px 2.75rem;">
                                 <hr style="width: 131px;margin: auto;margin-top:20px;">
                                 <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
-                                    <input style="height: 90px;" type="text" class="form-control w-100"
-                                        placeholder="Enter The description">
+                                    <input style="height: 90px;" type="text" name="description"
+                                        class="form-control w-100" placeholder="Enter The description">
                                 </div>
 
 
@@ -509,19 +428,26 @@
                                 <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
                                     <div style="width:-webkit-fill-available;" class="btn-group" role="group"
                                         aria-label="Basic example">
-                                        <button type="button"
+                                        <label for="one_image"
                                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
-                                            data-imageone="#image1" data-imagetwo="#image11">1 Image</button>
-                                        <button type="button"
+                                            data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
+                                            <input type="radio" class="form-check-input" name="image_type"
+                                                value="one_image" id="one_image" checked/>1 Image</label>
+                                        <label for="two_image"
                                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image2" data-imagetwo="#image22">2 Image</button>
-                                        <button type="button"
-                                            class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker "
-                                            data-imageone="#image3" data-imagetwo="#image33">3 Image</button>
-                                        <button type="button"
+                                            data-imageone="#image2" data-imagetwo="#image22" data-value="#two_image">
+                                            <input type="radio" class="form-check-input" name="image_type"
+                                                value="two_image" id="two_image" />2 Image</label>
+                                        <label for="three_image"
                                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image4" data-imagetwo="#image44">+4 Image</button>
-
+                                            data-imageone="#image3" data-imagetwo="#image33" data-value="#three_image">
+                                            <input type="radio" class="form-check-input" name="image_type"
+                                                value="three_image" id="three_image" />3 Image</label>
+                                        <label for="four_image"
+                                            class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
+                                            data-imageone="#image4" data-imagetwo="#image44" data-value="#four_image">
+                                            <input type="radio" class="form-check-input" name="image_type"
+                                                value="four_image" id="four_image" />+4 Image</label>
                                     </div>
                                 </div>
                             </div>
@@ -531,9 +457,9 @@
                         <div class="row mt-4">
                             <div class="col-md mb-md-0 mb-2">
                                 <div class="form-check custom-option custom-option-basic">
-                                    <label class="form-check-label custom-option-content" for="customRadioTemp1">
-                                        <input name="customRadioTemp1" class="form-check-input" type="radio"
-                                            value="" id="customRadioTemp1">
+                                    <label class="form-check-label custom-option-content" for="comments">
+                                        <input name="comments" class="form-check-input" type="checkbox"
+                                            value="1" id="comments">
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Comments</span>
                                         </span>
@@ -545,9 +471,9 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-check custom-option custom-option-basic">
-                                    <label class="form-check-label custom-option-content" for="customRadioTemp2">
-                                        <input name="customRadioTemp2" class="form-check-input" type="radio"
-                                            value="" id="customRadioTemp2">
+                                    <label class="form-check-label custom-option-content" for="voice_comments">
+                                        <input name="voice_comments" class="form-check-input" type="checkbox"
+                                            value="1" id="voice_comments">
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Voice Comments</span>
                                         </span>
@@ -562,9 +488,9 @@
                         <div class="row mt-2">
                             <div class="col-md mb-md-0 mb-2">
                                 <div class="form-check custom-option custom-option-basic">
-                                    <label class="form-check-label custom-option-content" for="customRadioTemp3">
-                                        <input name="customRadioTemp3" class="form-check-input" type="radio"
-                                            value="" id="customRadioTemp3">
+                                    <label class="form-check-label custom-option-content" for="share">
+                                        <input name="share" class="form-check-input" type="checkbox"
+                                            value="1" id="share">
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Share</span>
                                         </span>
@@ -576,9 +502,9 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-check custom-option custom-option-basic">
-                                    <label class="form-check-label custom-option-content" for="customRadioTemp4">
-                                        <input name="customRadioTemp4" class="form-check-input" type="radio"
-                                            value="" id="customRadioTemp4">
+                                    <label class="form-check-label custom-option-content" for="emotion">
+                                        <input name="emotion" class="form-check-input" type="checkbox"
+                                            value="1" id="emotion">
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Emotion</span>
                                         </span>
@@ -593,21 +519,21 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Start Date</label>
-                                <input type="date" class="form-control" name="" id="">
+                                <input type="date" class="form-control" name="start_date" id="">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">End Date</label>
-                                <input type="date" class="form-control" name="" id="">
+                                <input type="date" class="form-control" name="end_date" id="">
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <label class="form-label">Status</label>
                             <select class="form-select" aria-label="Default select example" name="status">
-                                <option value="1" selected="">Select status</option>
+                                <option value="" selected="">Select status</option>
                                 <option value="1">Published</option>
                                 <option value="0">UnPublished</option>
                             </select>

@@ -22,6 +22,8 @@ class Event extends Model
         'description',
         'event_category_id',
         'user_id',
+        'user_type',
+        'start_date',
         'start_time',
         "end_time",
         "country",
@@ -75,7 +77,7 @@ class Event extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function ticketSales()
     {
         return $this->hasMany(TicketSale::class, 'event_id');

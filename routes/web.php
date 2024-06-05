@@ -122,6 +122,8 @@ Route::get('/cmd/{cmd}', function ($cmd) {
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile');
 Route::middleware('auth')->group(function () {
     Route::get("/admin_activity", [AdminProfileController::class, 'admin_activity'])->name('admin_activity');
+    Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
+    Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
 });
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
 Route::get('/admin/profile/security', [AdminProfileController::class, 'security'])->name('admin_profile.security');

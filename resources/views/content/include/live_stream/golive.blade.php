@@ -6,7 +6,7 @@
    #requestpopupnew .modal-dialog .modal-content .modal-footer{
        display:none;
    }
-    
+
 </style>
 
 <!--       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="-->
@@ -30,7 +30,7 @@
                   <span class="custom-option-body mt-4">
                     <img src="{{asset('assets/svg/icons/Plan a stream.svg')}}" width="35" alt="">
                     <span class="custom-option-title"> Plan a Stream </span>
-                    
+
                   </span>
                   <input name="customRadioIcon" class="form-check-input goliveOptions" type="radio" value="" checked="">
                 </label>
@@ -42,7 +42,7 @@
                   <span class="custom-option-body mt-4">
                     <img src="{{asset('assets/svg/icons/Go Live.svg')}}" width="35" alt="">
                     <span class="custom-option-title">Go Live</span>
-                    
+
                   </span>
                   <input name="customRadioIcon" class="form-check-input goliveOptions" type="radio" value="" id="customRadioHome" >
                 </label>
@@ -50,28 +50,36 @@
             </div>
           </div>
         </div>
-        <form id="PlanStream" class="row g-3 tab-contented" onsubmit="return false">
-
+        <form action="{{route('admin_activity.store_event')}}" id="PlanStream" class="row g-3 tab-contented" method="post">
+            @csrf
           <div class="col-12">
             <label class="form-label" for="modalAddressFirstName">Title</label>
-            <input type="text" id="modalAddressFirstName" name="modalAddressFirstName" class="form-control">
+            <input type="text" id="modalAddressFirstName" name="title" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="modalAddressDescription">Description</label>
+            <textarea name="description" id="modalAddressDescription" class="form-control" cols="30" rows="4"></textarea>
           </div>
           <div class="col-12">
             <label class="form-label" for="modalAddressAddress1">Start Date</label>
-            <input type="date" id="modalAddressAddress1" name="modalAddressAddress1" class="form-control">
+            <input type="date" id="modalAddressAddress1" name="start_date" class="form-control">
           </div>
           <div class="col-12">
             <label class="form-label" for="modalAddressAddress2">Start Time</label>
-            <input type="time" id="modalAddressAddress2" name="modalAddressAddress2" class="form-control">
+            <input type="time" id="modalAddressAddress2" name="start_time" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="modalAddressAddress24">End Time</label>
+            <input type="time" id="modalAddressAddress24" name="end_time" class="form-control">
           </div>
           <div class="col-12">
             <label class="form-label" for="modalAddressCountry">Select User type</label>
-            <select id="modalAddressCountry" name="modalAddressCountry" class="select2 form-select" data-allow-clear="true">
+            <select id="modalAddressCountry" name="user_type" class="select2 form-select" data-allow-clear="true">
               <option value="">Select</option>
-              <option value="All">All</option>
-              <option value="Standard">Standard</option>
-              <option value="Premium">Premium</option>
-              <option value="Vip">Vip</option>
+              <option value="all">All</option>
+              <option value="standard">Standard</option>
+              <option value="premium">Premium</option>
+              <option value="vip">Vip</option>
             </select>
           </div>
           <div  style="padding-bottom:20px;" class="col-12 text-center">
@@ -159,5 +167,5 @@
             <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
           </div>
         </form>
-        
+
     </div>

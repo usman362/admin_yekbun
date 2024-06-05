@@ -6,6 +6,8 @@ use App\Helpers\Helpers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
@@ -23,7 +25,9 @@ class AdminProfileController extends Controller
 
     public function admin_activity()
     {
-        return view('content.pages.admin_activity');
+        $events = Event::all();
+        $news = News::all();
+        return view('content.pages.admin_activity',compact('events','news'));
     }
 
     public function store(Request $request)
@@ -115,5 +119,23 @@ class AdminProfileController extends Controller
                 return back()->with('error', 'Your New Password  and Confirm Password  is not matched');
             }
         }
+    }
+
+    public function store_news(Request $request)
+    {
+        $news = News::create($request->all());
+        return back();
+    }
+
+    public function store_event(Request $request)
+    {
+        $event = Event::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'start_date' => $request->start_date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+        ]);
+        return back();
     }
 }
