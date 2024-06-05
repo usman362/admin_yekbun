@@ -8,6 +8,7 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Album;
+use App\Models\MusicCategory;
 use App\Models\Song;
 use App\Models\VideoClip;
 
@@ -23,7 +24,8 @@ class ArtistController extends Controller
 
         $artists  = Artist::with('musics')->get();
         $provinces = Region::get();
-        return view('content.artist.index', compact('artists', 'provinces'));
+        $categories = MusicCategory::doesntHave('musics')->get();
+        return view('content.artist.index', compact('artists', 'provinces','categories'));
     }
 
     /**

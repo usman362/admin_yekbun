@@ -279,4 +279,12 @@ class MusicController extends Controller
         $countries = Country::orderBy("name", "ASC")->get();
         return view('content.music.country', compact('countries'));
     }
+
+    public function changeCategory(Request $request)
+    {
+        $music = Music::find($request->music_id);
+        $music->category_id = $request->changeCategory;
+        $music->save();
+        return back()->with("success", "Category Saved Successfully!");
+    }
 }

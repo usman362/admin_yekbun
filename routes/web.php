@@ -287,6 +287,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     );
 
     Route::resource('/music', MusicController::class);
+    Route::post('/change-music-category',[MusicController::class,'changeCategory'])->name('change.musicCategory');
     Route::get('/musics/{id}/{status}', [MusicController::class, 'status'])->name('musics-status');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
     Route::get('get-songs',[MusicController::class, 'getSongs'])->name('get.songs');
