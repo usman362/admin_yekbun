@@ -109,11 +109,14 @@
                         <!--codee-->
                         <div id="" class="">
                             <div class="shareimage">
-                                <div style="margin-top:-65px;" id="image11" class="image-content1  ">
-                                    <div style="margin-top: -37px;" class="w-100 imagefullmargin">
-                                        <input style="border-radius:20px;" name="file1" type="file" class="dropify"
-                                            data-height="250"
-                                            data-default-file="{{ asset('assets/img/spiderfull.png') }}" />
+                                <div style="" id="image11" class="image-content1">
+                                    <div class="dropzone needsclick" action="/" id="dropzone-image11">
+                                        <div class="dz-message needsclick">
+                                            Drop files here or click to upload
+                                        </div>
+                                        <div class="fallback">
+                                            <input type="file" name="image" />
+                                        </div>
                                     </div>
                                     <!--code-->
                                 </div>
@@ -125,16 +128,30 @@
                                     <div class="row image-changecontent p-0" id="imagechangeone1">
                                         <div style="padding-right:0px;margin-top:-4px;"
                                             class="col-sm-6 customborderradiustopleft imagefullmargin2one">
-                                            <input name="file1" type="file" class="dropify" data-height="150"
-                                                data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
 
+                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-1">
+                                                <div class="dz-message needsclick">
+                                                    Drop files here or click to upload
+                                                </div>
+                                                <div class="fallback">
+                                                    <input type="file" name="image" />
+                                                </div>
+                                            </div>
 
                                         </div>
 
                                         <div style="padding-left:0px;margin-top:-4px;"
                                             class="col-sm-6 customborderradiustopleft imagefullmargin2two">
-                                            <input name="file1" type="file" class="dropify" data-height="150"
-                                                data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+
+                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-2">
+                                                <div class="dz-message needsclick">
+                                                    Drop files here or click to upload
+                                                </div>
+                                                <div class="fallback">
+                                                    <input type="file" name="image" />
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <!--2 image 1st tab-->
@@ -142,12 +159,24 @@
                                     <div class="row image-changecontent p-0" id="imagechangeone2">
 
                                         <div style="margin-top:-4px;" class="col-sm-12 imagefullmargintwotwo">
-                                            <input name="file1" type="file" class="dropify" data-height="100"
-                                                data-default-file="{{ asset('assets/img/spiderfull (2).png') }}" />
+                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-3">
+                                                <div class="dz-message needsclick">
+                                                    Drop files here or click to upload
+                                                </div>
+                                                <div class="fallback">
+                                                    <input type="file" name="image" />
+                                                </div>
+                                            </div>
                                         </div>
                                         <div style="margin-top:-4px;" class="col-sm-12 imagefullmargintwotwo">
-                                            <input name="file1" type="file" class="dropify" data-height="100"
-                                                data-default-file="{{ asset('assets/img/spiderfull (2).png') }}" />
+                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-4">
+                                                <div class="dz-message needsclick">
+                                                    Drop files here or click to upload
+                                                </div>
+                                                <div class="fallback">
+                                                    <input type="file" name="image" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -193,20 +222,36 @@
                                     <div class="col-sm-12 image-changecontent2" id="imagechangetwo1">
                                         <div style="padding:0px;width:105%;margin-left:-12px;margin-top:-9px;"
                                             class="col-sm-12 imagefullmargintwotwo">
-                                            <input name="file1" type="file" class="dropify" data-height="100"
-                                                data-default-file="{{ asset('assets/img/spiderfull (2).png') }}" />
+                                            <div class="dropzone needsclick" action="/" id="dropzone-image33-1">
+                                                <div class="dz-message needsclick">
+                                                    Drop files here or click to upload
+                                                </div>
+                                                <div class="fallback">
+                                                    <input type="file" name="image" />
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
                                             <div style="padding:0px;" class="col-sm-6 imagefullmargin2one">
-                                                <input name="file1" type="file" class="dropify"
-                                                    data-height="90"
-                                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                <div class="dropzone needsclick" action="/" id="dropzone-image33-2">
+                                                    <div class="dz-message needsclick">
+                                                        Drop files here or click to upload
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input type="file" name="image" />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div style="padding:0px;" class="col-sm-6 imagefullmargin2two">
-                                                <input name="file1" type="file" class="dropify"
-                                                    data-height="90"
-                                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                <div class="dropzone needsclick" action="/" id="dropzone-image33-3">
+                                                    <div class="dz-message needsclick">
+                                                        Drop files here or click to upload
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input type="file" name="image" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -220,20 +265,35 @@
                                         <div style="padding:0px;" class="col-sm-12 ">
                                             <div class="row">
                                                 <div style="padding:0px;" class="col-sm-8 imagefullmarginthreeone">
-                                                    <input name="file1" type="file" class="dropify"
-                                                        data-height="170"
-                                                        data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                                                    <div class="dropzone needsclick" action="/" id="dropzone-image33-4">
+                                                        <div class="dz-message needsclick">
+                                                            Drop files here or click to upload
+                                                        </div>
+                                                        <div class="fallback">
+                                                            <input type="file" name="image" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div style="padding:0px;margin-left:-12px;" class="col-sm-4">
                                                     <div class="col-sm-12 imagefullmarginthreetwo">
-                                                        <input name="file1" type="file" class="dropify"
-                                                            data-height="80"
-                                                            data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                                                        <div class="dropzone needsclick" action="/" id="dropzone-image33-5">
+                                                            <div class="dz-message needsclick">
+                                                                Drop files here or click to upload
+                                                            </div>
+                                                            <div class="fallback">
+                                                                <input type="file" name="image" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-sm-12 imagefullmarginthreetwo">
-                                                        <input name="file1" type="file" class="dropify"
-                                                            data-height="80"
-                                                            data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                                                        <div class="dropzone needsclick" action="/" id="dropzone-image33-6">
+                                                            <div class="dz-message needsclick">
+                                                                Drop files here or click to upload
+                                                            </div>
+                                                            <div class="fallback">
+                                                                <input type="file" name="image" />
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -284,26 +344,46 @@
                                         id="imagecontentfour1">
                                         <div class="d-flex flex-wrap ">
                                             <div style="padding:0px;width:50%" class="imagefullmargin4one">
-                                                <input name="file1" type="file" class="dropify"
-                                                    data-height="80"
-                                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-1">
+                                                    <div class="dz-message needsclick">
+                                                        Drop files here or click to upload
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input type="file" name="image" />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div style="padding:0px;width:50%" class="imagefullmargin4two">
-                                                <input name="file1" type="file" class="dropify"
-                                                    data-height="120"
-                                                    data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-2">
+                                                    <div class="dz-message needsclick">
+                                                        Drop files here or click to upload
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input type="file" name="image" />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div style="width:50%;padding:0px;margin-top:-41px;"
                                                 class="imagefullmargin4one">
-                                                <input name="file1" type="file" class="dropify"
-                                                    data-height="120"
-                                                    data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-3">
+                                                    <div class="dz-message needsclick">
+                                                        Drop files here or click to upload
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input type="file" name="image" />
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div style="width:50%;padding:0px;margin-top:0px;"
                                                 class="imagefullmargin4two">
-                                                <input name="file1" type="file" class="dropify"
-                                                    data-height="80"
-                                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-4">
+                                                    <div class="dz-message needsclick">
+                                                        Drop files here or click to upload
+                                                    </div>
+                                                    <div class="fallback">
+                                                        <input type="file" name="image" />
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -316,25 +396,45 @@
                                         <div style="padding:10px;" class="col-sm-12 imagefullmargin4three">
                                             <div class="row">
                                                 <div style="padding:0px;" class="col-sm-8 imagefullmargin4four">
-                                                    <input name="file1" type="file" class="dropify"
-                                                        data-height="175"
-                                                        data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                                                    <div class="dropzone needsclick" action="/" id="dropzone-image44-5">
+                                                        <div class="dz-message needsclick">
+                                                            Drop files here or click to upload
+                                                        </div>
+                                                        <div class="fallback">
+                                                            <input type="file" name="image" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div style="padding:0px;" class="col-sm-4 ">
                                                     <div class="col-sm-12 imagefullmargin4four">
-                                                        <input name="file1" type="file" class="dropify"
-                                                            data-height="50"
-                                                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                        <div class="dropzone needsclick" action="/" id="dropzone-image44-6">
+                                                            <div class="dz-message needsclick">
+                                                                Drop files here or click to upload
+                                                            </div>
+                                                            <div class="fallback">
+                                                                <input type="file" name="image" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-sm-12 imagefullmargin4four">
-                                                        <input name="file1" type="file" class="dropify"
-                                                            data-height="50"
-                                                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                        <div class="dropzone needsclick" action="/" id="dropzone-image44-7">
+                                                            <div class="dz-message needsclick">
+                                                                Drop files here or click to upload
+                                                            </div>
+                                                            <div class="fallback">
+                                                                <input type="file" name="image" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-sm-12 imagefullmargin4four">
-                                                        <input name="file1" type="file" class="dropify"
-                                                            data-height="50"
-                                                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
+                                                        <div class="dropzone needsclick" action="/" id="dropzone-image44-8">
+                                                            <div class="dz-message needsclick">
+                                                                Drop files here or click to upload
+                                                            </div>
+                                                            <div class="fallback">
+                                                                <input type="file" name="image" />
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
