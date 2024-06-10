@@ -261,58 +261,12 @@
 <div id="shahretext" class="share-content">
     <div style="padding:0px 2.75rem;">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-            <div style="margin-bottom:-24px !important;" class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
             <div style="background-image:url('{{ asset('assets/img/hand.png') }}');height: 240px; width: 119%;margin-top:-28px;margin-left:-44px; background-size: 100% 100%;background-repeat: no-repeat;"
-                class="carousel-inner">
+                class="carousel-inner" id="feed-text-background">
                 <div class="carousel-item active">
                     <h2 style="font-size:28px;color:whitesmoke;margin-top:20px;text-align:center;" class="">User
                         Text Will be then <br> showed here</h2>
-                    <!--<img src="{{ asset('assets/img/hand.png') }}" class="d-block w-100" alt="...">-->
                 </div>
-                <div class="carousel-item">
-                    <h2 style="font-size:28px;color:whitesmoke;margin-top:20px;text-align:center;" class="">User
-                        Text Will be then <br> showed here</h2>
-                    <!--<img src="{{ asset('assets/img/hand.png') }}" class="d-block w-100" alt="...">-->
-                </div>
-                <div class="carousel-item">
-                    <h2 style="font-size:28px;color:whitesmoke;margin-top:20px;text-align:center;" class="">User
-                        Text Will be then <br> showed here</h2>
-                    <!--<img src="{{ asset('assets/img/hand.png') }}" class="d-block w-100" alt="...">-->
-                </div>
-            </div>
-            <!--<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">-->
-            <!--  <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-            <!--  <span class="visually-hidden">Previous</span>-->
-            <!--</button>-->
-            <!--<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">-->
-            <!--  <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-            <!--  <span class="visually-hidden">Next</span>-->
-            <!--</button>-->
-        </div>
-    </div>
-
-    <div style="padding:0px 2.75rem;">
-        <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-            <div style="width:-webkit-fill-available;" class="">
-                <div style="width:-webkit-fill-available;" class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All User</button>
-                    <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                    <button type="button" class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                    <button type="button" class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                    <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                </div>
-            </div>
-            <div style="margin-left:10px;"
-                class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
             </div>
         </div>
     </div>
@@ -331,15 +285,19 @@
         </div>
 
         <div style="padding:10px !important;background-color:#eaeaea;border-radius:0px 0px 5px 5px;" id="owl-example"
-            class="owl-carousel ">
+            class="owl-carousel">
             @php
                 $bgs = \App\Models\BackgroundFeed::all();
             @endphp
             @foreach ($bgs as $bg)
-                <div><img class="clickborder" style="height:55px;width:82px;padding: 0px 12px;"
-                        src="{{ asset('storage/' . $bg->image) }}" alt=""></div>
+                <a href="javascript:void(0)" class="feed-bg" data-url="{{ asset('storage/' . $bg->image) }}"><img
+                        class="clickborder" style="height:55px;width:82px;padding: 0px 12px;"
+                        src="{{ asset('storage/' . $bg->image) }}" alt=""></a>
             @endforeach
         </div>
+        <input type="hidden" name="feed_background_image" value="{{ asset('assets/img/hand.png') }}"
+            id="feed_background_image">
+        <input type="hidden" name="feed_text_color" value="black" id="feed_text_color">
         <hr style="width: 131px;
     margin: auto;margin-top:20px;">
         <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex  align-items-center pt-3 mt-3"> <i
@@ -350,36 +308,15 @@
 
         <!--add color select-->
         <div class="color-selector">
-            <div class="color-option" style="background:black"></div>
-            <div class="color-option" style="background:pink"></div>
-            <div class="color-option" style="background:blue"></div>
-            <div class="color-option" style="background:green"></div>
-            <div class="color-option" style="background:white"></div>
-            <div class="color-option" style="background:red"></div>
-            <div class="color-option" style="background:skyblue"></div>
+            <div class="cursor-pointer color-option" style="background:black" data-color="black"></div>
+            <div class="cursor-pointer color-option" style="background:pink" data-color="pink"></div>
+            <div class="cursor-pointer color-option" style="background:blue" data-color="blue"></div>
+            <div class="cursor-pointer color-option" style="background:green" data-color="green"></div>
+            <div class="cursor-pointer color-option" style="background:white" data-color="white"></div>
+            <div class="cursor-pointer color-option" style="background:red" data-color="red"></div>
+            <div class="cursor-pointer color-option" style="background:skyblue" data-color="skyblue"></div>
         </div>
     </div>
-
-    <!-- <hr style="    width: 131px;-->
-    <!--margin: auto;margin-top:20px">-->
-
-    <!--ad-->
-
-
-
-
-    <hr style="width: 131px;
-  margin: auto;margin-top:20px;">
-
-    <div style="padding:0px 2.75rem;">
-        <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
-            <input style="height: 90px;" type="text" class="form-control w-100"
-                placeholder="Enter The description">
-        </div>
-    </div>
-
-
-    <!--</div>-->
 </div>
 
 <!--share image-->
@@ -392,32 +329,6 @@
                     data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
             </div>
             <!--code-->
-
-            <!--code-->
-            <div style="padding:0px 2.75rem;">
-
-                <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-                    <div style="width:-webkit-fill-available;" class="">
-                        <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                            aria-label="Basic example">
-                            <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                                User</button>
-                            <button type="button"
-                                class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                            <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                        </div>
-                    </div>
-                    <div style="margin-left:10px;"
-                        class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                        <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                    </div>
-                </div>
-            </div>
         </div>
         <!--image 1 end-->
 
@@ -452,35 +363,6 @@
             <!--2 image second tab-->
 
 
-            <!--line here-->
-            <div style="padding:0px 2.75rem;">
-                <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-                    <div style="width:-webkit-fill-available;" class="">
-                        <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                            aria-label="Basic example">
-                            <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                                User</button>
-                            <button type="button"
-                                class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                            <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                        </div>
-                    </div>
-
-
-
-
-                    <div style="margin-left:10px;"
-                        class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                        <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                    </div>
-                </div>
-            </div>
-
             <hr style="width: 131px;margin: auto;margin-top:20px;">
 
             <!--</div> -->
@@ -493,8 +375,8 @@
                             data="{{ asset('assets/img/thanks3.png') }}"
                             data-original="{{ asset('assets/img/thanks3.png') }}"
                             data-default="{{ asset('assets/img/colorimage.PNG') }}" width="80" height="80"
-                            class="carousel-inner  imagechangeclassimageone"
-                            data-imagechangeimageone="#imagechangeone1new"></object>
+                            class="carousel-inner grid_change imagechangeclassimageone"
+                            data-imagechangeimageone="#imagechangeone1new" data-value="modern"></object>
 
                     </div>
 
@@ -505,8 +387,8 @@
                             data="{{ asset('assets/img/thanks2.png') }}"
                             data-original="{{ asset('assets/img/thanks2.png') }}"
                             data-default="{{ asset('assets/img/thanks2 (1).png') }}" width="80" height="80"
-                            class="carousel-inner   imagechange2 imagechangeclassimageone"
-                            data-imagechangeimageone="#imagechangeone2new"></object>
+                            class="carousel-inner grid_change imagechange2 imagechangeclassimageone"
+                            data-imagechangeimageone="#imagechangeone2new" data-value="elegant"></object>
 
                     </div>
                 </div>
@@ -569,41 +451,9 @@
                 </div>
 
             </div>
-            <!--3 image 2nd tab-->
-            <div style="padding:0px 2.75rem;">
-                <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-                    <div style="width:-webkit-fill-available;" class="">
-                        <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                            aria-label="Basic example">
-                            <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                                User</button>
-                            <button type="button"
-                                class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                            <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                        </div>
-                    </div>
-
-
-
-
-
-                    <div style="margin-left:10px;"
-                        class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                        <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                    </div>
-                </div>
-            </div>
 
             <div>
-
-                <hr style="width: 131px;
-  margin: auto;margin-top:20px;">
-
+                <hr style="width: 131px;margin: auto;margin-top:20px;">
                 <div style="padding:0px 2.75rem;">
                     <div style="margin-left:5px;margin-top:20px;"
                         class="row pick-content d-flex justify-content-around">
@@ -615,8 +465,8 @@
                                 data="{{ asset('assets/img/three3.png') }}"
                                 data-original2="{{ asset('assets/img/three3.png') }}"
                                 data-default2="{{ asset('assets/img/threedef1.png') }}" width="80"
-                                height="80" class="carousel-inner  imagechangetwo2image"
-                                data-imagechangetwoimage="#imagechangetwo1new"></object>
+                                height="80" class="carousel-inner grid_change imagechangetwo2image"
+                                data-imagechangetwoimage="#imagechangetwo1new" data-value="modern"></object>
                         </div>
 
 
@@ -628,8 +478,8 @@
                                 data="{{ asset('assets/img/three3(2).png') }}"
                                 data-original2="{{ asset('assets/img/three3(2).png') }}"
                                 data-default2="{{ asset('assets/img/threedef2.png') }}" width="80"
-                                height="80" class="carousel-inner imagechangetwo2image"
-                                data-imagechangetwoimage="#imagechangetwo2new"></object>
+                                height="80" class="carousel-inner grid_change imagechangetwo2image"
+                                data-imagechangetwoimage="#imagechangetwo2new" data-value="elegant"></object>
 
                         </div>
                     </div>
@@ -690,34 +540,6 @@
             </div>
             <!--four tab 2-->
 
-            <!--add upp-->
-            <div style="padding:0px 2.75rem;">
-                <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-                    <div style="width:-webkit-fill-available;" class="">
-                        <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                            aria-label="Basic example">
-                            <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                                User</button>
-                            <button type="button"
-                                class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                            <button type="button"
-                                class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                        </div>
-                    </div>
-                    <div style="margin-left:10px;"
-                        class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                        <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!--add upp-->
-
             <hr style="width: 131px;
       margin: auto;margin-top:20px;">
 
@@ -729,8 +551,8 @@
                             data="{{ asset('assets/img/four4.png') }}"
                             data-original3="{{ asset('assets/img/four4.png') }}"
                             data-default3="{{ asset('assets/img/fourdef2.png') }}" width="80" height="80"
-                            class="carousel-inner imagechangefourclass"
-                            data-contentfour2new="#imagecontentfour1new"></object>
+                            class="carousel-inner grid_change imagechangefourclass"
+                            data-contentfour2new="#imagecontentfour1new" data-value="modern"></object>
                     </div>
 
                     <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
@@ -739,8 +561,8 @@
                             data="{{ asset('assets/img/four4(4).png') }}"
                             data-original3="{{ asset('assets/img/four4(4).png') }}"
                             data-default3="{{ asset('assets/img/fourdef1.png') }}" width="80" height="80"
-                            class="carousel-inner imagechangefourclass"
-                            data-contentfour2new="#imagecontentfour2new"></object>
+                            class="carousel-inner imagechangefourclass grid_change"
+                            data-contentfour2new="#imagecontentfour2new" data-value="elegant"></object>
 
                     </div>
                 </div>
@@ -749,28 +571,25 @@
     </div>
 
     <div style="padding:0px 2.75rem;">
-        <hr style="width: 131px;
-  margin: auto;margin-top:20px;">
-        <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
-            <input style="height: 90px;" type="text" class="form-control w-100"
-                placeholder="Enter The description">
-        </div>
+        <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
 
-
-        <hr style="    width: 131px;
-  margin: auto;margin-top:20px">
-
-        <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
-            <div style="width:-webkit-fill-available;" class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-label-secondary btn btn-outline-secondary imagehaiyeh  active"
-                    data-imagetabs="#image11new">1 Image</button>
-                <button type="button" class="btn btn-label-secondary btn btn-outline-secondary imagehaiyeh "
-                    data-imagetabs="#image22new">2 Image</button>
-                <button type="button" class="btn btn-label-secondary  btn btn-outline-secondary imagehaiyeh  "
-                    data-imagetabs="#image33new">3 Image</button>
-                <button type="button" class="btn btn-label-secondary  btn btn-outline-secondary imagehaiyeh "
-                    data-imagetabs="#image44new">+4 Image</button>
-
+            <div style="width:-webkit-fill-available;" class="">
+                <div style="width:-webkit-fill-available;" class="btn-group" role="group"
+                    aria-label="Basic example">
+                    <label for="one_image"
+                        class="btn btn-label-secondary btn btn-outline-secondary imgqtypicker active" data-imagetabs="#image11new">
+                        <input type="radio" class="form-check-input" name="image_qty" value="one_image"
+                            id="one_image" checked />1 Image</label>
+                    <label for="two_image" class="btn btn-label-secondary btn btn-outline-secondary imgqtypicker" data-imagetabs="#image22new">
+                        <input type="radio" class="form-check-input" name="image_qty" value="two_image"
+                            id="two_image" />2 Image</label>
+                    <label for="three_image" class="btn btn-label-secondary  btn btn-outline-secondary imgqtypicker" data-imagetabs="#image33new">
+                        <input type="radio" class="form-check-input" name="image_qty" value="three_image"
+                            id="three_image" />3 Image</label>
+                    <label for="four_image" class="btn btn-label-secondary  btn btn-outline-secondary imgqtypicker" data-imagetabs="#image44new">
+                        <input type="radio" class="form-check-input" name="image_qty" value="four_image"
+                            id="four_image" />4+ Image</label>
+                </div>
             </div>
         </div>
     </div>
@@ -804,36 +623,7 @@
                 <p>Drag and drop or click to replace</p>
             </div>
         </div>
-
-        <!-- Additional controls -->
-        <div style="padding:0px 2.75rem;">
-            <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-                <div style="width:-webkit-fill-available;" class="">
-                    <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                        aria-label="Basic example">
-                        <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                            User</button>
-                        <button type="button"
-                            class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                        <button type="button" class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                    </div>
-                </div>
-
-
-
-
-                <div style="margin-left:10px;"
-                    class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                    <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                </div>
-            </div>
-        </div>
     </div>
-
-
 
     <div style="margin-top:-28px;" id="video22" class="col-sm-12 video-content1 row  justify-content-center">
         <!--2 image 1st tab-->
@@ -939,28 +729,6 @@
             </div>
         </div>
 
-        <div style="padding:0px 2.75rem;">
-            <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-                <div style="width:-webkit-fill-available;" class="">
-                    <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                        aria-label="Basic example">
-                        <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                            User</button>
-                        <button type="button"
-                            class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                    </div>
-                </div>
-                <div style="margin-left:10px;"
-                    class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                    <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                </div>
-            </div>
-        </div>
-
         <hr style="width: 131px;
   margin: auto;margin-top:20px;">
         <div style="padding:0px 2.75rem;">
@@ -972,7 +740,7 @@
                         data="{{ asset('assets/img/thanks3.png') }}"
                         data-original="{{ asset('assets/img/thanks3.png') }}"
                         data-default="{{ asset('assets/img/colorimage.PNG') }}" width="80" height="80"
-                        class="carousel-inner  videochangeclass" data-videochange="#videochangeone1"></object>
+                        class="carousel-inner grid_change videochangeclass" data-videochange="#videochangeone1" data-value="modern"></object>
 
                 </div>
 
@@ -982,7 +750,7 @@
                         data="{{ asset('assets/img/thanks2.png') }}"
                         data-original="{{ asset('assets/img/thanks2.png') }}"
                         data-default="{{ asset('assets/img/thanks2 (1).png') }}" width="80" height="80"
-                        class="carousel-inner   videochangeclass" data-videochange="#videochangeone2"></object>
+                        class="carousel-inner grid_change videochangeclass" data-videochange="#videochangeone2" data-value="elegant"></object>
                 </div>
             </div>
         </div>
@@ -992,15 +760,13 @@
 
         <!--3 image 1st tab-->
         <div style="padding:0px;" class="video-container">
-            <div style="margin-top:-40px;padding:0px;" class="col-sm-12 video-changecontent2"
-                id="videochangetwo1">
+            <div style="margin-top:-40px;padding:0px;" class="col-sm-12 video-changecontent2" id="videochangetwo1">
                 <div class="col-sm-12 ">
                     <div style="height: 315px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
                         class="carousel-inner">
                         <input type="file" hidden id="videoupl31one">
                         <video style="position:relative;" controls="" class="videoclass31one videohoverclass">
-                            <source
-                                src="{{ asset('/assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
+                            <source src="{{ asset('/assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
                         </video>
                         <!--c-->
                         <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
@@ -1027,8 +793,7 @@
                             class="carousel-inner">
                             <input type="file" hidden id="videoupl31two">
 
-                            <video style="position:relative;" controls=""
-                                class="videoclass31two videohoverclass">
+                            <video style="position:relative;" controls="" class="videoclass31two videohoverclass">
                                 <source
                                     src="{{ asset('/assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
                             </video>
@@ -1159,52 +924,25 @@
 
         </div>
         <!--3 image 2nd tab-->
-        <div style="padding:0px 2.75rem;">
-            <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-3">
-
-                <div style="width:-webkit-fill-available;" class="">
-                    <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                        aria-label="Basic example">
-                        <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                            User</button>
-                        <button type="button"
-                            class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                    </div>
-                </div>
-                <div style="margin-left:10px;"
-                    class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                    <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                </div>
-            </div>
-        </div>
         <div>
             <hr style="width: 131px;margin: auto;margin-top:20px;">
             <div style="padding:0px 2.75rem;">
-                <div style="margin-left:5px;margin-top:20px;"
-                    class="row pick-content d-flex justify-content-around">
-                    <div style="width:33.3%" class="carousel-inner brchg imagepicker "
-                        data-imagetwo="#image22new">
+                <div style="margin-left:5px;margin-top:20px;" class="row pick-content d-flex justify-content-around">
+                    <div style="width:33.3%" class="carousel-inner brchg imagepicker " data-imagetwo="#image22new">
                         <h6 style="text-align:center;">Modern</h6>
                         <object style="height:80px;width:80px;margin:auto;display:flex;"
                             data="{{ asset('assets/img/three3.png') }}"
                             data-original2="{{ asset('assets/img/three3.png') }}"
-                            data-default2="{{ asset('assets/img/threedef1.png') }}" width="80"
-                            height="80" class="carousel-inner  videochangetwo2"
-                            data-videochangetwo="#videochangetwo1"></object>
+                            data-default2="{{ asset('assets/img/threedef1.png') }}" width="80" height="80"
+                            class="carousel-inner grid_change videochangetwo2" data-videochangetwo="#videochangetwo1" data-value="modern"></object>
                     </div>
-                    <div style="width:33.3%" class="carousel-inner brchg imagepicker "
-                        data-imagetwo="#image33new">
+                    <div style="width:33.3%" class="carousel-inner brchg imagepicker " data-imagetwo="#image33new">
                         <h6 style="text-align:center;">Elegant</h6>
                         <object style="height:80px;width:80px;margin:auto;display:flex;"
                             data="{{ asset('assets/img/three3(2).png') }}"
                             data-original2="{{ asset('assets/img/three3(2).png') }}"
-                            data-default2="{{ asset('assets/img/threedef2.png') }}" width="80"
-                            height="80" class="carousel-inner videochangetwo2"
-                            data-videochangetwo="#videochangetwo2"></object>
+                            data-default2="{{ asset('assets/img/threedef2.png') }}" width="80" height="80"
+                            class="carousel-inner grid_change videochangetwo2" data-videochangetwo="#videochangetwo2" data-value="elegant"></object>
 
                     </div>
                 </div>
@@ -1402,31 +1140,6 @@
             </div>
         </div>
         <!--four tab 2-->
-        <!--add upp-->
-        <div style="padding:0px 2.75rem;">
-            <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-3 ">
-
-                <div style="width:-webkit-fill-available;" class="">
-                    <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                        aria-label="Basic example">
-                        <button type="button" class="btn btn-label-secondary btn btn-outline-secondary">All
-                            User</button>
-                        <button type="button"
-                            class="btn btn-label-secondary btn btn-outline-secondary">Standart</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Premium</button>
-                        <button type="button"
-                            class="btn btn-label-secondary  btn btn-outline-secondary">Vip</button>
-                        <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                    </div>
-                </div>
-                <div style="margin-left:10px;"
-                    class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                    <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                </div>
-            </div>
-        </div>
-        <!--add upp-->
 
         <hr style="width: 131px;margin: auto;margin-top:20px;">
         <div style="padding:0px 2.75rem;">
@@ -1436,61 +1149,96 @@
                     <object style="height:80px;width:80px;margin:auto;display:flex;"
                         data="{{ asset('assets/img/four4.png') }}"
                         data-original3="{{ asset('assets/img/four4.png') }}"
-                        data-default3="{{ asset('assets/img/fourdef2.png') }}"
-                        width="80" height="80" class="carousel-inner videochangefour"
-                        data-contentfour2="#videocontentfour1"></object>
+                        data-default3="{{ asset('assets/img/fourdef2.png') }}" width="80" height="80"
+                        class="carousel-inner grid_change videochangefour" data-contentfour2="#videocontentfour1" data-value="modern"></object>
                 </div>
                 <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
                     <h6 style="text-align:center;">Elegant</h6>
                     <object style="height:80px;width:80px;margin:auto;display:flex;"
                         data="{{ asset('assets/img/four4(4).png') }}"
                         data-original3="{{ asset('assets/img/four4(4).png') }}"
-                        data-default3="{{ asset('assets/img/fourdef1.png') }}"
-                        width="80" height="80" class="carousel-inner videochangefour"
-                        data-contentfour2="#videocontentfour2"></object>
+                        data-default3="{{ asset('assets/img/fourdef1.png') }}" width="80" height="80"
+                        class="carousel-inner grid_change videochangefour" data-contentfour2="#videocontentfour2" data-value="elegant"></object>
                 </div>
             </div>
         </div>
     </div>
+    <input type="hidden" name="grid_style" id="feed_grid_style" value="modern">
     <!--video 4-->
     <hr style="width: 131px;margin: auto;margin-top:20px;">
     <div style="padding:0px 2.75rem;">
-        <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
-            <input style="height: 90px;" type="text" class="form-control w-100" placeholder="Enter The description">
-        </div>
-        <hr style="width: 131px;margin: auto;margin-top:20px;">
-        <div>
-            <div style="width:-webkit-fill-available;" class="mt-3 clickhere ">
+        <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
+
+            <div style="width:-webkit-fill-available;" class="">
                 <div style="width:-webkit-fill-available;" class="btn-group" role="group"
                     aria-label="Basic example">
-                    <button type="button"
-                        class="btn btn-label-secondary btn btn-outline-secondary videoa videopicker active"
-                        data-videoone="#video1" data-videotwo="#video11">1 Video</button>
-                    <button type="button"
-                        class="btn btn-label-secondary btn btn-outline-secondary videoa videopicker"
-                        data-videoone="#video2" data-videotwo="#video22">2 Video</button>
-                    <button type="button"
-                        class="btn btn-label-secondary  btn btn-outline-secondary videoa videopicker "
-                        data-videoone="#video3" data-videotwo="#video33">3 Video</button>
-                    <button type="button"
-                        class="btn btn-label-secondary  btn btn-outline-secondary videoa videopicker"
-                        data-videoone="#video4" data-videotwo="#video44">+4 Video</button>
+                    <label for="one_video"
+                        class="btn btn-label-secondary btn btn-outline-secondary videoa videopicker active" data-videoone="#video1" data-videotwo="#video11">
+                        <input type="radio" class="form-check-input" name="video_qty" value="one_video"
+                            id="one_video" checked />1 Video</label>
+                    <label for="two_video" class="btn btn-label-secondary btn btn-outline-secondary videoa videopicker" data-videoone="#video2" data-videotwo="#video22">
+                        <input type="radio" class="form-check-input" name="video_qty" value="two_video"
+                            id="two_video" />2 Videos</label>
+                    <label for="three_video"
+                        class="btn btn-label-secondary  btn btn-outline-secondary videoa videopicker" data-videoone="#video3" data-videotwo="#video33">
+                        <input type="radio" class="form-check-input" name="video_qty" value="three_video"
+                            id="three_video" />3 Videos</label>
+                    <label for="four_video" class="btn btn-label-secondary  btn btn-outline-secondary videoa videopicker" data-videoone="#video4" data-videotwo="#video44">
+                        <input type="radio" class="form-check-input" name="video_qty" value="four_video"
+                            id="four_video" />4+ Videos</label>
                 </div>
             </div>
         </div>
     </div>
     <!--add code-->
 </div>
+<div style="padding:0px 2.75rem;">
+    <hr style="width: 131px;margin: auto;margin-top:20px">
+    <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
+        <input style="height: 90px;" type="text" class="form-control w-100" placeholder="Enter The description">
+    </div>
+</div>
+<hr style="width: 131px;margin: auto;margin-top:20px;">
+<div style="padding:0px 2.75rem;">
+    <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
+
+        <div style="width:-webkit-fill-available;" class="">
+            <div style="width:-webkit-fill-available;" class="btn-group" role="group" aria-label="Basic example">
+                <label for="all" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
+                    <input type="radio" class="form-check-input" name="user_type" value="all" id="all"
+                        checked />All</label>
+                <label for="standard" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
+                    <input type="radio" class="form-check-input" name="user_type" value="standard"
+                        id="standard" />Standard</label>
+                <label for="premium" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                    <input type="radio" class="form-check-input" name="user_type" value="premium"
+                        id="premium" />Premium</label>
+                <label for="vip" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                    <input type="radio" class="form-check-input" name="user_type" value="vip"
+                        id="vip" />VIP</label>
+            </div>
+        </div>
+    </div>
+</div>
 <hr style="width: 131px;margin: auto;margin-top:20px">
+
 <div style="padding:0px 2.75rem;">
     <div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
         <div style="width:100%;padding:10px;" class="btn-group ary" role="group" aria-label="First group">
-            <button type="button" class="btn btn-outline-secondary geo ary active"
-                data-sharetext="#shahretext">Share Text</button>
-            <button type="button" class="btn btn-outline-secondary geo shareimage ary"
-                data-sharetext="#shahreimage">Share Image</button>
-            <button type="button" class="btn btn-outline-secondary geo ary" data-sharetext="#shahrevideo">Share
-                Video</button>
+
+            <label for="share_text" data-sharetext="#shahretext"
+                class="btn btn-label-secondary btn btn-outline-secondary geo ary active active">
+                <input type="radio" class="form-check-input" name="feed_type" value="share_text" id="share_text"
+                    checked />Share Text</label>
+            <label for="share_image" data-sharetext="#shahreimage"
+                class="btn btn-label-secondary btn btn-outline-secondary geo shareimage ary">
+                <input type="radio" class="form-check-input" name="feed_type" value="share_image"
+                    id="share_image" />Share Image</label>
+            <label for="share_video" data-sharetext="#shahrevideo"
+                class="btn btn-label-secondary  btn btn-outline-secondary geo ary">
+                <input type="radio" class="form-check-input" name="feed_type" value="share_video"
+                    id="share_video" />Share
+                Video</label>
         </div>
     </div>
 </div>
@@ -1500,3 +1248,20 @@
         Submit
     </button>
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.feed-bg').click(function() {
+                let url = $(this).attr('data-url');
+                $('#feed-text-background').css('background-image', `url('${url}')`);
+                $('#feed_background_image').val(url);
+            });
+
+            $('.color-option').click(function() {
+                let color = $(this).attr('data-color');
+                $('#feed_text_color').val(color);
+            })
+        });
+    </script>
+@endpush

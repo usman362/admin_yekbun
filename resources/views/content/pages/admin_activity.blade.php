@@ -692,11 +692,11 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                             <!-- Featured image -->
                                             <div class="post-image">
                                                 <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
-                                                    href="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
-                                                    data-demo-href="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg">
-                                                    <img src="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
-                                                        data-demo-src="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
+                                                    data-thumb="{{asset("assets/img/feed-image.jpeg")}}"
+                                                    href="{{asset("assets/img/feed-image.jpeg")}}"
+                                                    data-demo-href="{{asset("assets/img/feed-image.jpeg")}}">
+                                                    <img src="{{asset("assets/img/feed-image.jpeg")}}"
+                                                        data-demo-src="{{asset("assets/img/feed-image.jpeg")}}"
                                                         alt="">
                                                 </a>
                                                 <!-- Action buttons -->
@@ -1515,7 +1515,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                             <!-- User meta -->
                                             <div class="user-block">
                                                 @php
-                                                    $imgUrl = $newz->image ? asset('storage/'.$newz->image[0]) : 'https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg';
+                                                    $imgUrl = $newz->image ? asset('storage/'.$newz->image[0]) : asset("assets/img/feed-image.jpeg");
                                                 @endphp
                                                 <div class="image">
                                                     <img src="{{ asset('assets/img/logo.png') }}"
@@ -2514,11 +2514,11 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                             <!-- Featured image -->
                                             <div class="post-image">
                                                 <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
-                                                    href="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
-                                                    data-demo-href="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg">
-                                                    <img src="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
-                                                        data-demo-src="https://friendkit.cssninja.io/assets/img/demo/unsplash/1.jpg"
+                                                    data-thumb="{{asset("assets/img/feed-image.jpeg")}}"
+                                                    href="{{asset("assets/img/feed-image.jpeg")}}"
+                                                    data-demo-href="{{asset("assets/img/feed-image.jpeg")}}">
+                                                    <img src="{{asset("assets/img/feed-image.jpeg")}}"
+                                                        data-demo-src="{{asset("assets/img/feed-image.jpeg")}}"
                                                         alt="">
                                                 </a>
                                                 <!-- Action buttons -->
@@ -3508,25 +3508,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
             // Initialize multiple Dropzones
             document.addEventListener('DOMContentLoaded', function() {
-                initializeDropzone('#dropzone-image11', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image22-1', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image22-2', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image22-3', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image22-4', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image33-1', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image33-2', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image33-3', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image33-4', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image33-5', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image33-6', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-1', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-2', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-3', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-4', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-5', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-6', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-7', 'image[]', 'images', 'image/*');
-                initializeDropzone('#dropzone-image44-8', 'image[]', 'images', 'image/*');
+                initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*');
             });
         </script>
         <script>
@@ -7342,7 +7324,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             $(document).ready(function() {
 
                 $("#owl-example").owlCarousel({
-                    loop: true,
+                    loop: false,
                     margin: 1,
                     autoPlay: true,
                     nav: true,
@@ -7417,6 +7399,19 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             $('.usertypepicker').click(function() {
                 $('.usertypepicker').removeClass('active');
                 $(this).addClass('active');
+                return false;
+            });
+
+            $('.imgqtypicker:first-child').addClass('active');
+            $('.image-contentnew').hide();
+            $('.image-contentnew:first').show();
+
+            $('.imgqtypicker').click(function() {
+                $('.imgqtypicker').removeClass('active');
+                $(this).addClass('active');
+                $('.image-contentnew').hide();
+                var activeTab = $(this).attr('data-imagetabs');
+                $(activeTab).fadeIn();
                 return false;
             });
 
@@ -7508,6 +7503,11 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                     // Change the source of the clicked image
                     $(this).attr('data', $(this).data('default'));
                 });
+
+                $('.grid_change').click(function(){
+                    $('#news_grid_style').val($(this).attr('data-value'))
+                    $('#feed_grid_style').val($(this).attr('data-value'))
+                })
             });
 
 
@@ -7590,8 +7590,6 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 $('.imagechangefour').removeClass('active');
                 $(this).addClass('active');
                 $('.imagecontentfour').hide();
-
-                $('#image_style').val($(this).attr('data-value'))
 
                 var activeTab = $(this).attr('data-contentfour2');
                 $(activeTab).fadeIn();
@@ -8109,24 +8107,6 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 $('#videoupl42four').trigger('click');
             });
 
-            // modal 2 image change new js
-
-            $('.imagehaiyeh:first-child').addClass('active');
-            $('.image-contentnew').hide();
-            $('.image-contentnew:first').show();
-
-            // Click function
-            $('.imagehaiyeh').click(function() {
-                $('.imagehaiyeh').removeClass('active');
-                $(this).addClass('active');
-                $('.image-contentnew').hide();
-
-                var activeTab = $(this).attr('data-imagetabs');
-                $(activeTab).fadeIn();
-                return false;
-            });
-
-            // yahan sy naya
             // tabs start
             // Show the first tab and hide the rest
             $('#imagechangeone1new:first-child').addClass('active');

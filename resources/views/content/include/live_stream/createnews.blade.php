@@ -108,374 +108,90 @@
                     <div class="row g-3">
                         <!--codee-->
                         <div id="" class="">
+                            <div style="" id="news-image" class="">
+                                <div class="dropzone needsclick" action="/" id="news-dropzone-img">
+                                    <div class="dz-message needsclick">
+                                        Drop files here or click to upload
+                                    </div>
+                                    <div class="fallback">
+                                        <input type="file" name="image" />
+                                    </div>
+                                </div>
+                                <!--code-->
+                            </div>
                             <div class="shareimage">
-                                <div style="" id="image11" class="image-content1">
-                                    <div class="dropzone needsclick" action="/" id="dropzone-image11">
-                                        <div class="dz-message needsclick">
-                                            Drop files here or click to upload
-                                        </div>
-                                        <div class="fallback">
-                                            <input type="file" name="image" />
-                                        </div>
-                                    </div>
-                                    <!--code-->
-                                </div>
-                                <!--image 1 end-->
-
                                 <div style="margin-top:-56px;width:105%;" id="image22"
-                                    class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
-                                    <!--2 image 1st tab-->
-                                    <div class="row image-changecontent p-0" id="imagechangeone1">
-                                        <div style="padding-right:0px;margin-top:-4px;"
-                                            class="col-sm-6 customborderradiustopleft imagefullmargin2one">
+                                class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
 
-                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-1">
-                                                <div class="dz-message needsclick">
-                                                    Drop files here or click to upload
-                                                </div>
-                                                <div class="fallback">
-                                                    <input type="file" name="image" />
-                                                </div>
-                                            </div>
+                                <!--line here-->
 
+                                <hr style="width: 131px;margin: auto;margin-top:20px;">
+                                <div style="padding:0px 2.75rem;">
+                                    <div style="margin-left:5px;margin-top:20px;"
+                                        class="row pick-content d-flex justify-content-around ">
+                                        <div style="width:33.3%" class="carousel-inner ">
+                                            <h6 style="text-align:center;">Modern</h6>
+                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                data="{{ asset('assets/img/thanks3.png') }}"
+                                                data-original="{{ asset('assets/img/thanks3.png') }}"
+                                                data-default="{{ asset('assets/img/colorimage.PNG') }}"
+                                                width="80" height="80"
+                                                class="carousel-inner imagechangeclass grid_change"
+                                                data-imagechange="#imagechangeone1" data-value="modern"></object>
                                         </div>
+                                        <div style="width:33.3%" class="carousel-inner  ">
+                                            <h6 style="text-align:center;">Elegant</h6>
 
-                                        <div style="padding-left:0px;margin-top:-4px;"
-                                            class="col-sm-6 customborderradiustopleft imagefullmargin2two">
+                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                data="{{ asset('assets/img/thanks2.png') }}"
+                                                data-original="{{ asset('assets/img/thanks2.png') }}"
+                                                data-default="{{ asset('assets/img/thanks2 (1).png') }}"
+                                                width="80" height="80"
+                                                class="carousel-inner imagechange2 grid_change imagechangeclass"
+                                                data-imagechange="#imagechangeone2" data-value="elegant"></object>
 
-                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-2">
-                                                <div class="dz-message needsclick">
-                                                    Drop files here or click to upload
-                                                </div>
-                                                <div class="fallback">
-                                                    <input type="file" name="image" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!--2 image 1st tab-->
-                                    <!--2 image second tab-->
-                                    <div class="row image-changecontent p-0" id="imagechangeone2">
-
-                                        <div style="margin-top:-4px;" class="col-sm-12 imagefullmargintwotwo">
-                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-3">
-                                                <div class="dz-message needsclick">
-                                                    Drop files here or click to upload
-                                                </div>
-                                                <div class="fallback">
-                                                    <input type="file" name="image" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="margin-top:-4px;" class="col-sm-12 imagefullmargintwotwo">
-                                            <div class="dropzone needsclick" action="/" id="dropzone-image22-4">
-                                                <div class="dz-message needsclick">
-                                                    Drop files here or click to upload
-                                                </div>
-                                                <div class="fallback">
-                                                    <input type="file" name="image" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--2 image second tab-->
-                                    <!--line here-->
-
-                                    <hr style="width: 131px;margin: auto;margin-top:20px;">
-                                    <div style="padding:0px 2.75rem;">
-                                        <div style="margin-left:5px;margin-top:20px;"
-                                            class="row pick-content d-flex justify-content-around ">
-                                            <div style="width:33.3%" class="carousel-inner ">
-                                                <h6 style="text-align:center;">Modern</h6>
-                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                    data="{{ asset('assets/img/thanks3.png') }}"
-                                                    data-original="{{ asset('assets/img/thanks3.png') }}"
-                                                    data-default="{{ asset('assets/img/colorimage.PNG') }}"
-                                                    width="80" height="80"
-                                                    class="carousel-inner  imagechangeclass"
-                                                    data-imagechange="#imagechangeone1"></object>
-                                            </div>
-                                            <div style="width:33.3%" class="carousel-inner  ">
-                                                <h6 style="text-align:center;">Elegant</h6>
-
-                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                    data="{{ asset('assets/img/thanks2.png') }}"
-                                                    data-original="{{ asset('assets/img/thanks2.png') }}"
-                                                    data-default="{{ asset('assets/img/thanks2 (1).png') }}"
-                                                    width="80" height="80"
-                                                    class="carousel-inner   imagechange2 imagechangeclass"
-                                                    data-imagechange="#imagechangeone2"></object>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!--3 image new-->
-                                <!--3 image new-->
-                                <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;" id="image33"
-                                    class="col-sm-12 image-content1 row ">
+                            <!--3 image new-->
 
-                                    <!--3 image 1st tab-->
-                                    <div class="col-sm-12 image-changecontent2" id="imagechangetwo1">
-                                        <div style="padding:0px;width:105%;margin-left:-12px;margin-top:-9px;"
-                                            class="col-sm-12 imagefullmargintwotwo">
-                                            <div class="dropzone needsclick" action="/" id="dropzone-image33-1">
-                                                <div class="dz-message needsclick">
-                                                    Drop files here or click to upload
-                                                </div>
-                                                <div class="fallback">
-                                                    <input type="file" name="image" />
-                                                </div>
-                                            </div>
+                            <div style="display:contents;" id="image44" class="col-sm-12 image-content1 row  ">
+                                <!--add upp-->
+
+                                <hr style="width: 131px;margin: auto;margin-top:20px;">
+
+                                <div style="padding:0px 2.75rem;">
+                                    <div style="margin-left:5px;margin-top:20px;"
+                                        class="row pick-content d-flex justify-content-around">
+                                        <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                                            <h6 style="text-align:center;">Modern</h6>
+                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                data="{{ asset('assets/img/four4.png') }}"
+                                                data-original3="{{ asset('assets/img/four4.png') }}"
+                                                data-default3="{{ asset('assets/img/fourdef2.png') }}"
+                                                width="80" height="80"
+                                                class="carousel-inner grid_change imagechangefour"
+                                                data-contentfour2="#imagecontentfour1"
+                                                data-value="modern"></object>
                                         </div>
-
-                                        <div class="row">
-                                            <div style="padding:0px;" class="col-sm-6 imagefullmargin2one">
-                                                <div class="dropzone needsclick" action="/" id="dropzone-image33-2">
-                                                    <div class="dz-message needsclick">
-                                                        Drop files here or click to upload
-                                                    </div>
-                                                    <div class="fallback">
-                                                        <input type="file" name="image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="padding:0px;" class="col-sm-6 imagefullmargin2two">
-                                                <div class="dropzone needsclick" action="/" id="dropzone-image33-3">
-                                                    <div class="dz-message needsclick">
-                                                        Drop files here or click to upload
-                                                    </div>
-                                                    <div class="fallback">
-                                                        <input type="file" name="image" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                                            <h6 style="text-align:center;">Elegant</h6>
+                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                data="{{ asset('assets/img/four4(4).png') }}"
+                                                data-original3="{{ asset('assets/img/four4(4).png') }}"
+                                                data-default3="{{ asset('assets/img/fourdef1.png') }}"
+                                                width="80" height="80"
+                                                class="carousel-inner grid_change imagechangefour"
+                                                data-contentfour2="#imagecontentfour2"
+                                                data-value="elegant"></object>
                                         </div>
-                                    </div>
-                                    <!--3 image 1st tab-->
-
-
-                                    <!--3 image 2nd tab-->
-
-                                    <div style="padding:0px;" class="col-sm-12 image-changecontent2"
-                                        id="imagechangetwo2">
-                                        <div style="padding:0px;" class="col-sm-12 ">
-                                            <div class="row">
-                                                <div style="padding:0px;" class="col-sm-8 imagefullmarginthreeone">
-                                                    <div class="dropzone needsclick" action="/" id="dropzone-image33-4">
-                                                        <div class="dz-message needsclick">
-                                                            Drop files here or click to upload
-                                                        </div>
-                                                        <div class="fallback">
-                                                            <input type="file" name="image" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="padding:0px;margin-left:-12px;" class="col-sm-4">
-                                                    <div class="col-sm-12 imagefullmarginthreetwo">
-                                                        <div class="dropzone needsclick" action="/" id="dropzone-image33-5">
-                                                            <div class="dz-message needsclick">
-                                                                Drop files here or click to upload
-                                                            </div>
-                                                            <div class="fallback">
-                                                                <input type="file" name="image" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 imagefullmarginthreetwo">
-                                                        <div class="dropzone needsclick" action="/" id="dropzone-image33-6">
-                                                            <div class="dz-message needsclick">
-                                                                Drop files here or click to upload
-                                                            </div>
-                                                            <div class="fallback">
-                                                                <input type="file" name="image" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <!--3 image 2nd tab-->
-
-                                    <div>
-
-                                        <hr style="width: 131px;margin: auto;margin-top:20px;">
-
-                                        <div style="padding:0px 2.75rem;">
-                                            <div style="margin-left:5px;margin-top:20px;"
-                                                class="row pick-content d-flex justify-content-around">
-                                                <div style="width:33.3%" class="carousel-inner brchg imagepicker "
-                                                    data-imagetwo="#image22">
-                                                    <h6 style="text-align:center;">Modern</h6>
-
-                                                    <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                        data="{{ asset('assets/img/three3.png') }}"
-                                                        data-original2="{{ asset('assets/img/three3.png') }}"
-                                                        data-default2="{{ asset('assets/img/threedef1.png') }}"
-                                                        width="80" height="80"
-                                                        class="carousel-inner  imagechangetwo2"
-                                                        data-imagechangetwo="#imagechangetwo1"></object>
-                                                </div>
-                                                <div style="width:33.3%" class="carousel-inner brchg imagepicker "
-                                                    data-imagetwo="#image33">
-                                                    <h6 style="text-align:center;">Elegant</h6>
-                                                    <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                        data="{{ asset('assets/img/three3(2).png') }}"
-                                                        data-original2="{{ asset('assets/img/three3(2).png') }}"
-                                                        data-default2="{{ asset('assets/img/threedef2.png') }}"
-                                                        width="80" height="80"
-                                                        class="carousel-inner imagechangetwo2"
-                                                        data-imagechangetwo="#imagechangetwo2"></object>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <input type="hidden" name="grid_style" id="news_grid_style" value="modern">
                                     </div>
                                 </div>
+                            </div>
 
-                                <div style="display:contents;" id="image44" class="col-sm-12 image-content1 row  ">
-                                    <!--four tab 1-->
-                                    <div style="margin-top:-60px;padding:0px" class="imagecontentfour"
-                                        id="imagecontentfour1">
-                                        <div class="d-flex flex-wrap ">
-                                            <div style="padding:0px;width:50%" class="imagefullmargin4one">
-                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-1">
-                                                    <div class="dz-message needsclick">
-                                                        Drop files here or click to upload
-                                                    </div>
-                                                    <div class="fallback">
-                                                        <input type="file" name="image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="padding:0px;width:50%" class="imagefullmargin4two">
-                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-2">
-                                                    <div class="dz-message needsclick">
-                                                        Drop files here or click to upload
-                                                    </div>
-                                                    <div class="fallback">
-                                                        <input type="file" name="image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="width:50%;padding:0px;margin-top:-41px;"
-                                                class="imagefullmargin4one">
-                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-3">
-                                                    <div class="dz-message needsclick">
-                                                        Drop files here or click to upload
-                                                    </div>
-                                                    <div class="fallback">
-                                                        <input type="file" name="image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="width:50%;padding:0px;margin-top:0px;"
-                                                class="imagefullmargin4two">
-                                                <div class="dropzone needsclick" action="/" id="dropzone-image44-4">
-                                                    <div class="dz-message needsclick">
-                                                        Drop files here or click to upload
-                                                    </div>
-                                                    <div class="fallback">
-                                                        <input type="file" name="image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!--four tab 1-->
-
-                                    <!--four tab 2-->
-                                    <div style="margin-top:-70px;padding:0px" class="imagecontentfour"
-                                        id="imagecontentfour2">
-                                        <div style="padding:10px;" class="col-sm-12 imagefullmargin4three">
-                                            <div class="row">
-                                                <div style="padding:0px;" class="col-sm-8 imagefullmargin4four">
-                                                    <div class="dropzone needsclick" action="/" id="dropzone-image44-5">
-                                                        <div class="dz-message needsclick">
-                                                            Drop files here or click to upload
-                                                        </div>
-                                                        <div class="fallback">
-                                                            <input type="file" name="image" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="padding:0px;" class="col-sm-4 ">
-                                                    <div class="col-sm-12 imagefullmargin4four">
-                                                        <div class="dropzone needsclick" action="/" id="dropzone-image44-6">
-                                                            <div class="dz-message needsclick">
-                                                                Drop files here or click to upload
-                                                            </div>
-                                                            <div class="fallback">
-                                                                <input type="file" name="image" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 imagefullmargin4four">
-                                                        <div class="dropzone needsclick" action="/" id="dropzone-image44-7">
-                                                            <div class="dz-message needsclick">
-                                                                Drop files here or click to upload
-                                                            </div>
-                                                            <div class="fallback">
-                                                                <input type="file" name="image" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 imagefullmargin4four">
-                                                        <div class="dropzone needsclick" action="/" id="dropzone-image44-8">
-                                                            <div class="dz-message needsclick">
-                                                                Drop files here or click to upload
-                                                            </div>
-                                                            <div class="fallback">
-                                                                <input type="file" name="image" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--four tab 2-->
-
-                                    <!--add upp-->
-
-                                    <hr style="width: 131px;margin: auto;margin-top:20px;">
-
-                                    <div style="padding:0px 2.75rem;">
-                                        <div style="margin-left:5px;margin-top:20px;"
-                                            class="row pick-content d-flex justify-content-around">
-                                            <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                                                <h6 style="text-align:center;">Modern</h6>
-                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                    data="{{ asset('assets/img/four4.png') }}"
-                                                    data-original3="{{ asset('assets/img/four4.png') }}"
-                                                    data-default3="{{ asset('assets/img/fourdef2.png') }}"
-                                                    width="80" height="80"
-                                                    class="carousel-inner imagechangefour"
-                                                    data-contentfour2="#imagecontentfour1"
-                                                    data-value="modern"></object>
-                                            </div>
-                                            <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                                                <h6 style="text-align:center;">Elegant</h6>
-                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                    data="{{ asset('assets/img/four4(4).png') }}"
-                                                    data-original3="{{ asset('assets/img/four4(4).png') }}"
-                                                    data-default3="{{ asset('assets/img/fourdef1.png') }}"
-                                                    width="80" height="80"
-                                                    class="carousel-inner imagechangefour"
-                                                    data-contentfour2="#imagecontentfour2"
-                                                    data-value="elegant"></object>
-                                            </div>
-                                            <input type="hidden" name="image_style" id="image_style" value="modern">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div style="padding:0px 2.75rem;">
