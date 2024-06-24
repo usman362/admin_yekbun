@@ -1939,7 +1939,7 @@ $configData = Helper::appClasses();
     <li class="menu-item {{ Request::is('policy_and_terms') ? 'active' : '' }}">
       <a href="{{url('/policy_and_terms')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-list-ul"></i>
-        <div>App Terms</div>
+        <div>Policy and Terms</div>
       </a>
     </li>
     <li class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
@@ -2022,7 +2022,7 @@ $configData = Helper::appClasses();
     <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
       <a href="{{ url('/language') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-transfer"></i>
-        <div>Translation</div>
+        <div>Languages</div>
       </a>
     </li>
     <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">

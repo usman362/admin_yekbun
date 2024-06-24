@@ -6,6 +6,7 @@ use App\Models\Text;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\LanguageData;
 use Illuminate\Support\Facades\DB;
 
 class LanguageController extends Controller
@@ -18,12 +19,14 @@ class LanguageController extends Controller
   public function index()
   {
     $languages = Language::all();
+    $languageData = LanguageData::all();
+
     $textCounts = Text::count();
-    // Add the text count to each language
+
     foreach ($languages as $language) {
       $language->texts_count = $textCounts;
     }
-    return view('content.language.index', compact('languages'));
+    return view('content.language.index', compact('languages', 'languageData'));
   }
 
   /**

@@ -3508,7 +3508,9 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
             // Initialize multiple Dropzones
             document.addEventListener('DOMContentLoaded', function() {
-                initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*');
+                initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*', 2);
+                initializeDropzone('#feeds-dropzone-img', 'image[]', 'images', 'image/*', 2);
+                initializeDropzone('#video-dropzone-img', 'video[]', 'videos', 'video/*', 2);
             });
         </script>
         <script>
@@ -7399,6 +7401,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             $('.usertypepicker').click(function() {
                 $('.usertypepicker').removeClass('active');
                 $(this).addClass('active');
+                $('[name="user_type"]').val($(this).attr('data-val'));
                 return false;
             });
 
@@ -7435,7 +7438,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                 var activeTab = $(this).attr('data-sharetext');
                 $(activeTab).fadeIn();
-
+                $('[name="feed_type"]').val($(this).attr('data-val'));
                 var activeTab1 = $(this).attr('data-sharetext2');
                 $(activeTab1).fadeIn();
                 return false;

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Feed;
 use App\Models\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,8 +17,6 @@ class AdminProfileController extends Controller
 {
     public function index()
     {
-
-
         $activity = Auth::user()->actions()->orderBy('created_at', 'DESC')->paginate(20);
         // return view('content.admin_profile.index', compact("activity"));
         return view('content.pages.pages-account-settings-account', compact('activity'));
@@ -136,6 +135,13 @@ class AdminProfileController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
         ]);
+        return back();
+    }
+
+    public function store_feeds(Request $request)
+    {
+        $request->dd();
+        $feeds = Feed::create($request->all());
         return back();
     }
 }

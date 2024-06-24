@@ -21,7 +21,7 @@ class NewsController extends Controller
     {
         $news_category  = NewsCategory::get();
         $news  = News::with('news_category')->get();
-  
+
         return view('content.news.index' , compact('news' , 'news_category'));
     }
 
@@ -43,6 +43,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->dd();
         $request->validate([
             'title' => 'required',
             'description' => 'required'
@@ -82,12 +83,12 @@ class NewsController extends Controller
                 $post_gallery->save();
             }
         }
-        
+
         return redirect()->route('news.index')->with('success', 'News Has been inserted');
     }else{
         return redirect()->route('news.index')->with('error', 'Failed to add news');
     }
-   
+
     }
 
     /**
@@ -123,8 +124,8 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-       
+
+
         $news = News::findorFail($id);
         $news->title = $request->title;
         $news->description = $request->description;
@@ -145,7 +146,7 @@ class NewsController extends Controller
         // }
 
         // $news->image = json_encode($asset);
-        
+
         if($news->update()){
             return redirect()->route('news.index')->with('success', 'News Has been Updated');
 
@@ -195,7 +196,7 @@ class NewsController extends Controller
     {
         $music = News::find($id);
         $music->image = array_filter($music->image, function ($path) use ($request) {
-            return !($path === $request->path); 
+            return !($path === $request->path);
         });
         $music->save();
         unlink(public_path('storage/' . $request->path));

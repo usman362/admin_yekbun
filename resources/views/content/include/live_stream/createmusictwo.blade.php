@@ -258,13 +258,15 @@
     }
 </style>
 
+<form action="{{route('admin_activity.store_feeds')}}" method="post" enctype="multipart/form-data">
+@csrf
 <div id="shahretext" class="share-content">
     <div style="padding:0px 2.75rem;">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div style="background-image:url('{{ asset('assets/img/hand.png') }}');height: 240px; width: 119%;margin-top:-28px;margin-left:-44px; background-size: 100% 100%;background-repeat: no-repeat;"
                 class="carousel-inner" id="feed-text-background">
                 <div class="carousel-item active">
-                    <h2 style="font-size:28px;color:whitesmoke;margin-top:20px;text-align:center;" class="">User
+                    <h2 style="font-size:28px;color:whitesmoke;margin-top:20px;text-align:center;" class="feed-text">User
                         Text Will be then <br> showed here</h2>
                 </div>
             </div>
@@ -322,880 +324,329 @@
 <!--share image-->
 <div id="shahreimage" class="share-content">
     <div class="shareimage">
-        <div style="margin-top:-28px;" id="image11new" class="image-contentnew">
-
-            <div style="margin-top: -36px;" class="w-100">
-                <input style="border-radius:20px;" name="file1" type="file" class="dropify" data-height="250"
-                    data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
-            </div>
-            <!--code-->
-        </div>
-        <!--image 1 end-->
-
-        <div style="margin-top:-28px;width:105%;" id="image22new"
-            class="col-sm-12 image-contentnew row  justify-content-around  justify-content-center">
-            <!--2 image 1st tab-->
-            <div class="row image-changecontentimage p-0" id="imagechangeone1new">
-                <div style="padding-right:0px;" class="col-sm-6 customborderradiustopleft">
-                    <input name="file1" type="file" class="dropify" data-height="150"
-                        data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                </div>
-
-                <div style="padding-left:0px;" class="col-sm-6 customborderradiustopleft">
-                    <input name="file1" type="file" class="dropify" data-height="150"
-                        data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                </div>
-            </div>
-            <!--2 image 1st tab-->
-            <!--2 image second tab-->
-            <div class="row image-changecontentimage p-0" id="imagechangeone2new">
-
-                <div class="col-sm-12">
-                    <input name="file1" type="file" class="dropify" data-height="100"
-                        data-default-file="{{ asset('assets/img/banner2.jpg') }}" />
-                </div>
-                <div class="col-sm-12">
-                    <input name="file1" type="file" class="dropify" data-height="100"
-                        data-default-file="{{ asset('assets/img/banner2.jpg') }}" />
-                </div>
-            </div>
-
-            <!--2 image second tab-->
-
-
-            <hr style="width: 131px;margin: auto;margin-top:20px;">
-
-            <!--</div> -->
-            <div style="padding:0px 2.75rem;">
-                <div style="margin-left:5px;margin-top:20px;" class="row pick-content d-flex justify-content-around">
-                    <div style="width:33.3%" class="carousel-inner ">
-                        <h6 style="text-align:center;">Modern</h6>
-
-                        <object style="height:80px;width:80px;margin:auto;display:flex;"
-                            data="{{ asset('assets/img/thanks3.png') }}"
-                            data-original="{{ asset('assets/img/thanks3.png') }}"
-                            data-default="{{ asset('assets/img/colorimage.PNG') }}" width="80" height="80"
-                            class="carousel-inner grid_change imagechangeclassimageone"
-                            data-imagechangeimageone="#imagechangeone1new" data-value="modern"></object>
-
+        <!--codee-->
+        <div id="" class="">
+            <div style="" id="feeds-image" class="">
+                <div class="dropzone needsclick" action="/" id="feeds-dropzone-img">
+                    <div class="dz-message needsclick">
+                        Drop files here or click to upload
                     </div>
-
-                    <div style="width:33.3%" class="carousel-inner  ">
-                        <h6 style="text-align:center;">Elegant</h6>
-
-                        <object style="height:80px;width:80px;margin:auto;display:flex;"
-                            data="{{ asset('assets/img/thanks2.png') }}"
-                            data-original="{{ asset('assets/img/thanks2.png') }}"
-                            data-default="{{ asset('assets/img/thanks2 (1).png') }}" width="80" height="80"
-                            class="carousel-inner grid_change imagechange2 imagechangeclassimageone"
-                            data-imagechangeimageone="#imagechangeone2new" data-value="elegant"></object>
-
+                    <div class="fallback">
+                        <input type="file" name="image" multiple/>
                     </div>
                 </div>
+                <!--code-->
             </div>
-        </div>
+            <div class="shareimage">
+                <div style="margin-top:-56px;width:105%;display:contents;" id="feedimage22"
+                    class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
 
-        <!--3 image new-->
-        <!--3 image new-->
-        <div style="margin-top:-28px;margin-left:-1px;" style="display:contents;" id="image33new"
-            class="col-sm-12 image-contentnew row ">
+                    <!--line here-->
 
-            <!--3 image 1st tab-->
-            <div class="col-sm-12 image-changecontent2new" id="imagechangetwo1new">
-                <div style="padding:0px;width:105%;margin-left:-12px;margin-top:-9px;" class="col-sm-12 ">
-                    <input name="file1" type="file" class="dropify" data-height="100"
-                        data-default-file="{{ asset('assets/img/banner2.jpg') }}" />
-                    <!-- <div  style="background-image:url('{{ asset('assets/img/jamunda.png') }}');height: 250px; width: 100%; background-size: 100% 100%;background-repeat: no-repeat;" class="carousel-inner">-->
-                </div>
-
-                <div class="row">
-                    <div style="padding:0px;" class="col-sm-6 ">
-                        <input name="file1" type="file" class="dropify" data-height="90"
-                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                        <!-- <div  style="background-image:url('{{ asset('assets/img/jamunda.png') }}');height: 250px; width: 100%; background-size: 100% 100%;background-repeat: no-repeat;" class="carousel-inner">-->
-                        <!--</div>-->
-                    </div>
-                    <div style="padding:0px;" class="col-sm-6 ">
-                        <input name="file1" type="file" class="dropify" data-height="90"
-                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                        <!-- <div  style="background-image:url('{{ asset('assets/img/jamunda.png') }}');height: 250px; width: 100%; background-size: 100% 100%;background-repeat: no-repeat;" class="carousel-inner">-->
-                        <!--</div>-->
-                    </div>
-                </div>
-            </div>
-            <!--3 image 1st tab-->
-
-
-            <!--3 image 2nd tab-->
-
-            <div style="padding:0px;" class="col-sm-12 image-changecontent2new" id="imagechangetwo2new">
-                <div style="padding:0px;" class="col-sm-12 ">
-                    <!-- <div  style="background-image:url('{{ asset('assets/img/jamunda.png') }}');height: 250px; width: 100%; background-size: 100% 100%;background-repeat: no-repeat;" class="carousel-inner">-->
-                    <div class="row">
-                        <div style="padding:0px;" class="col-sm-8">
-                            <input name="file1" type="file" class="dropify" data-height="170"
-                                data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
-                        </div>
-                        <div style="padding:0px;margin-left:-12px;" class="col-sm-4">
-                            <div class="col-sm-12">
-                                <input name="file1" type="file" class="dropify" data-height="80"
-                                    data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
+                    <hr style="width: 131px;margin: auto;margin-top:20px;">
+                    <div style="padding:0px 2.75rem;">
+                        <div style="margin-left:5px;margin-top:20px;"
+                            class="row pick-content d-flex justify-content-around ">
+                            <div style="width:33.3%" class="carousel-inner ">
+                                <h6 style="text-align:center;">Modern</h6>
+                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                    data="{{ asset('assets/img/thanks3.png') }}"
+                                    data-original="{{ asset('assets/img/thanks3.png') }}"
+                                    data-default="{{ asset('assets/img/colorimage.PNG') }}"
+                                    width="80" height="80"
+                                    class="carousel-inner imagechangeclass grid_change"
+                                    data-imagechange="#imagechangeone1" data-value="modern"></object>
                             </div>
-                            <div class="col-sm-12">
-                                <input name="file1" type="file" class="dropify" data-height="80"
-                                    data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
-                            </div>
+                            <div style="width:33.3%" class="carousel-inner  ">
+                                <h6 style="text-align:center;">Elegant</h6>
 
+                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                    data="{{ asset('assets/img/thanks2.png') }}"
+                                    data-original="{{ asset('assets/img/thanks2.png') }}"
+                                    data-default="{{ asset('assets/img/thanks2 (1).png') }}"
+                                    width="80" height="80"
+                                    class="carousel-inner imagechange2 grid_change imagechangeclass"
+                                    data-imagechange="#imagechangeone2" data-value="elegant"></object>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;" id="feedimage33"
+                    class="col-sm-12 image-content1 row ">
+
+                    <div>
+                        <hr style="width: 131px;margin: auto;margin-top:20px;">
+                        <div style="padding:0px 2.75rem;">
+                            <div style="margin-left:5px;margin-top:20px;"
+                                class="row pick-content d-flex justify-content-around">
+                                <div style="width:33.3%" class="carousel-inner brchg imagepicker "
+                                    data-imagetwo="#feedimage22">
+                                    <h6 style="text-align:center;">Modern</h6>
+
+                                    <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                        data="{{ asset('assets/img/three3.png') }}"
+                                        data-original2="{{ asset('assets/img/three3.png') }}"
+                                        data-default2="{{ asset('assets/img/threedef1.png') }}"
+                                        width="80" height="80"
+                                        class="carousel-inner  imagechangetwo2"
+                                        data-imagechangetwo="#imagechangetwo1"></object>
+                                </div>
+                                <div style="width:33.3%" class="carousel-inner brchg imagepicker "
+                                    data-imagetwo="#feedimage33">
+                                    <h6 style="text-align:center;">Elegant</h6>
+                                    <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                        data="{{ asset('assets/img/three3(2).png') }}"
+                                        data-original2="{{ asset('assets/img/three3(2).png') }}"
+                                        data-default2="{{ asset('assets/img/threedef2.png') }}"
+                                        width="80" height="80"
+                                        class="carousel-inner imagechangetwo2"
+                                        data-imagechangetwo="#imagechangetwo2"></object>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:contents;" id="feedimage44" class="col-sm-12 image-content1 row  ">
+                    <!--add upp-->
+
+                    <hr style="width: 131px;margin: auto;margin-top:20px;">
+
+                    <div style="padding:0px 2.75rem;">
+                        <div style="margin-left:5px;margin-top:20px;"
+                            class="row pick-content d-flex justify-content-around">
+                            <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                                <h6 style="text-align:center;">Modern</h6>
+                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                    data="{{ asset('assets/img/four4.png') }}"
+                                    data-original3="{{ asset('assets/img/four4.png') }}"
+                                    data-default3="{{ asset('assets/img/fourdef2.png') }}"
+                                    width="80" height="80"
+                                    class="carousel-inner grid_change imagechangefour"
+                                    data-contentfour2="#imagecontentfour1"
+                                    data-value="modern"></object>
+                            </div>
+                            <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                                <h6 style="text-align:center;">Elegant</h6>
+                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                    data="{{ asset('assets/img/four4(4).png') }}"
+                                    data-original3="{{ asset('assets/img/four4(4).png') }}"
+                                    data-default3="{{ asset('assets/img/fourdef1.png') }}"
+                                    width="80" height="80"
+                                    class="carousel-inner grid_change imagechangefour"
+                                    data-contentfour2="#imagecontentfour2"
+                                    data-value="elegant"></object>
+                            </div>
+                            <input type="hidden" name="grid_style" id="news_grid_style"
+                                value="modern">
                         </div>
                     </div>
                 </div>
 
             </div>
-
-            <div>
-                <hr style="width: 131px;margin: auto;margin-top:20px;">
-                <div style="padding:0px 2.75rem;">
-                    <div style="margin-left:5px;margin-top:20px;"
-                        class="row pick-content d-flex justify-content-around">
-                        <div style="width:33.3%" class="carousel-inner brchg imagepicker "
-                            data-imagetwo="#image22new">
-                            <h6 style="text-align:center;">Modern</h6>
-
-                            <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                data="{{ asset('assets/img/three3.png') }}"
-                                data-original2="{{ asset('assets/img/three3.png') }}"
-                                data-default2="{{ asset('assets/img/threedef1.png') }}" width="80"
-                                height="80" class="carousel-inner grid_change imagechangetwo2image"
-                                data-imagechangetwoimage="#imagechangetwo1new" data-value="modern"></object>
-                        </div>
-
-
-                        <div style="width:33.3%" class="carousel-inner brchg imagepicker "
-                            data-imagetwo="#image33new">
-                            <h6 style="text-align:center;">Elegant</h6>
-
-                            <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                data="{{ asset('assets/img/three3(2).png') }}"
-                                data-original2="{{ asset('assets/img/three3(2).png') }}"
-                                data-default2="{{ asset('assets/img/threedef2.png') }}" width="80"
-                                height="80" class="carousel-inner grid_change imagechangetwo2image"
-                                data-imagechangetwoimage="#imagechangetwo2new" data-value="elegant"></object>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="display:contents;" id="image44new" class="col-sm-12 image-contentnew row  ">
-            <!--four tab 1-->
-            <div style="margin-top:-28px;padding:0px" class="imagecontentfournew" id="imagecontentfour1new">
-                <div class="d-flex flex-wrap ">
-                    <div style="padding:0px;width:50%" class="">
-                        <input name="file1" type="file" class="dropify" data-height="80"
-                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                    </div>
-                    <div style="padding:0px;width:50%" class="">
-                        <input name="file1" type="file" class="dropify" data-height="120"
-                            data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
-                    </div>
-                    <div style="width:50%;padding:0px;margin-top:-41px;" class="">
-                        <input name="file1" type="file" class="dropify" data-height="120"
-                            data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
-                    </div>
-                    <div style="width:50%;padding:0px;margin-top:0px;" class="">
-                        <input name="file1" type="file" class="dropify" data-height="80"
-                            data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                    </div>
-
-                </div>
-            </div>
-            <!--four tab 1-->
-
-            <!--four tab 2-->
-            <div style="margin-top:-38px;padding:0px" class="imagecontentfournew" id="imagecontentfour2new">
-                <div style="padding:10px;" class="col-sm-12 ">
-                    <!-- <div  style="background-image:url('{{ asset('assets/img/jamunda.png') }}');height: 250px; width: 100%; background-size: 100% 100%;background-repeat: no-repeat;" class="carousel-inner">-->
-                    <div class="row">
-                        <div style="padding:0px;" class="col-sm-8 ">
-                            <input name="file1" type="file" class="dropify" data-height="175"
-                                data-default-file="{{ asset('assets/img/spiderman.jpg') }}" />
-                        </div>
-                        <div style="padding:0px;" class="col-sm-4 ">
-                            <div class="col-sm-12 ">
-                                <input name="file1" type="file" class="dropify" data-height="50"
-                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                            </div>
-                            <div class="col-sm-12 ">
-                                <input name="file1" type="file" class="dropify" data-height="50"
-                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                            </div>
-                            <div class="col-sm-12 ">
-                                <input name="file1" type="file" class="dropify" data-height="50"
-                                    data-default-file="{{ asset('assets/img/spidercurve.jpg') }}" />
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--four tab 2-->
-
-            <hr style="width: 131px;
-      margin: auto;margin-top:20px;">
 
             <div style="padding:0px 2.75rem;">
-                <div style="margin-left:5px;margin-top:20px;" class="row pick-content d-flex justify-content-around">
-                    <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                        <h6 style="text-align:center;">Modern</h6>
-                        <object style="height:80px;width:80px;margin:auto;display:flex;"
-                            data="{{ asset('assets/img/four4.png') }}"
-                            data-original3="{{ asset('assets/img/four4.png') }}"
-                            data-default3="{{ asset('assets/img/fourdef2.png') }}" width="80" height="80"
-                            class="carousel-inner grid_change imagechangefourclass"
-                            data-contentfour2new="#imagecontentfour1new" data-value="modern"></object>
-                    </div>
 
-                    <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                        <h6 style="text-align:center;">Elegant</h6>
-                        <object style="height:80px;width:80px;margin:auto;display:flex;"
-                            data="{{ asset('assets/img/four4(4).png') }}"
-                            data-original3="{{ asset('assets/img/four4(4).png') }}"
-                            data-default3="{{ asset('assets/img/fourdef1.png') }}" width="80" height="80"
-                            class="carousel-inner imagechangefourclass grid_change"
-                            data-contentfour2new="#imagecontentfour2new" data-value="elegant"></object>
+                <hr style="width: 131px;margin: auto;margin-top:20px">
 
+                <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
+                    <div style="width:-webkit-fill-available;" class="btn-group" role="group"
+                        aria-label="Basic example">
+                        <label for="one_image"
+                            class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
+                            data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
+                            <input type="radio" class="form-check-input" name="image_type"
+                                value="one_image" id="one_image" checked />1 Image</label>
+                        <label for="two_image"
+                            class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
+                            data-imageone="#image2" data-imagetwo="#feedimage22" data-value="#two_image">
+                            <input type="radio" class="form-check-input" name="image_type"
+                                value="two_image" id="two_image" />2 Image</label>
+                        <label for="three_image"
+                            class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
+                            data-imageone="#image3" data-imagetwo="#feedimage33"
+                            data-value="#three_image">
+                            <input type="radio" class="form-check-input" name="image_type"
+                                value="three_image" id="three_image" />3 Image</label>
+                        <label for="four_image"
+                            class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
+                            data-imageone="#image4" data-imagetwo="#feedimage44"
+                            data-value="#four_image">
+                            <input type="radio" class="form-check-input" name="image_type"
+                                value="four_image" id="four_image" />+4 Image</label>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div style="padding:0px 2.75rem;">
-        <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-            <div style="width:-webkit-fill-available;" class="">
-                <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                    aria-label="Basic example">
-                    <label for="one_image"
-                        class="btn btn-label-secondary btn btn-outline-secondary imgqtypicker active" data-imagetabs="#image11new">
-                        <input type="radio" class="form-check-input" name="image_qty" value="one_image"
-                            id="one_image" checked />1 Image</label>
-                    <label for="two_image" class="btn btn-label-secondary btn btn-outline-secondary imgqtypicker" data-imagetabs="#image22new">
-                        <input type="radio" class="form-check-input" name="image_qty" value="two_image"
-                            id="two_image" />2 Image</label>
-                    <label for="three_image" class="btn btn-label-secondary  btn btn-outline-secondary imgqtypicker" data-imagetabs="#image33new">
-                        <input type="radio" class="form-check-input" name="image_qty" value="three_image"
-                            id="three_image" />3 Image</label>
-                    <label for="four_image" class="btn btn-label-secondary  btn btn-outline-secondary imgqtypicker" data-imagetabs="#image44new">
-                        <input type="radio" class="form-check-input" name="image_qty" value="four_image"
-                            id="four_image" />4+ Image</label>
-                </div>
-            </div>
-        </div>
+        <!--code end-->
     </div>
 </div>
 <!--share image-->
 <div id="shahrevideo" class="share-content">
-
-
-    <!-- Main container -->
-    <div style="margin-top:-38px;" id="video11" class="video-content1">
-
-        <!-- File input and button -->
-        <input type="file" hidden id="videoupl">
-
-
-        <!-- Video player -->
-        <div style="height: 310px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat; position: relative;"
-            class="carousel-inner videoclass">
-            <video controls class="videoclass videohoverclass">
-                <source src="{{ asset('assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
-            </video>
-
-            <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                id="videohover" class="videohover">
-                <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                    class="btn btn-primary text-nowrap upload-btn">
-                    <label for="videoupl" class="">Remove
-                        <!--<i class="fa fa-upload"></i>-->
-                    </label>
-                </a>
-                <p>Drag and drop or click to replace</p>
+    <!--codee-->
+    <div id="" class="">
+        <div style="" id="video-image" class="">
+            <div class="dropzone needsclick" action="/" id="video-dropzone-img">
+                <div class="dz-message needsclick">
+                    Drop files here or click to upload
+                </div>
+                <div class="fallback">
+                    <input type="file" name="image" multiple/>
+                </div>
             </div>
+            <!--code-->
         </div>
-    </div>
+        <div class="shareimage">
+            <div style="margin-top:-56px;width:105%;display:contents;" id="videoimage22"
+                class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
 
-    <div style="margin-top:-28px;" id="video22" class="col-sm-12 video-content1 row  justify-content-center">
-        <!--2 image 1st tab-->
-        <div style="margin-left:14px;padding:0px" class="row video-changecontent" id="videochangeone1">
-            <div style="padding: 0px 0px 0px 0px;" class="col-sm-6 ">
-                <div style="height: 150px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                    class="carousel-inner">
+                <!--line here-->
 
+                <hr style="width: 131px;margin: auto;margin-top:20px;">
+                <div style="padding:0px 2.75rem;">
+                    <div style="margin-left:5px;margin-top:20px;"
+                        class="row pick-content d-flex justify-content-around ">
+                        <div style="width:33.3%" class="carousel-inner ">
+                            <h6 style="text-align:center;">Modern</h6>
+                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                data="{{ asset('assets/img/thanks3.png') }}"
+                                data-original="{{ asset('assets/img/thanks3.png') }}"
+                                data-default="{{ asset('assets/img/colorimage.PNG') }}"
+                                width="80" height="80"
+                                class="carousel-inner imagechangeclass grid_change"
+                                data-imagechange="#imagechangeone1" data-value="modern"></object>
+                        </div>
+                        <div style="width:33.3%" class="carousel-inner  ">
+                            <h6 style="text-align:center;">Elegant</h6>
 
-                    <input type="file" hidden id="videoupl2one">
+                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                data="{{ asset('assets/img/thanks2.png') }}"
+                                data-original="{{ asset('assets/img/thanks2.png') }}"
+                                data-default="{{ asset('assets/img/thanks2 (1).png') }}"
+                                width="80" height="80"
+                                class="carousel-inner imagechange2 grid_change imagechangeclass"
+                                data-imagechange="#imagechangeone2" data-value="elegant"></object>
 
-                    <video style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                        controls="" class="videoclass2one videohoverclass">
-                        <source src="{{ asset('assets/img/straight.mp4') }}">
-                    </video>
-                    <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                        id="videohover2one" class="videohover">
-                        <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                            class="btn btn-primary text-nowrap upload-btn">
-                            <label for="videoupl2one" class="">Remove
-                                <!--<i class="fa fa-upload"></i>-->
-                            </label>
-                        </a>
-                        <p>Drag and drop or click to replace</p>
-                    </div>
-                </div>
-
-            </div>
-            <div style="padding: 0px 0px 0px 0px;" class="col-sm-6">
-                <div style="height: 150px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                    class="carousel-inner">
-                    <input type="file" hidden id="videoupl2two">
-
-                    <video style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                        controls="" class="videoclass2two videohoverclass">
-                        <source src="{{ asset('assets/img/straight.mp4') }}">
-                    </video>
-
-                    <!--c-->
-                    <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                        id="videohover2two" class="videohover">
-                        <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                            class="btn btn-primary text-nowrap upload-btn">
-                            <label for="videoupl2two" class="">Remove
-                            </label>
-                        </a>
-                        <p>Drag and drop or click to replace</p>
-                    </div>
-
-                    <!--c-->
-
-                </div>
-            </div>
-        </div>
-        <div style="margin-left:14px;padding:0px" class="row video-changecontent" id="videochangeone2">
-
-            <div style="padding: 0px 0px 0px 0px;" class="col-sm-12">
-                <div style="height: 315px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                    class="carousel-inner">
-
-                    <input type="file" hidden id="videoupl22one">
-
-
-                    <video style="position:relative;" controls="" class="videoclass22one videohoverclass">
-                        <source src="{{ asset('assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
-                    </video>
-                    <!--c-->
-                    <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                        id="videohover2twoone" class="videohover">
-                        <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                            class="btn btn-primary text-nowrap upload-btn">
-                            <label for="videoupl22one" class="">Remove
-                                <!--<i class="fa fa-upload"></i>-->
-                            </label>
-                        </a>
-                        <p>Drag and drop or click to replace</p>
-                    </div>
-
-                    <!--c-->
-
-                </div>
-            </div>
-            <div style="padding:0px" class="col-sm-12">
-                <div style="height: 315px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                    class="carousel-inner">
-
-                    <input type="file" hidden id="videoupl22two">
-
-                    <video style="position:relative;" controls="" class="videoclass22two videohoverclass">
-                        <source src="{{ asset('assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
-                    </video>
-                    <!--c-->
-                    <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                        id="videohover2twotwo" class="videohover">
-                        <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                            class="btn btn-primary text-nowrap upload-btn">
-                            <label for="videoupl22two" class="">Remove
-                            </label>
-                        </a>
-                        <p>Drag and drop or click to replace</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;" id="videoimage33"
+                class="col-sm-12 image-content1 row ">
+
+                <div>
+                    <hr style="width: 131px;margin: auto;margin-top:20px;">
+                    <div style="padding:0px 2.75rem;">
+                        <div style="margin-left:5px;margin-top:20px;"
+                            class="row pick-content d-flex justify-content-around">
+                            <div style="width:33.3%" class="carousel-inner brchg imagepicker "
+                                data-imagetwo="#videoimage22">
+                                <h6 style="text-align:center;">Modern</h6>
+
+                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                    data="{{ asset('assets/img/three3.png') }}"
+                                    data-original2="{{ asset('assets/img/three3.png') }}"
+                                    data-default2="{{ asset('assets/img/threedef1.png') }}"
+                                    width="80" height="80"
+                                    class="carousel-inner  imagechangetwo2"
+                                    data-imagechangetwo="#imagechangetwo1"></object>
+                            </div>
+                            <div style="width:33.3%" class="carousel-inner brchg imagepicker "
+                                data-imagetwo="#videoimage33">
+                                <h6 style="text-align:center;">Elegant</h6>
+                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                    data="{{ asset('assets/img/three3(2).png') }}"
+                                    data-original2="{{ asset('assets/img/three3(2).png') }}"
+                                    data-default2="{{ asset('assets/img/threedef2.png') }}"
+                                    width="80" height="80"
+                                    class="carousel-inner imagechangetwo2"
+                                    data-imagechangetwo="#imagechangetwo2"></object>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:contents;" id="videoimage44" class="col-sm-12 image-content1 row  ">
+                <!--add upp-->
+
+                <hr style="width: 131px;margin: auto;margin-top:20px;">
+
+                <div style="padding:0px 2.75rem;">
+                    <div style="margin-left:5px;margin-top:20px;"
+                        class="row pick-content d-flex justify-content-around">
+                        <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                            <h6 style="text-align:center;">Modern</h6>
+                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                data="{{ asset('assets/img/four4.png') }}"
+                                data-original3="{{ asset('assets/img/four4.png') }}"
+                                data-default3="{{ asset('assets/img/fourdef2.png') }}"
+                                width="80" height="80"
+                                class="carousel-inner grid_change imagechangefour"
+                                data-contentfour2="#imagecontentfour1"
+                                data-value="modern"></object>
+                        </div>
+                        <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                            <h6 style="text-align:center;">Elegant</h6>
+                            <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                data="{{ asset('assets/img/four4(4).png') }}"
+                                data-original3="{{ asset('assets/img/four4(4).png') }}"
+                                data-default3="{{ asset('assets/img/fourdef1.png') }}"
+                                width="80" height="80"
+                                class="carousel-inner grid_change imagechangefour"
+                                data-contentfour2="#imagecontentfour2"
+                                data-value="elegant"></object>
+                        </div>
+                        <input type="hidden" name="grid_style" id="news_grid_style"
+                            value="modern">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <hr style="width: 131px;
-  margin: auto;margin-top:20px;">
         <div style="padding:0px 2.75rem;">
-            <div style="margin-left:5px;margin-top:20px;" class="row pick-content d-flex justify-content-around">
 
-                <div style="width:33.3%" class="carousel-inner ">
-                    <h6 style="text-align:center;">Modern</h6>
-                    <object style="height:80px;width:80px;margin:auto;display:flex;"
-                        data="{{ asset('assets/img/thanks3.png') }}"
-                        data-original="{{ asset('assets/img/thanks3.png') }}"
-                        data-default="{{ asset('assets/img/colorimage.PNG') }}" width="80" height="80"
-                        class="carousel-inner grid_change videochangeclass" data-videochange="#videochangeone1" data-value="modern"></object>
+            <hr style="width: 131px;margin: auto;margin-top:20px">
 
-                </div>
-
-                <div style="width:33.3%" class="carousel-inner  ">
-                    <h6 style="text-align:center;">Elegant</h6>
-                    <object style="height:80px;width:80px;margin:auto;display:flex;"
-                        data="{{ asset('assets/img/thanks2.png') }}"
-                        data-original="{{ asset('assets/img/thanks2.png') }}"
-                        data-default="{{ asset('assets/img/thanks2 (1).png') }}" width="80" height="80"
-                        class="carousel-inner grid_change videochangeclass" data-videochange="#videochangeone2" data-value="elegant"></object>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--video 2-->
-    <div style="display:contents;" id="video33" class="col-sm-12 video-content1 row  ">
-
-        <!--3 image 1st tab-->
-        <div style="padding:0px;" class="video-container">
-            <div style="margin-top:-40px;padding:0px;" class="col-sm-12 video-changecontent2" id="videochangetwo1">
-                <div class="col-sm-12 ">
-                    <div style="height: 315px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                        class="carousel-inner">
-                        <input type="file" hidden id="videoupl31one">
-                        <video style="position:relative;" controls="" class="videoclass31one videohoverclass">
-                            <source src="{{ asset('/assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
-                        </video>
-                        <!--c-->
-                        <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                            id="videohover3onetwo" class="videohover">
-                            <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                class="btn btn-primary text-nowrap upload-btn">
-                                <label for="videoupl31one" class="">Remove
-                                    <!--<i class="fa fa-upload"></i>-->
-                                </label>
-                            </a>
-                            <p>Drag and drop or click to replace</p>
-                        </div>
-
-                        <!--c-->
-                    </div>
-                    <!--<input name="file1" type="file" class="dropify" data-height="100" data-default-file="{{ asset('assets/img/hand.png') }}" />-->
-                    <!-- <div  style="background-image:url('{{ asset('assets/img/jamunda.png') }}');height: 250px; width: 100%; background-size: 100% 100%;background-repeat: no-repeat;" class="carousel-inner">-->
-                </div>
-
-                <div class="row">
-                    <div style="padding:0px;" class="col-sm-6 ">
-                        <!--<input name="file1" type="file" class="dropify" data-height="100" data-default-file="{{ asset('assets/img/hand.png') }}" />-->
-                        <div style=" width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                            class="carousel-inner">
-                            <input type="file" hidden id="videoupl31two">
-
-                            <video style="position:relative;" controls="" class="videoclass31two videohoverclass">
-                                <source
-                                    src="{{ asset('/assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
-                            </video>
-
-                            <!--c-->
-                            <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;height:95%;"
-                                id="videohover3oneone" class="videohover">
-                                <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                    class="btn btn-primary text-nowrap upload-btn">
-                                    <label for="videoupl31two" class="">Remove
-                                        <!--<i class="fa fa-upload"></i>-->
-                                    </label>
-                                </a>
-                                <p>Drag and drop or click to replace</p>
-                            </div>
-
-                            <!--c-->
-
-                        </div>
-                    </div>
-                    <div style="padding:0px;" class="col-sm-6 ">
-
-                        <div style="width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                            class="carousel-inner">
-                            <input type="file" hidden id="videoupl31three">
-
-                            <video style="position:relative;" controls=""
-                                class="videoclass videoclass31three videohoverclass">
-                                <source
-                                    src="{{ asset('/assets/img/pexels-pressmaster-3195394-3840x2160-25fps_2.mp4') }}">
-                            </video>
-                            <!--c-->
-                            <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;height:95%;"
-                                id="videohover3onethree" class="videohover">
-                                <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                    class="btn btn-primary text-nowrap upload-btn">
-                                    <label for="videoupl31three" class="">Remove
-                                        <!--<i class="fa fa-upload"></i>-->
-                                    </label>
-                                </a>
-                                <p>Drag and drop or click to replace</p>
-                            </div>
-
-                            <!--c-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--3 image 1st tab-->
-
-        <!--3 image 2nd tab-->
-        <div style="padding:0px;margin-top:-40px" class="col-sm-12 video-changecontent2" id="videochangetwo2">
-            <div style="padding:0px;" class="col-sm-12 ">
-                <div class="row">
-                    <div style="padding: 0px 0px 0px 0px;" class="col-sm-8">
-                        <div style="height: 200px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                            class="carousel-inner">
-                            <input type="file" hidden id="videoupl32one">
-
-                            <video
-                                style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                                controls="" class="videoclass videoclass32one videohoverclass">
-                                <source src="{{ asset('assets/img/straight.mp4') }}">
-                            </video>
-                            <!--c-->
-                            <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                id="videohover3twoone" class="videohover">
-                                <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                    class="btn btn-primary text-nowrap upload-btn">
-                                    <label for="videoupl32one" class="">Remove
-                                    </label>
-                                </a>
-                                <p>Drag and drop or click to replace</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="padding: 0px;" class="col-sm-4">
-                        <div class="col-sm-12">
-                            <div style="height: 100px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                                class="carousel-inner">
-                                <input type="file" hidden id="videoupl32two">
-
-                                <video
-                                    style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                                    controls="" class="videoclass videoclass32two videohoverclass">
-                                    <source src="{{ asset('assets/img/straight.mp4') }}">
-                                </video>
-                                <!--c-->
-                                <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                    id="videohover3twotwo" class="videohover">
-                                    <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                        class="btn btn-primary text-nowrap upload-btn">
-                                        <label for="videoupl32two" class="">Remove
-                                            <!--<i class="fa fa-upload"></i>-->
-                                        </label>
-                                    </a>
-                                    <p>Drag and drop or click to replace</p>
-                                </div>
-
-                                <!--c-->
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div style="height: 100px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                                class="carousel-inner">
-                                <input type="file" hidden id="videoupl32three">
-
-                                <video style="height:-webkit-fill-available;width:-webkit-fill-available"
-                                    controls="" class="videoclass videoclass32three videohoverclass">
-                                    <source src="{{ asset('assets/img/straight.mp4') }}">
-                                </video>
-                                <!--c-->
-                                <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                    id="videohover3twothree" class="videohover">
-                                    <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                        class="btn btn-primary text-nowrap upload-btn">
-                                        <label for="videoupl32three" class="">Remove
-                                        </label>
-                                    </a>
-                                    <p>Drag and drop or click to replace</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!--3 image 2nd tab-->
-        <div>
-            <hr style="width: 131px;margin: auto;margin-top:20px;">
-            <div style="padding:0px 2.75rem;">
-                <div style="margin-left:5px;margin-top:20px;" class="row pick-content d-flex justify-content-around">
-                    <div style="width:33.3%" class="carousel-inner brchg imagepicker " data-imagetwo="#image22new">
-                        <h6 style="text-align:center;">Modern</h6>
-                        <object style="height:80px;width:80px;margin:auto;display:flex;"
-                            data="{{ asset('assets/img/three3.png') }}"
-                            data-original2="{{ asset('assets/img/three3.png') }}"
-                            data-default2="{{ asset('assets/img/threedef1.png') }}" width="80" height="80"
-                            class="carousel-inner grid_change videochangetwo2" data-videochangetwo="#videochangetwo1" data-value="modern"></object>
-                    </div>
-                    <div style="width:33.3%" class="carousel-inner brchg imagepicker " data-imagetwo="#image33new">
-                        <h6 style="text-align:center;">Elegant</h6>
-                        <object style="height:80px;width:80px;margin:auto;display:flex;"
-                            data="{{ asset('assets/img/three3(2).png') }}"
-                            data-original2="{{ asset('assets/img/three3(2).png') }}"
-                            data-default2="{{ asset('assets/img/threedef2.png') }}" width="80" height="80"
-                            class="carousel-inner grid_change videochangetwo2" data-videochangetwo="#videochangetwo2" data-value="elegant"></object>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--video 3-->
-
-    <!--video 4-->
-
-    <div style="margin-top:-28px;" id="video44" class="col-sm-12 video-content1 row  ">
-        <!--four tab 1-->
-        <div style="margin-left:13px;padding:0px" class="videocontentfour" id="videocontentfour1">
-            <div class="d-flex flex-wrap ">
-                <div style="padding:0px;width:50%">
-                    <div style="height: 90px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                        class="carousel-inner">
-                        <input type="file" hidden id="videoupl41one">
-                        <video style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                            controls="" class="videoclass videoclass41one videohoverclass">
-                            <source src="{{ asset('assets/img/straight.mp4') }}">
-                        </video>
-                        <!--c-->
-                        <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                            id="videohover4oneone" class="videohover">
-                            <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                class="btn btn-primary text-nowrap upload-btn">
-                                <label for="videoupl41one" class="">Remove
-                                </label>
-                            </a>
-                            <p>Drag and drop or click to replace</p>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:0px;width:50%">
-                    <div style="height: 150px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                        class="carousel-inner">
-                        <input type="file" hidden id="videoupl41two">
-                        <video style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                            controls="" class="videoclass videoclass41two videohoverclass">
-                            <source src="{{ asset('assets/img/straight.mp4') }}">
-                        </video>
-                        <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                            id="videohover4onetwo" class="videohover">
-                            <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                class="btn btn-primary text-nowrap upload-btn">
-                                <label for="videoupl41two" class="">Remove
-                                </label>
-                            </a>
-                            <p>Drag and drop or click to replace</p>
-                        </div>
-                    </div>
-                </div>
-                <div style="width:50%;padding:0px;margin-top:-60px;">
-                    <div style="height: 150px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                        class="carousel-inner">
-                        <input type="file" hidden id="videoupl41three">
-
-                        <video style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                            controls="" class="videoclass videoclass41three videohoverclass">
-                            <source src="{{ asset('assets/img/straight.mp4') }}">
-                        </video>
-                        <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                            id="videohover4onethree" class="videohover">
-                            <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                class="btn btn-primary text-nowrap upload-btn">
-                                <label for="videoupl41three" class="">Remove
-                                </label>
-                            </a>
-                            <p>Drag and drop or click to replace</p>
-                        </div>
-                    </div>
-                </div>
-                <div style="width:50%;padding:0px;">
-                    <div style="height: 90px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                        class="carousel-inner">
-                        <input type="file" hidden id="videoupl41four">
-
-                        <video style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                            controls="" class="videoclass videoclass41four videohoverclass">
-                            <source src="{{ asset('assets/img/straight.mp4') }}">
-                        </video>
-                        <!--c-->
-                        <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                            id="videohover4onefour" class="videohover">
-                            <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                class="btn btn-primary text-nowrap upload-btn">
-                                <label for="videoupl41four" class="">Remove
-                                </label>
-                            </a>
-                            <p>Drag and drop or click to replace</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!--four tab 1-->
-
-        <!--four tab 2-->
-        <div class="videocontentfour" id="videocontentfour2">
-            <div style="padding:0px;margin-left:14px;" class="col-sm-12 ">
-                <div class="row">
-                    <div style="padding: 0px 0px 0px 0px;" class="col-sm-8">
-                        <div style="height: 300px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat;"
-                            class="carousel-inner">
-                            <input type="file" hidden id="videoupl42one">
-                            <video
-                                style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                                controls="" class="videoclass videoclass42one videohoverclass">
-                                <source src="{{ asset('assets/img/straight.mp4') }}">
-                            </video>
-                            <!--c-->
-                            <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                id="videohover42one" class="videohover">
-                                <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                    class="btn btn-primary text-nowrap upload-btn">
-                                    <label for="videoupl42one" class="">Remove
-                                    </label>
-                                </a>
-                                <p>Drag and drop or click to replace</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="padding: 0px 0px 0px 0px;" class="col-sm-4">
-                        <div style="padding: 0px 0px 0px 0px;" class="col-sm-12">
-                            <div style="height: 100px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat"
-                                class="carousel-inner">
-                                <input type="file" hidden id="videoupl42two">
-
-                                <video
-                                    style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                                    controls="" class="videoclass videoclass42two videohoverclass">
-                                    <source src="{{ asset('assets/img/straight.mp4') }}">
-                                </video>
-                                <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                    id="videohover42two" class="videohover">
-                                    <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                        class="btn btn-primary text-nowrap upload-btn">
-                                        <label for="videoupl42two" class="">Remove
-                                        </label>
-                                    </a>
-                                    <p>Drag and drop or click to replace</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="padding: 0px 0px 0px 0px;" class="col-sm-12">
-                            <div style="height: 100px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat"
-                                class="carousel-inner">
-                                <input type="file" hidden id="videoupl42three">
-
-                                <video
-                                    style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                                    controls="" class="videoclass videoclass42three videohoverclass">
-                                    <source src="{{ asset('assets/img/straight.mp4') }}">
-                                </video>
-                                <!--c-->
-                                <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                    id="videohover42three" class="videohover">
-                                    <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                        class="btn btn-primary text-nowrap upload-btn">
-                                        <label for="videoupl42three" class="">Remove
-                                        </label>
-                                    </a>
-                                    <p>Drag and drop or click to replace</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="padding: 0px 0px 0px 0px;" class="col-sm-12">
-                            <div style="height: 100px; width: 100%; background-size: 100% 100%; background-repeat: no-repeat"
-                                class="carousel-inner">
-                                <input type="file" hidden id="videoupl42four">
-
-                                <video
-                                    style="height:-webkit-fill-available;width:-webkit-fill-available;position:relative;"
-                                    controls="" class="videoclass videoclass42four videohoverclass">
-                                    <source src="{{ asset('assets/img/straight.mp4') }}">
-                                </video>
-                                <!--c-->
-                                <div style="background: #0000006e;color: white;position:absolute;top:0;display: flex;align-items: center;justify-content: center;height:100%;width:100%;text-align:center;visibility:hidden;"
-                                    id="videohover42four" class="videohover">
-                                    <a style="top:5px;padding:8px;" href="javascript:void(0)"
-                                        class="btn btn-primary text-nowrap upload-btn">
-                                        <label for="videoupl42four" class="">Remove
-                                            <!--<i class="fa fa-upload"></i>-->
-                                        </label>
-                                    </a>
-                                    <p>Drag and drop or click to replace</p>
-                                </div>
-                                <!--c-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--four tab 2-->
-
-        <hr style="width: 131px;margin: auto;margin-top:20px;">
-        <div style="padding:0px 2.75rem;">
-            <div style="margin-left:5px;margin-top:20px;" class="row pick-content d-flex justify-content-around">
-                <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                    <h6 style="text-align:center;">Modern</h6>
-                    <object style="height:80px;width:80px;margin:auto;display:flex;"
-                        data="{{ asset('assets/img/four4.png') }}"
-                        data-original3="{{ asset('assets/img/four4.png') }}"
-                        data-default3="{{ asset('assets/img/fourdef2.png') }}" width="80" height="80"
-                        class="carousel-inner grid_change videochangefour" data-contentfour2="#videocontentfour1" data-value="modern"></object>
-                </div>
-                <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                    <h6 style="text-align:center;">Elegant</h6>
-                    <object style="height:80px;width:80px;margin:auto;display:flex;"
-                        data="{{ asset('assets/img/four4(4).png') }}"
-                        data-original3="{{ asset('assets/img/four4(4).png') }}"
-                        data-default3="{{ asset('assets/img/fourdef1.png') }}" width="80" height="80"
-                        class="carousel-inner grid_change videochangefour" data-contentfour2="#videocontentfour2" data-value="elegant"></object>
-                </div>
-            </div>
-        </div>
-    </div>
-    <input type="hidden" name="grid_style" id="feed_grid_style" value="modern">
-    <!--video 4-->
-    <hr style="width: 131px;margin: auto;margin-top:20px;">
-    <div style="padding:0px 2.75rem;">
-        <div style="border-radius:5px 5px 5px 5px;" class="d-flex justify-content-start mt-5 ">
-
-            <div style="width:-webkit-fill-available;" class="">
+            <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
                 <div style="width:-webkit-fill-available;" class="btn-group" role="group"
                     aria-label="Basic example">
-                    <label for="one_video"
-                        class="btn btn-label-secondary btn btn-outline-secondary videoa videopicker active" data-videoone="#video1" data-videotwo="#video11">
-                        <input type="radio" class="form-check-input" name="video_qty" value="one_video"
-                            id="one_video" checked />1 Video</label>
-                    <label for="two_video" class="btn btn-label-secondary btn btn-outline-secondary videoa videopicker" data-videoone="#video2" data-videotwo="#video22">
-                        <input type="radio" class="form-check-input" name="video_qty" value="two_video"
-                            id="two_video" />2 Videos</label>
-                    <label for="three_video"
-                        class="btn btn-label-secondary  btn btn-outline-secondary videoa videopicker" data-videoone="#video3" data-videotwo="#video33">
-                        <input type="radio" class="form-check-input" name="video_qty" value="three_video"
-                            id="three_video" />3 Videos</label>
-                    <label for="four_video" class="btn btn-label-secondary  btn btn-outline-secondary videoa videopicker" data-videoone="#video4" data-videotwo="#video44">
-                        <input type="radio" class="form-check-input" name="video_qty" value="four_video"
-                            id="four_video" />4+ Videos</label>
+                    <label for="one_image"
+                        class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
+                        data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
+                        <input type="radio" class="form-check-input" name="image_type"
+                            value="one_image" id="one_image" checked />1 Video</label>
+                    <label for="two_image"
+                        class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
+                        data-imageone="#image2" data-imagetwo="#videoimage22" data-value="#two_image">
+                        <input type="radio" class="form-check-input" name="image_type"
+                            value="two_image" id="two_image" />2 Videos</label>
+                    <label for="three_image"
+                        class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
+                        data-imageone="#image3" data-imagetwo="#videoimage33"
+                        data-value="#three_image">
+                        <input type="radio" class="form-check-input" name="image_type"
+                            value="three_image" id="three_image" />3 Videos</label>
+                    <label for="four_image"
+                        class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
+                        data-imageone="#image4" data-imagetwo="#videoimage44"
+                        data-value="#four_image">
+                        <input type="radio" class="form-check-input" name="image_type"
+                            value="four_image" id="four_image" />+4 Videos</label>
                 </div>
             </div>
         </div>
     </div>
-    <!--add code-->
+    <!--code end-->
 </div>
 <div style="padding:0px 2.75rem;">
     <hr style="width: 131px;margin: auto;margin-top:20px">
     <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
-        <input style="height: 90px;" type="text" class="form-control w-100" placeholder="Enter The description">
+        <input style="height: 90px;" name="description" type="text" class="form-control feed-description w-100" placeholder="Enter The description">
     </div>
 </div>
 <hr style="width: 131px;margin: auto;margin-top:20px;">
@@ -1204,16 +655,16 @@
 
         <div style="width:-webkit-fill-available;" class="">
             <div style="width:-webkit-fill-available;" class="btn-group" role="group" aria-label="Basic example">
-                <label for="all" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
+                <label for="all" data-val="all" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
                     <input type="radio" class="form-check-input" name="user_type" value="all" id="all"
                         checked />All</label>
-                <label for="standard" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
+                <label for="standard" data-val="standard" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
                     <input type="radio" class="form-check-input" name="user_type" value="standard"
                         id="standard" />Standard</label>
-                <label for="premium" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                <label for="premium" data-val="premium" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                     <input type="radio" class="form-check-input" name="user_type" value="premium"
                         id="premium" />Premium</label>
-                <label for="vip" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                <label for="vip" data-val="vip" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                     <input type="radio" class="form-check-input" name="user_type" value="vip"
                         id="vip" />VIP</label>
             </div>
@@ -1226,15 +677,15 @@
     <div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
         <div style="width:100%;padding:10px;" class="btn-group ary" role="group" aria-label="First group">
 
-            <label for="share_text" data-sharetext="#shahretext"
+            <label for="share_text" data-sharetext="#shahretext" data-val="share_text"
                 class="btn btn-label-secondary btn btn-outline-secondary geo ary active active">
                 <input type="radio" class="form-check-input" name="feed_type" value="share_text" id="share_text"
                     checked />Share Text</label>
-            <label for="share_image" data-sharetext="#shahreimage"
+            <label for="share_image" data-sharetext="#shahreimage" data-val="share_image"
                 class="btn btn-label-secondary btn btn-outline-secondary geo shareimage ary">
                 <input type="radio" class="form-check-input" name="feed_type" value="share_image"
                     id="share_image" />Share Image</label>
-            <label for="share_video" data-sharetext="#shahrevideo"
+            <label for="share_video" data-sharetext="#shahrevideo" data-val="share_video"
                 class="btn btn-label-secondary  btn btn-outline-secondary geo ary">
                 <input type="radio" class="form-check-input" name="feed_type" value="share_video"
                     id="share_video" />Share
@@ -1248,6 +699,7 @@
         Submit
     </button>
 </div>
+</form>
 
 @push('scripts')
     <script>
@@ -1261,6 +713,12 @@
             $('.color-option').click(function() {
                 let color = $(this).attr('data-color');
                 $('#feed_text_color').val(color);
+                $('.feed-text').css('color',color);
+            })
+
+            $('.feed-description').keyup(function(){
+                let text = $(this).val();
+                $('.feed-text').text(text);
             })
         });
     </script>

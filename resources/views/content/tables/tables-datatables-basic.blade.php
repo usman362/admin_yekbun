@@ -26,7 +26,7 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/tables-datatables-basic.js')}}"></script>
+{{-- <script src="{{asset('assets/js/tables-datatables-basic.js')}}"></script> --}}
 @endsection
 
 @section('content')

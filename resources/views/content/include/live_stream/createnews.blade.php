@@ -114,83 +114,118 @@
                                         Drop files here or click to upload
                                     </div>
                                     <div class="fallback">
-                                        <input type="file" name="image" />
+                                        <input type="file" name="image" multiple/>
                                     </div>
                                 </div>
                                 <!--code-->
                             </div>
                             <div class="shareimage">
-                                <div style="margin-top:-56px;width:105%;" id="image22"
-                                class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
+                                <div style="margin-top:-56px;width:105%;display:contents;" id="image22"
+                                    class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
 
-                                <!--line here-->
+                                    <!--line here-->
 
-                                <hr style="width: 131px;margin: auto;margin-top:20px;">
-                                <div style="padding:0px 2.75rem;">
-                                    <div style="margin-left:5px;margin-top:20px;"
-                                        class="row pick-content d-flex justify-content-around ">
-                                        <div style="width:33.3%" class="carousel-inner ">
-                                            <h6 style="text-align:center;">Modern</h6>
-                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                data="{{ asset('assets/img/thanks3.png') }}"
-                                                data-original="{{ asset('assets/img/thanks3.png') }}"
-                                                data-default="{{ asset('assets/img/colorimage.PNG') }}"
-                                                width="80" height="80"
-                                                class="carousel-inner imagechangeclass grid_change"
-                                                data-imagechange="#imagechangeone1" data-value="modern"></object>
-                                        </div>
-                                        <div style="width:33.3%" class="carousel-inner  ">
-                                            <h6 style="text-align:center;">Elegant</h6>
+                                    <hr style="width: 131px;margin: auto;margin-top:20px;">
+                                    <div style="padding:0px 2.75rem;">
+                                        <div style="margin-left:5px;margin-top:20px;"
+                                            class="row pick-content d-flex justify-content-around ">
+                                            <div style="width:33.3%" class="carousel-inner ">
+                                                <h6 style="text-align:center;">Modern</h6>
+                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                    data="{{ asset('assets/img/thanks3.png') }}"
+                                                    data-original="{{ asset('assets/img/thanks3.png') }}"
+                                                    data-default="{{ asset('assets/img/colorimage.PNG') }}"
+                                                    width="80" height="80"
+                                                    class="carousel-inner imagechangeclass grid_change"
+                                                    data-imagechange="#imagechangeone1" data-value="modern"></object>
+                                            </div>
+                                            <div style="width:33.3%" class="carousel-inner  ">
+                                                <h6 style="text-align:center;">Elegant</h6>
 
-                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                data="{{ asset('assets/img/thanks2.png') }}"
-                                                data-original="{{ asset('assets/img/thanks2.png') }}"
-                                                data-default="{{ asset('assets/img/thanks2 (1).png') }}"
-                                                width="80" height="80"
-                                                class="carousel-inner imagechange2 grid_change imagechangeclass"
-                                                data-imagechange="#imagechangeone2" data-value="elegant"></object>
+                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                    data="{{ asset('assets/img/thanks2.png') }}"
+                                                    data-original="{{ asset('assets/img/thanks2.png') }}"
+                                                    data-default="{{ asset('assets/img/thanks2 (1).png') }}"
+                                                    width="80" height="80"
+                                                    class="carousel-inner imagechange2 grid_change imagechangeclass"
+                                                    data-imagechange="#imagechangeone2" data-value="elegant"></object>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!--3 image new-->
+                                <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;" id="image33"
+                                    class="col-sm-12 image-content1 row ">
 
-                            <div style="display:contents;" id="image44" class="col-sm-12 image-content1 row  ">
-                                <!--add upp-->
+                                    <div>
+                                        <hr style="width: 131px;margin: auto;margin-top:20px;">
+                                        <div style="padding:0px 2.75rem;">
+                                            <div style="margin-left:5px;margin-top:20px;"
+                                                class="row pick-content d-flex justify-content-around">
+                                                <div style="width:33.3%" class="carousel-inner brchg imagepicker "
+                                                    data-imagetwo="#image22">
+                                                    <h6 style="text-align:center;">Modern</h6>
 
-                                <hr style="width: 131px;margin: auto;margin-top:20px;">
-
-                                <div style="padding:0px 2.75rem;">
-                                    <div style="margin-left:5px;margin-top:20px;"
-                                        class="row pick-content d-flex justify-content-around">
-                                        <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                                            <h6 style="text-align:center;">Modern</h6>
-                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                data="{{ asset('assets/img/four4.png') }}"
-                                                data-original3="{{ asset('assets/img/four4.png') }}"
-                                                data-default3="{{ asset('assets/img/fourdef2.png') }}"
-                                                width="80" height="80"
-                                                class="carousel-inner grid_change imagechangefour"
-                                                data-contentfour2="#imagecontentfour1"
-                                                data-value="modern"></object>
+                                                    <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                        data="{{ asset('assets/img/three3.png') }}"
+                                                        data-original2="{{ asset('assets/img/three3.png') }}"
+                                                        data-default2="{{ asset('assets/img/threedef1.png') }}"
+                                                        width="80" height="80"
+                                                        class="carousel-inner  imagechangetwo2"
+                                                        data-imagechangetwo="#imagechangetwo1"></object>
+                                                </div>
+                                                <div style="width:33.3%" class="carousel-inner brchg imagepicker "
+                                                    data-imagetwo="#image33">
+                                                    <h6 style="text-align:center;">Elegant</h6>
+                                                    <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                        data="{{ asset('assets/img/three3(2).png') }}"
+                                                        data-original2="{{ asset('assets/img/three3(2).png') }}"
+                                                        data-default2="{{ asset('assets/img/threedef2.png') }}"
+                                                        width="80" height="80"
+                                                        class="carousel-inner imagechangetwo2"
+                                                        data-imagechangetwo="#imagechangetwo2"></object>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
-                                            <h6 style="text-align:center;">Elegant</h6>
-                                            <object style="height:80px;width:80px;margin:auto;display:flex;"
-                                                data="{{ asset('assets/img/four4(4).png') }}"
-                                                data-original3="{{ asset('assets/img/four4(4).png') }}"
-                                                data-default3="{{ asset('assets/img/fourdef1.png') }}"
-                                                width="80" height="80"
-                                                class="carousel-inner grid_change imagechangefour"
-                                                data-contentfour2="#imagecontentfour2"
-                                                data-value="elegant"></object>
-                                        </div>
-                                        <input type="hidden" name="grid_style" id="news_grid_style" value="modern">
                                     </div>
                                 </div>
-                            </div>
+
+                                <div style="display:contents;" id="image44" class="col-sm-12 image-content1 row  ">
+                                    <!--add upp-->
+
+                                    <hr style="width: 131px;margin: auto;margin-top:20px;">
+
+                                    <div style="padding:0px 2.75rem;">
+                                        <div style="margin-left:5px;margin-top:20px;"
+                                            class="row pick-content d-flex justify-content-around">
+                                            <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                                                <h6 style="text-align:center;">Modern</h6>
+                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                    data="{{ asset('assets/img/four4.png') }}"
+                                                    data-original3="{{ asset('assets/img/four4.png') }}"
+                                                    data-default3="{{ asset('assets/img/fourdef2.png') }}"
+                                                    width="80" height="80"
+                                                    class="carousel-inner grid_change imagechangefour"
+                                                    data-contentfour2="#imagecontentfour1"
+                                                    data-value="modern"></object>
+                                            </div>
+                                            <div style="width:33.3%" class="carousel-inner brchg imagepicker ">
+                                                <h6 style="text-align:center;">Elegant</h6>
+                                                <object style="height:80px;width:80px;margin:auto;display:flex;"
+                                                    data="{{ asset('assets/img/four4(4).png') }}"
+                                                    data-original3="{{ asset('assets/img/four4(4).png') }}"
+                                                    data-default3="{{ asset('assets/img/fourdef1.png') }}"
+                                                    width="80" height="80"
+                                                    class="carousel-inner grid_change imagechangefour"
+                                                    data-contentfour2="#imagecontentfour2"
+                                                    data-value="elegant"></object>
+                                            </div>
+                                            <input type="hidden" name="grid_style" id="news_grid_style"
+                                                value="modern">
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -203,7 +238,7 @@
                                             <label for="all"
                                                 class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
                                                 <input type="radio" class="form-check-input" name="user_type"
-                                                    value="all" id="all" checked/>All</label>
+                                                    value="all" id="all" checked />All</label>
                                             <label for="standard"
                                                 class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
                                                 <input type="radio" class="form-check-input" name="user_type"
@@ -248,7 +283,7 @@
                                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
                                             data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
                                             <input type="radio" class="form-check-input" name="image_type"
-                                                value="one_image" id="one_image" checked/>1 Image</label>
+                                                value="one_image" id="one_image" checked />1 Image</label>
                                         <label for="two_image"
                                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
                                             data-imageone="#image2" data-imagetwo="#image22" data-value="#two_image">
@@ -256,12 +291,14 @@
                                                 value="two_image" id="two_image" />2 Image</label>
                                         <label for="three_image"
                                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image3" data-imagetwo="#image33" data-value="#three_image">
+                                            data-imageone="#image3" data-imagetwo="#image33"
+                                            data-value="#three_image">
                                             <input type="radio" class="form-check-input" name="image_type"
                                                 value="three_image" id="three_image" />3 Image</label>
                                         <label for="four_image"
                                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image4" data-imagetwo="#image44" data-value="#four_image">
+                                            data-imageone="#image4" data-imagetwo="#image44"
+                                            data-value="#four_image">
                                             <input type="radio" class="form-check-input" name="image_type"
                                                 value="four_image" id="four_image" />+4 Image</label>
                                     </div>

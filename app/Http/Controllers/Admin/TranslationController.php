@@ -8,6 +8,7 @@ use App\Models\Translation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\LanguageData;
 use Illuminate\Support\Facades\Session;
 
 class TranslationController extends Controller
@@ -42,7 +43,7 @@ class TranslationController extends Controller
 
     public function translateLanguage(Request $request, $id = null)
     {
-       
+
         foreach ($request->data as $item) {
             if ($item['id'] == '' && $item['value'] == '') continue;
 
@@ -50,7 +51,7 @@ class TranslationController extends Controller
                 Translation::create([
                     'translation' => $item['value'],
                     'text_id' => $item['text_id'],
-                    'language_id' => $item['language_id'] 
+                    'language_id' => $item['language_id']
                 ]);
 
                 continue;
@@ -63,5 +64,17 @@ class TranslationController extends Controller
 
         return response()->json(['sucess' => true, 'message' => 'Translation successfully saved.']);
 
+    }
+
+    public function storeLanguageData(Request $request)
+    {
+        $languageData = $request->languageData;
+        $languageDataId = $request->languageDataId;
+        $languageId = $request->language_id;
+
+        foreach ($languageData as $index => $language) {
+            LanguageData::where('_id', $languageDataId[$index])->update([$languageId => $language]);
+        }
+        return back()->with("success", "Translation term successfully updated.");
     }
 }

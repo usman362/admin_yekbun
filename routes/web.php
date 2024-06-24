@@ -124,6 +124,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/admin_activity", [AdminProfileController::class, 'admin_activity'])->name('admin_activity');
     Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
     Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
+    Route::post("/admin_activity/feeds", [AdminProfileController::class, 'store_feeds'])->name('admin_activity.store_feeds');
 });
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
 Route::get('/admin/profile/security', [AdminProfileController::class, 'security'])->name('admin_profile.security');
@@ -428,6 +429,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::post('/language-transalate/{id?}', [TranslationController::class, 'translateLanguage'])->name(
         'translation.translateLanguage'
     );
+    Route::put('languageData-translation', [TranslationController::class, 'storeLanguageData'])->name('languageData.store');
     //   <!-- log -<System-logo> -->
     Route::get('/app/ftp/list', $controller_path . '\apps\FtpController@index')->name('app-ftp-list');
 

@@ -29,6 +29,6 @@
 <script src="{{asset('assets/vendor/libs/@form-validation/auto-focus.js')}}"></script>
 
 @yield('page-script')
-<script src="{{asset('assets/js/tables-datatables-basic.js')}}"></script>
+{{-- <script src="{{asset('assets/js/tables-datatables-basic.js')}}"></script> --}}
 <!-- END: Page JS-->
 @stack('scripts')
