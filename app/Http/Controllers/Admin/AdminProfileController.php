@@ -122,12 +122,14 @@ class AdminProfileController extends Controller
 
     public function store_news(Request $request)
     {
+        // $request->dd();
         $news = News::create($request->all());
         return back();
     }
 
     public function store_event(Request $request)
     {
+        // $request->dd();
         $event = Event::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -140,7 +142,7 @@ class AdminProfileController extends Controller
 
     public function store_feeds(Request $request)
     {
-        $request->dd();
+        // $request->dd();
         $feeds = Feed::create($request->all());
         return back();
     }

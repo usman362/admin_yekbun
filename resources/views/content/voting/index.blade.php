@@ -7,11 +7,8 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/bs-stepper/bs-stepper.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/css/custom.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css')}}" />
-<!-- <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/katex.css')}}" />
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" /> -->
-<!--<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script> -->
 @endsection
 
 @section('page-style')
@@ -42,11 +39,10 @@
                     <div class="content-left">
                         <span>Total Category</span>
                         <div class="d-flex align-items-end mt-2">
-                            <h4 class="mb-0 me-2">{{count($vote_category)}}</h4>
-                            {{-- <h4 class="mb-0 me-2">21,459</h4> --}}
-                            {{-- <small class="text-success">(+29%)</small> --}}
+                            <h4 class="mb-0 me-2">21,459</h4>
+                            <small class="text-success">(+29%)</small>
                         </div>
-                        {{-- <small>Last week analytics</small> --}}
+                        <small>Last week analytics</small>
                     </div>
                     <span class="badge bg-label-primary rounded p-2">
                         <i class="bx bx-user bx-sm"></i>
@@ -62,10 +58,10 @@
                     <div class="content-left">
                         <span>Total Vote</span>
                         <div class="d-flex align-items-end mt-2">
-                            <h4 class="mb-0 me-2">{{count($votes)}}</h4>
-                            {{-- <small class="text-success">(+18%)</small> --}}
+                            <h4 class="mb-0 me-2">4,567</h4>
+                            <small class="text-success">(+18%)</small>
                         </div>
-                        {{-- <small>Last week analytics </small> --}}
+                        <small>Last week analytics </small>
                     </div>
                     <span class="badge bg-label-danger rounded p-2">
                         <i class="bx bx-user-plus bx-sm"></i>
@@ -79,10 +75,13 @@
 
 <!-- Basic Bootstrap Table -->
   <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="card-header d-flex align-items-center">
         <h5 class="m-0">Voting List</h5>
         @can('voting.create')
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createvotingModal"><i class="bx bx-plus me-0 me-sm-1"></i> Add Vote</button>
+        <div class="flex-fluid d-flex justify-content-end align-items-center">
+          <button class="btn btn-primary btn-create-vote" data-vote-type='single_vote'><i class="bx bx-plus me-0 me-sm-1"></i>Single Vote</button>
+          <button class="btn btn-primary btn-create-vote ms-2" data-vote-type='individual_vote'><i class="bx bx-plus me-0 me-sm-1"></i>Individual Vote</button>
+        </div>
         @endcan
     </div>
     <div class="table-responsive text-nowrap">
@@ -90,38 +89,64 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Thumbnail</th>
-            <th>Total </th>
-            <th>Likes </th>
-            <th>Dislikes </th>
-            <th>Natural </th>
+            <th>Vote Title</th>
+            <th>Vote Banner</th>
+            <th>Created Date</th>
+            <th>Statistic</th>
             <th>Option</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-        @forelse($votes as $vote)
+        @forelse($votes as $index => $vote)
         <tr>
-            <td>{{ $vote->custom_id ?? $loop->iteration }}</td>
-            <td>{{ $vote->voting_category->name?? '' }}</td>
-            <td>{{ $vote->name ?? '' }}</td>
-            {{-- <td><video loop="" class="rounded" controls="" style="width:150px; height:100px;">
-              <source src="{{asset('storage/'.$vote->banner)}}">
-            </video></td> --}}
+            <td>{{ $index + 1 }}</td>
             <td>
-                <img style="width:150px; height:100px;" src="{{asset('storage/'.$vote->banner)}}">
-              </td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+              <div class="">
+                <div style="font-size:110%; font-weight:bold;">{{$vote->name}}</div>
+                <div style="font-size:90%">{{ $vote->voting_category->name ?? '' }}</div>
+              </div>
+            </td>
+            <td>
+              @if(!empty($vote->banner))
+              <img class="vote-banner-image" src='/storage/{{$vote->banner}}' width="100"/>
+              @endif
+            </td>
+            <td>
+              <div>
+                <div>{{date("d.m.Y", strtotime($vote->created_at))}}<div>
+                <div>{{date("H:i", strtotime($vote->created_at))}}<div>
+              </div>
+            </td>
+            <td>
+              <div class="d-flex">
+                @foreach($vote->options as $index=>$option)
+                  <div class="d-flex align-items-center {{$index > 0 ? 'ms-3' : ''}}"
+                        style="background:#f5f5f5; border-radius:5px; padding: 5px 10px;"
+                  >
+                    @if(!empty($option['image']))
+                    <img src="{{\App\Helpers\Helpers::storagePath($option['image'])}}" class="vote-option-image" />
+                    @endif
+                    <div class="ms-3">
+                      <div>{{$option['title']}}</div>
+                      <div style="font-size:80%">215</div>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+            </td>
             <td>
                 <div class="dropdown d-inline-block">
                     <!-- Edit -->
-                    <span data-bs-toggle="modal" data-bs-target="#editvotingModal{{ $vote->id }}">
+                    <span>
                         @can('voting.write')
-                        <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit" aria-describedby="tooltip557134">
+                        <button
+                            class="btn btn-sm btn-icon btn-edit-vote"
+                            data-bs-toggle="tooltip"
+                            data-bs-offset="0,4"
+                            data-bs-placement="top"
+                            data-bs-html="true"
+                            data-vote-id="{{$vote->id}}"
+                            data-bs-original-title="Edit" aria-describedby="tooltip557134">
                             <i class="bx bx-edit"></i>
                         </button>
                         @endcan
@@ -135,11 +160,21 @@
                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
                         @endcan
                     </form>
+
+                    <span>
+                      <button
+                          class="btn btn-sm btn-icon btn-statistic-vote"
+                          data-bs-toggle="tooltip"
+                          data-bs-offset="0,4"
+                          data-bs-placement="top"
+                          data-bs-html="true"
+                          data-vote-id="{{$vote->id}}"
+                          data-bs-original-title="Statistic" aria-describedby="tooltip557134"
+                      >
+                          <i class="bx bx-bar-chart-alt-2"></i>
+                      </button>
+                    </span>
                 </div>
-                {{-- Edit Model Form --}}
-                <x-modal id="editvotingModal{{ $vote->id }}" title="Edit Vote" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{ $vote->id }}" size="md">
-                    @include('content.include.voting.editForm')
-                </x-modal>
             </td>
         </tr>
         @empty
@@ -187,83 +222,41 @@
 
 {{-- Create Vote model --}}
 <x-modal
-id="createvotingModal"
-title="Create Vote"
-saveBtnText="Create"
-saveBtnType="submit"
-saveBtnForm="createForm"
-size="md">
+  id="createvotingModal"
+  title="Single Vote"
+  saveBtnText="Create"
+  saveBtnType="submit"
+  saveBtnForm="createForm"
+  :showHeader="false"
+  size="md"
+>
  @include('content.include.voting.createForm')
 </x-modal>
 
+{{-- Edit Model Form --}}
+<x-modal
+  id="editvotingModal"
+  title="Edit Vote"
+  saveBtnText="Update"
+  saveBtnType="submit"
+  saveBtnForm="editForm"
+  :showHeader="false"
+  size="md"
+>
+  @include('content.include.voting.editForm')
+</x-modal>
 
-<!-- <script src="{{asset('assets/vendor/libs/quill/katex.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/quill/quill.js')}}"></script> -->
+{{-- Stastics Model Form --}}
+<x-modal
+  id="statisticVotingModal"
+  :showSaveBtn="false"
+  :showHeader="false"
+  size="md"
+>
+</x-modal>
+
 <script>
     (function() {
-        // Full Toolbar
-        // --------------------------------------------------------------------
-        // const fullToolbar = [
-        //     [{
-        //             font: []
-        //         }
-        //         , {
-        //             size: []
-        //         }
-        //     ]
-        //     , ['bold', 'italic', 'underline', 'strike']
-        //     , [{
-        //             color: []
-        //         }
-        //         , {
-        //             background: []
-        //         }
-        //     ]
-        //     , [{
-        //             script: 'super'
-        //         }
-        //         , {
-        //             script: 'sub'
-        //         }
-        //     ]
-        //     , [{
-        //             header: '1'
-        //         }
-        //         , {
-        //             header: '2'
-        //         }
-        //         , 'blockquote'
-        //         , 'code-block'
-        //     ]
-        //     , [{
-        //             list: 'ordered'
-        //         }
-        //         , {
-        //             list: 'bullet'
-        //         }
-        //         , {
-        //             indent: '-1'
-        //         }
-        //         , {
-        //             indent: '+1'
-        //         }
-        //     ]
-        //     , [{
-        //         direction: 'rtl'
-        //     }]
-        //     , ['link', 'image', 'video', 'formula']
-        //     , ['clean']
-        // ];
-        // const fullEditor = new Quill('#inputDescription', {
-        //     bounds: '#full-editor'
-        //     , placeholder: 'Type Something...'
-        //     , modules: {
-        //         formula: true
-        //         , toolbar: fullToolbar
-        //     }
-        //     , theme: 'snow'
-        // });
-
         ClassicEditor
         .create( document.querySelector( '#inputDescription' ) )
         .catch( error => {
@@ -277,6 +270,8 @@ size="md">
 @endsection
 
 @section('page-script')
+<script src="{{asset('assets/js/app-voting.js')}}"></script>
+<script src="{{asset('assets/js/app-upload-audio.js')}}"></script>
 <script>
   function confirmAction(event, callback) {
     event.preventDefault();
@@ -302,28 +297,7 @@ size="md">
 <script>
 // bootstrap-maxlength & repeater (jquery)
 $(function () {
-  //var maxlengthInput = $('.bootstrap-maxlength-example'),
     var formRepeater = $('.form-repeater');
-
-  // Bootstrap Max Length
-  // --------------------------------------------------------------------
-//   if (maxlengthInput.length) {
-//     maxlengthInput.each(function () {
-//       $(this).maxlength({
-//         warningClass: 'label label-success bg-success text-white',
-//         limitReachedClass: 'label label-danger',
-//         separator: ' out of ',
-//         preText: 'You typed ',
-//         postText: ' chars available.',
-//         validate: true,
-//         threshold: +this.getAttribute('maxlength')
-//       });
-//     });
-//   }
-
-  // Form Repeater
-  // ! Using jQuery each loop to add dynamic id and class for inputs. You may need to improve it based on form fields.
-  // -----------------------------------------------------------------------------------------------------------------
 
   if (formRepeater.length) {
     var row = 2;
@@ -355,7 +329,10 @@ $(function () {
   }
 });
 </script>
+
 <script>
+    var votes = @json(!empty($votes) ? $votes : []);
+    var vote_categories = @json(!empty($vote_categories) ? $vote_categories : []);
     function drpzone_init() {
         dropZoneInitFunctions.forEach(callback => callback());
     }

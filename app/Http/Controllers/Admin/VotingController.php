@@ -18,11 +18,9 @@ class VotingController extends Controller
      */
     public function index()
     {
-          $votes = Voting::with('voting_category')->get();
-          $vote_category = VotingCategory::get();
-
-
-        return view('content.voting.index' , compact('votes' , 'vote_category'));
+        $votes = Voting::with('voting_category')->get();
+        $vote_categories = VotingCategory::get();
+        return view('content.voting.index' , compact('votes' , 'vote_categories'));
     }
 
     /**
@@ -43,28 +41,28 @@ class VotingController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'image' => 'required',
-            'description' => 'required',
           ]);
 
           $options = [];
-          if ($request->{'group-a'}) {
+          if ($request->{'reaction_option'}) {
             $options = array_map(function ($option) {
-                return ["title" => $option['option']];
-            }, $request->{'group-a'});
+                $ret = ["title" => $option['title']];
+                if(isset($option['image'])) $ret['image'] = $option['image'];
+                return $ret;
+            }, $request->{'reaction_option'});
           }
 
           $vote = new Voting();
           $vote->name = $request->name;
-          $vote->category_id = $request->category_id;
-          $vote->description = $request->description;
+          $vote->category_id = $request->vote_category_id;
           $vote->options = $options;
           $vote->banner = $request->image ?? null;
+          $vote->audio = $request->audio ?? null;
+          $vote->vote_type = $request->vote_type ?? 'single';
           if($vote->save()){
-
             $id  = $vote->id;
             $post_gallery  = new PostGallery();
             $post_gallery->vote_id=$id;
@@ -106,12 +104,97 @@ class VotingController extends Controller
      * @param  \App\Models\Voting  $voting
      * @return \Illuminate\Http\Response
      */
+
+     public function statistic($id)
+    {
+        $vote = Voting::with('voting_category')->findOrFail($id);
+        $statistics = [
+            [
+                'age' => '18-24',
+                'max' => 150,
+                'male' => [
+                    'reviews' => 30,
+                    'likes' => 15,
+                    'neutrals' => 10,
+                    'dislikes' => 5
+                ],
+                'female' => [
+                    'reviews' => 27,
+                    'likes' => 13,
+                    'neutrals' => 8,
+                    'dislikes' => 6
+                ]
+            ],
+            [
+                'age' => '25-30',
+                'max' => 150,
+                'male' => [
+                    'reviews' => 50,
+                    'likes' => 35,
+                    'neutrals' => 10,
+                    'dislikes' => 5
+                ],
+                'female' => [
+                    'reviews' => 37,
+                    'likes' => 20,
+                    'neutrals' => 8,
+                    'dislikes' => 9
+                ]
+            ],
+            [
+                'age' => '31-35',
+                'max' => 150,
+                'male' => [
+                    'reviews' => 67,
+                    'likes' => 40,
+                    'neutrals' => 20,
+                    'dislikes' => 7
+                ],
+                'female' => [
+                    'reviews' => 27,
+                    'likes' => 13,
+                    'neutrals' => 8,
+                    'dislikes' => 6
+                ]
+            ],
+            [
+                'age' => '36-40',
+                'max' => 150,
+                'male' => [
+                    'reviews' => 30,
+                    'likes' => 15,
+                    'neutrals' => 10,
+                    'dislikes' => 5
+                ],
+                'female' => [
+                    'reviews' => 27,
+                    'likes' => 13,
+                    'neutrals' => 8,
+                    'dislikes' => 6
+                ]
+            ]
+        ];
+
+        $total_reviews = 0;
+        $total_likes = 0;
+        $total_dislikes = 0;
+        $total_neutrals = 0;
+        foreach($statistics as $index => $statistic) {
+            $total_reviews += $statistic['male']['reviews'] + $statistic['male']['reviews'];
+            $total_likes += $statistic['male']['likes'] + $statistic['female']['likes'];
+            $total_dislikes += $statistic['male']['dislikes'] + $statistic['female']['dislikes'];
+            $total_neutrals += $statistic['male']['neutrals'] + $statistic['female']['neutrals'];
+        }
+
+        return view('content.include.voting.statistic', compact('vote', 'statistics', 'total_reviews', 'total_likes',
+            'total_dislikes', 'total_neutrals'));
+    }
+
     public function edit($id)
     {
-
-        // $vote = Voting::find($id);
-        // return view('content.voting.index', compact('vote'));
-
+        $vote = Voting::find($id);
+        $vote_categories = VotingCategory::get();
+        return view('content.include.voting.editForm', compact('vote', 'vote_categories'));
     }
 
     /**
@@ -125,17 +208,21 @@ class VotingController extends Controller
     {
         $vote = Voting::find($id);
         $vote->name = $request->name;
-        $vote->category_id = $request->category_id;
+        $vote->category_id = $request->vote_category_id;
         $vote->description = $request->description;
-        $options = $vote->options;
-        if ($request->{'group-a'}) {
-            $options = array_map(function ($option) {
-                return ["title" => $option['option']];
-            }, $request->{'group-a'});
+
+        $options = [];
+        if ($request->{'reaction_option'}) {
+          $options = array_map(function ($option) {
+              $ret = ["title" => $option['title']];
+              if(isset($option['image'])) $ret['image'] = $option['image'];
+              return $ret;
+          }, $request->{'reaction_option'});
         }
         $vote->options = $options;
 
-        $vote->banner = $request->image??null;
+        if($request->image) $vote->banner = $request->image;
+        if($request->audio) $vote->audio = $request->audio;
 
         if($vote->update()){
             return redirect()->route('vote.index')->with('success', 'Vote Has been Updated');

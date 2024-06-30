@@ -260,6 +260,7 @@
 
 <form action="{{route('admin_activity.store_feeds')}}" method="post" enctype="multipart/form-data">
 @csrf
+<div class="hidden-inputs"></div>
 <div id="shahretext" class="share-content">
     <div style="padding:0px 2.75rem;">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -454,28 +455,28 @@
                 <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
                     <div style="width:-webkit-fill-available;" class="btn-group" role="group"
                         aria-label="Basic example">
-                        <label for="one_image"
+                        <label for="one_feed_image"
                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
-                            data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
+                            data-imageone="#image1" data-imagetwo="#image11" data-value="#one_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="one_image" id="one_image" checked />1 Image</label>
-                        <label for="two_image"
+                                value="one_feed_image" id="one_feed_image" checked />1 Image</label>
+                        <label for="two_feed_image"
                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
-                            data-imageone="#image2" data-imagetwo="#feedimage22" data-value="#two_image">
+                            data-imageone="#image2" data-imagetwo="#feedimage22" data-value="#two_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="two_image" id="two_image" />2 Image</label>
-                        <label for="three_image"
+                                value="two_feed_image" id="two_feed_image" />2 Image</label>
+                        <label for="three_feed_image"
                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                             data-imageone="#image3" data-imagetwo="#feedimage33"
-                            data-value="#three_image">
+                            data-value="#three_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="three_image" id="three_image" />3 Image</label>
-                        <label for="four_image"
+                                value="three_feed_image" id="three_feed_image" />3 Image</label>
+                        <label for="four_feed_image"
                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                             data-imageone="#image4" data-imagetwo="#feedimage44"
-                            data-value="#four_image">
+                            data-value="#four_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="four_image" id="four_image" />+4 Image</label>
+                                value="four_feed_image" id="four_feed_image" />+4 Image</label>
                     </div>
                 </div>
             </div>
@@ -615,28 +616,28 @@
             <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
                 <div style="width:-webkit-fill-available;" class="btn-group" role="group"
                     aria-label="Basic example">
-                    <label for="one_image"
+                    <label for="one_feed_video"
                         class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
-                        data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
+                        data-imageone="#image1" data-imagetwo="#image11" data-value="#one_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="one_image" id="one_image" checked />1 Video</label>
-                    <label for="two_image"
+                            value="one_feed_video" id="one_feed_video" checked />1 Video</label>
+                    <label for="two_feed_video"
                         class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
-                        data-imageone="#image2" data-imagetwo="#videoimage22" data-value="#two_image">
+                        data-imageone="#image2" data-imagetwo="#videoimage22" data-value="#two_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="two_image" id="two_image" />2 Videos</label>
-                    <label for="three_image"
+                            value="two_feed_video" id="two_feed_video" />2 Videos</label>
+                    <label for="three_feed_video"
                         class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                         data-imageone="#image3" data-imagetwo="#videoimage33"
-                        data-value="#three_image">
+                        data-value="#three_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="three_image" id="three_image" />3 Videos</label>
-                    <label for="four_image"
+                            value="three_feed_video" id="three_feed_video" />3 Videos</label>
+                    <label for="four_feed_video"
                         class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                         data-imageone="#image4" data-imagetwo="#videoimage44"
-                        data-value="#four_image">
+                        data-value="#four_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="four_image" id="four_image" />+4 Videos</label>
+                            value="four_feed_video" id="four_feed_video" />+4 Videos</label>
                 </div>
             </div>
         </div>

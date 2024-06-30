@@ -12,7 +12,9 @@
 <script src="{{ asset(mix('assets/vendor/libs/toastr/toastr.js')) }}"></script>
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
+<script src="{{ asset('assets/js/main-typeahead.js') }}"></script>
 <script src="{{ asset(mix('assets/js/main.js')) }}"></script>
+<script src="{{ asset('assets/js/utils.js') }}"></script>
 
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->

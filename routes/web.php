@@ -305,8 +305,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::resource('/music', MusicController::class);
     Route::get('/musics/{id}/{status}', [MusicController::class, 'status'])->name('musics-status');
     Route::delete('/music/{id}/music', [MusicController::class, 'deleteMusic'])->name('music.delete-audio');
-
-    Route::resource('/music-category', MusicCategoryController::class);
     Route::get('/music_category/{id}/{status}', [MusicCategoryController::class, 'status'])->name('musiccat-status');
     Route::delete('/music_icon/{id}/icon', [MusicCategoryController::class, 'deleteMusic'])->name(
         'music_icon.delete-img'
@@ -341,6 +339,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::resource('/vote-category', VotingCategoryController::class);
 
     Route::resource('/vote', VotingController::class);
+    Route::get('/vote/{id}/statistic', [VotingController::class, 'statistic'])->name('vote.statistics');
+    Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
     Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
 
     Route::resource('/vote-category', VotingCategoryController::class);
