@@ -61,7 +61,11 @@
                 </div>
                 <div class="col-md-12">
                     <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
-                    <input id="rolesInput{{ $user->id }}" name="roles" class="form-control" value="{{ $user->roles? rtrim($user->roles->reduce(fn($c, $i)=>$c.=$i->name.', '), ', '): '' }}" />
+                    <select class="form-control" name="roles" id="rolesInput">
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}" {{ $user->role_id == $role->id? 'selected': '' }}>{{$role->name}}</option>
+                        @endforeach
+                    </select>
                     @error('roles')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
@@ -77,7 +81,6 @@
         </div>
     </div>
 </form>
-
 <script>
     window.addEventListener('load', function () {
         const TagifyRolesListEl = document.querySelector('#rolesInput{{ $user->id }}');

@@ -35,7 +35,7 @@
           <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
             @foreach($role->users as $user)
             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $user->name ?? '' }}" class="avatar avatar-sm pull-up">
-              <img class="rounded-circle" src="{{$user->image && $user->image != "NULL" ? asset('storage/'.$user->image) : asset('https://www.w3schools.com/howto/img_avatar.png')}}" alt="Avatar">
+              <img class="rounded-circle" src="{{asset('storage/'.$user->image)}}" alt="Avatar">
             </li>
             @endforeach
           </ul>
@@ -43,9 +43,9 @@
         <div class="d-flex justify-content-between align-items-end">
           <div class="role-heading">
             <h4 class="mb-1">{{ $role->name }}</h4>
-            {{-- @if ($role->name !== 'Super Admin') --}}
+            @if ($role->name !== 'Super Admin')
             <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#editRoleModal{{ $role->id }}" class="role-edit-modal"><small>Edit Role</small></a>
-            {{-- @endif --}}
+            @endif
           </div>
           @if ($role->name !== 'Super Admin')
           <form action="{{ route('settings.team.roles.destroy', $role->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="POST">

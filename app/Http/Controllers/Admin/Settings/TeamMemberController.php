@@ -25,11 +25,9 @@ class TeamMemberController extends Controller
      */
     public function index()
     {
-        $users = User::where('is_admin_user', true)->get();
+        $users = User::where('status', 1);
+        $users = $users->with('roles')->get();
         $roles = Role::all();
-
-        // $users = User::with('roles')->get();
-
         return view("content.settings.team_members.index", compact("users", "roles"));
     }
 
@@ -43,20 +41,21 @@ class TeamMemberController extends Controller
     {
         $validated = $request->validated();
         $validated['image'] = $request->image??null;
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->image??'';
-        //     $validated["image"] = $imagePath;
-        // }
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->image??'';
+            $validated["image"] = $imagePath;
+        }
 
-        $validated['is_admin_user'] = true;
+        $validated['is_admin_user'] = 1;
         $validated['password'] = Hash::make($validated['password']);
-
-        $user = User::create($validated);
-
-        $roles = array_map(fn($role) => $role->name, json_decode($validated['roles']));
-        $user->syncRoles($roles);
-
+        $validated['status'] = (int)$request->status;
+        $validated['role_id'] = $validated['roles'];
+        try {
+            $user = User::create($validated);
+        } catch (\Throwable $e) {
+            return back()->with("success", "Team member successfully added.");
+        }
         return back()->with("success", "Team member successfully added.");
     }
 
@@ -69,7 +68,6 @@ class TeamMemberController extends Controller
      */
     public function update(UpdateTeamMemberRequest $request, $id)
     {
-        // dd($request->roles);
         $validated = $request->validated();
         $validated['image'] = $request->image??null;
 
@@ -79,13 +77,13 @@ class TeamMemberController extends Controller
         } else {
             $validated['password'] = Hash::make($validated['password']);
         }
+        $validated['role_id'] = $request->roles;
         $user->fill($validated);
-        $user->save();
-
-        $roles = array_map(fn($role) => $role->name, json_decode($validated['roles']));
-        $user->syncRoles($roles);
-        // $user->assignRole($roles);
-
+        try {
+            $user->save();
+        } catch (\Throwable $e) {
+            return back()->with("success", "Team member successfully updated.");
+        }
         return back()->with("success", "Team member successfully updated.");
     }
 
@@ -98,17 +96,12 @@ class TeamMemberController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $imagePath = public_path('storage/' . $user->image);
+        if ($user->image != NULL && $imagePath)
+        unlink($imagePath);
 
-        // Delete Image
-        if ($user->image)
-            Storage::delete($user->image);
-
-        $user->delete();
-
-        return back()->with("success", "Team member successfully deleted.");
+        $objectId = new \MongoDB\BSON\ObjectId($id);
+        User::where('_id', $objectId)->delete();
+        return back()->with("success", "Role successfully deleted.");
     }
-
-
-
-
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Maklad\Permission\Models\Role;
 use Maklad\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsSeeder extends Seeder
 {
@@ -20,58 +21,9 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = json_decode(file_get_contents(base_path('resources/data/permissions.json')));
-        foreach ($permissions as $permission) {
-            $this->createPermission($permission);
-        }
-
-        // Create super admin role
-        $role = Role::where('name', 'Super Admin')->first();
-        if (! $role) {
-            $role = Role::create([
-                'name' => 'Super Admin'
-            ]);
-        }
-
-        // Create super admin
-        $superadmin = User::where('email', 'admin@gmail.com')->first();
-        if(! $superadmin) {
-            $superadmin = User::updateOrCreate(['email' => 'admin@gmail.com'],[
-                'name' => 'Super Admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('123456'),
-                'is_admin_user' => 1,
-                'is_superadmin' => 1,
-                'status' => 1,
-                'level' => 1,
-                "is_verfied" => 1,
-            ]);
-        }
-
-        try {
-            $superadmin->assignRole($role->name);
-        } catch (\Exception $e) {
-
-        }
-    }
-
-    public function createPermission($permission, $parent_id = null)
-    {
-        $parent = Permission::find($parent_id);
-        $newPermissionName = $parent? $parent->name .'.'. $permission->name: $permission->name;
-        $created = Permission::where('name', $newPermissionName)->first();
-        if (! $created) {
-            $created = Permission::create([
-                "name" => $newPermissionName,
-                "label" => $permission->label?? null,
-                "parent_id" => $parent? $parent->id: null,
-            ]);
-        }
-
-        if ($permission->children?? false) {
-            foreach ($permission->children as $child) {
-                $this->createPermission($child, $created->id);
-            }
-        }
+        $jsonFile = database_path('data/permissions.json');
+        $jsonData = json_decode(file_get_contents($jsonFile), true);
+        DB::connection('mongodb')->collection('permissions')->truncate();
+        DB::connection('mongodb')->collection('permissions')->insert($jsonData);
     }
 }

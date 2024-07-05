@@ -11,11 +11,21 @@ class Feed extends Model
     use HasFactory;
 
     protected $fillable=[
-        'title',
+        'feed_background_image',
+        'feed_text_color',
+        'grid_style',
+        'image_type',
         'description',
-        'status',
-        'media',
-        'type'
+        'user_type',
+        'feed_type',
+        'image',
+        'image_file_name',
+        'image_file_length',
+        'image_file_size',
+        'video',
+        'video_file_name',
+        'video_file_length',
+        'video_file_size',
     ];
 
     protected static function boot()

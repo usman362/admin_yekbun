@@ -619,154 +619,156 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                             </div>
 
                             <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab1">
-                                <div id="feed-post-1" class="card is-post">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <!-- Post header -->
-                                        <div class="card-heading">
-                                            <!-- User meta -->
-                                            <div class="user-block">
-                                                <div class="image">
-                                                    <img src="{{ asset('assets/img/logo.png') }}"
-                                                        data-demo-src="{{ asset('assets/img/logo.png') }}"
+                                @foreach ($feeds as $key => $feed)
+                                    <div id="feed-post-{{$key}}" class="card is-post">
+                                        <!-- Main wrap -->
+                                        <div class="content-wrap">
+                                            <!-- Post header -->
+                                            <div class="card-heading">
+                                                <!-- User meta -->
+                                                <div class="user-block">
+                                                    <div class="image">
+                                                        <img src="{{ asset('assets/img/logo.png') }}"
+                                                            data-demo-src="{{ asset('assets/img/logo.png') }}"
+                                                            data-user-popover="1" alt="">
+                                                    </div>
+                                                    <div class="user-info">
+                                                        <span class="d-flex"><a href="#">Yekbun</a><i
+                                                                class="bx bx-world ml-2"></i></span>
+                                                        <span class="time">. CEO .</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Right side dropdown -->
+                                                <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
+                                                <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
+                                                    <div>
+                                                        <div class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" class="feather feather-more-vertical">
+                                                                <circle cx="12" cy="12" r="1"></circle>
+                                                                <circle cx="12" cy="5" r="1"></circle>
+                                                                <circle cx="12" cy="19" r="1"></circle>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <div class="dropdown-content">
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Remove Feed</h3>
+                                                                        <small>Feed Removed Only</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Repost the Feed</h3>
+                                                                        <small>Post it again</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Post header -->
+
+                                            <!-- Post body -->
+                                            <div class="card-body">
+                                                <!-- Post body text -->
+                                                <div class="post-text">
+                                                    <p>
+                                                        Admin Feeds with <a href="#">@Karen Miller</a> and
+                                                        <a href="#">@Marvin Stemperd</a> at the
+                                                        <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally
+                                                        fantastic!
+                                                        People were really excited about this one!
+                                                    </p>
+                                                </div>
+                                                <!-- Featured image -->
+                                                <div class="post-image">
+                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                        data-thumb="{{asset("assets/img/feed-image.jpeg")}}"
+                                                        href="{{asset("assets/img/feed-image.jpeg")}}"
+                                                        data-demo-href="{{asset("assets/img/feed-image.jpeg")}}">
+                                                        <img src="{{asset("assets/img/feed-image.jpeg")}}"
+                                                            data-demo-src="{{asset("assets/img/feed-image.jpeg")}}"
+                                                            alt="">
+                                                    </a>
+                                                    <!-- Action buttons -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /Post body -->
+
+                                            <!-- Post footer -->
+                                            <div class="card-footer">
+                                                <!-- Followers avatars -->
+                                                <div class="likers-group">
+                                                    <img src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
+                                                        data-demo-src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
                                                         data-user-popover="1" alt="">
+                                                    <img src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
+                                                        data-demo-src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
+                                                        data-user-popover="4" alt="">
+                                                    <img src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
+                                                        data-demo-src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
+                                                        data-user-popover="5" alt="">
                                                 </div>
-                                                <div class="user-info">
-                                                    <span class="d-flex"><a href="#">Yekbun</a><i
-                                                            class="bx bx-world ml-2"></i></span>
-                                                    <span class="time">. CEO .</span>
+                                                <!-- Followers text -->
+                                                <div class="likers-text">
+
                                                 </div>
-                                            </div>
-                                            <!-- Right side dropdown -->
-                                            <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
-                                            <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                                <div>
-                                                    <div class="button">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-more-vertical">
-                                                            <circle cx="12" cy="12" r="1"></circle>
-                                                            <circle cx="12" cy="5" r="1"></circle>
-                                                            <circle cx="12" cy="19" r="1"></circle>
-                                                        </svg>
+                                                <!-- Post statistics -->
+                                                <div class="social-count">
+                                                    <div class="shares-count" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/Share.svg') }}" width="15"
+                                                            alt="">
+                                                        <span>9</span>
                                                     </div>
-                                                </div>
-                                                <div class="dropdown-menu" role="menu">
-                                                    <div class="dropdown-content">
-                                                        <a href="javascript:void(0)" class="dropdown-item">
-                                                            <div class="media">
-                                                                <div class="media-content">
-                                                                    <h3>Remove Feed</h3>
-                                                                    <small>Feed Removed Only</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="dropdown-item">
-                                                            <div class="media">
-                                                                <div class="media-content">
-                                                                    <h3>Repost the Feed</h3>
-                                                                    <small>Post it again</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
+                                                    <div class="likes-count" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/views.svg') }}" width="15"
+                                                            alt="">
+                                                        <span>27</span>
+                                                    </div>
+                                                    <div class="comments-count is-comment-light" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/Comments.svg') }}"
+                                                            width="15" alt="">
+                                                        <span>3</span>
+                                                    </div>
+                                                    <div class="comments-count" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/voice.svg') }}" width="15"
+                                                            alt="">
+                                                        <span>3</span>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- /Post footer -->
                                         </div>
-                                        <!-- /Post header -->
+                                        <!-- /Main wrap -->
 
-                                        <!-- Post body -->
-                                        <div class="card-body">
-                                            <!-- Post body text -->
-                                            <div class="post-text">
-                                                <p>
-                                                    Admin Feeds with <a href="#">@Karen Miller</a> and
-                                                    <a href="#">@Marvin Stemperd</a> at the
-                                                    <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally
-                                                    fantastic!
-                                                    People were really excited about this one!
-                                                </p>
-                                            </div>
-                                            <!-- Featured image -->
-                                            <div class="post-image">
-                                                <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{asset("assets/img/feed-image.jpeg")}}"
-                                                    href="{{asset("assets/img/feed-image.jpeg")}}"
-                                                    data-demo-href="{{asset("assets/img/feed-image.jpeg")}}">
-                                                    <img src="{{asset("assets/img/feed-image.jpeg")}}"
-                                                        data-demo-src="{{asset("assets/img/feed-image.jpeg")}}"
+                                        <!-- Post #1 Comments -->
+                                        <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
+                                            <div class="comments-header">
+                                                @if (request('type') === 'flag')
+                                                    <img src="{{ asset('assets/img/exclamation-mark.png') }}"
+                                                        style="position: absolute;top:1rem;right:3.5rem" width="15"
                                                         alt="">
-                                                </a>
-                                                <!-- Action buttons -->
-
+                                                @endif
                                             </div>
                                         </div>
-                                        <!-- /Post body -->
-
-                                        <!-- Post footer -->
-                                        <div class="card-footer">
-                                            <!-- Followers avatars -->
-                                            <div class="likers-group">
-                                                <img src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
-                                                    data-demo-src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
-                                                    data-user-popover="1" alt="">
-                                                <img src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
-                                                    data-demo-src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
-                                                    data-user-popover="4" alt="">
-                                                <img src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
-                                                    data-demo-src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
-                                                    data-user-popover="5" alt="">
-                                            </div>
-                                            <!-- Followers text -->
-                                            <div class="likers-text">
-
-                                            </div>
-                                            <!-- Post statistics -->
-                                            <div class="social-count">
-                                                <div class="shares-count" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/Share.svg') }}" width="15"
-                                                        alt="">
-                                                    <span>9</span>
-                                                </div>
-                                                <div class="likes-count" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/views.svg') }}" width="15"
-                                                        alt="">
-                                                    <span>27</span>
-                                                </div>
-                                                <div class="comments-count is-comment-light" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/Comments.svg') }}"
-                                                        width="15" alt="">
-                                                    <span>3</span>
-                                                </div>
-                                                <div class="comments-count" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/voice.svg') }}" width="15"
-                                                        alt="">
-                                                    <span>3</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /Post footer -->
+                                        <!-- /Post #1 Comments -->
                                     </div>
-                                    <!-- /Main wrap -->
-
-                                    <!-- Post #1 Comments -->
-                                    <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
-                                        <div class="comments-header">
-                                            @if (request('type') === 'flag')
-                                                <img src="{{ asset('assets/img/exclamation-mark.png') }}"
-                                                    style="position: absolute;top:1rem;right:3.5rem" width="15"
-                                                    alt="">
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <!-- /Post #1 Comments -->
-                                </div>
+                                @endforeach
                             </div>
 
                             <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab2">
-                                @foreach ($news as $newz)
-                                <div id="feed-post-1" class="card is-post">
+                                @foreach ($news as $key => $newz)
+                                <div id="news-post-{{$key}}" class="card is-post">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
                                         <!-- Post header -->
@@ -959,7 +961,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                             <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab4">
 
-                                <div id="feed-post-1" class="card is-post">
+                                <div id="admin-live-1" class="card is-post">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
                                         <!-- Post header -->
@@ -1181,22 +1183,24 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             'use strict';
 
             function initializeDropzone(dropzoneId, hiddenInputName, folder, acceptedFiles, limit = 1) {
-                const previewTemplate = `<div class="row"><div class="col-md-12 d-flex justify-content-center"><div class="dz-preview dz-file-preview w-100">
-                                    <div class="dz-details">
-                                      <div class="dz-thumbnail" style="width:95%">
-                                        <img data-dz-thumbnail >
-                                        <span class="dz-nopreview">No preview</span>
-                                        <div class="dz-success-mark"></div>
-                                        <div class="dz-error-mark"></div>
-                                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
-                                        <div class="progress">
-                                          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-                                        </div>
-                                      </div>
-                                      <div class="dz-filename" data-dz-name></div>
-                                      <div class="dz-size" data-dz-size></div>
-                                    </div>
-                                    </div></div></div>`;
+                const previewTemplate = `<div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                    <div class="dz-preview dz-file-preview w-100">
+                    <div class="dz-details">
+                    <div class="dz-thumbnail" style="width:95%">
+                    <img data-dz-thumbnail >
+                    <span class="dz-nopreview">No preview</span>
+                    <div class="dz-success-mark"></div>
+                    <div class="dz-error-mark"></div>
+                    <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                    </div>
+                    </div>
+                    <div class="dz-filename" data-dz-name></div>
+                    <div class="dz-size" data-dz-size></div>
+                </div>
+                </div></div></div>`;
                 let dropzoneKey = 0;
                 return new Dropzone(dropzoneId, {
                     url: '{{ route('file.upload') }}',

@@ -45,15 +45,22 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-12">
                     <label for="rolesInput" class="form-label">Roles</label>
-                    <input id="rolesInput" name="roles" class="form-control" autofocus/>
+                    <select class="form-control" name="roles" id="rolesInput">
+                        <option value="" selected disabled></option>
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
                     @error('roles')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-12">
                     <label class="form-label" for="imageInput">Status</label>
+
                     <select class="form-control" name="status" id="imageInput">
                         <option value="1" selected>Active</option>
                         <option value="0" {{ old('status') === '0'? 'selected': '' }}>Disabled</option>

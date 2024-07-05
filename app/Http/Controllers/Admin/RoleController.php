@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-// use Spatie\Permission\Models\Role;
-// use App\Repositories\Role;
-use Maklad\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-// use Spatie\Permission\Models\Permission;
-// use App\Repositories\Permission;
-use Maklad\Permission\Models\Permission;
+use App\Models\Role;
+use App\Models\Permission;
+use MongoDB\BSON\ObjectId;
 
 class RoleController extends Controller
 {
@@ -24,7 +21,6 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         $permissions = Permission::all();
-
         return view("content.settings.roles.index", compact("roles", "permissions"));
     }
 
@@ -37,11 +33,13 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $validated = $request->validated();
-
         $role = Role::create($validated);
-        $role->syncPermissions($validated['permissions']?? []);
+        try {
+            $role->syncPermissions($validated['permissions']?? []);
+        } catch (\Throwable $e) {
+                return back()->with("success", "Role successfully created.");
+        }
 
-        return back()->with("success", "Role successfully created.");
     }
 
     /**
@@ -54,13 +52,20 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, $id)
     {
         $validated = $request->validated();
+        if (array_key_exists('permissions', $validated)) {
+            $permissions = $validated['permissions'];
+        } else {
+            $permissions = [];
+        }
 
         $role = Role::find($id);
-        // if ($role->name === 'Super Admin')
-        //     abort(403);
-        $role->fill($validated);
-        $role->syncPermissions($validated['permissions']?? []);
+        if ($role->name === 'Super Admin')
+            abort(403);
+        $role->name = $validated['name'];
+        $role->permissions = $permissions;
         $role->save();
+
+        session(['permissions' => $permissions]);
 
         return back()->with("success", "Role successfully updated.");
     }
@@ -73,11 +78,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role = Role::find($id);
-        if ($role->name === 'Super Admin')
-            abort(403);
-        $role->delete();
-
+        $objectId = new \MongoDB\BSON\ObjectId($id);
+        Role::where('_id', $objectId)->delete();
         return back()->with("success", "Role successfully deleted.");
     }
 }

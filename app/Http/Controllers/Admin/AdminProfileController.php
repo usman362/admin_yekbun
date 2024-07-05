@@ -26,7 +26,8 @@ class AdminProfileController extends Controller
     {
         $events = Event::all();
         $news = News::all();
-        return view('content.pages.admin_activity',compact('events','news'));
+        $feeds = Feed::all();
+        return view('content.pages.admin_activity',compact('events','news','feeds'));
     }
 
     public function store(Request $request)
