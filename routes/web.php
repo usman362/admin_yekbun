@@ -92,6 +92,8 @@ use App\Http\Controllers\BackgroundFeedController;
 use App\Http\Controllers\DepartmentController;
 use App\Models\FanPageType;
 use App\Models\Story;
+use Illuminate\Support\Facades\Artisan;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -117,6 +119,18 @@ Route::get('/cmd/{cmd}', function ($cmd) {
     echo '<pre>';
     return \Artisan::output();
 });
+
+Route::get('/db-seed/{cmd}', function ($cmd) {
+    Artisan::call('db:seed', [
+        '--class' => $cmd
+    ]);
+
+    // Optionally, you can get the output of the command
+    $output = Artisan::output();
+    echo $output;
+});
+
+
 
 // Admin Profiel
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile');
