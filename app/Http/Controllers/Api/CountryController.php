@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCountryRequest;
+use App\Http\Requests\UpdateCountryRequest;
 use App\Models\Region;
 use App\Models\City;
 use App\Models\User;
@@ -34,4 +36,37 @@ class CountryController extends Controller
     //         return response()->json(['error'=>false , "data" => "No City Available for that Province"]);
     //     }
     // }
+    public function store(StoreCountryRequest $request)
+    {
+        $validated = $request->validated();
+    
+        try {
+            $country = Country::create($validated);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Country successfully added.',
+                
+            ], 201);
+    
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to add country.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function update(UpdateCountryRequest $request, $id)
+    {
+        $validated = $request->validated();
+
+        $country = Country::find($id);
+        $country->fill($validated);
+        $country->save();
+
+        return response()->json('Country Updated successfully');
+    }
+
 }

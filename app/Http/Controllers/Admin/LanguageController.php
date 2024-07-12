@@ -125,15 +125,34 @@ class LanguageController extends Controller
    */
   public function destroy($id)
   {
-    $language = Language::find($id);
-    if ($language->delete()) {
-      return redirect()
-        ->route('language.index')
-        ->with('success', 'Your language has been Deleted successfully.');
-    } else {
-      return redirect()
-        ->route('language.index')
-        ->with('success', 'Your language has been not deleted.');
-    }
+      $language = Language::find($id);
+  
+      if (!$language) {
+          return response()->json([
+              'success' => false,
+              'message' => 'Language not found.'
+          ], 404);
+      }
+  
+      try {
+          if ($language->delete()) {
+              return response()->json([
+                  'success' => true,
+                  'message' => 'Your language has been deleted successfully.'
+              ], 200);
+          } else {
+              return response()->json([
+                  'success' => false,
+                  'message' => 'Failed to delete language.'
+              ], 500);
+          }
+      } catch (\Exception $e) {
+          return response()->json([
+              'success' => false,
+              'message' => 'Failed to delete language.',
+              'error' => $e->getMessage()
+          ], 500);
+      }
   }
+  
 }
