@@ -11,8 +11,12 @@ use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\RegionController;
+use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\VotingController;
+use App\Http\Controllers\Admin\Donation\DonationController as DonationDonationController;
+
 use App\Http\Controllers\Api\FanPageController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\PolicyAndTermsController;
@@ -144,6 +148,13 @@ Route::delete('app-setting/ringtone/{id}', [RingtoneController::class, 'destroy'
 //Language
 Route::resource('/language', LanguageController::class);
 
+/*--------------------------
+ Donation 
+----------------------------*/
+Route::post('/add_donation', [DonationDonationController::class, 'add_donation'])->name('create.donation');
+Route::put('/edit_donation/{id}', [DonationDonationController::class, 'edit_donation'])->name('edit.donation');
+Route::delete('/destroy_donation/{id}', [DonationDonationController::class, 'destroy_donation'])->name('destroy.donation');
+
 
 
 // User 
@@ -176,6 +187,12 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
 Route::get('province', [CountryController::class, 'province'])->name('province');
 Route::post('country/store', [CountryController::class, 'store'])->name('country.store');
 Route::put('country/store/update/yes', [CountryController::class, 'update'])->name('country.update');
+
+//provinces
+Route::resource('/provinces', RegionController::class);
+
+//Cities
+Route::resource('/cities', CityController::class);
 
  // Privacy and Policy
 Route::get('privacy', [PrivacyAndPolicyController::class, 'privacy'])->name('privacy');

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Settings;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Region;
 use App\Models\Country;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRegionRequest;
 use App\Http\Requests\UpdateRegionRequest;
 
@@ -20,7 +20,21 @@ class RegionController extends Controller
     {
         $regions = Region::orderBy("name", "ASC")->with('cities')->get();
         $countries = Country::orderBy("name", "ASC")->get();
-        return view("content.settings.regions.index", compact("regions", "countries"));
+        return response()->json([
+            'regions' => $regions,
+            'countries' => $countries,
+        ]);
+    }
+    
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -31,12 +45,37 @@ class RegionController extends Controller
      */
     public function store(StoreRegionRequest $request)
     {
-       
+        // dd($request->all());
         $validated = $request->validated();
 
         $region = Region::create($validated);
 
-        return back()->with("success", "Region successfully added.");
+        return response()->json([
+            'success'=>'true',
+            'message'=>'Region created successfully'
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -54,7 +93,10 @@ class RegionController extends Controller
         $region->fill($validated);
         $region->save();
 
-        return back()->with("success", "Region successfully updated.");
+        return response()->json([
+            'success'=>'true',
+            'message'=>'Region updated successfully'
+        ]);
     }
 
     /**
@@ -69,6 +111,9 @@ class RegionController extends Controller
 
         $region->delete();
 
-        return back()->with("success", "Region successfully deleted.");
+        return response()->json([
+            'success'=>'true',
+            'message'=>' Region Deleted successfully'
+        ]);
     }
 }
