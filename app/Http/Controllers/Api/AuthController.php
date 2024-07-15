@@ -25,8 +25,13 @@ class AuthController extends Controller
 
   public function login(Request $request)
   {
-    $credentials = $request->only('email', 'password');
-
+    $credentials = $request->validate([
+        'email' => 'required',
+        'password' => 'required',
+    ]);
+    (int)$credentials['is_admin_user'] = 1;
+    (int)$credentials['status'] = 1;
+    // dd($credentials);
     if (Auth::attempt($credentials)) {
       $user = Auth::user();
 
@@ -45,15 +50,11 @@ class AuthController extends Controller
   public function signup(Request $request)
   {
     $validatedData = $request->validate([
-      'username' => 'required|max:100',
-      'firstName' => 'required|max:100',
-      'lastName' => 'required|max:100',
-      'gender' => 'required',
-      'dob' => 'required',
-      'province' => 'required|max:255',
-      'city' => 'required|max:255',
+      'fname' => 'required|max:100',
+      'lname' => 'required|max:100',
       'email' => 'required',
       'password' => 'required|min:6',
+      'phone' => 'required|min:11',
     ]);
 
     $userExist = User::where('email', $request->email)->first();
@@ -66,20 +67,16 @@ class AuthController extends Controller
     }
 
     $user = User::create([
-      'username' => $request['username'],
-      'firstName' => $request['firstName'],
-      'lastName' => $request['lastName'],
-      'image' => $request->image ?? '',
-      'name' => $request['firstName'] . ' ' . $request['lastName'],
-      'gender' => $request['gender'],
-      'dob' => $request['dob'],
-      'country' => $request['location'],
-      'province' => $request['province'],
-      'province_city' => $request['originCity'],
-      'city' => $request['city'],
-      'email' => $request['email'],
-      'password' => bcrypt($request['password']),
-      'status' => 0
+        'name' => $request['fname'],
+        'email' => $request['email'],
+        'password' => bcrypt($request['password']),
+        'status' => (int)'1',
+        'is_admin_user' => (int)'0',
+        'level' => (int)'1',
+        'is_verfied' => (int)'1',
+        'is_superadmin' => (int)'0',
+        'last_name' => $request['lname'],
+        'phone' => $request['phone']
     ]);
 
 
@@ -131,7 +128,7 @@ class AuthController extends Controller
       Mail::to($user->email)->send(new SendCodeMail($details));
       return response()->json(['success' => true, 'message' => 'A verification email has been sent to ' . $user->email . '!', 'data' => ['user_id' => $user->id, 'email' => $user->email, 'token' => $token]], 201);
     } catch (\Exception $e) {
-      
+
       return $e->getMessage();
     }
 
