@@ -32,9 +32,9 @@
         </h4>
     </div>
     <div>
-        @can('policy_terms.create')
+        {{-- @can('policy_terms.create') --}}
         <button class="btn btn-primary" data-bs-target="#addnewtab" data-bs-toggle="modal">Add New</button>
-        @endcan
+        {{-- @endcan --}}
     </div>
 </div>
 
@@ -77,9 +77,9 @@
                         <form action="{{ route('policy_and_terms.destroy' ,$section->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                             @method('DELETE')
                             @csrf
-                            @can('policy_terms.delete')
+                            {{-- @can('policy_terms.delete') --}}
                             <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1 text-danger" ></i></button>
-                            @endcan
+                            {{-- @endcan --}}
                         </form>
                     </li>
                     @section('tab-content')

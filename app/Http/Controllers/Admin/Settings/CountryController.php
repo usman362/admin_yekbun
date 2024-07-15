@@ -30,7 +30,7 @@ class CountryController extends Controller
     public function store(StoreCountryRequest $request)
     {
         $validated = $request->validated();
-
+ 
         $country = Country::create($validated);
 
         return back()->with("success", "Country successfully added.");

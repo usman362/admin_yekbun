@@ -11,10 +11,16 @@ use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\RegionController;
+use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\VotingController;
+use App\Http\Controllers\Admin\Donation\DonationController as DonationDonationController;
+
 use App\Http\Controllers\Api\FanPageController;
 use App\Http\Controllers\Api\HistoryController;
+use App\Http\Controllers\Api\PolicyAndTermsController;
+
 use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\DiamondUserController;
 use App\Http\Controllers\Api\FlaggedUserController;
@@ -39,6 +45,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BazarSubCategoryController;
 use App\Http\Controllers\Api\TwoFactorController;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\PrivacyAndPolicyController;
 use App\Http\Controllers\Api\TranslationController;
 use App\Http\Controllers\Api\AccountSettingController;
@@ -128,6 +135,30 @@ Route::resource('video', UploadVideoController::class)->only(['index', 'store', 
 Route::resource('movie-category', UploadMovieCategoryController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
 Route::resource('movie', UploadMovieController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
 
+//policy_and_terms
+
+Route::apiResource('policy-and-terms', PolicyAndTermsController::class);
+Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
+//Ringtone 
+Route::get('app-setting/message-ringtone', [RingtoneController::class, 'getMessage'])->name('appsetting.message.ringtone');
+Route::get('app-setting/call-ringtone', [RingtoneController::class, 'getCall'])->name('appsetting.call.ringtone');
+Route::get('app-setting/ringtone', [RingtoneController::class, 'index'])->name('appsetting.ringtone.index');
+
+Route::post('app-setting/ringtone', [RingtoneController::class, 'store'])->name('appsetting.ringtone.store');
+
+Route::delete('app-setting/ringtone/{id}', [RingtoneController::class, 'destroy'])->name('appsetting.ringtone.destroy');
+
+//Language
+Route::resource('/language', LanguageController::class);
+
+/*--------------------------
+ Donation 
+----------------------------*/
+Route::post('/add_donation', [DonationDonationController::class, 'add_donation'])->name('create.donation');
+Route::put('/edit_donation/{id}', [DonationDonationController::class, 'edit_donation'])->name('edit.donation');
+Route::delete('/destroy_donation/{id}', [DonationDonationController::class, 'destroy_donation'])->name('destroy.donation');
+
+
 
 // User
 
@@ -155,8 +186,16 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
 
 // Country Controller
 Route::get('province', [CountryController::class, 'province'])->name('province');
+Route::post('country/store', [CountryController::class, 'store'])->name('country.store');
+Route::put('country/store/update/yes', [CountryController::class, 'update'])->name('country.update');
 
-// Privacy and Policy
+//provinces
+Route::resource('/provinces', RegionController::class);
+
+//Cities
+Route::resource('/cities', CityController::class);
+
+ // Privacy and Policy
 Route::get('privacy', [PrivacyAndPolicyController::class, 'privacy'])->name('privacy');
 Route::get('/single-privacy/{name}', [PrivacyAndPolicyController::class, 'single_privacy'])->name('single_privacy');
 

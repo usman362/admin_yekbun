@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Settings;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Region;
 use App\Models\Country;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
+use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
@@ -22,7 +22,22 @@ class CityController extends Controller
         $cities = City::orderBy("name", "ASC")->get();
         $regions = Region::orderBy("name", "ASC")->get();
         $countries = Country::orderBy("name", "ASC")->get();
-        return view("content.settings.cities.index", compact("cities", "regions", "countries"));
+        return response()->json([
+            'regions' => $regions,
+            'countries' => $countries,
+            'cities' => $cities
+        ]);
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -33,7 +48,7 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        dd($request->all());
+       // dd($request->all());
         $validated = $request->validated();
 
         $cities = $validated['cities'];
@@ -42,7 +57,32 @@ class CityController extends Controller
         foreach ($cities as $city)
             City::create(array_merge($validated, ['zipcode' => $city['zipcode'], 'name' => $city['name']]));
 
-        return back()->with("success", "City successfully added.");
+            return response()->json([
+                'success'=>'true',
+                'message'=>'Cities created successfully'
+            ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -60,7 +100,10 @@ class CityController extends Controller
         $city->fill($validated);
         $city->save();
 
-        return back()->with("success", "City successfully updated.");
+        return response()->json([
+            'success'=>'true',
+            'message'=>'Cities Updated successfully'
+        ]);
     }
 
     /**
@@ -75,6 +118,9 @@ class CityController extends Controller
 
         $city->delete();
 
-        return back()->with("success", "City successfully deleted.");
+        return response()->json([
+            'success'=>'true',
+            'message'=>'City Deleted successfully'
+        ]);
     }
 }
