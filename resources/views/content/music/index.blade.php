@@ -129,10 +129,10 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 
 <div class="">
-  @can('music.create')
+  {{-- @can('music.create') --}}
    {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createcategoryModal">{{ $type == 'music' ? 'Add Category' : 'Add Song' }}</button> --}}
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmusicModal">{{ $type == 'music' ? 'Add Music' : 'Add Song' }}</button>
-  @endcan
+  {{-- @endcan --}}
 </div>
 </div>
 
@@ -263,13 +263,13 @@ title="{{ $type == 'music' ? 'Create Category' : 'Create Songs' }}"
                   <td>3:30 min</td>
                   <td>
                   <div class="d-flex justify-content-start align-items-center">
-                  @can('music.write')
+                  {{-- @can('music.write') --}}
                   <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit"><i class="bx bx-edit"></i>
-                  @endcan
+                  {{-- @endcan --}}
                   </button>
-                  @can('music.delete')
+                  {{-- @can('music.delete') --}}
                   <button type="button" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
-                  @endcan
+                  {{-- @endcan --}}
                   </div>
                   </td>
               </tr>
