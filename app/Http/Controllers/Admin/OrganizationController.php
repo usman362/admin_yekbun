@@ -38,7 +38,7 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrganizationRequest $request)
+    public function store(Request $request)
     {
         $validated = $request->validated();
 
@@ -128,12 +128,12 @@ class OrganizationController extends Controller
             if (file_exists($path)) {
                 unlink($path);
             }
-    
+
             // Remove the image filename from the model attribute
             $organization->logo = null;
             $organization->save();
         }
-        
+
         return [
             'status' => true
         ];

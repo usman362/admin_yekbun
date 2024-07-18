@@ -19,12 +19,18 @@ class Organization extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'bank_account',
-        'paypal_account',
-        'address',
-        'logo',
-        "status",
+        "logo",
+        "showCreateFormModal",
+        "organization_name",
+        "gender",
+        "first_name",
+        "last_name",
+        "country",
+        "city",
+        "address",
+        "phone_no",
+        "email",
+        "image",
     ];
 
     public function getActivitylogOptions(): LogOptions

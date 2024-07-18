@@ -63,9 +63,9 @@ s
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         <h5 class="m-0">Category List</h5>
-        @can('history.create')
+        {{-- @can('history.create') --}}
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createhistorycategoryModal"><i class="bx bx-plus me-0 me-sm-1"></i> Add Category</button>
-        @endcan
+        {{-- @endcan --}}
     </div>
     <div class="table-responsive text-nowrap">
       <table class="table">
@@ -85,22 +85,22 @@ s
             <td>{{ $history->name ?? '' }}</td>
             <td>
                 <div class="dropdown d-inline-block">
-                    @can('history.write')
+                    {{-- @can('history.write') --}}
                     <!-- Edit -->
                     <span data-bs-toggle="modal" data-bs-target="#edithistorycategoryModal{{ $history->id }}">
                         <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
                             <i class="bx bx-edit"></i>
                         </button>
-                        @endcan
+                        {{-- @endcan --}}
                     </span>
 
                     <!-- Delete -->
                     <form action="{{ route('history-category.destroy',$history->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                         @method('DELETE')
                         @csrf
-                        @can('history.delete')
+                        {{-- @can('history.delete') --}}
                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
-                        @endcan
+                        {{-- @endcan --}}
                     </form>
 
                     {{--<button type="button" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" class="mb-2 mr-2 dropdown-toggle btn btn-light">Action

@@ -781,7 +781,7 @@
                         processData: false,
                         success: function(response) {
                             // Handle success
-                            alert('Album updated successfully');
+                            // alert('Album updated successfully');
                             $('#editAlbumModal' + formData.get('id')).modal('hide');
                             // Optionally refresh the album list or update the row
                         },

@@ -77,12 +77,12 @@
   <div class="card">
     <div class="card-header d-flex align-items-center">
         <h5 class="m-0">Voting List</h5>
-        @can('voting.create')
+        {{-- @can('voting.create') --}}
         <div class="flex-fluid d-flex justify-content-end align-items-center">
           <button class="btn btn-primary btn-create-vote" data-vote-type='single_vote'><i class="bx bx-plus me-0 me-sm-1"></i>Single Vote</button>
           <button class="btn btn-primary btn-create-vote ms-2" data-vote-type='individual_vote'><i class="bx bx-plus me-0 me-sm-1"></i>Individual Vote</button>
         </div>
-        @endcan
+        {{-- @endcan --}}
     </div>
     <div class="table-responsive text-nowrap">
       <table class="table">
@@ -138,7 +138,7 @@
                 <div class="dropdown d-inline-block">
                     <!-- Edit -->
                     <span>
-                        @can('voting.write')
+                        {{-- @can('voting.write') --}}
                         <button
                             class="btn btn-sm btn-icon btn-edit-vote"
                             data-bs-toggle="tooltip"
@@ -149,16 +149,16 @@
                             data-bs-original-title="Edit" aria-describedby="tooltip557134">
                             <i class="bx bx-edit"></i>
                         </button>
-                        @endcan
+                        {{-- @endcan --}}
                     </span>
 
                     <!-- Delete -->
                     <form action="{{ route('vote.destroy', $vote->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                         @method('DELETE')
                         @csrf
-                        @can('voting.delete')
+                        {{-- @can('voting.delete') --}}
                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
-                        @endcan
+                        {{-- @endcan --}}
                     </form>
 
                     <span>
