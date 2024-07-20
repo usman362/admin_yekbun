@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
+use App\Models\MongoDonation;
+use App\Models\MongoOrganization;
 use App\Models\Organization;
 
 class DonationController extends Controller
@@ -18,8 +20,10 @@ class DonationController extends Controller
      */
     public function index()
     {
-        $donations = Donation::orderBy("updated_at", "DESC")->get();
-        $organizations = Organization::where("status", 1)->get();
+        // $donations = Donation::orderBy("updated_at", "DESC")->get();
+        // $organizations = Organization::where("status", 1)->get();
+        $donations = MongoDonation::orderBy("updated_at", "DESC")->get();
+        $organizations = MongoOrganization::where("status", 1)->get();
         return view("content.donations.index", compact("donations", "organizations"));
     }
 
@@ -49,7 +53,7 @@ class DonationController extends Controller
         }, json_decode($validated['tags']));
 
         $validated['start_date'] .= ' 00:00:00';
-        $validated['end_date'] .= ' 23:59:59'; 
+        $validated['end_date'] .= ' 23:59:59';
 
         $donation = Donation::create($validated);
 
@@ -97,7 +101,7 @@ class DonationController extends Controller
         }, json_decode($validated['tags']));
 
         $validated['start_date'] .= ' 00:00:00';
-        $validated['end_date'] .= ' 23:59:59'; 
+        $validated['end_date'] .= ' 23:59:59';
 
         $donation = Donation::find($id);
         $donation->fill($validated);

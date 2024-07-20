@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
+use App\Models\MongoOrganization;
 
 class OrganizationController extends Controller
 {
@@ -18,7 +19,8 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $organizations = Organization::orderBy("updated_at", "DESC")->get();
+        // $organizations = Organization::orderBy("updated_at", "DESC")->get();
+        $organizations = MongoOrganization::orderBy("updated_at", "DESC")->get();
         return view("content.organizations.index", compact("organizations"));
     }
 

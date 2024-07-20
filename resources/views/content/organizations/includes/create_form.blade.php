@@ -1,4 +1,4 @@
-<form id="createOrgForm" action="{{ route('donations.organizations.store') }}" method="post" enctype="multipart/form-data">
+<form id="createOrgForm" action="{{ route('add.organization') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="hidden-inputs"></div>
     <input type="hidden" name="showCreateFormModal" value="1">
