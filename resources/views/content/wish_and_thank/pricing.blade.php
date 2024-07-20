@@ -33,470 +33,320 @@
         font-weight: bolder;
         color:black;
     }
+
+
+    .details{
+    background: #f3f3f3;
+      padding: 5px;
+      border-radius: 10px;
+      padding-bottom: 10px;
+      margin-top: 5px;
+  }
+  .w-px-40{
+    height:40px !important;
+  }
+  .upper{
+    text-transform:uppercase;
+  }
+  .text-rigth{
+    float:left;
+    margin-right:10px;
+  }
+  .ava-link{
+    color:unset;
+  }
+
+
+    .modal .modal-header .btn-close {
+    margin-top: -1.25rem;
+    position: fixed;
+    margin-left: 495px;
+}
+.dropify-wrapper .dropify-message span.file-icon{
+    display:block !important;
+    line-height: 50px;
+    display: block !important;
+    width: 100%;
+} 
+.removebtn{
+    position: absolute;
+     
+      margin-right: 10px;
+      
+      height: 30px;
+      width: 30px;
+      max-width: 30px;
+      padding: 5px;
+      display:none;
+  }
+  
+  img{
+    height:fit-content !important;
+  }
+  
+  .bs-stepper .bs-stepper-content {
+  padding: 0.5rem 1.5rem;
+}
+  b, .title-tx{
+    padding:0px !important;
+  }
+  .mangprices{
+    border-bottom:solid 1px #d9dee3;
+  }
+  .main-panel{
+    background: #f2f2f2;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  .max-plans{
+    text-align:right;
+    color:#DA6787;
+    margin-bottom:5px;
+  }
+  
+  #avatar_image{
+    height:120px;
+    /*border-radius:50%;*/
+    width:120px;
+    cursor:pointer;
+  }
+  #uploadimage{
+    display:none;
+  }
+  
+  .bot-20{
+    margin-bottom:20px;
+  }
+  
+  .cke_notification_warning{
+    display:none; 
+  }
+  .price-list-heading{
+    padding:10px;
+    background:#fff;
+    border-radius:10px;
+    max-width:75%;
+    margin:auto;
+    text-align:center;
+    margin-bottom:10px;
+  }
+  .price-list-heading h5{
+    margin-bottom:0px;
+  }
+  .price-item{
+    padding:15px;
+    background:#fff;
+    border-radius:10px;
+    margin-bottom:10px;
+  }
+  .currency{
+    background: #8d92a5;
+    padding-left: 5px;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: block;
+    float: left;
+    color: #fff;
+    font-size: 13px;
+    margin-right:3px;
+  }
+  .price{
+    color:#ED1C25;
+  }
+  .txt-green{
+    color:#1BC469;
+    font-weight: 600;
+  }
+  .btn-save{
+    margin-top:10px;
+    background:#f2f2f2;
+  }
+  .dots-img{
+    float:right;
+    margin-top: 5px;
+  }
+
+  .price_details{
+    width:calc(100% - 25px);
+    float:left;
+  }
+
 </style>
 <h4 class="fw-bold py-3 mb-4">
   <span class="text-muted fw-light">Wizard examples /</span> Pricing List
 </h4>
 
 <!-- Property Listing Wizard -->
+
+<div class="row">
+
+<div class="col-md-8">
+
+  
+    
+
 <div id="wizard-property-listing" class="bs-stepper vertical ">
 
 
-
+    
 
 
   <div class="bs-stepper-content">
-          <div class="col-md-12 container p-3">
-                          <a style="float: right;color:#566a7f;" href="#">Edit</a>
-<div class="row">
-           
-        <div class="col-md-4">
-            <input class="form-control mb-3 one"  type="text" class="mb-4" placeholder="Standard">
-
-            <input class="form-control" type="text" placeholder="in the Selected category">
-
-            </div>
-
-            <div class="col-md-3 pr-3">
-                <input class="form-control" type="text" placeholder="30" >
-        
-            </div>
-
-            <div class="col-md-3 ">
-                <input class="form-control" type="text" placeholder="Free">
-            </div>
-        </div>
-    </div>
-    <hr>
-
-    <div class="col-md-12 container p-3">
-                    <a style="float: right;color:#566a7f" href="#">Edit</a>
-        <div class="row">
-                 
-                <div class="col-md-4">
-                    <input class="form-control mb-3 one"  type="text" class="mb-4" placeholder="Standard">
-        
-                    <input class="form-control" type="text" placeholder="in the Selected category">
-        
-                    </div>
-        <div class="col-md-6">
-            <div class="row">
-                    <div class="col-md-6 pr-3">
-                        <input class="form-control" type="text" placeholder="30" >
-                
-                    </div>
-        
-                    <div class="col-md-6 ">
-                        <input class="form-control" type="text" placeholder="Free">
-                    </div>
+    
+        <div class="row mangprices">
+                <b>Manage Prices</b>
+                <div class="title-tx">Title of Price</div>
+          </div>
+         
+          
+          <div class="col-md-12 container p-3 main-panel">
+                        
+      <div class="row">
+              <div class="col-md-12 max-plans">
+                  Max 5 Prices plan allowed
                 </div>
-                <div class="col-md-12 mt-3">
-                    <input class="form-control" type="text" placeholder="recomanded">
-                </div>
-                </div>
-                </div>
-            </div>
-
-
-    <hr>
-
-            <div class="col-md-12 container p-3">
-                <a style="float: right;color:#566a7f;" href="#">Edit</a>
-                <div class="row">
-                         
-                        <div class="col-md-4">
-                            <input class="form-control mb-3 one"  type="text" class="mb-4" placeholder="Advanced">
                 
-                            <input class="form-control" type="text" placeholder="in the Selected category">
-                
-                            </div>
-                
-                            <div class="col-md-6">
-                                <div class="row">
-                                        <div class="col-md-6 pr-3">
-                                            <input class="form-control" type="text" placeholder="30" >
-                                    
-                                        </div>
+                <div class="col-md-12 text-center bot-20">
+                  <label for="uploadimage"><img id="avatar_image" src="{{asset('/images/uploadimage.png')}}" /> </label>
+                            <input name="dp" id="uploadimage" type="file" onchange="loadFile(event)" class="dropify" data-height="90" accept="image/*" />
                             
-                                        <div class="col-md-6 ">
-                                            <input class="form-control" type="text" placeholder="Free">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-md-6 mt-3">
-                                        <input class="form-control" type="text" placeholder="in recomanded">
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <input class="form-control" type="text" placeholder="in feed">
-                                    </div>
-                                </div>
-                                    </div>
-                        </div>
-                    </div>
-
-    <form id="wizard-property-listing-form" onSubmit="return false">
-
-
-      <!-- Property Details -->
-      <div id="property-details" class="content">
-        <div class="row g-3">
-          <div class="col-12">
-            <div class="row">
-              <div class="col-xl mb-xl-0 mb-2">
-                <div class="form-check custom-option custom-option-icon">
-                  <label class="form-check-label custom-option-content" for="customRadioSell">
-                    <span class="custom-option-body">
-                      <i class="bx bx-home"></i>
-                      <span class="custom-option-title">Sale the property</span>
-                      <small>Post your property for sale.<br /> Unlimited free listing.</small>
-                    </span>
-                    <input name="plPropertySaleRent" class="form-check-input" type="radio" value="1" id="customRadioSell" checked />
-                  </label>
+                            <button type="button" class="btn btn-danger removebtn">X</button>
                 </div>
-              </div>
-              <div class="col-xl mb-xl-0 mb-2">
-                <div class="form-check custom-option custom-option-icon">
-                  <label class="form-check-label custom-option-content" for="customRadioRent">
-                    <span class="custom-option-body">
-                      <i class="bx bx-wallet"></i>
-                      <span class="custom-option-title">Rent the property</span>
-                      <small>Post your property for rent.<br /> Unlimited free listing.</small>
-                    </span>
-                    <input name="plPropertySaleRent" class="form-check-input" type="radio" value="2" id="customRadioRent" />
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plPropertyType">Property Type</label>
-            <select id="plPropertyType" name="plPropertyType" class="select2 form-select" data-allow-clear="true">
-              <option value="">Select Property Type</option>
-              <option value="10002">Flat/ Apartment</option>
-              <option value="10001">Residential House</option>
-              <option value="10017">Villa</option>
-              <option value="10003">Builder Floor Apartment</option>
-              <option value="10000">Residential Land/ Plot</option>
-              <option value="10021">Penthouse</option>
-              <option value="10022">Studio Apartment</option>
-            </select>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plZipCode">Zip Code</label>
-            <input type="number" id="plZipCode" name="plZipCode" class="form-control" placeholder="99950" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plCountry">Country</label>
-            <select id="plCountry" name="plCountry" class="select2 form-select" data-allow-clear="true">
-              <option value="">Select</option>
-              <option value="Australia">Australia</option>
-              <option value="Bangladesh">Bangladesh</option>
-              <option value="Belarus">Belarus</option>
-              <option value="Brazil">Brazil</option>
-              <option value="Canada">Canada</option>
-              <option value="China">China</option>
-              <option value="France">France</option>
-              <option value="Germany">Germany</option>
-              <option value="India">India</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Israel">Israel</option>
-              <option value="Italy">Italy</option>
-              <option value="Japan">Japan</option>
-              <option value="Korea">Korea, Republic of</option>
-              <option value="Mexico">Mexico</option>
-              <option value="Philippines">Philippines</option>
-              <option value="Russia">Russian Federation</option>
-              <option value="South Africa">South Africa</option>
-              <option value="Thailand">Thailand</option>
-              <option value="Turkey">Turkey</option>
-              <option value="Ukraine">Ukraine</option>
-              <option value="United Arab Emirates">United Arab Emirates</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="United States">United States</option>
-            </select>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plState">State</label>
-            <input type="text" id="plState" name="plState" class="form-control" placeholder="California" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plCity">City</label>
-            <input type="text" id="plCity" name="plCity" class="form-control" placeholder="Los Angeles" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plLandmark">Landmark</label>
-            <input type="text" id="plLandmark" name="plLandmark" class="form-control" placeholder="Nr. Hard Rock Cafe" />
-          </div>
-          <div class="col-lg-12">
-            <label class="form-label" for="plAddress">Address</label>
-            <textarea id="plAddress" name="plAddress" class="form-control" rows="2" placeholder="12, Business Park"></textarea>
-          </div>
-          <div class="col-12 d-flex justify-content-between">
-            <button class="btn btn-primary btn-prev"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i> <span class="align-middle d-sm-inline-block d-none">Previous</span> </button>
-            <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="bx bx-chevron-right bx-sm me-sm-n2"></i></button>
-          </div>
-        </div>
-      </div>
+    
+        
+           
+          <div class="col-md-3">
+              
+                <label>Type Price Title</label>
+                <input class="form-control mb-3 one" name="title"  type="text" class="mb-4" placeholder="Price Title...">
 
-      <!-- Property Features -->
-      <div id="property-features" class="content">
-        <div class="row g-3">
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plBedrooms">Bedrooms</label>
-            <input type="number" id="plBedrooms" name="plBedrooms" class="form-control" placeholder="3" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plFloorNo">Floor No</label>
-            <input type="number" id="plFloorNo" name="plFloorNo" class="form-control" placeholder="12" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plBathrooms">Bathrooms</label>
-            <input type="number" id="plBathrooms" name="plBathrooms" class="form-control" placeholder="4" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plFurnishedStatus">Furnished Status</label>
-            <select id="plFurnishedStatus" name="plFurnishedStatus" class="form-select">
-              <option selected disabled value="">Select furnished status </option>
-              <option value="1">Fully furnished</option>
-              <option value="2">Furnished</option>
-              <option value="3">Semi furnished</option>
-              <option value="4">Unfurnished</option>
-            </select>
-          </div>
-          <div class="col-lg-12">
-            <label class="form-label" for="plFurnishingDetails">Furnishing Details</label>
-            <input id="plFurnishingDetails" name="plFurnishingDetails" class="form-control" placeholder="select options" value="Fridge, AC, TV, WiFi">
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Is there any common area?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plCommonAreaRadio" id="plCommonAreaRadioYes" checked>
-              <label class="form-check-label" for="plCommonAreaRadioYes">Yes</label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plCommonAreaRadio" id="plCommonAreaRadioNo">
-              <label class="form-check-label" for="plCommonAreaRadioNo">No</label>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Is there any attached balcony?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plAttachedBalconyRadio" id="plAttachedBalconyRadioYes" checked>
-              <label class="form-check-label" for="plAttachedBalconyRadioYes">Yes</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plAttachedBalconyRadio" id="plAttachedBalconyRadioNo">
-              <label class="form-check-label" for="plAttachedBalconyRadioNo">No</label>
-            </div>
-          </div>
-          <div class="col-12 d-flex justify-content-between">
-            <button class="btn btn-primary btn-prev"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i> <span class="align-middle d-sm-inline-block d-none">Previous</span> </button>
-            <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="bx bx-chevron-right bx-sm me-sm-n2"></i></button>
-          </div>
-        </div>
-      </div>
+            
+            <div class="col-md-3">
+              
+                <label>Total Days Allowed</label>
+                <input class="form-control mb-3 one" name="days" min="0" type="number" class="mb-4" placeholder="1" value="1" >
 
-      <!-- Property Area -->
-      <div id="property-area" class="content">
-        <div class="row g-3">
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plTotalArea">Total Area</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plTotalArea" name="plTotalArea" placeholder="1000" aria-describedby="pl-total-area">
-              <span class="input-group-text" id="pl-total-area">sq-ft</span>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plCarpetArea">Carpet Area</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plCarpetArea" name="plCarpetArea" placeholder="800" aria-describedby="pl-carpet-area">
-              <span class="input-group-text" id="pl-carpet-area">sq-ft</span>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plPlotArea">Plot Area</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plPlotArea" name="plPlotArea" placeholder="800" aria-describedby="pl-plot-area">
-              <span class="input-group-text" id="pl-plot-area">sq-yd</span>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plAvailableFrom">Available From</label>
-            <input type="text" id="plAvailableFrom" name="plAvailableFrom" class="form-control flatpickr" placeholder="YYYY-MM-DD" />
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Possession Status</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plPossessionStatus" id="plUnderConstruction" checked>
-              <label class="form-check-label" for="plUnderConstruction">Under Construction</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plPossessionStatus" id="plReadyToMoveRadio">
-              <label class="form-check-label" for="plReadyToMoveRadio">Ready to Move</label>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Transaction Type</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plTransectionType" id="plNewProperty" checked>
-              <label class="form-check-label" for="plNewProperty">New Property</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plTransectionType" id="plResaleProperty">
-              <label class="form-check-label" for="plResaleProperty">Resale</label>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Is Property Facing Main Road?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plRoadFacingRadio" id="plRoadFacingRadioYes" checked>
-              <label class="form-check-label" for="plRoadFacingRadioYes">Yes</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plRoadFacingRadio" id="plRoadFacingRadioNo">
-              <label class="form-check-label" for="plRoadFacingRadioNo">No</label>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Gated Colony?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plGatedColonyRadio" id="plGatedColonyRadioYes" checked>
-              <label class="form-check-label" for="plGatedColonyRadioYes">Yes</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plGatedColonyRadio" id="plGatedColonyRadioNo">
-              <label class="form-check-label" for="plGatedColonyRadioNo">No</label>
-            </div>
-          </div>
-          <div class="col-12 d-flex justify-content-between">
-            <button class="btn btn-primary btn-prev"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i> <span class="align-middle d-sm-inline-block d-none">Previous</span> </button>
-            <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="bx bx-chevron-right bx-sm me-sm-n2"></i></button>
-          </div>
-        </div>
-      </div>
+            
+            <div class="col-md-3">
+              
+                <label>Select Currency</label>
+                <select class="form-control mb-3 one" name="currency"  class="mb-4" >
+                  <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="CHF">CHF</option>
+                    <option value="CAD">CAD</option>
+                    <option value="SAR">SAR</option>
+                    <option value="AED">AED</option>
+                    <option value="PKR">PKR</option>
+                    <option value="INR">INR</option>
+                    
+                
+                </select>
 
-      <!-- Price Details -->
-      <div id="price-details" class="content">
-        <div class="row g-3">
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plExpeactedPrice">Expected Price</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plExpeactedPrice" name="plExpeactedPrice" placeholder="25,000" aria-describedby="pl-expeacted-price">
-              <span class="input-group-text" id="pl-expeacted-price">$</span>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plPriceSqft">Price per Sqft</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plPriceSqft" name="plPriceSqft" placeholder="500" aria-describedby="pl-price-sqft">
-              <span class="input-group-text" id="pl-price-sqft">$</span>
+            
+            <div class="col-md-3">
+              
+                <label>Type Price</label>
+                <input class="form-control mb-3 one" name="price" type="text" placeholder="Free" >
+
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plMaintenenceCharge">Maintenance Charge</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plMaintenenceCharge" name="plMaintenenceCharge" placeholder="50" aria-describedby="pl-mentenence-charge">
-              <span class="input-group-text" id="pl-mentenence-charge">$</span>
+
+            
+
+            <div class="col-md-12 ">
+              <label>Description</label>
+                <textarea class="form-control" name="description" id="description" placeholder="Description"></textarea>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label" for="plMaintenencePer">Maintenance</label>
-            <select id="plMaintenencePer" name="plMaintenencePer" class="form-select">
-              <option value="1" selected>Monthly</option>
-              <option value="2">Quarterly</option>
-              <option value="3">Yearly</option>
-              <option value="3">One-time</option>
-              <option value="3">Per sqft. Monthly</option>
-            </select>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plBookingAmount">Booking/Token Amount</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plBookingAmount" name="plBookingAmount" placeholder="250" aria-describedby="pl-booking-amount">
-              <span class="input-group-text" id="pl-booking-amount">$</span>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label d-block" for="plOtherAmount">Other Amount</label>
-            <div class="input-group input-group-merge">
-              <input type="number" class="form-control" id="plOtherAmount" name="plOtherAmount" placeholder="500" aria-describedby="pl-other-amount">
-              <span class="input-group-text" id="pl-other-amount">$</span>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Show Price as</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plShowPriceRadio" id="plNagotiablePrice" checked>
-              <label class="form-check-label" for="plNagotiablePrice">Negotiable</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="plShowPriceRadio" id="plCallForPrice">
-              <label class="form-check-label" for="plCallForPrice">Call for Price</label>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <label class="form-label">Price includes</label>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="plCarParking" id="plCarParking">
-              <label class="form-check-label" for="plCarParking">Car Parking</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="plClubMembership" id="plClubMembership">
-              <label class="form-check-label" for="plClubMembership">Club Membership</label>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="plOtherCharges" id="plOtherCharges">
-              <label class="form-check-label" for="plOtherCharges">Stamp Duty & Registration charges excluded.</label>
-            </div>
-          </div>
-          <div class="col-12 d-flex justify-content-between">
-            <button class="btn btn-primary btn-prev"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i> <span class="align-middle d-sm-inline-block d-none">Previous</span> </button>
-            <button class="btn btn-success btn-submit btn-next">Submit</button>
-          </div>
+      
         </div>
-      </div>
-    </form>
+
+
+
+    </div>
+
+  <div class="col-md-12 text-center">
+    <button class="btn btn-save">
+      Save
+    </button>
+
   </div>
-    <div class="main_side_bar mt-3">
-        <h5 class="d-flex justify-content-center">Wishes and Thanks</h5>
-        <div style="padding:15px" class="coloun">
+    
+
+
+   
+
+            
+
+ 
+  
+</div>
+    
+    </div>
+  
+</div>
+
+<div class="col-md-4">
+  
+    <div class="main_side_bar">
+    <div class="price-list-heading">
+    <h5 class="d-flex justify-content-center">Our Pricing List</h5>
+    </div>  
+        
+        
+        <div style="padding:15px" class="coloun price-item">
             <div class="d-flex justify-content-between">
                 <div class="d-flex justify-content-inline">
-                    <img src="{{asset('assets/img/image_newww.png')}}" alt="" width="20px" height="25px">
+                    <img src="{{asset('assets/img/free.png')}}" alt="" width="20px" height="25px">
                      
-                    <h5>Standard</h5>
+                    <h5><b>Standard</b></h5>
                 </div>
                 <div class="d-flex justify-content-inline">
-                    <p>Free</p>
-                    <img src="{{asset('assets/img/tick.PNG')}}" alt="" width="20px" height="20px">
+                    <p class="price-free">
+            <span class="currency">€</span> 
+          Free</p>
+                    <!--<img src="{{asset('assets/img/tick.PNG')}}" alt="" width="20px" height="20px">-->
 
                 </div>
             </div>
-            <p>3 days in the selected category</p>
+            <p class="price_details"><span class="txt-green">&#10003; &nbsp;3 days</span> in the selected category
+    
+      
+    </p>
+    <img src="{{asset('assets/img/dots.jpg')}}" class="dots-img" alt="" width="20px" height="20px">
+    <div class="clearfix"></div>
+
+      <div>
+      
+      </div>
+
         </div>
 
 
-
-
-
-
-<!-- tw -->
-
-<div style="padding:15px" class="coloun mt-4">
+<div style="padding:15px" class="coloun mt-4 price-item">
     <div class="d-flex justify-content-between ">
         <div class="d-flex justify-content-inline ">
-            <img src="{{asset('assets/img/image_star2.png')}}" alt="" width="20px" height="25px">
+            <img src="{{asset('assets/img/premium.png')}}" alt="" width="20px" height="25px">
             <h5>Starter</h5>
         </div>
         <div class="d-flex justify-content-inline">
-            <p>9,99€</p>
+            <p class="price">
+      <span class="currency">€</span>   
+      9,99</p>
             <!-- <img src="tick.PNG" alt="" width="20px" height="30px"> -->
 
         </div>
     </div>
-    <p>7 days in selected area and in category first place</p>
+    <p class="price_details"><span class="txt-green">&#10003; &nbsp;7 days</span> in <span class="txt-green">selected area</span> and 
+    in <span class="txt-green">category</span> on <span class="txt-green">first place</span>
+    
+  </p>
+  <img src="{{asset('assets/img/dots.jpg')}}" class="dots-img" alt="" width="20px" height="20px">
+  <div class="clearfix"></div>
 </div>
 
 
@@ -504,24 +354,34 @@
 
 
 
-<div style="padding:15px" class="coloun mt-5">
+<div style="padding:15px" class="coloun mt-5 price-item">
     <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-inline mt-1 ">
-            <img src="{{asset('assets/img/image_star.png')}}" alt="" width="20px" height="25px">
+            <img src="{{asset('assets/img/advance.png')}}" alt="" width="20px" height="25px">
             <h5>Advanced</h5>
         </div>
         <div class="d-flex justify-content-inline">
-            <p>19,99€</p>
+            <p class="price">
+      <span class="currency">€</span>   
+      19,99</p>
             <!-- <img src="tick.PNG" alt="" width="20px" height="30px"> -->
 
         </div>
     </div>
-    <p>10 days in selected area and in category first place and in Feeds</p>
+    <p class="price_details"><span class="txt-green">&#10003; &nbsp;10 days</span> in <span class="txt-green">selected area </span>
+    and in <span class="txt-green">category</span> on 
+    <span class="txt-green">first place in Feeds</span>
+    
+  </p>
+  <img src="{{asset('assets/img/dots.jpg')}}" class="dots-img" alt="" width="20px" height="20px">
+  <div class="clearfix"></div>
 </div>
 
     </div>
-    </div>
- 
+    
+</div>
+</div>
+
 </div>
 <!--/ Property Listing Wizard -->
 @endsection
