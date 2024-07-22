@@ -30,9 +30,9 @@
             </h4>
         </div>
         <div class="">
-            @can('artist.create')
+            {{-- @can('artist.create') --}}
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createartistModal">Add Artist</button>
-            @endcan
+            {{-- @endcan --}}
             {{-- @can('crea') --}}
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmusicModal">Add Songs</button>
             {{-- @endcan --}}
@@ -93,7 +93,7 @@
                             <td>{{ $artist->gender }}</td>
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
-                                    @can('location.write')
+                                    {{-- @can('location.write') --}}
                                         <!-- Edit -->
                                         <span data-bs-toggle="modal" data-bs-target="#editModal{{ $artist->id }}">
                                             <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -111,8 +111,8 @@
                                                 </svg>
                                             </button>
                                         </span>
-                                    @endcan
-                                    @can('location.delete')
+                                    {{-- @endcan --}}
+                                    {{-- @can('location.delete') --}}
                                         <!-- Delete -->
                                         <form action="{{ route('artist.destroy', $artist->id) }}"
                                             onsubmit="confirmAction(event, () => event.target.submit())" method="post"
@@ -138,15 +138,15 @@
                                                 </svg>
                                             </button>
                                         </form>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </div>
-                                @can('artist.write')
+                                {{-- @can('artist.write') --}}
                                     <x-modal id="editModal{{ $artist->id }}" title="Edit Artist" saveBtnText="Update"
                                         saveBtnType="submit" saveBtnForm="editForm{{ $artist->id }}" size="md"
                                         :show="old('showEditFormModal' . $artist->id) ? true : false">
                                         @include('content.include.artist.editForm')
                                     </x-modal>
-                                @endcan
+                                {{-- @endcan --}}
                             </td>
                         </tr>
                     @empty
@@ -781,7 +781,7 @@
                         processData: false,
                         success: function(response) {
                             // Handle success
-                            alert('Album updated successfully');
+                            // alert('Album updated successfully');
                             $('#editAlbumModal' + formData.get('id')).modal('hide');
                             // Optionally refresh the album list or update the row
                         },

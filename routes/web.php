@@ -394,7 +394,16 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
             );
             Route::get('/categories', [CategoryController::class, 'index'])->name('organizations.categories.index');
         });
+    // Donation
     Route::resource('/donations', DonationController::class);
+    Route::post('/add_donation', [DonationController::class, 'add_donation'])->name('create.donation');
+    Route::put('/edit_donation/{id}', [DonationController::class, 'edit_donation'])->name('edit.donation');
+    Route::delete('/destroy_donation/{id}', [DonationController::class, 'destroy_donation'])->name('destroy.donation');
+
+    //Organization
+    Route::post('/add_organization', [App\Http\Controllers\Admin\Donation\OrganizationController::class, 'add_organization'])->name('add.organization');
+    Route::delete('/delete_organization/{id}', [App\Http\Controllers\Admin\Donation\OrganizationController::class, 'organization_destroy'])->name('organization.destroy');
+    Route::put('/organization_update/{id}', [App\Http\Controllers\Admin\Donation\OrganizationController::class, 'organization_update'])->name('organization.update');
 
     Route::resource('/news-category', NewsCategoryController::class);
 

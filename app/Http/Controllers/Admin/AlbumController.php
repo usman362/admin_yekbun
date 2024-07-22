@@ -41,7 +41,7 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        $request->dd();
+        // $request->dd();
         $request->validate([
             'artist_id' => 'required',
         ]);
@@ -66,7 +66,8 @@ class AlbumController extends Controller
                 $song->status = (int)$request->status;
                 $song->save();
             }
-            return redirect()->route('album.index')->with('success', 'Album Created Successfully');
+            // return redirect()->route('album.index')->with('success', 'Album Created Successfully');
+            return response()->json(['message' => 'Album Created Successfully'],201);
         } catch (Exception $e) {
             return back()->with('error', 'Album not created');
         }

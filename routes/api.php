@@ -71,12 +71,15 @@ use App\Http\Controllers\Api\PostGalleryController;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-| 
+|
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -109,7 +112,7 @@ Route::prefix("/users")->name("users.")->group(function () {
     Route::resource("diamond", DiamondUserController::class);
 });
 
-// News 
+// News
 Route::resource('news', NewsController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 Route::resource('news-category', NewsCategoryController::class)->only(['index', 'store', 'update', 'show', 'destroy']);
 Route::resource('music-category', MusicCategoryController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
@@ -157,9 +160,7 @@ Route::delete('/destroy_donation/{id}', [DonationDonationController::class, 'des
 
 
 
-// User 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/signup', [AuthController::class, 'signup']);
+// User
 
 Route::post('forgot-password', [AuthController::class, 'forgot_password']);
 
@@ -183,7 +184,7 @@ Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 
 
-// Country Controller 
+// Country Controller
 Route::get('province', [CountryController::class, 'province'])->name('province');
 Route::post('country/store', [CountryController::class, 'store'])->name('country.store');
 Route::put('country/store/update/yes', [CountryController::class, 'update'])->name('country.update');
@@ -204,12 +205,12 @@ Route::prefix('/translate')->name('api.translate.')->group(function () {
     Route::get('/{id}', [TranslationController::class, 'translate'])->name('translate');
 });
 
-// User  Setting Controller 
+// User  Setting Controller
 Route::post('/user-setting/{user_id}', [UserSettingController::class, 'index'])->name('user-setting');
 Route::post('/user-setting/save', [UserSettingController::class, 'save'])->name('user-setting-save')->middleware('auth:sanctum');
 
 
-// Feed Controller 
+// Feed Controller
 Route::get('share-feed', [FeedController::class, 'shareWidget'])->name('share-feed');
 
 
@@ -278,17 +279,17 @@ Route::get('/voting-stats/{id}', [VotingController::class , 'stats']);
 //Animation Emojji
 Route::get('/get-all-emoji/{userId?}/{type?}/{value?}' , [AnimationEmojiController::class  , 'get_all_emoji'])->name('get-all-emoji');
 
-// Reaction 
+// Reaction
 Route::post('/store-reaction' , [ReactionController::class, 'store_reaction'])->name('store-reaction');
-// comments 
+// comments
 Route::get('/get-comment/{type}/{id}/{parent_id?}' , [CommentController::class, 'get_comment'])->name('get-comment');
 Route::post('/store-comment' , [CommentController::class, 'store_comment'])->name('store-comment');
 
-// Music 
+// Music
 Route::get('/music' , [MusicController::class , 'index'])->name('music');
 Route::get('/popular-song/{id}' , [MusicController::class , 'popular_song'])->name('popular-song');
 
-// Artist 
+// Artist
 Route::get('/artist-music' , [ArtistController::class , 'get_all_artist_music'])->name('artist-music');
 Route::get('/single-aritst-music/{id}' , [ArtistController::class , 'get_single_artist_music'])->name('single-aritst-music');
 Route::get('/get-latest-artist' , [ArtistController::class , 'get_two_latest_artist'])->name('get-latest-artist');
@@ -305,18 +306,18 @@ Route::post('/market-services' ,[MarketServiceContorller::class , 'market_servic
 // Route::post('/market-view-options' , [MarketServiceContorller::class , 'market_view_option'])->name('market-view-options');
 
 
-// Playlist 
+// Playlist
 Route::post('/playlists' , [PlaylistController::class , 'playlist'])->name('playlists');
 Route::post('/get-playlist' , [PlaylistController::class , 'get_playlist'])->name('get-playlist');
 Route::get('/get-single-playlist/{playlist_id}' , [PlaylistController::class , 'get_single_playlist'])->name('get-single-playlist');
 // Set music to playlist
 Route::post('/set-music-playlist' , [PlaylistController::class , 'set_music_to_playlist'])->name('set-music-playlist');
-// fovourite artist 
+// fovourite artist
 Route::post('/favourite-artist' , [PlaylistController::class , 'favourite_artist'])->name('favourite-aritst');
 Route::get('/get-favourite-artist/{user_id}' , [PlaylistController::class  , 'get_favourite_artist'])->name('get-favourite-artist');
 Route::get('/get-favourite-artist-id/{user_id}' , [PlaylistController::class  , 'get_favourite_artist_ids'])->name('get-favourite-artist-id');
 // Route::get('/get-music-playlist' , [PlaylistController::class , 'get_music_playlist'])->name('get-music-playlist');
-// Ablbum controller 
+// Ablbum controller
 Route::post('/favourite-album' , [AlbumController::class , 'favourite_album'])->name('favourite-album');
 Route::get('/get-favourite-album/{user_id}' , [AlbumController::class , 'get_favourite_album'])->name('get-favourite-album');
 Route::get('/get-favourite-album-id/{user_id}' , [AlbumController::class , 'get_favourite_album_ids'])->name('get-favourite-album-id');

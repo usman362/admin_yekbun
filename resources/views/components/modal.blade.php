@@ -2,12 +2,13 @@
 $uid = uniqid();
 @endphp
 
-<div class="modal fade modal-{{ $uid }}" {{$attributes}} aria-modal="true" role="dialog" style="z-index: 999999">
+<div class="modal fade modal-{{ $uid }}" {{$attributes}} aria-modal="true" role="dialog">
     <div class="modal-dialog {{ $centered? 'modal-dialog-centered': '' }} modal-{{$size}}" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="{{ $titleCentered? 'text-center': '' }} w-100">
-                    <{{ $titleTag }} class="modal-title" id="modalCenterTitle">{{ $title }}</{{ $titleTag }}>
+                    {{-- <{{ $titleTag }} class="modal-title" id="modalCenterTitle">{{ $title }}</{{ $titleTag }}> --}}
+                    <h4>Channel Name</h4>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

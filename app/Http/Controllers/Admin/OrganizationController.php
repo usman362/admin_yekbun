@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
+use App\Models\MongoOrganization;
 
 class OrganizationController extends Controller
 {
@@ -18,7 +19,8 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $organizations = Organization::orderBy("updated_at", "DESC")->get();
+        // $organizations = Organization::orderBy("updated_at", "DESC")->get();
+        $organizations = MongoOrganization::orderBy("updated_at", "DESC")->get();
         return view("content.organizations.index", compact("organizations"));
     }
 
@@ -38,7 +40,7 @@ class OrganizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrganizationRequest $request)
+    public function store(Request $request)
     {
         $validated = $request->validated();
 
@@ -128,12 +130,12 @@ class OrganizationController extends Controller
             if (file_exists($path)) {
                 unlink($path);
             }
-    
+
             // Remove the image filename from the model attribute
             $organization->logo = null;
             $organization->save();
         }
-        
+
         return [
             'status' => true
         ];
