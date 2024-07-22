@@ -31,15 +31,19 @@ class AuthController extends Controller
     ]);
     (int)$credentials['is_admin_user'] = 1;
     (int)$credentials['status'] = 1;
-    // dd($credentials);
-    if (Auth::attempt($credentials)) {
-      $user = Auth::user();
+    if (Auth::attempt($credentials, true)) {
+        $user = Auth::user();
+        $user->remember_token = null;
+        $user->save();
 
-      if ($user->status == 0)
+        if ($user->status == 0)
         return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
 
-      // $token = explode('|', $user->createToken('Yekhbun')->plainTextToken)[1];
-      $token = explode('|', $user->createToken('Yekhbun')->plainTextToken)[1];
+    // $token = explode('|', $user->createToken('Yekhbun')->plainTextToken)[1];
+    $user = $request->user();
+    $tokenResult = $user->createToken('Personal Access Token');
+    $token = $tokenResult->plainTextToken;
+    dd($token);
 
       return response()->json(['success' => true, 'data' => ['user' => $user, 'token' => $token]], 200);
     } else {
