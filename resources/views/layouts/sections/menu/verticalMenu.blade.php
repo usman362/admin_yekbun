@@ -885,14 +885,14 @@ $configData = Helper::appClasses();
             </li>
 
 
- <li class="menu-item {{ Request::is('wishes/add_prays') ? 'active' : '' }}">
+ {{-- <li class="menu-item {{ Request::is('wishes/add_prays') ? 'active' : '' }}">
 
           <a href="{{url('wishes/add_prays?view=new_request')}} " class="menu-link">
                 <div>Add Prays</div>
               </a>
 
 
-            </li>
+            </li> --}}
 
 
 
@@ -933,14 +933,14 @@ $configData = Helper::appClasses();
             </li>
 
 
-    <li class="menu-item {{ Request::is('wishes/add_verses') ? 'active' : '' }}">
+    {{-- <li class="menu-item {{ Request::is('wishes/add_verses') ? 'active' : '' }}">
 
           <a href="{{url('wishes/add_verses?view=new_request')}} " class="menu-link">
                 <div>Add verses</div>
               </a>
 
 
-            </li>
+            </li> --}}
 
 
 
@@ -983,7 +983,7 @@ $configData = Helper::appClasses();
 
             <li class="menu-item {{ Request::is('wishes/setting/policy_terms') ? 'active' : '' }}">
               <a href="{{ url('wishes/setting/policy_terms') }}" class="menu-link">
-                <div>Policy and Terms</div>
+                <div>Wishes Policy </div>
               </a>
 
 
