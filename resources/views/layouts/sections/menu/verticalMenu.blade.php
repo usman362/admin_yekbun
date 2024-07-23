@@ -1059,32 +1059,13 @@ $configData = Helper::appClasses();
 
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
-                <div>Add Effects</div>
+                <div>Add Cards</div>
               </a>
 
 
             </li>
 
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Add Fonts</div>
-              </a>
-
-
-            </li>
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Add Font Colors</div>
-              </a>
-
-
-            </li>
-
+ 
 
 
             <li class="menu-item ">
@@ -1106,7 +1087,101 @@ $configData = Helper::appClasses();
 
             <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
               <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
-                <div>Policy and Terms</div>
+                <div> Stories Policy</div>
+              </a>
+
+
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-item {{ Request::is('settings/reels/*') ? 'active open' : '' }} {{ Request::is('reel/*') ? 'active open' : '' }}">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bxs-videos"></i>
+        <div>Reels</div>
+      </a>
+
+
+      <ul class="menu-sub">
+
+
+
+        <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
+          <a href="{{ url('story/ManageStories') }}" class="menu-link">
+            <div>Manage Stories</div>
+          </a>
+
+
+        </li>
+
+
+
+         <li class="menu-item {{ Request::is('story/ReportedStories') ? 'active' : '' }} ">
+          <a href="{{ url('story/ReportedStories') }}" class="menu-link">
+            <div>Reported Stories</div>
+          </a>
+
+
+        </li>
+
+
+
+        <li class="menu-item {{ Request::is('settings/stories/*') ? 'active open' : '' }}">
+          <a href="javascript:void(0)" class="menu-link menu-toggle">
+            <div>Settings</div>
+          </a>
+
+
+          <ul class="menu-sub">
+
+
+
+
+
+
+
+            <li class="menu-item ">
+              <a href="javascript:void(0)" class="menu-link">
+                <div>Add Songs</div>
+              </a>
+
+
+            </li>
+
+
+
+            <li class="menu-item ">
+              <a href="javascript:void(0)" class="menu-link">
+                <div>Add Cards</div>
+              </a>
+
+
+            </li>
+
+ 
+
+
+            <li class="menu-item ">
+              <a href="javascript:void(0)" class="menu-link">
+                <div>Stories Time</div>
+              </a>
+
+
+            </li>
+
+             <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
+              <a href="{{url('/settings/stories/reasons ')}}" class="menu-link">
+                <div>Reasons</div>
+              </a>
+
+
+            </li>
+
+
+            <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
+              <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
+                <div> Stories Policy</div>
               </a>
 
 
