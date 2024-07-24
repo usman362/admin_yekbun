@@ -11,11 +11,13 @@ use App\Http\Controllers\fanpage\FanPage;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\Admin\ChannelPolicyController;
 
 use App\Http\Controllers\Admin\EventController;
 
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\Admin\StoryController;
+use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ReportController;
@@ -81,6 +83,7 @@ use App\Http\Controllers\Admin\Settings\PrefixController;
 use App\Http\Controllers\Admin\Settings\ReasonController;
 
 use App\Http\Controllers\VideoClipController;
+use App\Http\Controllers\Admin\ChannelReasonController; 
 use App\Http\Controllers\Admin\WishesandThanks\WishesReasonController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPrefixController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPolicyandTermController;
@@ -347,7 +350,14 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/video-clips/{id}/clip', [VideoClipController::class, 'deleteVideo'])->name(
         'video-clips.delete-audio'
     );
-
+  
+   // Channel Policy 
+   Route::post('/add_channel_policy',[ChannelPolicyController::class, 'add_policy'])->name('add.policy');
+    Route::put('/edit_channel_policy',[ChannelPolicyController::class, 'edit_policy'])->name('edit.policy');
+    Route::post('/add_policy_section',[ChannelPolicyController::class, 'add_section'])->name('add.section');
+   Route::put('/edit_policy_section/{id}',[ChannelPolicyController::class, 'edit_section'])->name('edit.section');
+   // Route::delete('/destroy_policy_section/{id}',[ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
+   Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
 
     Route::resource('/vote-category', VotingCategoryController::class);
@@ -508,6 +518,34 @@ Route::post('/languages/keyword/section/voting', [LanguageController::class, 'sa
         ->group(function () {
             Route::resource('/flagged-users', FlaggedUserController::class);
         });
+//Channel Reasons 
+Route::post('/add_channel_reason',[ChannelReasonController::class, 'add_reason'])->name('add.reason');
+Route::put('/edit_channel_reason/{id}',[ChannelReasonController::class, 'edit_reason'])->name('edit.reason');
+Route::delete('/destory_reason/{id}',[ChannelReasonController::class, 'destroy_reason'])->name('destroy.reason');
+Route::get('/destroy_policy_desc/{id}',  [ChannelPolicyController::class, 'destroy_desc'])->name('destroy.desc');
+
+//Channels
+Route::get('managecategories', [FlaggedUserController::class, 'managecategories'])->name('channels');
+
+Route::get('channelrequest', [FlaggedUserController::class, 'channelrequest']);
+Route::get('managechannel', [FlaggedUserController::class, 'managechannel']);
+Route::get('channeladmin', [FlaggedUserController::class, 'channeladmin']);
+Route::get('channels/reason', [FlaggedUserController::class, 'reason']);
+Route::get('channels/prefix', [FlaggedUserController::class, 'prefix']);
+Route::get('channels/policy_terms', [FlaggedUserController::class, 'policy_terms']);
+
+
+Route::post('/add_channel_category', [ChannelCategoryController::class, 'add_channel_category'])->name('add.channel.category');
+Route::delete('/channels/{id}', [ChannelCategoryController::class, 'destroy_channel'])->name('channels.destroy');
+Route::post('/edit_channel', [ChannelCategoryController::class, 'edit_channel'])->name('edit.category');
+Route::post('/add_channel_subcategory', [ChannelCategoryController::class, 'add_channel_subcategory'])->name('channel.subcategory');
+Route::put('/edit_channel_subcategory/{id}', [ChannelCategoryController::class, 'edit_channel_subcategory'])->name('edit.channel.subcat');
+Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, 'destroy_channel_subcategory'])->name('channels.subcat.destroy');
+
+
+
+
+
     Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
     Route::get('/feed-background', [BackgroundFeedController::class, 'index'])->name('feed.background');
     Route::post('/feed-background', [BackgroundFeedController::class, 'store'])->name('feed.background.store');

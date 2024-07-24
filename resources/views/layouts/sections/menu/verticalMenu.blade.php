@@ -136,6 +136,58 @@ $configData = Helper::appClasses();
           <div>Flagged User</div>
         </a>
       </li>
+      <li class="menu-item {{ Request::is('Channels/') ? 'active open' : '' }} {{ Request::is('channelrequest') ? 'active open' : '' }} {{ Request::is('managechannel') ? 'active open' : '' }} {{ Request::is('settings/') ? 'active open' : '' }} {{ Request::is('channels/reason') ? 'active open' : '' }} {{ Request::is('channels/prefix') ? 'active open' : '' }} {{ Request::is('channels/policy_terms') ? 'active open' : '' }} {{ Request::is('channeladmin') ? 'active open' : '' }} {{ Request::is('addmanagechannel') ? 'active open' : '' }}">
+  <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <i class="menu-icon tf-icons bx bx-file"></i>
+    <div>Channels</div>
+  </a>
+  <ul class="menu-sub">
+  
+   <li class="menu-item {{ Request::is('managecategories') ? 'active ' : '' }}">
+      <a href="{{url('managecategories')}}" class="menu-link">
+        <div>Manage Categories</div>
+      </a>
+    </li>
+   <li class="menu-item {{ Request::is('channelrequest') ? 'active ' : '' }}">
+      <a href="{{url('channelrequest?view=new_request')}}" class="menu-link">
+        <div>Channel Request</div>
+      </a>
+    </li>
+  <li class="menu-item {{ Request::is('managechannel') ? 'active ' : '' }}">
+      <a href="{{url('managechannel?view=new_request')}}" class="menu-link">
+        <div>Manage Channel</div>
+      </a>
+    </li>
+    <li class="menu-item {{ Request::is('channeladmin') ? 'active ' : '' }}">
+      <a href="{{url('channeladmin')}}" class="menu-link">
+        <div>Channel Admin</div>
+      </a>
+    </li>
+    <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }} {{ Request::is('channels/reason') ? 'active open' : '' }} {{ Request::is('channels/prefix') ? 'active open' : '' }} {{ Request::is('channels/policy_terms') ? 'active open' : '' }}">
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <div>Settings</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item {{ Request::is('channels/reason') ? 'active' : '' }}">
+          <a href="{{url('channels/reason')}}" class="menu-link">
+            <div>Reasons</div>
+          </a>
+        </li>
+        {{-- <li class="menu-item {{ Request::is('channels/prefix') ? 'active' : '' }}">
+          <a href="{{url('channels/prefix')}}" class="menu-link">
+            <div>Prefix</div>
+          </a>
+        </li> --}}
+        <li class="menu-item {{ Request::is('channels/policy_terms') ? 'active' : '' }}">
+          <a href="{{url('channels/policy_terms')}}" class="menu-link">
+            <div>Channels Policy </div>
+          </a>
+        </li>
+
+      </ul>
+    </li>
+  </ul>
+</li>
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-file"></i>
