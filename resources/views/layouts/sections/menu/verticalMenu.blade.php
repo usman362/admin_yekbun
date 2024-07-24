@@ -188,56 +188,12 @@ $configData = Helper::appClasses();
     </li>
   </ul>
 </li>
-    <li class="menu-item ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-file"></i>
-        <div>FanPage</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>Add/Manage Categories</div>
-          </a>
-        </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>FanPage Request</div>
-          </a>
-        </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>Manage Fanpage</div>
-          </a>
-        </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>FanPage Admin</div>
-          </a>
-        </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Reasons</div>
-              </a>
-            </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Policy and Terms</div>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    
 </li>
 <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active ' : '' }}">
 <a href="{{url('/flaggedfanpage')}}" class="menu-link">
 <i class="menu-icon tf-icons bx bx-flag"></i>
-<div>Flagged FanPage</div>
+<div>Flagged Channels</div>
 </a>
 </li>
     <li class="menu-header small text-uppercase">
