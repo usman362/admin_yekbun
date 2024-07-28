@@ -6,7 +6,7 @@
         padding-top: 8px;
     }
   </style>
-<form id=createForm method="POST" action="{{ route('language.store') }}" enctype="multipart/form-data">
+<form id=createForm2 method="POST" action="{{ route('language.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-lg-12 mx-auto">

@@ -1645,7 +1645,7 @@
     </div>
 </div>
 
-<x-modal id="createlanguageModal" title="Create Language" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md">
+<x-modal id="createlanguageModal" title="Create Language" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm2" size="md">
     @include('content.include.language.createForm')
 </x-modal>
 
