@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Helpers;
 use session;
 use App\Models\User;
 use App\Models\UserCode;
@@ -33,17 +34,14 @@ class AuthController extends Controller
     (int)$credentials['status'] = 1;
     if (Auth::attempt($credentials, true)) {
         $user = Auth::user();
-        $user->remember_token = null;
-        $user->save();
 
-        if ($user->status == 0)
+        if ($user->is_verfied == 0)
         return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
 
     // $token = explode('|', $user->createToken('Yekhbun')->plainTextToken)[1];
     $user = $request->user();
     $tokenResult = $user->createToken('Personal Access Token');
     $token = $tokenResult->plainTextToken;
-    dd($token);
 
       return response()->json(['success' => true, 'data' => ['user' => $user, 'token' => $token]], 200);
     } else {
@@ -61,50 +59,73 @@ class AuthController extends Controller
       'phone' => 'required|min:11',
     ]);
 
-    $userExist = User::where('email', $request->email)->first();
+    $emailTaken = User::where('email', $request->email)->first();
 
-    if ($userExist) {
+    if ($emailTaken) {
       return response()->json([
         'success' => false,
         'message' => 'Email is already taken.',
       ]);
     }
 
+    $usernameTaken = User::where('username', $request->username)->first();
+
+    if ($usernameTaken) {
+      return response()->json([
+        'success' => false,
+        'message' => 'Username is already taken.',
+      ]);
+    }
+
     $user = User::create([
         'name' => $request['fname'],
+        'username' => $request['username'],
         'email' => $request['email'],
         'password' => bcrypt($request['password']),
         'status' => (int)'1',
         'is_admin_user' => (int)'0',
-        'level' => (int)'1',
+        'level' => (int)'0',
         'is_verfied' => (int)'1',
         'is_superadmin' => (int)'0',
         'last_name' => $request['lname'],
+        'language' => $request['language'],
+        'gender' => $request['gender'],
+        'location' => $request['location'],
+        'marital_status' => $request['marital_status'],
+        'dob' => $request['dob'],
+        'province' => $request['province'],
+        'city' => $request['city'],
         'phone' => $request['phone']
     ]);
 
-
-    if ($user->id) {
-      $code = rand(1000, 9999);
-      UserCode::updateOrCreate(
-        ['user_id' => $user->id],
-        ['code' => $code]
-      );
-      try {
-        $details = [
-          'title' => 'Mail from Yekbun.org',
-          'code' => $code,
-          'username' => $request->username,
-        ];
-
-        Mail::to($request['email'])->send(new SendCodeMail($details));
-        return response()->json(['success' => true, "message" => "Verfication Code sent to your email", 'data' => $user->id], 201);
-      } catch (\Exception $e) {
-        info("Error: " . $e->getMessage());
-        return response()->json(['success' => false, 'message' => $e->getMessage()], 505);
-      }
+    if ($request->has('image')) {
+        $image_path = Helpers::fileUpload($request->image, 'images/user');
+        $user->image = $image_path;
+        $user->save();
     }
-  }
+
+    // if ($user->id) {
+    //   $code = rand(1000, 9999);
+    //   UserCode::updateOrCreate(
+    //     ['user_id' => $user->id],
+    //     ['code' => $code]
+    //   );
+    //   try {
+        // $details = [
+        //   'title' => 'Mail from Yekbun.org',
+        //   'code' => $code,
+        //   'username' => $request->username,
+        // ];
+
+        // Mail::to($request['email'])->send(new SendCodeMail($details));
+        // return response()->json(['success' => true, "message" => "Verfication Code sent to your email", 'user' => $user->id], 201);
+        return response()->json(['success' => true, "message" => "User has been Successfully Created!", 'user' => $user->id], 201);
+    //   } catch (\Exception $e) {
+    //     info("Error: " . $e->getMessage());
+    //     return response()->json(['success' => false, 'message' => $e->getMessage()], 505);
+    //   }
+    }
+//   }
 
   public function forgot_password(Request $request)
   {

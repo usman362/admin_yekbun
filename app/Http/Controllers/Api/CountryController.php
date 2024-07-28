@@ -3,61 +3,46 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
-use App\Models\Region;
-use App\Models\City;
-use App\Models\User;
 use App\Models\Country;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-    public function province(){
-        $provinces = Country::where('name', 'Kurdistan')->first()->regions;
-
-        for($i=0; $i<sizeof($provinces); $i++){
-            $provinces[$i]->cities = $provinces[$i]->cities;
-
-            foreach ($provinces[$i]->cities as $item) {
-                $item->user_count = User::where('province_city', $item->name)->count() ?? '';
-            }
-        }
-
-        return response()->json(['success' => true, "data" => $provinces]);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $countries = Country::orderBy("name", "ASC")->get();
+        return response()->json(['countries' => $countries],200);
     }
 
-    // public function city($provinceId){
-
-    //     $city = City::where('region_id'  , $provinceId)->get();
-    //     if(isset($city)){
-    //         return response()->json(['success' => true, "data" =>$city]);
-    //     }else{
-    //         return response()->json(['error'=>false , "data" => "No City Available for that Province"]);
-    //     }
-    // }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(StoreCountryRequest $request)
     {
         $validated = $request->validated();
-    
-        try {
-            $country = Country::create($validated);
-    
-            return response()->json([
-                'success' => true,
-                'message' => 'Country successfully added.',
-                
-            ], 201);
-    
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to add country.',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+
+        $country = Country::create($validated);
+
+        return response()->json(['message' => 'Country successfully added.','country' => $country],201);
     }
-    
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(UpdateCountryRequest $request, $id)
     {
         $validated = $request->validated();
@@ -66,7 +51,21 @@ class CountryController extends Controller
         $country->fill($validated);
         $country->save();
 
-        return response()->json('Country Updated successfully');
+        return response()->json(['message' => 'Country successfully updated.','country' => $country],201);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $country = Country::find($id);
+
+        $country->delete();
+
+        return response()->json(['message' => 'Country successfully deleted.','country' => $country],201);
+    }
 }

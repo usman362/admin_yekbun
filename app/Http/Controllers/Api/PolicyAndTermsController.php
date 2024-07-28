@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Setting;
+use App\Models\PolicyTerm;
 use Illuminate\Http\Request;
 use App\Models\PolicyAndTerm;
+use App\Http\Controllers\Controller;
+use App\Models\Translation;
+use App\Models\Language;
+
 
 class PolicyAndTermsController extends Controller
 {
@@ -15,7 +20,8 @@ class PolicyAndTermsController extends Controller
      */
     public function index()
     {
-        //
+        $data = PolicyAndTerm::all();
+        return response()->json(['policy' => $data],200);
     }
 
     /**
@@ -39,27 +45,13 @@ class PolicyAndTermsController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-    
-        try {
-            $policyAndTerm = PolicyAndTerm::create([
-                'name' => $request->name
-            ]);
-    
-            return response()->json([
-                'success' => true,
-                'message' => 'New privacy policy and terms section has been created.',
-                
-            ], 201);
-    
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to create new privacy policy and terms section.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+
+        $policy = PolicyAndTerm::create([
+            'name' => $request->name
+        ]);
+
+        return response()->json(['message' => 'New privacy policy and terms section has been created.', 'policy' => $policy],201);
     }
-    
 
     /**
      * Display the specified resource.
@@ -103,61 +95,23 @@ class PolicyAndTermsController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $policy = PolicyAndTerm::findOrFail($id);
-    
-            if ($policy->delete()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Policy and terms section has been deleted successfully.'
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Failed to delete policy and terms section.'
-                ], 500);
-            }
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Policy and terms section not found.',
-                'error' => $e->getMessage(),
-            ], 404);
-        }
+         $policy = PolicyAndTerm::find($id);
+         if($policy->delete($policy->id)){
+            return response()->json(['message' => 'New privacy policy and terms section has been deleted.', 'policy' => $policy],201);
+         }
     }
 
-    public function saveFileds(Request $request)
-{
-    $request->validate([
-        'privacy_policy' => 'required',
-        // 'disclaimer' => 'required',
-    ]);
+    public function saveFileds(Request $request){
+        $request->validate([
+            'privacy_policy' => 'required',
+        ]);
 
-    try {
-        $check = PolicyAndTerm::findOrFail($request->id);
+        $check = PolicyAndTerm::find($request->id);
         $check->privacy_policy = $request->privacy_policy;
-        // $check->disclaimer = $request->disclaimer;
-
-        if ($check->save()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Privacy Policy and terms updated successfully.',
-               
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to update Privacy Policy and terms.'
-            ], 500);
+        if($check->save()){
+            return response()->json(['message' => 'Privacy Policy and term updated successfully.', 'policy' => $check],201);
+        }else{
+            return response()->json(['message' => 'Failed to update Privacy Policy and term.', 'policy' => $check],403);
         }
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Policy and terms not found.',
-            'error' => $e->getMessage(),
-        ], 404);
     }
-}
-
-
 }

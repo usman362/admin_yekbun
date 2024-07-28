@@ -83,7 +83,7 @@ use App\Http\Controllers\Admin\Settings\PrefixController;
 use App\Http\Controllers\Admin\Settings\ReasonController;
 
 use App\Http\Controllers\VideoClipController;
-use App\Http\Controllers\Admin\ChannelReasonController; 
+use App\Http\Controllers\Admin\ChannelReasonController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesReasonController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPrefixController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPolicyandTermController;
@@ -350,8 +350,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/video-clips/{id}/clip', [VideoClipController::class, 'deleteVideo'])->name(
         'video-clips.delete-audio'
     );
-  
-   // Channel Policy 
+
+   // Channel Policy
    Route::post('/add_channel_policy',[ChannelPolicyController::class, 'add_policy'])->name('add.policy');
     Route::put('/edit_channel_policy',[ChannelPolicyController::class, 'edit_policy'])->name('edit.policy');
     Route::post('/add_policy_section',[ChannelPolicyController::class, 'add_section'])->name('add.section');
@@ -518,7 +518,7 @@ Route::post('/languages/keyword/section/voting', [LanguageController::class, 'sa
         ->group(function () {
             Route::resource('/flagged-users', FlaggedUserController::class);
         });
-//Channel Reasons 
+//Channel Reasons
 Route::post('/add_channel_reason',[ChannelReasonController::class, 'add_reason'])->name('add.reason');
 Route::put('/edit_channel_reason/{id}',[ChannelReasonController::class, 'edit_reason'])->name('edit.reason');
 Route::delete('/destory_reason/{id}',[ChannelReasonController::class, 'destroy_reason'])->name('destroy.reason');
