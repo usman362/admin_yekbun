@@ -11,11 +11,13 @@ use App\Http\Controllers\fanpage\FanPage;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\Admin\ChannelPolicyController;
 
 use App\Http\Controllers\Admin\EventController;
 
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\Admin\StoryController;
+use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ReportController;
@@ -81,6 +83,7 @@ use App\Http\Controllers\Admin\Settings\PrefixController;
 use App\Http\Controllers\Admin\Settings\ReasonController;
 
 use App\Http\Controllers\VideoClipController;
+use App\Http\Controllers\Admin\ChannelReasonController; 
 use App\Http\Controllers\Admin\WishesandThanks\WishesReasonController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPrefixController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPolicyandTermController;
@@ -347,7 +350,14 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/video-clips/{id}/clip', [VideoClipController::class, 'deleteVideo'])->name(
         'video-clips.delete-audio'
     );
-
+  
+   // Channel Policy 
+   Route::post('/add_channel_policy',[ChannelPolicyController::class, 'add_policy'])->name('add.policy');
+    Route::put('/edit_channel_policy',[ChannelPolicyController::class, 'edit_policy'])->name('edit.policy');
+    Route::post('/add_policy_section',[ChannelPolicyController::class, 'add_section'])->name('add.section');
+   Route::put('/edit_policy_section/{id}',[ChannelPolicyController::class, 'edit_section'])->name('edit.section');
+   // Route::delete('/destroy_policy_section/{id}',[ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
+   Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
 
     Route::resource('/vote-category', VotingCategoryController::class);
@@ -449,6 +459,45 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
 
     Route::resource('/language', LanguageController::class);
+
+//Translation Keyword
+
+Route::post('/languages/keywordstore', [LanguageController::class, 'keywordstore'])->name('languages.keywordstore');
+Route::post('/languages/keyword/startpage', [LanguageController::class, 'startpage'])->name('languages.startpage');
+Route::post('/languages/keyword/signupsection', [LanguageController::class, 'signupsection'])->name('languages.signupsection');
+Route::post('/languages/keyword/signinsection', [LanguageController::class, 'signinsection'])->name('languages.signinsection');
+Route::post('/languages/keyword/footerquicklauncher', [LanguageController::class, 'footerquicksection'])->name('languages.footerquicklauncher');
+Route::post('/languages/keyword/footercart', [LanguageController::class, 'footercartsection'])->name('languages.footercart');
+Route::post('/languages/keyword/footerfriendsection', [LanguageController::class, 'footerfriendsection'])->name('languages.footerfriendsection');
+Route::post('/languages/keyword/footerchatsection', [LanguageController::class, 'footerchatsection'])->name('languages.footerchatsection');
+Route::post('/languages/keyword/headerfeedsection', [LanguageController::class, 'headerfeedsection'])->name('languages.headerfeedsection');
+Route::post('/languages/keyword/visiter_profile', [LanguageController::class, 'visiterprofilesection'])->name('languages.visiterprofilesection');
+Route::post('/languages/keyword/header_section_stories', [LanguageController::class, 'headersectionstories'])->name('languages.headersectionstories');
+Route::post('/languages/keyword/header_greating/section', [LanguageController::class, 'headergreatingsection'])->name('languages.headergreatingsection');
+Route::post('/languages/keyword/header_music/section', [LanguageController::class, 'headermusicsection'])->name('languages.headermusicsection');
+Route::post('/languages/keyword/header_video/section', [LanguageController::class, 'headervideosection'])->name('languages.headervideosection');
+Route::post('/languages/keyword/header_stream/section', [LanguageController::class, 'headerstreamsection'])->name('languages.headerstreamsection');
+Route::post('/languages/keyword/header_event/section', [LanguageController::class, 'headereventsection'])->name('languages.headereventsection');
+Route::post('/languages/keyword/header_online_shop/section', [LanguageController::class, 'headeronlineshopsection'])->name('languages.headeronlineshopsection');
+Route::post('/languages/keyword/header_restaurant/section', [LanguageController::class, 'headerrestaurantsection'])->name('languages.headerrestaurantsection');
+Route::post('/languages/keyword/header_service_portal/section', [LanguageController::class, 'headerserviceportalsection'])->name('languages.headerserviceportalsection');
+Route::post('/languages/keyword/setting_overview_section/section', [LanguageController::class, 'settingOverviewSection'])->name('languages.settingOverviewSection');
+Route::post('/languages/keyword/my_profile_home/section', [LanguageController::class, 'myProfileHomeSection'])->name('languages.myProfileHomeSection');
+Route::post('/languages/keyword/my_profile_multimedia/section', [LanguageController::class, 'myProfileMultimedia'])->name('languages.myProfileMultimedia');
+Route::post('/languages/keyword/my_profile_friend/section', [LanguageController::class, 'myProfileFriendsSection'])->name('languages.myProfileFriendsSection');
+Route::post('/languages/keyword/my_profile_office/section', [LanguageController::class, 'myProfileOfficeSection'])->name('languages.myProfileOfficeSection');
+Route::post('/languages/keyword/Channels/section', [LanguageController::class, 'myChannels'])->name('languages.myChannels');
+Route::post('/languages/keyword/Channels/setting/section', [LanguageController::class, 'ChannelsSetting'])->name('languages.ChannelsSetting');
+Route::post('/languages/keyword/section/setting', [LanguageController::class, 'saveSectionSettings'])->name('languages.saveSectionSettings');
+Route::post('/languages/keyword/section/history', [LanguageController::class, 'saveSectionhistory'])->name('languages.saveSectionhistory');
+Route::post('/languages/keyword/section/voting', [LanguageController::class, 'saveSectionvoter'])->name('languages.saveSectionvoter');
+
+
+
+
+
+
+
     Route::post('/language-transalate/{id?}', [TranslationController::class, 'translateLanguage'])->name(
         'translation.translateLanguage'
     );
@@ -469,6 +518,34 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         ->group(function () {
             Route::resource('/flagged-users', FlaggedUserController::class);
         });
+//Channel Reasons 
+Route::post('/add_channel_reason',[ChannelReasonController::class, 'add_reason'])->name('add.reason');
+Route::put('/edit_channel_reason/{id}',[ChannelReasonController::class, 'edit_reason'])->name('edit.reason');
+Route::delete('/destory_reason/{id}',[ChannelReasonController::class, 'destroy_reason'])->name('destroy.reason');
+Route::get('/destroy_policy_desc/{id}',  [ChannelPolicyController::class, 'destroy_desc'])->name('destroy.desc');
+
+//Channels
+Route::get('managecategories', [FlaggedUserController::class, 'managecategories'])->name('channels');
+
+Route::get('channelrequest', [FlaggedUserController::class, 'channelrequest']);
+Route::get('managechannel', [FlaggedUserController::class, 'managechannel']);
+Route::get('channeladmin', [FlaggedUserController::class, 'channeladmin']);
+Route::get('channels/reason', [FlaggedUserController::class, 'reason']);
+Route::get('channels/prefix', [FlaggedUserController::class, 'prefix']);
+Route::get('channels/policy_terms', [FlaggedUserController::class, 'policy_terms']);
+
+
+Route::post('/add_channel_category', [ChannelCategoryController::class, 'add_channel_category'])->name('add.channel.category');
+Route::delete('/channels/{id}', [ChannelCategoryController::class, 'destroy_channel'])->name('channels.destroy');
+Route::post('/edit_channel', [ChannelCategoryController::class, 'edit_channel'])->name('edit.category');
+Route::post('/add_channel_subcategory', [ChannelCategoryController::class, 'add_channel_subcategory'])->name('channel.subcategory');
+Route::put('/edit_channel_subcategory/{id}', [ChannelCategoryController::class, 'edit_channel_subcategory'])->name('edit.channel.subcat');
+Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, 'destroy_channel_subcategory'])->name('channels.subcat.destroy');
+
+
+
+
+
     Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
     Route::get('/feed-background', [BackgroundFeedController::class, 'index'])->name('feed.background');
     Route::post('/feed-background', [BackgroundFeedController::class, 'store'])->name('feed.background.store');

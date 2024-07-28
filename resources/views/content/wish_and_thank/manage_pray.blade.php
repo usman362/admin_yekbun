@@ -85,12 +85,43 @@ const dropZoneInitFunctions = [];
       </div>
     </div>
   </div>
- 
+  <!--<div class="col-sm-6 col-xl-4">-->
+  <!--  <div class="card">-->
+  <!--    <div class="card-body">-->
+  <!--      <div class="d-flex align-items-start justify-content-between">-->
+  <!--        <div class="content-left">-->
+  <!--          <span>New Request</span>-->
+  <!--          <div class="d-flex align-items-end mt-2">-->
+  <!--            <h4 class="mb-0 me-2">19,860</h4>-->
+  <!--            <small class="text-danger">(-14%)</small>-->
+  <!--          </div>-->
+  <!--          <small>Last week analytics</small>-->
+  <!--        </div>-->
+  <!--        <span class="badge bg-label-success rounded p-2">-->
+  <!--          <i class="bx bx-group bx-sm"></i>-->
+  <!--        </span>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
 </div>
 
     <!-- customers List Table -->
  <div class="card">
-   
+    <!-- <ul class="nav nav-tabs nav-fill" role="tablist">-->
+    <!--  <li class="nav-item" role="presentation">-->
+    <!--    <a type="button" class="nav-link active" href="?view=new_request" aria-selected="true"><i class="tf-icons bx bxs-edit me-1"></i> New Request</a>-->
+    <!--    <div class="tab--selected tab__slider"></div>-->
+    <!--  </li>-->
+    <!--  <li class="nav-item" role="presentation">-->
+    <!--    <a type="button" class="nav-link " href="?view=request_on_hold" aria-selected="false" tabindex="-1"><i class="tf-icons bx bxs-edit me-1"></i> Blocked Events</a>-->
+    <!--    <div class=" tab__slider"></div>-->
+    <!--  </li>-->
+      <!--<li class="nav-item" role="presentation">-->
+      <!--  <a type="button" class="nav-link " href="?view=rejected_request" aria-selected="false" tabindex="-1"><i class="tf-icons bx bx-block me-1"></i> Rejected Request</a>-->
+      <!--  <div class=" tab__slider"></div>-->
+      <!--</li>-->
+    <!--</ul>-->
       <ul class="nav nav-tabs nav-fill" role="tablist">
       <li class="nav-item" role="presentation">
         <a type="button" class="nav-link {{ $view === 'new_request'? 'active': '' }}" href="?view=new_request" aria-selected="true"><i class="tf-icons bx bxs-edit me-1"></i> Active Greeting</a>
@@ -869,12 +900,141 @@ const dropZoneInitFunctions = [];
             </div>
         </div>
     </div>
-        <x-modal
-id="requestpopup"
-title="Detail of Air Jordan"
-size="md">
- @include('content.include.live_stream.popup')
-</x-modal>
+        
+     <div class="modal fade modal-6698d17fb4a90" id="requestpopup" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class=" w-100">
+                
+                
+                <div class="card-heading justify-content-between">
+                      <!-- User meta -->
+                      <div class="user-block">
+                          <div class="image">
+                              <img src="https://www.w3schools.com/howto/img_avatar.png" data-user-popover="1" alt="">
+                          </div>
+                          <div class="user-info">
+                              <span class="d-flex"><a href="#" class="dotted dotted-href">Alex Smith</a></span>
+                              <span class="time dotted">Wed 29 Nov 1:49 pm</span>
+                          </div>
+                      </div>
+                      
+                              
+                                
+                                <button class="btn btn-sm btn-icon delcross"> ☒</button>
+                                
+                            </div>
+
+                   
+                  </div>
+                    
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            
+            	<!-- starting -- >
+                
+                
+                <div id="feed-post-1" class="card is-post">
+              <!-- Main wrap -->
+              <div class="content-wrap">
+                  <!-- Post header -->
+                  
+                  <!-- /Post header -->
+
+                  <!-- Post body -->
+                  <div class="card-body">
+                      <div class="post-image">
+                          <a data-fancybox="post1" data-lightbox-type="comments">
+                         
+                           <img src="{{asset('assets/img/image.png')}}" data-user-popover="1" alt="">
+                          </a>
+                          
+                      </div>
+                      
+                      <div class="post-details">
+                      	<h6>Product Details</h6>
+                      	
+                        <div class="pr-details">
+                        	<div class="prod-left">
+                            	<img src="{{asset('/images/pr-title.png')}}" class="pr-img" />
+                            </div>
+                            <div class="prod-right">
+                            	
+                                <div class="prod-heading">Product Title</div>
+                                <div class="prod-txt">Title of the Product</div>
+                                
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr />
+                            <div class="prod-left">
+                            	<img src="{{asset('/images/pr-time.png')}}" class="pr-img" />
+                            </div>
+                            <div class="prod-right">
+                            	
+                                <div class="prod-heading">Start & End Date</div>
+                                <div class="prod-txt">Start: 08.08.2024 - 09.08.2024</div>
+                                
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                            <hr />
+                            <div class="prod-left">
+                            	<img src="{{asset('/images/pr-plan.png')}}" class="pr-img" />
+                            </div>
+                            <div class="prod-right">
+                            	
+                                <div class="prod-heading">Select Plan</div>
+                                <div class="prod-txt">Standard or Premium or Advanced</div>
+                                
+                            </div>
+                        	
+                            <div class="clearfix"></div>
+                            <hr />
+                            
+                            <div class="text-center">
+                            	<b>Invoice</b><br />
+                            
+                            	<img src="{{asset('/images/invoices.png')}}" class="invoice-img" />
+                            </div>
+                        </div>
+                        
+                      </div>
+                      
+                      
+                      
+                  </div>
+                  <!-- /Post body -->
+              </div>
+              <!-- /Main wrap -->
+
+              <!-- Post #1 Comments -->
+              <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
+                <div class="comments-header">
+                                  </div>
+                  <!-- Comments body -->
+                  <div class="comments-body has-slimscroll">
+                    <img src="https://dash.yekbun.net/assets/svg/icons/Comment- area.svg" style="width: 100%" alt="">
+                </div>
+                <!-- /Comments body -->
+              </div>
+              <!-- /Post #1 Comments -->
+          </div>
+                
+            
+            </div>
+        </div>
+   </div>
+</div>      
+        <?php
+   /*
+    <x-modal id="requestpopup" title="Detail of Air Jordan" size="md">
+ 		@include('content.include.live_stream.popup')
+	</x-modal>
+	*/
+	?>
 
 <x-modal
 id="requestDenied"

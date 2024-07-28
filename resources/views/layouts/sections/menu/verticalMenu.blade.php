@@ -136,56 +136,64 @@ $configData = Helper::appClasses();
           <div>Flagged User</div>
         </a>
       </li>
-    <li class="menu-item ">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-file"></i>
-        <div>FanPage</div>
+      <li class="menu-item {{ Request::is('Channels/') ? 'active open' : '' }} {{ Request::is('channelrequest') ? 'active open' : '' }} {{ Request::is('managechannel') ? 'active open' : '' }} {{ Request::is('settings/') ? 'active open' : '' }} {{ Request::is('channels/reason') ? 'active open' : '' }} {{ Request::is('channels/prefix') ? 'active open' : '' }} {{ Request::is('channels/policy_terms') ? 'active open' : '' }} {{ Request::is('channeladmin') ? 'active open' : '' }} {{ Request::is('addmanagechannel') ? 'active open' : '' }}">
+  <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <i class="menu-icon tf-icons bx bx-file"></i>
+    <div>Channels</div>
+  </a>
+  <ul class="menu-sub">
+  
+   <li class="menu-item {{ Request::is('managecategories') ? 'active ' : '' }}">
+      <a href="{{url('managecategories')}}" class="menu-link">
+        <div>Manage Categories</div>
+      </a>
+    </li>
+   <li class="menu-item {{ Request::is('channelrequest') ? 'active ' : '' }}">
+      <a href="{{url('channelrequest?view=new_request')}}" class="menu-link">
+        <div>Channel Request</div>
+      </a>
+    </li>
+  <li class="menu-item {{ Request::is('managechannel') ? 'active ' : '' }}">
+      <a href="{{url('managechannel?view=new_request')}}" class="menu-link">
+        <div>Manage Channel</div>
+      </a>
+    </li>
+    <li class="menu-item {{ Request::is('channeladmin') ? 'active ' : '' }}">
+      <a href="{{url('channeladmin')}}" class="menu-link">
+        <div>Channel Admin</div>
+      </a>
+    </li>
+    <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }} {{ Request::is('channels/reason') ? 'active open' : '' }} {{ Request::is('channels/prefix') ? 'active open' : '' }} {{ Request::is('channels/policy_terms') ? 'active open' : '' }}">
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <div>Settings</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>Add/Manage Categories</div>
+        <li class="menu-item {{ Request::is('channels/reason') ? 'active' : '' }}">
+          <a href="{{url('channels/reason')}}" class="menu-link">
+            <div>Reasons</div>
           </a>
         </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>FanPage Request</div>
+        {{-- <li class="menu-item {{ Request::is('channels/prefix') ? 'active' : '' }}">
+          <a href="{{url('channels/prefix')}}" class="menu-link">
+            <div>Prefix</div>
+          </a>
+        </li> --}}
+        <li class="menu-item {{ Request::is('channels/policy_terms') ? 'active' : '' }}">
+          <a href="{{url('channels/policy_terms')}}" class="menu-link">
+            <div>Channels Policy </div>
           </a>
         </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>Manage Fanpage</div>
-          </a>
-        </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>FanPage Admin</div>
-          </a>
-        </li>
-        <li class="menu-item ">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Reasons</div>
-              </a>
-            </li>
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Policy and Terms</div>
-              </a>
-            </li>
-          </ul>
-        </li>
+
       </ul>
     </li>
+  </ul>
+</li>
+    
 </li>
 <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active ' : '' }}">
 <a href="{{url('/flaggedfanpage')}}" class="menu-link">
 <i class="menu-icon tf-icons bx bx-flag"></i>
-<div>Flagged FanPage</div>
+<div>Flagged Channels</div>
 </a>
 </li>
     <li class="menu-header small text-uppercase">
@@ -885,14 +893,14 @@ $configData = Helper::appClasses();
             </li>
 
 
- <li class="menu-item {{ Request::is('wishes/add_prays') ? 'active' : '' }}">
+ {{-- <li class="menu-item {{ Request::is('wishes/add_prays') ? 'active' : '' }}">
 
           <a href="{{url('wishes/add_prays?view=new_request')}} " class="menu-link">
                 <div>Add Prays</div>
               </a>
 
 
-            </li>
+            </li> --}}
 
 
 
@@ -933,14 +941,14 @@ $configData = Helper::appClasses();
             </li>
 
 
-    <li class="menu-item {{ Request::is('wishes/add_verses') ? 'active' : '' }}">
+    {{-- <li class="menu-item {{ Request::is('wishes/add_verses') ? 'active' : '' }}">
 
           <a href="{{url('wishes/add_verses?view=new_request')}} " class="menu-link">
                 <div>Add verses</div>
               </a>
 
 
-            </li>
+            </li> --}}
 
 
 
@@ -983,7 +991,7 @@ $configData = Helper::appClasses();
 
             <li class="menu-item {{ Request::is('wishes/setting/policy_terms') ? 'active' : '' }}">
               <a href="{{ url('wishes/setting/policy_terms') }}" class="menu-link">
-                <div>Policy and Terms</div>
+                <div>Wishes Policy </div>
               </a>
 
 
@@ -1059,32 +1067,13 @@ $configData = Helper::appClasses();
 
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
-                <div>Add Effects</div>
+                <div>Add Cards</div>
               </a>
 
 
             </li>
 
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Add Fonts</div>
-              </a>
-
-
-            </li>
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Add Font Colors</div>
-              </a>
-
-
-            </li>
-
+ 
 
 
             <li class="menu-item ">
@@ -1106,7 +1095,101 @@ $configData = Helper::appClasses();
 
             <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
               <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
-                <div>Policy and Terms</div>
+                <div> Stories Policy</div>
+              </a>
+
+
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="menu-item {{ Request::is('settings/reels/*') ? 'active open' : '' }} {{ Request::is('reel/*') ? 'active open' : '' }}">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bxs-videos"></i>
+        <div>Reels</div>
+      </a>
+
+
+      <ul class="menu-sub">
+
+
+
+        <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
+          <a href="{{ url('story/ManageStories') }}" class="menu-link">
+            <div>Manage Stories</div>
+          </a>
+
+
+        </li>
+
+
+
+         <li class="menu-item {{ Request::is('story/ReportedStories') ? 'active' : '' }} ">
+          <a href="{{ url('story/ReportedStories') }}" class="menu-link">
+            <div>Reported Stories</div>
+          </a>
+
+
+        </li>
+
+
+
+        <li class="menu-item {{ Request::is('settings/stories/*') ? 'active open' : '' }}">
+          <a href="javascript:void(0)" class="menu-link menu-toggle">
+            <div>Settings</div>
+          </a>
+
+
+          <ul class="menu-sub">
+
+
+
+
+
+
+
+            <li class="menu-item ">
+              <a href="javascript:void(0)" class="menu-link">
+                <div>Add Songs</div>
+              </a>
+
+
+            </li>
+
+
+
+            <li class="menu-item ">
+              <a href="javascript:void(0)" class="menu-link">
+                <div>Add Cards</div>
+              </a>
+
+
+            </li>
+
+ 
+
+
+            <li class="menu-item ">
+              <a href="javascript:void(0)" class="menu-link">
+                <div>Stories Time</div>
+              </a>
+
+
+            </li>
+
+             <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
+              <a href="{{url('/settings/stories/reasons ')}}" class="menu-link">
+                <div>Reasons</div>
+              </a>
+
+
+            </li>
+
+
+            <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
+              <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
+                <div> Stories Policy</div>
               </a>
 
 
