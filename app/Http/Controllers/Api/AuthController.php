@@ -39,7 +39,7 @@ class AuthController extends Controller
         if ($user->is_verfied == 0)
         return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
         $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token',$user->id);
+        $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->plainTextToken;
 
       return response()->json(['success' => true, 'data' => ['user' => $user, 'token' => $token]], 200);
