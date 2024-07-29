@@ -237,7 +237,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="d-flex">
                             <div>
                                 <label class="switch me-0">
-                                  <input type="checkbox" class="switch-input" {{$permissions["value"]['friends_allow_request'] ? 'checked' : ''}} data-permission="friends_allow_request">
+                                  <input type="checkbox" class="switch-input" data-permission="friends_allow_request">
                                   <span class="switch-toggle-slider">
 
                                   </span>
@@ -1131,7 +1131,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="d-flex">
                             <div>
                                 <label class="switch me-0">
-                                  <input type="checkbox" class="switch-input" {{$permissions["value"]['music_allow_music'] ? 'checked' : ''}} data-permission="music_allow_music">
+                                  <input type="checkbox" class="switch-input" data-permission="music_allow_music">
                                   <span class="switch-toggle-slider">
 
                                   </span>
@@ -1171,7 +1171,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="d-flex">
                             <div>
                                 <label class="switch me-0">
-                                  <input type="checkbox" class="switch-input" {{$permissions["value"]['music_create_playlist'] ? 'checked' : ''}} data-permission="music_create_playlist">
+                                  <input type="checkbox" class="switch-input" data-permission="music_create_playlist">
                                   <span class="switch-toggle-slider">
 
                                   </span>

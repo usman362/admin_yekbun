@@ -90,6 +90,7 @@ use App\Http\Controllers\Admin\WishesandThanks\WishesPolicyandTermController;
 use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\EmojiFeedController;
 use App\Http\Controllers\Admin\liveStream\livestreamController;
+use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\BackgroundFeedController;
 use App\Http\Controllers\DepartmentController;
@@ -674,9 +675,9 @@ Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, '
             Route::post('/payment-methods', [PaymentMethodController::class, 'save'])->name('payment-methods');
 
 
-            Route::get('app-setting/appinfo',[SettingController::class,'get_app_info'])->name('appsetting.appinfo');
-
-            Route::post('app-setting/appinfo',[SettingController::class,'store_app_info'])->name('appsetting.appinfo.store');
+            Route::get('app-setting/app-info', [AppInfoController::class, 'index'])->name('appsetting.app-info');
+            // app info
+            Route::post('/app-info', [AppInfoController::class, 'store'])->name('appsetting.appinfo.store');
 
             Route::get('app-setting/message-ringtone', [RingtoneController::class, 'getMessage'])->name('appsetting.message.ringtone');
             Route::get('app-setting/call-ringtone', [RingtoneController::class, 'getCall'])->name('appsetting.call.ringtone');
