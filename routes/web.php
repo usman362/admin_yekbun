@@ -133,7 +133,9 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
     echo $output;
 });
 
-
+Route::get('unauthorize',function(){
+    return response()->json(['message' => 'Unauthorized'],401);
+})->name('unauthorize');
 
 // Admin Profiel
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile');

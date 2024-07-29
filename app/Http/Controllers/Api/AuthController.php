@@ -32,16 +32,15 @@ class AuthController extends Controller
     ]);
     (int)$credentials['is_admin_user'] = 1;
     (int)$credentials['status'] = 1;
+
     if (Auth::attempt($credentials, true)) {
         $user = Auth::user();
 
         if ($user->is_verfied == 0)
         return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
-
-    // $token = explode('|', $user->createToken('Yekhbun')->plainTextToken)[1];
-    $user = $request->user();
-    $tokenResult = $user->createToken('Personal Access Token');
-    $token = $tokenResult->plainTextToken;
+        $user = $request->user();
+        $tokenResult = $user->createToken('Personal Access Token',$user->id);
+        $token = $tokenResult->plainTextToken;
 
       return response()->json(['success' => true, 'data' => ['user' => $user, 'token' => $token]], 200);
     } else {
@@ -126,6 +125,16 @@ class AuthController extends Controller
     //   }
     }
 //   }
+
+
+    public function logout(Request $request)
+    {
+        // Revoke the current user's token
+        $request->user()->currentAccessToken()->delete();
+
+        // Return a response indicating success
+        return response()->json(['message' => 'Logged out successfully'], 200);
+    }
 
   public function forgot_password(Request $request)
   {
