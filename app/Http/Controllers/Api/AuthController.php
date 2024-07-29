@@ -30,7 +30,8 @@ class AuthController extends Controller
         'email' => 'required',
         'password' => 'required',
     ]);
-    (int)$credentials['is_admin_user'] = 1;
+    (int)$credentials['is_admin_user'] = 0;
+    (int)$credentials['is_superadmin'] = 0;
     (int)$credentials['status'] = 1;
 
     if (Auth::attempt($credentials, true)) {
