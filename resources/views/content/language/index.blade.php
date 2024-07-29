@@ -92,7 +92,7 @@
                                 </button>
                             </span>
 
-                            {{-- @if ($language->title != "English") --}}
+                            @if ($language->title != "English")
                             <form action="{{ route('language.destroy', $language->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
@@ -106,7 +106,7 @@
                                     </svg>
                                 </button>
                             </form>
-                            {{-- @endif --}}
+                            @endif
 
                             {{-- <x-modal id="editlanguageModal{{$language->id}}" title="Update Language" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{$language->id}}" size="md">
                             @include('content.include.movies.editForm')
