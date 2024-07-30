@@ -497,6 +497,14 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+    <li class="menu-item ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-intersect"></i>
+        <div>Advertisment</div>
+      </a>
+
+ 
+    </li>
 
 
 
