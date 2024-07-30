@@ -142,7 +142,7 @@ $configData = Helper::appClasses();
     <div>Channels</div>
   </a>
   <ul class="menu-sub">
-  
+
    <li class="menu-item {{ Request::is('managecategories') ? 'active ' : '' }}">
       <a href="{{url('managecategories')}}" class="menu-link">
         <div>Manage Categories</div>
@@ -188,7 +188,7 @@ $configData = Helper::appClasses();
     </li>
   </ul>
 </li>
-    
+
 </li>
 <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active ' : '' }}">
 <a href="{{url('/flaggedfanpage')}}" class="menu-link">
@@ -1073,7 +1073,7 @@ $configData = Helper::appClasses();
 
             </li>
 
- 
+
 
 
             <li class="menu-item ">
@@ -1167,7 +1167,7 @@ $configData = Helper::appClasses();
 
             </li>
 
- 
+
 
 
             <li class="menu-item ">
@@ -2060,8 +2060,8 @@ $configData = Helper::appClasses();
         <div>Add Popup</div>
       </a>
     </li>
-    <li class="menu-item {{ Request::is('settings/app-setting/appinfo') ? 'active' : '' }}">
-      <a href="{{url('/settings/app-setting/appinfo')}}" class="menu-link">
+    <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
+      <a href="{{url('/settings/app-setting/app-info')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-info-square"></i>
         <div>App Info</div>
       </a>
