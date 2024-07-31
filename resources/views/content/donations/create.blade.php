@@ -19,6 +19,9 @@
 @endsection
 
 @section('content')
+@php
+    $organizations = App\Models\Organization::get();
+@endphp
 <h4 class="fw-bold py-3 mb-4">
     <span class="text-muted fw-light">Donations /</span> Add Donation
 </h4>
