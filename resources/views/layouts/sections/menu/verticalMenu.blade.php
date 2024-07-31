@@ -111,11 +111,7 @@ $configData = Helper::appClasses();
                 <div>User Roles</div>
               </a>
             </li>
-            <li class="menu-item {{ Request::is('settings/pricing') ? 'active' : '' }}">
-              <a href="{{url('/settings/pricing')}}" class="menu-link">
-                <div>User Pricing</div>
-              </a>
-            </li>
+          
             <li class="menu-item {{ Request::is('settings/reasons') ? 'active' : '' }}">
               <a href="{{url('/settings/reasons')}}" class="menu-link">
                 <div>Reasons</div>
@@ -1307,38 +1303,7 @@ $configData = Helper::appClasses();
         </li>
 
 
-
-        <li class="menu-item {{ Request::is('settings/voting/*') ? 'active open' : '' }} ">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-
-
-          <ul class="menu-sub">
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Add Notification</div>
-              </a>
-
-
-            </li>
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Setting</div>
-              </a>
-
-
-            </li>
-
-
-          </ul>
-        </li>
+ 
       </ul>
     </li>
 
