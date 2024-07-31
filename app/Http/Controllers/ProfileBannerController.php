@@ -88,9 +88,9 @@ class ProfileBannerController extends Controller
     public function destroy(ProfileBanner $ProfileBanner)
     {
         if($ProfileBanner->delete()){
-            return redirect()->route('feed.background')->with('success', 'Background Feed Has been Deleted!');
+            return redirect()->route('profile.banner')->with('success', 'Profile Banner  Has been Deleted!');
         }else{
-            return redirect()->route('feed.background')->with('error', 'Something Went Wrong!');
+            return redirect()->route('profile.banner')->with('error', 'Something Went Wrong!');
         }
     }
     
