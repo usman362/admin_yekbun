@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ChannelPolicyController;
 use App\Http\Controllers\Admin\EventController;
 
 use App\Http\Controllers\Admin\MusicController;
+use App\Http\Controllers\ProfileBannerController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
@@ -543,6 +544,11 @@ Route::post('/add_channel_subcategory', [ChannelCategoryController::class, 'add_
 Route::put('/edit_channel_subcategory/{id}', [ChannelCategoryController::class, 'edit_channel_subcategory'])->name('edit.channel.subcat');
 Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, 'destroy_channel_subcategory'])->name('channels.subcat.destroy');
 
+
+//ProfileBanner
+Route::get('/profile-banner', [ProfileBannerController::class, 'index'])->name('profile.banner');
+Route::post('/profile-banner', [ProfileBannerController::class, 'store'])->name('profile.banner.store');
+Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class, 'destroy'])->name('profile.banner.delete');
 
 
 

@@ -102,9 +102,9 @@ $configData = Helper::appClasses();
           <ul class="menu-sub">
             <li class="menu-item {{ Request::is('settings/user-roles/standard') ? 'active' : '' }}">
                 <a href="javascript:void(0)" class="menu-link">
-                {{-- <a href="{{url('/settings/user-roles/standard')}}" class="menu-link"> --}}
-                  <div>Profile Banner</div>
-                </a>
+                  <a href="{{url('/profile-banner')}}" class="menu-link">
+                    <div>Profile Banner</div>
+                  </a>
               </li>
             <li class="menu-item {{ Request::is('settings/user-roles/standard') ? 'active' : '' }}">
               <a href="{{url('/settings/user-roles/standard')}}" class="menu-link">
