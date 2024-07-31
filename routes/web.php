@@ -28,7 +28,6 @@ use App\Http\Controllers\Admin\VotingController;
 use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DonationController;
-use App\Http\Controllers\Admin\Donation\DonationController;
 
 use App\Http\Controllers\Admin\DiamondUserController;
 use App\Http\Controllers\Admin\FlaggedUserController;
@@ -277,10 +276,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         'manage.fanpage.comments'
     );
 
-
-    Route::post('/add_donation', [App\Http\Controllers\Admin\Donation\DonationController::class, 'add_donation'])->name('create.donation');
-    Route::put('/edit_donation/{id}', [App\Http\Controllers\Admin\Donation\DonationController::class, 'edit_donation'])->name('edit.donation');
-    Route::delete('/destroy_donation/{id}', [App\Http\Controllers\Admin\Donation\DonationController::class, 'destroy_donation'])->name('destroy.donation');
     Route::get('story/ManageStories', [StoryController::class, 'ManageStories']);
 
     Route::get('live/manage_live_stream', [livestreamController::class, 'manage_live_stream'])->name(
