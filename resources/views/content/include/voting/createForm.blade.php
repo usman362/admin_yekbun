@@ -82,7 +82,7 @@
                 <div class="d-flex align-items-center mt-4 individual-reaction-option" data-index="{{$index}}">
                     <div class="max-10-letters">Max. 10 Letters</div>
                     <div class="individual-vote-react-option-image">
-                        <img src='{{asset('/assets/img/icons/others/gallery_add.png')}}' style='width:30px;height:30px' />
+                        <img src='{{asset('/assets/img/icons/others/Gallery_add.svg')}}' style='width:30px;height:30px' />
                         <input type="file" class="hidden" />
                         <input type='hidden' name="reaction_option[{{$index}}][image]" />
                         <div class="remove-image justify-content-center align-items-center">
