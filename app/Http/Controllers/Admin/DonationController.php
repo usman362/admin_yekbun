@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Donation;
+use App\Models\MongoDonation;
+use App\Models\MongoOrganization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
-use App\Models\MongoDonation;
-use App\Models\MongoOrganization;
 use App\Models\Organization;
 
 class DonationController extends Controller
@@ -18,14 +18,17 @@ class DonationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // $donations = Donation::orderBy("updated_at", "DESC")->get();
-        // $organizations = Organization::where("status", 1)->get();
-        $donations = MongoDonation::orderBy("updated_at", "DESC")->get();
-        $organizations = MongoOrganization::where("status", 1)->get();
+    public function index() {
+        $donations = MongoDonation::with('organization')->orderBy("updated_at", "DESC")->get();
+        $organizations = MongoOrganization::where("status", true)->get();
         return view("content.donations.index", compact("donations", "organizations"));
     }
+    // public function index()
+    // {
+    //     $donations = Donation::orderBy("updated_at", "DESC")->get();
+    //     $organizations = Organization::where("status", 1)->get();
+    //     return view("content.donations.index", compact("donations", "organizations"));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +56,7 @@ class DonationController extends Controller
         }, json_decode($validated['tags']));
 
         $validated['start_date'] .= ' 00:00:00';
-        $validated['end_date'] .= ' 23:59:59';
+        $validated['end_date'] .= ' 23:59:59'; 
 
         $donation = Donation::create($validated);
 
@@ -82,7 +85,7 @@ class DonationController extends Controller
     {
         $donation = Donation::find($id);
         $organizations = Organization::where("status", 1)->get();
-        return view("content.donations.edit", compact("donation", "organizations"));
+        return view("content.donations.include.edit_form", compact("donation", "organizations"));
     }
 
     /**
@@ -101,7 +104,7 @@ class DonationController extends Controller
         }, json_decode($validated['tags']));
 
         $validated['start_date'] .= ' 00:00:00';
-        $validated['end_date'] .= ' 23:59:59';
+        $validated['end_date'] .= ' 23:59:59'; 
 
         $donation = Donation::find($id);
         $donation->fill($validated);
