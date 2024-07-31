@@ -36,7 +36,7 @@
           </div>
         </div></div>
         <div class="card-body">
-            <form action="{{ route('donations.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('create.donation') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
