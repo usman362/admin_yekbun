@@ -11,9 +11,10 @@ class SigninSection extends Model
     use HasFactory;
 
     protected $fillable = [
-'language_id',
+        'language_id',
         'email',
         'password',
+        'repeat_password',
         'signin',
         'login_error',
         'not_found',
@@ -40,7 +41,7 @@ class SigninSection extends Model
         'successfully',
         'logged_in',
         'remember_me',
-        'repeat_password',
+        'wrong_password', // Added missing field
     ];
 
     public function language()

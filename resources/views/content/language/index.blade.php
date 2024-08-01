@@ -1464,215 +1464,184 @@
                                             </div>
                                         </div>
                                         {{-- //Sign up Section --}}
-                                        <div class="modal fade" id="signupsection__1{{ $language->id }}" tabindex="-1"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="signupsection__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle">Sign up Section
-                                                            {{-- <span class="text-info">{{ $language->title }}</span> --}}
-                                                             </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('languages.signupsection') }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="language_id"
-                                                                value="{{ $language->id }}">
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <h5>English Language</h5>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <h5>{{ $language->title }} Language</h5>
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Language -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Language</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="language_search" placeholder="Search">
-                                                                        <input type="text" class="form-control mt-2"
-                                                                            name="language_save_change"
-                                                                            placeholder="Save Change">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Select Gender -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Select Gender</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <select class="form-control" name="gender">
-                                                                            <option value="male">Male</option>
-                                                                            <option value="female">Female</option>
-                                                                            <option value="missing">Gender is Missing
-                                                                            </option>
-                                                                        </select> <br>
-                                                                        <h6>Select Location</h6>
-                                                                        <select class="form-control" name="location">
-                                                                            <option value="address">Address</option>
-                                                                            <option value="current_location">Current
-                                                                                Location</option>
-                                                                            >
-                                                                        </select>
-
-                                                                        <input type="text" class="form-control mt-2"
-                                                                            name="select_gender_prompt"
-                                                                            placeholder="Please select your gender">
-                                                                        <input type="text" class="form-control mt-2"
-                                                                            name="gender_ok" placeholder="Ok">
-                                                                        <input type="text" class="form-control mt-2"
-                                                                            name="gender_start" placeholder="Start">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Firstname -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Firstname</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="firstname"
-                                                                            placeholder="Your Firstname">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Lastname -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Lastname</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="lastname" placeholder="Your Lastname">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Username -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Username</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="username" placeholder="Your Username">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Birthday and Status -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Your Birthday</h6>
-                                                                    </div>
-                                                                    <div class="row mt-2">
-                                                                        <div class="col-md-6">
-                                                                            <h6>Your Status</h6>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <select class="form-control"
-                                                                                name="your_status">
-                                                                                <option value="single">Single</option>
-                                                                                <option value="engaged">Engaged</option>
-                                                                                <option value="married">Married</option>
-                                                                            </select>
-                                                                            <input type="text"
-                                                                                class="form-control mt-2"
-                                                                                name="status_next" placeholder="Next">
-                                                                            <input type="text"
-                                                                                class="form-control mt-2"
-                                                                                name="status_back" placeholder="Back">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <h6>Select Origin</h6>
-                                                                <select class="form-control" name="origin">
-                                                                    <option value="kurdish">I´m Kurdish</option>
-                                                                    <option value="provinces">Your Provinse</option>
-                                                                    >
-                                                                </select>
-
-                                                                <!-- E-Mail Address -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Your E-Mail Address</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="email" class="form-control"
-                                                                            name="email"
-                                                                            placeholder="Type your E-Mail">
-                                                                        <input type="email" class="form-control mt-2"
-                                                                            name="repeat_email"
-                                                                            placeholder="Repeat your E-Mail">
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Phone Number -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Your Phone Number</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="phone_number"
-                                                                            placeholder="Your Phone Number">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Create Password -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Create Password</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="password" class="form-control"
-                                                                            name="password"
-                                                                            placeholder="Enter a Password">
-                                                                        <input type="password" class="form-control mt-2"
-                                                                            name="repeat_password"
-                                                                            placeholder="Repeat a Password">
-                                                                    </div>
-                                                                </div>
-
-                                                                <!-- Account Created -->
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Account Created!</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="account_created_success_message"
-                                                                            placeholder="Your account has been created, successfully. Please sign in to use your account, and enjoy">
-
-                                                                        <input type="text" class="form-control mt-2"
-                                                                            name="sign_in_redirect"
-                                                                            placeholder="Take me to sign in">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-label-secondary"
-                                                            data-bs-dismiss="modal">Save</button>
-                                                    </div>
-                                                    </form>
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="modalCenterTitle">Sign up Section</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                  <form action="{{ route('languages.signupsection') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="language_id" value="{{ $language->id }}">
+                                                    <div class="container">
+                                                      <div class="row">
+                                                        <div class="col-md-6">
+                                                          <h5>English Language</h5>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <h5>{{ $language->title }} Language</h5>
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Language -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Language</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="text" class="form-control" name="language_search" placeholder="Search">
+                                                          <input type="text" class="form-control mt-2" name="language_save_change" placeholder="Save Change">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Select Gender -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Select Gender</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <select class="form-control" name="gender">
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
+                                                            <option value="missing">Gender is Missing</option>
+                                                          </select> <br>
+                                                          <h6>Select Location</h6>
+                                                          <select class="form-control" name="location">
+                                                            <option value="address">Address</option>
+                                                            <option value="current_location">Current Location</option>
+                                                          </select>
+                                                          <input type="text" class="form-control mt-2" name="select_gender_prompt" placeholder="Please select your gender">
+                                                          <input type="text" class="form-control mt-2" name="gender_ok" placeholder="Ok">
+                                                          <input type="text" class="form-control mt-2" name="gender_start" placeholder="Start">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Firstname -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Firstname</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="text" class="form-control" name="firstname" placeholder="Your Firstname">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Lastname -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Lastname</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="text" class="form-control" name="lastname" placeholder="Your Lastname">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Username -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Username</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="text" class="form-control" name="username" placeholder="Your Username">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Birthday and Status -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Your Birthday</h6>
+                                                          <input type="date" class="form-control" name="birthday" placeholder="Your Birthday"> <!-- Missing birthday field -->
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                          <div class="col-md-6">
+                                                            <h6>Your Status</h6>
+                                                          </div>
+                                                          <div class="col-md-6">
+                                                            <select class="form-control" name="your_status">
+                                                              <option value="single">Single</option>
+                                                              <option value="engaged">Engaged</option>
+                                                              <option value="married">Married</option>
+                                                            </select>
+                                                            <input type="text" class="form-control mt-2" name="status_next" placeholder="Next">
+                                                            <input type="text" class="form-control mt-2" name="status_back" placeholder="Back">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Select Origin -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Select Origin</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <select class="form-control" name="origin">
+                                                            <option value="kurdish">I´m Kurdish</option>
+                                                            <option value="provinces">Your Province</option>
+                                                            <option value="not_kurdish">I´m not Kurdish</option> <!-- Missing not Kurdish option -->
+                                                          </select>
+                                                          <input type="text" class="form-control mt-2" name="select_province" placeholder="Select your Province"> <!-- Missing Select your Province -->
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- E-Mail Address -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Your E-Mail Address</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="email" class="form-control" name="email" placeholder="Type your E-Mail">
+                                                          <input type="email" class="form-control mt-2" name="repeat_email" placeholder="Repeat your E-Mail">
+                                                          <input type="text" class="form-control mt-2" name="email_issue_message" placeholder="E-Mail issue Message"> <!-- Missing email issue message -->
+                                                          <input type="text" class="form-control mt-2" name="error_found" placeholder="Error found"> <!-- Missing error found -->
+                                                          <input type="text" class="form-control mt-2" name="user_already_exist" placeholder="User already exist"> <!-- Missing user already exist -->
+                                                          <input type="text" class="form-control mt-2" name="email_ok" placeholder="Ok"> <!-- Missing email ok -->
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Phone Number -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Your Phone Number</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="text" class="form-control" name="phone_number" placeholder="Your Phone Number">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Create Password -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Create Password</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="password" class="form-control" name="password" placeholder="Enter a Password">
+                                                          <input type="password" class="form-control mt-2" name="repeat_password" placeholder="Repeat a Password">
+                                                        </div>
+                                                      </div>
+                                          
+                                                      <!-- Account Created -->
+                                                      <div class="row mt-2">
+                                                        <div class="col-md-6">
+                                                          <h6>Account Created!</h6>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <input type="text" class="form-control" name="account_created_success_message" placeholder="Your account has been created, successfully. Please sign in to use your account, and enjoy">
+                                                          <input type="text" class="form-control mt-2" name="sign_in_redirect" placeholder="Take me to sign in">
+                                                        </div>
+                                                      </div>
+                                          
+                                                    </div>
+                                                  </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="submit" class="btn btn-label-secondary" data-bs-dismiss="modal">Save</button>
+                                                </div>
+                                              </div>
                                             </div>
-                                        </div>
-
+                                          </div>
+                                          
 
                                         @include('content.include.language.editForm', [
                                             'language' => $language,

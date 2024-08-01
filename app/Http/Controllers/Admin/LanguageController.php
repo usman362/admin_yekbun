@@ -356,7 +356,7 @@ class LanguageController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error saving start page data: ' . $e->getMessage());
         }
-    }
+    } 
     public function signupsection(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -383,6 +383,7 @@ class LanguageController extends Controller
             'firstname' => 'nullable|string|max:255',
             'lastname' => 'nullable|string|max:255',
             'username' => 'nullable|string|max:255|unique:signup_sections,username',
+            'birthday' => 'nullable|date',
             'your_status' => 'nullable|string|in:single,engaged,married',
             'status_next' => 'nullable|string|max:255',
             'status_back' => 'nullable|string|max:255',
@@ -390,56 +391,51 @@ class LanguageController extends Controller
             'address' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'origin' => 'nullable|string|max:255',
+            'select_province' => 'nullable|string|max:255',
+            'not_kurdish' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255|unique:signup_sections,email',
-            'repeat_email' => 'nullable|same:email',      
+            'repeat_email' => 'nullable|same:email',
+            'email_issue_message' => 'nullable|string|max:255',
+            'error_found' => 'nullable|string|max:255',
             'user_exists' => 'nullable|string|max:255',
             'email_ok' => 'nullable|string|max:255',
             'phone_number' => 'nullable|string|max:20',
-            'password' => 'nullable|string|min:4',
+            'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable_with:password|same:password',
-            
-            
+            'password_criteria_min_length' => 'nullable|string|max:255',
+            'password_criteria_uppercase_symbol' => 'nullable|string|max:255',
+            'password_criteria_number' => 'nullable|string|max:255',
+            'activation_mail' => 'nullable|string|max:255',
+            'not_yet_code' => 'nullable|string|max:255',
+            'resend_now' => 'nullable|string|max:255',
+            'sent' => 'nullable|string|max:255',
+            'something_wrong' => 'nullable|string|max:255',
+            'invalid_opt' => 'nullable|string|max:255',
+            'password_ok' => 'nullable|string|max:255',
             'account_created_success_message' => 'nullable|string|max:255',
-           
+            'account_created_ok' => 'nullable|string|max:255',
             'sign_in_redirect' => 'nullable|string|max:255',
         ]);
     
-        // Dump and die the validator instance
-       // dd($validator);
-    
         if ($validator->fails()) {
-            // Dump and die if validation fails
-            dd('Validation failed', $validator->errors());
             return redirect()->back()->withErrors($validator)->withInput();
         }
     
-        // Dump and die the validated data
         $validatedData = $validator->validated();
-       // dd('Validation passed', $validatedData);
     
         try {
-            // Dump and die before updating or creating the record
-          //  dd('Before updateOrCreate', $validatedData);
-    
             SignupSection::updateOrCreate(
                 ['language_id' => $validatedData['language_id']],
                 $validatedData
             );
     
-            // Dump and die if saving is successful
-         //   dd('Record saved');
-    
             return redirect()->back()->with('success', 'Signup section saved successfully.');
         } catch (\Exception $e) {
-            // Log the exception
             \Log::error('Error saving signup section: '.$e->getMessage());
-    
-            // Dump and die the exception message
-            dd('Exception caught', $e->getMessage());
-    
             return redirect()->back()->with('error', 'Error saving signup section: ' . $e->getMessage());
         }
     }
+    
     
     public function signinsection(Request $request)
     {
@@ -488,6 +484,7 @@ class LanguageController extends Controller
             'successfully' => 'required|string|max:255',
             'logged_in' => 'required|string|max:255',
             'remember_me' => 'nullable|boolean',
+            'wrong_password' => 'required|string|max:255', // Added missing field
         ]);
     
         // Check for validation errors
@@ -514,9 +511,8 @@ class LanguageController extends Controller
     
  
 
-public function footercartsection(Request $request)
+    public function footercartsection(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
             'language_id' => [
                 'required',
@@ -542,33 +538,32 @@ public function footercartsection(Request $request)
             'donate' => 'nullable|string|max:255',
             'portal_cart' => 'nullable|string|max:255',
             'payment_method' => 'nullable|string|max:255',
-            'accept_policy_terms' => 'nullable|string|max:255',
+            'accept_policy_terms' => 'nullable|boolean',
             'office_information' => 'nullable|string|max:255',
             'bank_information' => 'nullable|string|max:255',
         ]);
-   // dd($validator);
+    
         // Check for validation errors
         if ($validator->fails()) {
-            dd('validation failed',$validator->errors());
             return redirect()->back()->withErrors($validator)->withInput();
         }
     
         $validatedData = $validator->validated();
     
         try {
-            //dd('validation Sucess',$validator->success());
-           $asim= FooterCart::updateOrCreate(
+            FooterCart::updateOrCreate(
                 ['language_id' => $validatedData['language_id']],
                 $validatedData
             );
-           
+    
             // Redirect back with success message
             return redirect()->back()->with('success', 'Footer Cart Section saved successfully.');
         } catch (\Exception $e) {
             // Redirect back with error message
-            return redirect()->back()->with('error', 'Error saving Footer Quick Section: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error saving Footer Cart Section: ' . $e->getMessage());
         }
     }
+    
     public function footerfriendsection(Request $request)
     {
        
