@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use App\Models\UserRoleSetting;
 use Illuminate\Http\Request;
 
 use Maklad\Permission\Models\Permission;
@@ -15,9 +14,7 @@ class UserRolesController extends Controller
     {
         $userLevel = 'standard';
         $modules = $this->getModules($userLevel);
-        // $permissions = Setting::where('name', $userLevel)->first();
-        $permissions = UserRoleSetting::where('name', $userLevel)->first();
-        // dd($permissions["value"]['']);
+        $permissions = Setting::where('name', $userLevel)->first();
         return view("content.settings.user_roles", compact("modules", "userLevel","permissions"));
     }
 
