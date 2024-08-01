@@ -2,41 +2,21 @@
 
 namespace App\Models;
 
-use Spatie\Activitylog\LogOptions;
-//use Illuminate\Database\Eloquent\Model;
-use Jenssegers\Mongodb\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use MongoDB\Laravel\Eloquent\Model;
+use Eloquent;
 
 class City extends Model
 {
-    use HasFactory, LogsActivity;
+    protected $connection = 'mongodb';
 
-    protected $fillable = [
-        'name',
-        'country_id',
-        'region_id',
-        'zipcode',
-        'status',
-    ];
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults();
+    public function country() {
+        return $this->belongsTo('App\Models\Country', 'country_id', 'conid');
     }
+    
 
-    public function region()
+    public function state()
     {
-        return $this->belongsTo(Region::class);
+        return $this->belongsTo('App\Models\States', 'state_id', 'stid');
     }
-
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
-
-    public function users()
-    {
-        return $this->hasMany(User::class);
-    }
+        
 }
