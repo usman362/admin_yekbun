@@ -98,9 +98,9 @@
 
     <div class="col-xl-12 col-lg-12 col-md-12 order-0 order-md-12">
         <div class="row">
-            @foreach ($background_post as $key => $background_posts)
+            @foreach ($banner as $key => $banners)
             @php
-                $date = \Carbon\Carbon::parse($background_posts->created_at);
+                $date = \Carbon\Carbon::parse($banners->created_at);
                 $formattedDate = $date->format('D d M g:i a');
             @endphp
                 <div class="col-lg-3">
@@ -112,12 +112,12 @@
                                 <!-- User meta -->
                                 <div class="user-block">
                                     <div class="user-info">
-                                        <span class="d-flex"><a href="#">{{$background_posts->name}}</a></span>
+                                        <span class="d-flex"><a href="#">{{$banners->name}}</a></span>
                                         <span class="time">{{$formattedDate}}</span>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end align-item-end">
-                                    <form action="{{ route('profile.banner.delete',$background_posts->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                    <form action="{{ route('profile.banner.delete',$banners->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
@@ -129,8 +129,8 @@
                             <div class="card-body">
                                 <div class="post-image">
                                     <a data-fancybox="post1" data-lightbox-type="comments">
-                                        <img src="{{ asset('storage/'.$background_posts->image) }}" style="width: 375px;height:264px"
-                                            data-demo-src="{{ asset('storage/'.$background_posts->image) }}"
+                                        <img src="{{ asset('storage/'.$banners->image) }}" style="width: 375px;height:264px"
+                                            data-demo-src="{{ asset('storage/'.$banners->image) }}"
                                             data-user-popover="1" alt="">
                                     </a>
                                 </div>

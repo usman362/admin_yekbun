@@ -5,6 +5,7 @@ use App\Helpers\Helpers;
 use App\Models\AnimationEmoji;
 use App\Models\ProfileBanner;
 use App\Models\Post;
+use Illuminate\Support\Facades\Log;
  
 use Illuminate\Support\Facades\DB;
 
@@ -61,10 +62,10 @@ class ProfileBannerController extends Controller
             return $post->user_id === null;
         })->count();
 
-        $background_post = ProfileBanner::get();
+        $banner = ProfileBanner::get();
         $animated = AnimationEmoji::get();
 
-        return view('content.profilebanner.index', compact("posts", "totalPosts", "totalUserPosts", "totalAdminPosts", "background_post", "show", "animated_emoji"));
+        return view('content.profilebanner.index', compact("posts", "totalPosts", "totalUserPosts", "totalAdminPosts", "banner", "show", "animated_emoji"));
     }
     public function store(Request $request)
     {
@@ -85,13 +86,24 @@ class ProfileBannerController extends Controller
         }
     }
 
-    public function destroy(ProfileBanner $ProfileBanner)
+    // public function destroy(ProfileBanner $ProfileBanner)
+    // {
+    //     if($ProfileBanner->delete()){
+    //         return redirect()->route('profile.banner')->with('success', 'Profile Banner  Has been Deleted!');
+    //     }else{
+    //         return redirect()->route('profile.banner')->with('error', 'Something Went Wrong!');
+    //     }
+    // }
+    public function destroy(ProfileBanner $profilebanner)
     {
-        if($ProfileBanner->delete()){
-            return redirect()->route('profile.banner')->with('success', 'Profile Banner  Has been Deleted!');
-        }else{
-            return redirect()->route('profile.banner')->with('error', 'Something Went Wrong!');
+        try {
+            Log::info('Attempting to delete banner with ID: ' . $profilebanner->_id);
+            $profilebanner->delete();
+            Log::info('Successfully deleted banner with ID: ' . $profilebanner->_id);
+            return redirect()->route('profile.banner')->with('success', 'Banner has been deleted!');
+        } catch (\Exception $e) {
+            Log::error('Error deleting banner: ' . $e->getMessage());
+            return redirect()->route('profile.banner')->with('error', 'Something went wrong!');
         }
     }
-    
 }
