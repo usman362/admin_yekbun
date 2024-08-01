@@ -186,7 +186,7 @@
                                                                     <tbody class="table-border-bottom-0">
                                                                         <tr>
                                                                             <td>Alert,Upgrade,Mail</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -215,7 +215,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Start Page</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -244,7 +244,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Sign up Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -273,7 +273,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Sign in Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -302,7 +302,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Footer Quick Launcher Sections</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -332,7 +332,7 @@
 
                                                                         <tr>
                                                                             <td>Footer Cart Sections</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -361,7 +361,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Footer Friends Sections</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -390,7 +390,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Footer Chat Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -419,7 +419,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Feed Sections</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -448,7 +448,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Visitor Profile</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -477,7 +477,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Stories Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -506,7 +506,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Greeting & Wishes Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -535,7 +535,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header History Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -564,7 +564,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Voting Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -593,7 +593,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Donation Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -622,7 +622,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Music Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -651,7 +651,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Videos Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -680,7 +680,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Stream Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -709,7 +709,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Event Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -738,7 +738,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header OnlineShop Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -767,7 +767,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Restaurant Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -796,7 +796,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header ServicePortal Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -826,7 +826,7 @@
 
                                                                         <tr>
                                                                             <td>Setting Overview Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -855,7 +855,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Setting Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -884,7 +884,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>My Profile Home Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -914,7 +914,7 @@
 
                                                                         <tr>
                                                                             <td>My Profile Multimedia Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -943,7 +943,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>My Profile Friends Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -972,7 +972,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>My Profile Office Section</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -1001,7 +1001,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Channels</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -1030,7 +1030,7 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Channel Settings</td>
-                                                                            <td>Task</td>
+                                                                            
                                                                             <td>
                                                                                 <div class="progress">
                                                                                     <div class="progress-bar"
@@ -1077,7 +1077,7 @@
                                             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle">Edit
+                                                        <h5 class="modal-title" id="modalCenterTitle">Alert,Upgrade,Mail
                                                             {{-- <span class="text-info">{{ $language->title }}</span> --}}
                                                             Section</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -1370,9 +1370,9 @@
                                             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle">Edit
+                                                        <h5 class="modal-title" id="modalCenterTitle">Start Page
                                                             {{-- <span class="text-info">{{ $language->title }}</span> --}}
-                                                            Section</h5>
+                                                          </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
@@ -1469,9 +1469,9 @@
                                             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle">Edit
+                                                        <h5 class="modal-title" id="modalCenterTitle">Sign up Section
                                                             {{-- <span class="text-info">{{ $language->title }}</span> --}}
-                                                            Section</h5>
+                                                             </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
