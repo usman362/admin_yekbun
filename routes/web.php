@@ -142,7 +142,7 @@ Route::get('/browse_movies/', [MovieController::class, 'show']);
 
 use App\Http\Controllers\AvatarsController;
 use App\Http\Controllers\GreetingsController;
-use App\Http\Controllers\CountryController;
+//use App\Http\Controllers\CountryController;
 use App\Http\Controllers\StateController;
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
