@@ -2022,7 +2022,7 @@ $configData = Helper::appClasses();
       </ul>
     </li>
     <li class="menu-item {{ Request::is('yekbun-location/countries') ? 'active' : '' }}">
-        <a href="{{url('/yekbun-location/countries')}}" class="menu-link">
+        <a href="{{url('/yekbun-location/countrieslist')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
           <div>Add Country</div>
         </a>

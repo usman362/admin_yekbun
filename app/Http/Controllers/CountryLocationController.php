@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use DateTime;
 
-class CountryController extends Controller
+class CountryLocationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request )
     {
+
 
 
 		if($request->countryname){
@@ -66,7 +67,7 @@ class CountryController extends Controller
 		}
 
 		return response()->json($aray, 200);
-		//echo json_encode($aray);
+		
     }
 	
 	public function get_pricing($id){

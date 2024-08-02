@@ -77,6 +77,8 @@ use App\Http\Controllers\Api\PostGalleryController;
 |
 */
 
+Route::post('/searchlocation', [CountryController::class, 'search_location']);
+
 // Authentication
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -89,11 +91,14 @@ Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 
 
+
 Route::middleware('auth:sanctum')->group(function () {
   Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
   Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
   Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
   Route::delete('countries/{id}', [CountryController::class, 'destroy'])->name('countries.destroy');
+
+  
 
   Route::get('policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('policy_and_terms.index');
   Route::post('policy_and_terms', [PolicyAndTermsController::class, 'store'])->name('policy_and_terms.store');

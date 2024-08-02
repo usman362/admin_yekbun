@@ -2389,7 +2389,7 @@
       </ul>
     </li>
     <li class="menu-item ">
-      <a href="{{url('/settings/countries')}}" class="menu-link">
+      <a href="{{url('/settings/countrieslist')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-flag"></i>
         <div>Add Country</div>
       </a>

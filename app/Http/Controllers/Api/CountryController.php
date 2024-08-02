@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+
+use App\Models\States;
+use App\Models\City;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
@@ -17,8 +21,28 @@ class CountryController extends Controller
      */
     public function index()
     {
+        die("24");
         $countries = Country::orderBy("name", "ASC")->get();
         return response()->json(['countries' => $countries],200);
+    }
+
+    public function search_location(Request $request)
+    {
+
+        $searchval = $request->search;
+
+		$results =  City::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
+		
+		$aray = array();
+
+		foreach($results as $row){
+			
+			$aray[] = $row->country->name . " " . $row->state->name . " " . $row->name;
+
+		}
+
+        return response()->json(['message' => 'Ok','locations' => $aray],201);
+		
     }
 
     /**

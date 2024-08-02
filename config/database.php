@@ -54,7 +54,13 @@ return [
                 'database' => 'admin_yekbun'  
             ]
         ],
-
+/*
+        'mongodb' => [
+			'driver' => 'mongodb',
+			'dsn' => env('DB_URI'),
+			'database' => 'sample_mflix',
+		  ],
+*/
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),

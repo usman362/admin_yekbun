@@ -148,9 +148,22 @@
                     	{{$cont->name}}
                     </td>
                     <td>
-                        {{$cont->states->count()}}
+                        @if($cont->states)
+                            {{$cont->states->count()}}  
+                        @else
+                            0
+                        @endif
+
+                        
                     </td>
-                    <td>{{$cont->cities->count()}}</td>
+                    <td>
+                        @if($cont->cities)
+                            {{$cont->cities->count()}}  
+                        @else
+                            0
+                        @endif
+                    
+                    </td>
 
                     <td>0</td>
                     
