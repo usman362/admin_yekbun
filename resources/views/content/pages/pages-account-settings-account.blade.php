@@ -249,6 +249,15 @@
                             border-radius: 50%;
                             transition: .2s;
                         }
+
+                        .field-icon {
+                            float: right;
+                            margin-right    : 12px;
+                            margin-top: -25px;
+                            position: relative;
+                            z-index: 2;
+                            cursor: pointer;
+                        }
                     </style>
 
                     <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar"
@@ -319,6 +328,7 @@
                                     <input type="password" name="password"
                                         class="js-toggle-password form-control form-control input-field" id="password"
                                         placeholder="Enter new password" required="">
+                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                             </div>
 
@@ -330,6 +340,7 @@
                                     <input type="password" name="confirm_password"
                                         class="js-toggle-password form-control form-control input-field"
                                         id="confirm_password" placeholder="Confirm your new password" required="">
+                                    <span toggle="#confirm_password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                             </div>
                             <br>
@@ -655,6 +666,17 @@
             $('.js-validate').each(function() {
                 $.HSCore.components.HSValidation.init($(this));
             });
+        });
+
+        $(".toggle-password").click(function() {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+            input.attr("type", "text");
+            } else {
+            input.attr("type", "password");
+            }
         });
     </script>
     <script>

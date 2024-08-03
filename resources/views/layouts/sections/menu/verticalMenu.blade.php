@@ -101,7 +101,7 @@ $configData = Helper::appClasses();
           </a>
           <ul class="menu-sub">
             <li class="menu-item {{ Request::is('settings/user-roles/standard') ? 'active' : '' }}">
-                 
+
                   <a href="{{url('/profile-banner')}}" class="menu-link">
                     <div>Profile Banner</div>
                   </a>
@@ -111,7 +111,7 @@ $configData = Helper::appClasses();
                 <div>User Roles</div>
               </a>
             </li>
-          
+
             <li class="menu-item {{ Request::is('settings/reasons') ? 'active' : '' }}">
               <a href="{{url('/settings/reasons')}}" class="menu-link">
                 <div>Reasons</div>
@@ -499,7 +499,7 @@ $configData = Helper::appClasses();
         <div>Advertisment</div>
       </a>
 
- 
+
     </li>
 
 
@@ -1303,7 +1303,7 @@ $configData = Helper::appClasses();
         </li>
 
 
- 
+
       </ul>
     </li>
 
@@ -1995,13 +1995,13 @@ $configData = Helper::appClasses();
     <li class="menu-item {{ Request::is('policy_and_terms') ? 'active' : '' }}">
       <a href="{{url('/policy_and_terms')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-list-ul"></i>
-        <div>Policy and Terms</div>
+        <div>App Policy</div>
       </a>
     </li>
     <li class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-map"></i>
-        <div>Locations</div>
+        <div>Manage Origin</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item {{ Request::is('settings/countries') ? 'active' : '' }}">
@@ -2024,7 +2024,7 @@ $configData = Helper::appClasses();
     <li class="menu-item {{ Request::is('yekbun-location/countries') ? 'active' : '' }}">
         <a href="{{url('/yekbun-location/countries')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
-          <div>Add Country</div>
+          <div>Select Country</div>
         </a>
       </li>
     <li class="menu-item {{ Request::is('app/popup') ? 'active' : '' }} ">
