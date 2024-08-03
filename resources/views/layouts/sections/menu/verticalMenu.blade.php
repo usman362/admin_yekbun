@@ -1424,8 +1424,8 @@ $configData = Helper::appClasses();
 
 
         <li class="menu-item ">
-          <a href="{{url('/news-category')}}" class="menu-link">
-            <div>Add Category</div>
+          <a href="{{url('/avatars')}}" class="menu-link">
+            <div>Add/Manage Avatars</div>
           </a>
 
 
@@ -1434,8 +1434,8 @@ $configData = Helper::appClasses();
 
 
         <li class="menu-item ">
-          <a href="{{url('/news')}}" class="menu-link">
-            <div>Add / Manage News</div>
+          <a href="{{url('/manage-avatars')}}" class="menu-link">
+            <div>Manage AI Posts</div>
           </a>
 
 
@@ -2001,7 +2001,7 @@ $configData = Helper::appClasses();
     <li class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-map"></i>
-        <div>Locations</div>
+        <div>Manage Origions</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item {{ Request::is('settings/countries') ? 'active' : '' }}">
@@ -2022,7 +2022,7 @@ $configData = Helper::appClasses();
       </ul>
     </li>
     <li class="menu-item {{ Request::is('yekbun-location/countries') ? 'active' : '' }}">
-        <a href="{{url('/yekbun-location/countrieslist')}}" class="menu-link">
+        <a href="{{url('/settings/countrieslist')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
           <div>Add Country</div>
         </a>

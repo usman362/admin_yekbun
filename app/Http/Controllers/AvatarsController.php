@@ -22,7 +22,7 @@ class AvatarsController extends Controller
 				
 			
 		
-		return view('avatars_list', [
+		return view('content.avatars.avatars_list', [
 			'avatars' => $avatars
 		]);
     }
@@ -37,6 +37,10 @@ class AvatarsController extends Controller
 			'avatars' => $avatars, 'id' => $id
 		]);
 		
+	}
+
+	public function testavatar(){
+		return view('content.avatars.test');
 	}
 	
 	public function get_avatars($id){
@@ -75,7 +79,7 @@ $from = \Carbon\Carbon::parse(time());
 		//$avatar->av_Id = 'Ahs_342';
 		//$avatar->status = 1;
 		//$avatar->save();
-		return view('avatars_add');
+		return view('content.avatars.avatars_add');
         //
     }
 
@@ -235,7 +239,7 @@ $from = \Carbon\Carbon::parse(time());
 			$avatar->sources = $sources;
 		}
 				
-		return view('avatars_edit', [
+		return view('content.avatars.avatars_edit', [
 			'avatar' => $avatar
 		]);		
 		

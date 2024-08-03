@@ -27,7 +27,7 @@ class GreetingsController extends Controller
 				
 		
 		
-		return view('greetings_list', [
+		return view('content.greetings.greetings_list', [
 			'greetings' => $greetings
 		]);
     }
@@ -95,7 +95,6 @@ class GreetingsController extends Controller
 				$newprice->image = $imgfilename;
 				$newprice->update();
 				return Redirect::to($url);
-				return redirect()->route('pricing')->with('success','Price updated successfully.');
 			}else{
 				//save record
 				$newprice = new Pricings();
@@ -107,7 +106,6 @@ class GreetingsController extends Controller
 				$newprice->image = $imgfilename;
 				$newprice->save();
 				return Redirect::to($url);
-				return redirect()->route('pricing')->with('success','Price added successfully.');
 				
 			}
 			
@@ -125,7 +123,7 @@ class GreetingsController extends Controller
 		
 		
 		
-		return view('pricing', [
+		return view('content.greetings.pricing', [
 			'pricings' => $pricings
 		]);
 		

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
-use App\Models\States;
-use App\Models\City;
+use App\Models\Countrylocations;
+use App\Models\Stateslocations;
+use App\Models\Citylocations;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use DateTime;
@@ -16,12 +16,8 @@ class CountryLocationController extends Controller
      */
     public function index(Request $request )
     {
-
-
-
-		if($request->countryname){
-			
-		}
+		//return redirect()->route('countrylocation.search_location')->with('success','Country added successfully.');
+		
 		  /*
 		  set_time_limit(3000);
 		  foreach ($cities as $city){
@@ -39,13 +35,15 @@ class CountryLocationController extends Controller
 
 
 		//$country_list =  City::where('name', 'Ajman')->orderBy('name', 'asc')->paginate(20);
-		$country_list =  Country::orderBy('name', 'asc')->paginate(20);
+		$country_list =  Countrylocations::orderBy('name', 'asc')->paginate(20);
 
 		
-		return view('country_list', [
+		return view('content.settings.locations.country_list', [
 			'country_list' => $country_list
 		]);
     }
+
+	
 
 
 	public function search_location(Request $request)
@@ -56,7 +54,7 @@ class CountryLocationController extends Controller
 			$searchval = $request->search;
 		}
 
-		$results =  City::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
+		$results =  Citylocations::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
 		
 		$aray = array();
 
@@ -195,8 +193,14 @@ class CountryLocationController extends Controller
     public function store(Request $request)
     {
 		
+		$newcont = New Countrylocations();
+		$newcont->name = $request->name;
+		$newcont->iso2 = $request->iso2;
+		$newcont->iso3 = $request->iso3;
+		$newcont->save();
+		return redirect()->action([CountryLocationController::class, 'index'])->with('success', 'Data stored successfully!');
+		
 			
-        //
     }
 
     /**

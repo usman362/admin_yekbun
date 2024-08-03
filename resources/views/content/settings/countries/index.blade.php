@@ -15,6 +15,36 @@
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 @endsection
 
+
+<style>
+#flag_image{
+		height:120px;
+		border-radius:50%;
+		width:120px;
+		cursor:pointer;
+	}
+	#uploadimage{
+		display:none;
+	}
+
+	.removebtn{
+		position: absolute;
+		  margin-top: 15px;
+		  margin-right: 10px;
+		  margin-left: -30px;
+		  height: 30px;
+		  width: 30px;
+		  max-width: 30px;
+		  padding: 5px;
+		  display:none;
+	}
+  .flag{
+    width:25px;
+    
+  }
+
+  </style>
+
 @section('content')
 <div class="d-flex justify-content-between">
   <div>
@@ -50,7 +80,15 @@
           @forelse($countries as $country)
           <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{ $country->name }}</td>
+            <td>
+              
+            @if($country->flag_path != "")
+              <img src="{{asset('/images/flags/' . $country->flag_path)}}" class="flag" />
+            @else 
+            <img src="{{asset('/images/flags/flag.png')}}" class="flag" />
+            @endif
+            
+            {{ $country->name }}</td>
             <td>{{ $country->users->count() }}</td>
             <td>
               <div>
@@ -116,6 +154,28 @@
 
 @section('page-script')
 <script>
+
+var imgsrc = $("#flag_image").attr("src");
+var loadFile = function(event) {
+				var image = document.getElementById('flag_image');
+				
+				image.src = URL.createObjectURL(event.target.files[0]);
+				$(".removebtn").show();
+			};
+			
+			$(document).on("click", ".removebtn", function(){
+				$("#flag_image").attr("src", imgsrc);
+				$(".removebtn").hide();
+				
+				var fileInput = document.getElementById('uploadimage')
+			   fileInput.value = ''
+			   fileInput.dispatchEvent(new Event('change'));
+				
+			});
+
+
+
+
   function confirmAction(event, callback) {
     event.preventDefault();
     Swal.fire({

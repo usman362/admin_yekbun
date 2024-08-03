@@ -11,6 +11,25 @@
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="col-md-12">
+                    <label class="form-label" for="inputcode">ISO2 Code</label>
+                    <input type="text" id="inputcode" name="code" class="form-control" value="{{ old('code') }}" placeholder="ISO2">
+                    @error('code')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-12">
+                <label class="form-label" >Upload Flag</label><br>
+                        <!--<label for="uploadimage">
+                            <img id="flag_image" src="{{asset('/images/flags/flag.png')}}" />	</label>-->
+                        <input name="dp" id="uploadimage2" type="file"  data-height="90" accept="image/*" />
+                        
+                        <!--<button type="button" class="btn1 btn-danger removebtn">X</button>-->
+                        
+                    </div>
+
             </div>
         </div>
     </div>

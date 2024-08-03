@@ -97,7 +97,12 @@ use App\Http\Controllers\BackgroundFeedController;
 use App\Http\Controllers\DepartmentController;
 use App\Models\FanPageType;
 use App\Models\Story;
+use App\Http\Controllers\AvatarsController;
+use App\Http\Controllers\GreetingsController;
+use App\Http\Controllers\CountryLocationController;
+use App\Http\Controllers\StateController;
 use Illuminate\Support\Facades\Artisan;
+
 
 
 
@@ -142,14 +147,8 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
 });
 
 
-use App\Http\Controllers\MovieController;
-Route::get('/browse_movies/', [MovieController::class, 'show']);
 
 
-use App\Http\Controllers\AvatarsController;
-use App\Http\Controllers\GreetingsController;
-use App\Http\Controllers\CountryLocationController;
-use App\Http\Controllers\StateController;
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
@@ -161,7 +160,10 @@ Route::get('/manage-avatars/', [AvatarsController::class, 'manag_avatars']);
 Route::get('/manage-avatars/{id}', [AvatarsController::class, 'manag_avatars']);
 Route::get('/get-avatars/{id}', [AvatarsController::class, 'get_avatars']);
 
+Route::get('/test-avatars', [AvatarsController::class, 'testavatar']);
+
 Route::resource('/settings/countrieslist', CountryLocationController::class);
+Route::post('/settings/countrieslist', [CountryLocationController::class, 'store']);
 
 //greetings 
 Route::resource('/uploads_cards', GreetingsController::class);
