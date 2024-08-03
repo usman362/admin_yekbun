@@ -142,7 +142,7 @@ Route::get('/browse_movies/', [MovieController::class, 'show']);
 
 use App\Http\Controllers\AvatarsController;
 use App\Http\Controllers\GreetingsController;
-use App\Http\Controllers\CountryController;
+// use App\Http\Controllers\CountryController;
 use App\Http\Controllers\StateController;
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
@@ -157,7 +157,7 @@ Route::get('/get-avatars/{id}', [AvatarsController::class, 'get_avatars']);
 
 
 
-//greetings 
+//greetings
 Route::resource('/uploads_cards', GreetingsController::class);
 
 Route::resource('/pricings', GreetingsController::class);
@@ -167,7 +167,7 @@ Route::get('/get-pricing/{id}', [GreetingsController::class, 'get_pricing']);
 Route::prefix("wishes")->name("wishes.")->group(function () {
 	Route::get('setting/pricing', [GreetingsController::class,'pricing']);
 	Route::post('setting/pricing', [GreetingsController::class,'pricing']);
-	
+
 });
 
 Route::resource('/settings/countries', CountryController::class);
