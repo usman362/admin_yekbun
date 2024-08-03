@@ -8,6 +8,7 @@ use Eloquent;
 class Stateslocations extends Model
 {
     protected $connection = 'mongodb';
+    protected $table = 'states';
 
     public function country() {
         

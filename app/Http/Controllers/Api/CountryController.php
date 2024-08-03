@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Models\States;
-use App\Models\City;
+use App\Models\Countrylocations;
+use App\Models\Stateslocations;
+use App\Models\Citylocations;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
@@ -31,7 +32,7 @@ class CountryController extends Controller
 
         $searchval = $request->search;
 
-		$results =  City::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
+		$results =  Citylocations::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
 		
 		$aray = array();
 

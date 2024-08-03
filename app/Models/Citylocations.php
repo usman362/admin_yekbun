@@ -8,11 +8,12 @@ use Eloquent;
 class Citylocations extends Model
 {
     protected $connection = 'mongodb';
+    protected $table = 'cities';
 
     public function country() {
         return $this->belongsTo('App\Models\Countrylocations', 'country_id', 'conid');
     }
-    
+     
 
     public function state()
     {
