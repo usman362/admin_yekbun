@@ -47,5 +47,5 @@
     </style>
 
     <label class="avatar avatar-xxl avatar-circle avatar-border-lg" for="">
-        <img id="viewer" onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'" class="avatar-img" src="http://127.0.0.1:2002/storage/images/user/66acfdc448341___Screenshot_2024-07-31_at_12.36.24_PM.png" alt="Image">
+        <img id="viewer" class="avatar-img" src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != "NULL" ? asset('storage/'.Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}" alt="Image">
     </label>
