@@ -1992,8 +1992,8 @@ $configData = Helper::appClasses();
         <div>Portal Notifications</div>
       </a>
     </li>
-    <li class="menu-item {{ Request::is('policy_and_terms') ? 'active' : '' }}">
-      <a href="{{url('/policy_and_terms')}}" class="menu-link">
+    <li class="menu-item {{ Request::is('app-policy') ? 'active' : '' }}">
+      <a href="{{url('/app-policy')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-list-ul"></i>
         <div>App Policy</div>
       </a>

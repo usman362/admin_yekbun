@@ -623,7 +623,7 @@ Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class
     Route::get('/manage_video', [ReportVideoController::class, 'manage_video']);
     Route::resource('/history-category', HistoryCategoryController::class);
     Route::resource('/history-category', HistoryCategoryController::class);
-    Route::resource('policy_and_terms', PolicyAndTermsController::class);
+    Route::resource('app-policy', PolicyAndTermsController::class);
 
     Route::resource('/news', NewsController::class);
     Route::resource('/feeds', NewsController::class);

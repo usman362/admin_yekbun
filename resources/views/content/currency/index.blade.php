@@ -70,14 +70,14 @@
                 <td>{{$currency->symbol}}</td>
                 <td>{{$currency->code}}</td>
                 <td>
-                    @can('location.delete')
+                    {{-- @can('location.delete') --}}
                     <!-- Delete -->
                     <form action="{{ route('currency.destroy', $currency->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                       @method('DELETE')
                       @csrf
                       <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
                     </form>
-                  @endcan
+                  {{-- @endcan   --}}
             </tr>
             @empty
             <tr>

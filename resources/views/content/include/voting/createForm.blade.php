@@ -9,7 +9,7 @@
         <form id="createForm" method="POST" action="{{ route('vote.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="hidden-inputs">
-                <input type="hidden" name="vote_category_id" value="{{$vote_categories[0]->id}}" requried />
+                <input type="hidden" name="vote_category_id" value="{{$vote_categories[0]->id ?? ''}}" requried />
                 <input type="hidden" name="vote_type" value="single" required />
             </div>
 

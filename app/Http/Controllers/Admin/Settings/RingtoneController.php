@@ -94,28 +94,15 @@ class RingtoneController extends Controller
     {
         try {
             $ringtone = Ringtone::find($id);
-    
             if (!$ringtone) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ringtone not found.'
-                ], 404);
+                return back()->with('error','Ringtone not found.');
             }
-    
             $ringtone->delete();
-    
-            return response()->json([
-                'success' => true,
-                'message' => 'Ringtone has been deleted.'
-            ], 200);
-    
+            return back()->with('success','Ringtone has been deleted.');
+
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to delete ringtone.',
-                'error' => $e->getMessage(),
-            ], 500);
+            return back()->with('error','Failed to delete ringtone.');
         }
     }
-    
+
 }

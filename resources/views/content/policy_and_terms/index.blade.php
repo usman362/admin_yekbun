@@ -47,7 +47,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form id="createForm" method="POST" action="{{ route('policy_and_terms.store') }}">
+                    <form id="createForm" method="POST" action="{{ route('app-policy.store') }}">
                         @csrf
                         <div class="col mb-3">
                             <label for="nameLarge" class="form-label">Section Name</label>
@@ -74,7 +74,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <button type="button" class="nav-link {{ $loop->iteration == 1 && !old('tab') ? 'active' : ''  }} {{ old('tab') === "tab{$section->id}"  ? 'active' : '' }}" role="tab" data-bs-toggle="tab" data-bs-target="#tab{{ $section->id }}" aria-controls="tab{{ $section->id }}" aria-selected="true"><i class='bx bx-file'></i>{{ $section->name }}</button>
 
-                        <form action="{{ route('policy_and_terms.destroy' ,$section->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                        <form action="{{ route('app-policy.destroy' ,$section->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                             @method('DELETE')
                             @csrf
                             {{-- @can('policy_terms.delete') --}}
