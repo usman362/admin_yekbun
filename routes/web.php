@@ -165,7 +165,7 @@ Route::get('/test-avatars', [AvatarsController::class, 'testavatar']);
 Route::resource('/settings/countrieslist', CountryLocationController::class);
 Route::post('/settings/countrieslist', [CountryLocationController::class, 'store']);
 
-//greetings 
+//greetings
 Route::resource('/uploads_cards', GreetingsController::class);
 
 Route::resource('/pricings', GreetingsController::class);
@@ -175,7 +175,7 @@ Route::get('/get-pricing/{id}', [GreetingsController::class, 'get_pricing']);
 Route::prefix("wishes")->name("wishes.")->group(function () {
 	Route::get('setting/pricing', [GreetingsController::class,'pricing']);
 	Route::post('setting/pricing', [GreetingsController::class,'pricing']);
-	
+
 });
 
 //Route::resource('/settings/countries', CountryController::class);
