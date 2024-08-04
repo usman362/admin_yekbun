@@ -228,7 +228,7 @@
                             </div>
                         </div>
                         
-                        <div class="details"
+                        <div class="details">
                             <h4><b>Avatar Article</b></h4>
                             <div class="txt">Amount per Time</div>
                             <div class="row">
@@ -256,7 +256,7 @@
                         </div>
                         
                         
-                        <div class="details"
+                        <div class="details">
                             <h4><b>Sharing Options</b></h4>
                             <div class="txt">Who can see the Post</div>
                             <div class="row">
@@ -293,7 +293,7 @@
                         
                     
                     
-                    <div class="details"
+                    <div class="details">
                             <h4><b>Reaction Options</b></h4>
                             <div class="txt">User reactions for Post</div>
                             <div class="row">
@@ -335,7 +335,7 @@
                     
                     <!-- col6 start -->
                     <div class="col-md-6">
-                        <div class="details"
+                        <div class="details">
                             <h4><b>Text Setting</b>
                                  <div  class="form-check form-switch mb-2 righ-check-option">
                             	 	<input @if($avatar->text_setting == "1") checked @endif class="form-check-input closetogglebtn" name="text_settings" type="checkbox" >
@@ -352,7 +352,7 @@
                             </div>
                         </div>
                         
-                        <div class="details"
+                        <div class="details">
                             <h4><b>Image Setting</b>
                                  <div  class="form-check form-switch mb-2 righ-check-option">
                             	 	<input @if($avatar->image_setting == "1") checked @endif  class="form-check-input closetogglebtn" name="image_settings" type="checkbox" >
@@ -369,7 +369,7 @@
                             </div>
                         </div>
                         
-                        <div class="details"
+                        <div class="details">
                             <h4><b>Video Setting</b>
                                  <div  class="form-check form-switch mb-2 righ-check-option">
                             	 	<input @if($avatar->video_setting == "1") checked @endif class="form-check-input closetogglebtn" name="video_settings" type="checkbox" >
@@ -385,9 +385,44 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="details">
+                            <h4><b>Language Setting</b>
+                                 <div  class="form-check form-switch mb-2 righ-check-option">
+                            	 	<input class="form-check-input closetogglebtn" name="languages_settings" type="checkbox" >
+                                </div>
+                            </h4>
+                            <div class="txt">Translate Settings</div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <select class="form-control" name="select_lang">
+                                        <option value="">Select Language</option>
+
+                                        @foreach($languages as $lang)
+                                            <option @if($avatar->select_lang == $lang->id) selected @endif value="{{$lang->id}}">{{$lang->title}}</option>
+                                        @endforeach
+
+                                    </select>
+                                	
+                                </div>
+                                <div class="col-md-6">
+                                <select class="form-control" name="translate_lang">
+                                        <option value="">Translate To</option>
+                                        
+                                        
+                                        @foreach($languages as $lang)
+                                            <option @if($avatar->translate_lang == $lang->id) selected @endif value="{{$lang->id}}">{{$lang->title}}</option>
+                                        @endforeach
+
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         
                         
-                        <div class="details"
+                        <div class="details">
                             <h4><b>Sources</b>
                                  
                             </h4>
@@ -476,7 +511,7 @@
         </form>
 
     </div>
-
+ 
 
 
             <!-- pricingModal -->

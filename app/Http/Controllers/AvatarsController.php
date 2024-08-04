@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Avatars;
 use App\Models\Avatars_sources;
 use Illuminate\Http\Request;
+use App\Models\Language;
 use DateTime;
 
 class AvatarsController extends Controller
@@ -74,12 +75,16 @@ $from = \Carbon\Carbon::parse(time());
      */
     public function create()
     {
+
+		$languages = Language::all();
+
+
 		//$avatar = new Avatars();
 		//$avatar->name = 'ali hassan';
 		//$avatar->av_Id = 'Ahs_342';
 		//$avatar->status = 1;
 		//$avatar->save();
-		return view('content.avatars.avatars_add');
+		return view('content.avatars.avatars_add', ['languages' => $languages]);
         //
     }
 
@@ -112,6 +117,9 @@ $from = \Carbon\Carbon::parse(time());
 		$aricle_per_day = $request['aricle_per_day'];
 		$feed_per_hour = $request['feed_per_hour'];
 		$sharing_options = $request['sharing_options'];
+
+		$language = $request['select_lang'];
+		$translate_lang = $request['translate_lang'];
 		
 		$text_comments = 0;
 		if(isset($request['text_comments'])){
@@ -195,7 +203,9 @@ $from = \Carbon\Carbon::parse(time());
 		$avatar->video_setting = $video_settings;
 		$avatar->video_setting_content_type = $video_settings_1;
 		$avatar->video_setting_content_type2 = $video_settings_2;
-		
+		$avatar->select_lang = $language;
+		$avatar->translate_lang = $translate_lang;
+
 		
 		$avatar->save();
 		
@@ -238,9 +248,12 @@ $from = \Carbon\Carbon::parse(time());
 			$sources = Avatars_sources::where('avatar_Id', $avatar->id)->get();	
 			$avatar->sources = $sources;
 		}
+
+		$languages = Language::all();
+
 				
 		return view('content.avatars.avatars_edit', [
-			'avatar' => $avatar
+			'avatar' => $avatar, 'languages' => $languages
 		]);		
 		
         //
@@ -278,6 +291,9 @@ $from = \Carbon\Carbon::parse(time());
 		$aricle_per_day = $request['aricle_per_day'];
 		$feed_per_hour = $request['feed_per_hour'];
 		$sharing_options = $request['sharing_options'];
+
+		$language = $request['select_lang'];
+		$translate_lang = $request['translate_lang'];
 		
 		$text_comments = 0;
 		if(isset($request['text_comments'])){
@@ -344,6 +360,9 @@ $from = \Carbon\Carbon::parse(time());
 		$avatar->video_setting = $video_settings;
 		$avatar->video_setting_content_type = $video_settings_1;
 		$avatar->video_setting_content_type2 = $video_settings_2;
+
+		$avatar->select_lang = $language;
+		$avatar->translate_lang = $translate_lang;
 		
 		$avatar->update();
 		
