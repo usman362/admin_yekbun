@@ -112,22 +112,12 @@
 </div>
 </div>
 
-@if($message = Session::get('success'))
-					<div class="alert alert-success alert-message">
-						<i class="fa fa-check-circle"></i>
-						{{ $message }}
-					</div>
-				@endif
-
 <!-- Basic Bootstrap Table -->
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         <h5 class="m-0">Avatars List</h5>
                 <a class="btn btn-primary" href="avatars/create"><i class="bx bx-plus me-0 me-sm-1"></i> Add Avatar</a>
             </div>
-            
-            
-            
             
     <div class="table-responsive text-nowrap">
       <table class="table">

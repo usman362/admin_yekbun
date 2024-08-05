@@ -130,17 +130,17 @@
                                         <td>3:30 min</td>
                                         <td>
                                             <div class="d-flex justify-content-start align-items-center">
-                                                @can('music.write')
+                                                
                                                     <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4"
                                                         data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit"><i class="bx bx-edit"></i>
-                                                    @endcan
+                                                   
                                                 </button>
-                                                @can('music.delete')
+                                               
                                                     <button type="button" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
                                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                                         data-bs-original-title="Remove"><i
                                                             class="bx bx-trash me-1"></i></button>
-                                                @endcan
+                                                
                                             </div>
                                         </td>
                                     </tr>

@@ -17,7 +17,7 @@ class RegionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         $regions = Region::orderBy("name", "ASC")->with('cities')->get();
         $countries = Country::orderBy("name", "ASC")->get();
         return view("content.settings.regions.index", compact("regions", "countries"));

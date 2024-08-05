@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Spatie\Activitylog\LogOptions;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class City extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory;
+    protected $connection = 'mongodb';
+    protected $table = 'cities_orig';
 
     protected $fillable = [
         'name',
@@ -26,6 +28,7 @@ class City extends Model
 
     public function region()
     {
+        
         return $this->belongsTo(Region::class);
     }
 
@@ -38,4 +41,9 @@ class City extends Model
     {
         return $this->hasMany(User::class);
     }
+       
 }
+
+
+
+
