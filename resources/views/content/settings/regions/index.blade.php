@@ -45,6 +45,7 @@
             <th>#</th>
             <th>Country Name</th>
             <th>Province Name</th>
+            <th>Short-Code</th>
             <th>Total People</th>
             <th>Total Cities</th>
             <th>Options</th>
@@ -56,6 +57,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{ $region->country? $region->country->name: '' }}</td>
             <td>{{ $region->name }}</td>
+            <td>{{ $region->shortcode}}</td>
             <td>{{ $region->users->count() }}</td>
             <td>{{ $region->cities->count() }}</td>
             <td>

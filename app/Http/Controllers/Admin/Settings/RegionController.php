@@ -23,7 +23,7 @@ class RegionController extends Controller
         return view("content.settings.regions.index", compact("regions", "countries"));
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -34,7 +34,14 @@ class RegionController extends Controller
        
         $validated = $request->validated();
 
-        $region = Region::create($validated);
+        $regin = new Region();
+        $regin->name = $request->name;
+        $regin->country_id = $request->country_id;
+        $regin->shortcode = $request->shortcode;
+
+        $regin->save();
+
+       /// $region = Region::create($validated);
 
         return back()->with("success", "Region successfully added.");
     }
@@ -51,8 +58,15 @@ class RegionController extends Controller
         $validated = $request->validated();
 
         $region = Region::find($id);
-        $region->fill($validated);
-        $region->save();
+
+        $region->name = $request->name;
+        $region->country_id = $request->country_id;
+        $region->shortcode = $request->shortcode;
+
+        $region->update();
+
+        //$region->fill($validated);
+        //$region->save();
 
         return back()->with("success", "Region successfully updated.");
     }
