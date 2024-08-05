@@ -116,14 +116,6 @@
 </div>
 
 
-
-@if($message = Session::get('success'))
-					<div class="alert alert-success alert-message">
-						<i class="fa fa-check-circle"></i>
-						{{ $message }}
-					</div>
-				@endif
-
 <!-- Basic Bootstrap Table -->
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">

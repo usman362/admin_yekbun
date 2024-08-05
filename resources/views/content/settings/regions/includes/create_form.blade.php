@@ -31,7 +31,7 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        $("#inputCountryId").select2();
+        //$("#inputCountryId").select2();
     });
 </script>
 @endpush

@@ -103,8 +103,8 @@
 @parent
 <script>
     window.addEventListener('load', function () {
-        $("#inputRegionId").select2();
-        $("#inputCountryId").select2();
+       // $("#inputRegionId").select2();
+       // $("#inputCountryId").select2();
     });
 </script>
 

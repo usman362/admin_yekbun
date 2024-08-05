@@ -12,7 +12,7 @@ class Region extends Model
 {
     use HasFactory, LogsActivity;
     // use HasFactory;
-
+ 
     protected $fillable = [
         'name',
         'country_id',

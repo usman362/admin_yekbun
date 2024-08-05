@@ -61,10 +61,10 @@
 {{-- <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h5 class="m-0">City List</h5>
-    @can('location.create')
+   
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
         class="bx bx-plus me-0 me-sm-1"></i> Add City</button>
-    @endcan
+    
   </div>
   <div class="card-datatable table-responsive">
     <table class="datatables-basic table border-top" id="example">
@@ -100,7 +100,7 @@
           <td>{{ $city->users->count() }}</td>
           <td>
             <div>
-              @can('location.write')
+              
               <!-- Edit -->
               <span data-bs-toggle="modal" data-bs-target="#editModal{{ $city->id }}">
                 <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -108,9 +108,9 @@
                   <i class="bx bx-edit"></i>
                 </button>
               </span>
-              @endcan
+              
 
-              @can('location.delete')
+              
               <!-- Delete -->
               <form action="{{ route('settings.cities.destroy', $city->id) }}"
                 onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
@@ -120,15 +120,15 @@
                   data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i
                     class="bx bx-trash me-1"></i></button>
               </form>
-              @endcan
+             
             </div>
 
-            @can('location.write')
+            
             <x-modal id="editModal{{ $city->id }}" title="Edit City" saveBtnText="Update" saveBtnType="submit"
               saveBtnForm="editForm{{ $city->id }}" size="sm" :show="old('showEditFormModal'.$city->id)? true: false">
               @include('content.settings.cities.includes.edit_form')
             </x-modal>
-            @endcan
+            
           </td>
         </tr>
         @empty
@@ -145,10 +145,10 @@
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h5 class="m-0">City List</h5>
-    @can('location.create')
+    
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
         class="bx bx-plus me-0 me-sm-1"></i> Add City</button>
-    @endcan
+    
   </div>
   <div class="card-datatable table-responsive">
     <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -183,7 +183,7 @@
             <td>{{ $city->users->count() }}</td>
             <td>
               <div>
-                @can('location.write')
+                
                 <!-- Edit -->
                 <span data-bs-toggle="modal" data-bs-target="#editModal{{ $city->id }}">
                   <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -191,9 +191,9 @@
                     <i class="bx bx-edit"></i>
                   </button>
                 </span>
-                @endcan
+                
 
-                @can('location.delete')
+                
                 <!-- Delete -->
                 <form action="{{ route('settings.cities.destroy', $city->id) }}"
                   onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
@@ -203,15 +203,15 @@
                     data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i
                       class="bx bx-trash me-1"></i></button>
                 </form>
-                @endcan
+                
               </div>
 
-              @can('location.write')
+              
               <x-modal id="editModal{{ $city->id }}" title="Edit City" saveBtnText="Update" saveBtnType="submit"
                 saveBtnForm="editForm{{ $city->id }}" size="sm" :show="old('showEditFormModal'.$city->id)? true: false">
                 @include('content.settings.cities.includes.edit_form')
               </x-modal>
-              @endcan
+              
             </td>
           </tr>
           @empty
@@ -262,12 +262,12 @@
 
 <!--/ Basic Bootstrap Table -->
 
-@can('location.create')
+
 <x-modal id="createModal" title="Add City" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
   :show="old('showCreateFormModal')? true: false">
   @include('content.settings.cities.includes.create_form')
 </x-modal>
-@endcan
+
 @endsection
 
 @section('page-script')

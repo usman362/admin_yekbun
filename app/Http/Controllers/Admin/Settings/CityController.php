@@ -19,9 +19,14 @@ class CityController extends Controller
      */
     public function index()
     {
+
+        
+
         $cities = City::orderBy("name", "ASC")->get();
         $regions = Region::orderBy("name", "ASC")->get();
         $countries = Country::orderBy("name", "ASC")->get();
+
+
         return view("content.settings.cities.index", compact("cities", "regions", "countries"));
     }
 
@@ -33,7 +38,7 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        dd($request->all());
+      //  dd($request->all());
         $validated = $request->validated();
 
         $cities = $validated['cities'];
@@ -41,6 +46,7 @@ class CityController extends Controller
         
         foreach ($cities as $city)
             City::create(array_merge($validated, ['zipcode' => $city['zipcode'], 'name' => $city['name']]));
+
 
         return back()->with("success", "City successfully added.");
     }
