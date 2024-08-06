@@ -263,7 +263,7 @@
 <!--/ Basic Bootstrap Table -->
 
 
-<x-modal id="createModal" title="Add City" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
+<x-modal id="createModal"  title="Add City" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
   :show="old('showCreateFormModal')? true: false">
   @include('content.settings.cities.includes.create_form')
 </x-modal>

@@ -45,7 +45,7 @@ class CountryController extends Controller
             $randomize = rand(111111, 999999);
             $extension = $request->file('dp')->extension();
             $filename = $randomize . '.' . $extension;
-            $image = $request->file('dp')->move('images/flags/', $filename);
+            $image = $request->file('dp')->move('public/images/flags/', $filename);
             $flagpath = $filename;
         }
 
@@ -86,7 +86,7 @@ class CountryController extends Controller
             $randomize = rand(111111, 999999);
             $extension = $request->file('dp')->extension();
             $filename = $randomize . '.' . $extension;
-            $image = $request->file('dp')->move('images/flags/', $filename);
+            $image = $request->file('dp')->move('public/images/flags/', $filename);
             $flagpath = $filename;
 
             $country->flag_path = $flagpath;

@@ -16,11 +16,14 @@ class Region extends Model
     protected $fillable = [
         'name',
         'country_id',
-        'status',
+        'shortcode',
+        'status'
+        
     ];
 
     public function getActivitylogOptions(): LogOptions
     {
+        
         return LogOptions::defaults();
     }
 

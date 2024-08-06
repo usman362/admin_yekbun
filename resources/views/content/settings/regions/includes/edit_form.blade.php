@@ -24,6 +24,15 @@
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="col-md-12">
+                    <label class="form-label" for="inputShortcode">Short Code</label>
+                    <input type="text" id="inputShortcode" name="shortcode" class="form-control" value="{{ old('shortcode')?? $region->shortcode }}" placeholder="Short Code">
+                    @error('shortcode')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
             </div>
         </div>
     </div>
