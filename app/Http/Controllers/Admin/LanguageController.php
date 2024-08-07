@@ -373,7 +373,7 @@ class LanguageController extends Controller
   }
   public function signupsection(Request $request)
   {
-   
+   //dd("helo");
     $validator = Validator::make($request->all(), [
       'language_id' => [
         'required',
@@ -415,7 +415,7 @@ class LanguageController extends Controller
       'user_exists' => 'nullable|string|max:255',
       'email_ok' => 'nullable|string|max:255',
       'phone_number' => 'nullable|string|max:20',
-      'password' => 'nullable|string|min:8|confirmed',
+      'password' => 'nullable|string|min:4',
       'password_confirmation' => 'nullable_with:password|same:password',
       'password_criteria_min_length' => 'nullable|string|max:255',
       'password_criteria_uppercase_symbol' => 'nullable|string|max:255',
@@ -431,8 +431,9 @@ class LanguageController extends Controller
       'account_created_ok' => 'nullable|string|max:255',
       'sign_in_redirect' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     if ($validator->fails()) {
+      dd( $validator->errors());
       return redirect()
         ->back()
         ->withErrors($validator)
