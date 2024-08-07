@@ -251,7 +251,7 @@
                         }
                         @endphp
                         @php
-                        $headersection = App\Models\HeaderHistory::where('language_id', $language->id)->first();
+                        $headersection = App\Models\headerhistory::where('language_id', $language->id)->first();
                         
                         // Define the fields for the Header History Section
                         $headerHistoryFields = [
