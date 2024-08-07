@@ -392,29 +392,33 @@
         }
     }
     @endphp
-        @php
-        // Retrieve the existing SignupSection data for the given language_id
-        $signupsection = App\Models\SignupSection::where('language_id', $language->id)->first();
-    
-        // Define the fields for the Sign up Section
-        $signupFields = [
-            'language_search', 'language_save_change', 'gender', 'location', 'select_gender_prompt', 'gender_ok',
-            'gender_start', 'firstname', 'lastname', 'username', 'birthday', 'your_status', 'status_next', 'status_back',
-            'origin', 'select_province', 'email', 'repeat_email', 'email_issue_message', 'error_found',
-            'user_already_exist', 'email_ok', 'phone_number', 'password', 'repeat_password',
-            'account_created_success_message', 'sign_in_redirect'
-        ];
-    
-        // Calculate total and done values
-        $signupTotal = count($signupFields);
-        $signupDone = 0;
-    
-        foreach ($signupFields as $field) {
-            if (!empty($signupsection->$field)) {
-                $signupDone++;
-            }
-        }
-    @endphp 
+       @php
+       // Retrieve the existing SignupSection data for the given language_id
+       $signupsection = App\Models\SignupSection::where('language_id', $language->id)->first();
+   
+       // Define the fields for the Sign up Section
+       $signupFields = [
+           'language_search', 'language_save_change', 'gender', 'location', 'select_gender_prompt', 'gender_ok',
+           'gender_start', 'firstname', 'lastname', 'username', 'birthday', 'your_status', 'status_next', 'status_back',
+           'origin', 'select_province', 'email', 'repeat_email', 'email_issue_message', 'error_found',
+           'user_already_exist', 'email_ok', 'phone_number', 'password', 'repeat_password',
+           'account_created_success_message', 'sign_in_redirect'
+       ];
+   
+       // Calculate total and done values
+       $signupTotal = count($signupFields);
+       $signupDone = 0;
+   
+       foreach ($signupFields as $field) {
+           if (!empty($signupsection->$field)) {
+               $signupDone++;
+           }
+       }
+   
+       // If all fields are filled, adjust the total and done values accordingly
+       $signupTotal = $signupTotal > 0 ? $signupTotal : 0;
+       $signupDone = $signupDone > 0 ? $signupDone : 0;
+   @endphp 
     @php
     // Retrieve the existing FooterFriendSection data for the given language_id
     $footerfriends = App\Models\FooterFriendSection::where('language_id', $language->id)->first();
@@ -839,7 +843,6 @@ foreach ($signupFields as $field) {
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
-                                                                        
                                                                         <tr>
                                                                             <td>Sign up Section</td>
                                                                             <td>
@@ -857,6 +860,7 @@ foreach ($signupFields as $field) {
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Sign in Section</td>
                                                                             <td>
