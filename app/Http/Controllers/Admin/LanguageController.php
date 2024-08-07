@@ -7,7 +7,7 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LanguageData;
-use App\Models\StartPage;
+use App\Models\Startpage;
 use App\Models\LanguageKeyword;
 use App\Models\FooterFriendSection;
 use App\Models\headervoter;
