@@ -656,7 +656,7 @@ foreach ($headerDonationFields as $field) {
 }
 @endphp
 @php
-$headervoter = App\Models\HeaderVoter::where('language_id', $language->id)->first();
+$headervoter = App\Models\headervoter::where('language_id', $language->id)->first();
 
 // Define the fields for the Header Voting Section
 $headerVotingFields = [
