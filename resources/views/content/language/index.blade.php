@@ -198,7 +198,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>26</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#languageModal__1{{ $language->id }}"
@@ -227,7 +227,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td> 6</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#startpage__1{{ $language->id }}"
@@ -256,7 +256,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>12</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#signupsection__1{{ $language->id }}"
@@ -285,7 +285,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>30</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#signinsection__1{{ $language->id }}"
@@ -314,7 +314,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>21</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#footerQuickSectionModal{{ $language->id }}">
@@ -344,7 +344,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>14</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#footercart{{ $language->id }}"
@@ -373,7 +373,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td> 12</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#footerfriendssection{{ $language->id }}"
@@ -402,7 +402,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td> 19</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#footerchatsection{{ $language->id }}"
@@ -1131,8 +1131,9 @@
                                                                     <h6>{{ ucfirst(str_replace('_', ' ', $field)) }}</h6>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <input type="text" class="form-control" name="{{ $field }}" placeholder="{{ $placeholder }}" value="{{ $keywords->$field }}">
+                                                                    <input type="text" class="form-control" name="{{ $field }}" placeholder="{{ $placeholder }}" value="{{ $keywords->$field ?? '' }}">
                                                                 </div>
+                                                                
                                                             </div>
                                                             @endforeach
                                     
