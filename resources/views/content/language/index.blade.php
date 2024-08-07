@@ -431,7 +431,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>47</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerfeedsection{{ $language->id }}"
@@ -460,7 +460,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>26</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#visitprofilesection{{ $language->id }}"
@@ -489,7 +489,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>13</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerstoriessection{{ $language->id }}"
@@ -518,7 +518,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>4</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headergreating{{ $language->id }}"
@@ -547,7 +547,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>11</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerhistory{{ $language->id }}"
@@ -576,7 +576,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>15</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headervoter{{ $language->id }}"
@@ -605,7 +605,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>3</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerdonation{{ $language->id }}"
@@ -634,7 +634,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>40</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headermusic{{ $language->id }}"
@@ -663,7 +663,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>3</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headervideo{{ $language->id }}"
@@ -692,7 +692,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>3</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerstreamsection{{ $language->id }}"
@@ -721,7 +721,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>3</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerevent{{ $language->id }}"
@@ -750,7 +750,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>3</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headeronlineshop{{ $language->id }}"
@@ -779,7 +779,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>4</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerrestorent{{ $language->id }}"
@@ -808,7 +808,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>4</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#headerserviceportal{{ $language->id }}"
@@ -838,7 +838,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>35</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#settingoverview{{ $language->id }}"
@@ -867,7 +867,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>20</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#settingsectionsok{{ $language->id }}"
@@ -896,7 +896,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>11</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#myprofilesection{{ $language->id }}"
@@ -926,7 +926,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>6</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#profilemultimedia{{ $language->id }}"
@@ -955,7 +955,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>3</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#myprofilefriends{{ $language->id }}"
@@ -984,7 +984,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td>18</td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#myprofileoffice{{ $language->id }}"
@@ -1012,8 +1012,8 @@
                                                                                         aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td> </td>
+                                                                            <td> </td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#myaschannels{{ $language->id }}"
@@ -1041,8 +1041,8 @@
                                                                                         aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>{{ rand(0, 100) }}</td>
+                                                                            <td> </td>
+                                                                            <td> </td>
                                                                             <td>
                                                                                 <span data-bs-toggle="modal"
                                                                                     data-bs-target="#mychannelsetting{{ $language->id }}"
