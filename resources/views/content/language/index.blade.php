@@ -1152,7 +1152,7 @@
                                         
                                            
                                     @php
-                                    $startpage = App\Models\StartPage::where('language_id', $language->id)->first();
+                                    $startpage = App\Models\Startpage::where('language_id', $language->id)->first();
                                     @endphp
                                     
                                     <div class="modal fade" id="startpage__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
