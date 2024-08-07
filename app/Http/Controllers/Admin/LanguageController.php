@@ -7,7 +7,7 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LanguageData;
-use App\Models\Startpage;
+use App\Models\StartPage;
 use App\Models\LanguageKeyword;
 use App\Models\FooterFriendSection;
 use App\Models\headervoter;
@@ -349,7 +349,7 @@ class LanguageController extends Controller
       'dear_guest' => 'nullable|string',
       'create_account' => 'nullable|string',
     ]);
-
+//dd($validator);
     if ($validator->fails()) {
       return redirect()
         ->back()
@@ -358,9 +358,9 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd(  $validatedData);
     try {
-      Startpage::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+      StartPage::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
 
       return redirect()
         ->back()

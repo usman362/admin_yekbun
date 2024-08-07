@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 
-class Startpage extends Model
+class StartPage extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'startpages';
+     
     use HasFactory;
 
     protected $fillable = [

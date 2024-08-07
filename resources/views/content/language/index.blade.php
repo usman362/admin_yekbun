@@ -1150,11 +1150,9 @@
                                         
 
                                         
-                                           
                                     @php
                                     $startpage = App\Models\Startpage::where('language_id', $language->id)->first();
                                     @endphp
-                                    
                                     <div class="modal fade" id="startpage__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -1165,6 +1163,9 @@
                                                 <div class="modal-body">
                                                     <form action="{{ route('languages.startpage') }}" method="POST">
                                                         @csrf
+                                                        @if($startpage)
+                                                            <input type="hidden" name="_id" value="{{ $startpage->_id }}">
+                                                        @endif
                                                         <input type="hidden" name="language_id" value="{{ $language->id }}">
                                                         <div class="container">
                                                             <div class="row">
@@ -1239,6 +1240,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     
 
                                         {{-- //Sign up Section --}}
