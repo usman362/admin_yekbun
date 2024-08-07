@@ -17,7 +17,7 @@ class Startpage extends Model
         'our_policy',
         'login',
         'sign_up',
-        'dear_guest',
+        'dear_guest ',
         'create_account'
     ];
 
