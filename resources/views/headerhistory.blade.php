@@ -1,5 +1,5 @@
 @php
-$headersection = App\Models\HeaderHistory::where('language_id', $language->id)->first();
+$headersection = App\Models\headerhistory::where('language_id', $language->id)->first();
 @endphp
 <div class="modal fade" id="headerhistory{{ $language->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
