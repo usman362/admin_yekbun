@@ -1,5 +1,5 @@
 @php
-$headervoter = App\Models\HeaderVoter::where('language_id', $language->id)->first();
+$headervoter = App\Models\headervoter::where('language_id', $language->id)->first();
 @endphp
 
 <div class="modal fade" id="headervoter{{ $language->id }}" tabindex="-1" aria-hidden="true">
