@@ -157,8 +157,116 @@
                                         {{-- <x-modal id="editlanguageModal{{$language->id}}" title="Update Language" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{$language->id}}" size="md">
                             @include('content.include.movies.editForm')
                             </x-modal> --}}
+                            @php
+                            $keywords = App\Models\LanguageKeyword::where('language_id', $language->id)->first();
+                            
+                            $fields = [
+                                'alert', 'upgrade', 'premium', 'vip', 'monthly', 'feeds', 'text_comments', 'music_player',
+                                'video_playlist', 'discount', 'stories', 'voice_comments', 'live_stream', 'fanpage',
+                                'gift_free', 'show_me_the_gift', 'congratulations_educated', 'congratulations_academic',
+                                'premium_description', 'go_back_home', 'your_activation_code_mail', 'your_password_code_mail',
+                                'your_fanpage_activation_code', 'one_time_code', 'follow_steps_on_your_device', 'welcome'
+                            ];
+                        
+                            $total = count($fields);
+                            $done = 0;
+                        
+                            foreach ($fields as $field) {
+                                if (!empty($keywords->$field)) {
+                                    $done++;
+                                }
+                            }
+                        @endphp
+            @php
+            $startpage = App\Models\StartPage::where('language_id', $language->id)->first();
+        
+            $startpageFields = [
+                'language', 'our_policy', 'login', 'sign_up', 'dear_guest', 'create_account'
+            ];
+        
+            $startpageTotal = count($startpageFields);
+            $startpageDone = 0;
+        
+            foreach ($startpageFields as $field) {
+                if (!empty($startpage->$field)) {
+                    $startpageDone++;
+                }
+            }
+        @endphp   
+        @php
+        // Retrieve the existing SignupSection data for the given language_id
+        $signupsection = App\Models\SignupSection::where('language_id', $language->id)->first();
+    
+        // Define the fields for the Sign up Section
+        $signupFields = [
+            'language_search', 'language_save_change', 'gender', 'location', 'select_gender_prompt', 'gender_ok',
+            'gender_start', 'firstname', 'lastname', 'username', 'birthday', 'your_status', 'status_next', 'status_back',
+            'origin', 'select_province', 'email', 'repeat_email', 'email_issue_message', 'error_found',
+            'user_already_exist', 'email_ok', 'phone_number', 'password', 'repeat_password',
+            'account_created_success_message', 'sign_in_redirect'
+        ];
+    
+        // Calculate total and done values
+        $signupTotal = count($signupFields);
+        $signupDone = 0;
+    
+        foreach ($signupFields as $field) {
+            if (!empty($signupsection->$field)) {
+                $signupDone++;
+            }
+        }
+    @endphp       
+    @php
+// Retrieve the existing SignupSection data for the given language_id
+$signinsection = App\Models\SignInSection::where('language_id', $language->id)->first();
 
-                                        {{-- Add Categroy modal --}}
+// Define the fields for the Sign up Section
+$signupFields = [
+     
+        'email',
+        'password',
+        'repeat_password',
+        'signin',
+        'login_error',
+        'not_found',
+        'signup',
+        'regain_password_mail',
+        'email_format_wrong',
+        'correct_email',
+        'password_reset_sent',
+        'reset_password_email',
+        'verification',
+        'authentication_code_sent',
+        'did_not_receive_code',
+        'resend_code',
+        'time_left',
+        'verify_now',
+        'error_found',
+        'invalid_otp',
+        'create_password',
+        'secure_password',
+        'has_8_characters',
+        'uppercase_or_symbol',
+        'has_number',
+        'continue',
+        'successfully',
+        'logged_in',
+        'remember_me',
+        'wrong_password',
+];
+
+// Calculate total and done values
+$signupTotal = count($signupFields);
+$signupDone = 0;
+
+foreach ($signupFields as $field) {
+    if (!empty($signupsection->$field)) {
+        $signupDone++;
+    }
+}
+@endphp      
+                            
+                            {{-- Add Categroy modal --}}
                                         <div class="modal fade" id="languageModal{{ $language->id }}" tabindex="-1"
                                             aria-hidden="true">
                                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -186,88 +294,54 @@
                                                                     <tbody class="table-border-bottom-0">
                                                                         <tr>
                                                                             <td>Alert,Upgrade,Mail</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $total > 0 ? ($done / $total) * 100 : 0 }}%;" aria-valuenow="{{ $total > 0 ? ($done / $total) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>26</td>
+                                                                            <td>{{ $done }}</td>
+                                                                            <td>{{ $total - $done }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#languageModal__1{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#languageModal__1{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Start Page</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $startpageTotal > 0 ? ($startpageDone / $startpageTotal) * 100 : 0 }}%;" aria-valuenow="{{ $startpageTotal > 0 ? ($startpageDone / $startpageTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td> 6</td>
+                                                                            <td>{{ $startpageDone }}</td>
+                                                                            <td>{{ $startpageTotal - $startpageDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#startpage__1{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#startpage__1{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Sign up Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $signupTotal > 0 ? ($signupDone / $signupTotal) * 100 : 0 }}%;" aria-valuenow="{{ $signupTotal > 0 ? ($signupDone / $signupTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>12</td>
+                                                                            <td>{{ $signupDone }}</td>
+                                                                            <td>{{ $signupTotal - $signupDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#signupsection__1{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#signupsection__1{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
@@ -1073,8 +1147,24 @@
 
                                         {{-- Edit language model __1 --}}
                                         @php
-                                           
                                         $keywords = App\Models\LanguageKeyword::where('language_id', $language->id)->first();
+                                        
+                                        $fields = [
+                                            'alert', 'upgrade', 'premium', 'vip', 'monthly', 'feeds', 'text_comments', 'music_player',
+                                            'video_playlist', 'discount', 'stories', 'voice_comments', 'live_stream', 'fanpage',
+                                            'gift_free', 'show_me_the_gift', 'congratulations_educated', 'congratulations_academic',
+                                            'premium_description', 'go_back_home', 'your_activation_code_mail', 'your_password_code_mail',
+                                            'your_fanpage_activation_code', 'one_time_code', 'follow_steps_on_your_device', 'welcome'
+                                        ];
+                                    
+                                        $total = count($fields);
+                                        $done = 0;
+                                    
+                                        foreach ($fields as $field) {
+                                            if (!empty($keywords->$field)) {
+                                                $done++;
+                                            }
+                                        }
                                     @endphp
                                     
                                     <div class="modal fade" id="languageModal__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
@@ -1097,7 +1187,7 @@
                                                                     <h5>{{ $language->title }} Language</h5>
                                                                 </div>
                                                             </div>
-                                    
+                                                            
                                                             @foreach ([
                                                                 'alert' => 'This Module is only for Premium User Please Upgrade your Account',
                                                                 'upgrade' => 'Select the plan',
@@ -1133,12 +1223,9 @@
                                                                 <div class="col-md-6">
                                                                     <input type="text" class="form-control" name="{{ $field }}" placeholder="{{ $placeholder }}" value="{{ $keywords->$field ?? '' }}">
                                                                 </div>
-                                                                
                                                             </div>
                                                             @endforeach
-                                    
                                                         </div>
-                                    
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-label-secondary">Save</button>
                                                         </div>
@@ -1147,7 +1234,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                        
+                                    
+                                    
 
                                         
                                     @php
@@ -1176,7 +1264,7 @@
                                                                     <h5>{{ $language->title }} Language</h5>
                                                                 </div>
                                                             </div>
-                                    
+                                                            
                                                             <div class="row mt-2">
                                                                 <div class="col-md-6">
                                                                     <h6>Language</h6>
@@ -1240,7 +1328,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     
 
                                         {{-- //Sign up Section --}}
