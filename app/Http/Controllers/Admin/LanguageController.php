@@ -360,7 +360,7 @@ class LanguageController extends Controller
     $validatedData = $validator->validated();
 
     try {
-      StartPage::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+      Startpage::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
 
       return redirect()
         ->back()
