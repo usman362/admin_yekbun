@@ -1276,7 +1276,7 @@
                                                                     <h6>Language</h6>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <input type="text" class="form-control" name="language_search" placeholder="Search">
+                                                                    <input type="text" class="form-control" name="language_search" value="{{ $signupsection->language_search ?? '' }}" placeholder="Search">
                                                                     <input type="text" class="form-control mt-2" name="language_save_change" value="{{ $signupsection->language_save_change ?? '' }}" placeholder="Save Change">
                                                                 </div>
                                                             </div>
