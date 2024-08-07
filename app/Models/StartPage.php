@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 
-class StartPage extends Model
+class Startpage extends Model
 {
     protected $connection = 'mongodb';
     use HasFactory;
