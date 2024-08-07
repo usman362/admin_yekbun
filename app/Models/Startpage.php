@@ -19,7 +19,7 @@ class StartPage extends Model
         'login',
         'sign_up',
         'dear_guest ',
-        'create_account'
+        'create_account '
     ];
 
 
