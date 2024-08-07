@@ -11,6 +11,7 @@ use App\Models\StartPage;
 use App\Models\LanguageKeyword;
 use App\Models\FooterFriendSection;
 use App\Models\headervoter;
+use App\Models\HeaderDonationSection;
 use App\Models\headerhistory;
 use Illuminate\Support\Facades\Validator;
 
@@ -1284,11 +1285,11 @@ class LanguageController extends Controller
         },
       ],
       'yahala' => 'nullable|string|max:255',
-      'arabic_social_site' => 'nullable|string|max:255',
+      'social_arabic_site' => 'nullable|string|max:255',
       'in_development' => 'nullable|string|max:255',
       'soon_available' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     // Check for validation errors
     if ($validator->fails()) {
       return redirect()
@@ -1298,11 +1299,11 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd( $validatedData);
     try {
       // Update or create the header video section entry
-      HeaderRestaurentSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
-
+    $data= HeaderRestaurentSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+//dd( $data);
       // Redirect back with success message
       return redirect()
         ->back()
@@ -1605,6 +1606,54 @@ class LanguageController extends Controller
       return redirect()
         ->back()
         ->with('error', 'Error saving My Profile Friends Section: ' . $e->getMessage());
+    }
+  }
+  public function headerdoantion(Request $request)
+  {
+    // Validate the request data
+    $validator = Validator::make($request->all(), [
+      'language_id' => [
+        'required',
+        'string',
+        'size:24', // MongoDB ObjectId size
+        function ($attribute, $value, $fail) {
+          if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+            return $fail($attribute . ' is not a valid ObjectId.');
+          }
+          // Check if the ObjectId exists in the languages collection
+          if (!Language::where('_id', $value)->exists()) {
+            return $fail($attribute . ' does not exist.');
+          }
+        },
+      ],
+      'yahala' => 'nullable|string|max:255',
+      'in_development' => 'nullable|string|max:255',
+      'soon_available' => 'nullable|string|max:255',
+    ]);
+
+    // Check for validation errors
+    if ($validator->fails()) {
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput();
+    }
+
+    $validatedData = $validator->validated();
+
+    try {
+      // Update or create the MyProfileFriendsSection entry
+      HeaderDonationSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+
+      // Redirect back with success message
+      return redirect()
+        ->back()
+        ->with('success', 'Donation  Section saved successfully.');
+    } catch (\Exception $e) {
+      // Redirect back with error message
+      return redirect()
+        ->back()
+        ->with('error', 'Error saving Donation Section: ' . $e->getMessage());
     }
   }
   public function myProfileOfficeSection(Request $request)

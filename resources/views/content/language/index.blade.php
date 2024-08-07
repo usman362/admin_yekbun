@@ -177,6 +177,120 @@
                                 }
                             }
                         @endphp
+                        @php
+                        $headerOnlineShop = App\Models\HeaderOnlineShopSection::where('language_id', $language->id)->first();
+                        
+                        // Define the fields for the Header OnlineShop Section
+                        $headerOnlineShopFields = [
+                            'yahala', 'in_development', 'soon_available'
+                        ];
+                        
+                        // Calculate total and done values
+                        $headerOnlineShopTotal = count($headerOnlineShopFields);
+                        $headerOnlineShopDone = 0;
+                        
+                        foreach ($headerOnlineShopFields as $field) {
+                            if (!empty($headerOnlineShop->$field)) {
+                                $headerOnlineShopDone++;
+                            }
+                        }
+                        @endphp
+                        @php
+                        $headerEvent = App\Models\HeaderEventSection::where('language_id', $language->id)->first();
+                        
+                        // Define the fields for the Header Event Section
+                        $headerEventFields = [
+                            'yahala', 'in_development', 'soon_available'
+                        ];
+                        
+                        // Calculate total and done values
+                        $headerEventTotal = count($headerEventFields);
+                        $headerEventDone = 0;
+                        
+                        foreach ($headerEventFields as $field) {
+                            if (!empty($headerEvent->$field)) {
+                                $headerEventDone++;
+                            }
+                        }
+                        @endphp
+                        
+                        @php
+                        $headerStream = App\Models\HeaderStreamSection::where('language_id', $language->id)->first();
+                        
+                        // Define the fields for the Header Stream Section
+                        $headerStreamFields = [
+                            'yahala', 'in_development', 'soon_available'
+                        ];
+                        
+                        // Calculate total and done values
+                        $headerStreamTotal = count($headerStreamFields);
+                        $headerStreamDone = 0;
+                        
+                        foreach ($headerStreamFields as $field) {
+                            if (!empty($headerStream->$field)) {
+                                $headerStreamDone++;
+                            }
+                        }
+                        @endphp
+                        @php
+                        $headergreeting = App\Models\HeaderGreatingSection::where('language_id', $language->id)->first();
+                        
+                        // Define the fields for the Header Greeting & Wishes Section
+                        $headerGreetingFields = [
+                            'greetings', 'pray', 'sympathy', 'see_all'
+                        ];
+                        
+                        // Calculate total and done values
+                        $headerGreetingTotal = count($headerGreetingFields);
+                        $headerGreetingDone = 0;
+                        
+                        foreach ($headerGreetingFields as $field) {
+                            if (!empty($headergreeting->$field)) {
+                                $headerGreetingDone++;
+                            }
+                        }
+                        @endphp
+                        @php
+                        $headersection = App\Models\HeaderHistory::where('language_id', $language->id)->first();
+                        
+                        // Define the fields for the Header History Section
+                        $headerHistoryFields = [
+                            'categories', 'newst_upload', 'must_viewed', 'share_on_yekbun',
+                            'public', 'friends', 'family', 'write_a_comment', 'post_media_comment',
+                            'add_voice', 'see_all'
+                        ];
+                        
+                        // Calculate total and done values
+                        $headerHistoryTotal = count($headerHistoryFields);
+                        $headerHistoryDone = 0;
+                        
+                        foreach ($headerHistoryFields as $field) {
+                            if (!empty($headersection->$field)) {
+                                $headerHistoryDone++;
+                            }
+                        }
+                        @endphp
+                        @php
+                        // Retrieve the existing FooterCart data for the given language_id
+                        $footercart = App\Models\FooterCart::where('language_id', $language->id)->first();
+                        
+                        // Define the fields for the Footer Cart Section
+                        $footerCartFields = [
+                            'music_cart', 'video_cart', 'bazar_cart', 'event_cart', 'shop_cart', 
+                            'service_cart', 'wishes_cart', 'donate', 'portal_cart', 'payment_method', 
+                            'accept_policy_terms', 'office_information', 'bank_information'
+                        ];
+                        
+                        // Calculate total and done values
+                        $footerCartTotal = count($footerCartFields);
+                        $footerCartDone = 0;
+                        
+                        foreach ($footerCartFields as $field) {
+                            if (!empty($footercart->$field)) {
+                                $footerCartDone++;
+                            }
+                        }
+                    @endphp
             @php
             $startpage = App\Models\StartPage::where('language_id', $language->id)->first();
         
@@ -192,7 +306,92 @@
                     $startpageDone++;
                 }
             }
-        @endphp   
+        @endphp
+        @php
+        $headerfeed = App\Models\HeaderFeedSection::where('language_id', $language->id)->first();
+        
+        // Define the fields for the Header Feed Section
+        $headerFeedFields = [
+            'no_stories_found', 'latest_feeds', 'see_all', 'greeting_wishes', 'in_development', 
+            'soon_available', 'latest_history', 'latest_vote', 'post_comment', 'like', 
+            'replay', 'report_comment', 'show_more', 'see_more_feeds', 'show_less', 
+            'see_less_feeds', 'save_feed', 'add_to_collection', 'active_notification', 
+            'get_message_publish_feed', 'hide_feed_from_user',   'report_this_feed', 
+            'share_yekbun', 'public', 'friend', 'family', 'enter_description', 
+            'create_feed', 'select_background', 'select_font_color', 'select_service', 
+            'search', 'newest', 'friends', 'must_viewed', 'done', 
+            'no_data_found', 'my_collection', 'no_collection', 'create_collection', 
+            'new_playlist_name', 'select', 'private', 'create'
+        ];
+        
+        // Calculate total and done values
+        $headerFeedTotal = count($headerFeedFields);
+        $headerFeedDone = 0;
+        
+        foreach ($headerFeedFields as $field) {
+            if (!empty($headerfeed->$field)) {
+                $headerFeedDone++;
+            }
+        }
+    @endphp   
+    @php
+    $profileoffice = App\Models\MyProfileOfficeSection::where('language_id', $language->id)->first();
+    
+    // Define the fields for the My Profile Office Section
+    $profileOfficeFields = [
+        'standard', 'upgrade_account', 'my_fanpage', 'new_violate', 'you_get_flag', 'reason', 
+        'closed_violate', 'my_fanpage_channel', 'owner', 'follower', 'member', 'our_document', 
+        'see_all_document', 'statics', 'my_storage', 'used_storage', 'free_storage', 'my_wishes'
+    ];
+    
+    // Calculate total and done values
+    $profileOfficeTotal = count($profileOfficeFields);
+    $profileOfficeDone = 0;
+    
+    foreach ($profileOfficeFields as $field) {
+        if (!empty($profileoffice->$field)) {
+            $profileOfficeDone++;
+        }
+    }
+    @endphp
+    @php
+    $settingsection = App\Models\SectionSetting::where('language_id', $language->id)->first();
+    
+    // Define the fields for the Setting Section
+    $settingSectionFields = [
+        'setNewPassword', 'oldPassword', 'newPassword', 'confirmNewPassword', 'email', 'oldEmail', 'newEmail',
+        'repeatNewEmail', 'details', 'status', 'notificationType', 'musicSetting', 'musicVolume', 'messagesRingtone',
+        'callRingtone', 'notificationsRingtone', 'leaveReason', 'describeReason', 'contactType', 'message'
+    ];
+    
+    // Calculate total and done values
+    $settingSectionTotal = count($settingSectionFields);
+    $settingSectionDone = 0;
+    
+    foreach ($settingSectionFields as $field) {
+        if (!empty($settingsection->$field)) {
+            $settingSectionDone++;
+        }
+    }
+    @endphp
+    @php
+    $profilemulti = App\Models\MyProfileMultimedia::where('language_id', $language->id)->first();
+    
+    // Define the fields for the My Profile Multimedia Section
+    $profileMultiFields = [
+        'photo_gallery', 'video_gallery', 'my_playlist', 'my_artist', 'must_listen', 'my_subscribes'
+    ];
+    
+    // Calculate total and done values
+    $profileMultiTotal = count($profileMultiFields);
+    $profileMultiDone = 0;
+    
+    foreach ($profileMultiFields as $field) {
+        if (!empty($profilemulti->$field)) {
+            $profileMultiDone++;
+        }
+    }
+    @endphp
         @php
         // Retrieve the existing SignupSection data for the given language_id
         $signupsection = App\Models\SignupSection::where('language_id', $language->id)->first();
@@ -215,7 +414,295 @@
                 $signupDone++;
             }
         }
-    @endphp       
+    @endphp 
+    @php
+    // Retrieve the existing FooterFriendSection data for the given language_id
+    $footerfriends = App\Models\FooterFriendSection::where('language_id', $language->id)->first();
+    
+    // Define the fields for the Footer Friends Section
+    $footerFriendsFields = [
+        'friends_online', 'user_you_may_know', 'see_all', 'friends_request', 'search_friends', 
+        'friends', 'no_record_found', 'search_family', 'family', 'no_family_member_found', 
+        'search_user', 'no_friend_family_found'
+    ];
+    
+    // Calculate total and done values
+    $footerFriendsTotal = count($footerFriendsFields);
+    $footerFriendsDone = 0;
+    
+    foreach ($footerFriendsFields as $field) {
+        if (!empty($footerfriends->$field)) {
+            $footerFriendsDone++;
+        }
+    }
+@endphp
+@php
+$headersection = App\Models\HeaderSectionStories::where('language_id', $language->id)->first();
+
+// Define the fields for the Header Stories Section
+$headerStoriesFields = [
+    'my_subscriber', 'friends_stories', 'family_stories', 'my_stories', 'see_all',
+    'created', 'story_created_success', 'latest_stories', 'no_stories_found', 'recently_viewed',
+    'stories', 'create_new_stories', 'start_now'
+];
+
+// Calculate total and done values
+$headerStoriesTotal = count($headerStoriesFields);
+$headerStoriesDone = 0;
+
+foreach ($headerStoriesFields as $field) {
+    if (!empty($headersection->$field)) {
+        $headerStoriesDone++;
+    }
+}
+@endphp
+@php
+$myprofilehome = App\Models\MyProfileHomeSection::where('language_id', $language->id)->first();
+
+// Define the fields for the My Profile Home Section
+$myProfileHomeFields = [
+    'update_profile_image', 'select_or_upload_banner', 'like', 'following', 'following_posts', 'menu',
+    'share_on_yekbun', 'upload_video', 'create_reels', 'go_live', 'my_feed'
+];
+
+// Calculate total and done values
+$myProfileHomeTotal = count($myProfileHomeFields);
+$myProfileHomeDone = 0;
+
+foreach ($myProfileHomeFields as $field) {
+    if (!empty($myprofilehome->$field)) {
+        $myProfileHomeDone++;
+    }
+}
+@endphp
+    @php
+    // Retrieve the existing FooterQuickLauncher data for the given language_id
+    $footerQuickLauncher = App\Models\FooterQuickLauncher::where('language_id', $language->id)->first();
+    
+    // Define the fields for the Footer Quick Launcher Section
+    $footerQuickFields = [
+        'quick_launcher', 'wishes_thanks', 'greetings', 'wishes', 'prays',
+        'introduce_business', 'services', 'bazar', 'channels', 'shops',
+        'fast_sharing', 'feeds', 'stories', 'golive', 'video',
+        'quick_access', 'my_storage', 'used', 'free', 'coming_soon',
+        'under_development'
+    ];
+    
+    // Calculate total and done values
+    $footerQuickTotal = count($footerQuickFields);
+    $footerQuickDone = 0;
+    
+    foreach ($footerQuickFields as $field) {
+        if (!empty($footerQuickLauncher->$field)) {
+            $footerQuickDone++;
+        }
+    }
+@endphp 
+@php
+$headerservice = App\Models\HeaderServicePortalSection::where('language_id', $language->id)->first();
+
+// Define the fields for the Header ServicePortal Section
+$headerserviceFields = [
+    'yahala', 'arabic', 'in_development', 'soon_available'
+];
+
+// Calculate total and done values
+$headerserviceTotal = count($headerserviceFields);
+$headerserviceDone = 0;
+
+foreach ($headerserviceFields as $field) {
+    if (!empty($headerservice->$field)) {
+        $headerserviceDone++;
+    }
+}
+@endphp
+@php
+$profilefriend = App\Models\MyProfileFriendsSection::where('language_id', $language->id)->first();
+
+// Define the fields for the My Profile Friends Section
+$profileFriendFields = [
+    'friend_request', 'no_friend_requests', 'see_all_friend_requests'
+];
+
+// Calculate total and done values
+$profileFriendTotal = count($profileFriendFields);
+$profileFriendDone = 0;
+
+foreach ($profileFriendFields as $field) {
+    if (!empty($profilefriend->$field)) {
+        $profileFriendDone++;
+    }
+}
+@endphp
+@php
+$headerVideo = App\Models\HeaderVideoSection::where('language_id', $language->id)->first();
+
+// Define the fields for the Header Videos Section
+$headerVideoFields = [
+    'yahala', 'in_development', 'soon_available'
+];
+
+// Calculate total and done values
+$headerVideoTotal = count($headerVideoFields);
+$headerVideoDone = 0;
+
+foreach ($headerVideoFields as $field) {
+    if (!empty($headerVideo->$field)) {
+        $headerVideoDone++;
+    }
+}
+@endphp
+@php
+$headerRestaurant = App\Models\HeaderRestaurantSection::where('language_id', $language->id)->first();
+
+// Define the fields for the Header Restaurant Section
+$headerRestaurantFields = [
+    'yahala', 'social_arabic_site', 'in_development', 'soon_available'
+];
+
+// Calculate total and done values
+$headerRestaurantTotal = count($headerRestaurantFields);
+$headerRestaurantDone = 0;
+
+foreach ($headerRestaurantFields as $field) {
+    if (!empty($headerRestaurant->$field)) {
+        $headerRestaurantDone++;
+    }
+}
+@endphp
+@php
+    // Retrieve the existing FooterChatSection data for the given language_id
+    $footerchat = App\Models\FooterChatSection::where('language_id', $language->id)->first();
+    
+    // Define the fields for the Footer Chat Section
+    $footerChatFields = [
+        'bazar_chat', 'shop_chat', 'service_chat', 'friends_chat', 'family_chat', 
+        'group_chat', 'notifications', 'fanpage_chat', 'wishes_chat', 'favorite_contacts', 
+        'my_groups', 'coming_soon', 'chat_overview', 'new_messages', 'options', 
+        'block_user', 'unblocked', 'block', 'report_user'
+    ];
+    
+    // Calculate total and done values
+    $footerChatTotal = count($footerChatFields);
+    $footerChatDone = 0;
+    
+    foreach ($footerChatFields as $field) {
+        if (!empty($footerchat->$field)) {
+            $footerChatDone++;
+        }
+    }
+@endphp
+@php
+    $visiter = App\Models\VisiterProfile::where('language_id', $language->id)->first();
+    
+    // Define the fields for the Visitor Profile Section
+    $visitorProfileFields = [
+        'say_hello', 'be_friends', 'cancel_friend_request', 'my_feeds', 'see_all_my_feeds', 
+        'photo_gallery', 'see_all_photo_gallery', 'video_gallery', 'see_all_video_gallery', 'my_friends', 
+        'see_all_my_friends', 'options', 'move_user', 'friends_option', 'family_option', 
+        'remove_option', 'block_user', 'unblock_block_user', 'block_block_user', 'report_user', 
+        'insult_report_user', 'image_report_user', 'content_report_user', 'feedback_report_user', 
+        'annoyance_report_user', 'racism_report_user'
+    ];
+    
+    // Calculate total and done values
+    $visitorProfileTotal = count($visitorProfileFields);
+    $visitorProfileDone = 0;
+    
+    foreach ($visitorProfileFields as $field) {
+        if (!empty($visiter->$field)) {
+            $visitorProfileDone++;
+        }
+    }
+@endphp
+@php
+$settingoverview = App\Models\SettingOverviewSection::where('language_id', $language->id)->first();
+
+// Define the fields for the Setting Overview Section
+$settingoverviewFields = [
+    'setting_overview', 'notifications', 'settings', 'my_profile', 'my_channels', 'shortcut', 'collection',
+    'view_later', 'market', 'manage_items', 'add', 'manage_ads', 'manage_notifications', 'password',
+    'manage_password', 'email', 'change_email', 'ringtone', 'manage_ringtone', 'music', 'manage_player',
+    'network', 'manage_connections', 'documentation', 'my_documents', 'storage', 'manage_storage', 'violate',
+    'manage_reels', 'my_channels_2', 'in_development_2', 'soon_available_2', 'standard', 'upgrade_account'
+];
+
+// Calculate total and done values
+$settingoverviewTotal = count($settingoverviewFields);
+$settingoverviewDone = 0;
+
+foreach ($settingoverviewFields as $field) {
+    if (!empty($settingoverview->$field)) {
+        $settingoverviewDone++;
+    }
+}
+@endphp
+@php
+$headerDonation = App\Models\HeaderDonationSection::where('language_id', $language->id)->first();
+
+// Define the fields for the Header Donation Section
+$headerDonationFields = [
+    'yahala', 'in_development', 'soon_available'
+];
+
+// Calculate total and done values
+$headerDonationTotal = count($headerDonationFields);
+$headerDonationDone = 0;
+
+foreach ($headerDonationFields as $field) {
+    if (!empty($headerDonation->$field)) {
+        $headerDonationDone++;
+    }
+}
+@endphp
+@php
+$headervoter = App\Models\HeaderVoter::where('language_id', $language->id)->first();
+
+// Define the fields for the Header Voting Section
+$headerVotingFields = [
+    'categories', 'newst_uploads', 'past_vote', 'your_vote', 'what_u_like', 
+    'notification', 'vote_one_time', 'cant_redo_vote', 'community', 
+    'reviews_qualification', 'total', 'statistics', 'age_and_gender', 
+    'male', 'female'
+];
+
+// Calculate total and done values
+$headerVotingTotal = count($headerVotingFields);
+$headerVotingDone = 0;
+
+foreach ($headerVotingFields as $field) {
+    if (!empty($headervoter->$field)) {
+        $headerVotingDone++;
+    }
+}
+@endphp
+
+@php
+$headerMusic = App\Models\HeaderMusicSection::where('language_id', $language->id)->first();
+
+// Define the fields for the Header Music Section
+$headerMusicFields = [
+    'new_albums', 'latest_videos', 'new_artist', 'latest_stream', 'latest_songs', 
+    'see_all', 'history', 'invoice', 'purchase', 'my_invoice', 'music_history', 
+    'my_purchase', 'options', 'share_with_friends', 'move_to_playlist', 'save', 
+    'remove_from_playlist', 'categories', 'popular_songs', 'latest_uploads', 
+    'new_artist_2', 'artist', 'songs', 'albums', 'video_clip', 'new_album', 
+    'albums_2', 'my_playlist', 'playlist', 'need_more_playlist', 'buy_new_playlist', 
+    'options_2', 'create_new_playlist', 'enter_new_playlist_name', 'select', 
+    'private', 'public', 'friends', 'family', 'create'
+];
+
+// Calculate total and done values
+$headerMusicTotal = count($headerMusicFields);
+$headerMusicDone = 0;
+
+foreach ($headerMusicFields as $field) {
+    if (!empty($headerMusic->$field)) {
+        $headerMusicDone++;
+    }
+}
+@endphp
+
     @php
 // Retrieve the existing SignupSection data for the given language_id
 $signinsection = App\Models\SignInSection::where('language_id', $language->id)->first();
@@ -265,6 +752,31 @@ foreach ($signupFields as $field) {
     }
 }
 @endphp      
+
+@php
+    // Retrieve the existing SignInSection data for the given language_id
+    $signinsection = App\Models\SignInSection::where('language_id', $language->id)->first();
+    
+    // Define the fields for the Sign in Section
+    $signinFields = [
+        'email', 'password', 'remember_me', 'forgot_password', 'signin', 'login_error',
+        'not_found', 'signup', 'regain_password_mail', 'email_format_wrong', 'correct_email',
+        'password_reset_sent', 'reset_password_email', 'verification', 'authentication_code_sent',
+        'did_not_receive_code', 'resend_code', 'time_left', 'verify_now', 'error_found',
+        'invalid_otp', 'create_password', 'secure_password', 'has_8_characters', 'uppercase_or_symbol',
+        'has_number', 'continue', 'successfully', 'logged_in', 'wrong_password'
+    ];
+    
+    // Calculate total and done values
+    $signinTotal = count($signinFields);
+    $signinDone = 0;
+    
+    foreach ($signinFields as $field) {
+        if (!empty($signinsection->$field)) {
+            $signinDone++;
+        }
+    }
+@endphp
                             
                             {{-- Add Categroy modal --}}
                                         <div class="modal fade" id="languageModal{{ $language->id }}" tabindex="-1"
@@ -347,57 +859,33 @@ foreach ($signupFields as $field) {
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Sign in Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $signinTotal > 0 ? ($signinDone / $signinTotal) * 100 : 0 }}%;" aria-valuenow="{{ $signinTotal > 0 ? ($signinDone / $signinTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>30</td>
+                                                                            <td>{{ $signinDone }}</td>
+                                                                            <td>{{ $signinTotal - $signinDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#signinsection__1{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#signinsection__1{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Footer Quick Launcher Sections</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $footerQuickTotal > 0 ? ($footerQuickDone / $footerQuickTotal) * 100 : 0 }}%;" aria-valuenow="{{ $footerQuickTotal > 0 ? ($footerQuickDone / $footerQuickTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>21</td>
+                                                                            <td>{{ $footerQuickDone }}</td>
+                                                                            <td>{{ $footerQuickTotal - $footerQuickDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#footerQuickSectionModal{{ $language->id }}">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit">
+                                                                                <span data-bs-toggle="modal" data-bs-target="#footerQuickSectionModal{{ $language->id }}">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
                                                                                         <i class="bx bx-edit"></i>
                                                                                     </button>
                                                                                 </span>
@@ -406,673 +894,400 @@ foreach ($signupFields as $field) {
 
                                                                         <tr>
                                                                             <td>Footer Cart Sections</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $footerCartTotal > 0 ? ($footerCartDone / $footerCartTotal) * 100 : 0 }}%;" aria-valuenow="{{ $footerCartTotal > 0 ? ($footerCartDone / $footerCartTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>14</td>
+                                                                            <td>{{ $footerCartDone }}</td>
+                                                                            <td>{{ $footerCartTotal - $footerCartDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#footercart{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#footercart{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Footer Friends Sections</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $footerFriendsTotal > 0 ? ($footerFriendsDone / $footerFriendsTotal) * 100 : 0 }}%;" aria-valuenow="{{ $footerFriendsTotal > 0 ? ($footerFriendsDone / $footerFriendsTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td> 12</td>
+                                                                            <td>{{ $footerFriendsDone }}</td>
+                                                                            <td>{{ $footerFriendsTotal - $footerFriendsDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#footerfriendssection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#footerfriendssection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Footer Chat Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $footerChatTotal > 0 ? ($footerChatDone / $footerChatTotal) * 100 : 0 }}%;" aria-valuenow="{{ $footerChatTotal > 0 ? ($footerChatDone / $footerChatTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td> 19</td>
+                                                                            <td>{{ $footerChatDone }}</td>
+                                                                            <td>{{ $footerChatTotal - $footerChatDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#footerchatsection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#footerchatsection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Feed Sections</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerFeedTotal > 0 ? ($headerFeedDone / $headerFeedTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerFeedTotal > 0 ? ($headerFeedDone / $headerFeedTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>47</td>
+                                                                            <td>{{ $headerFeedDone }}</td>
+                                                                            <td>{{ $headerFeedTotal - $headerFeedDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerfeedsection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerfeedsection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Visitor Profile</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $visitorProfileTotal > 0 ? ($visitorProfileDone / $visitorProfileTotal) * 100 : 0 }}%;" aria-valuenow="{{ $visitorProfileTotal > 0 ? ($visitorProfileDone / $visitorProfileTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>26</td>
+                                                                            <td>{{ $visitorProfileDone }}</td>
+                                                                            <td>{{ $visitorProfileTotal - $visitorProfileDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#visitprofilesection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#visitprofilesection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Stories Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerStoriesTotal > 0 ? ($headerStoriesDone / $headerStoriesTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerStoriesTotal > 0 ? ($headerStoriesDone / $headerStoriesTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>13</td>
+                                                                            <td>{{ $headerStoriesDone }}</td>
+                                                                            <td>{{ $headerStoriesTotal - $headerStoriesDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerstoriessection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerstoriessection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Greeting & Wishes Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerGreetingTotal > 0 ? ($headerGreetingDone / $headerGreetingTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerGreetingTotal > 0 ? ($headerGreetingDone / $headerGreetingTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>4</td>
+                                                                            <td>{{ $headerGreetingDone }}</td>
+                                                                            <td>{{ $headerGreetingTotal - $headerGreetingDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headergreating{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headergreating{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header History Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerHistoryTotal > 0 ? ($headerHistoryDone / $headerHistoryTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerHistoryTotal > 0 ? ($headerHistoryDone / $headerHistoryTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>11</td>
+                                                                            <td>{{ $headerHistoryDone }}</td>
+                                                                            <td>{{ $headerHistoryTotal - $headerHistoryDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerhistory{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerhistory{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Voting Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerVotingTotal > 0 ? ($headerVotingDone / $headerVotingTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerVotingTotal > 0 ? ($headerVotingDone / $headerVotingTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>15</td>
+                                                                            <td>{{ $headerVotingDone }}</td>
+                                                                            <td>{{ $headerVotingTotal - $headerVotingDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headervoter{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headervoter{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Donation Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerDonationTotal > 0 ? ($headerDonationDone / $headerDonationTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerDonationTotal > 0 ? ($headerDonationDone / $headerDonationTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>3</td>
+                                                                            <td>{{ $headerDonationDone }}</td>
+                                                                            <td>{{ $headerDonationTotal - $headerDonationDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerdonation{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerdonation{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Music Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerMusicTotal > 0 ? ($headerMusicDone / $headerMusicTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerMusicTotal > 0 ? ($headerMusicDone / $headerMusicTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>40</td>
+                                                                            <td>{{ $headerMusicDone }}</td>
+                                                                            <td>{{ $headerMusicTotal - $headerMusicDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headermusic{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headermusic{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Videos Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerVideoTotal > 0 ? ($headerVideoDone / $headerVideoTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerVideoTotal > 0 ? ($headerVideoDone / $headerVideoTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>3</td>
+                                                                            <td>{{ $headerVideoDone }}</td>
+                                                                            <td>{{ $headerVideoTotal - $headerVideoDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headervideo{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headervideo{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Header Stream Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerStreamTotal > 0 ? ($headerStreamDone / $headerStreamTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerStreamTotal > 0 ? ($headerStreamDone / $headerStreamTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>3</td>
+                                                                            <td>{{ $headerStreamDone }}</td>
+                                                                            <td>{{ $headerStreamTotal - $headerStreamDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerstreamsection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerstreamsection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Event Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerEventTotal > 0 ? ($headerEventDone / $headerEventTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerEventTotal > 0 ? ($headerEventDone / $headerEventTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>3</td>
+                                                                            <td>{{ $headerEventDone }}</td>
+                                                                            <td>{{ $headerEventTotal - $headerEventDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerevent{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerevent{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Header OnlineShop Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerOnlineShopTotal > 0 ? ($headerOnlineShopDone / $headerOnlineShopTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerOnlineShopTotal > 0 ? ($headerOnlineShopDone / $headerOnlineShopTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>3</td>
+                                                                            <td>{{ $headerOnlineShopDone }}</td>
+                                                                            <td>{{ $headerOnlineShopTotal - $headerOnlineShopDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headeronlineshop{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headeronlineshop{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header Restaurant Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerRestaurantTotal > 0 ? ($headerRestaurantDone / $headerRestaurantTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerRestaurantTotal > 0 ? ($headerRestaurantDone / $headerRestaurantTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>4</td>
+                                                                            <td>{{ $headerRestaurantDone }}</td>
+                                                                            <td>{{ $headerRestaurantTotal - $headerRestaurantDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerrestorent{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerrestaurant{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Header ServicePortal Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $headerserviceTotal > 0 ? ($headerserviceDone / $headerserviceTotal) * 100 : 0 }}%;" aria-valuenow="{{ $headerserviceTotal > 0 ? ($headerserviceDone / $headerserviceTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>4</td>
+                                                                            <td>{{ $headerserviceDone }}</td>
+                                                                            <td>{{ $headerserviceTotal - $headerserviceDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#headerserviceportal{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#headerserviceportal{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
-
                                                                         <tr>
                                                                             <td>Setting Overview Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $settingoverviewTotal > 0 ? ($settingoverviewDone / $settingoverviewTotal) * 100 : 0 }}%;" aria-valuenow="{{ $settingoverviewTotal > 0 ? ($settingoverviewDone / $settingoverviewTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>35</td>
+                                                                            <td>{{ $settingoverviewDone }}</td>
+                                                                            <td>{{ $settingoverviewTotal - $settingoverviewDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#settingoverview{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#settingoverview{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Setting Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $settingSectionTotal > 0 ? ($settingSectionDone / $settingSectionTotal) * 100 : 0 }}%;" aria-valuenow="{{ $settingSectionTotal > 0 ? ($settingSectionDone / $settingSectionTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>20</td>
+                                                                            <td>{{ $settingSectionDone }}</td>
+                                                                            <td>{{ $settingSectionTotal - $settingSectionDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#settingsectionsok{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#settingsectionsok{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>My Profile Home Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $myProfileHomeTotal > 0 ? ($myProfileHomeDone / $myProfileHomeTotal) * 100 : 0 }}%;" aria-valuenow="{{ $myProfileHomeTotal > 0 ? ($myProfileHomeDone / $myProfileHomeTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>11</td>
+                                                                            <td>{{ $myProfileHomeDone }}</td>
+                                                                            <td>{{ $myProfileHomeTotal - $myProfileHomeDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#myprofilesection{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#myprofilesection{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
 
                                                                         <tr>
                                                                             <td>My Profile Multimedia Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $profileMultiTotal > 0 ? ($profileMultiDone / $profileMultiTotal) * 100 : 0 }}%;" aria-valuenow="{{ $profileMultiTotal > 0 ? ($profileMultiDone / $profileMultiTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>6</td>
+                                                                            <td>{{ $profileMultiDone }}</td>
+                                                                            <td>{{ $profileMultiTotal - $profileMultiDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#profilemultimedia{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#profilemultimedia{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>My Profile Friends Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $profileFriendTotal > 0 ? ($profileFriendDone / $profileFriendTotal) * 100 : 0 }}%;" aria-valuenow="{{ $profileFriendTotal > 0 ? ($profileFriendDone / $profileFriendTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>3</td>
+                                                                            <td>{{ $profileFriendDone }}</td>
+                                                                            <td>{{ $profileFriendTotal - $profileFriendDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#myprofilefriends{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#myprofilefriends{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>My Profile Office Section</td>
-                                                                            
                                                                             <td>
                                                                                 <div class="progress">
-                                                                                    <div class="progress-bar"
-                                                                                        role="progressbar"
-                                                                                        style="width: {{ rand(0, 100) }}%;"
-                                                                                        aria-valuenow="{{ rand(0, 100) }}"
-                                                                                        aria-valuemin="0"
-                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $profileOfficeTotal > 0 ? ($profileOfficeDone / $profileOfficeTotal) * 100 : 0 }}%;" aria-valuenow="{{ $profileOfficeTotal > 0 ? ($profileOfficeDone / $profileOfficeTotal) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>{{ rand(0, 100) }}</td>
-                                                                            <td>18</td>
+                                                                            <td>{{ $profileOfficeDone }}</td>
+                                                                            <td>{{ $profileOfficeTotal - $profileOfficeDone }}</td>
                                                                             <td>
-                                                                                <span data-bs-toggle="modal"
-                                                                                    data-bs-target="#myprofileoffice{{ $language->id }}"
-                                                                                    onclick="openSectionModal('alert')">
-                                                                                    <button class="btn"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-offset="0,4"
-                                                                                        data-bs-placement="top"
-                                                                                        data-bs-html="true"
-                                                                                        data-bs-original-title="Edit"><i
-                                                                                            class="bx bx-edit"></i></button>
+                                                                                <span data-bs-toggle="modal" data-bs-target="#myprofileoffice{{ $language->id }}" onclick="openSectionModal('alert')">
+                                                                                    <button class="btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+                                                                                        <i class="bx bx-edit"></i>
+                                                                                    </button>
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
+                                                                        
                                                                         <tr>
                                                                             <td>Channels</td>
                                                                             

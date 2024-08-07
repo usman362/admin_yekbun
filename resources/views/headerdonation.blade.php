@@ -11,7 +11,7 @@ $signupsection = App\Models\SignupSection::where('language_id', $language->id)->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('languages.headeronlineshopsection') }}" method="POST">
+                <form action="{{ route('languages.headerdoantion') }}" method="POST">
                     @csrf
                     <input type="hidden" name="language_id" value="{{ $language->id }}">
                     <div class="container ">
