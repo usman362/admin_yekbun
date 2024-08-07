@@ -1149,11 +1149,17 @@
                                     </div>
                                         
 
-                                        {{-- //Startpage --}}
-                                           @php
-                                               
-                                            $startpage = App\Models\Startpage::where('language_id', $language->id)->first();
-                                        @endphp
+                                        
+                                           
+@php
+$startpage = App\Models\Startpage::where('language_id', $language->id)->first();
+@endphp
+
+
+
+
+
+
 <div class="modal fade" id="startpage__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
