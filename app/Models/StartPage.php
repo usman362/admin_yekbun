@@ -12,7 +12,7 @@ class StartPage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'language_id',
+        // 'language_id',
         'language',
         'our_policy',
         'login',
@@ -22,8 +22,5 @@ class StartPage extends Model
     ];
 
 
-    public function language()
-    {
-        return $this->belongsTo(Language::class);
-    }
+    
 }

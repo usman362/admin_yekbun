@@ -1,4 +1,7 @@
 <!-- resources/views/edit_footer_quick_section_modal.blade.php -->
+@php
+$signupsection = App\Models\SignupSection::where('language_id', $language->id)->first();
+                             @endphp
 <div class="modal fade" id="headerdonation{{ $language->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">

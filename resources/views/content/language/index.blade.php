@@ -1072,575 +1072,349 @@
 
 
                                         {{-- Edit language model __1 --}}
-                                        <div class="modal fade" id="languageModal__1{{ $language->id }}" tabindex="-1"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle">Alert,Upgrade,Mail
-                                                            {{-- <span class="text-info">{{ $language->title }}</span> --}}
-                                                            Section</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('languages.keywordstore') }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="language_id"
-                                                                value="{{ $language->id }}">
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <h5>English Language</h5>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <h5>{{ $language->title }} Language</h5>
-                                                                    </div>
+                                        @php
+                                           
+                                        $keywords = App\Models\LanguageKeyword::where('language_id', $language->id)->first();
+                                    @endphp
+                                    
+                                    <div class="modal fade" id="languageModal__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalCenterTitle">Alert, Upgrade, Mail Section</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('languages.keywordstore') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="language_id" value="{{ $language->id }}">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h5>English Language</h5>
                                                                 </div>
-
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Alert</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            placeholder="This Module is only for Premium User Please Upgrade your Account"
-                                                                            name="alert">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Upgrade</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="upgrade" placeholder="Select the plan">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Premium</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="premium" placeholder="Premium">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Vip</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="vip" placeholder="Vip">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Monthly</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            placeholder="Monthly" name="monthly">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Feeds</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="feeds" placeholder="Feeds">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Text Comments</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="text_comments"
-                                                                            placeholder="Text Comments">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Music Player</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="music_player"
-                                                                            placeholder="Music Player">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Video Playlist</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="video_playlist"
-                                                                            placeholder="Video Playlist">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>10% Discount</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="discount" placeholder="10% Discount">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Stories</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="stories" placeholder="Stories">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Voice Comments</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="voice_comments"
-                                                                            placeholder="Voice Comments">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Live Stream</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="live_stream" placeholder="Live Stream">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Fanpage</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="fanpage" placeholder="Fanpage">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Choose this Plan and get one Gift Free</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="gift_free"
-                                                                            placeholder="Choose this Plan and get one Gift Free">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Show me the Gift</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="show_me_the_gift"
-                                                                            placeholder="Show me the Gift">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Congratulations Educated</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="congratulations_educated"
-                                                                            placeholder="Congratulations Educated">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Congratulations Academic</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="congratulations_academic"
-                                                                            placeholder="Congratulations Academic">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Premium Description</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="premium_description"
-                                                                            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Go back to home!</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="go_back_home"
-                                                                            placeholder="Go back to home!">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Your Activation Code „Mail“</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="your_activation_code_mail"
-                                                                            placeholder="Your Activation Code „Mail“">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Your Password Code „Mail“</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="your_password_code_mail"
-                                                                            placeholder="Your Password Code „Mail“">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Your FanPage Activation Code</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="your_fanpage_activation_code"
-                                                                            placeholder="Your FanPage Activation Code">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Code can be used one Time only</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="one_time_code"
-                                                                            placeholder="Code can be used one Time only">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Follow Steps on your Device</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="follow_steps_on_your_device"
-                                                                            placeholder="Follow Steps on your Device">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Welcome</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="welcome" placeholder="Welcome">
-                                                                    </div>
+                                                                <div class="col-md-6">
+                                                                    <h5>{{ $language->title }} Language</h5>
                                                                 </div>
                                                             </div>
-
-
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-label-secondary"
-                                                            data-bs-dismiss="modal">Save</button>
-                                                    </div>
+                                    
+                                                            @foreach ([
+                                                                'alert' => 'This Module is only for Premium User Please Upgrade your Account',
+                                                                'upgrade' => 'Select the plan',
+                                                                'premium' => 'Premium',
+                                                                'vip' => 'Vip',
+                                                                'monthly' => 'Monthly',
+                                                                'feeds' => 'Feeds',
+                                                                'text_comments' => 'Text Comments',
+                                                                'music_player' => 'Music Player',
+                                                                'video_playlist' => 'Video Playlist',
+                                                                'discount' => '10% Discount',
+                                                                'stories' => 'Stories',
+                                                                'voice_comments' => 'Voice Comments',
+                                                                'live_stream' => 'Live Stream',
+                                                                'fanpage' => 'Fanpage',
+                                                                'gift_free' => 'Choose this Plan and get one Gift Free',
+                                                                'show_me_the_gift' => 'Show me the Gift',
+                                                                'congratulations_educated' => 'Congratulations Educated',
+                                                                'congratulations_academic' => 'Congratulations Academic',
+                                                                'premium_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+                                                                'go_back_home' => 'Go back to home!',
+                                                                'your_activation_code_mail' => 'Your Activation Code „Mail“',
+                                                                'your_password_code_mail' => 'Your Password Code „Mail“',
+                                                                'your_fanpage_activation_code' => 'Your FanPage Activation Code',
+                                                                'one_time_code' => 'Code can be used one Time only',
+                                                                'follow_steps_on_your_device' => 'Follow Steps on your Device',
+                                                                'welcome' => 'Welcome',
+                                                            ] as $field => $placeholder)
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>{{ ucfirst(str_replace('_', ' ', $field)) }}</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="{{ $field }}" placeholder="{{ $placeholder }}" value="{{ $keywords->$field }}">
+                                                                </div>
+                                                            </div>
+                                                            @endforeach
+                                    
+                                                        </div>
+                                    
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-label-secondary">Save</button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                        
+
                                         {{-- //Startpage --}}
-                                        <div class="modal fade" id="startpage__1{{ $language->id }}" tabindex="-1"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle">Start Page
-                                                            {{-- <span class="text-info">{{ $language->title }}</span> --}}
-                                                          </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('languages.startpage') }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="language_id"
-                                                                value="{{ $language->id }}">
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <h5>English Language</h5>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <h5>{{ $language->title }} Language</h5>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Language</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="language" placeholder="Language">
-                                                                    </div>
-                                                                </div>
+                                           @php
+                                               
+                                            $startpage = App\Models\Startpage::where('language_id', $language->id)->first();
+                                        @endphp
+<div class="modal fade" id="startpage__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCenterTitle">Start Page</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('languages.startpage') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="language_id" value="{{ $language->id }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>English Language</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>{{ $language->title }} Language</h5>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <h6>Language</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="language" placeholder="Language" value="{{ $startpage->language }}">
+                            </div>
+                        </div>
 
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Our Policy</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="our_policy" placeholder="Our Policy">
-                                                                    </div>
-                                                                </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <h6>Our Policy</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="our_policy" placeholder="Our Policy" value="{{ $startpage->our_policy }}">
+                            </div>
+                        </div>
 
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Login</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="login" placeholder="Login">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Sign up</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="sign_up" placeholder="Sign up">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6> Guest</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="dear_guest" placeholder="Dear Guest">
-                                                                    </div>
-                                                                </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <h6>Login</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="login" placeholder="Login" value="{{ $startpage->login }}">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <h6>Sign up</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="sign_up" placeholder="Sign up" value="{{ $startpage->sign_up }}">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <h6>Guest</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="dear_guest" placeholder="Dear Guest" value="{{ $startpage->dear_guest }}">
+                            </div>
+                        </div>
 
-                                                                <div class="row mt-2">
-                                                                    <div class="col-md-6">
-                                                                        <h6>Create Account</h6>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="form-control"
-                                                                            name="create_account"
-                                                                            placeholder="Create Account">
-                                                                    </div>
-                                                                </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <h6>Create Account</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="create_account" placeholder="Create Account" value="{{ $startpage->create_account }}">
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-label-secondary" data-bs-dismiss="modal">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-                                                            </div>
-
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-label-secondary"
-                                                                    data-bs-dismiss="modal">Save</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         {{-- //Sign up Section --}}
-                                        <div class="modal fade" id="signupsection__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                              <div class="modal-content">
+                                        @php
+                                        // Retrieve the existing SignupSection data for the given language_id
+                                        $signupsection = App\Models\SignupSection::where('language_id', $language->id)->first();
+                                    @endphp
+                                    
+                                    <div class="modal fade" id="signupsection__1{{ $language->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                                            <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h5 class="modal-title" id="modalCenterTitle">Sign up Section</h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <h5 class="modal-title" id="modalCenterTitle">Sign up Section</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                  <form action="{{ route('languages.signupsection') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="language_id" value="{{ $language->id }}">
-                                                    <div class="container">
-                                                      <div class="row">
-                                                        <div class="col-md-6">
-                                                          <h5>English Language</h5>
+                                                    <form action="{{ route('languages.signupsection') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="language_id" value="{{ $language->id }}">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h5>English Language</h5>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <h5>{{ $language->title }} Language</h5>
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Language -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Language</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="language_search" placeholder="Search">
+                                                                    <input type="text" class="form-control mt-2" name="language_save_change" value="{{ $signupsection->language_save_change ?? '' }}" placeholder="Save Change">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Select Gender -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Select Gender</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <select class="form-control" name="gender">
+                                                                        <option value="male" {{ $signupsection && $signupsection->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                                                        <option value="female" {{ $signupsection && $signupsection->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                                                        <option value="missing" {{ $signupsection && $signupsection->gender == 'missing' ? 'selected' : '' }}>Gender is Missing</option>
+                                                                    </select> <br>
+                                                                    <h6>Select Location</h6>
+                                                                    <select class="form-control" name="location">
+                                                                        <option value="address" {{ $signupsection && $signupsection->location == 'address' ? 'selected' : '' }}>Address</option>
+                                                                        <option value="current_location" {{ $signupsection && $signupsection->location == 'current_location' ? 'selected' : '' }}>Current Location</option>
+                                                                    </select>
+                                                                    <input type="text" class="form-control mt-2" name="select_gender_prompt" value="{{ $signupsection->select_gender_prompt ?? '' }}" placeholder="Please select your gender">
+                                                                    <input type="text" class="form-control mt-2" name="gender_ok" value="{{ $signupsection->gender_ok ?? '' }}" placeholder="Ok">
+                                                                    <input type="text" class="form-control mt-2" name="gender_start" value="{{ $signupsection->gender_start ?? '' }}" placeholder="Start">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Firstname -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Firstname</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="firstname" value="{{ $signupsection->firstname ?? '' }}" placeholder="Your Firstname">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Lastname -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Lastname</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="lastname" value="{{ $signupsection->lastname ?? '' }}" placeholder="Your Lastname">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Username -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Username</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="username" value="{{ $signupsection->username ?? '' }}" placeholder="Your Username">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Birthday and Status -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Your Birthday</h6>
+                                                                    <input type="date" class="form-control" name="birthday" value="{{ $signupsection->birthday ?? '' }}" placeholder="Your Birthday">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <h6>Your Status</h6>
+                                                                    <select class="form-control" name="your_status">
+                                                                        <option value="single" {{ $signupsection && $signupsection->your_status == 'single' ? 'selected' : '' }}>Single</option>
+                                                                        <option value="engaged" {{ $signupsection && $signupsection->your_status == 'engaged' ? 'selected' : '' }}>Engaged</option>
+                                                                        <option value="married" {{ $signupsection && $signupsection->your_status == 'married' ? 'selected' : '' }}>Married</option>
+                                                                    </select>
+                                                                    <input type="text" class="form-control mt-2" name="status_next" value="{{ $signupsection->status_next ?? '' }}" placeholder="Next">
+                                                                    <input type="text" class="form-control mt-2" name="status_back" value="{{ $signupsection->status_back ?? '' }}" placeholder="Back">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Select Origin -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Select Origin</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <select class="form-control" name="origin">
+                                                                        <option value="kurdish" {{ $signupsection && $signupsection->origin == 'kurdish' ? 'selected' : '' }}>I´m Kurdish</option>
+                                                                        <option value="provinces" {{ $signupsection && $signupsection->origin == 'provinces' ? 'selected' : '' }}>Your Province</option>
+                                                                        <option value="not_kurdish" {{ $signupsection && $signupsection->origin == 'not_kurdish' ? 'selected' : '' }}>I´m not Kurdish</option>
+                                                                    </select>
+                                                                    <input type="text" class="form-control mt-2" name="select_province" value="{{ $signupsection->select_province ?? '' }}" placeholder="Select your Province">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- E-Mail Address -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Your E-Mail Address</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="email" class="form-control" name="email" value="{{ $signupsection->email ?? '' }}" placeholder="Type your E-Mail">
+                                                                    <input type="email" class="form-control mt-2" name="repeat_email" value="{{ $signupsection->repeat_email ?? '' }}" placeholder="Repeat your E-Mail">
+                                                                    <input type="text" class="form-control mt-2" name="email_issue_message" value="{{ $signupsection->email_issue_message ?? '' }}" placeholder="E-Mail issue Message">
+                                                                    <input type="text" class="form-control mt-2" name="error_found" value="{{ $signupsection->error_found ?? '' }}" placeholder="Error found">
+                                                                    <input type="text" class="form-control mt-2" name="user_already_exist" value="{{ $signupsection->user_already_exist ?? '' }}" placeholder="User already exist">
+                                                                    <input type="text" class="form-control mt-2" name="email_ok" value="{{ $signupsection->email_ok ?? '' }}" placeholder="Ok">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Phone Number -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Your Phone Number</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="phone_number" value="{{ $signupsection->phone_number ?? '' }}" placeholder="Your Phone Number">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Create Password -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Create Password</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="password" class="form-control" name="password" placeholder="Enter a Password">
+                                                                    <input type="password" class="form-control mt-2" name="repeat_password" placeholder="Repeat a Password">
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <!-- Account Created -->
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-6">
+                                                                    <h6>Account Created!</h6>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" class="form-control" name="account_created_success_message" value="{{ $signupsection->account_created_success_message ?? '' }}" placeholder="Your account has been created, successfully. Please sign in to use your account, and enjoy">
+                                                                    <input type="text" class="form-control mt-2" name="sign_in_redirect" value="{{ $signupsection->sign_in_redirect ?? '' }}" placeholder="Take me to sign in">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                          <h5>{{ $language->title }} Language</h5>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-label-secondary" data-bs-dismiss="modal">Save</button>
                                                         </div>
-                                                      </div>
-                                          
-                                                      <!-- Language -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Language</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="text" class="form-control" name="language_search" placeholder="Search">
-                                                          <input type="text" class="form-control mt-2" name="language_save_change" placeholder="Save Change">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Select Gender -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Select Gender</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <select class="form-control" name="gender">
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
-                                                            <option value="missing">Gender is Missing</option>
-                                                          </select> <br>
-                                                          <h6>Select Location</h6>
-                                                          <select class="form-control" name="location">
-                                                            <option value="address">Address</option>
-                                                            <option value="current_location">Current Location</option>
-                                                          </select>
-                                                          <input type="text" class="form-control mt-2" name="select_gender_prompt" placeholder="Please select your gender">
-                                                          <input type="text" class="form-control mt-2" name="gender_ok" placeholder="Ok">
-                                                          <input type="text" class="form-control mt-2" name="gender_start" placeholder="Start">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Firstname -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Firstname</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="text" class="form-control" name="firstname" placeholder="Your Firstname">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Lastname -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Lastname</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="text" class="form-control" name="lastname" placeholder="Your Lastname">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Username -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Username</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="text" class="form-control" name="username" placeholder="Your Username">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Birthday and Status -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Your Birthday</h6>
-                                                          <input type="date" class="form-control" name="birthday" placeholder="Your Birthday"> <!-- Missing birthday field -->
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                          <div class="col-md-6">
-                                                            <h6>Your Status</h6>
-                                                          </div>
-                                                          <div class="col-md-6">
-                                                            <select class="form-control" name="your_status">
-                                                              <option value="single">Single</option>
-                                                              <option value="engaged">Engaged</option>
-                                                              <option value="married">Married</option>
-                                                            </select>
-                                                            <input type="text" class="form-control mt-2" name="status_next" placeholder="Next">
-                                                            <input type="text" class="form-control mt-2" name="status_back" placeholder="Back">
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Select Origin -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Select Origin</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <select class="form-control" name="origin">
-                                                            <option value="kurdish">I´m Kurdish</option>
-                                                            <option value="provinces">Your Province</option>
-                                                            <option value="not_kurdish">I´m not Kurdish</option> <!-- Missing not Kurdish option -->
-                                                          </select>
-                                                          <input type="text" class="form-control mt-2" name="select_province" placeholder="Select your Province"> <!-- Missing Select your Province -->
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- E-Mail Address -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Your E-Mail Address</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="email" class="form-control" name="email" placeholder="Type your E-Mail">
-                                                          <input type="email" class="form-control mt-2" name="repeat_email" placeholder="Repeat your E-Mail">
-                                                          <input type="text" class="form-control mt-2" name="email_issue_message" placeholder="E-Mail issue Message"> <!-- Missing email issue message -->
-                                                          <input type="text" class="form-control mt-2" name="error_found" placeholder="Error found"> <!-- Missing error found -->
-                                                          <input type="text" class="form-control mt-2" name="user_already_exist" placeholder="User already exist"> <!-- Missing user already exist -->
-                                                          <input type="text" class="form-control mt-2" name="email_ok" placeholder="Ok"> <!-- Missing email ok -->
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Phone Number -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Your Phone Number</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="text" class="form-control" name="phone_number" placeholder="Your Phone Number">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Create Password -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Create Password</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="password" class="form-control" name="password" placeholder="Enter a Password">
-                                                          <input type="password" class="form-control mt-2" name="repeat_password" placeholder="Repeat a Password">
-                                                        </div>
-                                                      </div>
-                                          
-                                                      <!-- Account Created -->
-                                                      <div class="row mt-2">
-                                                        <div class="col-md-6">
-                                                          <h6>Account Created!</h6>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                          <input type="text" class="form-control" name="account_created_success_message" placeholder="Your account has been created, successfully. Please sign in to use your account, and enjoy">
-                                                          <input type="text" class="form-control mt-2" name="sign_in_redirect" placeholder="Take me to sign in">
-                                                        </div>
-                                                      </div>
-                                          
-                                                    </div>
-                                                  </form>
+                                                    </form>
                                                 </div>
-                                                <div class="modal-footer">
-                                                  <button type="submit" class="btn btn-label-secondary" data-bs-dismiss="modal">Save</button>
-                                                </div>
-                                              </div>
+                                               
                                             </div>
-                                          </div>
+                                        </div>
+                                    </div>
+                                    
                                           
 
                                         @include('content.include.language.editForm', [

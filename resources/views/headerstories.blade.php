@@ -1,10 +1,12 @@
-<!-- resources/views/edit_footer_quick_section_modal.blade.php -->
+@php
+$headersection = App\Models\HeaderSectionStories::where('language_id', $language->id)->first();
+@endphp
+
 <div class="modal fade" id="headerstoriessection{{ $language->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalCenterTitle">Header Stories Section	
-                </h5>
+                <h5 class="modal-title" id="modalCenterTitle">Header Stories Section</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -22,12 +24,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-md-6">
                                 <h6>My Subscriber</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="my_subscriber" placeholder="My Subscriber">
+                                <input type="text" class="form-control" name="my_subscriber" placeholder="My Subscriber" value="{{ $headersection->my_subscriber ?? '' }}">
                             </div>
                         </div>
                     
@@ -37,7 +39,7 @@
                                 <h6>Friends Stories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="friends_stories" placeholder="Friends Stories">
+                                <input type="text" class="form-control" name="friends_stories" placeholder="Friends Stories" value="{{ $headersection->friends_stories ?? '' }}">
                             </div>
                         </div>
                     
@@ -47,7 +49,7 @@
                                 <h6>Family Stories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="family_stories" placeholder="Family Stories">
+                                <input type="text" class="form-control" name="family_stories" placeholder="Family Stories" value="{{ $headersection->family_stories ?? '' }}">
                             </div>
                         </div>
                     
@@ -57,7 +59,7 @@
                                 <h6>My Stories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="my_stories" placeholder="My Stories">
+                                <input type="text" class="form-control" name="my_stories" placeholder="My Stories" value="{{ $headersection->my_stories ?? '' }}">
                             </div>
                         </div>
                     
@@ -67,7 +69,7 @@
                                 <h6>See All</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="see_all" placeholder="See All">
+                                <input type="text" class="form-control" name="see_all" placeholder="See All" value="{{ $headersection->see_all ?? '' }}">
                             </div>
                         </div>
                     
@@ -77,7 +79,7 @@
                                 <h6>Created</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="created" placeholder="Created">
+                                <input type="text" class="form-control" name="created" placeholder="Created" value="{{ $headersection->created ?? '' }}">
                             </div>
                         </div>
                     
@@ -87,7 +89,7 @@
                                 <h6>Your Story is created Successfully</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="story_created_success" placeholder="Your Story is created Successfully">
+                                <input type="text" class="form-control" name="story_created_success" placeholder="Your Story is created Successfully" value="{{ $headersection->story_created_success ?? '' }}">
                             </div>
                         </div>
                     
@@ -97,7 +99,7 @@
                                 <h6>Latest Stories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="latest_stories" placeholder="Latest Stories">
+                                <input type="text" class="form-control" name="latest_stories" placeholder="Latest Stories" value="{{ $headersection->latest_stories ?? '' }}">
                             </div>
                         </div>
                     
@@ -107,7 +109,7 @@
                                 <h6>No Stories found</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="no_stories_found" placeholder="No Stories found">
+                                <input type="text" class="form-control" name="no_stories_found" placeholder="No Stories found" value="{{ $headersection->no_stories_found ?? '' }}">
                             </div>
                         </div>
                     
@@ -117,7 +119,7 @@
                                 <h6>Recently viewed</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="recently_viewed" placeholder="Recently viewed">
+                                <input type="text" class="form-control" name="recently_viewed" placeholder="Recently viewed" value="{{ $headersection->recently_viewed ?? '' }}">
                             </div>
                         </div>
                     
@@ -127,7 +129,7 @@
                                 <h6>Stories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="stories" placeholder="Stories">
+                                <input type="text" class="form-control" name="stories" placeholder="Stories" value="{{ $headersection->stories ?? '' }}">
                             </div>
                         </div>
                     
@@ -137,7 +139,7 @@
                                 <h6>Create new Stories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="create_new_stories" placeholder="Create new Stories">
+                                <input type="text" class="form-control" name="create_new_stories" placeholder="Create new Stories" value="{{ $headersection->create_new_stories ?? '' }}">
                             </div>
                         </div>
                     
@@ -147,19 +149,13 @@
                                 <h6>Start now</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="start_now" placeholder="Start now">
+                                <input type="text" class="form-control" name="start_now" placeholder="Start now" value="{{ $headersection->start_now ?? '' }}">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit"
-                                class="btn btn-label-secondary"
-                                data-bs-dismiss="modal">Save</button>
+                            <button type="submit" class="btn btn-label-secondary" data-bs-dismiss="modal">Save</button>
                         </div>
                     </div>
-                    
-                    
-
-
                 </form>
             </div>
         </div>

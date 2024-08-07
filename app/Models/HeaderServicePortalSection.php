@@ -13,7 +13,7 @@ class HeaderServicePortalSection   extends Model
     protected $fillable = [
         'language_id',
         'yahala',
-        'arabic_social_site',
+        'arabic',
         'in_development',
         'soon_available',
     ];
