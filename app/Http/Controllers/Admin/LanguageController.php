@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LanguageData;
 use App\Models\StartPage;
+use App\Models\LanguageKeyword;
+use App\Models\FooterFriendSection;
 use App\Models\headervoter;
+use App\Models\HeaderDonationSection;
 use App\Models\headerhistory;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,7 +39,7 @@ use App\Models\FooterChatSection;
 use App\Models\HeaderFeedSection;
 use App\Models\VisiterProfile;
 use App\Models\HeaderSectionStories;
-use App\Models\FooterFriendSection;
+ 
 use App\Models\FooterCart;
 use Illuminate\Support\Facades\DB;
 
@@ -255,75 +258,74 @@ class LanguageController extends Controller
 
   public function keywordstore(Request $request)
   {
-    //  dd($request->all());
-    try {
       $validator = Validator::make($request->all(), [
-        'language_id' => [
-          'required',
-          'string',
-          'size:24', // MongoDB ObjectId size
-          function ($attribute, $value, $fail) {
-            if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-              return $fail($attribute . ' is not a valid ObjectId.');
-            }
-            // Check if the ObjectId exists in the languages collection
-            if (!Language::where('_id', $value)->exists()) {
-              return $fail($attribute . ' does not exist.');
-            }
-          },
-        ],
-        'alert' => 'nullable|string',
-        'upgrade' => 'nullable|string',
-        'premium' => 'nullable|string',
-        'vip' => 'nullable|string',
-        'monthly' => 'nullable|string',
-        'feeds' => 'nullable|string',
-        'text_comments' => 'nullable|string',
-        'music_player' => 'nullable|string',
-        'video_playlist' => 'nullable|string',
-        'discount' => 'nullable|string',
-        'stories' => 'nullable|string',
-        'voice_comments' => 'nullable|string',
-        'live_stream' => 'nullable|string',
-        'fanpage' => 'nullable|string',
-        'gift_free' => 'nullable|string',
-        'show_me_the_gift' => 'nullable|string',
-        'congratulations_educated' => 'nullable|string',
-        'congratulations_academic' => 'nullable|string',
-        'premium_description' => 'nullable|string',
-        'go_back_home' => 'nullable|string',
-        'your_activation_code_mail' => 'nullable|string',
-        'your_password_code_mail' => 'nullable|string',
-        'your_fanpage_activation_code' => 'nullable|string',
-        'one_time_code' => 'nullable|string',
-        'follow_steps_on_your_device' => 'nullable|string',
-        'welcome' => 'nullable|string',
+          'language_id' => [
+              'required',
+              'string',
+              'size:24', // MongoDB ObjectId size
+              function ($attribute, $value, $fail) {
+                  if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+                      return $fail($attribute . ' is not a valid ObjectId.');
+                  }
+                  // Check if the ObjectId exists in the languages collection
+                  if (!Language::where('_id', $value)->exists()) {
+                      return $fail($attribute . ' does not exist.');
+                  }
+              },
+          ],
+          'alert' => 'nullable|string',
+          'upgrade' => 'nullable|string',
+          'premium' => 'nullable|string',
+          'vip' => 'nullable|string',
+          'monthly' => 'nullable|string',
+          'feeds' => 'nullable|string',
+          'text_comments' => 'nullable|string',
+          'music_player' => 'nullable|string',
+          'video_playlist' => 'nullable|string',
+          'discount' => 'nullable|string',
+          'stories' => 'nullable|string',
+          'voice_comments' => 'nullable|string',
+          'live_stream' => 'nullable|string',
+          'fanpage' => 'nullable|string',
+          'gift_free' => 'nullable|string',
+          'show_me_the_gift' => 'nullable|string',
+          'congratulations_educated' => 'nullable|string',
+          'congratulations_academic' => 'nullable|string',
+          'premium_description' => 'nullable|string',
+          'go_back_home' => 'nullable|string',
+          'your_activation_code_mail' => 'nullable|string',
+          'your_password_code_mail' => 'nullable|string',
+          'your_fanpage_activation_code' => 'nullable|string',
+          'one_time_code' => 'nullable|string',
+          'follow_steps_on_your_device' => 'nullable|string',
+          'welcome' => 'nullable|string',
       ]);
-
+  
       if ($validator->fails()) {
-        return redirect()
-          ->back()
-          ->withErrors($validator)
-          ->withInput();
+          return redirect()
+              ->back()
+              ->withErrors($validator)
+              ->withInput();
       }
-
+  
       $validatedData = $validator->validated();
-
-      $language = Language::findOrFail($validatedData['language_id']);
-
-      $languageKeyword = $language
-        ->keywords()
-        ->updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
-
-      return redirect()
-        ->back()
-        ->with('success', 'Language keyword section updated successfully.');
-    } catch (\Exception $e) {
-      return redirect()
-        ->back()
-        ->with('error', 'Error saving language keyword section: ' . $e->getMessage());
-    }
+  
+      try {
+          LanguageKeyword::updateOrCreate(
+              ['language_id' => $validatedData['language_id']],
+              $validatedData
+          );
+  
+          return redirect()
+              ->back()
+              ->with('success', 'Language keyword section updated successfully.');
+      } catch (\Exception $e) {
+          return redirect()
+              ->back()
+              ->with('error', 'Error saving language keyword section: ' . $e->getMessage());
+      }
   }
+  
   public function startpage(Request $request)
   {
     $validator = Validator::make($request->all(), [
@@ -348,7 +350,7 @@ class LanguageController extends Controller
       'dear_guest' => 'nullable|string',
       'create_account' => 'nullable|string',
     ]);
-
+//dd($validator);
     if ($validator->fails()) {
       return redirect()
         ->back()
@@ -357,7 +359,7 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd(  $validatedData);
     try {
       StartPage::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
 
@@ -372,6 +374,7 @@ class LanguageController extends Controller
   }
   public function signupsection(Request $request)
   {
+   //dd("helo");
     $validator = Validator::make($request->all(), [
       'language_id' => [
         'required',
@@ -395,7 +398,7 @@ class LanguageController extends Controller
       'gender_start' => 'nullable|string|max:255',
       'firstname' => 'nullable|string|max:255',
       'lastname' => 'nullable|string|max:255',
-      'username' => 'nullable|string|max:255|unique:signup_sections,username',
+      'username' => 'nullable|string|max:255',
       'birthday' => 'nullable|date',
       'your_status' => 'nullable|string|in:single,engaged,married',
       'status_next' => 'nullable|string|max:255',
@@ -406,14 +409,14 @@ class LanguageController extends Controller
       'origin' => 'nullable|string|max:255',
       'select_province' => 'nullable|string|max:255',
       'not_kurdish' => 'nullable|string|max:255',
-      'email' => 'nullable|email|max:255|unique:signup_sections,email',
+      'email' => 'nullable|email|max:255 ',
       'repeat_email' => 'nullable|same:email',
       'email_issue_message' => 'nullable|string|max:255',
       'error_found' => 'nullable|string|max:255',
       'user_exists' => 'nullable|string|max:255',
       'email_ok' => 'nullable|string|max:255',
       'phone_number' => 'nullable|string|max:20',
-      'password' => 'nullable|string|min:8|confirmed',
+      'password' => 'nullable|string|min:4',
       'password_confirmation' => 'nullable_with:password|same:password',
       'password_criteria_min_length' => 'nullable|string|max:255',
       'password_criteria_uppercase_symbol' => 'nullable|string|max:255',
@@ -429,8 +432,9 @@ class LanguageController extends Controller
       'account_created_ok' => 'nullable|string|max:255',
       'sign_in_redirect' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     if ($validator->fails()) {
+      dd( $validator->errors());
       return redirect()
         ->back()
         ->withErrors($validator)
@@ -455,7 +459,7 @@ class LanguageController extends Controller
 
   public function signinsection(Request $request)
   {
-    // Validate the request data
+  
     $validator = Validator::make($request->all(), [
       'language_id' => [
         'required',
@@ -471,51 +475,53 @@ class LanguageController extends Controller
           }
         },
       ],
-      'email' => 'required|email|max:255|unique:signin_sections,email',
-      'password' => 'required|string|min:8',
-      'repeat_password' => 'required|same:password',
-      'signin' => 'required|string|max:255',
-      'login_error' => 'required|string|max:255',
-      'not_found' => 'required|string|max:255',
-      'signup' => 'required|string|max:255',
-      'regain_password_mail' => 'required|string|max:255',
-      'email_format_wrong' => 'required|string|max:255',
-      'correct_email' => 'required|string|max:255',
-      'password_reset_sent' => 'required|string|max:255',
-      'reset_password_email' => 'required|string|max:255',
-      'verification' => 'required|string|max:255',
-      'authentication_code_sent' => 'required|string|max:255',
-      'did_not_receive_code' => 'required|string|max:255',
-      'resend_code' => 'required|string|max:255',
-      'time_left' => 'required|string|max:255',
-      'verify_now' => 'required|string|max:255',
-      'error_found' => 'required|string|max:255',
-      'invalid_otp' => 'required|string|max:255',
-      'create_password' => 'required|string|max:255',
-      'secure_password' => 'required|string|max:255',
-      'has_8_characters' => 'required|string|max:255',
-      'uppercase_or_symbol' => 'required|string|max:255',
-      'has_number' => 'required|string|max:255',
-      'continue' => 'required|string|max:255',
-      'successfully' => 'required|string|max:255',
-      'logged_in' => 'required|string|max:255',
+      'email' => 'nullable|email|max:255',
+      'password' => 'nullable|string|min:4',
+      'repeat_password' => 'nullable|string|min:4',
+      
+      'signin' => 'nullable|string|max:255',
+      'login_error' => 'nullable|string|max:255',
+      'not_found' => 'nullable|string|max:255',
+      'signup' => 'nullable|string|max:255',
+      'regain_password_mail' => 'nullable|string|max:255',
+      'email_format_wrong' => 'nullable|string|max:255',
+      'correct_email' => 'nullable|string|max:255',
+      'password_reset_sent' => 'nullable|string|max:255',
+      'reset_password_email' => 'nullable|string|max:255',
+      'verification' => 'nullable|string|max:255',
+      'authentication_code_sent' => 'nullable|string|max:255',
+      'did_not_receive_code' => 'nullable|string|max:255',
+      'resend_code' => 'nullable|string|max:255',
+      'time_left' => 'nullable|string|max:255',
+      'verify_now' => 'nullable|string|max:255',
+      'error_found' => 'nullable|string|max:255',
+      'invalid_otp' => 'nullable|string|max:255',
+      'create_password' => 'nullable|string|max:255',
+      'secure_password' => 'nullable|string|max:255',
+      'has_8_characters' => 'nullable|string|max:255',
+      'uppercase_or_symbol' => 'nullable|string|max:255',
+      'has_number' => 'nullable|string|max:255',
+      'continue' => 'nullable|string|max:255',
+      'successfully' => 'nullable|string|max:255',
+      'logged_in' => 'nullable|string|max:255',
       'remember_me' => 'nullable|boolean',
-      'wrong_password' => 'required|string|max:255', // Added missing field
+      'wrong_password' => 'nullable|string|max:255', // Added missing field
     ]);
 
     // Check for validation errors
     if ($validator->fails()) {
+     // dd( ($validator->fails()));
       return redirect()
         ->back()
         ->withErrors($validator)
         ->withInput();
     }
-
+//dd($validator);
     $validatedData = $validator->validated();
 
     try {
       // Update or create the signin section entry
-      SigninSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+      SignInSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
 
       // Redirect back with success message
       return redirect()
@@ -531,6 +537,7 @@ class LanguageController extends Controller
 
   public function footercartsection(Request $request)
   {
+    //dd("hello");
     $validator = Validator::make($request->all(), [
       'language_id' => [
         'required',
@@ -556,13 +563,14 @@ class LanguageController extends Controller
       'donate' => 'nullable|string|max:255',
       'portal_cart' => 'nullable|string|max:255',
       'payment_method' => 'nullable|string|max:255',
-      'accept_policy_terms' => 'nullable|boolean',
+      'accept_policy_terms' => 'nullable|string',
       'office_information' => 'nullable|string|max:255',
       'bank_information' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     // Check for validation errors
     if ($validator->fails()) {
+      dd($validator->errors());
       return redirect()
         ->back()
         ->withErrors($validator)
@@ -570,7 +578,7 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd($validatedData);
     try {
       FooterCart::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
 
@@ -1277,11 +1285,11 @@ class LanguageController extends Controller
         },
       ],
       'yahala' => 'nullable|string|max:255',
-      'arabic_social_site' => 'nullable|string|max:255',
+      'social_arabic_site' => 'nullable|string|max:255',
       'in_development' => 'nullable|string|max:255',
       'soon_available' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     // Check for validation errors
     if ($validator->fails()) {
       return redirect()
@@ -1291,11 +1299,11 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd( $validatedData);
     try {
       // Update or create the header video section entry
-      HeaderRestaurentSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
-
+    $data= HeaderRestaurentSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+//dd( $data);
       // Redirect back with success message
       return redirect()
         ->back()
@@ -1309,7 +1317,7 @@ class LanguageController extends Controller
   }
   public function headerserviceportalsection(Request $request)
   {
-    // Validate the request data
+   //dd("hello");
     $validator = Validator::make($request->all(), [
       'language_id' => [
         'required',
@@ -1326,13 +1334,14 @@ class LanguageController extends Controller
         },
       ],
       'yahala' => 'nullable|string|max:255',
-      'arabic_social_site' => 'nullable|string|max:255',
+      'arabic' => 'nullable|string|max:255',
       'in_development' => 'nullable|string|max:255',
       'soon_available' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     // Check for validation errors
     if ($validator->fails()) {
+      //dd($validator->errors());
       return redirect()
         ->back()
         ->withErrors($validator)
@@ -1340,7 +1349,7 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd( $validatedData);
     try {
       // Update or create the header video section entry
       HeaderServicePortalSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
@@ -1599,6 +1608,54 @@ class LanguageController extends Controller
         ->with('error', 'Error saving My Profile Friends Section: ' . $e->getMessage());
     }
   }
+  public function headerdoantion(Request $request)
+  {
+    // Validate the request data
+    $validator = Validator::make($request->all(), [
+      'language_id' => [
+        'required',
+        'string',
+        'size:24', // MongoDB ObjectId size
+        function ($attribute, $value, $fail) {
+          if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+            return $fail($attribute . ' is not a valid ObjectId.');
+          }
+          // Check if the ObjectId exists in the languages collection
+          if (!Language::where('_id', $value)->exists()) {
+            return $fail($attribute . ' does not exist.');
+          }
+        },
+      ],
+      'yahala' => 'nullable|string|max:255',
+      'in_development' => 'nullable|string|max:255',
+      'soon_available' => 'nullable|string|max:255',
+    ]);
+
+    // Check for validation errors
+    if ($validator->fails()) {
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput();
+    }
+
+    $validatedData = $validator->validated();
+
+    try {
+      // Update or create the MyProfileFriendsSection entry
+      HeaderDonationSection::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);
+
+      // Redirect back with success message
+      return redirect()
+        ->back()
+        ->with('success', 'Donation  Section saved successfully.');
+    } catch (\Exception $e) {
+      // Redirect back with error message
+      return redirect()
+        ->back()
+        ->with('error', 'Error saving Donation Section: ' . $e->getMessage());
+    }
+  }
   public function myProfileOfficeSection(Request $request)
   {
     // Validate the request data
@@ -1837,19 +1894,19 @@ class LanguageController extends Controller
           }
         },
       ],
-      'categories' => 'required|string|max:255',
-      'newst_upload' => 'required|string|max:255',
-      'must_viewed' => 'required|string|max:255',
-      'share_on_yekbun' => 'required|string|max:255',
-      'public' => 'required|string|max:255',
-      'friends' => 'required|string|max:255',
-      'family' => 'required|string|max:255',
-      'write_a_comment' => 'required|string|max:255',
-      'post_media_comment' => 'required|string|max:255',
-      'add_voice' => 'required|string|max:255',
-      'see_all' => 'required|string|max:255',
+      'categories' => 'nullable|string|max:255',
+      'newst_upload' => 'nullable|string|max:255',
+      'must_viewed' => 'nullable|string|max:255',
+      'share_on_yekbun' => 'nullable|string|max:255',
+      'public' => 'nullable|string|max:255',
+      'friends' => 'nullable|string|max:255',
+      'family' => 'nullable|string|max:255',
+      'write_a_comment' => 'nullable|string|max:255',
+      'post_media_comment' => 'nullable|string|max:255',
+      'add_voice' => 'nullable|string|max:255',
+      'see_all' => 'nullable|string|max:255',
     ]);
-
+//dd( $validator);
     // Check for validation errors
     if ($validator->fails()) {
       return redirect()
@@ -1859,7 +1916,7 @@ class LanguageController extends Controller
     }
 
     $validatedData = $validator->validated();
-
+//dd( $validatedData);
     try {
       // Update or create the headerhistory entry
       headerhistory::updateOrCreate(['language_id' => $validatedData['language_id']], $validatedData);

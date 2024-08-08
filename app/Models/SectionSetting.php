@@ -38,4 +38,9 @@ class SectionSetting   extends Model
     {
         return $this->belongsTo(Language::class);
     }
+    protected $casts = [
+        'notificationType' => 'array',
+        'musicSetting' => 'array',
+        'leaveReason' => 'array',
+    ];
 }

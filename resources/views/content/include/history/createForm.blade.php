@@ -60,10 +60,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <label class="form-label" for="inputDescription">Description</label>
                     <textarea class="form-control" name="description" rows="6" id="inputDescription" placeholder="Type..."></textarea>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

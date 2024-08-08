@@ -13,7 +13,7 @@ class HeaderRestaurentSection   extends Model
     protected $fillable = [
         'language_id',
         'yahala',
-        'arabic_social_site',
+        'arbi',
         'in_development',
         'soon_available',
     ];

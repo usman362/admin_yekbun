@@ -92,7 +92,7 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
 
 
 
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
   Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
   Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
   Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
@@ -438,4 +438,4 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::get('/user', function (Request $request) {
     return $request->user();
   });
-});
+// });

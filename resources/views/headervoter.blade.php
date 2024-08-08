@@ -1,9 +1,12 @@
+@php
+$headervoter = App\Models\headervoter::where('language_id', $language->id)->first();
+@endphp
+
 <div class="modal fade" id="headervoter{{ $language->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalCenterTitle">Header Voting Section	
-                </h5>
+                <h5 class="modal-title" id="modalCenterTitle">Header Voting Section</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -27,7 +30,7 @@
                                 <h6>Categories</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="categories" placeholder="Categories">
+                                <input type="text" class="form-control" name="categories" placeholder="Categories" value="{{ $headervoter->categories ?? '' }}">
                             </div>
                         </div>
 
@@ -37,7 +40,7 @@
                                 <h6>Newst Uploads</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="newst_uploads" placeholder="Newst Uploads">
+                                <input type="text" class="form-control" name="newst_uploads" placeholder="Newst Uploads" value="{{ $headervoter->newst_uploads ?? '' }}">
                             </div>
                         </div>
 
@@ -47,7 +50,7 @@
                                 <h6>Past Vote</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="past_vote" placeholder="Past Vote">
+                                <input type="text" class="form-control" name="past_vote" placeholder="Past Vote" value="{{ $headervoter->past_vote ?? '' }}">
                             </div>
                         </div>
 
@@ -57,7 +60,7 @@
                                 <h6>Your Vote</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="your_vote" placeholder="Your Vote">
+                                <input type="text" class="form-control" name="your_vote" placeholder="Your Vote" value="{{ $headervoter->your_vote ?? '' }}">
                             </div>
                         </div>
 
@@ -67,7 +70,7 @@
                                 <h6>What u Like</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="what_u_like" placeholder="What u Like">
+                                <input type="text" class="form-control" name="what_u_like" placeholder="What u Like" value="{{ $headervoter->what_u_like ?? '' }}">
                             </div>
                         </div>
 
@@ -77,17 +80,17 @@
                                 <h6>Notification</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="notification" placeholder="Notification">
+                                <input type="text" class="form-control" name="notification" placeholder="Notification" value="{{ $headervoter->notification ?? '' }}">
                             </div>
                         </div>
 
-                        <!-- Your can vote one Time only -->
+                        <!-- You can vote one Time only -->
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <h6>You can vote one Time only</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="vote_one_time" placeholder="You can vote one Time only">
+                                <input type="text" class="form-control" name="vote_one_time" placeholder="You can vote one Time only" value="{{ $headervoter->vote_one_time ?? '' }}">
                             </div>
                         </div>
 
@@ -97,7 +100,7 @@
                                 <h6>You can’t redo your Vote</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="cant_redo_vote" placeholder="You can’t redo your Vote">
+                                <input type="text" class="form-control" name="cant_redo_vote" placeholder="You can’t redo your Vote" value="{{ $headervoter->cant_redo_vote ?? '' }}">
                             </div>
                         </div>
 
@@ -107,7 +110,7 @@
                                 <h6>Community</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="community" placeholder="Community">
+                                <input type="text" class="form-control" name="community" placeholder="Community" value="{{ $headervoter->community ?? '' }}">
                             </div>
                         </div>
 
@@ -117,7 +120,7 @@
                                 <h6>Reviews qualification</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="reviews_qualification" placeholder="Reviews qualification">
+                                <input type="text" class="form-control" name="reviews_qualification" placeholder="Reviews qualification" value="{{ $headervoter->reviews_qualification ?? '' }}">
                             </div>
                         </div>
 
@@ -127,7 +130,7 @@
                                 <h6>Total</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="total" placeholder="Total">
+                                <input type="text" class="form-control" name="total" placeholder="Total" value="{{ $headervoter->total ?? '' }}">
                             </div>
                         </div>
 
@@ -137,7 +140,7 @@
                                 <h6>Statistics</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="statistics" placeholder="Statistics">
+                                <input type="text" class="form-control" name="statistics" placeholder="Statistics" value="{{ $headervoter->statistics ?? '' }}">
                             </div>
                         </div>
 
@@ -147,7 +150,7 @@
                                 <h6>Age and gender</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="age_and_gender" placeholder="Age and gender">
+                                <input type="text" class="form-control" name="age_and_gender" placeholder="Age and gender" value="{{ $headervoter->age_and_gender ?? '' }}">
                             </div>
                         </div>
 
@@ -157,7 +160,7 @@
                                 <h6>Male</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="male" placeholder="Male">
+                                <input type="text" class="form-control" name="male" placeholder="Male" value="{{ $headervoter->male ?? '' }}">
                             </div>
                         </div>
 
@@ -167,7 +170,7 @@
                                 <h6>Female</h6>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="female" placeholder="Female">
+                                <input type="text" class="form-control" name="female" placeholder="Female" value="{{ $headervoter->female ?? '' }}">
                             </div>
                         </div>
 
