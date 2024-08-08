@@ -42,7 +42,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-
+/*
         'mongodb' => [
             'driver' => 'mongodb',
             'host' => env('MONGO_DB_HOST', '127.0.0.1'),
@@ -54,13 +54,13 @@ return [
                 'database' => 'admin_yekbun'  
             ]
         ],
-/*
+*/
         'mongodb' => [
 			'driver' => 'mongodb',
 			'dsn' => env('DB_URI'),
 			'database' => 'sample_mflix',
 		  ],
-*/
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),

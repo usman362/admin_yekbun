@@ -34,7 +34,7 @@
                       </td>
                     </tr>
                     @foreach ($permissions->whereNull('parent_id') as $permission)
-                    <tr>
+                    <tr> 
                       <td class="text-nowrap fw-semibold">{{ $permission->label?? ucfirst(str_replace('_', ' ', $permission->name)) }}</td>
                       <td>
                         <div class="d-flex">

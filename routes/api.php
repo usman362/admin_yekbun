@@ -77,7 +77,7 @@ use App\Http\Controllers\Api\PostGalleryController;
 |
 */
 
-Route::post('/searchlocation', [CountryController::class, 'search_location']);
+
 
 // Authentication
 Route::post('/signup', [AuthController::class, 'signup']);
@@ -285,6 +285,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
   //Cities
   Route::resource('/cities', CityController::class);
+
+  Route::post('/searchlocation', [CountryController::class, 'search_location']);
 
   // Privacy and Policy
   // Route::get('privacy', [PrivacyAndPolicyController::class, 'privacy'])->name('privacy');

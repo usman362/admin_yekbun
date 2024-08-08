@@ -19,8 +19,12 @@ class RoleController extends Controller
      */
     public function index()
     {
+
+
         $roles = Role::all();
         $permissions = Permission::all();
+
+
         return view("content.settings.roles.index", compact("roles", "permissions"));
     }
 
