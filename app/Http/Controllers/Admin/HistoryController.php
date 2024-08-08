@@ -40,13 +40,14 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $test=$request->validate([
             'title' => 'required',
             'category_id'=>'required',
-            'description' => 'required',
+            'description' => 'nullable',
             // 'image'=> 'required',
              'video_path'=> 'string'
           ]);
+          
           $history = new History();
           $history->title  = $request->title;
           $history->category_id = $request->category_id;
