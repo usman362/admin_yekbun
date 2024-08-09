@@ -604,6 +604,11 @@ Route::get('/profile-banner', [ProfileBannerController::class, 'index'])->name('
 Route::post('/profile-banner', [ProfileBannerController::class, 'store'])->name('profile.banner.store');
 Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class, 'destroy'])->name('profile.banner.delete');
 
+//Manage Cards
+Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.cards');
+Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
+Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.delete');
+
 
 
 
