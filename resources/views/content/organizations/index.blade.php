@@ -205,7 +205,7 @@
                 <div class="modal-body">
                     @include('content.organizations.includes.create_form')
                 </div>
-                <div class="modal-footer p-0 d-flex justify-content-center">
+                <div class="modal-footer p-4 d-flex justify-content-center">
  
 
                             <button type="submit" class="btn btn-light fs-3" style="background-color: #F2F2F2;" form="createOrgForm">Create <img
