@@ -391,8 +391,8 @@
         aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <div class="modal-header bg-custom-grey pb-2"  style="background-color:  rgba(225, 235, 230, 0.548)">
-                    <div class="d-flex w-100">
+                <div class="modal-header bg-custom-grey pb-2" style="background-color: #F2F2F2;">
+                    <div class="d-flex w-100" >
                         <div class="d-flex justify-content-center align-items-center p-2 gap-1 bg-white rounded-2 mx-auto">
                             <img src="{{ asset('assets/img/icons/donations/donate-heart.png') }}" alt="Donate Heart"
                                 style="width:2vw;">
@@ -402,7 +402,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="rounded donation-info mb-4 w-75 mx-auto" >
+                    <div class="rounded donation-info mb-4 w-75 mx-auto">
                         <div class="d-flex w-100 align-items-center justify-content-center h-100">
                             <div class="d-flex align-items-center justify-content-center w-15">
                                 <img src="{{ asset('assets/img/icons/donations/check-circle.png') }}" alt="Check mark">
@@ -417,7 +417,7 @@
                     @include('content.donations.includes.create_form')
                 </div>
                 <div class="modal-footer p-0 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-light fs-3" form="createLimitedForm">Create <img
+                    <button type="submit" class="btn btn-light fs-3"  style="background-color: #F2F2F2;" form="createLimitedForm">Create <img
                             src="{{ asset('assets/img/icons/donations/send.png') }}" alt="send btn"
                             class="ms-2"></button>
                 </div>
@@ -431,8 +431,8 @@
         aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content modal-custom-font">
-                <div class="modal-header bg-custom-grey pb-2" style="background-color:  rgba(225, 235, 230, 0.548)">
-                    <div class="d-flex w-100">
+                <div class="modal-header bg-custom-grey pb-2" style="background-color: #F2F2F2;">
+                    <div class="d-flex w-100" >
                         <div class="d-flex justify-content-center align-items-center p-2 gap-1 bg-white rounded-2 mx-auto">
                             <img src="{{ asset('assets/img/icons/donations/donate-heart.png') }}" alt="Donate Heart"
                                 style="width:2vw;">
@@ -441,9 +441,9 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" >
-                    <div class="rounded donation-info mb-4 x-modal w-75 mx-auto">
-                        <div class="d-flex w-100 align-items-center justify-content-center h-100">
+                <div class="modal-body">
+                    <div class="rounded donation-info mb-4 x-modal w-75 mx-auto" >
+                        <div class="d-flex w-100 align-items-center justify-content-center h-100" >
                             <div class="d-flex align-items-center justify-content-center w-15">
                                 <img src="{{ asset('assets/img/icons/donations/check-circle.png') }}" alt="Check mark">
                             </div>
@@ -454,7 +454,6 @@
                             </div>
                         </div>
                     </div>
-                    <div style="background-color:  rgba(225, 235, 230, 0.548)">
                     <form id="createUnlimitedForm" action="{{ route('create.donation') }}" method="post"
                         enctype="multipart/form-data" class="x-modal">
                         @csrf
@@ -463,7 +462,7 @@
                             <div class="col-lg-12 mx-auto">
                                 <div class="row g-3">
                                     <!-- Organization selection -->
-                                    <div class="col-md-12 bg-custom-grey rounded-3 py-2">
+                                    <div class="col-md-12 bg-custom-grey rounded-3 py-2" style="background-color: #F2F2F2;">
                                         <input type="hidden" name="organization_id" id="organ_id" required>
                                         <div class="m-0 mb-2"><span class="fs-5 text-black fw-bold">Select
                                                 Organization</span></div>
@@ -492,9 +491,9 @@
                                     </div>
 
                                     <!-- Banner upload -->
-                                    <div
+                                    <div style="background-color: #F2F2F2;"
                                         class="limited-banner col-md-12 bg-custom-grey rounded-3 py-2 border-secondary border-dashed banner-wrapper cursor-pointer">
-                                        <div
+                                        <div 
                                             class="d-flex flex-column align-items-center justify-content-center dummy-banner">
                                             <img src="{{ asset('assets/img/icons/donations/plus.png') }}" alt="">
                                             <span class="">Upload Banner</span>
@@ -505,7 +504,7 @@
                                         accept="image/jpeg, image/png">
 
                                     <!-- Title and other fields -->
-                                    <div class="col-md-12 bg-custom-grey rounded-3 py-2">
+                                    <div class="col-md-12 bg-custom-grey rounded-3 py-2" style="background-color: #F2F2F2;">
                                         <div class="m-0 mb-2"><span class="fs-5 text-black fw-bold">Donation Title</span>
                                         </div>
                                         <input type="text" class="form-control" name="title"
@@ -516,7 +515,7 @@
                                     </div>
 
                                     <input type="hidden" name="donation_type" value="Unlimited Donation">
-                                    <div class="col-md-12 bg-custom-grey rounded-3 py-2">
+                                    <div class="col-md-12 bg-custom-grey rounded-3 py-2" style="background-color: #F2F2F2;">
                                         <div class="m-0 mb-2"><span class="fs-5 text-black fw-bold">Start Date - End
                                                 Date</span>
                                         </div>
@@ -537,7 +536,7 @@
                                     </div>
 
                                     <!-- Payment methods -->
-                                    <div class="col-md-12 bg-custom-grey rounded-3 p-2">
+                                    <div class="col-md-12 bg-custom-grey rounded-3 p-2" style="background-color: #F2F2F2;">
                                         <div class="m-0 mb-2"><span class="fs-5 text-black fw-bold">Payment Methods</span>
                                         </div>
                                         <div class="px-3">
@@ -556,7 +555,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6 p-1">
+                                                <div class="col-sm-6 p-1" style="background-color: #F2F2F2;">
                                                     <div style="background-color: #fff;border-radius: 20px;"
                                                         class="d-flex justify-content-between py-1 px-2 align-items-center">
                                                         <span
@@ -570,7 +569,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" style="background-color: #F2F2F2;">
                                                 <div class="col-sm-6 p-1">
                                                     <div style="background-color: #fff;border-radius: 20px;"
                                                         class="d-flex justify-content-between py-1 px-2 align-items-center">
@@ -585,7 +584,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6 p-1">
+                                                <div class="col-sm-6 p-1" style="background-color: #F2F2F2;">
                                                     <div style="background-color: #fff;border-radius: 20px;"
                                                         class="d-flex justify-content-between py-1 px-2 align-items-center">
                                                         <span
@@ -604,11 +603,11 @@
                             </div>
                         </div>
                         <div class="modal-footer p-0 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-light fs-3" form="createUnlimitedForm">Create <img
+                            <button type="submit" class="btn btn-light fs-3" style="background-color: #F2F2F2;" form="createUnlimitedForm">Create <img
                                     src="{{ asset('assets/img/icons/donations/send.png') }}" alt="send btn"
                                     class="ms-2"></button>
                         </div>
-                    </form></div>
+                    </form>
                 </div>
             </div>
         </div>
