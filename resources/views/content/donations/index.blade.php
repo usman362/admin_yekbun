@@ -391,7 +391,7 @@
         aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <div class="modal-header bg-custom-grey pb-2">
+                <div class="modal-header bg-custom-grey pb-2"  style="background-color:  rgba(225, 235, 230, 0.548)">
                     <div class="d-flex w-100">
                         <div class="d-flex justify-content-center align-items-center p-2 gap-1 bg-white rounded-2 mx-auto">
                             <img src="{{ asset('assets/img/icons/donations/donate-heart.png') }}" alt="Donate Heart"
@@ -402,7 +402,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="rounded donation-info mb-4 w-75 mx-auto">
+                    <div class="rounded donation-info mb-4 w-75 mx-auto" >
                         <div class="d-flex w-100 align-items-center justify-content-center h-100">
                             <div class="d-flex align-items-center justify-content-center w-15">
                                 <img src="{{ asset('assets/img/icons/donations/check-circle.png') }}" alt="Check mark">
@@ -431,7 +431,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content modal-custom-font">
-                <div class="modal-header bg-custom-grey pb-2">
+                <div class="modal-header bg-custom-grey pb-2" style="background-color:  rgba(225, 235, 230, 0.548)">
                     <div class="d-flex w-100">
                         <div class="d-flex justify-content-center align-items-center p-2 gap-1 bg-white rounded-2 mx-auto">
                             <img src="{{ asset('assets/img/icons/donations/donate-heart.png') }}" alt="Donate Heart"
@@ -441,7 +441,7 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" >
                     <div class="rounded donation-info mb-4 x-modal w-75 mx-auto">
                         <div class="d-flex w-100 align-items-center justify-content-center h-100">
                             <div class="d-flex align-items-center justify-content-center w-15">
@@ -454,6 +454,7 @@
                             </div>
                         </div>
                     </div>
+                    <div style="background-color:  rgba(225, 235, 230, 0.548)">
                     <form id="createUnlimitedForm" action="{{ route('create.donation') }}" method="post"
                         enctype="multipart/form-data" class="x-modal">
                         @csrf
@@ -607,7 +608,7 @@
                                     src="{{ asset('assets/img/icons/donations/send.png') }}" alt="send btn"
                                     class="ms-2"></button>
                         </div>
-                    </form>
+                    </form></div>
                 </div>
             </div>
         </div>

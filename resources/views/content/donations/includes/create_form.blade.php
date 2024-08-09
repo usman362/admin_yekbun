@@ -4,6 +4,7 @@
     }
 </style>
 {{-- form --}}
+<div id=-"background"  style="background-color:  rgba(225, 235, 230, 0.548)">
 <form class="DonationForm" id="createLimitedForm" action="{{ route('create.donation') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="showCreateFormModal" value="1">
@@ -113,6 +114,7 @@
         </div>
     </div>
 </form>
+
 {{-- <form id="createForm" action="{{ route('donations.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="showCreateFormModal" value="1">
@@ -188,4 +190,4 @@
 const TagifyBasic = new Tagify(tagsEl, {
   // originalInputValueFormat: valuesArr => valuesArr.map(item => item.value)
 }); --}}
-@endsection
+@endsection</div>

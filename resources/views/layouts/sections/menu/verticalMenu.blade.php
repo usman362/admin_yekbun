@@ -1060,7 +1060,7 @@ $configData = Helper::appClasses();
 
 
             <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
+              <a href="" class="menu-link">
                 <div>Add Songs</div>
               </a>
 
@@ -1070,7 +1070,7 @@ $configData = Helper::appClasses();
 
 
             <li class="menu-item ">
-              <a href="{{ route('list.cards') }}" class="menu-link">
+              <a href="{{route('list.cards') }}" class="menu-link">
                 <div>Add Cards</div>
               </a>
 

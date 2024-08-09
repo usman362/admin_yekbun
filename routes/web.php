@@ -11,6 +11,7 @@ use App\Http\Controllers\fanpage\FanPage;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\SongController;
 use App\Http\Controllers\Admin\ChannelPolicyController;
 
 use App\Http\Controllers\Admin\EventController;
@@ -720,7 +721,8 @@ Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->nam
             Route::post('voting/prefix/update/{id}', [PrefixController::class, 'update'])->name('voting.prefix.update');
             Route::get('chats/reasons', [ReasonController::class, 'index'])->name('chats.reasons');
 
-
+          
+            
             Route::resource('/bank-transfer', BankTransferController::class);
 
             Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
