@@ -417,7 +417,7 @@
                     @include('content.donations.includes.create_form')
                 </div>
                 <div class="modal-footer p-0 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-light fs-3"  style="background-color: #F2F2F2;" form="createLimitedForm">Create <img
+                    <button type="submit" class="btn btn-light fs-3"  style="background-color: #F2F2F2;" form="createLimitedForm">Create<img
                             src="{{ asset('assets/img/icons/donations/send.png') }}" alt="send btn"
                             class="ms-2"></button>
                 </div>

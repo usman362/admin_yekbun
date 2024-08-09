@@ -83,7 +83,7 @@
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-6 mb-3">
+                        <div class="col-12 mb-3">
                             <textarea name="address" class="form-control" style="resize: none;" required>{{ old('address', 'Address') }}</textarea>
                             @error('address')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>

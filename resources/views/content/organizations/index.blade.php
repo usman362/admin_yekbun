@@ -197,7 +197,7 @@
                 <div class="modal-header bg-custom-grey pb-2">
                     <div class="d-flex w-100">
                         <div class="bg-white p-2 rounded-3 mx-auto">
-                            <h5 class="modal-title fs-3" id="createModalLabel">Add Organization</h5>
+                            <h5 class="modal-title fs-3" id="createModalLabel">Add Organization </h5>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -206,8 +206,11 @@
                     @include('content.organizations.includes.create_form')
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button type="submit" class="btn btn-label-secondary d-flex gap-2" form="createOrgForm">Create <img
-                            src="{{ asset('assets/img/icons/donations/send.png') }}" alt="Send Icon"></button>
+ 
+
+                            <button type="submit" class="btn btn-light fs-3" style="background-color: #F2F2F2;" form="createOrgForm">Create <img
+                                src="{{ asset('assets/img/icons/donations/send.png') }}" alt="send btn"
+                                class="ms-2"></button>
                 </div>
             </div>
         </div>
