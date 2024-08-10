@@ -720,8 +720,18 @@ Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->nam
             Route::delete('voting/prefix/destroy/{id}', [PrefixController::class, 'destroy'])->name('voting.prefix.destroy');
             Route::post('voting/prefix/update/{id}', [PrefixController::class, 'update'])->name('voting.prefix.update');
             Route::get('chats/reasons', [ReasonController::class, 'index'])->name('chats.reasons');
-
-          
+//Manage Songs
+            Route::resource('/storysong', SongController::class);
+            Route::resource('/storysong', SongController::class)->names([
+                'index' => 'storysong.index',
+                'create' => 'storysong.create',
+                'store' => 'storysong.store',
+                'show' => 'storysong.show',
+                'edit' => 'storysong.edit',
+                'update' => 'storysong.update',
+                'destroy' => 'storysong.destroy',
+            ]);
+            
             
             Route::resource('/bank-transfer', BankTransferController::class);
 

@@ -1060,7 +1060,7 @@ $configData = Helper::appClasses();
 
 
             <li class="menu-item ">
-              <a href="" class="menu-link">
+              <a href="{{ route('settings.storysong.index') }}" class="menu-link">
                 <div>Add Songs</div>
               </a>
 

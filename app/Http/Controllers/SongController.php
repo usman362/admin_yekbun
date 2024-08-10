@@ -1,65 +1,174 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\StorySong;
 
 use Illuminate\Http\Request;
+use App\Models\StorySong;
+
 
 class SongController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-      //  dd("helo");
-        $storysong = StorySong::all();
-        return view("content.apps.add-songs",compact('storysong'));
+        $ringtones  = StorySong::get();
+        return view('content.song.index' , compact('ringtones'));
     }
-    public function getMessage()
-    {
-        $storysong = StorySong::where('songType', 1)->get();
-        $songType = 1;
 
-        return view("content.apps.add-songs",compact('storysong', 'songType'));
-    }
-    public function getCall()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $storysong = StorySong::where('songType', 2)->get();
-        $songType = 2;
-        return view("content.apps.add-songs",compact('storysong', 'songType'));
+        //
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $response_msg = $request->songType == "1" ? "Message" : "Call";
-        if(!empty($request->audio_paths)){
-            foreach ($request->audio_paths as $key => $path) {
-                try {
-                    $storysong = StorySong::updateOrCreate(['_id' => $request->id], [
-                        'fileName' => $request->audio_filename[$key],
-                        'filePath' => $path,
-                        'ringType' => intval($request->songType),
-                        'fileSize' => $request->audio_size[$key]
-                    ]);
-                } catch (\Throwable $e) {
-                    return back()->with('success', $response_msg.' Song has been updated');
+        // Validate the request
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'song' => 'required|string', // Expecting a path as a string
+        ]);
+    
+        $ringtone = new StorySong();
+        $ringtone->title = $request->title;
+        $ringtone->ringtone_path = $request->song; // Store the path directly
+    
+        if ($ringtone->save()) {
+            return redirect()->route('settings.storysong.index')->with('success', 'Song was successfully created');
+        } else {
+            return redirect()->back()->with('error', 'Ringtone was not created successfully');
+        }
+    }
+    
+    
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        // Find the existing ringtone record
+        $ringtone = StorySong::find($id);
+        
+        if (!$ringtone) {
+            return redirect()->back()->with('danger', 'Ringtone not found');
+        }
+    
+        // Update the title
+        $ringtone->title = $request->input('title');
+        
+        // Update the ringtone path if a new file is uploaded
+        if ($request->hasFile('ringtone_path')) {
+            // Delete the old ringtone file if it exists
+            if ($ringtone->ringtone_path) {
+                $oldPath = storage_path('app/public/' . $ringtone->ringtone_path);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
-            return back()->with('success', $response_msg.' Song has been updated');
-        } else {
-            return redirect()->back();
+    
+            // Store the new ringtone file
+            $path = $request->file('ringtone_path')->store('ringtones', 'public');
+            $ringtone->ringtone_path = $path;
         }
-
+        
+        // Save the updated record
+        if ($ringtone->save()) {
+            return redirect()->route('settings.storysong.index')->with('success', 'Song was successfully updated');
+        } else {
+            return redirect()->back()->with('danger', 'Song was not updated successfully');
+        }
     }
+    
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        try {
-            $storysong = StorySong::find($id);
-            if (!$storysong) {
-                return back()->with('error','Song not found.');
-            }
-            $storysong->delete();
-            return back()->with('success','Song has been deleted.');
-
-        } catch (\Exception $e) {
-            return back()->with('error','Failed to delete Song.');
+        $ringtone = StorySong::find($id);
+        
+        if (!$ringtone) {
+            return redirect()->route('settings.storysong.index')->with('danger', 'Ringtone not found');
         }
+        
+        // Delete the ringtone file if it exists
+        if ($ringtone->ringtone_path) {
+            $file_path = storage_path('app/public/' . $ringtone->ringtone_path);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        
+        // Delete the ringtone record
+        if ($ringtone->delete()) {
+            return redirect()->route('settings.storysong.index')->with('success', 'Ringtone was successfully deleted');
+        } else {
+            return redirect()->route('settings.storysong.index')->with('danger', 'Ringtone was not deleted');
+        }
+    }
+    
+
+    public function deleteRingtone($id)
+    {
+       // echo $id;exit;
+        $ringtone = Ringtone::find($id);
+        if ($ringtone && isset($ringtone->ringtone_path)) {
+            $path = public_path('storage/' . $ringtone->ringtone_path);
+            if (file_exists($path)) {
+                unlink($path);
+            }
+    
+            // Remove the image filename from the model attribute
+            if(!empty($ringtone)){
+                $ringtone->delete(); 
+            }
+          
+        }
+        return redirect()->back()->with('success' , 'Ringtone  Deleted  Successfully');
     }
 }
