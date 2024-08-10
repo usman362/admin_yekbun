@@ -16,12 +16,11 @@ class StorySong extends Model
 
     protected $collection = 'storysong';
 
-    protected $fillable = [
-        'fileName',
-        'filePath',
-        'fileSize',
-        'ringType'
-    ];
+    protected $fillable = [ 'fileName',
+    'filePath',
+    'fileSize',
+    'ringType'];
+
 
     public function getActivitylogOptions(): LogOptions
     {

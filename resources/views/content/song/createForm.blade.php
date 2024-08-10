@@ -20,7 +20,7 @@
                                     Drop files here or click to upload
                                 </div>
                                 <div class="fallback">
-                                    <input type="file" name="ringtone"  id="ringtone"  accept="audio/*" />
+                                    <input type="file" name="ringtone"  id="ringtone" accept="image/png, image/gif, image/jpeg" />
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
             {{--
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Song</label>
-                    <input type="file" id="smiley" class="form-control" name="song" accept="audio/*">
+                    <input type="file" id="smiley" class="form-control" name="song" accept="" />
                     @error('song')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
