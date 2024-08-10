@@ -26,7 +26,7 @@
                                     Drop files here or click to upload
                                 </div>
                                 <div class="fallback">
-                                    <input type="file" name="ringtone"  id="ringtone" accept="image/png, image/gif, image/jpeg" />
+                                    <input type="file" name="ringtone"  id="ringtone" accept="audio/*"/>
                                 </div>
                             </div>
                         </div>
@@ -39,8 +39,8 @@
             {{--
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Ringtone</label>
-                    <input type="file" id="smiley" class="form-control" name="ringtone" accept="" />
-                    @error('ringtone')
+     <input type="file" id="smiley" class="form-control" name="ringtone_path" accept="audio/*" />
+                     @error('ringtone')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
