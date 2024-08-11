@@ -45,6 +45,8 @@ use Jenssegers\Mongodb\Auth\User as Authenticatable;
         'city',
         'province_city',
         'country',
+        'role_id',
+        'roles',
         'is_admin_user',
         'is_superadmin'
     ];
@@ -113,7 +115,7 @@ use Jenssegers\Mongodb\Auth\User as Authenticatable;
         return $this->hasMany(FanPage::class, 'user_id', 'id');
     }
 
-    /**
+    /** 
      * Write code on Method
      *
      * @return response()

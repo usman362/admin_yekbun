@@ -1412,10 +1412,11 @@ $configData = Helper::appClasses();
 
 
 
-    <li class="menu-item ">
+    
+    <li class="menu-item {{ Request::is('avatars/*') ? 'active open' : '' }}  {{ Request::is('manage-avatars') ? 'active open' : '' }} {{ Request::is('avatars') ? 'active open' : '' }}{{ Request::is('manage-avatars/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-bot"></i>
-        <div>Avatar</div>
+        <div>Avatar </div>
       </a>
 
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Permission;
 
 class LoginController extends Controller
 {
@@ -32,10 +33,18 @@ class LoginController extends Controller
                 return redirect()->route('2fa.index');
             }
 
+            $permission = Permission::where('name', 'dashboard.read')->first();
+
+
+           
+ 
             activity()
                 ->event('logged_in')
                 ->log("<strong>" . Auth::user()->name . "</strong> logged in");
             $request->session()->regenerate();
+            
+           
+
             return redirect()->intended(
                 Auth::user()->can('dashboard.read')?
                 route('dashboard-analytics'):

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class TeamMemberController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +51,9 @@ class TeamMemberController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         $validated['status'] = (int)$request->status;
         $validated['role_id'] = $validated['roles'];
+
+        
+
         try {
             $user = User::create($validated);
         } catch (\Throwable $e) {
@@ -97,8 +100,11 @@ class TeamMemberController extends Controller
     {
         $user = User::find($id);
         $imagePath = public_path('storage/' . $user->image);
-        if ($user->image != NULL && $imagePath)
-        unlink($imagePath);
+        
+        if ($user->image != NULL && $imagePath && file_exists($imagePath)){
+            unlink($imagePath);
+        }
+            
 
         $objectId = new \MongoDB\BSON\ObjectId($id);
         User::where('_id', $objectId)->delete();

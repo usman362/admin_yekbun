@@ -32,9 +32,8 @@ class AvatarsController extends Controller
 		
 		$avatars =  Avatars::orderBy('created_at', 'desc')->get();
 				
-			
 		
-		return view('manag_avatars', [
+		return view('content.avatars.manag_avatars', [
 			'avatars' => $avatars, 'id' => $id
 		]);
 		
@@ -100,7 +99,7 @@ $from = \Carbon\Carbon::parse(time());
 				$randomize = rand(111111, 999999);
 				$extension = $request->file('dp')->extension();
 				$filename = $randomize . '.' . $extension;
-				$image = $request->file('dp')->move('images/', $filename);
+				$image = $request->file('dp')->move('public/images/', $filename);
 				$imgfilename = $filename;
 			}
                 
@@ -280,7 +279,7 @@ $from = \Carbon\Carbon::parse(time());
 				$randomize = rand(111111, 999999);
 				$extension = $request->file('dp')->extension();
 				$filename = $randomize . '.' . $extension;
-				$image = $request->file('dp')->move('images/', $filename);
+				$image = $request->file('dp')->move('public/images/', $filename);
 				$imgfilename = $filename;
 			}
              
