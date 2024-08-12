@@ -60,4 +60,8 @@ class SettingController extends Controller
         $app_info = AppInfo::create($request->all());
         return back();
     }
+
+    public function storage_setting(){
+        return view('content.stories.story_time');
+   }
 }

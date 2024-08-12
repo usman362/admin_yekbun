@@ -862,9 +862,8 @@ Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->nam
         });
 });
 
+Route::get('stories_time', [SettingController::class, 'storage_setting']);
 
 
 
 ?>
-
-

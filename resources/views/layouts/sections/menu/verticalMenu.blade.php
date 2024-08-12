@@ -1023,7 +1023,13 @@ $configData = Helper::appClasses();
 
       <ul class="menu-sub">
 
+        <li class="menu-item ">
+          <a href="{{route('list.cards') }}" class="menu-link">
+            <div>Add / Manage  Cards</div>
+          </a>
 
+
+        </li>
 
         <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
           <a href="{{ url('story/ManageStories') }}" class="menu-link">
@@ -1061,7 +1067,7 @@ $configData = Helper::appClasses();
 
             <li class="menu-item ">
               <a href="{{ route('settings.storysong.index') }}" class="menu-link">
-                <div>Add Songs</div>
+                <div>Add Manage/Songs</div>
               </a>
 
 
@@ -1069,25 +1075,19 @@ $configData = Helper::appClasses();
 
 
 
-            <li class="menu-item ">
-              <a href="{{route('list.cards') }}" class="menu-link">
-                <div>Add Cards</div>
-              </a>
-
-
-            </li>
+           
 
 
 
 
             <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
+              <a href=" {{url('stories_time')}}" class="menu-link">
                 <div>Stories Time</div>
               </a>
 
 
             </li>
-
+             
              <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
               <a href="{{url('/settings/stories/reasons ')}}" class="menu-link">
                 <div>Reasons</div>
