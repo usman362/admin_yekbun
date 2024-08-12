@@ -69,7 +69,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 
                 <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">App Settings /</span> Storage Settings
+        <span class="text-muted fw-light">Stories /</span> Story Time
     </h4>
 
     <!-- Basic Bootstrap Table -->
@@ -80,7 +80,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 					<div class="card-title d-flex" style="justify-content: space-between">
 						<div>
 							<h5 class="m-0">
-								Storage Settings
+								Story Time
 							</h5>
 							<small class="m-0">
 								For all users
@@ -124,7 +124,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 						  </div>
 
-							<p class="text-muted mx-2">Storage size</p>
+							<p class="text-muted mx-2">Story Time size</p>
 
 						<div class="row">
 							<div class="col-md-9">
@@ -161,7 +161,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 						  </div>
 
-							<p class="text-muted mx-2">Storage size</p>
+							<p class="text-muted mx-2">Story Time size</p>
 
 						<div class="row">
 							<div class="col-md-9">
@@ -200,7 +200,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 						  </div>
 
-							<p class="text-muted mx-2">Storage size</p>
+							<p class="text-muted mx-2">Story Time size</p>
 
 						<div class="row">
 							<div class="col-md-9">
@@ -224,7 +224,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 							</div>
 							<div class="flex-grow-1 row">
 							  <div class="col-9 mb-sm-0 mb-2">
-								<h6 class="mb-0">Storage alert</h6>
+								<h6 class="mb-0">Story Time alert</h6>
 								<small class="text-muted">User will get alert on the App once the Storage Amount is less then set it %</small>
 							  </div>
 							  <div class="col-3 text-end mt-1">
@@ -240,7 +240,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/js/dropify.min.js
 
 						  </div>
 
-							<p class="text-muted mx-2">Storage alert when reach %</p>
+							<p class="text-muted mx-2">Story Time alert when reach %</p>
 
 						<div class="row">
 							<div class="col-md-9">
