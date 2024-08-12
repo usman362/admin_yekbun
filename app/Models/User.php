@@ -48,8 +48,7 @@ use Jenssegers\Mongodb\Auth\User as Authenticatable;
         'role_id',
         'roles',
         'is_admin_user',
-        'is_superadmin',
-        'user_type'
+        'is_superadmin'
     ];
 
     /**

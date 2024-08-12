@@ -24,9 +24,9 @@ class StandardUserController extends Controller
         }
 
         if ($view === 'blocked')
-            $users = User::where("level", 0)->where('is_admin_user', 0)->where('status', 0)->where('user_type','!=','team_member')->orderBy("updated_at", "DESC")->get();
+            $users = User::where("level", 0)->where('is_admin_user', 0)->where('status', 0)->orderBy("updated_at", "DESC")->get();
         else
-            $users = User::where("level", 0)->where('is_admin_user', 0)->where('gender', $view)->where('user_type','!=','team_member')->orderBy("updated_at", "DESC")->get();
+            $users = User::where("level", 0)->where('is_admin_user', 0)->where('gender', $view)->orderBy("updated_at", "DESC")->get();
 
         return view("content.users.standard.index", compact("users", "view"));
     }

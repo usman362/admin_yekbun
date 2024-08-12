@@ -25,7 +25,7 @@ class TeamMemberController extends Controller
      */
     public function index()
     {
-        $users = User::where('status', 1)->where('user_type','team_member');
+        $users = User::where('status', 1)->where('is_admin_user', 0);
         $users = $users->with('roles')->get();
         $roles = Role::all();
         return view("content.settings.team_members.index", compact("users", "roles"));
