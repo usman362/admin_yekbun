@@ -48,6 +48,18 @@
       "updated_at": "29/3/2024 17:33:08.83"
     },
     {
+      "_id": "6606fa54259adb7a4a09c155",
+      "created_at": "29/3/2024 17:33:08.83",
+      "guard_name": "web",
+      "label": "Write",
+      "name": "users.write",
+      "parent_child_id": null,
+      "parent_id": "6606fb54259adb7a4a09c154",
+      "role_ids": "[ \"663e84fa96f497f4a30daf52\", \"660416972e6d0dc1480293a1\" ]",
+      "order":0,
+      "updated_at": "29/3/2024 17:33:08.83"
+    },
+    {
       "_id": "6606fb54259adb7a4a09c159",
       "created_at": "29/3/2024 17:33:08.838",
       "guard_name": "web",
@@ -2125,9 +2137,9 @@
 
 
 
-    
-    
-   
+
+
+
     {
       "_id": "6606fb55259adb7a4a09c19a",
       "created_at": "29/4/2024 17:33:08.825",
@@ -2248,7 +2260,7 @@
       "order":0,
       "updated_at": null
     },
-    
+
     {
       "_id": "6606fb55259adb7a4a09c408",
       "created_at": null,
@@ -2275,8 +2287,8 @@
     },
 
 
-    
-    
+
+
     {
       "_id": "6606fb55259adb7a4a09c22c",
       "created_at": null,

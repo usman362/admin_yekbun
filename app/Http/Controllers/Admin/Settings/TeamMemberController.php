@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class TeamMemberController extends Controller
-{ 
+{
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +25,7 @@ class TeamMemberController extends Controller
      */
     public function index()
     {
-        $users = User::where('status', 1);
+        $users = User::where('status', 1)->where('user_type','team_member');
         $users = $users->with('roles')->get();
         $roles = Role::all();
         return view("content.settings.team_members.index", compact("users", "roles"));
@@ -51,8 +51,9 @@ class TeamMemberController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         $validated['status'] = (int)$request->status;
         $validated['role_id'] = $validated['roles'];
+        $validated['user_type'] = 'team_member';
 
-        
+
 
         try {
             $user = User::create($validated);
@@ -81,6 +82,7 @@ class TeamMemberController extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
         $validated['role_id'] = $request->roles;
+        $validated['user_type'] = 'team_member';
         $user->fill($validated);
         try {
             $user->save();
@@ -100,11 +102,11 @@ class TeamMemberController extends Controller
     {
         $user = User::find($id);
         $imagePath = public_path('storage/' . $user->image);
-        
+
         if ($user->image != NULL && $imagePath && file_exists($imagePath)){
             unlink($imagePath);
         }
-            
+
 
         $objectId = new \MongoDB\BSON\ObjectId($id);
         User::where('_id', $objectId)->delete();

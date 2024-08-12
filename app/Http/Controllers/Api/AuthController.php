@@ -51,6 +51,8 @@ class AuthController extends Controller
 
   public function signup(Request $request)
   {
+
+    try {
     $validatedData = $request->validate([
       'fname' => 'required|max:100',
       'lname' => 'required|max:100',
@@ -95,7 +97,8 @@ class AuthController extends Controller
         'dob' => $request['dob'],
         'province' => $request['province'],
         'city' => $request['city'],
-        'phone' => $request['phone']
+        'phone' => $request['phone'],
+        'user_type' => 'users'
     ]);
 
     if ($request->has('image')) {
@@ -124,6 +127,12 @@ class AuthController extends Controller
         info("Error: " . $e->getMessage());
         return response()->json(['success' => false, 'message' => $e->getMessage()], 505);
       }
+    }
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'errors' => $e->getMessage(),
+        ], 422);
     }
   }
 
