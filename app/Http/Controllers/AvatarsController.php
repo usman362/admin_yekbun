@@ -7,6 +7,7 @@ use App\Models\Avatars_sources;
 use Illuminate\Http\Request;
 use App\Models\Language;
 use DateTime;
+use Auth;
 
 class AvatarsController extends Controller
 {
@@ -16,6 +17,14 @@ class AvatarsController extends Controller
     public function index()
     {
         //
+
+		if(Auth::user()->hasPermissionTo('avatars.read')) {
+			// continue for API
+		} else {
+			// response with error for API
+		}
+
+		die("");
 		
 		$avatars =  Avatars::orderBy('created_at', 'desc')
 				->take(10)
@@ -31,7 +40,10 @@ class AvatarsController extends Controller
 	public function manag_avatars($id = 0){
 		
 		$avatars =  Avatars::orderBy('created_at', 'desc')->get();
-				
+		
+		if(count($avatars) == 0){
+			return redirect()->route('avatars.index')->with('success','No Avatar is there.');
+		}
 		
 		return view('content.avatars.manag_avatars', [
 			'avatars' => $avatars, 'id' => $id

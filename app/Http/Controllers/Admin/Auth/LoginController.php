@@ -43,7 +43,12 @@ class LoginController extends Controller
                 ->log("<strong>" . Auth::user()->name . "</strong> logged in");
             $request->session()->regenerate();
             
-           
+/*
+            return redirect()->intended(
+              
+                route('admin_profile')
+            );
+*/           
 
             return redirect()->intended(
                 Auth::user()->can('dashboard.read')?

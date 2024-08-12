@@ -5,13 +5,15 @@ namespace App\Models;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Spatie\Permission\Contracts\Role as RoleContract;
 use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class Role extends Eloquent
 {
     // use HasPermissions;
+    use HasRoles;
 
     protected $connection = 'mongodb';
-    protected $collection = 'roles';
+    //protected $collection = 'roles';
 
     protected $fillable = [
         'name',

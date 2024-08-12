@@ -9,9 +9,13 @@ use App\Http\Requests\UpdateRoleRequest;
 use App\Models\Role;
 use App\Models\Permission;
 use MongoDB\BSON\ObjectId;
+//use Spatie\Permission\Traits\HasRoles;
+//use Spatie\Permission\Models\Role as SpatieRole;
+
 
 class RoleController extends Controller
 {
+    //use HasRoles;
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +24,20 @@ class RoleController extends Controller
     public function index()
     {
 
+      
+        
+      // $role = Role::first(); // or another way to retrieve the role
 
+    //   $role->syncPermissions(['dashboard.read']);
+        
+//$permissions = Permission::whereIn('name', ['dashboard.read'])->get();
+
+//print_r($permissions);
+
+
+//$role->syncPermissions($permissions);
+
+//die("27");
         $roles = Role::all();
         $permissions = Permission::all();
 
@@ -36,13 +53,47 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
+
+        $permissions = Permission::whereIn('name', ['dashboard.read'])->get();
+
+        
         $validated = $request->validated();
-        $role = Role::create($validated);
-        try {
+
+        $role = new Role();
+        $role->name = $request->input('name');
+        $role->permissions = $request->input('permissions');
+        $role->guard_name = $request->input('guard_name');
+        $role->save();
+
+
+
+//print_r($validated);
+//die("");
+
+       // $role = Role::create($validated);
+
+       // $permissions = [];
+        
+        
+      //  $post_permissions = $request->input('permissions');
+        
+        
+       // foreach ($post_permissions as $key => $val) {
+       //     $permissions[intval($val)] = intval($val);
+      //  }
+      //  $role->syncPermissions($permissions);
+
+//print_r($permissions);
+//die("");
+
+
+
+
+      //  try {
             $role->syncPermissions($validated['permissions']?? []);
-        } catch (\Throwable $e) {
+      //  } catch (\Throwable $e) {
                 return back()->with("success", "Role successfully created.");
-        }
+      //  }
 
     }
 

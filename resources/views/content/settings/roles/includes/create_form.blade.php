@@ -11,6 +11,9 @@
           <!-- Add role form -->
           <form action="{{ route('settings.team.roles.store') }}" id="addRoleForm" class="row g-3" method="post" enctype="multipart/form-data">
             @csrf
+
+            <input type="text" id="guard_name" requried value="web" name="guard_name" class="form-control" value="{{ old('guard_name') }}"  tabindex="-1" />
+            
             <div class="col-12 mb-4">
               <label class="form-label" for="inputRoleName">Role Name</label>
               <input type="text" id="inputRoleName" name="name" class="form-control" value="{{ old('name') }}" placeholder="Enter a role name" tabindex="-1" />
@@ -38,6 +41,9 @@
                       <td class="text-nowrap fw-semibold">{{ $permission->label?? ucfirst(str_replace('_', ' ', $permission->name)) }}</td>
                       <td>
                         <div class="d-flex">
+
+
+
                           @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
                           <div class="form-check me-3 me-lg-5">
                             <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermission->name }}" id="permission{{ $childPermission->id }}" />
