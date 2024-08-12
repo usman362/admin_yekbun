@@ -161,4 +161,26 @@
         @include('content.include.cards.createForm')
     </x-modal>
     <!-- /Modal -->
+    <script>
+        function confirmAction(event, callback) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?'
+                , text: "Are you sure you want to delete this?"
+                , icon: 'warning'
+                , showCancelButton: true
+                , confirmButtonText: 'Yes, delete it!'
+                , customClass: {
+                    confirmButton: 'btn btn-danger me-3'
+                    , cancelButton: 'btn btn-label-secondary'
+                }
+                , buttonsStyling: false
+            }).then(function(result) {
+                if (result.value) {
+                    callback();
+                }
+            });
+        }
+    
+    </script>
 @endsection
