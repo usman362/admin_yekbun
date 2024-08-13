@@ -862,8 +862,8 @@ Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->nam
         });
 });
 
-Route::get('stories_time', [SettingController::class, 'storage_setting']);
-
+ Route::get('stories_time', [SettingController::class, 'storage_setting']);
+Route::post('/story-time', [SettingController::class, 'store'])->name('story.time.store');
 
 
 ?>

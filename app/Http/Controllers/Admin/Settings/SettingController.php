@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AppInfo;
+use App\Models\StoryTime;
 
 class SettingController extends Controller
 {
@@ -62,6 +63,27 @@ class SettingController extends Controller
     }
 
     public function storage_setting(){
-        return view('content.stories.story_time');
+        $storyTime = StoryTime::first(); 
+        return view('content.stories.story_time',compact('storyTime'));
    }
+   public function store(Request $request)
+   {
+       //dd($request->all());
+       $validated = $request->validate([
+           'length' => 'nullable|string|min:0|max:100',
+           'is_active' => 'nullable|string',
+       ]);
+//dd( $validated);
+       $storyTime = StoryTime::first(); // Assuming there's only one record
+       if ($storyTime) {
+           $storyTime->update($validated);
+       } else {
+           StoryTime::create($validated);
+       }
+//dd($storyTime);
+       return redirect()->back()->with('success', 'Story Time updated successfully!');
+   }
+
+
+ 
 }
