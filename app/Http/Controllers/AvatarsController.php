@@ -19,6 +19,9 @@ class AvatarsController extends Controller
         //
 
 		
+
+
+		
 		$avatars =  Avatars::orderBy('created_at', 'desc')
 				->take(10)
 				->get();

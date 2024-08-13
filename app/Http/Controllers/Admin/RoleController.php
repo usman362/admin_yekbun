@@ -25,10 +25,11 @@ class RoleController extends Controller
     public function index()
     {
 
-      
+        //$role = Role::first();
+       // $role->givePermissionTo('dashboard.read');
         
-     //  $role = Role::first(); // or another way to retrieve the role
-
+        
+   // die("");
 //$permissions = Permission::whereIn('name', ['dashboard.read'])->first();
 
 
