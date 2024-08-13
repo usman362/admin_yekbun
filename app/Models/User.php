@@ -115,6 +115,25 @@ use Jenssegers\Mongodb\Auth\User as Authenticatable;
         return $this->hasMany(FanPage::class, 'user_id', 'id');
     }
 
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, null, 'user_ids', 'role_ids');
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, null, 'user_ids', 'permission_ids');
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->permissions()->where('name', $permission)->exists() ||
+               $this->roles()->whereHas('permissions', function ($query) use ($permission) {
+                   $query->where('name', $permission);
+               })->exists();
+    }
+
     /**
      * Write code on Method
      *

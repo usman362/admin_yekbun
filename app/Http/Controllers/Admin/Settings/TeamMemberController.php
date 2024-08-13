@@ -53,7 +53,7 @@ class TeamMemberController extends Controller
         $validated['role_id'] = $validated['roles'];
         $validated['user_type'] = 'team_member';
 
-
+ 
 
         try {
             $user = User::create($validated);

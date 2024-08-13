@@ -18,13 +18,6 @@ class AvatarsController extends Controller
     {
         //
 
-		if(Auth::user()->hasPermissionTo('avatars.read')) {
-			// continue for API
-		} else {
-			// response with error for API
-		}
-
-		die("");
 		
 		$avatars =  Avatars::orderBy('created_at', 'desc')
 				->take(10)

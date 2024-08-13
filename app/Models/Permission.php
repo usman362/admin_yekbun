@@ -5,13 +5,14 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Spatie\Permission\Contracts\Permission as PermissionContract;
 use Spatie\Permission\Traits\HasRoles;
 
-class Permission extends Eloquent implements PermissionContract
+//class Permission extends Eloquent implements PermissionContract
+class Permission extends Eloquent 
 {
     use HasRoles;
 
     protected $connection = 'mongodb';
     protected $collection = 'permissions';
-
+ 
 
 
     /**
@@ -34,6 +35,11 @@ class Permission extends Eloquent implements PermissionContract
         }
 
         return $permission;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, null, 'permission_ids', 'role_ids');
     }
 
     /**

@@ -11,6 +11,7 @@ use App\Models\Permission;
 use MongoDB\BSON\ObjectId;
 //use Spatie\Permission\Traits\HasRoles;
 //use Spatie\Permission\Models\Role as SpatieRole;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 
 class RoleController extends Controller
@@ -26,7 +27,15 @@ class RoleController extends Controller
 
       
         
-      // $role = Role::first(); // or another way to retrieve the role
+     //  $role = Role::first(); // or another way to retrieve the role
+
+//$permissions = Permission::whereIn('name', ['dashboard.read'])->first();
+
+
+
+
+// Manually sync permissions
+//$role->permissions()->sync($permissions->pluck('_id'));
 
     //   $role->syncPermissions(['dashboard.read']);
         
@@ -72,16 +81,16 @@ class RoleController extends Controller
 
        // $role = Role::create($validated);
 
-       // $permissions = [];
+        $permissions = [];
         
         
-      //  $post_permissions = $request->input('permissions');
+        $post_permissions = $request->input('permissions');
         
         
-       // foreach ($post_permissions as $key => $val) {
-       //     $permissions[intval($val)] = intval($val);
-      //  }
-      //  $role->syncPermissions($permissions);
+        foreach ($post_permissions as $key => $val) {
+            $permissions[intval($val)] = intval($val);
+        }
+       // $role->syncPermissions($permissions);
 
 //print_r($permissions);
 //die("");
@@ -90,7 +99,7 @@ class RoleController extends Controller
 
 
       //  try {
-            $role->syncPermissions($validated['permissions']?? []);
+          //  $role->syncPermissions($validated['permissions']?? []);
       //  } catch (\Throwable $e) {
                 return back()->with("success", "Role successfully created.");
       //  }

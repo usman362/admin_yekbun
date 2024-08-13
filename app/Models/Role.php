@@ -9,11 +9,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Role extends Eloquent
 {
-    // use HasPermissions;
+     use HasPermissions;
     use HasRoles;
 
     protected $connection = 'mongodb';
-    //protected $collection = 'roles';
+    protected $collection = 'roles';
 
     protected $fillable = [
         'name',
@@ -28,14 +28,22 @@ class Role extends Eloquent
             return [];
         }
     }
+
+    public function permissions() {
+        return $this->belongsToMany(Permission::class, null, 'role_ids', 'permission_ids');
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class, null, 'role_id', 'user_ids');
     }
+    /*
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, null, 'id', 'permissions');
     }
+        */
+        
     /**
      * Find a role by its name.
      *
