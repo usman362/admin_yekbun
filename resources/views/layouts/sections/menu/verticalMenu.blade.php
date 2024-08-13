@@ -1023,7 +1023,7 @@ $configData = Helper::appClasses();
 
       <ul class="menu-sub">
 
-        <li class="menu-item {{ Request::is('cards*') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::is('list-card') ? 'active' : '' }}">
           <a href="{{ route('list.cards') }}" class="menu-link">
             <div>Add / Manage Cards</div>
           </a>
