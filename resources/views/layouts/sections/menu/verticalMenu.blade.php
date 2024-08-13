@@ -1013,9 +1013,8 @@ $configData = Helper::appClasses();
 
 
 
-
-    <li class="menu-item {{ Request::is('settings/stories/*') ? 'active open' : '' }} {{ Request::is('story/*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <li class="menu-item {{ Request::is('story/*') || Request::is('list-cards*') ? 'active open' : '' }}">
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bxs-videos"></i>
         <div>Stories</div>
       </a>
@@ -1023,11 +1022,12 @@ $configData = Helper::appClasses();
 
       <ul class="menu-sub">
 
-        <li class="menu-item {{ Request::is('list-card') ? 'active' : '' }}">
+      <li class="menu-item {{ Request::is('list-cards*') ? 'active' : '' }}">
           <a href="{{ route('list.cards') }}" class="menu-link">
             <div>Add / Manage Cards</div>
           </a>
         </li>
+        
 
         <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
           <a href="{{ url('story/ManageStories') }}" class="menu-link">
