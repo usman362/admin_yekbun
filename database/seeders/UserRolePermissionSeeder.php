@@ -5,8 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User; // Assuming you have a User model
-use Maklad\Permission\Models\Role;
-use Maklad\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 
 class UserRolePermissionSeeder extends Seeder
@@ -14,13 +14,13 @@ class UserRolePermissionSeeder extends Seeder
     public function run()
     {
       // Create a permission
-      $viewUsersPermission = Permission::create([
+      $viewUsersPermission = Permission::firstOrCreate([
         'name' => 'all',
         'guard_name' => 'web', // Optional, depends on your configuration
       ]);
 
       // Create a role and assign permission
-      $adminRole = Role::create([
+      $adminRole = Role::firstOrCreate([
         'name' => 'admin',
         'guard_name' => 'web', // Optional
       ]);

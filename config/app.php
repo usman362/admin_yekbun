@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+// use Maklad\Permission\Models\Permission;
 
 return [
 
@@ -180,6 +181,7 @@ return [
     Spatie\Permission\PermissionServiceProvider::class,
     Jorenvh\Share\Providers\ShareServiceProvider::class,
     Jenssegers\Mongodb\MongoDBServiceProvider::class,
+    // Maklad\Permission\PermissionServiceProvider::class,
     // ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
   ],
 

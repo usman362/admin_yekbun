@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
-use Maklad\Permission\Models\Permission;
-
+// use Maklad\Permission\Models\Permission;
+use Spatie\Permission\Models\Permission;
 class UserRolesController extends Controller
 {
     public function standard()
