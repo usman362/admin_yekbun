@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\Story;
+use App\Models\FeedReason;
+use App\Models\DeletionCards;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -182,10 +184,44 @@ class StoryController extends Controller
         ];
     }
     public function ManageStories(){
-       return view('content.stories.ManageStories');
+        $cards=Cards::get();
+       return view('content.stories.ManageStories',compact('cards'));
     }
+ 
     
-    
+    public function deleteCard(Request $request, $id)
+{
+    //dd($request->all()); 
+    $card = Cards::find($id);
+    if (!$card) {
+        return redirect()->back()->with('error', 'Card not found.');
+    }
+
+    // Fetch the reason from the request
+    $reasonId = $request->input('reason');
+    $reasonTitle = $request->input('reason_title');
+    $reason_description = $request->input('reason_description');
+
+    $reason = FeedReason::find($reasonId);
+
+    if (!$reason) {
+        return redirect()->back()->with('error', 'Reason not found.');
+    }
+
+    // Store the deletion log with reason and additional details
+    DeletionCards::create([
+        'card_id' => $id,
+        'reason_id' => $reasonId,
+        'reason_title' => $reasonTitle, // Store reason title
+        'reason_description' => $reason_description,   // Store reason text
+    ]);
+
+    // Delete the card
+    $card->delete();
+
+    return redirect()->back()->with('success', 'Card deleted successfully.');
+}
+
      public function ManageStoriestwo(){
        return view('content.stories.ReportedStories');
     }
