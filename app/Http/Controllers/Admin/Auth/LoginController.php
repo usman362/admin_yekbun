@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Permission;
+// use App\Models\Role;
+// use App\Models\Permission;
+// use App\Models\User;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class LoginController extends Controller
 {
     public function index()
@@ -24,8 +28,8 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        (int)$credentials['is_admin_user'] = 1;
-        (int)$credentials['status'] = 1;
+        $credentials['is_admin_user'] = 1;
+        $credentials['status'] = 1;
         if (Auth::attempt($credentials, true)) {
 
             if (Auth::user()->enable_2fa) {
@@ -33,22 +37,13 @@ class LoginController extends Controller
                 return redirect()->route('2fa.index');
             }
 
-            $permission = Permission::where('name', 'dashboard.read')->first();
-
-
-           
- 
             activity()
                 ->event('logged_in')
                 ->log("<strong>" . Auth::user()->name . "</strong> logged in");
             $request->session()->regenerate();
-            
-/*
-            return redirect()->intended(
-              
-                route('admin_profile')
-            );
-*/           
+                        
+            $user = Auth::user();
+dd($user);
 
             return redirect()->intended(
                 Auth::user()->can('dashboard.read')?
