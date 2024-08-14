@@ -104,6 +104,50 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
 @endsection
 
 @section('content')
+<div class="row g-4 mb-4">
+    <div class="col-sm-6  col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div class="content-left">
+                        <span>Total Category</span>
+                        <div class="d-flex align-items-end mt-2">
+                            <h4 class="mb-0 me-2">21,459</h4>
+                            <small class="text-success">(+29%)</small>
+                        </div>
+                        <small>Last week analytics</small>
+                    </div>
+                    <span class="badge bg-label-primary rounded p-2">
+                        <i class="bx bx-user bx-sm"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div class="content-left">
+                        <span>Total Vote</span>
+                        <div class="d-flex align-items-end mt-2">
+                            <h4 class="mb-0 me-2">4,567</h4>
+                            <small class="text-success">(+18%)</small>
+                        </div>
+                        <small>Last week analytics </small>
+                    </div>
+                    <span class="badge bg-label-danger rounded p-2">
+                        <i class="bx bx-user-plus bx-sm"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@php
+   
+$user=App\Models\User::get();
+@endphp
     <div class="row g-4 mb-4">
         @foreach ($cards as $card)
             <div class="col-lg-3">
@@ -112,6 +156,10 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="card-heading justify-content-between">
                             <div class="user-block">
                                 <div class="user-info">
+                                 
+                                    {{-- <img id="viewer"
+                                    onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
+                                    class="avatar-img" src="{{ asset('storage/' . auth()->user()->image) }}" alt="Image"> --}}
                                     <span class="d-flex"><a href="#">{{ Auth::user()->name }}</a></span>
                                     <span class="time">{{ \Carbon\Carbon::parse($card->created_at)->format('D d M g:i a') }}</span>
                                 </div>
@@ -221,3 +269,4 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
      
 
 @endsection
+
