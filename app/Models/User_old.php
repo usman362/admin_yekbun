@@ -7,17 +7,16 @@ use Exception;
 use App\Mail\SendCodeMail;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
-// use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
-use Maklad\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable  implements MustVerifyEmail
+    class User extends Authenticatable  implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, CausesActivity, LogsActivity;
 
@@ -124,24 +123,11 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     public function permissions()
     {
-        
         return $this->belongsToMany(Permission::class, null, 'user_ids', 'permission_ids');
     }
 
-    public function before(User $user, string $ability): bool|null
-{
-
-    
-    if ($user->hasRole('Super Admin')) {
-        return true;
-    }
- 
-    return null; // see the note above in Gate::before about why null must be returned here.
-}
-
     public function hasPermission($permission)
     {
-       
         return $this->permissions()->where('name', $permission)->exists() ||
                $this->roles()->whereHas('permissions', function ($query) use ($permission) {
                    $query->where('name', $permission);

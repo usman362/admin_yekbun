@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Permission;
+use Maklad\Permission\Models\Role;
+use Maklad\Permission\Models\Permission;
 
 class LoginController extends Controller
 {
@@ -33,28 +34,36 @@ class LoginController extends Controller
                 return redirect()->route('2fa.index');
             }
 
-            $permission = Permission::where('name', 'dashboard.read')->first();
-
-
-           
- 
             activity()
                 ->event('logged_in')
                 ->log("<strong>" . Auth::user()->name . "</strong> logged in");
             $request->session()->regenerate();
-            
-/*
-            return redirect()->intended(
-              
-                route('admin_profile')
-            );
-*/           
 
-            return redirect()->intended(
-                Auth::user()->can('dashboard.read')?
-                route('dashboard-analytics'):
-                route('admin_profile')
-            );
+            if(isset(Auth::user()->is_superadmin) && Auth::user()->is_superadmin == 1){
+
+                return redirect()->intended(
+                    route('dashboard-analytics')
+                );
+
+            }else{
+
+                $permissions = Role::find(Auth::user()->role_id)->permission;
+                $role = Role::find(Auth::user()->role_id);
+                foreach ($permissions as $permission) {
+                    $role->givePermissionTo($permission);
+                }
+                
+                Auth::user()->assignRole($role);
+
+                return redirect()->intended(
+                    Auth::user()->can('dashboard.read')?
+                    route('dashboard-analytics'):
+                    route('admin_profile')
+                );
+
+            }
+  
+            
         }
 
         return back()->withInput(request()->only(['email', 'password']))->with('error', "Invalid Credentials!");

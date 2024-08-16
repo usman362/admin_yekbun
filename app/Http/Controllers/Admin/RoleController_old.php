@@ -71,7 +71,7 @@ class RoleController extends Controller
 
         $role = new Role();
         $role->name = $request->input('name');
-        $role->permission = $request->input('permissions');
+        $role->permissions = $request->input('permissions');
         $role->guard_name = $request->input('guard_name');
         $role->save();
 
@@ -127,7 +127,7 @@ class RoleController extends Controller
         if ($role->name === 'Super Admin')
             abort(403);
         $role->name = $validated['name'];
-        $role->permission = $permissions;
+        $role->permissions = $permissions;
         $role->save();
 
         session(['permissions' => $permissions]);

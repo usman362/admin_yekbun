@@ -15,8 +15,6 @@ use App\Http\Requests\UpdateTeamMemberRequest;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-// use Maklad\Permission\Models\Role;
-use Maklad\Permission\Models\Permission;
 
 class TeamMemberController extends Controller
 {
@@ -55,21 +53,10 @@ class TeamMemberController extends Controller
         $validated['role_id'] = $validated['roles'];
         $validated['user_type'] = 'team_member';
 
-        // $newUserPermission = Permission::firstOrCreate([
-        //     'name' => 'all',
-        //     'guard_name' => 'web', // Optional, depends on your configuration
-        //   ]);
-
-        // $role = Role::firstOrCreate([
-        //     'name' => 'admin',
-        //     'guard_name' => 'web', // Optional
-        //   ]);
-        $role = Role::find($validated['role_id']);
-        // $role->givePermissionTo($newUserPermission);
+ 
 
         try {
             $user = User::create($validated);
-            $user->assignRole($role);
         } catch (\Throwable $e) {
             return back()->with("success", "Team member successfully added.");
         }
