@@ -619,6 +619,7 @@ Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.card
 Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
 Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.delete');
 
+Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
 
 
 
