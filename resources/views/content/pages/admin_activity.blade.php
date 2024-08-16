@@ -5171,7 +5171,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             $('.usertypepicker').click(function() {
                 $('.usertypepicker').removeClass('active');
                 $(this).addClass('active');
-                $('[name="user_type"]').val($(this).attr('data-val'));
+                // $('[name="user_type"]').val($(this).attr('data-val'));
                 return false;
             });
 

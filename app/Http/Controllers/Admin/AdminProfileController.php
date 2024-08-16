@@ -123,8 +123,21 @@ class AdminProfileController extends Controller
 
     public function store_news(Request $request)
     {
-        // $request->dd();
-        $news = News::create($request->all());
+        $request->dd();
+        $news = News::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_type' => $request->user_type,
+            'image' => $request->image,
+            'image_type' => (int)$request->image_type,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'comments' => (int)$request->comments ?? 0,
+            'voice_comments' => (int)$request->voice_comments ?? 0,
+            'share' => (int)$request->share ?? 0,
+            'emotion' => (int)$request->emotion ?? 0,
+            'status' => $request->status,
+        ]);
         return back();
     }
 
