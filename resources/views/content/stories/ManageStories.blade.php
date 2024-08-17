@@ -155,20 +155,25 @@ $user=App\Models\User::get();
                     <div class="content-wrap">
                         <div class="card-heading justify-content-between">
                             <div class="user-block">
-                                <div class="user-info">
-                                 
-                                    {{-- <img id="viewer"
-                                    onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
-                                    class="avatar-img" src="{{ asset('storage/' . auth()->user()->image) }}" alt="Image"> --}}
-                                    <span class="d-flex"><a href="#">{{ Auth::user()->name }}</a></span>
-                                    <span class="time">{{ \Carbon\Carbon::parse($card->created_at)->format('D d M g:i a') }}</span>
-                                </div>
+                                <div class="user-info" style="display: flex; align-items: center;">
+                                    <div>
+                                      <img id="viewer"
+                                           onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
+                                           class="avatar-img" src="{{ asset('storage/' . auth()->user()->image) }}" 
+                                           alt="Image" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+                                    </div>
+                                    <div>
+                                      <span class="d-flex"><a href="#">{{ Auth::user()->name }}</a></span>
+                                      <span class="time">{{ \Carbon\Carbon::parse($card->created_at)->format('D d M g:i a') }}</span>
+                                    </div>
+                                  </div>
+                                  
                             </div>
                             <div class="d-flex justify-content-end align-item-end">
                                 <form action="{{ route('list.cards.delete', $card->id) }}" method="post" class="d-inline">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="button" onclick="confirmAction(event, '{{ $card->id }}')" class="btn btn-sm btn-icon text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
+                                    <button type="button" onclick="confirmAction(event, '{{ $card->id }}')" class="btn btn-sm btn-icon  " data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </form>
@@ -269,4 +274,3 @@ $user=App\Models\User::get();
      
 
 @endsection
-
