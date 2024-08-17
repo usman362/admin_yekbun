@@ -20,6 +20,10 @@ class CustomPermissionMiddleware extends PermissionMiddleware
     {
         $user = $request->user();
 
+        if(isset($user->is_superadmin) && $user->is_superadmin == 1){
+            return $next($request);
+        }
+
         // Bypass permission check if the user has the Super Admin role
         if ($user->hasRole('Super Admin')) {
             return $next($request);

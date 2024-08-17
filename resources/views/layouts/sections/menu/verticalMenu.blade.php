@@ -62,6 +62,8 @@ $configData = Helper::appClasses();
   <div class="menu-inner-shadow" style="display: none;"></div>
 
   <ul class="menu-inner py-1 ps ps--active-y">
+    
+  @can('dashboard.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Dashboard</span>
     </li>
@@ -71,6 +73,9 @@ $configData = Helper::appClasses();
         <div>Dashboard</div>
       </a>
     </li>
+  @endcan
+  
+  @can('users.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Customers</span>
     </li>
@@ -126,12 +131,17 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+    @endcan
+    @can('flaggedUser.read')
     <li class="menu-item {{ Request::is('reports/flagged-users') ? 'active ' : '' }}">
         <a href="{{url('reports/flagged-users')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
           <div>Flagged User</div>
         </a>
       </li>
+      @endcan
+
+      @can('channels.read')
       <li class="menu-item {{ Request::is('Channels/') ? 'active open' : '' }} {{ Request::is('channelrequest') ? 'active open' : '' }} {{ Request::is('managechannel') ? 'active open' : '' }} {{ Request::is('settings/') ? 'active open' : '' }} {{ Request::is('channels/reason') ? 'active open' : '' }} {{ Request::is('channels/prefix') ? 'active open' : '' }} {{ Request::is('channels/policy_terms') ? 'active open' : '' }} {{ Request::is('channeladmin') ? 'active open' : '' }} {{ Request::is('addmanagechannel') ? 'active open' : '' }}">
   <a href="javascript:void(0);" class="menu-link menu-toggle">
     <i class="menu-icon tf-icons bx bx-file"></i>
@@ -186,15 +196,21 @@ $configData = Helper::appClasses();
 </li>
 
 </li>
+
+@endcan
+@can('flaggedchannels.read')
 <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active ' : '' }}">
 <a href="{{url('/flaggedfanpage')}}" class="menu-link">
 <i class="menu-icon tf-icons bx bx-flag"></i>
 <div>Flagged Channels</div>
 </a>
 </li>
+@endcan
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">E-Commerce</span>
     </li>
+
+    @can('onlineshop.read')
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-store"></i>
@@ -326,12 +342,12 @@ $configData = Helper::appClasses();
       </ul>
     </li>
 
+    @endcan
 
 
 
 
-
-
+    @can('bazar.read')
 
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -415,13 +431,13 @@ $configData = Helper::appClasses();
       </ul>
     </li>
 
+    @endcan
 
 
 
 
 
-
-
+    @can('serviceportal.read')
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-intersect"></i>
@@ -493,6 +509,10 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+
+    @endcan
+    
+    @can('advertisment.read')
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-intersect"></i>
@@ -501,7 +521,7 @@ $configData = Helper::appClasses();
 
 
     </li>
-
+    @endcan
 
 
 
@@ -513,7 +533,7 @@ $configData = Helper::appClasses();
 
 
 
-
+    @can('feeds.read')
 
 
 
@@ -632,11 +652,11 @@ $configData = Helper::appClasses();
     </li>
 
 
+    @endcan
 
 
 
-
-
+    @can('videos.read')
 
     <li class="menu-item {{ Request::is('videos/*') ? 'active open' : ''}} {{ Request::is('manage_video') ? 'active open' : ''}}  {{ Request::is('video_request') ? 'active open' : '' }} {{ Request::is('reason') ? 'active open' : '' }} {{ Request::is('prefix') ? 'active open' : '' }} {{ Request::is('policyterms') ? 'active open' : '' }}">
 
@@ -720,11 +740,11 @@ $configData = Helper::appClasses();
     </li>
 
 
+    @endcan
 
 
 
-
-
+    @can('events.read')
 
     <li class="menu-item {{ Request::is('events/*') ? 'active open' : '' }} {{ Request::is('events') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -814,13 +834,13 @@ $configData = Helper::appClasses();
       </ul>
     </li>
 
+    @endcan
 
 
 
 
 
-
-
+    @can('wishesthanks.read')
     <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }} ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-credit-card"></i>
@@ -1008,11 +1028,11 @@ $configData = Helper::appClasses();
     </li>
 
 
+    @endcan
 
 
 
-
-
+    @can('stories.read')
     <li class="menu-item {{ Request::is('story/*') || Request::is('list-cards*') ? 'active open' : '' }}">
       <a href="javascript:void(0)" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bxs-videos"></i>
@@ -1106,6 +1126,9 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+
+    @endcan
+    @can('reels.read')
     <li class="menu-item {{ Request::is('settings/reels/*') ? 'active open' : '' }} {{ Request::is('reel/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bxs-videos"></i>
@@ -1209,13 +1232,13 @@ $configData = Helper::appClasses();
     </li>
 
 
+    @endcan
 
 
 
 
 
-
-
+    @can('music.read')
     <li class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('album') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-music"></i>
@@ -1265,12 +1288,12 @@ $configData = Helper::appClasses();
     </li>
 
 
+    @endcan
 
 
 
 
-
-
+    @can('voting.read')
     <li class="menu-item {{ Request::is('vote-category') ? 'active open' : '' }} {{ Request::is('vote') ? 'active open' : '' }} {{ Request::is('settings/voting/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-sort"></i>
@@ -1304,14 +1327,14 @@ $configData = Helper::appClasses();
 
       </ul>
     </li>
+    @endcan
 
 
 
 
 
 
-
-
+    @can('history.read')
     <li class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-history"></i>
@@ -1364,14 +1387,14 @@ $configData = Helper::appClasses();
         </li> --}}
       </ul>
     </li>
+    @endcan
 
 
 
 
 
 
-
-
+    @can('donation.read')
     <li class="menu-item {{ Request::is('donations/*') ? 'active open' : '' }} {{ Request::is('donations') ? 'active open' : '' }}{{ Request::is('settings/donation/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-donate-heart"></i>
@@ -1402,7 +1425,7 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
-
+    @endcan
 
 
 
@@ -1676,7 +1699,7 @@ $configData = Helper::appClasses();
 
 
 
-
+    
 
     <li class="menu-item {{ Request::is('movie/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -1991,12 +2014,15 @@ $configData = Helper::appClasses();
         <div>Portal Notifications</div>
       </a>
     </li>
+    @can('addpolicy.read')
     <li class="menu-item {{ Request::is('app-policy') ? 'active' : '' }}">
       <a href="{{url('/app-policy')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-list-ul"></i>
         <div>App Policy</div>
       </a>
     </li>
+    @endcan
+    @can('manageorigin.read')
     <li class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-map"></i>
@@ -2020,6 +2046,8 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+    @endcan
+    
     <li class="menu-item {{ Request::is('yekbun-location/countries') ? 'active' : '' }}">
         <a href="{{url('/settings/countrieslist')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
@@ -2032,13 +2060,16 @@ $configData = Helper::appClasses();
         <div>Add Popup</div>
       </a>
     </li>
+    @can('manageorigin.read')
     <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
       <a href="{{url('/settings/app-setting/app-info')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-info-square"></i>
         <div>App Info</div>
       </a>
     </li>
+    @endcan
 
+    @can('addringtone.read')
     <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active open' : (Request::is('settings/app-setting/call-ringtone') ? 'active open' : '') }}" style="">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-devices"></i>
@@ -2057,6 +2088,7 @@ $configData = Helper::appClasses();
             </li>
         </ul>
     </li>
+    @endcan
 
     <li class="menu-item {{ Request::is('settings/app-setting/maintainance') ? 'active' : '' }}">
       <a href="{{url('/settings/app-setting/maintainance')}}" class="menu-link">
@@ -2074,12 +2106,14 @@ $configData = Helper::appClasses();
         <div>System Log</div>
       </a>
     </li>
+    @can('languages.read')
     <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
       <a href="{{ url('/language') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-transfer"></i>
         <div>Languages</div>
       </a>
     </li>
+    @endcan
     <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">
       <a href="{{ url('/app/ftp/list') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-network-chart"></i>

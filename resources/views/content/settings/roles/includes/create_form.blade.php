@@ -12,7 +12,7 @@
           <form action="{{ route('settings.team.roles.store') }}" id="addRoleForm" class="row g-3" method="post" enctype="multipart/form-data">
             @csrf
 
-            <input type="text" id="guard_name" requried value="web" name="guard_name" class="form-control" value="{{ old('guard_name') }}"  tabindex="-1" />
+            <input type="hidden" id="guard_name" requried value="web" name="guard_name" class="form-control" value="{{ old('guard_name') }}"  tabindex="-1" />
             
             <div class="col-12 mb-4">
               <label class="form-label" for="inputRoleName">Role Name</label>
