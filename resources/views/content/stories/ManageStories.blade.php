@@ -144,7 +144,10 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
         </div>
     </div>
 </div>
-
+@php
+   
+$user=App\Models\User::get();
+@endphp
     <div class="row g-4 mb-4">
         @foreach ($cards as $card)
             <div class="col-lg-3">
