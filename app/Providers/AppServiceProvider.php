@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+//use Illuminate\Support\Facades\Gate;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +26,17 @@ class AppServiceProvider extends ServiceProvider
    * @return void
    */
  
-public function boot()
+public function boot(GateContract $gate)
 {
+
+
+  $gate->before(function ($user, $ability) {
+   
+    if ($user->hasRole('Super Admin')) {
+        return true;
+    }
+});
+
     Validator::extend('max_image_dimensions', function ($attribute, $value, $parameters, $validator) {
     
         $maxWidth = $parameters[0] ?? null;

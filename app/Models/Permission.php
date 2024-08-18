@@ -26,6 +26,7 @@ class Permission extends Eloquent
      */
     public static function findByName(string $name, $guardName = null): PermissionContract
     {
+        
         $guardName = $guardName ?? config('auth.defaults.guard');
 
         $permission = static::where('name', $name)->where('guard_name', $guardName)->first();
@@ -39,6 +40,7 @@ class Permission extends Eloquent
 
     public function roles()
     {
+        
         return $this->belongsToMany(Role::class, null, 'permission_ids', 'role_ids');
     }
 
@@ -53,6 +55,7 @@ class Permission extends Eloquent
      */
     public static function findById($id, $guardName = null): PermissionContract
     {
+        
         $guardName = $guardName ?? config('auth.defaults.guard');
 
         $permission = static::where('_id', $id)->where('guard_name', $guardName)->first();
@@ -73,6 +76,7 @@ class Permission extends Eloquent
      */
     public static function findOrCreate(string $name, $guardName = null): PermissionContract
     {
+        
         $guardName = $guardName ?? config('auth.defaults.guard');
 
         $permission = static::where('name', $name)->where('guard_name', $guardName)->first();

@@ -7,6 +7,8 @@ use Spatie\Permission\Contracts\Role as RoleContract;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
+
+
 class Role extends Eloquent
 {
      use HasPermissions;
@@ -22,6 +24,7 @@ class Role extends Eloquent
     ];
     public function getPermissionsAttribute()
     {
+        
         if (array_key_exists('permissions', $this->attributes)) {
             return $this->attributes['permissions'];
         } else {
@@ -30,11 +33,13 @@ class Role extends Eloquent
     }
 
     public function permissions() {
+        
         return $this->belongsToMany(Permission::class, null, 'role_ids', 'permission_ids');
     }
 
     public function users()
     {
+        
         return $this->belongsToMany(User::class, null, 'role_id', 'user_ids');
     }
     /*
@@ -55,6 +60,7 @@ class Role extends Eloquent
      */
     public static function findByName(string $name, $guardName = null): RoleContract
     {
+        
         $guardName = $guardName ?? config('auth.defaults.guard');
 
         $role = static::where('name', $name)->where('guard_name', $guardName)->first();
@@ -77,6 +83,7 @@ class Role extends Eloquent
      */
     public static function findById($id, $guardName = null): RoleContract
     {
+        
         $guardName = $guardName ?? config('auth.defaults.guard');
 
         $role = static::where('_id', $id)->where('guard_name', $guardName)->first();
@@ -97,6 +104,7 @@ class Role extends Eloquent
      */
     public static function findOrCreate(string $name, $guardName = null): RoleContract
     {
+        
         $guardName = $guardName ?? config('auth.defaults.guard');
 
         $role = static::where('name', $name)->where('guard_name', $guardName)->first();
@@ -115,6 +123,7 @@ class Role extends Eloquent
      */
     public function getDefaultGuardName(): string
     {
+        
         return $this->guard_name ?? config('auth.defaults.guard');
     }
 
@@ -125,6 +134,7 @@ class Role extends Eloquent
      */
     public function hasPermissionTo($search, $permissions): bool
     {
+       
         if ($permissions === $search) {
             return true;
         } elseif (is_array($permissions) && in_array($search, $permissions)) {

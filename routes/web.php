@@ -154,14 +154,23 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
 
-Route::resource('/avatars', AvatarsController::class);
-Route::post('/avatars/create', [AvatarsController::class, 'store']);
-Route::post('/avatars/{id}/edit', [AvatarsController::class, 'update']);
-Route::get('/manage-avatars/', [AvatarsController::class, 'manag_avatars']);
-Route::get('/manage-avatars/{id}', [AvatarsController::class, 'manag_avatars']);
-Route::get('/get-avatars/{id}', [AvatarsController::class, 'get_avatars']);
 
-Route::get('/test-avatars', [AvatarsController::class, 'testavatar']);
+
+
+Route::group(['middleware' => 'permission:avatars.read'], function () {
+
+    //Route::resource('/avatars', AvatarsController::class);
+    Route::post('/avatars/create', [AvatarsController::class, 'store']);
+    Route::post('/avatars/{id}/edit', [AvatarsController::class, 'update']);
+    Route::get('/manage-avatars/', [AvatarsController::class, 'manag_avatars']);
+    Route::get('/manage-avatars/{id}', [AvatarsController::class, 'manag_avatars']);
+    Route::get('/get-avatars/{id}', [AvatarsController::class, 'get_avatars']);
+    
+    Route::resource('/avatars', AvatarsController::class);
+    
+    Route::get('/test-avatars', [AvatarsController::class, 'testavatar']);
+    
+    });
 
 Route::resource('/settings/countrieslist', CountryLocationController::class);
 Route::post('/settings/countrieslist', [CountryLocationController::class, 'store']);

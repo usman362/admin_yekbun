@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-md-12">
                     <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
-                    <select class="form-control" name="roles" id="rolesInput">
+                    <select class="form-control" name="roles" id="rolesInput2">
                         @foreach($roles as $role)
                         <option value="{{$role->id}}" {{ $user->role_id == $role->id? 'selected': '' }}>{{$role->name}}</option>
                         @endforeach
