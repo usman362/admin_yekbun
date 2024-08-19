@@ -62,7 +62,7 @@ $configData = Helper::appClasses();
   <div class="menu-inner-shadow" style="display: none;"></div>
 
   <ul class="menu-inner py-1 ps ps--active-y">
-    
+
   @can('dashboard.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Dashboard</span>
@@ -74,7 +74,7 @@ $configData = Helper::appClasses();
       </a>
     </li>
   @endcan
-  
+
   @can('users.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Customers</span>
@@ -511,7 +511,7 @@ $configData = Helper::appClasses();
     </li>
 
     @endcan
-    
+
     @can('advertisment.read')
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -1047,7 +1047,7 @@ $configData = Helper::appClasses();
             <div>Add / Manage Cards</div>
           </a>
         </li>
-        
+
 
         <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
           <a href="{{ url('story/ManageStories') }}" class="menu-link">
@@ -1093,7 +1093,7 @@ $configData = Helper::appClasses();
 
 
 
-           
+
 
 
 
@@ -1105,7 +1105,7 @@ $configData = Helper::appClasses();
 
 
             </li>
-             
+
              <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
               <a href="{{url('/settings/stories/reasons ')}}" class="menu-link">
                 <div>Reasons</div>
@@ -1433,7 +1433,7 @@ $configData = Helper::appClasses();
 
 
     @can('avatars.read')
-    
+
     <li class="menu-item {{ Request::is('avatars/*') ? 'active open' : '' }}  {{ Request::is('manage-avatars') ? 'active open' : '' }} {{ Request::is('avatars') ? 'active open' : '' }}{{ Request::is('manage-avatars/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-bot"></i>
@@ -1699,7 +1699,7 @@ $configData = Helper::appClasses();
 
 
 
-    
+
 
     <li class="menu-item {{ Request::is('movie/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -2047,8 +2047,8 @@ $configData = Helper::appClasses();
       </ul>
     </li>
     @endcan
-    
-    <li class="menu-item {{ Request::is('yekbun-location/countries') ? 'active' : '' }}">
+
+    <li class="menu-item {{ Request::is('settings/countrieslist') ? 'active' : '' }}">
         <a href="{{url('/settings/countrieslist')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
           <div>Select Country</div>

@@ -24,7 +24,7 @@
     </script>
 
 
-<style>	
+<style>
 	.details{
 		background: #f3f3f3;
 	  	padding: 5px;
@@ -63,7 +63,7 @@
 
         <!-- Content -->
                   <div class="container-xxl flex-grow-1 container-p-y">
-            
+
             <div class="d-flex justify-content-between">
             <h4 class="fw-bold py-3 mb-4">
     <span class="text-muted fw-light">Settings /</span> Add / Manage Country
@@ -73,7 +73,7 @@
 
 
 
- 
+
 <!-- Category Model -->
 <div class="modal fade" id="createModal" aria-modal="true" role="dialog" >
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -120,20 +120,20 @@
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         <h5 class="m-0">Countries List</h5>
-                
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal_old"><i class="bx bx-plus me-0 me-sm-1"></i> Add Country</button>
+
+        {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal_old"><i class="bx bx-plus me-0 me-sm-1"></i> Add Country</button> --}}
             </div>
-       
-            
+
+
            <!-- <form method="post" action="{{url('searchlocation')}}">
             @csrf
 
             <input name="search" />
 </form>
 -->
-            
-            
-            
+
+
+
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead>
@@ -143,7 +143,7 @@
             <th>States</th>
             <th>Cities</th>
             <th>Total People</th>
-            
+
             <th>Options</th>
           </tr>
         </thead>
@@ -152,7 +152,7 @@
         @php
             $i=0;
         @endphp
-        	
+
             @foreach ($country_list as $cont)
                 @php
                     $i++;
@@ -168,27 +168,27 @@
                     <td>{{$cont->cities->count()}}</td>
 
                     <td>0</td>
-                    
-                    
-                    
+
+
+
                     <td>
 
 
 
-                    
+
                     	<a class="btn" href="#" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit"><i class="bx bx-edit"></i></a>
                         <i class="bx bx-trash me-1"></i>
-                        
-                   
-                        
+
+
+
                     </td>
-                
+
                 </tr>
-           
+
             @endforeach
-        
-                
-            
+
+
+
                 </tbody>
       </table>
     </div>
@@ -210,12 +210,12 @@
           </div>
           <!-- / Content -->
 
-        
+
           <div class="content-backdrop fade"></div>
         </div>
         <!--/ Content wrapper -->
-      
-      
+
+
         @section('page-script')
     <script>
         function confirmAction(event, callback) {
