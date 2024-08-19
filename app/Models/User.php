@@ -128,6 +128,11 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->belongsToMany(Permission::class, null, 'user_ids', 'permission_ids');
     }
 
+    //public function hasRole($role)
+//{
+ //   return $this->role === $role;  
+//}
+
     public function before(User $user, string $ability): bool|null
 {
 

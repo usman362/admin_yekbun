@@ -29,6 +29,7 @@ class CustomPermissionMiddleware extends PermissionMiddleware
             return $next($request);
         }
 
+        
         if (!$user->can($permission)) {
             // Redirect to dashboard if permission is not granted
             return redirect()->back()->with('error', 'You do not have permission to access this page.');

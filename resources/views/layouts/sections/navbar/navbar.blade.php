@@ -512,13 +512,15 @@ $navbarDetached = ($navbarDetached ?? '');
                                         </div>
                                     </a>
                                 </li>
+                                @can('admins.read')
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
+
                                 <li>
                                     <a class="dropdown-item" href="{{ route('admin_profile') }}">
                                         <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
+                                        <span class="align-middle">My Profile </span>
                                     </a>
                                 </li>
                                 <li>
@@ -527,6 +529,7 @@ $navbarDetached = ($navbarDetached ?? '');
                                         <span class="align-middle">Admin Activity</span>
                                     </a>
                                 </li>
+                                @endcan
                                 @if (Auth::check() && false && Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <li>
                                     <a class="dropdown-item" href="{{ route('api-tokens.index') }}">

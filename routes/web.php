@@ -203,13 +203,16 @@ Route::get('unauthorize',function(){
 })->name('unauthorize');
 
 // Admin Profiel
-Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile');
-Route::middleware('auth')->group(function () {
+Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('auth');
+
+Route::middleware('check.role:Super Admin')->group(function () {
     Route::get("/admin_activity", [AdminProfileController::class, 'admin_activity'])->name('admin_activity');
     Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
     Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
     Route::post("/admin_activity/feeds", [AdminProfileController::class, 'store_feeds'])->name('admin_activity.store_feeds');
 });
+
+
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
 Route::get('/admin/profile/security', [AdminProfileController::class, 'security'])->name('admin_profile.security');
 Route::get('/admin/profile/account', [AdminProfileController::class, 'account'])->name('admin_profile.account');
@@ -509,19 +512,11 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/series/{id}/thumbnail', [UploadMovieController::class, 'deleteImage'])->name('series.delete-thumbnail');
 
     //   Route::get('/currency', [CurrencyController::class, 'index'])->name('index');
-    Route::resource('/currency', CurrencyController::class);
+    
+    
 
-    Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
 
-    Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
 
-    Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
-
-    Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
-
-    Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
-
-    Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
 
     Route::resource('/language', LanguageController::class);
 
@@ -577,6 +572,27 @@ Route::post('/languages/keyword/section/donation', [LanguageController::class, '
             Route::resource('members', TeamMemberController::class);
             Route::resource('roles', RoleController::class);
         });
+
+
+
+        Route::middleware('check.role:Super Admin')->group(function ( )  use ($controller_path) {
+
+            Route::resource('/currency', CurrencyController::class);
+        
+            Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
+        
+            Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
+        
+            Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
+        
+            Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
+        
+            Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
+        
+            Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
+            
+
+
     Route::get('/app/user/storage', $controller_path . '\apps\popup\Popup@index')->name('user.storage');
     Route::get('flaggedfanpage', [FlaggedUserController::class, "flaggedfanpage"]);
     Route::prefix('reports')
@@ -801,6 +817,9 @@ Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list
     Route::post('/app/task/store', $controller_path . '\Task\Task@store')->name('app-task-store');
     Route::post('/app/task/update/{id}', $controller_path . '\Task\Task@update')->name('app-task-update');
     Route::delete('/app/task/delete/{id}', $controller_path . '\Task\Task@destroy')->name('app-task-delete');
+    
+});
+    
     Route::get('/upload_movies/{id}/{status}', [UploadMovieController::class, 'status'])->name('movies_status');
     Route::get('/movie_category/{id}/{status}', [UploadMovieCategoryController::class, 'status'])->name(
         'moviecat_status'

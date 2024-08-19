@@ -3,7 +3,7 @@ $configData = Helper::appClasses();
 @endphp
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" data-bg-class="bg-menu-theme"
   style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-
+ 
   <!-- ! Hide app brand if navbar-full -->
   <div class="app-brand demo ">
     <a href="{{url('/')}}" class="app-brand-link">
@@ -206,11 +206,13 @@ $configData = Helper::appClasses();
 </a>
 </li>
 @endcan
+
+@can('onlineshop.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">E-Commerce</span>
     </li>
 
-    @can('onlineshop.read')
+    
     <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-store"></i>
@@ -524,7 +526,7 @@ $configData = Helper::appClasses();
     @endcan
 
 
-
+    @can('feeds.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">User adds</span>
     </li>
@@ -533,7 +535,7 @@ $configData = Helper::appClasses();
 
 
 
-    @can('feeds.read')
+    
 
 
 
@@ -1468,10 +1470,11 @@ $configData = Helper::appClasses();
     @endcan
 
 
-
+    @can('admins.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Entertainment</span>
     </li>
+    @endcan
 
 
 
@@ -1699,7 +1702,7 @@ $configData = Helper::appClasses();
 
 
 
-
+    @can('movies.read')
 
     <li class="menu-item {{ Request::is('movie/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -1709,14 +1712,18 @@ $configData = Helper::appClasses();
 
 
       <ul class="menu-sub">
+      @can('addmangemovies.read')
         <li class="menu-item {{ Request::is('movie/upload-movies') ? 'active' : '' }}">
           <a href="{{ url('/movie/upload-movies') }}" class="menu-link">
             <div>Add/Manage Movies</div>
           </a>
         </li>
+        @endcan
 
       </ul>
     </li>
+    @endcan
+    @can('series.read')
     <li class="menu-item {{ Request::is('series/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-movie-play"></i>
@@ -1730,6 +1737,7 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+    @endcan
     {{-- <li class="menu-item ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-devices"></i>
@@ -1868,6 +1876,10 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li> --}}
+
+
+
+    @can('admins.read')
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Bank &amp; Payments</span>
     </li>
@@ -2005,6 +2017,7 @@ $configData = Helper::appClasses();
         </li>
       </ul>
     </li>
+
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">App Settings</span>
     </li>
@@ -2014,6 +2027,7 @@ $configData = Helper::appClasses();
         <div>Portal Notifications</div>
       </a>
     </li>
+    @endcan
     @can('addpolicy.read')
     <li class="menu-item {{ Request::is('app-policy') ? 'active' : '' }}">
       <a href="{{url('/app-policy')}}" class="menu-link">
@@ -2048,6 +2062,7 @@ $configData = Helper::appClasses();
     </li>
     @endcan
 
+    @can('admins.read')
     <li class="menu-item {{ Request::is('settings/countrieslist') ? 'active' : '' }}">
         <a href="{{url('/settings/countrieslist')}}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-flag"></i>
@@ -2060,6 +2075,7 @@ $configData = Helper::appClasses();
         <div>Add Popup</div>
       </a>
     </li>
+    @endcan
     @can('manageorigin.read')
     <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
       <a href="{{url('/settings/app-setting/app-info')}}" class="menu-link">
@@ -2090,6 +2106,7 @@ $configData = Helper::appClasses();
     </li>
     @endcan
 
+    @can('admins.read')
     <li class="menu-item {{ Request::is('settings/app-setting/maintainance') ? 'active' : '' }}">
       <a href="{{url('/settings/app-setting/maintainance')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-wrench"></i>
@@ -2106,6 +2123,7 @@ $configData = Helper::appClasses();
         <div>System Log</div>
       </a>
     </li>
+    @endcan
     @can('languages.read')
     <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
       <a href="{{ url('/language') }}" class="menu-link">
@@ -2114,6 +2132,7 @@ $configData = Helper::appClasses();
       </a>
     </li>
     @endcan
+    @can('admins.read')
     <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">
       <a href="{{ url('/app/ftp/list') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-network-chart"></i>
@@ -2185,6 +2204,7 @@ $configData = Helper::appClasses();
           <div>Storage Setting</div>
         </a>
     </li>
+    @endcan
     <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
       <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
     </div>
