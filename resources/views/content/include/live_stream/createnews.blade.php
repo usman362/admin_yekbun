@@ -120,7 +120,7 @@
                                 <!--code-->
                             </div>
                             <div class="shareimage">
-                                <div style="margin-top:-56px;width:105%;display:contents;" id="image22"
+                                <div style="margin-top:-56px;width:105%;display:none;" id="image22"
                                     class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
 
                                     <!--line here-->
@@ -155,7 +155,7 @@
                                     </div>
                                 </div>
 
-                                <div style="margin-top:-60px;margin-left:-1px;" style="display:contents;" id="image33"
+                                <div style="margin-top:-60px;margin-left:-1px;" style="display:none;" id="image33"
                                     class="col-sm-12 image-content1 row ">
 
                                     <div>
@@ -191,7 +191,7 @@
                                     </div>
                                 </div>
 
-                                <div style="display:contents;" id="image44" class="col-sm-12 image-content1 row  ">
+                                <div style="display:none;" id="image44" class="col-sm-12 image-content1 row  ">
                                     <!--add upp-->
 
                                     <hr style="width: 131px;margin: auto;margin-top:20px;">
@@ -283,24 +283,24 @@
                                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
                                             data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
                                             <input type="radio" class="form-check-input" name="image_type"
-                                                value="one_image" id="one_image" checked />1 Image</label>
+                                                value="1" id="one_image" checked />1 Image</label>
                                         <label for="two_image"
                                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
                                             data-imageone="#image2" data-imagetwo="#image22" data-value="#two_image">
                                             <input type="radio" class="form-check-input" name="image_type"
-                                                value="two_image" id="two_image" />2 Image</label>
+                                                value="2" id="two_image" />2 Image</label>
                                         <label for="three_image"
                                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                                             data-imageone="#image3" data-imagetwo="#image33"
                                             data-value="#three_image">
                                             <input type="radio" class="form-check-input" name="image_type"
-                                                value="three_image" id="three_image" />3 Image</label>
+                                                value="3" id="three_image" />3 Image</label>
                                         <label for="four_image"
                                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                                             data-imageone="#image4" data-imagetwo="#image44"
                                             data-value="#four_image">
                                             <input type="radio" class="form-check-input" name="image_type"
-                                                value="four_image" id="four_image" />+4 Image</label>
+                                                value="4" id="four_image" />+4 Image</label>
                                     </div>
                                 </div>
                             </div>

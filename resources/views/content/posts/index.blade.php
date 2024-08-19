@@ -117,14 +117,14 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end align-item-end">
-                                    <form action="{{ route('profile.banner.delete', $banners->_id) }}" method="POST" onsubmit="confirmAction(event, () => event.target.submit())" class="d-inline">
+                                    <form action="{{ route('feed.background.delete', $background_posts->_id) }}" method="POST" onsubmit="confirmAction(event, () => event.target.submit())" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove">
                                             <i class="bx bx-trash me-1"></i>
                                         </button>
                                     </form>
-                                    
+
                                 </div>
                             </div>
                             <!-- /Post header -->

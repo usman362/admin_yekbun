@@ -123,7 +123,6 @@ class AdminProfileController extends Controller
 
     public function store_news(Request $request)
     {
-        $request->dd();
         $news = News::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -157,7 +156,23 @@ class AdminProfileController extends Controller
     public function store_feeds(Request $request)
     {
         // $request->dd();
-        $feeds = Feed::create($request->all());
+        $feeds = Feed::create([
+            'feed_background_image' => $request->feed_background_image,
+            'feed_text_color' => $request->feed_text_color,
+            'grid_style' => $request->grid_style,
+            'image_type' => (int)$request->image_type,
+            'description' => $request->description,
+            'user_type' => $request->user_type,
+            'feed_type' => $request->feed_type,
+            'image' => $request->image,
+            'image_file_name' => $request->image_file_name,
+            'image_file_length' => $request->image_file_length,
+            'image_file_size' => $request->image_file_size,
+            'video' => $request->video,
+            'video_file_name' => $request->video_file_name,
+            'video_file_length' => $request->video_file_length,
+            'video_file_size' => $request->video_file_size,
+        ]);
         return back();
     }
 }

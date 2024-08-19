@@ -459,24 +459,24 @@
                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
                             data-imageone="#image1" data-imagetwo="#image11" data-value="#one_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="one_feed_image" id="one_feed_image" checked />1 Image</label>
+                                value="1" id="one_feed_image" checked />1 Image</label>
                         <label for="two_feed_image"
                             class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
                             data-imageone="#image2" data-imagetwo="#feedimage22" data-value="#two_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="two_feed_image" id="two_feed_image" />2 Image</label>
+                                value="2" id="two_feed_image" />2 Image</label>
                         <label for="three_feed_image"
                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                             data-imageone="#image3" data-imagetwo="#feedimage33"
                             data-value="#three_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="three_feed_image" id="three_feed_image" />3 Image</label>
+                                value="3" id="three_feed_image" />3 Image</label>
                         <label for="four_feed_image"
                             class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                             data-imageone="#image4" data-imagetwo="#feedimage44"
                             data-value="#four_feed_image">
                             <input type="radio" class="form-check-input" name="image_type"
-                                value="four_feed_image" id="four_feed_image" />+4 Image</label>
+                                value="4" id="four_feed_image" />+4 Image</label>
                     </div>
                 </div>
             </div>
@@ -620,24 +620,24 @@
                         class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
                         data-imageone="#image1" data-imagetwo="#image11" data-value="#one_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="one_feed_video" id="one_feed_video" checked />1 Video</label>
+                            value="1" id="one_feed_video" checked />1 Video</label>
                     <label for="two_feed_video"
                         class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
                         data-imageone="#image2" data-imagetwo="#videoimage22" data-value="#two_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="two_feed_video" id="two_feed_video" />2 Videos</label>
+                            value="2" id="two_feed_video" />2 Videos</label>
                     <label for="three_feed_video"
                         class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                         data-imageone="#image3" data-imagetwo="#videoimage33"
                         data-value="#three_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="three_feed_video" id="three_feed_video" />3 Videos</label>
+                            value="3" id="three_feed_video" />3 Videos</label>
                     <label for="four_feed_video"
                         class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
                         data-imageone="#image4" data-imagetwo="#videoimage44"
                         data-value="#four_feed_video">
                         <input type="radio" class="form-check-input" name="image_type"
-                            value="four_feed_video" id="four_feed_video" />+4 Videos</label>
+                            value="4" id="four_feed_video" />+4 Videos</label>
                 </div>
             </div>
         </div>
@@ -656,18 +656,18 @@
 
         <div style="width:-webkit-fill-available;" class="">
             <div style="width:-webkit-fill-available;" class="btn-group" role="group" aria-label="Basic example">
-                <label for="all" data-val="all" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
-                    <input type="radio" class="form-check-input" name="user_type" value="all" id="all"
+                <label for="all" data-val="all-feed" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
+                    <input type="radio" class="form-check-input" name="user_type" value="all" id="all-feed"
                         checked />All</label>
-                <label for="standard" data-val="standard" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
+                <label for="standard" data-val="standard-feed" class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
                     <input type="radio" class="form-check-input" name="user_type" value="standard"
-                        id="standard" />Standard</label>
-                <label for="premium" data-val="premium" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                        id="standard-feed" />Standard</label>
+                <label for="premium" data-val="premium-feed" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                     <input type="radio" class="form-check-input" name="user_type" value="premium"
-                        id="premium" />Premium</label>
-                <label for="vip" data-val="vip" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                        id="premium-feed" />Premium</label>
+                <label for="vip" data-val="vip-feed" class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                     <input type="radio" class="form-check-input" name="user_type" value="vip"
-                        id="vip" />VIP</label>
+                        id="vip-feed" />VIP</label>
             </div>
         </div>
     </div>

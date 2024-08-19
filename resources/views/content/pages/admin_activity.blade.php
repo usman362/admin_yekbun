@@ -218,8 +218,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-        https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-        "></script>
+            https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+            "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -620,7 +620,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                             <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab1">
                                 @foreach ($feeds as $key => $feed)
-                                    <div id="feed-post-{{$key}}" class="card is-post">
+                                    <div id="feed-post-{{ $key }}" class="card is-post">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
                                             <!-- Post header -->
@@ -645,8 +645,188 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                         <div class="button">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round" class="feather feather-more-vertical">
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-more-vertical">
+                                                                <circle cx="12" cy="12" r="1"></circle>
+                                                                <circle cx="12" cy="5" r="1"></circle>
+                                                                <circle cx="12" cy="19" r="1"></circle>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <div class="dropdown-content">
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Remove Feed</h3>
+                                                                        <small>Feed Removed Only</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Repost the Feed</h3>
+                                                                        <small>Post it again</small>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Post header -->
+
+                                            <!-- Post body -->
+                                            <div class="card-body">
+                                                <!-- Post body text -->
+                                                @if ($feed->feed_type == 'share_text')
+                                                    <div class="post-text">
+                                                        <p style="background-size:cover;background-image:url({{ $feed->feed_background_image }});color:{{ $feed->feed_text_color }}">
+                                                            {{ $feed->description }}
+                                                        </p>
+                                                    </div>
+                                                @else
+                                                    <div class="post-text">
+                                                        <p>
+                                                            {{ $feed->description }}
+                                                        </p>
+                                                    </div>
+                                                    @php
+                                                        $imgUrl = $feed->image
+                                                            ? asset('storage/' . $feed->image[0])
+                                                            : asset('assets/img/feed-image.jpeg');
+                                                    @endphp
+                                                    <!-- Featured image -->
+                                                    @if ($feed->feed_type == "share_video")
+                                                        @php
+                                                            $videoUrl = $feed->video
+                                                                ? asset('storage/' . $feed->video[0])
+                                                                : asset('assets/img/feed-image.jpeg');
+                                                        @endphp
+                                                        <div class="post-image">
+                                                            <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                data-thumb="{{$videoUrl}}"
+                                                                href="{{$videoUrl}}"
+                                                                data-demo-href="{{$videoUrl}}">
+                                                                {{-- <img src="{{$videoUrl}}"
+                                                                    data-demo-src="{{$videoUrl}}"
+                                                                    alt=""> --}}
+                                                                <video src="{{$videoUrl}}" controls style="width: 100%"></video>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="post-image">
+                                                            <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                data-thumb="{{$imgUrl}}"
+                                                                href="{{$imgUrl}}"
+                                                                data-demo-href="{{$imgUrl}}">
+                                                                <img src="{{$imgUrl}}"
+                                                                    data-demo-src="{{$imgUrl}}"
+                                                                    alt="">
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            <!-- /Post body -->
+
+                                            <!-- Post footer -->
+                                            <div class="card-footer">
+                                                <!-- Followers avatars -->
+                                                <div class="likers-group">
+                                                    <img src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
+                                                        data-demo-src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
+                                                        data-user-popover="1" alt="">
+                                                    <img src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
+                                                        data-demo-src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
+                                                        data-user-popover="4" alt="">
+                                                    <img src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
+                                                        data-demo-src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
+                                                        data-user-popover="5" alt="">
+                                                </div>
+                                                <!-- Followers text -->
+                                                <div class="likers-text">
+
+                                                </div>
+                                                <!-- Post statistics -->
+                                                <div class="social-count">
+                                                    <div class="shares-count" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/Share.svg') }}"
+                                                            width="15" alt="">
+                                                        <span>9</span>
+                                                    </div>
+                                                    <div class="likes-count" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/views.svg') }}"
+                                                            width="15" alt="">
+                                                        <span>27</span>
+                                                    </div>
+                                                    <div class="comments-count is-comment-light" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/Comments.svg') }}"
+                                                            width="15" alt="">
+                                                        <span>3</span>
+                                                    </div>
+                                                    <div class="comments-count" style="cursor: pointer">
+                                                        <img src="{{ asset('assets/svg/icons/voice.svg') }}"
+                                                            width="15" alt="">
+                                                        <span>3</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Post footer -->
+                                        </div>
+                                        <!-- /Main wrap -->
+
+                                        <!-- Post #1 Comments -->
+                                        <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
+                                            <div class="comments-header">
+                                                @if (request('type') === 'flag')
+                                                    <img src="{{ asset('assets/img/exclamation-mark.png') }}"
+                                                        style="position: absolute;top:1rem;right:3.5rem" width="15"
+                                                        alt="">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <!-- /Post #1 Comments -->
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab2">
+                                @foreach ($news as $key => $newz)
+                                    <div id="news-post-{{ $key }}" class="card is-post">
+                                        <!-- Main wrap -->
+                                        <div class="content-wrap">
+                                            <!-- Post header -->
+                                            <div class="card-heading">
+                                                <!-- User meta -->
+                                                <div class="user-block">
+                                                    @php
+                                                        $imgUrl = $newz->image
+                                                            ? asset('storage/' . $newz->image[0])
+                                                            : asset('assets/img/feed-image.jpeg');
+                                                    @endphp
+                                                    <div class="image">
+                                                        <img src="{{ asset('assets/img/logo.png') }}"
+                                                            data-demo-src="{{ asset('assets/img/logo.png') }}"
+                                                            data-user-popover="1" alt="">
+                                                    </div>
+                                                    <div class="user-info">
+                                                        <span class="d-flex"><a href="#">Yekbun</a><i
+                                                                class="bx bx-world ml-2"></i></span>
+                                                        <span class="time">. CEO .</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Right side dropdown -->
+                                                <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
+                                                    <div>
+                                                        <div class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-more-vertical">
                                                                 <circle cx="12" cy="12" r="1"></circle>
                                                                 <circle cx="12" cy="5" r="1"></circle>
                                                                 <circle cx="12" cy="19" r="1"></circle>
@@ -682,25 +862,19 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                 <!-- Post body text -->
                                                 <div class="post-text">
                                                     <p>
-                                                        Admin Feeds with <a href="#">@Karen Miller</a> and
-                                                        <a href="#">@Marvin Stemperd</a> at the
-                                                        <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally
-                                                        fantastic!
-                                                        People were really excited about this one!
+                                                        {{ $newz->description }}
                                                     </p>
                                                 </div>
                                                 <!-- Featured image -->
                                                 <div class="post-image">
                                                     <a data-fancybox="post1" data-lightbox-type="comments"
-                                                        data-thumb="{{asset("assets/img/feed-image.jpeg")}}"
-                                                        href="{{asset("assets/img/feed-image.jpeg")}}"
-                                                        data-demo-href="{{asset("assets/img/feed-image.jpeg")}}">
-                                                        <img src="{{asset("assets/img/feed-image.jpeg")}}"
-                                                            data-demo-src="{{asset("assets/img/feed-image.jpeg")}}"
-                                                            alt="">
+                                                        data-thumb="{{ $imgUrl }}" href="{{ $imgUrl }}"
+                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                        <img src="{{ $imgUrl }}"
+                                                            data-demo-src="{{ $imgUrl }}" alt="">
                                                     </a>
                                                     <!-- Action buttons -->
-
                                                 </div>
                                             </div>
                                             <!-- /Post body -->
@@ -726,13 +900,13 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                 <!-- Post statistics -->
                                                 <div class="social-count">
                                                     <div class="shares-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/Share.svg') }}" width="15"
-                                                            alt="">
+                                                        <img src="{{ asset('assets/svg/icons/Share.svg') }}"
+                                                            width="15" alt="">
                                                         <span>9</span>
                                                     </div>
                                                     <div class="likes-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/views.svg') }}" width="15"
-                                                            alt="">
+                                                        <img src="{{ asset('assets/svg/icons/views.svg') }}"
+                                                            width="15" alt="">
                                                         <span>27</span>
                                                     </div>
                                                     <div class="comments-count is-comment-light" style="cursor: pointer">
@@ -741,8 +915,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                         <span>3</span>
                                                     </div>
                                                     <div class="comments-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/voice.svg') }}" width="15"
-                                                            alt="">
+                                                        <img src="{{ asset('assets/svg/icons/voice.svg') }}"
+                                                            width="15" alt="">
                                                         <span>3</span>
                                                     </div>
                                                 </div>
@@ -765,19 +939,66 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                     </div>
                                 @endforeach
                             </div>
+                            <div style="margin-top: -35px;" class="column column is-6 tab-content" id="tab3">
+                                <div class="column column is-12">
+                                    @foreach ($events as $key => $event)
+                                        <div class="card p-2 mb-4">
+                                            <div class="card-body">
+                                                <h4 class="mb-2 pb-1">Upcoming Webinar</h4>
+                                                <p class="small">{{ $event->description }}</p>
+                                                <div class="row mb-3 g-3">
+                                                    <div class="col-6">
+                                                        <div class="d-flex">
+                                                            <div class="avatar flex-shrink-0 me-2">
+                                                                <span class="avatar-initial rounded bg-label-primary"><i
+                                                                        class="bx bx-calendar-exclamation bx-sm"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="mb-0 text-nowrap">
+                                                                    {{ \Carbon\Carbon::parse($event->start_date)->format('d M y') }}
+                                                                </h6>
+                                                                <small>Date</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex">
+                                                            <div class="avatar flex-shrink-0 me-2">
+                                                                <span class="avatar-initial rounded bg-label-primary"><i
+                                                                        class="bx bx-time-five bx-sm"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="mb-0 text-nowrap">
+                                                                    {{ \Carbon\Carbon::parse($event->start_time)->diffForHumans(\Carbon\Carbon::parse($event->end_time), true) }}
+                                                                </h6>
+                                                                <small>Duration</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <a href="javascript:void(0);" class="btn btn-primary w-100 d-grid"
+                                                        data-bs-toggle="modal" data-bs-target="#addNewAddress">Join the
+                                                        event</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
 
-                            <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab2">
-                                @foreach ($news as $key => $newz)
-                                <div id="news-post-{{$key}}" class="card is-post">
+                                <!--statt-->
+                            </div>
+
+
+                            <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab4">
+
+                                <div id="admin-live-1" class="card is-post">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
                                         <!-- Post header -->
                                         <div class="card-heading">
                                             <!-- User meta -->
                                             <div class="user-block">
-                                                @php
-                                                    $imgUrl = $newz->image ? asset('storage/'.$newz->image[0]) : asset("assets/img/feed-image.jpeg");
-                                                @endphp
                                                 <div class="image">
                                                     <img src="{{ asset('assets/img/logo.png') }}"
                                                         data-demo-src="{{ asset('assets/img/logo.png') }}"
@@ -790,6 +1011,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                 </div>
                                             </div>
                                             <!-- Right side dropdown -->
+                                            <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
                                             <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
                                                 <div>
                                                     <div class="button">
@@ -832,18 +1054,21 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                             <!-- Post body text -->
                                             <div class="post-text">
                                                 <p>
-                                                   {{$newz->description}}
+                                                    Yesterday with <a href="#">@Karen Miller</a> and
+                                                    <a href="#">@Marvin Stemperd</a> at the
+                                                    <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally
+                                                    fantastic!
+                                                    People were really excited about this one!
                                                 </p>
                                             </div>
                                             <!-- Featured image -->
                                             <div class="post-image">
                                                 <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{$imgUrl}}"
-                                                    href="{{$imgUrl}}"
-                                                    data-demo-href="{{$imgUrl}}">
-
-                                                    <img src="{{$imgUrl}}"
-                                                        data-demo-src="{{$imgUrl}}"
+                                                    data-thumb="{{ asset('assets/img/feed-image.jpeg') }}"
+                                                    href="{{ asset('assets/img/feed-image.jpeg') }}"
+                                                    data-demo-href="{{ asset('assets/img/feed-image.jpeg') }}">
+                                                    <img src="{{ asset('assets/img/feed-image.jpeg') }}"
+                                                        data-demo-src="{{ asset('assets/img/feed-image.jpeg') }}"
                                                         alt="">
                                                 </a>
                                                 <!-- Action buttons -->
@@ -910,201 +1135,6 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                     </div>
                                     <!-- /Post #1 Comments -->
                                 </div>
-                                @endforeach
-                            </div>
-                            <div style="margin-top: -35px;" class="column column is-6 tab-content" id="tab3">
-                                <div class="column column is-12">
-                                    @foreach ($events as $key => $event)
-                                        <div class="card p-2 mb-4">
-                                            <div class="card-body">
-                                                <h4 class="mb-2 pb-1">Upcoming Webinar</h4>
-                                                <p class="small">{{$event->description}}</p>
-                                                <div class="row mb-3 g-3">
-                                                    <div class="col-6">
-                                                        <div class="d-flex">
-                                                            <div class="avatar flex-shrink-0 me-2">
-                                                                <span class="avatar-initial rounded bg-label-primary"><i
-                                                                        class="bx bx-calendar-exclamation bx-sm"></i></span>
-                                                            </div>
-                                                            <div>
-                                                                <h6 class="mb-0 text-nowrap">{{\Carbon\Carbon::parse($event->start_date)->format('d M y')}}</h6>
-                                                                <small>Date</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="d-flex">
-                                                            <div class="avatar flex-shrink-0 me-2">
-                                                                <span class="avatar-initial rounded bg-label-primary"><i
-                                                                        class="bx bx-time-five bx-sm"></i></span>
-                                                            </div>
-                                                            <div>
-                                                                <h6 class="mb-0 text-nowrap">{{ \Carbon\Carbon::parse($event->start_time)->diffForHumans(\Carbon\Carbon::parse($event->end_time), true) }}</h6>
-                                                                <small>Duration</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 text-center">
-                                                    <a href="javascript:void(0);" class="btn btn-primary w-100 d-grid"
-                                                        data-bs-toggle="modal" data-bs-target="#addNewAddress">Join the
-                                                        event</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <!--statt-->
-                            </div>
-
-
-                            <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab4">
-
-                                <div id="admin-live-1" class="card is-post">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <!-- Post header -->
-                                        <div class="card-heading">
-                                            <!-- User meta -->
-                                            <div class="user-block">
-                                                <div class="image">
-                                                    <img src="{{ asset('assets/img/logo.png') }}"
-                                                        data-demo-src="{{ asset('assets/img/logo.png') }}"
-                                                        data-user-popover="1" alt="">
-                                                </div>
-                                                <div class="user-info">
-                                                    <span class="d-flex"><a href="#">Yekbun</a><i
-                                                            class="bx bx-world ml-2"></i></span>
-                                                    <span class="time">. CEO .</span>
-                                                </div>
-                                            </div>
-                                            <!-- Right side dropdown -->
-                                            <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
-                                            <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                                <div>
-                                                    <div class="button">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-more-vertical">
-                                                            <circle cx="12" cy="12" r="1"></circle>
-                                                            <circle cx="12" cy="5" r="1"></circle>
-                                                            <circle cx="12" cy="19" r="1"></circle>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div class="dropdown-menu" role="menu">
-                                                    <div class="dropdown-content">
-                                                        <a href="javascript:void(0)" class="dropdown-item">
-                                                            <div class="media">
-                                                                <div class="media-content">
-                                                                    <h3>Remove Feed</h3>
-                                                                    <small>Feed Removed Only</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="dropdown-item">
-                                                            <div class="media">
-                                                                <div class="media-content">
-                                                                    <h3>Repost the Feed</h3>
-                                                                    <small>Post it again</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /Post header -->
-
-                                        <!-- Post body -->
-                                        <div class="card-body">
-                                            <!-- Post body text -->
-                                            <div class="post-text">
-                                                <p>
-                                                    Yesterday with <a href="#">@Karen Miller</a> and
-                                                    <a href="#">@Marvin Stemperd</a> at the
-                                                    <a href="#">#Rock'n'Rolla</a> concert in LA. Was totally
-                                                    fantastic!
-                                                    People were really excited about this one!
-                                                </p>
-                                            </div>
-                                            <!-- Featured image -->
-                                            <div class="post-image">
-                                                <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{asset("assets/img/feed-image.jpeg")}}"
-                                                    href="{{asset("assets/img/feed-image.jpeg")}}"
-                                                    data-demo-href="{{asset("assets/img/feed-image.jpeg")}}">
-                                                    <img src="{{asset("assets/img/feed-image.jpeg")}}"
-                                                        data-demo-src="{{asset("assets/img/feed-image.jpeg")}}"
-                                                        alt="">
-                                                </a>
-                                                <!-- Action buttons -->
-
-                                            </div>
-                                        </div>
-                                        <!-- /Post body -->
-
-                                        <!-- Post footer -->
-                                        <div class="card-footer">
-                                            <!-- Followers avatars -->
-                                            <div class="likers-group">
-                                                <img src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
-                                                    data-demo-src="{{ asset('assets/svg/icons/haha-emoji.svg') }}"
-                                                    data-user-popover="1" alt="">
-                                                <img src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
-                                                    data-demo-src="{{ asset('assets/svg/icons/love-emoji.svg') }}"
-                                                    data-user-popover="4" alt="">
-                                                <img src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
-                                                    data-demo-src="{{ asset('assets/svg/icons/sad-emoji.svg') }}"
-                                                    data-user-popover="5" alt="">
-                                            </div>
-                                            <!-- Followers text -->
-                                            <div class="likers-text">
-
-                                            </div>
-                                            <!-- Post statistics -->
-                                            <div class="social-count">
-                                                <div class="shares-count" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/Share.svg') }}"
-                                                        width="15" alt="">
-                                                    <span>9</span>
-                                                </div>
-                                                <div class="likes-count" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/views.svg') }}"
-                                                        width="15" alt="">
-                                                    <span>27</span>
-                                                </div>
-                                                <div class="comments-count is-comment-light" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/Comments.svg') }}"
-                                                        width="15" alt="">
-                                                    <span>3</span>
-                                                </div>
-                                                <div class="comments-count" style="cursor: pointer">
-                                                    <img src="{{ asset('assets/svg/icons/voice.svg') }}"
-                                                        width="15" alt="">
-                                                    <span>3</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /Post footer -->
-                                    </div>
-                                    <!-- /Main wrap -->
-
-                                    <!-- Post #1 Comments -->
-                                    <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
-                                        <div class="comments-header">
-                                            @if (request('type') === 'flag')
-                                                <img src="{{ asset('assets/img/exclamation-mark.png') }}"
-                                                    style="position: absolute;top:1rem;right:3.5rem" width="15"
-                                                    alt="">
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <!-- /Post #1 Comments -->
-                                </div>
                             </div>
                             <div class="col-sm-3"></div>
                         </div>
@@ -1140,8 +1170,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
     @section('page-script')
         <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
         <script src="
-                https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js
-                "></script>
+                        https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js
+                        "></script>
         <script>
             $('.nav-tab a:first-child').addClass('active');
             $('.tab-content').hide();
@@ -5163,17 +5193,29 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                 var activeTab = $(this).attr('data-imagetwo');
                 let value = $(this).attr('data-value');
-                $(value).prop('checked',true);
+                $(value).prop('checked', true);
                 $(activeTab).fadeIn();
                 return false;
             });
 
             $('.usertypepicker').click(function() {
+                // Remove 'active' class from all elements
                 $('.usertypepicker').removeClass('active');
+
+                // Add 'active' class to the clicked element
                 $(this).addClass('active');
-                // $('[name="user_type"]').val($(this).attr('data-val'));
+
+                // Uncheck all radio buttons or checkboxes within 'user_type' name
+                $('[name="user_type"]').prop('checked', false);
+
+                // Check the radio button or checkbox with the ID from 'data-val' attribute
+                var idToCheck = $(this).attr('data-val'); // Using .data() is cleaner
+                $('#' + idToCheck).prop('checked', true);
+
+                // Prevent default action (if needed)
                 return false;
             });
+
 
             $('.imgqtypicker:first-child').addClass('active');
             $('.image-contentnew').hide();
@@ -5277,7 +5319,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                     $(this).attr('data', $(this).data('default'));
                 });
 
-                $('.grid_change').click(function(){
+                $('.grid_change').click(function() {
                     $('#news_grid_style').val($(this).attr('data-value'))
                     $('#feed_grid_style').val($(this).attr('data-value'))
                 })
