@@ -1208,13 +1208,7 @@ $configData = Helper::appClasses();
             </li>
 
 
-            <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
-              <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
-                <div> Stories Policy</div>
-              </a>
-
-
-            </li>
+            
           </ul>
         </li>
       </ul>
