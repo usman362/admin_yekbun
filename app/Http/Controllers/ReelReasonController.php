@@ -10,7 +10,7 @@ class ReelReasonController extends Controller
     public function index()
     {
         $reasons = RealReason::all();
-        return view('content.settings.reelreasons.index', compact('reasons'));
+        return view('content.settings.reelreason.index', compact('reasons'));
     }
     public function store(Request $request)
     {
