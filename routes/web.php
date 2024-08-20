@@ -903,5 +903,6 @@ Route::post('/story-time', [SettingController::class, 'store'])->name('story.tim
 
 Route::get('reels/reasons', [ReelReasonController::class, 'index'])->name('reels.reasons');
 Route::post('reels/reasons/store', [ReelReasonController::class, 'store'])->name('reels.reasons.store');
+Route::delete('reels/reasons/delete/{id}', [ReelReasonController::class, 'destroy'])->name('reels.reasons.destroy');
 
 ?>

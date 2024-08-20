@@ -66,7 +66,7 @@
                             <td>
                                 <button type="button" class="btn edit-btn" data-id="{{$reason->id}}" data-title="{{$reason->title}}" data-reason="{{$reason->reason}}"
                                 data-bs-target="#offcanvasAddTask" data-bs-toggle="offcanvas"><i class="bx bx-edit"></i></button>
-                                <form action="{{ route('reasons.destroy',$reason->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                <form action="{{ route('reels.reasons.destroy',$reason->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
@@ -160,7 +160,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body mx-0 flex-grow-0">
-            <form action="{{route('reasons.store')}}" class="add-new-user pt-0" method="POST" id="addNewUserForm">
+            <form action="{{route('reels.reasons.store')}}" class="add-new-user pt-0" method="POST" id="addNewUserForm">
                 @csrf
                 <input type="hidden" name="reason_id" id="reason_id">
                 <div class="mb-3">
