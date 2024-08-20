@@ -1132,7 +1132,7 @@ $configData = Helper::appClasses();
       </a>
 
 
-      <ul class="menu-sub">reels/song
+      <ul class="menu-sub">
 
 
         <li class="menu-item {{ Request::is('list-reels-cards*') ? 'active' : '' }}">
