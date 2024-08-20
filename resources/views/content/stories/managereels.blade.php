@@ -199,7 +199,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
     <!-- Delete Reason Modal -->
     @php
 
-        $reason = App\Models\FeedReason::get();
+        $reason = App\Models\RealReason::get();
     @endphp
     <div class="modal fade" id="deleteReasonModal" tabindex="-1" aria-labelledby="deleteReasonModalLabel"
         aria-hidden="true">
