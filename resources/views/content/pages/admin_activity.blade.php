@@ -1147,11 +1147,11 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             <div class="content-backdrop fade"></div>
         </div>
 
-        <x-modal id="requestpopup" size="lg">
+        <x-modal id="requestpopup" size="lg" title="Create News">
             @include('content.include.live_stream.createnews')
         </x-modal>
 
-        <x-modal id="requestpopuptwo" title="" size="md">
+        <x-modal id="requestpopuptwo" title="Create Feed" size="md">
             @include('content.include.live_stream.createmusictwo')
         </x-modal>
 

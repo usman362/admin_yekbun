@@ -61,10 +61,11 @@
         scrollbar-width: none;
     }
 
-    .btn-close {
+    #requestpopuptwo .btn-close {
         position: fixed !important;
-        right: -10px !important;
-        top: 50px !important;
+        right: -56px !important;
+        top: 30px !important;
+        z-index: 2 !important;
     }
 
     .modal-content {
@@ -256,6 +257,34 @@
     .videoclass:hover #videohover {
         visibility: visible !important;
     }
+
+    /* New Css */
+
+    .dz-size {
+        font-size: 12px !important;
+        padding: 0 !important;
+    }
+
+    .dropzone .dz-preview .dz-details .dz-size{
+        margin-bottom: 0 !important;
+    }
+    .row.dz-processing.dz-image-preview.dz-success.dz-complete {
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .dz-thumbnail {
+        width: 90px !important;
+        height: 90px !important;
+        margin: 0 auto !important;
+    }
+    .dropzone .dz-preview .dz-details{
+        position: relative !important;
+    }
+    a.dz-remove {
+    width: 95%;
+    margin: 0 auto;
+}
 </style>
 
 <form action="{{route('admin_activity.store_feeds')}}" method="post" enctype="multipart/form-data">

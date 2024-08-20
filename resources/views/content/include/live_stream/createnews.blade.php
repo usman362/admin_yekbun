@@ -3,6 +3,7 @@
         position: fixed !important;
         right: 100px !important;
         top: 30px !important;
+        z-index: 2 !important;
     }
 
     .dz-message {
@@ -86,6 +87,33 @@
         height: 60px;
         min-width: 343px;
     }
+/* New Css */
+
+    .dz-size {
+        font-size: 12px !important;
+        padding: 0 !important;
+    }
+
+    .dropzone .dz-preview .dz-details .dz-size{
+        margin-bottom: 0 !important;
+    }
+    .row.dz-processing.dz-image-preview.dz-success.dz-complete {
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .dz-thumbnail {
+        width: 90px !important;
+        height: 90px !important;
+        margin: 0 auto !important;
+    }
+    .dropzone .dz-preview .dz-details{
+        position: relative !important;
+    }
+    a.dz-remove {
+    width: 95%;
+    margin: 0 auto;
+}
 </style>
 <div style="padding:0px 2.75rem;">
     <div class="bs-stepper wizard-vertical shadow-none vertical mt-2">
@@ -107,7 +135,7 @@
                 <div id="en" class="content active dstepper-block">
                     <div class="row g-3">
                         <!--codee-->
-                        <div id="" class="">
+                        <div class="mt-4">
                             <div style="" id="news-image" class="">
                                 <div class="dropzone needsclick" action="/" id="news-dropzone-img">
                                     <div class="dz-message needsclick">
@@ -119,6 +147,8 @@
                                 </div>
                                 <!--code-->
                             </div>
+                        </div>
+                        <div class="mt-4">
                             <div class="shareimage">
                                 <div style="margin-top:-56px;width:105%;display:none;" id="image22"
                                     class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
@@ -228,7 +258,9 @@
                                 </div>
 
                             </div>
+                        </div>
 
+                        <div class="mt-4">
                             <div style="padding:0px 2.75rem;">
                                 <div style="border-radius:5px 5px 5px 5px;"
                                     class="d-flex justify-content-start mt-5 ">
@@ -260,12 +292,16 @@
                                     </div> --}}
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="mt-4">
                             <div style="padding:0px 2.75rem;" class="col-md-12">
                                 <input type="text" id="title" class="form-control mt-3"
                                     placeholder="News Title" name="title">
                             </div>
+                        </div>
 
+                        <div class="mt-4">
                             <div style="padding:0px 2.75rem;">
                                 <hr style="width: 131px;margin: auto;margin-top:20px;">
                                 <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
