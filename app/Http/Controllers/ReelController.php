@@ -44,10 +44,10 @@ public function destroycard(ReelCard $card)
         Log::info('Attempting to delete card with ID: ' . $card->_id);
         $card->delete();
         Log::info('Successfully deleted card with ID: ' . $card->_id);
-        return redirect()->route('list.cards')->with('success', 'Card has been deleted!');
+        return redirect()->route('list.reels.cards')->with('success', 'Card has been deleted!');
     } catch (\Exception $e) {
         Log::error('Error deleting Card: ' . $e->getMessage());
-        return redirect()->route('list.cards')->with('error', 'Something went wrong!');
+        return redirect()->route('list.reels.cards')->with('error', 'Something went wrong!');
     }
 }
 
