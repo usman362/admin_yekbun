@@ -728,8 +728,7 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
                 'yekbun_location.countries.index'
             );
             Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
-            Route::get('reels/reasons', [ReelReasonController::class, 'index'])->name('reels.reasons');
-            Route::post('reels/reasons/store', [ReelReasonController::class, 'store'])->name('reels.reasons.store');
+           
             Route::resource('/countries', CountryController::class);
             //App Setting
             $controller_path = 'App\Http\Controllers';
@@ -902,5 +901,7 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
  Route::get('stories_time', [SettingController::class, 'storage_setting']);
 Route::post('/story-time', [SettingController::class, 'store'])->name('story.time.store');
 
+Route::get('reels/reasons', [ReelReasonController::class, 'index'])->name('reels.reasons');
+Route::post('reels/reasons/store', [ReelReasonController::class, 'store'])->name('reels.reasons.store');
 
 ?>
