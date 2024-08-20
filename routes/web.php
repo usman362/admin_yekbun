@@ -915,5 +915,5 @@ Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name
 Route::delete('/list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
 
 
-Route::get('reel/ManageStories', [StoryController::class, 'ManageStories']);
+Route::get('reel/ManageStories', [ReelSongController::class, 'ManageStories']);
 ?>
