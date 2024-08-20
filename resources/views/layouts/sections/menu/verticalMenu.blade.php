@@ -1135,7 +1135,11 @@ $configData = Helper::appClasses();
       <ul class="menu-sub">
 
 
-
+        <li class="menu-item {{ Request::is('list-reels-cards*') ? 'active' : '' }}">
+          <a href="{{ route('list.reels.cards') }}" class="menu-link">
+            <div>Add / Manage Cards</div>
+          </a>
+        </li>
         <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
           <a href="{{ url('story/ManageStories') }}" class="menu-link">
             <div>Manage Stories</div>
@@ -1208,7 +1212,13 @@ $configData = Helper::appClasses();
             </li>
 
 
-            
+            <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
+              <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
+                <div> Stories Policy</div>
+              </a>
+
+
+            </li>
           </ul>
         </li>
       </ul>

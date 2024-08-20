@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\ReelController;
 use App\Http\Controllers\Admin\ChannelPolicyController;
 
 use App\Http\Controllers\Admin\EventController;
@@ -636,6 +637,10 @@ Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('l
 Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.delete');
 
 Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
+
+Route::get('/list-reels-cards', [ReelController::class, 'Listcard'])->name('list.reels.cards');
+Route::post('/list-reels-cards-store', [ReelController::class, 'Cardstore'])->name('list.reel-cards.store');
+Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])->name('list.reel-cards.delete');
 
 
 
