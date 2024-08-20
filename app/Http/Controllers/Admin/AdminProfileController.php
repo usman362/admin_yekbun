@@ -22,6 +22,10 @@ class AdminProfileController extends Controller
         return view('content.pages.pages-account-settings-account', compact('activity'));
     }
 
+    public function welcome(){
+        return view('content.welcome');
+    }
+
     public function admin_activity()
     {
         $events = Event::all();

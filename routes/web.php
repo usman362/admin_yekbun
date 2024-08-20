@@ -206,9 +206,10 @@ Route::get('unauthorize',function(){
 })->name('unauthorize');
 
 // Admin Profiel
-Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('auth');
 
 Route::middleware('check.role:Super Admin')->group(function () {
+    Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('auth');
+
     Route::get("/admin_activity", [AdminProfileController::class, 'admin_activity'])->name('admin_activity');
     Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
     Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
@@ -230,6 +231,8 @@ Route::post('/admin/change-password', [AdminProfileController::class, 'change_pa
     'admin_change_password'
 );
 Route::get('/admin/2FA', [AdminProfileController::class, 'enable'])->name('admin.enable.2fa');
+
+Route::get('/welcome', [AdminProfileController::class, 'welcome'])->name('welcome');
 
 Route::get('/login', [LoginController::class, 'index'])
     ->name('admin.login')

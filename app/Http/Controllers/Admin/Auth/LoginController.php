@@ -58,7 +58,7 @@ class LoginController extends Controller
                 return redirect()->intended(
                     Auth::user()->can('dashboard.read')?
                     route('dashboard-analytics'):
-                    route('admin_profile')
+                    route('welcome')
                 );
 
             }
