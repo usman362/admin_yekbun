@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\ReelController;
+use App\Http\Controllers\ReelSongController;
 use App\Http\Controllers\ReelReasonController;
 use App\Http\Controllers\Admin\ChannelPolicyController;
 
@@ -904,5 +905,11 @@ Route::post('/story-time', [SettingController::class, 'store'])->name('story.tim
 Route::get('reels/reasons', [ReelReasonController::class, 'index'])->name('reels.reasons');
 Route::post('reels/reasons/store', [ReelReasonController::class, 'store'])->name('reels.reasons.store');
 Route::delete('reels/reasons/delete/{id}', [ReelReasonController::class, 'destroy'])->name('reels.reasons.destroy');
+
+
+Route::get('reels/song', [ReelSongController::class, 'index'])->name('reels.song');
+Route::post('reels/song/store', [ReelSongController::class, 'store'])->name('reels.song.store');
+Route::delete('reels/song/delete/{id}', [ReelSongController::class, 'destroy'])->name('reels.song.destroy');
+
 
 ?>

@@ -1132,7 +1132,7 @@ $configData = Helper::appClasses();
       </a>
 
 
-      <ul class="menu-sub">
+      <ul class="menu-sub">reels/song
 
 
         <li class="menu-item {{ Request::is('list-reels-cards*') ? 'active' : '' }}">
@@ -1171,7 +1171,7 @@ $configData = Helper::appClasses();
  
 
             <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
+              <a href="{{ route('reels.song') }}" class="menu-link">
                 <div>Add Manage/Songs</div>
               </a>
 
