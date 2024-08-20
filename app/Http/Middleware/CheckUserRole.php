@@ -25,6 +25,10 @@ class CheckUserRole
 
         $user = Auth::user();
 
+        if(isset($user->is_superadmin) && $user->is_superadmin == 1){
+            return $next($request);
+        }
+
         // Check if the user has the required role
         if (!$user->hasRole($role)) {  // Assuming you have a method `hasRole` on your User model
             return redirect()->back()->with('error', 'You do not have permission to access this page.');
