@@ -28,27 +28,32 @@ class ReelSongController extends Controller
     }
     public function store(Request $request)
     {
-       // dd($request->all());
         $response_msg = $request->ringType == "1" ? "Song" : "Song";
-        if(!empty($request->audio_paths)){
-            foreach ($request->audio_paths as $key => $path) {
-                try {
-                    $ringtone = RealSong::updateOrCreate(['_id' => $request->id], [
+    
+        if (!empty($request->audio_paths)) {
+            try {
+                foreach ($request->audio_paths as $key => $path) {
+                    RealSong::updateOrCreate(['_id' => $request->id], [
                         'fileName' => $request->audio_filename[$key],
                         'filePath' => $path,
                         'ringType' => intval($request->ringType),
                         'fileSize' => $request->audio_size[$key]
                     ]);
-                } catch (\Throwable $e) {
-                    return back()->with('success', $response_msg.'  has been created');
                 }
+    
+                // Success message after all items are processed
+                return redirect()->route('reels.song')->with('success', $response_msg . ' has been updated');
+            } catch (\Throwable $e) {
+                // Handle the exception (log the error, etc.)
+                // For now, redirect back with an error message
+                return redirect()->route('reels.song')->with('error', 'There was an error processing your request.');
             }
-            return back()->with('success', $response_msg.'  has been updated');
         } else {
-            return redirect()->back();
+            // Redirect to the route if no audio_paths are present
+            return redirect()->route('reels.song')->with('warning', 'No audio paths were provided.');
         }
-
     }
+    
     public function destroy($id)
     {
         try {
