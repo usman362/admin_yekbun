@@ -1168,11 +1168,7 @@ $configData = Helper::appClasses();
 
           <ul class="menu-sub">
 
-
-
-
-
-
+ 
 
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
@@ -1203,8 +1199,8 @@ $configData = Helper::appClasses();
 
             </li>
 
-             <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
-              <a href="{{url('/settings/stories/reasons ')}}" class="menu-link">
+             <li class="menu-item {{ Request::is('reels/reasons') ? 'active' : '' }}">
+              <a href="{{route('reels.reasons')}}" class="menu-link">
                 <div>Reasons</div>
               </a>
 

@@ -33,7 +33,7 @@
     <div class="d-flex justify-content-between">
         <div>
             <h4 class="fw-bold py-3 mb-4">
-               Reel Reasons
+                Reasons
             </h4>
         </div>
         <div class="">
@@ -160,7 +160,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body mx-0 flex-grow-0">
-            <form action="{{route('reels.reasons.store')}}" class="add-new-user pt-0" method="POST" id="addNewUserForm">
+            <form action="{{route('reasons.store')}}" class="add-new-user pt-0" method="POST" id="addNewUserForm">
                 @csrf
                 <input type="hidden" name="reason_id" id="reason_id">
                 <div class="mb-3">

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\ReelController;
+use App\Http\Controllers\ReelReasonController;
 use App\Http\Controllers\Admin\ChannelPolicyController;
 
 use App\Http\Controllers\Admin\EventController;
@@ -727,6 +728,8 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
                 'yekbun_location.countries.index'
             );
             Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
+            Route::get('reels/reasons', [ReelReasonController::class, 'index'])->name('reels.reasons');
+            Route::post('reels/reasons/store', [ReelReasonController::class, 'store'])->name('reels.reasons.store');
             Route::resource('/countries', CountryController::class);
             //App Setting
             $controller_path = 'App\Http\Controllers';
