@@ -25,6 +25,7 @@ class ReelSongController extends Controller
     {
         //dd($request->all()); 
         $card = ReelCard::find($id);
+        
         if (!$card) {
             return redirect()->back()->with('error', 'Card not found.');
         }
