@@ -261,7 +261,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
 
             // Set the form action URL
             const form = document.getElementById('deleteReasonForm');
-            form.action = `/cards/${cardId}`;
+            form.action = `/reel-list-card/${cardId}`;
 
             // Clear previous values in hidden inputs
             document.getElementById('reasonTitleInput').value = '';

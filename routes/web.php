@@ -912,7 +912,7 @@ Route::post('reels/song/store', [ReelSongController::class, 'store'])->name('ree
 Route::delete('reels/song/delete/{id}', [ReelSongController::class, 'destroy'])->name('reels.song.destroy');
 Route::get('reels/stories_time', [ReelSongController::class, 'storage_setting']);
 Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name('reel.time.store');
-Route::delete('/list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
+Route::delete('/reel-list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
 
 
 

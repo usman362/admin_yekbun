@@ -25,7 +25,7 @@ class ReelSongController extends Controller
     {
         //dd($request->all()); 
         $card = ReelCard::find($id);
-        
+
         if (!$card) {
             return redirect()->back()->with('error', 'Card not found.');
         }
@@ -54,6 +54,7 @@ class ReelSongController extends Controller
     
         return redirect()->back()->with('success', 'Card deleted successfully.');
     }
+    
     public function getMessage()
     {
         $ringtones = RealSong::where('ringType', 1)->get();
