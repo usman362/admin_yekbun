@@ -1140,8 +1140,8 @@ $configData = Helper::appClasses();
             <div>Add / Manage Cards</div>
           </a>
         </li>
-        <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
-          <a href="{{ url('story/ManageStories') }}" class="menu-link">
+        <li class="menu-item {{ Request::is('reel/ManageStories') ? 'active' : '' }} ">
+          <a href="{{ url('reel/ManageStories') }}" class="menu-link">
             <div>Manage Stories</div>
           </a>
 

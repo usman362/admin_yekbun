@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RealSong;
 use App\Models\ReelStoryTime;
+use App\Models\ReelCard;
+use App\Models\ReelDeletionCards;
+use App\Models\RealReason;
 
 
 class ReelSongController extends Controller
@@ -13,6 +16,42 @@ class ReelSongController extends Controller
     {
         $StorySongs  = RealSong::all();
         return view("content.reelsong.index",compact('StorySongs'));
+    }
+    public function ManageStories(){
+        $cards=ReelCard::get();
+       return view('content.stories.managereels',compact('cards'));
+    }
+    public function deleteCard(Request $request, $id)
+    {
+        //dd($request->all()); 
+        $card = ReelCard::find($id);
+        if (!$card) {
+            return redirect()->back()->with('error', 'Card not found.');
+        }
+    
+        // Fetch the reason from the request
+        $reasonId = $request->input('reason');
+        $reasonTitle = $request->input('reason_title');
+        $reason_description = $request->input('reason_description');
+    
+        $reason = RealReason::find($reasonId);
+    
+        if (!$reason) {
+            return redirect()->back()->with('error', 'Reason not found.');
+        }
+    
+        // Store the deletion log with reason and additional details
+        ReelDeletionCards::create([
+            'card_id' => $id,
+            'reason_id' => $reasonId,
+            'reason_title' => $reasonTitle, // Store reason title
+            'reason_description' => $reason_description,   // Store reason text
+        ]);
+    
+        // Delete the card
+        $card->delete();
+    
+        return redirect()->back()->with('success', 'Card deleted successfully.');
     }
     public function getMessage()
     {
