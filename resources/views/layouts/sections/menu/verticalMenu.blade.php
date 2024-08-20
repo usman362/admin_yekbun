@@ -1172,7 +1172,7 @@ $configData = Helper::appClasses();
 
             <li class="menu-item ">
               <a href="javascript:void(0)" class="menu-link">
-                <div>Add Songs</div>
+                <div>Add Manage/Songs</div>
               </a>
 
 
@@ -1180,13 +1180,7 @@ $configData = Helper::appClasses();
 
 
 
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Add Cards</div>
-              </a>
-
-
-            </li>
+           
 
 
 
@@ -1208,13 +1202,7 @@ $configData = Helper::appClasses();
             </li>
 
 
-            <li class="menu-item {{ Request::is('settings/stories/policy_and_terms') ? 'active' : '' }}">
-              <a href="{{url('/settings/stories/policy_and_terms')}}" class="menu-link">
-                <div> Stories Policy</div>
-              </a>
-
-
-            </li>
+             
           </ul>
         </li>
       </ul>
