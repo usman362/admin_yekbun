@@ -1179,19 +1179,11 @@ $configData = Helper::appClasses();
             </li>
 
 
-
-           
-
-
-
-
-            <li class="menu-item ">
-              <a href="javascript:void(0)" class="menu-link">
-                <div>Stories Time</div>
-              </a>
-
-
-            </li>
+ 
+            
+            <a href=" {{url('reels/stories_time')}}" class="menu-link">
+              <div>Stories Time</div>
+            </a>
 
              <li class="menu-item {{ Request::is('reels/reasons') ? 'active' : '' }}">
               <a href="{{route('reels.reasons')}}" class="menu-link">

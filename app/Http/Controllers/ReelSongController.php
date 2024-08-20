@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RealSong;
+use App\Models\ReelStoryTime;
 
 
 class ReelSongController extends Controller
@@ -26,6 +27,27 @@ class ReelSongController extends Controller
         $ringType = 2;
         return view("content.apps.app-ringtone",compact('ringtones', 'ringType'));
     }
+    public function storage_setting(){
+        $storyTime = ReelStoryTime::first(); 
+        return view('content.stories.reelstorytime',compact('storyTime'));
+   }
+   public function storestory(Request $request)
+   {
+       //dd($request->all());
+       $validated = $request->validate([
+           'length' => 'nullable|string|min:0|max:100',
+           'is_active' => 'nullable|string',
+       ]);
+//dd( $validated);
+       $storyTime = ReelStoryTime::first(); // Assuming there's only one record
+       if ($storyTime) {
+           $storyTime->update($validated);
+       } else {
+        ReelStoryTime::create($validated);
+       }
+//dd($storyTime);
+       return redirect()->back()->with('success', 'Reel Time updated successfully!');
+   }
     public function store(Request $request)
     {
         $response_msg = $request->ringType == "1" ? "Song" : "Song";

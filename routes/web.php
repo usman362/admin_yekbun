@@ -910,6 +910,7 @@ Route::delete('reels/reasons/delete/{id}', [ReelReasonController::class, 'destro
 Route::get('reels/song', [ReelSongController::class, 'index'])->name('reels.song');
 Route::post('reels/song/store', [ReelSongController::class, 'store'])->name('reels.song.store');
 Route::delete('reels/song/delete/{id}', [ReelSongController::class, 'destroy'])->name('reels.song.destroy');
-
+Route::get('reels/stories_time', [ReelSongController::class, 'storage_setting']);
+Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name('reel.time.store');
 
 ?>
