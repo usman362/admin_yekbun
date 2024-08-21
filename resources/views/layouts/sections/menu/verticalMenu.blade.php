@@ -1092,13 +1092,7 @@ $configData = Helper::appClasses();
 
 
             </li>
-
-
-
-
-
-
-
+ 
 
             <li class="menu-item ">
               <a href=" {{url('stories_time')}}" class="menu-link">
@@ -1125,82 +1119,66 @@ $configData = Helper::appClasses();
 
     @endcan
     @can('reels.read')
-    <li class="menu-item {{ Request::is('settings/reels/*') ? 'active open' : '' }} {{ Request::is('reel/*') ? 'active open' : '' }}">
+    <li class="menu-item {{
+      Request::is('settings/reels/*') ||
+      Request::is('reel/*') ||
+      Request::is('list-reels-cards*') ||
+      Request::is('reels/song*') ||
+      Request::is('reels/stories_time*') ||
+      Request::is('reels/reasons*') ? 'active open' : ''
+  }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bxs-videos"></i>
-        <div>Reels</div>
+          <i class="menu-icon tf-icons bx bxs-videos"></i>
+          <div>Reels</div>
       </a>
-
-
+  
       <ul class="menu-sub">
-
-
-        <li class="menu-item {{ Request::is('list-reels-cards*') ? 'active' : '' }}">
-          <a href="{{ route('list.reels.cards') }}" class="menu-link">
-            <div>Add / Manage Cards</div>
-          </a>
-        </li>
-        <li class="menu-item {{ Request::is('reel/ManageStories') ? 'active' : '' }} ">
-          <a href="{{ url('reel/ManageStories') }}" class="menu-link">
-            <div>Manage Stories</div>
-          </a>
-
-
-        </li>
-
-
-
-         <li class="menu-item {{ Request::is('story/ReportedStories') ? 'active' : '' }} ">
-          <a href="{{ url('story/ReportedStories') }}" class="menu-link">
-            <div>Reported Stories</div>
-          </a>
-
-
-        </li>
-
-
-
-        <li class="menu-item {{ Request::is('settings/stories/*') ? 'active open' : '' }}">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-
-
-          <ul class="menu-sub">
-
- 
-
-            <li class="menu-item ">
-              <a href="{{ route('reels.song') }}" class="menu-link">
-                <div>Add Manage/Songs</div>
+          <li class="menu-item {{ Request::is('list-reels-cards*') ? 'active' : '' }}">
+              <a href="{{ route('list.reels.cards') }}" class="menu-link">
+                  <div>Add / Manage Cards</div>
               </a>
-
-
-            </li>
-
-
- 
-            <li class="menu-item {{ Request::is('reels/stories_time') ? 'active' : '' }}">
-            <a href=" {{url('reels/stories_time')}}" class="menu-link">
-              <div>Stories Time</div>
-            </a>
-            </li>
-             <li class="menu-item {{ Request::is('reels/reasons') ? 'active' : '' }}">
-              <a href="{{route('reels.reasons')}}" class="menu-link">
-                <div>Reasons</div>
+          </li>
+          <li class="menu-item {{ Request::is('reel/ManageStories') ? 'active' : '' }}">
+              <a href="{{ url('reel/ManageStories') }}" class="menu-link">
+                  <div>Manage Stories</div>
               </a>
-
-
-            </li>
-
-
-             
-          </ul>
-        </li>
+          </li>
+          <li class="menu-item {{ Request::is('reel/ReportedStories') ? 'active' : '' }}">
+              <a href="{{ url('reel/ReportedStories') }}" class="menu-link">
+                  <div>Reported Stories</div>
+              </a>
+          </li>
+          <li class="menu-item {{
+              Request::is('settings/stories/*') ||
+              Request::is('reels/song*') ||
+              Request::is('reels/stories_time*') ||
+              Request::is('reels/reasons*') ? 'active open' : ''
+          }}">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                  <div>Settings</div>
+              </a>
+              <ul class="menu-sub">
+                  <li class="menu-item {{ Request::is('reels/song*') ? 'active' : '' }}">
+                      <a href="{{ route('reels.song') }}" class="menu-link">
+                          <div>Add Manage/Songs</div>
+                      </a>
+                  </li>
+                  <li class="menu-item {{ Request::is('reels/stories_time*') ? 'active' : '' }}">
+                      <a href="{{ url('reels/stories_time') }}" class="menu-link">
+                          <div>Stories Time</div>
+                      </a>
+                  </li>
+                  <li class="menu-item {{ Request::is('reels/reasons*') ? 'active' : '' }}">
+                      <a href="{{ route('reels.reasons') }}" class="menu-link">
+                          <div>Reasons</div>
+                      </a>
+                  </li>
+              </ul>
+          </li>
       </ul>
-    </li>
-
-
+  </li>
+  
+    
 
 
     <li class="menu-header small text-uppercase">

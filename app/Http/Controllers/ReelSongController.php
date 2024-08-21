@@ -54,7 +54,9 @@ class ReelSongController extends Controller
     
         return redirect()->back()->with('success', 'Card deleted successfully.');
     }
-    
+    public function ManageStoriestwo(){
+        return view('content.reels.ReportedStories');
+     }
     public function getMessage()
     {
         $ringtones = RealSong::where('ringType', 1)->get();
