@@ -520,9 +520,38 @@ $configData = Helper::appClasses();
         <i class="menu-icon tf-icons bx bx-intersect"></i>
         <div>Advertisment</div>
       </a>
+      <ul class="menu-sub">
+      <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
+        <a href="javascript:void(0)" class="menu-link menu-toggle">
+          <div>Add / Manage Cards</div>
+        </a>
 
 
-    </li>
+        
+<ul class="menu-sub">
+  <li class="menu-item ">
+    <a href="{{url('/manage-user-feeds')}}" class="menu-link">
+      <div>Manage Special  Cards</div>
+    </a>
+  </li>
+  <li class="menu-item ">
+    <a href="{{url('/manage-user-feeds')}}" class="menu-link">
+      <div>Manage Business Cards</div>
+    </a>
+  </li>
+  <li class="menu-item ">
+    <a href="{{url('/manage-user-feeds')}}" class="menu-link">
+      <div>Manage Services Cards</div>
+    </a>
+  </li>
+  <li class="menu-item ">
+    <a href="{{url('/manage-user-feeds')}}" class="menu-link">
+      <div>Manage Food & Drinks Cards</div>
+    </a>
+  </li>
+</ul>
+
+    </li></li></ul>
     @endcan
 
 
