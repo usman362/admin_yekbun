@@ -6,7 +6,10 @@ use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\BazarController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\ReasonController;
 use App\Http\Controllers\Api\MediaController;
+use App\Http\Controllers\SongController;
+use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\ReportController;
@@ -199,6 +202,15 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
     'destroy',
     'update',
   ]);
+  //Manage Cards
+Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.cards');
+Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
+Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.delete');
+Route::get('story/ManageStories', [StoryController::class, 'ManageStories']);
+Route::get('stories_time', [StoryController::class, 'storage_setting']);
+Route::post('/story-time', [StoryController::class, 'storetime'])->name('story.time.store');
+Route::get('story/ReportedStories', [StoryController::class, 'ManageStoriestwo']);
+Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
   Route::resource('history', HistoryController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
   Route::resource('bazar-category', BazarCategoryController::class)->only([
     'index',
@@ -207,6 +219,19 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
     'destroy',
     'update',
   ]);
+  Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
+           
+  Route::resource('/storysong', SongController::class);
+  Route::resource('/storysong', SongController::class)->names([
+      'index' => 'storysong.index',
+      'create' => 'storysong.create',
+      'store' => 'storysong.store',
+      'show' => 'storysong.show',
+      'edit' => 'storysong.edit',
+      'update' => 'storysong.update',
+      'destroy' => 'storysong.destroy',
+  ]);
+  
   Route::resource('bazar-subcategory', BazarSubCategoryController::class)->only([
     'index',
     'store',
