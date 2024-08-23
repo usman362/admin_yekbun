@@ -158,7 +158,7 @@
     <x-modal id="createcategoryModal" title="Add Background" saveBtnText="Add" saveBtnType="submit" saveBtnForm="createForm"
         size="md">
 
-        @include('content.include.advertisement.createForm4')
+        @include('content.include.advertisement.createform4')
     </x-modal>
     <!-- /Modal -->
     <script>
