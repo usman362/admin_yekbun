@@ -148,9 +148,10 @@
                                 <!--code-->
                             </div>
                         </div>
+                        <input type="hidden" name="grid_style" id="news_grid_style" value="modern">
                         <div class="mt-4">
                             <div class="shareimage">
-                                <div style="margin-top:-56px;width:105%;display:none;" id="image22"
+                                <div style="width:105%;display:none;" id="image22"
                                     class="col-sm-12 image-content1 row  justify-content-around  justify-content-center">
 
                                     <!--line here-->
@@ -185,7 +186,7 @@
                                     </div>
                                 </div>
 
-                                <div style="margin-top:-60px;margin-left:-1px;" style="display:none;" id="image33"
+                                <div style="margin-left:-1px;" style="display:none;" id="image33"
                                     class="col-sm-12 image-content1 row ">
 
                                     <div>
@@ -202,8 +203,8 @@
                                                         data-original2="{{ asset('assets/img/three3.png') }}"
                                                         data-default2="{{ asset('assets/img/threedef1.png') }}"
                                                         width="80" height="80"
-                                                        class="carousel-inner  imagechangetwo2"
-                                                        data-imagechangetwo="#imagechangetwo1"></object>
+                                                        class="carousel-inner grid_change imagechangetwo2"
+                                                        data-imagechangetwo="#imagechangetwo1" data-value="modern"></object>
                                                 </div>
                                                 <div style="width:33.3%" class="carousel-inner brchg imagepicker "
                                                     data-imagetwo="#image33">
@@ -213,8 +214,8 @@
                                                         data-original2="{{ asset('assets/img/three3(2).png') }}"
                                                         data-default2="{{ asset('assets/img/threedef2.png') }}"
                                                         width="80" height="80"
-                                                        class="carousel-inner imagechangetwo2"
-                                                        data-imagechangetwo="#imagechangetwo2"></object>
+                                                        class="carousel-inner imagechangetwo2 grid_change"
+                                                        data-imagechangetwo="#imagechangetwo2" data-value="elegant"></object>
                                                 </div>
                                             </div>
                                         </div>
@@ -251,8 +252,6 @@
                                                     data-contentfour2="#imagecontentfour2"
                                                     data-value="elegant"></object>
                                             </div>
-                                            <input type="hidden" name="grid_style" id="news_grid_style"
-                                                value="modern">
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +296,7 @@
                         <div class="mt-4">
                             <div style="padding:0px 2.75rem;" class="col-md-12">
                                 <input type="text" id="title" class="form-control mt-3"
-                                    placeholder="News Title" name="title">
+                                    placeholder="News Title" name="title" required>
                             </div>
                         </div>
 
@@ -306,7 +305,7 @@
                                 <hr style="width: 131px;margin: auto;margin-top:20px;">
                                 <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
                                     <input style="height: 90px;" type="text" name="description"
-                                        class="form-control w-100" placeholder="Enter The description">
+                                        class="form-control w-100" placeholder="Enter The description" required>
                                 </div>
 
 
@@ -428,7 +427,7 @@
                             </select>
                         </div>
                         <div class="col-md-12 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-label-primary">
+                            <button type="button" class="btn btn-label-primary news-btn">
                                 Submit
                             </button>
                         </div>
@@ -476,3 +475,4 @@
 
     })
 </script>
+

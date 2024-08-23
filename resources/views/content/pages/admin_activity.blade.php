@@ -218,8 +218,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-            https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-            "></script>
+                    https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                    "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -274,7 +274,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                             <div class="row">
                                 <div class="col-md mb-md-0 mb-2">
                                     <div class="form-check card custom-option-icon hki custom-options" id="hki">
-                                        <a href="javascript:void(0)" class="form-check-label custom-option-content "
+                                        <a href="javascript:void(0)"
+                                            class="form-check-label custom-option-content news-modal-btn"
                                             for="customRadioPercentage" data-bs-toggle="modal"
                                             data-bs-target="#requestpopup">
                                             <span class="custom-option-body">
@@ -683,7 +684,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                 <!-- Post body text -->
                                                 @if ($feed->feed_type == 'share_text')
                                                     <div class="post-text">
-                                                        <p style="background-size:cover;background-image:url({{ $feed->feed_background_image }});color:{{ $feed->feed_text_color }}">
+                                                        <p
+                                                            style="background-size:cover;background-image:url({{ $feed->feed_background_image }});color:{{ $feed->feed_text_color }}">
                                                             {{ $feed->description }}
                                                         </p>
                                                     </div>
@@ -699,7 +701,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                             : asset('assets/img/feed-image.jpeg');
                                                     @endphp
                                                     <!-- Featured image -->
-                                                    @if ($feed->feed_type == "share_video")
+                                                    @if ($feed->feed_type == 'share_video')
                                                         @php
                                                             $videoUrl = $feed->video
                                                                 ? asset('storage/' . $feed->video[0])
@@ -707,24 +709,24 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                         @endphp
                                                         <div class="post-image">
                                                             <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                data-thumb="{{$videoUrl}}"
-                                                                href="{{$videoUrl}}"
-                                                                data-demo-href="{{$videoUrl}}">
+                                                                data-thumb="{{ $videoUrl }}"
+                                                                href="{{ $videoUrl }}"
+                                                                data-demo-href="{{ $videoUrl }}">
                                                                 {{-- <img src="{{$videoUrl}}"
                                                                     data-demo-src="{{$videoUrl}}"
                                                                     alt=""> --}}
-                                                                <video src="{{$videoUrl}}" controls style="width: 100%"></video>
+                                                                <video src="{{ $videoUrl }}" controls
+                                                                    style="width: 100%"></video>
                                                             </a>
                                                         </div>
                                                     @else
                                                         <div class="post-image">
                                                             <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                data-thumb="{{$imgUrl}}"
-                                                                href="{{$imgUrl}}"
-                                                                data-demo-href="{{$imgUrl}}">
-                                                                <img src="{{$imgUrl}}"
-                                                                    data-demo-src="{{$imgUrl}}"
-                                                                    alt="">
+                                                                data-thumb="{{ $imgUrl }}"
+                                                                href="{{ $imgUrl }}"
+                                                                data-demo-href="{{ $imgUrl }}">
+                                                                <img src="{{ $imgUrl }}"
+                                                                    data-demo-src="{{ $imgUrl }}" alt="">
                                                             </a>
                                                         </div>
                                                     @endif
@@ -865,16 +867,258 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                         {{ $newz->description }}
                                                     </p>
                                                 </div>
-                                                <!-- Featured image -->
-                                                <div class="post-image">
-                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                        data-thumb="{{ $imgUrl }}" href="{{ $imgUrl }}"
-                                                        data-demo-href="{{ $imgUrl }}">
+                                                <div class="row">
+                                                    @if ($newz->image_type == 2)
+                                                        @if ($newz->grid_style == 'modern')
+                                                            <div class="col-md-6">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
 
-                                                        <img src="{{ $imgUrl }}"
-                                                            data-demo-src="{{ $imgUrl }}" alt="">
-                                                    </a>
-                                                    <!-- Action buttons -->
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="col-md-12">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @elseif($newz->image_type == 3)
+                                                        @if ($newz->grid_style == 'modern')
+                                                            <div class="col-md-12">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="col-md-8">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @elseif($newz->image_type == 4)
+                                                        @if ($newz->grid_style == 'modern')
+                                                            <div class="col-md-6">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="col-md-8">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        <img src="{{ $imgUrl }}"
+                                                                            data-demo-src="{{ $imgUrl }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @else
+                                                        <div class="col-md-12">
+                                                            <div class="post-image">
+                                                                <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                    data-thumb="{{ $imgUrl }}"
+                                                                    href="{{ $imgUrl }}"
+                                                                    data-demo-href="{{ $imgUrl }}">
+
+                                                                    <img src="{{ $imgUrl }}"
+                                                                        data-demo-src="{{ $imgUrl }}"
+                                                                        alt="">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!-- /Post body -->
@@ -992,7 +1236,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                             <div style="padding-top:0px;" class="column column is-6 tab-content" id="tab4">
 
-                                <div id="admin-live-1" class="card is-post">
+                                {{-- <div id="admin-live-1" class="card is-post">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
                                         <!-- Post header -->
@@ -1134,7 +1378,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                         </div>
                                     </div>
                                     <!-- /Post #1 Comments -->
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-sm-3"></div>
                         </div>
@@ -1169,9 +1413,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
     @section('page-script')
         <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
-        <script src="
-                        https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js
-                        "></script>
+        <script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
         <script>
             $('.nav-tab a:first-child').addClass('active');
             $('.tab-content').hide();
@@ -1320,12 +1562,135 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             }
         </script>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
+
+        {{-- News Section Image Validation --}}
+        <script>
+            $('.news-btn').click(function() {
+                let selectedImages = parseInt($('#createForm .hidden-inputs [name="image[]"]').length);
+                let imageLength = parseInt($('#createForm input[name="image_type"]:checked').val());
+
+                if (isNaN(imageLength)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Image type is not selected or invalid!',
+                    });
+                    return;
+                }
+
+                if (imageLength === 4) {
+                    if (selectedImages < imageLength) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Selection Error',
+                            text: 'Please select at least 4 images!',
+                        });
+                    } else {
+                        $('#createForm')[0].submit()
+                    }
+                } else {
+                    if (selectedImages !== imageLength) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Selection Warning',
+                            text: `Please select exactly ${imageLength} images!`,
+                        });
+                    } else {
+                        $('#createForm')[0].submit()
+                    }
+                }
+            });
+
+            $('.news-modal-btn').click(function() {
+                let image_type = parseInt($('#createForm input[name="image_type"]:checked').val())
+                if (image_type !== 2) {
+                    $('#image22').css('display', 'none')
+                }
+            })
+        </script>
+
+        {{-- Feeds Section Image Validation --}}
+        <script>
+            $('.feed-btn').click(function() {
+                let selectedImages = parseInt($('#feedsForm .hidden-inputs [name="image[]"]').length);
+                let selectedVideos = parseInt($('#feedsForm .hidden-inputs [name="video[]"]').length);
+                let imageLength = parseInt($('#feedsForm input[name="image_type"]:checked').val());
+                let feed_type = $('#feedsForm input[name="feed_type"]:checked').val();
+
+                if (feed_type == 'share_image') {
+                    if (isNaN(imageLength)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Image type is not selected or invalid!',
+                        });
+                        return;
+                    }
+
+                    if (imageLength === 4) {
+                        if (selectedImages < imageLength) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Selection Error',
+                                text: 'Please select at least 4 images!',
+                            });
+                        } else {
+                            $('#feedsForm')[0].submit()
+                        }
+                    } else {
+                        if (selectedImages !== imageLength) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Selection Warning',
+                                text: `Please select exactly ${imageLength} images!`,
+                            });
+                        } else {
+                            $('#feedsForm')[0].submit()
+                        }
+                    }
+                }
+
+
+                if (feed_type == 'share_video') {
+                    if (isNaN(imageLength)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Video is not selected or invalid!',
+                        });
+                        return;
+                    }
+
+                    if (imageLength === 4) {
+                        if (selectedVideos < imageLength) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Selection Error',
+                                text: 'Please select at least 4 Videos!',
+                            });
+                        } else {
+                            $('#feedsForm')[0].submit()
+                        }
+                    } else {
+                        if (selectedVideos !== imageLength) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Selection Warning',
+                                text: `Please select exactly ${imageLength} Videos!`,
+                            });
+                        } else {
+                            $('#feedsForm')[0].submit()
+                        }
+                    }
+                }
+            });
+        </script>
+
         <script>
             $(document).ready(function() {
                 $(document).click(function() {
 
-                    const lightboxing = `
-<div class="fancybox-container fancybox-custom-layout fancybox-show-toolbar fancybox-show-caption fancybox-is-open fancybox-is-zoomable fancybox-can-zoomIn"
+                    const lightboxing = `<div class="fancybox-container fancybox-custom-layout fancybox-show-toolbar fancybox-show-caption fancybox-is-open fancybox-is-zoomable fancybox-can-zoomIn"
             role="dialog" tabindex="-1" id="fancybox-container-1"
             style="transition-duration: 366ms;">
             <div class="fancybox-inner">
@@ -4406,22 +4771,16 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                 class="feather feather-heart"><path
                                                     d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                             <span>5</span></div>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                             <div class="media is-comment">
-
                                 <figure class="media-left">
 
                                     <p class="image is-32x32"> <img
                                             src="https://via.placeholder.com/300x300"
                                             data-demo-src="assets/img/avatars/elise.jpg"
                                             alt data-user-popover="6"></p>
-
                                 </figure>
 
                                 <div class="media-content">
@@ -5063,21 +5422,10 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                         <div class="comment-controls has-lightbox-emojis">
 
                         </div>
-                    </div></div></div></div>
-`;
-
-
-
-                    // alert('dsad');
-                    // $('.fancybox-progress').append(lightboxing);
-
+                    </div></div></div></div>`;
                     $('.fancybox-caption__body').append(lightboxing);
-
-
-
                 });
             });
-
             //  alert('adasd');
             $(document).ready(function() {
                 $(".hki").click(function() {
@@ -5088,11 +5436,6 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 });
             });
 
-
-            //modal
-            // alert('helloo');
-            // $('#PlanStream').addClass('active');
-            // $('.tab-contented').hide();
             $('.tab-contented:first').show();
 
             // Click function
@@ -5109,18 +5452,6 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 $(activeTab).fadeIn();
                 return false;
             });
-
-            // $('.classonetr').click(function(){
-            //   $('.classonetr').removeClass('checked');
-            //   $(this).addClass('checked');
-            //   $('.tab-contented').hide();
-
-            //   var activeTab = $(this).attr('data-king');
-            //   $(activeTab).fadeIn();
-            //   return false;
-            // });
-
-
 
             // owl
             $(document).ready(function() {
@@ -5256,33 +5587,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 return false;
             });
 
-            // Click function
-            // $('.imageae').click(function(){
-            //     // $('.removing').hide();
-            //   $('.imageae').removeClass('active');
-            //     //  $('.shareimage').addClass('active');
-
-            //   $(this).addClass('active');
-            //   $('.share-content').hide();
-
-            //   var activeTab = $(this).attr('data-sharetext');
-            //   $(activeTab).fadeIn();
-
-            //     var activeTab1 = $(this).attr('data-sharetext2');
-            //   $(activeTab1).fadeIn();
-            //   return false;
-            // });
-
-
-
-
-
             // remove modal center clas
             $('.modal-dialog').removeClass('modal-dialog-centered');
-
-
-
-
             $(document).ready(function() {
                 let previousImage = null;
 
@@ -5324,16 +5630,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                     $('#feed_grid_style').val($(this).attr('data-value'))
                 })
             });
-
-
             // edit
-
-
-
-
             // tabs start
-
-
             // Show the first tab and hide the rest
             $('#imagechangeone1:first-child').addClass('active');
             $('.image-changecontent').hide();
@@ -5734,16 +6032,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 $(activeTab).fadeIn();
                 return false;
             });
-
-
             // yahan khatam
         </script>
-
-
-
-
-
-
     @endsection
 @endsection
 
