@@ -40,6 +40,7 @@ class User extends Authenticatable  implements MustVerifyEmail
         'fname',
         'lname',
         'gender',
+        'origin',
         'dob',
         'address',
         'province',
@@ -124,29 +125,29 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     public function permissions()
     {
-        
+
         return $this->belongsToMany(Permission::class, null, 'user_ids', 'permission_ids');
     }
 
     //public function hasRole($role)
 //{
- //   return $this->role === $role;  
+ //   return $this->role === $role;
 //}
 
     public function before(User $user, string $ability): bool|null
 {
 
-    
+
     if ($user->hasRole('Super Admin')) {
         return true;
     }
- 
+
     return null; // see the note above in Gate::before about why null must be returned here.
 }
 
     public function hasPermission($permission)
     {
-       
+
         return $this->permissions()->where('name', $permission)->exists() ||
                $this->roles()->whereHas('permissions', function ($query) use ($permission) {
                    $query->where('name', $permission);

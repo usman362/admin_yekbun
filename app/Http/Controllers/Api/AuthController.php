@@ -92,6 +92,7 @@ class AuthController extends Controller
         'last_name' => $request['lname'],
         'language' => $request['language'],
         'gender' => $request['gender'],
+        'origin' => $request['origin'],
         'location' => $request['location'],
         'marital_status' => $request['marital_status'],
         'dob' => $request['dob'],
