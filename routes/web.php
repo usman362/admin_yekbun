@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\Diamond;
 use App\Http\Controllers\user\Premium;
 use App\Http\Controllers\user\Standard;
+use App\Http\Controllers\AdvertismentController;
 use App\Http\Controllers\fanpage\FanPage;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PostController;
@@ -649,6 +650,7 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
 
 
 
+
     Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
     Route::get('/feed-background', [BackgroundFeedController::class, 'index'])->name('feed.background');
     Route::post('/feed-background', [BackgroundFeedController::class, 'store'])->name('feed.background.store');
@@ -917,8 +919,53 @@ Route::get('reels/stories_time', [ReelSongController::class, 'storage_setting'])
 Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name('reel.time.store');
 Route::delete('/reel-list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
 Route::get('reel/ReportedStories', [ReelSongController::class, 'ManageStoriestwo']);
-
-
-
 Route::get('reel/ManageStories', [ReelSongController::class, 'ManageStories']);
+
+
+//Advertismen cards
+
+//Specials Cads
+Route::get('/specialcards', [AdvertismentController::class, 'specialcards'])->name('list.adver.cards');
+Route::post('/specialcards-store', [AdvertismentController::class, 'Cardstore'])->name('list.special.store');
+Route::delete('/specials-card/{card}', [AdvertismentController::class, 'destroycard'])->name('specials.cards.delete');
+//Business Cads
+Route::get('/businesscards', [AdvertismentController::class, 'businesscards'])->name('list.business.cards');
+Route::post('/businesscards-store', [AdvertismentController::class, 'businesscardsstore'])->name('list.business.store');
+Route::delete('/businesscards-card/{card}', [AdvertismentController::class, 'destroybusinesscards'])->name('business.cards.delete');
+
+//Service Cads
+Route::get('/Servicecards', [AdvertismentController::class, 'Servicecards'])->name('list.Service.cards');
+Route::post('/Servicecards-store', [AdvertismentController::class, 'Servicecardsstore'])->name('list.Service.store');
+Route::delete('/Servicecards-card/{card}', [AdvertismentController::class, 'destroyServicecards'])->name('Service.cards.delete');
+
+//Food Drink Cads
+Route::get('/FoodDrinkcards', [AdvertismentController::class, 'FoodDrinkcards'])->name('list.food.cards');
+Route::post('/FoodDrinkcards-store', [AdvertismentController::class, 'FoodDrinkcardsstore'])->name('list.food.store');
+Route::delete('/FoodDrinkcards-card/{card}', [AdvertismentController::class, 'destroyFoodDrinkcards'])->name('food.cards.delete');
+
+
+//Add Manage Ads
+//Specials Ads
+Route::get('/specialAds', [AdvertismentController::class, 'specialads'])->name('specialads.list');
+Route::post('/specialAds-store', [AdvertismentController::class, 'adsstore'])->name('specialads.store');
+Route::delete('/specials-Ads/{card}', [AdvertismentController::class, 'destroyads'])->name('specialads.ads.delete');
+//Business Ads
+Route::get('/businessAds', [AdvertismentController::class, 'businessads'])->name('list.business.cards');
+Route::post('/businessAds-store', [AdvertismentController::class, 'businessadssstore'])->name('list.business.store.ads');
+Route::delete('/businessAds-card/{card}', [AdvertismentController::class, 'destroybusinessads'])->name('business.ads.delete');
+
+//Service Ads
+Route::get('/ServiceAds', [AdvertismentController::class, 'Servicecardsads'])->name('list.Service.ads');
+Route::post('/ServiceAds-store', [AdvertismentController::class, 'Serviceadssstore'])->name('list.Serviceads.store');
+Route::delete('/ServiceAds-card/{card}', [AdvertismentController::class, 'destroyServicecardsads'])->name('Service.ads.delete');
+
+//Food Drink Ads
+Route::get('/FoodDrinkAds', [AdvertismentController::class, 'FoodDrinkads'])->name('list.food.ads');
+Route::post('/FoodDrinkAds-store', [AdvertismentController::class, 'FoodDrinkadsstore'])->name('ads.food.store');
+Route::delete('/FoodDrinkAds-card/{card}', [AdvertismentController::class, 'destroyFoodDrinkads'])->name('food.ads.delete');
+
+
+
+
 ?>
+
