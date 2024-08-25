@@ -512,79 +512,74 @@
         @endcan
 
         @can('advertisment.read')
-            <li class="menu-item ">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-intersect"></i>
-                    <div>Advertisment</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <div>Add / Manage Cards</div>
-                        </a>
-
-
-
-                        <ul class="menu-sub">
-                            <li class="menu-item ">
-                                <a href="{{ url('specialcards') }}" class="menu-link">
-                                    <div>Manage Special Cards</div>
-                                </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="{{ url('/businesscards') }}" class="menu-link">
-                                    <div>Manage Business Cards</div>
-                                </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="{{ url('/Servicecards') }}" class="menu-link">
-                                    <div>Manage Services Cards</div>
-                                </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="{{ url('/FoodDrinkcards') }}" class="menu-link">
-                                    <div>Manage Food & Drinks Cards</div>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-
-                    <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
-                      <a href="javascript:void(0)" class="menu-link menu-toggle">
-                          <div>Add / Manage Ads</div>
-                      </a>
-
-
-
-                      <ul class="menu-sub">
-                          <li class="menu-item ">
-                              <a href="{{ url('specialAds') }}" class="menu-link">
-                                  <div>Manage Special Cards</div>
-                              </a>
-                          </li>
-                          <li class="menu-item ">
-                              <a href="{{ url('/businessAds') }}" class="menu-link">
-                                  <div>Manage Business Cards</div>
-                              </a>
-                          </li>
-                          <li class="menu-item ">
-                              <a href="{{ url('/ServiceAds') }}" class="menu-link">
-                                  <div>Manage Services Cards</div>
-                              </a>
-                          </li>
-                          <li class="menu-item ">
-                              <a href="{{ url('/FoodDrinkAds') }}" class="menu-link">
-                                  <div>Manage Food & Drinks Cards</div>
-                              </a>
-                          </li>
-                      </ul>
-
-                  </li>
-            </li>
-        </ul>
+        <li class="menu-item {{ Request::is('specialcards') || Request::is('businesscards') || Request::is('Servicecards') || Request::is('FoodDrinkcards') || Request::is('specialAds') || Request::is('businessAds') || Request::is('ServiceAds') || Request::is('FoodDrinkAds') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-intersect"></i>
+                <div>Advertisment</div>
+            </a>
+    
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('specialcards') || Request::is('businesscards') || Request::is('Servicecards') || Request::is('FoodDrinkcards') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Add / Manage Cards</div>
+                    </a>
+    
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('specialcards') ? 'active' : '' }}">
+                            <a href="{{ url('specialcards') }}" class="menu-link">
+                                <div>Manage Special Cards</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('businesscards') ? 'active' : '' }}">
+                            <a href="{{ url('/businesscards') }}" class="menu-link">
+                                <div>Manage Business Cards</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('Servicecards') ? 'active' : '' }}">
+                            <a href="{{ url('/Servicecards') }}" class="menu-link">
+                                <div>Manage Services Cards</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('FoodDrinkcards') ? 'active' : '' }}">
+                            <a href="{{ url('/FoodDrinkcards') }}" class="menu-link">
+                                <div>Manage Food & Drinks Cards</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+    
+                <li class="menu-item {{ Request::is('specialAds') || Request::is('businessAds') || Request::is('ServiceAds') || Request::is('FoodDrinkAds') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Add / Manage Ads</div>
+                    </a>
+    
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('specialAds') ? 'active' : '' }}">
+                            <a href="{{ url('specialAds') }}" class="menu-link">
+                                <div>Manage Special Ads</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('businessAds') ? 'active' : '' }}">
+                            <a href="{{ url('/businessAds') }}" class="menu-link">
+                                <div>Manage Business Ads</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('ServiceAds') ? 'active' : '' }}">
+                            <a href="{{ url('/ServiceAds') }}" class="menu-link">
+                                <div>Manage Services Ads</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('FoodDrinkAds') ? 'active' : '' }}">
+                            <a href="{{ url('/FoodDrinkAds') }}" class="menu-link">
+                                <div>Manage Food & Drinks Ads</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
     @endcan
-
+    
 
     @can('feeds.read')
         <li class="menu-header small text-uppercase">
@@ -1091,88 +1086,63 @@
 
 
     @can('stories.read')
-        <li class="menu-item {{ Request::is('story/*') || Request::is('list-cards*') ? 'active open' : '' }}">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-videos"></i>
-                <div>Stories</div>
-            </a>
+    <li class="menu-item {{ Request::is('story/*') || Request::is('list-cards*') || Request::is('settings/*') || Request::is('stories_time') || Request::is('settings/storysong/*') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
+        <a href="javascript:void(0)" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bxs-videos"></i>
+            <div>Stories</div>
+        </a>
 
+        <ul class="menu-sub">
+            <li class="menu-item {{ Request::is('list-cards*') ? 'active' : '' }}">
+                <a href="{{ route('list.cards') }}" class="menu-link">
+                    <div>Add / Manage Cards</div>
+                </a>
+            </li>
 
-            <ul class="menu-sub">
+            <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }}">
+                <a href="{{ url('story/ManageStories') }}" class="menu-link">
+                    <div>Manage Stories</div>
+                </a>
+            </li>
 
-                <li class="menu-item {{ Request::is('list-cards*') ? 'active' : '' }}">
-                    <a href="{{ route('list.cards') }}" class="menu-link">
-                        <div>Add / Manage Cards</div>
-                    </a>
-                </li>
+            <li class="menu-item {{ Request::is('story/ReportedStories') ? 'active' : '' }}">
+                <a href="{{ url('story/ReportedStories') }}" class="menu-link">
+                    <div>Reported Stories</div>
+                </a>
+            </li>
 
+            <li class="menu-item {{ Request::is('settings/stories/*') || Request::is('stories_time') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <div>Settings</div>
+                </a>
 
-                <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }} ">
-                    <a href="{{ url('story/ManageStories') }}" class="menu-link">
-                        <div>Manage Stories</div>
-                    </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::is('settings/storysong/*') ? 'active' : '' }}">
+                        <a href="{{ url('settings/storysong') }}" class="menu-link">
+                            <div>Add Manage/Songs</div>
+                        </a>
+                    </li>
 
+                    <li class="menu-item {{ Request::is('stories_time') ? 'active' : '' }}">
+                        <a href="{{ url('stories_time') }}" class="menu-link">
+                            <div>Stories Time</div>
+                        </a>
+                    </li>
 
-                </li>
-
-
-
-                <li class="menu-item {{ Request::is('story/ReportedStories') ? 'active' : '' }} ">
-                    <a href="{{ url('story/ReportedStories') }}" class="menu-link">
-                        <div>Reported Stories</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item {{ Request::is('settings/stories/*') ? 'active open' : '' }}">
-                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                        <div>Settings</div>
-                    </a>
-
-
-                    <ul class="menu-sub">
-
-
-
-
-
-
-
-                        <li class="menu-item ">
-                            <a href="{{ route('settings.storysong.index') }}" class="menu-link">
-                                <div>Add Manage/Songs</div>
-                            </a>
-
-
-                        </li>
-
-
-                        <li class="menu-item ">
-                            <a href=" {{ url('stories_time') }}" class="menu-link">
-                                <div>Stories Time</div>
-                            </a>
-
-
-                        </li>
-
-                        <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/stories/reasons ') }}" class="menu-link">
-                                <div>Reasons</div>
-                            </a>
-
-
-                        </li>
+                    <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
+                        <a href="{{ url('settings/stories/reasons') }}" class="menu-link">
+                            <div>Reasons</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+@endcan
 
 
 
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    @endcan
+
     @can('reels.read')
         <li
             class="menu-item {{ Request::is('settings/reels/*') ||

@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end align-item-end">
-                                    <form action="{{ route('list.cards.delete',$card->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                    <form action="{{ route('list.cards.deleteas',$card->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>

@@ -640,7 +640,7 @@ Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class
 //Manage Cards
 Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.cards');
 Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
-Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.delete');
+Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.deleteas');
 
 Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
 
@@ -760,7 +760,7 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
             Route::post('voting/prefix/update/{id}', [PrefixController::class, 'update'])->name('voting.prefix.update');
             Route::get('chats/reasons', [ReasonController::class, 'index'])->name('chats.reasons');
 //Manage Songs
-            Route::resource('/storysong', SongController::class);
+          //  Route::resource('/storysong', SongController::class);
             Route::resource('/storysong', SongController::class)->names([
                 'index' => 'storysong.index',
                 'create' => 'storysong.create',
@@ -904,8 +904,8 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
         });
 });
 
- Route::get('stories_time', [SettingController::class, 'storage_setting']);
-Route::post('/story-time', [SettingController::class, 'store'])->name('story.time.store');
+Route::get('stories_time', [SettingController::class, 'storage_setting'])->name('stories23.time');
+Route::post('/story-time/post', [SettingController::class, 'store'])->name('story.time.store');
 
 Route::get('reels/reasons', [ReelReasonController::class, 'index'])->name('reels.reasons');
 Route::post('reels/reasons/store', [ReelReasonController::class, 'store'])->name('reels.reasons.store');

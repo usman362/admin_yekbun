@@ -253,6 +253,7 @@ public function Cardstore(Request $request)
 
 public function destroycard(Cards $card)
 {
+   // dd('helo');
     try {
         Log::info('Attempting to delete card with ID: ' . $card->_id);
         $card->delete();
