@@ -154,7 +154,8 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                     <div class="content-wrap">
                         <div class="card-heading justify-content-between">
                             <div class="user-block">
-                                <div class="user-info" style="display: flex; align-items: center; justify-content: space-between; padding: 5px;">
+                                <div class="user-info"
+                                    style="display: flex; align-items: center; justify-content: space-between; padding: 5px;">
                                     <div style="display: flex; align-items: center;">
                                         <div>
                                             <img id="viewer"
@@ -164,26 +165,42 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                                 style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
                                         </div>
                                         <div style="display: flex; flex-direction: column;">
-                                            <span class="d-flex" style="font-weight: bold;"><a href="#">{{ Auth::user()->name }}</a></span>
-                                            <span class="time" style="font-size: 12px; color: gray;">{{ \Carbon\Carbon::parse($card->created_at)->format('D d M g:i a') }}</span>
+                                            <span class="d-flex" style="font-weight: bold;"><a
+                                                    href="#">{{ Auth::user()->name }}</a></span>
+                                            <span class="time"
+                                                style="font-size: 12px; color: gray;">{{ \Carbon\Carbon::parse($card->created_at)->format('D d M g:i a') }}</span>
                                         </div>
                                     </div>
                                     <!-- Emojis, Like Count, and Red Flag -->
                                     <div style="display: flex; align-items: center; gap: 8px;">
                                         <!-- Emojis -->
-                                        <div style="display: flex; gap: 3px; background-color: white; padding: 5px 10px; border-radius: 15px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);">
-                                            <span>😊</span>
-                                            <span>😢</span>
-                                            <span>😡</span>
+                                        <div
+                                            style="display: flex; gap: 3px; background-color: white; padding: 5px 10px; border-radius: 15px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);">
+                                            <span>
+                                                <img src="{{ asset('assets/img/emoji 1.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                            </span>
+                                            <span>
+                                                <img src="{{ asset('assets/img/emoji 2.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                            </span>
+                                            <span>
+                                                <img src="{{ asset('assets/img/emoji 3.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                            </span>
+                                            <span>
+                                                <img src="{{ asset('assets/img/emoji-1.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                            </span>
                                         </div>
                                         <!-- Like Count -->
                                         <div style="display: flex; align-items: center;">
-                                            <span style="margin-right: 3px;">❤️</span>
+                                            <span>
+                                                <img src="{{ asset('assets/img/like.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                            </span>
                                             <span style="font-weight: bold;">123</span>
                                         </div>
                                         <!-- Red Flag -->
                                         <div>
-                                            <span style="color: red; font-size: 16px;">🚩</span>
+                                            <span>
+                                                <img src="{{ asset('assets/img/Flag 2.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -195,10 +212,17 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                     <button type="button" onclick="confirmAction(event, '{{ $card->id }}')"
                                         class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="Remove">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                        </svg>
+                                        <span>
+                                            <img src="{{ asset('assets/img/Trash icon.svg') }}" style="width: 25px; height: 35px;" alt="emoji">
+                                        </span>
+                                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                                        
+                                        viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                            <path
+                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                        </svg> --}}
                                     </button>
                                 </form>
                             </div>
@@ -206,17 +230,47 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="card-body">
                             <div class="post-image">
                                 <a data-fancybox="post1">
-                                    <!-- Increased height of the image -->
-                                    <img src="{{ asset('storage/' . $card->image) }}" style="width: 100%; height: 300px; object-fit: cover;" alt="">
+                                    
+                                    <img src="{{ asset('assets/img/Stories Cards.svg') }}" style="width: 100%; height: 70%; object-fit: cover;" alt="Post Image">
                                 </a>
                             </div>
+                            
+                            
                         </div>
+
+                        {{-- some  --}}
+                        <div class="form-check mb-3 d-flex justify-content-between align-items-center">
+                            <span>
+                                <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">Reported Reason
+                            </span>
+                          
+                        </div>
+                        
+                        {{-- pading --}}
+                        <div  class="form-check mb-3 d-flex justify-content-between align-items-center custom-form-check" style=" marging-left:20px marging-right:20px " >
+                                <div>
+                                    <label class="form-check-label d-flex align-items-start"
+                                        for="reason" data-title=""
+                                        data-description="">
+                                        <span>
+                                            <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">
+                                        </span>
+                                        <div>
+                                            <strong>Reason Title</strong><br><small>Reason Description</small>
+                                        </div>
+                                    </label>
+                                </div>
+                                <input class="form-check-input" type="radio" name="reason"
+                                    id="reason" value=""
+                                    data-title="Reason Title" data-description="Reason Description" required>
+                        </div>
+
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-    
+
 
     <!-- Delete Reason Modal -->
     @php
@@ -228,14 +282,11 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #F2F2F2 ">
-                    <h5 class="modal-title" id="deleteReasonModalLabel">   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFF00" class="bi bi-exclamation-triangle" viewBox="0 0 16 16" style="transform: translateY(-2px);">
-                        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/>
-                        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
-                      </svg>
-                      
-                      Remove Reason</h5>
+                    <h5 class="modal-title" id="deleteReasonModalLabel">  
+
+                        Remove Reason</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 
+
                 </div>
                 <div class="modal-body">
                     <p class="text-muted">Select the reason </p>
@@ -252,7 +303,9 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                     <label class="form-check-label d-flex align-items-start"
                                         for="reason{{ $key }}" data-title="{{ $items->title }}"
                                         data-description="{{ $items->reason }}">
-                                        <i class="bi bi-lightning-fill text-danger me-2"></i>
+                                        <span>
+                                            <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">
+                                        </span>
                                         <div>
                                             <strong>{{ $items->title }}</strong><br><small>{{ $items->reason }}</small>
                                         </div>
@@ -266,8 +319,8 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" class="btn btn-label-secondary">Save</button>
                         </div>
-                        
-                        
+
+
                     </form>
 
 
