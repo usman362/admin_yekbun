@@ -375,7 +375,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/movie/setting/prefix', [UploadMovieController::class, 'prefix'])->name('movie.setting.prefix');
 
     Route::get('story/ManageStories', [StoryController::class, 'ManageStories']);
-    Route::get('story/ReportedStories', [StoryController::class, 'ManageStoriestwo']);
+    Route::get('story/ReportedStories', [StoryController::class, 'ReportedStories']);
 
     Route::get('setting/live/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name(
         'live.policy_and_terms.index'

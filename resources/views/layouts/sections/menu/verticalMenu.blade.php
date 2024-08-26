@@ -1111,13 +1111,13 @@
                 </a>
             </li>
 
-            <li class="menu-item {{ Request::is('settings/stories/*') || Request::is('stories_time') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
+            <li class="menu-item {{ Request::is('settings/storysong*') || Request::is('stories_time') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <div>Settings</div>
                 </a>
 
                 <ul class="menu-sub">
-                    <li class="menu-item {{ Request::is('settings/storysong/*') ? 'active' : '' }}">
+                    <li class="menu-item {{ Request::is('settings/storysong*') ? 'active' : '' }}">
                         <a href="{{ url('settings/storysong') }}" class="menu-link">
                             <div>Add Manage/Songs</div>
                         </a>
@@ -1139,7 +1139,6 @@
         </ul>
     </li>
 @endcan
-
 
 
 

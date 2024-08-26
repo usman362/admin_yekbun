@@ -222,8 +222,9 @@ class StoryController extends Controller
     return redirect()->back()->with('success', 'Card deleted successfully.');
 }
 
-     public function ManageStoriestwo(){
-       return view('content.stories.ReportedStories');
+     public function ReportedStories(){
+        $cards=Cards::get();
+       return view('content.stories.ReportedStories',compact('cards'));
     }
  
 public function Listcard()
