@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RealSong;
 use App\Models\ReelStoryTime;
+use App\Models\Cards;
 use App\Models\ReelCard;
 use App\Models\ReelDeletionCards;
 use App\Models\RealReason;
@@ -54,8 +55,9 @@ class ReelSongController extends Controller
     
         return redirect()->back()->with('success', 'Card deleted successfully.');
     }
-    public function ManageStoriestwo(){
-        return view('content.reels.ReportedStories');
+    public function ReportedStories(){
+        $cards=Cards::get();
+        return view('content.reels.ReportedStories',compact('cards'));
      }
     public function getMessage()
     {

@@ -918,7 +918,7 @@ Route::delete('reels/song/delete/{id}', [ReelSongController::class, 'destroy'])-
 Route::get('reels/stories_time', [ReelSongController::class, 'storage_setting']);
 Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name('reel.time.store');
 Route::delete('/reel-list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
-Route::get('reel/ReportedStories', [ReelSongController::class, 'ManageStoriestwo']);
+Route::get('reel/ReportedStories', [ReelSongController::class, 'ReportedStories']);
 Route::get('reel/ManageStories', [ReelSongController::class, 'ManageStories']);
 
 
