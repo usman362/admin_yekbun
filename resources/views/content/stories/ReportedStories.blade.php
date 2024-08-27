@@ -16,6 +16,37 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
 
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
     <style>
+        /* Hide the default radio button */
+.custom-radio {
+    appearance: none;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Create a custom radio button effect */
+.custom-radio:checked::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+     width: 16px; /* Adjust width for inner circle */
+    height: 16px; /* Adjust height for inner circle */
+    border-radius: 50%;
+    background-color: #28a745;  /* Success green color */
+}
+
+/* Optional: Add a hover effect */
+.custom-radio:hover {
+    border-color: #28a745;
+}
+
         /* Custom Modal Styles */
         .modal-content {
             border-radius: 10px;
@@ -237,34 +268,36 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                             
                             
                         </div>
+{{-- new --}} 
+                       {{-- some  --}}
+<div class="form-check mb-3 d-flex justify-content-center align-items-center text-center">
+    <span>
+        <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">
+        Reported Reason
+    </span>
+</div>
 
-                        {{-- some  --}}
-                        <div class="form-check mb-3 d-flex justify-content-between align-items-center">
-                            <span>
-                                <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">Reported Reason
-                            </span>
-                          
-                        </div>
-                        
-                        {{-- pading --}}
-                        <div  class="form-check mb-3 d-flex justify-content-between align-items-center custom-form-check" style=" marging-left:20px marging-right:20px " >
-                                <div>
-                                    <label class="form-check-label d-flex align-items-start"
-                                        for="reason" data-title=""
-                                        data-description="">
-                                        <span>
-                                            <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">
-                                        </span>
-                                        <div>
-                                            <strong>Reason Title</strong><br><small>Reason Description</small>
-                                        </div>
-                                    </label>
-                                </div>
-                                <input class="form-check-input" type="radio" name="reason"
-                                    id="reason" value=""
-                                    data-title="Reason Title" data-description="Reason Description" required>
-                        </div>
+{{-- padding --}}
+<div class="form-check mb-3 d-flex justify-content-between align-items-center custom-form-check" style="padding-left: 20px; padding-right: 20px; margin:20px; border-radius:10px">
+    <div class="d-flex align-items-center">
+        <label class="form-check-label d-flex align-items-center" for="reason" style="margin-bottom: 0;">
+            <span>
+                <img src="{{ asset('assets/img/Reason Icon.svg') }}" style="width: 20px; height: 20px;" alt="emoji">
+            </span>
+            <div class="ml-2">
+                <strong>Reason Title</strong><br>
+                <small>Reason Description</small>
+            </div>
+        </label>
+    </div>
+    <!-- Align the radio button to the right -->
+    <div>
+        <input class="form-check-input custom-radio" type="radio" name="reason" id="reason" value="" data-title="Reason Title" data-description="Reason Description" required>
+    </div>
+</div>
 
+{{-- end --}}
+                       
                     </div>
                 </div>
             </div>
@@ -311,7 +344,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                         </div>
                                     </label>
                                 </div>
-                                <input class="form-check-input" type="radio" name="reason"
+                                <input class="form-check-input custom-radio" type="radio" name="reason"
                                     id="reason{{ $key }}" value="{{ $items->id }}"
                                     data-title="{{ $items->title }}" data-description="{{ $items->reason }}" required>
                             </div>
