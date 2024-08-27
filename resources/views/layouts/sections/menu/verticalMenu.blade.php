@@ -576,6 +576,41 @@
                         </li>
                     </ul>
                 </li>
+                <li class="menu-item {{ Request::is('settings/adver-manage-song*') || Request::is('stories_time') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
+    
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('settings/adver-manage-song*') ? 'active' : '' }}">
+                            <a href="{{ url('adver-manage-song') }}" class="menu-link">
+                                <div>Add Manage/Songs</div>
+                            </a>
+                        </li>
+    
+                        <li class="menu-item {{ Request::is('advertisement_time') ? 'active' : '' }}">
+                            <a href="{{ url('advertisement_time') }}" class="menu-link">
+                                <div>Ads Time</div>
+                            </a>
+                        </li>
+    
+                        <li class="menu-item {{ Request::is('adver-reason') ? 'active' : '' }}">
+                            <a href="{{ url('adver-reason') }}" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('adver-policy') ? 'active' : '' }}">
+                            <a href="{{ url('adver-policy') }}" class="menu-link">
+                                <div>Add Policy</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
+                            <a href="{{ url('settings/stories/reasons') }}" class="menu-link">
+                                <div>Pricing</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </li>
     @endcan

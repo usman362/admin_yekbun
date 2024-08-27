@@ -8,7 +8,11 @@ use App\Models\SpecialCards;
 use App\Models\BusinessCard;
 use App\Models\FoodDrink;
 use App\Models\FoodAds;
+use App\Models\AdsReason;
+use App\Models\AdverSong;
+use App\Models\AdsTime;
 use App\Models\SpecialsAds;
+use App\Models\AdsPolicy;
 use App\Models\ServiceAds;
 use App\Models\BusinessAds;
 use App\Models\ServiceCard;
@@ -435,5 +439,153 @@ public function FoodDrinkadsstore(Request $request)
 }
 
 
+public function index()
+{
+    $StorySongs  = AdverSong::all();
+    return view("content.advertisement.song.index",compact('StorySongs'));
+}
+public function getMessage()
+{
+    $ringtones = AdverSong::where('ringType', 1)->get();
+    $ringType = 1;
 
+    return view("content.song.index",compact('ringtones', 'ringType'));
+}
+public function getCall()
+{
+    $ringtones = AdverSong::where('ringType', 2)->get();
+    $ringType = 2;
+    return view("content.apps.app-ringtone",compact('ringtones', 'ringType'));
+}
+public function store(Request $request)
+{
+   // dd($request->all());
+    $response_msg = $request->ringType == "1" ? "Song" : "Song";
+    if(!empty($request->audio_paths)){
+        foreach ($request->audio_paths as $key => $path) {
+            try {
+                $ringtone = AdverSong::updateOrCreate(['_id' => $request->id], [
+                    'fileName' => $request->audio_filename[$key],
+                    'filePath' => $path,
+                    'ringType' => intval($request->ringType),
+                    'fileSize' => $request->audio_size[$key]
+                ]);
+            } catch (\Throwable $e) {
+                return back()->with('success', $response_msg.'  has been created');
+            }
+        }
+        return back()->with('success', $response_msg.'  has been updated');
+    } else {
+        return redirect()->back();
+    }
+
+}
+public function destroy($id)
+{
+    try {
+        $ringtone = AdverSong::find($id);
+        if (!$ringtone) {
+            return back()->with('error','Song not found.');
+        }
+        $ringtone->delete();
+        return back()->with('success','Song has been deleted.');
+
+    } catch (\Exception $e) {
+        return back()->with('error','Failed to delete Song.');
+    }
+}
+public function storage_setting(){
+    $storyTime = AdsTime::first(); 
+    return view('content.advertisement.story_time',compact('storyTime'));
+}
+public function storetime(Request $request)
+{
+   //dd($request->all());
+   $validated = $request->validate([
+       'length' => 'nullable|string|min:0|max:100',
+       'is_active' => 'nullable|string',
+   ]);
+//dd( $validated);
+   $storyTime = AdsTime::first(); // Assuming there's only one record
+   if ($storyTime) {
+       $storyTime->update($validated);
+   } else {
+    AdsTime::create($validated);
+   }
+//dd($storyTime);
+   return redirect()->back()->with('success', 'Ads Time updated successfully!');
+}
+public function indexreason()
+{
+    $reasons = AdsReason::all();
+    return view('content.advertisement.reasons.index', compact('reasons'));
+}
+public function reasonstore(Request $request)
+{
+    $validatedData = $request->validate([
+        'title' => 'required',
+        'reason' => 'required',
+    ]);
+    $status = empty($request->id) ? 'Created' : 'Updated';
+    try {
+        $reason = AdsReason::updateOrCreate(
+            ['_id' => $request->reason_id],
+            $validatedData
+        );
+        return redirect()->route('adver.reason')->with('success', 'Ads Reason Has been ' . $status);
+    } catch (\Exception $e) {
+        return redirect()->route('adver.reason')->with('error', 'Failed to ' . $status . ' Feed Reason');
+    }
+}
+public function reasondestroy($id)
+{
+    $reason = AdsReason::find($id);
+    if ($reason->delete()) {
+        return redirect()->route('reasons.index')->with('success', 'Ads Reason Deleted Successfully');
+    } else {
+        return redirect()->route('reasons.index')->with('error', 'Failed to Delete  Reason');
+    }
+}
+public function Policyindex()
+{
+    $data = AdsPolicy::all();
+    //return  view('content.policy_and_terms.index' , compact('decode' , 'disclaimer' , 'tab'));
+    return  view('content.advertisement.policy_and_terms.index' , compact('data'));
+}
+public function Policystore(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+    ]);
+
+    AdsPolicy::create([
+        'name' => $request->name
+    ]);
+
+    return back()->with('success', 'New privacy policy and terms section has been created.');
+ 
+}
+public function Policyestroy($id)
+{
+     $policy = AdsPolicy::find($id);
+     if($policy->delete($policy->id)){
+        return redirect()->back();
+     }
+}
+
+public function saveFileds(Request $request){
+    $request->validate([
+        'privacy_policy' => 'required',
+        // 'disclaimer' => 'required',
+    ]);
+// dd($request->privacy_policy);
+    $check = AdsPolicy::find($request->id);
+    $check->privacy_policy = $request->privacy_policy;
+    // $check->disclaimer = $request->disclaimer;
+    if($check->save()){
+        return back()->with('success' , 'Privacy Policy and term updated successfully.')->withInput(['tab' => $request->tab]);
+    }else{
+        return back()->with('success' , ' Failed to update Privacy Policy and term.')->withInput(['tab' => $request->tab]);
+    }
+}
 }

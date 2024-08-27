@@ -964,6 +964,23 @@ Route::get('/FoodDrinkAds', [AdvertismentController::class, 'FoodDrinkads'])->na
 Route::post('/FoodDrinkAds-store', [AdvertismentController::class, 'FoodDrinkadsstore'])->name('ads.food.store');
 Route::delete('/FoodDrinkAds-card/{card}', [AdvertismentController::class, 'destroyFoodDrinkads'])->name('food.ads.delete');
 
+//Manage Song
+Route::get('/adver-manage-song', [AdvertismentController::class, 'index'])->name('adver.managesong');
+Route::post('/advertisement-store', [AdvertismentController::class, 'store'])->name('adver.managesong.store');
+Route::delete('/advertisement-song/{song}', [AdvertismentController::class, 'destroy'])->name('adver.song.delete');
+
+// Ads Time
+Route::get('advertisement_time', [AdvertismentController::class, 'storage_setting'])->name('adver.time');
+Route::post('/story-time/post', [AdvertismentController::class, 'storetime'])->name('adver.time.store');
+//Reason
+Route::get('/adver-reason', [AdvertismentController::class, 'indexreason'])->name('adver.reason');
+Route::post('/advertisement-reason', [AdvertismentController::class, 'reasonstore'])->name('adver.reason.store');
+Route::delete('/advertisement-song/{song}', [AdvertismentController::class, 'reasondestroy'])->name('adver.song.delete');
+//Policy
+Route::get('/advertisement-policy', [AdvertismentController::class, 'Policyindex'])->name('adver.policy');
+Route::post('/advertisement-policy', [AdvertismentController::class, 'Policystore'])->name('adver.policy.store');
+Route::delete('/advertisement-policy/{policy}', [AdvertismentController::class, 'Policyestroy'])->name('adver.policy.delete');
+Route::post('advert-saveFileds', [AdvertismentController::class, 'saveFileds'])->name('adver.policy_and_terms.saveFileds');
 
 
 
