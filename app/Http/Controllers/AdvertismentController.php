@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Helpers;
+use Illuminate\Support\Facades\Redirect;
+
 use App\Models\SpecialCards;
 use App\Models\BusinessCard;
 use App\Models\FoodDrink;
 use App\Models\FoodAds;
+use App\Models\AdsPricing;
 use App\Models\AdsReason;
 use App\Models\AdverSong;
 use App\Models\AdsTime;
@@ -587,5 +590,94 @@ public function saveFileds(Request $request){
     }else{
         return back()->with('success' , ' Failed to update Privacy Policy and term.')->withInput(['tab' => $request->tab]);
     }
+}
+public function pricing2(Request $request){
+		
+    $url = url('advertisement/advert/pricing');
+    
+    if($request->isdelete){
+        $delid = $request->delid;
+        
+        $delprice =  AdsPricing::where('_id', $delid)->first();
+        
+        $delprice->delete();	
+        
+        return Redirect::to($url);
+        
+        return redirect()->back()->with('success','Price deleted successfully.');
+    }
+    
+    if($request->title){
+        
+        
+        $imgfilename = "";
+    
+          if ($request->hasFile('dp')) {
+            $randomize = rand(111111, 999999);
+            $extension = $request->file('dp')->extension();
+            $filename = $randomize . '.' . $extension;
+            $image = $request->file('dp')->move('images/prices/', $filename);
+            $imgfilename = $filename;
+        }
+        
+        $title = $request->title;
+        $days = $request->days;
+        $currency = $request->currency;
+        $price = $request->price;
+        $description = strip_tags($request->description);
+        
+        if($request->upid != "0"){
+            
+            $id = $request->upid;
+            $newprice =  AdsPricing::where('_id', $id)->first();
+            
+            
+            if($request->file_removed == 1){
+                
+            }else{
+                $imgfilename = $newprice->image;
+            }
+            
+        //	$newprice = new Pricings();
+            $newprice->title = $title;
+            $newprice->days = $days;
+            $newprice->currency = $currency;
+            $newprice->price = $price;
+            $newprice->desription = $description;
+            $newprice->image = $imgfilename;
+            $newprice->update();
+            return Redirect::to($url);
+        }else{
+            //save record
+            $newprice = new AdsPricing();
+            $newprice->title = $title;
+            $newprice->days = $days;
+            $newprice->currency = $currency;
+            $newprice->price = $price;
+            $newprice->desription = $description;
+            $newprice->image = $imgfilename;
+            $newprice->save();
+            return Redirect::to($url);
+            
+        }
+        
+        
+        
+            
+    }
+    
+    $view = 'daily';
+    if (request()->view) {
+      $view = request()->view;
+    }
+    
+    $pricings =  AdsPricing::orderBy('created_at', 'desc')->get();
+    
+    
+    
+    return view('content.advertisement.greetings.pricing', [
+        'pricings' => $pricings
+    ]);
+ 
 }
 }

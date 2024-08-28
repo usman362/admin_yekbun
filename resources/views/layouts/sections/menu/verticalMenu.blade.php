@@ -512,18 +512,18 @@
         @endcan
 
         @can('advertisment.read')
-        <li class="menu-item {{ Request::is('specialcards') || Request::is('businesscards') || Request::is('Servicecards') || Request::is('FoodDrinkcards') || Request::is('specialAds') || Request::is('businessAds') || Request::is('ServiceAds') || Request::is('FoodDrinkAds') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('specialcards', 'businesscards', 'Servicecards', 'FoodDrinkcards', 'specialAds', 'businessAds', 'ServiceAds', 'FoodDrinkAds') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-intersect"></i>
                 <div>Advertisment</div>
             </a>
-    
+        
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('specialcards') || Request::is('businesscards') || Request::is('Servicecards') || Request::is('FoodDrinkcards') ? 'active open' : '' }}">
+                <li class="menu-item {{ Request::is('specialcards', 'businesscards', 'Servicecards', 'FoodDrinkcards') ? 'active open' : '' }}">
                     <a href="javascript:void(0)" class="menu-link menu-toggle">
                         <div>Add / Manage Cards</div>
                     </a>
-    
+        
                     <ul class="menu-sub">
                         <li class="menu-item {{ Request::is('specialcards') ? 'active' : '' }}">
                             <a href="{{ url('specialcards') }}" class="menu-link">
@@ -531,28 +531,28 @@
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('businesscards') ? 'active' : '' }}">
-                            <a href="{{ url('/businesscards') }}" class="menu-link">
+                            <a href="{{ url('businesscards') }}" class="menu-link">
                                 <div>Manage Business Cards</div>
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('Servicecards') ? 'active' : '' }}">
-                            <a href="{{ url('/Servicecards') }}" class="menu-link">
+                            <a href="{{ url('Servicecards') }}" class="menu-link">
                                 <div>Manage Services Cards</div>
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('FoodDrinkcards') ? 'active' : '' }}">
-                            <a href="{{ url('/FoodDrinkcards') }}" class="menu-link">
+                            <a href="{{ url('FoodDrinkcards') }}" class="menu-link">
                                 <div>Manage Food & Drinks Cards</div>
                             </a>
                         </li>
                     </ul>
                 </li>
-    
-                <li class="menu-item {{ Request::is('specialAds') || Request::is('businessAds') || Request::is('ServiceAds') || Request::is('FoodDrinkAds') ? 'active open' : '' }}">
+        
+                <li class="menu-item {{ Request::is('specialAds', 'businessAds', 'ServiceAds', 'FoodDrinkAds') ? 'active open' : '' }}">
                     <a href="javascript:void(0)" class="menu-link menu-toggle">
                         <div>Add / Manage Ads</div>
                     </a>
-    
+        
                     <ul class="menu-sub">
                         <li class="menu-item {{ Request::is('specialAds') ? 'active' : '' }}">
                             <a href="{{ url('specialAds') }}" class="menu-link">
@@ -560,52 +560,55 @@
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('businessAds') ? 'active' : '' }}">
-                            <a href="{{ url('/businessAds') }}" class="menu-link">
+                            <a href="{{ url('businessAds') }}" class="menu-link">
                                 <div>Manage Business Ads</div>
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('ServiceAds') ? 'active' : '' }}">
-                            <a href="{{ url('/ServiceAds') }}" class="menu-link">
+                            <a href="{{ url('ServiceAds') }}" class="menu-link">
                                 <div>Manage Services Ads</div>
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('FoodDrinkAds') ? 'active' : '' }}">
-                            <a href="{{ url('/FoodDrinkAds') }}" class="menu-link">
+                            <a href="{{ url('FoodDrinkAds') }}" class="menu-link">
                                 <div>Manage Food & Drinks Ads</div>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item {{ Request::is('settings/adver-manage-song*') || Request::is('stories_time') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
+        
+                <li class="menu-item {{ Request::is('adver-manage-song*', 'advertisement_time', 'adver-reason', 'advertisement-policy', 'advertisement/advert/pricing') ? 'active open' : '' }}">
                     <a href="javascript:void(0)" class="menu-link menu-toggle">
                         <div>Settings</div>
                     </a>
-    
+        
                     <ul class="menu-sub">
-                        <li class="menu-item {{ Request::is('settings/adver-manage-song*') ? 'active' : '' }}">
+                        <li class="menu-item {{ Request::is('adver-manage-song*') ? 'active' : '' }}">
                             <a href="{{ url('adver-manage-song') }}" class="menu-link">
                                 <div>Add Manage/Songs</div>
                             </a>
                         </li>
-    
+        
                         <li class="menu-item {{ Request::is('advertisement_time') ? 'active' : '' }}">
                             <a href="{{ url('advertisement_time') }}" class="menu-link">
                                 <div>Ads Time</div>
                             </a>
                         </li>
-    
+        
                         <li class="menu-item {{ Request::is('adver-reason') ? 'active' : '' }}">
                             <a href="{{ url('adver-reason') }}" class="menu-link">
                                 <div>Reasons</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Request::is('adver-policy') ? 'active' : '' }}">
-                            <a href="{{ url('adver-policy') }}" class="menu-link">
+        
+                        <li class="menu-item {{ Request::is('advertisement-policy') ? 'active' : '' }}">
+                            <a href="{{ url('advertisement-policy') }}" class="menu-link">
                                 <div>Add Policy</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
-                            <a href="{{ url('settings/stories/reasons') }}" class="menu-link">
+        
+                        <li class="menu-item {{ Request::is('advertisement/advert/pricing') ? 'active' : '' }}">
+                            <a href="{{ url('advertisement/advert/pricing') }}" class="menu-link">
                                 <div>Pricing</div>
                             </a>
                         </li>
@@ -613,8 +616,8 @@
                 </li>
             </ul>
         </li>
-    @endcan
-    
+        @endcan
+        
 
     @can('feeds.read')
         <li class="menu-header small text-uppercase">
@@ -1119,61 +1122,112 @@
     @endcan
 
 
-
-    @can('stories.read')
-    <li class="menu-item {{ Request::is('story/*') || Request::is('list-cards*') || Request::is('settings/*') || Request::is('stories_time') || Request::is('settings/storysong/*') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
-        <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bxs-videos"></i>
-            <div>Stories</div>
+    @can('advertisment.read')
+    <li class="menu-item {{ Request::is('specialcards') || Request::is('businesscards') || Request::is('Servicecards') || Request::is('FoodDrinkcards') || Request::is('specialAds') || Request::is('businessAds') || Request::is('ServiceAds') || Request::is('FoodDrinkAds') || Request::is('adver-manage-song*') || Request::is('advertisement_time*') || Request::is('adver-reason*') || Request::is('advertisement-policy*') || Request::is('advertisement/advert/pricing*') ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-intersect"></i>
+            <div>Advertisement</div>
         </a>
-
+    
         <ul class="menu-sub">
-            <li class="menu-item {{ Request::is('list-cards*') ? 'active' : '' }}">
-                <a href="{{ route('list.cards') }}" class="menu-link">
+            <!-- Cards Submenu -->
+            <li class="menu-item {{ Request::is('specialcards') || Request::is('businesscards') || Request::is('Servicecards') || Request::is('FoodDrinkcards') ? 'active open' : '' }}">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <div>Add / Manage Cards</div>
                 </a>
+    
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::is('specialcards') ? 'active' : '' }}">
+                        <a href="{{ url('specialcards') }}" class="menu-link">
+                            <div>Manage Special Cards</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('businesscards') ? 'active' : '' }}">
+                        <a href="{{ url('/businesscards') }}" class="menu-link">
+                            <div>Manage Business Cards</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('Servicecards') ? 'active' : '' }}">
+                        <a href="{{ url('/Servicecards') }}" class="menu-link">
+                            <div>Manage Services Cards</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('FoodDrinkcards') ? 'active' : '' }}">
+                        <a href="{{ url('/FoodDrinkcards') }}" class="menu-link">
+                            <div>Manage Food & Drinks Cards</div>
+                        </a>
+                    </li>
+                </ul>
             </li>
-
-            <li class="menu-item {{ Request::is('story/ManageStories') ? 'active' : '' }}">
-                <a href="{{ url('story/ManageStories') }}" class="menu-link">
-                    <div>Manage Stories</div>
+    
+            <!-- Ads Submenu -->
+            <li class="menu-item {{ Request::is('specialAds') || Request::is('businessAds') || Request::is('ServiceAds') || Request::is('FoodDrinkAds') ? 'active open' : '' }}">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <div>Add / Manage Ads</div>
                 </a>
+    
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::is('specialAds') ? 'active' : '' }}">
+                        <a href="{{ url('specialAds') }}" class="menu-link">
+                            <div>Manage Special Ads</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('businessAds') ? 'active' : '' }}">
+                        <a href="{{ url('/businessAds') }}" class="menu-link">
+                            <div>Manage Business Ads</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('ServiceAds') ? 'active' : '' }}">
+                        <a href="{{ url('/ServiceAds') }}" class="menu-link">
+                            <div>Manage Services Ads</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('FoodDrinkAds') ? 'active' : '' }}">
+                        <a href="{{ url('/FoodDrinkAds') }}" class="menu-link">
+                            <div>Manage Food & Drinks Ads</div>
+                        </a>
+                    </li>
+                </ul>
             </li>
-
-            <li class="menu-item {{ Request::is('story/ReportedStories') ? 'active' : '' }}">
-                <a href="{{ url('story/ReportedStories') }}" class="menu-link">
-                    <div>Reported Stories</div>
-                </a>
-            </li>
-
-            <li class="menu-item {{ Request::is('settings/storysong*') || Request::is('stories_time') || Request::is('settings/stories/reasons') ? 'active open' : '' }}">
+    
+            <!-- Settings Submenu -->
+            <li class="menu-item {{ Request::is('adver-manage-song*') || Request::is('advertisement_time*') || Request::is('adver-reason*') || Request::is('advertisement-policy*') || Request::is('advertisement/advert/pricing*') ? 'active open' : '' }}">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <div>Settings</div>
                 </a>
-
+    
                 <ul class="menu-sub">
-                    <li class="menu-item {{ Request::is('settings/storysong*') ? 'active' : '' }}">
-                        <a href="{{ url('settings/storysong') }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('adver-manage-song*') ? 'active' : '' }}">
+                        <a href="{{ route('adver.managesong') }}" class="menu-link">
                             <div>Add Manage/Songs</div>
                         </a>
                     </li>
-
-                    <li class="menu-item {{ Request::is('stories_time') ? 'active' : '' }}">
-                        <a href="{{ url('stories_time') }}" class="menu-link">
-                            <div>Stories Time</div>
+                    <li class="menu-item {{ Request::is('advertisement_time*') ? 'active' : '' }}">
+                        <a href="{{ url('advertisement_time') }}" class="menu-link">
+                            <div>Ads Time</div>
                         </a>
                     </li>
-
-                    <li class="menu-item {{ Request::is('settings/stories/reasons') ? 'active' : '' }}">
-                        <a href="{{ url('settings/stories/reasons') }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('adver-reason*') ? 'active' : '' }}">
+                        <a href="{{ url('adver-reason') }}" class="menu-link">
                             <div>Reasons</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('advertisement-policy*') ? 'active' : '' }}">
+                        <a href="{{ url('advertisement-policy') }}" class="menu-link">
+                            <div>Add Policy</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('advertisement/advert/pricing*') ? 'active' : '' }}">
+                        <a href="{{ url('advertisement/advert/pricing') }}" class="menu-link">
+                            <div>Pricing</div>
                         </a>
                     </li>
                 </ul>
             </li>
         </ul>
     </li>
-@endcan
+    @endcan
+    
 
 
 

@@ -983,6 +983,10 @@ Route::delete('/advertisement-policy/{policy}', [AdvertismentController::class, 
 Route::post('advert-saveFileds', [AdvertismentController::class, 'saveFileds'])->name('adver.policy_and_terms.saveFileds');
 
 
+ 
+ Route::prefix('advertisement')->name('advertisement.')->group(function () {
+    Route::match(['get', 'post'], 'advert/pricing', [AdvertismentController::class, 'pricing2'])->name('pricing');
+});
 
 ?>
 
