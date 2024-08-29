@@ -6,6 +6,6 @@
     </div>
     <div class="col mb-3">
         <label for="background_image" class="form-label">Background Image</label>
-        <input type="file" id="background_image" class="form-control background_image"  name="background_image" accept="image/*" required>
+        <input type="file" id="background_image" class="form-control background_image"  name="background_image" accept="image/jpeg,image/jpg,image/png,image/webp,image/gif" required>
     </div>
 </form>
