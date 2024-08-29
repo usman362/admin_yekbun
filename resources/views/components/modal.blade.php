@@ -6,10 +6,12 @@ $uid = uniqid();
     <div class="modal-dialog {{ $centered? 'modal-dialog-centered': '' }} modal-{{$size}}" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                @if($title)
                 <div class="{{ $titleCentered? 'text-center': '' }} w-100">
                     {{-- <{{ $titleTag }} class="modal-title" id="modalCenterTitle">{{ $title }}</{{ $titleTag }}> --}}
-                    <h4>@if($title) {{$title}} @else Channel Name @endif</h4>
+                    <h4>@if($title) {{$title}} @else Title Name @endif</h4>
                 </div>
+                @endif
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

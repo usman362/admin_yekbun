@@ -134,6 +134,12 @@
                 <!-- EN -->
                 <div id="en" class="content active dstepper-block">
                     <div class="row g-3">
+                        <div class="mt-4">
+                            <div class="col-md-12">
+                                <input type="text" id="title" class="form-control mt-3"
+                                    placeholder="News Title" name="title" required>
+                            </div>
+                        </div>
                         <!--codee-->
                         <div class="mt-4">
                             <div style="" id="news-image" class="">
@@ -261,47 +267,6 @@
 
                         <div class="mt-4">
                             <div style="padding:0px 2.75rem;">
-                                <div style="border-radius:5px 5px 5px 5px;"
-                                    class="d-flex justify-content-start mt-5 ">
-                                    <div style="width:-webkit-fill-available;" class="">
-                                        <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                                            aria-label="Basic example">
-                                            <label for="all"
-                                                class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
-                                                <input type="radio" class="form-check-input" name="user_type"
-                                                    value="all" id="all" checked />All</label>
-                                            <label for="standard"
-                                                class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
-                                                <input type="radio" class="form-check-input" name="user_type"
-                                                    value="standard" id="standard" />Standard</label>
-                                            <label for="premium"
-                                                class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
-                                                <input type="radio" class="form-check-input" name="user_type"
-                                                    value="premium" id="premium" />Premium</label>
-                                            <label for="vip"
-                                                class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
-                                                <input type="radio" class="form-check-input" name="user_type"
-                                                    value="vip" id="vip" />VIP</label>
-                                            <!--<button type="button" class="btn btn-label-secondary  btn btn-outline-secondary"> <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i></button>-->
-                                        </div>
-                                    </div>
-                                    {{-- <div style="margin-left:10px;"
-                                        class="d-flex justify-content-center align-items-center btn btn-outline-secondary">
-                                        <i class="fa fa-send-o" style="font-size:20px;color:#59d068"></i>
-                                    </div> --}}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <div style="padding:0px 2.75rem;" class="col-md-12">
-                                <input type="text" id="title" class="form-control mt-3"
-                                    placeholder="News Title" name="title" required>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <div style="padding:0px 2.75rem;">
                                 <hr style="width: 131px;margin: auto;margin-top:20px;">
                                 <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
                                     <input style="height: 90px;" type="text" name="description"
@@ -309,35 +274,37 @@
                                 </div>
 
 
-                                <hr style="width: 131px;margin: auto;margin-top:20px">
+                                {{-- <hr style="width: 131px;margin: auto;margin-top:20px"> --}}
 
-                                <div style="width:-webkit-fill-available;" class="mt-3 clickhere  ">
-                                    <div style="width:-webkit-fill-available;" class="btn-group" role="group"
-                                        aria-label="Basic example">
-                                        <label for="one_image"
-                                            class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active"
-                                            data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image">
-                                            <input type="radio" class="form-check-input" name="image_type"
-                                                value="1" id="one_image" checked />1 Image</label>
-                                        <label for="two_image"
-                                            class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image2" data-imagetwo="#image22" data-value="#two_image">
-                                            <input type="radio" class="form-check-input" name="image_type"
-                                                value="2" id="two_image" />2 Image</label>
-                                        <label for="three_image"
-                                            class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image3" data-imagetwo="#image33"
-                                            data-value="#three_image">
-                                            <input type="radio" class="form-check-input" name="image_type"
-                                                value="3" id="three_image" />3 Image</label>
-                                        <label for="four_image"
-                                            class="btn btn-label-secondary  btn btn-outline-secondary imagea imagepicker"
-                                            data-imageone="#image4" data-imagetwo="#image44"
-                                            data-value="#four_image">
-                                            <input type="radio" class="form-check-input" name="image_type"
-                                                value="4" id="four_image" />+4 Image</label>
+                                <div class="mt-4">
+                                    <div>
+                                        <div style="border-radius:5px 5px 5px 5px;"
+                                            class="d-flex justify-content-start mt-5 ">
+                                            <div style="width:-webkit-fill-available;" class="">
+                                                <div style="width:-webkit-fill-available;" class="btn-group" role="group"
+                                                    aria-label="Basic example">
+                                                    <label for="all"
+                                                        class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
+                                                        <input type="radio" class="form-check-input" name="user_type"
+                                                            value="all" id="all" checked />All</label>
+                                                    <label for="standard"
+                                                        class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
+                                                        <input type="radio" class="form-check-input" name="user_type"
+                                                            value="standard" id="standard" />Standard</label>
+                                                    <label for="premium"
+                                                        class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                                                        <input type="radio" class="form-check-input" name="user_type"
+                                                            value="premium" id="premium" />Premium</label>
+                                                    <label for="vip"
+                                                        class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                                                        <input type="radio" class="form-check-input" name="user_type"
+                                                            value="vip" id="vip" />VIP</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                {{-- <div style="width:-webkit-fill-available" class="mt-3 clickhere"><div style="width:-webkit-fill-available" class="btn-group" role="group" aria-label="Basic example"><label for="one_image" class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker active" data-imageone="#image1" data-imagetwo="#image11" data-value="#one_image"><input type="radio" class="form-check-input" name="image_type" value="1" id="one_image" checked="checked">1 Image</label><label for="two_image" class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker" data-imageone="#image2" data-imagetwo="#image22" data-value="#two_image"><input type="radio" class="form-check-input" name="image_type" value="2" id="two_image">2 Image</label><label for="three_image" class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker" data-imageone="#image3" data-imagetwo="#image33" data-value="#three_image"><input type="radio" class="form-check-input" name="image_type" value="3" id="three_image">3 Image</label><label for="four_image" class="btn btn-label-secondary btn btn-outline-secondary imagea imagepicker" data-imageone="#image4" data-imagetwo="#image44" data-value="#four_image"><input type="radio" class="form-check-input" name="image_type" value="4" id="four_image">+4 Image</label></div></div> --}}
                             </div>
                         </div>
                         <!--code end-->
@@ -351,9 +318,9 @@
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Comments</span>
                                         </span>
-                                        <span class="custom-option-body">
+                                        {{-- <span class="custom-option-body">
                                             <small>Get 1 project with 1 teams members.</small>
-                                        </span>
+                                        </span> --}}
                                     </label>
                                 </div>
                             </div>
@@ -365,9 +332,9 @@
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Voice Comments</span>
                                         </span>
-                                        <span class="custom-option-body">
+                                        {{-- <span class="custom-option-body">
                                             <small>Get 5 projects with 5 team members.</small>
-                                        </span>
+                                        </span> --}}
                                     </label>
                                 </div>
                             </div>
@@ -382,9 +349,9 @@
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Share</span>
                                         </span>
-                                        <span class="custom-option-body">
+                                        {{-- <span class="custom-option-body">
                                             <small>Get 1 project with 1 teams members.</small>
-                                        </span>
+                                        </span> --}}
                                     </label>
                                 </div>
                             </div>
@@ -396,15 +363,15 @@
                                         <span class="custom-option-header">
                                             <span class="h6 mb-0">Emotion</span>
                                         </span>
-                                        <span class="custom-option-body">
+                                        {{-- <span class="custom-option-body">
                                             <small>Get 5 projects with 5 team members.</small>
-                                        </span>
+                                        </span> --}}
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Start Date</label>
                                 <input type="date" class="form-control" name="start_date" id="">
@@ -416,7 +383,7 @@
                                 <label class="form-label">End Date</label>
                                 <input type="date" class="form-control" name="end_date" id="">
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="col-md-12">
                             <label class="form-label">Status</label>

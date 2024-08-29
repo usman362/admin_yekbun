@@ -218,8 +218,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-                    https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-                    "></script>
+                            https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                            "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -1391,15 +1391,15 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             <div class="content-backdrop fade"></div>
         </div>
 
-        <x-modal id="requestpopup" size="lg" title="Create News">
+        <x-modal id="requestpopup" size="lg">
             @include('content.include.live_stream.createnews')
         </x-modal>
 
-        <x-modal id="requestpopuptwo" title="Create Feed" size="md">
+        <x-modal id="requestpopuptwo" size="md">
             @include('content.include.live_stream.createmusictwo')
         </x-modal>
 
-        <x-modal id="requestpopupnew" title="" size="lg">
+        <x-modal id="requestpopupnew" size="lg">
             @include('content.include.live_stream.golive')
         </x-modal>
 
@@ -1473,7 +1473,97 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                     <div class="dz-size" data-dz-size></div>
                 </div>
                 </div></div></div>`;
+
                 let dropzoneKey = 0;
+
+                // Function to check the number of files
+                function checkFileCount() {
+                    switch (dropzoneId) {
+                        case '#news-dropzone-img':
+                            switch (this.files.length) {
+                                case 2:
+                                    $('#image22').css('display', 'block');
+                                    $('#image33').css('display', 'none');
+                                    $('#image44').css('display', 'none');
+                                    break;
+                                case 3:
+                                    $('#image22').css('display', 'none');
+                                    $('#image33').css('display', 'block');
+                                    $('#image44').css('display', 'none');
+                                    break;
+                                default:
+                                    if (this.files.length >= 4) {
+                                        $('#image22').css('display', 'none');
+                                        $('#image33').css('display', 'none');
+                                        $('#image44').css('display', 'block');
+                                    } else {
+                                        $('#image22').css('display', 'none');
+                                        $('#image33').css('display', 'none');
+                                        $('#image44').css('display', 'none');
+                                    }
+                                    break;
+                            }
+                            break;
+
+                        case '#feeds-dropzone-img':
+                            switch (this.files.length) {
+                                case 2:
+                                    $('#feedimage22').css('display', 'block');
+                                    $('#feedimage33').css('display', 'none');
+                                    $('#feedimage44').css('display', 'none');
+                                    break;
+                                case 3:
+                                    $('#feedimage22').css('display', 'none');
+                                    $('#feedimage33').css('display', 'block');
+                                    $('#feedimage44').css('display', 'none');
+                                    break;
+                                default:
+                                    if (this.files.length >= 4) {
+                                        $('#feedimage22').css('display', 'none');
+                                        $('#feedimage33').css('display', 'none');
+                                        $('#feedimage44').css('display', 'block');
+                                    } else {
+                                        $('#feedimage22').css('display', 'none');
+                                        $('#feedimage33').css('display', 'none');
+                                        $('#feedimage44').css('display', 'none');
+                                    }
+                                    break;
+                            }
+                            break;
+
+                        case '#video-dropzone-img':
+                            switch (this.files.length) {
+                                case 2:
+                                    $('#videoimage22').css('display', 'block');
+                                    $('#videoimage33').css('display', 'none');
+                                    $('#videoimage44').css('display', 'none');
+                                    break;
+                                case 3:
+                                    $('#videoimage22').css('display', 'none');
+                                    $('#videoimage33').css('display', 'block');
+                                    $('#videoimage44').css('display', 'none');
+                                    break;
+                                default:
+                                    if (this.files.length >= 4) {
+                                        $('#videoimage22').css('display', 'none');
+                                        $('#videoimage33').css('display', 'none');
+                                        $('#videoimage44').css('display', 'block');
+                                    } else {
+                                        $('#videoimage22').css('display', 'none');
+                                        $('#videoimage33').css('display', 'none');
+                                        $('#videoimage44').css('display', 'none');
+                                    }
+                                    break;
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+
+
+                }
+
                 return new Dropzone(dropzoneId, {
                     url: '{{ route('file.upload') }}',
                     previewTemplate: previewTemplate,
@@ -1483,8 +1573,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    acceptedFiles: acceptedFiles, // Accept specified file types
-                    maxFiles: limit, // Allow only one file to be selected
+                    acceptedFiles: acceptedFiles,
+                    maxFiles: limit,
                     sending: function(file, xhr, formData) {
                         formData.append('folder', folder);
                     },
@@ -1502,23 +1592,22 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                             return match.slice(0, -2);
                         });
                         if (limit == 1) {
-
                             hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${fileInputName}_file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                                `<input type="hidden" name="${fileInputName}_file_name" data-path="${response.path}" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
                             hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${fileInputName}_file_length" value="${response.duration}">`;
+                                `<input type="hidden" name="${fileInputName}_file_length" data-path="${response.path}" value="${response.duration}">`;
                             hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${fileInputName}_file_size" value="${fileSize.match(/[\d.]+/)[0]}">`;
+                                `<input type="hidden" name="${fileInputName}_file_size" data-path="${response.path}" value="${fileSize.match(/[\d.]+/)[0]}">`;
                         } else {
                             hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                                `<input type="hidden" name="${fileInputName}_file_name[]" data-path="${response.path}" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
                             hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${fileInputName}_file_length[]" value="${response.duration}">`;
+                                `<input type="hidden" name="${fileInputName}_file_length[]" data-path="${response.path}" value="${response.duration}">`;
                             hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${fileInputName}_file_size[]" value="${fileSize.match(/[\d.]+/)[0]}">`;
+                                `<input type="hidden" name="${fileInputName}_file_size[]" data-path="${response.path}" value="${fileSize.match(/[\d.]+/)[0]}">`;
                             dropzoneKey++;
                         }
-
+                        checkFileCount.call(this);
                     },
                     removedfile: function(file) {
                         const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
@@ -1541,7 +1630,10 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                             },
                             success: function() {
                                 dropzoneKey--;
-                            }
+                                const dataPath = file.previewElement.dataset.path;
+                                $(`input[data-path="${dataPath}"]`).remove();
+                                checkFileCount.call(this); // Check file count after removal
+                            }.bind(this)
                         });
 
                         return this._updateMaxFilesReachedClass();
@@ -1549,11 +1641,12 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 });
             }
 
+
             // Initialize multiple Dropzones
             document.addEventListener('DOMContentLoaded', function() {
-                initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*', 2);
-                initializeDropzone('#feeds-dropzone-img', 'image[]', 'images', 'image/*', 2);
-                initializeDropzone('#video-dropzone-img', 'video[]', 'videos', 'video/*', 2);
+                initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*', 100);
+                initializeDropzone('#feeds-dropzone-img', 'image[]', 'images', 'image/*', 100);
+                initializeDropzone('#video-dropzone-img', 'video[]', 'videos', 'video/*', 100);
             });
         </script>
         <script>
@@ -1565,6 +1658,9 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
         {{-- News Section Image Validation --}}
         <script>
+            $('#news-dropzone-img').change(function() {
+                console.log('test');
+            });
             $('.news-btn').click(function() {
                 let selectedImages = parseInt($('#createForm .hidden-inputs [name="image[]"]').length);
                 let imageLength = parseInt($('#createForm input[name="image_type"]:checked').val());
