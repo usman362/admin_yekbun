@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin\WishesandThanks;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\GreetingCard;
+use App\Models\PrayCard;
+use App\Models\SympathyCard;
+use App\Helpers\Helpers;
+use Illuminate\Support\Facades\Log;
+
 
 class WishesReasonController extends Controller
 {
@@ -18,6 +24,107 @@ class WishesReasonController extends Controller
     {
         return view('content.wish_and_thank.reason');
     }
+    public function Cardstore(Request $request)
+{
+    $request->validate([
+        'card_name' => 'required'
+    ]);
+
+    $model = new GreetingCard();
+    $model->name = $request->card_name;
+    if (!empty($request->card_image)) {
+        $imgPath = Helpers::fileUpload($request->card_image, "images/card_image");
+        $model->image = $imgPath;
+    }
+    if ($model->save()) {
+        return redirect()->back()->with('success', 'Greeting Card   Has been inserted');
+    } else {
+        return redirect()->back()->with('error', ' Failed to add Greeting Card ');
+    }
+    
+}
+
+
+public function destroycard(GreetingCard $card)
+{
+    try {
+        Log::info('Attempting to delete card with ID: ' . $card->_id);
+        $card->delete();
+        Log::info('Successfully deleted card with ID: ' . $card->_id);
+        return redirect()->back()->with('success', 'Card has been deleted!');
+    } catch (\Exception $e) {
+        Log::error('Error deleting Card: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!');
+    }
+}
+
+public function PraysStore(Request $request)
+{
+    $request->validate([
+        'card_name' => 'required'
+    ]);
+
+    $model = new PrayCard();
+    $model->name = $request->card_name;
+    if (!empty($request->card_image)) {
+        $imgPath = Helpers::fileUpload($request->card_image, "images/card_image");
+        $model->image = $imgPath;
+    }
+    if ($model->save()) {
+        return redirect()->back()->with('success', 'Pray Card   Has been inserted');
+    } else {
+        return redirect()->back()->with('error', ' Failed to add Pray Card ');
+    }
+    
+}
+
+
+public function destroyprays(PrayCard $card)
+{
+    try {
+        Log::info('Attempting to delete card with ID: ' . $card->_id);
+        $card->delete();
+        Log::info('Successfully deleted card with ID: ' . $card->_id);
+        return redirect()->back()->with('success', ' Pray Card has been deleted!');
+    } catch (\Exception $e) {
+        Log::error('Error deleting Card: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!');
+    }
+}
+
+public function sympathyStore(Request $request)
+{
+    $request->validate([
+        'card_name' => 'required'
+    ]);
+
+    $model = new SympathyCard();
+    $model->name = $request->card_name;
+    if (!empty($request->card_image)) {
+        $imgPath = Helpers::fileUpload($request->card_image, "images/card_image");
+        $model->image = $imgPath;
+    }
+    if ($model->save()) {
+        return redirect()->back()->with('success', 'Sympathy Card   Has been inserted');
+    } else {
+        return redirect()->back()->with('error', ' Failed to add Sympathy Card ');
+    }
+    
+}
+
+
+public function destroysympathy(SympathyCard $card)
+{
+    try {
+        Log::info('Attempting to delete card with ID: ' . $card->_id);
+        $card->delete();
+        Log::info('Successfully deleted card with ID: ' . $card->_id);
+        return redirect()->back()->with('success', ' Sympathy Card has been deleted!');
+    } catch (\Exception $e) {
+        Log::error('Error deleting Card: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Something went wrong!');
+    }
+}
 
     /**
      * Show the form for creating a new resource.
@@ -112,30 +219,21 @@ class WishesReasonController extends Controller
     }
     
      public function upload_card(){
-        $view = 'daily';
-        if (request()->view) {
-          $view = request()->view;
-        }
-        return view('content.wish_and_thank.upload_card',compact('view'));
+         $cards=PrayCard::get();
+        return view('content.wish_and_thank.upload_card',compact('cards'));
       
     }
     
      public function upload_cardone(){
-        $view = 'daily';
-        if (request()->view) {
-          $view = request()->view;
-        }
-        return view('content.wish_and_thank.upload_cardone',compact('view'));
+      $cards=SympathyCard::get();
+        return view('content.wish_and_thank.upload_cardone',compact('cards'));
       
     }
     
     
      public function upload_cardtwo(){
-        $view = 'daily';
-        if (request()->view) {
-          $view = request()->view;
-        }
-        return view('content.wish_and_thank.upload_cardtwo',compact('view'));
+      $cards=GreetingCard::get();
+        return view('content.wish_and_thank.upload_cardtwo',compact('cards'));
       
     }
     
@@ -176,4 +274,5 @@ class WishesReasonController extends Controller
         return view('content.wish_and_thank.pricing',compact('view'));
       
     }
+    
 }

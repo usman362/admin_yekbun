@@ -988,5 +988,17 @@ Route::post('advert-saveFileds', [AdvertismentController::class, 'saveFileds'])-
     Route::match(['get', 'post'], 'advert/pricing', [AdvertismentController::class, 'pricing2'])->name('pricing');
 });
 
+ //GreetingCards
+Route::post('/list-greeting-cards-store', [WishesReasonController::class, 'Cardstore'])->name('list.greeting-cards.store');
+Route::delete('/list-greeting-card/{card}', [WishesReasonController::class, 'destroycard'])->name('list.greeting-cards.delete');
+//PraysCards
+Route::post('/list-prays-cards-store', [WishesReasonController::class, 'PraysStore'])->name('list.prays-cards.store');
+Route::delete('/list-prays-card/{card}', [WishesReasonController::class, 'destroyprays'])->name('list.prays-cards.delete');
+
+//Sympathy
+Route::post('/list-sympathy-cards-store', [WishesReasonController::class, 'sympathyStore'])->name('list.sympathy-cards.store');
+Route::delete('/list-sympathy-card/{card}', [WishesReasonController::class, 'destroysympathy'])->name('list.sympathy-cards.delete');
+
+
 ?>
 
