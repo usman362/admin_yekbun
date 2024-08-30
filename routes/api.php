@@ -65,7 +65,7 @@ use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\AlbumController;
 use App\Http\Controllers\Api\PostGalleryController;
-
+use App\Http\Controllers\Api\AvatarsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -77,7 +77,8 @@ use App\Http\Controllers\Api\PostGalleryController;
 |
 */
 
-
+Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
+Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
 
 // Authentication
 Route::post('/signup', [AuthController::class, 'signup']);
