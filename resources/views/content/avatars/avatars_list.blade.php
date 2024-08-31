@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Avatar - List')
+@section('title', 'YekBûn SocialMedia Kurdî')
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
@@ -24,7 +24,7 @@
     </script>
 
 
-<style>	
+<style>
 	.details{
 		background: #f3f3f3;
 	  	padding: 5px;
@@ -54,7 +54,7 @@
 
         <!-- Content -->
                   <div class="container-xxl flex-grow-1 container-p-y">
-            
+
             <div class="d-flex justify-content-between">
     <h4 class="fw-bold py-3 mb-4">
           Avatars
@@ -74,15 +74,15 @@
             <div class="modal-body">
 
                 <div class="row">
-                    
-                    
-                    
+
+
+
                     <div class="col-md-6">
-                    
+
                     	<div class="" style="text-align:center;;margin-top:30px;">
                             <input name="file1" type="file" class="dropify" data-height="90" />
                         </div>
-                    
+
                     	<div class="details"
                             <b>Avatar Details</b>
                             <div class="txt">Name and Task of Avatar</div>
@@ -96,9 +96,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
-                   
+
+
+
                     </div>
                 </div>
 
@@ -118,7 +118,7 @@
         <h5 class="m-0">Avatars List</h5>
                 <a class="btn btn-primary" href="avatars/create"><i class="bx bx-plus me-0 me-sm-1"></i> Add Avatar</a>
             </div>
-            
+
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead>
@@ -133,8 +133,8 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-        
-        	
+
+
             @foreach ($avatars as $av)
             	<tr>
                 	<td class="upper">
@@ -147,14 +147,14 @@
                     	<div class="w-px-40 text-rigth" >
                     	@if($av->image != "")
                         	<img src="{{asset('/images/' . $av->image)}}" alt="" class="w-px-40 h-auto rounded-circle">
-                        @else 
+                        @else
                         	<img src="https://www.w3schools.com/howto/img_avatar.png" alt="" class="w-px-40 h-auto rounded-circle">
                         @endif
                         </div>
-                        
-                               
+
+
                     	&nbsp;<span>{{$av->name}}<br />{{$av->task}}</span>
-                        
+
                         </a>
                     </td>
                     <td>1028</td>
@@ -165,7 +165,7 @@
                         	<label class="switch me-0">
 							  <input type="checkbox" class="switch-input" checked="">
 							  <span class="switch-toggle-slider">
-								
+
 							  </span>
 							  <span class="switch-label"></span>
 							</label>
@@ -173,7 +173,7 @@
                         	<label class="switch me">
 							  <input type="checkbox" class="switch-input">
 							  <span class="switch-toggle-slider">
-								
+
 							  </span>
 							  <span class="switch-label"></span>
 							</label>
@@ -181,25 +181,25 @@
                     </td>
                     <td>
                     	<a class="btn" href="avatars/{{$av->id}}/edit" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit"><i class="bx bx-edit"></i></a>
-                        
-                        
-                        
+
+
+
                          <form action="avatars/{{$av->id}}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf                                <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove">
                                 	<i class="bx bx-trash me-1"></i>
                                 </button>
                             </form>
-                        
-                        
+
+
                     </td>
-                
+
                 </tr>
-           
+
             @endforeach
-        
-                
-            
+
+
+
                 </tbody>
       </table>
     </div>
@@ -213,7 +213,7 @@
           </div>
           <!-- / Content -->
 
-        
+
           <div class="content-backdrop fade"></div>
         </div>
         <!--/ Content wrapper -->
@@ -243,5 +243,4 @@
 
         @endsection
 @endsection
-      
-	
+
