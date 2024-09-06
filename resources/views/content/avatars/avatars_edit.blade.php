@@ -399,9 +399,12 @@
                                     <select class="form-control" name="select_lang">
                                         <option value="">Select Language</option>
 
-                                        @foreach($languages as $lang)
-                                            <option @if($avatar->select_lang == $lang->id) selected @endif value="{{$lang->id}}">{{$lang->title}}</option>
-                                        @endforeach
+                                        <option @if($avatar->select_lang == "English") selected @endif value="English">English</option>
+                                        <option @if($avatar->select_lang == "Kurdi") selected @endif value="Kurdi">Kurdi</option>
+                                        <option @if($avatar->select_lang == "Deutsch") selected @endif value="Deutsch">Deutsch</option>
+                                        <option @if($avatar->select_lang == "Arabic") selected @endif value="Arabic">Arabic</option>
+
+                                        
 
                                     </select>
                                 	
@@ -411,9 +414,11 @@
                                         <option value="">Translate To</option>
                                         
                                         
-                                        @foreach($languages as $lang)
-                                            <option @if($avatar->translate_lang == $lang->id) selected @endif value="{{$lang->id}}">{{$lang->title}}</option>
-                                        @endforeach
+                                        <option @if($avatar->translate_lang == "English") selected @endif value="English">English</option>
+                                        <option @if($avatar->translate_lang == "Kurdi") selected @endif value="Kurdi">Kurdi</option>
+                                        <option @if($avatar->translate_lang == "Deutsch") selected @endif value="Deutsch">Deutsch</option>
+                                        <option @if($avatar->translate_lang == "Arabic") selected @endif value="Arabic">Arabic</option>
+
 
 
                                     </select>

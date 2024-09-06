@@ -384,9 +384,12 @@
                                     <select class="form-control" name="select_lang">
                                         <option value="">Select Language</option>
 
-                                        @foreach($languages as $lang)
-                                            <option value="{{$lang->id}}">{{$lang->title}}</option>
-                                        @endforeach
+                                        
+                                            <option value="English">English</option>
+                                            <option value="Kurdi">Kurdi</option>
+                                            <option value="Deutsch">Deutsch</option>
+                                            <option value="Arabic">Arabic</option>
+                                        
 
                                     </select>
                                 	
@@ -396,9 +399,10 @@
                                         <option value="">Translate To</option>
                                         
                                         
-                                        @foreach($languages as $lang)
-                                            <option value="{{$lang->id}}">{{$lang->title}}</option>
-                                        @endforeach
+                                        <option value="English">English</option>
+                                            <option value="Kurdi">Kurdi</option>
+                                            <option value="Deutsch">Deutsch</option>
+                                            <option value="Arabic">Arabic</option>
 
 
                                     </select>
