@@ -99,6 +99,7 @@ class AuthController extends Controller
         'province' => $request['province'],
         'city' => $request['city'],
         'phone' => $request['phone'],
+        'device_type' => $request['device_type'],
         'user_type' => 'users'
     ]);
 
