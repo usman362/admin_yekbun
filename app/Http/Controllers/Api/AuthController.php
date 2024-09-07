@@ -87,7 +87,7 @@ class AuthController extends Controller
         'status' => (int)'1',
         'is_admin_user' => (int)'0',
         'level' => (int)'0',
-        'is_verfied' => (int)'1',
+        'is_verfied' => (int)'0',
         'is_superadmin' => (int)'0',
         'last_name' => $request['lname'],
         'language' => $request['language'],
@@ -120,7 +120,8 @@ class AuthController extends Controller
           'code' => $code,
           'username' => $request->username,
         ];
-
+        $user->otp = $code;
+        $user->save();
         Mail::to($request['email'])->send(new SendCodeMail($details));
         return response()->json(['success' => true, "message" => "Verfication Code sent to your email", 'user' => $user->id], 201);
         return response()->json(['success' => true, "message" => "User has been Successfully Created!", 'user' => $user->id], 201);
