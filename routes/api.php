@@ -90,6 +90,7 @@ Route::post('forgot-password', [AuthController::class, 'forgot_password']);
 Route::post('change-password', [AuthController::class, 'change_password']);
 Route::post('/reset/password', [AuthController::class, 'reset'])->name('password.reset');
 Route::post('/reset', [AuthController::class, 'resetpassword'])->name('reset.complete');
+Route::get('/get-code/{user_id}', [AuthController::class, 'getCode'])->name('get.userCode');
 Route::post('/reset/resend', [AuthController::class, 'reset_resend'])->name('reset.resend');
 Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
@@ -102,7 +103,7 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
   Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
   Route::delete('countries/{id}', [CountryController::class, 'destroy'])->name('countries.destroy');
 
-  
+
 
   Route::get('policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('policy_and_terms.index');
   Route::post('policy_and_terms', [PolicyAndTermsController::class, 'store'])->name('policy_and_terms.store');
@@ -221,7 +222,7 @@ Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list
     'update',
   ]);
   Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
-           
+
   Route::resource('/storysong', SongController::class);
   Route::resource('/storysong', SongController::class)->names([
       'index' => 'storysong.index',
@@ -232,7 +233,7 @@ Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list
       'update' => 'storysong.update',
       'destroy' => 'storysong.destroy',
   ]);
-  
+
   Route::resource('bazar-subcategory', BazarSubCategoryController::class)->only([
     'index',
     'store',
