@@ -138,9 +138,15 @@ class AuthController extends Controller
         }
     }
 
-    public function getCode(Request $request, $user_id)
+    public function getCode(Request $request)
     {
-        $code = UserCode::where('user_id', $user_id)->first();
+        $user = User::where('email',$request->email)->first();
+
+        if(!$user){
+            return response()->json(['message' => 'User not found!'], 404);
+        }
+
+        $code = UserCode::where('user_id', $user->id)->first();
 
         return response()->json(['user_code' => $code], 200);
     }
