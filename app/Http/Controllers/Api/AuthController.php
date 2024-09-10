@@ -143,12 +143,20 @@ class AuthController extends Controller
         $user = User::where('email',$request->email)->first();
 
         if(!$user){
-            return response()->json(['message' => 'User not found!'], 404);
+            return response()->json(['status' => false,'message' => 'User not found!'], 404);
         }
 
         $code = UserCode::where('user_id', $user->id)->first();
 
-        return response()->json(['user_code' => $code], 200);
+        if(!$code){
+            return response()->json(['status' => false,'message' => 'Code not found!'], 404);
+        }
+
+        if((int)$code->code == (int)$request->otp){
+            return response()->json(['status' => true,'message' => 'Valid Code!'], 200);
+        }else{
+            return response()->json(['status' => false,'message' => 'Invalid Code!'], 403);
+        }
     }
 
     public function logout(Request $request)
