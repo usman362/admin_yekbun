@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Notes')
+@section('title', 'Admin Activity')
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
@@ -1708,77 +1708,81 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
         {{-- Feeds Section Image Validation --}}
         <script>
             $('.feed-btn').click(function() {
-                let selectedImages = parseInt($('#feedsForm .hidden-inputs [name="image[]"]').length);
-                let selectedVideos = parseInt($('#feedsForm .hidden-inputs [name="video[]"]').length);
-                let imageLength = parseInt($('#feedsForm input[name="image_type"]:checked').val());
-                let feed_type = $('#feedsForm input[name="feed_type"]:checked').val();
+                // let selectedImages = parseInt($('#feedsForm .hidden-inputs [name="image[]"]').length);
+                // let selectedVideos = parseInt($('#feedsForm .hidden-inputs [name="video[]"]').length);
+                // let imageLength = parseInt($('#feedsForm input[name="image_type"]:checked').val());
+                // let feed_type = $('#feedsForm input[name="feed_type"]:checked').val();
 
-                if (feed_type == 'share_image') {
-                    if (isNaN(imageLength)) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Image type is not selected or invalid!',
-                        });
-                        return;
-                    }
+                // if (feed_type == 'share_image') {
+                //     if (isNaN(imageLength)) {
+                //         Swal.fire({
+                //             icon: 'error',
+                //             title: 'Oops...',
+                //             text: 'Image type is not selected or invalid!',
+                //         });
+                //         return;
+                //     }
 
-                    if (imageLength === 4) {
-                        if (selectedImages < imageLength) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Selection Error',
-                                text: 'Please select at least 4 images!',
-                            });
-                        } else {
-                            $('#feedsForm')[0].submit()
-                        }
-                    } else {
-                        if (selectedImages !== imageLength) {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Selection Warning',
-                                text: `Please select exactly ${imageLength} images!`,
-                            });
-                        } else {
-                            $('#feedsForm')[0].submit()
-                        }
-                    }
-                }
+                //     if (imageLength === 4) {
+                //         if (selectedImages < imageLength) {
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Selection Error',
+                //                 text: 'Please select at least 4 images!',
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     } else {
+                //         if (selectedImages !== imageLength) {
+                //             Swal.fire({
+                //                 icon: 'warning',
+                //                 title: 'Selection Warning',
+                //                 text: `Please select exactly ${imageLength} images!`,
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     }
+                // }
 
 
-                if (feed_type == 'share_video') {
-                    if (isNaN(imageLength)) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Video is not selected or invalid!',
-                        });
-                        return;
-                    }
+                // if (feed_type == 'share_video') {
+                //     if (isNaN(imageLength)) {
+                //         Swal.fire({
+                //             icon: 'error',
+                //             title: 'Oops...',
+                //             text: 'Video is not selected or invalid!',
+                //         });
+                //         return;
+                //     }
 
-                    if (imageLength === 4) {
-                        if (selectedVideos < imageLength) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Selection Error',
-                                text: 'Please select at least 4 Videos!',
-                            });
-                        } else {
-                            $('#feedsForm')[0].submit()
-                        }
-                    } else {
-                        if (selectedVideos !== imageLength) {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Selection Warning',
-                                text: `Please select exactly ${imageLength} Videos!`,
-                            });
-                        } else {
-                            $('#feedsForm')[0].submit()
-                        }
-                    }
-                }
+                //     if (imageLength === 4) {
+                //         if (selectedVideos < imageLength) {
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Selection Error',
+                //                 text: 'Please select at least 4 Videos!',
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     } else {
+                //         if (selectedVideos !== imageLength) {
+                //             Swal.fire({
+                //                 icon: 'warning',
+                //                 title: 'Selection Warning',
+                //                 text: `Please select exactly ${imageLength} Videos!`,
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     }
+                // }
+                // if (feed_type == 'share_text') {
+                //     $('#feedsForm')[0].submit()
+                // }
+                $('#feedsForm')[0].submit();
             });
         </script>
 
