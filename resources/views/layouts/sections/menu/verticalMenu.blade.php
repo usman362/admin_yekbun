@@ -125,18 +125,18 @@
                     <div>Users</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item  {{ Request::is('users/standard') ? 'active' : '' }}">
-                        <a href="{{ url('/users/standard') }}" class="menu-link">
+                    <li class="menu-item  {{ Request::is('users/educated') ? 'active' : '' }}">
+                        <a href="{{ url('/users/educated') }}" class="menu-link">
                             <div>Educated Users</div>
                         </a>
                     </li>
-                    <li class="menu-item  {{ Request::is('users/premium') ? 'active' : '' }}">
-                        <a href="{{ url('/users/premium') }}" class="menu-link">
+                    <li class="menu-item  {{ Request::is('users/cultivated') ? 'active' : '' }}">
+                        <a href="{{ url('/users/cultivated') }}" class="menu-link">
                             <div>Cultivated Users</div>
                         </a>
                     </li>
-                    <li class="menu-item  {{ Request::is('users/vip') ? 'active' : '' }}">
-                        <a href="{{ url('/users/vip') }}" class="menu-link">
+                    <li class="menu-item  {{ Request::is('users/academic') ? 'active' : '' }}">
+                        <a href="{{ url('/users/academic') }}" class="menu-link">
                             <div>Academic Users</div>
                         </a>
                     </li>
@@ -145,14 +145,14 @@
                             <div>Settings</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('settings/user-roles/standard') ? 'active' : '' }}">
+                            <li class="menu-item {{ Request::is('settings/user-roles/educated') ? 'active' : '' }}">
 
                                 <a href="{{ url('/profile-banner') }}" class="menu-link">
                                     <div>Profile Banner</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ Request::is('settings/user-roles/standard') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/user-roles/standard') }}" class="menu-link">
+                            <li class="menu-item {{ Request::is('settings/user-roles/educated') ? 'active' : '' }}">
+                                <a href="{{ url('/settings/user-roles/educated') }}" class="menu-link">
                                     <div>User Roles</div>
                                 </a>
                             </li>

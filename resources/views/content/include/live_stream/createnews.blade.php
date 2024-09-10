@@ -287,18 +287,18 @@
                                                         class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
                                                         <input type="radio" class="form-check-input" name="user_type"
                                                             value="all" id="all" checked />All</label>
-                                                    <label for="standard"
+                                                    <label for="educated"
                                                         class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
                                                         <input type="radio" class="form-check-input" name="user_type"
-                                                            value="standard" id="standard" />Standard</label>
-                                                    <label for="premium"
+                                                            value="educated" id="educated" />Educated</label>
+                                                    <label for="cultivated"
                                                         class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                                                         <input type="radio" class="form-check-input" name="user_type"
-                                                            value="premium" id="premium" />Premium</label>
-                                                    <label for="vip"
+                                                            value="cultivated" id="cultivated" />Cultivated</label>
+                                                    <label for="academic"
                                                         class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                                                         <input type="radio" class="form-check-input" name="user_type"
-                                                            value="vip" id="vip" />VIP</label>
+                                                            value="academic" id="academic" />Academic</label>
                                                 </div>
                                             </div>
                                         </div>

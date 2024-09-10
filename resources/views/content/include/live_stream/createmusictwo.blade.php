@@ -613,18 +613,18 @@
                         class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
                         <input type="radio" class="form-check-input" name="user_type" value="all"
                             id="all-feed" checked />All</label>
-                    <label for="standard" data-val="standard-feed"
+                    <label for="educated" data-val="educated-feed"
                         class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
-                        <input type="radio" class="form-check-input" name="user_type" value="standard"
-                            id="standard-feed" />Standard</label>
-                    <label for="premium" data-val="premium-feed"
+                        <input type="radio" class="form-check-input" name="user_type" value="educated"
+                            id="educated-feed" />Educated</label>
+                    <label for="cultivated" data-val="cultivated-feed"
                         class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
-                        <input type="radio" class="form-check-input" name="user_type" value="premium"
-                            id="premium-feed" />Premium</label>
-                    <label for="vip" data-val="vip-feed"
+                        <input type="radio" class="form-check-input" name="user_type" value="cultivated"
+                            id="cultivated-feed" />Cultivated</label>
+                    <label for="academic" data-val="academic-feed"
                         class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
-                        <input type="radio" class="form-check-input" name="user_type" value="vip"
-                            id="vip-feed" />VIP</label>
+                        <input type="radio" class="form-check-input" name="user_type" value="academic"
+                            id="academic-feed" />Academic</label>
                 </div>
             </div>
         </div>

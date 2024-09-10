@@ -169,11 +169,11 @@ Route::group(['middleware' => 'permission:avatars.read'], function () {
     Route::get('/manage-avatars/', [AvatarsController::class, 'manag_avatars']);
     Route::get('/manage-avatars/{id}', [AvatarsController::class, 'manag_avatars']);
     Route::get('/get-avatars/{id}', [AvatarsController::class, 'get_avatars']);
-    
+
     Route::resource('/avatars', AvatarsController::class);
-    
+
     Route::get('/test-avatars', [AvatarsController::class, 'testavatar']);
-    
+
     });
 
 Route::resource('/settings/countrieslist', CountryLocationController::class);
@@ -247,19 +247,12 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::prefix('/users')
         ->name('users.')
         ->group(function () {
-            Route::resource('standard', StandardUserController::class);
-            Route::resource('premium', PremiumUserController::class);
-            Route::resource('vip', DiamondUserController::class);
-        });
-    Route::prefix('/users')
-        ->name('users.')
-        ->group(function () {
             Route::post('{id}/block/', [StandardUserController::class, 'block'])->name('block');
             Route::post('{id}/warn/', [StandardUserController::class, 'warn'])->name('warn');
             Route::post('{id}/upgrade/', [StandardUserController::class, 'upgrade'])->name('upgrade');
-            Route::resource('standard', StandardUserController::class);
-            Route::resource('premium', PremiumUserController::class);
-            Route::resource('vip', DiamondUserController::class);
+            Route::resource('educated', StandardUserController::class);
+            Route::resource('cultivated', PremiumUserController::class);
+            Route::resource('academic', DiamondUserController::class);
         });
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
@@ -519,8 +512,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/series/{id}/thumbnail', [UploadMovieController::class, 'deleteImage'])->name('series.delete-thumbnail');
 
     //   Route::get('/currency', [CurrencyController::class, 'index'])->name('index');
-    
-    
+
+
 
 
 
@@ -585,19 +578,19 @@ Route::post('/languages/keyword/section/donation', [LanguageController::class, '
         Route::middleware('check.role:Super Admin')->group(function ( )  use ($controller_path) {
 
             Route::resource('/currency', CurrencyController::class);
-        
+
             Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
-        
+
             Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
-        
+
             Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
-        
+
             Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
-        
+
             Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
-        
+
             Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
-            
+
 
 
     Route::get('/app/user/storage', $controller_path . '\apps\popup\Popup@index')->name('user.storage');
@@ -734,7 +727,7 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
                 'yekbun_location.countries.index'
             );
             Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
-           
+
             Route::resource('/countries', CountryController::class);
             //App Setting
             $controller_path = 'App\Http\Controllers';
@@ -770,8 +763,8 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
                 'update' => 'storysong.update',
                 'destroy' => 'storysong.destroy',
             ]);
-            
-            
+
+
             Route::resource('/bank-transfer', BankTransferController::class);
 
             Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
@@ -806,9 +799,9 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
             Route::prefix('user-roles')
                 ->name('user-roles.')
                 ->group(function () {
-                    Route::get('/standard', [UserRolesController::class, 'standard'])->name('standard');
-                    Route::get('/premium', [UserRolesController::class, 'premium'])->name('premium');
-                    Route::get('/vip', [UserRolesController::class, 'vip'])->name('vip');
+                    Route::get('/educated', [UserRolesController::class, 'educated'])->name('educated');
+                    Route::get('/cultivated', [UserRolesController::class, 'cultivated'])->name('cultivated');
+                    Route::get('/academic', [UserRolesController::class, 'academic'])->name('academic');
                     Route::get('/fanpage', [UserRolesController::class, 'fanpage'])->name('fanpage');
                     Route::post('/update', [UserRolesController::class, 'update'])->name('update.permissions');
                 });
@@ -830,9 +823,9 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
     Route::post('/app/task/store', $controller_path . '\Task\Task@store')->name('app-task-store');
     Route::post('/app/task/update/{id}', $controller_path . '\Task\Task@update')->name('app-task-update');
     Route::delete('/app/task/delete/{id}', $controller_path . '\Task\Task@destroy')->name('app-task-delete');
-    
+
 });
-    
+
     Route::get('/upload_movies/{id}/{status}', [UploadMovieController::class, 'status'])->name('movies_status');
     Route::get('/movie_category/{id}/{status}', [UploadMovieCategoryController::class, 'status'])->name(
         'moviecat_status'
@@ -983,7 +976,7 @@ Route::delete('/advertisement-policy/{policy}', [AdvertismentController::class, 
 Route::post('advert-saveFileds', [AdvertismentController::class, 'saveFileds'])->name('adver.policy_and_terms.saveFileds');
 
 
- 
+
  Route::prefix('advertisement')->name('advertisement.')->group(function () {
     Route::match(['get', 'post'], 'advert/pricing', [AdvertismentController::class, 'pricing2'])->name('pricing');
 });

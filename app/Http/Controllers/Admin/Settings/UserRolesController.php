@@ -10,25 +10,25 @@ use Maklad\Permission\Models\Permission;
 
 class UserRolesController extends Controller
 {
-    public function standard()
+    public function educated()
     {
-        $userLevel = 'standard';
+        $userLevel = 'educated';
         $modules = $this->getModules($userLevel);
         $permissions = Setting::where('name', $userLevel)->first();
         return view("content.settings.user_roles", compact("modules", "userLevel","permissions"));
     }
 
-    public function premium()
+    public function cultivated()
     {
-        $userLevel = 'premium';
+        $userLevel = 'cultivated';
         $modules = $this->getModules($userLevel);
         $permissions = Setting::where('name', $userLevel)->first();
         return view("content.settings.user_roles", compact("modules", "userLevel","permissions"));
     }
 
-    public function vip()
+    public function academic()
     {
-        $userLevel = 'vip';
+        $userLevel = 'academic';
         $modules = $this->getModules($userLevel);
         $permissions = Setting::where('name', $userLevel)->first();
         return view("content.settings.user_roles", compact("modules", "userLevel","permissions"));

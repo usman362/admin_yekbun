@@ -10,7 +10,7 @@ class UserRoleSettingSeeder extends Seeder
 {
     public function run()
     {
-      $userLevels = ['standard', 'premium', 'vip'];
+      $userLevels = ['educated', 'cultivated', 'academic'];
 
       $permissions = [
           'friends_allow_request' => false,
@@ -112,6 +112,8 @@ class UserRoleSettingSeeder extends Seeder
           'chat_video_join_call' => false,
           'chat_video_call_time' => 10,
       ];
+
+      Setting::truncate();
 
       // Create a permission
       for($i = 0; $i < 3; $i ++){
