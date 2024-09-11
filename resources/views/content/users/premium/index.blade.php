@@ -23,7 +23,7 @@
 <div class="d-flex justify-content-between">
   <div>
     <h4 class="fw-bold py-3 mb-4">
-      <span class="text-muted fw-light">Users /</span> List of Premium Users
+      <span class="text-muted fw-light">Users /</span> List of Cultivated Users
     </h4>
   </div>
   <div class="">
