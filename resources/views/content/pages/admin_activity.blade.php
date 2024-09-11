@@ -455,8 +455,8 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-                                    https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-                                    "></script>
+                                        https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                                        "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -891,299 +891,411 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                                 <!-- Post body text -->
                                                 @if ($feed->feed_type == 'share_text')
                                                     <div class="post-text mt-1">
-                                                        <div style="background-size:cover;background-image:url({{ $feed->feed_background_image }});display: flex;justify-content: center;align-items: center;height: 50vh;text-align: center;">
-                                                            <p style="color:{{ $feed->feed_text_color }};font-weight:bold;font-size:24px" class="p-1">
+                                                        <div
+                                                            style="background-size:cover;background-image:url({{ $feed->feed_background_image }});display: flex;justify-content: center;align-items: center;height: 50vh;text-align: center;">
+                                                            <p style="color:{{ $feed->feed_text_color }};font-weight:bold;font-size:24px"
+                                                                class="p-1">
                                                                 {{ $feed->description }}
                                                             </p>
                                                         </div>
                                                     </div>
                                                 @else
-
-                                                @if ($feed->feed_type == 'share_video')
-                                                    @php
-                                                        $imgUrl = $feed->video
-                                                            ? asset('storage/' . $feed->video[0])
-                                                            : asset('assets/img/feed-image.jpeg');
-                                                    @endphp
-                                                @else
-                                                    @php
-                                                        $imgUrl = $feed->image
-                                                            ? asset('storage/' . $feed->image[0])
-                                                            : asset('assets/img/feed-image.jpeg');
-                                                    @endphp
-                                                @endif
-
-
-                                                <div class="row">
-                                                    @if ($feed->image_type == 2)
-                                                        @if ($feed->grid_style == 'modern')
-                                                            <div class="col-md-6">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="col-md-12">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @elseif($feed->image_type == 3)
-                                                        @if ($feed->grid_style == 'modern')
-                                                            <div class="col-md-12">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="col-md-8">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @elseif($feed->image_type == 4)
-                                                        @if ($feed->grid_style == 'modern')
-                                                            <div class="col-md-6">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="col-md-8">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-image">
-                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                        data-thumb="{{ $imgUrl }}"
-                                                                        href="{{ $imgUrl }}"
-                                                                        data-demo-href="{{ $imgUrl }}">
-
-                                                                        <img src="{{ $imgUrl }}"
-                                                                            data-demo-src="{{ $imgUrl }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        @endif
+                                                    @if ($feed->feed_type == 'share_video')
+                                                        @php
+                                                            $imgUrl = $feed->video
+                                                                ? asset('storage/' . $feed->video[0])
+                                                                : asset('assets/img/feed-image.jpeg');
+                                                        @endphp
                                                     @else
-                                                        <div class="col-md-12">
-                                                            <div class="post-image">
-                                                                <a data-fancybox="post1" data-lightbox-type="comments"
-                                                                    data-thumb="{{ $imgUrl }}"
-                                                                    href="{{ $imgUrl }}"
-                                                                    data-demo-href="{{ $imgUrl }}">
-
-                                                                    <img src="{{ $imgUrl }}"
-                                                                        data-demo-src="{{ $imgUrl }}"
-                                                                        alt="">
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                                        @php
+                                                            $imgUrl = $feed->image
+                                                                ? asset('storage/' . $feed->image[0])
+                                                                : asset('assets/img/feed-image.jpeg');
+                                                        @endphp
                                                     @endif
-                                                    <div class="col-md-12">
-                                                        <div class="article_details">
 
-                                                            <div class="artilce_title">
-                                                                {{ $feed->title ?? 'Title' }}
-                                                            </div>
-                                                            <div class="article_time">
-                                                                {{ \Carbon\Carbon::parse($feed->created_at)->format('d.m.Y - H:m') ?? '0.0.0' }}
-                                                            </div>
+                                                    <div class="row">
+                                                        @if ($feed->image_type == 2)
+                                                            @if ($feed->grid_style == 'modern')
+                                                                <div class="col-md-6">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
 
-                                                            <div class="article_txt">
-                                                                {{ $feed->description ?? 'Description' }}
-                                                            </div>
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-12">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
 
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @elseif($feed->image_type == 3)
+                                                            @if ($feed->grid_style == 'modern')
+                                                                <div class="col-md-12">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-8">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @elseif($feed->image_type == 4)
+                                                            @if ($feed->grid_style == 'modern')
+                                                                <div class="col-md-6">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-8">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="post-image">
+                                                                        <a data-fancybox="post1"
+                                                                            data-lightbox-type="comments"
+                                                                            data-thumb="{{ $imgUrl }}"
+                                                                            href="{{ $imgUrl }}"
+                                                                            data-demo-href="{{ $imgUrl }}">
+
+                                                                            @if ($feed->feed_type == 'share_video')
+                                                                                <video src="{{ $imgUrl }}" controls
+                                                                                    style="width: 100%"></video>
+                                                                            @else
+                                                                                <img src="{{ $imgUrl }}"
+                                                                                    data-demo-src="{{ $imgUrl }}"
+                                                                                    alt="">
+                                                                            @endif
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @else
+                                                            <div class="col-md-12">
+                                                                <div class="post-image">
+                                                                    <a data-fancybox="post1" data-lightbox-type="comments"
+                                                                        data-thumb="{{ $imgUrl }}"
+                                                                        href="{{ $imgUrl }}"
+                                                                        data-demo-href="{{ $imgUrl }}">
+
+                                                                        @if ($feed->feed_type == 'share_video')
+                                                                            <video src="{{ $imgUrl }}" controls
+                                                                                style="width: 100%"></video>
+                                                                        @else
+                                                                            <img src="{{ $imgUrl }}"
+                                                                                data-demo-src="{{ $imgUrl }}"
+                                                                                alt="">
+                                                                        @endif
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        <div class="col-md-12">
+                                                            <div class="article_details">
+
+                                                                <div class="artilce_title">
+                                                                    {{ $feed->title ?? 'Title' }}
+                                                                </div>
+                                                                <div class="article_time">
+                                                                    {{ \Carbon\Carbon::parse($feed->created_at)->format('d.m.Y - H:m') ?? '0.0.0' }}
+                                                                </div>
+
+                                                                <div class="article_txt">
+                                                                    {{ $feed->description ?? 'Description' }}
+                                                                </div>
+
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                </div>
+                                                    </div>
 
                                                 @endif
                                             </div>
@@ -1881,51 +1993,51 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             }
         </script>
 
-        @section('page-script')
-            <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
-            <script>
-                $('.nav-tab a:first-child').addClass('active');
+    @section('page-script')
+        <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
+        <script>
+            $('.nav-tab a:first-child').addClass('active');
+            $('.tab-content').hide();
+            let ii = $('.tab-content');
+            ii[1].style.display = 'block';
+            // Click function
+            $('.nav-tab a').click(function() {
+                $('.nav-tab a').removeClass('active');
+                $(this).addClass('active');
                 $('.tab-content').hide();
-                let ii = $('.tab-content');
-                ii[1].style.display = 'block';
-                // Click function
-                $('.nav-tab a').click(function() {
-                    $('.nav-tab a').removeClass('active');
-                    $(this).addClass('active');
-                    $('.tab-content').hide();
 
-                    var activeTab = $(this).attr('href');
-                    $(activeTab).fadeIn();
-                    return false;
+                var activeTab = $(this).attr('href');
+                $(activeTab).fadeIn();
+                return false;
+            });
+        </script>
+        <script>
+            function confirmAction(event, callback) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Are you sure you want to delete this?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    customClass: {
+                        confirmButton: 'btn btn-danger me-3',
+                        cancelButton: 'btn btn-label-secondary'
+                    },
+                    buttonsStyling: false
+                }).then(function(result) {
+                    if (result.value) {
+                        callback();
+                    }
                 });
-            </script>
-            <script>
-                function confirmAction(event, callback) {
-                    event.preventDefault();
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "Are you sure you want to delete this?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes, delete it!',
-                        customClass: {
-                            confirmButton: 'btn btn-danger me-3',
-                            cancelButton: 'btn btn-label-secondary'
-                        },
-                        buttonsStyling: false
-                    }).then(function(result) {
-                        if (result.value) {
-                            callback();
-                        }
-                    });
-                }
-            </script>
-            <script>
-                'use strict';
+            }
+        </script>
+        <script>
+            'use strict';
 
-                function initializeDropzone(dropzoneId, hiddenInputName, folder, acceptedFiles, limit = 1) {
-                    const previewTemplate = `<div class="row">
+            function initializeDropzone(dropzoneId, hiddenInputName, folder, acceptedFiles, limit = 1) {
+                const previewTemplate = `<div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
                     <div class="dz-preview dz-file-preview w-100">
                     <div class="dz-details">
@@ -1944,323 +2056,324 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 </div>
                 </div></div></div>`;
 
-                    let dropzoneKey = 0;
+                let dropzoneKey = 0;
 
-                    // Function to check the number of files
-                    function checkFileCount() {
-                        switch (dropzoneId) {
-                            case '#news-dropzone-img':
-                                switch (this.files.length) {
-                                    case 2:
-                                        $('#image22').css('display', 'block');
+                // Function to check the number of files
+                function checkFileCount() {
+                    switch (dropzoneId) {
+                        case '#news-dropzone-img':
+                            switch (this.files.length) {
+                                case 2:
+                                    $('#image22').css('display', 'block');
+                                    $('#image33').css('display', 'none');
+                                    $('#image44').css('display', 'none');
+                                    break;
+                                case 3:
+                                    $('#image22').css('display', 'none');
+                                    $('#image33').css('display', 'block');
+                                    $('#image44').css('display', 'none');
+                                    break;
+                                default:
+                                    if (this.files.length >= 4) {
+                                        $('#image22').css('display', 'none');
+                                        $('#image33').css('display', 'none');
+                                        $('#image44').css('display', 'block');
+                                    } else {
+                                        $('#image22').css('display', 'none');
                                         $('#image33').css('display', 'none');
                                         $('#image44').css('display', 'none');
-                                        break;
-                                    case 3:
-                                        $('#image22').css('display', 'none');
-                                        $('#image33').css('display', 'block');
-                                        $('#image44').css('display', 'none');
-                                        break;
-                                    default:
-                                        if (this.files.length >= 4) {
-                                            $('#image22').css('display', 'none');
-                                            $('#image33').css('display', 'none');
-                                            $('#image44').css('display', 'block');
-                                        } else {
-                                            $('#image22').css('display', 'none');
-                                            $('#image33').css('display', 'none');
-                                            $('#image44').css('display', 'none');
-                                        }
-                                        break;
-                                }
-                                break;
+                                    }
+                                    break;
+                            }
+                            break;
 
-                            case '#feeds-dropzone-img':
-                                switch (this.files.length) {
-                                    case 2:
-                                        $('#feedimage22').css('display', 'block');
+                        case '#feeds-dropzone-img':
+                            switch (this.files.length) {
+                                case 2:
+                                    $('#feedimage22').css('display', 'block');
+                                    $('#feedimage33').css('display', 'none');
+                                    $('#feedimage44').css('display', 'none');
+                                    break;
+                                case 3:
+                                    $('#feedimage22').css('display', 'none');
+                                    $('#feedimage33').css('display', 'block');
+                                    $('#feedimage44').css('display', 'none');
+                                    break;
+                                default:
+                                    if (this.files.length >= 4) {
+                                        $('#feedimage22').css('display', 'none');
+                                        $('#feedimage33').css('display', 'none');
+                                        $('#feedimage44').css('display', 'block');
+                                    } else {
+                                        $('#feedimage22').css('display', 'none');
                                         $('#feedimage33').css('display', 'none');
                                         $('#feedimage44').css('display', 'none');
-                                        break;
-                                    case 3:
-                                        $('#feedimage22').css('display', 'none');
-                                        $('#feedimage33').css('display', 'block');
-                                        $('#feedimage44').css('display', 'none');
-                                        break;
-                                    default:
-                                        if (this.files.length >= 4) {
-                                            $('#feedimage22').css('display', 'none');
-                                            $('#feedimage33').css('display', 'none');
-                                            $('#feedimage44').css('display', 'block');
-                                        } else {
-                                            $('#feedimage22').css('display', 'none');
-                                            $('#feedimage33').css('display', 'none');
-                                            $('#feedimage44').css('display', 'none');
-                                        }
-                                        break;
-                                }
-                                break;
+                                    }
+                                    break;
+                            }
+                            break;
 
-                            case '#video-dropzone-img':
-                                switch (this.files.length) {
-                                    case 2:
-                                        $('#videoimage22').css('display', 'block');
+                        case '#video-dropzone-img':
+                            switch (this.files.length) {
+                                case 2:
+                                    $('#videoimage22').css('display', 'block');
+                                    $('#videoimage33').css('display', 'none');
+                                    $('#videoimage44').css('display', 'none');
+                                    break;
+                                case 3:
+                                    $('#videoimage22').css('display', 'none');
+                                    $('#videoimage33').css('display', 'block');
+                                    $('#videoimage44').css('display', 'none');
+                                    break;
+                                default:
+                                    if (this.files.length >= 4) {
+                                        $('#videoimage22').css('display', 'none');
+                                        $('#videoimage33').css('display', 'none');
+                                        $('#videoimage44').css('display', 'block');
+                                    } else {
+                                        $('#videoimage22').css('display', 'none');
                                         $('#videoimage33').css('display', 'none');
                                         $('#videoimage44').css('display', 'none');
-                                        break;
-                                    case 3:
-                                        $('#videoimage22').css('display', 'none');
-                                        $('#videoimage33').css('display', 'block');
-                                        $('#videoimage44').css('display', 'none');
-                                        break;
-                                    default:
-                                        if (this.files.length >= 4) {
-                                            $('#videoimage22').css('display', 'none');
-                                            $('#videoimage33').css('display', 'none');
-                                            $('#videoimage44').css('display', 'block');
-                                        } else {
-                                            $('#videoimage22').css('display', 'none');
-                                            $('#videoimage33').css('display', 'none');
-                                            $('#videoimage44').css('display', 'none');
-                                        }
-                                        break;
-                                }
-                                break;
+                                    }
+                                    break;
+                            }
+                            break;
 
-                            default:
-                                break;
-                        }
-
-
+                        default:
+                            break;
                     }
 
-                    return new Dropzone(dropzoneId, {
-                        url: '{{ route('file.upload') }}',
-                        previewTemplate: previewTemplate,
-                        parallelUploads: 1,
-                        maxFilesize: 100,
-                        addRemoveLinks: true,
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        acceptedFiles: acceptedFiles,
-                        maxFiles: limit,
-                        sending: function(file, xhr, formData) {
-                            formData.append('folder', folder);
-                        },
-                        success: function(file, response) {
-                            let fileSize = $('.dz-size').eq(dropzoneKey).text();
-                            if (file.previewElement) {
-                                file.previewElement.classList.add("dz-success");
-                            }
-                            file.previewElement.dataset.path = response.path;
-                            const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                                '.hidden-inputs');
-                            hiddenInputsContainer.innerHTML +=
-                                `<input type="hidden" name="${hiddenInputName}" value="${response.path}" data-path="${response.path}">`;
-                            let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
-                                return match.slice(0, -2);
-                            });
-                            if (limit == 1) {
-                                hiddenInputsContainer.innerHTML +=
-                                    `<input type="hidden" name="${fileInputName}_file_name" data-path="${response.path}" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
-                                hiddenInputsContainer.innerHTML +=
-                                    `<input type="hidden" name="${fileInputName}_file_length" data-path="${response.path}" value="${response.duration}">`;
-                                hiddenInputsContainer.innerHTML +=
-                                    `<input type="hidden" name="${fileInputName}_file_size" data-path="${response.path}" value="${fileSize.match(/[\d.]+/)[0]}">`;
-                            } else {
-                                hiddenInputsContainer.innerHTML +=
-                                    `<input type="hidden" name="${fileInputName}_file_name[]" data-path="${response.path}" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
-                                hiddenInputsContainer.innerHTML +=
-                                    `<input type="hidden" name="${fileInputName}_file_length[]" data-path="${response.path}" value="${response.duration}">`;
-                                hiddenInputsContainer.innerHTML +=
-                                    `<input type="hidden" name="${fileInputName}_file_size[]" data-path="${response.path}" value="${fileSize.match(/[\d.]+/)[0]}">`;
-                                dropzoneKey++;
-                            }
-                            checkFileCount.call(this);
-                        },
-                        removedfile: function(file) {
-                            const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                                '.hidden-inputs');
-                            hiddenInputsContainer.querySelector(
-                                `input[data-path="${file.previewElement.dataset.path}"]`).remove();
 
-                            if (file.previewElement != null && file.previewElement.parentNode != null) {
-                                file.previewElement.parentNode.removeChild(file.previewElement);
-                            }
+                }
 
-                            $.ajax({
-                                url: '{{ route('file.delete') }}',
-                                method: 'delete',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                data: {
-                                    path: file.previewElement.dataset.path
-                                },
-                                success: function() {
-                                    dropzoneKey--;
-                                    const dataPath = file.previewElement.dataset.path;
-                                    $(`input[data-path="${dataPath}"]`).remove();
-                                    checkFileCount.call(this); // Check file count after removal
-                                }.bind(this)
-                            });
-
-                            return this._updateMaxFilesReachedClass();
+                return new Dropzone(dropzoneId, {
+                    url: '{{ route('file.upload') }}',
+                    previewTemplate: previewTemplate,
+                    parallelUploads: 1,
+                    maxFilesize: 100,
+                    addRemoveLinks: true,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    acceptedFiles: acceptedFiles,
+                    maxFiles: limit,
+                    sending: function(file, xhr, formData) {
+                        formData.append('folder', folder);
+                    },
+                    success: function(file, response) {
+                        let fileSize = $('.dz-size').eq(dropzoneKey).text();
+                        if (file.previewElement) {
+                            file.previewElement.classList.add("dz-success");
                         }
-                    });
-                }
-
-
-                // Initialize multiple Dropzones
-                document.addEventListener('DOMContentLoaded', function() {
-                    initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*', 100);
-                    initializeDropzone('#feeds-dropzone-img', 'image[]', 'images', 'image/*', 100);
-                    initializeDropzone('#video-dropzone-img', 'video[]', 'videos', 'video/*', 100);
-                });
-            </script>
-            <script>
-                function drpzone_init() {
-                    dropZoneInitFunctions.forEach(callback => callback());
-                }
-            </script>
-            <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-
-            {{-- News Section Image Validation --}}
-            <script>
-                $('#news-dropzone-img').change(function() {
-                    console.log('test');
-                });
-                $('.news-btn').click(function() {
-                    let selectedImages = parseInt($('#createForm .hidden-inputs [name="image[]"]').length);
-                    let imageLength = parseInt($('#createForm input[name="image_type"]:checked').val());
-
-                    if (isNaN(imageLength)) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Image type is not selected or invalid!',
+                        file.previewElement.dataset.path = response.path;
+                        const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
+                            '.hidden-inputs');
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${hiddenInputName}" value="${response.path}" data-path="${response.path}">`;
+                        let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
+                            return match.slice(0, -2);
                         });
-                        return;
-                    }
+                        if (limit == 1) {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name" data-path="${response.path}" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_length" data-path="${response.path}" value="${response.duration}">`;
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_size" data-path="${response.path}" value="${fileSize.match(/[\d.]+/)[0]}">`;
+                        } else {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name[]" data-path="${response.path}" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_length[]" data-path="${response.path}" value="${response.duration}">`;
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_size[]" data-path="${response.path}" value="${fileSize.match(/[\d.]+/)[0]}">`;
+                            dropzoneKey++;
+                        }
+                        checkFileCount.call(this);
+                    },
+                    removedfile: function(file) {
+                        const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
+                            '.hidden-inputs');
+                        hiddenInputsContainer.querySelector(
+                            `input[data-path="${file.previewElement.dataset.path}"]`).remove();
 
-                    if (imageLength === 4) {
-                        if (selectedImages < imageLength) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Selection Error',
-                                text: 'Please select at least 4 images!',
-                            });
-                        } else {
-                            $('#createForm')[0].submit()
+                        if (file.previewElement != null && file.previewElement.parentNode != null) {
+                            file.previewElement.parentNode.removeChild(file.previewElement);
                         }
-                    } else {
-                        if (selectedImages !== imageLength) {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Selection Warning',
-                                text: `Please select exactly ${imageLength} images!`,
-                            });
-                        } else {
-                            $('#createForm')[0].submit()
-                        }
+
+                        $.ajax({
+                            url: '{{ route('file.delete') }}',
+                            method: 'delete',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            data: {
+                                path: file.previewElement.dataset.path
+                            },
+                            success: function() {
+                                dropzoneKey--;
+                                const dataPath = file.previewElement.dataset.path;
+                                $(`input[data-path="${dataPath}"]`).remove();
+                                checkFileCount.call(this); // Check file count after removal
+                            }.bind(this)
+                        });
+
+                        return this._updateMaxFilesReachedClass();
                     }
                 });
-
-                $('.news-modal-btn').click(function() {
-                    let image_type = parseInt($('#createForm input[name="image_type"]:checked').val())
-                    if (image_type !== 2) {
-                        $('#image22').css('display', 'none')
-                    }
-                })
-            </script>
-
-            {{-- Feeds Section Image Validation --}}
-            <script>
-                $('.feed-btn').click(function() {
-                    // let selectedImages = parseInt($('#feedsForm .hidden-inputs [name="image[]"]').length);
-                    // let selectedVideos = parseInt($('#feedsForm .hidden-inputs [name="video[]"]').length);
-                    // let imageLength = parseInt($('#feedsForm input[name="image_type"]:checked').val());
-                    // let feed_type = $('#feedsForm input[name="feed_type"]:checked').val();
-
-                    // if (feed_type == 'share_image') {
-                    //     if (isNaN(imageLength)) {
-                    //         Swal.fire({
-                    //             icon: 'error',
-                    //             title: 'Oops...',
-                    //             text: 'Image type is not selected or invalid!',
-                    //         });
-                    //         return;
-                    //     }
-
-                    //     if (imageLength === 4) {
-                    //         if (selectedImages < imageLength) {
-                    //             Swal.fire({
-                    //                 icon: 'error',
-                    //                 title: 'Selection Error',
-                    //                 text: 'Please select at least 4 images!',
-                    //             });
-                    //         } else {
-                    //             $('#feedsForm')[0].submit()
-                    //         }
-                    //     } else {
-                    //         if (selectedImages !== imageLength) {
-                    //             Swal.fire({
-                    //                 icon: 'warning',
-                    //                 title: 'Selection Warning',
-                    //                 text: `Please select exactly ${imageLength} images!`,
-                    //             });
-                    //         } else {
-                    //             $('#feedsForm')[0].submit()
-                    //         }
-                    //     }
-                    // }
+            }
 
 
-                    // if (feed_type == 'share_video') {
-                    //     if (isNaN(imageLength)) {
-                    //         Swal.fire({
-                    //             icon: 'error',
-                    //             title: 'Oops...',
-                    //             text: 'Video is not selected or invalid!',
-                    //         });
-                    //         return;
-                    //     }
+            // Initialize multiple Dropzones
+            document.addEventListener('DOMContentLoaded', function() {
+                initializeDropzone('#news-dropzone-img', 'image[]', 'images', 'image/*', 100);
+                initializeDropzone('#feeds-dropzone-img', 'image[]', 'images', 'image/*', 100);
+                initializeDropzone('#video-dropzone-img', 'video[]', 'videos', 'video/*', 100);
+            });
+        </script>
+        <script>
+            function drpzone_init() {
+                dropZoneInitFunctions.forEach(callback => callback());
+            }
+        </script>
+        <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 
-                    //     if (imageLength === 4) {
-                    //         if (selectedVideos < imageLength) {
-                    //             Swal.fire({
-                    //                 icon: 'error',
-                    //                 title: 'Selection Error',
-                    //                 text: 'Please select at least 4 Videos!',
-                    //             });
-                    //         } else {
-                    //             $('#feedsForm')[0].submit()
-                    //         }
-                    //     } else {
-                    //         if (selectedVideos !== imageLength) {
-                    //             Swal.fire({
-                    //                 icon: 'warning',
-                    //                 title: 'Selection Warning',
-                    //                 text: `Please select exactly ${imageLength} Videos!`,
-                    //             });
-                    //         } else {
-                    //             $('#feedsForm')[0].submit()
-                    //         }
-                    //     }
-                    // }
-                    // if (feed_type == 'share_text') {
-                    //     $('#feedsForm')[0].submit()
-                    // }
-                    $('#feedsForm')[0].submit();
-                });
-            </script>
+        {{-- News Section Image Validation --}}
+        <script>
+            $('#news-dropzone-img').change(function() {
+                console.log('test');
+            });
+            $('.news-btn').click(function() {
+                // let selectedImages = parseInt($('#createForm .hidden-inputs [name="image[]"]').length);
+                // let imageLength = parseInt($('#createForm input[name="image_type"]:checked').val());
 
-            <script>
-                $(document).ready(function() {
-                    $(document).click(function() {
+                // if (isNaN(imageLength)) {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Oops...',
+                //         text: 'Image type is not selected or invalid!',
+                //     });
+                //     return;
+                // }
 
-                        const lightboxing = `<div class="fancybox-container fancybox-custom-layout fancybox-show-toolbar fancybox-show-caption fancybox-is-open fancybox-is-zoomable fancybox-can-zoomIn"
+                // if (imageLength === 4) {
+                //     if (selectedImages < imageLength) {
+                //         Swal.fire({
+                //             icon: 'error',
+                //             title: 'Selection Error',
+                //             text: 'Please select at least 4 images!',
+                //         });
+                //     } else {
+                //         $('#createForm')[0].submit()
+                //     }
+                // } else {
+                //     if (selectedImages !== imageLength) {
+                //         Swal.fire({
+                //             icon: 'warning',
+                //             title: 'Selection Warning',
+                //             text: `Please select exactly ${imageLength} images!`,
+                //         });
+                //     } else {
+                //         $('#createForm')[0].submit()
+                //     }
+                // }
+                $('#createForm')[0].submit()
+            });
+
+            $('.news-modal-btn').click(function() {
+                let image_type = parseInt($('#createForm input[name="image_type"]:checked').val())
+                if (image_type !== 2) {
+                    $('#image22').css('display', 'none')
+                }
+            })
+        </script>
+
+        {{-- Feeds Section Image Validation --}}
+        <script>
+            $('.feed-btn').click(function() {
+                // let selectedImages = parseInt($('#feedsForm .hidden-inputs [name="image[]"]').length);
+                // let selectedVideos = parseInt($('#feedsForm .hidden-inputs [name="video[]"]').length);
+                // let imageLength = parseInt($('#feedsForm input[name="image_type"]:checked').val());
+                // let feed_type = $('#feedsForm input[name="feed_type"]:checked').val();
+
+                // if (feed_type == 'share_image') {
+                //     if (isNaN(imageLength)) {
+                //         Swal.fire({
+                //             icon: 'error',
+                //             title: 'Oops...',
+                //             text: 'Image type is not selected or invalid!',
+                //         });
+                //         return;
+                //     }
+
+                //     if (imageLength === 4) {
+                //         if (selectedImages < imageLength) {
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Selection Error',
+                //                 text: 'Please select at least 4 images!',
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     } else {
+                //         if (selectedImages !== imageLength) {
+                //             Swal.fire({
+                //                 icon: 'warning',
+                //                 title: 'Selection Warning',
+                //                 text: `Please select exactly ${imageLength} images!`,
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     }
+                // }
+
+
+                // if (feed_type == 'share_video') {
+                //     if (isNaN(imageLength)) {
+                //         Swal.fire({
+                //             icon: 'error',
+                //             title: 'Oops...',
+                //             text: 'Video is not selected or invalid!',
+                //         });
+                //         return;
+                //     }
+
+                //     if (imageLength === 4) {
+                //         if (selectedVideos < imageLength) {
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Selection Error',
+                //                 text: 'Please select at least 4 Videos!',
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     } else {
+                //         if (selectedVideos !== imageLength) {
+                //             Swal.fire({
+                //                 icon: 'warning',
+                //                 title: 'Selection Warning',
+                //                 text: `Please select exactly ${imageLength} Videos!`,
+                //             });
+                //         } else {
+                //             $('#feedsForm')[0].submit()
+                //         }
+                //     }
+                // }
+                // if (feed_type == 'share_text') {
+                //     $('#feedsForm')[0].submit()
+                // }
+                $('#feedsForm')[0].submit();
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $(document).click(function() {
+
+                    const lightboxing = `<div class="fancybox-container fancybox-custom-layout fancybox-show-toolbar fancybox-show-caption fancybox-is-open fancybox-is-zoomable fancybox-can-zoomIn"
             role="dialog" tabindex="-1" id="fancybox-container-1"
             style="transition-duration: 366ms;">
             <div class="fancybox-inner">
@@ -5993,641 +6106,641 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                         </div>
                     </div></div></div></div>`;
-                        $('.fancybox-caption__body').append(lightboxing);
-                    });
+                    $('.fancybox-caption__body').append(lightboxing);
                 });
-                //  alert('adasd');
-                $(document).ready(function() {
-                    $(".hki").click(function() {
-                        // alert('kkk');
+            });
+            //  alert('adasd');
+            $(document).ready(function() {
+                $(".hki").click(function() {
+                    // alert('kkk');
 
-                        $(".hki").removeClass("checked");
-                        $(this).addClass("checked");
-                    });
+                    $(".hki").removeClass("checked");
+                    $(this).addClass("checked");
                 });
+            });
 
-                $('.tab-contented:first').show();
+            $('.tab-contented:first').show();
 
-                // Click function
-                $(document).on('click', '.classonetr', function() {
-                    // alert('sdas');
-                    $('.classonetr').removeClass('checked');
-                    $(this).addClass('checked');
-                    $('.tab-contented').hide();
+            // Click function
+            $(document).on('click', '.classonetr', function() {
+                // alert('sdas');
+                $('.classonetr').removeClass('checked');
+                $(this).addClass('checked');
+                $('.tab-contented').hide();
 
-                    var activeTab = $(this).attr('data-king1');
-                    $(activeTab).fadeIn();
+                var activeTab = $(this).attr('data-king1');
+                $(activeTab).fadeIn();
 
-                    var activeTab = $(this).attr('data-king');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+                var activeTab = $(this).attr('data-king');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
-                // owl
-                $(document).ready(function() {
+            // owl
+            $(document).ready(function() {
 
-                    $("#owl-example").owlCarousel({
-                        loop: false,
-                        margin: 1,
-                        autoPlay: true,
-                        nav: true,
-                        center: true,
+                $("#owl-example").owlCarousel({
+                    loop: false,
+                    margin: 1,
+                    autoPlay: true,
+                    nav: true,
+                    center: true,
 
-                        rewindNav: false,
-                        responsive: {
-                            0: {
-                                items: 1
-                            },
-                            600: {
-                                items: 3
-                            },
-                            1000: {
-                                items: 4
-                            }
+                    rewindNav: false,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 3
+                        },
+                        1000: {
+                            items: 4
                         }
-                    });
-
-                });
-                // slick
-
-
-                $('.multiple-items').slick({
-                    infinite: true,
-                    slidesToShow: 6,
-                    slidesToScroll: 3,
-                    dots: true
-
+                    }
                 });
 
+            });
+            // slick
+
+
+            $('.multiple-items').slick({
+                infinite: true,
+                slidesToShow: 6,
+                slidesToScroll: 3,
+                dots: true
+
+            });
 
 
 
-                $('#imageone:first-child').addClass('active');
-                $('.image-content').hide();
-                $('.image-content:first').show();
 
-                $('.imagea:first-child').addClass('active');
+            $('#imageone:first-child').addClass('active');
+            $('.image-content').hide();
+            $('.image-content:first').show();
+
+            $('.imagea:first-child').addClass('active');
+            $('.image-content1').hide();
+            $('.image-content1:first').show();
+
+            // Click function
+            $('.imagea').click(function() {
+                $('.imagea').removeClass('active');
+                $(this).addClass('active');
                 $('.image-content1').hide();
-                $('.image-content1:first').show();
 
-                // Click function
-                $('.imagea').click(function() {
-                    $('.imagea').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-content1').hide();
-
-                    var activeTab = $(this).attr('data-imagetwo');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+                var activeTab = $(this).attr('data-imagetwo');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
 
-                $('.imagepicker:first-child').addClass('active');
+            $('.imagepicker:first-child').addClass('active');
+            $('.image-content1').hide();
+            $('.image-content1:first').show();
+
+            // Click function
+            $('.imagepicker').click(function() {
+                $('.imagepicker').removeClass('active');
+                $(this).addClass('active');
                 $('.image-content1').hide();
-                $('.image-content1:first').show();
 
-                // Click function
-                $('.imagepicker').click(function() {
-                    $('.imagepicker').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-content1').hide();
+                var activeTab = $(this).attr('data-imagetwo');
+                let value = $(this).attr('data-value');
+                $(value).prop('checked', true);
+                $(activeTab).fadeIn();
+                return false;
+            });
 
-                    var activeTab = $(this).attr('data-imagetwo');
-                    let value = $(this).attr('data-value');
-                    $(value).prop('checked', true);
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+            $('.usertypepicker').click(function() {
+                // Remove 'active' class from all elements
+                $('.usertypepicker').removeClass('active');
 
-                $('.usertypepicker').click(function() {
-                    // Remove 'active' class from all elements
-                    $('.usertypepicker').removeClass('active');
+                // Add 'active' class to the clicked element
+                $(this).addClass('active');
 
-                    // Add 'active' class to the clicked element
-                    $(this).addClass('active');
+                // Uncheck all radio buttons or checkboxes within 'user_type' name
+                $('[name="user_type"]').prop('checked', false);
 
-                    // Uncheck all radio buttons or checkboxes within 'user_type' name
-                    $('[name="user_type"]').prop('checked', false);
+                // Check the radio button or checkbox with the ID from 'data-val' attribute
+                var idToCheck = $(this).attr('data-val'); // Using .data() is cleaner
+                $('#' + idToCheck).prop('checked', true);
 
-                    // Check the radio button or checkbox with the ID from 'data-val' attribute
-                    var idToCheck = $(this).attr('data-val'); // Using .data() is cleaner
-                    $('#' + idToCheck).prop('checked', true);
-
-                    // Prevent default action (if needed)
-                    return false;
-                });
+                // Prevent default action (if needed)
+                return false;
+            });
 
 
-                $('.imgqtypicker:first-child').addClass('active');
+            $('.imgqtypicker:first-child').addClass('active');
+            $('.image-contentnew').hide();
+            $('.image-contentnew:first').show();
+
+            $('.imgqtypicker').click(function() {
+                $('.imgqtypicker').removeClass('active');
+                $(this).addClass('active');
                 $('.image-contentnew').hide();
-                $('.image-contentnew:first').show();
+                var activeTab = $(this).attr('data-imagetabs');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
-                $('.imgqtypicker').click(function() {
-                    $('.imgqtypicker').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-contentnew').hide();
-                    var activeTab = $(this).attr('data-imagetabs');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+            $('.dropify').dropify();
 
-                $('.dropify').dropify();
-
-                // share
+            // share
 
 
-                $('#shahretext:first-child').addClass('active');
+            $('#shahretext:first-child').addClass('active');
+            $('.share-content').hide();
+            $('.share-content:first').show();
+
+            // Click function
+            $('.ary').click(function() {
+                // $('.removing').hide();
+                $('.ary').removeClass('active');
+                //  $('.shareimage').addClass('active');
+
+                $(this).addClass('active');
                 $('.share-content').hide();
-                $('.share-content:first').show();
 
-                // Click function
-                $('.ary').click(function() {
-                    // $('.removing').hide();
-                    $('.ary').removeClass('active');
-                    //  $('.shareimage').addClass('active');
+                var activeTab = $(this).attr('data-sharetext');
+                $(activeTab).fadeIn();
+                $('[name="feed_type"]').val($(this).attr('data-val'));
+                var activeTab1 = $(this).attr('data-sharetext2');
+                $(activeTab1).fadeIn();
+                return false;
+            });
 
-                    $(this).addClass('active');
-                    $('.share-content').hide();
+            // remove modal center clas
+            $('.modal-dialog').removeClass('modal-dialog-centered');
+            $(document).ready(function() {
+                let previousImage = null;
 
-                    var activeTab = $(this).attr('data-sharetext');
-                    $(activeTab).fadeIn();
-                    $('[name="feed_type"]').val($(this).attr('data-val'));
-                    var activeTab1 = $(this).attr('data-sharetext2');
-                    $(activeTab1).fadeIn();
-                    return false;
+                $('.imagechange').click(function() {
+
+                    $('.tabbactive').addClass('active');
+                    $('.tabbactive2').removeClass('active');
+
+                    // Revert the previous image back to its default state
+                    if (previousImage !== null) {
+                        previousImage.attr('data', previousImage.data('default'));
+                    }
+
+                    // Set the current image as the previous image
+                    previousImage = $(this);
+
+                    // Change the source of the clicked image
+                    $(this).attr('data', $(this).data('default'));
+                });
+                $('.imagechange2').click(function() {
+
+                    $('.tabbactive').removeClass('active');
+                    $('.tabbactive2').addClass('active');
+
+                    // Revert the previous image back to its default state
+                    if (previousImage !== null) {
+                        previousImage.attr('data', previousImage.data('default'));
+                    }
+
+                    // Set the current image as the previous image
+                    previousImage = $(this);
+
+                    // Change the source of the clicked image
+                    $(this).attr('data', $(this).data('default'));
                 });
 
-                // remove modal center clas
-                $('.modal-dialog').removeClass('modal-dialog-centered');
-                $(document).ready(function() {
-                    let previousImage = null;
+                $('.grid_change').click(function() {
+                    $('#news_grid_style').val($(this).attr('data-value'))
+                    $('#feed_grid_style').val($(this).attr('data-value'))
+                })
+            });
+            // edit
+            // tabs start
+            // Show the first tab and hide the rest
+            $('#imagechangeone1:first-child').addClass('active');
+            $('.image-changecontent').hide();
+            $('.image-changecontent:first').show();
 
-                    $('.imagechange').click(function() {
+            // Click function
+            $('.imagechangeclass').click(function() {
+                var defaultimg = $(this).data('default');
+                var originalimg = $(this).data('original');
+                for (var i = 0; i < $('.imagechangeclass').length; i++) {
+                    $('.imagechangeclass').eq(i).attr('data', $('.imagechangeclass').eq(i).data('original'));
+                }
 
-                        $('.tabbactive').addClass('active');
-                        $('.tabbactive2').removeClass('active');
 
-                        // Revert the previous image back to its default state
-                        if (previousImage !== null) {
-                            previousImage.attr('data', previousImage.data('default'));
-                        }
-
-                        // Set the current image as the previous image
-                        previousImage = $(this);
-
-                        // Change the source of the clicked image
-                        $(this).attr('data', $(this).data('default'));
-                    });
-                    $('.imagechange2').click(function() {
-
-                        $('.tabbactive').removeClass('active');
-                        $('.tabbactive2').addClass('active');
-
-                        // Revert the previous image back to its default state
-                        if (previousImage !== null) {
-                            previousImage.attr('data', previousImage.data('default'));
-                        }
-
-                        // Set the current image as the previous image
-                        previousImage = $(this);
-
-                        // Change the source of the clicked image
-                        $(this).attr('data', $(this).data('default'));
-                    });
-
-                    $('.grid_change').click(function() {
-                        $('#news_grid_style').val($(this).attr('data-value'))
-                        $('#feed_grid_style').val($(this).attr('data-value'))
-                    })
-                });
-                // edit
-                // tabs start
-                // Show the first tab and hide the rest
-                $('#imagechangeone1:first-child').addClass('active');
+                $(this).attr('data', defaultimg);
+                $('.imagechangeclass').removeClass('active');
+                $(this).addClass('active');
                 $('.image-changecontent').hide();
-                $('.image-changecontent:first').show();
 
-                // Click function
-                $('.imagechangeclass').click(function() {
-                    var defaultimg = $(this).data('default');
-                    var originalimg = $(this).data('original');
-                    for (var i = 0; i < $('.imagechangeclass').length; i++) {
-                        $('.imagechangeclass').eq(i).attr('data', $('.imagechangeclass').eq(i).data('original'));
-                    }
+                var activeTab = $(this).attr('data-imagechange');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
 
-                    $(this).attr('data', defaultimg);
-                    $('.imagechangeclass').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-changecontent').hide();
+            // second
+            $('#imagechangetwo1:first-child').addClass('active');
+            $('.image-changecontent2').hide();
+            $('.image-changecontent2:first').show();
 
-                    var activeTab = $(this).attr('data-imagechange');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+            // Click function
+            $('.imagechangetwo2').click(function() {
+                var defaultimg = $(this).data('default2');
+                var originalimg = $(this).data('original2');
+                for (var i = 0; i < $('.imagechangetwo2').length; i++) {
+                    $('.imagechangetwo2').eq(i).attr('data', $('.imagechangetwo2').eq(i).data('original2'));
+                }
+
+                $(this).attr('data', defaultimg);
 
 
-                // second
-                $('#imagechangetwo1:first-child').addClass('active');
+                $('.imagechangetwo2').removeClass('active');
+                $(this).addClass('active');
                 $('.image-changecontent2').hide();
-                $('.image-changecontent2:first').show();
 
-                // Click function
-                $('.imagechangetwo2').click(function() {
-                    var defaultimg = $(this).data('default2');
-                    var originalimg = $(this).data('original2');
-                    for (var i = 0; i < $('.imagechangetwo2').length; i++) {
-                        $('.imagechangetwo2').eq(i).attr('data', $('.imagechangetwo2').eq(i).data('original2'));
-                    }
+                var activeTab = $(this).attr('data-imagechangetwo');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
-                    $(this).attr('data', defaultimg);
+            // third
+
+            $('#image-contentfour1:first-child').addClass('active');
+            $('.imagecontentfour').hide();
+            $('.imagecontentfour:first').show();
+
+            // Click function
+            $('.imagechangefour').click(function() {
+                var defaultimg = $(this).data('default3');
+                var originalimg = $(this).data('original3');
+                for (var i = 0; i < $('.imagechangefour').length; i++) {
+                    $('.imagechangefour').eq(i).attr('data', $('.imagechangefour').eq(i).data('original3'));
+                }
+
+                $(this).attr('data', defaultimg);
 
 
-                    $('.imagechangetwo2').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-changecontent2').hide();
 
-                    var activeTab = $(this).attr('data-imagechangetwo');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
-
-                // third
-
-                $('#image-contentfour1:first-child').addClass('active');
+                $('.imagechangefour').removeClass('active');
+                $(this).addClass('active');
                 $('.imagecontentfour').hide();
-                $('.imagecontentfour:first').show();
 
-                // Click function
-                $('.imagechangefour').click(function() {
-                    var defaultimg = $(this).data('default3');
-                    var originalimg = $(this).data('original3');
-                    for (var i = 0; i < $('.imagechangefour').length; i++) {
-                        $('.imagechangefour').eq(i).attr('data', $('.imagechangefour').eq(i).data('original3'));
-                    }
+                var activeTab = $(this).attr('data-contentfour2');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
-                    $(this).attr('data', defaultimg);
+            // video start
 
 
+            // Show the first tab and hide the rest
+            $('.videoa:first-child').addClass('active');
+            $('.video-content1').hide();
+            $('.video-content1:first-child').show();
 
-                    $('.imagechangefour').removeClass('active');
-                    $(this).addClass('active');
-                    $('.imagecontentfour').hide();
-
-                    var activeTab = $(this).attr('data-contentfour2');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
-
-                // video start
-
-
-                // Show the first tab and hide the rest
-                $('.videoa:first-child').addClass('active');
+            // Click function
+            $('.videoa').click(function() {
+                $('.videoa').removeClass('active');
+                $(this).addClass('active');
                 $('.video-content1').hide();
-                $('.video-content1:first-child').show();
 
-                // Click function
-                $('.videoa').click(function() {
-                    $('.videoa').removeClass('active');
-                    $(this).addClass('active');
-                    $('.video-content1').hide();
-
-                    var activeTab = $(this).attr('data-videotwo');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+                var activeTab = $(this).attr('data-videotwo');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
 
 
-                // video active 1
+            // video active 1
 
-                // Show the first tab and hide the rest
-                $('#videochangeone1:first-child').addClass('active');
+            // Show the first tab and hide the rest
+            $('#videochangeone1:first-child').addClass('active');
+            $('.video-changecontent').hide();
+            $('.video-changecontent:first').show();
+
+            // Click function
+            $('.videochangeclass').click(function() {
+                var defaultimg = $(this).data('default');
+                var originalimg = $(this).data('original');
+                for (var i = 0; i < $('.videochangeclass').length; i++) {
+                    $('.videochangeclass').eq(i).attr('data', $('.videochangeclass').eq(i).data('original'));
+                }
+
+
+                $(this).attr('data', defaultimg);
+                $('.videochangeclass').removeClass('active');
+                $(this).addClass('active');
                 $('.video-changecontent').hide();
-                $('.video-changecontent:first').show();
 
-                // Click function
-                $('.videochangeclass').click(function() {
-                    var defaultimg = $(this).data('default');
-                    var originalimg = $(this).data('original');
-                    for (var i = 0; i < $('.videochangeclass').length; i++) {
-                        $('.videochangeclass').eq(i).attr('data', $('.videochangeclass').eq(i).data('original'));
-                    }
+                var activeTab = $(this).attr('data-videochange');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
 
-                    $(this).attr('data', defaultimg);
-                    $('.videochangeclass').removeClass('active');
-                    $(this).addClass('active');
-                    $('.video-changecontent').hide();
-
-                    var activeTab = $(this).attr('data-videochange');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
+            // video active 2
 
 
-                // video active 2
+            // Show the first tab and hide the rest
+            $('#videochangetwo1:first-child').addClass('active');
+            $('.video-changecontent2').hide();
+            $('.video-changecontent2:first').show();
+
+            // Click function
+            $('.videochangetwo2').click(function() {
+                var defaultimg = $(this).data('default2');
+                var originalimg = $(this).data('original2');
+                for (var i = 0; i < $('.videochangetwo2').length; i++) {
+                    $('.videochangetwo2').eq(i).attr('data', $('.videochangetwo2').eq(i).data('original2'));
+                }
 
 
-                // Show the first tab and hide the rest
-                $('#videochangetwo1:first-child').addClass('active');
+                $(this).attr('data', defaultimg);
+                $('.videochangetwo2').removeClass('active');
+                $(this).addClass('active');
                 $('.video-changecontent2').hide();
-                $('.video-changecontent2:first').show();
 
-                // Click function
-                $('.videochangetwo2').click(function() {
-                    var defaultimg = $(this).data('default2');
-                    var originalimg = $(this).data('original2');
-                    for (var i = 0; i < $('.videochangetwo2').length; i++) {
-                        $('.videochangetwo2').eq(i).attr('data', $('.videochangetwo2').eq(i).data('original2'));
-                    }
+                var activeTab = $(this).attr('data-videochangetwo');
+                $(activeTab).fadeIn();
+                return false;
+            });
 
-
-                    $(this).attr('data', defaultimg);
-                    $('.videochangetwo2').removeClass('active');
-                    $(this).addClass('active');
-                    $('.video-changecontent2').hide();
-
-                    var activeTab = $(this).attr('data-videochangetwo');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
-
-                // video active 3
+            // video active 3
 
 
 
-                // Show the first tab and hide the rest
-                $('#videocontentfour1:first-child').addClass('active');
+            // Show the first tab and hide the rest
+            $('#videocontentfour1:first-child').addClass('active');
+            $('.videocontentfour').hide();
+            $('.videocontentfour:first').show();
+
+            // Click function
+            $('.videochangefour').click(function() {
+                var defaultimg = $(this).data('default3');
+                var originalimg = $(this).data('original3');
+                for (var i = 0; i < $('.videochangefour').length; i++) {
+                    $('.videochangefour').eq(i).attr('data', $('.videochangefour').eq(i).data('original3'));
+                }
+
+
+                $(this).attr('data', defaultimg);
+                $('.videochangefour').removeClass('active');
+                $(this).addClass('active');
                 $('.videocontentfour').hide();
-                $('.videocontentfour:first').show();
 
-                // Click function
-                $('.videochangefour').click(function() {
-                    var defaultimg = $(this).data('default3');
-                    var originalimg = $(this).data('original3');
-                    for (var i = 0; i < $('.videochangefour').length; i++) {
-                        $('.videochangefour').eq(i).attr('data', $('.videochangefour').eq(i).data('original3'));
-                    }
+                var activeTab = $(this).attr('data-contentfour2');
+                $(activeTab).fadeIn();
+                return false;
+            });
+            // Get all color options
+            const colorOptions = document.querySelectorAll('.color-option');
 
-
-                    $(this).attr('data', defaultimg);
-                    $('.videochangefour').removeClass('active');
-                    $(this).addClass('active');
-                    $('.videocontentfour').hide();
-
-                    var activeTab = $(this).attr('data-contentfour2');
-                    $(activeTab).fadeIn();
-                    return false;
+            // Loop through each color option
+            colorOptions.forEach(colorOption => {
+                // Add click event listener
+                colorOption.addEventListener('click', function() {
+                    // Remove 'selected' class from all color options
+                    colorOptions.forEach(option => option.classList.remove('selected'));
+                    // Add 'selected' class to the clicked color option
+                    this.classList.add('selected');
                 });
-                // Get all color options
-                const colorOptions = document.querySelectorAll('.color-option');
+            });
+            // Get all color options
 
-                // Loop through each color option
-                colorOptions.forEach(colorOption => {
-                    // Add click event listener
-                    colorOption.addEventListener('click', function() {
-                        // Remove 'selected' class from all color options
-                        colorOptions.forEach(option => option.classList.remove('selected'));
-                        // Add 'selected' class to the clicked color option
-                        this.classList.add('selected');
-                    });
+
+            // image select
+            $(document).ready(function() {
+                $('.clickborder').click(function() {
+                    $('.clickborder').removeClass('selected');
+                    $(this).addClass('selected');
                 });
-                // Get all color options
+            });
 
-
-                // image select
-                $(document).ready(function() {
-                    $('.clickborder').click(function() {
-                        $('.clickborder').removeClass('selected');
-                        $(this).addClass('selected');
-                    });
-                });
-
-                //   image work
-                $(document).ready(function() {
-                    $('.input_image_file').on('change', function() {
-                        let files = $(this).prop('files');
-                        let filesArr = Array.prototype.slice.call(files);
-                        if (filesArr[0].size > 2097152) {
-                            $(this).val();
-                            $(this).parent().removeClass('active');
-                            $(this).parent().find('.label-upload-image').html(
-                                "<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><path fill='currentColor' d='M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7Z'/></svg>Upload File"
-                            );
-                            $(this).parent().find('.image-preview').attr('src', '');
-
-                        } else {
-                            $(this).parent().addClass('active');
-                            $(this).parent().find('.label-upload-image').html('');
-                            $(this).parent().find('.image-preview').attr(
-                                'src',
-                                URL.createObjectURL(filesArr[0])
-                            );
-                            console.log(URL.createObjectURL(filesArr[0]));
-                            console.log("helloworld");
-                        }
-                    })
-                    $('.btn-delete').on("click", function() {
-                        $(this).val('');
+            //   image work
+            $(document).ready(function() {
+                $('.input_image_file').on('change', function() {
+                    let files = $(this).prop('files');
+                    let filesArr = Array.prototype.slice.call(files);
+                    if (filesArr[0].size > 2097152) {
+                        $(this).val();
                         $(this).parent().removeClass('active');
-                        $(this).parent().find('.label-upload-image').removeClass('d-none');
                         $(this).parent().find('.label-upload-image').html(
                             "<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><path fill='currentColor' d='M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7Z'/></svg>Upload File"
                         );
                         $(this).parent().find('.image-preview').attr('src', '');
-                    })
+
+                    } else {
+                        $(this).parent().addClass('active');
+                        $(this).parent().find('.label-upload-image').html('');
+                        $(this).parent().find('.image-preview').attr(
+                            'src',
+                            URL.createObjectURL(filesArr[0])
+                        );
+                        console.log(URL.createObjectURL(filesArr[0]));
+                        console.log("helloworld");
+                    }
                 })
-
-
-
-                // video hover
-                $(document).ready(function() {
-                    $('.videohoverclass').on('mouseenter', function() {
-                        $(this).parent().find('.videohover').css('visibility', 'visible');
-                    });
-                    $('.videohoverclass').on('mouseleave', function() {
-                        $(this).parent().find('.videohover').css('visibility', 'hidden');
-                    });
-
-
-                    $('.videohover').on('mouseenter', function() {
-                        $(this).css('visibility', 'visible');
-                    });
-                    $('.videohover').on('mouseleave', function() {
-                        $(this).css('visibility', 'hidden');
-                    });
-                });
-
-
-                $('#videohover').click(function() {
-                    $('#videoupl').trigger('click');
-                });
-
-                $('#videohover2one').click(function() {
-                    $('#videoupl2one').trigger('click');
-                });
-
-                $('#videohover2two').click(function() {
-                    $('#videoupl2two').trigger('click');
-                });
-
-
-                $('#videohover2twoone').click(function() {
-                    $('#videoupl22one').trigger('click');
-                });
-
-                $('#videohover2twotwo').click(function() {
-                    $('#videoupl22two').trigger('click');
-                });
-                $('#videohover3oneone').click(function() {
-                    $('#videoupl31two').trigger('click');
-                });
-                $('#videohover3onetwo').click(function() {
-                    $('#videoupl31one').trigger('click');
-                });
-                $('#videohover3onethree').click(function() {
-                    $('#videoupl31three').trigger('click');
-                });
-
-                $('#videohover3twoone').click(function() {
-                    $('#videoupl32one').trigger('click');
-                });
-                $('#videohover3twotwo').click(function() {
-                    $('#videoupl32two').trigger('click');
-                });
-                $('#videohover3twothree').click(function() {
-                    $('#videoupl32three').trigger('click');
-                });
-
-                $('#videohover4oneone').click(function() {
-                    $('#videoupl41one').trigger('click');
-                });
-                $('#videohover4onetwo').click(function() {
-                    $('#videoupl41two').trigger('click');
-                });
-                $('#videohover4onethree').click(function() {
-                    $('#videoupl41three').trigger('click');
-                });
-                $('#videohover4onefour').click(function() {
-                    $('#videoupl41four').trigger('click');
-                });
-                // four
-                $('#videohover42one').click(function() {
-                    $('#videoupl42one').trigger('click');
-                });
-                $('#videohover42two').click(function() {
-                    $('#videoupl42two').trigger('click');
-                });
-                $('#videohover42three').click(function() {
-                    $('#videoupl42three').trigger('click');
-                });
-                $('#videohover42four').click(function() {
-                    $('#videoupl42four').trigger('click');
-                });
-
-                // tabs start
-                // Show the first tab and hide the rest
-                $('#imagechangeone1new:first-child').addClass('active');
-                $('.image-changecontentimage').hide();
-                $('.image-changecontentimage:first').show();
-
-                // Click function
-                $('.imagechangeclassimageone').click(function() {
-                    var defaultimg = $(this).data('default');
-                    var originalimg = $(this).data('original');
-                    for (var i = 0; i < $('.imagechangeclassimageone').length; i++) {
-                        $('.imagechangeclassimageone').eq(i).attr('data', $('.imagechangeclassimageone').eq(i).data(
-                            'original'));
-                    }
-
-
-                    $(this).attr('data', defaultimg);
-                    $('.imagechangeclassimageone').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-changecontentimage').hide();
-
-                    var activeTab = $(this).attr('data-imagechangeimageone');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
-
-
-                // second
-                $('#imagechangetwo1new:first-child').addClass('active');
-                $('.image-changecontent2new').hide();
-                $('.image-changecontent2new:first').show();
-
-                // Click function
-                $('.imagechangetwo2image').click(function() {
-                    var defaultimg = $(this).data('default2');
-                    var originalimg = $(this).data('original2');
-                    for (var i = 0; i < $('.imagechangetwo2image').length; i++) {
-                        $('.imagechangetwo2image').eq(i).attr('data', $('.imagechangetwo2image').eq(i).data('original2'));
-                    }
-
-                    $(this).attr('data', defaultimg);
-
-
-                    $('.imagechangetwo2image').removeClass('active');
-                    $(this).addClass('active');
-                    $('.image-changecontent2new').hide();
-
-                    var activeTab = $(this).attr('data-imagechangetwoimage');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
-
-                // third
-
-                $('#imagecontentfour1new:first-child').addClass('active');
-                $('.imagecontentfournew').hide();
-                $('.imagecontentfournew:first').show();
-
-                // Click function
-                $('.imagechangefourclass').click(function() {
-                    var defaultimg = $(this).data('default3');
-                    var originalimg = $(this).data('original3');
-                    for (var i = 0; i < $('.imagechangefourclass').length; i++) {
-                        $('.imagechangefourclass').eq(i).attr('data', $('.imagechangefourclass').eq(i).data('original3'));
-                    }
-
-                    $(this).attr('data', defaultimg);
-                    $('.imagechangefourclass').removeClass('active');
-                    $(this).addClass('active');
-                    $('.imagecontentfournew').hide();
-
-                    var activeTab = $(this).attr('data-contentfour2new');
-                    $(activeTab).fadeIn();
-                    return false;
-                });
-                // yahan khatam
-            </script>
-        @endsection
-    @endsection
-
-    <!--// $('.tab-content').hide();-->
-    <!--// $('.tab-content:first').hide();-->
-    <!--// // $(document).find('.classone').hide();-->
-    <!--// // Click function-->
-    <!--// $(document).on('click','.classone',function(){-->
-
-    <!--//     alert('sad');-->
-    <!--//   $('.classone').removeClass('checked');-->
-    <!--//   $(this).addClass('checked');-->
-    <!--//   $('.tab-content').hide();-->
-
-    <!--//   var activeTab = $(this).attr('data-king');-->
-    <!--//   $(activeTab).fadeIn();-->
-    <!--//   return false;-->
-    <!--// });-->
-
-    @section('page-script')
-        <script></script>
-        <script>
-            $('#classone').click(function() {
-                alert('loin');
+                $('.btn-delete').on("click", function() {
+                    $(this).val('');
+                    $(this).parent().removeClass('active');
+                    $(this).parent().find('.label-upload-image').removeClass('d-none');
+                    $(this).parent().find('.label-upload-image').html(
+                        "<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'><path fill='currentColor' d='M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7Z'/></svg>Upload File"
+                    );
+                    $(this).parent().find('.image-preview').attr('src', '');
+                })
             })
+
+
+
+            // video hover
+            $(document).ready(function() {
+                $('.videohoverclass').on('mouseenter', function() {
+                    $(this).parent().find('.videohover').css('visibility', 'visible');
+                });
+                $('.videohoverclass').on('mouseleave', function() {
+                    $(this).parent().find('.videohover').css('visibility', 'hidden');
+                });
+
+
+                $('.videohover').on('mouseenter', function() {
+                    $(this).css('visibility', 'visible');
+                });
+                $('.videohover').on('mouseleave', function() {
+                    $(this).css('visibility', 'hidden');
+                });
+            });
+
+
+            $('#videohover').click(function() {
+                $('#videoupl').trigger('click');
+            });
+
+            $('#videohover2one').click(function() {
+                $('#videoupl2one').trigger('click');
+            });
+
+            $('#videohover2two').click(function() {
+                $('#videoupl2two').trigger('click');
+            });
+
+
+            $('#videohover2twoone').click(function() {
+                $('#videoupl22one').trigger('click');
+            });
+
+            $('#videohover2twotwo').click(function() {
+                $('#videoupl22two').trigger('click');
+            });
+            $('#videohover3oneone').click(function() {
+                $('#videoupl31two').trigger('click');
+            });
+            $('#videohover3onetwo').click(function() {
+                $('#videoupl31one').trigger('click');
+            });
+            $('#videohover3onethree').click(function() {
+                $('#videoupl31three').trigger('click');
+            });
+
+            $('#videohover3twoone').click(function() {
+                $('#videoupl32one').trigger('click');
+            });
+            $('#videohover3twotwo').click(function() {
+                $('#videoupl32two').trigger('click');
+            });
+            $('#videohover3twothree').click(function() {
+                $('#videoupl32three').trigger('click');
+            });
+
+            $('#videohover4oneone').click(function() {
+                $('#videoupl41one').trigger('click');
+            });
+            $('#videohover4onetwo').click(function() {
+                $('#videoupl41two').trigger('click');
+            });
+            $('#videohover4onethree').click(function() {
+                $('#videoupl41three').trigger('click');
+            });
+            $('#videohover4onefour').click(function() {
+                $('#videoupl41four').trigger('click');
+            });
+            // four
+            $('#videohover42one').click(function() {
+                $('#videoupl42one').trigger('click');
+            });
+            $('#videohover42two').click(function() {
+                $('#videoupl42two').trigger('click');
+            });
+            $('#videohover42three').click(function() {
+                $('#videoupl42three').trigger('click');
+            });
+            $('#videohover42four').click(function() {
+                $('#videoupl42four').trigger('click');
+            });
+
+            // tabs start
+            // Show the first tab and hide the rest
+            $('#imagechangeone1new:first-child').addClass('active');
+            $('.image-changecontentimage').hide();
+            $('.image-changecontentimage:first').show();
+
+            // Click function
+            $('.imagechangeclassimageone').click(function() {
+                var defaultimg = $(this).data('default');
+                var originalimg = $(this).data('original');
+                for (var i = 0; i < $('.imagechangeclassimageone').length; i++) {
+                    $('.imagechangeclassimageone').eq(i).attr('data', $('.imagechangeclassimageone').eq(i).data(
+                        'original'));
+                }
+
+
+                $(this).attr('data', defaultimg);
+                $('.imagechangeclassimageone').removeClass('active');
+                $(this).addClass('active');
+                $('.image-changecontentimage').hide();
+
+                var activeTab = $(this).attr('data-imagechangeimageone');
+                $(activeTab).fadeIn();
+                return false;
+            });
+
+
+            // second
+            $('#imagechangetwo1new:first-child').addClass('active');
+            $('.image-changecontent2new').hide();
+            $('.image-changecontent2new:first').show();
+
+            // Click function
+            $('.imagechangetwo2image').click(function() {
+                var defaultimg = $(this).data('default2');
+                var originalimg = $(this).data('original2');
+                for (var i = 0; i < $('.imagechangetwo2image').length; i++) {
+                    $('.imagechangetwo2image').eq(i).attr('data', $('.imagechangetwo2image').eq(i).data('original2'));
+                }
+
+                $(this).attr('data', defaultimg);
+
+
+                $('.imagechangetwo2image').removeClass('active');
+                $(this).addClass('active');
+                $('.image-changecontent2new').hide();
+
+                var activeTab = $(this).attr('data-imagechangetwoimage');
+                $(activeTab).fadeIn();
+                return false;
+            });
+
+            // third
+
+            $('#imagecontentfour1new:first-child').addClass('active');
+            $('.imagecontentfournew').hide();
+            $('.imagecontentfournew:first').show();
+
+            // Click function
+            $('.imagechangefourclass').click(function() {
+                var defaultimg = $(this).data('default3');
+                var originalimg = $(this).data('original3');
+                for (var i = 0; i < $('.imagechangefourclass').length; i++) {
+                    $('.imagechangefourclass').eq(i).attr('data', $('.imagechangefourclass').eq(i).data('original3'));
+                }
+
+                $(this).attr('data', defaultimg);
+                $('.imagechangefourclass').removeClass('active');
+                $(this).addClass('active');
+                $('.imagecontentfournew').hide();
+
+                var activeTab = $(this).attr('data-contentfour2new');
+                $(activeTab).fadeIn();
+                return false;
+            });
+            // yahan khatam
         </script>
     @endsection
+@endsection
+
+<!--// $('.tab-content').hide();-->
+<!--// $('.tab-content:first').hide();-->
+<!--// // $(document).find('.classone').hide();-->
+<!--// // Click function-->
+<!--// $(document).on('click','.classone',function(){-->
+
+<!--//     alert('sad');-->
+<!--//   $('.classone').removeClass('checked');-->
+<!--//   $(this).addClass('checked');-->
+<!--//   $('.tab-content').hide();-->
+
+<!--//   var activeTab = $(this).attr('data-king');-->
+<!--//   $(activeTab).fadeIn();-->
+<!--//   return false;-->
+<!--// });-->
+
+@section('page-script')
+    <script></script>
+    <script>
+        $('#classone').click(function() {
+            alert('loin');
+        })
+    </script>
+@endsection
