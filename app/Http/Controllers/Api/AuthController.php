@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\UploadMedia;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -153,6 +154,9 @@ class AuthController extends Controller
         }
 
         if((int)$code->code == (int)$request->otp){
+            $user->email_verified_at = Carbon::now();
+            $user->is_verfied = (int)1;
+            $user->save();
             return response()->json(['status' => true,'message' => 'Valid Code!'], 200);
         }else{
             return response()->json(['status' => false,'message' => 'Invalid Code!'], 403);

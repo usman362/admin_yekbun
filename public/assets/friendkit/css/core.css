@@ -51415,3 +51415,12 @@ body.is-dark .elements-wrap .element-block code {
   color: #000;
   opacity: .75
 }
+
+.m-0-auto{
+    margin: 0 auto !important;
+}
+.mt-4-auto{
+    margin-top: 1rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

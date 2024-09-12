@@ -266,7 +266,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <div style="padding:0px 2.75rem;">
+                            <div style="padding:0px 0.35rem;">
                                 <hr style="width: 131px;margin: auto;margin-top:20px;">
                                 <div style="background: #eaeaea;border-radius:5px 5px 0px 0px;" class="d-flex mt-3  ">
                                     <input style="height: 90px;" type="text" name="description"
@@ -309,7 +309,7 @@
                         </div>
                         <!--code end-->
 
-                        <div class="row mt-4">
+                        <div class="row mt-4 mt-4-auto p-0">
                             <div class="col-md mb-md-0 mb-2">
                                 <div class="form-check custom-option custom-option-basic">
                                     <label class="form-check-label custom-option-content" for="comments">
@@ -340,7 +340,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-2">
+                        <div class="row mt-2 mt-4-auto p-0">
                             <div class="col-md mb-md-0 mb-2">
                                 <div class="form-check custom-option custom-option-basic">
                                     <label class="form-check-label custom-option-content" for="share">
@@ -385,7 +385,7 @@
                             </div>
                         </div> --}}
 
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="0 0.75rem">
                             <label class="form-label">Status</label>
                             <select class="form-select" aria-label="Default select example" name="status">
                                 <option value="" selected="">Select status</option>
