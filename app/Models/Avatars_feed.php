@@ -9,7 +9,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Avatars_Feed extends Model
 {
     use HasFactory;
-
+//just to update
     protected $table = 'avatars_feeds';
 
     protected $fillable = [
