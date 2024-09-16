@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Avatars;
 use App\Models\Avatars_sources;
+use App\Models\Avatars_feed;
 use Illuminate\Http\Request;
 use App\Models\Language;
+use Carbon\Carbon;
 use DateTime;
 use Auth;
 
@@ -16,12 +18,12 @@ class AvatarsController extends Controller
      */
     public function index()
     {
-        //
+        //f
 
-		
+		if(isset($_GET["delfeedfortest"]) && $_GET["delfeedfortest"] == "test1"){
+			Avatars_feed::truncate();
+		}
 
-
-		
 		$avatars =  Avatars::orderBy('created_at', 'desc')
 				->take(10)
 				->get();
@@ -59,7 +61,7 @@ class AvatarsController extends Controller
 		$avatar->joindate = date("d m Y", strtotime($avatar->created_at));
 		
 		$to = \Carbon\Carbon::parse($avatar->created_at);
-$from = \Carbon\Carbon::parse(time());
+		$from = \Carbon\Carbon::parse(time());
 
         $years = $to->diffInYears($from);
         $months = $to->diffInMonths($from);
@@ -73,6 +75,80 @@ $from = \Carbon\Carbon::parse(time());
 		}else{
 			$avatar->days = $days . " days";
 		}
+
+		$feeds = Avatars_feed::where('avatar_Id', $avatar->av_Id)->take(10)->get();
+
+		//calculate time for next feed
+		$working_days = $avatar->working_days;
+		$working_hours = $avatar->working_hours;
+
+		$current_hr = date("H", time());
+
+		$feed_next = "";
+		$remainingTime = "";
+		$currentDateTime = Carbon::now();
+
+		if($working_days == "Every Day"){
+			//feed daily so only call next feed time
+
+			if($working_hours > $current_hr){
+				//today next time
+				$feed_next = date("d.m.Y - " . $working_hours . ":" . rand(10,59));
+				$chktime = date("d.m.Y " . $working_hours . ":" . rand(10,59));
+			}else{
+				//next day time
+				$feed_next = date("d.m.Y - " . $working_hours . ":" . rand(10,59), time() + 86400);
+				$chktime = date("d.m.Y " . $working_hours . ":" . rand(10,59), time() + 86400);
+			}
+
+
+			$endDateTime = Carbon::parse(date("d.m.Y H:i", time()));
+			$startDateTime = Carbon::parse(date("d.m.Y H:i", strtotime($chktime)));
+			
+			// Calculate the time difference in various units
+			$diffInMinutes = $startDateTime->diffInMinutes($endDateTime);
+			$diffInHours = $startDateTime->diffInHours($endDateTime);
+			$diffInDays = $startDateTime->diffInDays($endDateTime);
+			$diffHumanReadable = $startDateTime->diffForHumans($endDateTime); // Human readable string
+			//if($diffInDays > 0){
+			//	$remainingTime = $diffInDays . ":" . $diffInMinutes - ($diffInHours * 60);
+			//}else{
+				$remainingTime = $diffInHours . ":" . $diffInMinutes - ($diffInHours * 60);
+			//}
+			
+
+		}else{
+			//feed on specific day so check and find next feed time
+			
+			$dbDay = $working_days; // Day column in your database (e.g., 'Monday')
+			$dbTime = $working_hours; // Hour column in your database (e.g., '14:30')
+	
+			// Convert the 'day' from the database to a Carbon instance
+			$targetDayOfWeek = Carbon::parse($dbDay)->dayOfWeek; // Get day of the week index (e.g., 1 for Monday)
+	
+			// Create a Carbon instance of the target time on the target day
+			$targetDateTime = Carbon::now()->next($targetDayOfWeek)->setTimeFromTimeString($dbTime);
+	
+			// If the target time is before the current time, move to the next week
+			if ($targetDateTime->lt($currentDateTime)) {
+				$targetDateTime->addWeek();
+			}
+
+			$feed_next = date("d.m.Y - H:i", strtotime($targetDateTime->toDateTimeString()));
+
+			$remainingTime = $targetDateTime->diffForHumans($currentDateTime, [
+				'parts' => 3, // Limit to 3 units (e.g., "2 days 4 hours 30 minutes")
+				'short' => true, // Shorten the output (optional)
+			]);
+
+			$remainingTime = str_replace("after", "", $remainingTime);
+
+		}
+
+
+		$avatar->feeds = $feeds;
+		$avatar->nextime = $feed_next;
+		$avatar->remtime = $remainingTime;
 		
 		echo json_encode($avatar);
 	}

@@ -331,6 +331,9 @@
                     <hr />
                 @endforeach
             </div>
+
+
+			<input id="main_avid" value="{{$mainav->id}}" type="hidden" />
             
             <!-- avatar list -->
             <div class="col-sm-4 ">
@@ -408,7 +411,7 @@
                     </div>
                     <hr class="postshr" />
                     
-                    <div class="postbox">
+                    <div class="postbox post_schedule">
                     
                         <div class="post-innter">
                             <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" class="w-px-30 h-auto rounded-circle">
@@ -417,7 +420,7 @@
                                 <div class="details_post av_task">&nbsp;&nbsp;Avatar Task</div>
                             </div>
                             <div class="post_time">
-                                Online in 05:12
+                                Online in <span id="remtime1">05:19</span>
                             </div>
                             <div class="post_img">
                                 <img src="{{asset('/images/post.png')}}" />
@@ -428,8 +431,8 @@
                             	<div class="artilce_title">
                                 	Title of Article
                                 </div>
-                                <div class="article_time">
-                                	22.05.2024 - 16:20
+                                <div class="article_time" id="time1">
+                                	
                                 </div>
                                 
                                 <div class="article_txt">
@@ -452,53 +455,7 @@
                             <div class="clear clearfix"></div>
                         </div>
                     </div>
-                    <!-- post box end -->
-                    
-                    <div class="postbox">
-                    
-                        <div class="post-innter">
-                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" class="w-px-30 h-auto rounded-circle">
-                            <div class="post_avatar">
-                                <div class="heading_post av_name">Avatar Name</div>
-                                <div class="details_post av_task">&nbsp;&nbsp;Avatar Task</div>
-                            </div>
-                            <div class="post_time">
-                                Online in 05:12
-                            </div>
-                            <div class="post_img">
-                                <img src="{{asset('/images/post.png')}}" />
-                            </div>
-                            
-                            <div class="article_details">
-                            
-                            	<div class="artilce_title">
-                                	Title of Article
-                                </div>
-                                <div class="article_time">
-                                	22.05.2024 - 16:20
-                                </div>
-                                
-                                <div class="article_txt">
-                                	Some text will be where when user have 
-                                </div>
-                            
-                            </div>
-                            
-                            <div class="col-sm-6 artilce_title articles_btns">
-                            	<button class="btn btn-success btn-share btn-share-like">
-                                <span>&#9745;</span>
-                                Allow to Share
-                                </button>
-                            </div>
-                            
-                            <div class="col-sm-6 artilce_title">
-                            	<button class="btn btn-danger btn-share btn-share-denied">Denied to Share <span>&#9746;</span></button>
-                            </div>
-                            
-                            <div class="clear clearfix"></div>
-                        </div>
-                    </div>
-                    <!-- post box end -->
+                   
                 	
                 </div>
             </div>
@@ -514,92 +471,12 @@
                     </div>
                     <hr class="postshr" />
                     
-                    <div class="postbox">
-                    
-                        <div class="post-innter">
-                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" class="w-px-30 h-auto rounded-circle">
-                            <div class="post_avatar">
-                                <div class="heading_post av_name">Avatar Name</div>
-                                <div class="details_post av_task">&nbsp;&nbsp;Avatar Task</div>
-                            </div>
-                            <div class="post_time">
-                                <i class="bx bx-trash me-1"></i>
-                            </div>
-                            <div class="post_img">
-                                <img src="{{asset('/images/post.png')}}" />
-                            </div>
-                            
-                            <div class="article_details">
-                            
-                            	<div class="artilce_title">
-                                	Title of Article
-                                </div>
-                                <div class="article_time">
-                                	22.05.2024 - 16:20
-                                </div>
-                                
-                                <div class="article_txt">
-                                	Some text will be where when user have 
-                                </div>
-                            
-                            </div>
-                            
-                            <div class="col-sm-12 ">
-                            	<div class="emojies">
-                                	&#128512;&#128515;&#128516;
-                                </div>
-                            	<div class="shares_options">
-                                	<img class="shareimg" src="{{asset('/images/share.png')}}" />
-                                </div>
-                            </div>
-                            
-                            <div class="clear clearfix"></div>
-                        </div>
-                    </div>
+
+				<div id="post_online">	
+                    Loading...
+					</div>
                     <!-- post box end -->
                     
-                    <div class="postbox">
-                    
-                        <div class="post-innter">
-                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="" class="w-px-30 h-auto rounded-circle">
-                            <div class="post_avatar">
-                                <div class="heading_post av_name">Avatar Name</div>
-                                <div class="details_post av_task">&nbsp;&nbsp;Avatar Task</div>
-                            </div>
-                            <div class="post_time">
-                                <i class="bx bx-trash me-1"></i>
-                            </div>
-                            <div class="post_img">
-                                <img src="{{asset('/images/post.png')}}" />
-                            </div>
-                            
-                            <div class="article_details">
-                            
-                            	<div class="artilce_title">
-                                	Title of Article
-                                </div>
-                                <div class="article_time">
-                                	22.05.2024 - 16:20
-                                </div>
-                                
-                                <div class="article_txt">
-                                	Some text will be where when user have 
-                                </div>
-                            
-                            </div>
-                            
-                            <div class="col-sm-12 ">
-                            	<div class="emojies">
-                                	&#128512;&#128515;&#128516;
-                                </div>
-                            	<div class="shares_options">
-                                	<img class="shareimg" src="{{asset('/images/share.png')}}" />
-                                </div>
-                            </div>
-                            
-                            <div class="clear clearfix"></div>
-                        </div>
-                    </div>
                     <!-- post box end -->
                 	
                 </div>
@@ -629,10 +506,23 @@
 	<script>
 		var url = "{{url('/get-avatars/')}}";
 		var imgurl = "{{asset('')}}";
-		
+
+
+		var mid = $("#main_avid").val();
+		show_details(mid);
 		
 		$(document).on("click", ".show_details", function(){
 			var cid = $(this).attr("cid");
+			show_details(cid);
+		});
+
+
+
+		function show_details(cid){
+
+
+			$("#post_online").html("Loading...");
+
 			var apiurl = url + "/" + cid;
 				$.ajax({
 				  url: apiurl,
@@ -649,9 +539,97 @@
 					  }
 					  $(".av_image").attr("src", imgpath);
 					  $(".av_time").text(result.days);
+
+					
+					var str = '';
+					var feeds = result.feeds;
+					for(var t=0; t<feeds.length; t++){
+						var cfeed = feeds[t];
+
+						str = str + '<div class="postbox ">';
+                    
+                        str = str + '<div class="post-innter">';
+                        str = str + '<img src="' + imgpath + '" alt="" class="w-px-30 h-auto rounded-circle">';
+                        str = str + '<div class="post_avatar">';
+                        str = str + '<div class="heading_post av_name">'+ result.name +'</div>';
+                        str = str + '<div class="details_post av_task">&nbsp;&nbsp;'+ result.task +'</div>';
+                        str = str + '</div>';
+                        str = str + '<div class="post_time">';
+                        str = str + '<i class="bx bx-trash me-1"></i>';
+                        str = str + '</div>';
+                        str = str + '<div class="post_img">';
+                      //  str = str + '<img src="{{asset("/images/post.png")}}" />';
+						
+						str = str + '<img src="'+ cfeed.image +'" />';
+
+                        str = str + '</div>';
+                            
+                        str = str + '<div class="article_details">';
+                            
+                        str = str + '<div class="artilce_title">';
+                        str = str + cfeed.title.slice(0, 20)+'...';
+                        str = str + '</div>';
+                        str = str + '<div class="article_time">';
+
+
+						const date = new Date(cfeed.created_at);
+
+						const day = String(date.getDate()).padStart(2, '0');        // Get the day and pad with 0
+						const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (0-based, so add 1)
+						const year = date.getFullYear();                           // Get the full year
+
+						const hours = String(date.getHours()).padStart(2, '0');    // Get hours and pad with 0
+						const minutes = String(date.getMinutes()).padStart(2, '0'); // Get minutes and pad with 0
+
+						// Format the date like "DD.MM.YYYY - HH:MM"
+						const formattedDate = `${day}.${month}.${year} - ${hours}:${minutes}`;
+
+
+                        str = str + formattedDate ;
+                        str = str + '</div>';
+                                
+                        str = str + '<div class="article_txt">';
+
+						var html = cfeed.content;
+						var div = document.createElement("div");
+						div.innerHTML = html;
+						var text = div.textContent || div.innerText || "";
+
+						
+
+                        str = str + text.slice(0, 10)+'...';
+                        str = str + '</div>';
+                            
+                        str = str + '</div>';
+                            
+                        str = str + '<div class="col-sm-12 ">';
+                        str = str + '<div class="emojies">';
+                        str = str + '       	&#128512;&#128515;&#128516;';
+                        str = str + '</div>';
+                        str = str + '<div class="shares_options">';
+                        str = str + '<img class="shareimg" src="{{asset("/images/share.png")}}" />';
+                        str = str + '</div></div>';
+                            
+                        str = str + '<div class="clear clearfix"></div></div></div>';
+                        
+
+					}
+
+					if(str == ""){
+						str = "No feed online yet.";
+					}
+
+					$("#post_online").html(str);
+					$("#time1").text(result.nextime);
+					$("#remtime1").text(result.remtime);
+
+
 				  }
 				});
-		});
+
+		}
+
+
 	
 	</script>
 
