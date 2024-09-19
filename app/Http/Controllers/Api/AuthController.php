@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\ResetUserPassword;
 use App\Http\Controllers\Controller;
 use App\Models\OtpVerification;
+use App\Models\UserImei;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -36,15 +37,25 @@ class AuthController extends Controller
         (int)$credentials['is_superadmin'] = 0;
         (int)$credentials['status'] = 1;
 
+        $user = User::where('email',$request->email)->first();
+        if($user){
+            if((int)$user->device_imei !== (int)$request->device_imei){
+                $imeis = UserImei::where('user_id',$user->id)->pluck('device_imei');
+                return response()->json(['message' => 'Device Imei is not registered', 'imeis' => $imeis],404);
+            }
+        }else{
+            return response()->json(['message' => 'User not Found!'],404);
+        }
+
         if (Auth::attempt($credentials, true)) {
             $user = Auth::user();
 
             if ($user->is_verfied == 0)
                 return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
+
             $user = $request->user();
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->plainTextToken;
-
             return response()->json(['success' => true, 'data' => ['user' => $user, 'token' => $token]], 200);
         } else {
             return response()->json(['success' => false, 'message' => 'Email or password is incorrect.']);
@@ -102,6 +113,7 @@ class AuthController extends Controller
                 'city' => $request['city'],
                 'phone' => $request['phone'],
                 'device_type' => $request['device_type'],
+                'device_imei' => (int)$request['device_imei'],
                 'user_type' => 'users'
             ]);
 
@@ -117,6 +129,12 @@ class AuthController extends Controller
                     ['user_id' => $user->id],
                     ['code' => $code]
                 );
+
+                UserImei::create([
+                    'user_id' => $user->id,
+                    'device_imei' => (int)$request['device_imei'],
+                ]);
+
                 try {
                     $details = [
                         'title' => 'Mail from Yekbun.org',
