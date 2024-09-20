@@ -114,6 +114,9 @@ class AuthController extends Controller
                 'phone' => $request['phone'],
                 'device_type' => $request['device_type'],
                 'device_imei' => (int)$request['device_imei'],
+                'device_name' => $request['device_name'],
+                'device_model' => $request['device_model'],
+                'device_serial' => $request['device_serial'],
                 'user_type' => 'users'
             ]);
 
