@@ -37,14 +37,14 @@ class AuthController extends Controller
         (int)$credentials['is_superadmin'] = 0;
         (int)$credentials['status'] = 1;
 
-        $user = User::where('email',$request->email)->first();
-        if($user){
-            if((int)$user->device_imei !== (int)$request->device_imei){
-                $imeis = UserImei::where('user_id',$user->id)->pluck('device_imei');
-                return response()->json(['message' => 'Device Imei is not registered', 'imeis' => $imeis],404);
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            if ((int)$user->device_imei !== (int)$request->device_imei) {
+                $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
+                return response()->json(['message' => 'Device Imei is not registered', 'imeis' => $imeis], 404);
             }
-        }else{
-            return response()->json(['message' => 'User not Found!'],404);
+        } else {
+            return response()->json(['message' => 'User not Found!'], 404);
         }
 
         if (Auth::attempt($credentials, true)) {
@@ -160,27 +160,43 @@ class AuthController extends Controller
         }
     }
 
+    public function registerDevice(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['message' => 'User not Found!'], 404);
+        }
+        $user->device_serial = $request->device_serial;
+        $user->device_type = $request->device_type;
+        $user->device_model = $request->device_model;
+        if ($user->save) {
+            return response()->json(['message' => 'New device registered successfully.'], 201);
+        } else {
+            return response()->json(['message' => 'Failed to register device'], 403);
+        }
+    }
+
     public function getCode(Request $request)
     {
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-        if(!$user){
-            return response()->json(['status' => false,'message' => 'User not found!'], 404);
+        if (!$user) {
+            return response()->json(['status' => false, 'message' => 'User not found!'], 404);
         }
 
         $code = UserCode::where('user_id', $user->id)->first();
 
-        if(!$code){
-            return response()->json(['status' => false,'message' => 'Code not found!'], 404);
+        if (!$code) {
+            return response()->json(['status' => false, 'message' => 'Code not found!'], 404);
         }
 
-        if((int)$code->code == (int)$request->otp){
+        if ((int)$code->code == (int)$request->otp) {
             $user->email_verified_at = Carbon::now();
             $user->is_verfied = (int)1;
             $user->save();
-            return response()->json(['status' => true,'message' => 'Valid Code!'], 200);
-        }else{
-            return response()->json(['status' => false,'message' => 'Invalid Code!'], 403);
+            return response()->json(['status' => true, 'message' => 'Valid Code!'], 200);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Invalid Code!'], 403);
         }
     }
 
