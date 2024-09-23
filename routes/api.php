@@ -86,6 +86,7 @@ Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
 // Authentication
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register-device',[AuthController::class,'registerDevice']);
 Route::post('forgot-password', [AuthController::class, 'forgot_password']);
 Route::post('change-password', [AuthController::class, 'change_password']);
 Route::post('/reset/password', [AuthController::class, 'reset'])->name('password.reset');
@@ -102,6 +103,18 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
   Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
   Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
   Route::delete('countries/{id}', [CountryController::class, 'destroy'])->name('countries.destroy');
+
+  //provinces
+  Route::get('provinces', [RegionController::class, 'index'])->name('provinces.index');
+  Route::post('provinces', [RegionController::class, 'store'])->name('provinces.store');
+  Route::put('provinces/{id}', [RegionController::class, 'update'])->name('provinces.update');
+  Route::delete('provinces/{id}', [RegionController::class, 'destroy'])->name('provinces.destroy');
+
+  //Cities
+  Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+  Route::post('cities', [CityController::class, 'store'])->name('cities.store');
+  Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
+  Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
 
 
 
@@ -306,12 +319,6 @@ Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list
   // Route::get('province', [CountryController::class, 'province'])->name('province');
   // Route::post('country/store', [CountryController::class, 'store'])->name('country.store');
   // Route::put('country/store/update/yes', [CountryController::class, 'update'])->name('country.update');
-
-  //provinces
-  Route::resource('/provinces', RegionController::class);
-
-  //Cities
-  Route::resource('/cities', CityController::class);
 
   Route::post('/searchlocation', [CountryController::class, 'search_location']);
 
