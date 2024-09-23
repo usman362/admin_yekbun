@@ -94,6 +94,13 @@
 		color:#44Af74;
 		font-weight:bold;	
 	}
+
+	.post_schedule .post_time{
+		width:calc(100% - 140px);
+		margin-top:10px;
+		font-size:10px;
+	}
+
 	.heading_post{
 		font-weight:bold;
 	}
@@ -149,6 +156,7 @@
 	}
 	.article_txt{
 		width:100%;
+		font-size:11px;
 	}
 	.artilce_title{
 		float:left;
@@ -158,7 +166,8 @@
 	.article_time{
 		width:50%;
 		float:left;
-		text-align:right;	
+		text-align:right;
+		font-size:10px;	
 	}
 	.article_details{
 		background:#f3f3f3;
@@ -434,7 +443,7 @@
                                 <div class="article_time" id="time1">
                                 	
                                 </div>
-                                
+                                <div class="clearfix"></div>
                                 <div class="article_txt">
                                 	Some text will be where when user have 
                                 </div>
@@ -567,7 +576,7 @@
                         str = str + '<div class="article_details">';
                             
                         str = str + '<div class="artilce_title">';
-                        str = str + cfeed.title.slice(0, 20)+'...';
+                        str = str + cfeed.title.slice(0, 15)+'...';
                         str = str + '</div>';
                         str = str + '<div class="article_time">';
 
@@ -587,7 +596,9 @@
 
                         str = str + formattedDate ;
                         str = str + '</div>';
-                                
+                        
+						str = str + '<div class="clearfix"></div>'
+
                         str = str + '<div class="article_txt">';
 
 						var html = cfeed.content;
@@ -597,7 +608,7 @@
 
 						
 
-                        str = str + text.slice(0, 10)+'...';
+                        str = str + text.slice(0, 35)+'...';
                         str = str + '</div>';
                             
                         str = str + '</div>';
