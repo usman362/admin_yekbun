@@ -18,18 +18,21 @@ class StandardUserController extends Controller
      */
     public function index()
     {
-        if (request()->limit) {
-            return User::where("level", 0)
-                        ->orderBy("updated_at", "DESC")
-                        ->paginate(request()->limit)
-                        ->appends(["limit" => request()->limit]);
-        }
 
-        $users = User::where("level", 0)->orderBy("updated_at", "DESC")->get();
+            $blockedUsers = User::where("level", 0)->where('is_admin_user', 0)->where('status', 0)->orderBy("updated_at", "DESC")->get();
+            $users = User::where("level", 0)->where('is_admin_user', 0)->where('status','!=', 0)->orderBy("updated_at", "DESC")->get();
+            return response()->json(['users' => $users, 'blocked_users' => $blockedUsers],200);
 
-        return [
-            "data" => $users
-        ];
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view("content.users.standard.create");
     }
 
     /**
@@ -52,10 +55,7 @@ class StandardUserController extends Controller
 
         $user = User::create($validated);
 
-        return [
-            "message" => "User successfully created.",
-            "data" => $user
-        ];
+        return back()->with("success", "User successfully created.");
     }
 
     /**
@@ -66,9 +66,20 @@ class StandardUserController extends Controller
      */
     public function show($id)
     {
-        return [
-            "data" => User::find($id)
-        ];
+        $user = User::find($id);
+        return view("content.users.standard.show", compact("user"));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view("content.users.standard.edit", compact("user"));
     }
 
     /**
@@ -78,6 +89,7 @@ class StandardUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(UpdateStandardUserRequest $request, $id)
     {
         $validated = $request->validated();
@@ -92,10 +104,7 @@ class StandardUserController extends Controller
         $user->fill($validated);
         $user->save();
 
-        return [
-            "message" => "User successfully updated.",
-            "data" => $user
-        ];
+        return back()->with("success", "User successfully updated");
     }
 
     /**
@@ -114,8 +123,48 @@ class StandardUserController extends Controller
 
         $user->delete();
 
-        return [
-            "message" => "User successfully deleted."
+        return back()->with("success", "User successfully deleted.");
+    }
+
+    public function block(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->status = 0;
+        $user->block_for_days = $request->block_for_days;
+        $user->save();
+
+        if ($request->block_for_days)
+            return back()->with("success", "User blocked for {$request->block_for_days} days.");
+        else
+            return back()->with("success", "User blocked.");
+    }
+
+    public function warn(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->is_warned = 1;
+        $user->warning_cause = $request->warning_cause;
+        $user->save();
+
+        return back()->with("success", "User warned.");
+    }
+
+    public function upgrade(Request $request, $id)
+    {
+
+        if ($request->password !== '123456') {
+            return back()->with("error", "Wrong password!");
+        }
+        $user = User::find($id);
+        $user->level = (int) $request->level;
+        $user->save();
+
+        $levels = [
+            0 => 'Standard',
+            1 => 'Premium',
+            2 => 'VIP'
         ];
+
+        return back()->with("success", "User upgraded to {$levels[$request->level]}.");
     }
 }
