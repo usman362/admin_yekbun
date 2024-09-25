@@ -32,6 +32,7 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required',
+            'device_imei' => 'required'
         ]);
         (int)$credentials['is_admin_user'] = 0;
         (int)$credentials['is_superadmin'] = 0;
