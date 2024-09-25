@@ -247,7 +247,7 @@
 
 
 <x-modal id="editModal{{ $user->id }}" title="Edit Standard User" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{ $user->id }}" size="xl" :show="old('showEditFormModal'.$user->id)? true: false">
-  @include('content.users.educated.includes.edit_form')
+  @include('content.users.standard.includes.edit_form')
 </x-modal>
 
 <!-- Block Modal -->
@@ -369,7 +369,7 @@
 </x-modal>
 
 <x-modal id="createModal" title="Add Standard User" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="xl" :show="old('showCreateFormModal')? true: false">
-  @include('content.users.educated.includes.create_form')
+  @include('content.users.standard.includes.create_form')
 </x-modal>
 @endsection
 
