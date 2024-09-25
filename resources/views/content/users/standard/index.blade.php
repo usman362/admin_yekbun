@@ -26,9 +26,9 @@
     </h4>
   </div>
   <div class="">
-     {{-- <a href="{{ route('users.standard.create') }}">
+    <!-- <a href="{{ route('users.educated.create') }}">
         <button class="btn btn-primary">Add User</button>
-      </a> --}}
+      </a> -->
     {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add User</button> --}}
   </div>
 </div>
@@ -210,7 +210,7 @@
                         <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Upgrade"><i class='bx bx-dollar'></i></button>
                         {{-- @endcan --}}
                       </span>
-                      <form action="{{ route('users.standard.destroy', $userr->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" class="d-inline" method="post">
+                      <form action="{{ route('users.educated.destroy', $userr->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" class="d-inline" method="post">
                         @method('DELETE')
                         @csrf
                         {{-- @can('users.delete') --}}
@@ -219,9 +219,9 @@
                       </form>
                       {{--<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                       <div class="dropdown-menu">
-                        <!-- <a class="dropdown-item" href="{{ route('users.standard.edit', $userr->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a> -->
+                        <!-- <a class="dropdown-item" href="{{ route('users.educated.edit', $userr->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a> -->
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $userr->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
-                        <form action="{{ route('users.standard.destroy', $userr->id) }}" method="post">
+                        <form action="{{ route('users.educated.destroy', $userr->id) }}" method="post">
                           @method('DELETE')
                           @csrf
                           <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i></button>
@@ -247,7 +247,7 @@
 
 
 <x-modal id="editModal{{ $user->id }}" title="Edit Standard User" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm{{ $user->id }}" size="xl" :show="old('showEditFormModal'.$user->id)? true: false">
-  @include('content.users.standard.includes.edit_form')
+  @include('content.users.educated.includes.edit_form')
 </x-modal>
 
 <!-- Block Modal -->
@@ -369,7 +369,7 @@
 </x-modal>
 
 <x-modal id="createModal" title="Add Standard User" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="xl" :show="old('showCreateFormModal')? true: false">
-  @include('content.users.standard.includes.create_form')
+  @include('content.users.educated.includes.create_form')
 </x-modal>
 @endsection
 
