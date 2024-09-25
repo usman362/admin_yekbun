@@ -27,7 +27,7 @@
     </h4>
   </div>
   <div class="">
-    <!-- <a href="{{ route('users.standard.create') }}">
+    <!-- <a href="{{ route('users.educated.create') }}">
         <button class="btn btn-primary">Add User</button>
       </a> -->
     {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add User</button> --}}

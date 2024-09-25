@@ -24,7 +24,7 @@
           </div>
         </div></div>
         <div class="card-body">
-            <form action="{{ route('users.standard.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('users.educated.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-lg-8 mx-auto">

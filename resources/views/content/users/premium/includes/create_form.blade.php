@@ -1,4 +1,4 @@
-<form id="createForm" action="{{ route('users.premium.store') }}" method="post" enctype="multipart/form-data">
+<form id="createForm" action="{{ route('users.cultivated.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="showCreateFormModal" value="1">
     <div class="row">

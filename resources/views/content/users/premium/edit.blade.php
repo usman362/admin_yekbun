@@ -24,7 +24,7 @@
           </div>
         </div></div>
         <div class="card-body">
-            <form action="{{ route('users.premium.update', $user->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('users.cultivated.update', $user->id) }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row">

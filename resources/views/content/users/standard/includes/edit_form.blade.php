@@ -1,4 +1,4 @@
-<form id="editForm{{ $user->id }}" action="{{ route('users.standard.update', $user->id) }}" method="post" enctype="multipart/form-data">
+<form id="editForm{{ $user->id }}" action="{{ route('users.educated.update', $user->id) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <input type="hidden" name="showEditFormModal{{ $user->id }}" value="1">
