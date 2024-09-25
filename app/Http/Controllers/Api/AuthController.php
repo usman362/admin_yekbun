@@ -163,6 +163,12 @@ class AuthController extends Controller
 
     public function registerDevice(Request $request)
     {
+        $credentials = $request->validate([
+            'email' => 'required',
+            'device_serial' => 'required',
+            'device_model' => 'required',
+            'device_type' => 'required'
+        ]);
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             return response()->json(['message' => 'User not Found!'], 404);
