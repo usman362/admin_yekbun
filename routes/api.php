@@ -87,6 +87,7 @@ Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register-device', [AuthController::class, 'registerDevice']);
+Route::post('/register-verify-device', [AuthController::class, 'verifyDevice']);
 Route::post('forgot-password', [AuthController::class, 'forgot_password']);
 Route::post('change-password', [AuthController::class, 'change_password']);
 Route::post('/reset/password', [AuthController::class, 'reset'])->name('password.reset');

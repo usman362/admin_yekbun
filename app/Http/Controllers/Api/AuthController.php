@@ -161,30 +161,78 @@ class AuthController extends Controller
         }
     }
 
-    public function registerDevice(Request $request)
+    public function verifyDevice(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required',
-            'device_serial' => 'required',
-            'device_model' => 'required',
-            'device_type' => 'required'
         ]);
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             return response()->json(['message' => 'User not Found!'], 404);
         }
-        $user->device_serial = $request->device_serial;
-        $user->device_type = $request->device_type;
-        $user->device_model = $request->device_model;
-        if ($user->save) {
-            return response()->json(['message' => 'New device registered successfully.'], 201);
+        if ($user->id) {
+            $code = rand(1000, 9999);
+            UserCode::updateOrCreate(
+                ['user_id' => $user->id],
+                ['code' => $code]
+            );
+
+            try {
+                $details = [
+                    'title' => 'Mail from Yekbun.org',
+                    'code' => $code,
+                    'username' => $user->username ?? 'User',
+                ];
+                Mail::to($request['email'])->send(new SendCodeMail($details));
+                return response()->json(['success' => true, "message" => "Verfication Code sent to your email", 'user' => $user->id, 'code' => $code], 201);
+            } catch (\Exception $e) {
+                info("Error: " . $e->getMessage());
+                return response()->json(['success' => false, 'message' => $e->getMessage()], 505);
+            }
+        }
+    }
+
+    public function registerDevice(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'device_serial' => 'required',
+            'device_model' => 'required',
+            'device_type' => 'required',
+            'otp' => 'required',
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['message' => 'User not Found!'], 404);
+        }
+
+        $code = UserCode::where('user_id', $user->id)->first();
+
+        if (!$code) {
+            return response()->json(['status' => false, 'message' => 'Code not found!'], 404);
+        }
+
+        if ((int)$code->code == (int)$request->otp) {
+            $user->device_serial = $request->device_serial;
+            $user->device_type = $request->device_type;
+            $user->device_model = $request->device_model;
+            if ($user->save) {
+                return response()->json(['message' => 'New device registered successfully.'], 201);
+            } else {
+                return response()->json(['message' => 'Failed to register device'], 403);
+            }
         } else {
-            return response()->json(['message' => 'Failed to register device'], 403);
+            return response()->json(['status' => false, 'message' => 'Invalid Code!'], 403);
         }
     }
 
     public function getCode(Request $request)
     {
+        $request->validate([
+            'email' => 'required',
+            'otp' => 'required',
+        ]);
+
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
