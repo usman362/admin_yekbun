@@ -118,6 +118,7 @@ class AuthController extends Controller
                 'device_name' => $request['device_name'],
                 'device_model' => $request['device_model'],
                 'device_serial' => $request['device_serial'],
+                'user_id' => 'YB-US'.(User::count()+1),
                 'user_type' => 'users'
             ]);
 
