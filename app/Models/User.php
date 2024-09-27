@@ -38,7 +38,7 @@ class User extends Authenticatable  implements MustVerifyEmail
         'level',
         'username',
         'fname',
-        'lname',
+        'last_name',
         'gender',
         'origin',
         'dob',
