@@ -168,6 +168,7 @@
                                 <tr>
                                     <th>User ID</th>
                                     <th>User</th>
+                                    <th>Username</th>
                                     <th>Device Type</th>
                                     <th>Device IMEI</th>
                                     <th>Device Name</th>
@@ -193,11 +194,13 @@
                                                 <div class="d-flex flex-column">
                                                     <a href="javascript:void(0)" class="text-body text-truncate">
                                                         <span class="fw-semibold">{{ $userr->name }}</span>
+                                                        <span class="fw-semibold">{{ $userr->last_name }}</span>
                                                     </a>
                                                     <small class="text-muted">{{ $userr->email }}</small>
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>{{ $userr->username }}</td>
                                         <td>{{ $userr->device_type }}</td>
                                         <td>{{ $userr->device_imei }}</td>
                                         <td>{{ $userr->device_name }}</td>
