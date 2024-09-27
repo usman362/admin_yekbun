@@ -35,6 +35,9 @@ class AvatarsController extends Controller
 		]);
     }
 
+
+	
+
 	public function manag_avatars($id = 0){
 
 		$avatars =  Avatars::orderBy('created_at', 'desc')->get();
@@ -63,18 +66,19 @@ class AvatarsController extends Controller
 		$to = \Carbon\Carbon::parse($avatar->created_at);
 		$from = \Carbon\Carbon::parse(time());
 
-        $years = $to->diffInYears($from);
-        $months = $to->diffInMonths($from);
-        $weeks = $to->diffInWeeks($from);
-        $days = $to->diffInDays($from);
+		$diff = $to->diff($from);
 
-		if($years > 0){
-			$avatar->days = $years . " Years - " . $months . " Months";
-		}else if($months > 0){
-			$avatar->days = $months . " Months - " . $days . " days";
-		}else{
-			$avatar->days = $days . " days";
-		}
+$years = $diff->y;
+$months = $diff->m;
+$days = $diff->d;
+
+if($years > 0){
+    $avatar->days = $years . " Years - " . $months . " Months - " . $days . " Days";
+}else if($months > 0){
+    $avatar->days = $months . " Months - " . $days . " Days";
+}else{
+    $avatar->days = $days . " Days";
+}
 
 		$feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->take(10)->get();
 
@@ -482,4 +486,20 @@ class AvatarsController extends Controller
 		//
         //
     }
+
+
+	public function del_manag_avatars($id){
+		//echo $id;
+
+		$avatarfeed = Avatars_Feed::where('_id', $id)->first();
+
+		$avatarid = $avatarfeed->avatar_Id;
+		
+		$avatar = Avatars::where('av_Id', $avatarid)->first();
+		$aid = $avatar->id;
+
+		$avatarfeed->delete();
+
+		return redirect()->route('avatars.manag_avatars', ['id' => $aid])->with('success','Avatar deleted successfully.');
+	}
 }

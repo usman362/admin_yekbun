@@ -166,8 +166,9 @@ Route::group(['middleware' => 'permission:avatars.read'], function () {
     //Route::resource('/avatars', AvatarsController::class);
     Route::post('/avatars/create', [AvatarsController::class, 'store']);
     Route::post('/avatars/{id}/edit', [AvatarsController::class, 'update']);
-    Route::get('/manage-avatars/', [AvatarsController::class, 'manag_avatars']);
-    Route::get('/manage-avatars/{id}', [AvatarsController::class, 'manag_avatars']);
+    Route::get('/manage-avatars/', [AvatarsController::class, 'manag_avatars'])->name('avatars.manag_avatars');
+    Route::get('/manage-avatars/{id}', [AvatarsController::class, 'manag_avatars'])->name('avatars.manag_avatars');
+    Route::delete('/manage-avatars/{id}', [AvatarsController::class, 'del_manag_avatars']);
     Route::get('/get-avatars/{id}', [AvatarsController::class, 'get_avatars']);
 
     Route::resource('/avatars', AvatarsController::class);

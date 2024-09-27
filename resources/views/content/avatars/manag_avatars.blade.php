@@ -70,6 +70,9 @@
 		  color:#fff !important;
 		  border-top: 4px solid;
 	}
+	.del_feed{
+		cursor:pointer;
+	}
 	.feeds_div{
 		margin:auto;
 		
@@ -99,6 +102,7 @@
 		width:calc(100% - 140px);
 		margin-top:10px;
 		font-size:10px;
+		text-align:right;
 	}
 
 	.heading_post{
@@ -564,7 +568,15 @@
                         str = str + '<div class="details_post av_task">&nbsp;&nbsp;'+ result.task +'</div>';
                         str = str + '</div>';
                         str = str + '<div class="post_time">';
+                        //str = str + '<i class="bx bx-trash me-1 del_feed" cid="' + cfeed._id + '"></i>';
+
+						str = str + '<form action="manage-avatars/'+ cfeed._id +'" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">';
+                        str = str + '@method("DELETE")@csrf ';
+                        str = str + '<button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove">';
                         str = str + '<i class="bx bx-trash me-1"></i>';
+                        str = str + '</button></form>';
+
+
                         str = str + '</div>';
                         str = str + '<div class="post_img">';
                       //  str = str + '<img src="{{asset("/images/post.png")}}" />';
@@ -640,6 +652,26 @@
 
 		}
 
+
+		function confirmAction(event, callback) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to delete this?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    confirmButton: 'btn btn-danger me-3',
+                    cancelButton: 'btn btn-label-secondary'
+                },
+                buttonsStyling: false
+            }).then(function(result) {
+                if (result.value) {
+                    callback();
+                }
+            });
+        }
 
 	
 	</script>
