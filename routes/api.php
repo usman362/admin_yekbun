@@ -69,6 +69,8 @@ use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\AlbumController;
 use App\Http\Controllers\Api\PostGalleryController;
 use App\Http\Controllers\Api\AvatarsController;
+use App\Http\Controllers\Api\UserProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -97,6 +99,8 @@ Route::post('/reset/resend', [AuthController::class, 'reset_resend'])->name('res
 Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 
+//User Profile
+Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
 
 
 // Route::middleware('auth:sanctum')->group(function () {
