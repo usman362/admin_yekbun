@@ -145,9 +145,9 @@
                             <div>Settings</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('settings/user-roles/educated') ? 'active' : '' }}">
+                            <li class="menu-item {{ Request::is('settings/profile-banner') ? 'active' : '' }}">
 
-                                <a href="{{ url('/profile-banner') }}" class="menu-link">
+                                <a href="{{ url('settings/profile-banner') }}" class="menu-link">
                                     <div>Profile Banner</div>
                                 </a>
                             </li>

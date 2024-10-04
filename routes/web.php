@@ -627,7 +627,7 @@ Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, '
 
 
 //ProfileBanner
-Route::get('/profile-banner', [ProfileBannerController::class, 'index'])->name('profile.banner');
+Route::get('settings/profile-banner', [ProfileBannerController::class, 'index'])->name('profile.banner');
 Route::post('/profile-banner', [ProfileBannerController::class, 'store'])->name('profile.banner.store');
 Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class, 'destroy'])->name('profile.banner.delete');
 
@@ -749,7 +749,7 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
             Route::get('donation/prefix', [PrefixController::class, 'index'])->name('donation.prefix');
             Route::get('history/prefix', [PrefixController::class, 'index'])->name('history.prefix');
             Route::get('voting/prefix', [PrefixController::class, 'index'])->name('voting.prefix');
-            Route::post('voting/prefix', [PrefixController::class, 'store'])->name('voting.prefix');
+            Route::post('voting/prefix', [PrefixController::class, 'store'])->name('voting.store_prefix');
             Route::delete('voting/prefix/destroy/{id}', [PrefixController::class, 'destroy'])->name('voting.prefix.destroy');
             Route::post('voting/prefix/update/{id}', [PrefixController::class, 'update'])->name('voting.prefix.update');
             Route::get('chats/reasons', [ReasonController::class, 'index'])->name('chats.reasons');
@@ -850,7 +850,10 @@ Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])
     Route::get('musics/{music_id}', [MusicController::class, 'video']);
     Route::resource('/reasons', ReasonController::class);
     Route::get('/app/invoice/print', $controller_path . '\apps\InvoicePrint@index')->name('app-invoice-print');
-    Route::get('/app/user/view/account', $controller_path . '\apps\UserViewAccount@index')->name('app-user-view-account');
+    Route::get('/app/user/{id}/account', $controller_path . '\apps\UserViewAccount@index')->name('app-user-view-account');
+    Route::get('/app/user/{id}/videos', $controller_path . '\apps\UserViewAccount@videos')->name('app-user-view-videos');
+    Route::get('/app/user/{id}/activity', $controller_path . '\apps\UserViewAccount@activity')->name('app-user-view-activity');
+    Route::get('/app/user/{id}/location', $controller_path . '\apps\UserViewAccount@location')->name('app-user-view-location');
 
     Route::get('/app/invoice/list', $controller_path . '\apps\InvoiceList@index')->name('app-invoice-list');
     Route::get('/app/invoice/preview', $controller_path . '\apps\InvoicePreview@index')->name('app-invoice-preview');

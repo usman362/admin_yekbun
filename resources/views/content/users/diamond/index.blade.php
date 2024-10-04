@@ -153,11 +153,11 @@
                         aria-selected="false" tabindex="-1"><i class="tf-icons bx bx-female me-1"></i> Female User</a>
                     <div class="{{ $view === 'female' ? 'tab--selected' : '' }} tab__slider"></div>
                 </li>
-                <li class="nav-item" role="presentation">
+                {{-- <li class="nav-item" role="presentation">
                     <a type="button" class="nav-link {{ $view === 'blocked' ? 'active' : '' }}" href="?view=blocked"
                         aria-selected="false" tabindex="-1"><i class="tf-icons bx bx-block me-1"></i> Blocked User</a>
                     <div class="{{ $view === 'blocked' ? 'tab--selected' : '' }} tab__slider"></div>
-                </li>
+                </li> --}}
             </ul>
 
             <div class="tab-content p-0">
@@ -219,33 +219,33 @@
                                         </td>
                                         <td>
                                             <div class="dropdown">
-                                                <span data-bs-toggle="modal"
+                                                {{-- <span data-bs-toggle="modal"
                                                     data-bs-target="#blockModal{{ $user->id }}">
-                                                    {{-- @can('users.write') --}}
+                                                    @can('users.write')
                                                     <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
                                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                                         data-bs-original-title="Block"><i
                                                             class="bx bx-block"></i></button>
-                                                    {{-- @endcan --}}
+                                                    @endcan
                                                 </span>
                                                 <span data-bs-toggle="modal"
                                                     data-bs-target="#warnModal{{ $user->id }}">
-                                                    {{-- @can('users.write') --}}
+                                                    @can('users.write')
                                                     <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
                                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                                         data-bs-original-title="Warn"><i
                                                             class='bx bx-alarm-exclamation'></i></button>
-                                                    {{-- @endcan --}}
+                                                    @endcan
                                                 </span>
                                                 <span data-bs-toggle="modal"
                                                     data-bs-target="#upgradeModal{{ $user->id }}">
-                                                    {{-- @can('users.write') --}}
+                                                    @can('users.write')
                                                     <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
                                                         data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                                         data-bs-original-title="Upgrade"><i
                                                             class='bx bx-dollar'></i></button>
-                                                    {{-- @endcan --}}
-                                                </span>
+                                                    @endcan
+                                                </span> --}}
                                                 <form action="{{ route('users.standard.destroy', $userr->id) }}"
                                                     onsubmit="confirmAction(event, () => event.target.submit())"
                                                     class="d-inline" method="post">

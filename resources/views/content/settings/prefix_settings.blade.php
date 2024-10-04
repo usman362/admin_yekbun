@@ -67,7 +67,7 @@
                                         <div class="py-2 rounded" style="width:fit-content">
                                             <div x-show="!editPrice">
                                                 <span class="me-4">{{$prefix->prefix_id}}</span>
-                                                
+
                                             </div>
                                             {{-- <div x-show="editPrice" class="edit-price align-items-center gap-1"
                                                 style="display: none;">
@@ -168,7 +168,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body mx-0 flex-grow-0">
-                        <form class="add-new-user pt-0" id="addNewPrefixForm" onsubmit="{{route('settings.voting.prefix')}}" method="post" enctype="multipart/form-data">
+                        <form class="add-new-user pt-0" id="addNewPrefixForm" action="{{route('settings.voting.store_prefix')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label" for="task-title">Prefix for</label>
