@@ -80,7 +80,7 @@ class AvatarsController extends Controller
 			$avatar->days = $days . " Days";
 		}
 
-		$feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->where('online', 0)->orderby('created_at', 'desc')->take(10)->get();
+		$feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->where('online', '!=', 1)->orderby('created_at', 'desc')->take(10)->get();
 		$online_feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->where('online', 1)->orderby('online_time', 'desc')->take(10)->get(); 
 
 		$trec = count($feeds);
