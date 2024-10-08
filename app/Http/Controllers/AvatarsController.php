@@ -68,20 +68,39 @@ class AvatarsController extends Controller
 
 		$diff = $to->diff($from);
 
-$years = $diff->y;
-$months = $diff->m;
-$days = $diff->d;
+		$years = $diff->y;
+		$months = $diff->m;
+		$days = $diff->d;
 
-if($years > 0){
-    $avatar->days = $years . " Years - " . $months . " Months - " . $days . " Days";
-}else if($months > 0){
-    $avatar->days = $months . " Months - " . $days . " Days";
-}else{
-    $avatar->days = $days . " Days";
-}
+		if($years > 0){
+			$avatar->days = $years . " Years - " . $months . " Months - " . $days . " Days";
+		}else if($months > 0){
+			$avatar->days = $months . " Months - " . $days . " Days";
+		}else{
+			$avatar->days = $days . " Days";
+		}
 
-		$feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->take(10)->get();
+		$feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->where('online', 0)->orderby('created_at', 'desc')->take(10)->get();
+		$online_feeds = Avatars_Feed::where('avatar_Id', $avatar->av_Id)->where('online', 1)->orderby('online_time', 'desc')->take(10)->get(); 
 
+		$trec = count($feeds);
+
+		$times = array();
+
+		for($i=0; $i<$trec; $i++){
+			if($i == 0){
+				$times[] = "02:40";
+			}else if($i == 1){
+				$times[] = "04:0" . rand(1,9);
+			}else if($i==3){
+				$times[] = "06:0" . rand(1,9);
+			}else{
+				$times[] = "0". $i + 6 .":3" . rand(1,9);
+			}
+			
+		}
+
+		
 		//calculate time for next feed
 		$working_days = $avatar->working_days;
 		$working_hours = $avatar->working_hours;
@@ -151,8 +170,10 @@ if($years > 0){
 
 
 		$avatar->feeds = $feeds;
+		$avatar->online_feeds = $online_feeds;
 		$avatar->nextime = $feed_next;
 		$avatar->remtime = $remainingTime;
+		$avatar->times = $times;
 
 		echo json_encode($avatar);
 	}
@@ -500,6 +521,25 @@ if($years > 0){
 
 		$avatarfeed->delete();
 
-		return redirect()->route('avatars.manag_avatars', ['id' => $aid])->with('success','Avatar deleted successfully.');
+		return redirect()->route('avatars.manag_avatars', ['id' => $aid])->with('success','Feed deleted successfully.');
+	}
+
+
+	public function update_manag_avatars($id){
+		//echo $id;
+
+		$avatarfeed = Avatars_Feed::where('_id', $id)->first();
+
+		$avatarid = $avatarfeed->avatar_Id;
+		
+		$avatar = Avatars::where('av_Id', $avatarid)->first();
+		$aid = $avatar->id;
+
+		$avatarfeed->online = 1;
+		$avatarfeed->online_time = date("Y-m-d H:i:s");
+
+		$avatarfeed->update();
+
+		return redirect()->route('avatars.manag_avatars', ['id' => $aid])->with('success','Feed shared successfully.');
 	}
 }
