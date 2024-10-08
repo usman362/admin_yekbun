@@ -87,6 +87,7 @@ class AvatarsController extends Controller
 		$feed->image = $image;
 		$feed->content = $content;
 		$feed->forwards = 0;
+		$feed->online = 0;
 		
 		$feed->comments = 0;
 		$feed->likes = 0;
