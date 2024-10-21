@@ -22,6 +22,8 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\UploadMedia;
 use Carbon\Carbon;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -29,36 +31,59 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // Validate the request input
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required',
             'device_imei' => 'required'
         ]);
+
+        // Additional validation for user roles and status
         (int)$credentials['is_admin_user'] = 0;
         (int)$credentials['is_superadmin'] = 0;
         (int)$credentials['status'] = 1;
 
+        // Check if the user exists by email
         $user = User::where('email', $request->email)->first();
+
+        // If user exists, check the device IMEI
         if ($user) {
             if ((int)$user->device_imei !== (int)$request->device_imei) {
                 $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
-                return response()->json(['message' => 'Device Imei is not registered', 'imeis' => $imeis], 404);
+                return response()->json(['message' => 'Device IMEI is not registered', 'imeis' => $imeis], 404);
             }
         } else {
             return response()->json(['message' => 'User not Found!'], 404);
         }
 
-        if (Auth::attempt($credentials, true)) {
+        // Check if the credentials are correct (email, password)
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
             $user = Auth::user();
 
-            if ($user->is_verfied == 0)
+            // Ensure the user's email is verified
+            if ($user->email_verified_at == null || $user->email_verified_at == '') {
                 return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
+            }
 
-            $user = $request->user();
-            $tokenResult = $user->createToken('Personal Access Token');
-            $token = $tokenResult->plainTextToken;
-            return response()->json(['success' => true, 'data' => ['user' => $user, 'token' => $token]], 200);
+            // Generate a JWT token for the authenticated user
+            try {
+                if (!$token = JWTAuth::fromUser($user)) {
+                    return response()->json(['error' => 'Invalid credentials'], 400);
+                }
+            } catch (JWTException $e) {
+                return response()->json(['error' => 'Could not create token'], 500);
+            }
+
+            // Return the user data and JWT token
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'user' => $user,
+                    'token' => $token  // This is your Bearer token
+                ]
+            ], 200);
         } else {
+            // If credentials are incorrect, return an error
             return response()->json(['success' => false, 'message' => 'Email or password is incorrect.']);
         }
     }
@@ -118,7 +143,7 @@ class AuthController extends Controller
                 'device_name' => $request['device_name'],
                 'device_model' => $request['device_model'],
                 'device_serial' => $request['device_serial'],
-                'user_id' => 'YB-US'.(User::count()+1),
+                'user_id' => 'YB-US' . (User::count() + 1),
                 'user_type' => 'users'
             ]);
 

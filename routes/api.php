@@ -70,6 +70,7 @@ use App\Http\Controllers\Api\AlbumController;
 use App\Http\Controllers\Api\PostGalleryController;
 use App\Http\Controllers\Api\AvatarsController;
 use App\Http\Controllers\Api\UserProfileController;
+use App\Http\Controllers\Api\FeedsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +104,7 @@ Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.rese
 Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
 
 
-// Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('jwt.auth')->group(function () {
 Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
 Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
 Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
@@ -121,7 +122,17 @@ Route::post('cities', [CityController::class, 'store'])->name('cities.store');
 Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
 Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
 
+//Feeds Section
+Route::post('feeds',[FeedsController::class,'store']);
+Route::get('feeds',[FeedsController::class,'index']);
 
+//News Feed Section
+Route::post('news-feeds',[FeedsController::class,'news_store']);
+Route::get('news-feeds',[FeedsController::class,'news']);
+
+//Event Section
+Route::post('events',[FeedsController::class,'store_event']);
+Route::get('events',[FeedsController::class,'index']);
 
 Route::get('policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('policy_and_terms.index');
 Route::post('policy_and_terms', [PolicyAndTermsController::class, 'store'])->name('policy_and_terms.store');
@@ -153,7 +164,7 @@ Route::resource('organizations', OrganizationController::class)->except(['create
 Route::resource('donations', DonationController::class)->except(['create', 'edit']);
 
 // Events
-Route::resource('events', EventController::class)->except(['create', 'edit']);
+// Route::resource('events', EventController::class)->except(['create', 'edit']);
 // Event Categories
 Route::resource('event-categories', EventCategoryController::class)->except(['create', 'edit']);
 // Tickets

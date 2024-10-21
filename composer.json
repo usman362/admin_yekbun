@@ -23,9 +23,11 @@
     "nesbot/carbon": "^2.68",
     "omnipay/paypal": "^3.0",
     "pbmedia/laravel-ffmpeg": "^8.3",
+    "php-ffmpeg/php-ffmpeg": "^1.2",
     "spatie/laravel-activitylog": "^4.8",
     "spatie/laravel-permission": "^6.9",
     "stripe/stripe-php": "^10.18",
+    "tymon/jwt-auth": "^2.1",
     "wapmorgan/mp3info": "^0.1.0"
   },
   "require-dev": {

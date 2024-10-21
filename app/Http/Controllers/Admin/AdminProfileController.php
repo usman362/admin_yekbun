@@ -28,9 +28,9 @@ class AdminProfileController extends Controller
 
     public function admin_activity()
     {
-        $events = Event::all();
-        $news = News::all();
-        $feeds = Feed::all();
+        $events = Event::orderBy('created_at','desc')->get();
+        $news = News::orderBy('created_at','desc')->get();
+        $feeds = Feed::orderBy('created_at','desc')->get();
         return view('content.pages.admin_activity',compact('events','news','feeds'));
     }
 
