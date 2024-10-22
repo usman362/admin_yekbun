@@ -323,43 +323,61 @@ class AuthController extends Controller
 
     public function resetpassword(Request $request)
     {
-        $user  = ResetUserPassword::where('user_id', $request->user_id)->first();
-        if ($user->password_token != $request->token)
-            return response()->json(['success' => false, 'message' => 'Something went wrong']);
+        $request->validate([
+            'password' => 'required',
+            'token' => 'required',
+            'user_id' => 'required'
+        ]);
 
+        // Find the reset entry
+        $resetEntry = ResetUserPassword::where('user_id', $request->user_id)->first();
+        if (!$resetEntry || $resetEntry->password_token != $request->token) {
+            return response()->json(['success' => false, 'message' => 'Invalid token or user.'], 400);
+        }
+
+        // Find the user
         $user = User::find($request->user_id);
-        if ($user == '')
-            return response()->json(['success' => false, 'message' => 'User Not found.']);
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+        }
 
-        $user->password = bcrypt($request->password);
+        // Update password
+        $user->password = Hash::make($request->password);
         $user->save();
 
+        // Remove the reset entry
         ResetUserPassword::where('user_id', $request->user_id)->delete();
 
-        return response()->json(['success' => true, 'message' => 'Your password has been changed.']);
+        return response()->json(['success' => true, 'message' => 'Your password has been changed.'], 200);
     }
 
     public function reset(Request $request)
     {
         $request->validate([
             'code' => 'required',
+            'token' => 'required',
+            'user_id' => 'required'
         ]);
 
-        $user = ResetUserPassword::where('user_id', $request->user_id)->first();
-        if ($user !== "") {
-            if ($request->token != $user->token)
-                return response()->json(['success' => false, 'message' => 'Something went wrong.']);
+        // Find the reset entry
+        $resetEntry = ResetUserPassword::where('user_id', $request->user_id)->first();
+        if (!$resetEntry) {
+            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+        }
 
-            if ($user->code == $request->code) {
-                $password_token = Str::random(50);
-                $user->password_token = $password_token;
-                $user->save();
-                return response()->json(['success' => true, 'data' => ['token' => $password_token, 'user_id' => $user->user_id]]);
-            } else {
-                return response()->json(['success' => false, 'message' => 'OTP code is incorrect.']);
-            }
+        // Validate the token and OTP
+        if ($request->token != $resetEntry->token) {
+            return response()->json(['success' => false, 'message' => 'Invalid token.'], 400);
+        }
+
+        if ($resetEntry->code == $request->code) {
+            $password_token = Str::random(50);
+            $resetEntry->password_token = $password_token;
+            $resetEntry->save();
+
+            return response()->json(['success' => true, 'data' => ['token' => $password_token, 'user_id' => $resetEntry->user_id]], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'User not found.']);
+            return response()->json(['success' => false, 'message' => 'OTP code is incorrect.'], 400);
         }
     }
 
