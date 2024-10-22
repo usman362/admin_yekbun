@@ -306,6 +306,12 @@ class AuthController extends Controller
 
         $code = rand(1000, 9999);
         $token  = Str::random(20);
+        $tempreset = ResetUserPassword::where('user_id',$user->id)->get();
+        if($tempreset){
+            foreach($tempreset as $userDel){
+                $userDel->delete();
+            }
+        }
         ResetUserPassword::updateorCreate(['code' => $code, 'user_id' => $user->id, 'token' => $token, 'email' => $user->email]);
         try {
             $details = [
