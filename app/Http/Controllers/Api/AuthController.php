@@ -225,6 +225,7 @@ class AuthController extends Controller
             'device_serial' => 'required',
             'device_model' => 'required',
             'device_type' => 'required',
+            'device_imei' => 'required',
             'otp' => 'required',
         ]);
         $user = User::where('email', $request->email)->first();
@@ -237,16 +238,24 @@ class AuthController extends Controller
         if (!$code) {
             return response()->json(['status' => false, 'message' => 'Code not found!'], 404);
         }
-
         if ((int)$code->code == (int)$request->otp) {
-            $user->device_serial = $request->device_serial;
-            $user->device_type = $request->device_type;
-            $user->device_model = $request->device_model;
-            if ($user->save) {
+
+            try {
+                User::updateOrCreate(
+                    ['email' => $request->email],
+                    [
+                        'device_serial' => $request->device_serial,
+                        'device_type' => $request->device_type,
+                        'device_model' => $request->device_model,
+                        'device_imei' => $request->device_imei,
+                    ]
+                );
+                UserCode::where('user_id', $user->id)->delete();
                 return response()->json(['message' => 'New device registered successfully.'], 201);
-            } else {
+            } catch (\Exception $e) {
                 return response()->json(['message' => 'Failed to register device'], 403);
             }
+
         } else {
             return response()->json(['status' => false, 'message' => 'Invalid Code!'], 403);
         }
@@ -306,9 +315,9 @@ class AuthController extends Controller
 
         $code = rand(1000, 9999);
         $token  = Str::random(20);
-        $tempreset = ResetUserPassword::where('user_id',$user->id)->get();
-        if($tempreset){
-            foreach($tempreset as $userDel){
+        $tempreset = ResetUserPassword::where('user_id', $user->id)->get();
+        if ($tempreset) {
+            foreach ($tempreset as $userDel) {
                 $userDel->delete();
             }
         }
