@@ -51,7 +51,7 @@
         // Inactivity Timer Script
         let inactivityTime = function () {
           let time;
-          let maxInactivity = 120 * 60 * 1000; // 2 hours
+          let maxInactivity = 30 * 1000; // 2 hours
 
           window.onload = resetTimer;
           document.onmousemove = resetTimer;
