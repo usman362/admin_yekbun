@@ -54,7 +54,7 @@
                 <div>
                     <h4 class="fw-bold py-3 mb-4">
                         <span class="text-muted fw-light">App Setting/</span>
-                        <?= $ringType == 1 ? "Message": "Call" ?>&nbspRingtone
+                        <?= $ringType == 1 ? 'Message' : ($ringType == 2 ? 'Call' : 'Notification') ?>&nbspRingtone
 
                     </h4>
                 </div>
@@ -168,7 +168,8 @@
                                                             <div class="dz-message needsclick">
                                                                 Drop files here or click to upload
                                                             </div>
-                                                            <input type="hidden" name="ringType" value="<?= $ringType ?>" />
+                                                            <input type="hidden" name="ringType"
+                                                                value="<?= $ringType ?>" />
                                                         </div>
                                                     </div>
                                                 </div>

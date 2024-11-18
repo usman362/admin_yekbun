@@ -302,6 +302,7 @@ Route::get('app-setting/message-ringtone', [RingtoneController::class, 'getMessa
     'appsetting.message.ringtone'
 );
 Route::get('app-setting/call-ringtone', [RingtoneController::class, 'getCall'])->name('appsetting.call.ringtone');
+Route::get('app-setting/notification-ringtone', [RingtoneController::class, 'getNotification'])->name('appsetting.notification.ringtone');
 Route::get('app-setting/ringtone', [RingtoneController::class, 'index'])->name('appsetting.ringtone.index');
 
 Route::post('app-setting/ringtone', [RingtoneController::class, 'store'])->name('appsetting.ringtone.store');

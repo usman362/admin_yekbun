@@ -2130,6 +2130,11 @@
                         <div>Calls Ringtone</div>
                     </a>
                 </li>
+                <li class="menu-item {{ Request::is('settings/app-setting/notification-ringtone') ? 'active' : '' }} ">
+                    <a href="{{ route('settings.appsetting.notification.ringtone') }}" class="menu-link">
+                        <div>Notifications Ringtone</div>
+                    </a>
+                </li>
             </ul>
         </li>
     @endcan

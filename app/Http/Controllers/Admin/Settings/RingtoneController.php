@@ -43,6 +43,13 @@ class RingtoneController extends Controller
         $ringType = 2;
         return view("content.apps.app-ringtone",compact('ringtones', 'ringType'));
     }
+
+    public function getNotification()
+    {
+        $ringtones = Ringtone::where('ringType', 3)->get();
+        $ringType = 3;
+        return view("content.apps.app-ringtone",compact('ringtones', 'ringType'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -51,7 +58,7 @@ class RingtoneController extends Controller
      */
     public function store(Request $request)
     {
-        $response_msg = $request->ringType == "1" ? "Message" : "Call";
+        $response_msg = $request->ringType == "1" ? "Message" : ($request->ringType == "3" ? "Notification" : "Call");
         if(!empty($request->audio_paths)){
             foreach ($request->audio_paths as $key => $path) {
                 try {

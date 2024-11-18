@@ -18,9 +18,47 @@ class RingtoneController extends Controller
             return response()->json(['success' => true, 'data' => $ringtone]);
         }
     }
+
+    public function getMessage()
+    {
+        $ringtones = Ringtone::where('ringType', 1)->get();
+        $ringType = 1;
+
+        if($ringtones->isEmpty()){
+            return response()->json(['success' => false, 'data' => []]);
+        }else{
+            return response()->json(['success' => true, 'data' => $ringtones]);
+        }
+    }
+    /**
+     * Display a listing of the resource for call ringtone with ringType.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCall()
+    {
+        $ringtones = Ringtone::where('ringType', 2)->get();
+        $ringType = 2;
+        if($ringtones->isEmpty()){
+            return response()->json(['success' => false, 'data' => []]);
+        }else{
+            return response()->json(['success' => true, 'data' => $ringtones]);
+        }
+    }
+
+    public function getNotification()
+    {
+        $ringtones = Ringtone::where('ringType', 3)->get();
+        $ringType = 3;
+        if($ringtones->isEmpty()){
+            return response()->json(['success' => false, 'data' => []]);
+        }else{
+            return response()->json(['success' => true, 'data' => $ringtones]);
+        }
+    }
         public function store(Request $request)
     {
-        $response_msg = $request->ringType == "1" ? "Message" : "Call";
+        $response_msg = $request->ringType == "1" ? "Message" : ($request->ringType == "3" ? "Notification" : "Call");
         if(!empty($request->audio_paths)){
             foreach ($request->audio_paths as $key => $path) {
                 try {
