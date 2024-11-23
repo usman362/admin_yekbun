@@ -226,6 +226,7 @@ class AuthController extends Controller
             'device_model' => 'required',
             'device_type' => 'required',
             'device_imei' => 'required',
+            'device_name' => 'required',
             'otp' => 'required',
         ]);
         $user = User::where('email', $request->email)->first();
@@ -248,6 +249,7 @@ class AuthController extends Controller
                         'device_type' => $request->device_type,
                         'device_model' => $request->device_model,
                         'device_imei' => $request->device_imei,
+                        'device_name' => $request->device_name,
                     ]
                 );
                 UserCode::where('user_id', $user->id)->delete();

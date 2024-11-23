@@ -1,18 +1,18 @@
 <?php
-  
+
 namespace App\Mail;
-  
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-  
+
 class SendCodeMail extends Mailable
 {
     use Queueable, SerializesModels;
- 
+
     public $details;
-    
+
     /**
      * Create a new message instance.
      *
@@ -22,7 +22,7 @@ class SendCodeMail extends Mailable
     {
         $this->details = $details;
     }
-    
+
     /**
      * Build the message.
      *
@@ -30,7 +30,7 @@ class SendCodeMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from Yekhbun.org')
+        return $this->subject('Mail from Yekbun.org')
                     ->view('content.emails.code');
     }
 }

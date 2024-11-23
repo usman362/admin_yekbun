@@ -78,7 +78,7 @@ class AccountSettingController extends Controller
         );
         try {
           $details = [
-            'title' => 'Mail from Yekhbun.org',
+            'title' => 'Mail from Yekbun.org',
             'code' => $code,
             'username' => $user->username ?? '',
           ];
@@ -98,7 +98,7 @@ class AccountSettingController extends Controller
     $code=  rand(1000, 9999);
     try{
       $details =[
-        'title' => 'Mail from Yekhbun.org',
+        'title' => 'Mail from Yekbun.org',
         'code' => $code,
         'username' => $user->user->username ?? '',
       ];
@@ -120,7 +120,7 @@ class AccountSettingController extends Controller
     $user = User::where('email'  , $request->email)->first();
 
     if(isset($user)){
-      
+
       $user->level = $request->level;
       $user->save();
       $levels = [
@@ -132,6 +132,6 @@ class AccountSettingController extends Controller
     }else{
       return response()->json(['success' => false, 'message' =>'User not found.']);
     }
-  } 
-  
+  }
+
 }

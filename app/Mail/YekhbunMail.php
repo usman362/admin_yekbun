@@ -32,7 +32,7 @@ class YekhbunMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Yekhbun Mail',
+            subject: 'Yekbun Mail',
         );
     }
 
