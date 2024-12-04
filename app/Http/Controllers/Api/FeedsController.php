@@ -97,7 +97,6 @@ class FeedsController extends Controller
 
     public function store(Request $request)
     {
-        dd(count($request->file('images') ?? []) + count($request->file('videos') ?? []));
         $validate = $request->validate([
             'user_type' => 'required',
             'feed_type' => 'required',
