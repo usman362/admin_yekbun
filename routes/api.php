@@ -101,10 +101,11 @@ Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 
 //User Profile
-Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
 
 
-// Route::middleware('jwt.auth')->group(function () {
+Route::middleware('jwt.auth')->group(function () {
+    Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
+});
 Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
 Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
 Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
