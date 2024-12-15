@@ -41,16 +41,25 @@ class UserProfileController extends Controller
         if (!empty($request->name) && $request->name !== "") {
             $profile->name = $request->name;
         }
+        if (!empty($request->username) && $request->username !== "") {
+            $profile->username = $request->username;
+        }
         if (!empty($request->last_name) && $request->last_name !== "") {
             $profile->last_name = $request->last_name;
         }
         if (!empty($request->email) && $request->email !== "") {
+            if($request->old_email != $profile->email){
+                return response()->json(['message', 'Invalid Old Email Address'],403);
+            }
             $profile->email  = $request->email;
         }
         if (!empty($request->phone) && $request->phone !== "") {
             $profile->phone  = $request->phone;
         }
         if (!empty($request->password) && $request->password !== "") {
+            if(!Hash::check($request->old_password,$profile->password)){
+                return response()->json(['message', 'Invalid Old Password'],403);
+            }
             $profile->password  = Hash::make($request->password);
         }
         // unlink($profile->image);
