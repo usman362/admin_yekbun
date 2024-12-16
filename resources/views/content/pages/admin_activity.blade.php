@@ -6230,6 +6230,21 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                 return false;
             });
 
+            $('.visibilitypicker').click(function() {
+                // Remove 'active' class from all elements
+                $('.visibilitypicker').removeClass('active');
+
+                // Add 'active' class to the clicked element
+                $(this).addClass('active');
+
+                // Check the radio button or checkbox with the ID from 'data-val' attribute
+                var idToCheck = $(this).attr('data-val'); // Using .data() is cleaner
+                $('[name="visibility"]').val(idToCheck);
+
+                // Prevent default action (if needed)
+                return false;
+            });
+
 
             $('.imgqtypicker:first-child').addClass('active');
             $('.image-contentnew').hide();
