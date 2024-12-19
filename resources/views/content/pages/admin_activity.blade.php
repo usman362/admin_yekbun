@@ -419,6 +419,87 @@
         .avatar_details .show_details {
             cursor: pointer;
         }
+
+        .feeds-type{
+            background-color:white;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 0px 0px 10px 10px;
+        }
+
+        .feeds-type button{
+            width: 60px;
+            height: 64px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 12px 18px 12px 18px;
+            border: none;
+            padding: 8px;
+        }
+        .feeds-type button.active{
+            border: 1px solid #1BC469;
+            background-color: #fff;
+        }
+        .feeds-type button.active svg *{
+            fill: #1BC469;
+        }
+        .feeds-type p{
+            font-size: 14px;
+            /* line-height: 16.8px; */
+            margin: 4px 0 -4px 0;
+            font-weight: 500;
+            text-align: center;
+            color: #1C274C;
+        }
+        .modal{
+            font-family: "Genos", serif !important;
+            font-optical-sizing: auto !important;
+            font-style: normal !important;
+        }
+        .modal *{
+            font-family: "Genos", serif !important;
+            font-optical-sizing: auto !important;
+            font-style: normal !important;
+        }
+        img.ellipse{
+            width: 2px !important;
+            height: 2px !important;
+            margin-top: 13px !important;
+        }
+        .section-head span {
+            font-weight: 500;
+        }
+
+        .section-head img {
+            height: 20px;
+            width: 20px;
+            margin: 4px 4px 0 0;
+        }
+        .visibilitypicker{
+            width: 96px;
+            height: auto;
+            border-radius: 14px;
+            background-color: #F2F2F2;
+            color: black;
+            border: none;
+            margin: 7px;
+        }
+
+        .visibilitypicker svg *{
+            fill: black;
+        }
+
+        .visibilitypicker.active{
+            background-color: #1BC469;
+            color: #fff;
+        }
+
+        .visibilitypicker.active svg *{
+            fill: #fff;
+            stroke: #fff;
+        }
+
+
     </style>
 @endsection
 

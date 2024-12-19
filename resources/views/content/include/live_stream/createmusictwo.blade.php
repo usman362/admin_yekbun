@@ -3,6 +3,10 @@
         display: none;
     }
 
+    .modal-content{
+        width: 450px !important;
+    }
+
     .bgchn {
         cursor: pointer;
     }
@@ -63,7 +67,7 @@
 
     #requestpopuptwo .btn-close {
         position: fixed !important;
-        right: -56px !important;
+        right: 76px !important;
         top: 30px !important;
         z-index: 2 !important;
     }
@@ -87,7 +91,7 @@
     .color-selector {
         /* background-color: #eaeaea; */
         border-radius: 0px 0px 5px 5px;
-        padding: 10px;
+        /* padding: 10px; */
         display: flex;
         justify-content: space-between;
     }
@@ -292,8 +296,10 @@
 
     .feed-btn {
         border: none;
-        padding: 6px 16px;
         outline: none;
+        border-radius: 7px;
+        width: 52px;
+        height: auto;
     }
 </style>
 
@@ -304,7 +310,7 @@
     <div id="shahretext" class="share-content">
         <div style="padding:0px 2.75rem;">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                <div style="background-image:url('{{ asset('assets/img/hand.png') }}');height: 240px; width: 119%;margin-top:-28px;margin-left:-44px; background-size: 100% 100%;background-repeat: no-repeat;"
+                <div style="background-image:url('{{ asset('assets/img/hand.png') }}');height: 200px; width: 125%;margin-top:-28px;margin-left:-44px; background-size: 100% 100%;background-repeat: no-repeat;"
                     class="carousel-inner" id="feed-text-background">
                     <div class="carousel-item active">
                         <h2 style="font-size:28px;color:rgb(163, 138, 138);margin-top:20px;text-align:center;"
@@ -325,85 +331,91 @@
             {{-- //Fonts --}}
 
             <div
-                style="background-color:white; padding-left: 20px; padding-right: 20px; border-radius:7px;margin-top:10px">
-                <label> <img src="{{ asset('assets/svg/fonts.svg') }}" style="width:100px" alt=""> </label>
-                <div class="fonts-selector">
-                    <div class="cursor-pointer color-option"
-                        style="width: 85px; height: 85px;  border-radius: 0 0 15px 15px; display: inline-block; margin: 10px;">
-                        <img src="{{ asset('assets/svg/fonts1.svg') }}" alt=""
-                            style="width: 100px; height:100px">
-
+                style="background-color:white; padding-left: 14px; padding-right: 14px; border-radius:7px;margin-top:10px">
+                <div class="section-head d-flex">
+                    <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                    <img src="{{ asset('assets/svg/fonts-icon.svg') }}" alt="">
+                    <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                    <span>Fonts</span>
+                </div>
+                <div class="fonts-selector mt-2">
+                    <div class="cursor-pointer"
+                        style="width: 65px; height: 65px;border-radius: 0 0 15px 15px; display: inline-block;">
+                        <img src="{{ asset('assets/svg/fonts1.svg') }}" alt="">
                     </div>
-                    <div class="cursor-pointer color-option"
-                        style="width: 85px; height: 85px; border-radius: 0 0 15px 15px; display: inline-block; margin: 10px;">
-                        <img src="{{ asset('assets/svg/fonts2.svg') }}" alt="" style="width: 85px; height:85px">
-
+                    <div class="cursor-pointer"
+                        style="width: 65px; height: 65px;border-radius: 0 0 15px 15px; display: inline-block;">
+                        <img src="{{ asset('assets/svg/fonts2.svg') }}" alt="">
                     </div>
-                    <div class="cursor-pointer color-option"
-                        style="width: 85px; height: 85px; border-radius: 0 0 15px 15px;   display: inline-block; margin: 10px;">
-                        <img src="{{ asset('assets/svg/fonts3.svg') }}" alt="" style="width: 85px; height:85px">
-
+                    <div class="cursor-pointer"
+                        style="width: 65px; height: 65px;border-radius: 0 0 15px 15px;   display: inline-block;">
+                        <img src="{{ asset('assets/svg/fonts3.svg') }}" alt="">
                     </div>
-                    <div class="cursor-pointer color-option"
-                        style="width: 85px; height: 85px; border-radius: 0 0 15px 15px;  display: inline-block; margin: 10px;">
-                        <img src="{{ asset('assets/svg/fonts4.svg') }}" alt="" style="width: 85px; height:85px">
-
+                    <div class="cursor-pointer"
+                        style="width: 65px; height: 65px;border-radius: 0 0 15px 15px;  display: inline-block;">
+                        <img src="{{ asset('assets/svg/fonts4.svg') }}" alt="">
                     </div>
-                    <div class="cursor-pointer color-option"
-                        style="width: 85px; height: 85px; border-radius: 0 0 15px 15px; display: inline-block; margin: 10px;">
-                        <img src="{{ asset('assets/svg/fonts5.svg') }}" alt="" style="width: 85px; height:85px">
-
+                    <div class="cursor-pointer"
+                        style="width: 65px; height: 65px;border-radius: 0 0 15px 15px;  display: inline-block;">
+                        <img src="{{ asset('assets/svg/fonts4.svg') }}" alt="">
                     </div>
                 </div>
 
             </div>
 
             <!--add color select-->
-            <div
-                style="background-color:white;padding-left: 20px; padding-right: 20px; border-radius:5px;margin-top:10px">
-                <label> <img src="{{ asset('assets/svg/color.svg') }}" style="width:100px" alt=""> </label>
+            <div style="background-color:white;height:95px;padding:4px 14px; border-radius:5px;margin-top:10px">
+                <div class="section-head d-flex">
+                    <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                    <img src="{{ asset('assets/svg/colors-icon.svg') }}" alt="">
+                    <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                    <span>Colors</span>
+                </div>
                 <div class="color-selector">
                     <div class="cursor-pointer color-option"
-                        style="background:black;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:black;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="black"></div>
                     <div class="cursor-pointer color-option"
-                        style="background:pink ;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:pink ;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="pink"></div>
                     <div class="cursor-pointer color-option"
-                        style="background:blue ;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:blue ;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="blue"></div>
                     <div class="cursor-pointer color-option"
-                        style="background:green ;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:green ;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="green"></div>
                     <div class="cursor-pointer color-option"
-                        style="background:white ;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:white ;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="white"></div>
                     <div class="cursor-pointer color-option"
-                        style="background:red ;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:red ;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="red"></div>
                     <div class="cursor-pointer color-option"
-                        style="background:skyblue ;width: 60px; height: 60px; border-radius: 15px; display: inline-block; margin: 10px;border: 1px solid #0000004f"
+                        style="background:skyblue ;width: 44px; height: 44px; border-radius: 15px; display: inline-block; margin: 10px 0;border: 1px solid #0000004f"
                         data-color="skyblue"></div>
                 </div>
             </div>
 
-            <div
-                style="background-color:white;padding-left: 20px; padding-right: 20px; border-radius:5px;margin-top:10px">
-                <label> <img src="{{ asset('assets/svg/background.svg') }}" style="width:100px" alt="">
-                </label>
+            <div style="background-color:white;height:95px;padding:4px 14px; border-radius:5px;margin-top:10px">
+                <div class="section-head d-flex">
+                    <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                    <img src="{{ asset('assets/svg/background-image-icon.svg') }}" alt="">
+                    <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                    <span>Backgrounds</span>
+                </div>
+                <div id="owl-example" class="owl-carousel">
+                    @php
+                        $bgs = \App\Models\BackgroundFeed::all();
+                    @endphp
+                    @foreach ($bgs as $bg)
+                        <a href="javascript:void(0)" class="feed-bg"
+                            data-url="{{ asset('storage/' . $bg->image) }}"><img class="clickborder"
+                                style="height:55px;width:55px;border-radius:5px"
+                                src="{{ asset('storage/' . $bg->image) }}" alt=""></a>
+                    @endforeach
+                </div>
             </div>
 
-            <div style="padding:17px !important;background-color:white ;border-radius:0px 0px 5px 5px;" id="owl-example"
-                class="owl-carousel">
-                @php
-                    $bgs = \App\Models\BackgroundFeed::all();
-                @endphp
-                @foreach ($bgs as $bg)
-                    <a href="javascript:void(0)" class="feed-bg" data-url="{{ asset('storage/' . $bg->image) }}"><img
-                            class="clickborder" style="height:65px;width:90px;padding: 0px 12px;"
-                            src="{{ asset('storage/' . $bg->image) }}" alt=""></a>
-                @endforeach
-            </div>
         </div>
     </div>
 
@@ -647,13 +659,15 @@
         <!--code end-->
     </div>
     <div style="padding:0px 0.5rem;">
-        <div style="border-radius:5px 5px 0 0; background-color:white;padding:20px"
-            class="d-flex align-items-center pt-3 mt-3">
-            <label>
-                <img src="{{ asset('assets/svg/description.svg') }}" style="width:100px" alt="">
-            </label>
-        </div>
-        <div style="background: white; border-radius:0 0 7px 7px; margin-top: -1px;" class="d-flex">
+        <div style="border-radius:5px 5px 0 0; background-color:white;padding:0 14px 10px 14px"
+            class="align-items-center mt-3">
+            <div class="section-head d-flex">
+                <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                <img src="{{ asset('assets/svg/description-icon.svg') }}" alt="">
+                <img class="ellipse" src="{{ asset('assets/img/ellipse.png') }}" alt="">
+                <span>Description</span>
+            </div>
+
             <input style="height: 90px; border: none;" name="description" type="text"
                 class="form-control feed-description w-100" placeholder="Enter The description">
         </div>
@@ -689,71 +703,154 @@
     </div> --}}
     <input type="hidden" name="visibility" id="visibility" value="public">
     <div style="padding:0px 0.5rem;">
-    <div class="fonts-selector"
-        style="background-color:white;border-radius:5px; padding-left: 20px; padding-right: 20px; margin-top:10px">
-        <center>
-            <div class="cursor-pointer visibilitypicker" data-val="public"
-                style="border-radius: 15px; display: inline-block; margin: 10px;">
-                <img src="{{ asset('assets/svg/public.svg') }}" alt="" style="width: 100px; height:100px">
-            </div>
-            <div class="cursor-pointer visibilitypicker" data-val="friends"
-                style="border-radius: 15px; display: inline-block; margin: 10px;">
-                <img src="{{ asset('assets/svg/friends.svg') }}" alt="" style="width: 100px; height:100px">
-            </div>
-            <div class="cursor-pointer visibilitypicker" data-val="family"
-                style="border-radius: 15px; display: inline-block; margin: 10px;">
-                <img src="{{ asset('assets/svg/doit.svg') }}" alt="" style="width: 100px; height:100px">
-            </div>
-            <div class="cursor-pointer color-option"
-                style="border-radius: 15px; display: inline-block; margin: 10px;">
-                {{-- <img src="{{ asset('assets/svg/share2.svg') }}" alt="" style="width: 100px; height:100px"> --}}
-                <button type="button" class="feed-btn"><svg width="45" height="35" viewBox="0 0 45 35"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.4237 1.27994C11.2734 0.93596 11.3491 0.535053 11.6144 0.269525C11.8798 0.00399709 12.2806 -0.071987 12.6247 0.0780205L32.5198 8.60371C32.8558 8.74733 33.0737 9.07749 33.0737 9.44286C33.0737 9.80823 32.8558 10.1384 32.5198 10.282L12.5964 18.7958C12.2541 18.9418 11.8573 18.8653 11.5939 18.6024C11.3304 18.3395 11.2529 17.943 11.3982 17.6003L14.2382 10.909C14.3751 10.5867 14.6843 10.3711 15.034 10.3541L17.2526 10.2455C17.7566 10.2488 18.1679 9.84285 18.1712 9.33882C18.1744 8.8348 17.7685 8.42355 17.2645 8.42027L14.9975 8.28247C14.6549 8.26141 14.353 8.04983 14.2163 7.73489L11.4237 1.27994Z"
-                            fill="#4CD964" />
-                        <path
-                            d="M3.29583 32.5569C3.5305 32.6956 3.8345 32.8022 4.20783 32.8769C4.59183 32.9409 4.9865 32.9836 5.39183 33.0049C5.79717 33.0156 6.14917 33.0209 6.44783 33.0209C6.56517 33.0209 6.6985 33.0209 6.84783 33.0209C7.00783 33.0102 7.1465 33.0049 7.26383 33.0049C7.64783 32.9942 7.98383 32.9516 8.27183 32.8769C8.55983 32.7916 8.7785 32.6529 8.92783 32.4609C9.08783 32.2689 9.16783 31.9969 9.16783 31.6449C9.16783 31.2076 9.0505 30.9249 8.81583 30.7969C8.59183 30.6689 8.26117 30.6049 7.82383 30.6049C7.6745 30.6049 7.5145 30.6049 7.34383 30.6049C7.17317 30.6049 6.97583 30.6049 6.75183 30.6049C6.5385 30.6049 6.28783 30.6049 5.99983 30.6049C5.67983 30.6049 5.35983 30.5889 5.03983 30.5569C4.71983 30.5249 4.43183 30.4556 4.17583 30.3489C3.91983 30.2316 3.71183 30.0502 3.55183 29.8049C3.39183 29.5489 3.31183 29.1916 3.31183 28.7329C3.31183 28.1996 3.40783 27.7782 3.59983 27.4689C3.79183 27.1596 4.0585 26.9356 4.39983 26.7969C4.75183 26.6476 5.15183 26.5516 5.59983 26.5089C6.0585 26.4662 6.55983 26.4449 7.10383 26.4449C7.42383 26.4449 7.77583 26.4502 8.15983 26.4609C8.54383 26.4716 8.91183 26.4982 9.26383 26.5409C9.61583 26.5729 9.88783 26.6316 10.0798 26.7169C10.3038 26.7382 10.4745 26.8076 10.5918 26.9249C10.7198 27.0316 10.7838 27.1702 10.7838 27.3409C10.7838 27.3729 10.7838 27.4262 10.7838 27.5009C10.7838 27.5756 10.7838 27.6449 10.7838 27.7089C10.7838 27.7729 10.7838 27.8209 10.7838 27.8529C10.6985 27.7462 10.5385 27.6662 10.3038 27.6129C10.0798 27.5489 9.82383 27.5009 9.53583 27.4689C9.24783 27.4369 8.96517 27.4156 8.68783 27.4049C8.42117 27.3836 8.19183 27.3729 7.99983 27.3729H6.91183C6.54917 27.3729 6.22383 27.4049 5.93583 27.4689C5.64783 27.5222 5.4185 27.6396 5.24783 27.8209C5.07717 27.9916 4.99183 28.2582 4.99183 28.6209C4.99183 28.8982 5.04517 29.1116 5.15183 29.2609C5.26917 29.3996 5.4345 29.4956 5.64783 29.5489C5.87183 29.5916 6.13317 29.6129 6.43183 29.6129C6.9225 29.6129 7.3385 29.6129 7.67983 29.6129C8.02117 29.6129 8.2825 29.6129 8.46383 29.6129C8.94383 29.6129 9.36517 29.6556 9.72783 29.7409C10.1012 29.8156 10.3892 29.9916 10.5918 30.2689C10.8052 30.5462 10.9118 30.9836 10.9118 31.5809C10.9118 32.1462 10.7892 32.5996 10.5438 32.9409C10.2985 33.2716 9.9625 33.5116 9.53583 33.6609C9.10917 33.7996 8.6185 33.8849 8.06383 33.9169C7.73317 33.9382 7.41317 33.9489 7.10383 33.9489C6.7945 33.9596 6.46917 33.9596 6.12783 33.9489C5.8185 33.9489 5.4985 33.9382 5.16783 33.9169C4.83717 33.8956 4.52783 33.8582 4.23983 33.8049C3.9625 33.7409 3.73317 33.6556 3.55183 33.5489C3.38117 33.4422 3.29583 33.2982 3.29583 33.1169V32.5569ZM13.0936 33.8689C12.8376 33.8689 12.6722 33.8316 12.5976 33.7569C12.5336 33.6822 12.5016 33.5276 12.5016 33.2929V25.8049H14.0056V27.6929C14.1336 27.6502 14.2989 27.6182 14.5016 27.5969C14.7149 27.5649 14.9389 27.5382 15.1736 27.5169C15.4189 27.4956 15.6429 27.4849 15.8456 27.4849C16.5176 27.4849 17.0509 27.5436 17.4456 27.6609C17.8402 27.7782 18.1336 27.9542 18.3256 28.1889C18.5282 28.4129 18.6616 28.6956 18.7256 29.0369C18.7896 29.3782 18.8216 29.7836 18.8216 30.2529V33.1329C18.8216 33.3462 18.8002 33.5062 18.7576 33.6129C18.7256 33.7196 18.6616 33.7889 18.5656 33.8209C18.4696 33.8529 18.3256 33.8689 18.1336 33.8689H17.3496V29.9649C17.3496 29.4849 17.2856 29.1222 17.1576 28.8769C17.0296 28.6316 16.8322 28.4662 16.5656 28.3809C16.3096 28.2849 15.9842 28.2369 15.5896 28.2369C15.4402 28.2369 15.2589 28.2476 15.0456 28.2689C14.8429 28.2796 14.6456 28.3009 14.4536 28.3329C14.2722 28.3542 14.1229 28.3916 14.0056 28.4449V33.8689H13.0936ZM23.398 33.9649C22.7366 33.9649 22.198 33.9329 21.782 33.8689C21.366 33.8156 21.046 33.7142 20.822 33.5649C20.598 33.4156 20.4433 33.2129 20.358 32.9569C20.2833 32.7009 20.246 32.3809 20.246 31.9969C20.246 31.4529 20.3046 31.0422 20.422 30.7649C20.55 30.4769 20.7633 30.2796 21.062 30.1729C21.3713 30.0662 21.782 30.0129 22.294 30.0129C22.5606 30.0129 22.854 30.0182 23.174 30.0289C23.5046 30.0396 23.8193 30.0556 24.118 30.0769C24.4273 30.0876 24.694 30.1036 24.918 30.1249C25.1526 30.1462 25.3073 30.1729 25.382 30.2049C25.382 29.7569 25.3446 29.4049 25.27 29.1489C25.1953 28.8929 25.0726 28.7009 24.902 28.5729C24.742 28.4449 24.5393 28.3596 24.294 28.3169C24.0486 28.2742 23.7606 28.2529 23.43 28.2529C23.0673 28.2529 22.7046 28.2636 22.342 28.2849C21.99 28.3062 21.654 28.3436 21.334 28.3969C21.0246 28.4502 20.7686 28.5196 20.566 28.6049V28.3009C20.566 28.0556 20.63 27.8796 20.758 27.7729C20.8966 27.6662 21.062 27.5969 21.254 27.5649C21.4673 27.5116 21.782 27.4689 22.198 27.4369C22.614 27.4049 23.0566 27.3942 23.526 27.4049C24.1233 27.4049 24.63 27.4369 25.046 27.5009C25.4726 27.5542 25.814 27.6716 26.07 27.8529C26.3366 28.0342 26.5286 28.3062 26.646 28.6689C26.774 29.0316 26.838 29.5169 26.838 30.1249V33.3889C26.742 33.5916 26.4166 33.7409 25.862 33.8369C25.3073 33.9222 24.486 33.9649 23.398 33.9649ZM23.398 33.2929C23.8246 33.2929 24.1713 33.2822 24.438 33.2609C24.7153 33.2289 24.9286 33.1916 25.078 33.1489C25.2273 33.0956 25.3286 33.0316 25.382 32.9569V30.7489C25.286 30.7169 25.1153 30.6902 24.87 30.6689C24.6246 30.6369 24.3686 30.6102 24.102 30.5889C23.8353 30.5676 23.6113 30.5569 23.43 30.5569C23.0353 30.5569 22.7153 30.5836 22.47 30.6369C22.2246 30.6902 22.0486 30.8129 21.942 31.0049C21.8353 31.1969 21.782 31.4956 21.782 31.9009C21.782 32.2316 21.8193 32.4982 21.894 32.7009C21.9686 32.9036 22.118 33.0529 22.342 33.1489C22.5766 33.2449 22.9286 33.2929 23.398 33.2929ZM29.9903 33.8689H28.9663C28.8063 33.8689 28.6837 33.8262 28.5983 33.7409C28.513 33.6556 28.4703 33.4956 28.4703 33.2609V27.8049C28.7263 27.7302 29.0837 27.6502 29.5423 27.5649C30.001 27.4796 30.5503 27.4369 31.1903 27.4369C31.8197 27.4369 32.3157 27.4796 32.6783 27.5649C33.041 27.6396 33.3077 27.7569 33.4783 27.9169C33.6597 28.0662 33.7717 28.2529 33.8143 28.4769C33.8677 28.6902 33.8943 28.9409 33.8943 29.2289H32.4543L32.4383 29.0049C32.4383 28.7489 32.369 28.5676 32.2303 28.4609C32.1023 28.3436 31.9477 28.2689 31.7663 28.2369C31.585 28.2049 31.4037 28.1889 31.2223 28.1889C30.945 28.1889 30.6943 28.2156 30.4703 28.2689C30.257 28.3222 30.097 28.3916 29.9903 28.4769V33.8689ZM38.2481 33.9649C37.5974 33.9649 37.0481 33.9222 36.6001 33.8369C36.1627 33.7516 35.8107 33.5916 35.5441 33.3569C35.2881 33.1222 35.1067 32.7969 35.0001 32.3809C34.8934 31.9649 34.8401 31.4262 34.8401 30.7649C34.8401 29.9756 34.9414 29.3356 35.1441 28.8449C35.3467 28.3542 35.7041 27.9969 36.2161 27.7729C36.7387 27.5382 37.4641 27.4209 38.3921 27.4209C39.1174 27.4209 39.6934 27.5116 40.1201 27.6929C40.5574 27.8636 40.8721 28.1356 41.0641 28.5089C41.2561 28.8822 41.3521 29.3569 41.3521 29.9329V30.9569H36.8561C36.8561 30.7862 36.8934 30.6476 36.9681 30.5409C37.0427 30.4342 37.1814 30.3809 37.3841 30.3809H40.0081L39.9921 29.9649C39.9814 29.3676 39.8534 28.9302 39.6081 28.6529C39.3734 28.3756 38.9467 28.2369 38.3281 28.2369C37.8161 28.2369 37.4161 28.3169 37.1281 28.4769C36.8401 28.6369 36.6374 28.8982 36.5201 29.2609C36.4027 29.6129 36.3441 30.1036 36.3441 30.7329C36.3441 31.3836 36.4081 31.8796 36.5361 32.2209C36.6747 32.5516 36.8987 32.7756 37.2081 32.8929C37.5281 33.0102 37.9707 33.0689 38.5361 33.0689C38.7387 33.0689 38.9734 33.0636 39.2401 33.0529C39.5174 33.0422 39.7947 33.0262 40.0721 33.0049C40.3601 32.9836 40.6161 32.9569 40.8401 32.9249C41.0641 32.8929 41.2134 32.8609 41.2881 32.8289V33.0529C41.2881 33.1702 41.2614 33.2876 41.2081 33.4049C41.1547 33.5222 41.0427 33.6182 40.8721 33.6929C40.6481 33.7996 40.3174 33.8689 39.8801 33.9009C39.4534 33.9436 38.9094 33.9649 38.2481 33.9649Z"
-                            fill="#1C274C" fill-opacity="0.6" />
+        <div class="fonts-selector"
+            style="background-color:white;border-radius:5px; padding-left: 14px; padding-right: 14px; margin-top:10px">
+            <center>
+                <button class="cursor-pointer visibilitypicker active" data-val="public">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.5"
+                            d="M2.82471 9.6047C2.82471 6.94005 2.82471 5.60772 3.1393 5.15949C3.4539 4.71127 4.70664 4.28245 7.21213 3.42481L7.68948 3.26142C8.99553 2.81435 9.64855 2.59082 10.3247 2.59082C11.0009 2.59082 11.6539 2.81435 12.9599 3.26142L13.4373 3.42481C15.9428 4.28245 17.1955 4.71127 17.5101 5.15949C17.8247 5.60772 17.8247 6.94005 17.8247 9.6047C17.8247 10.0072 17.8247 10.4437 17.8247 10.917C17.8247 15.6153 14.2922 17.8954 12.0759 18.8635C11.4747 19.1262 11.1741 19.2575 10.3247 19.2575C9.47532 19.2575 9.17472 19.1262 8.57351 18.8635C6.35718 17.8954 2.82471 15.6153 2.82471 10.917C2.82471 10.4437 2.82471 10.0072 2.82471 9.6047Z"
+                            stroke="white" />
+                        <path style="fill: #ababab"
+                            d="M14.4914 10.924C14.4914 11.4712 14.3836 12.013 14.1742 12.5185C13.9648 13.024 13.6579 13.4834 13.271 13.8703C12.8841 14.2572 12.4247 14.5641 11.9192 14.7735C11.4137 14.9829 10.8719 15.0907 10.3247 15.0907C9.77751 15.0907 9.2357 14.9829 8.73017 14.7735C8.22465 14.5641 7.76532 14.2572 7.37841 13.8703C6.9915 13.4834 6.68458 13.024 6.47519 12.5185C6.26579 12.013 6.15802 11.4712 6.15802 10.924C6.15802 10.3768 6.26579 9.835 6.47519 9.32948C6.68458 8.82395 6.9915 8.36462 7.37841 7.97771C7.76532 7.5908 8.22465 7.28389 8.73017 7.07449C9.2357 6.8651 9.77751 6.75732 10.3247 6.75732C10.8719 6.75732 11.4137 6.8651 11.9192 7.07449C12.4247 7.28389 12.8841 7.5908 13.271 7.97771C13.6579 8.36462 13.9648 8.82395 14.1742 9.32948C14.3836 9.835 14.4914 10.3768 14.4914 10.924L14.4914 10.924Z"
+                            stroke="white" />
+                        <path style="fill: #ababab"
+                            d="M11.8645 12.5185C11.9482 12.013 11.9914 11.4712 11.9914 10.924C11.9914 10.3768 11.9482 9.835 11.8645 9.32948C11.7807 8.82395 11.658 8.36462 11.5032 7.97771C11.3484 7.5908 11.1647 7.28389 10.9625 7.07449C10.7603 6.8651 10.5436 6.75732 10.3247 6.75732C10.1058 6.75732 9.88909 6.8651 9.68688 7.07449C9.48467 7.28389 9.30094 7.5908 9.14618 7.97771C8.99141 8.36462 8.86865 8.82395 8.78489 9.32948C8.70113 9.835 8.65802 10.3768 8.65802 10.924C8.65802 11.4712 8.70113 12.013 8.78489 12.5185C8.86864 13.024 8.99141 13.4834 9.14617 13.8703C9.30094 14.2572 9.48467 14.5641 9.68688 14.7735C9.88909 14.9829 10.1058 15.0907 10.3247 15.0907C10.5436 15.0907 10.7603 14.9829 10.9625 14.7735C11.1647 14.5641 11.3484 14.2572 11.5032 13.8703C11.658 13.4834 11.7807 13.024 11.8645 12.5185Z"
+                            stroke="white" />
+                        <path d="M6.15802 10.9241H14.4914" stroke="white" stroke-linecap="round" />
                     </svg>
+                    <p>Public</p>
                 </button>
-            </div>
-        </center>
-    </div>
+                <button class="cursor-pointer visibilitypicker" data-val="friends">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8.84554" cy="5.92415" r="3.33333" stroke="#1C274C" />
+                        <path opacity="0.5"
+                            d="M15.5122 15.5073C15.5122 17.5784 15.5122 19.2573 8.8455 19.2573C2.17883 19.2573 2.17883 17.5784 2.17883 15.5073C2.17883 13.4363 5.1636 11.7573 8.8455 11.7573C12.5274 11.7573 15.5122 13.4363 15.5122 15.5073Z"
+                            stroke="#1C274C" />
+                        <path
+                            d="M15.586 11.3729L15.8894 10.9754L15.586 11.3729ZM16.3456 8.1271L15.991 8.47962C16.0848 8.57402 16.2125 8.6271 16.3456 8.6271C16.4787 8.6271 16.6063 8.57402 16.7002 8.47962L16.3456 8.1271ZM17.1051 11.3729L16.8018 10.9754L17.1051 11.3729ZM15.8894 10.9754C15.4915 10.6718 15.1124 10.4143 14.8084 10.0829C14.5216 9.77027 14.3456 9.43431 14.3456 9.00726H13.3456C13.3456 9.75721 13.672 10.3234 14.0715 10.7589C14.4538 11.1757 14.9449 11.5126 15.2827 11.7703L15.8894 10.9754ZM14.3456 9.00726C14.3456 8.61491 14.5742 8.29228 14.8761 8.1587C15.1504 8.03728 15.558 8.04408 15.991 8.47962L16.7002 7.77459C16.0082 7.07857 15.1658 6.93694 14.4714 7.24424C13.8045 7.53938 13.3456 8.2226 13.3456 9.00726H14.3456ZM15.2827 11.7703C15.4079 11.8659 15.5622 11.9836 15.7232 12.0746C15.8844 12.1659 16.0977 12.2575 16.3456 12.2575V11.2575C16.3435 11.2575 16.3068 11.2559 16.2156 11.2043C16.1242 11.1526 16.0237 11.0779 15.8894 10.9754L15.2827 11.7703ZM17.4085 11.7703C17.7462 11.5126 18.2373 11.1757 18.6197 10.7589C19.0192 10.3234 19.3456 9.75721 19.3456 9.00726H18.3456C18.3456 9.43431 18.1695 9.77027 17.8827 10.0829C17.5788 10.4143 17.1996 10.6718 16.8018 10.9754L17.4085 11.7703ZM19.3456 9.00726C19.3456 8.2226 18.8867 7.53938 18.2198 7.24424C17.5254 6.93694 16.683 7.07857 15.991 7.77459L16.7002 8.47962C17.1332 8.04408 17.5407 8.03728 17.8151 8.1587C18.1169 8.29228 18.3456 8.61491 18.3456 9.00726H19.3456ZM16.8018 10.9754C16.6675 11.0779 16.567 11.1526 16.4756 11.2043C16.3844 11.2559 16.3477 11.2575 16.3456 11.2575V12.2575C16.5935 12.2575 16.8068 12.1659 16.968 12.0746C17.129 11.9836 17.2832 11.8659 17.4085 11.7703L16.8018 10.9754Z"
+                            fill="#1C274C" />
+                    </svg>
+                    <p>Friends</p>
+                </button>
+                <button class="cursor-pointer visibilitypicker" data-val="family">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8.84554" cy="5.92415" r="3.33333" stroke="#1C274C" />
+                        <path opacity="0.5"
+                            d="M15.5122 15.5073C15.5122 17.5784 15.5122 19.2573 8.8455 19.2573C2.17883 19.2573 2.17883 17.5784 2.17883 15.5073C2.17883 13.4363 5.1636 11.7573 8.8455 11.7573C12.5274 11.7573 15.5122 13.4363 15.5122 15.5073Z"
+                            stroke="#1C274C" />
+                        <path
+                            d="M15.586 11.3729L15.8894 10.9754L15.586 11.3729ZM16.3456 8.1271L15.991 8.47962C16.0848 8.57402 16.2125 8.6271 16.3456 8.6271C16.4787 8.6271 16.6063 8.57402 16.7002 8.47962L16.3456 8.1271ZM17.1051 11.3729L16.8018 10.9754L17.1051 11.3729ZM15.8894 10.9754C15.4915 10.6718 15.1124 10.4143 14.8084 10.0829C14.5216 9.77027 14.3456 9.43431 14.3456 9.00726H13.3456C13.3456 9.75721 13.672 10.3234 14.0715 10.7589C14.4538 11.1757 14.9449 11.5126 15.2827 11.7703L15.8894 10.9754ZM14.3456 9.00726C14.3456 8.61491 14.5742 8.29228 14.8761 8.1587C15.1504 8.03728 15.558 8.04408 15.991 8.47962L16.7002 7.77459C16.0082 7.07857 15.1658 6.93694 14.4714 7.24424C13.8045 7.53938 13.3456 8.2226 13.3456 9.00726H14.3456ZM15.2827 11.7703C15.4079 11.8659 15.5622 11.9836 15.7232 12.0746C15.8844 12.1659 16.0977 12.2575 16.3456 12.2575V11.2575C16.3435 11.2575 16.3068 11.2559 16.2156 11.2043C16.1242 11.1526 16.0237 11.0779 15.8894 10.9754L15.2827 11.7703ZM17.4085 11.7703C17.7462 11.5126 18.2373 11.1757 18.6197 10.7589C19.0192 10.3234 19.3456 9.75721 19.3456 9.00726H18.3456C18.3456 9.43431 18.1695 9.77027 17.8827 10.0829C17.5788 10.4143 17.1996 10.6718 16.8018 10.9754L17.4085 11.7703ZM19.3456 9.00726C19.3456 8.2226 18.8867 7.53938 18.2198 7.24424C17.5254 6.93694 16.683 7.07857 15.991 7.77459L16.7002 8.47962C17.1332 8.04408 17.5407 8.03728 17.8151 8.1587C18.1169 8.29228 18.3456 8.61491 18.3456 9.00726H19.3456ZM16.8018 10.9754C16.6675 11.0779 16.567 11.1526 16.4756 11.2043C16.3844 11.2559 16.3477 11.2575 16.3456 11.2575V12.2575C16.5935 12.2575 16.8068 12.1659 16.968 12.0746C17.129 11.9836 17.2832 11.8659 17.4085 11.7703L16.8018 10.9754Z"
+                            fill="#1C274C" />
+                    </svg>
+                    <p>Family</p>
+                </button>
+                {{-- <img src="{{ asset('assets/svg/share2.svg') }}" alt="" style="width: 100px; height:100px"> --}}
+                <button type="button" class="feed-btn">
+                    <svg width="23" height="19" viewBox="0 0 23 19" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.423705 1.27994C0.273437 0.93596 0.349116 0.535053 0.614442 0.269525C0.879768 0.00399709 1.28062 -0.071987 1.62471 0.0780205L21.5198 8.60371C21.8558 8.74733 22.0737 9.07749 22.0737 9.44286C22.0737 9.80823 21.8558 10.1384 21.5198 10.282L1.59642 18.7958C1.25406 18.9418 0.857348 18.8653 0.593871 18.6024C0.330394 18.3395 0.252947 17.943 0.398152 17.6003L3.23822 10.909C3.37507 10.5867 3.68428 10.3711 4.03403 10.3541L6.2526 10.2455C6.75663 10.2488 7.16788 9.84285 7.17115 9.33882C7.17443 8.8348 6.76849 8.42355 6.26447 8.42027L3.99752 8.28247C3.65485 8.26141 3.353 8.04983 3.21632 7.73489L0.423705 1.27994Z"
+                            fill="#4CD964" />
+                    </svg>
+                    <p>Share</p>
+                </button>
+            </center>
+        </div>
     </div>
     {{-- <hr style="width: 131px;margin: auto;margin-top:20px"> --}}
     <input type="hidden" name="feed_type" id="feed_type" value="share_text">
-    <div style="padding:0px 0.5rem;">
-    <div style="border-radius:10px 10px 0px 0px; background-color:white;" class="d-flex mt-3">
-        <div class="d-flex justify-content-center align-items-center mt-3">
-            <label>
-                <img src="{{ asset('assets/svg/select.svg') }}" alt="">
-            </label>
+
+    <div class="fonts-selector feeds-type mt-2">
+        <div class="section-head d-flex">
+            <img src="{{ asset('assets/svg/feed-type-icon.svg') }}" alt="">
+            <span>Please Select</span>
         </div>
-    </div>
-    <div class="fonts-selector"
-        style="background-color:white; padding-left: 20px; padding-right: 20px; border-radius: 0px 0px 10px 10px;">
-        <!-- Share Text -->
-        <div class="cursor-pointer ary" data-sharetext="#shahretext" data-val="share_text"
-            style="width: 100px; height: 100px; border-radius: 15px; display: inline-block; margin: 18px;">
-            <img src="{{ asset('assets/svg/select1.svg') }}" alt="" style="width: 100px; height:100px;">
-        </div>
-        <!-- Share Image -->
-        <div class="cursor-pointer ary" data-sharetext="#shahreimage" data-val="share_image"
-            style="width: 100px; height: 100px; border-radius: 15px; display: inline-block; margin: 18px;">
-            <img src="{{ asset('assets/svg/select5.svg') }}" alt="" style="width: 100px; height:100px;">
-        </div>
-        <!-- Share Video -->
-        <div class="cursor-pointer ary" data-sharetext="#shahrevideo" data-val="share_video"
-            style="width: 100px; height: 100px; border-radius: 15px; display: inline-block; margin: 18px;">
-            <img src="{{ asset('assets/svg/videos.svg') }}" alt="" style="width: 100px; height:100px;">
-        </div>
-        <!-- Another Option -->
-        <div class="cursor-pointer color-option" data-sharetext="#shahreother" data-val="share_other"
-            style="width: 100px; height: 100px; border-radius: 15px; display: inline-block; margin: 18px;">
-            <img src="{{ asset('assets/svg/select4.svg') }}" alt="" style="width: 100px; height:100px;">
-        </div>
-    </div>
+        <center>
+
+            <!-- Share Text -->
+            <button type="button" class="cursor-pointer active ary" data-sharetext="#shahretext" data-val="share_text">
+                <svg width="31" height="31" viewBox="0 0 31 31" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.704102 28.8728C0.704102 28.1447 1.27974 27.5544 1.98982 27.5544H29.4184C30.1285 27.5544 30.7041 28.1447 30.7041 28.8728C30.7041 29.6008 30.1285 30.1911 29.4184 30.1911H1.98982C1.27974 30.1911 0.704102 29.6008 0.704102 28.8728Z"
+                        fill="#1C274C" />
+                    <path opacity="0.5"
+                        d="M25.8893 7.89569C27.6446 6.13356 27.6446 3.27659 25.8893 1.51447C24.1339 -0.24766 21.2879 -0.24766 19.5325 1.51447L18.5186 2.53229C18.5325 2.57438 18.5469 2.61705 18.5618 2.66027C18.9335 3.73558 19.6347 5.14522 20.9538 6.46938C22.2728 7.79354 23.6771 8.49744 24.7483 8.87051C24.7911 8.88544 24.8334 8.89983 24.8752 8.91371L25.8893 7.89569Z"
+                        fill="#1C274C" />
+                    <path
+                        d="M18.5618 2.48657L18.5181 2.5304C18.532 2.57248 18.5464 2.61515 18.5613 2.65838C18.933 3.73369 19.6342 5.14333 20.9532 6.46749C22.2723 7.79165 23.6765 8.49555 24.7477 8.86862C24.7902 8.88342 24.8322 8.89769 24.8736 8.91146L15.0887 18.734C14.429 19.3963 14.0991 19.7274 13.7354 20.0122C13.3063 20.3481 12.8421 20.6361 12.3509 20.8711C11.9346 21.0703 11.492 21.2184 10.6069 21.5146L5.93949 23.0764C5.50392 23.2221 5.02371 23.1083 4.69906 22.7824C4.3744 22.4565 4.26104 21.9745 4.40623 21.5372L5.96203 16.8518C6.25707 15.9633 6.40458 15.5191 6.60302 15.1011C6.83711 14.608 7.12401 14.142 7.45865 13.7113C7.74232 13.3462 8.07218 13.0151 8.73182 12.3529L18.5618 2.48657Z"
+                        fill="#1C274C" />
+                </svg>
+                <p>Text</p>
+            </button>
+            <!-- Share Image -->
+            <button type="button" class="cursor-pointer ary" data-sharetext="#shahreimage" data-val="share_image">
+                <svg width="31" height="31" viewBox="0 0 31 31" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M24.1205 15.8215C24.1205 16.9295 23.1336 17.8278 21.9161 17.8278C20.6987 17.8278 19.7117 16.9295 19.7117 15.8215C19.7117 14.7135 20.6987 13.8152 21.9161 13.8152C23.1336 13.8152 24.1205 14.7135 24.1205 15.8215Z"
+                        fill="#1C274C" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M25.5223 8.98051C24.1083 8.79951 22.2858 8.79953 20.0142 8.79956H10.5918C8.32016 8.79953 6.49764 8.79951 5.08362 8.98051C3.62068 9.16778 2.40223 9.56961 1.49637 10.5113C0.590506 11.453 0.313897 12.6053 0.303294 13.9498C0.293045 15.2494 0.533941 16.8936 0.834194 18.9429L1.4433 23.1006C1.67798 24.7027 1.86793 25.9994 2.16324 27.0148C2.47064 28.0717 2.92446 28.948 3.77603 29.6266C4.62759 30.3051 5.64193 30.5987 6.83366 30.7364C7.97855 30.8686 9.41593 30.8686 11.1918 30.8685H19.4141C21.19 30.8686 22.6274 30.8686 23.7723 30.7364C24.964 30.5987 25.9784 30.3051 26.8299 29.6266C27.6815 28.948 28.1353 28.0717 28.4427 27.0148C28.738 25.9994 28.928 24.7027 29.1627 23.1005L29.7718 18.9429C30.072 16.8936 30.3129 15.2494 30.3027 13.9498C30.2921 12.6053 30.0155 11.453 29.1096 10.5113C28.2037 9.56961 26.9853 9.16778 25.5223 8.98051ZM5.39064 10.9672C4.17912 11.1223 3.56635 11.4052 3.15491 11.8329C2.74347 12.2606 2.5164 12.8508 2.50762 13.9642C2.49861 15.1062 2.71635 16.6102 3.03068 18.7558L3.11403 19.3248L3.73334 18.9165C5.33149 17.8631 7.69277 17.9149 9.21258 19.0598L14.8531 23.309C15.3862 23.7106 16.3048 23.7856 16.9678 23.4346L17.3599 23.2271C19.2354 22.2341 21.7489 22.3388 23.4795 23.5122L26.5326 25.5822C26.6831 24.8388 26.818 23.9249 26.9874 22.7684L27.5753 18.7558C27.8896 16.6102 28.1074 15.1062 28.0983 13.9642C28.0896 12.8508 27.8625 12.2606 27.451 11.8329C27.0396 11.4052 26.4268 11.1223 25.2153 10.9672C23.9728 10.8082 22.306 10.8058 19.9276 10.8058H10.6783C8.29999 10.8058 6.63315 10.8082 5.39064 10.9672Z"
+                        fill="#1C274C" />
+                    <g opacity="0.7">
+                        <path
+                            d="M6.76901 4.61841C4.68308 4.61841 2.97268 5.87802 2.40189 7.54907C2.38999 7.58391 2.37858 7.61892 2.36768 7.6541C2.9649 7.47325 3.58645 7.3551 4.21565 7.27443C5.83621 7.06668 7.88422 7.06679 10.2633 7.06691L10.4409 7.06692L20.6014 7.06691C22.9805 7.06679 25.0285 7.06668 26.649 7.27443C27.2782 7.3551 27.8998 7.47325 28.497 7.6541C28.4861 7.61892 28.4747 7.58391 28.4628 7.54907C27.892 5.87802 26.1816 4.61841 24.0957 4.61841H6.76901Z"
+                            fill="#1C274C" />
+                    </g>
+                    <g opacity="0.4">
+                        <path
+                            d="M10.068 0.868419H20.5382C20.8869 0.868332 21.1543 0.868266 21.388 0.891128C23.0497 1.05368 24.4099 2.05277 24.9866 3.39855H5.61963C6.1964 2.05277 7.55653 1.05368 9.21826 0.891128C9.45197 0.868266 9.71933 0.868332 10.068 0.868419Z"
+                            fill="#1C274C" />
+                    </g>
+                </svg>
+
+                <p>Images</p>
+            </button>
+            <!-- Share Video -->
+            <button type="button" class="cursor-pointer ary" data-sharetext="#shahrevideo" data-val="share_video">
+                <svg width="31" height="31" viewBox="0 0 31 31" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.50708 15.9426C0.50708 14.0875 0.50708 12.4757 0.546747 11.0676H30.4674C30.5071 12.4757 30.5071 14.0875 30.5071 15.9426C30.5071 23.0137 30.5071 26.5492 28.3104 28.7459C26.1137 30.9426 22.5782 30.9426 15.5071 30.9426C8.43602 30.9426 4.90048 30.9426 2.70378 28.7459C0.50708 26.5492 0.50708 23.0137 0.50708 15.9426Z"
+                        fill="#1C274C" />
+                    <path
+                        d="M20.0071 19.6926C20.0071 18.7426 19.0141 18.1019 17.028 16.8204C15.0149 15.5215 14.0083 14.872 13.2577 15.3489C12.5071 15.8258 12.5071 17.1147 12.5071 19.6926C12.5071 22.2705 12.5071 23.5595 13.2577 24.0364C14.0083 24.5132 15.0149 23.8637 17.0281 22.5648C19.0141 21.2834 20.0071 20.6427 20.0071 19.6926Z"
+                        fill="#1C274C" />
+                    <path
+                        d="M15.5068 0.942627C18.2747 0.942627 20.5008 0.942627 22.317 1.07437L17.1548 8.81767H10.1089L15.3589 0.942627H15.5068Z"
+                        fill="#1C274C" />
+                    <path
+                        d="M2.70352 3.13933C4.58207 1.26078 7.43973 0.988705 12.6503 0.9493L7.40474 8.81767H0.663086C0.88396 6.17152 1.41702 4.42583 2.70352 3.13933Z"
+                        fill="#1C274C" />
+                    <path
+                        d="M30.3506 8.81767C30.1297 6.17152 29.5966 4.42583 28.3102 3.13933C27.4142 2.24334 26.2954 1.71281 24.8049 1.39867L19.8589 8.81767H30.3506Z"
+                        fill="#1C274C" />
+                </svg>
+
+                <p>Videos</p>
+            </button>
+            <!-- Another Option -->
+            {{-- <button type="button" class="cursor-pointer ary" data-sharetext="#shahreother" data-val="share_other"> --}}
+            <button type="button" class="cursor-pointer ary" data-sharetext="#shahretext" data-val="share_text">
+                <svg width="31" height="31" viewBox="0 0 31 31" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle opacity="0.5" cx="15.6489" cy="15.9587" r="15" fill="#1C274C" />
+                    <path
+                        d="M10.5117 12.1298C10.2308 9.00348 7.81982 6.09032 6.64946 5.02453L6.00293 4.47158C8.6108 2.27929 11.9759 0.95874 15.6495 0.95874C18.9695 0.95874 22.0377 2.03739 24.5226 3.86338C24.8737 4.92917 24.205 7.15611 23.5027 8.2219C23.2484 8.60795 22.6716 9.08722 22.0393 9.54152C20.6135 10.5659 18.8143 11.0726 17.8995 12.9587C17.638 13.4979 17.6491 14.025 17.7749 14.4831C17.8653 14.8125 17.9231 15.1705 17.924 15.5207C17.927 16.6531 16.7818 17.4711 15.6495 17.4587C12.703 17.4266 10.7742 15.052 10.5117 12.1298Z"
+                        fill="#1C274C" />
+                    <path
+                        d="M17.8036 25.3728C19.2858 22.5797 24.2263 22.5797 24.2263 22.5797C29.3742 22.526 30.0697 19.4004 30.5345 17.8206C29.7025 24.5426 24.423 29.8861 17.7317 30.8156C17.2478 29.7972 16.6745 27.5006 17.8036 25.3728Z"
+                        fill="#1C274C" />
+                </svg>
+
+                <p>Link</p>
+            </button>
+        </center>
     </div>
 
     {{-- <div style="padding:10px;" class="col-md-12 d-flex justify-content-center">
