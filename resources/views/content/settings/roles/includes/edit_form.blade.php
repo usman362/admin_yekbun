@@ -41,7 +41,8 @@
                         <div class="d-flex">
                           @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
                           <div class="form-check me-3 me-lg-5">
-                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermission->name }}" id="permission{{ $childPermission->id }}"   {{ $role->hasPermissionTo($childPermission->name, $role->getPermissionsAttribute())? 'checked': '' }}  />
+                            {{-- {{dd($role->permission)}} --}}
+                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermission->name }}" id="permission{{ $childPermission->id }}"   {{ \App\Helpers\Helpers::array_in($childPermission->name, $role->permission) ? 'checked': '' }}  />
                             <label class="form-check-label" for="permission{{ $childPermission->id }}">
                               {{ $childPermission->label??  ucfirst(str_replace('_', ' ', str_replace($permission->name.'.', '', $childPermission->name))) }}
                             </label>
@@ -59,7 +60,7 @@
                             <div class="d-flex">
                               @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
                                 <div class="form-check me-3 me-lg-5">
-                                  <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermissionbottom->name }}" id="permission{{ $childPermissionbottom->id }}" {{ $role->hasPermissionTo($childPermissionbottom->name, $role->getPermissionsAttribute())? 'checked': '' }} />
+                                  <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermissionbottom->name }}" id="permission{{ $childPermissionbottom->id }}" {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $role->permission) ? 'checked': '' }} />
                                   <label class="form-check-label" for="permission{{ $childPermissionbottom->id }}"  >
                                     {{ $childPermissionbottom->label??  ucfirst(str_replace('_', ' ', str_replace($permission->name.'.', '', $childPermissionbottom->name))) }}
                                   </label>
