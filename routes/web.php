@@ -125,7 +125,8 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test',function(){
+
+Route::get('test', function () {
     App\Models\Ringtone::create([
         'fileName' => '1',
         'filePath' => '2',
@@ -175,8 +176,7 @@ Route::group(['middleware' => 'permission:avatars.read'], function () {
     Route::resource('/avatars', AvatarsController::class);
 
     Route::get('/test-avatars', [AvatarsController::class, 'testavatar']);
-
-    });
+});
 
 Route::resource('/settings/countrieslist', CountryLocationController::class);
 Route::post('/settings/countrieslist', [CountryLocationController::class, 'store']);
@@ -189,9 +189,8 @@ Route::resource('/pricings', GreetingsController::class);
 Route::get('/get-pricing/{id}', [GreetingsController::class, 'get_pricing']);
 
 Route::prefix("wishes")->name("wishes.")->group(function () {
-	Route::get('setting/pricing', [GreetingsController::class,'pricing']);
-	Route::post('setting/pricing', [GreetingsController::class,'pricing']);
-
+    Route::get('setting/pricing', [GreetingsController::class, 'pricing']);
+    Route::post('setting/pricing', [GreetingsController::class, 'pricing']);
 });
 
 //Route::resource('/settings/countries', CountryController::class);
@@ -204,8 +203,8 @@ Route::post('/searchlocation', [CountryController::class, 'search_location']);
 
 
 
-Route::get('unauthorize',function(){
-    return response()->json(['message' => 'Unauthorized'],401);
+Route::get('unauthorize', function () {
+    return response()->json(['message' => 'Unauthorized'], 401);
 })->name('unauthorize');
 
 // Admin Profiel
@@ -295,7 +294,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
             Route::get('setting/reasons', [WishesReasonController::class, 'index'])->name('reasons');
             Route::get('setting/prefix', [WishesPrefixController::class, 'index'])->name('prefix');
             Route::get('setting/policy_terms', [WishesPolicyandTermController::class, 'index'])->name('policy_terms');
-           // Route::get('setting/pricing', [WishesReasonController::class, 'pricing']);
+            // Route::get('setting/pricing', [WishesReasonController::class, 'pricing']);
 
             Route::get('manage_greeting', [WishesReasonController::class, 'manage_greeting']);
 
@@ -377,10 +376,10 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     );
 
     Route::resource('/music', MusicController::class);
-    Route::post('/change-music-category',[MusicController::class,'changeCategory'])->name('change.musicCategory');
+    Route::post('/change-music-category', [MusicController::class, 'changeCategory'])->name('change.musicCategory');
     Route::get('/musics/{id}/{status}', [MusicController::class, 'status'])->name('musics-status');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
-    Route::get('get-songs',[MusicController::class, 'getSongs'])->name('get.songs');
+    Route::get('get-songs', [MusicController::class, 'getSongs'])->name('get.songs');
     Route::post('musics/store_song', [MusicController::class, 'store_song'])->name('musics.store_song');
     Route::delete('musics/delete_song/{id}', [MusicController::class, 'deleteSong'])->name('musics.delete_song');
     //   Route::get('musics/{music_id}', [MusicController::class, 'video']);
@@ -409,27 +408,27 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/artists/{id}/image', [ArtistController::class, 'deleteArtistImage'])->name('artists.delete-img');
 
     Route::resource('/album', AlbumController::class);
-    Route::get('get-albums',[AlbumController::class,'getAlbums'])->name('get.albums');
+    Route::get('get-albums', [AlbumController::class, 'getAlbums'])->name('get.albums');
     Route::delete('/album/{id}/album', [AlbumController::class, 'deleteAlbum'])->name('album.delete-audio');
     Route::delete('/album/{id}/image', [AlbumController::class, 'deleteAlbumImage'])->name('album.delete-img');
     //   Route::get('albums', [AlbumController::class, 'viewpage']);
     Route::get('albums/{id}', [AlbumController::class, 'viewpage']);
 
     Route::resource('/video-clips', VideoClipController::class);
-    Route::get('get-video-clips',[VideoClipController::class,'getVideoClips'])->name('get.video-clips');
+    Route::get('get-video-clips', [VideoClipController::class, 'getVideoClips'])->name('get.video-clips');
     Route::get('/video-clips/{id}/clips', $controller_path . '\VideoClipController@detail')->name('video-clips.clips');
     Route::get('/video-clips/{id}/{status}', [VideoClipController::class, 'status'])->name('video-clips-status');
     Route::delete('/video-clips/{id}/clip', [VideoClipController::class, 'deleteVideo'])->name(
         'video-clips.delete-audio'
     );
 
-   // Channel Policy
-   Route::post('/add_channel_policy',[ChannelPolicyController::class, 'add_policy'])->name('add.policy');
-    Route::put('/edit_channel_policy',[ChannelPolicyController::class, 'edit_policy'])->name('edit.policy');
-    Route::post('/add_policy_section',[ChannelPolicyController::class, 'add_section'])->name('add.section');
-   Route::put('/edit_policy_section/{id}',[ChannelPolicyController::class, 'edit_section'])->name('edit.section');
-   // Route::delete('/destroy_policy_section/{id}',[ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
-   Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
+    // Channel Policy
+    Route::post('/add_channel_policy', [ChannelPolicyController::class, 'add_policy'])->name('add.policy');
+    Route::put('/edit_channel_policy', [ChannelPolicyController::class, 'edit_policy'])->name('edit.policy');
+    Route::post('/add_policy_section', [ChannelPolicyController::class, 'add_section'])->name('add.section');
+    Route::put('/edit_policy_section/{id}', [ChannelPolicyController::class, 'edit_section'])->name('edit.section');
+    // Route::delete('/destroy_policy_section/{id}',[ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
+    Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
 
     Route::resource('/vote-category', VotingCategoryController::class);
@@ -522,38 +521,42 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::resource('/language', LanguageController::class);
 
-//Translation Keyword
+    Route::get('languages/{id}/sections', [LanguageController::class, 'getSections'])->name('languages.sections');
+    Route::post('languages-sections', [LanguageController::class, 'storeSections'])->name('languages.sections.store');
+    Route::get('languages/{id}/keywords/{section?}', [LanguageController::class, 'getKeywords'])->name('languages.keywords');
+    Route::post('languages-keywords', [LanguageController::class, 'storeKeywords'])->name('languages.keywords.store');
+    //Translation Keyword
 
-Route::post('/languages/keywordstore', [LanguageController::class, 'keywordstore'])->name('languages.keywordstore');
-Route::post('/languages/keyword/startpage', [LanguageController::class, 'startpage'])->name('languages.startpage');
-Route::post('/languages/keyword/signupsection', [LanguageController::class, 'signupsection'])->name('languages.signupsection');
-Route::post('/languages/keyword/signinsection', [LanguageController::class, 'signinsection'])->name('languages.signinsection');
-Route::post('/languages/keyword/footerquicklauncher', [LanguageController::class, 'footerquicksection'])->name('languages.footerquicklauncher');
-Route::post('/languages/keyword/footercart', [LanguageController::class, 'footercartsection'])->name('languages.footercart');
-Route::post('/languages/keyword/footerfriendsection', [LanguageController::class, 'footerfriendsection'])->name('languages.footerfriendsection');
-Route::post('/languages/keyword/footerchatsection', [LanguageController::class, 'footerchatsection'])->name('languages.footerchatsection');
-Route::post('/languages/keyword/headerfeedsection', [LanguageController::class, 'headerfeedsection'])->name('languages.headerfeedsection');
-Route::post('/languages/keyword/visiter_profile', [LanguageController::class, 'visiterprofilesection'])->name('languages.visiterprofilesection');
-Route::post('/languages/keyword/header_section_stories', [LanguageController::class, 'headersectionstories'])->name('languages.headersectionstories');
-Route::post('/languages/keyword/header_greating/section', [LanguageController::class, 'headergreatingsection'])->name('languages.headergreatingsection');
-Route::post('/languages/keyword/header_music/section', [LanguageController::class, 'headermusicsection'])->name('languages.headermusicsection');
-Route::post('/languages/keyword/header_video/section', [LanguageController::class, 'headervideosection'])->name('languages.headervideosection');
-Route::post('/languages/keyword/header_stream/section', [LanguageController::class, 'headerstreamsection'])->name('languages.headerstreamsection');
-Route::post('/languages/keyword/header_event/section', [LanguageController::class, 'headereventsection'])->name('languages.headereventsection');
-Route::post('/languages/keyword/header_online_shop/section', [LanguageController::class, 'headeronlineshopsection'])->name('languages.headeronlineshopsection');
-Route::post('/languages/keyword/header_restaurant/section', [LanguageController::class, 'headerrestaurantsection'])->name('languages.headerrestaurantsection');
-Route::post('/languages/keyword/header_service_portal/section', [LanguageController::class, 'headerserviceportalsection'])->name('languages.headerserviceportalsection');
-Route::post('/languages/keyword/setting_overview_section/section', [LanguageController::class, 'settingOverviewSection'])->name('languages.settingOverviewSection');
-Route::post('/languages/keyword/my_profile_home/section', [LanguageController::class, 'myProfileHomeSection'])->name('languages.myProfileHomeSection');
-Route::post('/languages/keyword/my_profile_multimedia/section', [LanguageController::class, 'myProfileMultimedia'])->name('languages.myProfileMultimedia');
-Route::post('/languages/keyword/my_profile_friend/section', [LanguageController::class, 'myProfileFriendsSection'])->name('languages.myProfileFriendsSection');
-Route::post('/languages/keyword/my_profile_office/section', [LanguageController::class, 'myProfileOfficeSection'])->name('languages.myProfileOfficeSection');
-Route::post('/languages/keyword/Channels/section', [LanguageController::class, 'myChannels'])->name('languages.myChannels');
-Route::post('/languages/keyword/Channels/setting/section', [LanguageController::class, 'ChannelsSetting'])->name('languages.ChannelsSetting');
-Route::post('/languages/keyword/section/setting', [LanguageController::class, 'saveSectionSettings'])->name('languages.saveSectionSettings');
-Route::post('/languages/keyword/section/history', [LanguageController::class, 'saveSectionhistory'])->name('languages.saveSectionhistory');
-Route::post('/languages/keyword/section/voting', [LanguageController::class, 'saveSectionvoter'])->name('languages.saveSectionvoter');
-Route::post('/languages/keyword/section/donation', [LanguageController::class, 'headerdoantion'])->name('languages.headerdoantion');
+    Route::post('/languages/keywordstore', [LanguageController::class, 'keywordstore'])->name('languages.keywordstore');
+    Route::post('/languages/keyword/startpage', [LanguageController::class, 'startpage'])->name('languages.startpage');
+    Route::post('/languages/keyword/signupsection', [LanguageController::class, 'signupsection'])->name('languages.signupsection');
+    Route::post('/languages/keyword/signinsection', [LanguageController::class, 'signinsection'])->name('languages.signinsection');
+    Route::post('/languages/keyword/footerquicklauncher', [LanguageController::class, 'footerquicksection'])->name('languages.footerquicklauncher');
+    Route::post('/languages/keyword/footercart', [LanguageController::class, 'footercartsection'])->name('languages.footercart');
+    Route::post('/languages/keyword/footerfriendsection', [LanguageController::class, 'footerfriendsection'])->name('languages.footerfriendsection');
+    Route::post('/languages/keyword/footerchatsection', [LanguageController::class, 'footerchatsection'])->name('languages.footerchatsection');
+    Route::post('/languages/keyword/headerfeedsection', [LanguageController::class, 'headerfeedsection'])->name('languages.headerfeedsection');
+    Route::post('/languages/keyword/visiter_profile', [LanguageController::class, 'visiterprofilesection'])->name('languages.visiterprofilesection');
+    Route::post('/languages/keyword/header_section_stories', [LanguageController::class, 'headersectionstories'])->name('languages.headersectionstories');
+    Route::post('/languages/keyword/header_greating/section', [LanguageController::class, 'headergreatingsection'])->name('languages.headergreatingsection');
+    Route::post('/languages/keyword/header_music/section', [LanguageController::class, 'headermusicsection'])->name('languages.headermusicsection');
+    Route::post('/languages/keyword/header_video/section', [LanguageController::class, 'headervideosection'])->name('languages.headervideosection');
+    Route::post('/languages/keyword/header_stream/section', [LanguageController::class, 'headerstreamsection'])->name('languages.headerstreamsection');
+    Route::post('/languages/keyword/header_event/section', [LanguageController::class, 'headereventsection'])->name('languages.headereventsection');
+    Route::post('/languages/keyword/header_online_shop/section', [LanguageController::class, 'headeronlineshopsection'])->name('languages.headeronlineshopsection');
+    Route::post('/languages/keyword/header_restaurant/section', [LanguageController::class, 'headerrestaurantsection'])->name('languages.headerrestaurantsection');
+    Route::post('/languages/keyword/header_service_portal/section', [LanguageController::class, 'headerserviceportalsection'])->name('languages.headerserviceportalsection');
+    Route::post('/languages/keyword/setting_overview_section/section', [LanguageController::class, 'settingOverviewSection'])->name('languages.settingOverviewSection');
+    Route::post('/languages/keyword/my_profile_home/section', [LanguageController::class, 'myProfileHomeSection'])->name('languages.myProfileHomeSection');
+    Route::post('/languages/keyword/my_profile_multimedia/section', [LanguageController::class, 'myProfileMultimedia'])->name('languages.myProfileMultimedia');
+    Route::post('/languages/keyword/my_profile_friend/section', [LanguageController::class, 'myProfileFriendsSection'])->name('languages.myProfileFriendsSection');
+    Route::post('/languages/keyword/my_profile_office/section', [LanguageController::class, 'myProfileOfficeSection'])->name('languages.myProfileOfficeSection');
+    Route::post('/languages/keyword/Channels/section', [LanguageController::class, 'myChannels'])->name('languages.myChannels');
+    Route::post('/languages/keyword/Channels/setting/section', [LanguageController::class, 'ChannelsSetting'])->name('languages.ChannelsSetting');
+    Route::post('/languages/keyword/section/setting', [LanguageController::class, 'saveSectionSettings'])->name('languages.saveSectionSettings');
+    Route::post('/languages/keyword/section/history', [LanguageController::class, 'saveSectionhistory'])->name('languages.saveSectionhistory');
+    Route::post('/languages/keyword/section/voting', [LanguageController::class, 'saveSectionvoter'])->name('languages.saveSectionvoter');
+    Route::post('/languages/keyword/section/donation', [LanguageController::class, 'headerdoantion'])->name('languages.headerdoantion');
 
 
 
@@ -577,257 +580,256 @@ Route::post('/languages/keyword/section/donation', [LanguageController::class, '
 
 
 
-        Route::middleware('check.role:Super Admin')->group(function ( )  use ($controller_path) {
+    Route::middleware('check.role:Super Admin')->group(function ()  use ($controller_path) {
 
-            Route::resource('/currency', CurrencyController::class);
+        Route::resource('/currency', CurrencyController::class);
 
-            Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
+        Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
 
-            Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
+        Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
 
-            Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
+        Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
 
-            Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
+        Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
 
-            Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
+        Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
 
-            Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
-
-
-
-    Route::get('/app/user/storage', $controller_path . '\apps\popup\Popup@index')->name('user.storage');
-    Route::get('flaggedfanpage', [FlaggedUserController::class, "flaggedfanpage"]);
-    Route::prefix('reports')
-        ->name('reports.')
-        ->group(function () {
-            Route::resource('/flagged-users', FlaggedUserController::class);
-        });
-//Channel Reasons
-Route::post('/add_channel_reason',[ChannelReasonController::class, 'add_reason'])->name('add.reason');
-Route::put('/edit_channel_reason/{id}',[ChannelReasonController::class, 'edit_reason'])->name('edit.reason');
-Route::delete('/destory_reason/{id}',[ChannelReasonController::class, 'destroy_reason'])->name('destroy.reason');
-Route::get('/destroy_policy_desc/{id}',  [ChannelPolicyController::class, 'destroy_desc'])->name('destroy.desc');
-
-//Channels
-Route::get('managecategories', [FlaggedUserController::class, 'managecategories'])->name('channels');
-
-Route::get('channelrequest', [FlaggedUserController::class, 'channelrequest']);
-Route::get('managechannel', [FlaggedUserController::class, 'managechannel']);
-Route::get('channeladmin', [FlaggedUserController::class, 'channeladmin']);
-Route::get('channels/reason', [FlaggedUserController::class, 'reason']);
-Route::get('channels/prefix', [FlaggedUserController::class, 'prefix']);
-Route::get('channels/policy_terms', [FlaggedUserController::class, 'policy_terms']);
-
-
-Route::post('/add_channel_category', [ChannelCategoryController::class, 'add_channel_category'])->name('add.channel.category');
-Route::delete('/channels/{id}', [ChannelCategoryController::class, 'destroy_channel'])->name('channels.destroy');
-Route::post('/edit_channel', [ChannelCategoryController::class, 'edit_channel'])->name('edit.category');
-Route::post('/add_channel_subcategory', [ChannelCategoryController::class, 'add_channel_subcategory'])->name('channel.subcategory');
-Route::put('/edit_channel_subcategory/{id}', [ChannelCategoryController::class, 'edit_channel_subcategory'])->name('edit.channel.subcat');
-Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, 'destroy_channel_subcategory'])->name('channels.subcat.destroy');
-
-
-//ProfileBanner
-Route::get('settings/profile-banner', [ProfileBannerController::class, 'index'])->name('profile.banner');
-Route::post('/profile-banner', [ProfileBannerController::class, 'store'])->name('profile.banner.store');
-Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class, 'destroy'])->name('profile.banner.delete');
-
-//Manage Cards
-Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.cards');
-Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
-Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.deleteas');
-
-Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
-
-Route::get('/list-reels-cards', [ReelController::class, 'Listcard'])->name('list.reels.cards');
-Route::post('/list-reels-cards-store', [ReelController::class, 'Cardstore'])->name('list.reel-cards.store');
-Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])->name('list.reel-cards.delete');
+        Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
 
 
 
+        Route::get('/app/user/storage', $controller_path . '\apps\popup\Popup@index')->name('user.storage');
+        Route::get('flaggedfanpage', [FlaggedUserController::class, "flaggedfanpage"]);
+        Route::prefix('reports')
+            ->name('reports.')
+            ->group(function () {
+                Route::resource('/flagged-users', FlaggedUserController::class);
+            });
+        //Channel Reasons
+        Route::post('/add_channel_reason', [ChannelReasonController::class, 'add_reason'])->name('add.reason');
+        Route::put('/edit_channel_reason/{id}', [ChannelReasonController::class, 'edit_reason'])->name('edit.reason');
+        Route::delete('/destory_reason/{id}', [ChannelReasonController::class, 'destroy_reason'])->name('destroy.reason');
+        Route::get('/destroy_policy_desc/{id}',  [ChannelPolicyController::class, 'destroy_desc'])->name('destroy.desc');
 
-    Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
-    Route::get('/feed-background', [BackgroundFeedController::class, 'index'])->name('feed.background');
-    Route::post('/feed-background', [BackgroundFeedController::class, 'store'])->name('feed.background.store');
-    Route::delete('/feed-background/{backgroundFeed}', [BackgroundFeedController::class, 'destroy'])->name('feed.background.delete');
-    Route::get('/feed-emoji', [EmojiFeedController::class, 'index'])->name('feed.emoji');
-    Route::post('/feed-emoji', [EmojiFeedController::class, 'store'])->name('feed.emoji.store');
-    Route::delete('/feed-emoji/{emoji}', [EmojiFeedController::class, 'destroy'])->name('feed.emoji.delete');
-    // Route::get('/feed-emoji', [PostController::class, 'indextwo'])->name('feed.emoji');
-    Route::get('/feeds-prefix', [PrefixController::class, 'index'])->name('feeds.prefix');
-    Route::get('/feeds-reasons', [ReasonController::class, 'index'])->name('feeds.reasons');
-    Route::post('file/upload', [FileController::class, 'upload'])->name('file.upload');
-    Route::delete('file/delete', [FileController::class, 'delete'])->name('file.delete');
-    Route::post('file/images', [FileController::class, 'upload_bg'])->name('file.images');
+        //Channels
+        Route::get('managecategories', [FlaggedUserController::class, 'managecategories'])->name('channels');
 
-    Route::get('/manage_video', [ReportVideoController::class, 'manage_video']);
-    Route::resource('/history-category', HistoryCategoryController::class);
-    Route::resource('/history-category', HistoryCategoryController::class);
-    Route::resource('app-policy', PolicyAndTermsController::class);
-
-    Route::resource('/news', NewsController::class);
-    Route::resource('/feeds', NewsController::class);
-    Route::get('/news/{id}/{status}', [NewsController::class, 'status'])->name('news-status');
-    Route::delete('/news/{id}/asset', [NewsController::class, 'deleteassets'])->name('news.delete-asset');
-
-    Route::resource('/news-category', NewsCategoryController::class);
-    Route::get('/news_category/{id}/{status}', [NewsCategoryController::class, 'status'])->name('newscat-status');
-
-    Route::resource('/news', NewsController::class);
-    Route::get('/news/{id}/{status}', [NewsController::class, 'status'])->name('news-status');
-
-    Route::resource('/news-category', NewsCategoryController::class);
-    Route::get('/news_category/{id}/{status}', [NewsCategoryController::class, 'status'])->name('newscat-status');
-
-    Route::get('live/request_channel', [livestreamController::class, 'channel_request'])->name('live.request_channel');
-
-    Route::get('live/manage_live_stream', [livestreamController::class, 'manage_live_stream'])->name(
-        'live.manage_live_stream'
-    );
-    Route::get('live/report_live_stream', [livestreamController::class, 'report_live_stream'])->name(
-        'live.report_live_stream'
-    );
-    Route::get('setting/live/streaming_duration', [PrefixController::class, 'index'])->name('live.streaming_durations');
-
-    Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
-
-    Route::get('/app/online-shop-income', $controller_path . '\apps\income\Income@onlineShopIncome')->name(
-        'app-online-shop-income'
-    );
-
-    Route::get('/app/service-income', $controller_path . '\apps\income\Income@serviceIncome')->name('app-service-income');
-
-    Route::get('/app/events-income', $controller_path . '\apps\income\Income@eventsIncome')->name('app-events-income');
-
-    Route::get('/app/music-income', $controller_path . '\apps\income\Income@musicIncome')->name('app-music-income');
-    Route::get('/app/video-income', $controller_path . '\apps\income\Income@videoIncome')->name('app-video-income');
-
-    Route::get('/app/donation-income', $controller_path . '\apps\income\Income@donationIncome')->name(
-        'app-donation-income'
-    );
-
-    Route::get('/app/total-income', $controller_path . '\apps\income\Income@totalIncome')->name('app-total-income');
-
-    Route::get('/app/invoice/list', $controller_path . '\apps\InvoiceList@index')->name('app-invoice-list');
+        Route::get('channelrequest', [FlaggedUserController::class, 'channelrequest']);
+        Route::get('managechannel', [FlaggedUserController::class, 'managechannel']);
+        Route::get('channeladmin', [FlaggedUserController::class, 'channeladmin']);
+        Route::get('channels/reason', [FlaggedUserController::class, 'reason']);
+        Route::get('channels/prefix', [FlaggedUserController::class, 'prefix']);
+        Route::get('channels/policy_terms', [FlaggedUserController::class, 'policy_terms']);
 
 
-    Route::prefix('settings')
-        ->name('settings.')
-        ->group(function () {
-            // Team
-            Route::prefix('team')
-                ->name('team.')
-                ->group(function () {
-                    Route::resource('members', TeamMemberController::class);
-                    Route::resource('roles', RoleController::class);
-                });
-            Route::post('/save', [SettingController::class, 'save'])->name('save');
-            Route::post('/save-many', [SettingController::class, 'saveMany'])->name('saveMany');
-            Route::get('chats/permission', [UserRolesController::class, 'standard'])->name('chats.permission');
-            Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
-            Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name(
-                'yekbun_location.countries.index'
-            );
-            Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
-
-            Route::resource('/countries', CountryController::class);
-            //App Setting
-            $controller_path = 'App\Http\Controllers';
-            Route::get('stories/prefix', [PrefixController::class, 'index'])->name('stories.prefix');
-
-            Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
-
-            Route::get('stories/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name(
-                'stories.policy_and_terms'
-            );
-            Route::get('chats/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('chats.policy_and_terms');
-            Route::get('musics/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name(
-                'music.policy_and_terms.index'
-            );
-
-            //   Route::resource('/prefix', PrefixController::class);
-            Route::get('user/prefix', [PrefixController::class, 'index'])->name('user.prefix');
-            Route::get('donation/prefix', [PrefixController::class, 'index'])->name('donation.prefix');
-            Route::get('history/prefix', [PrefixController::class, 'index'])->name('history.prefix');
-            Route::get('voting/prefix', [PrefixController::class, 'index'])->name('voting.prefix');
-            Route::post('voting/prefix', [PrefixController::class, 'store'])->name('voting.store_prefix');
-            Route::delete('voting/prefix/destroy/{id}', [PrefixController::class, 'destroy'])->name('voting.prefix.destroy');
-            Route::post('voting/prefix/update/{id}', [PrefixController::class, 'update'])->name('voting.prefix.update');
-            Route::get('chats/reasons', [ReasonController::class, 'index'])->name('chats.reasons');
-//Manage Songs
-          //  Route::resource('/storysong', SongController::class);
-            Route::resource('/storysong', SongController::class)->names([
-                'index' => 'storysong.index',
-                'create' => 'storysong.create',
-                'store' => 'storysong.store',
-                'show' => 'storysong.show',
-                'edit' => 'storysong.edit',
-                'update' => 'storysong.update',
-                'destroy' => 'storysong.destroy',
-            ]);
+        Route::post('/add_channel_category', [ChannelCategoryController::class, 'add_channel_category'])->name('add.channel.category');
+        Route::delete('/channels/{id}', [ChannelCategoryController::class, 'destroy_channel'])->name('channels.destroy');
+        Route::post('/edit_channel', [ChannelCategoryController::class, 'edit_channel'])->name('edit.category');
+        Route::post('/add_channel_subcategory', [ChannelCategoryController::class, 'add_channel_subcategory'])->name('channel.subcategory');
+        Route::put('/edit_channel_subcategory/{id}', [ChannelCategoryController::class, 'edit_channel_subcategory'])->name('edit.channel.subcat');
+        Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, 'destroy_channel_subcategory'])->name('channels.subcat.destroy');
 
 
-            Route::resource('/bank-transfer', BankTransferController::class);
+        //ProfileBanner
+        Route::get('settings/profile-banner', [ProfileBannerController::class, 'index'])->name('profile.banner');
+        Route::post('/profile-banner', [ProfileBannerController::class, 'store'])->name('profile.banner.store');
+        Route::delete('/profile-banner/{profilebanner}', [ProfileBannerController::class, 'destroy'])->name('profile.banner.delete');
 
-            Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
+        //Manage Cards
+        Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.cards');
+        Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
+        Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.deleteas');
 
-            Route::resource('/payment-offices', PaymentOfficeController::class);
-            Route::delete('/payment-offices/{id}/delete-image', [PaymentOfficeController::class, 'deleteOfficeImage'])->name(
-                'payment-offices.delete-image'
-            );
-            Route::resource('/provinces', RegionController::class);
+        Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
 
-            Route::resource('/cities', CityController::class);
-
-            Route::get('/paypal-stripe', [PaymentMethodController::class, 'index'])->name('paypal.stripe');
-            Route::get('/payment-methods', [PaymentMethodController::class, 'index'])->name('payment-methods');
-            Route::post('/payment-methods', [PaymentMethodController::class, 'save'])->name('payment-methods');
+        Route::get('/list-reels-cards', [ReelController::class, 'Listcard'])->name('list.reels.cards');
+        Route::post('/list-reels-cards-store', [ReelController::class, 'Cardstore'])->name('list.reel-cards.store');
+        Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])->name('list.reel-cards.delete');
 
 
-            Route::get('app-setting/app-info', [AppInfoController::class, 'index'])->name('appsetting.app-info');
-            // app info
-            Route::post('/app-info', [AppInfoController::class, 'store'])->name('appsetting.appinfo.store');
 
-            Route::get('app-setting/message-ringtone', [RingtoneController::class, 'getMessage'])->name('appsetting.message.ringtone');
-            Route::get('app-setting/call-ringtone', [RingtoneController::class, 'getCall'])->name('appsetting.call.ringtone');
-            Route::get('app-setting/notification-ringtone', [RingtoneController::class, 'getNotification'])->name('appsetting.notification.ringtone');
 
-            Route::get('app-setting/ringtone', [RingtoneController::class, 'index'])->name('appsetting.ringtone.index');
+        Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
+        Route::get('/feed-background', [BackgroundFeedController::class, 'index'])->name('feed.background');
+        Route::post('/feed-background', [BackgroundFeedController::class, 'store'])->name('feed.background.store');
+        Route::delete('/feed-background/{backgroundFeed}', [BackgroundFeedController::class, 'destroy'])->name('feed.background.delete');
+        Route::get('/feed-emoji', [EmojiFeedController::class, 'index'])->name('feed.emoji');
+        Route::post('/feed-emoji', [EmojiFeedController::class, 'store'])->name('feed.emoji.store');
+        Route::delete('/feed-emoji/{emoji}', [EmojiFeedController::class, 'destroy'])->name('feed.emoji.delete');
+        // Route::get('/feed-emoji', [PostController::class, 'indextwo'])->name('feed.emoji');
+        Route::get('/feeds-prefix', [PrefixController::class, 'index'])->name('feeds.prefix');
+        Route::get('/feeds-reasons', [ReasonController::class, 'index'])->name('feeds.reasons');
+        Route::post('file/upload', [FileController::class, 'upload'])->name('file.upload');
+        Route::delete('file/delete', [FileController::class, 'delete'])->name('file.delete');
+        Route::post('file/images', [FileController::class, 'upload_bg'])->name('file.images');
 
-            Route::post('app-setting/ringtone', [RingtoneController::class, 'store'])->name('appsetting.ringtone.store');
+        Route::get('/manage_video', [ReportVideoController::class, 'manage_video']);
+        Route::resource('/history-category', HistoryCategoryController::class);
+        Route::resource('/history-category', HistoryCategoryController::class);
+        Route::resource('app-policy', PolicyAndTermsController::class);
 
-            Route::delete('app-setting/ringtone/{id}', [RingtoneController::class, 'destroy'])->name('appsetting.ringtone.destroy');
+        Route::resource('/news', NewsController::class);
+        Route::resource('/feeds', NewsController::class);
+        Route::get('/news/{id}/{status}', [NewsController::class, 'status'])->name('news-status');
+        Route::delete('/news/{id}/asset', [NewsController::class, 'deleteassets'])->name('news.delete-asset');
 
-            Route::delete('/member/{id}/image', [TeamMemberController::class, 'deleteMemberImage'])->name('user.delete-img');
-            Route::prefix('user-roles')
-                ->name('user-roles.')
-                ->group(function () {
-                    Route::get('/educated', [UserRolesController::class, 'educated'])->name('educated');
-                    Route::get('/cultivated', [UserRolesController::class, 'cultivated'])->name('cultivated');
-                    Route::get('/academic', [UserRolesController::class, 'academic'])->name('academic');
-                    Route::get('/fanpage', [UserRolesController::class, 'fanpage'])->name('fanpage');
-                    Route::post('/update', [UserRolesController::class, 'update'])->name('update.permissions');
-                });
-            Route::get('/reasons', [ReasonController::class, 'index'])->name('reasons');
+        Route::resource('/news-category', NewsCategoryController::class);
+        Route::get('/news_category/{id}/{status}', [NewsCategoryController::class, 'status'])->name('newscat-status');
 
-            Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
-        });
-    Route::resource('logs', SystemLogController::class);
+        Route::resource('/news', NewsController::class);
+        Route::get('/news/{id}/{status}', [NewsController::class, 'status'])->name('news-status');
 
-    Route::get('department', [SystemLogController::class, 'manage_department']);
+        Route::resource('/news-category', NewsCategoryController::class);
+        Route::get('/news_category/{id}/{status}', [NewsCategoryController::class, 'status'])->name('newscat-status');
 
-    Route::get('backup_setting', [SystemLogController::class, 'backup_setting']);
+        Route::get('live/request_channel', [livestreamController::class, 'channel_request'])->name('live.request_channel');
 
-    Route::get('storage_setting', [SystemLogController::class, 'storage_setting']);
-    Route::get('/activity', [ActivityController::class, 'index'])->name('ajax-activity');
-    Route::get('team/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('team.policy_and_terms.index');
-    Route::resource('/donations', DonationController::class);
-    Route::get('/app/task/list', $controller_path . '\Task\Task@index')->name('app-task-list');
-    Route::post('/app/task/store', $controller_path . '\Task\Task@store')->name('app-task-store');
-    Route::post('/app/task/update/{id}', $controller_path . '\Task\Task@update')->name('app-task-update');
-    Route::delete('/app/task/delete/{id}', $controller_path . '\Task\Task@destroy')->name('app-task-delete');
+        Route::get('live/manage_live_stream', [livestreamController::class, 'manage_live_stream'])->name(
+            'live.manage_live_stream'
+        );
+        Route::get('live/report_live_stream', [livestreamController::class, 'report_live_stream'])->name(
+            'live.report_live_stream'
+        );
+        Route::get('setting/live/streaming_duration', [PrefixController::class, 'index'])->name('live.streaming_durations');
 
-});
+        Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
+
+        Route::get('/app/online-shop-income', $controller_path . '\apps\income\Income@onlineShopIncome')->name(
+            'app-online-shop-income'
+        );
+
+        Route::get('/app/service-income', $controller_path . '\apps\income\Income@serviceIncome')->name('app-service-income');
+
+        Route::get('/app/events-income', $controller_path . '\apps\income\Income@eventsIncome')->name('app-events-income');
+
+        Route::get('/app/music-income', $controller_path . '\apps\income\Income@musicIncome')->name('app-music-income');
+        Route::get('/app/video-income', $controller_path . '\apps\income\Income@videoIncome')->name('app-video-income');
+
+        Route::get('/app/donation-income', $controller_path . '\apps\income\Income@donationIncome')->name(
+            'app-donation-income'
+        );
+
+        Route::get('/app/total-income', $controller_path . '\apps\income\Income@totalIncome')->name('app-total-income');
+
+        Route::get('/app/invoice/list', $controller_path . '\apps\InvoiceList@index')->name('app-invoice-list');
+
+
+        Route::prefix('settings')
+            ->name('settings.')
+            ->group(function () {
+                // Team
+                Route::prefix('team')
+                    ->name('team.')
+                    ->group(function () {
+                        Route::resource('members', TeamMemberController::class);
+                        Route::resource('roles', RoleController::class);
+                    });
+                Route::post('/save', [SettingController::class, 'save'])->name('save');
+                Route::post('/save-many', [SettingController::class, 'saveMany'])->name('saveMany');
+                Route::get('chats/permission', [UserRolesController::class, 'standard'])->name('chats.permission');
+                Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
+                Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name(
+                    'yekbun_location.countries.index'
+                );
+                Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
+
+                Route::resource('/countries', CountryController::class);
+                //App Setting
+                $controller_path = 'App\Http\Controllers';
+                Route::get('stories/prefix', [PrefixController::class, 'index'])->name('stories.prefix');
+
+                Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
+
+                Route::get('stories/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name(
+                    'stories.policy_and_terms'
+                );
+                Route::get('chats/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('chats.policy_and_terms');
+                Route::get('musics/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name(
+                    'music.policy_and_terms.index'
+                );
+
+                //   Route::resource('/prefix', PrefixController::class);
+                Route::get('user/prefix', [PrefixController::class, 'index'])->name('user.prefix');
+                Route::get('donation/prefix', [PrefixController::class, 'index'])->name('donation.prefix');
+                Route::get('history/prefix', [PrefixController::class, 'index'])->name('history.prefix');
+                Route::get('voting/prefix', [PrefixController::class, 'index'])->name('voting.prefix');
+                Route::post('voting/prefix', [PrefixController::class, 'store'])->name('voting.store_prefix');
+                Route::delete('voting/prefix/destroy/{id}', [PrefixController::class, 'destroy'])->name('voting.prefix.destroy');
+                Route::post('voting/prefix/update/{id}', [PrefixController::class, 'update'])->name('voting.prefix.update');
+                Route::get('chats/reasons', [ReasonController::class, 'index'])->name('chats.reasons');
+                //Manage Songs
+                //  Route::resource('/storysong', SongController::class);
+                Route::resource('/storysong', SongController::class)->names([
+                    'index' => 'storysong.index',
+                    'create' => 'storysong.create',
+                    'store' => 'storysong.store',
+                    'show' => 'storysong.show',
+                    'edit' => 'storysong.edit',
+                    'update' => 'storysong.update',
+                    'destroy' => 'storysong.destroy',
+                ]);
+
+
+                Route::resource('/bank-transfer', BankTransferController::class);
+
+                Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
+
+                Route::resource('/payment-offices', PaymentOfficeController::class);
+                Route::delete('/payment-offices/{id}/delete-image', [PaymentOfficeController::class, 'deleteOfficeImage'])->name(
+                    'payment-offices.delete-image'
+                );
+                Route::resource('/provinces', RegionController::class);
+
+                Route::resource('/cities', CityController::class);
+
+                Route::get('/paypal-stripe', [PaymentMethodController::class, 'index'])->name('paypal.stripe');
+                Route::get('/payment-methods', [PaymentMethodController::class, 'index'])->name('payment-methods');
+                Route::post('/payment-methods', [PaymentMethodController::class, 'save'])->name('payment-methods');
+
+
+                Route::get('app-setting/app-info', [AppInfoController::class, 'index'])->name('appsetting.app-info');
+                // app info
+                Route::post('/app-info', [AppInfoController::class, 'store'])->name('appsetting.appinfo.store');
+
+                Route::get('app-setting/message-ringtone', [RingtoneController::class, 'getMessage'])->name('appsetting.message.ringtone');
+                Route::get('app-setting/call-ringtone', [RingtoneController::class, 'getCall'])->name('appsetting.call.ringtone');
+                Route::get('app-setting/notification-ringtone', [RingtoneController::class, 'getNotification'])->name('appsetting.notification.ringtone');
+
+                Route::get('app-setting/ringtone', [RingtoneController::class, 'index'])->name('appsetting.ringtone.index');
+
+                Route::post('app-setting/ringtone', [RingtoneController::class, 'store'])->name('appsetting.ringtone.store');
+
+                Route::delete('app-setting/ringtone/{id}', [RingtoneController::class, 'destroy'])->name('appsetting.ringtone.destroy');
+
+                Route::delete('/member/{id}/image', [TeamMemberController::class, 'deleteMemberImage'])->name('user.delete-img');
+                Route::prefix('user-roles')
+                    ->name('user-roles.')
+                    ->group(function () {
+                        Route::get('/educated', [UserRolesController::class, 'educated'])->name('educated');
+                        Route::get('/cultivated', [UserRolesController::class, 'cultivated'])->name('cultivated');
+                        Route::get('/academic', [UserRolesController::class, 'academic'])->name('academic');
+                        Route::get('/fanpage', [UserRolesController::class, 'fanpage'])->name('fanpage');
+                        Route::post('/update', [UserRolesController::class, 'update'])->name('update.permissions');
+                    });
+                Route::get('/reasons', [ReasonController::class, 'index'])->name('reasons');
+
+                Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
+            });
+        Route::resource('logs', SystemLogController::class);
+
+        Route::get('department', [SystemLogController::class, 'manage_department']);
+
+        Route::get('backup_setting', [SystemLogController::class, 'backup_setting']);
+
+        Route::get('storage_setting', [SystemLogController::class, 'storage_setting']);
+        Route::get('/activity', [ActivityController::class, 'index'])->name('ajax-activity');
+        Route::get('team/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('team.policy_and_terms.index');
+        Route::resource('/donations', DonationController::class);
+        Route::get('/app/task/list', $controller_path . '\Task\Task@index')->name('app-task-list');
+        Route::post('/app/task/store', $controller_path . '\Task\Task@store')->name('app-task-store');
+        Route::post('/app/task/update/{id}', $controller_path . '\Task\Task@update')->name('app-task-update');
+        Route::delete('/app/task/delete/{id}', $controller_path . '\Task\Task@destroy')->name('app-task-delete');
+    });
 
     Route::get('/upload_movies/{id}/{status}', [UploadMovieController::class, 'status'])->name('movies_status');
     Route::get('/movie_category/{id}/{status}', [UploadMovieCategoryController::class, 'status'])->name(
@@ -983,11 +985,11 @@ Route::post('advert-saveFileds', [AdvertismentController::class, 'saveFileds'])-
 
 
 
- Route::prefix('advertisement')->name('advertisement.')->group(function () {
+Route::prefix('advertisement')->name('advertisement.')->group(function () {
     Route::match(['get', 'post'], 'advert/pricing', [AdvertismentController::class, 'pricing2'])->name('pricing');
 });
 
- //GreetingCards
+//GreetingCards
 Route::post('/list-greeting-cards-store', [WishesReasonController::class, 'Cardstore'])->name('list.greeting-cards.store');
 Route::delete('/list-greeting-card/{card}', [WishesReasonController::class, 'destroycard'])->name('list.greeting-cards.delete');
 //PraysCards
@@ -997,7 +999,3 @@ Route::delete('/list-prays-card/{card}', [WishesReasonController::class, 'destro
 //Sympathy
 Route::post('/list-sympathy-cards-store', [WishesReasonController::class, 'sympathyStore'])->name('list.sympathy-cards.store');
 Route::delete('/list-sympathy-card/{card}', [WishesReasonController::class, 'destroysympathy'])->name('list.sympathy-cards.delete');
-
-
-?>
-
