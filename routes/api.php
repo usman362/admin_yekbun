@@ -148,6 +148,7 @@ Route::get('languages', [LanguageController::class, 'index'])->name('languages.i
 Route::post('languages', [LanguageController::class, 'store'])->name('languages.store');
 Route::post('languages/{id}', [LanguageController::class, 'update'])->name('languages.update');
 Route::delete('languages/{id}', [LanguageController::class, 'destroy'])->name('languages.destroy');
+Route::get('languages/{id}/keywords',[LanguageController::class, 'keywords'])->name('languages.keywords');
 
 Route::post('/logout', [AuthController::class, 'logout']);
 

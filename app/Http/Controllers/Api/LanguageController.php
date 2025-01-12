@@ -38,6 +38,7 @@ use App\Models\VisiterProfile;
 use App\Models\HeaderSectionStories;
 use App\Models\FooterFriendSection;
 use App\Models\FooterCart;
+use App\Models\LanguageDetail;
 use Illuminate\Support\Facades\DB;
 
 class LanguageController extends Controller
@@ -186,6 +187,13 @@ class LanguageController extends Controller
           ], 500);
       }
   }
+
+  public function keywords($id)
+  {
+    $keywords = LanguageDetail::select(['section_name','keyword','translated'])->where('language_id',$id)->get();
+    return response()->json(['keywords' => $keywords],200);
+  }
+
   public function footerquicksection(Request $request)
   {
       // Validate the request data
