@@ -194,6 +194,16 @@ class LanguageController extends Controller
     return response()->json(['keywords' => $keywords],200);
   }
 
+  public function keyword($id,$keyword)
+  {
+    $keyword = LanguageDetail::select(['section_name','keyword','translated'])->where('language_id',$id)->where('keyword',$keyword)->first();
+    if(!empty($keyword)){
+        return response()->json(['keyword' => $keyword],200);
+    }else{
+        return response()->json(['message' => 'Not Found!'],404);
+    }
+  }
+
   public function footerquicksection(Request $request)
   {
       // Validate the request data
