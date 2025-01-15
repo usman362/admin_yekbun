@@ -557,6 +557,9 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::post('/languages/keyword/section/history', [LanguageController::class, 'saveSectionhistory'])->name('languages.saveSectionhistory');
     Route::post('/languages/keyword/section/voting', [LanguageController::class, 'saveSectionvoter'])->name('languages.saveSectionvoter');
     Route::post('/languages/keyword/section/donation', [LanguageController::class, 'headerdoantion'])->name('languages.headerdoantion');
+    Route::post('/languages/keyword/homepage/language', [LanguageController::class, 'savehompagelanguage'])->name('languages.savehompagelanguage');
+    Route::post('/languages/app_policy', [LanguageController::class, 'saveappp_policy'])->name('languages.saveappp_policy');
+    Route::post('/languages/guest', [LanguageController::class, 'storeguest'])->name('languages.storeguest');
 
 
 

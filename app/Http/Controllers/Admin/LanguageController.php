@@ -2040,4 +2040,161 @@ class LanguageController extends Controller
                 ->with('error', 'Error saving Section Settings: ' . $e->getMessage());
         }
     }
+
+    public function savehompagelanguage(Request $request)
+    {
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'language_id' => [
+                'required',
+                'string',
+                'size:24', // MongoDB ObjectId size
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+                        return $fail($attribute.' is not a valid ObjectId.');
+                    }
+                    // Check if the ObjectId exists in the languages collection
+                    if (!Language::where('_id', $value)->exists()) {
+                        return $fail($attribute.' does not exist.');
+                    }
+                },
+            ],
+            'language_main' => 'required|string|max:255',
+            'search_language' => 'required|string|max:255',
+
+        ]);
+
+        // Check for validation errors
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validatedData = $validator->validated();
+
+        try {
+            // Update or create the headervoter entry
+            HomePageLanguage::updateOrCreate(
+                ['language_id' => $validatedData['language_id']],
+                $validatedData
+            );
+
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Home page Language saved successfully.');
+        } catch (\Exception $e) {
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'Error saving Home page Language: ' . $e->getMessage());
+        }
+    }
+
+    public function storeguest(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'language_id' => [
+                'required',
+                'string',
+                'size:24', // MongoDB ObjectId size
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+                        return $fail($attribute.' is not a valid ObjectId.');
+                    }
+                    // Check if the ObjectId exists in the languages collection
+                    if (!Language::where('_id', $value)->exists()) {
+                        return $fail($attribute.' does not exist.');
+                    }
+                },
+            ],
+            'dear_guest' => 'nullable|string|max:255',
+            'guest_message' => 'nullable|string|max:255',
+            'create_account' => 'nullable|string|max:255',
+            'account_message' => 'nullable|string|max:255',
+            'sign_in' => 'nullable|string|max:255',
+            'sign_in_message' => 'nullable|string|max:255',
+            'close' => 'nullable|string|max:255',
+
+
+        ]);
+//dd($validator);
+        // Check for validation errors
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validatedData = $validator->validated();
+
+        try {
+            // Update or create the headervoter entry
+            GuestSection::updateOrCreate(
+                ['language_id' => $validatedData['language_id']],
+                $validatedData
+            );
+          //  dd('saved');
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Guest section Language saved successfully.');
+        } catch (\Exception $e) {
+// dd('hello');
+            return redirect()->back()->with('error', 'Error saving Guest section Language: ' . $e->getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function saveappp_policy(Request $request)
+    {
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'language_id' => [
+                'required',
+                'string',
+                'size:24', // MongoDB ObjectId size
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+                        return $fail($attribute.' is not a valid ObjectId.');
+                    }
+                    // Check if the ObjectId exists in the languages collection
+                    if (!Language::where('_id', $value)->exists()) {
+                        return $fail($attribute.' does not exist.');
+                    }
+                },
+            ],
+            'policy_terms' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'heading_title' => 'required|string|max:255',
+
+
+        ]);
+
+        // Check for validation errors
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validatedData = $validator->validated();
+
+        try {
+            // Update or create the headervoter entry
+        $data=    App_Policy::updateOrCreate(
+                ['language_id' => $validatedData['language_id']],
+                $validatedData
+            );
+//dd(  $data);
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'App Policy  saved successfully.');
+        } catch (\Exception $e) {
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'Error saving Home page Language: ' . $e->getMessage());
+        }
+    }
 }
