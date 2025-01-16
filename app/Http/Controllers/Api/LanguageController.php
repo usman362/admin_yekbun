@@ -50,15 +50,15 @@ class LanguageController extends Controller
    */
   public function index()
   {
-    $languages = Language::all();
-    $languageData = LanguageData::all();
+    $languages = Language::with('details')->get();
+    // $languageData = LanguageData::all();
 
-    $textCounts = Text::count();
+    // $textCounts = Text::count();
 
-    foreach ($languages as $language) {
-      $language->texts_count = $textCounts;
-    }
-    return response()->json(['languages' => $languages, 'languageData' => $languageData],200);
+    // foreach ($languages as $language) {
+    //   $language->texts_count = $textCounts;
+    // }
+    return response()->json(['languages' => $languages],200);
   }
 
   /**
