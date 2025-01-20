@@ -4,7 +4,7 @@
 
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-icons.css')}}" />
-{{-- <style>
+<style>
   .dataTables_filter{
     display: none;
   }
@@ -20,7 +20,7 @@
   #DataTables_Table_3_paginate{
     display: none;
   }
-</style> --}}
+</style>
 @endsection
 
 @section('vendor-style')
@@ -53,7 +53,7 @@
 <div class="d-flex justify-content-between">
   <div>
     <h4 class="fw-bold py-3 mb-4">
-      <span class="text-muted fw-light">Settings /</span> Add / Manage Citys
+      <span class="text-muted fw-light">Settings /</span> Add / Manage City
     </h4>
   </div>
 </div>
@@ -326,7 +326,9 @@
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
-      $('#DataTables_Table_3').DataTable();
+      $('#DataTables_Table_3').DataTable({
+        'paging' : false,
+      });
   });
 </script>
 
