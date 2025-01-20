@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
+use Yajra\DataTables\DataTables;
 
 class CityController extends Controller
 {
@@ -17,18 +18,34 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-
-
-        $cities = City::orderBy("zipcode", "ASC")->get();
         $regions = Region::orderBy("name", "ASC")->get();
         $countries = Country::orderBy("name", "ASC")->get();
+        $cities = City::orderBy("zipcode", "ASC")->get();
+        if ($request->ajax()) {
+            return DataTables::of($cities)
+                ->addColumn('country', function ($city) {
+                    return $city->country ? $city->country->name : '';
+                })
+                ->addColumn('region', function ($city) {
+                    return $city->region ? $city->region->name : '';
+                })
+                ->addColumn('total_people', function ($city) {
+                    return $city->users->count();
+                })
+                ->addColumn('actions', function ($city) use ($regions, $countries) {
+                    $regions = Region::orderBy("name", "ASC")->get();
+                    $countries = Country::orderBy("name", "ASC")->get();
+                    return view('content.settings.cities.includes.actions', compact('city', 'countries', 'regions'))->render();
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
 
-
-        return view("content.settings.cities.index", compact("cities", "regions", "countries"));
+        return view("content.settings.cities.index", compact("regions", "countries"));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +55,7 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-      //  dd($request->all());
+        //  dd($request->all());
         $validated = $request->validated();
 
         $cities = $validated['cities'];
