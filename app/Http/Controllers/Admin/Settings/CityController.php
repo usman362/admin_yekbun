@@ -20,9 +20,9 @@ class CityController extends Controller
     public function index()
     {
 
-        
 
-        $cities = City::orderBy("name", "ASC")->get();
+
+        $cities = City::orderBy("zipcode", "ASC")->get();
         $regions = Region::orderBy("name", "ASC")->get();
         $countries = Country::orderBy("name", "ASC")->get();
 
@@ -43,7 +43,7 @@ class CityController extends Controller
 
         $cities = $validated['cities'];
         unset($validated['cities']);
-        
+
         foreach ($cities as $city)
             City::create(array_merge($validated, ['zipcode' => $city['zipcode'], 'name' => $city['name']]));
 

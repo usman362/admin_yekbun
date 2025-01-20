@@ -4,7 +4,7 @@
 
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-icons.css')}}" />
-<style>
+{{-- <style>
   .dataTables_filter{
     display: none;
   }
@@ -20,7 +20,7 @@
   #DataTables_Table_3_paginate{
     display: none;
   }
-</style>
+</style> --}}
 @endsection
 
 @section('vendor-style')
@@ -53,7 +53,7 @@
 <div class="d-flex justify-content-between">
   <div>
     <h4 class="fw-bold py-3 mb-4">
-      <span class="text-muted fw-light">Settings /</span> Add / Manage City
+      <span class="text-muted fw-light">Settings /</span> Add / Manage Citys
     </h4>
   </div>
 </div>
@@ -61,10 +61,10 @@
 {{-- <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h5 class="m-0">City List</h5>
-   
+
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
         class="bx bx-plus me-0 me-sm-1"></i> Add City</button>
-    
+
   </div>
   <div class="card-datatable table-responsive">
     <table class="datatables-basic table border-top" id="example">
@@ -100,7 +100,7 @@
           <td>{{ $city->users->count() }}</td>
           <td>
             <div>
-              
+
               <!-- Edit -->
               <span data-bs-toggle="modal" data-bs-target="#editModal{{ $city->id }}">
                 <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -108,9 +108,9 @@
                   <i class="bx bx-edit"></i>
                 </button>
               </span>
-              
 
-              
+
+
               <!-- Delete -->
               <form action="{{ route('settings.cities.destroy', $city->id) }}"
                 onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
@@ -120,15 +120,15 @@
                   data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i
                     class="bx bx-trash me-1"></i></button>
               </form>
-             
+
             </div>
 
-            
+
             <x-modal id="editModal{{ $city->id }}" title="Edit City" saveBtnText="Update" saveBtnType="submit"
               saveBtnForm="editForm{{ $city->id }}" size="sm" :show="old('showEditFormModal'.$city->id)? true: false">
               @include('content.settings.cities.includes.edit_form')
             </x-modal>
-            
+
           </td>
         </tr>
         @empty
@@ -145,10 +145,10 @@
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h5 class="m-0">City List</h5>
-    
+
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
         class="bx bx-plus me-0 me-sm-1"></i> Add City</button>
-    
+
   </div>
   <div class="card-datatable table-responsive">
     <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -183,7 +183,7 @@
             <td>{{ $city->users->count() }}</td>
             <td>
               <div>
-                
+
                 <!-- Edit -->
                 <span data-bs-toggle="modal" data-bs-target="#editModal{{ $city->id }}">
                   <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -191,9 +191,9 @@
                     <i class="bx bx-edit"></i>
                   </button>
                 </span>
-                
 
-                
+
+
                 <!-- Delete -->
                 <form action="{{ route('settings.cities.destroy', $city->id) }}"
                   onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
@@ -203,15 +203,15 @@
                     data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i
                       class="bx bx-trash me-1"></i></button>
                 </form>
-                
+
               </div>
 
-              
+
               <x-modal id="editModal{{ $city->id }}" title="Edit City" saveBtnText="Update" saveBtnType="submit"
                 saveBtnForm="editForm{{ $city->id }}" size="sm" :show="old('showEditFormModal'.$city->id)? true: false">
                 @include('content.settings.cities.includes.edit_form')
               </x-modal>
-              
+
             </td>
           </tr>
           @empty
@@ -326,9 +326,7 @@
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
-      $('#DataTables_Table_3').DataTable({
-        'paging' : false,
-      });
+      $('#DataTables_Table_3').DataTable();
   });
 </script>
 
