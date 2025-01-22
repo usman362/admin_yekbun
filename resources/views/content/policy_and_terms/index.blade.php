@@ -64,6 +64,33 @@
     </div>
 </div>
 
+<div class="modal fade" id="edittab" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel3">Edit Section</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="createForm" method="POST" action="{{ route('app-policy.store') }}">
+                        @csrf
+                        <input type="hidden" id="policy_id" name="id">
+                        <div class="col mb-3">
+                            <label for="name" class="form-label">Section Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Add Tab Name Here" name="name">
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary">Save</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
 @if ($data->count())
 <div class="row">
     <h6 class="text-muted">Privacy Policy and Terms</h6>
@@ -73,7 +100,7 @@
                 @foreach($data as $section)
                     <li class="nav-item d-flex align-items-center">
                         <button type="button" class="nav-link {{ $loop->iteration == 1 && !old('tab') ? 'active' : ''  }} {{ old('tab') === "tab{$section->id}"  ? 'active' : '' }}" role="tab" data-bs-toggle="tab" data-bs-target="#tab{{ $section->id }}" aria-controls="tab{{ $section->id }}" aria-selected="true"><i class='bx bx-file'></i>{{ $section->name }}</button>
-
+                        <button type="button" class="btn btn-sm btn-icon edit-btn" data-id="{{$section->id}}" data-name="{{$section->name}}" data-bs-offset="0,4" data-bs-placement="top" data-bs-target="#edittab" data-bs-toggle="modal" data-bs-html="true" data-bs-original-title="Edit"><i class="bx bx-edit me-1 text-primary" ></i></button>
                         <form action="{{ route('app-policy.destroy' ,$section->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                             @method('DELETE')
                             @csrf
@@ -209,6 +236,14 @@
 
 </script>
 <script>
+
+    $('body').on('click','.edit-btn',function(){
+        let id = $(this).attr('data-id');
+        let name = $(this).attr('data-name');
+        $('#policy_id').val(id);
+        $('#name').val(name);
+    });
+
     function deleteURL(event) {
         event.target.closest('.row').remove();
     }

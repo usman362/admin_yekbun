@@ -47,12 +47,12 @@ class PolicyAndTermsController extends Controller
             'name' => 'required',
         ]);
 
-        PolicyAndTerm::create([
+        PolicyAndTerm::updateOrCreate(['_id' => $request->id],[
             'name' => $request->name
         ]);
 
         return back()->with('success', 'New privacy policy and terms section has been created.');
-    
+
         // if($request->has('privacy')){
         //     $request->validate([
         //         'policy_text' => 'required',
@@ -64,7 +64,7 @@ class PolicyAndTermsController extends Controller
         //         'disclaimer' => 'required'
         //     ]);
         // }
-      
+
         // if($request->has('privacy')){
         //     $data =[];
         //     $titles = $request->policy_title;
