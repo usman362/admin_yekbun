@@ -6,6 +6,7 @@ use App\Models\Text;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\App_Policy;
 use App\Models\LanguageData;
 use App\Models\StartPage;
 use App\Models\LanguageKeyword;
@@ -41,6 +42,8 @@ use App\Models\VisiterProfile;
 use App\Models\HeaderSectionStories;
 
 use App\Models\FooterCart;
+use App\Models\GuestSection;
+use App\Models\HomePageLanguage;
 use App\Models\LanguageDetail;
 use App\Models\LanguageSection;
 use Illuminate\Support\Facades\DB;
