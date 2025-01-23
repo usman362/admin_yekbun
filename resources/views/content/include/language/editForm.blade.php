@@ -48,6 +48,13 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-md-12">
+                                    <label class="form-label" for="code">Code</label>
+                                    <input type ="text" class="form-control" name="code" value="{{$language->code ?? ''}}" required/>
+                                    @error('code')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
                                 <div class="col-md-12">
                                     <label class="form-label" for="fullname">Status</label>
