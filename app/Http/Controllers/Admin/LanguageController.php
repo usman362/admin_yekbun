@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Models\Text;
 use App\Models\Language;
 use Illuminate\Http\Request;
@@ -98,6 +99,7 @@ class LanguageController extends Controller
             $language->icon = $image_path;
         }
         if ($language->save()) {
+            Helpers::languages_keywords($language->id);
             return redirect()
                 ->route('language.index')
                 ->with('success', 'Your language has been created successfully.');
