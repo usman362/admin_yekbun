@@ -248,7 +248,7 @@ class LanguageKeywordsSeeder extends Seeder
         foreach ($languages as $language) {
             if ($language->code == 'ku') {
                 foreach ($kurdishkeywords as $keyword) {
-                    LanguageDetail::updateOrCreate(['keyword' => $keyword['keyword']], [
+                    LanguageDetail::create([
                         'language_id' => $language->id,
                         'section_name' => 'Home Section',
                         'keyword' => $keyword['keyword'],
@@ -257,11 +257,12 @@ class LanguageKeywordsSeeder extends Seeder
                 }
             } else {
                 foreach ($homekeywords as $keyword) {
-                    LanguageDetail::updateOrCreate(['keyword' => $keyword['keyword']], [
+                    $translatedValue = ($language->code == 'en') ? $keyword['translated'] : '';
+                    LanguageDetail::create([
                         'language_id' => $language->id,
                         'section_name' => 'Home Section',
                         'keyword' => $keyword['keyword'],
-                        'translated' => $language->code == 'en' ? $keyword['translated'] : '',
+                        'translated' => $translatedValue,
                     ]);
                 }
             }
