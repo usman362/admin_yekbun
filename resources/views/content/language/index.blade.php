@@ -359,9 +359,9 @@
                     // console.log(data);
                     data.sections.forEach(section => {
                         html += `<tr>
-                <td>${section.name}</td>
-                <td>${section.details.length}</td>
-                <td><a href="#" data-id="${section._id}" data-language_id="${section.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
+                <td>${section.section_name}</td>
+                <td>${''}</td>
+                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
                         <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
@@ -420,13 +420,13 @@
 
 
             $('table').on('click', '.edit_section_details', function() {
-                let section_id = $(this).attr('data-id');
+                let section_name = $(this).attr('data-section_name');
                 let language_id = $(this).attr('data-language_id');
                 $('.ajax_status').html('');
-                $('#keyword_section_id').val(section_id);
+                $('#keyword_section_name').val(section_name);
                 $('#keyword_language_id').val(language_id);
                 // Fetch existing keywords via AJAX
-                $.get(`/languages/${language_id}/keywords/${section_id}`, function(data) {
+                $.get(`/languages/${language_id}/keywords/${section_name}`, function(data) {
                     let html = '';
                     data.keywords.forEach((section, index) => {
                         if (index == 0) {

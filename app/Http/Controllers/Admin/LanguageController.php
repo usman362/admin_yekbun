@@ -110,8 +110,8 @@ class LanguageController extends Controller
 
     public function getSections($id)
     {
-        $sections = LanguageSection::with('details')->where('language_id', $id)->get();
-        return response()->json(['sections' => $sections], 200);
+        $sections = LanguageDetail::where('language_id', $id)->groupBy('section_name')->get();
+        return response()->json(['sections' => $sections,'language_id'=>$id], 200);
     }
 
     public function storeSections(Request $request)
@@ -123,9 +123,9 @@ class LanguageController extends Controller
         return response()->json(['message' => 'Language Section has Successfully Created!', 'section' => $section], 201);
     }
 
-    public function getKeywords($id, $section = null)
+    public function getKeywords($id, $section)
     {
-        $keywords = LanguageDetail::where('language_id', $id)->where('section_id', $section)->get();
+        $keywords = LanguageDetail::where('language_id', $id)->where('section_name', $section)->get();
         return response()->json(['keywords' => $keywords], 200);
     }
 
