@@ -180,9 +180,6 @@
                                 class="text-info">{{ $language->title }}</span> --}}
                             Language Sections
                         </h5>
-                        <button class="btn btn-primary add_language_section" style="position: absolute;right:30px"
-                            data-bs-toggle="modal" data-bs-target="#createSectionModal">Add
-                            Section</button>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -211,43 +208,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="createSectionModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">Add Section
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('languages.sections.store') }}" id="language_section_form" method="POST">
-                    @csrf
-                    <input type="hidden" id="section_language_id" name="language_id">
-                    <div class="modal-body">
-                        <div class="table-responsive text-nowrap">
-                            <div class="row">
-                                <div class="col-lg-12 mx-auto">
-                                    <div class="row g-3">
-
-                                        <div class="col-md-12">
-                                            <label class="form-label" for="fullname">Section Name</label>
-                                            <input type="text" name="name" class="form-control" id="name"
-                                                required>
-                                        </div>
-                                        <div class="ajax_status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-label-primary">Submit</button>
-                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="editKeywordsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -259,7 +219,7 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="updateKeywordsForm" action="{{route('languages.keywords.store')}}" method="POST">
+                <form id="updateKeywordsForm" action="{{ route('languages.keywords.store') }}" method="POST">
                     @csrf
                     <input type="hidden" id="keyword_section_id" name="section_id">
                     <input type="hidden" id="keyword_language_id" name="language_id">
@@ -272,7 +232,6 @@
                                         <tr>
                                             <th>Keyword</th>
                                             <th>Translated</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody id="keywordsTable">
@@ -382,41 +341,11 @@
                 });
             })
 
-            $('.add_language_section').click(function() {
-                let id = $(this).attr('data-id');
-                $('#section_language_id').val(id);
-            })
-
-            $('#language_section_form').on('submit', function(e) {
-                e.preventDefault();
-
-                const formData = new FormData(this);
-
-                for (const [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
-
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        $('#language_section_form')[0].reset();
-                        console.log('Form submitted successfully:', response);
-                        $('.ajax_status').html(`
-                            <span class="text-success">Section Created Successfully!</span>
-                        `);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Form submission failed:', error);
-                        $('.ajax_status').html(`
-                            <span class="text-danger">Something Went Wrong!</span>
-                        `);
-                    }
-                });
-            });
+            function camelCaseToTitle(camelCaseStr) {
+                return camelCaseStr
+                    .replace(/([A-Z])/g, ' $1')
+                    .replace(/^./, (str) => str.toUpperCase());
+            }
 
 
             $('table').on('click', '.edit_section_details', function() {
@@ -429,78 +358,19 @@
                 $.get(`/languages/${language_id}/keywords/${section_name}`, function(data) {
                     let html = '';
                     data.keywords.forEach((section, index) => {
-                        if (index == 0) {
-                            html += `<tr>
-                                <td>
-                                    <input class="form-control" name="keyword[]" value="${section.keyword}" placeholder="Keyword">
-                                </td>
-                                <td>
-                                    <input class="form-control" name="translated[]" value="${section.translated}" placeholder="Translated">
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-sm add-row">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </td>
-                            </tr>`;
-                        } else {
-                            html += `<tr>
-                                <td>
-                                    <input class="form-control" name="keyword[]" value="${section.keyword}" placeholder="Keyword">
-                                </td>
-                                <td>
-                                    <input class="form-control" name="translated[]" value="${section.translated}" placeholder="Translated">
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm remove-row">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </td>
-                            </tr>`;
-                        }
-                    });
-
-                    let firstRow = '';
-                    if(html.length == 0){
-                        firstRow = `<tr>
+                        html += `<tr>
                             <td>
-                                <input class="form-control" name="keyword[]" value="" placeholder="Keyword" required>
+                                ${camelCaseToTitle(section.keyword)}
+                                <input type="hidden" name="keyword[]" value="${section.keyword}">
                             </td>
                             <td>
-                                <input class="form-control" name="translated[]" value="" placeholder="Translated" required>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-sm add-row">
-                                    <i class="fa fa-plus"></i>
-                                </button>
+                                <input type="text" class="form-control" name="translated[]" value="${section.translated}" placeholder="Translated">
                             </td>
                         </tr>`;
-                    }
-                    $('#keywordsTable').html(firstRow + html);
+                    });
+
+                    $('#keywordsTable').html(html);
                 });
-            });
-
-            // Add a new row when the plus button is clicked
-            $('#keywordsTable').on('click', '.add-row', function() {
-                let newRow = `<tr>
-                    <td>
-                        <input class="form-control" name="keyword[]" placeholder="Keyword" required>
-                    </td>
-                    <td>
-                        <input class="form-control" name="translated[]" placeholder="Translated" required>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm remove-row">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </td>
-                </tr>`;
-                $('#keywordsTable').append(newRow);
-            });
-
-            // Remove the row when the minus button is clicked
-            $('#keywordsTable').on('click', '.remove-row', function() {
-                $(this).closest('tr').remove();
             });
 
             $('#updateKeywordsForm').on('submit', function(e) {

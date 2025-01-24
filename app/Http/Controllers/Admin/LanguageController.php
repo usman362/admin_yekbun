@@ -116,15 +116,6 @@ class LanguageController extends Controller
         return response()->json(['sections' => $sections,'language_id'=>$id], 200);
     }
 
-    public function storeSections(Request $request)
-    {
-        $section = LanguageSection::updateOrCreate(['_id' => $request->id], [
-            'name' => $request->name,
-            'language_id' => $request->language_id
-        ]);
-        return response()->json(['message' => 'Language Section has Successfully Created!', 'section' => $section], 201);
-    }
-
     public function getKeywords($id, $section)
     {
         $keywords = LanguageDetail::where('language_id', $id)->where('section_name', $section)->get();
