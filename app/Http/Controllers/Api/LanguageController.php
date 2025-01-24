@@ -68,6 +68,13 @@ class LanguageController extends Controller
         return response()->json($response);
     }
 
+    public function languagesList()
+    {
+        $languages = Language::all();
+
+        return response()->json(['languages' => $languages],200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
