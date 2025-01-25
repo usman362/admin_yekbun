@@ -106,10 +106,9 @@ use App\Http\Controllers\AvatarsController;
 use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\CountryLocationController;
 use App\Http\Controllers\StateController;
+use App\Mail\TestMail;
 use Illuminate\Support\Facades\Artisan;
-
-
-
+use Illuminate\Support\Facades\Mail;
 
 //use App\Http\Controllers\GreetingsController;
 
@@ -153,7 +152,10 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
 });
 
 
-
+Route::get('/send-test-email', function () {
+    Mail::to('usmanshoaib362@gmail.com')->send(new TestMail());
+    return 'Test email sent successfully!';
+});
 
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
