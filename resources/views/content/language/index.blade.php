@@ -235,7 +235,6 @@
                 </div>
                 <form id="updateKeywordsForm" action="{{ route('languages.keywords.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" id="keyword_section_id" name="section_id">
                     <input type="hidden" id="keyword_language_id" name="language_id">
                     <div class="modal-body">
                         {{-- <div class="container"> --}}
@@ -382,7 +381,7 @@
                                 <input type="text" class="form-control"
                                     name="translated[]"
                                     value="${section.translated}"
-                                    placeholder="Search">
+                                    placeholder="${camelCaseToTitle(section.keyword)}">
                             </div>
                         </div><hr>`;
                     });
@@ -400,26 +399,27 @@
                     console.log(`${key}: ${value}`);
                 }
 
-                // $.ajax({
-                //     url: $(this).attr('action'),
-                //     method: 'POST',
-                //     data: formData,
-                //     processData: false,
-                //     contentType: false,
-                //     success: function(response) {
-                //         // $('#updateKeywordsForm')[0].reset();
-                //         console.log('Form submitted successfully:', response);
-                //         $('.ajax_status').html(`
-                //             <span class="text-success">Keywords Created Successfully!</span>
-                //         `);
-                //     },
-                //     error: function(xhr, status, error) {
-                //         console.error('Form submission failed:', error);
-                //         $('.ajax_status').html(`
-                //             <span class="text-danger">Something Went Wrong!</span>
-                //         `);
-                //     }
-                // });
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // $('#updateKeywordsForm')[0].reset();
+                        window.location.reload();
+                        console.log('Form submitted successfully:', response);
+                        $('.ajax_status').html(`
+                            <span class="text-success">Keywords Created Successfully!</span>
+                        `);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Form submission failed:', error);
+                        $('.ajax_status').html(`
+                            <span class="text-danger">Something Went Wrong!</span>
+                        `);
+                    }
+                });
             });
 
         });

@@ -124,8 +124,9 @@ class LanguageController extends Controller
 
     public function storeKeywords(Request $request)
     {
-        $section = LanguageSection::find($request->section_id);
-        $exists = LanguageDetail::where('section_id', $request->section_id)->where('language_id', $request->language_id)->get();
+        $exists = LanguageDetail::where('language_id', $request->language_id)->get();
+        $sectionLang = LanguageDetail::where('language_id', $request->language_id)->first();
+        $sectionName = $sectionLang->section_name ?? '';
         if (!empty($exists)) {
             foreach ($exists as $ex) {
                 $ex->delete();
@@ -134,15 +135,14 @@ class LanguageController extends Controller
         foreach ($request->keyword as $key => $keyword) {
             LanguageDetail::create(
                 [
-                    'section_name' => $section->name ?? '',
-                    'section_id' => $request->section_id,
-                    'language_id' => $request->language_id,
                     'keyword' => $keyword,
+                    'section_name' => $sectionName,
+                    'language_id' => $request->language_id,
                     'translated' => $request->translated[$key] ?? ''
                 ]
             );
         }
-        $keywords = LanguageDetail::where('section_id', $request->section_id)->where('language_id', $request->language_id)->get();
+        $keywords = LanguageDetail::where('section_name', $sectionName)->where('language_id', $request->language_id)->get();
         return response()->json(['message' => 'Language Keyword has Successfully Created!', 'keyword' => $keywords], 201);
     }
 
