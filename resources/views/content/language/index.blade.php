@@ -73,7 +73,8 @@
                                     <div class="">
                                         <span data-bs-toggle="modal" data-bs-target="#editDetailsModal">
                                             <button class="btn pl-0 edit-details-btn" data-bs-toggle="tooltip"
-                                                data-bs-offset="0,4" data-id="{{ $language->id }}" data-bs-placement="top"
+                                                data-bs-offset="0,4" data-id="{{ $language->id }}"
+                                                data-name="{{ $language->title }}" data-bs-placement="top"
                                                 data-bs-html="true" data-bs-original-title="Details">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -176,8 +177,7 @@
                 <div class="modal-header">
                     <div class="d-flex justify-content-between">
                         <h5 class="modal-title" id="modalCenterTitle">
-                            {{-- <span
-                                class="text-info">{{ $language->title }}</span> --}}
+                            <span class="text-info languageName">{{ $language->title }}</span>
                             Language Sections
                         </h5>
                     </div>
@@ -190,12 +190,27 @@
                                 <thead>
                                     <tr>
                                         <th>Section</th>
-                                        <th>Total Keywords</th>
+                                        <th>Progress</th>
+                                        <th>Done</th>
+                                        <th>Total</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+
                                 <tbody id="sectionsTable">
-                                    <!-- AJAX Data -->
+                                    {{--
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                style="width: {{ $homepagelanguageTotal > 0 ? ($homepagelanguageDone / $homepagelanguageTotal) * 100 : 0 }}%;"
+                                                aria-valuenow="{{ $homepagelanguageTotal > 0 ? ($homepagelanguageDone / $homepagelanguageTotal) * 100 : 0 }}"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                    <td>{{ $homepagelanguageDone }}</td>
+                                    <td>{{ $homepagelanguageTotal - $startpageDone }}
+                                    </td>
+                                    --}}
                                 </tbody>
                             </table>
                         </div>
@@ -213,8 +228,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalCenterTitle">Edit
-                        {{-- <span
-                            class="text-info">{{ $language->title }}</span> --}}
+                        <span class="text-info languageName">{{ $language->title }}</span>
                         Language Keyword
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -224,22 +238,19 @@
                     <input type="hidden" id="keyword_section_id" name="section_id">
                     <input type="hidden" id="keyword_language_id" name="language_id">
                     <div class="modal-body">
-                        <div class="card">
-                            <div class="ajax_status"></div>
-                            <div class="table-responsive text-nowrap">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Keyword</th>
-                                            <th>Translated</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="keywordsTable">
-                                        <!-- AJAX Data -->
-                                    </tbody>
-                                </table>
+                        {{-- <div class="container"> --}}
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h5>English Language</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5><span class="languageName">{{ $language->title }}</span> Language</h5>
                             </div>
                         </div>
+                        <div id="keywordsTable">
+                            <!-- AJAX Data -->
+                        </div>
+                        {{-- </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-label-primary">Save Changes</button>
@@ -311,6 +322,7 @@
 
             $('.edit-details-btn').click(function() {
                 let id = $(this).attr('data-id');
+                $('.languageName').text($(this).attr('data-name'));
                 $('.add_language_section').attr('data-id', id);
                 $('.ajax_status').html('');
                 $.get(`/languages/${id}/sections`, function(data) {
@@ -319,6 +331,8 @@
                     data.sections.forEach(section => {
                         html += `<tr>
                 <td>${section.section_name}</td>
+                <td>${''}</td>
+                <td>${''}</td>
                 <td>${''}</td>
                 <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -358,15 +372,19 @@
                 $.get(`/languages/${language_id}/keywords/${section_name}`, function(data) {
                     let html = '';
                     data.keywords.forEach((section, index) => {
-                        html += `<tr>
-                            <td>
-                                ${camelCaseToTitle(section.keyword)}
+                        html += `
+                          <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="m-0">${camelCaseToTitle(section.keyword)}</h6>
                                 <input type="hidden" name="keyword[]" value="${section.keyword}">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" name="translated[]" value="${section.translated}" placeholder="Translated">
-                            </td>
-                        </tr>`;
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"
+                                    name="translated[]"
+                                    value="${section.translated}"
+                                    placeholder="Search">
+                            </div>
+                        </div><hr>`;
                     });
 
                     $('#keywordsTable').html(html);
