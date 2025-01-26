@@ -28,7 +28,12 @@ class PopFeeds extends Model
         'is_comments',
         'is_share',
         'is_emoji',
-        'type'
+        'type',
+        'limited',
+        'is_paypal',
+        'is_gpay',
+        'is_pay_office',
+        'is_pay_other'
     ];
 
     public function getActivitylogOptions(): LogOptions

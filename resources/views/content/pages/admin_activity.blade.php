@@ -12,7 +12,7 @@
             background-color: transparent !important;
             border: none !important;
         }
-
+ 
         .form-check-input:checked,
         .form-check-input[type=checkbox],
         .form-check-input[type=radio] {
@@ -41,6 +41,16 @@
             font-size: 25px;
         }
 
+        #deal-type .hki{
+            min-height:250px;
+            height:250px;
+            max-height:250px;
+        }
+/*
+        .custom-option-body img{
+            height:136px;
+        }
+*/
         .dropdown-item h6,
         .h6,
         h5,
@@ -279,6 +289,82 @@
             text-align: center !important;
             transition: transform 0.2s ease !important;
         }
+        .donation{
+            display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          width: 322px;
+          height: 54px;
+          margin: 10px auto;
+          padding: 3px;
+          border-radius: 5px;
+          background-color: #E5E5E5;
+        }
+        .bar-amount{
+            padding: 0px 10px;
+            text-align:right;
+            color: #09A824;
+
+        }
+        .bar-amount span{
+            width:50%;
+           
+        }
+        .date-left{
+            text-align:left !important;
+            float:left;
+        }
+        .bar-container {
+            width: 100%;
+            display: flex; /* Use flexbox to arrange the bars in a row */
+            justify-content: space-between; /* Distribute space between bars */
+            padding: 5px 10px;
+        }
+        .date_span{
+            font-size: 16px; 
+            text-transform: capitalize; 
+            color: green; 
+            font-weight: 600; 
+            margin-left: 5px;
+        }
+
+        .bar {
+            height: 6px; /* Thickness of each bar */
+            width: 100%; /* Each bar takes up equal width inside the container */
+            margin-right: 4px; /* Small space between each bar */
+            border-radius: 10px;
+        }
+
+        .bar:last-child {
+        margin-right: 0; /* Remove margin for the last bar */
+        }
+
+        .dark-red {
+            background-color: #FC4B5D; /* Dark red */
+        }
+
+        .red {
+            background-color: #FC4B5D; /* Red */
+        }
+
+        .orange {
+            background-color: #F2BE1D; /* Orange */
+        }
+
+        .yellow {
+            background-color: #FFF200; /* Yellow */
+        }
+
+        .gray {
+            background-color: #C7D3EB; /* Gray */
+        }
+
+        .gray-light {
+            background-color: #C7D3EB; /* Light gray */
+        }
+
+
 
     </style>
 
@@ -848,7 +934,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
                                 <div class="col-md mb-md-0 mb-2">
                                     <div class="form-check  card custom-option-icon hki custom-options">
 
-                                        <a href="javascript:void(0)" class="form-check-label custom-option-content "
+                                        <a href="javascript:void(0)" class="form-check-label custom-option-content popcall1"
                                             data-bs-toggle="modal" data-bs-target="#modal10" for="customRadioPrime">
                                             <span class="custom-option-body">
                                                 <img src="{{ asset('assets/svg/svg-dialog/Group 1000008357.svg') }}" class="my-2 pop-img"
@@ -930,11 +1016,11 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                                         <a href="javascript:void(0)" class="form-check-label custom-option-content "
                                             data-bs-toggle="modal" data-bs-target="#requestpopupnew" for="customRadioPrime">
+                                            
                                             <span class="custom-option-body">
-                                                <img src="{{ asset('assets/svg/icons/on-air.svg') }}" class="my-2"
-                                                    width="40" alt="">
-                                                <span class="custom-option-title"> Go Live </span>
-                                                <small>Go Live or Plan a date to Go Live</small>
+                                                <img class="my-2 pop-img" width="40" alt="" src="{{ asset('assets/svg/icons/onair.png')}}">
+                                                <span class="custom-option-title pop-heading"> Live Stream </span>
+                                                <small class="pop-txt">Go Live now</small>
                                             </span>
                                             <input name="customRadioIcon" class="form-check-input" type="radio"
                                                 value="" id="customRadioPrime">
@@ -1403,8 +1489,22 @@ text-decoration-skip-ink: none;
 
             @php
                 $modalnumber = 1;
+
+                $paypal = "";
+                $gpay = "";
+                $payoffice = "";
+                $payother = "";
+                $limited = "";
+
                 if($feed->type == "System"){
                     $modalnumber = 1;
+                }else if($feed->type == "Donation"){
+                    $modalnumber = 10;
+                    $paypal = $feed->is_paypal;
+                    $gpay = $feed->is_gpay;
+                    $payoffice = $feed->is_pay_office;
+                    $payother = $feed->is_paypal;
+                    $limited = $feed->is_pay_other;
                 }else if($feed->type == "Surveys"){
                     $modalnumber = 3;
                 }else if($feed->type == "Greetings"){
@@ -1418,7 +1518,8 @@ text-decoration-skip-ink: none;
                 <a href="javascript:void(0)" class="pop_action edit_popup1" data-bs-toggle="modal" data-bs-target="#modal{{$modalnumber}}" for="customRadioPrime"
                     data-id="{{$feed->_id}}" data-name="{{$feed->title}}" data-image="{{$feed->image}}"
                     data-start="{{$feed->date_start}}" data-end="{{$feed->date_ends}}" data-type="{{$feed->type}}"
-                    data-option="{{$feed->share_option}}" data-isshare="{{$feed->is_share}}" data-iscomment="{{$feed->is_comments}}" data-isemoji="{{$feed->is_emoji}}">
+                    data-option="{{$feed->share_option}}" data-isshare="{{$feed->is_share}}" data-iscomment="{{$feed->is_comments}}" data-isemoji="{{$feed->is_emoji}}"
+                     data-paypal="{{$paypal}}" data-gpay="{{$gpay}}" data-payoffice="{{$payoffice}}" data-other="{{$payother}}" data-limit="{{$limited}}">
                     <img src="{{ asset('assets/svg/edit.svg')}}" class="pop_action_image">
                 </a>
             </div>
@@ -2902,6 +3003,13 @@ text-decoration-skip-ink: none;
         <script>
 
             $( document ).ready(function() {
+              
+                $('#datepicker1_donation').datepicker({
+                    onSelect: function(dateText) {
+                        
+                        $('#span_output').text(dateText);
+                    }
+                });
 
                 $('#classone').click(function() {
                     alert('loin');
@@ -2924,6 +3032,9 @@ text-decoration-skip-ink: none;
                 $("#button2Modal8").prop("checked", false);
                 $("#button3Modal8").prop("checked", false);
                 $("#button4Modal8").prop("checked", false);
+                $("#button2Modal8_2").prop("checked", false);
+                $("#button3Modal8_2").prop("checked", false);
+                $("#button4Modal8_2").prop("checked", false);
                 $("#button2Modal8_3").prop("checked", false);
                 $("#button3Modal8_3").prop("checked", false);
                 $("#button4Modal8_3").prop("checked", false);
@@ -2935,10 +3046,24 @@ text-decoration-skip-ink: none;
                 $("#button1Modal8").click();
                 $("#button1Modal8_3").attr('checked', 'checked');
                 $("#button1Modal8_3").click();
+                $("#button1Modal8_2").attr('checked', 'checked');
+                $("#button1Modal8_2").click();
                 $("#button1Modal8_4").attr('checked', 'checked');
                 $("#button1Modal8_4").click();
 
+                $(".paypal").prop("checked", false);
+                $(".gpay").prop("checked", true);
+                $(".paymentOffice").prop("checked", true);
+                $(".others").prop("checked", false);
 
+                $("#unlimit_img_uc").show();
+                $("#unlimit_img_c").hide();
+                $("#limit_img_c").show();
+                $("#limit_img_uc").hide();
+                $("#unlimi_bars").show();
+                $("#limi_bars").hide();
+
+                
                 $("#button1Modal8").css("background-color", "rgb(28, 162, 237)");
                 $("#button1Modal8_3").css("background-color", "rgb(28, 162, 237)");
                 $("#button1Modal8_4").css("background-color", "rgb(28, 162, 237)");
@@ -2968,6 +3093,9 @@ text-decoration-skip-ink: none;
                 var p_iscomment = $(this).attr("data-iscomment");
                 var p_emoji = $(this).attr("data-isemoji");
                 var typ = $(this).attr("data-type");
+
+                var imgid = ".pop_main_image_" + cid;
+                var imghtml = $(imgid).html();
 
                 $(".upid").val(cid);
                 $(".title_field").val(p_title);
@@ -3009,6 +3137,73 @@ text-decoration-skip-ink: none;
                         $("#button1Modal8").attr('checked', 'checked');
                         $("#button1Modal8").click();
                     }
+                }else if(typ == "Donation"){
+
+                    if(p_option == "Educated"){
+                        $("#button2Modal8_2").attr('checked', 'checked');
+                        $("#button2Modal8_2").click();
+                    }else if(p_option == "Cultivated"){
+                        $("#button3Modal8_2").attr('checked', 'checked');
+                        $("#button3Modal8_2").click();
+
+                    }else if(p_option == "Academic"){
+                        $("#button4Modal8_2").attr('checked', 'checked');
+                        $("#button4Modal8_2").click();
+                    }else{
+                        $("#button1Modal8_2").attr('checked', 'checked');
+                        $("#button1Modal8_2").click();
+                    }
+
+                    //extra fields
+                    $("#donation_img").html(imghtml);
+                    var limit = $(this).attr("data-limit");
+                    var paypal = $(this).attr("data-paypal");
+                    var gpay = $(this).attr("data-gpay");
+                    var payoffice = $(this).attr("data-payoffice");
+                    var payother = $(this).attr("data-other");
+
+                    $("#limit").val(limit);
+
+                    if(limit == "Limited"){
+                        $("#unlimit_img_uc").show();
+                        $("#unlimit_img_c").hide();
+                        $("#limit_img_c").show();
+                        $("#limit_img_uc").hide();
+                        $("#unlimi_bars").show();
+                        $("#limi_bars").hide();
+                    }else{
+                        $("#unlimit_img_uc").hide();
+                        $("#unlimit_img_c").show();
+                        $("#limit_img_c").hide();
+                        $("#limit_img_uc").show();
+                        $("#unlimi_bars").hide();
+                        $("#limi_bars").show();
+                    }
+
+                    $("#st_date").text(p_start);
+                    $("#end_date").text(p_end);
+
+                    if(paypal == "1"){
+                        
+                        $(".paypal").prop("checked", true);
+                    }else{
+                        $(".paypal").prop("checked", false);
+                    }
+                    if(gpay == "1"){
+                        $(".gpay").prop("checked", true);
+                    }else{
+                        $(".gpay").prop("checked", false);
+                    }
+                    if(payoffice == "1"){
+                        $(".paymentOffice").prop("checked", true);
+                    }else{
+                        $(".paymentOffice").prop("checked", false);
+                    }
+                    if(payother == "1"){
+                        $(".others").prop("checked", true);
+                    }else{
+                        $(".others").prop("checked", false);
+                    }
 
                 }else if(typ == "Surveys"){
 
@@ -3046,12 +3241,12 @@ text-decoration-skip-ink: none;
                 }
 
 
-                var imgid = ".pop_main_image_" + cid;
-                var imghtml = $(imgid).html();
+                
                 //pop_main_image
                 $(".addImageButtonModel2").hide();
                 $(".descriptionTextContainerModal2").hide();
                 $(".image-preview-containerModal2").html(imghtml);
+                
             })
 
         function confirmAction(event, callback) {

@@ -11,7 +11,7 @@
         display: flex; 
         flex-direction: column; 
         justify-content: flex-start;">
-
+ 
           <!-- Text aligned to the left -->
           <div style="text-align: left;">
             <h5 class="modal-title" id="popupModalLabel">Welcome to:</h5>
@@ -431,34 +431,27 @@ This donation will automatically end on the specified date.
         opacity: 0px;
         ">Donation duration</label>
               <div class="row">
-                <div class="col-6" style="border-radius: 10px;">
-                  <div class="input-group" style="width: 150px; height: 35px;
-                background-color: #e0e0e0;
-                border-radius: 5px;
-                ">
-                    <input type="text" class="form-control" placeholder="Start Date" id="datepicker1_old"
-                      aria-label="Datepicker 1" style="width: 90px; height: 35px; background-color: #e0e0e0;" />
-                    <button class="btn " type="button" onclick="$('#datepicker1_old').datepicker('show')">
-                      <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" style="width: 20px;
-                  height: 20px;
-                  display: flex;
-                  ">
-                    </button>
+                
+
+              <div class="col-6" style="border-radius: 10px;">
+                  <div class="input-group time_input" style="">
+                    <input type="text" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1"
+                      aria-label="Datepicker 1"  />
+                      <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
+                        <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
+                      </button>
                   </div>
                 </div>
                 <div class="col-6" style="border-radius: 10px;">
-                  <div class="input-group" style="width: 150px; height: 35px; background-color: #e0e0e0; 
-                border-radius: 5px;">
-                    <input type="text" class="form-control" placeholder="Expired Date" id="datepicker2_old"
-                      aria-label="Datepicker 2" style="width: 90px; height: 35px; background-color: #e0e0e0" />
-                    <button class="btn" type="button" onclick="$('#datepicker2_old').datepicker('show')">
-                      <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" style="width: 20px;
-                  height: 20px;
-                  display: flex;
-                  ">
-                    </button>
+                  <div class="input-group time_input">
+                    <input type="text" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2"
+                      aria-label="Datepicker 2" style="" />
+                      <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
+                        <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
+                      </button>
                   </div>
                 </div>
+                
               </div>
 
 
@@ -480,7 +473,7 @@ This donation will automatically end on the specified date.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="paypal">PayPal</label>
-                    <input class="form-check-input" type="checkbox" id="paypal" />
+                    <input class="form-check-input paypal" type="checkbox" id="paypal" />
                   </div>
                 </div>
                 <div class="col-6">
@@ -494,7 +487,7 @@ This donation will automatically end on the specified date.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="gpay">GPay</label>
-                    <input class="form-check-input" type="checkbox" id="gpay" checked />
+                    <input class="form-check-input gpay" type="checkbox" id="gpay" checked />
                   </div>
                 </div>
                 <div class="col-6" style="margin-top: 6px;">
@@ -508,7 +501,7 @@ This donation will automatically end on the specified date.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="paymentOffice">Payment Office</label>
-                    <input class="form-check-input" type="checkbox" id="paymentOffice" checked />
+                    <input class="form-check-input paymentOffice" type="checkbox" id="paymentOffice" checked />
                   </div>
                 </div>
                 <div class="col-6" style="margin-top: 6px;">
@@ -522,7 +515,7 @@ This donation will automatically end on the specified date.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="others">Others</label>
-                    <input class="form-check-input" type="checkbox" id="others" />
+                    <input class="form-check-input others" type="checkbox" id="others" />
                   </div>
                 </div>
               </div>
@@ -630,55 +623,34 @@ This donation will automatically end on the specified date.
     </div>
   </div>
 
+
+  <!-- donation popup hassan -->
   <div class="modal fade" id="modal10" tabindex="-1" aria-hidden="true " aria-labelledby="Modlal10">
     <div class="modal-dialog modal-dialog-centered" style="position: relative">
 
-      <div class="modal-content container"
-        style="background-color: #e0e0e0; width: 375px;height: 812px; padding: 0; font-family: Genos;border-radius: 10px;">
-
-        <div style="
-        width: 50px;
-        height: 130px;
-              position: absolute;
-              top: 1%;
-              right: -17%;
-              border-radius: 5px;
-              z-index: 1000;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              gap: 5px;
-            ">
-
+    <div class="modal8-right">
           <img id="deleteButtonModal10" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
-
-          <img id="backButtonToModal11" data-target="#modal11" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}"
+          <img id="backButtonToModal11" data-target="#modal11" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008244.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
         </div>
+
+      <div class="modal-content bg-model-image container"
+        style="background-color: #e0e0e0; width: 375px;height: 812px; padding: 0; font-family: Genos;border-radius: 10px;">
+
         <div class="modal-body" style="width:360px ;  height: 783px; margin: 5px; padding: 0;">
 
-          <div style="
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 10px;
-          width: 322px;
-          height: 54px;
-          margin: 10px auto;
-          padding: 3px;
-          border-radius: 5px;
-          background-color: #E5E5E5;
-        ">
+          <div class="donation">
 
-            <button id="limitedButton2" data-target="#modal2" style="outline: none; border: none; border-radius: 10px">
-              <img src="{{ asset('assets/svg/svg-dialog/Frame%201000004474.svg')}}" style="width: 100%; height: 100%" />
+            <button id="limitedButton2"  style="outline: none; border: none; border-radius: 10px">
+              <img id="unlimit_img_uc" src="{{ asset('assets/svg/svg-dialog/Frame%201000004474.svg')}}" style="width: 100%; height: 100%" />
+              <img id="unlimit_img_c" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004474.svg')}}" style="display:none; width: 100%; height: 100%" />
             </button>
 
-            <button id="unlimitedButton2" data-target="#modal10"
+            <button id="unlimitedButton2" 
               style="outline: none; border: none; border-radius: 10px">
-              <img src="{{ asset('assets/svg/svg-dialog/Frame%201000004475.svg')}}" style="width: 100%; height: 100%" />
+              <img id="limit_img_c" src="{{ asset('assets/svg/svg-dialog/Frame%201000004475.svg')}}" style="width: 100%; height: 100%" />
+              <img id="limit_img_uc" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004475.svg')}}" style="display:none; width: 100%; height: 100%" />
             </button>
           </div>
 
@@ -749,19 +721,20 @@ This donation will close automatically once the target amount is reached.
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
-              <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17"
+              <img class="addImageButtonModel2" src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17"
                 data-bs-dismiss="modal"
                 style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px"
                 id="addImageButtonModel10" />
 
-              <!-- Input Field (covering the entire container) -->
-              <input type="file" class="fileInput10" multiple accept="image/*"
+              <!-- Input Field (covering the entire container0) -->
+              <input type="file" name="image" form="donation_form" class="fileInput10" multiple accept="image/*"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
-              <div id="image-preview-containerModal10" class="image-preview-container"
+              <div id="image-preview-containerModal10" class="image-preview-container image-preview-containerModal2"
                 style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
+               
               <!-- Description Text (bottom-aligned) -->
               <div id="descriptionTextContainerModal10" style="width: 344px; height: 90px; display: flex; 
               align-items: center; justify-content: start; 
@@ -770,7 +743,7 @@ This donation will close automatically once the target amount is reached.
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
                 <div style="width: 275px; height: 65px; text-align: center;">
-                  <h4 style="font-size: 26px; font-weight: 500; line-height: 15px;">Multi Selection</h4>
+                  
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
                   <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
@@ -783,7 +756,11 @@ This donation will close automatically once the target amount is reached.
             </div>
           </div>
 
-          <form>
+          
+
+          
+
+
 
             <div class="mb-3 card border-0" style="
             width: 360px;
@@ -797,7 +774,7 @@ This donation will close automatically once the target amount is reached.
         gap: 10px;
         opacity: 0px;
         ">Donation Title</label>
-              <input type="text" class="form-control" id="donationTitle" placeholder="Type Donation Title"
+              <input type="text" name="title" form="donation_form" class="form-control title_field" id="donationTitle" placeholder="Type Donation Title"
                 style="background-color: #e0e0e0; width: 347px;height: 35px;margin-bottom: 5px;" />
             </div>
 
@@ -814,30 +791,27 @@ This donation will close automatically once the target amount is reached.
         gap: 10px;
         opacity: 0px;
         ">Donation duration</label>
-              <div class="row">
-                <div class="col-6" style="border-radius: 10px;">
-                  <div class="input-group" style="width: 150px; height: 35px;
-                background-color: #e0e0e0;
-                border-radius: 5px;
-                ">
-                    <input type="text" class="form-control" placeholder="Type the amount" id="datepicker1_old"
-                      aria-label="Datepicker 1" style="width: 90px; height: 35px; background-color: #e0e0e0;" />
-                  </div>
-                </div>
-                <div class="col-6" style="border-radius: 10px;">
-                  <div class="input-group"
-                    style="width: 150px; height: 35px; background-color: #e0e0e0; border-radius: 5px;">
-                    <select class="form-select" id="datepicker2_old" aria-label="Datepicker Dropdown"
-                      style="width: 150px; height: 35px; background-color: #e0e0e0; border-radius: 5px;">
-                      <option selected disabled>Currency</option>
-                      <option value="3">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <!-- Ajoutez plus d'options ici -->
-                    </select>
-                  </div>
-                </div>
 
+
+              <div class="row">
+              <div class="col-6" style="border-radius: 10px;">
+                  <div class="input-group time_input" style="">
+                    <input type="text" form="donation_form" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1_donation"
+                      aria-label="Datepicker 1"  />
+                      <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
+                        <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
+                      </button>
+                  </div>
+                </div>
+                <div class="col-6" style="border-radius: 10px;">
+                  <div class="input-group time_input">
+                    <input type="text" form="donation_form" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2_donation"
+                      aria-label="Datepicker 2" style="" />
+                      <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
+                        <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
+                      </button>
+                  </div>
+                </div>
               </div>
 
 
@@ -859,7 +833,7 @@ This donation will close automatically once the target amount is reached.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="paypal">PayPal</label>
-                    <input class="form-check-input" type="checkbox" id="paypal" />
+                    <input class="form-check-input paypal" name="is_paypal" value="1" form="donation_form" type="checkbox" id="paypal" />
                   </div>
                 </div>
                 <div class="col-6">
@@ -873,7 +847,7 @@ This donation will close automatically once the target amount is reached.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="gpay">GPay</label>
-                    <input class="form-check-input" type="checkbox" id="gpay" checked />
+                    <input class="form-check-input gpay" name="is_gpay" value="1" form="donation_form" type="checkbox" id="gpay" checked />
                   </div>
                 </div>
                 <div class="col-6" style="margin-top: 6px;">
@@ -887,7 +861,7 @@ This donation will close automatically once the target amount is reached.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="paymentOffice">Payment Office</label>
-                    <input class="form-check-input" type="checkbox" id="paymentOffice" checked />
+                    <input class="form-check-input paymentOffice" name="is_payoffice" value="1" form="donation_form" type="checkbox" id="paymentOffice" checked />
                   </div>
                 </div>
                 <div class="col-6" style="margin-top: 6px;">
@@ -901,14 +875,12 @@ This donation will close automatically once the target amount is reached.
                         border-radius: 7px;
                       ">
                     <label class="form-check-label" for="others">Others</label>
-                    <input class="form-check-input" type="checkbox" id="others" />
+                    <input class="form-check-input others" name="is_other" value="1" form="donation_form" type="checkbox" id="others" />
                   </div>
                 </div>
               </div>
             </div>
 
-
-          </form>
 
           <div style="width: 360px; height: 79px; border: 2px dashed gray; 
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal10">
@@ -974,40 +946,12 @@ This donation will close automatically once the target amount is reached.
             </div>
           </div>
 
-
-
-
-          <div style="
-          position: absolute;
-          bottom: -100%;
-          left: 100px;
-          width: 202px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-        ">
-            <div id="createSOSButton" data-target="#popupModal" style="
-            outline: none;
-            width: 50px;
-            height: 40px;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-          ">
-              <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008245.svg')}}" />
-            </div>
-
-
-
-          </div>
-
         </div>
       </div>
     </div>
   </div>
+
+  <!-- donation popup end -->
 
   <div class="modal fade" id="modal12" tabindex="-1" aria-hidden="true" aria-labelledby="Modlal12">
     <div class="modal-dialog modal-dialog-centered">
@@ -1500,30 +1444,32 @@ text-decoration-skip-ink: none;
 
   <div class="modal fade" id="modal11" tabindex="-1" aria-hidden="true" aria-labelledby="Modlal11">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-model-image container" style="background: #000000BF;width: 375px;
-height: 812px; padding: 0px;border-radius: 10px;">
 
-        <div style="
-width: 50px;
-height: 130px;
-      position: absolute;
-      top: 1%;
-      right: -17%;
-      border-radius: 5px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    ">
+   
 
+
+    <div class="modal8-right">
           <img id="deleteButtonModal11" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
-
+            <img id="GoButtonToModal18" data-target="#modal10" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008247.svg')}}"
+            style="width: 100%; height: 100%; cursor: pointer;" />
+            <button type="submit" form="donation_form">
           <img id="GoButtonToModal18" data-target="#modal18" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
+</button>
         </div>
+
+        
+
+      <div class="modal-content bg-model-image container" style="width: 375px;
+height: 812px; padding: 0px;border-radius: 10px;">
+
+<form method="post" action="{{ route('postpops') }}" enctype="multipart/form-data" id="donation_form">
+  @csrf
+    <input type="hidden" name="upid" value="0" class="upid" />
+    <input type="hidden" name="type" value="Donation" />
+    <input type="hidden" name="limit" value="limited" id="limit" />
+
         <div class="modal-body" style="
         width: 360px;
         height: 400px;
@@ -1663,15 +1609,13 @@ text-decoration-skip-ink: none;
               Title of Donation
             </div>
 
-            <div style="position: relative;
+            <div id="donation_img" style="position: relative;
   width: 350px;
   height: 256px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-              <img src="{{ asset('assets/svg/svg-dialog/image%20222.svg')}}"
-                style="width: 350px; height: 256px; object-fit: cover; border-radius: 7px; padding: 0; display: block;" />
-
+              
               <div class="overlay" style="position: absolute;
                 width: 275px;
                 height: 43px;
@@ -1710,28 +1654,83 @@ text-decoration-skip-ink: none;
             </div>
 
 
-
-            <div style="background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
+            <div id="unlimi_bars" style=" background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
               <div style="
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: flex-end;
                     align-items: center;
                     margin-top: 5px;
                   ">
                 <span style="
                       font-size: 16px;
                       text-transform: capitalize;
-                      color: green;
-                      font-weight: 600;
-                      margin-left: 5px;
-                    ">start:12.10.2024</span>
-                <span style="
-                      font-size: 16px;
-                      text-transform: capitalize;
                       font-weight: 600;
                       color: green;
-                      margin-right: 5px;
-                    ">expire:31.10.2024</span>
+                      margin-right: 10px;
+                    ">5000 $</span>
+              </div>
+
+              <div style="
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 5px;
+                    margin-top: 5px;
+                  ">
+                <div style="
+                      width: 25%;
+                      height: 5px;
+                      background-color: red;
+                      border-radius: 5px;
+                    "></div>
+
+                <div style="
+                      width: 25%;
+                      height: 5px;
+                      background-color: red;
+                      border-radius: 5px;
+                    "></div>
+
+                <div style="
+                      width: 25%;
+                      height: 5px;
+                      background-color: green;
+                      border-radius: 5px;
+                    "></div>
+
+                <div style="
+                      width: 25%;
+                      height: 5px;
+                      background-color: goldenrod;
+                      border-radius: 5px;
+                    "></div>
+
+                <div style="
+                      width: 25%;
+                      height: 5px;
+                      background-color: gray;
+                      border-radius: 5px;
+                    "></div>
+
+                <div style="
+                      width: 25%;
+                      height: 5px;
+                      background-color: gray;
+                      border-radius: 5px;
+                    "></div>
+              </div>
+            </div>
+
+            <div id="limi_bars" style="display:none; background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
+              <div style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 5px;
+                  ">
+                <span class="date_span">start:<span id="st_date">12.10.2025</span></span>
+                <span class="date_span">expire:<span id="end_date">31.10.2025</span></span>
               </div>
 
               <div style="
@@ -1836,81 +1835,35 @@ text-decoration-skip-ink: none;
   gap: 10px;
   margin-top: 5px;
 ">
-              <button id="button1Modal11" class="toggle-buttonModal11" onclick="toggleColorModal11('button1Modal11')" style="
-    border: none;
-    background: #1CA2ED;
-    padding: 0;
-    border-radius: 7px;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: transform 0.2s ease;
-  ">
+
+
+<label id="button1Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_2')">
+  <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_2" value="All Users">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
-              </button>
+</label>
 
-              <button id="button2Modal11" class="toggle-buttonModal11" onclick="toggleColorModal11('button2Modal11')" style="
-    border: none;
-    background: #F2F2F2;
-    padding: 0;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 7px;
-    transition: transform 0.2s ease;
-  ">
+              <label  id="button2Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8_2')">
+  <input class="options_btns button2Modal8" type="radio" name="option_2" value="Educated">
+  
+
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
-              </button>
+</label>
 
-              <button id="button3Modal11" class="toggle-buttonModal11" onclick="toggleColorModal11('button3Modal11')" style="
-    border: none;
-    background: #F2F2F2;
-    padding: 0;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 7px;
-    transition: transform 0.2s ease;
-  ">
+              <label  id="button3Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_2')">
+                <input class="options_btns button3Modal8" type="radio" name="option_2" value="Cultivated">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-              </button>
+</label>
 
-              <button id="button4Modal11" class="toggle-buttonModal11" onclick="toggleColorModal11('button4Modal11')" style="
-    border: none;
-    background: #F2F2F2;
-    padding: 0;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 7px;
-    transition: transform 0.2s ease;
-  ">
+              <label id="button4Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_2')">
+                <input class="options_btns button4Modal8" type="radio" name="option_2" value="Academic">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
-              </button>
+</label>
+            
+          
             </div>
 
 
@@ -1947,50 +1900,12 @@ text-decoration-skip-ink: none;
               </div>
             </div>
           </div>
-          <div style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 54px;
-                height: 51px;
-                margin-top: 50px;
-                margin-left: 150px;
-              ">
-            <button style="outline: none; border: none; border-radius: 10px;background: #1BC469;
-            padding: 2px;
-">
-              <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Path_2-2.svg')}}" style="width: 29px; height: 26px;" />
-              <span style="font-family: Genos; color: white;">share</span>
-            </button>
-          </div>
+          
         </div>
-        <div style="
-                position: absolute;
-                bottom: -10%;
-                left: 100px;
-                width: 202px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-              ">
-          <div id="backButtonToMainFrModel17" data-target="#modal6" style="
-                  outline: none;
-                  width: 50px;
-                  height: 40px;
-                  background-color: #fff;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  border-radius: 10px;
-                ">
-            <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008245.svg')}}" />
-          </div>
-
-
-        </div>
-
+</form>
       </div>
+
+
     </div>
   </div>
 
@@ -2023,7 +1938,7 @@ height: 812px; padding: 0px;border-radius: 10px;">
                   top: 10px;
                 ">
 
-              <div style="
+              <div  style="
                     background-color: #f8f9fa;
                     border-radius: 5px;
                     display: flex;
@@ -2186,7 +2101,7 @@ text-decoration-skip-ink: none;
             </div>
 
 
-            <div style="background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
+            <div  style="background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
               <div style="
                     display: flex;
                     justify-content: flex-end;
@@ -2254,7 +2169,7 @@ text-decoration-skip-ink: none;
               </div>
             </div>
 
-            <div style="background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
+            <div  style="background-color: #F2F2F2; width: 350px; height: 38px;border-radius: 10px;">
               <div style="
                     display: flex;
                     justify-content: space-between;

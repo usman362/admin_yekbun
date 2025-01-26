@@ -143,6 +143,9 @@ class AdminProfileController extends Controller
         if($poptyp == "System"){
             $optons = $request->option;
         }
+        if($poptyp == "Donation"){
+            $optons = $request->option_2;
+        }
         if($poptyp == "Surveys"){
             $optons = $request->option_3;
         }
@@ -151,7 +154,7 @@ class AdminProfileController extends Controller
         }
 
 
-
+//die("154");
 
 
         if($request->upid > 0){
@@ -161,23 +164,52 @@ class AdminProfileController extends Controller
             if($postpop != null){
 
 
-                $postpop->title = $request->title;
-                $postpop->date_start = $request->start_date;
-                $postpop->date_ends = $request->end_date;
-                $postpop->share_option = $optons;
-                $postpop->is_comments = $request->comments ?? 0;
-                $postpop->is_share = $request->share ?? 0;
-                $postpop->is_emoji = $request->emoji ?? 0;
+                if($request->type == "Donation"){
 
-                if ($request->hasFile('image')) {
+                    $postpop->limited = $request->limit;
+                    $postpop->is_paypal = $request->is_paypal ?? 0;
+                    $postpop->is_gpay = $request->is_gpay ?? 0;
+                    $postpop->is_pay_office = $request->is_payoffice ?? 0;
+                    $postpop->is_pay_other = $request->is_other ?? 0;
+                    $postpop->title = $request->title;
+                    $postpop->date_start = $request->start_date;
+                    $postpop->date_ends = $request->end_date;
+                    $postpop->share_option = $optons;
+                    $postpop->is_comments = $request->comments ?? 0;
+                    $postpop->is_share = $request->share ?? 0;
+                    $postpop->is_emoji = $request->emoji ?? 0;
 
-                    $image = $request->file('image');
-                    $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-                    $image->move('public/images/', $imageName);
-                    $postpop->image = $imageName;
+                    if ($request->hasFile('image')) {
+
+                        $image = $request->file('image');
+                        $imageName = time() . '-post.' . $image->getClientOriginalExtension();
+                        $image->move('public/images/', $imageName);
+                        $postpop->image = $imageName;
+                    }
+
+                    $postpop->update();
+                }else{
+
+                    $postpop->title = $request->title;
+                    $postpop->date_start = $request->start_date;
+                    $postpop->date_ends = $request->end_date;
+                    $postpop->share_option = $optons;
+                    $postpop->is_comments = $request->comments ?? 0;
+                    $postpop->is_share = $request->share ?? 0;
+                    $postpop->is_emoji = $request->emoji ?? 0;
+
+                    if ($request->hasFile('image')) {
+
+                        $image = $request->file('image');
+                        $imageName = time() . '-post.' . $image->getClientOriginalExtension();
+                        $image->move('public/images/', $imageName);
+                        $postpop->image = $imageName;
+                    }
+
+                    $postpop->update();
+
+
                 }
-
-                $postpop->update();
                 return back()->with('success', 'Popup Feed updated successfully.');
             }
 
@@ -195,20 +227,42 @@ class AdminProfileController extends Controller
             //$image = $request->file('dp')->move('public/images/', $filename);
         }
 
+        if($request->type == "Donation"){
 
-        $postpop = PopFeeds::create([
-            'user_id' => 0,
-            'title' => $request->title,
-            'date_start' => $request->start_date,
-            'date_ends' => $request->end_date,
-            'image' => $imageName,
-            'share_option' => $optons,
-            'status' => 1,
-            'is_comments' => $request->comments ?? 0,
-            'is_share' => $request->share ?? 0,
-            'is_emoji' => "1",
-            'type' => $request->type,
-        ]);
+            $postpop = PopFeeds::create([
+                'limited' => $request->limit,
+                'is_paypal' => $request->is_paypal ?? 0,
+                'is_gpay' => $request->is_gpay ?? 0,
+                'is_pay_office' => $request->is_payoffice ?? 0,
+                'is_pay_other' => $request->is_other ?? 0,
+                'user_id' => 0,
+                'title' => $request->title,
+                'date_start' => $request->start_date,
+                'date_ends' => $request->end_date,
+                'image' => $imageName,
+                'share_option' => $optons,
+                'status' => 1,
+                'is_comments' => $request->comments ?? 0,
+                'is_share' => $request->share ?? 0,
+                'is_emoji' => "1",
+                'type' => $request->type,
+            ]);
+
+        }else{
+            $postpop = PopFeeds::create([
+                'user_id' => 0,
+                'title' => $request->title,
+                'date_start' => $request->start_date,
+                'date_ends' => $request->end_date,
+                'image' => $imageName,
+                'share_option' => $optons,
+                'status' => 1,
+                'is_comments' => $request->comments ?? 0,
+                'is_share' => $request->share ?? 0,
+                'is_emoji' => "1",
+                'type' => $request->type,
+            ]);
+        }
 
         return back()->with('success', 'Popup Feed added successfully.');
 
