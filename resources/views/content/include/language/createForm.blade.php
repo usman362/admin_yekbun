@@ -1,11 +1,12 @@
 <style>
-    .select2-container--default .select2-selection--single .select2-selection__arrow b{
-      border-style: none;
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-style: none;
     }
-    .light-style .select2-container--default .select2-selection--single .select2-selection__rendered{
+
+    .light-style .select2-container--default .select2-selection--single .select2-selection__rendered {
         padding-top: 8px;
     }
-  </style>
+</style>
 <form id=createForm2 method="POST" action="{{ route('language.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="row">
@@ -14,9 +15,9 @@
 
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Title</label>
-                    <input type="text" name="title" class="form-control" id="audioFile"  />
+                    <input type="text" name="title" class="form-control" id="audioFile" />
                     @error('title')
-                    <span class="text-danger">{{ $message }}</span>
+                        <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -33,14 +34,22 @@
                             <option value="ES" data-img_src="{{ asset('assets/img/ES.png') }}">Spanish</option>
                     </select>              --}}
 
-                    <input type ="file" class="form-control" name="icon"/>
+                    <input type ="file" class="form-control" name="icon" />
                     @error('title')
-                    <span class="text-danger">{{ $message }}</span>
+                        <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
+                <div class="col-md-12">
+                    <label class="form-label" for="code">Code</label>
+                    <input type ="text" class="form-control" name="code" value=""
+                        required />
+                    @error('code')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
-                   <div class="col-md-12">
+                <div class="col-md-12">
                     <label class="form-label" for="fullname">Status</label>
                     <select class="form-select" aria-label="Default select example" name="status">
                         <option selected value="">Select</option>
@@ -49,7 +58,7 @@
 
                     </select>
                     @error('status')
-                    <span class="text-danger">{{ $message }}</span>
+                        <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
