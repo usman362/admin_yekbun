@@ -145,6 +145,7 @@ Route::delete('policy_and_terms/{id}', [PolicyAndTermsController::class, 'destro
 );
 
 Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');
+Route::get('languages-list', [LanguageController::class, 'languagesList'])->name('languages.list');
 Route::post('languages', [LanguageController::class, 'store'])->name('languages.store');
 Route::post('languages/{id}', [LanguageController::class, 'update'])->name('languages.update');
 Route::delete('languages/{id}', [LanguageController::class, 'destroy'])->name('languages.destroy');

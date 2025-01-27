@@ -106,10 +106,9 @@ use App\Http\Controllers\AvatarsController;
 use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\CountryLocationController;
 use App\Http\Controllers\StateController;
+use App\Mail\TestMail;
 use Illuminate\Support\Facades\Artisan;
-
-
-
+use Illuminate\Support\Facades\Mail;
 
 //use App\Http\Controllers\GreetingsController;
 
@@ -153,7 +152,10 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
 });
 
 
-
+Route::get('/send-test-email', function () {
+    Mail::to('usmanshoaib362@gmail.com')->send(new TestMail());
+    return 'Test email sent successfully!';
+});
 
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
@@ -524,8 +526,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::resource('/language', LanguageController::class);
 
     Route::get('languages/{id}/sections', [LanguageController::class, 'getSections'])->name('languages.sections');
-    Route::post('languages-sections', [LanguageController::class, 'storeSections'])->name('languages.sections.store');
-    Route::get('languages/{id}/keywords/{section?}', [LanguageController::class, 'getKeywords'])->name('languages.keywords');
+    Route::get('languages/{id}/keywords/{section}', [LanguageController::class, 'getKeywords'])->name('languages.keywords');
     Route::post('languages-keywords', [LanguageController::class, 'storeKeywords'])->name('languages.keywords.store');
     //Translation Keyword
 

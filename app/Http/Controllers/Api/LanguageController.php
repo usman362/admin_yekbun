@@ -43,298 +43,312 @@ use Illuminate\Support\Facades\DB;
 
 class LanguageController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-    $languages = Language::with('details')->get();
-    // $languageData = LanguageData::all();
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $languages = Language::with('translation')->get();
 
-    // $textCounts = Text::count();
+        $response = [];
 
-    // foreach ($languages as $language) {
-    //   $language->texts_count = $textCounts;
-    // }
-    return response()->json(['languages' => $languages],200);
-  }
+        foreach ($languages as $language) {
+            $translations = [];
+            foreach ($language->translation as $translation) {
+                $translations[$translation->keyword] = $translation->translated;
+            }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
-  }
+            $response[$language->code] = [
+                'translation' => $translations,
+            ];
+        }
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
-  {
-    $request->validate([
-      'icon' => 'required',
-      'title' => 'required',
-    ]);
-
-    $language = new Language();
-    $language->title = $request->title;
-    $language->status = $request->status;
-
-    if ($request->has('icon')) {
-      $image_path = $request->file('icon')->store('/images/language/icon', 'public');
-      $language->icon = $image_path;
+        return response()->json($response);
     }
-    if ($language->save()) {
-        return response()->json(['language' => $language,'message' => 'Your language has been created successfully.'],201);
-    } else {
-        return response()->json(['language' => $language,'message' => 'Your language has not been created successfully.'],403);
+
+    public function languagesList()
+    {
+        $languages = Language::all();
+
+        return response()->json(['languages' => $languages],200);
     }
-  }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Language  $language
-   * @return \Illuminate\Http\Response
-   */
-  public function show(Language $language)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\Language  $language
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(Language $language)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Language  $language
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    $request->validate([
-        'title' => 'required',
-      ]);
-    $language = Language::find($id);
-    $language->title = $request->title;
-    $language->status = $request->status;
-    if ($request->has('icon')) {
-        $image_path = $request->file('icon')->store('/images/language/icon', 'public');
-        $language->icon = $image_path;
-      }
-    if ($language->save()) {
-        return response()->json(['language' => $language,'message' => 'Your language has been updated successfully.'],201);
-    } else {
-        return response()->json(['language' => $language,'message' => 'Your language has not  been updated.'],403);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
-  }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Language  $language
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-      $language = Language::find($id);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'icon' => 'required',
+            'title' => 'required',
+        ]);
 
-      if (!$language) {
-          return response()->json([
-              'success' => false,
-              'message' => 'Language not found.'
-          ], 404);
-      }
+        $language = new Language();
+        $language->title = $request->title;
+        $language->status = $request->status;
 
-      try {
-          if ($language->delete()) {
-              return response()->json([
-                  'success' => true,
-                  'language' => $language,
-                  'message' => 'Your language has been deleted successfully.'
-              ], 200);
-          } else {
-              return response()->json([
-                  'success' => false,
-                  'language' => $language,
-                  'message' => 'Failed to delete language.'
-              ], 500);
-          }
-      } catch (\Exception $e) {
-          return response()->json([
-              'success' => false,
-              'language' => $language,
-              'message' => 'Failed to delete language.',
-              'error' => $e->getMessage()
-          ], 500);
-      }
-  }
-
-  public function keywords($id)
-  {
-    $keywords = LanguageDetail::select(['section_name','keyword','translated'])->where('language_id',$id)->get();
-    return response()->json(['keywords' => $keywords],200);
-  }
-
-  public function keyword($id,$keyword)
-  {
-    $keyword = LanguageDetail::select(['section_name','keyword','translated'])->where('language_id',$id)->where('keyword',$keyword)->first();
-    if(!empty($keyword)){
-        return response()->json(['keyword' => $keyword],200);
-    }else{
-        return response()->json(['message' => 'Not Found!'],404);
+        if ($request->has('icon')) {
+            $image_path = $request->file('icon')->store('/images/language/icon', 'public');
+            $language->icon = $image_path;
+        }
+        if ($language->save()) {
+            return response()->json(['language' => $language, 'message' => 'Your language has been created successfully.'], 201);
+        } else {
+            return response()->json(['language' => $language, 'message' => 'Your language has not been created successfully.'], 403);
+        }
     }
-  }
 
-  public function footerquicksection(Request $request)
-  {
-      // Validate the request data
-      $validator = Validator::make($request->all(), [
-          'language_id' => [
-              'required',
-              'string',
-              'size:24', // MongoDB ObjectId size
-              function ($attribute, $value, $fail) {
-                  if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                      return $fail($attribute.' is not a valid ObjectId.');
-                  }
-                  // Check if the ObjectId exists in the languages collection
-                  if (!Language::where('_id', $value)->exists()) {
-                      return $fail($attribute.' does not exist.');
-                  }
-              },
-          ],
-          'quick_launcher' => 'required|string|max:255',
-          'wishes_thanks' => 'required|string|max:255',
-          'greetings' => 'required|string|max:255',
-          'wishes' => 'required|string|max:255',
-          'prays' => 'required|string|max:255',
-          'introduce_business' => 'required|string|max:255',
-          'services' => 'required|string|max:255',
-          'bazar' => 'required|string|max:255',
-          'channels' => 'required|string|max:255',
-          'shops' => 'required|string|max:255',
-          'fast_sharing' => 'required|string|max:255',
-          'feeds' => 'required|string|max:255',
-          'stories' => 'required|string|max:255',
-          'golive' => 'required|string|max:255',
-          'video' => 'required|string|max:255',
-          'quick_access' => 'required|string|max:255',
-          'my_storage' => 'required|string|max:255',
-          'used' => 'required|string|max:255',
-          'free' => 'required|string|max:255',
-          'coming_soon' => 'required|string|max:255',
-          'under_development' => 'required|string|max:255',
-      ]);
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Language  $language
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Language $language)
+    {
+        //
+    }
 
-      // Check for validation errors
-      if ($validator->fails()) {
-          return redirect()->back()->withErrors($validator)->withInput();
-      }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Language  $language
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Language $language)
+    {
+        //
+    }
 
-      $validatedData = $validator->validated();
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Language  $language
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+        ]);
+        $language = Language::find($id);
+        $language->title = $request->title;
+        $language->status = $request->status;
+        if ($request->has('icon')) {
+            $image_path = $request->file('icon')->store('/images/language/icon', 'public');
+            $language->icon = $image_path;
+        }
+        if ($language->save()) {
+            return response()->json(['language' => $language, 'message' => 'Your language has been updated successfully.'], 201);
+        } else {
+            return response()->json(['language' => $language, 'message' => 'Your language has not  been updated.'], 403);
+        }
+    }
 
-      try {
-          FooterQuickLauncher::updateOrCreate(
-              ['language_id' => $validatedData['language_id']],
-              $validatedData
-          );
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Language  $language
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $language = Language::find($id);
 
-          // Redirect back with success message
-          return redirect()->back()->with('success', 'Footer Quick Section saved successfully.');
-      } catch (\Exception $e) {
-          // Redirect back with error message
-          return redirect()->back()->with('error', 'Error saving Footer Quick Section: ' . $e->getMessage());
-      }
-  }
+        if (!$language) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Language not found.'
+            ], 404);
+        }
+
+        try {
+            if ($language->delete()) {
+                return response()->json([
+                    'success' => true,
+                    'language' => $language,
+                    'message' => 'Your language has been deleted successfully.'
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'language' => $language,
+                    'message' => 'Failed to delete language.'
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'language' => $language,
+                'message' => 'Failed to delete language.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function keywords($id)
+    {
+        $keywords = LanguageDetail::select(['section_name', 'keyword', 'translated'])->where('language_id', $id)->get();
+        return response()->json(['keywords' => $keywords], 200);
+    }
+
+    public function keyword($id, $keyword)
+    {
+        $keyword = LanguageDetail::select(['section_name', 'keyword', 'translated'])->where('language_id', $id)->where('keyword', $keyword)->first();
+        if (!empty($keyword)) {
+            return response()->json(['keyword' => $keyword], 200);
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+    }
+
+    public function footerquicksection(Request $request)
+    {
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'language_id' => [
+                'required',
+                'string',
+                'size:24', // MongoDB ObjectId size
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+                        return $fail($attribute . ' is not a valid ObjectId.');
+                    }
+                    // Check if the ObjectId exists in the languages collection
+                    if (!Language::where('_id', $value)->exists()) {
+                        return $fail($attribute . ' does not exist.');
+                    }
+                },
+            ],
+            'quick_launcher' => 'required|string|max:255',
+            'wishes_thanks' => 'required|string|max:255',
+            'greetings' => 'required|string|max:255',
+            'wishes' => 'required|string|max:255',
+            'prays' => 'required|string|max:255',
+            'introduce_business' => 'required|string|max:255',
+            'services' => 'required|string|max:255',
+            'bazar' => 'required|string|max:255',
+            'channels' => 'required|string|max:255',
+            'shops' => 'required|string|max:255',
+            'fast_sharing' => 'required|string|max:255',
+            'feeds' => 'required|string|max:255',
+            'stories' => 'required|string|max:255',
+            'golive' => 'required|string|max:255',
+            'video' => 'required|string|max:255',
+            'quick_access' => 'required|string|max:255',
+            'my_storage' => 'required|string|max:255',
+            'used' => 'required|string|max:255',
+            'free' => 'required|string|max:255',
+            'coming_soon' => 'required|string|max:255',
+            'under_development' => 'required|string|max:255',
+        ]);
+
+        // Check for validation errors
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validatedData = $validator->validated();
+
+        try {
+            FooterQuickLauncher::updateOrCreate(
+                ['language_id' => $validatedData['language_id']],
+                $validatedData
+            );
+
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Footer Quick Section saved successfully.');
+        } catch (\Exception $e) {
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'Error saving Footer Quick Section: ' . $e->getMessage());
+        }
+    }
 
 
 
 
-  public function keywordstore(Request $request)
-  {
-     //  dd($request->all());
-      try {
-          $validator = Validator::make($request->all(), [
-              'language_id' => [
-                  'required',
-                  'string',
-                  'size:24', // MongoDB ObjectId size
-                  function ($attribute, $value, $fail) {
-                      if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                          return $fail($attribute.' is not a valid ObjectId.');
-                      }
-                      // Check if the ObjectId exists in the languages collection
-                      if (!Language::where('_id', $value)->exists()) {
-                          return $fail($attribute.' does not exist.');
-                      }
-                  },
-              ],
-              'alert' => 'nullable|string',
-              'upgrade' => 'nullable|string',
-              'premium' => 'nullable|string',
-              'vip' => 'nullable|string',
-              'monthly' => 'nullable|string',
-              'feeds' => 'nullable|string',
-              'text_comments' => 'nullable|string',
-              'music_player' => 'nullable|string',
-              'video_playlist' => 'nullable|string',
-              'discount' => 'nullable|string',
-              'stories' => 'nullable|string',
-              'voice_comments' => 'nullable|string',
-              'live_stream' => 'nullable|string',
-              'fanpage' => 'nullable|string',
-              'gift_free' => 'nullable|string',
-              'show_me_the_gift' => 'nullable|string',
-              'congratulations_educated' => 'nullable|string',
-              'congratulations_academic' => 'nullable|string',
-              'premium_description' => 'nullable|string',
-              'go_back_home' => 'nullable|string',
-              'your_activation_code_mail' => 'nullable|string',
-              'your_password_code_mail' => 'nullable|string',
-              'your_fanpage_activation_code' => 'nullable|string',
-              'one_time_code' => 'nullable|string',
-              'follow_steps_on_your_device' => 'nullable|string',
-              'welcome' => 'nullable|string',
-          ]);
+    public function keywordstore(Request $request)
+    {
+        //  dd($request->all());
+        try {
+            $validator = Validator::make($request->all(), [
+                'language_id' => [
+                    'required',
+                    'string',
+                    'size:24', // MongoDB ObjectId size
+                    function ($attribute, $value, $fail) {
+                        if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
+                            return $fail($attribute . ' is not a valid ObjectId.');
+                        }
+                        // Check if the ObjectId exists in the languages collection
+                        if (!Language::where('_id', $value)->exists()) {
+                            return $fail($attribute . ' does not exist.');
+                        }
+                    },
+                ],
+                'alert' => 'nullable|string',
+                'upgrade' => 'nullable|string',
+                'premium' => 'nullable|string',
+                'vip' => 'nullable|string',
+                'monthly' => 'nullable|string',
+                'feeds' => 'nullable|string',
+                'text_comments' => 'nullable|string',
+                'music_player' => 'nullable|string',
+                'video_playlist' => 'nullable|string',
+                'discount' => 'nullable|string',
+                'stories' => 'nullable|string',
+                'voice_comments' => 'nullable|string',
+                'live_stream' => 'nullable|string',
+                'fanpage' => 'nullable|string',
+                'gift_free' => 'nullable|string',
+                'show_me_the_gift' => 'nullable|string',
+                'congratulations_educated' => 'nullable|string',
+                'congratulations_academic' => 'nullable|string',
+                'premium_description' => 'nullable|string',
+                'go_back_home' => 'nullable|string',
+                'your_activation_code_mail' => 'nullable|string',
+                'your_password_code_mail' => 'nullable|string',
+                'your_fanpage_activation_code' => 'nullable|string',
+                'one_time_code' => 'nullable|string',
+                'follow_steps_on_your_device' => 'nullable|string',
+                'welcome' => 'nullable|string',
+            ]);
 
-          if ($validator->fails()) {
-              return redirect()->back()->withErrors($validator)->withInput();
-          }
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
-          $validatedData = $validator->validated();
+            $validatedData = $validator->validated();
 
-          $language = Language::findOrFail($validatedData['language_id']);
+            $language = Language::findOrFail($validatedData['language_id']);
 
-          $languageKeyword = $language->keywords()->updateOrCreate(
-              ['language_id' => $validatedData['language_id']],
-              $validatedData
-          );
+            $languageKeyword = $language->keywords()->updateOrCreate(
+                ['language_id' => $validatedData['language_id']],
+                $validatedData
+            );
 
-          return redirect()->back()->with('success', 'Language keyword section updated successfully.');
-      } catch (\Exception $e) {
-          return redirect()->back()->with('error', 'Error saving language keyword section: ' . $e->getMessage());
-      }
-  }
-  public function startpage(Request $request)
+            return redirect()->back()->with('success', 'Language keyword section updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error saving language keyword section: ' . $e->getMessage());
+        }
+    }
+    public function startpage(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'language_id' => [
@@ -343,11 +357,11 @@ class LanguageController extends Controller
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -385,11 +399,11 @@ class LanguageController extends Controller
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -424,7 +438,7 @@ class LanguageController extends Controller
         ]);
 
         // Dump and die the validator instance
-       // dd($validator);
+        // dd($validator);
 
         if ($validator->fails()) {
             // Dump and die if validation fails
@@ -434,11 +448,11 @@ class LanguageController extends Controller
 
         // Dump and die the validated data
         $validatedData = $validator->validated();
-       // dd('Validation passed', $validatedData);
+        // dd('Validation passed', $validatedData);
 
         try {
             // Dump and die before updating or creating the record
-          //  dd('Before updateOrCreate', $validatedData);
+            //  dd('Before updateOrCreate', $validatedData);
 
             SignupSection::updateOrCreate(
                 ['language_id' => $validatedData['language_id']],
@@ -446,12 +460,12 @@ class LanguageController extends Controller
             );
 
             // Dump and die if saving is successful
-         //   dd('Record saved');
+            //   dd('Record saved');
 
             return redirect()->back()->with('success', 'Signup section saved successfully.');
         } catch (\Exception $e) {
             // Log the exception
-            \Log::error('Error saving signup section: '.$e->getMessage());
+            \Log::error('Error saving signup section: ' . $e->getMessage());
 
             // Dump and die the exception message
             dd('Exception caught', $e->getMessage());
@@ -470,11 +484,11 @@ class LanguageController extends Controller
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -533,7 +547,7 @@ class LanguageController extends Controller
 
 
 
-public function footercartsection(Request $request)
+    public function footercartsection(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
@@ -543,11 +557,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -565,10 +579,10 @@ public function footercartsection(Request $request)
             'office_information' => 'nullable|string|max:255',
             'bank_information' => 'nullable|string|max:255',
         ]);
-   // dd($validator);
+        // dd($validator);
         // Check for validation errors
         if ($validator->fails()) {
-            dd('validation failed',$validator->errors());
+            dd('validation failed', $validator->errors());
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -576,7 +590,7 @@ public function footercartsection(Request $request)
 
         try {
             //dd('validation Sucess',$validator->success());
-           $asim= FooterCart::updateOrCreate(
+            $asim = FooterCart::updateOrCreate(
                 ['language_id' => $validatedData['language_id']],
                 $validatedData
             );
@@ -598,11 +612,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -619,7 +633,7 @@ public function footercartsection(Request $request)
             'search_user' => 'nullable|string|max:255',
             'no_friend_family_found' => 'nullable|string|max:255',
         ]);
-    // dd($validator);
+        // dd($validator);
         // Check for validation errors
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -652,11 +666,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -697,11 +711,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -778,11 +792,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -823,11 +837,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -868,11 +882,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -913,11 +927,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -960,11 +974,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1020,11 +1034,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1106,11 +1120,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1161,11 +1175,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1218,7 +1232,7 @@ public function footercartsection(Request $request)
             return redirect()->back()->with('error', 'Error saving Visiter Profile Section: ' . $e->getMessage());
         }
     }
-     public function headerrestaurantsection(Request $request)
+    public function headerrestaurantsection(Request $request)
     {
         // Validate the request data
         $validator = Validator::make($request->all(), [
@@ -1228,11 +1242,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1273,11 +1287,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1318,11 +1332,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1393,11 +1407,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1501,11 +1515,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1545,11 +1559,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1604,11 +1618,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1647,11 +1661,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1692,11 +1706,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1752,11 +1766,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1805,11 +1819,11 @@ public function footercartsection(Request $request)
                 'size:24', // MongoDB ObjectId size
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
+                        return $fail($attribute . ' is not a valid ObjectId.');
                     }
                     // Check if the ObjectId exists in the languages collection
                     if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
+                        return $fail($attribute . ' does not exist.');
                     }
                 },
             ],
@@ -1851,9 +1865,4 @@ public function footercartsection(Request $request)
             return redirect()->back()->with('error', 'Error saving Section Settings: ' . $e->getMessage());
         }
     }
-
-
-
-
-
 }

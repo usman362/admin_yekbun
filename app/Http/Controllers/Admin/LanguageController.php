@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Models\Text;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\App_Policy;
 use App\Models\LanguageData;
 use App\Models\StartPage;
 use App\Models\LanguageKeyword;
@@ -42,8 +42,6 @@ use App\Models\VisiterProfile;
 use App\Models\HeaderSectionStories;
 
 use App\Models\FooterCart;
-use App\Models\GuestSection;
-use App\Models\HomePageLanguage;
 use App\Models\LanguageDetail;
 use App\Models\LanguageSection;
 use Illuminate\Support\Facades\DB;
@@ -94,12 +92,14 @@ class LanguageController extends Controller
         $language = new Language();
         $language->title = $request->title;
         $language->status = $request->status;
+        $language->code = $request->code;
 
         if ($request->has('icon')) {
             $image_path = $request->file('icon')->store('/images/language/icon', 'public');
             $language->icon = $image_path;
         }
         if ($language->save()) {
+            Helpers::languages_keywords($language->id);
             return redirect()
                 ->route('language.index')
                 ->with('success', 'Your language has been created successfully.');
@@ -112,29 +112,21 @@ class LanguageController extends Controller
 
     public function getSections($id)
     {
-        $sections = LanguageSection::with('details')->where('language_id', $id)->get();
-        return response()->json(['sections' => $sections], 200);
+        $sections = LanguageDetail::where('language_id', $id)->groupBy('section_name')->get();
+        return response()->json(['sections' => $sections,'language_id'=>$id], 200);
     }
 
-    public function storeSections(Request $request)
+    public function getKeywords($id, $section)
     {
-        $section = LanguageSection::updateOrCreate(['_id' => $request->id], [
-            'name' => $request->name,
-            'language_id' => $request->language_id
-        ]);
-        return response()->json(['message' => 'Language Section has Successfully Created!', 'section' => $section], 201);
-    }
-
-    public function getKeywords($id, $section = null)
-    {
-        $keywords = LanguageDetail::where('language_id', $id)->where('section_id', $section)->get();
+        $keywords = LanguageDetail::where('language_id', $id)->where('section_name', $section)->get();
         return response()->json(['keywords' => $keywords], 200);
     }
 
     public function storeKeywords(Request $request)
     {
-        $section = LanguageSection::find($request->section_id);
-        $exists = LanguageDetail::where('section_id', $request->section_id)->where('language_id', $request->language_id)->get();
+        $exists = LanguageDetail::where('language_id', $request->language_id)->get();
+        $sectionLang = LanguageDetail::where('language_id', $request->language_id)->first();
+        $sectionName = $sectionLang->section_name ?? '';
         if (!empty($exists)) {
             foreach ($exists as $ex) {
                 $ex->delete();
@@ -143,15 +135,14 @@ class LanguageController extends Controller
         foreach ($request->keyword as $key => $keyword) {
             LanguageDetail::create(
                 [
-                    'section_name' => $section->name ?? '',
-                    'section_id' => $request->section_id,
-                    'language_id' => $request->language_id,
                     'keyword' => $keyword,
+                    'section_name' => $sectionName,
+                    'language_id' => $request->language_id,
                     'translated' => $request->translated[$key] ?? ''
                 ]
             );
         }
-        $keywords = LanguageDetail::where('section_id', $request->section_id)->where('language_id', $request->language_id)->get();
+        $keywords = LanguageDetail::where('section_name', $sectionName)->where('language_id', $request->language_id)->get();
         return response()->json(['message' => 'Language Keyword has Successfully Created!', 'keyword' => $keywords], 201);
     }
 
@@ -189,6 +180,7 @@ class LanguageController extends Controller
         $language = Language::find($id);
         $language->title = $request->title;
         $language->status = $request->status;
+        $language->code = $request->code;
         if ($request->has('icon')) {
             $image_path = $request->file('icon')->store('/images/language/icon', 'public');
             $language->icon = $image_path;
@@ -2041,163 +2033,6 @@ class LanguageController extends Controller
             return redirect()
                 ->back()
                 ->with('error', 'Error saving Section Settings: ' . $e->getMessage());
-        }
-    }
-
-    public function savehompagelanguage(Request $request)
-    {
-        // Validate the request data
-        $validator = Validator::make($request->all(), [
-            'language_id' => [
-                'required',
-                'string',
-                'size:24', // MongoDB ObjectId size
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
-                    }
-                    // Check if the ObjectId exists in the languages collection
-                    if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
-                    }
-                },
-            ],
-            'language_main' => 'required|string|max:255',
-            'search_language' => 'required|string|max:255',
-
-        ]);
-
-        // Check for validation errors
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $validatedData = $validator->validated();
-
-        try {
-            // Update or create the headervoter entry
-            HomePageLanguage::updateOrCreate(
-                ['language_id' => $validatedData['language_id']],
-                $validatedData
-            );
-
-            // Redirect back with success message
-            return redirect()->back()->with('success', 'Home page Language saved successfully.');
-        } catch (\Exception $e) {
-            // Redirect back with error message
-            return redirect()->back()->with('error', 'Error saving Home page Language: ' . $e->getMessage());
-        }
-    }
-
-    public function storeguest(Request $request)
-    {
-
-        $validator = Validator::make($request->all(), [
-            'language_id' => [
-                'required',
-                'string',
-                'size:24', // MongoDB ObjectId size
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
-                    }
-                    // Check if the ObjectId exists in the languages collection
-                    if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
-                    }
-                },
-            ],
-            'dear_guest' => 'nullable|string|max:255',
-            'guest_message' => 'nullable|string|max:255',
-            'create_account' => 'nullable|string|max:255',
-            'account_message' => 'nullable|string|max:255',
-            'sign_in' => 'nullable|string|max:255',
-            'sign_in_message' => 'nullable|string|max:255',
-            'close' => 'nullable|string|max:255',
-
-
-        ]);
-//dd($validator);
-        // Check for validation errors
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $validatedData = $validator->validated();
-
-        try {
-            // Update or create the headervoter entry
-            GuestSection::updateOrCreate(
-                ['language_id' => $validatedData['language_id']],
-                $validatedData
-            );
-          //  dd('saved');
-            // Redirect back with success message
-            return redirect()->back()->with('success', 'Guest section Language saved successfully.');
-        } catch (\Exception $e) {
-// dd('hello');
-            return redirect()->back()->with('error', 'Error saving Guest section Language: ' . $e->getMessage());
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function saveappp_policy(Request $request)
-    {
-        // Validate the request data
-        $validator = Validator::make($request->all(), [
-            'language_id' => [
-                'required',
-                'string',
-                'size:24', // MongoDB ObjectId size
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^[a-f\d]{24}$/i', $value)) {
-                        return $fail($attribute.' is not a valid ObjectId.');
-                    }
-                    // Check if the ObjectId exists in the languages collection
-                    if (!Language::where('_id', $value)->exists()) {
-                        return $fail($attribute.' does not exist.');
-                    }
-                },
-            ],
-            'policy_terms' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'heading_title' => 'required|string|max:255',
-
-
-        ]);
-
-        // Check for validation errors
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $validatedData = $validator->validated();
-
-        try {
-            // Update or create the headervoter entry
-        $data=    App_Policy::updateOrCreate(
-                ['language_id' => $validatedData['language_id']],
-                $validatedData
-            );
-//dd(  $data);
-            // Redirect back with success message
-            return redirect()->back()->with('success', 'App Policy  saved successfully.');
-        } catch (\Exception $e) {
-            // Redirect back with error message
-            return redirect()->back()->with('error', 'Error saving Home page Language: ' . $e->getMessage());
         }
     }
 }
