@@ -198,12 +198,35 @@ class AdminProfileController extends Controller
                     $postpop->is_share = $request->share ?? 0;
                     $postpop->is_emoji = $request->emoji ?? 0;
 
+                    $postpop->txt1 = $request->txt1;
+                    $postpop->txt2 = $request->txt2;
+                    $postpop->txt3 = $request->txt3;
+
                     if ($request->hasFile('image')) {
 
                         $image = $request->file('image');
                         $imageName = time() . '-post.' . $image->getClientOriginalExtension();
                         $image->move('public/images/', $imageName);
                         $postpop->image = $imageName;
+                    }
+
+                    if ($request->hasFile('icon1')) {
+                        $image = $request->file('icon1');
+                        $icon1 = time() . rand() . '-icon.' . $image->getClientOriginalExtension();
+                        $image->move('public/images/icons/', $icon1);
+                        $postpop->icon1 = $icon1;
+                    }
+                    if ($request->hasFile('icon2')) {
+                        $image = $request->file('icon2');
+                        $icon2 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
+                        $image->move('public/images/icons/', $icon2);
+                        $postpop->icon2 = $icon2;
+                    }
+                    if ($request->hasFile('icon3')) {
+                        $image = $request->file('icon3');
+                        $icon3 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
+                        $image->move('public/images/icons/', $icon3);
+                        $postpop->icon3 = $icon3;
                     }
 
                     $postpop->update();
@@ -217,14 +240,30 @@ class AdminProfileController extends Controller
         }else{
 
             $imageName = "";
+            $icon1 = "";
+            $icon2 = "";
+            $icon3 = "";
 
         if ($request->hasFile('image')) {
-
             $image = $request->file('image');
             $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-           // $image->move(public_path('images'), $imageName);
             $image->move('public/images/', $imageName);
-            //$image = $request->file('dp')->move('public/images/', $filename);
+        }
+
+        if ($request->hasFile('icon1')) {
+            $image = $request->file('icon1');
+            $icon1 = time() . rand() . '-icon.' . $image->getClientOriginalExtension();
+            $image->move('public/images/icons/', $icon1);
+        }
+        if ($request->hasFile('icon2')) {
+            $image = $request->file('icon2');
+            $icon2 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
+            $image->move('public/images/icons/', $icon2);
+        }
+        if ($request->hasFile('icon3')) {
+            $image = $request->file('icon3');
+            $icon3 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
+            $image->move('public/images/icons/', $icon3);
         }
 
         if($request->type == "Donation"){
@@ -261,6 +300,12 @@ class AdminProfileController extends Controller
                 'is_share' => $request->share ?? 0,
                 'is_emoji' => "1",
                 'type' => $request->type,
+                'icon1' => $icon1,
+                'icon2' => $icon2,
+                'icon3' => $icon3,
+                'txt1' => $request->txt1,
+                'txt2' => $request->txt2,
+                'txt3' => $request->txt3
             ]);
         }
 

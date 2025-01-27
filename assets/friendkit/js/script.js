@@ -1525,13 +1525,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Handle file input3 changes
 fileInput_3.addEventListener("change", (event) => {
   const files = event.target.files;
- 
+
   if (imageCount_3 + files.length <= MAX_IMAGES_3) {
     Array.from(files).forEach((file) => {
       validateFile(file, (isValid, fileData) => {
         if (isValid) {
           console.log("Valid image file loaded, appending it to the container.");
-
+          
           const previewImage = document.createElement("img");
           previewImage.src = fileData;
           previewImage.alt = "Image Preview";

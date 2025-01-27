@@ -2500,7 +2500,7 @@ text-decoration-skip-ink: none;
 
             <div class="reaction-container shadow-sm">
               <div class="reaction-header">
-                <span>Allowed Reaction</span>
+                <span>Allowed Reaction2</span>
                 <span>Max. 10 Letters</span>
               </div>
               <div class="reaction-item">
@@ -3082,16 +3082,16 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
-              <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_3">
+              <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_3_0">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_3" multiple="" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_3_0" multiple="" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
-              <div id="image-preview-containerModal2_3" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
+              <div id="image-preview-containerModal2_3_0" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal2_3" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex; 
+              <div id="descriptionTextContainerModal2_3_0" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex; 
               align-items: center; justify-content: start; 
               gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
               margin: 7px; align-self: flex-end;">
@@ -3321,7 +3321,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
     <div class="modal8-right">
-          <img id="deleteButtonModal2_3"  src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 50px; height: 50px" />
+          <img id="deleteButtonModal2_3_0"  src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 50px; height: 50px" />
 <button type="submit">
           <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}" style="width: 50px; height: 50px" />
 </button>
@@ -3425,14 +3425,14 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
           <div class="mb-1 card border-0" style=" background-color: #fff; margin-top:10px; padding: 10px; border-radius: 5px;">
-              <label for="title_field" class="form-label" style="font-weight: bold">Type Title</label>
-              <input type="text" class="form-control title_field" name="title"  id="title_field" placeholder="Type Title"
+              <label for="title_field" class="form-label" style="font-weight: bold">Survey Title</label>
+              <input type="text" class="form-control title_field" name="title"  id="title_field" placeholder="Type Survey Title"
                 style="background-color: #e0e0e0" />
           </div>
           <!-- ali hassan -->
 
           <div class="mb-3 card border-0 time_div">
-              <label for="surveysTitle" class="form-label time_label">Time duration</label>
+              <label for="surveysTitle" class="form-label time_label">Survey duration</label>
               <div class="row">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
@@ -3458,8 +3458,169 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
           <!-- ends -->
 
 
+          <!-- special starts -->
 
-          <div style="
+          <div class="mb-3 card border-0" style="
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            width: 360px;
+            height: 220px;;
+          ">
+
+              <div class="reaction-header" style="margin: 0; padding: 0;">
+                <span style="font-weight: bold; padding: 0;">Allowed Reaction</span>
+              </div>
+
+              <span style="margin-left: 250px;padding: 0; height: 20px;">Max. 10 Letters</span>
+
+              <div class="reaction-item" style="background-color: white;border: none;margin: 0;padding: 0;">
+                <div style="width: 33px; height: 33px;">
+
+                  <label class="custom-file-container">
+                    <input type="file" name="icon1" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer1')">
+                    <div class="icon-container" id="iconContainer1" style="width: 24px; height: 24px;">
+                      <img id="defaultIcon1" src="{{ asset('assets/svg/Gallery%20Add.svg')}}" alt="Icon">
+                    </div>
+                  </label>
+
+
+                </div>
+                <input type="text" name="txt1" class="form-control txt1" style="background-color: #e0e0e0" placeholder="Type the amount">
+              </div>
+              <span style="margin-left: 250px;padding: 0; height: 20px;">Max. 10 Letters</span>
+
+              <div class="reaction-item" style="background-color: white;border: none;margin: 0;padding: 0;">
+                <div style="width: 33px; height: 33px;">
+
+
+                  <label class="custom-file-container">
+                    <input type="file" name="icon2" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer2')">
+                    <div class="icon-container" id="iconContainer2" style="width: 24px; height: 24px;">
+                      <img id="defaultIcon2" src="{{ asset('assets/svg/Gallery%20Add.svg')}}" alt="Icon">
+                    </div>
+                  </label>
+                </div>
+                <input type="text" name="txt2" class="form-control txt2" style="background-color: #e0e0e0" placeholder="Type the amount">
+              </div>
+              <span style="margin-left: 250px;padding: 0; height: 20px;">Max. 10 Letters</span>
+
+              <div class="reaction-item" style="background-color: white;border: none;margin: 0;padding: 0;">
+                <div style="width: 33px; height: 33px;">
+
+
+                  <label class="custom-file-container">
+                    <input type="file" name="icon3" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer3')">
+                    <div class="icon-container" id="iconContainer3" style="width: 24px; height: 24px;">
+                      <img id="defaultIcon3" src="{{ asset('assets/svg/Gallery%20Add.svg')}}" alt="Icon">
+                    </div>
+                  </label>
+                </div>
+                <input type="text" name="txt3" class="form-control txt3" style="background-color: #e0e0e0" placeholder="Type the amount">
+              </div>
+
+
+
+
+
+
+          
+
+          <div style="display:none; width: 360px; height: 79px; border: 2px dashed gray; 
+          border-radius: 10px; position: relative;margin-top: 25px; margin-left: -5px;" id="previewContainerMp3">
+            <!-- Preview Container -->
+            <div style="display: flex; flex-direction: column; justify-content: space-between; 
+            align-items: center; background-size: contain; cursor: pointer; 
+            border-radius: 10px; position: relative; height: 100%;" id="Mp3Input">
+
+
+              <input type="file" class="fileInput7" multiple="" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+
+
+
+              <!-- Description Text (bottom-aligned) -->
+              <div id="description" style="width: 345px; height: 64px; display: flex; 
+              align-items: center; justify-content: start; 
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              margin: 7px; align-self: flex-end;">
+                <img src="assets/first-svg-dialog/Group%201000008026.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
+                <div style="width: 275px; height: 47px; text-align: center;">
+                  <h4 style="font-size: 26px; font-weight: 500; line-height: 20px;">Upload Audio</h4>
+                  <h6 style="font-size: 22px; font-weight: 500; line-height: 20px; color: #64748B;">Mp3 or Wav File</h6>
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 361px; height: 57px; 
+       border-radius: 10px; position: relative;
+       margin-bottom: 10px; margin-left: 0px;
+       margin-top: 5px;
+       background-color: #fff; display: none;" id="Mp3upload">
+              <!-- Preview Container -->
+              <div style="display: flex; flex-direction: column; justify-content: space-between; 
+         align-items: center; background-size: contain; cursor: pointer; 
+         border-radius: 10px; position: relative; height: 100%;">
+
+
+                <!-- Description Text (bottom-aligned) -->
+                <div style="width: 340px; height: 37px; display: flex; 
+           align-items: center; justify-content: start; 
+          margin-top: 40px; border-radius: 10px; 
+           margin: 7px; align-self: flex-end;">
+                  <img src="assets/Group%201000002312.svg" alt="Illustration" class="img-fluid" id="play" style="height: 14px; width: 19px">
+
+                  <img src="assets/Group%201.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                  <img src="assets/Group%201.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                  <img src="assets/Group%201.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                  <img src="assets/Group%201.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                  <img src="assets/Group%201.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
+
+                  <span style="color: gray;margin-left: 5px; " id="Duration">00:00</span>
+
+                  <img id="deleteButtonMp3" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+             border-radius: 10px; margin-left: 40px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div style="display:none; 
+          position: absolute;
+          bottom: -100%;
+          left: 100px;
+          width: 202px;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        ">
+            <div id="createSOSButton" data-target="#popupModal" style="
+            outline: none;
+            width: 50px;
+            height: 40px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+          ">
+              <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008245.svg')}}">
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+
+          <!-- special ends -->
+
+
+
+          <div style=" display:none; 
             width: 360px;
             height: 117px;
             background-color: #fff;
@@ -3528,7 +3689,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
           </div>
 
-          <div>
+          <div style="display:none;">
             <div class="toggle-card">
               <!-- Toggle 1 -->
               <div class="toggle-item">
@@ -4036,7 +4197,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <p style="margin: 0; text-align: center;">MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span></p>
             </div>
           </div>
-          <div style="
+          <div style="display:none;
                   position: absolute;
                   bottom: -10%;
                   left: 100px;
@@ -5741,7 +5902,7 @@ text-decoration-skip-ink: none;
           ">
 
               <div class="reaction-header" style="margin: 0; padding: 0;">
-                <span style="font-weight: bold; padding: 0;">Allowed Reaction</span>
+                <span style="font-weight: bold; padding: 0;">Allowed Reaction1</span>
               </div>
 
               <span style="margin-left: 250px;padding: 0; height: 20px;">Max. 10 Letters</span>
@@ -5752,7 +5913,7 @@ text-decoration-skip-ink: none;
                   <label class="custom-file-container">
                     <input type="file" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer1')">
                     <div class="icon-container" id="iconContainer1" style="width: 24px; height: 24px;">
-                      <img id="defaultIcon1" src="/assets/Gallery%20Add.svg')}}" alt="Icon" />
+                      <img id="defaultIcon1_0" src="/assets/Gallery%20Add.svg'" alt="Icon" />
                     </div>
                   </label>
 
@@ -5770,7 +5931,7 @@ text-decoration-skip-ink: none;
                   <label class="custom-file-container">
                     <input type="file" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer2')">
                     <div class="icon-container" id="iconContainer2" style="width: 24px; height: 24px;">
-                      <img id="defaultIcon2" src="/assets/Gallery%20Add.svg')}}" alt="Icon" />
+                      <img id="defaultIcon2_0" src="/assets/Gallery%20Add.svg'" alt="Icon" />
                     </div>
                   </label>
                 </div>
@@ -5786,7 +5947,7 @@ text-decoration-skip-ink: none;
                   <label class="custom-file-container">
                     <input type="file" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer3')">
                     <div class="icon-container" id="iconContainer3" style="width: 24px; height: 24px;">
-                      <img id="defaultIcon3" src="/assets/Gallery%20Add.svg')}}" alt="Icon" />
+                      <img id="defaultIcon3_0" src="/assets/Gallery%20Add.svg'" alt="Icon" />
                     </div>
                   </label>
                 </div>

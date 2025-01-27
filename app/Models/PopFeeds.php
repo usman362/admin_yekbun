@@ -33,7 +33,13 @@ class PopFeeds extends Model
         'is_paypal',
         'is_gpay',
         'is_pay_office',
-        'is_pay_other'
+        'is_pay_other',
+        'icon1',
+        'icon2',
+        'icon3',
+        'txt1',
+        'txt2',
+        'txt3'
     ];
 
     public function getActivitylogOptions(): LogOptions

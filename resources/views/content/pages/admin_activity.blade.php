@@ -803,6 +803,11 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
             const pausebtn = "{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}";
             const playbtn = "{{ asset('assets/svg/svg-dialog/Player%20Play.svg')}}";
             const playpusecgrnbtn = "{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg')}}";
+
+            const adddefpath = "{{ asset('assets/svg/Gallery%20Add.svg')}}";
+
+            const imgpath =   "{{ asset('public/images/icons/')}}";
+
             //const DEFAULT_IMAGE = "{{ asset('assets/svg/svg-dialog/second-svg-dialog/image%201425.svg')}}";
         </script>
 
@@ -1495,6 +1500,12 @@ text-decoration-skip-ink: none;
                 $payoffice = "";
                 $payother = "";
                 $limited = "";
+                $txt1 = "";
+                $txt2 = "";
+                $txt3 = "";
+                $icon1 = "";
+                $icon2 = "";
+                $icon3 = "";
 
                 if($feed->type == "System"){
                     $modalnumber = 1;
@@ -1507,6 +1518,12 @@ text-decoration-skip-ink: none;
                     $limited = $feed->is_pay_other;
                 }else if($feed->type == "Surveys"){
                     $modalnumber = 3;
+                    $txt1 = $feed->txt1;
+                    $txt2 = $feed->txt2;
+                    $txt3 = $feed->txt3;
+                    $icon1 = $feed->icon1;
+                    $icon2 = $feed->icon2;
+                    $icon3 = $feed->icon3;
                 }else if($feed->type == "Greetings"){
                     $modalnumber = 4;
                 }
@@ -1519,7 +1536,9 @@ text-decoration-skip-ink: none;
                     data-id="{{$feed->_id}}" data-name="{{$feed->title}}" data-image="{{$feed->image}}"
                     data-start="{{$feed->date_start}}" data-end="{{$feed->date_ends}}" data-type="{{$feed->type}}"
                     data-option="{{$feed->share_option}}" data-isshare="{{$feed->is_share}}" data-iscomment="{{$feed->is_comments}}" data-isemoji="{{$feed->is_emoji}}"
-                     data-paypal="{{$paypal}}" data-gpay="{{$gpay}}" data-payoffice="{{$payoffice}}" data-other="{{$payother}}" data-limit="{{$limited}}">
+                     data-paypal="{{$paypal}}" data-gpay="{{$gpay}}" data-payoffice="{{$payoffice}}" data-other="{{$payother}}" data-limit="{{$limited}}"
+                     data-txt1="{{$txt1}}" data-txt2="{{$txt2}}" data-txt3="{{$txt3}}"
+                     data-icon1="{{$icon1}}" data-icon2="{{$icon2}}" data-icon3="{{$icon3}}" >
                     <img src="{{ asset('assets/svg/edit.svg')}}" class="pop_action_image">
                 </a>
             </div>
@@ -3077,6 +3096,18 @@ text-decoration-skip-ink: none;
                 $(".image-preview-containerModal2").html("");
                 $(".fileInput18").attr("required", true);
 
+                var image1 = document.getElementById('defaultIcon1');
+                image1.src = adddefpath;
+                var image2 = document.getElementById('defaultIcon2');
+                image2.src = adddefpath;
+                var image3 = document.getElementById('defaultIcon3');
+                image3.src = adddefpath;
+
+                $(".txt1").val("");
+                $(".txt2").val("");
+                $(".txt3").val("");
+                    
+
             })
 
 
@@ -3220,6 +3251,34 @@ text-decoration-skip-ink: none;
                     }else{
                         $("#button1Modal8_3").attr('checked', 'checked');
                         $("#button1Modal8_3").click();
+                    }
+                    var txt1 = $(this).attr("data-txt1");
+                    $('.txt1').val(txt1);
+                    var txt2 = $(this).attr("data-txt2");
+                    $('.txt2').val(txt2);
+                    var txt3 = $(this).attr("data-txt3");
+                    $('.txt3').val(txt3);
+                    var icon1 = $(this).attr("data-icon1");
+                    var icon2 = $(this).attr("data-icon2");
+                    var icon3 = $(this).attr("data-icon3");
+
+                    var image1 = document.getElementById('defaultIcon1');
+                    if(icon1 != ""){
+                        image1.src = imgpath + "/" + icon1;
+                    }else{
+                        image1.src =adddefpath;
+                    }
+                    var image2 = document.getElementById('defaultIcon2');
+                    if(icon2 != ""){
+                        image2.src = imgpath + "/" + icon2;
+                    }else{
+                        image2.src =adddefpath;
+                    }
+                    var image3 = document.getElementById('defaultIcon3');
+                    if(icon3 != ""){
+                        image3.src = imgpath + "/" + icon3;
+                    }else{
+                        image3.src =adddefpath;
                     }
 
                 }else if(typ == "Greetings"){
