@@ -99,7 +99,7 @@ class LanguageController extends Controller
             $language->icon = $image_path;
         }
         if ($language->save()) {
-            Helpers::languages_keywords($language->id);
+            Helpers::languages_keywords($language->id,$language->code);
             return redirect()
                 ->route('language.index')
                 ->with('success', 'Your language has been created successfully.');
