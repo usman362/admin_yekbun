@@ -1,9 +1,9 @@
 <style>
-    .modal-footer {
+    .layout-page .modal-footer {
         display: none;
     }
 
-    .modal-content{
+    .layout-page .modal-content{
         width: 450px !important;
     }
 
@@ -61,7 +61,7 @@
         display: none !important;
     }
 
-    .modal-content {
+    .layout-page .modal-content {
         scrollbar-width: none;
     }
 
@@ -72,7 +72,7 @@
         z-index: 2 !important;
     }
 
-    .modal-content {
+    .layout-page .modal-content {
         /*overflow:scroll !important;*/
     }
 
@@ -80,7 +80,7 @@
         width: 100% !important;
     }
 
-    .modal-content {
+    .layout-page .modal-content {
         padding: 20px !important;
     }
 
@@ -122,11 +122,11 @@
         align-items: center;
     }
 
-    .modal-content {
+    .layout-page .modal-content {
         padding: 0px !important;
     }
 
-    .modal-body {
+    .layout-page .modal-body {
         padding: 0px !important;
     }
 
@@ -153,7 +153,7 @@
     /*.dropify-wrapper:hover{*/
     /*    border-radius:15px !important;*/
     /*}*/
-    .modal-content {
+    .layout-page .modal-content {
         border-radius: 15px;
     }
 

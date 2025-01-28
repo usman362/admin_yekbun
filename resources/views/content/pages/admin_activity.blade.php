@@ -12,7 +12,7 @@
             background-color: transparent !important;
             border: none !important;
         }
- 
+
         .form-check-input:checked,
         .form-check-input[type=checkbox],
         .form-check-input[type=radio] {
@@ -30,11 +30,11 @@
             padding: 0;
             top: -22px;
         }
-        .modal{
+        .layout-page .modal{
             z-index:99999;
         }
 
-        .modal-title {
+        .layout-page .modal-title {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -309,7 +309,7 @@
         }
         .bar-amount span{
             width:50%;
-           
+
         }
         .date-left{
             text-align:left !important;
@@ -322,10 +322,10 @@
             padding: 5px 10px;
         }
         .date_span{
-            font-size: 16px; 
-            text-transform: capitalize; 
-            color: green; 
-            font-weight: 600; 
+            font-size: 16px;
+            text-transform: capitalize;
+            color: green;
+            font-weight: 600;
             margin-left: 5px;
         }
 
@@ -629,12 +629,12 @@
             text-align: center;
             color: #1C274C;
         }
-        .modal{
+        .layout-page .modal{
             font-family: "Genos", serif !important;
             font-optical-sizing: auto !important;
             font-style: normal !important;
         }
-        .modal *{
+        .layout-page .modal *{
             font-family: "Genos", serif !important;
             font-optical-sizing: auto !important;
             font-style: normal !important;
@@ -716,7 +716,7 @@
             height:100% !important;
         }
 
-        .modal-dialog-centered {
+        .layout-page .modal-dialog-centered {
             display: flex;
             align-items: center;
             width:370px;
@@ -724,7 +724,7 @@
         #mainImage{
             width:100% !important;
         }
-        .modal-content{
+        .layout-page .modal-content{
             overflow2:visible !important;
         }
 
@@ -759,11 +759,11 @@
         }
 
         @media (min-width: 576px) {
-            .modal-dialog {
+            .layout-page .modal-dialog {
                 max-width: 500px;
                 margin: 1.75rem auto;
             }
-            .modal-dialog-centered {
+            .layout-page .modal-dialog-centered {
                 min-height: calc(100% - 3.5rem);
             }
         }
@@ -1021,7 +1021,7 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                                         <a href="javascript:void(0)" class="form-check-label custom-option-content "
                                             data-bs-toggle="modal" data-bs-target="#requestpopupnew" for="customRadioPrime">
-                                            
+
                                             <span class="custom-option-body">
                                                 <img class="my-2 pop-img" width="40" alt="" src="{{ asset('assets/svg/icons/onair.png')}}">
                                                 <span class="custom-option-title pop-heading"> Live Stream </span>
@@ -3022,10 +3022,10 @@ text-decoration-skip-ink: none;
         <script>
 
             $( document ).ready(function() {
-              
+
                 $('#datepicker1_donation').datepicker({
                     onSelect: function(dateText) {
-                        
+
                         $('#span_output').text(dateText);
                     }
                 });
@@ -3082,7 +3082,7 @@ text-decoration-skip-ink: none;
                 $("#unlimi_bars").show();
                 $("#limi_bars").hide();
 
-                
+
                 $("#button1Modal8").css("background-color", "rgb(28, 162, 237)");
                 $("#button1Modal8_3").css("background-color", "rgb(28, 162, 237)");
                 $("#button1Modal8_4").css("background-color", "rgb(28, 162, 237)");
@@ -3106,7 +3106,7 @@ text-decoration-skip-ink: none;
                 $(".txt1").val("");
                 $(".txt2").val("");
                 $(".txt3").val("");
-                    
+
 
             })
 
@@ -3215,7 +3215,7 @@ text-decoration-skip-ink: none;
                     $("#end_date").text(p_end);
 
                     if(paypal == "1"){
-                        
+
                         $(".paypal").prop("checked", true);
                     }else{
                         $(".paypal").prop("checked", false);
@@ -3300,12 +3300,12 @@ text-decoration-skip-ink: none;
                 }
 
 
-                
+
                 //pop_main_image
                 $(".addImageButtonModel2").hide();
                 $(".descriptionTextContainerModal2").hide();
                 $(".image-preview-containerModal2").html(imghtml);
-                
+
             })
 
         function confirmAction(event, callback) {
