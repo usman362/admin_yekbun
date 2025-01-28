@@ -63,6 +63,7 @@ class LanguageController extends Controller
         foreach ($languages as $language) {
             $language->texts_count = $textCounts;
         }
+
         return view('content.language.index', compact('languages', 'languageData'));
     }
 
@@ -99,7 +100,7 @@ class LanguageController extends Controller
             $language->icon = $image_path;
         }
         if ($language->save()) {
-            Helpers::languages_keywords($language->id,$language->code);
+            Helpers::languages_keywords($language->id, $language->code);
             return redirect()
                 ->route('language.index')
                 ->with('success', 'Your language has been created successfully.');
@@ -112,8 +113,46 @@ class LanguageController extends Controller
 
     public function getSections($id)
     {
-        $sections = LanguageDetail::where('language_id', $id)->groupBy('section_name')->get();
-        return response()->json(['sections' => $sections,'language_id'=>$id], 200);
+        $sections = LanguageDetail::raw(function ($collection) use ($id) {
+            return $collection->aggregate([
+                ['$match' => ['language_id' => $id]], // Filter by language_id
+                [
+                    '$group' => [
+                        '_id' => '$section_name',
+                        'total' => ['$sum' => 1],
+                        'done' => [
+                            '$sum' => [
+                                '$cond' => [
+                                    'if' => [
+                                        '$and' => [
+                                            ['$ne' => ['$translated', null]], // Not null
+                                            ['$ne' => ['$translated', '']]   // Not empty
+                                        ]
+                                    ],
+                                    'then' => 1,
+                                    'else' => 0
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    '$project' => [
+                        'section_name' => '$_id',
+                        'total' => 1,
+                        'done' => 1,
+                        'progress' => [
+                            '$cond' => [
+                                'if' => ['$gt' => ['$total', 0]],
+                                'then' => ['$multiply' => [['$divide' => ['$done', '$total']], 100]],
+                                'else' => 0
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+        });
+        return response()->json(['sections' => $sections, 'language_id' => $id], 200);
     }
 
     public function getKeywords($id, $section)
@@ -124,9 +163,9 @@ class LanguageController extends Controller
 
     public function storeKeywords(Request $request)
     {
-        $exists = LanguageDetail::where('language_id', $request->language_id)->get();
         $sectionLang = LanguageDetail::where('language_id', $request->language_id)->first();
         $sectionName = $sectionLang->section_name ?? '';
+        $exists = LanguageDetail::where('language_id', $request->language_id)->where('section_name',$sectionName)->get();
         if (!empty($exists)) {
             foreach ($exists as $ex) {
                 $ex->delete();

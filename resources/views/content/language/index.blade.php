@@ -326,13 +326,20 @@
                 $('.ajax_status').html('');
                 $.get(`/languages/${id}/sections`, function(data) {
                     let html = '';
-                    // console.log(data);
+                    console.log(data);
                     data.sections.forEach(section => {
+                        const total = section.total;
+                        const done = section.done;
+                        const progress = total > 0 ? Math.round((done / total) * 100) : 0;
                         html += `<tr>
                 <td>${section.section_name}</td>
-                <td>${''}</td>
-                <td>${''}</td>
-                <td>${''}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
+                    </div>
+                </td>
+                <td>${done}</td>
+                <td>${total}</td>
                 <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
