@@ -44,7 +44,8 @@ class AuthController extends Controller
         (int)$credentials['status'] = 1;
 
         // Check if the user exists by email
-        $user = User::where('email', $request->email)->first();
+        $email = strtolower($request->email);
+        $user = User::where('email', $email)->first();
 
         // If user exists, check the device IMEI
         if ($user) {
@@ -57,7 +58,7 @@ class AuthController extends Controller
         }
 
         // Check if the credentials are correct (email, password)
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
+        if (Auth::attempt(['email' => $email, 'password' => $request->password], true)) {
             $user = Auth::user();
 
             // Ensure the user's email is verified
@@ -99,8 +100,8 @@ class AuthController extends Controller
                 'password' => 'required|min:6',
                 'phone' => 'required|min:11',
             ]);
-
-            $emailTaken = User::where('email', $request->email)->first();
+            $email = strtolower($request->email);
+            $emailTaken = User::where('email', $email)->first();
 
             if ($emailTaken) {
                 return response()->json([
@@ -118,10 +119,19 @@ class AuthController extends Controller
                 ]);
             }
 
+            $deviceImei = User::where('device_imei', (int)$request['device_imei'])->first();
+
+            if ($deviceImei) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Imei is already taken.',
+                ]);
+            }
+
             $user = User::create([
                 'name' => $request['fname'],
                 'username' => $request['username'],
-                'email' => $request['email'],
+                'email' => $email,
                 'password' => bcrypt($request['password']),
                 'status' => (int)'1',
                 'is_admin_user' => (int)'0',
@@ -192,7 +202,8 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required',
         ]);
-        $user = User::where('email', $request->email)->first();
+        $email = strtolower($request->email);
+        $user = User::where('email', $email)->first();
         if (!$user) {
             return response()->json(['message' => 'User not Found!'], 404);
         }
@@ -229,7 +240,8 @@ class AuthController extends Controller
             'device_name' => 'required',
             'otp' => 'required',
         ]);
-        $user = User::where('email', $request->email)->first();
+        $email = strtolower($request->email);
+        $user = User::where('email', $email)->first();
         if (!$user) {
             return response()->json(['message' => 'User not Found!'], 404);
         }
@@ -242,8 +254,9 @@ class AuthController extends Controller
         if ((int)$code->code == (int)$request->otp) {
 
             try {
+                $email = strtolower($request->email);
                 User::updateOrCreate(
-                    ['email' => $request->email],
+                    ['email' => $email],
                     [
                         'device_serial' => $request->device_serial,
                         'device_type' => $request->device_type,
@@ -269,8 +282,8 @@ class AuthController extends Controller
             'email' => 'required',
             'otp' => 'required',
         ]);
-
-        $user = User::where('email', $request->email)->first();
+        $email = strtolower($request->email);
+        $user = User::where('email', $email)->first();
 
         if (!$user) {
             return response()->json(['status' => false, 'message' => 'User not found!'], 404);
@@ -307,8 +320,8 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email',
         ]);
-
-        $user = User::where('email', '=', $request->email)->first();
+        $email = strtolower($request->email);
+        $user = User::where('email', '=', $email)->first();
         if (!$user) {
             return response()->json(['success' => false, 'message' => 'No user found with the email.']);
         }
