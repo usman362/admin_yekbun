@@ -3468,6 +3468,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             height: 220px;;
           ">
 
+
+
               <div class="reaction-header" style="margin: 0; padding: 0;">
                 <span style="font-weight: bold; padding: 0;">Allowed Reaction</span>
               </div>

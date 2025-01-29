@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const images = document.querySelectorAll(".row img");
 
 
+  //check changes
   const datepicker1donation = document.getElementById('datepicker1_donation');
   const st_duration = document.getElementById('st_duration');
 
