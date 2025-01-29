@@ -375,6 +375,10 @@ class Helpers
             ['keyword' => 'createPassword', 'translated' => 'Create Password', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'chooseASecurePasswordThatWillBeEasyForYouToRemember', 'translated' => 'Choose a secure password that will be easy for you to remember.', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'confirmYourPasswordHere', 'translated' => 'Confirm your password here', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'createAccountError', 'translated' => 'Create Account Error', 'section_name' => 'Home Page Sign Up'],
+            ['keyword' => 'thisDeviceIsAlreadyLinkedToAnExistingAccountCreatingANewAccountIsNotPossibleYouHaveTheFollowingOptions:', 'translated' => 'This device is already linked to an existing account. Creating a new account is not possible. You have the following options:', 'section_name' => 'Home Page Sign Up'],
+            ['keyword' => 'mailAndPasswordNeedIt', 'translated' => 'Mail & Password need it', 'section_name' => 'Home Page Sign Up'],
+            ['keyword' => 'eMailNeedIt', 'translated' => 'E-Mail need it', 'section_name' => 'Home Page Sign Up'],
         ];
 
         $kurdishkeywords = [
@@ -515,6 +519,10 @@ class Helpers
             ['translated' => 'Şîfre çêbikin'],
             ['translated' => 'Şîfreyek ewle hilbijêre ku te bikar bi hêsanî bîbîne.'],
             ['translated' => 'Li vir şîfreyê xwe piştrast bike'],
+            ['translated' => 'Çewtiya Hesabê Biafirîne'],
+            ['translated' => 'Ev cîhaz jixwe bi hesabek heyî ve girêdayî ye. Çêkirina hesabek nû ne mimkûn e. Vebijarkên we yên jêrîn hene:'],
+            ['translated' => 'Mail & Şîfre hewce dike'],
+            ['translated' => 'E-Mail hewce dike'],
         ];
 
         // Validate that the arrays match in length
