@@ -197,6 +197,23 @@ class AuthController extends Controller
         }
     }
 
+    public function userImei(Request $request)
+    {
+        $deviceImei = User::where('device_imei', (int)$request['device_imei'])->first();
+
+        if ($deviceImei) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Imei is already taken.',
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Imei not found!.',
+        ], 200);
+    }
+
     public function verifyDevice(Request $request)
     {
         $request->validate([
@@ -270,7 +287,6 @@ class AuthController extends Controller
             } catch (\Exception $e) {
                 return response()->json(['message' => 'Failed to register device'], 403);
             }
-
         } else {
             return response()->json(['status' => false, 'message' => 'Invalid Code!'], 403);
         }

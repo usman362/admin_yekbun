@@ -99,6 +99,7 @@ Route::post('/user-otp-code', [AuthController::class, 'getCode'])->name('get.use
 Route::post('/reset/resend', [AuthController::class, 'reset_resend'])->name('reset.resend');
 Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
+Route::post('/user-imei', [AuthController::class, 'userImei']);
 
 //User Profile
 
