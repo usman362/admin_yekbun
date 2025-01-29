@@ -4,6 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const popupModal = new bootstrap.Modal(document.getElementById("popupModal"));
   const images = document.querySelectorAll(".row img");
 
+
+  //check changes
+  const datepicker1donation = document.getElementById('datepicker1_donation');
+  const st_duration = document.getElementById('st_duration');
+
+  const datepicker2donation = document.getElementById('datepicker2_donation');
+  const end_duration = document.getElementById('end_duration');
+
+  datepicker1donation.addEventListener('click', function() {
+    // If the input field has a value, update the span with that value
+    if (datepicker1donation.value) {
+      
+      st_duration.textContent = datepicker1donation.value;
+    } else {
+      st_duration.textContent = ''; // Clear the span if the input is empty
+    }
+});
+
   // Show initial popup modal
   startWorkButton.addEventListener("click", () => {
     popupModal.show();
@@ -181,20 +199,38 @@ document.addEventListener("DOMContentLoaded", () => {
     targetModal.show();
   });
 });
-
+ 
 document.addEventListener("DOMContentLoaded", () => {
+  
   const createButton = document.getElementById("limitedButton2");
+  
+  
   createButton.addEventListener("click", () => {
-    const currentModal = bootstrap.Modal.getInstance(
-      document.getElementById("modal10")
-    );
-    currentModal.hide();
-    const targetModalId = createButton.getAttribute("data-target");
-    const targetModal = new bootstrap.Modal(
-      document.querySelector(targetModalId)
-    );
-    targetModal.show();
+
+    //unlimit_img_uc
+    document.getElementById('unlimit_img_uc').style.display = 'none';
+    document.getElementById('unlimit_img_c').style.display = 'block';
+    
+    document.getElementById('limit_img_c').style.display = 'none';
+    document.getElementById('limit_img_uc').style.display = 'block';
+
+    document.getElementById('unlimi_bars').style.display = 'none';
+    document.getElementById('limi_bars').style.display = 'block';
+
+    document.getElementById('limit').value = 'Unimited';
+    
+    
+   // const currentModal = bootstrap.Modal.getInstance(
+   //   document.getElementById("modal10")
+   // );
+   // currentModal.hide();
+  //  const targetModalId = createButton.getAttribute("data-target");
+  //  const targetModal = new bootstrap.Modal(
+   //   document.querySelector(targetModalId)
+   // );
+   // targetModal.show();
   });
+  
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -229,6 +265,19 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const createButton = document.getElementById("unlimitedButton2");
   createButton.addEventListener("click", () => {
+
+    document.getElementById('unlimit_img_uc').style.display = 'block';
+    document.getElementById('unlimit_img_c').style.display = 'none';
+    
+    document.getElementById('limit_img_c').style.display = 'block';
+    document.getElementById('limit_img_uc').style.display = 'none';
+
+    document.getElementById('unlimi_bars').style.display = 'block';
+    document.getElementById('limi_bars').style.display = 'none';
+
+    document.getElementById('limit').value = 'Limited';
+    
+    /*
     const currentModal = bootstrap.Modal.getInstance(
       document.getElementById("modal10")
     );
@@ -238,9 +287,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(targetModalId)
     );
     targetModal.show();
+*/
   });
 });
 document.addEventListener("DOMContentLoaded", () => {
+  /*
   const createButton = document.getElementById("limitedButton2");
   createButton.addEventListener("click", () => {
     const currentModal = bootstrap.Modal.getInstance(
@@ -253,6 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     targetModal.show();
   });
+  */
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -297,6 +349,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentModal = bootstrap.Modal.getInstance(
       document.getElementById("modal10")
     );
+    
+    const st_date = document.getElementById('datepicker1_donation').value;
+    const end_date = document.getElementById('datepicker2_donation').value;
+    
+    document.getElementById('st_date').textContent = st_date;
+    document.getElementById('end_date').textContent = end_date;
+
     currentModal.hide();
     const targetModalId = createButton.getAttribute("data-target");
     const targetModal = new bootstrap.Modal(
@@ -1136,6 +1195,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Append the image to the preview container
             previewContainerWrapper.appendChild(previewImage);
+           // previewContainerWrapperDonation.appendChild(previewImage);
+            
 
             // Hide the upload interface
             addImageButton.style.display = "none";
@@ -1163,6 +1224,11 @@ document.addEventListener("DOMContentLoaded", () => {
       previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
     }
 
+    //while (previewContainerWrapperDonation.firstChild) {
+    //  previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
+   // }
+
+    
     // Reset image count
     imageCount = 0;
 
@@ -1408,6 +1474,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Append the image to the preview container
             previewContainerWrapper.appendChild(previewImage);
+           // previewContainerWrapperDonation.appendChild(previewImage);
+            
 
             // Hide the upload interface
             addImageButton.style.display = "none";
@@ -1435,6 +1503,12 @@ document.addEventListener("DOMContentLoaded", () => {
       previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
     }
 
+  //  while (previewContainerWrapperDonation.firstChild) {
+   //   previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
+   // }
+
+    
+
     // Reset image count
     imageCount = 0;
 
@@ -1452,13 +1526,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Handle file input3 changes
 fileInput_3.addEventListener("change", (event) => {
   const files = event.target.files;
- 
+
   if (imageCount_3 + files.length <= MAX_IMAGES_3) {
     Array.from(files).forEach((file) => {
       validateFile(file, (isValid, fileData) => {
         if (isValid) {
           console.log("Valid image file loaded, appending it to the container.");
-
+          
           const previewImage = document.createElement("img");
           previewImage.src = fileData;
           previewImage.alt = "Image Preview";
@@ -1707,6 +1781,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const addImageButton = document.getElementById("addImageButtonModel10");
   const previewContainerWrapper = document.getElementById("image-preview-containerModal10");
+  const previewContainerWrapperDonation = document.getElementById("donation_img");
   const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel10");
   const descriptionTextContainer = document.getElementById("descriptionTextContainerModal10");
   const fileInput = document.querySelector(".fileInput10");
@@ -1772,9 +1847,14 @@ document.addEventListener("DOMContentLoaded", () => {
             previewImage.style.height = "100%";
             previewImage.style.objectFit = "fill";
             previewImage.style.borderRadius = "10px";
-
+            const clonedPreviewImage = previewImage.cloneNode(true);
             // Append the image to the preview container
             previewContainerWrapper.appendChild(previewImage);
+           // previewContainerWrapperDonation.appendChild(previewImage);
+
+            // clone the image (true to clone deeply)
+          previewContainerWrapperDonation.appendChild(clonedPreviewImage);
+            
 
             // Hide the upload interface
             addImageButton.style.display = "none";
@@ -1801,6 +1881,12 @@ document.addEventListener("DOMContentLoaded", () => {
     while (previewContainerWrapper.firstChild) {
       previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
     }
+
+   // while (previewContainerWrapperDonation.firstChild) {
+   //   previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
+   // }
+
+    
 
     // Reset image count
     imageCount = 0;
