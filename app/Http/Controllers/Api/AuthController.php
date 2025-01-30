@@ -205,7 +205,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Imei is already taken.',
-            ], 400);
+            ], 200);
         }
 
         return response()->json([
