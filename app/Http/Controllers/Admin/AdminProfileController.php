@@ -29,11 +29,8 @@ class AdminProfileController extends Controller
 
     public function admin_activity()
     {
-        $events = Event::orderBy('created_at','desc')->get();
-        $news = News::orderBy('created_at','desc')->get();
-        $feeds = Feed::orderBy('created_at','desc')->get();
         $popfeeds = PopFeeds::orderBy('created_at','desc')->get();
-        return view('content.pages.admin_activity',compact('events','news','feeds', 'popfeeds'));
+        return view('content.pages.admin_activity',compact('popfeeds'));
     }
 
     public function store(Request $request)
@@ -183,8 +180,8 @@ class AdminProfileController extends Controller
 
                         $image = $request->file('image');
                         $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-                        $image->move('public/images/', $imageName);
-                        $postpop->image = $imageName;
+                        $imagePath =  $image->storeAs("/images", $imageName, "public");
+                        $postpop->image = $imagePath;
                     }
 
                     $postpop->update();
@@ -206,27 +203,27 @@ class AdminProfileController extends Controller
 
                         $image = $request->file('image');
                         $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-                        $image->move('public/images/', $imageName);
-                        $postpop->image = $imageName;
+                        $imagePath =  $image->storeAs("/images", $imageName, "public");
+                        $postpop->image = $imagePath;
                     }
 
                     if ($request->hasFile('icon1')) {
                         $image = $request->file('icon1');
                         $icon1 = time() . rand() . '-icon.' . $image->getClientOriginalExtension();
-                        $image->move('public/images/icons/', $icon1);
-                        $postpop->icon1 = $icon1;
+                        $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
+                        $postpop->icon1 = $icon1Path;
                     }
                     if ($request->hasFile('icon2')) {
                         $image = $request->file('icon2');
                         $icon2 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
-                        $image->move('public/images/icons/', $icon2);
-                        $postpop->icon2 = $icon2;
+                        $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
+                        $postpop->icon2 = $icon2Path;
                     }
                     if ($request->hasFile('icon3')) {
                         $image = $request->file('icon3');
                         $icon3 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
-                        $image->move('public/images/icons/', $icon3);
-                        $postpop->icon3 = $icon3;
+                        $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
+                        $postpop->icon3 = $icon3Path;
                     }
 
                     $postpop->update();
@@ -247,23 +244,27 @@ class AdminProfileController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-            $image->move('public/images/', $imageName);
+            $imagePath =  $image->storeAs("/images", $imageName, "public");
         }
 
         if ($request->hasFile('icon1')) {
             $image = $request->file('icon1');
             $icon1 = time() . rand() . '-icon.' . $image->getClientOriginalExtension();
             $image->move('public/images/icons/', $icon1);
+            $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
+
         }
         if ($request->hasFile('icon2')) {
             $image = $request->file('icon2');
             $icon2 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
             $image->move('public/images/icons/', $icon2);
+            $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
         }
         if ($request->hasFile('icon3')) {
             $image = $request->file('icon3');
             $icon3 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
             $image->move('public/images/icons/', $icon3);
+            $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
         }
 
         if($request->type == "Donation"){
@@ -278,7 +279,7 @@ class AdminProfileController extends Controller
                 'title' => $request->title,
                 'date_start' => $request->start_date,
                 'date_ends' => $request->end_date,
-                'image' => $imageName,
+                'image' => $imagePath ?? '',
                 'share_option' => $optons,
                 'status' => 1,
                 'is_comments' => $request->comments ?? 0,
@@ -293,16 +294,16 @@ class AdminProfileController extends Controller
                 'title' => $request->title,
                 'date_start' => $request->start_date,
                 'date_ends' => $request->end_date,
-                'image' => $imageName,
+                'image' => $imagePath ?? '',
                 'share_option' => $optons,
                 'status' => 1,
                 'is_comments' => $request->comments ?? 0,
                 'is_share' => $request->share ?? 0,
                 'is_emoji' => "1",
                 'type' => $request->type,
-                'icon1' => $icon1,
-                'icon2' => $icon2,
-                'icon3' => $icon3,
+                'icon1' => $icon1Path ?? '',
+                'icon2' => $icon2Path ?? '',
+                'icon3' => $icon3Path ?? '',
                 'txt1' => $request->txt1,
                 'txt2' => $request->txt2,
                 'txt3' => $request->txt3

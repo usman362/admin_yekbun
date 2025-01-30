@@ -51,6 +51,7 @@ use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\PrivacyAndPolicyController;
 use App\Http\Controllers\Api\TranslationController;
 use App\Http\Controllers\Api\AccountSettingController;
+use App\Http\Controllers\Api\AdminActivityController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FeedBackgroundImageController;
 use App\Http\Controllers\Api\UserSettingController;
@@ -107,6 +108,17 @@ Route::get('/user-imei', [AuthController::class, 'userImei']);
 Route::middleware('jwt.auth')->group(function () {
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
 });
+
+Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
+Route::get("/admin-activity/donation", [AdminActivityController::class, 'getDonations']);
+Route::get("/admin-activity/surveys", [AdminActivityController::class, 'getSurveys']);
+Route::get("/admin-activity/greetings", [AdminActivityController::class, 'getGreetings']);
+Route::post("/admin-activity/system-info", [AdminActivityController::class, 'store_systemInfo']);
+Route::post("/admin-activity/donation", [AdminActivityController::class, 'store_donation']);
+Route::post("/admin-activity/surveys", [AdminActivityController::class, 'store_surveys']);
+Route::post("/admin-activity/greetings", [AdminActivityController::class, 'store_greetings']);
+Route::post("/admin-activity/delete-feeds", [AdminActivityController::class, 'delete_pops']);
+
 Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
 Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
 Route::put('countries/{id}', [CountryController::class, 'update'])->name('countries.update');
