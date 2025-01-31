@@ -135,18 +135,19 @@ Route::get('cities', [CityController::class, 'index'])->name('cities.index');
 Route::post('cities', [CityController::class, 'store'])->name('cities.store');
 Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
 Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
+Route::get('get-cities', [CityController::class, 'getCities']);
 
 //Feeds Section
-Route::post('feeds',[FeedsController::class,'store']);
-Route::get('feeds',[FeedsController::class,'index']);
+Route::post('feeds', [FeedsController::class, 'store']);
+Route::get('feeds', [FeedsController::class, 'index']);
 
 //News Feed Section
-Route::post('news-feeds',[FeedsController::class,'news_store']);
-Route::get('news-feeds',[FeedsController::class,'news']);
+Route::post('news-feeds', [FeedsController::class, 'news_store']);
+Route::get('news-feeds', [FeedsController::class, 'news']);
 
 //Event Section
-Route::post('events',[FeedsController::class,'store_event']);
-Route::get('events',[FeedsController::class,'index']);
+Route::post('events', [FeedsController::class, 'store_event']);
+Route::get('events', [FeedsController::class, 'index']);
 
 Route::get('policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('policy_and_terms.index');
 Route::post('policy_and_terms', [PolicyAndTermsController::class, 'store'])->name('policy_and_terms.store');
@@ -162,8 +163,8 @@ Route::get('languages-list', [LanguageController::class, 'languagesList'])->name
 Route::post('languages', [LanguageController::class, 'store'])->name('languages.store');
 Route::post('languages/{id}', [LanguageController::class, 'update'])->name('languages.update');
 Route::delete('languages/{id}', [LanguageController::class, 'destroy'])->name('languages.destroy');
-Route::get('languages/{id}/keywords',[LanguageController::class, 'keywords'])->name('languages.keywords');
-Route::get('languages/{id}/keywords/{keyword}',[LanguageController::class, 'keyword'])->name('languages.keyword');
+Route::get('languages/{id}/keywords', [LanguageController::class, 'keywords'])->name('languages.keywords');
+Route::get('languages/{id}/keywords/{keyword}', [LanguageController::class, 'keyword'])->name('languages.keyword');
 
 Route::post('/logout', [AuthController::class, 'logout']);
 

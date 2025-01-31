@@ -29,6 +29,20 @@ class CityController extends Controller
         ]);
     }
 
+    public function getCities(Request $request)
+    {
+        $cities = City::orderBy("name", "ASC")->query();
+        if (!empty($request->search)) {
+            $cities->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+        if (!empty($request->region_id)) {
+            $cities->where('region_id', $request->region_id);
+        }
+        $cities = $cities->get();
+        return response()->json([
+            'cities' => $cities
+        ], 200);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -48,19 +62,19 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-       // dd($request->all());
+        // dd($request->all());
         $validated = $request->validated();
 
         $cities = $validated['cities'];
         unset($validated['cities']);
-        
+
         foreach ($cities as $city)
             City::create(array_merge($validated, ['zipcode' => $city['zipcode'], 'name' => $city['name']]));
 
-            return response()->json([
-                'success'=>'true',
-                'message'=>'Cities created successfully'
-            ]);
+        return response()->json([
+            'success' => 'true',
+            'message' => 'Cities created successfully'
+        ]);
     }
 
     /**
@@ -101,8 +115,8 @@ class CityController extends Controller
         $city->save();
 
         return response()->json([
-            'success'=>'true',
-            'message'=>'Cities Updated successfully'
+            'success' => 'true',
+            'message' => 'Cities Updated successfully'
         ]);
     }
 
@@ -119,8 +133,8 @@ class CityController extends Controller
         $city->delete();
 
         return response()->json([
-            'success'=>'true',
-            'message'=>'City Deleted successfully'
+            'success' => 'true',
+            'message' => 'City Deleted successfully'
         ]);
     }
 }
