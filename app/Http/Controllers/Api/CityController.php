@@ -43,7 +43,7 @@ class CityController extends Controller
         }
 
         // Fetch the results
-        $cities = $cities->get();
+        $cities = $cities->limit(15)->get();
 
         return response()->json([
             'cities' => $cities
