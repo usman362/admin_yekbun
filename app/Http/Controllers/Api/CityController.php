@@ -31,18 +31,25 @@ class CityController extends Controller
 
     public function getCities(Request $request)
     {
-        $cities = City::orderBy("name", "ASC")->query();
+        // Start the query without 'query()'
+        $cities = City::orderBy("name", "ASC");
+
         if (!empty($request->search)) {
             $cities->where('name', 'LIKE', '%' . $request->search . '%');
         }
+
         if (!empty($request->region_id)) {
             $cities->where('region_id', $request->region_id);
         }
+
+        // Fetch the results
         $cities = $cities->get();
+
         return response()->json([
             'cities' => $cities
         ], 200);
     }
+
 
     /**
      * Show the form for creating a new resource.
