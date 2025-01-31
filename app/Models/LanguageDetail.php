@@ -10,7 +10,7 @@ class LanguageDetail extends Model
     protected $connection = 'mongodb';
     protected $collection = 'language_details';
 
-    protected $fillable = ['section_name','section_id', 'language_id', 'keyword', 'translated'];
+    protected $fillable = ['section_name','main_section','section_id', 'language_id', 'keyword', 'translated'];
 
     use HasFactory;
 

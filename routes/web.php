@@ -525,7 +525,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::resource('/language', LanguageController::class);
 
-    Route::get('languages/{id}/sections', [LanguageController::class, 'getSections'])->name('languages.sections');
+    Route::get('languages/{id}/sections/{section?}', [LanguageController::class, 'getSections'])->name('languages.sections');
     Route::get('languages/{id}/keywords/{section}', [LanguageController::class, 'getKeywords'])->name('languages.keywords');
     Route::post('languages-keywords', [LanguageController::class, 'storeKeywords'])->name('languages.keywords.store');
     //Translation Keyword

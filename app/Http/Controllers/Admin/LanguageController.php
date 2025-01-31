@@ -111,11 +111,25 @@ class LanguageController extends Controller
         }
     }
 
-    public function getSections($id)
+    public function getSections($id, $section = 'home-page')
     {
-        $sections = LanguageDetail::raw(function ($collection) use ($id) {
+        $sectionName = ucwords(str_replace('-', ' ', $section));
+        // Get all main sections grouped by main_section
+        $main_sections = LanguageDetail::raw(function ($collection) use ($id) {
             return $collection->aggregate([
-                ['$match' => ['language_id' => $id]], // Filter by language_id
+                ['$match' => ['language_id' => $id]],
+                ['$group' => ['_id' => '$main_section']],
+                ['$sort' => ['_id' => -1]] // Sort in ascending order (alphabetical)
+            ]);
+        });
+
+        // Convert raw aggregation result to an array
+        $main_sections = array_map(function ($item) {
+            return ['main_section' => $item->_id];
+        }, iterator_to_array($main_sections));
+        $sections = LanguageDetail::raw(function ($collection) use ($id, $sectionName) {
+            return $collection->aggregate([
+                ['$match' => ['language_id' => $id, 'main_section' => $sectionName]], // Added main_section filter
                 [
                     '$group' => [
                         '_id' => '$section_name',
@@ -152,7 +166,7 @@ class LanguageController extends Controller
                 ]
             ]);
         });
-        return response()->json(['sections' => $sections, 'language_id' => $id], 200);
+        return response()->json(['sections' => $sections, 'main_sections' => $main_sections, 'language_id' => $id], 200);
     }
 
     public function getKeywords($id, $section)
@@ -165,7 +179,7 @@ class LanguageController extends Controller
     {
         $sectionLang = LanguageDetail::where('language_id', $request->language_id)->first();
         $sectionName = $sectionLang->section_name ?? '';
-        $exists = LanguageDetail::where('language_id', $request->language_id)->where('section_name',$sectionName)->get();
+        $exists = LanguageDetail::where('language_id', $request->language_id)->where('section_name', $sectionName)->get();
         if (!empty($exists)) {
             foreach ($exists as $ex) {
                 $ex->delete();

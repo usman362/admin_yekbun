@@ -184,6 +184,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <ul class="nav nav-pills sections-tabs mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                aria-selected="true">Home Page</button>
+                        </li>
+                    </ul>
                     <div class="card">
                         <div class="table-responsive text-nowrap">
                             <table class="table">
@@ -200,7 +207,8 @@
                                 <tbody id="sectionsTable">
                                     <tr>
                                         <td colspan="5" class="text-center">
-                                            <img src="{{asset('images/spin-loader.gif')}}" alt="" width="100">
+                                            <img src="{{ asset('images/spin-loader.gif') }}" alt=""
+                                                width="100">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -241,7 +249,7 @@
                         <div id="keywordsTable">
                             <tr>
                                 <td colspan="5" class="text-center">
-                                    <img src="{{asset('images/spin-loader.gif')}}" alt="" width="100">
+                                    <img src="{{ asset('images/spin-loader.gif') }}" alt="" width="100">
                                 </td>
                             </tr>
                         </div>
@@ -322,7 +330,59 @@
                 $('.ajax_status').html('');
                 $.get(`/languages/${id}/sections`, function(data) {
                     let html = '';
+                    let tabs = '';
                     console.log(data);
+                    data.sections.forEach(section => {
+                        const total = section.total;
+                        const done = section.done;
+                        const progress = total > 0 ? Math.round((done / total) * 100) : 0;
+                        html += `<tr>
+                <td>${section.section_name}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
+                    </div>
+                </td>
+                <td>${done}</td>
+                <td>${total}</td>
+                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                        <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                        <path d="M6 4C6 5.10457 5.10457 6 4 6C2.89543 6 2 5.10457 2 4C2 2.89543 2.89543 2 4 2C5.10457 2 6 2.89543 6 4Z" stroke="#1C274C" stroke-width="1.5"></path>
+                        <path d="M6 20C6 21.1046 5.10457 22 4 22C2.89543 22 2 21.1046 2 20C2 18.8954 2.89543 18 4 18C5.10457 18 6 18.8954 6 20Z" stroke="#1C274C" stroke-width="1.5"></path>
+                        <path d="M22 4C22 5.10457 21.1046 6 20 6C18.8954 6 18 5.10457 18 4C18 2.89543 18.8954 2 20 2C21.1046 2 22 2.89543 22 4Z" stroke="#1C274C" stroke-width="1.5"></path>
+                        <path d="M22 20C22 21.1046 21.1046 22 20 22C18.8954 22 18 21.1046 18 20C18 18.8954 18.8954 18 20 18C21.1046 18 22 18.8954 22 20Z" stroke="#1C274C" stroke-width="1.5"></path>
+                        <path opacity="0.5" d="M6 20H18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                        <path opacity="0.5" d="M18 4H6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                        <path opacity="0.5" d="M20 18L20 6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                        <path opacity="0.5" d="M4 6L4 18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                    </a>
+                </td>
+                </tr>`;
+                    });
+
+                    data.main_sections.forEach((main_section,index) => {
+                        tabs += `
+                             <li class="nav-item" role="presentation">
+                                <button class="nav-link ${index == 0 ? 'active' : ''} change-section-tab" id="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}-tab"
+                                data-bs-toggle="pill" data-bs-target="#pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}"
+                                type="button" role="tab" aria-controls="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}"
+                                aria-selected="true" data-id="${id}" data-section_name="${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}">${main_section.main_section}</button>
+                            </li>
+                        `;
+                    });
+                    $('.sections-tabs').html(tabs);
+                    $('#sectionsTable').html(html);
+                });
+            })
+
+            $('body').on('click','.change-section-tab',function(){
+                let id = $(this).attr('data-id');
+                let section_name = $(this).attr('data-section_name');
+                $.get(`/languages/${id}/sections/${section_name}`, function(data) {
+                    let html = '';
                     data.sections.forEach(section => {
                         const total = section.total;
                         const done = section.done;
@@ -355,7 +415,7 @@
                     });
                     $('#sectionsTable').html(html);
                 });
-            })
+            });
 
             function camelCaseToTitle(camelCaseStr) {
                 return camelCaseStr
