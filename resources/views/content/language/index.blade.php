@@ -198,19 +198,11 @@
                                 </thead>
 
                                 <tbody id="sectionsTable">
-                                    {{--
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: {{ $homepagelanguageTotal > 0 ? ($homepagelanguageDone / $homepagelanguageTotal) * 100 : 0 }}%;"
-                                                aria-valuenow="{{ $homepagelanguageTotal > 0 ? ($homepagelanguageDone / $homepagelanguageTotal) * 100 : 0 }}"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td>{{ $homepagelanguageDone }}</td>
-                                    <td>{{ $homepagelanguageTotal - $startpageDone }}
-                                    </td>
-                                    --}}
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <img src="{{asset('images/spin-loader.gif')}}" alt="" width="100">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -247,7 +239,11 @@
                             </div>
                         </div>
                         <div id="keywordsTable">
-                            <!-- AJAX Data -->
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <img src="{{asset('images/spin-loader.gif')}}" alt="" width="100">
+                                </td>
+                            </tr>
                         </div>
                         {{-- </div> --}}
                     </div>
