@@ -31,19 +31,29 @@ class CityController extends Controller
 
     public function getCities(Request $request)
     {
-        // Start the query without 'query()'
+        // Start the query
         $cities = City::orderBy("name", "ASC");
+
+        // Flag to check if conditions are applied
+        $hasConditions = false;
 
         if (!empty($request->search)) {
             $cities->where('name', 'LIKE', '%' . $request->search . '%');
+            $hasConditions = true;
         }
 
         if (!empty($request->region_id)) {
             $cities->where('region_id', $request->region_id);
+            $hasConditions = true;
         }
 
-        // Fetch the results
-        $cities = $cities->limit(15)->get();
+        // If no conditions applied, limit results to 15
+        if (!$hasConditions) {
+            $cities->limit(15);
+        }
+
+        // Get results
+        $cities = $cities->get();
 
         return response()->json([
             'cities' => $cities
