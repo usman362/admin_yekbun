@@ -43,7 +43,7 @@ class CityController extends Controller
         }
 
         if (!empty($request->search)) {
-            $cities->where('name', 'LIKE', '%' . $request->search . '%');
+            $cities->where('name', 'LIKE',$request->search . '%');
             $hasConditions = true;
         }
 
