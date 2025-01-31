@@ -37,15 +37,16 @@ class CityController extends Controller
         // Flag to check if conditions are applied
         $hasConditions = false;
 
+        if (!empty($request->region_id)) {
+            $cities->where('region_id', $request->region_id);
+            $hasConditions = false;
+        }
+
         if (!empty($request->search)) {
             $cities->where('name', 'LIKE', '%' . $request->search . '%');
             $hasConditions = true;
         }
 
-        if (!empty($request->region_id)) {
-            $cities->where('region_id', $request->region_id);
-            $hasConditions = true;
-        }
 
         // If no conditions applied, limit results to 15
         if (!$hasConditions) {
