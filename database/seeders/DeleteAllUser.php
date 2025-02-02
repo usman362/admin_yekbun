@@ -15,9 +15,6 @@ class DeleteAllUser extends Seeder
      */
     public function run()
     {
-        $users = User::where('email','!==','admin@gmail.com')->get();
-        foreach ($users as $user) {
-            $user->delete();
-        }
+        User::where('email', '!=', 'admin@gmail.com')->delete();
     }
 }
