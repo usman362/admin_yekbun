@@ -34,10 +34,8 @@ class CityController extends Controller
                 ->addColumn('total_people', function ($city) {
                     return $city->users->count();
                 })
-                ->addColumn('actions', function ($city) use ($regions, $countries) {
-                    $regions = Region::orderBy("name", "ASC")->get();
-                    $countries = Country::orderBy("name", "ASC")->get();
-                    return view('content.settings.cities.includes.actions', compact('city', 'countries', 'regions'))->render();
+                ->addColumn('actions', function ($city) {
+                    return view('content.settings.cities.includes.actions', compact('city'))->render();
                 })
                 ->rawColumns(['actions'])
                 ->make(true);
@@ -78,11 +76,9 @@ class CityController extends Controller
     public function update(UpdateCityRequest $request, $id)
     {
         $validated = $request->validated();
-
-        $city = City::find($id);
+        $city = City::find($request->id);
         $city->fill($validated);
         $city->save();
-
         return back()->with("success", "City successfully updated.");
     }
 

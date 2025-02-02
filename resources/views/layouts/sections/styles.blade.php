@@ -2,15 +2,21 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icons.css') }}" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" href="{{ asset('assets/vendor/css' .$configData['rtlSupport'] .'/core' .($configData['style'] !== 'light' ? '-' . $configData['style'] : '') .'.css') }}" class="{{ $configData['hasCustomizer'] ? 'template-customizer-core-css' : '' }}" />
-<link rel="stylesheet" href="{{ asset('assets/vendor/css' .$configData['rtlSupport'] .'/' .$configData['theme'] .($configData['style'] !== 'light' ? '-' . $configData['style'] : '') .'.css') }}" class="{{ $configData['hasCustomizer'] ? 'template-customizer-theme-css' : '' }}" />
+<link rel="stylesheet"
+    href="{{ asset('assets/vendor/css' . $configData['rtlSupport'] . '/core' . ($configData['style'] !== 'light' ? '-' . $configData['style'] : '') . '.css') }}"
+    class="{{ $configData['hasCustomizer'] ? 'template-customizer-core-css' : '' }}" />
+<link rel="stylesheet"
+    href="{{ asset('assets/vendor/css' . $configData['rtlSupport'] . '/' . $configData['theme'] . ($configData['style'] !== 'light' ? '-' . $configData['style'] : '') . '.css') }}"
+    class="{{ $configData['hasCustomizer'] ? 'template-customizer-theme-css' : '' }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
 
@@ -29,6 +35,18 @@
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}">
 <!-- Form Validation -->
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css') }}" />
+
+<style>
+    div.dataTables_wrapper div.dataTables_processing {
+        background-color: #696eff !important;
+        background-image: none !important;
+        color: #fff !important;
+        padding: 30px !important;
+        line-height: 0 !important;
+        border-radius: 8px !important;
+        opacity: 0.9 !important;
+    }
+</style>
 <!-- Page Styles -->
 @yield('page-style')

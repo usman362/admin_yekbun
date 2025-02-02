@@ -95,6 +95,11 @@
         @include('content.settings.cities.includes.create_form')
     </x-modal>
 
+    <x-modal id="editModal" title="Edit City" saveBtnText="Update" saveBtnType="submit"
+        saveBtnForm="editForm" size="sm" :show="false">
+        @include('content.settings.cities.includes.edit_form')
+    </x-modal>
+
 @endsection
 
 @section('page-script')
@@ -165,6 +170,17 @@
                     { data: 'total_people', name: 'users.count', orderable: false, searchable: false },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ]
+            });
+
+            $('body').on('click','.btn-edit-city',function(){
+                $('#city_id').val($(this).attr('data-id'));
+                $('#editCountryId').val($(this).attr('data-country_id'));
+                $('#editCountryId').trigger('change');
+                $('#editRegionId').val($(this).attr('data-region_id'));
+                $('#editRegionId').trigger('change');
+                $('#editName').val($(this).attr('data-name'));
+                $('#editZipcode').val($(this).attr('data-zipcode'));
+                $('#editModal').modal('show');
             });
         });
     </script>

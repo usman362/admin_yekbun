@@ -43,9 +43,9 @@
         }
 
         #deal-type .hki {
-            min-height: 250px;
-            height: 250px;
-            max-height: 250px;
+            min-height: 224px;
+            height: 224px;
+            max-height: 224px;
         }
 
         /*

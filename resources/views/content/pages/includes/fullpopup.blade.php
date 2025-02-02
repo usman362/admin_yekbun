@@ -1,17 +1,17 @@
 <!-- Popup Modal  -->
 <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="width: 510px; height: 796px; 
-      background: #F2F2F2; 
+      <div class="modal-content" style="width: 510px; height: 796px;
+      background: #F2F2F2;
       border-radius: 10px;">
         <!-- Header Section -->
-        <div class="modal-header" style="height: 314px; 
+        <div class="modal-header" style="height: 314px;
         background-color: white;
         border-radius: 10px 10px 0 0;
-        display: flex; 
-        flex-direction: column; 
+        display: flex;
+        flex-direction: column;
         justify-content: flex-start;">
- 
+
           <!-- Text aligned to the left -->
           <div style="text-align: left;">
             <h5 class="modal-title" id="popupModalLabel">Welcome to:</h5>
@@ -37,7 +37,7 @@
           <div class="container my-4" style="width: 496px; height: 395px; padding: 0;">
             <div class="row row-col-3 g-4">
 
-              <div class="col" style="margin-top: 2px; 
+              <div class="col" style="margin-top: 2px;
       padding-left: 0; padding-right: 0;">
                 <div class="card text-center" style="width: 150px; height: 190px;">
                   <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008347.svg')}}" class="card-img-top" alt="System Info"
@@ -48,7 +48,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col" style="margin-top: 2px; 
+              <div class="col" style="margin-top: 2px;
       padding-left: 0; padding-right: 0;">
                 <div class="card text-center" style="width: 150px; height: 190px;">
                   <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000008357.svg')}}" class="card-img-top" alt="Donation"
@@ -113,9 +113,9 @@
 
   <!-- Secondary Modals -->
   <div class="modal fade" id="modal1_original" tabindex="-1" aria-labelledby="Modlal1">
-  
+
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="Width:375px; Height:812px; background-color: #f8f9fa; 
+      <div class="modal-content" style="Width:375px; Height:812px; background-color: #f8f9fa;
         padding: 5px;
         border-radius: 10px;">
         <div class="modal-body" style="
@@ -131,7 +131,7 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 110px;
-                
+
               ">
 
             <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008335.svg') }}" alt="Illustration" data-target="#modal6"
@@ -349,7 +349,7 @@
                       background: #00000066;
                       "></div>
               </div>
-              <div style="width: 248px; height: 24px;font-size:  14px; 
+              <div style="width: 248px; height: 24px;font-size:  14px;
               color: #ed1c24; font-weight: 400;
               line-height: 14px;">
 This donation will automatically end on the specified date.
@@ -357,11 +357,11 @@ This donation will automatically end on the specified date.
             </div>
           </div>
 
-          <div id="previewContainerWrapperModel2" class="previewContainerWrapperModel2" style="width: 360px; height: 213px; border: 2px dashed gray; 
+          <div id="previewContainerWrapperModel2" class="previewContainerWrapperModel2" style="width: 360px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
@@ -379,9 +379,9 @@ This donation will automatically end on the specified date.
                 style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal2_old" style="width: 344px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainerModal2_old" style="width: 344px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
@@ -389,8 +389,8 @@ This donation will automatically end on the specified date.
                   <h4 style="font-size: 26px; font-weight: 500; line-height: 15px;">Multi Selection</h4>
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -431,7 +431,7 @@ This donation will automatically end on the specified date.
         opacity: 0px;
         ">Donation duration</label>
               <div class="row">
-                
+
 
               <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
@@ -451,7 +451,7 @@ This donation will automatically end on the specified date.
                       </button>
                   </div>
                 </div>
-                
+
               </div>
 
 
@@ -524,11 +524,11 @@ This donation will automatically end on the specified date.
 
           </form>
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal2">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2_old">
               <input type="file" class="fileInputModal2_old" multiple accept=".mp3, .wav"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
@@ -536,9 +536,9 @@ This donation will automatically end on the specified date.
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
@@ -549,21 +549,21 @@ This donation will automatically end on the specified date.
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3uploadModal2_old">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="playModal2_old"
                     style="height: 14px; width: 19px" />
@@ -581,7 +581,7 @@ This donation will automatically end on the specified date.
 
                   <span style="color: gray;margin-left: 5px; " id="DurationModal2_old">00:00</span>
 
-                  <img id="deleteButtonMp3Modal2_old" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3Modal2_old" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;" />
                 </div>
               </div>
@@ -647,7 +647,7 @@ This donation will automatically end on the specified date.
               <img id="unlimit_img_c" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004474.svg')}}" style="display:none; width: 100%; height: 100%" />
             </button>
 
-            <button id="unlimitedButton2" 
+            <button id="unlimitedButton2"
               style="outline: none; border: none; border-radius: 10px">
               <img id="limit_img_c" src="{{ asset('assets/svg/svg-dialog/Frame%201000004475.svg')}}" style="width: 100%; height: 100%" />
               <img id="limit_img_uc" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004475.svg')}}" style="display:none; width: 100%; height: 100%" />
@@ -705,7 +705,7 @@ This donation will automatically end on the specified date.
                       background: #00000066;
                       "></div>
               </div>
-              <div style="width: 248px; height: 24px;font-size:  14px; 
+              <div style="width: 248px; height: 24px;font-size:  14px;
               color: #ed1c24; font-weight: 400;
               line-height: 14px;">
 This donation will close automatically once the target amount is reached.
@@ -713,11 +713,11 @@ This donation will close automatically once the target amount is reached.
             </div>
           </div>
 
-          <div id="previewContainerWrapperModel10" style="width: 360px; height: 213px; border: 2px dashed gray; 
+          <div id="previewContainerWrapperModel10" style="width: 360px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel10" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel10" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
@@ -734,20 +734,20 @@ This donation will close automatically once the target amount is reached.
               <div id="image-preview-containerModal10" class="image-preview-container image-preview-containerModal2"
                 style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
-               
+
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal10" style="width: 344px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-               background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainerModal10" style="width: 344px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+               background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
                 <div style="width: 275px; height: 65px; text-align: center;">
-                  
+
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -756,9 +756,9 @@ This donation will close automatically once the target amount is reached.
             </div>
           </div>
 
-          
 
-          
+
+
 
 
 
@@ -882,11 +882,11 @@ This donation will close automatically once the target amount is reached.
             </div>
 
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal10">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal10">
               <input type="file" class="fileInputModal10" multiple accept=".mp3, .wav"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
@@ -894,9 +894,9 @@ This donation will close automatically once the target amount is reached.
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
@@ -907,21 +907,21 @@ This donation will close automatically once the target amount is reached.
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3uploadModal10">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="playModal10"
                     style="height: 14px; width: 19px" />
@@ -939,7 +939,7 @@ This donation will close automatically once the target amount is reached.
 
                   <span style="color: gray;margin-left: 5px; " id="DurationModal10">00:00</span>
 
-                  <img id="deleteButtonMp3Modal10" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3Modal10" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;" />
                 </div>
               </div>
@@ -1011,7 +1011,7 @@ height: 812px; padding: 0px;border-radius: 10px;">
                     width: 197px;
                     height: 30px;
                     padding: 5px;
-                    
+
                   ">
                 <div style="
                       display: flex;
@@ -1149,13 +1149,13 @@ text-decoration-skip-ink: none;
 
                 <!-- Duration Display -->
                 <div style="
-          font-size: 18px; 
+          font-size: 18px;
           font-family: Genos;
-          color: rgb(197, 197, 197); 
-          width: 41px; 
-          height: 16px; 
-          display: flex; 
-          justify-content: center; 
+          color: rgb(197, 197, 197);
+          width: 41px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
           align-items: center;" id="DurationModal7">
                   00:00
                 </div>
@@ -1300,7 +1300,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
               </button>
 
               <button id="button2Modal12" class="toggle-buttonModal12" onclick="toggleColorModal12('button2Modal12')" style="
@@ -1319,7 +1319,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
               </button>
 
               <button id="button3Modal12" class="toggle-buttonModal12" onclick="toggleColorModal12('button3Modal12')" style="
@@ -1338,7 +1338,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
               </button>
 
               <button id="button4Modal12" class="toggle-buttonModal12" onclick="toggleColorModal12('button4Modal12')" style="
@@ -1357,7 +1357,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
               </button>
             </div>
 
@@ -1445,7 +1445,7 @@ text-decoration-skip-ink: none;
   <div class="modal fade" id="modal11" tabindex="-1" aria-hidden="true" aria-labelledby="Modlal11">
     <div class="modal-dialog modal-dialog-centered">
 
-   
+
 
 
     <div class="modal8-right">
@@ -1459,7 +1459,7 @@ text-decoration-skip-ink: none;
 </button>
         </div>
 
-        
+
 
       <div class="modal-content bg-model-image container" style="width: 375px;
 height: 812px; padding: 0px;border-radius: 10px;">
@@ -1502,7 +1502,7 @@ height: 812px; padding: 0px;border-radius: 10px;">
                     width: 197px;
                     height: 30px;
                     padding: 5px;
-                    
+
                   ">
                 <div style="
                       display: flex;
@@ -1615,7 +1615,7 @@ text-decoration-skip-ink: none;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-              
+
               <div class="overlay" style="position: absolute;
                 width: 275px;
                 height: 43px;
@@ -1638,13 +1638,13 @@ text-decoration-skip-ink: none;
 
                 <!-- Duration Display -->
                 <div style="
-          font-size: 18px; 
+          font-size: 18px;
           font-family: Genos;
-          color: rgb(197, 197, 197); 
-          width: 41px; 
-          height: 16px; 
-          display: flex; 
-          justify-content: center; 
+          color: rgb(197, 197, 197);
+          width: 41px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
           align-items: center;" id="DurationModal7">
                   00:00
                 </div>
@@ -1840,30 +1840,30 @@ text-decoration-skip-ink: none;
 <label id="button1Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_2')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_2" value="All Users">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
               <label  id="button2Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8_2')">
   <input class="options_btns button2Modal8" type="radio" name="option_2" value="Educated">
-  
+
 
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_2')">
                 <input class="options_btns button3Modal8" type="radio" name="option_2" value="Cultivated">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_2')">
                 <input class="options_btns button4Modal8" type="radio" name="option_2" value="Academic">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
-            
-          
+
+
             </div>
 
 
@@ -1900,7 +1900,7 @@ text-decoration-skip-ink: none;
               </div>
             </div>
           </div>
-          
+
         </div>
 </form>
       </div>
@@ -1947,7 +1947,7 @@ height: 812px; padding: 0px;border-radius: 10px;">
                     width: 197px;
                     height: 30px;
                     padding: 5px;
-                    
+
                   ">
                 <div style="
                       display: flex;
@@ -2085,13 +2085,13 @@ text-decoration-skip-ink: none;
 
                 <!-- Duration Display -->
                 <div style="
-          font-size: 18px; 
+          font-size: 18px;
           font-family: Genos;
-          color: rgb(197, 197, 197); 
-          width: 41px; 
-          height: 16px; 
-          display: flex; 
-          justify-content: center; 
+          color: rgb(197, 197, 197);
+          width: 41px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
           align-items: center;" id="DurationModal7">
                   00:00
                 </div>
@@ -2594,17 +2594,17 @@ text-decoration-skip-ink: none;
               height: 812px;
               gap: 0px;
               opacity: 0px;
-              border-radius: 10px; 
-              
+              border-radius: 10px;
+
             ">
         <div style="
-        position: absolute; 
-        top: 11px; 
-        right: 5px; 
-        width: 80px; 
-        height: 40px; 
-        border-radius: 10px; 
-        z-index: 1000; display: flex; 
+        position: absolute;
+        top: 11px;
+        right: 5px;
+        width: 80px;
+        height: 40px;
+        border-radius: 10px;
+        z-index: 1000; display: flex;
         align-items: center;
         background: #1c274c62;
             ">
@@ -2614,15 +2614,15 @@ text-decoration-skip-ink: none;
           <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Vector.svg')}}"
             style="width: 30px; height: 30px; margin: 5px; border-radius: 5px; object-fit: cover; color:#FFFFFF;" />
           <!-- Number on the right -->
-          <div id="imageCounter" style=" 
-          font-size: 30px; 
-          font-weight: bold; 
+          <div id="imageCounter" style="
+          font-size: 30px;
+          font-weight: bold;
           font-family: Genos;
-          color: white; 
-          width: 30px; 
-          height: 30px; 
-          display: flex; 
-          justify-content: center; 
+          color: white;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
           align-items: center;">
             0 <!-- Replace with dynamic number if needed -->
           </div>
@@ -2630,7 +2630,7 @@ text-decoration-skip-ink: none;
         </div>
 
 
-        
+
 
         <div class="modal-body">
           <!-- الصورة الرئيسية -->
@@ -2717,15 +2717,15 @@ text-decoration-skip-ink: none;
           <img id="shareButton" data-target="#modal8" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
         </div>
-        
+
 
     </div>
   </div>
 
 
-  
-      
-       
+
+
+
 
   <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -2744,7 +2744,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             <div style=" width: 350px; height: 30; display: flex; justify-content: space-between; align-items: center;
                   margin: 0; top: 10px; ">
 
-                  
+
 
             <div style=" width: 360px; height: 65px; display: flex; align-items: center; gap: 10px;
                 background-color: #e47a7d3f; border-radius: 10px; padding: 5px; ">
@@ -2769,34 +2769,34 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 </div>
                 <!-- here need to put image option -->
 
-                <div id="previewContainerWrapperModel2" class="previewContainerWrapperModel2" style="width: 350px; height: 213px; border: 2px dashed gray; 
+                <div id="previewContainerWrapperModel2" class="previewContainerWrapperModel2" style="width: 350px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2" id="addImageButtonModel2">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18" multiple="" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal2" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainerModal2" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 65px; text-align: center;">
-                  
+
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -2808,7 +2808,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <!-- here image option end -->
 
-              
+
 
 
 
@@ -2874,7 +2874,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
 
 
-            
+
 
             <div style="
   width: 347px;
@@ -2888,27 +2888,27 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <label id="button1Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option" value="All Users">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
               <label  id="button2Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8')">
   <input class="options_btns button2Modal8" type="radio" name="option" value="Educated">
-  
+
 
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8')">
                 <input class="options_btns button3Modal8" type="radio" name="option" value="Cultivated">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8')">
                 <input class="options_btns button4Modal8" type="radio" name="option" value="Academic">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
 
@@ -2947,23 +2947,23 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
           </div>
 
-   
+
           <!-- custom audio section -->
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal2">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2">
-              <input type="file" class="fileInputModal2" multiple="" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" class="fileInputModal2" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 47px; text-align: center;">
@@ -2973,21 +2973,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3uploadModal2">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="playModal2" style="height: 14px; width: 19px">
 
@@ -2999,7 +2999,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <span style="color: gray;margin-left: 5px; " id="DurationModal2">00:00</span>
 
-                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
                 </div>
               </div>
@@ -3012,7 +3012,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
         </div>
       </div>
-    
+
 
 
     <div class="modal8-right">
@@ -3031,7 +3031,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
   </div>
 
   <!-- Donation model -->
-   
+
   <div class="modal fade" id="modal2_old" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content bg-model-image container" style="background: #e0e0e0;width: 375px;
@@ -3049,7 +3049,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             <div style=" width: 350px; height: 30; display: flex; justify-content: space-between; align-items: center;
                   margin: 0; top: 10px; ">
 
-                  
+
 
             <div style=" width: 360px; height: 65px; display: flex; align-items: center; gap: 10px;
                 background-color: #e47a7d3f; border-radius: 10px; padding: 5px; ">
@@ -3074,34 +3074,34 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 </div>
                 <!-- here need to put image option -->
 
-                <div id="previewContainerWrapperModel2_3"  style="width: 350px; height: 213px; border: 2px dashed gray; 
+                <div id="previewContainerWrapperModel2_3"  style="width: 350px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_3_0">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_3_0" multiple="" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_3_0" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2_3_0" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal2_3_0" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainerModal2_3_0" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 65px; text-align: center;">
-                  
+
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -3113,7 +3113,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <!-- here image option end -->
 
-              
+
 
 
 
@@ -3179,7 +3179,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
 
 
-            
+
 
             <div style="
   width: 347px;
@@ -3193,27 +3193,27 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <label id="button1Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_3')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_3" value="All Users">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
               <label  id="button2Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8_3')" >
   <input class="options_btns button2Modal8_3" type="radio" name="option_3" value="Educated">
-  
+
 
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_3')" >
                 <input class="options_btns button3Modal8_3" type="radio" name="option_3" value="Cultivated">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_3')" >
                 <input class="options_btns button4Modal8_3" type="radio" name="option_3" value="Academic">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
 
@@ -3252,23 +3252,23 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
           </div>
 
-   
+
           <!-- custom audio section -->
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal2">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2">
-              <input type="file" class="fileInputModal2" multiple="" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" class="fileInputModal2" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 47px; text-align: center;">
@@ -3278,21 +3278,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3uploadModal2">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="playModal2" style="height: 14px; width: 19px">
 
@@ -3304,7 +3304,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <span style="color: gray;margin-left: 5px; " id="DurationModal2">00:00</span>
 
-                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
                 </div>
               </div>
@@ -3317,7 +3317,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
         </div>
       </div>
-    
+
 
 
     <div class="modal8-right">
@@ -3356,7 +3356,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             <div style=" width: 350px; height: 30; display: flex; justify-content: space-between; align-items: center;
                   margin: 0; top: 10px; ">
 
-                  
+
 
             <div style=" width: 360px; height: 65px; display: flex; align-items: center; gap: 10px;
                 background-color: #e47a7d3f; border-radius: 10px; padding: 5px; ">
@@ -3381,34 +3381,34 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 </div>
                 <!-- here need to put image option -->
 
-                <div id="previewContainerWrapperModel2_3"  style="width: 350px; height: 213px; border: 2px dashed gray; 
+                <div id="previewContainerWrapperModel2_3"  style="width: 350px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_3">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_3" multiple="" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_3" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2_3" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal2_3" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainerModal2_3" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 65px; text-align: center;">
-                  
+
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -3420,7 +3420,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <!-- here image option end -->
 
-              
+
 
 
 
@@ -3526,24 +3526,24 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
 
-          
 
-          <div style="display:none; width: 360px; height: 79px; border: 2px dashed gray; 
+
+          <div style="display:none; width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 25px; margin-left: -5px;" id="previewContainerMp3">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3Input">
 
 
-              <input type="file" class="fileInput7" multiple="" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" class="fileInput7" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="assets/first-svg-dialog/Group%201000008026.svg" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 47px; text-align: center;">
@@ -3553,21 +3553,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3upload">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="assets/Group%201000002312.svg" alt="Illustration" class="img-fluid" id="play" style="height: 14px; width: 19px">
 
@@ -3579,7 +3579,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <span style="color: gray;margin-left: 5px; " id="Duration">00:00</span>
 
-                  <img id="deleteButtonMp3" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
                 </div>
               </div>
@@ -3589,7 +3589,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
 
-          <div style="display:none; 
+          <div style="display:none;
           position: absolute;
           bottom: -100%;
           left: 100px;
@@ -3622,7 +3622,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
 
-          <div style=" display:none; 
+          <div style=" display:none;
             width: 360px;
             height: 117px;
             background-color: #fff;
@@ -3649,7 +3649,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
 
 
-            
+
 
             <div style="
   width: 347px;
@@ -3663,27 +3663,27 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <label id="button1Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_3')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_3" value="All Users">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
               <label  id="button2Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8_3')" >
   <input class="options_btns button2Modal8_3" type="radio" name="option_3" value="Educated">
-  
+
 
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_3')" >
                 <input class="options_btns button3Modal8_3" type="radio" name="option_3" value="Cultivated">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_3')" >
                 <input class="options_btns button4Modal8_3" type="radio" name="option_3" value="Academic">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
 
@@ -3722,23 +3722,23 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
           </div>
 
-   
+
           <!-- custom audio section -->
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal2">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2">
-              <input type="file" class="fileInputModal2" multiple="" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" class="fileInputModal2" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 47px; text-align: center;">
@@ -3748,21 +3748,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3uploadModal2">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="playModal2" style="height: 14px; width: 19px">
 
@@ -3774,7 +3774,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <span style="color: gray;margin-left: 5px; " id="DurationModal2">00:00</span>
 
-                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
                 </div>
               </div>
@@ -3787,7 +3787,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
         </div>
       </div>
-    
+
 
 
     <div class="modal8-right">
@@ -3826,7 +3826,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             <div style=" width: 350px; height: 30; display: flex; justify-content: space-between; align-items: center;
                   margin: 0; top: 10px; ">
 
-                  
+
 
             <div style=" width: 360px; height: 65px; display: flex; align-items: center; gap: 10px;
                 background-color: #e47a7d3f; border-radius: 10px; padding: 5px; ">
@@ -3851,34 +3851,34 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 </div>
                 <!-- here need to put image option -->
 
-                <div id="previewContainerWrapperModel2_4"  style="width: 350px; height: 213px; border: 2px dashed gray; 
+                <div id="previewContainerWrapperModel2_4"  style="width: 350px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_4">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_4" multiple="" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_4" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2_4" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainerModal2_4" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainerModal2_4" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 65px; text-align: center;">
-                  
+
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -3890,7 +3890,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <!-- here image option end -->
 
-              
+
 
 
 
@@ -3956,7 +3956,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
 
 
-            
+
 
             <div style="
   width: 347px;
@@ -3970,27 +3970,27 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <label id="button1Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_4')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_4" value="All Users">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
               <label  id="button2Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8_4')" >
   <input class="options_btns button2Modal8_4" type="radio" name="option_4" value="Educated">
-  
+
 
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_4')" >
                 <input class="options_btns button3Modal8_4" type="radio" name="option_4" value="Cultivated">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_4')" >
                 <input class="options_btns button4Modal8_4" type="radio" name="option_4" value="Academic">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
 
@@ -4029,23 +4029,23 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             </div>
           </div>
 
-   
+
           <!-- custom audio section -->
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal2">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2">
-              <input type="file" class="fileInputModal2" multiple="" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" class="fileInputModal2" accept=".mp3, .wav" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                 <div style="width: 275px; height: 47px; text-align: center;">
@@ -4055,21 +4055,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3uploadModal2">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="playModal2" style="height: 14px; width: 19px">
 
@@ -4081,7 +4081,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                   <span style="color: gray;margin-left: 5px; " id="DurationModal2">00:00</span>
 
-                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
                 </div>
               </div>
@@ -4094,7 +4094,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
         </div>
       </div>
-    
+
 
 
     <div class="modal8-right">
@@ -4114,13 +4114,13 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
   <!-- Greeting working Modals -->
 
-  
+
 
   <!-- Greeting Modals old -->
 
   <div class="modal fade" id="modal4_old" tabindex="-1" aria-labelledby="Modlal4">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="Width:375px; Height:812px; background-color: #f8f9fa; 
+      <div class="modal-content" style="Width:375px; Height:812px; background-color: #f8f9fa;
           padding: 5px;
           border-radius: 10px;">
         <div class="modal-body" style="
@@ -4136,7 +4136,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   flex-direction: column;
                   align-items: center;
                   gap: 110px;
-                  
+
                 ">
             <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008335.svg')}}" alt="Illustration" data-target="#modal6"
               data-bs-dismiss="modal" style="height: 250px; width: 100%" />
@@ -4250,8 +4250,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 height: 812px;
                 gap: 0px;
                 opacity: 0px;
-                border-radius: 10px; 
-                
+                border-radius: 10px;
+
               ">
 
 
@@ -4486,7 +4486,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 height: 30px;
                 width: 30px;
                 background: #F2F2F2;
-  
+
                       border-radius: 7px;
                       display: flex; /* Utilisation de Flexbox */
     align-items: center; /* Centrage vertical */
@@ -4513,7 +4513,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                     display: flex; /* Utilisation de Flexbox */
     align-items: center; /* Centrage vertical */
     justify-content: left; /* Centrage horizontal */
-  
+
                   ">
               Some Text wil be here when the User have
             </div>
@@ -4541,15 +4541,15 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Vector.svg')}}"
                   style="width: 26px; height: 26px; margin: 5px; border-radius: 5px; object-fit: cover; color:#FFFFFF;" />
                 <!-- Number on the right -->
-                <div style=" 
-          font-size: 30px; 
-          font-weight: bold; 
+                <div style="
+          font-size: 30px;
+          font-weight: bold;
           font-family: Genos;
-          color: white; 
-          width: 30px; 
-          height: 30px; 
-          display: flex; 
-          justify-content: center; 
+          color: white;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
           align-items: center;">
                   5 <!-- Replace with dynamic number if needed -->
                 </div>
@@ -4672,10 +4672,10 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 gap: 5px;
                 height: 100%;
               ">
-                <div style="padding: 3px; 
+                <div style="padding: 3px;
                   border-radius: 4px;
-                  width: 30px; 
-                  height: 30px; 
+                  width: 30px;
+                  height: 30px;
                   background: #F2F2F2;
                   display: flex;
                   align-items: center;
@@ -4683,10 +4683,10 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg')}}" style="width: 24px; height: 24px; object-fit: cover" />
                 </div>
 
-                <div style="padding: 3px; 
+                <div style="padding: 3px;
                   border-radius: 4px;
-                  width: 30px; 
-                  height: 30px; 
+                  width: 30px;
+                  height: 30px;
                   background: #F2F2F2;
                   display: flex;
                   align-items: center;
@@ -4694,10 +4694,10 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg')}}"
                     style="width: 24px; height: 24px; object-fit: cover" />
                 </div>
-                <div style="padding: 3px; 
+                <div style="padding: 3px;
                   border-radius: 4px;
-                  width: 30px; 
-                  height: 30px; 
+                  width: 30px;
+                  height: 30px;
                   background: #F2F2F2;
                   display: flex;
                   align-items: center;
@@ -4752,7 +4752,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <span style="font-family: Genos;
                 text-align: left;
                 font-size: 12px;
-  
+
   ">Share Option</span>
               <div style="
                   width: 2px;
@@ -4787,7 +4787,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       transition: transform 0.2s ease;
     ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
               </button>
 
               <button id="button2Modal9" class="toggle-buttonModal9" onclick="toggleColorModal9('button2Modal9')" style="
@@ -4806,7 +4806,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       transition: transform 0.2s ease;
     ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
               </button>
 
               <button id="button3Modal9" class="toggle-buttonModal9" onclick="toggleColorModal9('button3Modal9')" style="
@@ -4825,7 +4825,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       transition: transform 0.2s ease;
     ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
               </button>
 
               <button id="button4Modal9" class="toggle-buttonModal9" onclick="toggleColorModal9('button4Modal9')" style="
@@ -4844,7 +4844,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       transition: transform 0.2s ease;
     ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
               </button>
             </div>
 
@@ -5164,7 +5164,7 @@ height: 812px; padding: 0px;border-radius: 10px;">
                     width: 197px;
                     height: 30px;
                     padding: 5px;
-                    
+
                   ">
                 <div style="
                       display: flex;
@@ -5302,13 +5302,13 @@ text-decoration-skip-ink: none;
 
                 <!-- Duration Display -->
                 <div style="
-          font-size: 18px; 
+          font-size: 18px;
           font-family: Genos;
-          color: rgb(197, 197, 197); 
-          width: 41px; 
-          height: 16px; 
-          display: flex; 
-          justify-content: center; 
+          color: rgb(197, 197, 197);
+          width: 41px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
           align-items: center;" id="DurationModal7">
                   00:00
                 </div>
@@ -5345,7 +5345,7 @@ text-decoration-skip-ink: none;
               transition: transform 0.2s ease;
             ">
                 <img src="{{ asset('assets/svg/svg-dialog/Oval%20Copy%204.svg')}}" alt="Educated" style="width: 45px; height: 45px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos;line-height:14px;">Name</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos;line-height:14px;">Name</span>
                 <span style="font-size: 12px; font-family: Genos;">Lastname</span>
 
               </div>
@@ -5363,7 +5363,7 @@ text-decoration-skip-ink: none;
                         text-align: center;
                         border-radius: 7px;
                         transition: transform 0.2s ease;
-                        
+
                       ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008063.svg')}}" alt="Educated" style="width: 45px; height: 45px;" />
                 <div style="
@@ -5417,7 +5417,7 @@ text-decoration-skip-ink: none;
                                   transition: transform 0.2s ease;
                                 ">
                 <img src="{{ asset('assets/svg/svg-dialog/image%203.svg')}}" alt="Educated" style="width: 45px; height: 45px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos;line-height:14px;">Name</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos;line-height:14px;">Name</span>
                 <span style="font-size: 12px; font-family: Genos;">Lastname</span>
 
               </div>
@@ -5559,7 +5559,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
               </button>
 
               <button id="button2Modal17" class="toggle-buttonModal17" onclick="toggleColorModal17('button2Modal17')" style="
@@ -5578,7 +5578,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
               </button>
 
               <button id="button3Modal17" class="toggle-buttonModal17" onclick="toggleColorModal17('button3Modal17')" style="
@@ -5597,7 +5597,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
               </button>
 
               <button id="button4Modal17" class="toggle-buttonModal17" onclick="toggleColorModal17('button4Modal17')" style="
@@ -5616,7 +5616,7 @@ text-decoration-skip-ink: none;
     transition: transform 0.2s ease;
   ">
                 <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
-                <span style="font-size: 12px; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
               </button>
             </div>
 
@@ -5780,7 +5780,7 @@ text-decoration-skip-ink: none;
                       background: #00000066;
                       "></div>
               </div>
-              <div style="width: 248px; height: 24px;font-size:  14px; 
+              <div style="width: 248px; height: 24px;font-size:  14px;
               color: #ed1c24; font-weight: 400;
               line-height: 14px;">
                 This Surveys will automatically end on the specified date.
@@ -5788,11 +5788,11 @@ text-decoration-skip-ink: none;
             </div>
           </div>
 
-          <div id="previewContainerWrapperModel6" style="width: 360px; height: 213px; border: 2px dashed gray; 
+          <div id="previewContainerWrapperModel6" style="width: 360px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
             <!-- Preview Container -->
-            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
               <!-- Add Image Button (top-aligned) -->
@@ -5810,9 +5810,9 @@ text-decoration-skip-ink: none;
                 style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="descriptionTextContainer" style="width: 344px; height: 90px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="descriptionTextContainer" style="width: 344px; height: 90px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
@@ -5820,8 +5820,8 @@ text-decoration-skip-ink: none;
                   <h4 style="font-size: 26px; font-weight: 500; line-height: 15px;">Multi Selection</h4>
                   <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">File Size H 812 - W
                     350</h6>
-                  <p style="font-family: Genos; font-size: 18px; font-weight: 400; 
-             line-height: 10px; letter-spacing: 0.02em; text-align: center; 
+                  <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+             line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                     MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
                   </p>
@@ -5878,7 +5878,7 @@ text-decoration-skip-ink: none;
                   </div>
                 </div>
                 <div class="col-6" style="border-radius: 10px;">
-                  <div class="input-group" style="width: 150px; height: 35px; background-color: #e0e0e0; 
+                  <div class="input-group" style="width: 150px; height: 35px; background-color: #e0e0e0;
                 border-radius: 5px;">
                     <input type="text" class="form-control" placeholder="Expired Date" id="datepicker2Modal6"
                       aria-label="Datepicker 2" style="width: 90px; height: 35px; background-color: #e0e0e0" />
@@ -5964,11 +5964,11 @@ text-decoration-skip-ink: none;
 
           </form>
 
-          <div style="width: 360px; height: 79px; border: 2px dashed gray; 
+          <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 25px; margin-left: -5px;" id="previewContainerMp3">
             <!-- Preview Container -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; 
-            align-items: center; background-size: contain; cursor: pointer; 
+            <div style="display: flex; flex-direction: column; justify-content: space-between;
+            align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3Input">
 
 
@@ -5978,9 +5978,9 @@ text-decoration-skip-ink: none;
 
 
               <!-- Description Text (bottom-aligned) -->
-              <div id="description" style="width: 345px; height: 64px; display: flex; 
-              align-items: center; justify-content: start; 
-              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px; 
+              <div id="description" style="width: 345px; height: 64px; display: flex;
+              align-items: center; justify-content: start;
+              gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration" class="img-fluid"
                   data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;" />
@@ -5991,21 +5991,21 @@ text-decoration-skip-ink: none;
               </div>
             </div>
 
-            <div style="width: 361px; height: 57px; 
+            <div style="width: 361px; height: 57px;
        border-radius: 10px; position: relative;
        margin-bottom: 10px; margin-left: 0px;
        margin-top: 5px;
        background-color: #fff; display: none;" id="Mp3upload">
               <!-- Preview Container -->
-              <div style="display: flex; flex-direction: column; justify-content: space-between; 
-         align-items: center; background-size: contain; cursor: pointer; 
+              <div style="display: flex; flex-direction: column; justify-content: space-between;
+         align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                 <!-- Description Text (bottom-aligned) -->
-                <div style="width: 340px; height: 37px; display: flex; 
-           align-items: center; justify-content: start; 
-          margin-top: 40px; border-radius: 10px; 
+                <div style="width: 340px; height: 37px; display: flex;
+           align-items: center; justify-content: start;
+          margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                   <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg')}}" alt="Illustration" class="img-fluid" id="play"
                     style="height: 14px; width: 19px" />
@@ -6023,7 +6023,7 @@ text-decoration-skip-ink: none;
 
                   <span style="color: gray;margin-left: 5px; " id="Duration">00:00</span>
 
-                  <img id="deleteButtonMp3" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2; 
+                  <img id="deleteButtonMp3" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;" />
                 </div>
               </div>
