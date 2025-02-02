@@ -600,7 +600,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
         Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
 
-        Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
+        Route::get('app-setting/maintainance', [UserRolesController::class, 'educated'])->name('appsetting.maintainance');
 
 
 
@@ -732,8 +732,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
                     });
                 Route::post('/save', [SettingController::class, 'save'])->name('save');
                 Route::post('/save-many', [SettingController::class, 'saveMany'])->name('saveMany');
-                Route::get('chats/permission', [UserRolesController::class, 'standard'])->name('chats.permission');
-                Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
+                Route::get('chats/permission', [UserRolesController::class, 'educated'])->name('chats.permission');
+                Route::get('chats/manage-group', [UserRolesController::class, 'educated'])->name('chats.manageGroup');
                 Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name(
                     'yekbun_location.countries.index'
                 );
@@ -744,7 +744,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
                 $controller_path = 'App\Http\Controllers';
                 Route::get('stories/prefix', [PrefixController::class, 'index'])->name('stories.prefix');
 
-                Route::get('app-setting/maintainance', [UserRolesController::class, 'standard'])->name('appsetting.maintainance');
+                Route::get('app-setting/maintainance', [UserRolesController::class, 'educated'])->name('appsetting.maintainance');
 
                 Route::get('stories/policy_and_terms', [PolicyAndTermsController::class, 'index'])->name(
                     'stories.policy_and_terms'
