@@ -2187,7 +2187,7 @@ text-decoration-skip-ink: none;
     <script>
         $(document).ready(function() {
 
-            $('#datepicker1_donation').datepicker({
+            $('.time_input_field').datepicker({
                 onSelect: function(dateText) {
 
                     $('#span_output').text(dateText);

@@ -436,7 +436,7 @@ This donation will automatically end on the specified date.
               <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
                     <input type="text" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1"
-                      aria-label="Datepicker 1"  />
+                      aria-label="Datepicker 1" autocomplete="off" />
                       <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -445,7 +445,7 @@ This donation will automatically end on the specified date.
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input">
                     <input type="text" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2"
-                      aria-label="Datepicker 2" style="" />
+                      aria-label="Datepicker 2" style="" autocomplete="off"/>
                       <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -797,7 +797,7 @@ This donation will close automatically once the target amount is reached.
               <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
                     <input type="text" form="donation_form" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1_donation"
-                      aria-label="Datepicker 1"  />
+                      aria-label="Datepicker 1"  autocomplete="off"/>
                       <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -806,7 +806,7 @@ This donation will close automatically once the target amount is reached.
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input">
                     <input type="text" form="donation_form" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2_donation"
-                      aria-label="Datepicker 2" style="" />
+                      aria-label="Datepicker 2" style=""autocomplete="off" />
                       <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -2825,7 +2825,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
                     <input type="text" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1"
-                      aria-label="Datepicker 1"  />
+                      aria-label="Datepicker 1"  autocomplete="off"/>
                       <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -2834,7 +2834,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input">
                     <input type="text" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2"
-                      aria-label="Datepicker 2" style="" />
+                      aria-label="Datepicker 2" style="" autocomplete="off"/>
                       <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -3130,7 +3130,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
                     <input type="text" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1"
-                      aria-label="Datepicker 1"  />
+                      aria-label="Datepicker 1"  autocomplete="off"/>
                       <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -3139,7 +3139,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input">
                     <input type="text" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2"
-                      aria-label="Datepicker 2" style="" />
+                      aria-label="Datepicker 2" style="" autocomplete="off"/>
                       <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -3437,7 +3437,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
                     <input type="text" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1"
-                      aria-label="Datepicker 1"  />
+                      aria-label="Datepicker 1"  autocomplete="off"/>
                       <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -3446,7 +3446,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input">
                     <input type="text" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2"
-                      aria-label="Datepicker 2" style="" />
+                      aria-label="Datepicker 2" style="" autocomplete="off"/>
                       <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -3907,7 +3907,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input" style="">
                     <input type="text" class="form-control time_input_field datepicker1" placeholder="Start Date" name="start_date" id="datepicker1"
-                      aria-label="Datepicker 1"  />
+                      aria-label="Datepicker 1" autocomplete="off" />
                       <button class="btn " type="button" onclick="$('.datepicker1').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
@@ -3916,7 +3916,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <div class="col-6" style="border-radius: 10px;">
                   <div class="input-group time_input">
                     <input type="text" class="form-control time_input_field datepicker2" placeholder="Expired Date" name="end_date" id="datepicker2"
-                      aria-label="Datepicker 2" style="" />
+                      aria-label="Datepicker 2" style="" autocomplete="off"/>
                       <button class="btn" type="button" onclick="$('.datepicker2').datepicker('show')">
                         <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg')}}" class="time_div_img">
                       </button>
