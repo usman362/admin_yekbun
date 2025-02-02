@@ -77,7 +77,7 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Customers</span>
             </li>
-            <li class="menu-item {{ Request::is('users/*') ? 'active open' : '' }}" style="">
+            <li class="menu-item {{ Request::is('users/*','settings/user*','settings/reasons','settings/profile-banner') ? 'active open' : '' }}" style="">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-group"></i>
                     <div>Users</div>
