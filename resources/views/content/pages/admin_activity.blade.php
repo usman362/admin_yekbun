@@ -838,12 +838,8 @@
     <!--hero-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
-    <link href="
-https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css
-" rel="stylesheet">
-    <link href="
-https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
-" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
 @endsection
 
 @section('vendor-script')
@@ -1460,19 +1456,12 @@ https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css
 
                                             <a class="list-group-item list-group-item-action {{ request('type') == 'all-news' ? 'active' : '' }}"
                                                 href="#tab5">
-                                                Popup Feeds<br>
-                                                <small class="text-muted">Admin has Popup</small>
-                                                <a class="list-group-item list-group-item-action {{ request('type') == 'admin-feeds' ? 'active' : '' }}"
-                                                    href="#tab1">
-                                                    Admin Feeds<br>
-                                                    <small class="text-muted">Admin has Post</small>
+                                                Admin Feeds<br>
+                                                <small class="text-muted">Admin has Post</small>
+                                                
                                                 </a>
 
-                                                <a class="list-group-item list-group-item-action {{ request('type') == 'all-news' ? 'active' : '' }}"
-                                                    href="#tab2">
-                                                    All News<br>
-                                                    <small class="text-muted">Admin has create</small>
-                                                </a>
+
                                                 <a class="list-group-item list-group-item-action {{ request('type') == 'all-news' ? 'active' : '' }}"
                                                     href="#tab3">
                                                     Go live Soon<br>
