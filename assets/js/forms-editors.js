@@ -8,12 +8,18 @@
   // Snow Theme
   // --------------------------------------------------------------------
   const snowEditor = new Quill('#snow-editor', {
-    bounds: '#snow-editor',
-    modules: {
-      formula: true,
-      toolbar: '#snow-toolbar'
-    },
-    theme: 'snow'
+      bounds: '#snow-editor',
+      modules: {
+        toolbar: '#snow-toolbar'
+      },
+      theme: 'snow'
+  });
+
+  snowEditor.container.children[0].innerHTML = appinfo;
+
+  $('#btn-app-info').click(function() {
+    var content = snowEditor.container.children[0].innerHTML;
+    $("#textedit_content").val(content);
   });
 
   // Bubble Theme
