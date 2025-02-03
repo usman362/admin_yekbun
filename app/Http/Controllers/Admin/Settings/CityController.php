@@ -22,7 +22,7 @@ class CityController extends Controller
     {
         $regions = Region::orderBy("name", "ASC")->get();
         $countries = Country::orderBy("name", "ASC")->get();
-        $cities = City::orderBy("zipcode", "ASC")->get();
+        $cities = City::orderBy("zipcode", "ASC")->paginate(10);
         if ($request->ajax()) {
             return DataTables::of($cities)
                 ->addColumn('country', function ($city) {
@@ -41,7 +41,7 @@ class CityController extends Controller
                 ->make(true);
         }
 
-        return view("content.settings.cities.index", compact("regions", "countries"));
+        return view("content.settings.cities.index", compact("regions", "countries","cities"));
     }
 
 

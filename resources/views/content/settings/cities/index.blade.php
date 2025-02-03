@@ -9,10 +9,39 @@
             display: none;
         }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
             color: #fff !important;
             border: 1px solid #696dff;
             background: #696dff;
+        }
+        span[aria-current="page"] span{
+            background-color: #696dff !important;
+            color: #fff !important;
+            border: 1px solid #696eff !important;
+        }
+        span[aria-label="pagination.previous"]{
+            display: none;
+        }
+        span[aria-label="pagination.next"]{
+            display: none;
+        }
+        a[aria-label="pagination.next"]{
+            display: none;
+        }
+        a[aria-label="pagination.previous"]{
+            display: none;
+        }
+        nav[role="navigation"]>div:first-child{
+            display: none;
+        }
+        nav[role="navigation"]>div:last-child>div:last-child>span {
+            box-shadow: none !important;
+        }
+
+        nav[role="navigation"]>div:last-child>div:last-child{
+            float: right;
+            margin-top: -32px
         }
     </style>
 @endsection
@@ -65,27 +94,63 @@
                         <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1"
                             style="width: 0px; display: none;" aria-label=""></th>
                         <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1"
-                            colspan="1" style="width: 178px;"
+                            colspan="1"
                             aria-label="Name: aktivieren, um Spalte absteigend zu sortieren" aria-sort="ascending">Country
                             Name</th>
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
-                            style="width: 262px;" aria-label="Position: aktivieren, um Spalte aufsteigend zu sortieren">
+                            aria-label="Position: aktivieren, um Spalte aufsteigend zu sortieren">
                             Province Name</th>
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
-                            style="width: 264px;" aria-label="Email: aktivieren, um Spalte aufsteigend zu sortieren">Zip
+                            aria-label="Email: aktivieren, um Spalte aufsteigend zu sortieren">Zip
                             Code</th>
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
-                            style="width: 91px;" aria-label="Date: aktivieren, um Spalte aufsteigend zu sortieren">City Name
+                            aria-label="Date: aktivieren, um Spalte aufsteigend zu sortieren">City Name
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
-                            style="width: 89px;" aria-label="Salary: aktivieren, um Spalte aufsteigend zu sortieren">Total
+                            aria-label="Salary: aktivieren, um Spalte aufsteigend zu sortieren">Total
                             People</th>
-                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 74px;"
+                        <th class="sorting_disabled" rowspan="1" colspan="1"
                             aria-label="Actions">Actions</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    @foreach ($cities as $city)
+                        <tr>
+                            <td>{{ $city->country->name ?? '' }}</td>
+                            <td>{{ $city->region->name ?? '' }}</td>
+                            <td>{{ $city->zipcode ?? '' }}</td>
+                            <td>{{ $city->name ?? '' }}</td>
+                            <td>0</td>
+                            <td>
+                                <div>
+                                    <!-- Edit -->
+                                    <button type="button" class="btn btn-sm btn-icon btn-edit-city"
+                                        data-bs-toggle="tooltip" data-id="{{ $city->id }}"
+                                        data-region_id="{{ $city->region_id }}" data-country_id="{{ $city->country_id }}"
+                                        data-name="{{ $city->name }}" data-zipcode="{{ $city->zipcode }}"
+                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true">
+                                        <i class="bx bx-edit"></i>
+                                    </button>
+
+                                    <!-- Delete -->
+                                    <form action="{{ route('settings.cities.destroy', $city->id) }}"
+                                        onsubmit="confirmAction(event, () => event.target.submit())" method="post"
+                                        class="d-inline">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                            data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
+            <br>
+            {{ $cities->links() }}
 
         </div>
     </div>
@@ -95,8 +160,8 @@
         @include('content.settings.cities.includes.create_form')
     </x-modal>
 
-    <x-modal id="editModal" title="Edit City" saveBtnText="Update" saveBtnType="submit"
-        saveBtnForm="editForm" size="sm" :show="false">
+    <x-modal id="editModal" title="Edit City" saveBtnText="Update" saveBtnType="submit" saveBtnForm="editForm"
+        size="sm" :show="false">
         @include('content.settings.cities.includes.edit_form')
     </x-modal>
 
@@ -157,22 +222,43 @@
     </script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('settings.cities.index') }}",
-                columns: [
-                    { data: 'country', name: 'country.name' },
-                    { data: 'region', name: 'region.name' },
-                    { data: 'zipcode', name: 'zipcode' },
-                    { data: 'name', name: 'name' },
-                    { data: 'total_people', name: 'users.count', orderable: false, searchable: false },
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
-                ]
-            });
+        $(document).ready(function() {
+            // $('.data-table').DataTable({
+            //     processing: false,
+            //     serverSide: true,
+            //     ajax: "{{ route('settings.cities.index') }}",
+            //     columns: [{
+            //             data: 'country',
+            //             name: 'country.name'
+            //         },
+            //         {
+            //             data: 'region',
+            //             name: 'region.name'
+            //         },
+            //         {
+            //             data: 'zipcode',
+            //             name: 'zipcode'
+            //         },
+            //         {
+            //             data: 'name',
+            //             name: 'name'
+            //         },
+            //         {
+            //             data: 'total_people',
+            //             name: 'users.count',
+            //             orderable: false,
+            //             searchable: false
+            //         },
+            //         {
+            //             data: 'actions',
+            //             name: 'actions',
+            //             orderable: false,
+            //             searchable: false
+            //         }
+            //     ]
+            // });
 
-            $('body').on('click','.btn-edit-city',function(){
+            $('body').on('click', '.btn-edit-city', function() {
                 $('#city_id').val($(this).attr('data-id'));
                 $('#editCountryId').val($(this).attr('data-country_id'));
                 $('#editCountryId').trigger('change');
