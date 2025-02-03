@@ -43,6 +43,13 @@
             float: right;
             margin-top: -32px
         }
+        @media(max-width:1500px){
+            nav[role="navigation"]>div:last-child>div:last-child{
+                float: right;
+                margin-top: 0 !important;
+            }
+
+        }
     </style>
 @endsection
 
