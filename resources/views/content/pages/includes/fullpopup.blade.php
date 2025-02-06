@@ -1915,7 +1915,7 @@ text-decoration-skip-ink: none;
               <!-- Toggle 1 -->
               <div class="toggle-item">
                 <div class="form-switch">
-                  <input type="checkbox" class="form-check-input" id="comments" checked />
+                  <input type="checkbox" class="form-check-input" id="comments" name="comments" checked />
                   <label for="comments" class="form-check-label"></label>
                 </div>
                 <span>Comments</span>
@@ -1924,7 +1924,7 @@ text-decoration-skip-ink: none;
               <!-- Toggle 2 -->
               <div class="toggle-item">
                 <div class="form-switch">
-                  <input type="checkbox" class="form-check-input" id="share" />
+                  <input type="checkbox" class="form-check-input" id="share" name="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
                 <span>Voice Comments</span>
@@ -1933,7 +1933,7 @@ text-decoration-skip-ink: none;
               <!-- Toggle 3 -->
               <div class="toggle-item">
                 <div class="form-switch">
-                  <input type="checkbox" class="form-check-input" id="emoji" />
+                  <input type="checkbox" class="form-check-input" id="emoji" name="emoji" />
                   <label for="emoji" class="form-check-label"></label>
                 </div>
                 <span>Emoji</span>
