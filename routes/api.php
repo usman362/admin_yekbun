@@ -117,6 +117,7 @@ Route::post("/admin-activity/system-info", [AdminActivityController::class, 'sto
 Route::post("/admin-activity/donation", [AdminActivityController::class, 'store_donation']);
 Route::post("/admin-activity/surveys", [AdminActivityController::class, 'store_surveys']);
 Route::post("/admin-activity/greetings", [AdminActivityController::class, 'store_greetings']);
+Route::get("/admin-activity/get-feeds", [AdminActivityController::class, 'getpopFeeds']);
 Route::post("/admin-activity/delete-feeds", [AdminActivityController::class, 'delete_pops']);
 
 Route::get('countries', [CountryController::class, 'index'])->name('countries.index');

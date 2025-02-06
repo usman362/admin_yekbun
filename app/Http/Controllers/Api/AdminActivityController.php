@@ -30,6 +30,12 @@ class AdminActivityController extends Controller
         return response()->json(['feeds' => $popfeeds], 200);
     }
 
+    public function getpopFeeds(Request $request)
+    {
+        $popfeeds = PopFeeds::where('type',$request->type)->orderBy('created_at','desc')->get();
+        return response()->json(['feeds' => $popfeeds], 200);
+    }
+
     public function store_systemInfo(Request $request)
     {
         $validator = Validator::make($request->all(), [

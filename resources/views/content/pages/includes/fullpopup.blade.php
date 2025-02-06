@@ -151,7 +151,7 @@
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg') }}" alt="Illustration" data-target="#modal6"
                   data-bs-dismiss="modal" style="height: 96px; width: 69%" id="addImageButton" />
 
-                <input type="file" class="fileInput" multiple accept="image/*" style="
+                <input type="file" class="fileInput" accept="image/*" style="
                       opacity: 0;
                       width: 100%;
                       height: 100%;
@@ -371,7 +371,7 @@ This donation will automatically end on the specified date.
                 id="addImageButtonModel2_old" />
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" class="fileInput18_old" multiple accept="image/*"
+              <input type="file" class="fileInput18_old" accept="image/*"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
@@ -527,7 +527,7 @@ This donation will automatically end on the specified date.
             <div style="display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2_old">
-              <input type="file" class="fileInputModal2_old" multiple accept=".mp3, .wav"
+              <input type="file" class="fileInputModal2_old" accept=".mp3, .wav"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
 
@@ -729,7 +729,7 @@ This donation will automatically end on the specified date.
                 id="addImageButtonModel10" />
 
               <!-- Input Field (covering the entire container0) -->
-              <input type="file" name="image" form="donation_form" class="fileInput10" multiple accept="image/*"
+              <input type="file" name="image" form="donation_form" class="fileInput10" accept="image/*"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
@@ -928,7 +928,7 @@ This donation will automatically end on the specified date.
             <div style="display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal10">
-              <input type="file" class="fileInputModal10" multiple accept=".mp3, .wav"
+              <input type="file" class="fileInputModal10" accept=".mp3, .wav"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
 
@@ -4195,7 +4195,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal6"
                   data-bs-dismiss="modal" style="height: 96px; width: 69%" id="addImageButtonModal4" />
 
-                <input type="file" class="fileInput4" multiple accept="image/*" style="
+                <input type="file" class="fileInput4" accept="image/*" style="
                         opacity: 0;
                         width: 100%;
                         height: 100%;
@@ -5842,7 +5842,7 @@ text-decoration-skip-ink: none;
                 id="addImageButtonModel6" />
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" class="fileInput6" multiple accept="image/*"
+              <input type="file" class="fileInput6" accept="image/*"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
@@ -6012,7 +6012,7 @@ text-decoration-skip-ink: none;
             border-radius: 10px; position: relative; height: 100%;" id="Mp3Input">
 
 
-              <input type="file" class="fileInput7" multiple accept=".mp3, .wav"
+              <input type="file" class="fileInput7" accept=".mp3, .wav"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
 
