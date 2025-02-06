@@ -25,13 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function toggleColor(buttonId) {
   const buttons = document.querySelectorAll('.toggle-buttonModal8');
-  
+
   // Reset all buttons to default state
   buttons.forEach(button => {
     button.style.background = '#F2F2F2';
     button.querySelector('span').style.color = 'gray';
   });
-  
+
   // Toggle the clicked button
   const clickedButton = document.getElementById(buttonId);
   clickedButton.style.background = '#1CA2ED';
@@ -40,13 +40,13 @@ function toggleColor(buttonId) {
 
 function toggleColorModal9(buttonId) {
   const buttons = document.querySelectorAll('.toggle-buttonModal9');
-  
+
   // Reset all buttons to default state
   buttons.forEach(button => {
     button.style.background = '#F2F2F2';
     button.querySelector('span').style.color = 'gray';
   });
-  
+
   // Toggle the clicked button
   const clickedButton = document.getElementById(buttonId);
   clickedButton.style.background = '#1CA2ED';
@@ -55,13 +55,13 @@ function toggleColorModal9(buttonId) {
 
 function toggleColorModal12(buttonId) {
   const buttons = document.querySelectorAll('.toggle-buttonModal12');
-  
+
   // Reset all buttons to default state
   buttons.forEach(button => {
     button.style.background = '#F2F2F2';
     button.querySelector('span').style.color = 'gray';
   });
-  
+
   // Toggle the clicked button
   const clickedButton = document.getElementById(buttonId);
   clickedButton.style.background = '#1CA2ED';
@@ -69,13 +69,13 @@ function toggleColorModal12(buttonId) {
 }
 function toggleColorModal11(buttonId) {
   const buttons = document.querySelectorAll('.toggle-buttonModal11');
-  
+
   // Reset all buttons to default state
   buttons.forEach(button => {
     button.style.background = '#F2F2F2';
     button.querySelector('span').style.color = 'gray';
   });
-  
+
   // Toggle the clicked button
   const clickedButton = document.getElementById(buttonId);
   clickedButton.style.background = '#1CA2ED';
@@ -84,13 +84,13 @@ function toggleColorModal11(buttonId) {
 
 function toggleColorModal17(buttonId) {
   const buttons = document.querySelectorAll('.toggle-buttonModal17');
-  
+
   // Reset all buttons to default state
   buttons.forEach(button => {
     button.style.background = '#F2F2F2';
     button.querySelector('span').style.color = 'gray';
   });
-  
+
   // Toggle the clicked button
   const clickedButton = document.getElementById(buttonId);
   clickedButton.style.background = '#1CA2ED';
@@ -753,12 +753,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (img.width > 350 || img.height > 812) {
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
-          
+
           // Calculate the new dimensions while preserving the aspect ratio
           const ratio = Math.min(350 / img.width, 812 / img.height);
           const newWidth = img.width * ratio;
           const newHeight = img.height * ratio;
-          
+
           canvas.width = newWidth;
           canvas.height = newHeight;
 
@@ -922,12 +922,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (img.width > 350 || img.height > 812) {
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
-          
+
           // Calculate the new dimensions while preserving the aspect ratio
           const ratio = Math.min(350 / img.width, 812 / img.height);
           const newWidth = img.width * ratio;
           const newHeight = img.height * ratio;
-          
+
           canvas.width = newWidth;
           canvas.height = newHeight;
 
@@ -978,7 +978,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 mainImage.src = fileSrc;
                 psys3Image.src = fileSrc;
-                
+
               }
 
               // Create a thumbnail and append it to the container
@@ -1016,7 +1016,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function changeMainImage(src) {
     mainImage.src = src;
     psys3Image.src = src;
-    
+
   }
 
   // Update the image count
@@ -1043,7 +1043,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let nextIndex = (currentIndex === thumbnails.length) ? currentIndex - 1 : currentIndex;
         mainImage.src = thumbnails[nextIndex]; // Set the new main image
         psys3Image.src = thumbnails[nextIndex];
-        
+
       } else {
         // If no images remain, set to the default image
         mainImage.src = DEFAULT_IMAGE;
@@ -1075,7 +1075,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const MAX_IMAGES = 1;
   let imageCount = 0;
 
-  
+
 
   // Function to validate the file type and size
   function validateFile(file, callback) {
@@ -1391,7 +1391,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle file input changes
   fileInput.addEventListener("change", (event) => {
     const files = event.target.files;
-   
+
     if (imageCount + files.length <= MAX_IMAGES) {
       Array.from(files).forEach((file) => {
         validateFile(file, (isValid, fileData) => {
@@ -1452,7 +1452,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Handle file input3 changes
 fileInput_3.addEventListener("change", (event) => {
   const files = event.target.files;
- 
+
   if (imageCount_3 + files.length <= MAX_IMAGES_3) {
     Array.from(files).forEach((file) => {
       validateFile(file, (isValid, fileData) => {
@@ -1512,7 +1512,7 @@ deleteButton_3.addEventListener("click", () => {
 // Handle file input4 changes
 fileInput_4.addEventListener("change", (event) => {
   const files = event.target.files;
- 
+
   if (imageCount + files.length <= MAX_IMAGES_4) {
     Array.from(files).forEach((file) => {
       validateFile(file, (isValid, fileData) => {
@@ -1714,7 +1714,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const MAX_IMAGES = 1;
   let imageCount = 0;
 
-  
+
 
   // Function to validate the file type and size
   function validateFile(file, callback) {
@@ -1949,7 +1949,7 @@ function changeMainImage(src) {
   const mainImage = document.getElementById("mainImage");
   mainImage.src = src;
   psys3Image.src = src;
-  
+
 }
 
 

@@ -1673,6 +1673,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const Mp3upload = document.getElementById("Mp3uploadModal10");
   const playButton = document.getElementById("playModal10");
   const durationSpan = document.getElementById("DurationModal10"); // For the original modal
+  const playButton7 = document.getElementById("playModal7");
   const modal17Duration = document.getElementById("DurationModal7"); // Target duration in modal 17
   const playIconModal17 = document.querySelector(".overlay img[src='"+ playbtn +"']");
   const MAX_DURATION = 300; // Maximum duration in seconds
@@ -1783,8 +1784,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Play/pause functionality
+  function togglePlay2() {
+    if (audioElement) {
+      if (audioElement.paused) {
+        audioElement.play();
+        playButton7.src = playpusecgrnbtn;
+        playIconModal17.src = playpusecgrnbtn;
+      } else {
+        audioElement.pause();
+        playButton7.src = playbtn;
+        playIconModal17.src = playbtn;
+      }
+    }
+  }
+
   playButton.addEventListener("click", togglePlay);
   playIconModal17.addEventListener("click", togglePlay);
+  playButton7.addEventListener("click", togglePlay2);
 
   // Format duration to "MM:SS"
   function formatDuration(seconds) {

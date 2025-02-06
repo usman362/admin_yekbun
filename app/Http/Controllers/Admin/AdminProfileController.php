@@ -133,7 +133,7 @@ class AdminProfileController extends Controller
             'title' => 'required',
            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+dd($request->all());
         $poptyp = $request->type;
         $optons = "";
 
