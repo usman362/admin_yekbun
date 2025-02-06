@@ -846,8 +846,6 @@ This donation will automatically end on the specified date.
                 </div>
                 <div class="col-6" style="border-radius: 10px;">
                     <div class="input-group" style="">
-                      <input type="text" class="form-control" placeholder="Type the Amount" name="donation_amount" id="donation_amount"
-                        aria-label="Type the Amount" autocomplete="off" />
                         <select name="donation_amount_type" class="form-control" id="donation_amount_type">
                             <option value="currency">Currency</option>
                         </select>
