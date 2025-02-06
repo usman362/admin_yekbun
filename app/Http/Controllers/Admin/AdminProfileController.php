@@ -177,11 +177,22 @@ class AdminProfileController extends Controller
                     $postpop->is_emoji = $request->emoji ?? 0;
 
                     if ($request->hasFile('image')) {
+                        $file = $request->file('image');
+                        $fileExtension = $file->getClientOriginalExtension();
+                        $fileName = time() . '-post.' . $fileExtension;
 
-                        $image = $request->file('image');
-                        $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-                        $imagePath =  $image->storeAs("/images", $imageName, "public");
-                        $postpop->image = $imagePath;
+                        // Check if the file is a video (e.g., MP4)
+                        if (in_array($fileExtension, ['mp4', 'mov', 'avi'])) {
+                            // Save the file in the "videos" directory
+                            $filePath = $file->storeAs("/videos", $fileName, "public");
+                            $postpop->video = $filePath; // Assuming you have a `video` column in your database
+                            $postpop->image = '';
+                        } else {
+                            // Assume it's an image and save it in the "images" directory
+                            $filePath = $file->storeAs("/images", $fileName, "public");
+                            $postpop->image = $filePath; // Assuming you have an `image` column in your database
+                            $postpop->video = '';
+                        }
                     }
 
                     if ($request->hasFile('audio')) {
@@ -207,11 +218,22 @@ class AdminProfileController extends Controller
                     $postpop->txt3 = $request->txt3;
 
                     if ($request->hasFile('image')) {
+                        $file = $request->file('image');
+                        $fileExtension = $file->getClientOriginalExtension();
+                        $fileName = time() . '-post.' . $fileExtension;
 
-                        $image = $request->file('image');
-                        $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-                        $imagePath =  $image->storeAs("/images", $imageName, "public");
-                        $postpop->image = $imagePath;
+                        // Check if the file is a video (e.g., MP4)
+                        if (in_array($fileExtension, ['mp4', 'mov', 'avi'])) {
+                            // Save the file in the "videos" directory
+                            $filePath = $file->storeAs("/videos", $fileName, "public");
+                            $postpop->video = $filePath; // Assuming you have a `video` column in your database
+                            $postpop->image = '';
+                        } else {
+                            // Assume it's an image and save it in the "images" directory
+                            $filePath = $file->storeAs("/images", $fileName, "public");
+                            $postpop->image = $filePath; // Assuming you have an `image` column in your database
+                            $postpop->video = '';
+                        }
                     }
 
                     if ($request->hasFile('icon1')) {
@@ -249,17 +271,27 @@ class AdminProfileController extends Controller
 
         }else{
 
-            $imageName = "";
             $icon1 = "";
             $icon2 = "";
             $icon3 = "";
             $audio = "";
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '-post.' . $image->getClientOriginalExtension();
-            $imagePath =  $image->storeAs("/images", $imageName, "public");
-        }
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $fileExtension = $file->getClientOriginalExtension();
+                $fileName = time() . '-post.' . $fileExtension;
+
+                // Check if the file is a video (e.g., MP4)
+                if (in_array($fileExtension, ['mp4', 'mov', 'avi'])) {
+                    // Save the file in the "videos" directory
+                    $filePath = $file->storeAs("/videos", $fileName, "public");
+                    $fileType = 'video';
+                } else {
+                    // Assume it's an image and save it in the "images" directory
+                    $filePath = $file->storeAs("/images", $fileName, "public");
+                    $fileType = 'image';
+                }
+            }
 
         if ($request->hasFile('audio')) {
             $audio = $request->file('audio');
@@ -296,7 +328,8 @@ class AdminProfileController extends Controller
                 'title' => $request->title,
                 'date_start' => $request->start_date,
                 'date_ends' => $request->end_date,
-                'image' => $imagePath ?? '',
+                'image' => $fileType == 'image' ? $filePath : '',
+                'video' => $fileType == 'video' ? $filePath : '',
                 'audio' => $audioPath ?? '',
                 'share_option' => $optons,
                 'status' => 1,
@@ -312,7 +345,8 @@ class AdminProfileController extends Controller
                 'title' => $request->title,
                 'date_start' => $request->start_date,
                 'date_ends' => $request->end_date,
-                'image' => $imagePath ?? '',
+                'image' => $fileType == 'image' ? $filePath : '',
+                'video' => $fileType == 'video' ? $filePath : '',
                 'audio' => $audioPath ?? '',
                 'share_option' => $optons,
                 'status' => 1,

@@ -151,7 +151,7 @@
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg') }}" alt="Illustration" data-target="#modal6"
                   data-bs-dismiss="modal" style="height: 96px; width: 69%" id="addImageButton" />
 
-                <input type="file" class="fileInput" accept="image/*" style="
+                <input type="file" class="fileInput" accept="image/jpg,image/png,image/jpeg,video/mp4" style="
                       opacity: 0;
                       width: 100%;
                       height: 100%;
@@ -178,7 +178,7 @@
             <div style="display: flex; align-items: center; justify-content: center;">
               <img id="displayImage2" src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration"
                 class="img-fluid" style="height: 40px; width: 41px; cursor: pointer;margin-left: 2px;" />
-              <input type="file" id="imageUploader2" accept="image/*" style="display: none;" />
+              <input type="file" id="imageUploader2" accept="image/jpg,image/png,image/jpeg,video/mp4" style="display: none;" />
             </div>
 
             <!-- Texte à droite -->
@@ -371,7 +371,7 @@ This donation will automatically end on the specified date.
                 id="addImageButtonModel2_old" />
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" class="fileInput18_old" accept="image/*"
+              <input type="file" class="fileInput18_old" accept="image/jpg,image/png,image/jpeg,video/mp4"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
@@ -729,7 +729,7 @@ This donation will automatically end on the specified date.
                 id="addImageButtonModel10" />
 
               <!-- Input Field (covering the entire container0) -->
-              <input type="file" name="image" form="donation_form" class="fileInput10" accept="image/*"
+              <input type="file" name="image" form="donation_form" class="fileInput10" accept="image/jpg,image/png,image/jpeg,video/mp4"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
@@ -2820,7 +2820,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2" id="addImageButtonModel2">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18" accept="image/jpg,image/png,image/jpeg,video/mp4" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
@@ -3125,7 +3125,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_3_0">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_3_0" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_3_0" accept="image/jpg,image/png,image/jpeg,video/mp4" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2_3_0" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
@@ -3432,7 +3432,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_3">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_3" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_3" accept="image/jpg,image/png,image/jpeg,video/mp4" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2_3" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
@@ -3902,7 +3902,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2"  id="addImageButtonModel2_4">
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" name="image" required class="fileInput18_4" accept="image/*" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+              <input type="file" name="image" required class="fileInput18_4" accept="image/jpg,image/png,image/jpeg,video/mp4" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
               <!-- Image Preview Section -->
               <div id="image-preview-containerModal2_4" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
@@ -4195,7 +4195,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg')}}" alt="Illustration" data-target="#modal6"
                   data-bs-dismiss="modal" style="height: 96px; width: 69%" id="addImageButtonModal4" />
 
-                <input type="file" class="fileInput4" accept="image/*" style="
+                <input type="file" class="fileInput4" accept="image/jpg,image/png,image/jpeg,video/mp4" style="
                         opacity: 0;
                         width: 100%;
                         height: 100%;
@@ -4222,7 +4222,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             <div style="display: flex; align-items: center; justify-content: center;">
               <img id="displayImage2" src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg')}}" alt="Illustration"
                 class="img-fluid" style="height: 40px; width: 41px; cursor: pointer;margin-left: 10px;" />
-              <input type="file" id="imageUploader2" accept="image/*" style="display: none;" />
+              <input type="file" id="imageUploader2" accept="image/jpg,image/png,image/jpeg,video/mp4" style="display: none;" />
             </div>
 
             <!-- Texte à droite -->
@@ -5842,7 +5842,7 @@ text-decoration-skip-ink: none;
                 id="addImageButtonModel6" />
 
               <!-- Input Field (covering the entire container) -->
-              <input type="file" class="fileInput6" accept="image/*"
+              <input type="file" class="fileInput6" accept="image/jpg,image/png,image/jpeg,video/mp4"
                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;" />
 
               <!-- Image Preview Section -->
@@ -5953,7 +5953,7 @@ text-decoration-skip-ink: none;
                 <div style="width: 33px; height: 33px;">
 
                   <label class="custom-file-container">
-                    <input type="file" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer1')">
+                    <input type="file" accept="image/jpg,image/png,image/jpeg,video/mp4" onchange="updateLabelWithImage(event, 'iconContainer1')">
                     <div class="icon-container" id="iconContainer1" style="width: 24px; height: 24px;">
                       <img id="defaultIcon1_0" src="/assets/Gallery%20Add.svg'" alt="Icon" />
                     </div>
@@ -5971,7 +5971,7 @@ text-decoration-skip-ink: none;
 
 
                   <label class="custom-file-container">
-                    <input type="file" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer2')">
+                    <input type="file" accept="image/jpg,image/png,image/jpeg,video/mp4" onchange="updateLabelWithImage(event, 'iconContainer2')">
                     <div class="icon-container" id="iconContainer2" style="width: 24px; height: 24px;">
                       <img id="defaultIcon2_0" src="/assets/Gallery%20Add.svg'" alt="Icon" />
                     </div>
@@ -5987,7 +5987,7 @@ text-decoration-skip-ink: none;
 
 
                   <label class="custom-file-container">
-                    <input type="file" accept="image/*" onchange="updateLabelWithImage(event, 'iconContainer3')">
+                    <input type="file" accept="image/jpg,image/png,image/jpeg,video/mp4" onchange="updateLabelWithImage(event, 'iconContainer3')">
                     <div class="icon-container" id="iconContainer3" style="width: 24px; height: 24px;">
                       <img id="defaultIcon3_0" src="/assets/Gallery%20Add.svg'" alt="Icon" />
                     </div>

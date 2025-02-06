@@ -49,10 +49,10 @@
         }
 
         /*
-                        .custom-option-body img{
-                            height:136px;
-                        }
-                */
+                            .custom-option-body img{
+                                height:136px;
+                            }
+                    */
         .dropdown-item h6,
         .h6,
         h5,
@@ -840,6 +840,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
 @endsection
 
 @section('vendor-script')
@@ -866,8 +867,8 @@
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-                                                        https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-                                                        "></script>
+                                                            https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                                                            "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -907,6 +908,7 @@
     <script src="{{ asset('assets/friendkit/js/autocompletes.js') }}"></script>
     <!--hero-->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
 @endsection
 
 @section('content')
@@ -1447,14 +1449,30 @@
                                             </div>
                                         </div>
                                         <div class="pop_description">{{ $feed->title }}</div>
-                                        <div class="pop_main_image pop_main_image_{{ $feed->_id }}"><img
-                                                src="{{ asset('storage/' . $feed->image) }}"
-                                                style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                            {{-- <div class="audio-icon"
-                                                style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer">
-                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008129.svg') }}"
-                                                    style="width:20px;height:20px;margin:5px;border-radius:5px;object-fit:cover;color:#fff">
-                                            </div> --}}
+                                        <div class="pop_main_image pop_main_image_{{ $feed->_id }}">
+                                            @if ($feed->video !== null)
+                                                <!-- Custom controls are defined here -->
+                                                {{-- <video src="{{ asset('storage/' . $feed->video) }}" style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block"></video> --}}
+
+                                                <video
+                                                    id="my-player"
+                                                    class="video-js"
+                                                    controls
+                                                    preload="auto"
+                                                    {{-- poster="//vjs.zencdn.net/v/oceans.png" --}}
+                                                    data-setup='{}' style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                                <source src="{{ asset('storage/' . $feed->video) }}" type="video/mp4"></source>
+                                            </video>
+
+                                                {{-- <div class="audio-icon"
+                                                    style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008129.svg') }}"
+                                                        style="width:20px;height:20px;margin:5px;border-radius:5px;object-fit:cover;color:#fff">
+                                                </div> --}}
+                                            @else
+                                                <img src="{{ asset('storage/' . $feed->image) }}"
+                                                    style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                            @endif
                                         </div>
                                         <div
                                             style="height:29px;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-top:7px">

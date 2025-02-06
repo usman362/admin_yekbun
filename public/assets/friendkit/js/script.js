@@ -1141,123 +1141,135 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /********************Surveys ************ */
 document.addEventListener("DOMContentLoaded", () => {
-  const addImageButton = document.getElementById("addImageButtonModel6");
-  const previewContainerWrapper = document.getElementById("image-preview-container");
-  const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel6");
-  const descriptionTextContainer = document.getElementById("descriptionTextContainer");
-  const fileInput = document.querySelector(".fileInput6");
-  const deleteButton = document.getElementById("deleteButton1");
-  const MAX_IMAGES = 1;
-  let imageCount = 0;
+    const addImageButton = document.getElementById("addImageButtonModel6");
+    const previewContainerWrapper = document.getElementById("image-preview-container");
+    const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel6");
+    const descriptionTextContainer = document.getElementById("descriptionTextContainer");
+    const fileInput = document.querySelector(".fileInput6");
+    const deleteButton = document.getElementById("deleteButton1");
+    const MAX_IMAGES = 1;
+    let imageCount = 0;
 
+    // Function to validate the file type and size
+    function validateFile(file, callback) {
+      const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only JPG, PNG, or MP4 files are allowed.");
+        return callback(false, null, null);
+      }
 
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (file.type.startsWith("image")) {
+          // Handle image files
+          const img = new Image();
+          img.onload = () => {
+            if (img.width > 350 || img.height > 812) {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
 
-  // Function to validate the file type and size
-  function validateFile(file, callback) {
-    const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
-    if (!allowedTypes.includes(file.type)) {
-      alert("Only JPG, PNG, or MP4 files are allowed.");
-      return callback(false, null);
-    }
+              const ratio = Math.min(350 / img.width, 812 / img.height);
+              const newWidth = img.width * ratio;
+              const newHeight = img.height * ratio;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        if (img.width > 350 || img.height > 812) {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
+              canvas.width = newWidth;
+              canvas.height = newHeight;
 
-          const ratio = Math.min(350 / img.width, 812 / img.height);
-          const newWidth = img.width * ratio;
-          const newHeight = img.height * ratio;
-
-          canvas.width = newWidth;
-          canvas.height = newHeight;
-
-          ctx.drawImage(img, 0, 0, newWidth, newHeight);
-          const resizedDataUrl = canvas.toDataURL(file.type);
-          callback(true, resizedDataUrl);
-        } else {
-          callback(true, e.target.result);
+              ctx.drawImage(img, 0, 0, newWidth, newHeight);
+              const resizedDataUrl = canvas.toDataURL(file.type);
+              callback(true, resizedDataUrl, "image");
+            } else {
+              callback(true, e.target.result, "image");
+            }
+          };
+          img.src = e.target.result;
+        } else if (file.type.startsWith("video")) {
+          // Handle video files
+          callback(true, e.target.result, "video");
         }
       };
-      img.src = e.target.result;
-    };
 
-    reader.onerror = () => {
-      callback(false, null);
-    };
+      reader.onerror = () => {
+        callback(false, null, null);
+      };
 
-    reader.readAsDataURL(file);
-  }
+      reader.readAsDataURL(file);
+    }
 
-  // Handle file input changes
-  fileInput.addEventListener("change", (event) => {
-    const files = event.target.files;
-    if (imageCount + files.length <= MAX_IMAGES) {
-      Array.from(files).forEach((file) => {
-        validateFile(file, (isValid, fileData) => {
-          if (isValid) {
-            console.log("Valid image file loaded, appending it to the container.");
+    // Handle file input changes
+    fileInput.addEventListener("change", (event) => {
+      const files = event.target.files;
 
-            const previewImage = document.createElement("img");
-            previewImage.src = fileData;
-            previewImage.alt = "Image Preview";
-            previewImage.style.width = "100%";
-            previewImage.style.height = "100%";
-            previewImage.style.objectFit = "fill";
-            previewImage.style.borderRadius = "10px";
+      if (imageCount + files.length <= MAX_IMAGES) {
+        Array.from(files).forEach((file) => {
+          validateFile(file, (isValid, fileData, fileType) => {
+            if (isValid) {
+              console.log("Valid file loaded, appending it to the container.");
 
-            // Append the image to the preview container
-            previewContainerWrapper.appendChild(previewImage);
-           // previewContainerWrapperDonation.appendChild(previewImage);
+              if (fileType === "image") {
+                // Create and append image preview
+                const previewImage = document.createElement("img");
+                previewImage.src = fileData;
+                previewImage.alt = "Image Preview";
+                previewImage.style.width = "100%";
+                previewImage.style.height = "100%";
+                previewImage.style.objectFit = "fill";
+                previewImage.style.borderRadius = "10px";
 
+                // Append the image to the preview container
+                previewContainerWrapper.appendChild(previewImage);
+              } else if (fileType === "video") {
+                // Create and append video preview
+                const previewVideo = document.createElement("video");
+                previewVideo.src = fileData;
+                previewVideo.controls = false; // Disable default controls
+                previewVideo.style.width = "100%";
+                previewVideo.style.height = "100%";
+                previewVideo.style.objectFit = "fill";
+                previewVideo.style.borderRadius = "10px";
 
-            // Hide the upload interface
-            addImageButton.style.display = "none";
-            fileInput.style.display = "none";
-            descriptionTextContainer.style.display = "none"
-            previewContainerWrapperModel6.style.border = "none";
+                // Append the video to the preview container
+                previewContainerWrapper.appendChild(previewVideo);
+              }
 
+              // Hide the upload interface
+              addImageButton.style.display = "none";
+              fileInput.style.display = "none";
+              descriptionTextContainer.style.display = "none";
+              previewContainerWrapperModel6.style.border = "none";
 
-            imageCount++;
-            console.log("Image successfully appended to the container.");
-          }
+              imageCount++;
+              console.log("File successfully appended to the container.");
+            }
+          });
         });
-      });
-    } else {
-      alert("You can only upload a maximum of 1 image.");
-    }
+      } else {
+        alert("You can only upload a maximum of 1 file.");
+      }
+    });
+
+    // Handle file deletion
+    deleteButton.addEventListener("click", () => {
+      console.log("Deleting the file...");
+
+      // Remove the preview file
+      while (previewContainerWrapper.firstChild) {
+        previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
+      }
+
+      // Reset file count
+      imageCount = 0;
+
+      // Reshow the upload interface
+      addImageButton.style.display = "block";
+      fileInput.style.display = "block";
+      descriptionTextContainer.style.display = "flex";
+      previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
+
+      $('[name="image"]').val("");
+      console.log("File deleted and upload interface restored.");
+    });
   });
-
-  // Handle image deletion
-  deleteButton.addEventListener("click", () => {
-    console.log("Deleting the image...");
-
-    // Remove the preview image
-    while (previewContainerWrapper.firstChild) {
-      previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
-    }
-
-    //while (previewContainerWrapperDonation.firstChild) {
-    //  previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
-   // }
-
-
-    // Reset image count
-    imageCount = 0;
-
-    // Reshow the upload interface
-    addImageButton.style.display = "block";
-    fileInput.style.display = "block";
-    descriptionTextContainer.style.display = "flex"
-    previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
-
-    $('[name="image"]').val('');
-    console.log("Image deleted and upload interface restored.");
-  });
-});
 
 
 
@@ -1397,272 +1409,169 @@ document.addEventListener("DOMContentLoaded", () => {
 /*    Donation ***/
 
 document.addEventListener("DOMContentLoaded", () => {
-  const addImageButton = document.getElementById("addImageButtonModel2");
-  const addImageButton_3 = document.getElementById("addImageButtonModel2_3");
-  const addImageButton_4 = document.getElementById("addImageButtonModel2_4");
+    // Elements for the first file input
+    const addImageButton = document.getElementById("addImageButtonModel2");
+    const previewContainerWrapper = document.getElementById("image-preview-containerModal2");
+    const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel2");
+    const descriptionTextContainer = document.getElementById("descriptionTextContainerModal2");
+    const fileInput = document.querySelector(".fileInput18");
+    const deleteButton = document.getElementById("deleteButtonModal2");
 
-  const previewContainerWrapper = document.getElementById("image-preview-containerModal2");
-  const previewContainerWrapper_3 = document.getElementById("image-preview-containerModal2_3");
-  const previewContainerWrapper_4 = document.getElementById("image-preview-containerModal2_4");
+    // Elements for the second file input
+    const addImageButton_3 = document.getElementById("addImageButtonModel2_3");
+    const previewContainerWrapper_3 = document.getElementById("image-preview-containerModal2_3");
+    const previewContainerWrapperModel6_3 = document.getElementById("previewContainerWrapperModel2_3");
+    const descriptionTextContainer_3 = document.getElementById("descriptionTextContainerModal2_3");
+    const fileInput_3 = document.querySelector(".fileInput18_3");
+    const deleteButton_3 = document.getElementById("deleteButtonModal2_3");
 
-  const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel2");
-  const previewContainerWrapperModel6_3 = document.getElementById("previewContainerWrapperModel2_3");
-  const previewContainerWrapperModel6_4 = document.getElementById("previewContainerWrapperModel2_4");
+    // Elements for the third file input
+    const addImageButton_4 = document.getElementById("addImageButtonModel2_4");
+    const previewContainerWrapper_4 = document.getElementById("image-preview-containerModal2_4");
+    const previewContainerWrapperModel6_4 = document.getElementById("previewContainerWrapperModel2_4");
+    const descriptionTextContainer_4 = document.getElementById("descriptionTextContainerModal2_4");
+    const fileInput_4 = document.querySelector(".fileInput18_4");
+    const deleteButton_4 = document.getElementById("deleteButtonModal2_4");
 
-  const descriptionTextContainer = document.getElementById("descriptionTextContainerModal2");
-  const descriptionTextContainer_3 = document.getElementById("descriptionTextContainerModal2_3");
-  const descriptionTextContainer_4 = document.getElementById("descriptionTextContainerModal2_4");
-  const fileInput = document.querySelector(".fileInput18");
-  const deleteButton = document.getElementById("deleteButtonModal2");
+    // Constants
+    const MAX_IMAGES = 1;
+    const MAX_IMAGES_3 = 1;
+    const MAX_IMAGES_4 = 1;
+    let imageCount = 0;
+    let imageCount_3 = 0;
+    let imageCount_4 = 0;
 
-  const fileInput_3 = document.querySelector(".fileInput18_3");
-  const deleteButton_3 = document.getElementById("deleteButtonModal2_3");
+    // Function to validate the file type and size
+    function validateFile(file, callback) {
+      const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only JPG, PNG, or MP4 files are allowed.");
+        return callback(false, null, null);
+      }
 
-  const fileInput_4 = document.querySelector(".fileInput18_4");
-  const deleteButton_4 = document.getElementById("deleteButtonModal2_4");
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (file.type.startsWith("image")) {
+          // Handle image files
+          const img = new Image();
+          img.onload = () => {
+            if (img.width > 350 || img.height > 812) {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
 
-  const MAX_IMAGES = 1;
-  let imageCount = 0;
-  const MAX_IMAGES_3 = 1;
-  const MAX_IMAGES_4 = 1;
-  let imageCount_3 = 0;
-  let imageCount_4 = 0;
+              const ratio = Math.min(350 / img.width, 812 / img.height);
+              const newWidth = img.width * ratio;
+              const newHeight = img.height * ratio;
 
+              canvas.width = newWidth;
+              canvas.height = newHeight;
 
-
-  // Function to validate the file type and size
-  function validateFile(file, callback) {
-    const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
-    if (!allowedTypes.includes(file.type)) {
-      alert("Only JPG, PNG, or MP4 files are allowed.");
-      return callback(false, null);
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        if (img.width > 350 || img.height > 812) {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-
-          const ratio = Math.min(350 / img.width, 812 / img.height);
-          const newWidth = img.width * ratio;
-          const newHeight = img.height * ratio;
-
-          canvas.width = newWidth;
-          canvas.height = newHeight;
-
-          ctx.drawImage(img, 0, 0, newWidth, newHeight);
-          const resizedDataUrl = canvas.toDataURL(file.type);
-          callback(true, resizedDataUrl);
-        } else {
-          callback(true, e.target.result);
+              ctx.drawImage(img, 0, 0, newWidth, newHeight);
+              const resizedDataUrl = canvas.toDataURL(file.type);
+              callback(true, resizedDataUrl, "image");
+            } else {
+              callback(true, e.target.result, "image");
+            }
+          };
+          img.src = e.target.result;
+        } else if (file.type.startsWith("video")) {
+          // Handle video files
+          callback(true, e.target.result, "video");
         }
       };
-      img.src = e.target.result;
-    };
 
-    reader.onerror = () => {
-      callback(false, null);
-    };
+      reader.onerror = () => {
+        callback(false, null, null);
+      };
 
-    reader.readAsDataURL(file);
-  }
-
-  // Handle file input changes
-  fileInput.addEventListener("change", (event) => {
-    const files = event.target.files;
-
-    if (imageCount + files.length <= MAX_IMAGES) {
-      Array.from(files).forEach((file) => {
-        validateFile(file, (isValid, fileData) => {
-          if (isValid) {
-            console.log("Valid image file loaded, appending it to the container.");
-
-            const previewImage = document.createElement("img");
-            previewImage.src = fileData;
-            previewImage.alt = "Image Preview";
-            previewImage.style.width = "100%";
-            previewImage.style.height = "100%";
-            previewImage.style.objectFit = "fill";
-            previewImage.style.borderRadius = "10px";
-
-            // Append the image to the preview container
-            previewContainerWrapper.appendChild(previewImage);
-           // previewContainerWrapperDonation.appendChild(previewImage);
-
-
-            // Hide the upload interface
-            addImageButton.style.display = "none";
-            fileInput.style.display = "none";
-            descriptionTextContainer.style.display = "none"
-            previewContainerWrapperModel6.style.border = "none";
-
-
-            imageCount++;
-            console.log("Image successfully appended to the container.");
-          }
-        });
-      });
-    } else {
-      alert("You can only upload a maximum of 1 image.");
-    }
-  });
-
-  // Handle image deletion
-  deleteButton.addEventListener("click", () => {
-    console.log("Deleting the image...");
-
-    // Remove the preview image
-    while (previewContainerWrapper.firstChild) {
-      previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
+      reader.readAsDataURL(file);
     }
 
-  //  while (previewContainerWrapperDonation.firstChild) {
-   //   previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
-   // }
+    // Function to handle file input changes
+    function handleFileInputChange(fileInput, previewContainer, addImageButton, descriptionTextContainer, previewContainerWrapperModel, imageCountRef, MAX_IMAGES) {
+      fileInput.addEventListener("change", (event) => {
+        const files = event.target.files;
 
+        if (imageCountRef.value + files.length <= MAX_IMAGES) {
+          Array.from(files).forEach((file) => {
+            validateFile(file, (isValid, fileData, fileType) => {
+              if (isValid) {
+                console.log("Valid file loaded, appending it to the container.");
 
+                if (fileType === "image") {
+                  // Create and append image preview
+                  const previewImage = document.createElement("img");
+                  previewImage.src = fileData;
+                  previewImage.alt = "Image Preview";
+                  previewImage.style.width = "100%";
+                  previewImage.style.height = "100%";
+                  previewImage.style.objectFit = "fill";
+                  previewImage.style.borderRadius = "10px";
 
-    // Reset image count
-    imageCount = 0;
+                  previewContainer.appendChild(previewImage);
+                } else if (fileType === "video") {
+                  // Create and append video preview
+                  const previewVideo = document.createElement("video");
+                  previewVideo.src = fileData;
+                  previewVideo.controls = false; // Disable default controls
+                  previewVideo.style.width = "100%";
+                  previewVideo.style.height = "100%";
+                  previewVideo.style.objectFit = "fill";
+                  previewVideo.style.borderRadius = "10px";
 
-    // Reshow the upload interface
-    addImageButton.style.display = "block";
-    fileInput.style.display = "block";
-    descriptionTextContainer.style.display = "flex"
-    previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
+                  previewContainer.appendChild(previewVideo);
+                }
 
-    $('[name="image"]').val('');
-    console.log("Image deleted and upload interface restored.");
-  });
+                // Hide the upload interface
+                addImageButton.style.display = "none";
+                fileInput.style.display = "none";
+                descriptionTextContainer.style.display = "none";
+                previewContainerWrapperModel.style.border = "none";
 
-
-// Handle file input3 changes
-fileInput_3.addEventListener("change", (event) => {
-  const files = event.target.files;
-
-  if (imageCount_3 + files.length <= MAX_IMAGES_3) {
-    Array.from(files).forEach((file) => {
-      validateFile(file, (isValid, fileData) => {
-        if (isValid) {
-          console.log("Valid image file loaded, appending it to the container.");
-
-          const previewImage = document.createElement("img");
-          previewImage.src = fileData;
-          previewImage.alt = "Image Preview";
-          previewImage.style.width = "100%";
-          previewImage.style.height = "100%";
-          previewImage.style.objectFit = "fill";
-          previewImage.style.borderRadius = "10px";
-
-          // Append the image to the preview container
-          previewContainerWrapper_3.appendChild(previewImage);
-
-          // Hide the upload interface
-          addImageButton_3.style.display = "none";
-          fileInput_3.style.display = "none";
-          descriptionTextContainer_3.style.display = "none"
-          previewContainerWrapperModel6_3.style.border = "none";
-
-
-          imageCount_3++;
-          console.log("Image successfully appended to the container.");
+                imageCountRef.value++;
+                console.log("File successfully appended to the container.");
+              }
+            });
+          });
+        } else {
+          alert(`You can only upload a maximum of ${MAX_IMAGES} files.`);
         }
       });
-    });
-  } else {
-    alert("You can only upload a maximum of 1 image.");
-  }
-});
+    }
 
-// Handle3 image deletion
-deleteButton_3.addEventListener("click", () => {
-  console.log("Deleting the image...");
+    // Function to handle file deletion
+    function handleFileDeletion(deleteButton, previewContainer, addImageButton, fileInput, descriptionTextContainer, previewContainerWrapperModel, imageCountRef) {
+      deleteButton.addEventListener("click", () => {
+        console.log("Deleting the file...");
 
-  // Remove the preview image
-  while (previewContainerWrapper_3.firstChild) {
-    previewContainerWrapper_3.removeChild(previewContainerWrapper_3.firstChild);
-  }
-
-  // Reset image count
-  imageCount_3 = 0;
-
-  addImageButton_3.style.display = "block";
-  fileInput_3.style.display = "block";
-  descriptionTextContainer_3.style.display = "flex"
-  previewContainerWrapperModel6_3.style.border = "2px dashed gray"; // Restore the border
-
-  $('[name="image"]').val('');
-  console.log("Image deleted and upload interface restored.");
-});
-
-
-// Handle file input4 changes
-fileInput_4.addEventListener("change", (event) => {
-  const files = event.target.files;
-
-  if (imageCount + files.length <= MAX_IMAGES_4) {
-    Array.from(files).forEach((file) => {
-      validateFile(file, (isValid, fileData) => {
-        if (isValid) {
-          console.log("Valid image file loaded, appending it to the container.");
-
-          const previewImage = document.createElement("img");
-          previewImage.src = fileData;
-          previewImage.alt = "Image Preview";
-          previewImage.style.width = "100%";
-          previewImage.style.height = "100%";
-          previewImage.style.objectFit = "fill";
-          previewImage.style.borderRadius = "10px";
-
-          // Append the image to the preview container
-          previewContainerWrapper_4.appendChild(previewImage);
-
-          // Hide the upload interface
-          addImageButton_4.style.display = "none";
-          fileInput_4.style.display = "none";
-          descriptionTextContainer_4.style.display = "none"
-          previewContainerWrapperModel6_4.style.border = "none";
-
-
-          imageCount_4++;
-          console.log("Image successfully appended to the container.");
+        // Remove the preview file
+        while (previewContainer.firstChild) {
+          previewContainer.removeChild(previewContainer.firstChild);
         }
+
+        // Reset file count
+        imageCountRef.value = 0;
+
+        // Reshow the upload interface
+        addImageButton.style.display = "block";
+        fileInput.style.display = "block";
+        descriptionTextContainer.style.display = "flex";
+        previewContainerWrapperModel.style.border = "2px dashed gray"; // Restore the border
+
+        $('[name="image"]').val("");
+        console.log("File deleted and upload interface restored.");
       });
-    });
-  } else {
-    alert("You can only upload a maximum of 1 image.");
-  }
-});
+    }
 
-// Handle4 image deletion
-deleteButton_4.addEventListener("click", () => {
-  console.log("Deleting the image...");
+    // Initialize file input handlers
+    handleFileInputChange(fileInput, previewContainerWrapper, addImageButton, descriptionTextContainer, previewContainerWrapperModel6, { value: imageCount }, MAX_IMAGES);
+    handleFileInputChange(fileInput_3, previewContainerWrapper_3, addImageButton_3, descriptionTextContainer_3, previewContainerWrapperModel6_3, { value: imageCount_3 }, MAX_IMAGES_3);
+    handleFileInputChange(fileInput_4, previewContainerWrapper_4, addImageButton_4, descriptionTextContainer_4, previewContainerWrapperModel6_4, { value: imageCount_4 }, MAX_IMAGES_4);
 
-  // Remove the preview image
-  while (previewContainerWrapper_4.firstChild) {
-    previewContainerWrapper_4.removeChild(previewContainerWrapper_4.firstChild);
-  }
-
-  // Reset image count
-  imageCount_4 = 0;
-
-  // Reshow the upload interface
-  addImageButton_4.style.display = "block";
-  fileInput_4.style.display = "block";
-  descriptionTextContainer_4.style.display = "flex"
-  previewContainerWrapperModel6_4.style.border = "2px dashed gray"; // Restore the border
-
-  $('[name="image"]').val('');
-  console.log("Image deleted and upload interface restored.");
-});
-
-
-
-
-
+    // Initialize file deletion handlers
+    handleFileDeletion(deleteButton, previewContainerWrapper, addImageButton, fileInput, descriptionTextContainer, previewContainerWrapperModel6, { value: imageCount });
+    handleFileDeletion(deleteButton_3, previewContainerWrapper_3, addImageButton_3, fileInput_3, descriptionTextContainer_3, previewContainerWrapperModel6_3, { value: imageCount_3 });
+    handleFileDeletion(deleteButton_4, previewContainerWrapper_4, addImageButton_4, fileInput_4, descriptionTextContainer_4, previewContainerWrapperModel6_4, { value: imageCount_4 });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1812,128 +1721,149 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 /* Donation Modal 10*/
 document.addEventListener("DOMContentLoaded", () => {
-  const addImageButton = document.getElementById("addImageButtonModel10");
-  const previewContainerWrapper = document.getElementById("image-preview-containerModal10");
-  const previewContainerWrapperDonation = document.getElementById("donation_img");
-  const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel10");
-  const descriptionTextContainer = document.getElementById("descriptionTextContainerModal10");
-  const fileInput = document.querySelector(".fileInput10");
-  const deleteButton = document.getElementById("deleteButtonModal10");
-  const MAX_IMAGES = 1;
-  let imageCount = 0;
+    const addImageButton = document.getElementById("addImageButtonModel10");
+    const previewContainerWrapper = document.getElementById("image-preview-containerModal10");
+    const previewContainerWrapperDonation = document.getElementById("donation_img");
+    const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel10");
+    const descriptionTextContainer = document.getElementById("descriptionTextContainerModal10");
+    const fileInput = document.querySelector(".fileInput10");
+    const deleteButton = document.getElementById("deleteButtonModal10");
+    const MAX_IMAGES = 1;
+    let imageCount = 0;
 
+    // Function to validate the file type and size
+    function validateFile(file, callback) {
+      const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only JPG, PNG, or MP4 files are allowed.");
+        return callback(false, null, null);
+      }
 
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (file.type.startsWith("image")) {
+          // Handle image files
+          const img = new Image();
+          img.onload = () => {
+            if (img.width > 350 || img.height > 812) {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
 
-  // Function to validate the file type and size
-  function validateFile(file, callback) {
-    const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
-    if (!allowedTypes.includes(file.type)) {
-      alert("Only JPG, PNG, or MP4 files are allowed.");
-      return callback(false, null);
-    }
+              const ratio = Math.min(350 / img.width, 812 / img.height);
+              const newWidth = img.width * ratio;
+              const newHeight = img.height * ratio;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        if (img.width > 350 || img.height > 812) {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
+              canvas.width = newWidth;
+              canvas.height = newHeight;
 
-          const ratio = Math.min(350 / img.width, 812 / img.height);
-          const newWidth = img.width * ratio;
-          const newHeight = img.height * ratio;
-
-          canvas.width = newWidth;
-          canvas.height = newHeight;
-
-          ctx.drawImage(img, 0, 0, newWidth, newHeight);
-          const resizedDataUrl = canvas.toDataURL(file.type);
-          callback(true, resizedDataUrl);
-        } else {
-          callback(true, e.target.result);
+              ctx.drawImage(img, 0, 0, newWidth, newHeight);
+              const resizedDataUrl = canvas.toDataURL(file.type);
+              callback(true, resizedDataUrl, "image");
+            } else {
+              callback(true, e.target.result, "image");
+            }
+          };
+          img.src = e.target.result;
+        } else if (file.type.startsWith("video")) {
+          // Handle video files
+          callback(true, e.target.result, "video");
         }
       };
-      img.src = e.target.result;
-    };
 
-    reader.onerror = () => {
-      callback(false, null);
-    };
+      reader.onerror = () => {
+        callback(false, null, null);
+      };
 
-    reader.readAsDataURL(file);
-  }
+      reader.readAsDataURL(file);
+    }
 
-  // Handle file input changes
-  fileInput.addEventListener("change", (event) => {
-    const files = event.target.files;
-    if (imageCount + files.length <= MAX_IMAGES) {
-      Array.from(files).forEach((file) => {
-        validateFile(file, (isValid, fileData) => {
-          if (isValid) {
-            console.log("Valid image file loaded, appending it to the container.");
+    // Handle file input changes
+    fileInput.addEventListener("change", (event) => {
+      const files = event.target.files;
 
-            const previewImage = document.createElement("img");
-            previewImage.src = fileData;
-            previewImage.alt = "Image Preview";
-            previewImage.style.width = "100%";
-            previewImage.style.height = "100%";
-            previewImage.style.objectFit = "fill";
-            previewImage.style.borderRadius = "10px";
-            const clonedPreviewImage = previewImage.cloneNode(true);
-            // Append the image to the preview container
-            previewContainerWrapper.appendChild(previewImage);
-           // previewContainerWrapperDonation.appendChild(previewImage);
+      if (imageCount + files.length <= MAX_IMAGES) {
+        Array.from(files).forEach((file) => {
+          validateFile(file, (isValid, fileData, fileType) => {
+            if (isValid) {
+              console.log("Valid file loaded, appending it to the container.");
 
-            // clone the image (true to clone deeply)
-          previewContainerWrapperDonation.appendChild(clonedPreviewImage);
+              if (fileType === "image") {
+                // Create and append image preview
+                const previewImage = document.createElement("img");
+                previewImage.src = fileData;
+                previewImage.alt = "Image Preview";
+                previewImage.style.width = "100%";
+                previewImage.style.height = "100%";
+                previewImage.style.objectFit = "fill";
+                previewImage.style.borderRadius = "10px";
 
+                // Clone the image (true to clone deeply)
+                const clonedPreviewImage = previewImage.cloneNode(true);
 
-            // Hide the upload interface
-            addImageButton.style.display = "none";
-            fileInput.style.display = "none";
-            descriptionTextContainer.style.display = "none"
-            previewContainerWrapperModel6.style.border = "none";
+                // Append the image to the preview containers
+                previewContainerWrapper.appendChild(previewImage);
+                previewContainerWrapperDonation.appendChild(clonedPreviewImage);
+              } else if (fileType === "video") {
+                // Create and append video preview
+                const previewVideo = document.createElement("video");
+                previewVideo.src = fileData;
+                previewVideo.controls = false; // Disable default controls
+                previewVideo.style.width = "100%";
+                previewVideo.style.height = "100%";
+                previewVideo.style.objectFit = "fill";
+                previewVideo.style.borderRadius = "10px";
 
+                // Clone the video (true to clone deeply)
+                const clonedPreviewVideo = previewVideo.cloneNode(true);
 
-            imageCount++;
-            console.log("Image successfully appended to the container.");
-          }
+                // Append the video to the preview containers
+                previewContainerWrapper.appendChild(previewVideo);
+                previewContainerWrapperDonation.appendChild(clonedPreviewVideo);
+              }
+
+              // Hide the upload interface
+              addImageButton.style.display = "none";
+              fileInput.style.display = "none";
+              descriptionTextContainer.style.display = "none";
+              previewContainerWrapperModel6.style.border = "none";
+
+              imageCount++;
+              console.log("File successfully appended to the container.");
+            }
+          });
         });
-      });
-    } else {
-      alert("You can only upload a maximum of 1 image.");
-    }
+      } else {
+        alert("You can only upload a maximum of 1 file.");
+      }
+    });
+
+    // Handle file deletion
+    deleteButton.addEventListener("click", () => {
+      console.log("Deleting the file...");
+
+      // Remove the preview file from the first container
+      while (previewContainerWrapper.firstChild) {
+        previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
+      }
+
+      // Remove the preview file from the second container
+      while (previewContainerWrapperDonation.firstChild) {
+        previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
+      }
+
+      // Reset file count
+      imageCount = 0;
+
+      // Reshow the upload interface
+      addImageButton.style.display = "block";
+      fileInput.style.display = "block";
+      descriptionTextContainer.style.display = "flex";
+      previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
+
+      $('[name="image"]').val("");
+      console.log("File deleted and upload interface restored.");
+    });
   });
-
-  // Handle image deletion
-  deleteButton.addEventListener("click", () => {
-    console.log("Deleting the image...");
-
-    // Remove the preview image
-    while (previewContainerWrapper.firstChild) {
-      previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
-    }
-
-   // while (previewContainerWrapperDonation.firstChild) {
-   //   previewContainerWrapperDonation.removeChild(previewContainerWrapperDonation.firstChild);
-   // }
-
-
-
-    // Reset image count
-    imageCount = 0;
-
-    // Reshow the upload interface
-    addImageButton.style.display = "block";
-    fileInput.style.display = "block";
-    descriptionTextContainer.style.display = "flex"
-    previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
-
-    $('[name="image"]').val('');
-    console.log("Image deleted and upload interface restored.");
-  });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const mp3Input = document.getElementById("Mp3InputModal2");
@@ -2090,5 +2020,15 @@ function updateLabelWithImage(event, containerId) {
     iconContainer.innerHTML = `<img src="/assets/Gallery%20Add.svg" alt="Icon" />`;
   }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the video element
+    const videoElement = document.getElementById('my-player');
+
+    // Disable right-click on the video element
+    videoElement.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    });
+});
 
 
