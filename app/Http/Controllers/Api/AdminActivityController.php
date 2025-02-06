@@ -32,8 +32,8 @@ class AdminActivityController extends Controller
 
     public function getpopFeeds(Request $request)
     {
-        $popfeeds = PopFeeds::where('type',$request->type)->orderBy('created_at','desc')->get();
-        return response()->json(['feeds' => $popfeeds], 200);
+        $popfeeds = PopFeeds::orderBy('created_at','desc')->get()->groupBy('type');
+        return response()->json($popfeeds, 200);
     }
 
     public function store_systemInfo(Request $request)
