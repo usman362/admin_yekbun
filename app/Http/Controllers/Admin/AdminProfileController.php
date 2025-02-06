@@ -235,7 +235,7 @@ class AdminProfileController extends Controller
 
 
         }else{
-dd($request->all());
+            
             $imageName = "";
             $icon1 = "";
             $icon2 = "";
