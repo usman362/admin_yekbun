@@ -235,7 +235,7 @@ class AdminProfileController extends Controller
 
 
         }else{
-
+// dd($request->all());
             $imageName = "";
             $icon1 = "";
             $icon2 = "";
@@ -248,23 +248,23 @@ class AdminProfileController extends Controller
         }
 
         if ($request->hasFile('icon1')) {
-            $image = $request->file('icon1');
-            $icon1 = time() . rand() . '-icon.' . $image->getClientOriginalExtension();
-            $image->move('public/images/icons/', $icon1);
-            $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
+            $icon1Image = $request->file('icon1');
+            $icon1 = time() . '-icon.' . $icon1Image->getClientOriginalExtension();
+            $icon1Image->move('public/images/icons/', $icon1);
+            $icon1Path =  $icon1Image->storeAs("/images/icons", $icon1, "public");
 
         }
         if ($request->hasFile('icon2')) {
-            $image = $request->file('icon2');
-            $icon2 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
-            $image->move('public/images/icons/', $icon2);
-            $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
+            $icon2Image = $request->file('icon2');
+            $icon2 = time()  . '-icon.' . $icon2Image->getClientOriginalExtension();
+            $icon2Image->move('public/images/icons/', $icon2);
+            $icon2Path =  $icon2Image->storeAs("/images/icons", $icon2, "public");
         }
         if ($request->hasFile('icon3')) {
-            $image = $request->file('icon3');
-            $icon3 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
-            $image->move('public/images/icons/', $icon3);
-            $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
+            $icon3Image = $request->file('icon3');
+            $icon3 = time()  . '-icon.' . $icon3Image->getClientOriginalExtension();
+            $icon3Image->move('public/images/icons/', $icon3);
+            $icon3Path =  $icon3Image->storeAs("/images/icons", $icon3, "public");
         }
 
         if($request->type == "Donation"){
