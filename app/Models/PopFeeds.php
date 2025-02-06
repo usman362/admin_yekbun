@@ -23,6 +23,8 @@ class PopFeeds extends Model
         'date_start',
         'date_ends',
         'image',
+        'audio',
+        'video',
         'share_option',
         'status',
         'is_comments',
@@ -65,18 +67,18 @@ class PopFeeds extends Model
     public function user(){
         return $this->belongsTo(User::class );
     }
-    
+
     /*
     public function reactions(){
 
         return $this->hasMany(Reaction::class , 'feed_id');
     }
         */
- 
+
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
- 
+
 }

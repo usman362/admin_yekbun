@@ -184,6 +184,13 @@ class AdminProfileController extends Controller
                         $postpop->image = $imagePath;
                     }
 
+                    if ($request->hasFile('audio')) {
+                        $audio = $request->file('audio');
+                        $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
+                        $audioPath =  $audio->storeAs("/audio", $audioName, "public");
+                        $postpop->audio = $audioPath;
+                    }
+
                     $postpop->update();
                 }else{
 
@@ -209,21 +216,27 @@ class AdminProfileController extends Controller
 
                     if ($request->hasFile('icon1')) {
                         $image = $request->file('icon1');
-                        $icon1 = time() . rand() . '-icon.' . $image->getClientOriginalExtension();
+                        $icon1 = time() . '-icon.' . $image->getClientOriginalExtension();
                         $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
                         $postpop->icon1 = $icon1Path;
                     }
                     if ($request->hasFile('icon2')) {
                         $image = $request->file('icon2');
-                        $icon2 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
+                        $icon2 = time()  . '-icon.' . $image->getClientOriginalExtension();
                         $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
                         $postpop->icon2 = $icon2Path;
                     }
                     if ($request->hasFile('icon3')) {
                         $image = $request->file('icon3');
-                        $icon3 = time()  . rand() . '-icon.' . $image->getClientOriginalExtension();
+                        $icon3 = time()  . '-icon.' . $image->getClientOriginalExtension();
                         $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
                         $postpop->icon3 = $icon3Path;
+                    }
+                    if ($request->hasFile('audio')) {
+                        $audio = $request->file('audio');
+                        $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
+                        $audioPath =  $audio->storeAs("/audio", $audioName, "public");
+                        $postpop->audio = $audioPath;
                     }
 
                     $postpop->update();
@@ -235,16 +248,23 @@ class AdminProfileController extends Controller
 
 
         }else{
-            
+
             $imageName = "";
             $icon1 = "";
             $icon2 = "";
             $icon3 = "";
+            $audio = "";
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '-post.' . $image->getClientOriginalExtension();
             $imagePath =  $image->storeAs("/images", $imageName, "public");
+        }
+
+        if ($request->hasFile('audio')) {
+            $audio = $request->file('audio');
+            $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
+            $audioPath =  $audio->storeAs("/audio", $audioName, "public");
         }
 
         if ($request->hasFile('icon1')) {
@@ -272,31 +292,33 @@ class AdminProfileController extends Controller
                 'is_gpay' => $request->is_gpay ?? 0,
                 'is_pay_office' => $request->is_payoffice ?? 0,
                 'is_pay_other' => $request->is_other ?? 0,
-                'user_id' => 0,
+                'user_id' => auth()->user()->id ?? 0,
                 'title' => $request->title,
                 'date_start' => $request->start_date,
                 'date_ends' => $request->end_date,
                 'image' => $imagePath ?? '',
+                'audio' => $audioPath ?? '',
                 'share_option' => $optons,
                 'status' => 1,
                 'is_comments' => $request->comments ?? 0,
                 'is_share' => $request->share ?? 0,
-                'is_emoji' => "1",
+                'is_emoji' => $request->emoji ?? 0,
                 'type' => $request->type,
             ]);
 
         }else{
             $postpop = PopFeeds::create([
-                'user_id' => 0,
+                'user_id' => auth()->user()->id ?? 0,
                 'title' => $request->title,
                 'date_start' => $request->start_date,
                 'date_ends' => $request->end_date,
                 'image' => $imagePath ?? '',
+                'audio' => $audioPath ?? '',
                 'share_option' => $optons,
                 'status' => 1,
                 'is_comments' => $request->comments ?? 0,
                 'is_share' => $request->share ?? 0,
-                'is_emoji' => "1",
+                'is_emoji' => $request->emoji ?? 0,
                 'type' => $request->type,
                 'icon1' => $icon1Path ?? '',
                 'icon2' => $icon2Path ?? '',

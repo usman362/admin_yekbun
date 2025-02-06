@@ -1254,7 +1254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     descriptionTextContainer.style.display = "flex"
     previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
 
-
+    $('[name="image"]').val('');
     console.log("Image deleted and upload interface restored.");
   });
 });
@@ -1534,7 +1534,7 @@ document.addEventListener("DOMContentLoaded", () => {
     descriptionTextContainer.style.display = "flex"
     previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
 
-
+    $('[name="image"]').val('');
     console.log("Image deleted and upload interface restored.");
   });
 
@@ -1594,7 +1594,7 @@ deleteButton_3.addEventListener("click", () => {
   descriptionTextContainer_3.style.display = "flex"
   previewContainerWrapperModel6_3.style.border = "2px dashed gray"; // Restore the border
 
-
+  $('[name="image"]').val('');
   console.log("Image deleted and upload interface restored.");
 });
 
@@ -1655,7 +1655,7 @@ deleteButton_4.addEventListener("click", () => {
   descriptionTextContainer_4.style.display = "flex"
   previewContainerWrapperModel6_4.style.border = "2px dashed gray"; // Restore the border
 
-
+  $('[name="image"]').val('');
   console.log("Image deleted and upload interface restored.");
 });
 
@@ -1913,7 +1913,7 @@ document.addEventListener("DOMContentLoaded", () => {
     descriptionTextContainer.style.display = "flex"
     previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
 
-
+    $('[name="image"]').val('');
     console.log("Image deleted and upload interface restored.");
   });
 });
