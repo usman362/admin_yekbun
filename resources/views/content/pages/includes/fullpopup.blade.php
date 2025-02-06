@@ -453,10 +453,7 @@ This donation will automatically end on the specified date.
                 </div>
 
               </div>
-
-
             </div>
-
 
             <!-- Payment Methods -->
             <div class="mb-3 card border-0" style="padding: 5px; width: 360px; height: 123px; border-radius: 10px;">
@@ -643,14 +640,14 @@ This donation will automatically end on the specified date.
           <div class="donation">
 
             <button id="limitedButton2"  style="outline: none; border: none; border-radius: 10px">
-              <img id="unlimit_img_uc" src="{{ asset('assets/svg/svg-dialog/Frame%201000004474.svg')}}" style="width: 100%; height: 100%" />
-              <img id="unlimit_img_c" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004474.svg')}}" style="display:none; width: 100%; height: 100%" />
+              <img id="unlimit_img_uc" src="{{ asset('assets/svg/svg-dialog/Frame%201000004474.svg')}}" style="display:none; width: 100%; height: 100%" />
+              <img id="unlimit_img_c" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004474.svg')}}" style="width: 100%; height: 100%" />
             </button>
 
             <button id="unlimitedButton2"
               style="outline: none; border: none; border-radius: 10px">
-              <img id="limit_img_c" src="{{ asset('assets/svg/svg-dialog/Frame%201000004475.svg')}}" style="width: 100%; height: 100%" />
-              <img id="limit_img_uc" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004475.svg')}}" style="display:none; width: 100%; height: 100%" />
+              <img id="limit_img_c" src="{{ asset('assets/svg/svg-dialog/Frame%201000004475.svg')}}" style="display:none; width: 100%; height: 100%" />
+              <img id="limit_img_uc" src="{{ asset('assets/svg/svg-dialog/donations/Frame%201000004475.svg')}}" style="width: 100%; height: 100%" />
             </button>
           </div>
 
@@ -708,7 +705,12 @@ This donation will automatically end on the specified date.
               <div style="width: 248px; height: 24px;font-size:  14px;
               color: #ed1c24; font-weight: 400;
               line-height: 14px;">
-This donation will close automatically once the target amount is reached.
+              <span id="limited_note" style="display: none">
+                  This donation will close automatically once the target amount is reached.
+              </span>
+              <span id="unlimited_note">
+                This donation will automatically end on the specified date.
+              </span>
               </div>
             </div>
           </div>
@@ -778,7 +780,7 @@ This donation will close automatically once the target amount is reached.
                 style="background-color: #e0e0e0; width: 347px;height: 35px;margin-bottom: 5px;" />
             </div>
 
-            <div class="mb-3 card border-0" style="
+            <div class="mb-3 card border-0" id="unlimited_duration" style="
             width: 360px;
             height: 81px;
             background-color: #fff;
@@ -812,6 +814,46 @@ This donation will close automatically once the target amount is reached.
                       </button>
                   </div>
                 </div>
+              </div>
+
+
+            </div>
+
+
+
+
+            <div class="mb-3 card border-0" id="limited_duration" style="
+            width: 360px;
+            height: 81px;
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 0;
+          ">
+              <label for="surveysTitle" class="form-label" style="font-weight: bold;width: Hug (93px)px;
+        height: Hug (19px)px;
+        gap: 10px;
+        opacity: 0px;
+        ">Donation Amount</label>
+              <div class="row">
+
+
+              <div class="col-6" style="border-radius: 10px;">
+                  <div class="input-group" style="">
+                    <input type="text" class="form-control" placeholder="Type the Amount" name="donation_amount" id="donation_amount"
+                      aria-label="Type the Amount" autocomplete="off" />
+                  </div>
+                </div>
+                <div class="col-6" style="border-radius: 10px;">
+                    <div class="input-group" style="">
+                      <input type="text" class="form-control" placeholder="Type the Amount" name="donation_amount" id="donation_amount"
+                        aria-label="Type the Amount" autocomplete="off" />
+                        <select name="donation_amount_type" class="form-control" id="donation_amount_type">
+                            <option value="currency">Currency</option>
+                        </select>
+                    </div>
+                  </div>
+
               </div>
 
 
@@ -1299,7 +1341,7 @@ text-decoration-skip-ink: none;
     text-align: center;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
               </button>
 
@@ -1318,7 +1360,7 @@ text-decoration-skip-ink: none;
     border-radius: 7px;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
               </button>
 
@@ -1337,7 +1379,7 @@ text-decoration-skip-ink: none;
     border-radius: 7px;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
               </button>
 
@@ -1356,7 +1398,7 @@ text-decoration-skip-ink: none;
     border-radius: 7px;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
               </button>
             </div>
@@ -1839,7 +1881,7 @@ text-decoration-skip-ink: none;
 
 <label id="button1Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_2')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_2" value="All Users">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
@@ -1847,19 +1889,19 @@ text-decoration-skip-ink: none;
   <input class="options_btns button2Modal8" type="radio" name="option_2" value="Educated">
 
 
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_2')">
                 <input class="options_btns button3Modal8" type="radio" name="option_2" value="Cultivated">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_2" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_2')">
                 <input class="options_btns button4Modal8" type="radio" name="option_2" value="Academic">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
 
@@ -2887,7 +2929,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 ">
               <label id="button1Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option" value="All Users">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
@@ -2895,19 +2937,19 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
   <input class="options_btns button2Modal8" type="radio" name="option" value="Educated">
 
 
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8')">
                 <input class="options_btns button3Modal8" type="radio" name="option" value="Cultivated">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8')">
                 <input class="options_btns button4Modal8" type="radio" name="option" value="Academic">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
@@ -3192,7 +3234,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 ">
               <label id="button1Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_3')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_3" value="All Users">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
@@ -3200,19 +3242,19 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
   <input class="options_btns button2Modal8_3" type="radio" name="option_3" value="Educated">
 
 
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_3')" >
                 <input class="options_btns button3Modal8_3" type="radio" name="option_3" value="Cultivated">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_3')" >
                 <input class="options_btns button4Modal8_3" type="radio" name="option_3" value="Academic">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
@@ -3662,7 +3704,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 ">
               <label id="button1Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_3')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_3" value="All Users">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
@@ -3670,19 +3712,19 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
   <input class="options_btns button2Modal8_3" type="radio" name="option_3" value="Educated">
 
 
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_3')" >
                 <input class="options_btns button3Modal8_3" type="radio" name="option_3" value="Cultivated">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_3" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_3')" >
                 <input class="options_btns button4Modal8_3" type="radio" name="option_3" value="Academic">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
@@ -3969,7 +4011,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 ">
               <label id="button1Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8_4')">
   <input class="options_btns button1Modal8" checked="checked" type="radio" name="option_4" value="All Users">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
 </label>
 
@@ -3977,19 +4019,19 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
   <input class="options_btns button2Modal8_4" type="radio" name="option_4" value="Educated">
 
 
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
 </label>
 
               <label  id="button3Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8_4')" >
                 <input class="options_btns button3Modal8_4" type="radio" name="option_4" value="Cultivated">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
 </label>
 
               <label id="button4Modal8_4" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8_4')" >
                 <input class="options_btns button4Modal8_4" type="radio" name="option_4" value="Academic">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
 </label>
             </div>
@@ -4786,7 +4828,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       text-align: center;
       transition: transform 0.2s ease;
     ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
               </button>
 
@@ -4805,7 +4847,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       border-radius: 7px;
       transition: transform 0.2s ease;
     ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
               </button>
 
@@ -4824,7 +4866,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       border-radius: 7px;
       transition: transform 0.2s ease;
     ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
               </button>
 
@@ -4843,7 +4885,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
       border-radius: 7px;
       transition: transform 0.2s ease;
     ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
               </button>
             </div>
@@ -5558,7 +5600,7 @@ text-decoration-skip-ink: none;
     text-align: center;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008315.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg')}}" alt="All Users" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All Users</span>
               </button>
 
@@ -5577,7 +5619,7 @@ text-decoration-skip-ink: none;
     border-radius: 7px;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(1).svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
               </button>
 
@@ -5596,7 +5638,7 @@ text-decoration-skip-ink: none;
     border-radius: 7px;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008317%20(2).svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
               </button>
 
@@ -5615,7 +5657,7 @@ text-decoration-skip-ink: none;
     border-radius: 7px;
     transition: transform 0.2s ease;
   ">
-                <img src="{{ asset('assets/svg/svg-dialog/Group%201000008308.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
+                <img src="{{ asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" style="width: 55px; height: 55px;" />
                 <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
               </button>
             </div>

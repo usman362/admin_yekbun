@@ -1669,12 +1669,14 @@
             $(".paymentOffice").prop("checked", true);
             $(".others").prop("checked", false);
 
-            $("#unlimit_img_uc").show();
-            $("#unlimit_img_c").hide();
-            $("#limit_img_c").show();
-            $("#limit_img_uc").hide();
-            $("#unlimi_bars").show();
-            $("#limi_bars").hide();
+            $("#unlimit_img_uc").hide();
+            $("#unlimit_img_c").show();
+            $("#limit_img_c").hide();
+            $("#limit_img_uc").show();
+            $("#unlimi_bars").hide();
+            $("#limi_bars").show();
+            $("#unlimited_duration").show();
+            $("#limited_duration").hide();
 
 
             $("#button1Modal8").css("background-color", "rgb(28, 162, 237)");
@@ -1796,6 +1798,10 @@
                     $("#limit_img_uc").hide();
                     $("#unlimi_bars").show();
                     $("#limi_bars").hide();
+                    $('#limited_note').show();
+                    $('#unlimited_note').hide();
+                    $("#unlimited_duration").hide();
+                    $("#limited_duration").show();
                 } else {
                     $("#unlimit_img_uc").hide();
                     $("#unlimit_img_c").show();
@@ -1803,6 +1809,10 @@
                     $("#limit_img_uc").show();
                     $("#unlimi_bars").hide();
                     $("#limi_bars").show();
+                    $('#limited_note').hide();
+                    $('#unlimited_note').show();
+                    $("#unlimited_duration").show();
+                    $("#limited_duration").hide();
                 }
 
                 $("#st_date").text(p_start);
