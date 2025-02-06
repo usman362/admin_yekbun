@@ -364,9 +364,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const st_date = document.getElementById('datepicker1_donation').value;
     const end_date = document.getElementById('datepicker2_donation').value;
+    const donation_amount = document.getElementById('donation_amount').value+'$';
+    const donationTitle = document.getElementById('donationTitle').value;
 
     document.getElementById('st_date').textContent = st_date;
     document.getElementById('end_date').textContent = end_date;
+    document.getElementById('donation_amount_2').textContent = donation_amount;
+    document.getElementById('donation_title_2').textContent = donationTitle;
 
     currentModal.hide();
     const targetModalId = createButton.getAttribute("data-target");

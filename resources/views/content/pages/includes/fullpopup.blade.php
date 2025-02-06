@@ -413,7 +413,7 @@ This donation will automatically end on the specified date.
         gap: 10px;
         opacity: 0px;
         ">Donation Title</label>
-              <input type="text" class="form-control" id="donationTitle" placeholder="Type Donation Title"
+              <input type="text" class="form-control" id="donationTitle_2" placeholder="Type Donation Title"
                 style="background-color: #e0e0e0; width: 347px;height: 35px;margin-bottom: 5px;" />
             </div>
 
@@ -771,7 +771,7 @@ This donation will automatically end on the specified date.
             padding: 5px;
             border-radius: 10px;
           ">
-              <label for="surveysTitle" class="form-label" style="font-weight: bold;width: Hug (93px)px;
+              <label for="donationTitle" class="form-label" style="font-weight: bold;width: Hug (93px)px;
         height: Hug (19px)px;
         gap: 10px;
         opacity: 0px;
@@ -1628,7 +1628,7 @@ text-decoration-skip-ink: none;
 
             </div>
 
-            <div style="
+            <div id="donation_title_2" style="
                   font-size: 14px;
                   font-weight: 400;
                   color: gray;
@@ -1701,7 +1701,7 @@ text-decoration-skip-ink: none;
                     align-items: center;
                     margin-top: 5px;
                   ">
-                <span style="
+                <span id="donation_amount_2" style="
                       font-size: 16px;
                       text-transform: capitalize;
                       font-weight: 600;
@@ -2514,8 +2514,8 @@ text-decoration-skip-ink: none;
                   padding: 10px;
                   border-radius: 5px;
                 ">
-              <label for="donationTitle" class="form-label" style="font-weight: bold">Surveys Title</label>
-              <input type="text" class="form-control" id="donationTitle" placeholder="Type Donation Title"
+              <label for="surveyTitle" class="form-label" style="font-weight: bold">Surveys Title</label>
+              <input type="text" class="form-control" id="surveyTitle" placeholder="Type Donation Title"
                 style="background-color: #e0e0e0" />
             </div>
 
@@ -5046,8 +5046,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   padding: 10px;
                   border-radius: 5px;
                 ">
-              <label for="donationTitle" class="form-label" style="font-weight: bold">Event Title</label>
-              <input type="text" class="form-control" id="donationTitle" placeholder="Type Donation Title"
+              <label for="eventTitle" class="form-label" style="font-weight: bold">Event Title</label>
+              <input type="text" class="form-control" id="eventTitle" placeholder="Type Donation Title"
                 style="background-color: #e0e0e0" />
             </div>
 
@@ -5884,7 +5884,7 @@ text-decoration-skip-ink: none;
         gap: 10px;
         opacity: 0px;
         ">Surveys Title</label>
-              <input type="text" class="form-control" id="donationTitle" placeholder="Type Donation Title"
+              <input type="text" class="form-control" id="surveyTitle" placeholder="Type Donation Title"
                 style="background-color: #e0e0e0; width: 347px;height: 35px;margin-bottom: 5px;" />
             </div>
 
