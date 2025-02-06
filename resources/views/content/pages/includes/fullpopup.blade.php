@@ -1382,7 +1382,7 @@ text-decoration-skip-ink: none;
                   <input type="checkbox" class="form-check-input" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -1887,7 +1887,7 @@ text-decoration-skip-ink: none;
                   <input type="checkbox" class="form-check-input" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -2933,7 +2933,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <input type="checkbox" value="1" class="form-check-input share" name="share" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -3238,7 +3238,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <input type="checkbox" value="1" class="form-check-input share" name="share" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -3708,7 +3708,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <input type="checkbox" value="1" class="form-check-input share" name="share" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -4015,7 +4015,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <input type="checkbox" value="1" class="form-check-input share" name="share" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -4869,7 +4869,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                   <input type="checkbox" class="form-check-input" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -5641,7 +5641,7 @@ text-decoration-skip-ink: none;
                   <input type="checkbox" class="form-check-input" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
 
               <!-- Toggle 3 -->
@@ -6377,7 +6377,7 @@ text-decoration-skip-ink: none;
                   <input type="radio" class="form-check-input" name="toggleOptions" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
               <!-- Toggle 3 -->
               <div class="toggle-item">
@@ -6669,7 +6669,7 @@ text-decoration-skip-ink: none;
                   <input type="radio" class="form-check-input" name="toggleOptions" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
               <!-- Toggle 3 -->
               <div class="toggle-item">
@@ -6896,7 +6896,7 @@ text-decoration-skip-ink: none;
                   <input type="radio" class="form-check-input" name="toggleOptions" id="share" />
                   <label for="share" class="form-check-label"></label>
                 </div>
-                <span>Share</span>
+                <span>Voice Comments</span>
               </div>
               <!-- Toggle 3 -->
               <div class="toggle-item">

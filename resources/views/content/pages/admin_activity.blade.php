@@ -49,10 +49,10 @@
         }
 
         /*
-                    .custom-option-body img{
-                        height:136px;
-                    }
-            */
+                        .custom-option-body img{
+                            height:136px;
+                        }
+                */
         .dropdown-item h6,
         .h6,
         h5,
@@ -866,8 +866,8 @@
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-                                                    https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-                                                    "></script>
+                                                        https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                                                        "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -1461,40 +1461,40 @@
                                             <div
                                                 style="display:flex;align-items:center;justify-content:space-between;width:200px;height:100%">
 
-                                                    <div style="display:flex;align-items:center;gap:3px;height:100%"><img
+                                                <div style="display:flex;align-items:center;gap:3px;height:100%"><img
                                                         src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Eye%20Scan.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover"><span
                                                         style="font-weight:400;font-family:Genos">123</span>
-                                                    </div>
-                                                @if ($feed->is_share == 1)
-                                                    <div style="display:flex;align-items:center;gap:3px;height:100%"><img
+                                                </div>
+
+                                                <div style="display:flex;align-items:center;gap:3px;height:100%"><img
                                                         src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover"><span
                                                         style="font-weight:400;font-family:Genos">123</span>
-                                                    </div>
-                                                @endif
+                                                </div>
+
                                                 @if ($feed->is_comments == 1)
                                                     <div style="display:flex;align-items:center;gap:3px;height:100%"><img
-                                                        src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover"><span
-                                                        style="font-weight:400;font-family:Genos">123</span>
+                                                            src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover"><span
+                                                            style="font-weight:400;font-family:Genos">123</span>
                                                     </div>
                                                 @endif
+                                                @if ($feed->is_share == 1)
                                                     <div style="display:flex;align-items:center;gap:3px;height:100%"><img
-                                                        src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover"><span
-                                                        style="font-weight:400;font-family:Genos">123</span>
+                                                            src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover"><span
+                                                            style="font-weight:400;font-family:Genos">123</span>
                                                     </div>
+                                                @endif
                                             </div>
                                             @if ($feed->is_emoji == 1)
                                                 <div style="display:flex;align-items:center;gap:2px;height:100%">
-                                                    <img
-                                                        src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover">
-                                                    <img
-                                                        src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover">
-                                                        <span style="font-weight:400;font-family:Genos">123</span>
+                                                    <span style="font-weight:400;font-family:Genos">123</span>
                                                 </div>
                                             @endif
                                         </div>
@@ -1502,13 +1502,11 @@
                                             style="height:30px;display:flex;background-color:#fff;justify-content:space-between;align-items:center;margin-top:10px">
                                             <div
                                                 style="width:120px;height:30px;display:flex;align-items:center;gap:5px;height:100%">
-                                                @if ($feed->is_share == 1)
                                                 <div
                                                     style="padding:3px;border-radius:4px;width:30px;height:30px;background:#f2f2f2;display:flex;align-items:center;justify-content:center">
                                                     <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
                                                         style="width:24px;height:24px;object-fit:cover">
                                                 </div>
-                                                @endif
                                                 @if ($feed->is_emoji == 1)
                                                 <div
                                                     style="padding:3px;border-radius:4px;width:30px;height:30px;background:#f2f2f2;display:flex;align-items:center;justify-content:center">
@@ -1516,11 +1514,13 @@
                                                         style="width:24px;height:24px;object-fit:cover">
                                                 </div>
                                                 @endif
+                                                @if ($feed->is_share == 1)
                                                 <div
                                                     style="padding:3px;border-radius:4px;width:30px;height:30px;background:#f2f2f2;display:flex;align-items:center;justify-content:center">
                                                     <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
                                                         style="width:24px;height:24px;object-fit:cover">
                                                 </div>
+                                                @endif
                                             </div>
                                             @if ($feed->is_comments == 1)
                                             <div
@@ -1548,8 +1548,7 @@
 
     @include('content.pages.includes.fullpopup')
 
-    <div
-        class="modal fade popmodal" id="modal1__old" tabindex="-1" aria-labelledby="Modlal1">
+    <div class="modal fade popmodal" id="modal1__old" tabindex="-1" aria-labelledby="Modlal1">
         <div id="moo" class="modal-dialog modal-dialog-centered">
             <div class="modal-content"
                 style="Width:375px;Height:812px;background-color:#f8f9fa;padding:5px;border-radius:10px">
