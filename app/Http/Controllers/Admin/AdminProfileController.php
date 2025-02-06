@@ -235,7 +235,7 @@ class AdminProfileController extends Controller
 
 
         }else{
-// dd($request->all());
+dd($request->all());
             $imageName = "";
             $icon1 = "";
             $icon2 = "";
@@ -250,20 +250,17 @@ class AdminProfileController extends Controller
         if ($request->hasFile('icon1')) {
             $icon1Image = $request->file('icon1');
             $icon1 = time() . '-icon.' . $icon1Image->getClientOriginalExtension();
-            $icon1Image->move('public/images/icons/', $icon1);
             $icon1Path =  $icon1Image->storeAs("/images/icons", $icon1, "public");
 
         }
         if ($request->hasFile('icon2')) {
             $icon2Image = $request->file('icon2');
             $icon2 = time()  . '-icon.' . $icon2Image->getClientOriginalExtension();
-            $icon2Image->move('public/images/icons/', $icon2);
             $icon2Path =  $icon2Image->storeAs("/images/icons", $icon2, "public");
         }
         if ($request->hasFile('icon3')) {
             $icon3Image = $request->file('icon3');
             $icon3 = time()  . '-icon.' . $icon3Image->getClientOriginalExtension();
-            $icon3Image->move('public/images/icons/', $icon3);
             $icon3Path =  $icon3Image->storeAs("/images/icons", $icon3, "public");
         }
 
