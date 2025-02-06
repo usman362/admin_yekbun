@@ -144,7 +144,7 @@
         <div class="modal8-right"><img id="deleteButtonModal10"
                 src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
                 style="width:100%;height:100%;cursor:pointer"> <img id="backButtonToModal11" data-target="#modal11"
-                src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008244.svg') }}"
+                src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg') }}"
                 style="width:100%;height:100%;cursor:pointer"></div>
         <div class="modal-content bg-model-image container"
             style="background-color:#e0e0e0;width:375px;height:812px;padding:0;font-family:Genos;border-radius:10px">
@@ -455,7 +455,7 @@
                         <div class="toggle-item">
                             <div class="form-switch"><input type="checkbox" class="form-check-input"
                                     id="share"><label for="share" class="form-check-label"></label></div>
-                            <span>Share</span>
+                            <span>Voice Comments</span>
                         </div>
                         <div class="toggle-item">
                             <div class="form-switch"><input type="checkbox" class="form-check-input"
@@ -623,7 +623,7 @@
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" class="form-check-input"
                                         id="share"><label for="share" class="form-check-label"></label></div>
-                                <span>Share</span>
+                                <span>Voice Comments</span>
                             </div>
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" class="form-check-input"
@@ -1026,7 +1026,7 @@
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
                                         class="form-check-input share" name="share" id="share"><label
-                                        for="share" class="form-check-label"></label></div><span>Share</span>
+                                        for="share" class="form-check-label"></label></div><span>Voice Comments</span>
                             </div>
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
@@ -1230,7 +1230,7 @@
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
                                         class="form-check-input share" name="share" id="share"><label
-                                        for="share" class="form-check-label"></label></div><span>Share</span>
+                                        for="share" class="form-check-label"></label></div><span>Voice Comments</span>
                             </div>
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
@@ -1528,7 +1528,7 @@
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
                                         class="form-check-input share" name="share" id="share"><label
-                                        for="share" class="form-check-label"></label></div><span>Share</span>
+                                        for="share" class="form-check-label"></label></div><span>Voice Comments</span>
                             </div>
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
@@ -1733,7 +1733,7 @@
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
                                         class="form-check-input share" name="share" id="share"><label
-                                        for="share" class="form-check-label"></label></div><span>Share</span>
+                                        for="share" class="form-check-label"></label></div><span>Voice Comments</span>
                             </div>
                             <div class="toggle-item">
                                 <div class="form-switch"><input type="checkbox" value="1"
@@ -2049,7 +2049,7 @@
                         <div class="toggle-item">
                             <div class="form-switch"><input type="checkbox" class="form-check-input"
                                     id="share"><label for="share" class="form-check-label"></label></div>
-                            <span>Share</span>
+                            <span>Voice Comments</span>
                         </div>
                         <div class="toggle-item">
                             <div class="form-switch"><input type="checkbox" class="form-check-input"
@@ -2317,7 +2317,7 @@
                         <div class="toggle-item">
                             <div class="form-switch"><input type="checkbox" class="form-check-input"
                                     id="share"><label for="share" class="form-check-label"></label></div>
-                            <span>Share</span>
+                            <span>Voice Comments</span>
                         </div>
                         <div class="toggle-item">
                             <div class="form-switch"><input type="checkbox" class="form-check-input"
@@ -2638,7 +2638,7 @@
                         <div class="toggle-item">
                             <div class="form-switch"><input type="radio" class="form-check-input"
                                     name="toggleOptions" id="share"><label for="share"
-                                    class="form-check-label"></label></div><span>Share</span>
+                                    class="form-check-label"></label></div><span>Voice Comments</span>
                         </div>
                         <div class="toggle-item">
                             <div class="form-switch"><input type="radio" class="form-check-input"
@@ -2755,7 +2755,7 @@
                         <div class="toggle-item">
                             <div class="form-switch"><input type="radio" class="form-check-input"
                                     name="toggleOptions" id="share"><label for="share"
-                                    class="form-check-label"></label></div><span>Share</span>
+                                    class="form-check-label"></label></div><span>Voice Comments</span>
                         </div>
                         <div class="toggle-item">
                             <div class="form-switch"><input type="radio" class="form-check-input"
@@ -2846,7 +2846,7 @@
                         <div class="toggle-item">
                             <div class="form-switch"><input type="radio" class="form-check-input"
                                     name="toggleOptions" id="share"><label for="share"
-                                    class="form-check-label"></label></div><span>Share</span>
+                                    class="form-check-label"></label></div><span>Voice Comments</span>
                         </div>
                         <div class="toggle-item">
                             <div class="form-switch"><input type="radio" class="form-check-input"

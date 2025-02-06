@@ -379,4 +379,10 @@ class AdminProfileController extends Controller
         ]);
         return back();
     }
+
+    public function get_popfeeds(Request $request)
+    {
+        $popfeeds = PopFeeds::orderBy('created_at', 'desc')->get();
+        return response()->json(['popfeeds' => $popfeeds],200);
+    }
 }

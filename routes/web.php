@@ -216,6 +216,7 @@ Route::middleware('check.role:Super Admin')->group(function () {
 
     Route::get("/admin_activity", [AdminProfileController::class, 'admin_activity'])->name('admin_activity');
     Route::post("/admin_activity/postpops", [AdminProfileController::class, 'store_pops'])->name('postpops');
+    Route::get("/admin_activity/get-popfeeds", [AdminProfileController::class, 'get_popfeeds'])->name('get.popfeeds');
     Route::post("/delete_popfeed", [AdminProfileController::class, 'delete_pops']);
     Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
     Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
