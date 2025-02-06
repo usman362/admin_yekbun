@@ -631,7 +631,7 @@ This donation will automatically end on the specified date.
     <div class="modal8-right">
           <img id="deleteButtonModal10" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
-          <img id="backButtonToModal11" data-target="#modal11" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008244.svg')}}"
+          <img id="backButtonToModal11" data-target="#modal11" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
         </div>
 
@@ -2708,7 +2708,7 @@ text-decoration-skip-ink: none;
             style="width: 100%; height: 100%; cursor: pointer;" />
 
 
-          <img id="shareButton" data-target="#modal8" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008244.svg')}}"
+          <img id="shareButton" data-target="#modal8" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}"
             style="width: 100%; z-index: 10000000; height: 100%; cursor: pointer;" />
 
           <img id="backButtonToModal1"  data-target="#modal1" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008247.svg')}}"
@@ -4274,7 +4274,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
             style="width: 100%; height: 100%; cursor: pointer;" />
 
 
-          <img id="systemButton" data-target="#modal9" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008244.svg')}}"
+          <img id="systemButton" data-target="#modal9" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}"
             style="width: 100%; height: 100%; cursor: pointer;" />
 
           <img id="backButtonToModal4" data-target="#modal4" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008247.svg')}}"
@@ -4362,7 +4362,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
               ">
           <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg')}}" style="width: 50px; height: 50px" />
 
-          <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008244.svg')}}" style="width: 50px; height: 50px" />
+          <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg')}}" style="width: 50px; height: 50px" />
 
           <img id="backButtonToModal9" data-target="#modal14" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008247.svg')}}"
             style="width: 50px; height: 50px" cursor: pointer; />
