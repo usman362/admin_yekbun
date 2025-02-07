@@ -532,7 +532,7 @@ class Helpers
 
         try {
             foreach ($homekeywords as $key => $keyword) {
-                $translated = $code === 'ku' ? $kurdishkeywords[$key]['translated'] : ($code == 'en' ? $keyword['translated'] : '');
+                $translated = $code === 'ku' ? $kurdishkeywords[$key]['translated'] : $keyword['translated'];
 
                 LanguageDetail::create([
                     'language_id' => $language_id,
