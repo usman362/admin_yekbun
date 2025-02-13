@@ -2191,8 +2191,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const event_st_time = document.getElementById('start_time').value;
         const event_end_time = document.getElementById('end_time').value;
         const event_title = document.getElementById('eventTitle').value;
-        const event_country = document.getElementById('event_country').textContent;
-        const event_city = document.getElementById('event_city').textContent;
+        const event_country = document.getElementById('event_country');
+        const event_city = document.getElementById('event_city');
+        const selectedCountry = event_country.options[event_country.selectedIndex].textContent;
+        const selectedCity = event_city.options[event_city.selectedIndex].textContent;
         const event_address = document.getElementById('event_address').value;
 
         document.getElementById('event_st_date').textContent = event_st_date;
@@ -2200,8 +2202,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('event_st_time').textContent = event_st_time;
         document.getElementById('event_end_time').textContent = event_end_time;
         document.getElementById('event_title_2').textContent = event_title;
-        document.getElementById('event_country_2').textContent = event_country;
-        document.getElementById('event_city_2').textContent = event_city;
+        document.getElementById('event_country_2').textContent = selectedCountry;
+        document.getElementById('event_city_2').textContent = selectedCity;
         document.getElementById('event_address_2').textContent = event_address;
 
         currentModal.hide();
