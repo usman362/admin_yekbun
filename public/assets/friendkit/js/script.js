@@ -2032,3 +2032,199 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/* Event Modal 19*/
+document.addEventListener("DOMContentLoaded", () => {
+    const addImageButton = document.getElementById("addImageButtonModel19");
+    const previewContainerWrapper = document.getElementById("image-preview-containerModal19");
+    const previewContainerWrapperEvent = document.getElementById("event_img");
+    const previewContainerWrapperModel6 = document.getElementById("previewContainerWrapperModel19");
+    const descriptionTextContainer = document.getElementById("descriptionTextContainerModal19");
+    const fileInput = document.querySelector(".fileInput19");
+    const deleteButton = document.getElementById("deleteButtonModal19");
+    const MAX_IMAGES = 1;
+    let imageCount = 0;
+
+    // Function to validate the file type and size
+    function validateFile(file, callback) {
+      const allowedTypes = ["image/jpeg", "image/png", "video/mp4"];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only JPG, PNG, or MP4 files are allowed.");
+        return callback(false, null, null);
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (file.type.startsWith("image")) {
+          // Handle image files
+          const img = new Image();
+          img.onload = () => {
+            if (img.width > 350 || img.height > 812) {
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+
+              const ratio = Math.min(350 / img.width, 812 / img.height);
+              const newWidth = img.width * ratio;
+              const newHeight = img.height * ratio;
+
+              canvas.width = newWidth;
+              canvas.height = newHeight;
+
+              ctx.drawImage(img, 0, 0, newWidth, newHeight);
+              const resizedDataUrl = canvas.toDataURL(file.type);
+              callback(true, resizedDataUrl, "image");
+            } else {
+              callback(true, e.target.result, "image");
+            }
+          };
+          img.src = e.target.result;
+        } else if (file.type.startsWith("video")) {
+          // Handle video files
+          callback(true, e.target.result, "video");
+        }
+      };
+
+      reader.onerror = () => {
+        callback(false, null, null);
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    // Handle file input changes
+    fileInput.addEventListener("change", (event) => {
+      const files = event.target.files;
+
+      if (imageCount + files.length <= MAX_IMAGES) {
+        Array.from(files).forEach((file) => {
+          validateFile(file, (isValid, fileData, fileType) => {
+            if (isValid) {
+              console.log("Valid file loaded, appending it to the container.");
+
+              if (fileType === "image") {
+                // Create and append image preview
+                const previewImage = document.createElement("img");
+                previewImage.src = fileData;
+                previewImage.alt = "Image Preview";
+                previewImage.style.width = "100%";
+                previewImage.style.height = "100%";
+                previewImage.style.objectFit = "fill";
+                previewImage.style.borderRadius = "10px";
+
+                // Clone the image (true to clone deeply)
+                const clonedPreviewImage = previewImage.cloneNode(true);
+
+                // Append the image to the preview containers
+                previewContainerWrapper.appendChild(previewImage);
+                previewContainerWrapperEvent.appendChild(clonedPreviewImage);
+              } else if (fileType === "video") {
+                // Create and append video preview
+                const previewVideo = document.createElement("video");
+                previewVideo.src = fileData;
+                previewVideo.controls = false; // Disable default controls
+                previewVideo.style.width = "100%";
+                previewVideo.style.height = "100%";
+                previewVideo.style.objectFit = "fill";
+                previewVideo.style.borderRadius = "10px";
+
+                // Clone the video (true to clone deeply)
+                const clonedPreviewVideo = previewVideo.cloneNode(true);
+
+                // Append the video to the preview containers
+                previewContainerWrapper.appendChild(previewVideo);
+                previewContainerWrapperEvent.appendChild(clonedPreviewVideo);
+              }
+
+              // Hide the upload interface
+              addImageButton.style.display = "none";
+              fileInput.style.display = "none";
+              descriptionTextContainer.style.display = "none";
+              previewContainerWrapperModel6.style.border = "none";
+
+              imageCount++;
+              console.log("File successfully appended to the container.");
+            }
+          });
+        });
+      } else {
+        alert("You can only upload a maximum of 1 file.");
+      }
+    });
+
+    // Handle file deletion
+    deleteButton.addEventListener("click", () => {
+      console.log("Deleting the file...");
+
+      // Remove the preview file from the first container
+      while (previewContainerWrapper.firstChild) {
+        previewContainerWrapper.removeChild(previewContainerWrapper.firstChild);
+      }
+
+      // Remove the preview file from the second container
+      while (previewContainerWrapperEvent.firstChild) {
+        previewContainerWrapperEvent.removeChild(previewContainerWrapperEvent.firstChild);
+      }
+
+      // Reset file count
+      imageCount = 0;
+
+      // Reshow the upload interface
+      addImageButton.style.display = "block";
+      fileInput.style.display = "block";
+      descriptionTextContainer.style.display = "flex";
+      previewContainerWrapperModel6.style.border = "2px dashed gray"; // Restore the border
+
+      $('[name="image"]').val("");
+      console.log("File deleted and upload interface restored.");
+    });
+  });
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const createButton = document.getElementById("backButtonToeventPreviewModal");
+    createButton.addEventListener("click", () => {
+      const currentModal = bootstrap.Modal.getInstance(
+        document.getElementById("eventModal")
+      );
+
+      const event_st_date = document.getElementById('datepicker1_event').value;
+      const event_end_date = document.getElementById('datepicker2_event').value;
+      const event_st_time = document.getElementById('start_time').value;
+      const event_end_time = document.getElementById('end_time').value;
+      const event_title = document.getElementById('eventTitle').value;
+      const event_country = document.getElementById('event_country').textContent;
+      const event_city = document.getElementById('event_city').textContent;
+      const event_address = document.getElementById('event_address').value;
+
+      document.getElementById('event_st_date').textContent = event_st_date;
+      document.getElementById('event_end_date').textContent = event_end_date;
+      document.getElementById('event_st_time').textContent = event_st_time;
+      document.getElementById('event_end_time').textContent = event_end_time;
+      document.getElementById('event_title_2').textContent = event_title;
+      document.getElementById('event_country_2').textContent = event_country;
+      document.getElementById('event_city_2').textContent = event_city;
+      document.getElementById('event_address_2').textContent = event_address;
+
+      currentModal.hide();
+      const targetModalId = createButton.getAttribute("data-target");
+      const targetModal = new bootstrap.Modal(
+        document.querySelector(targetModalId)
+      );
+      targetModal.show();
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const createButton = document.getElementById("backButtonToeventModal");
+    createButton.addEventListener("click", () => {
+      const currentModal = bootstrap.Modal.getInstance(
+        document.getElementById("eventPreviewModal")
+      );
+
+      currentModal.hide();
+      const targetModalId = createButton.getAttribute("data-target");
+      const targetModal = new bootstrap.Modal(
+        document.querySelector(targetModalId)
+      );
+      targetModal.show();
+    });
+  });

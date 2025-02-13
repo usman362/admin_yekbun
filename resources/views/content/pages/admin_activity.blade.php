@@ -1011,7 +1011,7 @@
                                 <div class="col-md mb-md-0 mb-2">
                                     <div class="form-check card custom-option-icon hki custom-options"><a
                                             href="javascript:void(0)" class="form-check-label custom-option-content"
-                                            data-bs-toggle="modal" data-bs-target="#system_popup"
+                                            data-bs-toggle="modal" data-bs-target="#eventModal"
                                             for="customRadioPrime"><span class="custom-option-body"><img
                                                     src="{{ asset('assets/svg/svg-dialog/Ñëîé_1.svg') }}"
                                                     class="my-2 pop-img" width="40" alt=""><span
@@ -1450,7 +1450,7 @@
                                         </div>
                                         <div class="pop_description">{{ $feed->title }}</div>
                                         <div class="pop_main_image pop_main_image_{{ $feed->_id }}">
-                                            @if ($feed->video !== null)
+                                            @if ($feed->video != null)
                                                 <!-- Custom controls are defined here -->
                                                 {{-- <video src="{{ asset('storage/' . $feed->video) }}" style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block"></video> --}}
 

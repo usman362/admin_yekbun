@@ -4949,6 +4949,353 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
   <!-- *********** end greeting************** -->
 
+
+
+
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true " aria-labelledby="Modlal10">
+    <div class="modal-dialog modal-dialog-centered" style="position:relative">
+        <div class="modal8-right" style="top: 8%;"><img id="deleteButtonModal19"
+                src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
+                style="width:100%;height:100%;cursor:pointer"> <img id="backButtonToeventPreviewModal"
+                data-target="#eventPreviewModal" data-bs-toggle="modal"
+                src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg') }}"
+                style="width:100%;height:100%;cursor:pointer"></div>
+        <div class="modal-content bg-model-image container"
+            style="background-color:#e0e0e0;width:375px;padding:0;font-family:Genos;border-radius:10px">
+            <div class="modal-body" style="width:360px;margin:5px;padding:0">
+                <div
+                    style="width:360px;height:65px;display:flex;align-items:center;gap:10px;background-color:#e47a7d3f;border-radius:10px;padding:5px">
+                    <img style="width:50px;height:50px;border-radius:50%"
+                        src="{{ asset('assets/svg/svg-dialog/donations/Check%20Circle.svg') }}" alt="">
+                    <div
+                        style="width:250px;height:53px;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0">
+                        <div
+                            style="width:210px;height:26px;display:flex;align-items:center;text-align:center;gap:5px;font-weight:500;font-size:22px;color:#64748b">
+                            <div style="width:2px;height:2px;border-radius:45%;background:#00000066"></div>Event
+                            Information<div style="width:2px;height:2px;border-radius:45%;background:#00000066"></div>
+                        </div>
+                        <div
+                            style="width:248px;height:24px;font-size:14px;color:#ed1c24;font-weight:400;line-height:14px">
+                            <span>This donation will
+                                automatically end on the specified date.</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="previewContainerWrapperModel19"
+                    style="width:360px;height:213px;border:2px dashed gray;border-radius:10px;position:relative;margin-top:10px;margin-bottom:10px">
+                    <div class="previewContainerModel19"
+                        style="display:flex;flex-direction:column;justify-content:space-between;align-items:center;background-size:contain;cursor:pointer;border-radius:10px;position:relative;height:100%">
+                        <img class="addImageButtonModel2"
+                            src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg') }}"
+                            alt="Illustration" data-target="#modal17" data-bs-dismiss="modal"
+                            style="height:57px;width:41px;align-self:flex-start;margin-left:150px;margin-top:10px"
+                            id="addImageButtonModel19"> <input type="file" name="image"
+                            form="event_form" class="fileInput19"
+                            accept="image/jpg,image/png,image/jpeg,video/mp4"
+                            style="opacity:0;width:100%;height:100%;position:absolute;cursor:pointer">
+                        <div id="image-preview-containerModal19"
+                            class="image-preview-container image-preview-containerModal2"
+                            style="width:100%;height:100%;visibility:visible;border-radius:10px"></div>
+                        <div id="descriptionTextContainerModal19"
+                            style="width:344px;height:90px;display:flex;align-items:center;justify-content:start;background-color:#fff;margin-top:40px;border-radius:10px;margin:7px;align-self:flex-end">
+                            <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg') }}"
+                                alt="Illustration" class="img-fluid" data-target="#modal17"
+                                data-bs-dismiss="modal" style="height:41px;width:37px;margin-left:10px">
+                            <div style="width:275px;height:65px;text-align:center">
+                                <h6 style="font-size:22px;font-weight:500;line-height:15px;color:#64748b">File Size H
+                                    812 - W 350</h6>
+                                <p
+                                    style="font-family:Genos;font-size:18px;font-weight:400;line-height:10px;letter-spacing:.02em;text-align:center;color:#64748b">
+                                    MP4-JPG Or PNG -<span style="color:red">Max 1 Image</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 card border-0"
+                    style="width:360px;height:81px;background-color:#fff;padding:5px;border-radius:10px">
+                    <label for="eventTitle" class="form-label"
+                        style="font-weight:700;width:Hug (93px) px;height:Hug (19px) px;gap:10px;opacity:1">Event
+                        Title</label>
+                    <input type="text" name="title" class="form-control title_field" id="eventTitle"
+                        placeholder="Type Event Title" form="event_form"
+                        style="background-color:#e0e0e0;color:black;width:347px;height:35px;margin-bottom:5px">
+                </div>
+                <div class="mb-3 card border-0"
+                    style="width:360px;background-color:#fff;padding:5px;border-radius:10px;margin-bottom:0">
+                    <label for="surveysTitle" class="form-label"
+                        style="font-weight:700;width:Hug (93px) px;height:Hug (19px) px;gap:10px;opacity:1">Event Date
+                        & Time</label>
+                    <div class="row">
+                        <div class="col-6" style="border-radius:10px">
+                            <div class="input-group time_input" style=""><input type="text"
+                                    class="form-control time_input_field datepicker1" form="event_form"
+                                    placeholder="Start Date" name="start_date" id="datepicker1_event"
+                                    aria-label="Datepicker 1" autocomplete="off"><button class="btn"
+                                    type="button" onclick='$(".datepicker1").datepicker("show")'><img
+                                        src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg') }}"
+                                        class="time_div_img"></button></div>
+
+                            <div class="input-group time_input mt-4 mb-2" style=""><input type="time"
+                                 class="form-control" style="background-color:#e0e0e0;color:black;"
+                                    placeholder="Start Time" name="start_time" id="start_time"
+                                    aria-label="Start Time" autocomplete="off" form="event_form">
+                            </div>
+                        </div>
+                        <div class="col-6" style="border-radius:10px">
+                            <div class="input-group time_input"><input type="text" form="event_form"
+                                    class="form-control time_input_field datepicker2" placeholder="End Date"
+                                    name="end_date" id="datepicker2_event" aria-label="Datepicker 2"
+                                    style="" autocomplete="off"><button class="btn" type="button"
+                                    onclick='$(".datepicker2").datepicker("show")'><img
+                                        src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg') }}"
+                                        class="time_div_img"></button></div>
+                            <div class="input-group time_input mt-4 mb-2" style=""><input type="time"
+                                class="form-control" style="background-color:#e0e0e0;color:black;"
+                                    placeholder="End Time" name="end_time" id="end_time" form="event_form"
+                                    aria-label="End Time" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @php
+                    $countries = App\Models\Country::all();
+                    $cities = App\Models\City::all();
+                @endphp
+                <div class="mb-3 card border-0"
+                    style="width:360px;background-color:#fff;padding:5px;border-radius:10px;margin-bottom:0">
+                    <label for="surveysTitle" class="form-label"
+                        style="font-weight:700;width:Hug (93px) px;gap:10px;opacity:1">Country & City</label>
+                    <div class="row">
+                        <div class="col-6" style="border-radius:10px">
+                            <div class="input-group" style=""><select name="event_country" form="event_form"
+                                class="form-control" id="event_country"  style="background-color:#e0e0e0;color:black;">
+                                <option value="N/A">Select Country</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{$country->id}}">{{ucwords($country->name)}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-6" style="border-radius:10px">
+                            <div class="input-group" style="">
+                                <select name="event_city" form="event_form"
+                                    class="form-control" id="event_city"  style="background-color:#e0e0e0;color:black;">
+                                    <option value="N/A">Select City</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{$city->id}}">{{ucwords($city->name)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group mt-4 mb-2" style=""><input type="text" class="form-control" style="background-color:#e0e0e0;color:black;"
+                                placeholder="Type the Amount" name="event_address" id="event_address"
+                                aria-label="Type the Amount" autocomplete="off" form="event_form"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- event preview popup start --}}
+
+<div class="modal fade" id="eventPreviewModal" tabindex="-1" aria-hidden="true"
+    aria-labelledby="eventPreviewModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal8-right" style="top:12%;">
+            <img
+                data-target="#eventModal" data-bs-toggle="modal" id="backButtonToeventModal"
+                src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008247.svg') }}"
+                style="width:100%;height:100%;cursor:pointer"><button type="submit" form="event_form"><img
+                    id="GoButtonToModal18" data-target="#modal18"
+                    src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg') }}"
+                    style="width:100%;height:100%;cursor:pointer"></button></div>
+        <div class="modal-content bg-model-image container"
+            style="width:375px;height:660px;padding:0;border-radius:10px">
+            <form method="post" action="{{ route('postpops') }}" enctype="multipart/form-data"
+                id="event_form">@csrf <input type="hidden" name="upid" value="0" class="upid">
+                <input type="hidden" name="type" value="Event">
+                <div class="modal-body" style="width:360px;height:400px;padding:0;top:8px;left:5px">
+                    <div style="width:360px;background-color:#fff;border-radius:10px;padding:5px">
+                        <div
+                            style="width:350px;height:30;display:flex;justify-content:space-between;align-items:center;margin:0;top:10px">
+                            <div
+                                style="background-color:#f8f9fa;border-radius:5px;display:flex;align-items:center;justify-content:space-between;width:197px;height:30px;padding:5px">
+                                <div
+                                    style="display:flex;align-items:start;align-items:center;width:130px;height:30px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000003833.svg') }}"
+                                        style="width:28px;height:28px;object-fit:cover">
+                                    <div
+                                        style="width:100px;height:25px;display:flex;flex-direction:column;justify-content:start;align-items:flex-start;margin-left:5px;gap:8px">
+                                        <div
+                                            style="width:150px;height:11px;font-family:Genos;font-size:20px;font-weight:500;text-underline-position:from-font;text-decoration-skip-ink:none;display:flex;align-items:center;gap:5px">
+                                            <div style="width:2px;height:2px;border-radius:45%;background:#00000066">
+                                            </div>YekBun Team<div
+                                                style="width:2px;height:2px;border-radius:45%;background:#00000066">
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="width:150px;height:6px;font-family:Genos;font-size:14px;text-align:left;text-underline-position:from-font;text-decoration-skip-ink:none;color:#7e7e7e;display:flex;align-items:center;gap:5px">
+                                            <div style="width:2px;height:2px;border-radius:45%;background:#00000066">
+                                            </div>Time & Date<div
+                                                style="width:2px;height:2px;border-radius:45%;background:#00000066">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><img
+                                    src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000008317.svg') }}"
+                                    style="width:25px;height:27px;object-fit:cover;border:none"
+                                    class="img-thumbnail">
+                            </div>
+                        </div>
+                        <div id="event_title_2"
+                            style="font-size:14px;font-weight:400;color:gray;width:350px;height:27px;text-align:left;background:#f7f7f7;padding:7px;font-family:Genos;margin-top:7px;margin-bottom:7px;border-radius:5px;display:flex;align-items:center;justify-content:left">
+                            Title of Donation</div>
+                        <div id="event_img"
+                            style="position:relative;width:350px;height:256px;border-radius:10px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.1)">
+
+                        </div>
+
+                        <div style="background-color: #fff; padding: 5px">
+                            <div style="
+                                  display: flex;
+                                  align-items: center;
+                                  border-radius: 10px;
+                                  justify-content: space-between;
+                                  background-color:#f0eeee;
+                                  padding:0 4px;
+                                ">
+                              <img src="{{ asset('assets/svg/svg-dialog/donations/Date.svg')}}" class="img-thumbnail"
+                                style="width: 40px; height: 40px; object-fit: cover" />
+
+                              <div style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    width: 100%;
+                                  ">
+                                <span style="font-weight: bold; font-size: 16px">. <span id="event_st_date">14 . 12 . 2024</span> - . <span id="event_end_date">14 . 12 . 2024</span></span>
+                                <div style="display: flex; align-items: center; gap: 10px">
+                                  <img src="{{ asset('assets/svg/svg-dialog/donations/Group%201000002871.svg')}}" class="img-thumbnail"
+                                    style="width: 12px; height: 12px; object-fit: cover" />
+
+                                  <span style="font-size: 14px">. Start: <span id="event_st_time">16:00</span> .</span>
+                                  <span style="font-size: 14px">. End: <span id="event_end_time">16:00</span> .</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div style="
+                                  display: flex;
+                                  align-items: center;
+                                  justify-content: space-between;
+                                  border-radius: 10px;
+                                  background-color:#f0eeee;
+                                  margin-top:10px;
+                                  padding:0 4px;
+                                ">
+                              <img src="{{ asset('assets/svg/svg-dialog/donations/Date(1).svg')}}" class="img-thumbnail"
+                                style="width: 40px; height: 40px; object-fit: cover" />
+
+                              <div style="
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                  ">
+                                <span style="font-weight: bold; font-size: 16px" id="event_address_2">
+
+                                </span>
+
+                                <div style="
+                                      display: flex;
+                                      align-items: center;
+                                      justify-content: center;
+                                      gap: 5px;
+                                    ">
+                                  {{-- <img src="{{ asset('assets/svg/svg-dialog/donations/image%20831.svg')}}" class="img-thumbnail"
+                                    style="width: 12px; height: 12px; object-fit: cover" /> --}}
+
+                                  <span style="font-size: 14px">. <span id="event_country_2"></span> . <span id="event_city_2"></span> .</span>
+                                </div>
+                              </div>
+
+                              <img src="{{ asset('assets/svg/svg-dialog/donations/Group%201000002100.svg')}}" class="img-thumbnail"
+                                style="width: 40px; height: 40px; object-fit: cover" />
+                            </div>
+                          </div>
+                    </div>
+                    <div
+                        style="width:360px;height:117px;background-color:#fff;margin-top:10px;border-radius:5px;padding:5px">
+                        <div style="display:flex;align-items:center;gap:5px;width:130px;height:18px">
+                            <div style="width:2px;height:2px;border-radius:50%;background-color:#4e4e4e"></div><img
+                                src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
+                                style="width:18px;height:18px;object-fit:cover">
+                            <div style="width:2px;height:2px;border-radius:50%;background-color:#4e4e4e"></div><span
+                                style="font-family:Genos;text-align:left;font-size:12px">Share Option</span>
+                            <div style="width:2px;height:2;border-radius:50%;background-color:#4e4e4e"></div>
+                        </div>
+                        <div
+                            style="width:347px;height:80px;display:flex;align-items:center;justify-content:space-around;gap:10px;margin-top:5px">
+                            <label id="button1Modal8_9" class="toggle-buttonModal8" style="background:rgb(242, 242, 242)"
+                                onclick='toggleColor("button1Modal8_9")'><input class="options_btns button1Modal8"
+                                    checked="checked" type="radio" name="option_5" value="all-users"> <img
+                                    src="{{ asset('assets/svg/svg-dialog/all-users.svg') }}" alt="All Users"
+                                    style="width:55px;height:55px"><span
+                                    style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:#fff">All
+                                    Users</span></label>
+
+                                <label id="button2Modal8_9" class="toggle-buttonModal8" style="background:rgb(242, 242, 242)"
+                                onclick='toggleColor("button2Modal8_9")'><input class="options_btns button2Modal8"
+                                    type="radio" name="option_5" value="educated"> <img
+                                    src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated"
+                                    style="width:55px;height:55px"><span
+                                    style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:gray">Educated</span></label>
+
+                                <label
+                                id="button3Modal8_9" class="toggle-buttonModal8" style="background:rgb(242, 242, 242)"
+                                onclick='toggleColor("button3Modal8_9")'><input class="options_btns button3Modal8"
+                                    type="radio" name="option_5" value="cultivated"> <img
+                                    src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width:55px;height:55px"><span
+                                    style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:gray">Cultivated</span></label>
+
+                                <label
+                                id="button4Modal8_9" class="toggle-buttonModal8" style="background:rgb(242, 242, 242)"
+                                onclick='toggleColor("button4Modal8_9")'><input class="options_btns button4Modal8"
+                                    type="radio" name="option_5" value="academic"> <img
+                                    src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic"
+                                    style="width:55px;height:55px"><span
+                                    style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:gray">Academic</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="toggle-card">
+                            <div class="toggle-item">
+                                <div class="form-switch"><input type="checkbox" class="form-check-input"
+                                        id="comments" name="comments" value="1" checked="checked"><label
+                                        for="comments" class="form-check-label"></label></div><span>Comments</span>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="form-switch"><input type="checkbox" class="form-check-input"
+                                        id="share" name="share" value="1"><label for="share"
+                                        class="form-check-label"></label></div><span>Voice Comments</span>
+                            </div>
+                            <div class="toggle-item">
+                                <div class="form-switch"><input type="checkbox" class="form-check-input"
+                                        id="emoji" name="emoji" value="1"><label for="emoji"
+                                        class="form-check-label"></label></div><span>Emoji</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- event preview popup end --}}
+
+
   <div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content container" style="background-color: #e0e0e0; padding: 5px">

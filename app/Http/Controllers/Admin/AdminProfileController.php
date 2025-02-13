@@ -128,7 +128,7 @@ class AdminProfileController extends Controller
 
 
     public function store_pops(Request $request){
-
+// dd($request->all());
         $request->validate([
             'title' => 'required',
            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -148,6 +148,9 @@ class AdminProfileController extends Controller
         }
         if($poptyp == "Greetings"){
             $optons = $request->option_4;
+        }
+        if($poptyp == "Event"){
+            $optons = $request->option_5;
         }
 
 
@@ -213,6 +216,13 @@ class AdminProfileController extends Controller
                     $postpop->is_share = $request->share ?? 0;
                     $postpop->is_emoji = $request->emoji ?? 0;
 
+                    if($request->type == "Event"){
+                        $postpop->start_time = $request->start_time;
+                        $postpop->end_time = $request->end_time;
+                        $postpop->event_country = $request->event_country;
+                        $postpop->event_city = $request->event_city;
+                        $postpop->event_address = $request->event_address;
+                    }
                     $postpop->txt1 = $request->txt1;
                     $postpop->txt2 = $request->txt2;
                     $postpop->txt3 = $request->txt3;
@@ -361,6 +371,15 @@ class AdminProfileController extends Controller
                 'txt2' => $request->txt2,
                 'txt3' => $request->txt3
             ]);
+
+            if($request->type == "Event"){
+                $postpop->start_time = $request->start_time;
+                $postpop->end_time = $request->end_time;
+                $postpop->event_country = $request->event_country;
+                $postpop->event_city = $request->event_city;
+                $postpop->event_address = $request->event_address;
+                $postpop->save();
+            }
         }
 
         return back()->with('success', 'Popup Feed added successfully.');
