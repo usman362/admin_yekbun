@@ -268,7 +268,7 @@
                         <input type="file" name="image" class="js-file-attach avatar-uploader-input" id="customFileEg1"
                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                         <label class="avatar-uploader-trigger" for="customFileEg1">
-                            <i class="tio-edit avatar-uploader-icon shadow-soft"></i>
+                            <i class="avatar-uploader-icon fa fa-pencil shadow-soft"></i>
                         </label>
                     </label>
                     <div class="d-flex justify-content-center mb-2">
@@ -281,7 +281,7 @@
                     @csrf
                     <div class="card mb-3 mb-lg-5">
                         <div class="card-header">
-                            <h2 class="card-title h4"><i class="tio-info"></i> Basic information</h2>
+                            <h2 class="card-title h4"><i class="fa fa-circle-info"></i> Basic information</h2>
                         </div>
                         <div class="card-body">
                             <div class="row form-group">

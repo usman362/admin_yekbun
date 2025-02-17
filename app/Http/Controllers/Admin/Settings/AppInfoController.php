@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
-
+use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AppInfo;
@@ -18,11 +18,11 @@ class AppInfoController extends Controller
     public function index(Request $rquest)
     {
         try {
-            $appInfo = AppInfo::all()->last()->address;
+            $appInfo = AppInfo::all()->last();
         } catch (\Throwable $e) {
             $appInfo = "";
         }
-        return view('content.apps.app-info', compact('appInfo', 'appInfo'));
+        return view('content.apps.app-info', compact('appInfo'));
     }
 
     /**
@@ -43,14 +43,18 @@ class AppInfoController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             try {
-            $appInfo = AppInfo::updateOrCreate(['_id' => $request->id], [
-                'address' => $request->address
-            ]);
+                $appInfo = AppInfo::updateOrCreate(['_id' => $request->id], [
+                    'address' => $request->address
+                ]);
+                if ($request->has('image')) {
+                    $image_path = Helpers::fileUpload($request->image, 'images/appinfo');
+                    $appInfo->image = $image_path;
+                    $appInfo->save();
+                }
             } catch (\Throwable $e) {
                 return back()->with('success', 'App info has been created');
             }
             return back()->with('success', 'App info has been created');
         }
     }
-
 }
