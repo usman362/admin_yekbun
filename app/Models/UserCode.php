@@ -12,9 +12,12 @@ class UserCode extends Model
 {
     use HasFactory , LogsActivity;
     public $table = "user_codes";
-  
+
     protected $fillable = [
         'user_id',
+        'type',
+        'expires_at',
+        'email',
         'code',
     ];
     public function getActivitylogOptions(): LogOptions
