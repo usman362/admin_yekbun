@@ -349,9 +349,11 @@ Route::delete('/destroy_donation/{id}', [DonationDonationController::class, 'des
 Route::post('/change-password', [AccountSettingController::class, 'change_password'])
     ->name('change-password')
     ->middleware('auth:sanctum');
-Route::post('/send-email-code', [AccountSettingController::class, 'send_email_code'])->name('send-email-code');
-Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
+
+Route::post('/send-old-email-code', [AccountSettingController::class, 'send_old_email_code'])->name('send-old-email-code');
+Route::post('/send-new-email-code', [AccountSettingController::class, 'send_new_email_code'])->name('send-new-email-code');
 Route::post('/change-email', [AccountSettingController::class, 'change_email'])->name('change-email');
+Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
 Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
 
 // Contact Us Controller
