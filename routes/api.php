@@ -72,6 +72,7 @@ use App\Http\Controllers\Api\PostGalleryController;
 use App\Http\Controllers\Api\AvatarsController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
+use App\Http\Controllers\Api\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -166,6 +167,8 @@ Route::post('languages/{id}', [LanguageController::class, 'update'])->name('lang
 Route::delete('languages/{id}', [LanguageController::class, 'destroy'])->name('languages.destroy');
 Route::get('languages/{id}/keywords', [LanguageController::class, 'keywords'])->name('languages.keywords');
 Route::get('languages/{id}/keywords/{keyword}', [LanguageController::class, 'keyword'])->name('languages.keyword');
+
+Route::get('app-setting/appinfo',[SettingsController::class,'app_info']);
 
 Route::post('/logout', [AuthController::class, 'logout']);
 
