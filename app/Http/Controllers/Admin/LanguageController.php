@@ -119,7 +119,7 @@ class LanguageController extends Controller
             return $collection->aggregate([
                 ['$match' => ['language_id' => $id]],
                 ['$group' => ['_id' => '$main_section']],
-                ['$sort' => ['_id' => -1]] // Sort in ascending order (alphabetical)
+                ['$sort' => ['_id' => 1]] // Sort in ascending order (alphabetical)
             ]);
         });
 
