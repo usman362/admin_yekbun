@@ -47,6 +47,10 @@
         border-radius: 8px !important;
         opacity: 0.9 !important;
     }
+
+    .layout-page .modal {
+        z-index: 99999;
+    }
 </style>
 <!-- Page Styles -->
 @yield('page-style')
