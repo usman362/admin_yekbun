@@ -5,11 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\BazarController;
-use App\Http\Controllers\Api\EventController;
-use App\Http\Controllers\Api\ReasonController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\SongController;
-use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\ReportController;
@@ -18,20 +15,16 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\VotingController;
 use App\Http\Controllers\Admin\Donation\DonationController as DonationDonationController;
-
 use App\Http\Controllers\Api\FanPageController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\PolicyAndTermsController;
-
 use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\DiamondUserController;
 use App\Http\Controllers\Api\FlaggedUserController;
 use App\Http\Controllers\Api\PremiumUserController;
-use App\Http\Controllers\Api\BlockFanPageController;
 use App\Http\Controllers\Api\NewsCategoryController;
 use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\StandardUserController;
-use App\Http\Controllers\Api\BazarCategoryController;
 use App\Http\Controllers\Api\EventCategoryController;
 use App\Http\Controllers\Api\ManageFanPageController;
 use App\Http\Controllers\Api\MediaCategoryController;
@@ -48,14 +41,12 @@ use App\Http\Controllers\Api\BazarSubCategoryController;
 use App\Http\Controllers\Api\TwoFactorController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\LanguageController;
-use App\Http\Controllers\Api\PrivacyAndPolicyController;
 use App\Http\Controllers\Api\TranslationController;
 use App\Http\Controllers\Api\AccountSettingController;
 use App\Http\Controllers\Api\AdminActivityController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FeedBackgroundImageController;
 use App\Http\Controllers\Api\UserSettingController;
-use App\Http\Controllers\Api\FeedController;
 use App\Http\Controllers\Api\RingtoneController;
 use App\Http\Controllers\Api\UploadMediaController;
 use App\Http\Controllers\Api\CollectionController;
@@ -114,10 +105,12 @@ Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getS
 Route::get("/admin-activity/donation", [AdminActivityController::class, 'getDonations']);
 Route::get("/admin-activity/surveys", [AdminActivityController::class, 'getSurveys']);
 Route::get("/admin-activity/greetings", [AdminActivityController::class, 'getGreetings']);
+
 Route::post("/admin-activity/system-info", [AdminActivityController::class, 'store_systemInfo']);
 Route::post("/admin-activity/donation", [AdminActivityController::class, 'store_donation']);
 Route::post("/admin-activity/surveys", [AdminActivityController::class, 'store_surveys']);
 Route::post("/admin-activity/greetings", [AdminActivityController::class, 'store_greetings']);
+
 Route::get("/admin-activity/get-feeds", [AdminActivityController::class, 'getpopFeeds']);
 Route::post("/admin-activity/delete-feeds", [AdminActivityController::class, 'delete_pops']);
 
@@ -258,24 +251,6 @@ Route::resource('history-category', HistoryCategoryController::class)->only([
     'destroy',
     'update',
 ]);
-//Manage Cards
-Route::get('/list-cards', [StoryController::class, 'Listcard'])->name('list.cards');
-Route::post('/list-cards-store', [StoryController::class, 'Cardstore'])->name('list.cards.store');
-Route::delete('/list-card/{card}', [StoryController::class, 'destroycard'])->name('list.cards.delete');
-Route::get('story/ManageStories', [StoryController::class, 'ManageStories']);
-Route::get('stories_time', [StoryController::class, 'storage_setting']);
-Route::post('/story-time', [StoryController::class, 'storetime'])->name('story.time.store');
-Route::get('story/ReportedStories', [StoryController::class, 'ManageStoriestwo']);
-Route::delete('/cards/{id}', [StoryController::class, 'deleteCard'])->name('list.cards.delete');
-Route::resource('history', HistoryController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
-Route::resource('bazar-category', BazarCategoryController::class)->only([
-    'index',
-    'store',
-    'show',
-    'destroy',
-    'update',
-]);
-Route::get('stories/reasons', [ReasonController::class, 'index'])->name('stories.reasons');
 
 Route::resource('/storysong', SongController::class);
 Route::resource('/storysong', SongController::class)->names([
@@ -384,25 +359,11 @@ Route::post('/user-setting/save', [UserSettingController::class, 'save'])
     ->name('user-setting-save')
     ->middleware('auth:sanctum');
 
-// Feed Controller
-Route::get('share-feed', [FeedController::class, 'shareWidget'])->name('share-feed');
-
 // Ringtone Controller
 Route::get('/ringtone', [RingtoneController::class, 'get'])->name('ringtone');
 
 Route::post('/upload-media', [UploadMediaController::class, 'index']);
-Route::post('/add-feed', [FeedController::class, 'add_feed'])->name('add-feed');
-Route::get('/fetch-feed/{id?}', [FeedController::class, 'fetch_feed'])->name('fetch-feed');
-Route::get('/get-feed/{id}', [FeedController::class, 'get_feed'])->name('get-feed');
-Route::get('/get-first-feed/{id}', [FeedController::class, 'get_first_feed'])->name('get-feed-first');
-Route::get('/get-feed-bg/{id}', [FeedController::class, 'get_feed_bg'])->name('get-feed-bg');
-Route::get('/get-feed-background/{id}', [FeedController::class, 'get_all'])->name('get-feed-background');
-Route::get('/feed-background-video/{id}', [FeedController::class, 'get_feed_background_video'])->name(
-    'feed-background-video'
-);
-Route::get('/get-all-videos/{id}', [FeedController::class, 'get_all_feed_videos'])->name('get-all-videos');
-Route::get('/feed/media/{id}', [FeedController::class, 'get_feed_media'])->name('feed.media');
-Route::get('/feed/media-delete', [FeedController::class, 'feed_media_delete'])->name('feed.media.delete');
+
 // Feed image background
 Route::post('/upload-background', [FeedBackgroundImageController::class, 'upload'])->name('upload-background');
 Route::get('/get-background', [FeedBackgroundImageController::class, 'get'])->name('get-background');

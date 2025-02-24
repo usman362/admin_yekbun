@@ -102,11 +102,16 @@ class FeedsController extends Controller
             'feed_type' => 'required',
         ]);
         $feeds = new Feed();
-        $feeds->feed_background_image = $request->feed_background_image;
-        $feeds->feed_text_color = $request->feed_text_color;
+
+        if($request->feed_type == 'text'){
+            $feeds->background_image = $request->background_image;
+            $feeds->text_color = $request->text_color;
+        }
+
         $feeds->grid_style = $request->grid_style;
         $feeds->image_type = count($request->file('images') ?? []) + count($request->file('videos') ?? []);
         $feeds->description = $request->description;
+        $feeds->text_properties = $request->text_properties;
         $feeds->user_type = $request->user_type;
         $feeds->feed_type = $request->feed_type;
         // Arrays to store multiple file information
