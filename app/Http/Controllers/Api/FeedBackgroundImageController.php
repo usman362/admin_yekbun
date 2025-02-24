@@ -34,9 +34,9 @@ class FeedBackgroundImageController extends Controller
     public function get()
     {
         $feed = BackgroundFeed::get()->map(function ($item) {
-            if (pathinfo($item->image, PATHINFO_EXTENSION) === 'svg') {
-                $item->image = $this->convertSvgToJpeg($item->image);
-            }
+            // if (pathinfo($item->image, PATHINFO_EXTENSION) === 'svg') {
+            //     $item->image = $this->convertSvgToJpeg($item->image);
+            // }
             return $item;
         });
 
