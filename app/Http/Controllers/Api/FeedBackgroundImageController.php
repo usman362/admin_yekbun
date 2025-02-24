@@ -48,12 +48,10 @@ class FeedBackgroundImageController extends Controller
      */
     private function convertSvgToJpeg($svgPath)
     {
-        $svgFullPath = asset('storage/'.$svgPath);
+        $svgFullPath = public_path('storage/'.$svgPath);
+        dd($svgFullPath);
         if (!file_exists($svgFullPath)) {
-            dd('not exists',$svgFullPath);
-            // return asset('images/default.jpeg');
-        }else{
-            dd('exists',$svgFullPath);
+            return asset('images/default.jpeg');
         }
 
         $jpegPath = str_replace('.svg', '.jpg', $svgPath);
