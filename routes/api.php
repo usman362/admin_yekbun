@@ -61,6 +61,7 @@ use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\AlbumController;
 use App\Http\Controllers\Api\PostGalleryController;
 use App\Http\Controllers\Api\AvatarsController;
+use App\Http\Controllers\Api\EmojiFeedController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
 use App\Http\Controllers\Api\SettingsController;
@@ -135,6 +136,10 @@ Route::get('get-cities', [CityController::class, 'getCities']);
 //Feeds Section
 Route::post('feeds', [FeedsController::class, 'store']);
 Route::get('feeds', [FeedsController::class, 'index']);
+
+//Emojis Section
+Route::get('emojis', [EmojiFeedController::class, 'index']);
+Route::post('emojis', [EmojiFeedController::class, 'store']);
 
 //News Feed Section
 Route::post('news-feeds', [FeedsController::class, 'news_store']);
