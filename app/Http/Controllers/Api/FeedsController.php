@@ -111,6 +111,7 @@ class FeedsController extends Controller
         $feeds->grid_style = $request->grid_style;
         $feeds->image_type = count($request->file('images') ?? []) + count($request->file('videos') ?? []);
         $feeds->description = $request->description;
+        $feeds->text = $request->text;
         $feeds->text_properties = $request->text_properties;
         $feeds->user_type = $request->user_type;
         $feeds->feed_type = $request->feed_type;
