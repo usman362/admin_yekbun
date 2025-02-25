@@ -137,7 +137,7 @@ class FeedsController extends Controller
         $videoPaths = [];
         $videoNames = [];
         $videoLengths = [];
-        $videoSizes = [];
+        // $videoSizes = [];
 
         // Handle multiple video uploads
         if ($request->hasFile('videos')) {
@@ -152,7 +152,7 @@ class FeedsController extends Controller
             $feeds->video = $videoPaths;
             $feeds->video_file_name = $videoNames;
             $feeds->video_file_length = $videoLengths;
-            $feeds->video_file_size = $videoSizes;
+            // $feeds->video_file_size = $videoSizes;
         }
         if ($feeds->save()) {
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feeds], 201);
