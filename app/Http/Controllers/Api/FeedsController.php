@@ -136,8 +136,8 @@ class FeedsController extends Controller
         // Arrays to store multiple video information
         $videoPaths = [];
         $videoNames = [];
-        $videoLengths = [];
-        // $videoSizes = [];
+        // $videoLengths = [];
+        $videoSizes = [];
 
         // Handle multiple video uploads
         if ($request->hasFile('videos')) {
@@ -145,14 +145,14 @@ class FeedsController extends Controller
                 $videoPaths[] = $video->store('videos/user_feeds'); // Store the video and save the path
                 $videoNames[] = $video->getClientOriginalName();
                 $videoSizes[] = $video->getSize();
-                $videoLengths[] = $this->getMediaDuration($video); // Optional, for media length
+                // $videoLengths[] = $this->getMediaDuration($video); // Optional, for media length
             }
 
             // Store arrays in the MongoDB document
             $feeds->video = $videoPaths;
             $feeds->video_file_name = $videoNames;
-            $feeds->video_file_length = $videoLengths;
-            // $feeds->video_file_size = $videoSizes;
+            // $feeds->video_file_length = $videoLengths;
+            $feeds->video_file_size = $videoSizes;
         }
         if ($feeds->save()) {
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feeds], 201);
