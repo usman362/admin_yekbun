@@ -115,45 +115,37 @@ class FeedsController extends Controller
         $feeds->text_properties = $request->text_properties;
         $feeds->user_type = $request->user_type;
         $feeds->feed_type = $request->feed_type;
-        // Arrays to store multiple file information
-        $imagePaths = [];
-        $imageNames = [];
-        $imageSizes = [];
+        $images = [];
+$videos = [];
 
-        // Handle multiple image uploads
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('images/user_feeds'); // Store the image and save the path
-                $imageNames[] = $image->getClientOriginalName();
-                $imageSizes[] = $image->getSize();
-            }
-            // Store arrays in the MongoDB document
-            $feeds->image = $imagePaths;
-            $feeds->image_file_name = $imageNames;
-            $feeds->image_file_size = $imageSizes;
-        }
+// Handle multiple image uploads
+if ($request->hasFile('images')) {
+    foreach ($request->file('images') as $image) {
+        $images[] = [
+            'path' => $image->store('images/user_feeds'),
+            'name' => $image->getClientOriginalName(),
+            'size' => $image->getSize(),
+        ];
+    }
+    $feeds->images = $images; // Store as an array of objects in MongoDB
+}
 
-        // Arrays to store multiple video information
-        $videoPaths = [];
-        $videoNames = [];
-        // $videoLengths = [];
-        $videoSizes = [];
+// Handle multiple video uploads
+if ($request->hasFile('videos')) {
+    foreach ($request->file('videos') as $video) {
+        $videos[] = [
+            'path' => $video->store('videos/user_feeds'),
+            'name' => $video->getClientOriginalName(),
+            'size' => $video->getSize(),
+            // 'length' => $this->getMediaDuration($video), // Optional
+        ];
+    }
+    $feeds->videos = $videos; // Store as an array of objects in MongoDB
+}
 
-        // Handle multiple video uploads
-        if ($request->hasFile('videos')) {
-            foreach ($request->file('videos') as $video) {
-                $videoPaths[] = $video->store('videos/user_feeds'); // Store the video and save the path
-                $videoNames[] = $video->getClientOriginalName();
-                $videoSizes[] = $video->getSize();
-                // $videoLengths[] = $this->getMediaDuration($video); // Optional, for media length
-            }
+// Save the feed
+$feeds->save();
 
-            // Store arrays in the MongoDB document
-            $feeds->video = $videoPaths;
-            $feeds->video_file_name = $videoNames;
-            // $feeds->video_file_length = $videoLengths;
-            $feeds->video_file_size = $videoSizes;
-        }
         if ($feeds->save()) {
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feeds], 201);
         } else {
