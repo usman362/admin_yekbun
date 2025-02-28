@@ -121,8 +121,9 @@ $videos = [];
 // Handle multiple image uploads
 if ($request->hasFile('images')) {
     foreach ($request->file('images') as $image) {
+        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $image->getClientOriginalName());
         $images[] = [
-            'path' => $image->store('images/user_feeds'),
+            'path' => $image->storeAs("images/user_feeds", $uniqueName, "public"),
             'name' => $image->getClientOriginalName(),
             'size' => $image->getSize(),
         ];
@@ -133,8 +134,9 @@ if ($request->hasFile('images')) {
 // Handle multiple video uploads
 if ($request->hasFile('videos')) {
     foreach ($request->file('videos') as $video) {
+        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $video->getClientOriginalName());
         $videos[] = [
-            'path' => $video->store('videos/user_feeds'),
+            'path' => $video->storeAs("videos/user_feeds", $uniqueName, "public"),
             'name' => $video->getClientOriginalName(),
             'size' => $video->getSize(),
             // 'length' => $this->getMediaDuration($video), // Optional
