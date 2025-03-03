@@ -202,7 +202,10 @@ Route::post('/searchlocation', [CountryController::class, 'search_location']);
 
 
 
-
+Route::get('/nationality', [CountryLocationController::class, 'getnatioanlity'])->name('nationality');
+Route::post('/nationality/store', [CountryLocationController::class, 'nationalitystore'])->name('nationality.store');
+Route::delete('/nationality/destroy/{id}', [CountryLocationController::class, 'nationalitydestroy'])->name('nationality.destroy');
+Route::put('/nationality/update/{id}', [CountryLocationController::class, 'nationalityupdate'])->name('nationality.update');
 
 
 Route::get('unauthorize', function () {

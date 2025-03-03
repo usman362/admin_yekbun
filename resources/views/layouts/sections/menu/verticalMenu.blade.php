@@ -1708,6 +1708,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Request::is('nationality') ? 'active' : '' }}">
+            <a href="{{ url('/nationality') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-flag"></i>
+                <div>Manage Nationality</div>
+            </a>
+        </li>
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">System Settings</span>
         </li>
