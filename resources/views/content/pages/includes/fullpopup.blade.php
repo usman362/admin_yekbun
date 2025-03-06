@@ -5070,9 +5070,9 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <div class="input-group" style=""><select name="event_country" form="event_form"
                                 class="form-control" id="event_country"  style="background-color:#e0e0e0;color:black;">
                                 <option value="N/A">Select Country</option>
-                                @foreach ($countries as $country)
+                                {{-- @foreach ($countries as $country)
                                     <option value="{{$country->id}}">{{ucwords($country->name)}}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                         </div>
@@ -5081,9 +5081,9 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                 <select name="event_city" form="event_form"
                                     class="form-control" id="event_city"  style="background-color:#e0e0e0;color:black;">
                                     <option value="N/A">Select City</option>
-                                    @foreach ($cities as $city)
+                                    {{-- @foreach ($cities as $city)
                                         <option value="{{$city->id}}">{{ucwords($city->name)}}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
