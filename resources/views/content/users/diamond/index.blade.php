@@ -28,8 +28,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('users.educated.create') }}">
-            <button class="btn btn-primary">Add User</button>
-          </a> -->
+                <button class="btn btn-primary">Add User</button>
+              </a> -->
             {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add User</button> --}}
         </div>
     </div>
@@ -113,7 +113,17 @@
         </div>
     </div>
 
+    @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
 
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-header border-bottom">
             <h5 class="card-title">Search Filter</h5>
@@ -172,7 +182,6 @@
                                     <th>Username</th>
                                     <th>Device Type</th>
                                     <th>Device IMEI</th>
-                                    <th>Device Name</th>
                                     <th>Device Model</th>
                                     <th>Serial Number</th>
                                     <th>Join</th>
@@ -189,11 +198,13 @@
                                             <div class="d-flex justify-content-start align-items-center user-name">
                                                 <div class="avatar-wrapper">
                                                     <div class="avatar avatar-sm me-3"><img
-                                                            src="{{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
-                                                            alt="Avatar" class="rounded-circle"></div>
+                                                            src="{{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                                            alt="Avatar"
+                                                            onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'"
+                                                            class="rounded-circle"></div>
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ url('app/user/view/account') }}"
+                                                    <a href="{{ url('app/user/' . $userr->id . '/account') }}"
                                                         class="text-body text-truncate">
                                                         <span class="fw-semibold">{{ $userr->name }}</span>
                                                         <span class="fw-semibold">{{ $userr->last_name }}</span>
@@ -205,7 +216,6 @@
                                         <td>{{ $userr->username }}</td>
                                         <td>{{ $userr->device_type }}</td>
                                         <td>{{ $userr->device_imei }}</td>
-                                        <td>{{ $userr->device_name }}</td>
                                         <td>{{ $userr->device_model }}</td>
                                         <td>{{ $userr->device_serial }}</td>
                                         <td>{{ $userr->created_at->format('d/m/Y') }}</td>
@@ -237,16 +247,17 @@
                                                             class='bx bx-alarm-exclamation'></i></button>
                                                     @endcan
                                                 </span>
-                                                <span data-bs-toggle="modal"
-                                                    data-bs-target="#upgradeModal{{ $user->id }}">
+                                                 --}}
+                                                <span data-bs-toggle="modal" class="upgradeUser"
+                                                    data-bs-target="#upgradeModal" data-name="{{$userr->name}}" data-id="{{$userr->id}}" data-image="{{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}">
                                                     @can('users.write')
-                                                    <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
-                                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                                        data-bs-original-title="Upgrade"><i
-                                                            class='bx bx-dollar'></i></button>
+                                                        <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
+                                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                            data-bs-original-title="Upgrade"><i
+                                                                class='bx bx-medal'></i></button>
                                                     @endcan
-                                                </span> --}}
-                                                <form action="{{ route('users.standard.destroy', $userr->id) }}"
+                                                </span>
+                                                <form action="{{ route('users.educated.destroy', $userr->id) }}"
                                                     onsubmit="confirmAction(event, () => event.target.submit())"
                                                     class="d-inline" method="post">
                                                     @method('DELETE')
@@ -260,15 +271,15 @@
                                                     {{-- @endcan --}}
                                                 </form>
                                                 {{-- <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                    <div class="dropdown-menu">
-                      <!-- <a class="dropdown-item" href="{{ route('users.standard.edit', $user->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a> -->
-                      <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
-                      <form action="{{ route('users.standard.destroy', $user->id) }}" method="post">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i></button>
-                      </form>
-                    </div> --}}
+                      <div class="dropdown-menu">
+                        <!-- <a class="dropdown-item" href="{{ route('users.educated.edit', $userr->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a> -->
+                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $userr->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
+                        <form action="{{ route('users.educated.destroy', $userr->id) }}" method="post">
+                          @method('DELETE')
+                          @csrf
+                          <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i></button>
+                        </form>
+                      </div> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -345,41 +356,54 @@
     </x-modal>
 
     <!-- Upgrade Modal -->
-    <x-modal id="upgradeModal{{ $user->id }}" :centered="false" title="Upgrade to Premium" closeBtnText="Cancel"
-        saveBtnText="Upgrade" saveBtnForm="upgradeForm{{ $user->id }}" saveBtnType="submit">
-        <form id="upgradeForm{{ $user->id }}" action="{{ route('users.upgrade', $user->id) }}" method="post">
+    <x-modal id="upgradeModal" :centered="false" title="Upgrade User" closeBtnText="Cancel"
+        saveBtnText="Upgrade" saveBtnForm="upgradeForm" saveBtnType="submit">
+        <form id="upgradeForm" action="{{ route('users.upgrade', $user->id) }}" method="post">
             @csrf
-            <div class="d-flex justify-content-start align-items-center user-name mb-4">
+            <div class="d-flex justify-content-start align-items-center upgrade-user-section mb-4">
                 <div class="avatar-wrapper">
                     <div class="avatar avatar-sm me-3"><img src="{{ 'https://www.w3schools.com/howto/img_avatar.png' }}"
-                            alt="Avatar" class="rounded-circle"></div>
+                            alt="Avatar" class="rounded-circle" onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'"></div>
                 </div>
                 <div class="d-flex flex-column">
                     <a href="javascript:void(0)" class="text-body text-truncate">
-                        <span class="fw-semibold">{{ $user->name }}</span>
+                        <span class="fw-semibold"></span>
                     </a>
                 </div>
             </div>
+            <input type="hidden" name="user_id" id="user_id">
             <div class="row mb-4">
-                <div class="col col-md-6 mb-2">
-                    <div class="form-check custom-option custom-option-icon">
+                <div class="col col-md-4 mb-2">
+                    <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon1">
                             <span class="custom-option-body">
-                                <span class="custom-option-title">Premium</span>
+                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" width="20"> Educated</span>
                             </span>
-                            <input name="level" class="form-check-input" type="radio" value="1"
-                                id="customRadioIcon1" checked="">
+                            <input name="level" class="form-check-input" type="radio" value="0"
+                                id="customRadioIcon1">
                         </label>
                     </div>
                 </div>
-                <div class="col col-md-6 mb-2">
+                <div class="col col-md-4 mb-2">
                     <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon2">
                             <span class="custom-option-body">
-                                <span class="custom-option-title">VIP</span>
+                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Educated" width="20"> Cultivated</span>
+                            </span>
+                            <input name="level" class="form-check-input" type="radio" value="1"
+                                id="customRadioIcon2">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col col-md-4 mb-2">
+                    <div class="form-check custom-option custom-option-icon checked">
+                        <label class="form-check-label custom-option-content" for="customRadioIcon3">
+                            <span class="custom-option-body">
+                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/academic.svg')}}" alt="Educated" width="20"> Academic</span>
                             </span>
                             <input name="level" class="form-check-input" type="radio" value="2"
-                                id="customRadioIcon2">
+                                id="customRadioIcon3" checked="">
                         </label>
                     </div>
                 </div>
@@ -421,5 +445,12 @@
                 }
             });
         }
+
+
+        $(document).on('click', '.upgradeUser', function() {
+            $('#user_id').val($(this).attr('data-id'));
+            $('.upgrade-user-section img').attr('src', $(this).attr('data-image'));
+            $('.upgrade-user-section a span').text($(this).attr('data-name'));
+        });
     </script>
 @endsection

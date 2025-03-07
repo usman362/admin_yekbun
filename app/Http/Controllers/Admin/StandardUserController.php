@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreStandardUserRequest;
 use App\Http\Requests\UpdateStandardUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class StandardUserController extends Controller
 {
@@ -157,18 +158,18 @@ class StandardUserController extends Controller
 
     public function upgrade(Request $request, $id)
     {
-
-        if ($request->password !== '123456') {
+        if (!Hash::check($request->password, auth()->user()->password)) {
             return back()->with("error", "Wrong password!");
         }
-        $user = User::find($id);
+
+        $user = User::find($request->user_id);
         $user->level = (int) $request->level;
         $user->save();
 
         $levels = [
-            0 => 'Standard',
-            1 => 'Premium',
-            2 => 'VIP'
+            0 => 'Educated',
+            1 => 'Cultivated',
+            2 => 'Academic'
         ];
 
         return back()->with("success", "User upgraded to {$levels[$request->level]}.");
