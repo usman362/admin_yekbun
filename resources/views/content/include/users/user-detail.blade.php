@@ -6,8 +6,7 @@
                     src="{{ $user->image ? asset('storage/' . $user->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
                     alt="User avatar" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
                 <div class="user-info text-center">
-                    <h4 class="mb-2"><img height="20px;width:20px"
-                            src="{{asset('assets/svg/svg-dialog/'.($user->level == 0 ? 'educated' : ($user->level == 1 ? 'cultivated' : 'academic')).'.svg')}}">
+                    <h4 class="mb-2">
                         {{ $user->name ?? '' }} {{ $user->last_name ?? '' }}</h4>
                     {{-- <p class="mb-2"><img height="20px"
                             src="{{asset('assets/img/germany-flag-png.png')}}"> Rojava
@@ -15,7 +14,8 @@
                             src="{{asset('assets/img/germany-flag-png.png')}}"> Hannover
                     </p> --}}
                     <b>
-                        <p class="mb-2 ">{{$user->level == 0 ? 'Educated' : ($user->level == 1 ? 'Cultivated' : 'Academic')}} User</p>
+                        <p class="mb-2 "><img height="20px;width:20px"
+                            src="{{asset('assets/svg/svg-dialog/'.($user->level == 0 ? 'educated' : ($user->level == 1 ? 'cultivated' : 'academic')).'.svg')}}"> {{$user->level == 0 ? 'Educated' : ($user->level == 1 ? 'Cultivated' : 'Academic')}} User</p>
                     </b>
                     @if ($user->user_id)
                         <span>User Id: {{$user->user_id}}</span>
