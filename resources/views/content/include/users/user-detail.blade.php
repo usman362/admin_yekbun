@@ -2,9 +2,9 @@
     <div class="card-body">
         <div class="user-avatar-section">
             <div class=" d-flex align-items-center flex-column">
-                <img style="border-radius:100%" class="img-fluid my-4"
+                <img style="border-radius:100%;width:100%;height:unset" class="img-fluid my-4"
                     src="{{ $user->image ? asset('storage/' . $user->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
-                    height="110" width="110" alt="User avatar" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
+                    alt="User avatar" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
                 <div class="user-info text-center">
                     <h4 class="mb-2"><img height="20px;width:20px"
                             src="{{asset('assets/svg/svg-dialog/'.($user->level == 0 ? 'educated' : ($user->level == 1 ? 'cultivated' : 'academic')).'.svg')}}">
