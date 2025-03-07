@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="user-avatar-section">
             <div class=" d-flex align-items-center flex-column">
-                <img style="border-radius:100%;width:100%;height:unset" class="img-fluid my-4"
+                <img style="border-radius:100%;width:110px;height:110px" class="img-fluid my-4"
                     src="{{ $user->image ? asset('storage/' . $user->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
                     alt="User avatar" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
                 <div class="user-info text-center">
