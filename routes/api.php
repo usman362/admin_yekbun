@@ -65,6 +65,7 @@ use App\Http\Controllers\Api\EmojiFeedController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
 use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\UserRolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -166,7 +167,7 @@ Route::delete('languages/{id}', [LanguageController::class, 'destroy'])->name('l
 Route::get('languages/{id}/keywords', [LanguageController::class, 'keywords'])->name('languages.keywords');
 Route::get('languages/{id}/keywords/{keyword}', [LanguageController::class, 'keyword'])->name('languages.keyword');
 
-Route::get('app-setting/appinfo',[SettingsController::class,'app_info']);
+Route::get('app-setting/appinfo', [SettingsController::class, 'app_info']);
 
 Route::post('/logout', [AuthController::class, 'logout']);
 
@@ -192,7 +193,6 @@ Route::resource('tickets', TicketController::class)->except(['create', 'edit']);
 
 // Users
 Route::prefix('/users')
-    ->name('users.')
     ->group(function () {
         Route::post('{id}/block/', [StandardUserController::class, 'block'])->name('block');
         Route::post('{id}/warn/', [StandardUserController::class, 'warn'])->name('warn');
@@ -200,6 +200,13 @@ Route::prefix('/users')
         Route::resource('educated', StandardUserController::class);
         Route::resource('cultivated', PremiumUserController::class);
         Route::resource('academic', DiamondUserController::class);
+    });
+
+Route::prefix('user-roles')
+    ->group(function () {
+        Route::get('/educated', [UserRolesController::class, 'educated'])->name('educated');
+        Route::get('/cultivated', [UserRolesController::class, 'cultivated'])->name('cultivated');
+        Route::get('/academic', [UserRolesController::class, 'academic'])->name('academic');
     });
 
 // News
