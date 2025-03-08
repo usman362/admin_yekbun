@@ -50,7 +50,7 @@ class AuthController extends Controller
         // If user exists, check the device IMEI
         if ($user) {
             if($user->email !== 'test_yekbun@gmail.com'){
-                if ((int)$user->device_imei !== (int)$request->device_imei) {
+                if ($user->device_imei != $request->device_imei) {
                     $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
                     return response()->json(['message' => 'Device IMEI is not registered', 'imeis' => $imeis], 404);
                 }
@@ -121,7 +121,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            $deviceImei = User::where('device_imei', (int)$request['device_imei'])->first();
+            $deviceImei = User::where('device_imei', $request['device_imei'])->first();
 
             if ($deviceImei) {
                 return response()->json([
@@ -151,7 +151,7 @@ class AuthController extends Controller
                 'city' => $request['city'],
                 'phone' => $request['phone'],
                 'device_type' => $request['device_type'],
-                'device_imei' => (int)$request['device_imei'],
+                'device_imei' => $request['device_imei'],
                 'device_name' => $request['device_name'],
                 'device_model' => $request['device_model'],
                 'device_serial' => $request['device_serial'],
@@ -174,7 +174,7 @@ class AuthController extends Controller
 
                 UserImei::create([
                     'user_id' => $user->id,
-                    'device_imei' => (int)$request['device_imei'],
+                    'device_imei' => $request['device_imei'],
                 ]);
 
                 try {
@@ -201,7 +201,7 @@ class AuthController extends Controller
 
     public function userImei(Request $request)
     {
-        $deviceImei = User::where('device_imei', (int)$request['device_imei'])->first();
+        $deviceImei = User::where('device_imei', $request['device_imei'])->first();
 
         if ($deviceImei) {
             return response()->json([
