@@ -40,7 +40,7 @@
 	}
   .flag{
     width:25px;
-    
+
   }
 
   </style>
@@ -83,14 +83,14 @@
             <td>{{$loop->iteration}}</td>
             <td>
             @if($country->flag_path != "")
-              <img src="{{asset('/images/flags/' . $country->flag_path)}}" class="flag" />
-            @else 
-            <img src="{{asset('/images/flags/flag.png')}}" class="flag" />
+              <img src="{{asset('/images/flags/' . $country->flag_path)}}" class="flag" onerror="this.src='{{asset('assets/img/sample-flag.png')}}'"/>
+            @else
+            <img src="{{asset('/images/flags/flag.png')}}" class="flag" onerror="this.src='{{asset('assets/img/sample-flag.png')}}'"/>
             @endif
 
             </td>
             <td>
-             
+
             {{ $country->name }}</td>
             <td>{{ $country->users->count() }}</td>
             <td>
@@ -103,7 +103,7 @@
                     </button>
                   </span>
                 {{-- @endcan --}}
-{{-- 
+{{--
                 @can('location.delete') --}}
                   <!-- Delete -->
                   <form action="{{ route('settings.countries.destroy', $country->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
@@ -161,19 +161,19 @@
 var imgsrc = $("#flag_image").attr("src");
 var loadFile = function(event) {
 				var image = document.getElementById('flag_image');
-				
+
 				image.src = URL.createObjectURL(event.target.files[0]);
 				$(".removebtn").show();
 			};
-			
+
 			$(document).on("click", ".removebtn", function(){
 				$("#flag_image").attr("src", imgsrc);
 				$(".removebtn").hide();
-				
+
 				var fileInput = document.getElementById('uploadimage')
 			   fileInput.value = ''
 			   fileInput.dispatchEvent(new Event('change'));
-				
+
 			});
 
 

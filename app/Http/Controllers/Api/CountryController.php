@@ -22,8 +22,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        die("24");
-        $countries = Country::orderBy("name", "ASC")->get();
+        $countries = Country::select('name','flag_path')->orderBy("name", "ASC")->get();
         return response()->json(['countries' => $countries],200);
     }
 
@@ -33,17 +32,17 @@ class CountryController extends Controller
         $searchval = $request->search;
 
 		$results =  Citylocations::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
-		
+
 		$aray = array();
 
 		foreach($results as $row){
-			
+
 			$aray[] = $row->country->name . " " . $row->state->name . " " . $row->name;
 
 		}
 
         return response()->json(['message' => 'Ok','locations' => $aray],201);
-		
+
     }
 
     /**
