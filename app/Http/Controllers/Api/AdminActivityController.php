@@ -21,18 +21,18 @@ class AdminActivityController extends Controller
     }
 
     public function getSurveys(){
-        $popfeeds = PopFeeds::where('type','Surveys')->orderBy('created_at','desc')->get();
+        $popfeeds = PopFeeds::with('user')->where('type','Surveys')->orderBy('created_at','desc')->get();
         return response()->json(['feeds' => $popfeeds], 200);
     }
 
     public function getGreetings(){
-        $popfeeds = PopFeeds::where('type','Greetings')->orderBy('created_at','desc')->get();
+        $popfeeds = PopFeeds::with('user')->where('type','Greetings')->orderBy('created_at','desc')->get();
         return response()->json(['feeds' => $popfeeds], 200);
     }
 
     public function getpopFeeds(Request $request)
     {
-        $popfeeds = PopFeeds::orderBy('created_at','desc')->get()->groupBy('type');
+        $popfeeds = PopFeeds::with('user')->orderBy('created_at','desc')->get()->groupBy('type');
         return response()->json($popfeeds, 200);
     }
 
