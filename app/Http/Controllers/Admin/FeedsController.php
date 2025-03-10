@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helpers;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
 use FFMpeg\FFMpeg;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Activitylog\Models\Activity;
 
 class FeedsController extends Controller
 {
@@ -20,7 +15,7 @@ class FeedsController extends Controller
     public function index()
     {
         $feeds = Feed::with('user')->orderBy('created_at', 'desc')->get();
-        return response()->json(['feeds' => $feeds, 'success' => true], 200);
+        return view('content.manage_posts.manage_user_feeds',compact('feeds'));
     }
 
     public function news()

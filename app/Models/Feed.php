@@ -14,6 +14,7 @@ class Feed extends Model
         'feed_background_image',
         'feed_text_color',
         'grid_style',
+        'user_id',
         'image_type',
         'description',
         'user_type',
@@ -44,7 +45,7 @@ class Feed extends Model
     }
 
     public function user(){
-        return $this->hasMany(User::class , 'id' , 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function collections()
     {
@@ -60,7 +61,7 @@ class Feed extends Model
     }
     public function users()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->hasMany(User::class , 'id' , 'user_id');
     }
     public function reports()
     {

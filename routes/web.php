@@ -95,6 +95,7 @@ use App\Http\Controllers\Admin\WishesandThanks\WishesPrefixController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPolicyandTermController;
 use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\EmojiFeedController;
+use App\Http\Controllers\Admin\FeedsController;
 use App\Http\Controllers\Admin\liveStream\livestreamController;
 use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
@@ -276,7 +277,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     // locale
     Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
 
-    Route::view('/manage-user-feeds', 'content.manage_posts.manage_user_feeds')->name('manage.user.feeds');
+    Route::get('/manage-user-feeds', [FeedsController::class, 'index'])->name('manage.user.feeds');
 
     Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
 
@@ -345,12 +346,11 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/app/events', $controller_path . '\apps\event\Event@index')->name('app-event');
     Route::get('/app/events/add-event', $controller_path . '\apps\event\Event@create')->name('app-event-create');
 
-    Route::view('/manage-user-feeds', 'content.manage_posts.manage_user_feeds')->name('manage.user.feeds');
-    Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
-    Route::view('/manage-user-comments', 'content.manage_posts.manage_user_comments')->name('manage.user.comments');
-    Route::view('/manage-fanpage-comments', 'content.manage_posts.manage_fanpage_comments')->name(
-        'manage.fanpage.comments'
-    );
+    // Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
+    // Route::view('/manage-user-comments', 'content.manage_posts.manage_user_comments')->name('manage.user.comments');
+    // Route::view('/manage-fanpage-comments', 'content.manage_posts.manage_fanpage_comments')->name(
+    //     'manage.fanpage.comments'
+    // );
 
     Route::get('story/ManageStories', [StoryController::class, 'ManageStories']);
 

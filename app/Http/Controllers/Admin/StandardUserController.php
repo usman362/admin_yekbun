@@ -162,15 +162,17 @@ class StandardUserController extends Controller
             return back()->with("error", "Wrong password!");
         }
 
-        $user = User::find($request->user_id);
-        $user->level = (int) $request->level;
-        $user->save();
-
         $levels = [
             0 => 'Educated',
             1 => 'Cultivated',
             2 => 'Academic'
         ];
+
+        $user = User::find($request->user_id);
+        $user->level = (int) $request->level;
+        $user->user_type = strtolower($levels[$request->level]);
+        $user->save();
+
 
         return back()->with("success", "User upgraded to {$levels[$request->level]}.");
     }

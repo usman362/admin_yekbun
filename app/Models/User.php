@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'role_id',
         'roles',
         'user_id',
+        'user_type',
         'device_name',
         'device_model',
         'device_serial',
@@ -117,6 +118,11 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function feeds()
     {
         return $this->hasMany(Feed::class);
+    }
+
+    public function user_feeds()
+    {
+        return $this->hasMany(Feed::class , 'id' , 'user_id');
     }
 
     public function user()

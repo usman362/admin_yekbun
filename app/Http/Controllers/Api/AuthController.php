@@ -156,7 +156,7 @@ class AuthController extends Controller
                 'device_model' => $request['device_model'],
                 'device_serial' => $request['device_serial'],
                 'user_id' => 'YB-US' . (User::count() + 1),
-                'user_type' => 'users'
+                'user_type' => 'educated'
             ]);
 
             if ($request->has('image')) {
