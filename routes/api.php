@@ -95,6 +95,7 @@ Route::post('/reset/resend', [AuthController::class, 'reset_resend'])->name('res
 Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 Route::get('/user-imei', [AuthController::class, 'userImei']);
+Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
 
 //User Profile
 

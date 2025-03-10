@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         // If user exists, check the device IMEI
         if ($user) {
-            if($user->email !== 'test_yekbun@gmail.com'){
+            if ($user->email !== 'test_yekbun@gmail.com') {
                 if ($user->device_imei != $request->device_imei) {
                     $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
                     return response()->json(['message' => 'Device IMEI is not registered', 'imeis' => $imeis], 404);
@@ -450,6 +450,21 @@ class AuthController extends Controller
             return response()->json(['success' => true, "message" => "Email successfully resent."]);
         } catch (\Exception $e) {
             info("Error: " . $e->getMessage());
+        }
+    }
+
+    public function existsEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = User::where('email', $request->email)->first();
+
+        if (!empty($email)) {
+            return response()->json(['email' => $request->email, 'success' => true], 200);
+        } else {
+            return response()->json(['email' => null, 'success' => false], 404);
         }
     }
 }
