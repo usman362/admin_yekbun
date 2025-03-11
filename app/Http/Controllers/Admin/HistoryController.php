@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
 use FFMpeg\FFMpeg;
+use Illuminate\Support\Facades\Storage;
 
 class HistoryController extends Controller
 {
@@ -184,19 +185,20 @@ class HistoryController extends Controller
     public function destroy($id)
     {
         $history = History::find($id);
-        if(isset($history->image)){
-            foreach($history->image as $history_file){
-                $image_path  = public_path('storage/'.$history_file);
-                if(file_exists($image_path)){
-                    unlink($image_path);
+        if (isset($history->images)) {
+            foreach ($history->images as $history_file) {
+                $image_path = 'public/'.$history_file['path']; // Relative path in storage
+                // ✅ Check using Storage::exists()
+                if (Storage::exists($image_path)) {
+                    Storage::delete($image_path); // ✅ Delete the file properly
                 }
             }
         }
         if(isset($history->video)){
             foreach($history->video as $history_file){
-                $image_path  = public_path('storage/'.$history_file);
-                if(file_exists($image_path)){
-                    unlink($image_path);
+                $image_path = 'public/'.$history_file['path']; // Relative path in storage
+                if (Storage::exists($image_path)) {
+                    Storage::delete($image_path); // ✅ Delete the file properly
                 }
             }
         }
