@@ -42,6 +42,7 @@
                                     <input type="file" name="image[]" accept="image/*" />
                                 </div>
                             </div>
+                            <div class="hidden-images"></div> <!-- 🔹 Stores image hidden inputs -->
                         </div>
                     </div>
                 </div>
@@ -57,6 +58,7 @@
                                     <input type="file" name="video[]" accept="video/*" />
                                 </div>
                             </div>
+                            <div class="hidden-videos"></div> <!-- 🔹 Stores video hidden inputs -->
                         </div>
                     </div>
                 </div>
@@ -72,34 +74,30 @@
 
 
 <script>
-    'use strict';
-
     dropZoneInitFunctions.push(function() {
 
-        const previewTemplate = `<div class="row"><di class="col-md-12 d-flex justify-content-center"><div class="dz-preview dz-file-preview w-100">
-  <div class="dz-details">
+        const previewTemplate = `<div class="row"><div class="col-md-12 d-flex justify-content-center"><div class="dz-preview dz-file-preview w-100">
+<div class="dz-details">
     <div class="dz-thumbnail" style="width:95%">
-      <img data-dz-thumbnail>
-      <span class="dz-nopreview">No preview</span>
-      <div class="dz-success-mark"></div>
-      <div class="dz-error-mark"></div>
-      <div class="dz-error-message"><span data-dz-errormessage></span></div>
-      <div class="progress">
-        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-      </div>
+        <img data-dz-thumbnail>
+        <span class="dz-nopreview">No preview</span>
+        <div class="dz-success-mark"></div>
+        <div class="dz-error-mark"></div>
+        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+        </div>
     </div>
     <div class="dz-filename" data-dz-name></div>
     <div class="dz-size" data-dz-size></div>
-  </div>
-  </div></div></di>`;
+</div>
+</div></div></div>`;
 
-        // Multiple Dropzone
-        let dropzoneKey = 0;
-        const dropzoneMulti = new Dropzone('#dropzone-img', {
+        let dropzoneMulti = new Dropzone('#dropzone-img', {
             url: '{{ url('file/upload') }}',
             previewTemplate: previewTemplate,
             parallelUploads: 1,
-            maxFilesize: 100,
+            maxFilesize: 100, // Max file size in MB
             addRemoveLinks: true,
             acceptedFiles: 'image/*',
             headers: {
@@ -112,23 +110,44 @@
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-success");
                 }
+
                 file.previewElement.dataset.path = response.path;
+
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.innerHTML +=
-                    `<input type="hidden" name="image_paths[]" value="${response.path}" data-path="${response.path}">`;
-                dropzoneKey++;
+                    '.hidden-images');
+
+                // ✅ Convert file size to MB
+                const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+                // ✅ Get image dimensions
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+                img.onload = function() {
+                    hiddenInputsContainer.innerHTML += `
+            <input type="hidden" name="image_paths[]" value="${response.path}" data-path="${response.path}">
+            <input type="hidden" name="image_sizes[]" value="${fileSizeMB}" data-path="${response.path}">
+            <input type="hidden" name="image_name[]" value="${file.name}" data-path="${response.path}">
+        `;
+                };
             },
+
             removedfile: function(file) {
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.querySelector(
-                    `input[data-path="${file.previewElement.dataset.path}"]`).remove();
+                    '.hidden-images');
 
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
+                // ✅ Select all matching inputs with the same data-path
+                const hiddenInputs = hiddenInputsContainer.querySelectorAll(
+                    `input[data-path="${file.previewElement.dataset.path}"]`);
+
+                // ✅ Remove each matching input
+                hiddenInputs.forEach(input => input.remove());
+
+                // ✅ Remove the file preview element
+                if (file.previewElement && file.previewElement.parentNode) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
                 }
 
+                // ✅ Send an AJAX request to delete the file from the server
                 $.ajax({
                     url: '{{ url('file/delete') }}',
                     method: 'delete',
@@ -137,47 +156,20 @@
                     },
                     data: {
                         path: file.previewElement.dataset.path
-                    },
-                    success: function() {
-                        dropzoneKey--;
                     }
                 });
 
                 return this._updateMaxFilesReachedClass();
             }
+
         });
-    });
-</script>
 
-<script>
-    'use strict';
-
-    dropZoneInitFunctions.push(function() {
-
-        const previewTemplate = `<div class="row"><di class="col-md-12 d-flex justify-content-center"><div class="dz-preview dz-file-preview w-100">
-  <div class="dz-details">
-    <div class="dz-thumbnail" style="width:95%">
-      <img data-dz-thumbnail>
-      <span class="dz-nopreview">No preview</span>
-      <div class="dz-success-mark"></div>
-      <div class="dz-error-mark"></div>
-      <div class="dz-error-message"><span data-dz-errormessage></span></div>
-      <div class="progress">
-        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-      </div>
-    </div>
-    <div class="dz-filename" data-dz-name></div>
-    <div class="dz-size" data-dz-size></div>
-  </div>
-  </div></div></di>`;
-
-        // Multiple Dropzone
-        let dropzoneKey = 0;
-        const dropzoneMulti1 = new Dropzone('#dropzone-video', {
+        let dropzoneMulti1 = new Dropzone('#dropzone-video', {
             url: '{{ url('file/upload') }}',
             previewTemplate: previewTemplate,
             parallelUploads: 1,
-            maxFilesize: 100,
+            maxFiles: 1,
+            maxFilesize: 1000, // Max file size in MB
             addRemoveLinks: true,
             acceptedFiles: 'video/*',
             headers: {
@@ -187,26 +179,55 @@
                 formData.append('folder', 'history');
             },
             success: function(file, response) {
+                if (this.files.length > 1) {
+                    this.removeFile(this.files[0]); // ✅ Remove the previous file
+                }
+
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-success");
                 }
+
                 file.previewElement.dataset.path = response.path;
+
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.innerHTML +=
-                    `<input type="hidden" name="video_paths[]" value="${response.path}" data-path="${response.path}">`;
-                dropzoneKey++;
+                    '.hidden-videos');
+
+                // ✅ Convert file size to MB
+                const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+                // ✅ Get video duration
+                const video = document.createElement('video');
+                video.preload = 'metadata';
+                video.src = URL.createObjectURL(file);
+                video.onloadedmetadata = function() {
+                    const duration = video.duration.toFixed(2); // ✅ Video duration in seconds
+
+                    hiddenInputsContainer.innerHTML += `
+            <input type="hidden" name="video_paths[]" value="${response.path}" data-path="${response.path}">
+            <input type="hidden" name="video_sizes[]" value="${fileSizeMB}" data-path="${response.path}">
+            <input type="hidden" name="video_durations[]" value="${duration}" data-path="${response.path}">
+            <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
+        `;
+                };
             },
+
             removedfile: function(file) {
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.querySelector(
-                    `input[data-path="${file.previewElement.dataset.path}"]`).remove();
+                    '.hidden-videos');
 
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
+                // ✅ Select all matching inputs with the same data-path
+                const hiddenInputs = hiddenInputsContainer.querySelectorAll(
+                    `input[data-path="${file.previewElement.dataset.path}"]`);
+
+                // ✅ Remove each matching input
+                hiddenInputs.forEach(input => input.remove());
+
+                // ✅ Remove the file preview element
+                if (file.previewElement && file.previewElement.parentNode) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
                 }
 
+                // ✅ Send an AJAX request to delete the file from the server
                 $.ajax({
                     url: '{{ url('file/delete') }}',
                     method: 'delete',
@@ -215,15 +236,14 @@
                     },
                     data: {
                         path: file.previewElement.dataset.path
-                    },
-                    success: function() {
-                        dropzoneKey--;
                     }
                 });
 
                 return this._updateMaxFilesReachedClass();
             }
+
         });
+
     });
 </script>
 

@@ -104,8 +104,9 @@
                             <td>{{ $historys->title ?? '' }}</td>
                             <td><a href="javascript:void(0)" class="showVideo" data-bs-toggle="modal"
                                     data-bs-target="#showVideoModal"
-                                    data-url="{{ isset($historys->video[0]) ? asset('storage/' . $historys->video[0]) : '' }}"><img
-                                        src="{{ isset($historys->image[0]) ? asset('storage/' . $historys->image[0]) : '' }}"
+                                    data-url="{{ isset($historys->video[0]) ? asset('storage/' . $historys->video[0]['path']) : '' }}"
+                                    ><img
+                                        src="{{ isset($historys->images[0]) ? asset('storage/' . $historys->images[0]['path']) : '' }}"
                                         width="100" height="100" alt=""></a></td>
                             <td></td>
                             <td></td>
@@ -138,10 +139,10 @@
                                     </form>
                                 </div>
 
-                                <x-modal id="editModal{{ $historys->id }}" title="Edit History" saveBtnText="Update"
+                                {{--<x-modal id="editModal{{ $historys->id }}" title="Edit History" saveBtnText="Update"
                                     saveBtnType="submit" saveBtnForm="editForm{{ $historys->id }}" size="md">
                                     @include('content.include.history.editForm')
-                                </x-modal>
+                                </x-modal>--}}
                             </td>
                         </tr>
                     @empty

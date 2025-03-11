@@ -7,6 +7,7 @@ use App\Models\PostGallery;
 use Illuminate\Http\Request;
 use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
+use FFMpeg\FFMpeg;
 
 class HistoryController extends Controller
 {
@@ -45,61 +46,82 @@ class HistoryController extends Controller
             'category_id'=>'required',
             'description' => 'nullable',
             // 'image'=> 'required',
-             'video_path'=> 'string'
+            //  'video_path'=> 'string'
           ]);
-          
+
           $history = new History();
           $history->title  = $request->title;
           $history->category_id = $request->category_id;
           $history->description = $request->description;
-          $history->image = $request->image_paths?? [];
-          $history->video = $request->video_paths?? [];
+
+          if ($request->has('image_paths')) {
+            foreach ($request->image_paths as $key => $image) {
+                $images[] = [
+                    'path' => $image,
+                    'name' => $request->image_name[$key] ?? '',
+                    'size' => $request->image_sizes[$key] ?? '',
+                ];
+            }
+            $history->images = $images; // Store as an array of objects in MongoDB
+        }
+
+        if ($request->has('video_paths')) {
+            foreach ($request->video_paths as $key => $video) {
+                $videos[] = [
+                    'path' => $video,
+                    'name' => $request->video_name[$key] ?? '',
+                    'duration' => $request->video_durations[$key] ?? '',
+                    'size' => $request->video_sizes[$key] ?? '',
+                ];
+            }
+            $history->video = $videos; // Store as an array of objects in MongoDB
+        }
 
           if($history->save()){
-            $id = $history->id;
+            // $id = $history->id;
             // for image
-            if($request->image_paths != null){
-                foreach($request->image_paths  as $image){
-                    $post_gallery = new PostGallery();
-                    $post_gallery->history_id = $id;
-                    $post_gallery->media_url = url('/') . '/storage/' . $image;
-                    $post_gallery->media_type = 0;
-                    $post_gallery->user_id = $request->userId;
-                    if($request->has('post_id')){
-                        $post_gallery->post_id = $request->post_id;
-                    }
-                    if($request->has('vote_id')){
-                        $post_gallery->vote_id = $request->vote_id;
-                    }
-                    if($request->has('news_id')){
-                        $post_gallery->news_id = $request->news_id;
-                    }
-                    $post_gallery->save();
-                }
-            }
+            // if($request->image_paths != null){
+            //     foreach($request->image_paths  as $image){
+            //         $post_gallery = new PostGallery();
+            //         $post_gallery->history_id = $id;
+            //         $post_gallery->media_url = url('/') . '/storage/' . $image;
+            //         $post_gallery->media_type = 0;
+            //         $post_gallery->user_id = $request->userId;
+            //         if($request->has('post_id')){
+            //             $post_gallery->post_id = $request->post_id;
+            //         }
+            //         if($request->has('vote_id')){
+            //             $post_gallery->vote_id = $request->vote_id;
+            //         }
+            //         if($request->has('news_id')){
+            //             $post_gallery->news_id = $request->news_id;
+            //         }
+            //         $post_gallery->save();
+            //     }
+            // }
 
             // for video
-            if($request->video_paths != null){
+            // if($request->video_paths != null){
 
 
-            foreach($request->video_paths  as $video){
-                $post_gallery = new PostGallery();
-                $post_gallery->history_id = $id;
-                $post_gallery->media_url = url('/') . '/storage/' . $video;
-                $post_gallery->media_type = 1;
-                $post_gallery->user_id = $request->userId;
-                if($request->has('post_id')){
-                    $post_gallery->post_id = $request->post_id;
-                }
-                if($request->has('vote_id')){
-                    $post_gallery->vote_id = $request->vote_id;
-                }
-                if($request->has('news_id')){
-                    $post_gallery->news_id = $request->news_id;
-                }
-                $post_gallery->save();
-            }
-        }
+            // foreach($request->video_paths  as $video){
+            //     $post_gallery = new PostGallery();
+            //     $post_gallery->history_id = $id;
+            //     $post_gallery->media_url = url('/') . '/storage/' . $video;
+            //     $post_gallery->media_type = 1;
+            //     $post_gallery->user_id = $request->userId;
+            //     if($request->has('post_id')){
+            //         $post_gallery->post_id = $request->post_id;
+            //     }
+            //     if($request->has('vote_id')){
+            //         $post_gallery->vote_id = $request->vote_id;
+            //     }
+            //     if($request->has('news_id')){
+            //         $post_gallery->news_id = $request->news_id;
+            //     }
+            //     $post_gallery->save();
+            // }
+        // }
             return redirect()->route('history.index')->with('success', 'History Has been inserted');
         }else{
             return redirect()->route('history.index')->with('error', 'Failed to add history');
@@ -219,5 +241,19 @@ class HistoryController extends Controller
         return [
             'status' => true
         ];
+    }
+
+    private function getMediaDuration($file)
+    {
+        // Initialize FFMpeg
+        $ffmpeg = FFMpeg::create();
+        // Open the media file (you need to get the real path of the uploaded file)
+        $media = $ffmpeg->open($file->getRealPath());
+        // Get the format of the file to retrieve metadata, including the duration
+        $format = $media->getFormat();
+        // Get duration in seconds (or any other format you want)
+        $duration = $format->get('duration'); // Duration is in seconds
+
+        return $duration;
     }
 }
