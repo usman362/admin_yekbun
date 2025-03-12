@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <label class="form-label" for="inputCategory">Select Category</label>
                     <select class="form-select" aria-label="Default select example" id="inputCategory"
                         name="category_id">
@@ -22,29 +22,13 @@
                     @error('category_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-md-12">
                     <label class="form-label" for="inputTitle">Name</label>
                     <input type="text" id="inputTitle" class="form-control" placeholder="Name" name="title">
                     @error('title')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <h5 class="card-header">Images Upload</h5>
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-img">
-                                <div class="dz-message needsclick">
-                                    Drop files here or click to upload
-                                </div>
-                                <div class="fallback">
-                                    <input type="file" name="image[]" accept="image/*" />
-                                </div>
-                            </div>
-                            <div class="hidden-images"></div> <!-- 🔹 Stores image hidden inputs -->
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-12">
                     <div class="card">
@@ -93,76 +77,6 @@
 </div>
 </div></div></div>`;
 
-        let dropzoneMulti = new Dropzone('#dropzone-img', {
-            url: '{{ url('file/upload') }}',
-            previewTemplate: previewTemplate,
-            parallelUploads: 1,
-            maxFilesize: 100, // Max file size in MB
-            addRemoveLinks: true,
-            acceptedFiles: 'image/*',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            sending: function(file, xhr, formData) {
-                formData.append('folder', 'history');
-            },
-            success: function(file, response) {
-                if (file.previewElement) {
-                    file.previewElement.classList.add("dz-success");
-                }
-
-                file.previewElement.dataset.path = response.path;
-
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-images');
-
-                // ✅ Convert file size to MB
-                const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-
-                // ✅ Get image dimensions
-                const img = new Image();
-                img.src = URL.createObjectURL(file);
-                img.onload = function() {
-                    hiddenInputsContainer.innerHTML += `
-            <input type="hidden" name="image_paths[]" value="${response.path}" data-path="${response.path}">
-            <input type="hidden" name="image_sizes[]" value="${fileSizeMB}" data-path="${response.path}">
-            <input type="hidden" name="image_name[]" value="${file.name}" data-path="${response.path}">
-        `;
-                };
-            },
-
-            removedfile: function(file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-images');
-
-                // ✅ Select all matching inputs with the same data-path
-                const hiddenInputs = hiddenInputsContainer.querySelectorAll(
-                    `input[data-path="${file.previewElement.dataset.path}"]`);
-
-                // ✅ Remove each matching input
-                hiddenInputs.forEach(input => input.remove());
-
-                // ✅ Remove the file preview element
-                if (file.previewElement && file.previewElement.parentNode) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
-                }
-
-                // ✅ Send an AJAX request to delete the file from the server
-                $.ajax({
-                    url: '{{ url('file/delete') }}',
-                    method: 'delete',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    data: {
-                        path: file.previewElement.dataset.path
-                    }
-                });
-
-                return this._updateMaxFilesReachedClass();
-            }
-
-        });
 
         let dropzoneMulti1 = new Dropzone('#dropzone-video', {
             url: '{{ url('file/upload') }}',

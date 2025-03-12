@@ -11,7 +11,7 @@ $(document).ready(function() {
         const hidden_div = createModal.find("#hidden_div")[0];
         const single_vote_options = createModal.find("#single-vote-options")[0];
         const individual_vote_options = createModal.find("#individual-vote-options")[0];
-    
+
         if(voteType == 'single_vote') {
             createModal.find("input[name='vote_type']").val('single');
             createModal.find(".vote-header .title").text("Single Vote");
@@ -75,14 +75,14 @@ $(document).ready(function() {
     });
 
     editModal.on('submit', function() {
-        
+
     });
     createModal.on('submit', function() {
-        const category_id = createModal.find("input[name='vote_category_id']").val();
-        if(!category_id) {
-            toastr['warning']('', 'Please selecte category');
-            return false;
-        }
+        // const category_id = createModal.find("input[name='vote_category_id']").val();
+        // if(!category_id) {
+        //     toastr['warning']('', 'Please selecte category');
+        //     return false;
+        // }
         const banner = createModal.find("input[name='image']")[0];
         if(!banner) {
             toastr['warning']('', 'Please upload banner.');
@@ -159,18 +159,18 @@ $(document).ready(function() {
             removedfile: function (file) {
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
                 hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
-    
+
                 if (file.previewElement != null && file.previewElement.parentNode != null) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
                 }
-    
+
                 $.ajax({
                     url: '/file/delete',
                     method: 'delete',
                     data: {path: file.previewElement.dataset.path},
                     success: function () {}
                 });
-    
+
                 return this._updateMaxFilesReachedClass();
             }
         });
@@ -184,7 +184,7 @@ $(document).ready(function() {
     $(document).on('change', ".individual-vote-react-option-image input[type='file']", function(e){
         const file = e.target.files[0];
         if(!file) return;
-        
+
         const option = $(e.target).closest('.individual-reaction-option');
         const index = option.data('index');
 
@@ -230,6 +230,6 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 console.error('failed to delete file');
             }
-        })     
+        })
     });
 });

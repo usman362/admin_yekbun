@@ -63,22 +63,22 @@ class VotingController extends Controller
           $vote->audio = $request->audio ?? null;
           $vote->vote_type = $request->vote_type ?? 'single';
           if($vote->save()){
-            $id  = $vote->id;
-            $post_gallery  = new PostGallery();
-            $post_gallery->vote_id=$id;
-            $post_gallery->media_type = 0;
-            $post_gallery->media_url = url('/') .'/storage/'. $request->image;
-            $post_gallery->user_id = $request->userId;
-            if($request->has('post_id')){
-                $post_gallery->post_id = $request->post_id;
-            }
-            if($request->has('news_id')){
-                $post_gallery->news_id = $request->news_id;
-            }
-            if($request->has('history_id')){
-                $post_gallery->history_id = $request->history_id;
-            }
-            $post_gallery->save();
+            // $id  = $vote->id;
+            // $post_gallery  = new PostGallery();
+            // $post_gallery->vote_id=$id;
+            // $post_gallery->media_type = 0;
+            // $post_gallery->media_url = url('/') .'/storage/'. $request->image;
+            // $post_gallery->user_id = $request->userId;
+            // if($request->has('post_id')){
+            //     $post_gallery->post_id = $request->post_id;
+            // }
+            // if($request->has('news_id')){
+            //     $post_gallery->news_id = $request->news_id;
+            // }
+            // if($request->has('history_id')){
+            //     $post_gallery->history_id = $request->history_id;
+            // }
+            // $post_gallery->save();
 
             return redirect()->route('vote.index')->with('success', 'Vote Has been inserted');
         }else{

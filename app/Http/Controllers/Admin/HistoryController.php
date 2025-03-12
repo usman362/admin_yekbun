@@ -44,7 +44,7 @@ class HistoryController extends Controller
     {
         $test=$request->validate([
             'title' => 'required',
-            'category_id'=>'required',
+            // 'category_id'=>'required',
             'description' => 'nullable',
             // 'image'=> 'required',
             //  'video_path'=> 'string'
@@ -162,6 +162,13 @@ class HistoryController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $request->validate([
+            'title' => 'required',
+            // 'category_id'=>'required',
+            'description' => 'nullable',
+            // 'image'=> 'required',
+            //  'video_path'=> 'string'
+          ]);
         $history = History::find($id);
         $history->title  = $request->title;
         $history->description  = $request->description;

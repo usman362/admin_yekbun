@@ -439,40 +439,30 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
 
-    Route::resource('/vote-category', VotingCategoryController::class);
-
     Route::resource('/vote', VotingController::class);
     Route::get('/vote/{id}/statistic', [VotingController::class, 'statistic'])->name('vote.statistics');
     Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
     Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
 
-    Route::resource('/vote-category', VotingCategoryController::class);
-    Route::get('/vote_category/{id}/{status}', [VotingCategoryController::class, 'status'])->name('votecat-status');
+    // Route::resource('/vote-category', VotingCategoryController::class);
+    // Route::get('/vote_category/{id}/{status}', [VotingCategoryController::class, 'status'])->name('votecat-status');
 
     Route::resource('/vote', VotingController::class);
     Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
     Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
-
-    Route::resource('/vote-category', VotingCategoryController::class);
-    Route::get('/vote_category/{id}/{status}', [VotingCategoryController::class, 'status'])->name('votecat-status');
 
     Route::delete('/history/{id}/image', [HistoryController::class, 'deleteImage'])->name('history.delete-image');
     Route::delete('/history/{id}/video', [HistoryController::class, 'deleteVideo'])->name('history.delete-video');
     Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
 
-    Route::resource('/history-category', HistoryCategoryController::class);
-    Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(
-        'historycat-status'
-    );
+    // Route::resource('/history-category', HistoryCategoryController::class);
+    // Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(
+    //     'historycat-status'
+    // );
 
     Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
-
-    Route::resource('/history-category', HistoryCategoryController::class);
-    Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(
-        'historycat-status'
-    );
 
     Route::prefix('donations')
         ->name('donations.')
@@ -674,8 +664,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         Route::post('file/images', [FileController::class, 'upload_bg'])->name('file.images');
 
         Route::get('/manage_video', [ReportVideoController::class, 'manage_video']);
-        Route::resource('/history-category', HistoryCategoryController::class);
-        Route::resource('/history-category', HistoryCategoryController::class);
         Route::resource('app-policy', PolicyAndTermsController::class);
 
         Route::resource('/news', NewsController::class);

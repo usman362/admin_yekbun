@@ -11,12 +11,12 @@
             @csrf
             @method('PUT')
             <div class="hidden-inputs">
-                <input type="hidden" name="vote_category_id" />
+                {{-- <input type="hidden" name="vote_category_id" /> --}}
                 <input type="hidden" name="vote_type" />
                 <input type="hidden" name="id" />
             </div>
 
-            <div class="vote-categories p-3 pt-2">
+            {{-- <div class="vote-categories p-3 pt-2">
                 <div class="p-1 select-category" for="category">Select Category</div>
                 <div class="d-flex">
                     @foreach ($vote_categories as $index => $category )
@@ -30,7 +30,7 @@
                     </div>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
 
             <div class="vote-content mt-2 p-2">
                 <div class="vote-banner dropzone needsclick dropzone-img p-2" action="/">

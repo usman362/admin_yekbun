@@ -9,11 +9,11 @@
         <form id="createForm" method="POST" action="{{ route('vote.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="hidden-inputs">
-                <input type="hidden" name="vote_category_id" value="{{$vote_categories[0]->id ?? ''}}" requried />
+                {{-- <input type="hidden" name="vote_category_id" value="{{$vote_categories[0]->id ?? ''}}" requried /> --}}
                 <input type="hidden" name="vote_type" value="single" required />
             </div>
 
-            <div class="vote-categories p-3 pt-2">
+            {{-- <div class="vote-categories p-3 pt-2">
                 <div class="p-1 select-category fw-bold" style="" for="category">Select Category</div>
                 <div class="d-flex">
                     @foreach ($vote_categories as $index => $category )
@@ -27,7 +27,7 @@
                     </div>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
 
             <div class="vote-content mt-2 p-3">
                 <div class="vote-banner dropzone needsclick dropzone-img pt-2" action="/">

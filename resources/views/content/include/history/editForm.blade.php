@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <label class="form-label" for="inputCategory{{ $historys->id }}">Select Category</label>
                     <select class="form-select" aria-label="Default select example" id="inputCategory{{ $historys->id }}" name="category_id">
                         <option selected value="">Choose Category</option>
@@ -37,7 +37,7 @@
                     @error('category_id')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-md-12">
                     <label class="form-label" for="inputTitle{{ $historys->id }}">Name</label>
                     <input type="text" id="inputTitle{{ $historys->id }}" class="form-control" placeholder="Name" name="title" value="{{ $historys->title }}">
@@ -54,21 +54,6 @@
                     <label class="form-label" for="inputDescription">Video Upload</label>
                     <input type="file" class="form-control" name="video[]" accept="video/*" multiple>
                 </div> -->
-                <div class="col-md-12">
-                    <div class="card">
-                        <h5 class="card-header">Images Upload</h5>
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-img{{ $historys->id }}">
-                                <div class="dz-message needsclick">
-                                    Drop files here or click to upload
-                                </div>
-                                <div class="fallback">
-                                    <input  type="file" name="image[]" accept="image/*" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-12">
                     <div class="card">
                         <h5 class="card-header">Video Upload</h5>
@@ -144,83 +129,6 @@ dropZoneInitFunctions.push(function () {
                                         </div>`;
         // Multiple Dropzone
 
-        const dropzoneMulti = new Dropzone('#dropzone-img{{ $historys->id }}', {
-            url: '{{ route('file.upload') }}',
-            previewTemplate: previewTemplate,
-            parallelUploads: 1,
-            maxFilesize: 100,
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            acceptedFiles: 'image/*',  // Accept only images
-            sending: function (file, xhr, formData) {
-                formData.append('folder', 'history');
-            },
-            success: function (file, response) {
-                if (file.previewElement) {
-                    file.previewElement.classList.add("dz-success");
-                }
-                file.previewElement.dataset.path = response.path;
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                hiddenInputsContainer.innerHTML += `<input type="hidden" name="image_paths[]" value="${response.path}" data-path="${response.path}">`;
-            },
-            removedfile: function (file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
-
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
-                }
-
-                $.ajax({
-                    url: '{{ route("history.delete-image", $historys->id) }}',
-                    method: 'delete',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    data: {path: file.previewElement.dataset.path},
-                    success: function () {}
-                });
-
-                return this._updateMaxFilesReachedClass();
-            }
-        });
-
-        @foreach ($historys->image as $img)
-            $("document").ready(()=>{
-                var path = "{{ asset('storage/'.$img) }}";
-                let name = "{{ basename($img) }}";
-                const parts = name.split("___");
-                imageUrlToFile(path,parts).then((file) => {
-                    file['status'] = "success";
-                    file['previewElement'] = "div.dz-preview.dz-image-preview";
-                    file['previewTemplate'] = "div.dz-preview.dz-image-preview";
-                    file['_removeLink'] = "a.dz-remove";
-                    // file['webkitRelativePath'] = "";
-                    file['width'] = 500;
-                    file['height'] = 500;
-                    file['accepted'] = true;
-                    file['dataURL'] = path;
-                    file['processing'] = true;
-                    file['addPathToDataset'] = true;
-                    dropzoneMulti.on('addedfile', function (file) {
-                        if (file.addPathToDataset)
-                            file.previewElement.dataset.path = '{{ $img }}';
-                    });
-                    file['upload'] = {
-                        bytesSent: 0 ,
-                        progress: 0 ,
-                    };
-
-                    dropzoneMulti.emit("addedfile", file , path);
-                    dropzoneMulti.emit("thumbnail", file , path);
-                    // myDropzone.emit("complete", itemInfo);
-                    // myDropzone.options.maxFiles = myDropzone.options.maxFiles - 1;
-                    dropzoneMulti.files.push(file);
-                });
-            });
-        @endforeach
 
         const dropzoneMulti1 = new Dropzone('#dropzone-video{{ $historys->id }}', {
             url: '{{ route('file.upload') }}',

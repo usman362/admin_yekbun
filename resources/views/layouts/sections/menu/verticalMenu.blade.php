@@ -1337,13 +1337,13 @@
 
 
 
-                <li class="menu-item {{ Request::is('vote-category') ? 'active' : '' }}">
+                {{-- <li class="menu-item {{ Request::is('vote-category') ? 'active' : '' }}">
                     <a href="{{ url('/vote-category') }}" class="menu-link">
                         <div>Add Category</div>
                     </a>
 
 
-                </li>
+                </li> --}}
 
 
 
@@ -1379,13 +1379,13 @@
 
 
 
-                <li class="menu-item {{ Request::is('history-category') ? 'active' : '' }} ">
+                {{-- <li class="menu-item {{ Request::is('history-category') ? 'active' : '' }} ">
                     <a href="{{ url('/history-category') }}" class="menu-link">
                         <div>Add Category</div>
                     </a>
 
 
-                </li>
+                </li> --}}
 
 
 

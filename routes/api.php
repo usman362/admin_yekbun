@@ -410,6 +410,7 @@ Route::get('/news-detail/{id}', [NewsController::class, 'detail']);
 Route::post('/news-search', [NewsController::class, 'search']);
 
 // History
+Route::get('/history', [HistoryController::class, 'index']);
 Route::get('/category-history/{id}', [HistoryController::class, 'categorgy_history']);
 Route::get('/history-cover', [HistoryController::class, 'cover_history']);
 Route::get('/history-category', [HistoryController::class, 'categories']);
