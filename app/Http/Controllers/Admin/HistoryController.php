@@ -52,8 +52,9 @@ class HistoryController extends Controller
 
           $history = new History();
           $history->title  = $request->title;
-          $history->category_id = $request->category_id;
-          $history->description = $request->description;
+        //   $history->category_id = $request->category_id;
+        //   $history->description = $request->description;
+          $history->thumbnail = 'history/istockphoto-1973365581-612x612.jpg';
 
           if ($request->has('image_paths')) {
             foreach ($request->image_paths as $key => $image) {
