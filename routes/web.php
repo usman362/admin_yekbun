@@ -154,7 +154,7 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
 });
 
 Route::get('test-ffmpeg',function(){
-    dd(FFMpeg::create(['ffmpeg.binaries' => '/usr/bin/ffmpeg','ffprobe.binaries' => '/usr/bin/ffprobe',]));
+    dd(FFMpeg::create());
 });
 
 Route::get('/send-test-email', function () {
