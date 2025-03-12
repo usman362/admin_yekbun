@@ -456,6 +456,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
 
+
+    Route::post('/generate-thumbnail',[HistoryController::class, 'generateThumbnail']);
     // Route::resource('/history-category', HistoryCategoryController::class);
     // Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(
     //     'historycat-status'

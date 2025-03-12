@@ -26,9 +26,38 @@
                 <div class="col-md-12">
                     <label class="form-label" for="inputTitle">Name</label>
                     <input type="text" id="inputTitle" class="form-control" placeholder="Name" name="title">
+                    <input type="hidden" name="thumbnail" id="thumbnail">
                     @error('title')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+                </div>
+                <div class="col-md-12" id="generated-thumbnails" style="display: none">
+                    <div class="card">
+                        <h5 class="card-header">Generated Thumbnails</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div id="thumbnail-history" style="display: none">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img id="img1" class="generated-img"
+                                                style="width: 100%;height: 100px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
+                                                src="" alt="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img id="img2" class="generated-img"
+                                                style="width: 100%;height: 100px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
+                                                src="" alt="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img id="img3" class="generated-img"
+                                                style="width: 100%;height: 100px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
+                                                src="" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <div class="card">
@@ -117,12 +146,14 @@
                     const duration = video.duration.toFixed(2); // ✅ Video duration in seconds
 
                     hiddenInputsContainer.innerHTML += `
-            <input type="hidden" name="video_paths[]" value="${response.path}" data-path="${response.path}">
+            <input type="hidden" name="video_paths[]" id="video_path" value="${response.path}" data-path="${response.path}">
             <input type="hidden" name="video_sizes[]" value="${fileSizeMB}" data-path="${response.path}">
-            <input type="hidden" name="video_durations[]" value="${duration}" data-path="${response.path}">
+            <input type="hidden" name="video_durations[]" id="video_duration" value="${duration}" data-path="${response.path}">
             <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
         `;
+                    generateThumbnails();
                 };
+
             },
 
             removedfile: function(file) {
@@ -153,11 +184,74 @@
                     }
                 });
 
+                $('#error-thumbnail').text("");
+                $('#thumbnail-history').css('display', 'none');
+                $('#generated-thumbnails').css('display', 'none');
+
                 return this._updateMaxFilesReachedClass();
+
             }
 
         });
 
+    });
+
+    function generateThumbnails() {
+        let videoPath = $('#video_path').val();
+        let videoDuration = parseInt($('#video_duration').val());
+        let timestamp = $("#timestamp").val();
+
+        if (!videoPath) {
+            $('#error-thumbnail').text("Please Select Video first!");
+            return;
+        }
+
+        if (timestamp > videoDuration) {
+            $('#error-thumbnail').text("Video Duration is " + videoDuration + " seconds");
+            return;
+        }
+
+        $.ajax({
+            url: "/generate-thumbnail", // Laravel route
+            type: "POST",
+            data: {
+                video_path: videoPath,
+                duration: videoDuration,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                $('#error-thumbnail').text("");
+                $('#thumbnail-history').css('display', 'block');
+                $('#generated-thumbnails').css('display', 'block');
+                let newSrc1 = response.thumbnail[0] + "?t=" + new Date().getTime();
+                let newSrc2 = response.thumbnail[1] + "?t=" + new Date().getTime();
+                let newSrc3 = response.thumbnail[2] + "?t=" + new Date().getTime();
+                $("#thumbnail-history #img1").attr("src", newSrc1);
+                $("#thumbnail-history #img2").attr("src", newSrc2);
+                $("#thumbnail-history #img3").attr("src", newSrc3);
+            },
+            error: function() {
+                $('#error-thumbnail').text("Failed to generate thumbnail.");
+            }
+        });
+    };
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $('.add-history').click(function() {
+            $('#error-thumbnail').text("");
+            $('#thumbnail-history').css('display', 'none');
+            $('#generated-thumbnails').css('display', 'none');
+        })
+
+        $('.generated-img').click(function(){
+            let src = $(this).attr('src');
+            $('.dz-thumbnail img').attr('src',src);
+            $('#thumbnail').val(src);
+        })
     });
 </script>
 

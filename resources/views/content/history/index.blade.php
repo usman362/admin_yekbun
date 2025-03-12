@@ -77,7 +77,7 @@
         <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="m-0">History List</h5>
             {{-- @can('history.create') --}}
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createhistoryModal"><i
+                <button class="btn btn-primary add-history" data-bs-toggle="modal" data-bs-target="#createhistoryModal"><i
                         class="bx bx-plus me-0 me-sm-1"></i> Add History</button>
             {{-- @endcan --}}
         </div>

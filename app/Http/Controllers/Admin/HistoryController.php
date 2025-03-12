@@ -7,6 +7,7 @@ use App\Models\PostGallery;
 use Illuminate\Http\Request;
 use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,9 +20,9 @@ class HistoryController extends Controller
      */
     public function index()
     {
-         $history = History::with('history_category')->get();
+        $history = History::with('history_category')->get();
         $history_category = HistoryCategory::get();
-        return view('content.history.index' , compact('history' , 'history_category'));
+        return view('content.history.index', compact('history', 'history_category'));
     }
 
     /**
@@ -31,7 +32,7 @@ class HistoryController extends Controller
      */
     public function create()
     {
-         return view('content.history.create', compact('history_category'));
+        return view('content.history.create', compact('history_category'));
     }
 
     /**
@@ -42,21 +43,20 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        $test=$request->validate([
+        $test = $request->validate([
             'title' => 'required',
             // 'category_id'=>'required',
             'description' => 'nullable',
             // 'image'=> 'required',
             //  'video_path'=> 'string'
-          ]);
+        ]);
 
-          $history = new History();
-          $history->title  = $request->title;
+        $history = new History();
+        $history->title  = $request->title;
         //   $history->category_id = $request->category_id;
         //   $history->description = $request->description;
-          $history->thumbnail = 'history/istockphoto-1973365581-612x612.jpg';
 
-          if ($request->has('image_paths')) {
+        if ($request->has('image_paths')) {
             foreach ($request->image_paths as $key => $image) {
                 $images[] = [
                     'path' => $image,
@@ -77,9 +77,10 @@ class HistoryController extends Controller
                 ];
             }
             $history->video = $videos; // Store as an array of objects in MongoDB
+            $history->thumbnail = $request->thumbnail;
         }
 
-          if($history->save()){
+        if ($history->save()) {
             // $id = $history->id;
             // for image
             // if($request->image_paths != null){
@@ -123,9 +124,9 @@ class HistoryController extends Controller
             //     }
             //     $post_gallery->save();
             // }
-        // }
+            // }
             return redirect()->route('history.index')->with('success', 'History Has been inserted');
-        }else{
+        } else {
             return redirect()->route('history.index')->with('error', 'Failed to add history');
         }
     }
@@ -161,7 +162,7 @@ class HistoryController extends Controller
      * @param  \App\Models\History  $history
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
@@ -169,17 +170,17 @@ class HistoryController extends Controller
             'description' => 'nullable',
             // 'image'=> 'required',
             //  'video_path'=> 'string'
-          ]);
+        ]);
         $history = History::find($id);
         $history->title  = $request->title;
         $history->description  = $request->description;
         //$history->language  = $request->language;
         $history->category_id = $request->category_id;
-        $history->image = $request->image_paths?? [];
-        $history->video = $request->video_paths?? [];
-        if($history->update()){
+        $history->image = $request->image_paths ?? [];
+        $history->video = $request->video_paths ?? [];
+        if ($history->update()) {
             return redirect()->route('history.index')->with('success', 'History Has been Updated');
-        }else{
+        } else {
             return redirect()->route('history.index')->with('error', 'Failed to update history');
         }
     }
@@ -195,35 +196,35 @@ class HistoryController extends Controller
         $history = History::find($id);
         if (isset($history->images)) {
             foreach ($history->images as $history_file) {
-                $image_path = 'public/'.$history_file['path']; // Relative path in storage
+                $image_path = 'public/' . $history_file['path']; // Relative path in storage
                 // ✅ Check using Storage::exists()
                 if (Storage::exists($image_path)) {
                     Storage::delete($image_path); // ✅ Delete the file properly
                 }
             }
         }
-        if(isset($history->video)){
-            foreach($history->video as $history_file){
-                $image_path = 'public/'.$history_file['path']; // Relative path in storage
+        if (isset($history->video)) {
+            foreach ($history->video as $history_file) {
+                $image_path = 'public/' . $history_file['path']; // Relative path in storage
                 if (Storage::exists($image_path)) {
                     Storage::delete($image_path); // ✅ Delete the file properly
                 }
             }
         }
-        if($history->delete($history->id)){
+        if ($history->delete($history->id)) {
             return redirect()->route('history.index')->with('success', 'History Has been Deleted');
-        }else{
+        } else {
             return redirect()->route('history.index')->with('error', 'Failed to delete history');
         }
     }
-    public function status($id , $status){
+    public function status($id, $status)
+    {
         $history = History::find($id);
         $history->status = $status;
-        if($history->update()){
+        if ($history->update()) {
             return redirect()->route('history.index')->with('success', 'Status Has been Updated');
-        }else{
+        } else {
             return redirect()->route('history.index')->with('error', 'Status is not changed');
-
         }
     }
 
@@ -265,5 +266,46 @@ class HistoryController extends Controller
         $duration = $format->get('duration'); // Duration is in seconds
 
         return $duration;
+    }
+
+    public function generateThumbnail(Request $request)
+    {
+        $thumbnail = $this->generateThumbnailFromPath($request->video_path, $request->duration);
+        return response()->json(['thumbnail' => $thumbnail], 200);
+    }
+
+    private function generateThumbnailFromPath($videoPath, $duration)
+    {
+        // Initialize FFMpeg
+        $ffmpeg = FFMpeg::create();
+        $fullPath = Storage::path('public/' . $videoPath);
+
+        // Get 3 timestamps (25%, 50%, 75% of the duration)
+        $timestamps = [
+            round($duration * 0.25),
+            round($duration * 0.40),
+            round($duration * 0.75),
+        ];
+
+        $thumbnails = [];
+
+        foreach ($timestamps as $index => $time) {
+            // Generate unique thumbnail name
+            $thumbnailPath = 'history/' . pathinfo($videoPath, PATHINFO_FILENAME) . "_thumb_{$index}.jpg";
+
+            // Delete if already exists
+            if (Storage::exists($thumbnailPath)) {
+                Storage::delete($thumbnailPath);
+            }
+
+            // Open the video and capture frame
+            $video = $ffmpeg->open($fullPath);
+            $frame = $video->frame(TimeCode::fromSeconds($time));
+            $frame->save(storage_path('app/public/' . $thumbnailPath));
+
+            // Add to response array
+            $thumbnails[] = asset('storage/' . $thumbnailPath);
+        }
+        return $thumbnails;
     }
 }
