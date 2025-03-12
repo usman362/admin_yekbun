@@ -86,7 +86,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Category</th>
+                        {{-- <th>Category</th> --}}
                         <th>Name</th>
                         <th>Thumbnail</th>
                         <th>Total </th>
@@ -100,7 +100,7 @@
                     @forelse($history as $historys)
                         <tr>
                             <td>{{ $historys->custom_id ?? $loop->iteration }}</td>
-                            <td>{{ $historys->history_category->name ?? '' }}</td>
+                            {{-- <td>{{ $historys->history_category->name ?? '' }}</td> --}}
                             <td>{{ $historys->title ?? '' }}</td>
                             <td><a href="javascript:void(0)" class="showVideo" data-bs-toggle="modal"
                                     data-bs-target="#showVideoModal"
