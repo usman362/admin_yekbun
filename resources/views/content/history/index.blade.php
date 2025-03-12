@@ -106,7 +106,7 @@
                                     data-bs-target="#showVideoModal"
                                     data-url="{{ isset($historys->video[0]) ? asset('storage/' . $historys->video[0]['path']) : '' }}"
                                     ><img
-                                        src="{{ isset($historys->images[0]) ? asset('storage/' . $historys->images[0]['path']) : '' }}"
+                                        src="{{ asset('storage/' . $historys->thumbnail) }}"
                                         width="100" height="100" alt=""></a></td>
                             <td></td>
                             <td></td>
