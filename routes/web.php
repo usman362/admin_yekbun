@@ -110,6 +110,7 @@ use App\Http\Controllers\StateController;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
+use FFMpeg\FFMpeg;
 
 //use App\Http\Controllers\GreetingsController;
 
@@ -152,6 +153,9 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
     echo $output;
 });
 
+Route::get('test-ffmpeg',function(){
+    dd(FFMpeg::create());
+});
 
 Route::get('/send-test-email', function () {
     Mail::to('usmanshoaib362@gmail.com')->send(new TestMail());
