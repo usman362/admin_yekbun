@@ -30,7 +30,7 @@ class History extends Model
         parent::boot();
 
         static::creating(function ($history) {
-            $lastHistory = self::orderBy('id', 'desc')->first();
+            $lastHistory = self::orderBy('created_at', 'desc')->first();
             $lastId = $lastHistory ? intval(substr($lastHistory->custom_id, 2)) : 99;
             $history->custom_id = 'HS-' . ($lastId + 1);
         });
