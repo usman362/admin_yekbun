@@ -179,13 +179,13 @@
                                                 <!-- User meta -->
                                                 <div class="user-block">
                                                     <div class="image">
-                                                        <img src="{{ asset('storage/' . (isset($feed->user) ? $feed->user->image : '')) }}"
+                                                        <img src="{{ asset('storage/' . (isset($feed->user->image) ? $feed->user->image : '')) }}"
                                                             data-demo-src="{{ asset('storage/' . (isset($feed->user) ? $feed->user->image : '')) }}"
                                                             data-user-popover="1" alt="" onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                     </div>
                                                     <div class="user-info">
                                                         <span class="d-flex justify-content-center align-items-center"><a
-                                                                href="#">{{ (isset($feed->user) ? $feed->user->name : 'N/A').' '.(isset($feed->user) ? $feed->user->last_name : 'N/A')}}</a>&nbsp; <i class="	fa fa-circle"
+                                                                href="#">{{ (isset($feed->user->name) ? $feed->user->name : 'N/A').' '.(isset($feed->user->last_name) ? $feed->user->last_name : 'N/A')}}</a>&nbsp; <i class="	fa fa-circle"
                                                                 style="font-size: 4px;color: #c3c3c3;padding-left: 3px;"></i>&nbsp;
                                                             <img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" style="width: 16px;height: 16px" alt="">&nbsp; <i class="fa fa-circle"
                                                                 style="font-size: 4px;color: #c3c3c3;"></i></span>
