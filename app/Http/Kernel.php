@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
     //'permission' => \Maklad\Permission\Middlewares\PermissionMiddleware::class,
     'permission' => \App\Http\Middleware\CustomPermissionMiddleware::class,
     '2fa' => \App\Http\Middleware\Check2FA::class,
+    'jwt.custom' => \App\Http\Middleware\JwtMiddleware::class,
   ];
 }

@@ -101,7 +101,7 @@ Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
 //User Profile
 
 
-Route::middleware('jwt.auth')->group(function () {
+Route::middleware('jwt.custom')->group(function () {
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
     Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
     Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
