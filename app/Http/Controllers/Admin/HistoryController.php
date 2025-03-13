@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HistoryController extends Controller
 {
@@ -56,16 +57,16 @@ class HistoryController extends Controller
         //   $history->category_id = $request->category_id;
         //   $history->description = $request->description;
 
-        if ($request->has('image_paths')) {
-            foreach ($request->image_paths as $key => $image) {
-                $images[] = [
-                    'path' => $image,
-                    'name' => $request->image_name[$key] ?? '',
-                    'size' => $request->image_sizes[$key] ?? '',
-                ];
-            }
-            $history->images = $images; // Store as an array of objects in MongoDB
-        }
+        // if ($request->has('image_paths')) {
+        //     foreach ($request->image_paths as $key => $image) {
+        //         $images[] = [
+        //             'path' => $image,
+        //             'name' => $request->image_name[$key] ?? '',
+        //             'size' => $request->image_sizes[$key] ?? '',
+        //         ];
+        //     }
+        //     $history->images = $images; // Store as an array of objects in MongoDB
+        // }
 
         if ($request->has('video_paths')) {
             foreach ($request->video_paths as $key => $video) {
@@ -77,7 +78,9 @@ class HistoryController extends Controller
                 ];
             }
             $history->video = $videos; // Store as an array of objects in MongoDB
-            $history->thumbnail = $request->thumbnail;
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $history->thumbnail = $cleanedThumbnail;
         }
 
         if ($history->save()) {
