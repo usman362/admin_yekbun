@@ -44,19 +44,19 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof TokenExpiredException) {
-            return response()->json(['error' => 'Token has expired', 'success' => false], 401);
-        }
+        // if ($exception instanceof TokenExpiredException) {
+        //     return response()->json(['error' => 'Token has expired', 'success' => false], 401);
+        // }
 
-        if ($exception instanceof TokenInvalidException) {
-            return response()->json(['error' => 'Invalid token', 'success' => false], 401);
-        }
+        // if ($exception instanceof TokenInvalidException) {
+        //     return response()->json(['error' => 'Invalid token', 'success' => false], 401);
+        // }
 
-        if ($exception instanceof JWTException) {
-            return response()->json(['error' => 'Token is required', 'success' => false], 401);
-        }
+        // if ($exception instanceof JWTException) {
+        //     return response()->json(['error' => 'Token is required', 'success' => false], 401);
+        // }
 
-        return response()->json(['error' => 'Token Signature could not be verified.', 'success' => false], 401);
+        return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 401);
         // return parent::render($request, $exception);
     }
 }
