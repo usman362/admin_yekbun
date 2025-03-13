@@ -171,213 +171,75 @@
                             <div class="column column is-6 tab-content" id="tab1">
 
                                 @foreach ($feeds as $feed)
-                                    <div id="feed-post-1" class="card is-post">
-                                        <!-- Main wrap -->
-                                        <div class="content-wrap">
-                                            <!-- Post header -->
-                                            <div class="card-heading">
-                                                <!-- User meta -->
-                                                <div class="user-block">
-                                                    <div class="image">
-                                                        <img src="{{ asset('storage/' . (isset($feed->user->image) ? $feed->user->image : '')) }}"
-                                                            data-demo-src="{{ asset('storage/' . (isset($feed->user) ? $feed->user->image : '')) }}"
-                                                            data-user-popover="1" alt="" onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
-                                                    </div>
-                                                    <div class="user-info">
-                                                        <span class="d-flex justify-content-center align-items-center"><a
-                                                                href="#">{{ (isset($feed->user->name) ? $feed->user->name : 'N/A').' '.(isset($feed->user->last_name) ? $feed->user->last_name : 'N/A')}}</a>&nbsp; <i class="	fa fa-circle"
-                                                                style="font-size: 4px;color: #c3c3c3;padding-left: 3px;"></i>&nbsp;
-                                                            <img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" style="width: 16px;height: 16px" alt="">&nbsp; <i class="fa fa-circle"
-                                                                style="font-size: 4px;color: #c3c3c3;"></i></span>
-                                                        <span class="time d-flex ">&nbsp; <i class="	fa fa-circle pr-1"
-                                                            style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i>
-                                                            {{ \Carbon\Carbon::parse($feed->created_at)->diffForHumans() }}&nbsp; <i class="fa fa-circle"
-                                                            style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i></span>
-                                                    </div>
+                                <div id="feed-post-1" class="card is-post">
+                                    <div class="content-wrap">
+                                        <!-- Post header -->
+                                        <div class="card-heading">
+                                            <div class="user-block">
+                                                <div class="image">
+                                                    <img src="{{ asset('storage/' . (optional($feed->user)->image ?? 'default-avatar.png')) }}"
+                                                         data-demo-src="{{ asset('storage/' . (optional($feed->user)->image ?? 'default-avatar.png')) }}"
+                                                         data-user-popover="1" alt="User Image"
+                                                         onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                 </div>
-                                                <!-- Right side dropdown -->
-                                                <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
-                                                <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                                    <div>
-                                                        <div class="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-more-vertical">
-                                                                <circle cx="12" cy="12" r="1"></circle>
-                                                                <circle cx="12" cy="5" r="1"></circle>
-                                                                <circle cx="12" cy="19" r="1"></circle>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dropdown-menu" role="menu">
-                                                        <div class="dropdown-content">
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove the Feed</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove Feed - Flag User</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Flag</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove Feed - Block User</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select Downgrade User
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove User Block Device</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                <div class="user-info">
+                                                    <span class="d-flex justify-content-center align-items-center">
+                                                        <a href="#">{{ optional($feed->user)->name ?? 'N/A' }} {{ optional($feed->user)->last_name ?? 'N/A' }}</a>
+                                                        &nbsp;<i class="fa fa-circle" style="font-size: 4px;color: #c3c3c3;padding-left: 3px;"></i>&nbsp;
+                                                        <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" style="width: 16px;height: 16px" alt="">
+                                                        &nbsp;<i class="fa fa-circle" style="font-size: 4px;color: #c3c3c3;"></i>
+                                                    </span>
+                                                    <span class="time d-flex">
+                                                        &nbsp; <i class="fa fa-circle pr-1" style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i>
+                                                        {{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}
+                                                        &nbsp; <i class="fa fa-circle" style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i>
+                                                    </span>
                                                 </div>
                                             </div>
-                                            <!-- /Post header -->
+                                        </div>
 
-                                            <!-- Post body -->
-                                            <div class="card-body col-sm-12">
-                                                <!-- Post body text -->
-
-                                                <!-- Featured image -->
-                                                <div class="row">
+                                        <!-- Post body -->
+                                        <div class="card-body col-sm-12">
+                                            <div class="row">
+                                                @if(isset($feed->image[0]))
                                                     <div class="post-image col-sm-12" style="width:500px; margin:0 auto">
                                                         <a data-fancybox="post1" data-lightbox-type="comments"
-                                                            data-thumb="{{ asset('storage/'.$feed->image[0] ?? '') }}"
-                                                            href="{{ asset('storage/'.$feed->image[0] ?? '') }}"
-                                                            data-demo-href="{{ asset('storage/'.$feed->image[0] ?? '') }}">
-                                                            <img src="{{ asset('storage/'.$feed->image[0] ?? '') }}"
-                                                                data-demo-src="{{ asset('storage/'.$feed->image[0] ?? '') }}"
-                                                                alt="">
+                                                           data-thumb="{{ asset('storage/'.$feed->image[0]) }}"
+                                                           href="{{ asset('storage/'.$feed->image[0]) }}"
+                                                           data-demo-href="{{ asset('storage/'.$feed->image[0]) }}">
+                                                            <img src="{{ asset('storage/'.$feed->image[0]) }}"
+                                                                 data-demo-src="{{ asset('storage/'.$feed->image[0]) }}"
+                                                                 alt="Post Image">
                                                         </a>
-                                                        <!-- Action buttons -->
-
                                                     </div>
-                                                    <!--                                             <div class="post-image col-sm-6 p-1">-->
-                                                    <!--                                              <a data-fancybox="post1" data-lightbox-type="comments"-->
-                                                    <!--                                                  data-thumb="{{ asset('assets/img/soldier.mp4') }}"-->
-                                                    <!--                                                  href="{{ asset('assets/img/soldier.mp4') }}"-->
-                                                    <!--                                                  data-demo-href="{{ asset('assets/img/soldier.mp4') }}">-->
-                                                    <!--                                                  <video style="height:-webkit-fill-available;" width="320" height="-webkit-fill-available" controls>-->
-                                                    <!--<source src="{{ asset('assets/img/soldier.mp4') }}" type="video/mp4">-->
-                                                    <!--</video>-->
-                                                    <!--                                              </a>-->
-
-
-                                                    <!-- Action buttons -->
-
-                                                    <!--                                          </div>-->
-                                                </div>
-                                                <div class="alert alert-secondary" role="alert">
-                                                    {{$feed->description}}
-                                                </div>
-                                            </div>
-                                            <!-- /Post body -->
-
-                                            <!-- Post footer -->
-                                            <div class="card-footer">
-                                                <!-- Followers avatars -->
-                                                <div class="likers-group">
-                                                    <!--<img src="{{ asset('assets/svg/icons/emojitwo.png') }}"-->
-                                                    <!--    data-demo-src="{{ asset('assets/svg/icons/emojitwo.png') }}"-->
-                                                    <!--    data-user-popover="1" alt="">-->
-                                                    <!--<img src="{{ asset('assets/svg/icons/emojithree.png') }}"-->
-                                                    <!--    data-demo-src="{{ asset('assets/svg/icons/emojithree.png') }}"-->
-                                                    <!--    data-user-popover="4" alt="">-->
-                                                    <img style="height:60px;width:140px;"
-                                                        src="{{ asset('assets/img/emojiall.png') }}"
-                                                        data-demo-src="{{ asset('assets/img/emojiall.png') }}"
-                                                        data-user-popover="5" alt="">
-
-                                                </div>
-                                                <!-- Followers text -->
-                                                <div class="likers-text">
-
-                                                </div>
-                                                <!-- Post statistics -->
-                                                <div class="social-count">
-                                                    <div class="shares-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/Share.svg') }}"
-                                                            width="20" alt="">
-                                                        <span>12k <i class="	fa fa-circle"
-                                                                style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                                    </div>
-                                                    <div class="likes-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/views.svg') }}"
-                                                            width="20" alt="">
-                                                        <span>1225 <i class="	fa fa-circle"
-                                                                style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                                    </div>
-                                                    <div class="comments-count is-comment-light" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/Comments.svg') }}"
-                                                            width="20" alt="">
-                                                        <span>123 <i class="	fa fa-circle"
-                                                                style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                                    </div>
-                                                    <div class="comments-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/voice.svg') }}"
-                                                            width="20" alt="">
-                                                        <span>1.1M</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /Post footer -->
-                                        </div>
-                                        <!-- /Main wrap -->
-
-                                        <!-- Post #1 Comments -->
-                                        <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
-                                            <div class="comments-header">
-                                                @if (request('type') === 'flag')
-                                                    <img src="{{ asset('assets/img/exclamation-mark.png') }}"
-                                                        style="position: absolute;top:1rem;right:3.5rem" width="15"
-                                                        alt="">
                                                 @endif
                                             </div>
-                                            <!-- Comments body -->
-                                            <!--  <div class="comments-body has-slimscroll">-->
-                                            <!--    <img src="{{ asset('assets/svg/icons/Comment- area.svg') }}" style="width: 100%" alt="">-->
-                                            <!--</div>-->
-                                            <!-- /Comments body -->
+                                            <div class="alert alert-secondary" role="alert">
+                                                {{ $feed->description ?? 'No description available.' }}
+                                            </div>
                                         </div>
-                                        <!-- /Post #1 Comments -->
+
+                                        <!-- Post footer -->
+                                        <div class="card-footer">
+                                            <div class="social-count">
+                                                <div class="shares-count" style="cursor: pointer">
+                                                    <img src="{{ asset('assets/svg/icons/Share.svg') }}" width="20" alt="">
+                                                    <span>12k</span>
+                                                </div>
+                                                <div class="likes-count" style="cursor: pointer">
+                                                    <img src="{{ asset('assets/svg/icons/views.svg') }}" width="20" alt="">
+                                                    <span>1225</span>
+                                                </div>
+                                                <div class="comments-count is-comment-light" style="cursor: pointer">
+                                                    <img src="{{ asset('assets/svg/icons/Comments.svg') }}" width="20" alt="">
+                                                    <span>123</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                @endforeach
+                                </div>
+                            @endforeach
+
 
                             </div>
 
