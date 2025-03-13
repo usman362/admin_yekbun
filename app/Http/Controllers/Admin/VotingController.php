@@ -20,7 +20,7 @@ class VotingController extends Controller
     {
         $votes = Voting::with('voting_category')->get();
         $vote_categories = VotingCategory::get();
-        return view('content.voting.index' , compact('votes' , 'vote_categories'));
+        return view('content.voting.index', compact('votes', 'vote_categories'));
     }
 
     /**
@@ -30,7 +30,7 @@ class VotingController extends Controller
      */
     public function create()
     {
-        return view('content.voting.create' , compact('vote_category'));
+        return view('content.voting.create', compact('vote_category'));
     }
 
     /**
@@ -44,25 +44,28 @@ class VotingController extends Controller
         $request->validate([
             'name' => 'required',
             'image' => 'required',
-          ]);
+        ]);
 
-          $options = [];
-          if ($request->{'reaction_option'}) {
+        $options = [];
+        if ($request->{'reaction_option'}) {
             $options = array_map(function ($option) {
+
                 $ret = ["title" => $option['title']];
-                if(isset($option['image'])) $ret['image'] = $option['image'];
+
+                if (isset($option['image'])) $ret['image'] = $option['image'];
+
                 return $ret;
             }, $request->{'reaction_option'});
-          }
+        }
 
-          $vote = new Voting();
-          $vote->name = $request->name;
-          $vote->category_id = $request->vote_category_id;
-          $vote->options = $options;
-          $vote->banner = $request->image ?? null;
-          $vote->audio = $request->audio ?? null;
-          $vote->vote_type = $request->vote_type ?? 'single';
-          if($vote->save()){
+        $vote = new Voting();
+        $vote->name = $request->name;
+        $vote->category_id = $request->vote_category_id;
+        $vote->options = $options;
+        $vote->banner = $request->image ?? null;
+        $vote->audio = $request->audio ?? null;
+        $vote->vote_type = $request->vote_type ?? 'single';
+        if ($vote->save()) {
             // $id  = $vote->id;
             // $post_gallery  = new PostGallery();
             // $post_gallery->vote_id=$id;
@@ -81,10 +84,9 @@ class VotingController extends Controller
             // $post_gallery->save();
 
             return redirect()->route('vote.index')->with('success', 'Vote Has been inserted');
-        }else{
+        } else {
             return redirect()->route('vote.index')->with('error', 'Failed to add vote');
         }
-
     }
 
     /**
@@ -105,7 +107,7 @@ class VotingController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function statistic($id)
+    public function statistic($id)
     {
         $vote = Voting::with('voting_category')->findOrFail($id);
         $statistics = [
@@ -179,15 +181,21 @@ class VotingController extends Controller
         $total_likes = 0;
         $total_dislikes = 0;
         $total_neutrals = 0;
-        foreach($statistics as $index => $statistic) {
+        foreach ($statistics as $index => $statistic) {
             $total_reviews += $statistic['male']['reviews'] + $statistic['male']['reviews'];
             $total_likes += $statistic['male']['likes'] + $statistic['female']['likes'];
             $total_dislikes += $statistic['male']['dislikes'] + $statistic['female']['dislikes'];
             $total_neutrals += $statistic['male']['neutrals'] + $statistic['female']['neutrals'];
         }
 
-        return view('content.include.voting.statistic', compact('vote', 'statistics', 'total_reviews', 'total_likes',
-            'total_dislikes', 'total_neutrals'));
+        return view('content.include.voting.statistic', compact(
+            'vote',
+            'statistics',
+            'total_reviews',
+            'total_likes',
+            'total_dislikes',
+            'total_neutrals'
+        ));
     }
 
     public function edit($id)
@@ -213,23 +221,22 @@ class VotingController extends Controller
 
         $options = [];
         if ($request->{'reaction_option'}) {
-          $options = array_map(function ($option) {
-              $ret = ["title" => $option['title']];
-              if(isset($option['image'])) $ret['image'] = $option['image'];
-              return $ret;
-          }, $request->{'reaction_option'});
+            $options = array_map(function ($option) {
+                $ret = ["title" => $option['title']];
+                if (isset($option['image'])) $ret['image'] = $option['image'];
+                return $ret;
+            }, $request->{'reaction_option'});
         }
         $vote->options = $options;
 
-        if($request->image) $vote->banner = $request->image;
-        if($request->audio) $vote->audio = $request->audio;
+        if ($request->image) $vote->banner = $request->image;
+        if ($request->audio) $vote->audio = $request->audio;
 
-        if($vote->update()){
+        if ($vote->update()) {
             return redirect()->route('vote.index')->with('success', 'Vote Has been Updated');
-        }else{
+        } else {
             return redirect()->route('vote.index')->with('error', 'Failed to update vote');
         }
-
     }
 
     /**
@@ -241,29 +248,27 @@ class VotingController extends Controller
     public function destroy($id)
     {
         $vote = Voting::find($id);
-        if($vote->banner){
-            $image_path = public_path('storage/'.$vote->banner);
-                if(file_exists($image_path)){
-                    unlink($image_path);
-                }
+        if ($vote->banner) {
+            $image_path = public_path('storage/' . $vote->banner);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
         }
-        if($vote->delete($vote->id)){
+        if ($vote->delete($vote->id)) {
             return redirect()->route('vote.index')->with('success', 'Vote Has been Delted');
-
-        }else{
+        } else {
             return redirect()->route('vote.index')->with('success', 'Vote not deleted');
-
         }
     }
 
-      public function status($id , $status){
+    public function status($id, $status)
+    {
         $vote = Voting::find($id);
         $vote->status = $status;
-        if($vote->update()){
+        if ($vote->update()) {
             return redirect()->route('vote.index')->with('success', 'Status Has been Updated');
-        }else{
+        } else {
             return redirect()->route('vote.index')->with('error', 'Status is not changed');
-
         }
     }
 

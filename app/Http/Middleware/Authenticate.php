@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Response;
 
 class Authenticate extends Middleware
 {
@@ -18,4 +19,12 @@ class Authenticate extends Middleware
             return route('unauthorize');
         }
     }
+
+    public function unauthenticated($request, array $guards)
+{
+    return response()->json([
+        'error' => 'Unauthorized access. Please provide a valid token.',
+        'success' => false,
+    ], Response::HTTP_UNAUTHORIZED);
+}
 }
