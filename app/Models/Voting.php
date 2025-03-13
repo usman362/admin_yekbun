@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Voting extends Model
 {
-    use HasFactory , LogsActivity;
+    use HasFactory, LogsActivity;
 
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'category_id',
         'description',
@@ -44,12 +44,18 @@ class Voting extends Model
     {
         return LogOptions::defaults();
     }
-    public function voting_category(){
-        return $this->belongsTo(VotingCategory::class , 'category_id');
+    public function voting_category()
+    {
+        return $this->belongsTo(VotingCategory::class, 'category_id');
     }
 
-    public function gallery(){
-        return $this->hasMany(PostGallery::class,'vote_id','id');
+    public function gallery()
+    {
+        return $this->hasMany(PostGallery::class, 'vote_id', 'id');
     }
 
+    public function reactions()
+    {
+        return $this->hasMany(VotingReaction::class);
+    }
 }

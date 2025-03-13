@@ -66,6 +66,7 @@ use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
+use App\Http\Controllers\Api\VotingReactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +103,10 @@ Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
 
 Route::middleware('jwt.auth')->group(function () {
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
+
+    Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
+    Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
+    Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
 });
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
@@ -422,7 +427,6 @@ Route::get('/voting-cover/{id?}', [VotingController::class, 'get_cover']);
 Route::get('/fetch-voting/{id?}', [VotingController::class, 'fetch']);
 Route::get('/fetch-voting/all/{id?}', [VotingController::class, 'fetch_all']);
 Route::get('/voting-details/{id}/{user_id?}', [VotingController::class, 'get_details']);
-Route::post('/voting/store-reaction', [VotingController::class, 'store_reaction']);
 Route::get('/get-statistics/{voteId}', [VotingController::class, 'get_statistics']);
 Route::get('/voting-stats/{id}', [VotingController::class, 'stats']);
 

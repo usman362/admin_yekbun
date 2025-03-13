@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\VotingReaction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,10 +17,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::where('is_admin_user', 0)->get();
-        foreach($users as $user){
-            $user->user_type = 'educated';
-            $user->save();
-        }
+        $reaction = new VotingReaction();
+        $reaction->user_id = '67abbcd15a7cf058d80fe252';
+        $reaction->voting_id = '67d152ad7c6dc7813f09d1ac';
+        $reaction->type = 'yes';
+        $reaction->save();
     }
 }
