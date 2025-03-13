@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Voting;
 use App\Models\VotingReaction;
+use Illuminate\Support\Facades\Auth;
 
 class VotingController extends Controller
 {
@@ -16,7 +17,8 @@ class VotingController extends Controller
      */
     public function index()
     {
-        return response()->json(['Voting' => Voting::get()], 200);
+        $votings = Voting::with('reactions')->get();
+        return response()->json(['Voting' => $votings], 200);
     }
 
     /**

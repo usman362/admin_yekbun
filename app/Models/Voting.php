@@ -7,6 +7,7 @@ use Spatie\Activitylog\LogOptions;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class Voting extends Model
 {
@@ -56,6 +57,6 @@ class Voting extends Model
 
     public function reactions()
     {
-        return $this->hasMany(VotingReaction::class);
+        return $this->hasMany(VotingReaction::class)->where('user_id',Auth::id());
     }
 }

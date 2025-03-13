@@ -103,7 +103,7 @@ Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
 
 Route::middleware('jwt.auth')->group(function () {
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
-
+    Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
     Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
@@ -246,7 +246,7 @@ Route::resource('manage-fanpage', ManageFanPageController::class)->only([
     'destroy',
     'update',
 ]);
-Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
+
 Route::resource('voting-category', VotingCategoryController::class)->only([
     'index',
     'store',
