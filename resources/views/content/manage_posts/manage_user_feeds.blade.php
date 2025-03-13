@@ -179,15 +179,15 @@
                                                 <!-- User meta -->
                                                 <div class="user-block">
                                                     <div class="image">
-                                                        <img src="{{ asset('storage/' . $feed->user->image) }}"
-                                                            data-demo-src="{{ asset('storage/' . $feed->user->image) }}"
+                                                        <img src="{{ asset('storage/' . $feed->user->image ?? '') }}"
+                                                            data-demo-src="{{ asset('storage/' . $feed->user->image ?? '') }}"
                                                             data-user-popover="1" alt="" onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                     </div>
                                                     <div class="user-info">
                                                         <span class="d-flex justify-content-center align-items-center"><a
-                                                                href="#">{{$feed->user->name.' '.$feed->user->last_name}}</a>&nbsp; <i class="	fa fa-circle"
+                                                                href="#">{{$feed->user->name ?? ''.' '.$feed->user->last_name ?? ''}}</a>&nbsp; <i class="	fa fa-circle"
                                                                 style="font-size: 4px;color: #c3c3c3;padding-left: 3px;"></i>&nbsp;
-                                                            <img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" style="width: 16px;height: 16px" alt="">&nbsp; <i class="	fa fa-circle"
+                                                            <img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" style="width: 16px;height: 16px" alt="">&nbsp; <i class="fa fa-circle"
                                                                 style="font-size: 4px;color: #c3c3c3;"></i></span>
                                                         <span class="time d-flex ">&nbsp; <i class="	fa fa-circle pr-1"
                                                             style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i>
