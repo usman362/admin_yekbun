@@ -16,7 +16,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return response()->json(['History' => History::get()], 200);
+        return response()->json(['History' => History::get(), 'sucess' => true], 200);
     }
 
     /**
