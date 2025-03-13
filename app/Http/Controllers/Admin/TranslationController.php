@@ -62,7 +62,7 @@ class TranslationController extends Controller
             $translation->save();
         }
 
-        return response()->json(['sucess' => true, 'message' => 'Translation successfully saved.']);
+        return response()->json(['success' => true, 'message' => 'Translation successfully saved.']);
 
     }
 

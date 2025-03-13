@@ -18,7 +18,7 @@ class VotingController extends Controller
     public function index()
     {
         $votings = Voting::with('reactions')->get();
-        return response()->json(['Voting' => $votings, 'sucess' => true], 200);
+        return response()->json(['Voting' => $votings, 'success' => true], 200);
     }
 
     /**
