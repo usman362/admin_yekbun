@@ -22,7 +22,7 @@ class JwtMiddleware
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (JWTException $e) {
-            return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], Response::HTTP_UNAUTHORIZED);
+            return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 200);
         }
 
         return $next($request);
