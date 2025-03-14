@@ -52,7 +52,7 @@ class VotingController extends Controller
 
             $options = array_map(function ($option, $key) {
                 return [
-                    "title" => $option['title'] ? strtolower(str_replace(' ', '-', $option['title'])) : null,
+                    "title" => $option['title'] ? strtolower(str_replace(' ', '-', $option['title'])) : ($key == 0 ? 'yes' : ($key == 1 ? 'no-idea' : 'no')),
                     "type" => ++$key,
                     "image" => isset($option['image']) ? Helpers::fileUpload($option['image'], 'voting-reactions') : null,
                 ];
