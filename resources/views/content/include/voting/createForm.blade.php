@@ -66,9 +66,9 @@
                 <div id="single-vote-options">
                     <div class="fw-bold" style="color:#333;">Allowed Reaction</div>
                     <div class="d-flex justify-content-between mt-1">
-                        <input type="hidden" name="reaction_option[1][title]" value="yes" />
-                        <input type="hidden" name="reaction_option[2][title]" value="no-idea" />
-                        <input type="hidden" name="reaction_option[3][title]" value="no" />
+                        <input type="hidden" name="reaction_option[0][title]" value="yes" />
+                        <input type="hidden" name="reaction_option[1][title]" value="no-idea" />
+                        <input type="hidden" name="reaction_option[2][title]" value="no" />
                         <div class="reaction-option">Yes</div>
                         <div class="reaction-option">No idea</div>
                         <div class="reaction-option">No</div>
