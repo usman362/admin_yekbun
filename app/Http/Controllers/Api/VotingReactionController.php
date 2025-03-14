@@ -34,7 +34,7 @@ class VotingReactionController extends Controller
     {
         $request->validate([
             'voting_id' => 'required',
-            'type' => 'required|string',
+            'type' => 'required',
         ]);
 
         $voting = Voting::find($request->voting_id);
