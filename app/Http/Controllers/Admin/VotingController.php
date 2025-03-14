@@ -69,7 +69,6 @@ class VotingController extends Controller
         if($request->hasFile('audio_file')){
             $vote->audio = Helpers::fileUpload($request->audio_file,'voting');
         }
-        dd($vote);
         if ($vote->save()) {
             // $id  = $vote->id;
             // $post_gallery  = new PostGallery();
