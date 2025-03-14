@@ -46,15 +46,14 @@ class VotingController extends Controller
             'name' => 'required',
             'image' => 'required',
         ]);
-
         $options = [];
         if ($request->has('reaction_option')) {
-            $reactionOptions = $request->input('reaction_option');
+            $reactionOptions = $request->reaction_option;
 
             $options = array_map(function ($option, $key) {
                 return [
                     "title" => $option['title'] ?? null,
-                    "type" => $key,
+                    "type" => ++$key,
                     "image" => isset($option['image']) ? Helpers::fileUpload($option['image'], 'voting-reactions') : null,
                 ];
             }, $reactionOptions, array_keys($reactionOptions));
@@ -70,6 +69,7 @@ class VotingController extends Controller
         if($request->hasFile('audio_file')){
             $vote->audio = Helpers::fileUpload($request->audio_file,'voting');
         }
+        dd($vote);
         if ($vote->save()) {
             // $id  = $vote->id;
             // $post_gallery  = new PostGallery();

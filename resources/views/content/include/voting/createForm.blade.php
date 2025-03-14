@@ -91,7 +91,6 @@
                     <div class="individual-vote-react-option-image">
                         <img src='{{asset('/assets/img/icons/others/6icon.png')}}' style='width:30px;height:30px' />
                         <input type="file" class="hidden" name="reaction_option[{{$index}}][image]" />
-                        <input type='hidden' name="reaction_option[{{$index}}][image]" />
                         <div class="remove-image justify-content-center align-items-center">
                             <button class="btn btn-danger p-0"><i class='bx bx-trash bx-sm'></i></button>
                         </div>
