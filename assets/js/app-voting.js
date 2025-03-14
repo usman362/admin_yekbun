@@ -141,6 +141,8 @@ $(document).ready(function() {
             previewTemplate: previewTemplate,
             parallelUploads: 1,
             maxFilesize: 100,
+            maxFiles:1,
+            acceptedFiles:'image/*',
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

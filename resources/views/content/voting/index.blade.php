@@ -328,6 +328,18 @@ $(function () {
     });
   }
 });
+
+$(document).on("change", ".individual-vote-react-option-image input[type='file']", function (event) {
+    let input = event.target;
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            $(input).closest('.individual-vote-react-option-image').find('img').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+});
+
 </script>
 
 <script>

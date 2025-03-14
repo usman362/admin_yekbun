@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\PostGallery;
 use App\Models\Voting;
@@ -47,24 +48,28 @@ class VotingController extends Controller
         ]);
 
         $options = [];
-        if ($request->{'reaction_option'}) {
-            $options = array_map(function ($option) {
+        if ($request->has('reaction_option')) {
+            $reactionOptions = $request->input('reaction_option');
 
-                $ret = ["title" => $option['title']];
-
-                if (isset($option['image'])) $ret['image'] = $option['image'];
-
-                return $ret;
-            }, $request->{'reaction_option'});
+            $options = array_map(function ($option, $key) {
+                return [
+                    "title" => $option['title'] ?? null,
+                    "type" => $key,
+                    "image" => isset($option['image']) ? Helpers::fileUpload($option['image'], 'voting-reactions') : null,
+                ];
+            }, $reactionOptions, array_keys($reactionOptions));
         }
 
         $vote = new Voting();
         $vote->name = $request->name;
-        $vote->category_id = $request->vote_category_id;
+        $vote->description = $request->description;
         $vote->options = $options;
         $vote->banner = $request->image ?? null;
-        $vote->audio = $request->audio ?? null;
+        $vote->description = $request->description;
         $vote->vote_type = $request->vote_type ?? 'single';
+        if($request->hasFile('audio_file')){
+            $vote->audio = Helpers::fileUpload($request->audio_file,'voting');
+        }
         if ($vote->save()) {
             // $id  = $vote->id;
             // $post_gallery  = new PostGallery();

@@ -40,7 +40,7 @@
                         <div style="font-size: 0.8rem">JPG or PNG</div>
                     </div>
                     <div class="fallback">
-                        <input type="file" name="image"  id="image" />
+                        <input type="file" name="image"  id="image" accept="image/*"/>
                     </div>
                 </div>
 
@@ -48,6 +48,13 @@
                     <div class="fw-bold" style="color:#333;">Vote Title</div>
                     <div style="background:white;">
                         <input type="text" id="fullname" class="form-control" placeholder="title" name="name" required>
+                    </div>
+                </div>
+
+                <div class="vote-description mt-3">
+                    <div class="fw-bold" style="color:#333;">Vote Description</div>
+                    <div style="background:white;">
+                        <textarea name="description" class="form-control" id="description" cols="30" rows="5"></textarea>
                     </div>
                 </div>
 
@@ -83,7 +90,7 @@
                     <div class="max-10-letters">Max. 10 Letters</div>
                     <div class="individual-vote-react-option-image">
                         <img src='{{asset('/assets/img/icons/others/6icon.png')}}' style='width:30px;height:30px' />
-                        <input type="file" class="hidden" />
+                        <input type="file" class="hidden" name="reaction_option[{{$index}}][image]" />
                         <input type='hidden' name="reaction_option[{{$index}}][image]" />
                         <div class="remove-image justify-content-center align-items-center">
                             <button class="btn btn-danger p-0"><i class='bx bx-trash bx-sm'></i></button>

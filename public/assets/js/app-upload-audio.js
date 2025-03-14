@@ -30,7 +30,7 @@ class UploadAudio {
         template +=             "<img src='/assets/svg/icons/upload.svg' width='30' />"
         template +=             "<span class='ms-2 label-upload-audio'>Upload Audio</span>"
         template +=         "</button>"
-        template +=         "<input type='file' class='hidden' id='audio_file' name='audio_file'/>"
+        template +=         "<input type='file' class='hidden' id='audio_file' name='audio_file' accept='.mp3,.wav,.ogg'/>"
         template +=         "<input type='hidden' name='audio' />"
         template +=     "</div>"
         template +=     "<div class='hidden' id='audio_detail_panel'>"
