@@ -126,7 +126,7 @@
                                         <div class="d-flex align-items-center {{ $index > 0 ? 'ms-3' : '' }}"
                                             style="background:#f5f5f5; border-radius:5px; padding: 5px 10px;">
                                             @if (!empty($option['image']))
-                                                <img src="{{ \App\Helpers\Helpers::storagePath($option['image']) }}"
+                                                <img src="{{ asset('storage/'.$option['image']) }}"
                                                     class="vote-option-image" />
                                             @endif
                                             <div class="ms-3">
