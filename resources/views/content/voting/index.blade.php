@@ -130,8 +130,8 @@
                                                     class="vote-option-image" />
                                             @endif
                                             <div class="ms-3">
-                                                <div>{{ $option['title'] }}</div>
-                                                <div style="font-size:80%">215</div>
+                                                <div>{{ ucwords(str_replace('-', ' ', $option['title'])) }}</div>
+                                                {{-- <div style="font-size:80%">215</div> --}}
                                             </div>
                                         </div>
                                     @endforeach
