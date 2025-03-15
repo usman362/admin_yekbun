@@ -230,7 +230,7 @@ class VotingController extends Controller
 
     public function get_statistics($id)
     {
-        $vote = Voting::with('voting_category')->find($id);
+        $vote = Voting::select('options')->find($id);
         if (empty($vote)) {
             return response()->json(['message' => 'Vote Not Found!', 'success' => false], 404);
         }
@@ -318,6 +318,7 @@ class VotingController extends Controller
             'success' => true,
             'message' => 'Voting Statistics!',
             'data' => [
+                'vote' => $vote,
                 'statistics' => $statistics,
                 'totals' => [
                     'reviews' => $total_reviews,
