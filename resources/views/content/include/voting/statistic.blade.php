@@ -18,7 +18,7 @@
 
                 @if (isset($vote->options[0]['image']))
                     <div>
-                        <img src="/storage/{{ $vote->options[0]['image'] }}" style="height: 30px;" />
+                        <img src="{{ asset('storage/'.$vote->options[0]['image']) }}" style="height: 30px;" />
                     </div>
                 @else
                     <div>
@@ -40,7 +40,7 @@
 
                 @if (isset($vote->options[1]['image']))
                     <div>
-                        <img src="/storage/{{ $vote->options[1]['image'] }}" style="height: 30px;" />
+                        <img src="{{ asset('storage/'.$vote->options[1]['image']) }}" style="height: 30px;" />
                     </div>
                 @else
                     <div>
@@ -65,7 +65,7 @@
 
                 @if (isset($vote->options[2]['image']))
                     <div>
-                        <img src="/storage/{{ $vote->options[2]['image'] }}" style="height: 30px;" />
+                        <img src="{{ asset('storage/'.$vote->options[2]['image']) }}" style="height: 30px;" />
                     </div>
                 @else
                     <div>
