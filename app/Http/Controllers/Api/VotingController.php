@@ -230,9 +230,9 @@ class VotingController extends Controller
 
     public function get_statistics($id)
     {
-        $vote = Voting::with('voting_category')->findOrFail($id);
-        if(empty($vote)){
-            return response()->json(['message' => 'Vote Not Found!','success' => false],404);
+        $vote = Voting::with('voting_category')->find($id);
+        if (empty($vote)) {
+            return response()->json(['message' => 'Vote Not Found!', 'success' => false], 404);
         }
         // Define age groups
         $ageGroups = [
@@ -258,7 +258,7 @@ class VotingController extends Controller
             $userIds = $users->map(fn($user) => (string) $user['_id'])->toArray();
 
             // Fetch reactions for these users
-            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id',$id)->get();
+            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id', $id)->get();
 
             // Initialize gender-based stats
             // $genderStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
@@ -269,7 +269,7 @@ class VotingController extends Controller
                 $user = $users->where('_id', $reaction['user_id'])->first();
                 $gender = $user['gender'] ?? 'male'; // Default male if missing
                 // Determine the category
-                if($gender == 'male'){
+                if ($gender == 'male') {
                     if ($reaction['type'] == 1) {
                         $maleStats['likes']++;
                     } elseif ($reaction['type'] == 2) {
@@ -278,7 +278,7 @@ class VotingController extends Controller
                         $maleStats['dislikes']++;
                     }
                     $maleStats['reviews']++;
-                }else{
+                } else {
                     if ($reaction['type'] == 1) {
                         $femaleStats['likes']++;
                     } elseif ($reaction['type'] == 2) {
@@ -321,8 +321,9 @@ class VotingController extends Controller
                 'likes' => $total_likes,
                 'neutrals' => $total_neutrals,
                 'dislikes' => $total_dislikes
-            ]
-        ]);
+            ],
+            'success' => true
+        ], 200);
     }
 }
 
