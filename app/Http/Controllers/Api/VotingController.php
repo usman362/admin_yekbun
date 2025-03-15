@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Voting;
 use App\Models\VotingReaction;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VotingController extends Controller
 {
@@ -226,125 +228,96 @@ class VotingController extends Controller
         return response()->json(['success' => true, 'message' => 'Vote saved.']);
     }
 
-    public function stats($id)
+    public function get_statistics($id)
     {
-        $users = VotingReaction::where('vote_id', $id)->with('user')->get();
-
-        $ages = [];
-        $genders = [];
-
-        foreach ($users as $votingReaction) {
-            $user = $votingReaction->user;
-
-            $dob = $user->dob;
-
-            $age = now()->diffInYears($dob);
-
-            $ages[] = $age;
-            $genders[] = $user->gender;
-        }
-
-        $ageGroupCounts = [
-            '18-24' => 0,
-            '25-32' => 0,
-            '33-39' => 0,
-            '40+'   => 0,
-        ];
-
-        $genderCounts = [
-            '18-24' => [
-                'male'   => 0,
-                'female' => 0,
-            ],
-            '25-32' => [
-                'male'   => 0,
-                'female' => 0,
-            ],
-            '33-39' => [
-                'male'   => 0,
-                'female' => 0,
-            ],
-            '40+'   => [
-                'male'   => 0,
-                'female' => 0,
-            ],
-        ];
-
+        $vote = Voting::with('voting_category')->findOrFail($id);
+        // Define age groups
         $ageGroups = [
             '18-24' => [18, 24],
-            '25-32' => [25, 32],
-            '33-39' => [33, 39],
-            '40+'   => [40, PHP_INT_MAX],
+            '25-30' => [25, 30],
+            '31-35' => [31, 35],
+            '36-40' => [36, 40]
         ];
 
-        foreach ($ages as $key => $age) {
-            foreach ($ageGroups as $group => $range) {
-                if ($age >= $range[0] && $age <= $range[1]) {
-                    $ageGroupCounts[$group]++;
+        $statistics = [];
 
-                    $gender = $genders[$key];
-                    $genderCounts[$group][$gender]++;
+        foreach ($ageGroups as $ageRange => [$minAge, $maxAge]) {
+            // Fetch users within this age range
+            $users = DB::table('users')->get()->filter(function ($user) use ($minAge, $maxAge) {
+                if (!isset($user['dob'])) {
+                    return false;
+                }
+                $age = Carbon::parse($user['dob'])->age; // Calculate age from DOB
+                return $age >= $minAge && $age <= $maxAge;
+            });
 
-                    break;
+            // Extract user IDs
+            $userIds = $users->map(fn($user) => (string) $user['_id'])->toArray();
+
+            // Fetch reactions for these users
+            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id',$id)->get();
+
+            // Initialize gender-based stats
+            // $genderStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+            $maleStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+            $femaleStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+
+            foreach ($reactions as $reaction) {
+                $user = $users->where('_id', $reaction['user_id'])->first();
+                $gender = $user['gender'] ?? 'male'; // Default male if missing
+                // Determine the category
+                if($gender == 'male'){
+                    if ($reaction['type'] == 1) {
+                        $maleStats['likes']++;
+                    } elseif ($reaction['type'] == 2) {
+                        $maleStats['neutrals']++;
+                    } elseif ($reaction['type'] == 3) {
+                        $maleStats['dislikes']++;
+                    }
+                    $maleStats['reviews']++;
+                }else{
+                    if ($reaction['type'] == 1) {
+                        $femaleStats['likes']++;
+                    } elseif ($reaction['type'] == 2) {
+                        $femaleStats['neutrals']++;
+                    } elseif ($reaction['type'] == 3) {
+                        $femaleStats['dislikes']++;
+                    }
+                    $femaleStats['reviews']++;
                 }
             }
-        }
+            // Find max value for percentage calculations
+            $max = max($maleStats['reviews'], $femaleStats['reviews'], 1); // Avoid division by zero
 
-        $result = [];
-
-        foreach ($ageGroupCounts as $group => $count) {
-            $ageGroupPercentage = count($ages) > 0 ? ($count / count($ages)) * 100 : 0;
-
-            $result['age_group_percentages'][$group] = [
-                'total_percentage' => number_format($ageGroupPercentage, 2) . '%',
-                'male'            => $count > 0 ? number_format(($genderCounts[$group]['male'] / $count) * 100, 2) . '%' : '0%',
-                'female'          => $count > 0 ? number_format(($genderCounts[$group]['female'] / $count) * 100, 2) . '%' : '0%',
+            // dd($max);
+            $statistics[] = [
+                'age' => $ageRange,
+                'max' => $max,
+                'male' => $maleStats,
+                'female' => $femaleStats
             ];
         }
 
-        $types = VotingReaction::where('vote_id', $id)
-            ->pluck('type');
+        // Calculate total values
+        $total_reviews = 0;
+        $total_likes = 0;
+        $total_dislikes = 0;
+        $total_neutrals = 0;
 
-        $typeCounts = [
-            '0' => 0,
-            '1' => 0,
-            '2' => 0,
-        ];
-
-        foreach ($types as $type) {
-            if (array_key_exists($type, $typeCounts)) {
-                $typeCounts[$type]++;
-            }
+        foreach ($statistics as $stat) {
+            $total_reviews += $stat['male']['reviews'] + $stat['female']['reviews'];
+            $total_likes += $stat['male']['likes'] + $stat['female']['likes'];
+            $total_dislikes += $stat['male']['dislikes'] + $stat['female']['dislikes'];
+            $total_neutrals += $stat['male']['neutrals'] + $stat['female']['neutrals'];
         }
-
-        $totalVotes = count($types);
-
-        $typePercentages = [];
-
-        if ($totalVotes > 0) {
-            foreach ($typeCounts as $value => $count) {
-                $percentage = ($count / $totalVotes) * 100;
-                $typePercentages[$value] = number_format($percentage, 2);
-            }
-        } else {
-            $typePercentages = [0, 0, 0];
-        }
-
-        $total_reactiions = VotingReaction::where('vote_id', $id)->count();
-
-        $negative_reactions = VotingReaction::where('vote_id', $id)->where('type', 0)->count();
-        $normal_reactions = VotingReaction::where('vote_id', $id)->where('type', 1)->count();
-        $positive_reactions = VotingReaction::where('vote_id', $id)->where('type', 2)->count();
 
         return response()->json([
-            'success' => true,
-            'data' => [
-                'age_stats' => $result,
-                'type_stats' => $typePercentages,
-                'total' => $total_reactiions,
-                'negative' => $negative_reactions,
-                'normal' => $normal_reactions,
-                'positive' => $positive_reactions
+            'statistics' => $statistics,
+            'totals' => [
+                'reviews' => $total_reviews,
+                'likes' => $total_likes,
+                'neutrals' => $total_neutrals,
+                'dislikes' => $total_dislikes
             ]
         ]);
     }

@@ -9,6 +9,7 @@ use App\Models\Voting;
 use App\Models\VotingCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VotingController extends Controller
 {
@@ -66,8 +67,8 @@ class VotingController extends Controller
         $vote->banner = $request->image ?? null;
         $vote->description = $request->description;
         $vote->vote_type = $request->vote_type ?? 'single';
-        if($request->hasFile('audio_file')){
-            $vote->audio = Helpers::fileUpload($request->audio_file,'voting');
+        if ($request->hasFile('audio_file')) {
+            $vote->audio = Helpers::fileUpload($request->audio_file, 'voting');
         }
         if ($vote->save()) {
             // $id  = $vote->id;
@@ -114,82 +115,83 @@ class VotingController extends Controller
     public function statistic($id)
     {
         $vote = Voting::with('voting_category')->findOrFail($id);
-        $statistics = [
-            [
-                'age' => '18-24',
-                'max' => 150,
-                'male' => [
-                    'reviews' => 30,
-                    'likes' => 15,
-                    'neutrals' => 10,
-                    'dislikes' => 5
-                ],
-                'female' => [
-                    'reviews' => 27,
-                    'likes' => 13,
-                    'neutrals' => 8,
-                    'dislikes' => 6
-                ]
-            ],
-            [
-                'age' => '25-30',
-                'max' => 150,
-                'male' => [
-                    'reviews' => 50,
-                    'likes' => 35,
-                    'neutrals' => 10,
-                    'dislikes' => 5
-                ],
-                'female' => [
-                    'reviews' => 37,
-                    'likes' => 20,
-                    'neutrals' => 8,
-                    'dislikes' => 9
-                ]
-            ],
-            [
-                'age' => '31-35',
-                'max' => 150,
-                'male' => [
-                    'reviews' => 67,
-                    'likes' => 40,
-                    'neutrals' => 20,
-                    'dislikes' => 7
-                ],
-                'female' => [
-                    'reviews' => 27,
-                    'likes' => 13,
-                    'neutrals' => 8,
-                    'dislikes' => 6
-                ]
-            ],
-            [
-                'age' => '36-40',
-                'max' => 150,
-                'male' => [
-                    'reviews' => 30,
-                    'likes' => 15,
-                    'neutrals' => 10,
-                    'dislikes' => 5
-                ],
-                'female' => [
-                    'reviews' => 27,
-                    'likes' => 13,
-                    'neutrals' => 8,
-                    'dislikes' => 6
-                ]
-            ]
+        $ageGroups = [
+            '18-24' => [18, 24],
+            '25-30' => [25, 30],
+            '31-35' => [31, 35],
+            '36-40' => [36, 40]
         ];
 
+        $statistics = [];
+
+        foreach ($ageGroups as $ageRange => [$minAge, $maxAge]) {
+            // Fetch users within this age range
+            $users = DB::table('users')->get()->filter(function ($user) use ($minAge, $maxAge) {
+                if (!isset($user['dob'])) {
+                    return false;
+                }
+                $age = Carbon::parse($user['dob'])->age; // Calculate age from DOB
+                return $age >= $minAge && $age <= $maxAge;
+            });
+
+            // Extract user IDs
+            $userIds = $users->map(fn($user) => (string) $user['_id'])->toArray();
+
+            // Fetch reactions for these users
+            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id',$id)->get();
+
+            // Initialize gender-based stats
+            // $genderStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+            $maleStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+            $femaleStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+
+            foreach ($reactions as $reaction) {
+                $user = $users->where('_id', $reaction['user_id'])->first();
+                $gender = $user['gender'] ?? 'male'; // Default male if missing
+                // Determine the category
+                if($gender == 'male'){
+                    if ($reaction['type'] == 1) {
+                        $maleStats['likes']++;
+                    } elseif ($reaction['type'] == 2) {
+                        $maleStats['neutrals']++;
+                    } elseif ($reaction['type'] == 3) {
+                        $maleStats['dislikes']++;
+                    }
+                    $maleStats['reviews']++;
+                }else{
+                    if ($reaction['type'] == 1) {
+                        $femaleStats['likes']++;
+                    } elseif ($reaction['type'] == 2) {
+                        $femaleStats['neutrals']++;
+                    } elseif ($reaction['type'] == 3) {
+                        $femaleStats['dislikes']++;
+                    }
+                    $femaleStats['reviews']++;
+                }
+            }
+            // Find max value for percentage calculations
+            $max = max($maleStats['reviews'], $femaleStats['reviews'], 1); // Avoid division by zero
+
+            // dd($max);
+            $statistics[] = [
+                'age' => $ageRange,
+                'max' => $max,
+                'male' => $maleStats,
+                'female' => $femaleStats
+            ];
+        }
+
+        // Calculate total values
         $total_reviews = 0;
         $total_likes = 0;
         $total_dislikes = 0;
         $total_neutrals = 0;
-        foreach ($statistics as $index => $statistic) {
-            $total_reviews += $statistic['male']['reviews'] + $statistic['male']['reviews'];
-            $total_likes += $statistic['male']['likes'] + $statistic['female']['likes'];
-            $total_dislikes += $statistic['male']['dislikes'] + $statistic['female']['dislikes'];
-            $total_neutrals += $statistic['male']['neutrals'] + $statistic['female']['neutrals'];
+
+        foreach ($statistics as $stat) {
+            $total_reviews += $stat['male']['reviews'] + $stat['female']['reviews'];
+            $total_likes += $stat['male']['likes'] + $stat['female']['likes'];
+            $total_dislikes += $stat['male']['dislikes'] + $stat['female']['dislikes'];
+            $total_neutrals += $stat['male']['neutrals'] + $stat['female']['neutrals'];
         }
 
         return view('content.include.voting.statistic', compact(

@@ -428,8 +428,7 @@ Route::get('/voting-cover/{id?}', [VotingController::class, 'get_cover']);
 Route::get('/fetch-voting/{id?}', [VotingController::class, 'fetch']);
 Route::get('/fetch-voting/all/{id?}', [VotingController::class, 'fetch_all']);
 Route::get('/voting-details/{id}/{user_id?}', [VotingController::class, 'get_details']);
-Route::get('/get-statistics/{voteId}', [VotingController::class, 'get_statistics']);
-Route::get('/voting-stats/{id}', [VotingController::class, 'stats']);
+Route::get('/voting-stats/{id}', [VotingController::class, 'get_statistics']);
 
 //Animation Emojji
 Route::get('/get-all-emoji/{userId?}/{type?}/{value?}', [AnimationEmojiController::class, 'get_all_emoji'])->name(
