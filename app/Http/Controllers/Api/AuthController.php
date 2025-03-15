@@ -475,9 +475,10 @@ class AuthController extends Controller
         ]);
 
         try {
-            $user = User::updateOrCreate(['id' => Auth::id()], [
+            User::updateOrCreate(['id' => Auth::id()], [
                 'isPrivacyPolicyAccepted' => $request->privacy_policy,
             ]);
+            $user = User::find(Auth::id());
             return response()->json(['message' => 'Privacy Policy has been Accepted!','user' => $user, 'success' => true], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something Went Wrong', 'success' => false], 403);
