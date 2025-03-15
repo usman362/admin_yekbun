@@ -107,6 +107,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
+    Route::post('/accept-privacy-policy',[AuthController::class, 'acceptPrivacyPolicy']);
 });
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);

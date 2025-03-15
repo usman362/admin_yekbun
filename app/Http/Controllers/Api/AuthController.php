@@ -467,4 +467,20 @@ class AuthController extends Controller
             return response()->json(['email' => null, 'success' => false], 404);
         }
     }
+
+    public function acceptPrivacyPolicy(Request $request)
+    {
+        $request->validate([
+            'privacy_policy' => 'required',
+        ]);
+
+        try {
+            $user = User::updateOrCreate(['id' => Auth::id()], [
+                'isPrivacyPolicyAccepted' => $request->privacy_policy,
+            ]);
+            return response()->json(['message' => 'Privacy Policy has been Accepted!', 'success' => true], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something Went Wrong', 'success' => false], 403);
+        }
+    }
 }

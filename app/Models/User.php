@@ -58,7 +58,8 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'device_imei',
         'device_id',
         'is_admin_user',
-        'is_superadmin'
+        'is_superadmin',
+        'isPrivacyPolicyAccepted'
     ];
 
     /**

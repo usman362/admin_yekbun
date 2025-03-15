@@ -1,7 +1,6 @@
 <div class="vote-detail-modal">
     <div class="vote-header">
         <div class="vote-name">{{$vote->name}}</div>
-        <div class="vote-category-name">{{$vote->voting_category->name}}</div>
     </div>
     <div class="p-2">
         <div class="community p-3">
@@ -53,20 +52,20 @@
                 <div class="me-2">{{$statistic['age']}}</div>
                 <div class="flex-fluid d-flex justify-content-between align-items-center gap-3">
                     <div class="progress w-100" style="height:15px;">
-                        <div 
-                            class="progress-bar bg-primary" 
-                            role="progressbar" 
-                            style="width: {{$statistic['male']['reviews']*100/$statistic['max']}}%" 
-                            aria-valuenow="{{$statistic['male']['reviews']}}" 
-                            aria-valuemin="0" 
+                        <div
+                            class="progress-bar bg-primary"
+                            role="progressbar"
+                            style="width: {{$statistic['male']['reviews']*100/$statistic['max']}}%"
+                            aria-valuenow="{{$statistic['male']['reviews']}}"
+                            aria-valuemin="0"
                             aria-valuemax="{{$statistic['max']}}">
                         </div>
-                        <div 
-                            class="progress-bar" 
-                            role="progressbar" 
-                            style="width: {{$statistic['female']['reviews']*100/$statistic['max']}}%; background: pink;" 
-                            aria-valuenow="{{$statistic['female']['reviews']}}" 
-                            aria-valuemin="0" 
+                        <div
+                            class="progress-bar"
+                            role="progressbar"
+                            style="width: {{$statistic['female']['reviews']*100/$statistic['max']}}%; background: pink;"
+                            aria-valuenow="{{$statistic['female']['reviews']}}"
+                            aria-valuemin="0"
                             aria-valuemax="{{$statistic['max']}}">
                         </div>
                     </div>
