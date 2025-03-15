@@ -272,7 +272,7 @@
     <x-modal id="statisticVotingModal" :showSaveBtn="false" :showHeader="false" size="md">
     </x-modal>
 
-    <script>
+    {{-- <script>
         (function() {
             ClassicEditor
                 .create(document.querySelector('#inputDescription'))
@@ -281,7 +281,7 @@
                 });
 
         }());
-    </script>
+    </script> --}}
 
 @endsection
 

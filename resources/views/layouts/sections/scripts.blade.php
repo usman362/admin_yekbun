@@ -7,7 +7,7 @@
 <script src="{{ asset(mix('assets/vendor/libs/i18n/i18n.js')) }}"></script>
 <script src="{{ asset(mix('assets/vendor/libs/typeahead-js/typeahead.js')) }}"></script>
 <script src="{{ asset(mix('assets/vendor/js/menu.js')) }}"></script>
-<script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+<script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 @yield('vendor-script')
 <script src="{{ asset(mix('assets/vendor/libs/toastr/toastr.js')) }}"></script>
 <!-- END: Page Vendor JS-->
@@ -26,10 +26,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
 
 <!-- Form Validation -->
-<script src="{{asset('assets/vendor/libs/@form-validation/popular.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/@form-validation/bootstrap5.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/@form-validation/auto-focus.js')}}"></script>
-
+<script src="{{ asset('assets/vendor/libs/@form-validation/popular.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/@form-validation/bootstrap5.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/@form-validation/auto-focus.js') }}"></script>
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @yield('page-script')
 {{-- <script src="{{asset('assets/js/tables-datatables-basic.js')}}"></script> --}}
 <!-- END: Page JS-->

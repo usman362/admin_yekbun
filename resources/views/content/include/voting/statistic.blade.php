@@ -14,11 +14,11 @@
                 </div>
             </div>
             <div class="vote-reaction dislike d-flex align-items-center mt-4"
-                style="width:{{ $total_reviews > 0 ? round(($total_dislikes * 100) / $total_reviews) : 0 }}%">
+                style="width:{{ $total_reviews > 0 ? round(($total_dislikes * 100) / $total_reviews) : 10 }}%">
 
                 @if (isset($vote->options[0]['image']))
                     <div>
-                        <img src="{{ asset('storage/'.$vote->options[0]['image']) }}" style="height: 30px;" />
+                        <img src="{{ asset('storage/' . $vote->options[0]['image']) }}" style="height: 30px;" />
                     </div>
                 @else
                     <div>
@@ -33,14 +33,17 @@
                         </svg>
                     </div>
                 @endif
-                <div class="flex-fluid d-flex justify-content-end align-items-center count">{{ $total_dislikes }}</div>
+                @if ($total_dislikes > 0)
+                    <div class="flex-fluid d-flex justify-content-end align-items-center count">{{ $total_dislikes }}
+                    </div>
+                @endif
             </div>
             <div class="vote-reaction noIdea d-flex align-items-center mt-2"
-                style="width:{{ $total_reviews > 0 ? round(($total_neutrals * 100) / $total_reviews) : 0 }}%">
+                style="width:{{ $total_reviews > 0 ? round(($total_neutrals * 100) / $total_reviews) : 10 }}%">
 
                 @if (isset($vote->options[1]['image']))
                     <div>
-                        <img src="{{ asset('storage/'.$vote->options[1]['image']) }}" style="height: 30px;" />
+                        <img src="{{ asset('storage/' . $vote->options[1]['image']) }}" style="height: 30px;" />
                     </div>
                 @else
                     <div>
@@ -58,14 +61,17 @@
                         </svg>
                     </div>
                 @endif
-                <div class="flex-fluid d-flex justify-content-end align-items-center count">{{ $total_neutrals }}</div>
+                @if ($total_neutrals > 0)
+                    <div class="flex-fluid d-flex justify-content-end align-items-center count">{{ $total_neutrals }}
+                    </div>
+                @endif
             </div>
             <div class="vote-reaction like d-flex align-items-center mt-2"
-                style="width:{{ $total_reviews > 0 ? round(($total_likes * 100) / $total_reviews) : 0 }}%">
+                style="width:{{ $total_reviews > 0 ? round(($total_likes * 100) / $total_reviews) : 10 }}%">
 
                 @if (isset($vote->options[2]['image']))
                     <div>
-                        <img src="{{ asset('storage/'.$vote->options[2]['image']) }}" style="height: 30px;" />
+                        <img src="{{ asset('storage/' . $vote->options[2]['image']) }}" style="height: 30px;" />
                     </div>
                 @else
                     <div>
@@ -80,7 +86,10 @@
                         </svg>
                     </div>
                 @endif
-                <div class="flex-fluid d-flex justify-content-end align-items-center count">{{ $total_likes }}</div>
+                @if ($total_likes > 0)
+                    <div class="flex-fluid d-flex justify-content-end align-items-center count">{{ $total_likes }}
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -101,16 +110,20 @@
                             <div class="progress-bar bg-primary" role="progressbar"
                                 style="width: {{ ($statistic['male']['reviews'] * 100) / $statistic['max'] }}%"
                                 aria-valuenow="{{ $statistic['male']['reviews'] }}" aria-valuemin="0"
-                                aria-valuemax="{{ $statistic['max'] }}">
+                                aria-valuemax="{{ $statistic['max'] }}" data-toggle="tooltip" data-placement="bottom"
+                                title="{{ number_format((($statistic['male']['reviews'] - $statistic['female']['reviews']) * 100) / $statistic['max'], 1) }}%">
+                                <b>{{ number_format((($statistic['male']['reviews'] - $statistic['female']['reviews']) * 100) / $statistic['max'], 1) }}%</b>
                             </div>
                             <div class="progress-bar" role="progressbar"
-                                style="width: {{ ($statistic['female']['reviews'] * 100) / $statistic['max'] }}%; background: pink;"
+                                style="width: {{ ($statistic['female']['reviews'] * 100) / $statistic['max'] }}%; background: pink;color:#000"
                                 aria-valuenow="{{ $statistic['female']['reviews'] }}" aria-valuemin="0"
-                                aria-valuemax="{{ $statistic['max'] }}">
+                                aria-valuemax="{{ $statistic['max'] }}" data-toggle="tooltip" data-placement="bottom"
+                                title="{{ 100 - number_format((($statistic['male']['reviews'] - $statistic['female']['reviews']) * 100) / $statistic['max'], 1) }}%">
+                                <b>{{ 100 - number_format((($statistic['male']['reviews'] - $statistic['female']['reviews']) * 100) / $statistic['max'], 1) }}%</b>
                             </div>
                         </div>
-                        <small
-                            class="fw-semibold">{{ number_format((($statistic['male']['reviews'] + $statistic['female']['reviews']) * 100) / $statistic['max'], 1) }}%</small>
+                        {{-- <small
+                            class="fw-semibold">{{ number_format((($statistic['male']['reviews'] - $statistic['female']['reviews']) * 100) / $statistic['max'], 1) }}%</small> --}}
                     </div>
                 </div>
             @endforeach
