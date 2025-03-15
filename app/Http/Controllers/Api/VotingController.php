@@ -315,14 +315,17 @@ class VotingController extends Controller
         }
 
         return response()->json([
-            'statistics' => $statistics,
-            'totals' => [
-                'reviews' => $total_reviews,
-                'likes' => $total_likes,
-                'neutrals' => $total_neutrals,
-                'dislikes' => $total_dislikes
+            'success' => true,
+            'message' => 'Voting Statistics!',
+            'data' => [
+                'statistics' => $statistics,
+                'totals' => [
+                    'reviews' => $total_reviews,
+                    'likes' => $total_likes,
+                    'neutrals' => $total_neutrals,
+                    'dislikes' => $total_dislikes
+                ]
             ],
-            'success' => true
         ], 200);
     }
 }
