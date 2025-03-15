@@ -231,6 +231,9 @@ class VotingController extends Controller
     public function get_statistics($id)
     {
         $vote = Voting::with('voting_category')->findOrFail($id);
+        if(empty($vote)){
+            return response()->json(['message' => 'Vote Not Found!','success' => false],404);
+        }
         // Define age groups
         $ageGroups = [
             '18-24' => [18, 24],
