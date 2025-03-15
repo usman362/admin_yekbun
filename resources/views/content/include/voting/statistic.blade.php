@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="vote-reaction dislike d-flex align-items-center mt-4"
-                style="width:{{ $total_reviews > 0 ? round(($total_dislikes * 100) / $total_reviews) : 10 }}%">
+                style="width:{{ $total_reviews > 0 ? round(($total_dislikes * 100) / $total_reviews) : '10' }}%">
 
                 @if (isset($vote->options[0]['image']))
                     <div>
@@ -39,7 +39,7 @@
                 @endif
             </div>
             <div class="vote-reaction noIdea d-flex align-items-center mt-2"
-                style="width:{{ $total_reviews > 0 ? round(($total_neutrals * 100) / $total_reviews) : 10 }}%">
+                style="width:{{ $total_reviews > 0 ? round(($total_neutrals * 100) / $total_reviews) : '10' }}%">
 
                 @if (isset($vote->options[1]['image']))
                     <div>
@@ -67,7 +67,7 @@
                 @endif
             </div>
             <div class="vote-reaction like d-flex align-items-center mt-2"
-                style="width:{{ $total_reviews > 0 ? round(($total_likes * 100) / $total_reviews) : 10 }}%">
+                style="width:{{ $total_reviews > 0 ? round(($total_likes * 100) / $total_reviews) : '10' }}%">
 
                 @if (isset($vote->options[2]['image']))
                     <div>
