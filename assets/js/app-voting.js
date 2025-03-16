@@ -93,7 +93,9 @@ $(document).ready(function() {
 
     // To show statistic of a vote
     $(document).on('click', '.btn-statistic-vote', function(e) {
-        const vote_id = $(e.target).closest('button').data('vote-id');
+        const vote_id = $(e.target).closest('button').attr('data-vote-id');
+        const vote_name = $(e.target).closest('button').attr('data-vote-name');
+        $('#statisticVotingModal .modal-header h4').text(vote_name);
         $.ajax({
             url: `/vote/${vote_id}/statistic`,
             success: function(response) {

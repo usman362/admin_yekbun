@@ -205,8 +205,9 @@
                                     <span>
                                         <button class="btn btn-sm btn-icon btn-statistic-vote" data-bs-toggle="tooltip"
                                             data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                            data-vote-id="{{ $vote->id }}" data-bs-original-title="Statistic"
-                                            aria-describedby="tooltip557134">
+                                            data-vote-id="{{ $vote->id }}"
+                                            data-vote-name="{{ 'Vote for ' . $vote->name }}"
+                                            data-bs-original-title="Statistic" aria-describedby="tooltip557134">
                                             <i class="bx bx-bar-chart-alt-2"></i>
                                         </button>
                                     </span>
@@ -269,7 +270,7 @@
     </x-modal>
 
     {{-- Stastics Model Form --}}
-    <x-modal id="statisticVotingModal" :showSaveBtn="false" :showHeader="false" size="md">
+    <x-modal id="statisticVotingModal" title="Vote" :showFooter="false" :showHeader="false" size="md">
     </x-modal>
 
     {{-- <script>
@@ -356,6 +357,8 @@
                 reader.readAsDataURL(input.files[0]);
             }
         });
+
+        $('')
     </script>
 
     <script>

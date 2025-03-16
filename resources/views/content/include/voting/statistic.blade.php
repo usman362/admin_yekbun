@@ -1,7 +1,7 @@
 <div class="vote-detail-modal">
-    <div class="vote-header">
+    {{-- <div class="vote-header">
         <div class="vote-name">{{ $vote->name }}</div>
-    </div>
+    </div> --}}
     <div class="p-2">
         <div class="community p-3">
             <div class="d-flex" style="color: #aaa">
