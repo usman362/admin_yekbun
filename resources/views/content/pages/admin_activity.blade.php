@@ -1785,7 +1785,7 @@
             var imghtml = $(imgid).html();
             let imgsrc = $(this).attr('data-image')
 
-
+            $('.time_input_field').val(p_start+' - '+p_end);
             $(".upid").val(cid);
             $(".title_field").val(p_title);
             $(".datepicker1").val(p_start);
