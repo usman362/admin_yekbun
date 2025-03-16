@@ -49,10 +49,10 @@
         }
 
         /*
-                                    .custom-option-body img{
-                                        height:136px;
-                                    }
-                            */
+                                                        .custom-option-body img{
+                                                            height:136px;
+                                                        }
+                                                */
         .dropdown-item h6,
         .h6,
         h5,
@@ -867,8 +867,8 @@
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-                                                                    https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-                                                                    "></script>
+                                                                                        https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                                                                                        "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -1432,7 +1432,9 @@
                                                     class="pop_action edit_popup1" data-bs-toggle="modal"
                                                     data-bs-target="#modal{{ $modalnumber }}" for="customRadioPrime"
                                                     data-id="{{ $feed->_id }}" data-name="{{ $feed->title }}"
-                                                    data-image="{{ $feed->image }}" data-audio="{{ $feed->audio }}"
+                                                    data-image="{{ 'storage/' . $feed->image }}"
+                                                    data-video="{{ 'storage/' . $feed->video }}"
+                                                    data-audio="{{ 'storage/' . $feed->audio }}"
                                                     data-start="{{ $feed->date_start }}"
                                                     data-end="{{ $feed->date_ends }}" data-type="{{ $feed->type }}"
                                                     data-option="{{ $feed->share_option }}"
@@ -1471,10 +1473,13 @@
                                                 @if ($feed->audio !== '' && $feed->audio !== null)
                                                     <audio src="{{ asset('storage/' . $feed->audio) }}"
                                                         id="feed-audio-{{ $feed->id }}"></audio>
-                                                    <div class="audio-icon-play d-none" id="audio-icon-play{{$feed->id}}" data-id="{{ $feed->id }}">
+                                                    <div class="audio-icon-play d-none"
+                                                        id="audio-icon-play{{ $feed->id }}"
+                                                        data-id="{{ $feed->id }}">
                                                         <i class="fas fa-volume-high"></i>
                                                     </div>
-                                                    <div class="audio-icon-stop" id="audio-icon-stop{{$feed->id}}" data-id="{{ $feed->id }}">
+                                                    <div class="audio-icon-stop" id="audio-icon-stop{{ $feed->id }}"
+                                                        data-id="{{ $feed->id }}">
                                                         <i class="fas fa-volume-xmark"></i>
                                                     </div>
                                                 @endif
@@ -1713,8 +1718,20 @@
 
             $(".addImageButtonModel2").show();
             $(".descriptionTextContainerModal2").show();
+            $("#descriptionTextContainerModal10").show();
             $(".image-preview-containerModal2").html("");
             $(".fileInput18").attr("required", true);
+
+            $('#Mp3InputModal10').show();
+            $('#Mp3uploadModal10').hide();
+            $('#Mp3InputModal2').show();
+            $('#Mp3uploadModal2').hide();
+            $('#Mp3InputModal3').show();
+            $('#Mp3uploadModal3').hide();
+            $('#Mp3InputModal4').show();
+            $('#Mp3uploadModal4').hide();
+            $('#Mp3InputModal5').show();
+            $('#Mp3uploadModal5').hide();
 
             var image1 = document.getElementById('defaultIcon1');
             image1.src = adddefpath;
@@ -1738,7 +1755,7 @@
                 audio.pause();
                 audio.currentTime = 0; // Reset audio
                 $(this).addClass("d-none"); // Hide play button
-                $("#audio-icon-stop"+id).removeClass("d-none"); // Show stop button
+                $("#audio-icon-stop" + id).removeClass("d-none"); // Show stop button
             });
 
             $(".audio-icon-stop").click(function() {
@@ -1746,7 +1763,7 @@
                 let audio = $("#feed-audio-" + id)[0]; // Get the audio element
                 audio.play();
                 $(this).addClass("d-none"); // Hide stop button
-                $("#audio-icon-play"+id).removeClass("d-none"); // Show play button
+                $("#audio-icon-play" + id).removeClass("d-none"); // Show play button
             });
         });
 
@@ -1766,6 +1783,8 @@
 
             var imgid = ".pop_main_image_" + cid;
             var imghtml = $(imgid).html();
+            let imgsrc = $(this).attr('data-image')
+
 
             $(".upid").val(cid);
             $(".title_field").val(p_title);
@@ -1807,6 +1826,15 @@
                     $("#button1Modal8").attr('checked', 'checked');
                     $("#button1Modal8").click();
                 }
+
+                if ($(this).attr('data-audio') !== "" && $(this).attr('data-audio') !== null) {
+                    loadAudio($(this).attr('data-audio'), '#DurationModal2', '#playModal2');
+                    $('#Mp3InputModal2').css('display', 'none');
+                    $('#Mp3uploadModal2').css('display', 'block');
+                } else {
+                    $('#Mp3InputModal2').css('display', 'block');
+                    $('#Mp3uploadModal2').css('display', 'none');
+                }
             } else if (typ == "Donation") {
 
                 if (p_option == "educated") {
@@ -1824,8 +1852,16 @@
                     $("#button1Modal8_2").click();
                 }
 
+                if ($(this).attr('data-audio') !== "" && $(this).attr('data-audio') !== null) {
+                    loadAudio($(this).attr('data-audio'), '#DurationModal10', '#playModal10');
+                    $('#Mp3InputModal10').css('display', 'none');
+                    $('#Mp3uploadModal10').css('display', 'block');
+                } else {
+                    $('#Mp3InputModal10').css('display', 'block');
+                    $('#Mp3uploadModal10').css('display', 'none');
+                }
+
                 //extra fields
-                $("#donation_img").html(imghtml);
                 var limit = $(this).attr("data-limit");
                 var paypal = $(this).attr("data-paypal");
                 var gpay = $(this).attr("data-gpay");
@@ -1899,6 +1935,16 @@
                     $("#button1Modal8_3").attr('checked', 'checked');
                     $("#button1Modal8_3").click();
                 }
+
+                if ($(this).attr('data-audio') !== "" && $(this).attr('data-audio') !== null) {
+                    loadAudio($(this).attr('data-audio'), '#DurationModal4', '#playModal4');
+                    $('#Mp3InputModal4').css('display', 'none');
+                    $('#Mp3uploadModal4').css('display', 'block');
+                } else {
+                    $('#Mp3InputModal4').css('display', 'block');
+                    $('#Mp3uploadModal4').css('display', 'none');
+                }
+
                 var txt1 = $(this).attr("data-txt1");
                 $('.txt1').val(txt1);
                 var txt2 = $(this).attr("data-txt2");
@@ -1944,14 +1990,64 @@
                     $("#button1Modal8_4").click();
                 }
 
+                if ($(this).attr('data-audio') !== "" && $(this).attr('data-audio') !== null) {
+                    loadAudio($(this).attr('data-audio'), '#DurationModal5', '#playModal5');
+                    $('#Mp3InputModal5').css('display', 'none');
+                    $('#Mp3uploadModal5').css('display', 'block');
+                } else {
+                    $('#Mp3InputModal5').css('display', 'block');
+                    $('#Mp3uploadModal5').css('display', 'none');
+                }
+
+            }
+
+            //pop_main_image
+            if(imgsrc !== "" && imgsrc !== null){
+                $(".addImageButtonModel2").hide();
+                $(".descriptionTextContainerModal2").hide();
+                $("#descriptionTextContainerModal10").hide();
+                $(".image-preview-containerModal2").html(`
+                <img src="${imgsrc}" alt="Image Preview" style="width: 100%; height: 100%; object-fit: fill; border-radius: 10px;">
+                `);
             }
 
 
+            /** ✅ Load and play audio */
+            function loadAudio(audioPath, duration, play) {
+                let audioElement = null;
+                const durationSpan = $(duration)
+                const playButton = $(play);
+                if (!audioPath) return;
 
-            //pop_main_image
-            $(".addImageButtonModel2").hide();
-            $(".descriptionTextContainerModal2").hide();
-            $(".image-preview-containerModal2").html(imghtml);
+                audioElement = new Audio(audioPath);
+
+                // Update duration once metadata is loaded
+                $(audioElement).on("loadedmetadata", function() {
+                    durationSpan.text(formatDuration(audioElement.duration));
+                });
+
+                // Update current time during playback
+                $(audioElement).on("timeupdate", function() {
+                    durationSpan.text(formatDuration(audioElement.currentTime));
+                });
+
+                playButton.on("click", function() {
+                    if (audioElement.paused) {
+                        audioElement.play();
+                        playButton.attr("src", playpusecgrnbtn); // Change to pause icon
+                    } else {
+                        audioElement.pause();
+                        playButton.attr("src", playbtn); // Change back to play icon
+                    }
+                });
+
+                /** ✅ Format duration to "MM:SS" */
+                function formatDuration(seconds) {
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = Math.floor(seconds % 60);
+                    return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+                }
+            }
 
         })
 
