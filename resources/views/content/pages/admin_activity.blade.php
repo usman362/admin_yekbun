@@ -49,10 +49,10 @@
         }
 
         /*
-                            .custom-option-body img{
-                                height:136px;
-                            }
-                    */
+                                    .custom-option-body img{
+                                        height:136px;
+                                    }
+                            */
         .dropdown-item h6,
         .h6,
         h5,
@@ -239,7 +239,7 @@
         }
 
         .time_input {
-            width: 150px;
+            width: 100%;
             height: 35px;
             background-color: #e0e0e0;
             border-radius: 5px;
@@ -867,8 +867,8 @@
     <!-- Concatenated js plugins and jQuery -->
     <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
     <script src="
-                                                            https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
-                                                            "></script>
+                                                                    https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
+                                                                    "></script>
     <!-- Core js -->
     <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
 
@@ -1368,7 +1368,7 @@
                                                 <div class="pop_head">
                                                     <div class="pop_tit"><img
                                                             src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000003833.svg') }}"
-                                                            style="width:28px;height:28px;object-fit:cover">
+                                                            style="width:32px;height:32px;object-fit:cover">
                                                         <div class="pop_heading" style="">
                                                             <div class="pop_head_line" style="">
                                                                 <div class="pop_title" style=""></div>YekBun Team
@@ -1377,13 +1377,15 @@
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                style="width:150px;height:6px;font-family:Genos;font-size:14px;text-align:left;text-underline-position:from-font;text-decoration-skip-ink:none;color:#7e7e7e;display:flex;align-items:center;gap:5px">
-                                                                {{ \Carbon\Carbon::parse($feed->created_at)->format('d M y') }}
+                                                                style="width:150px;height:6px;font-family:Genos;font-size:14px;text-align:left;text-underline-position:from-font;text-decoration-skip-ink:none;color:#7e7e7e;display:flex;align-items:center;gap:5px;position: relative;top:-9px">
+                                                                {{ \Carbon\Carbon::parse($feed->date_start)->format('d M y') }}
+                                                                -
+                                                                {{ \Carbon\Carbon::parse($feed->date_ends)->format('d M y') }}
                                                             </div>
                                                         </div>
-                                                    </div><img
-                                                        src="{{ asset('assets/svg/svg-dialog/' . $feed->share_option . '.svg') }}"
-                                                        style="width:25px;height:27px;object-fit:cover;border:none"
+                                                    </div>
+                                                    <img src="{{ asset('assets/svg/svg-dialog/' . $feed->share_option . '.svg') }}"
+                                                        style="{{ $feed->share_option == 'all-users' ? 'width:36px;height:36px' : 'width:27px;height:36px' }};object-fit:cover;border:none"
                                                         class="img-thumbnail">
                                                 </div>
                                                 <form action="delete_popfeed"
@@ -1430,7 +1432,7 @@
                                                     class="pop_action edit_popup1" data-bs-toggle="modal"
                                                     data-bs-target="#modal{{ $modalnumber }}" for="customRadioPrime"
                                                     data-id="{{ $feed->_id }}" data-name="{{ $feed->title }}"
-                                                    data-image="{{ $feed->image }}"
+                                                    data-image="{{ $feed->image }}" data-audio="{{ $feed->audio }}"
                                                     data-start="{{ $feed->date_start }}"
                                                     data-end="{{ $feed->date_ends }}" data-type="{{ $feed->type }}"
                                                     data-option="{{ $feed->share_option }}"
@@ -1454,24 +1456,28 @@
                                                 <!-- Custom controls are defined here -->
                                                 {{-- <video src="{{ asset('storage/' . $feed->video) }}" style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block"></video> --}}
 
-                                                <video
-                                                    id="my-player"
-                                                    class="video-js"
-                                                    controls
-                                                    preload="auto"
-                                                    {{-- poster="//vjs.zencdn.net/v/oceans.png" --}}
-                                                    data-setup='{}' style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                                <source src="{{ asset('storage/' . $feed->video) }}" type="video/mp4"></source>
-                                            </video>
-
-                                                {{-- <div class="audio-icon"
-                                                    style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008129.svg') }}"
-                                                        style="width:20px;height:20px;margin:5px;border-radius:5px;object-fit:cover;color:#fff">
-                                                </div> --}}
+                                                <video id="my-player" class="video-js" controls preload="auto"
+                                                    {{-- poster="//vjs.zencdn.net/v/oceans.png" --}} data-setup='{}'
+                                                    style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                                    <source src="{{ asset('storage/' . $feed->video) }}"
+                                                        type="video/mp4">
+                                                    </source>
+                                                </video>
                                             @else
                                                 <img src="{{ asset('storage/' . $feed->image) }}"
                                                     style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                                {{-- <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008129.svg') }}"
+                                                style="width:20px;height:20px;margin:5px;border-radius:5px;object-fit:cover;color:#fff"> --}}
+                                                @if ($feed->audio !== '' && $feed->audio !== null)
+                                                    <audio src="{{ asset('storage/' . $feed->audio) }}"
+                                                        id="feed-audio-{{ $feed->id }}"></audio>
+                                                    <div class="audio-icon-play d-none" id="audio-icon-play{{$feed->id}}" data-id="{{ $feed->id }}">
+                                                        <i class="fas fa-volume-high"></i>
+                                                    </div>
+                                                    <div class="audio-icon-stop" id="audio-icon-stop{{$feed->id}}" data-id="{{ $feed->id }}">
+                                                        <i class="fas fa-volume-xmark"></i>
+                                                    </div>
+                                                @endif
                                             @endif
                                         </div>
                                         <div
@@ -1479,7 +1485,7 @@
                                             <div
                                                 style="display:flex;align-items:center;justify-content:space-between;width:200px;height:100%">
 
-                                                <div style="display:flex;align-items:center;gap:3px;height:100%"><img
+                                                {{-- <div style="display:flex;align-items:center;gap:3px;height:100%"><img
                                                         src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Eye%20Scan.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover"><span
                                                         style="font-weight:400;font-family:Genos">123</span>
@@ -1489,20 +1495,20 @@
                                                         src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover"><span
                                                         style="font-weight:400;font-family:Genos">123</span>
-                                                </div>
+                                                </div> --}}
 
                                                 @if ($feed->is_comments == 1)
                                                     <div style="display:flex;align-items:center;gap:3px;height:100%"><img
                                                             src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
                                                             style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">123</span>
+                                                            style="font-weight:400;font-family:Genos">0</span>
                                                     </div>
                                                 @endif
                                                 @if ($feed->is_share == 1)
                                                     <div style="display:flex;align-items:center;gap:3px;height:100%"><img
                                                             src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
                                                             style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">123</span>
+                                                            style="font-weight:400;font-family:Genos">0</span>
                                                     </div>
                                                 @endif
                                             </div>
@@ -1512,7 +1518,7 @@
                                                         style="width:100%;height:100%;object-fit:cover">
                                                     <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover">
-                                                    <span style="font-weight:400;font-family:Genos">123</span>
+                                                    <span style="font-weight:400;font-family:Genos">0</span>
                                                 </div>
                                             @endif
                                         </div>
@@ -1633,7 +1639,7 @@
     <script>
         $(document).ready(function() {
 
-            $('.time_input_field').datepicker({
+            $('.time_input_field').daterangepicker({
                 onSelect: function(dateText) {
 
                     $('#span_output').text(dateText);
@@ -1724,13 +1730,32 @@
 
         })
 
+        $(document).ready(function() {
 
+            $(".audio-icon-play").click(function() {
+                let id = $(this).attr('data-id');
+                let audio = $("#feed-audio-" + id)[0]; // Get the audio element
+                audio.pause();
+                audio.currentTime = 0; // Reset audio
+                $(this).addClass("d-none"); // Hide play button
+                $("#audio-icon-stop"+id).removeClass("d-none"); // Show stop button
+            });
+
+            $(".audio-icon-stop").click(function() {
+                let id = $(this).attr('data-id');
+                let audio = $("#feed-audio-" + id)[0]; // Get the audio element
+                audio.play();
+                $(this).addClass("d-none"); // Hide stop button
+                $("#audio-icon-play"+id).removeClass("d-none"); // Show play button
+            });
+        });
 
 
         $(document).on("click", ".edit_popup1", function() {
             var cid = $(this).attr("data-id");
             var p_title = $(this).attr("data-name");
             var p_image = $(this).attr("data-image");
+            var p_audio = $(this).attr("data-audio");
             var p_start = $(this).attr("data-start");
             var p_end = $(this).attr("data-end");
             var p_option = $(this).attr("data-option");
@@ -1769,13 +1794,13 @@
 
             if (typ == "System") {
 
-                if (p_option == "Educated") {
+                if (p_option == "educated") {
                     $("#button2Modal8").attr('checked', 'checked');
                     $("#button2Modal8").click();
-                } else if (p_option == "Cultivated") {
+                } else if (p_option == "cultivated") {
                     $("#button3Modal8").attr('checked', 'checked');
                     $("#button3Modal8").click();
-                } else if (p_option == "Academic") {
+                } else if (p_option == "academic") {
                     $("#button4Modal8").attr('checked', 'checked');
                     $("#button4Modal8").click();
                 } else {
@@ -1784,14 +1809,14 @@
                 }
             } else if (typ == "Donation") {
 
-                if (p_option == "Educated") {
+                if (p_option == "educated") {
                     $("#button2Modal8_2").attr('checked', 'checked');
                     $("#button2Modal8_2").click();
-                } else if (p_option == "Cultivated") {
+                } else if (p_option == "cultivated") {
                     $("#button3Modal8_2").attr('checked', 'checked');
                     $("#button3Modal8_2").click();
 
-                } else if (p_option == "Academic") {
+                } else if (p_option == "academic") {
                     $("#button4Modal8_2").attr('checked', 'checked');
                     $("#button4Modal8_2").click();
                 } else {
@@ -1860,14 +1885,14 @@
 
             } else if (typ == "Surveys") {
 
-                if (p_option == "Educated") {
+                if (p_option == "educated") {
                     $("#button2Modal8_3").attr('checked', 'checked');
                     $("#button2Modal8_3").click();
-                } else if (p_option == "Cultivated") {
+                } else if (p_option == "cultivated") {
                     $("#button3Modal8_3").attr('checked', 'checked');
                     $("#button3Modal8_3").click();
 
-                } else if (p_option == "Academic") {
+                } else if (p_option == "academic") {
                     $("#button4Modal8_3").attr('checked', 'checked');
                     $("#button4Modal8_3").click();
                 } else {
@@ -1904,14 +1929,14 @@
                 }
 
             } else if (typ == "Greetings") {
-                if (p_option == "Educated") {
+                if (p_option == "educated") {
                     $("#button2Modal8_4").attr('checked', 'checked');
                     $("#button2Modal8_4").click();
-                } else if (p_option == "Cultivated") {
+                } else if (p_option == "cultivated") {
                     $("#button3Modal8_4").attr('checked', 'checked');
                     $("#button3Modal8_4").click();
 
-                } else if (p_option == "Academic") {
+                } else if (p_option == "academic") {
                     $("#button4Modal8_4").attr('checked', 'checked');
                     $("#button4Modal8_4").click();
                 } else {

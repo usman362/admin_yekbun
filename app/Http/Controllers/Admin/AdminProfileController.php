@@ -12,6 +12,7 @@ use App\Models\News;
 use App\Models\PopFeeds;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\Models\Activity;
 
 class AdminProfileController extends Controller
@@ -128,12 +129,11 @@ class AdminProfileController extends Controller
 
 
     public function store_pops(Request $request){
-// dd($request->all());
+        
         $request->validate([
             'title' => 'required',
            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
         $poptyp = $request->type;
         $optons = "";
 
@@ -172,8 +172,8 @@ class AdminProfileController extends Controller
                     $postpop->is_pay_office = $request->is_payoffice ?? 0;
                     $postpop->is_pay_other = $request->is_other ?? 0;
                     $postpop->title = $request->title;
-                    $postpop->date_start = $request->start_date;
-                    $postpop->date_ends = $request->end_date;
+                    $postpop->date_start = Str::before($request->duration,' -');
+                    $postpop->date_ends = Str::after($request->duration,'- ');
                     $postpop->share_option = $optons;
                     $postpop->is_comments = $request->comments ?? 0;
                     $postpop->is_share = $request->share ?? 0;
@@ -209,8 +209,8 @@ class AdminProfileController extends Controller
                 }else{
 
                     $postpop->title = $request->title;
-                    $postpop->date_start = $request->start_date;
-                    $postpop->date_ends = $request->end_date;
+                    $postpop->date_start = Str::before($request->duration,' -');
+                    $postpop->date_ends = Str::after($request->duration,'- ');
                     $postpop->share_option = $optons;
                     $postpop->is_comments = $request->comments ?? 0;
                     $postpop->is_share = $request->share ?? 0;
@@ -336,8 +336,8 @@ class AdminProfileController extends Controller
                 'is_pay_other' => $request->is_other ?? 0,
                 'user_id' => auth()->user()->id ?? 0,
                 'title' => $request->title,
-                'date_start' => $request->start_date,
-                'date_ends' => $request->end_date,
+                'date_start' => Str::before($request->duration,' -'),
+                'date_ends' => Str::after($request->duration,'- '),
                 'image' => $fileType == 'image' ? $filePath : '',
                 'video' => $fileType == 'video' ? $filePath : '',
                 'audio' => $audioPath ?? '',
@@ -353,8 +353,8 @@ class AdminProfileController extends Controller
             $postpop = PopFeeds::create([
                 'user_id' => auth()->user()->id ?? 0,
                 'title' => $request->title,
-                'date_start' => $request->start_date,
-                'date_ends' => $request->end_date,
+                'date_start' => Str::before($request->duration,' -'),
+                'date_ends' => Str::after($request->duration,'- '),
                 'image' => $fileType == 'image' ? $filePath : '',
                 'video' => $fileType == 'video' ? $filePath : '',
                 'audio' => $audioPath ?? '',
@@ -385,9 +385,6 @@ class AdminProfileController extends Controller
         return back()->with('success', 'Popup Feed added successfully.');
 
         }
-
-
-
     }
 
     public function delete_pops(Request $request){

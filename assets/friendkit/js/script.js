@@ -362,8 +362,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("modal10")
       );
 
-      const st_date = document.getElementById('datepicker1_donation').value;
-      const end_date = document.getElementById('datepicker2_donation').value;
+      const duration_date = document.getElementById('donation_duration').value;
+      const [st_date, end_date] = duration_date.split(" - ").map(date => date.trim());
       const donation_amount = document.getElementById('donation_amount').value;
       const donationTitle = document.getElementById('donationTitle').value;
 
@@ -1328,7 +1328,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isValid) {
           // Hide the upload area
           mp3Input.style.display = "none";
-          previewContainerMp3.style.border = "none";
+          // previewContainerMp3.style.border = "none";
           Mp3upload.style.display = "block";
 
           // Update the duration spans
@@ -1628,7 +1628,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isValid) {
           // Hide the upload area
           mp3Input.style.display = "none";
-          previewContainerMp3.style.border = "none";
+          // previewContainerMp3.style.border = "none";
           Mp3upload.style.display = "block";
 
           // Update the duration spans
@@ -1918,7 +1918,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isValid) {
           // Hide the upload area
           mp3Input.style.display = "none";
-          previewContainerMp3.style.border = "none";
+          // previewContainerMp3.style.border = "none";
           Mp3upload.style.display = "block";
 
           // Update the duration spans
@@ -1993,6 +1993,385 @@ document.addEventListener("DOMContentLoaded", () => {
       return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
     }
   });
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const mp3Input = document.getElementById("Mp3InputModal3");
+      const fileInput = document.querySelector(".fileInputModal3");
+      const deleteButtonMp3 = document.getElementById("deleteButtonMp3Modal3");
+      const previewContainerMp3 = document.getElementById("previewContainerMp3Modal3");
+      const Mp3upload = document.getElementById("Mp3uploadModal3");
+      const playButton = document.getElementById("playModal3");
+      const durationSpan = document.getElementById("DurationModal3");
+      const playIconModal17 = document.querySelector(".overlay img[src='"+ playbtn +"']");
+      const MAX_DURATION = 300; // Maximum duration in seconds
+      const allowedTypes = ["audio/mpeg", "audio/wav"];
+      let audioElement = null; // Variable to store the audio element
+
+      // Validate file type and size
+      function validateFile(file, callback) {
+        if (!allowedTypes.includes(file.type)) {
+          alert("Only MP3 or WAV files are allowed.");
+          return callback(false, null);
+        }
+
+        const audio = new Audio();
+        audio.src = URL.createObjectURL(file);
+
+        audio.addEventListener("loadedmetadata", () => {
+          if (audio.duration > MAX_DURATION) {
+            alert(`The file exceeds the maximum allowed duration of ${MAX_DURATION} seconds.`);
+            return callback(false, null);
+          }
+
+          callback(true, { file, duration: audio.duration });
+        });
+
+        audio.onerror = () => {
+          alert("Invalid audio file.");
+          callback(false, null);
+        };
+      }
+
+      // Handle file input change
+      fileInput.addEventListener("change", (event) => {
+        const files = event.target.files;
+
+        if (files.length > 1) {
+          alert("You can only upload one file at a time.");
+          return;
+        }
+
+        const file = files[0];
+        validateFile(file, (isValid, fileData) => {
+          if (isValid) {
+            // Hide the upload area
+            mp3Input.style.display = "none";
+          //   previewContainerMp3.style.border = "none";
+            Mp3upload.style.display = "block";
+
+            // Update the duration spans
+            durationSpan.textContent = formatDuration(fileData.duration);
+
+            // Create an audio element and append it
+            if (!audioElement) {
+              audioElement = new Audio(URL.createObjectURL(fileData.file));
+              audioElement.addEventListener("timeupdate", () => {
+                const currentTime = audioElement.currentTime;
+                durationSpan.textContent = formatDuration(currentTime);
+              });
+            } else {
+              audioElement.src = URL.createObjectURL(fileData.file);
+            }
+          }
+        });
+      });
+
+      // Delete audio file and reset upload area
+      deleteButtonMp3.addEventListener("click", () => {
+        // Stop audio playback if it's playing
+        if (audioElement && !audioElement.paused) {
+          audioElement.pause();
+        }
+
+        // Reset the audio element and clear the file input
+        fileInput.value = ""; // Reset file input
+        mp3Input.style.display = "block"; // Reshow the upload area
+        mp3Input.style.top = "0px"; // Réinitialise la position verticale
+        mp3Input.style.bottom = "0px"; // Réinitialise la position horizontale
+        previewContainerMp3.style.border = "2px dashed gray"; // Restore the border
+        Mp3upload.style.display = "none";
+
+        // Reset duration span
+        durationSpan.textContent = "00:00";
+
+        // Reset audio element
+        audioElement = null;
+
+        // Reset play button and icon
+        playButton.src = pausebtn;
+        playIconModal17.src = playbtn;
+
+        console.log("Audio file deleted.");
+      });
+
+      // Play/pause functionality
+      function togglePlay() {
+        if (audioElement) {
+          if (audioElement.paused) {
+            audioElement.play();
+            playButton.src = playpusecgrnbtn;
+            playIconModal17.src = playpusecgrnbtn;
+          } else {
+            audioElement.pause();
+            playButton.src = pausebtn;
+            playIconModal17.src = playbtn;
+          }
+        }
+      }
+
+      playButton.addEventListener("click", togglePlay);
+      playIconModal17.addEventListener("click", togglePlay);
+
+      // Format duration to "MM:SS"
+      function formatDuration(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+      }
+    });
+  document.addEventListener("DOMContentLoaded", () => {
+      const mp3Input = document.getElementById("Mp3InputModal4");
+      const fileInput = document.querySelector(".fileInputModal4");
+      const deleteButtonMp3 = document.getElementById("deleteButtonMp3Modal4");
+      const previewContainerMp3 = document.getElementById("previewContainerMp3Modal4");
+      const Mp3upload = document.getElementById("Mp3uploadModal4");
+      const playButton = document.getElementById("playModal4");
+      const durationSpan = document.getElementById("DurationModal4");
+      const playIconModal17 = document.querySelector(".overlay img[src='"+ playbtn +"']");
+      const MAX_DURATION = 300; // Maximum duration in seconds
+      const allowedTypes = ["audio/mpeg", "audio/wav"];
+      let audioElement = null; // Variable to store the audio element
+
+      // Validate file type and size
+      function validateFile(file, callback) {
+        if (!allowedTypes.includes(file.type)) {
+          alert("Only MP3 or WAV files are allowed.");
+          return callback(false, null);
+        }
+
+        const audio = new Audio();
+        audio.src = URL.createObjectURL(file);
+
+        audio.addEventListener("loadedmetadata", () => {
+          if (audio.duration > MAX_DURATION) {
+            alert(`The file exceeds the maximum allowed duration of ${MAX_DURATION} seconds.`);
+            return callback(false, null);
+          }
+
+          callback(true, { file, duration: audio.duration });
+        });
+
+        audio.onerror = () => {
+          alert("Invalid audio file.");
+          callback(false, null);
+        };
+      }
+
+      // Handle file input change
+      fileInput.addEventListener("change", (event) => {
+        const files = event.target.files;
+
+        if (files.length > 1) {
+          alert("You can only upload one file at a time.");
+          return;
+        }
+
+        const file = files[0];
+        validateFile(file, (isValid, fileData) => {
+          if (isValid) {
+            // Hide the upload area
+            mp3Input.style.display = "none";
+          //   previewContainerMp3.style.border = "none";
+            Mp3upload.style.display = "block";
+
+            // Update the duration spans
+            durationSpan.textContent = formatDuration(fileData.duration);
+
+            // Create an audio element and append it
+            if (!audioElement) {
+              audioElement = new Audio(URL.createObjectURL(fileData.file));
+              audioElement.addEventListener("timeupdate", () => {
+                const currentTime = audioElement.currentTime;
+                durationSpan.textContent = formatDuration(currentTime);
+              });
+            } else {
+              audioElement.src = URL.createObjectURL(fileData.file);
+            }
+          }
+        });
+      });
+
+      // Delete audio file and reset upload area
+      deleteButtonMp3.addEventListener("click", () => {
+        // Stop audio playback if it's playing
+        if (audioElement && !audioElement.paused) {
+          audioElement.pause();
+        }
+
+        // Reset the audio element and clear the file input
+        fileInput.value = ""; // Reset file input
+        mp3Input.style.display = "block"; // Reshow the upload area
+        mp3Input.style.top = "0px"; // Réinitialise la position verticale
+        mp3Input.style.bottom = "0px"; // Réinitialise la position horizontale
+        previewContainerMp3.style.border = "2px dashed gray"; // Restore the border
+        Mp3upload.style.display = "none";
+
+        // Reset duration span
+        durationSpan.textContent = "00:00";
+
+        // Reset audio element
+        audioElement = null;
+
+        // Reset play button and icon
+        playButton.src = pausebtn;
+        playIconModal17.src = playbtn;
+
+        console.log("Audio file deleted.");
+      });
+
+      // Play/pause functionality
+      function togglePlay() {
+        if (audioElement) {
+          if (audioElement.paused) {
+            audioElement.play();
+            playButton.src = playpusecgrnbtn;
+            playIconModal17.src = playpusecgrnbtn;
+          } else {
+            audioElement.pause();
+            playButton.src = pausebtn;
+            playIconModal17.src = playbtn;
+          }
+        }
+      }
+
+      playButton.addEventListener("click", togglePlay);
+      playIconModal17.addEventListener("click", togglePlay);
+
+      // Format duration to "MM:SS"
+      function formatDuration(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+      }
+    });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const mp3Input = document.getElementById("Mp3InputModal5");
+      const fileInput = document.querySelector(".fileInputModal5");
+      const deleteButtonMp3 = document.getElementById("deleteButtonMp3Modal5");
+      const previewContainerMp3 = document.getElementById("previewContainerMp3Modal5");
+      const Mp3upload = document.getElementById("Mp3uploadModal5");
+      const playButton = document.getElementById("playModal5");
+      const durationSpan = document.getElementById("DurationModal5");
+      const playIconModal17 = document.querySelector(".overlay img[src='"+ playbtn +"']");
+      const MAX_DURATION = 300; // Maximum duration in seconds
+      const allowedTypes = ["audio/mpeg", "audio/wav"];
+      let audioElement = null; // Variable to store the audio element
+
+      // Validate file type and size
+      function validateFile(file, callback) {
+        if (!allowedTypes.includes(file.type)) {
+          alert("Only MP3 or WAV files are allowed.");
+          return callback(false, null);
+        }
+
+        const audio = new Audio();
+        audio.src = URL.createObjectURL(file);
+
+        audio.addEventListener("loadedmetadata", () => {
+          if (audio.duration > MAX_DURATION) {
+            alert(`The file exceeds the maximum allowed duration of ${MAX_DURATION} seconds.`);
+            return callback(false, null);
+          }
+
+          callback(true, { file, duration: audio.duration });
+        });
+
+        audio.onerror = () => {
+          alert("Invalid audio file.");
+          callback(false, null);
+        };
+      }
+
+      // Handle file input change
+      fileInput.addEventListener("change", (event) => {
+        const files = event.target.files;
+
+        if (files.length > 1) {
+          alert("You can only upload one file at a time.");
+          return;
+        }
+
+        const file = files[0];
+        validateFile(file, (isValid, fileData) => {
+          if (isValid) {
+            // Hide the upload area
+            mp3Input.style.display = "none";
+          //   previewContainerMp3.style.border = "none";
+            Mp3upload.style.display = "block";
+
+            // Update the duration spans
+            durationSpan.textContent = formatDuration(fileData.duration);
+
+            // Create an audio element and append it
+            if (!audioElement) {
+              audioElement = new Audio(URL.createObjectURL(fileData.file));
+              audioElement.addEventListener("timeupdate", () => {
+                const currentTime = audioElement.currentTime;
+                durationSpan.textContent = formatDuration(currentTime);
+              });
+            } else {
+              audioElement.src = URL.createObjectURL(fileData.file);
+            }
+          }
+        });
+      });
+
+      // Delete audio file and reset upload area
+      deleteButtonMp3.addEventListener("click", () => {
+        // Stop audio playback if it's playing
+        if (audioElement && !audioElement.paused) {
+          audioElement.pause();
+        }
+
+        // Reset the audio element and clear the file input
+        fileInput.value = ""; // Reset file input
+        mp3Input.style.display = "block"; // Reshow the upload area
+        mp3Input.style.top = "0px"; // Réinitialise la position verticale
+        mp3Input.style.bottom = "0px"; // Réinitialise la position horizontale
+        previewContainerMp3.style.border = "2px dashed gray"; // Restore the border
+        Mp3upload.style.display = "none";
+
+        // Reset duration span
+        durationSpan.textContent = "00:00";
+
+        // Reset audio element
+        audioElement = null;
+
+        // Reset play button and icon
+        playButton.src = pausebtn;
+        playIconModal17.src = playbtn;
+
+        console.log("Audio file deleted.");
+      });
+
+      // Play/pause functionality
+      function togglePlay() {
+        if (audioElement) {
+          if (audioElement.paused) {
+            audioElement.play();
+            playButton.src = playpusecgrnbtn;
+            playIconModal17.src = playpusecgrnbtn;
+          } else {
+            audioElement.pause();
+            playButton.src = pausebtn;
+            playIconModal17.src = playbtn;
+          }
+        }
+      }
+
+      playButton.addEventListener("click", togglePlay);
+      playIconModal17.addEventListener("click", togglePlay);
+
+      // Format duration to "MM:SS"
+      function formatDuration(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+      }
+    });
 
   function changeMainImage(src) {
     const mainImage = document.getElementById("mainImage");
