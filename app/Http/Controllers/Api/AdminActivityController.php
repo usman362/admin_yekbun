@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\PopFeeds;
 use Illuminate\Http\Request;
@@ -10,30 +11,34 @@ use Illuminate\Support\Facades\Validator;
 class AdminActivityController extends Controller
 {
 
-    public function getSystemInfo(){
-        $popfeeds = PopFeeds::where('type','System')->orderBy('created_at','desc')->get();
-        return response()->json(['feeds' => $popfeeds], 200);
+    public function getSystemInfo()
+    {
+        $popfeeds = PopFeeds::where('type', 'System')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($popfeeds, 'System Feeds');
     }
 
-    public function getDonations(){
-        $popfeeds = PopFeeds::where('type','Donation')->orderBy('created_at','desc')->get();
-        return response()->json(['feeds' => $popfeeds], 200);
+    public function getDonations()
+    {
+        $popfeeds = PopFeeds::where('type', 'Donation')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($popfeeds, 'Donation Feeds');
     }
 
-    public function getSurveys(){
-        $popfeeds = PopFeeds::with('user')->where('type','Surveys')->orderBy('created_at','desc')->get();
-        return response()->json(['feeds' => $popfeeds], 200);
+    public function getSurveys()
+    {
+        $popfeeds = PopFeeds::with('user')->where('type', 'Surveys')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($popfeeds, 'Survey Feeds');
     }
 
-    public function getGreetings(){
-        $popfeeds = PopFeeds::with('user')->where('type','Greetings')->orderBy('created_at','desc')->get();
-        return response()->json(['feeds' => $popfeeds], 200);
+    public function getGreetings()
+    {
+        $popfeeds = PopFeeds::with('user')->where('type', 'Greetings')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($popfeeds, 'Greetings Feeds');
     }
 
     public function getpopFeeds(Request $request)
     {
-        $popfeeds = PopFeeds::with('user')->orderBy('created_at','desc')->get()->groupBy('type');
-        return response()->json($popfeeds, 200);
+        $popfeeds = PopFeeds::with('user')->orderBy('created_at', 'desc')->get()->groupBy('type');
+        return ResponseHelper::sendResponse($popfeeds, 'All Admin Activity Feeds');
     }
 
     public function store_systemInfo(Request $request)
@@ -266,10 +271,11 @@ class AdminActivityController extends Controller
         }
     }
 
-    public function delete_pops(Request $request){
+    public function delete_pops(Request $request)
+    {
         $delid = $request->id;
         $popfeed = PopFeeds::where('_id', $delid)->first();
-        if($popfeed){
+        if ($popfeed) {
             $popfeed->delete();
             return response()->json(['message' => 'Popup Feed deleted successfully.'], 200);
         }
