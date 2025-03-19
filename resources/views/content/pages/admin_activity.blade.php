@@ -3026,9 +3026,9 @@
                 },
                 success: function(response) {
                     let comments = '';
-                    $('.comment-controls img').attr('src', '/storage/' + response?.data?.user?.image);
+                    $('.comment-controls img').attr('src', '/public/storage/' + response?.data?.user?.image);
                     $('.comment-controls img').css('display','block');
-                    $('.fancybox-caption__body .header img').attr('src', '/storage/' + response?.data
+                    $('.fancybox-caption__body .header img').attr('src', '/public/storage/' + response?.data
                         ?.feed?.user?.image);
                     $('.fancybox-caption__body .header img').css('display','block')
                     $('.fancybox-caption__body .user-meta .name').text(response?.data?.feed?.user
@@ -3044,7 +3044,7 @@
                                 <div class="comment-line"></div>
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/public/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
@@ -3077,7 +3077,7 @@
                                     <div class="arrow-line 3"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/public/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -3103,7 +3103,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${childUltra?.user?.image}" alt="" data-user-popover="${childUltra?.user?.id}">
+                                            <img src="/public/storage/${childUltra?.user?.image}" alt="" data-user-popover="${childUltra?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -3128,7 +3128,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/public/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -3149,7 +3149,7 @@
                             <div class="media is-comment" data-id="${data._id}">
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/public/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
@@ -3204,7 +3204,7 @@
                                 <div class="comment-line"></div>
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/public/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
@@ -3236,7 +3236,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/public/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -3262,7 +3262,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${childUltra?.user?.image}" alt="" data-user-popover="${childUltra?.user?.id}">
+                                            <img src="/public/storage/${childUltra?.user?.image}" alt="" data-user-popover="${childUltra?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -3287,7 +3287,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/public/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -3308,7 +3308,7 @@
                             <div class="media is-comment" data-id="${data._id}">
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/public/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
