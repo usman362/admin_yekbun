@@ -6,6 +6,7 @@ use App\Events\PopComments;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\PopFeedComments;
+use App\Models\PopFeedLikes;
 use App\Models\PopFeeds;
 use App\Models\User;
 use Exception;
@@ -347,9 +348,20 @@ class AdminActivityController extends Controller
 
             $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
             $commentCount = PopFeedComments::where('pop_feed_id', $id)->count();
+            $like = PopFeedLikes::where('user_id', $user->id)->where('pop_feed_id', $id)->first();
+
+            if ($like) {
+                $liked = true;
+            } else {
+                $liked = false;
+            }
+
+            $likeCount = PopFeedLikes::where('pop_feed_id', $id)->count();
             $data = [
                 'comments' => $comments,
                 'comments_count' => $commentCount,
+                'liked' => $liked,
+                'like_count' => $likeCount,
                 'user' => $user
             ];
             event(new PopComments($data));
