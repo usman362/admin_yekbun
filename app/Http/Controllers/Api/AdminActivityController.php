@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\PopComments;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\PopFeedComments;
@@ -325,6 +326,7 @@ class AdminActivityController extends Controller
         try {
             $comment = PopFeedComments::create([
                 'user_id' => auth()->id(),
+                'pop_feed_id' => $id,
                 'comment' => $request->comment,
                 'parent_id' => $request->parent_id ?? null,
                 'status' => 1
@@ -344,12 +346,13 @@ class AdminActivityController extends Controller
                 ->where('pop_feed_id', $id)->where('parent_id', null)->get();
 
             $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
-
+            $commentCount = PopFeedComments::where('pop_feed_id', $id)->count();
             $data = [
                 'comments' => $comments,
+                'comments_count' => $commentCount,
                 'user' => $user
             ];
-
+            event(new PopComments($data));
             return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);

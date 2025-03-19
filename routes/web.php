@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\PopComments;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\WizardController;
@@ -128,11 +129,9 @@ use FFMpeg\FFMpeg;
 */
 
 Route::get('test', function () {
-    App\Models\Ringtone::create([
-        'fileName' => '1',
-        'filePath' => '2',
-        'fileSize' => '3'
-    ]);
+    event(new PopComments("Testing 123"));
+    // PopComments::dispatch('test');
+    return response()->json(['status' => 'Message sent!']);
 });
 
 $controller_path = 'App\Http\Controllers';

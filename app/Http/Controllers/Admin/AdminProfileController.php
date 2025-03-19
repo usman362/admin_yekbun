@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PopComments;
 use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
 use App\Models\User;
@@ -498,7 +499,7 @@ class AdminProfileController extends Controller
                 'like_count' => $likeCount,
                 'user' => $user
             ];
-
+            
             return ResponseHelper::sendResponse($data, 'Comment Fetch successfully');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to fetch Comment!', false, 403);
