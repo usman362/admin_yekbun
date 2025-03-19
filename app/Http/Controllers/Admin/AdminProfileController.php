@@ -499,7 +499,7 @@ class AdminProfileController extends Controller
                 'user_id' => auth()->id(),
                 'pop_feed_id' => $request->pop_feed_id,
                 'comment' => $request->comment,
-                'parent_id' => $request->parent_id ?? '',
+                'parent_id' => $request->parent_id ?? null,
             ]);
 
             $comments = PopFeedComments::with(['child_comments' => function ($q) {
