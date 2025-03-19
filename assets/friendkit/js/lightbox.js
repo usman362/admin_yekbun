@@ -5,7 +5,7 @@
 <div class="header">
      <img style="display:none" src="assets/img/avatars/4.png" alt="" />
     <div class="user-meta">
-         <span class="name"></span> <span><small class="post-date">2 hours ago</small></span>
+         <span class="name"></span> <span><small class="post-date"></small></span>
     </div>
 
     <div class="dropdown is-spaced is-right dropdown-trigger">
@@ -94,7 +94,7 @@
 
         <div class="social-count">
 
-            <div class="likes-count"> `+ t + ` <span>12</span></div>
+            <div class="likes-count"> `+ t + ` <span></span></div>
 
 
 
@@ -112,7 +112,7 @@
 
     <div class="actions">
 
-        <div class="action"> `+ s + ` <span>Like</span></div>
+        <div class="action like-btn"> `+ s + ` <span>Like</span></div>
 
         <div class="action"> `+ o + ` <span>Comment</span></div>
 

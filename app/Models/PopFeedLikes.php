@@ -5,19 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class PopFeedComments extends Model
+class PopFeedLikes extends Model
 {
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'pop_feed_comments';
+    protected $collection = 'pop_feed_likes';
 
     protected $fillable = [
         'user_id',
         'pop_feed_id',
-        'comment',
-        'parent_id',
-        'status'
     ];
 
     public function user()
@@ -25,14 +22,9 @@ class PopFeedComments extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function child_comments()
+    public function feed()
     {
-        return $this->hasMany(self::class,'parent_id');
-    }
-
-    public function parent_comment()
-    {
-        return $this->belongsTo(self::class);
+        return $this->belongsTo(PopFeeds::class);
     }
 
 }

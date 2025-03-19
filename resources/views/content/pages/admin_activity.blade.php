@@ -49,10 +49,10 @@
         }
 
         /*
-                                                                                        .custom-option-body img{
-                                                                                            height:136px;
-                                                                                        }
-                                                                                */
+                                                                                            .custom-option-body img{
+                                                                                                height:136px;
+                                                                                            }
+                                                                                    */
         .dropdown-item h6,
         .h6,
         h5,
@@ -3026,15 +3026,17 @@
                 },
                 success: function(response) {
                     let comments = '';
-                    $('.comment-controls img').attr('src', '/public/storage/' + response?.data?.user?.image);
-                    $('.comment-controls img').css('display','block');
-                    $('.fancybox-caption__body .header img').attr('src', '/public/storage/' + response?.data
+                    $('.comment-controls img').attr('src', '/public/storage/' + response?.data?.user
+                        ?.image);
+                    $('.comment-controls img').css('display', 'block');
+                    $('.fancybox-caption__body .header img').attr('src', '/public/storage/' + response
+                        ?.data
                         ?.feed?.user?.image);
-                    $('.fancybox-caption__body .header img').css('display','block')
+                    $('.fancybox-caption__body .header img').css('display', 'block')
                     $('.fancybox-caption__body .user-meta .name').text(response?.data?.feed?.user
                         ?.name + ' ' + response?.data?.feed?.user?.last_name);
                     $('.post-date').text(moment(response?.data?.feed?.created_at).fromNow())
-                    $('.views-count-1').text(response?.data?.comments?.length);
+                    $('.views-count-1').text(response?.data?.comments_count);
 
                     response.data.comments.forEach(function(data, index) {
                         let child = '';
@@ -3167,8 +3169,13 @@
 
                     });
 
+                    if (response.data.liked == true) {
+                        $('.like-btn').addClass('liked');
+                    } else {
+                        $('.like-btn').removeClass('liked');
+                    }
+                    $('.likes-count span').text(response?.data?.like_count);
                     $('.comments-list').html(comments);
-
                     $('.comments-list').animate({
                         scrollTop: $('.comments-list')[0].scrollHeight
                     }, 500);
@@ -3184,9 +3191,6 @@
         }
 
         $('body').on('click', '.send-comment', function() {
-            console.log([$('.comment-textarea').val(),
-$('#pop_feed_id').val(),
-$('#comment_parent_id').val(),]);
             $.ajax({
                 url: "{{ route('store.popComments') }}",
                 type: 'POST',
@@ -3329,11 +3333,17 @@ $('#comment_parent_id').val(),]);
 
                     });
 
-                    $('.views-count-1').text(response.data.comments.length);
-                    $('.comment-textarea').val('');
 
+                    if (response.data.liked == true) {
+                        $('.like-btn').addClass('liked');
+                    } else {
+                        $('.like-btn').removeClass('liked');
+                    }
+                    $('.likes-count span').text(response?.data?.like_count);
+                    $('.views-count-1').text(response.data.comments_count);
+                    $('.comment-textarea').val('');
                     $('.comments-list').html(comments);
-                    if($('#comment_parent_id').val() == "" || $('#comment_parent_id').val() == null){
+                    if ($('#comment_parent_id').val() == "" || $('#comment_parent_id').val() == null) {
                         $('.comments-list').animate({
                             scrollTop: $('.comments-list')[0].scrollHeight
                         }, 500);
@@ -3346,10 +3356,37 @@ $('#comment_parent_id').val(),]);
 
         $('body').on('click', '.comment-reply', function() {
             $('.comment-textarea').val('');
-            $('.comment-textarea').attr('autofocus',true);
-            $('.comment-textarea').val($(this).attr('data-username')+' ');
+            $('.comment-textarea').attr('autofocus', true);
+            $('.comment-textarea').val($(this).attr('data-username') + ' ');
             $('#comment_parent_id').val($(this).attr('data-parent_id'));
         });
+
+
+        $(document).on('click', '.like-btn', function () {
+            let button = $(this);
+            let postId = $('#pop_feed_id').val();
+
+            $.ajax({
+                url: "{{ route('admin_activity.like') }}",
+                type: "POST",
+                data: {
+                    post_id: postId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (response) {
+                    if (response.data.liked == true) {
+                        button.addClass('liked');
+                    } else {
+                        button.removeClass('liked');
+                    }
+                    $('.likes-count span').text(response?.data?.like_count);
+                },
+                error: function (xhr) {
+                    alert("Something went wrong!");
+                }
+            });
+        });
+
     </script>
 @endsection
 @endsection

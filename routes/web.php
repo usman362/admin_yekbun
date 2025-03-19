@@ -231,6 +231,7 @@ Route::middleware('check.role:Super Admin')->group(function () {
     Route::post("/admin_activity/feeds", [AdminProfileController::class, 'store_feeds'])->name('admin_activity.store_feeds');
     Route::get("/admin_activity/comments", [AdminProfileController::class, 'getComments'])->name('popComments');
     Route::post("/admin_activity/comments", [AdminProfileController::class, 'storeComments'])->name('store.popComments');
+    Route::post('/admin_activity/like', [AdminProfileController::class, 'feedLike'])->name('admin_activity.like');
 });
 
 

@@ -25968,6 +25968,15 @@ code {
     border-radius: 0px 0px 0px 10px;
 }
 
+.fancybox-custom-layout .fancybox-caption .actions .like-btn.liked span{
+    color: #5596e6 !important;
+}
+
+.fancybox-custom-layout .fancybox-caption .actions .like-btn.liked svg{
+    stroke: #1b71db !important;
+    fill: #5596e6 !important;
+}
+
 .fancybox-custom-layout .fancybox-caption .comments-list .is-comment.is-nested {
     padding-left: 40px !important;
     margin-left: 0px !important;

@@ -292,19 +292,19 @@ class AdminActivityController extends Controller
             $comments = PopFeedComments::with(['child_comments' => function ($q) {
                 $q->with(['child_comments' => function ($q) {
                     $q->with(['user' =>  function ($q) {
-                        $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                     }]);
                 }, 'user' =>  function ($q) {
-                    $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }]);
             }, 'user' => function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
                 ->where('pop_feed_id', $id)->where('parent_id', null)->get();
 
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image','username')->find(auth()->id());
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
             $feed = PopFeeds::with(['user' => function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])->find($id);
 
             $data = [
@@ -318,7 +318,7 @@ class AdminActivityController extends Controller
         }
     }
 
-    public function storeComments(Request $request,$id)
+    public function storeComments(Request $request, $id)
     {
         $request->validate(['comment' => 'required|string']);
 
@@ -327,22 +327,23 @@ class AdminActivityController extends Controller
                 'user_id' => auth()->id(),
                 'comment' => $request->comment,
                 'parent_id' => $request->parent_id ?? null,
+                'status' => 1
             ]);
 
             $comments = PopFeedComments::with(['child_comments' => function ($q) {
                 $q->with(['child_comments' => function ($q) {
                     $q->with(['user' =>  function ($q) {
-                        $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                     }]);
                 }, 'user' =>  function ($q) {
-                    $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }]);
             }, 'user' => function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
                 ->where('pop_feed_id', $id)->where('parent_id', null)->get();
 
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image','username')->find(auth()->id());
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
 
             $data = [
                 'comments' => $comments,
