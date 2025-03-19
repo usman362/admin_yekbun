@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Models\PopFeedComments;
 use App\Models\PopFeeds;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -280,5 +283,75 @@ class AdminActivityController extends Controller
             return response()->json(['message' => 'Popup Feed deleted successfully.'], 200);
         }
         return response()->json(['message' => 'Popup Feed Not Found!'], 404);
+    }
+
+    public function getComments($id)
+    {
+        // $request->validate(['pop_feed_id' => 'required']);
+        try {
+            $comments = PopFeedComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+            }])
+                ->where('pop_feed_id', $id)->where('parent_id', null)->get();
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image','username')->find(auth()->id());
+            $feed = PopFeeds::with(['user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+            }])->find($id);
+
+            $data = [
+                'comments' => $comments,
+                'feed' => $feed,
+                'user' => $user
+            ];
+            return ResponseHelper::sendResponse($data, 'Comment Fetch successfully');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to fetch Comment!', false, 403);
+        }
+    }
+
+    public function storeComments(Request $request,$id)
+    {
+        $request->validate(['comment' => 'required|string']);
+
+        try {
+            $comment = PopFeedComments::create([
+                'user_id' => auth()->id(),
+                'comment' => $request->comment,
+                'parent_id' => $request->parent_id ?? null,
+            ]);
+
+            $comments = PopFeedComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+            }])
+                ->where('pop_feed_id', $id)->where('parent_id', null)->get();
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image','username')->find(auth()->id());
+
+            $data = [
+                'comments' => $comments,
+                'user' => $user
+            ];
+
+            return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
+        }
     }
 }
