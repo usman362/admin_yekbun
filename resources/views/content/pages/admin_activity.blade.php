@@ -3184,6 +3184,9 @@
         }
 
         $('body').on('click', '.send-comment', function() {
+            console.log([$('.comment-textarea').val(),
+$('#pop_feed_id').val(),
+$('#comment_parent_id').val(),]);
             $.ajax({
                 url: "{{ route('store.popComments') }}",
                 type: 'POST',
