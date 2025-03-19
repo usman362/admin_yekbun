@@ -121,6 +121,11 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(Feed::class);
     }
 
+    public function pop_feed_comments()
+    {
+        return $this->hasMany(PopFeedComments::class);
+    }
+
     public function user_feeds()
     {
         return $this->hasMany(Feed::class, 'id', 'user_id');

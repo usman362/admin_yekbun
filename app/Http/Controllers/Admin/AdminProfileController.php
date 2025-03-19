@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
+use App\Models\PopFeedComments;
 use App\Models\PopFeeds;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,14 +27,15 @@ class AdminProfileController extends Controller
         return view('content.pages.pages-account-settings-account', compact('activity'));
     }
 
-    public function welcome(){
+    public function welcome()
+    {
         return view('content.welcome');
     }
 
     public function admin_activity()
     {
-        $popfeeds = PopFeeds::orderBy('created_at','desc')->get();
-        return view('content.pages.admin_activity',compact('popfeeds'));
+        $popfeeds = PopFeeds::orderBy('created_at', 'desc')->get();
+        return view('content.pages.admin_activity', compact('popfeeds'));
     }
 
     public function store(Request $request)
@@ -128,43 +132,44 @@ class AdminProfileController extends Controller
     }
 
 
-    public function store_pops(Request $request){
-        
+    public function store_pops(Request $request)
+    {
+
         $request->validate([
             'title' => 'required',
-           // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $poptyp = $request->type;
         $optons = "";
 
-        if($poptyp == "System"){
+        if ($poptyp == "System") {
             $optons = $request->option;
         }
-        if($poptyp == "Donation"){
+        if ($poptyp == "Donation") {
             $optons = $request->option_2;
         }
-        if($poptyp == "Surveys"){
+        if ($poptyp == "Surveys") {
             $optons = $request->option_3;
         }
-        if($poptyp == "Greetings"){
+        if ($poptyp == "Greetings") {
             $optons = $request->option_4;
         }
-        if($poptyp == "Event"){
+        if ($poptyp == "Event") {
             $optons = $request->option_5;
         }
 
 
-//die("154");
+        //die("154");
 
 
-        if($request->upid > 0){
+        if ($request->upid > 0) {
 
             $postpop = PopFeeds::where('_id', $request->upid)->first();
 
-            if($postpop != null){
+            if ($postpop != null) {
 
 
-                if($request->type == "Donation"){
+                if ($request->type == "Donation") {
 
                     $postpop->limited = $request->limit;
                     $postpop->is_paypal = $request->is_paypal ?? 0;
@@ -172,8 +177,8 @@ class AdminProfileController extends Controller
                     $postpop->is_pay_office = $request->is_payoffice ?? 0;
                     $postpop->is_pay_other = $request->is_other ?? 0;
                     $postpop->title = $request->title;
-                    $postpop->date_start = Str::before($request->duration,' -');
-                    $postpop->date_ends = Str::after($request->duration,'- ');
+                    $postpop->date_start = Str::before($request->duration, ' -');
+                    $postpop->date_ends = Str::after($request->duration, '- ');
                     $postpop->share_option = $optons;
                     $postpop->is_comments = $request->comments ?? 0;
                     $postpop->is_share = $request->share ?? 0;
@@ -206,17 +211,17 @@ class AdminProfileController extends Controller
                     }
 
                     $postpop->update();
-                }else{
+                } else {
 
                     $postpop->title = $request->title;
-                    $postpop->date_start = Str::before($request->duration,' -');
-                    $postpop->date_ends = Str::after($request->duration,'- ');
+                    $postpop->date_start = Str::before($request->duration, ' -');
+                    $postpop->date_ends = Str::after($request->duration, '- ');
                     $postpop->share_option = $optons;
                     $postpop->is_comments = $request->comments ?? 0;
                     $postpop->is_share = $request->share ?? 0;
                     $postpop->is_emoji = $request->emoji ?? 0;
 
-                    if($request->type == "Event"){
+                    if ($request->type == "Event") {
                         $postpop->start_time = $request->start_time;
                         $postpop->end_time = $request->end_time;
                         $postpop->event_country = $request->event_country;
@@ -272,14 +277,10 @@ class AdminProfileController extends Controller
                     }
 
                     $postpop->update();
-
-
                 }
                 return back()->with('success', 'Popup Feed updated successfully.');
             }
-
-
-        }else{
+        } else {
 
             $icon1 = "";
             $icon2 = "";
@@ -303,91 +304,89 @@ class AdminProfileController extends Controller
                 }
             }
 
-        if ($request->hasFile('audio')) {
-            $audio = $request->file('audio');
-            $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
-            $audioPath =  $audio->storeAs("/audio", $audioName, "public");
-        }
-
-        if ($request->hasFile('icon1')) {
-            $icon1Image = $request->file('icon1');
-            $icon1 = time() . '-icon.' . $icon1Image->getClientOriginalExtension();
-            $icon1Path =  $icon1Image->storeAs("/images/icons", $icon1, "public");
-
-        }
-        if ($request->hasFile('icon2')) {
-            $icon2Image = $request->file('icon2');
-            $icon2 = time()  . '-icon.' . $icon2Image->getClientOriginalExtension();
-            $icon2Path =  $icon2Image->storeAs("/images/icons", $icon2, "public");
-        }
-        if ($request->hasFile('icon3')) {
-            $icon3Image = $request->file('icon3');
-            $icon3 = time()  . '-icon.' . $icon3Image->getClientOriginalExtension();
-            $icon3Path =  $icon3Image->storeAs("/images/icons", $icon3, "public");
-        }
-
-        if($request->type == "Donation"){
-
-            $postpop = PopFeeds::create([
-                'limited' => $request->limit,
-                'is_paypal' => $request->is_paypal ?? 0,
-                'is_gpay' => $request->is_gpay ?? 0,
-                'is_pay_office' => $request->is_payoffice ?? 0,
-                'is_pay_other' => $request->is_other ?? 0,
-                'user_id' => auth()->user()->id ?? 0,
-                'title' => $request->title,
-                'date_start' => Str::before($request->duration,' -'),
-                'date_ends' => Str::after($request->duration,'- '),
-                'image' => $fileType == 'image' ? $filePath : '',
-                'video' => $fileType == 'video' ? $filePath : '',
-                'audio' => $audioPath ?? '',
-                'share_option' => $optons,
-                'status' => 1,
-                'is_comments' => $request->comments ?? 0,
-                'is_share' => $request->share ?? 0,
-                'is_emoji' => $request->emoji ?? 0,
-                'type' => $request->type,
-            ]);
-
-        }else{
-            $postpop = PopFeeds::create([
-                'user_id' => auth()->user()->id ?? 0,
-                'title' => $request->title,
-                'date_start' => Str::before($request->duration,' -'),
-                'date_ends' => Str::after($request->duration,'- '),
-                'image' => $fileType == 'image' ? $filePath : '',
-                'video' => $fileType == 'video' ? $filePath : '',
-                'audio' => $audioPath ?? '',
-                'share_option' => $optons,
-                'status' => 1,
-                'is_comments' => $request->comments ?? 0,
-                'is_share' => $request->share ?? 0,
-                'is_emoji' => $request->emoji ?? 0,
-                'type' => $request->type,
-                'icon1' => $icon1Path ?? '',
-                'icon2' => $icon2Path ?? '',
-                'icon3' => $icon3Path ?? '',
-                'txt1' => $request->txt1,
-                'txt2' => $request->txt2,
-                'txt3' => $request->txt3
-            ]);
-
-            if($request->type == "Event"){
-                $postpop->start_time = $request->start_time;
-                $postpop->end_time = $request->end_time;
-                $postpop->event_country = $request->event_country;
-                $postpop->event_city = $request->event_city;
-                $postpop->event_address = $request->event_address;
-                $postpop->save();
+            if ($request->hasFile('audio')) {
+                $audio = $request->file('audio');
+                $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
+                $audioPath =  $audio->storeAs("/audio", $audioName, "public");
             }
-        }
 
-        return back()->with('success', 'Popup Feed added successfully.');
+            if ($request->hasFile('icon1')) {
+                $icon1Image = $request->file('icon1');
+                $icon1 = time() . '-icon.' . $icon1Image->getClientOriginalExtension();
+                $icon1Path =  $icon1Image->storeAs("/images/icons", $icon1, "public");
+            }
+            if ($request->hasFile('icon2')) {
+                $icon2Image = $request->file('icon2');
+                $icon2 = time()  . '-icon.' . $icon2Image->getClientOriginalExtension();
+                $icon2Path =  $icon2Image->storeAs("/images/icons", $icon2, "public");
+            }
+            if ($request->hasFile('icon3')) {
+                $icon3Image = $request->file('icon3');
+                $icon3 = time()  . '-icon.' . $icon3Image->getClientOriginalExtension();
+                $icon3Path =  $icon3Image->storeAs("/images/icons", $icon3, "public");
+            }
 
+            if ($request->type == "Donation") {
+
+                $postpop = PopFeeds::create([
+                    'limited' => $request->limit,
+                    'is_paypal' => $request->is_paypal ?? 0,
+                    'is_gpay' => $request->is_gpay ?? 0,
+                    'is_pay_office' => $request->is_payoffice ?? 0,
+                    'is_pay_other' => $request->is_other ?? 0,
+                    'user_id' => auth()->user()->id ?? 0,
+                    'title' => $request->title,
+                    'date_start' => Str::before($request->duration, ' -'),
+                    'date_ends' => Str::after($request->duration, '- '),
+                    'image' => $fileType == 'image' ? $filePath : '',
+                    'video' => $fileType == 'video' ? $filePath : '',
+                    'audio' => $audioPath ?? '',
+                    'share_option' => $optons,
+                    'status' => 1,
+                    'is_comments' => $request->comments ?? 0,
+                    'is_share' => $request->share ?? 0,
+                    'is_emoji' => $request->emoji ?? 0,
+                    'type' => $request->type,
+                ]);
+            } else {
+                $postpop = PopFeeds::create([
+                    'user_id' => auth()->user()->id ?? 0,
+                    'title' => $request->title,
+                    'date_start' => Str::before($request->duration, ' -'),
+                    'date_ends' => Str::after($request->duration, '- '),
+                    'image' => $fileType == 'image' ? $filePath : '',
+                    'video' => $fileType == 'video' ? $filePath : '',
+                    'audio' => $audioPath ?? '',
+                    'share_option' => $optons,
+                    'status' => 1,
+                    'is_comments' => $request->comments ?? 0,
+                    'is_share' => $request->share ?? 0,
+                    'is_emoji' => $request->emoji ?? 0,
+                    'type' => $request->type,
+                    'icon1' => $icon1Path ?? '',
+                    'icon2' => $icon2Path ?? '',
+                    'icon3' => $icon3Path ?? '',
+                    'txt1' => $request->txt1,
+                    'txt2' => $request->txt2,
+                    'txt3' => $request->txt3
+                ]);
+
+                if ($request->type == "Event") {
+                    $postpop->start_time = $request->start_time;
+                    $postpop->end_time = $request->end_time;
+                    $postpop->event_country = $request->event_country;
+                    $postpop->event_city = $request->event_city;
+                    $postpop->event_address = $request->event_address;
+                    $postpop->save();
+                }
+            }
+
+            return back()->with('success', 'Popup Feed added successfully.');
         }
     }
 
-    public function delete_pops(Request $request){
+    public function delete_pops(Request $request)
+    {
         $delid = $request->delid;
         $popfeed = PopFeeds::where('_id', $delid)->first();
         $popfeed->delete();
@@ -452,6 +451,80 @@ class AdminProfileController extends Controller
     public function get_popfeeds(Request $request)
     {
         $popfeeds = PopFeeds::orderBy('created_at', 'desc')->get();
-        return response()->json(['popfeeds' => $popfeeds],200);
+        return response()->json(['popfeeds' => $popfeeds], 200);
+    }
+
+    public function getComments(Request $request)
+    {
+        $request->validate(['pop_feed_id' => 'required']);
+
+        try {
+
+            $comments = PopFeedComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+            }])
+                ->where('pop_feed_id', $request->pop_feed_id)->where('parent_id', null)->get();
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image','username')->find(auth()->id());
+            $feed = PopFeeds::with(['user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+            }])->find($request->pop_feed_id);
+
+            $data = [
+                'comments' => $comments,
+                'feed' => $feed,
+                'user' => $user
+            ];
+
+            return ResponseHelper::sendResponse($data, 'Comment Fetch successfully');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to fetch Comment!', false, 403);
+        }
+    }
+
+    public function storeComments(Request $request)
+    {
+        $request->validate(['comment' => 'required|string']);
+
+        try {
+            $comment = PopFeedComments::create([
+                'user_id' => auth()->id(),
+                'pop_feed_id' => $request->pop_feed_id,
+                'comment' => $request->comment,
+                'parent_id' => $request->parent_id ?? '',
+            ]);
+
+            $comments = PopFeedComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image','username']);
+            }])
+                ->where('pop_feed_id', $request->pop_feed_id)->where('parent_id', null)->get();
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image','username')->find(auth()->id());
+
+            $data = [
+                'comments' => $comments,
+                'user' => $user
+            ];
+
+            return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
+        }
     }
 }

@@ -56,7 +56,7 @@ class PopFeeds extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(PopFeedComments::class);
     }
 
     public function reports()
