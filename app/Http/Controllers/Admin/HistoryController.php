@@ -54,6 +54,10 @@ class HistoryController extends Controller
 
         $history = new History();
         $history->title  = $request->title;
+        $history->is_comments  = $request->is_comments ?? 0;
+        $history->is_share  = $request->is_share ?? 0;
+        $history->is_emoji  = $request->is_emoji ?? 0;
+        $history->user_id = auth()->user()->id;
         //   $history->category_id = $request->category_id;
         //   $history->description = $request->description;
 

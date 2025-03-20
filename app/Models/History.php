@@ -49,4 +49,14 @@ class History extends Model
     public function gallery(){
         return $this->hasMany(PostGallery::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(HistoryComments::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

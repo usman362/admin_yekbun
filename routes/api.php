@@ -110,6 +110,9 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('/accept-privacy-policy',[AuthController::class, 'acceptPrivacyPolicy']);
     Route::get('admin-activity/{id}/comments',[AdminActivityController::class, 'getComments']);
     Route::post('admin-activity/{id}/comments',[AdminActivityController::class, 'storeComments']);
+
+    Route::get('history/{id}/comments',[HistoryController::class, 'getComments']);
+    Route::post('history/{id}/comments',[HistoryController::class, 'storeComments']);
 });
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);

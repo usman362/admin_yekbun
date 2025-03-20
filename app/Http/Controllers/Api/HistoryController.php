@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\History;
 use App\Models\HistoryCategory;
+use App\Models\HistoryComments;
+use App\Models\User;
+use Exception;
 
 class HistoryController extends Controller
 {
@@ -171,5 +175,80 @@ class HistoryController extends Controller
             return response()->json(['success' => true, 'data' => $history]);
         }
         return response()->json(['success' => false , 'message' => 'No history found.']);
+    }
+
+    public function getComments($id)
+    {
+        // $request->validate(['history_id' => 'required']);
+        try {
+            $comments = HistoryComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+            }])
+                ->where('history_id', $id)->where('parent_id', null)->paginate(10);
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+            $history = History::with(['user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+            }])->find($id);
+
+            $data = [
+                'comments' => $comments,
+                'history' => $history,
+                'user' => $user
+            ];
+            return ResponseHelper::sendResponse($data, 'Comment Fetch successfully');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to fetch Comment!', false, 403);
+        }
+    }
+
+    public function storeComments(Request $request, $id)
+    {
+        $request->validate(['comment' => 'required|string']);
+
+        try {
+            $comment = HistoryComments::create([
+                'user_id' => auth()->id(),
+                'history_id' => $id,
+                'comment' => $request->comment,
+                'parent_id' => $request->parent_id ?? null,
+                'status' => 1
+            ]);
+
+            $comments = HistoryComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+            }])
+                ->where('history_id', $id)->where('parent_id', null)->get();
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+            $commentCount = HistoryComments::where('history_id', $id)->count();
+
+            $data = [
+                'comments' => $comments,
+                'comment' => $comment,
+                'comments_count' => $commentCount,
+                'user' => $user
+            ];
+            // event(new PopComments($data));
+            return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
+        }
     }
 }
