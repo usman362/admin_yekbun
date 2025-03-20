@@ -302,7 +302,7 @@ class AdminActivityController extends Controller
             }, 'user' => function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
-                ->where('pop_feed_id', $id)->where('parent_id', null)->get();
+                ->where('pop_feed_id', $id)->where('parent_id', null)->paginate(10);
 
             $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
             $feed = PopFeeds::with(['user' => function ($q) {
@@ -359,6 +359,7 @@ class AdminActivityController extends Controller
             $likeCount = PopFeedLikes::where('pop_feed_id', $id)->count();
             $data = [
                 'comments' => $comments,
+                'comment' => $comment,
                 'comments_count' => $commentCount,
                 'liked' => $liked,
                 'like_count' => $likeCount,
