@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\HistoryComments as EventsHistoryComments;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -245,7 +246,7 @@ class HistoryController extends Controller
                 'comments_count' => $commentCount,
                 'user' => $user
             ];
-            // event(new PopComments($data));
+            event(new EventsHistoryComments($data));
             return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);

@@ -459,6 +459,9 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::delete('/history/{id}/image', [HistoryController::class, 'deleteImage'])->name('history.delete-image');
     Route::delete('/history/{id}/video', [HistoryController::class, 'deleteVideo'])->name('history.delete-video');
+    Route::get("/history/comments", [HistoryController::class, 'getComments'])->name('historyComments');
+    Route::post("/history/comments", [HistoryController::class, 'storeComments'])->name('store.historyComments');
+    Route::post('/history/like', [HistoryController::class, 'feedLike'])->name('historyLikes');
     Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
 

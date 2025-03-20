@@ -3014,52 +3014,9 @@
             return false;
         });
         // yahan khatam
-
-        function closeFancyBox() {
-            $('body').css('position', 'relative');
-            $('.comments-list').html('');
-        }
-
-        $('.view-post').click(function() {
-            $('#pop_feed_id').val($(this).attr('data-id'));
-            $.ajax({
-                url: "{{ route('popComments') }}",
-                type: 'GET',
-                data: {
-                    pop_feed_id: $('#pop_feed_id').val(),
-                },
-                success: function(response) {
-                    let comments = '';
-                    $('.comment-controls img').attr('src', '/public/storage/' + response?.data?.user
-                        ?.image);
-                    $('.comment-controls img').css('display', 'block');
-                    $('.fancybox-caption__body .header img').attr('src', '/public/storage/' + response
-                        ?.data
-                        ?.feed?.user?.image);
-                    $('.fancybox-caption__body .header img').css('display', 'block')
-                    $('.fancybox-caption__body .user-meta .name').text(response?.data?.feed?.user
-                        ?.name + ' ' + response?.data?.feed?.user?.last_name);
-                    $('.post-date').text(moment(response?.data?.feed?.created_at).fromNow())
-                    $('.views-count-1').text(response?.data?.comments_count);
-
-                    comments = getComments(response);
-
-                    if (response.data.liked == true) {
-                        $('.like-btn').addClass('liked');
-                    } else {
-                        $('.like-btn').removeClass('liked');
-                    }
-                    $('.likes-count span').text(response?.data?.like_count);
-                    $('.comments-list').html(comments);
-                    $('.comments-list').animate({
-                        scrollTop: $('.comments-list')[0].scrollHeight
-                    }, 500);
-                    $('body').css('position', 'fixed');
-                }
-
-            });
-        })
-
+    </script>
+    {{-- <script src="{{asset('assets/friendkit/js/get-comments.js')}}"></script> --}}
+    <script>
         function getComments(data) {
             let comments = '';
             data.data.comments.forEach(function(data, index) {
@@ -3195,6 +3152,52 @@
 
             return comments;
         }
+    </script>
+    <script>
+        function closeFancyBox() {
+            $('body').css('position', 'relative');
+            $('.comments-list').html('');
+        }
+
+        $('.view-post').click(function() {
+            $('#pop_feed_id').val($(this).attr('data-id'));
+            $.ajax({
+                url: "{{ route('popComments') }}",
+                type: 'GET',
+                data: {
+                    pop_feed_id: $('#pop_feed_id').val(),
+                },
+                success: function(response) {
+                    let comments = '';
+                    $('.comment-controls img').attr('src', '/public/storage/' + response?.data?.user
+                        ?.image);
+                    $('.comment-controls img').css('display', 'block');
+                    $('.fancybox-caption__body .header img').attr('src', '/public/storage/' + response
+                        ?.data
+                        ?.feed?.user?.image);
+                    $('.fancybox-caption__body .header img').css('display', 'block')
+                    $('.fancybox-caption__body .user-meta .name').text(response?.data?.feed?.user
+                        ?.name + ' ' + response?.data?.feed?.user?.last_name);
+                    $('.post-date').text(moment(response?.data?.feed?.created_at).fromNow())
+                    $('.views-count-1').text(response?.data?.comments_count);
+
+                    comments = getComments(response);
+
+                    if (response.data.liked == true) {
+                        $('.like-btn').addClass('liked');
+                    } else {
+                        $('.like-btn').removeClass('liked');
+                    }
+                    $('.likes-count span').text(response?.data?.like_count);
+                    $('.comments-list').html(comments);
+                    $('.comments-list').animate({
+                        scrollTop: $('.comments-list')[0].scrollHeight
+                    }, 500);
+                    $('body').css('position', 'fixed');
+                }
+
+            });
+        })
 
         $('body').on('click', '.send-comment', function() {
             $.ajax({
@@ -3276,7 +3279,6 @@
 
         var channel = pusher.subscribe('pop-comments');
         channel.bind('pop-event', function(data) {
-
             let comments = '';
             comments = getComments(data);
             $('.views-count-1').text(data.data.comments_count);

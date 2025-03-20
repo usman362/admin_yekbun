@@ -75,6 +75,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="feed-card">
+                        <div class="toggle-card">
+                            <!-- Toggle 1 -->
+                            <div class="toggle-item">
+                                <div class="form-switch">
+                                    <input type="checkbox" value="1" class="form-check-input comments" name="comments" id="comments" checked="">
+                                    <label for="comments" class="form-check-label"></label>
+                                </div>
+                                <span>Comments</span>
+                            </div>
+
+                            <!-- Toggle 2 -->
+                            <div class="toggle-item">
+                                <div class="form-switch">
+                                    <input type="checkbox" value="1" class="form-check-input share" name="share" id="share">
+                                    <label for="share" class="form-check-label"></label>
+                                </div>
+                                <span>Voice Comments</span>
+                            </div>
+
+                            <!-- Toggle 3 -->
+                            <div class="toggle-item">
+                                <div class="form-switch">
+                                    <input type="checkbox" value="1" class="form-check-input emoji" name="emoji" id="emoji">
+                                    <label for="emoji" class="form-check-label"></label>
+                                </div>
+                                <span>Emoji</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{-- <div class="col-md-12">
                     <label class="form-label" for="inputDescription">Description</label>
                     <textarea class="form-control" name="description" rows="6" id="inputDescription" placeholder="Type..."></textarea>
