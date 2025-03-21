@@ -1280,7 +1280,7 @@
 
             <ul class="menu-sub">
 
-
+{{--
                 <li class="menu-item {{ Request::is('music-category') ? 'active' : '' }}">
                     <a href="{{ url('/music-category') }}" class="menu-link">
                         <div>Add Music Category</div>
@@ -1293,10 +1293,7 @@
                     </a>
 
 
-                </li>
-
-
-
+                </li> --}}
 
                 <li class="menu-item  {{ Request::is('artist') ? 'active' : '' }}">
                     <a href="{{ url('/artist') }}" class="menu-link">

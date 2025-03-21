@@ -48,18 +48,18 @@ class ArtistController extends Controller
     {
         $request->validate([
             'first_name' => 'required',
-            'last_name' => 'required',
-            'city' => 'required',
+            // 'last_name' => 'required',
+            // 'city' => 'required',
             'gender' => 'required',
             'image' => 'required'
         ]);
 
         $artist = new Artist();
         $artist->first_name = $request->first_name;
-        $artist->last_name = $request->last_name;
+        // $artist->last_name = $request->last_name;
         $artist->gender = $request->gender;
         $artist->status = $request->status;
-        $artist->city_id = $request->city;
+        // $artist->city_id = $request->city;
         $artist->province_id = $request->province;
         $artist->image = $request->image ?? '';
         if ($artist->save()) {
@@ -105,12 +105,12 @@ class ArtistController extends Controller
     {
         $artist = Artist::findorFail($id);
         $artist->first_name = $request->first_name;
-        $artist->last_name = $request->last_name;
+        // $artist->last_name = $request->last_name;
         $artist->dob = $request->dob;
         $artist->gender = $request->gender;
         $artist->image = $request->image ?? '';
         $artist->status = $request->status;
-        $artist->city_id = $request->city;
+        // $artist->city_id = $request->city;
         $artist->province_id = $request->province;
 
         // if($request->hasFile('image')){

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="form-label" for="fullname">Gender</label>
                     <select name="gender" class="form-select">
                         <option selected>Select Gender</option>
@@ -12,15 +12,7 @@
                         <option value="female">Female</option>
                     </select>
                 </div>
-                <div class="col-md-12">
-                    <label class="form-label" for="fullname">First Name</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="first_name">
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label" for="fullname">Last Name</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="last_name">
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label class="form-label" for="fullname">Province</label>
                     <select name="province" class="form-control province_id" id="province_id" data-url={{ url('get/city') }} value="{{ old('province_id') }}">
                         <option value="">Select province</option>
@@ -29,12 +21,21 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
+                    <label class="form-label" for="fullname">Artist Name - Lastname</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="first_name">
+                </div>
+                {{-- <div class="col-md-12">
+                    <label class="form-label" for="fullname">Last Name</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="last_name">
+                </div> --}}
+{{--
+                <div class="col-md-12">
                     <label class="form-label" for="fullname">City</label>
                     <select name="city" class="form-control city_id" id="city_id">
                         <option value="">Select City</option>
                     </select>
-                </div>
+                </div> --}}
 
                 {{-- <div class="col-md-12">
                     <label class="form-label" for="fullname">Image</label>

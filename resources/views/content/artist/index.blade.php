@@ -37,7 +37,7 @@
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmusicModal">Add Songs</button>
             {{-- @endcan --}}
             {{-- @can('alb') --}}
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createalbumModal">Add Albums</button>
+            {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createalbumModal">Add Albums</button> --}}
             {{-- @endcan --}}
             {{-- @can('artist.create') --}}
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add Video
