@@ -1271,7 +1271,7 @@
 
     @can('music.read')
         <li
-            class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('album') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
+            class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-music"></i>
                 <div>Music</div>
@@ -1279,21 +1279,6 @@
 
 
             <ul class="menu-sub">
-
-{{--
-                <li class="menu-item {{ Request::is('music-category') ? 'active' : '' }}">
-                    <a href="{{ url('/music-category') }}" class="menu-link">
-                        <div>Add Music Category</div>
-                    </a>
-                </li>
-
-                <li class="menu-item {{ Request::is('music') ? 'active' : '' }}">
-                    <a href="{{ url('/music') }}" class="menu-link">
-                        <div>Add Music</div>
-                    </a>
-
-
-                </li> --}}
 
                 <li class="menu-item  {{ Request::is('artist') ? 'active' : '' }}">
                     <a href="{{ url('/artist') }}" class="menu-link">

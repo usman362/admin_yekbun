@@ -285,7 +285,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get("/feeds/comments", [FeedsController::class, 'getComments'])->name('get.comments');
 
     Route::post("/feeds/comments", [FeedsController::class, 'storeComments'])->name('post.comments');
-    
+
     Route::post('/feeds/like', [FeedsController::class, 'feedLike'])->name('post.like');
 
     Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
@@ -419,17 +419,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/artists/{id}/{status}', [ArtistController::class, 'status'])->name('artists-status');
     Route::get('/get-artist-detail', [ArtistController::class, 'getArtistDetail'])->name('get.artist.detail');
 
-    // Route::resource('/artist', ArtistController::class);
-    // Route::get('/artists/{id}/{status}', [ArtistController::class, 'status'])->name('artists-status');
     Route::get('get/city/{id}', [ArtistController::class, 'get_city']);
     Route::delete('/artists/{id}/image', [ArtistController::class, 'deleteArtistImage'])->name('artists.delete-img');
-
-    Route::resource('/album', AlbumController::class);
-    Route::get('get-albums', [AlbumController::class, 'getAlbums'])->name('get.albums');
-    Route::delete('/album/{id}/album', [AlbumController::class, 'deleteAlbum'])->name('album.delete-audio');
-    Route::delete('/album/{id}/image', [AlbumController::class, 'deleteAlbumImage'])->name('album.delete-img');
-    //   Route::get('albums', [AlbumController::class, 'viewpage']);
-    Route::get('albums/{id}', [AlbumController::class, 'viewpage']);
 
     Route::resource('/video-clips', VideoClipController::class);
     Route::get('get-video-clips', [VideoClipController::class, 'getVideoClips'])->name('get.video-clips');
