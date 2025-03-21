@@ -788,7 +788,7 @@
                         },
                         error: function(error) {
                             // Handle error
-                            alert('Failed to update album');
+                            alert('Failed to Submit!');
                         }
                     });
                 });
