@@ -784,6 +784,7 @@
                             // alert('Album updated successfully');
                             $('#editAlbumModal' + formData.get('id')).modal('hide');
                             // Optionally refresh the album list or update the row
+                            window.location.reload();
                         },
                         error: function(error) {
                             // Handle error
