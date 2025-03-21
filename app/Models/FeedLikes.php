@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class PopFeedLikes extends Model
+class FeedLikes extends Model
 {
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'pop_feed_likes';
+    protected $collection = 'feed_likes';
 
     protected $fillable = [
         'user_id',
-        'pop_feed_id',
+        'feed_id',
+        'feed_type',
     ];
 
     public function user()
@@ -22,9 +23,19 @@ class PopFeedLikes extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function feed()
+    public function admin_feed()
     {
         return $this->belongsTo(PopFeeds::class);
+    }
+
+    public function user_feed()
+    {
+        return $this->belongsTo(Feed::class);
+    }
+
+    public function history()
+    {
+        return $this->belongsTo(History::class);
     }
 
 }

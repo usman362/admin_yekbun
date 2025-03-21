@@ -1291,7 +1291,8 @@
                                 </div>
                             </div>
                             <div style="padding-top:0" class="column column is-6 tab-content" id="tab5">
-                                <input type="hidden" name="pop_feed_id" id="pop_feed_id">
+                                <input type="hidden" name="feed_id" id="feed_id">
+                                <input type="hidden" name="feed_type" id="feed_type" value="admin_feeds">
                                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                                 @foreach ($popfeeds as $key => $feed)
                                     <div id="feed-post-{{ $key }}" class="card is-post">
@@ -3160,12 +3161,13 @@
         }
 
         $('.view-post').click(function() {
-            $('#pop_feed_id').val($(this).attr('data-id'));
+            $('#feed_id').val($(this).attr('data-id'));
             $.ajax({
-                url: "{{ route('popComments') }}",
+                url: "{{ route('get.comments') }}",
                 type: 'GET',
                 data: {
-                    pop_feed_id: $('#pop_feed_id').val(),
+                    feed_id: $('#feed_id').val(),
+                    feed_type: $('#feed_type').val()
                 },
                 success: function(response) {
                     let comments = '';
@@ -3201,11 +3203,12 @@
 
         $('body').on('click', '.send-comment', function() {
             $.ajax({
-                url: "{{ route('store.popComments') }}",
+                url: "{{ route('post.comments') }}",
                 type: 'POST',
                 data: {
                     comment: $('.comment-textarea').val(),
-                    pop_feed_id: $('#pop_feed_id').val(),
+                    feed_id: $('#feed_id').val(),
+                    feed_type: $('#feed_type').val(),
                     parent_id: $('#comment_parent_id').val(),
                     _token: '{{ csrf_token() }}'
                 },
@@ -3244,13 +3247,14 @@
 
         $(document).on('click', '.like-btn', function() {
             let button = $(this);
-            let postId = $('#pop_feed_id').val();
+            let postId = $('#feed_id').val();
 
             $.ajax({
-                url: "{{ route('admin_activity.like') }}",
+                url: "{{ route('post.like') }}",
                 type: "POST",
                 data: {
-                    post_id: postId,
+                    feed_id: postId,
+                    feed_type: $('#feed_type').val(),
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
@@ -3277,8 +3281,8 @@
             cluster: 'ap2'
         });
 
-        var channel = pusher.subscribe('pop-comments');
-        channel.bind('pop-event', function(data) {
+        var channel = pusher.subscribe('admin_feeds-channel');
+        channel.bind('admin_feeds-event', function(data) {
             let comments = '';
             comments = getComments(data);
             $('.views-count-1').text(data.data.comments_count);

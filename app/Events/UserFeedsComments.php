@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class HistoryComments implements ShouldBroadcast
+class UserFeedsComments implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -32,12 +32,12 @@ class HistoryComments implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('history-channel');
+        return new Channel('user_feeds-channel');
     }
 
     public function broadcastAs()
     {
-        return 'history-event';
+        return 'user_feeds-event';
     }
 
     public function broadcastWith(): array

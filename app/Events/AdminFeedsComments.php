@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PopComments implements ShouldBroadcast
+class AdminFeedsComments implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -32,12 +32,12 @@ class PopComments implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('pop-comments');
+        return new Channel('admin_feeds-channel');
     }
 
     public function broadcastAs()
     {
-        return 'pop-event';
+        return 'admin_feeds-event';
     }
 
     public function broadcastWith(): array

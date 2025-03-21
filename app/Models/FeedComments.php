@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class HistoryComments extends Model
+class FeedComments extends Model
 {
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'history_comments';
+    protected $collection = 'feed_comments';
 
     protected $fillable = [
         'user_id',
-        'history_id',
+        'feed_id',
         'comment',
         'parent_id',
+        'feed_type',
+        'comment_type',
         'status'
     ];
 

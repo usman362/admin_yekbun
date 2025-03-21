@@ -1,24 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\Events\PopComments;
 use App\Helpers\Helpers;
-use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
-use App\Models\PopFeedComments;
-use App\Models\PopFeedLikes;
 use App\Models\PopFeeds;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Spatie\Activitylog\Models\Activity;
 
 class AdminProfileController extends Controller
 {
@@ -456,140 +449,4 @@ class AdminProfileController extends Controller
         return response()->json(['popfeeds' => $popfeeds], 200);
     }
 
-    public function getComments(Request $request)
-    {
-        $request->validate(['pop_feed_id' => 'required']);
-
-        try {
-
-            $comments = PopFeedComments::with(['child_comments' => function ($q) {
-                $q->with(['child_comments' => function ($q) {
-                    $q->with(['user' =>  function ($q) {
-                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                    }]);
-                }, 'user' =>  function ($q) {
-                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }]);
-            }, 'user' => function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }])
-                ->where('pop_feed_id', $request->pop_feed_id)->where('parent_id', null)->get();
-
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
-            $feed = PopFeeds::with(['user' => function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }])->find($request->pop_feed_id);
-
-            $like = PopFeedLikes::where('user_id', $user->id)->where('pop_feed_id', $request->pop_feed_id)->first();
-
-            if ($like) {
-                $liked = true;
-            } else {
-                $liked = false;
-            }
-
-            $likeCount = PopFeedLikes::where('pop_feed_id', $request->pop_feed_id)->count();
-            $commentCount = PopFeedComments::where('pop_feed_id', $request->pop_feed_id)->count();
-
-            $data = [
-                'comments' => $comments,
-                'comments_count' => $commentCount,
-                'feed' => $feed,
-                'liked' => $liked,
-                'like_count' => $likeCount,
-                'user' => $user
-            ];
-            
-            return ResponseHelper::sendResponse($data, 'Comment Fetch successfully');
-        } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to fetch Comment!', false, 403);
-        }
-    }
-
-    public function storeComments(Request $request)
-    {
-        $request->validate(['comment' => 'required|string']);
-
-        try {
-            $comment = PopFeedComments::create([
-                'user_id' => auth()->id(),
-                'pop_feed_id' => $request->pop_feed_id,
-                'comment' => $request->comment,
-                'parent_id' => $request->parent_id ?? null,
-                'status' => 1
-            ]);
-
-            $comments = PopFeedComments::with(['child_comments' => function ($q) {
-                $q->with(['child_comments' => function ($q) {
-                    $q->with(['user' =>  function ($q) {
-                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                    }]);
-                }, 'user' =>  function ($q) {
-                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }]);
-            }, 'user' => function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }])
-                ->where('pop_feed_id', $request->pop_feed_id)->where('parent_id', null)->get();
-
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
-            $commentCount = PopFeedComments::where('pop_feed_id', $request->pop_feed_id)->count();
-            $like = PopFeedLikes::where('user_id', $user->id)->where('pop_feed_id', $request->pop_feed_id)->first();
-
-            if ($like) {
-                $liked = true;
-            } else {
-                $liked = false;
-            }
-
-            $likeCount = PopFeedLikes::where('pop_feed_id', $request->pop_feed_id)->count();
-
-            $data = [
-                'comments' => $comments,
-                'comments_count' => $commentCount,
-                'liked' => $liked,
-                'like_count' => $likeCount,
-                'user' => $user
-            ];
-
-            return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
-        } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
-        }
-    }
-
-    public function feedLike(Request $request)
-    {
-        $request->validate([
-            'post_id' => 'required'
-        ]);
-
-        $user = Auth::user();
-        $postId = $request->post_id;
-
-        if (!$user) {
-            return ResponseHelper::sendResponse(null, 'User not authenticated!', false, 403);
-        }
-
-        $like = PopFeedLikes::where('user_id', $user->id)->where('pop_feed_id', $postId)->first();
-
-        if ($like) {
-            $like->delete();
-            $liked = false;
-        } else {
-            PopFeedLikes::create([
-                'user_id' => $user->id,
-                'pop_feed_id' => $postId,
-            ]);
-            $liked = true;
-        }
-
-        $likeCount = PopFeedLikes::where('pop_feed_id', $postId)->count();
-
-        $data = [
-            'liked' => $liked,
-            'like_count' => $likeCount
-        ];
-        return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
-    }
 }

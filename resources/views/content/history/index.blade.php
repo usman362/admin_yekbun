@@ -109,7 +109,8 @@
                             </div>
 
                             <div class="column column is-6 tab-content" id="tab1">
-                                <input type="hidden" name="post_feed_id" id="post_feed_id">
+                                <input type="hidden" name="feed_id" id="feed_id">
+                                <input type="hidden" name="feed_type" id="feed_type" value="history">
                                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                                 @foreach ($history as $feed)
                                     <div id="feed-post-1" class="card is-post">
@@ -387,16 +388,16 @@
         }
 
         $('.view-post').click(function() {
-            $('#post_feed_id').val($(this).attr('data-id'));
+            $('#feed_id').val($(this).attr('data-id'));
             $.ajax({
-                url: "{{ route('historyComments') }}",
+                url: "{{ route('get.comments') }}",
                 type: 'GET',
                 data: {
-                    history_id: $('#post_feed_id').val(),
+                    feed_id: $('#feed_id').val(),
+                    feed_type: $('#feed_type').val()
                 },
                 success: function(response) {
                     let comments = '';
-                    console.log(response);
                     $('.comment-controls img').attr('src', '/public/storage/' + response?.data?.user
                         ?.image);
                     $('.comment-controls img').css('display', 'block');
@@ -429,11 +430,12 @@
 
         $('body').on('click', '.send-comment', function() {
             $.ajax({
-                url: "{{ route('store.historyComments') }}",
+                url: "{{ route('post.comments') }}",
                 type: 'POST',
                 data: {
                     comment: $('.comment-textarea').val(),
-                    history_id: $('#post_feed_id').val(),
+                    feed_id: $('#feed_id').val(),
+                    feed_type: $('#feed_type').val(),
                     parent_id: $('#comment_parent_id').val(),
                     _token: '{{ csrf_token() }}'
                 },
@@ -472,12 +474,14 @@
 
         $(document).on('click', '.like-btn', function() {
             let button = $(this);
-            let postId = $('#post_feed_id').val();
+            let postId = $('#feed_id').val();
+
             $.ajax({
-                url: "{{ route('historyLikes') }}",
+                url: "{{ route('post.like') }}",
                 type: "POST",
                 data: {
-                    history_id: postId,
+                    feed_id: postId,
+                    feed_type: $('#feed_type').val(),
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
@@ -495,7 +499,7 @@
         });
     </script>
 
-    {{-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
@@ -504,16 +508,15 @@
             cluster: 'ap2'
         });
 
-        var channel = pusher.subscribe('history-comments');
+        var channel = pusher.subscribe('history-channel');
         channel.bind('history-event', function(data) {
-
             let comments = '';
             comments = getComments(data);
             $('.views-count-1').text(data.data.comments_count);
             $('.comments-list').html(comments);
             $('.likes-count span').text(data?.data?.like_count);
         });
-    </script> --}}
+    </script>
 
     <script>
         function drpzone_init() {

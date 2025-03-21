@@ -57,7 +57,7 @@ class Feed extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(FeedComments::class)->where('feed_type','user_feeds');
     }
     public function users()
     {

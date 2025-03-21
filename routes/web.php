@@ -228,9 +228,6 @@ Route::middleware('check.role:Super Admin')->group(function () {
     Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
     Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
     Route::post("/admin_activity/feeds", [AdminProfileController::class, 'store_feeds'])->name('admin_activity.store_feeds');
-    Route::get("/admin_activity/comments", [AdminProfileController::class, 'getComments'])->name('popComments');
-    Route::post("/admin_activity/comments", [AdminProfileController::class, 'storeComments'])->name('store.popComments');
-    Route::post('/admin_activity/like', [AdminProfileController::class, 'feedLike'])->name('admin_activity.like');
 });
 
 
@@ -284,6 +281,12 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
 
     Route::get('/manage-user-feeds', [FeedsController::class, 'index'])->name('manage.user.feeds');
+
+    Route::get("/feeds/comments", [FeedsController::class, 'getComments'])->name('get.comments');
+
+    Route::post("/feeds/comments", [FeedsController::class, 'storeComments'])->name('post.comments');
+    
+    Route::post('/feeds/like', [FeedsController::class, 'feedLike'])->name('post.like');
 
     Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
 
@@ -459,9 +462,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::delete('/history/{id}/image', [HistoryController::class, 'deleteImage'])->name('history.delete-image');
     Route::delete('/history/{id}/video', [HistoryController::class, 'deleteVideo'])->name('history.delete-video');
-    Route::get("/history/comments", [HistoryController::class, 'getComments'])->name('historyComments');
-    Route::post("/history/comments", [HistoryController::class, 'storeComments'])->name('store.historyComments');
-    Route::post('/history/like', [HistoryController::class, 'feedLike'])->name('historyLikes');
     Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
 

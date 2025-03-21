@@ -56,7 +56,7 @@ class PopFeeds extends Model
 
     public function comments()
     {
-        return $this->hasMany(PopFeedComments::class);
+        return $this->hasMany(FeedComments::class)->where('feed_type','admin_feeds');
     }
 
     public function reports()

@@ -52,7 +52,7 @@ class History extends Model
 
     public function comments()
     {
-        return $this->hasMany(HistoryComments::class);
+        return $this->hasMany(FeedComments::class)->where('feed_type','history');
     }
 
     public function user()

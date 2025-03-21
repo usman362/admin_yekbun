@@ -108,11 +108,10 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
     Route::post('/accept-privacy-policy',[AuthController::class, 'acceptPrivacyPolicy']);
-    Route::get('admin-activity/{id}/comments',[AdminActivityController::class, 'getComments']);
-    Route::post('admin-activity/{id}/comments',[AdminActivityController::class, 'storeComments']);
 
-    Route::get('history/{id}/comments',[HistoryController::class, 'getComments']);
-    Route::post('history/{id}/comments',[HistoryController::class, 'storeComments']);
+    Route::get('feeds/{id}/comments',[FeedsController::class, 'getComments']);
+    Route::post('feeds/{id}/comments',[FeedsController::class, 'storeComments']);
+    Route::post('feeds/{id}/likes',[FeedsController::class, 'feedLike']);
 });
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
@@ -442,9 +441,6 @@ Route::get('/get-all-emoji/{userId?}/{type?}/{value?}', [AnimationEmojiControlle
 
 // Reaction
 Route::post('/store-reaction', [ReactionController::class, 'store_reaction'])->name('store-reaction');
-// comments
-Route::get('/get-comment/{type}/{id}/{parent_id?}', [CommentController::class, 'get_comment'])->name('get-comment');
-Route::post('/store-comment', [CommentController::class, 'store_comment'])->name('store-comment');
 
 // Music
 Route::get('/music', [MusicController::class, 'index'])->name('music');
