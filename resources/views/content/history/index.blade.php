@@ -504,8 +504,8 @@
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('11724793b536f9ff5908', {
-            cluster: 'ap2'
+        var pusher = new Pusher("{{env('PUSHER_APP_KEY')}}", {
+            cluster: "{{env('PUSHER_APP_CLUSTER')}}"
         });
 
         var channel = pusher.subscribe('history-channel');
