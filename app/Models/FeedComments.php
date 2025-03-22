@@ -19,7 +19,10 @@ class FeedComments extends Model
         'parent_id',
         'feed_type',
         'comment_type',
-        'status'
+        'status',
+        'audio',
+        'emoji',
+        'image'
     ];
 
     public function user()
