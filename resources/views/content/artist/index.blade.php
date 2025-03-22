@@ -502,7 +502,7 @@
                             // Update Songs Tab
                             if (response.songs && response.songs.length > 0) {
                                 response.songs.forEach(song => {
-                                    totalSongsMbs += parseInt(song.file_size);
+                                    totalSongsMbs += parseFloat(song.file_size);
                                     const deleteUrl =
                                         '{{ url('/') }}/musics/delete_song/' + song
                                         ._id;
@@ -549,7 +549,7 @@
                             // Update Videos Tab
                             if (response.clips && response.clips.length > 0) {
                                 response.clips.forEach(video => {
-                                    totalVideosMbs += parseInt(video.video_file_size);
+                                    totalVideosMbs += parseFloat(video.video_file_size);
                                     const deleteVideoUrl =
                                         '{{ url('/') }}/video-clips/' + video._id;
                                     $('#videos-tbody').append(`
