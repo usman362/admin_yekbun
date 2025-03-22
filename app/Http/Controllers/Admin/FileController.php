@@ -32,7 +32,7 @@ class FileController extends Controller
         // Store the file in the 'public' disk (configured in config/filesystems.php)
         $filePath = $uploadedFile->storeAs("/{$folder}", $uniqueName, "public");
 
-        $fileSize = $this->formatSizeUnits($uploadedFile->getSize());
+        $fileSize = $this->formatFileSizeMB($uploadedFile->getSize());
         // $filtered_path = url('/') . '/storage/' .  $filePath;
         $durationType = '';
         try {
@@ -97,22 +97,8 @@ class FileController extends Controller
         ];
     }
 
-    function formatSizeUnits($bytes)
+    function formatFileSizeMB($bytes, $precision = 2)
     {
-        if ($bytes >= 1073741824) {
-            $bytes = number_format($bytes / 1073741824, 0) . ' GB';
-        } elseif ($bytes >= 1048576) {
-            $bytes = number_format($bytes / 1048576, 0) . ' MB';
-        } elseif ($bytes >= 1024) {
-            $bytes = number_format($bytes / 1024, 0) . ' KB';
-        } elseif ($bytes > 1) {
-            $bytes = $bytes . ' bytes';
-        } elseif ($bytes == 1) {
-            $bytes = $bytes . ' byte';
-        } else {
-            $bytes = '0 bytes';
-        }
-
-        return $bytes;
+        return round($bytes / (1024 * 1024), $precision);
     }
 }

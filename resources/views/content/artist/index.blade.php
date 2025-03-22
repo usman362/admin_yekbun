@@ -90,7 +90,7 @@
                                     data-gender="{{ $artist->gender }}"
                                     data-province="{{ $artist->province->name ?? 'N/A' }}"
                                     data-bs-target="#artistDetailModal">{{ $artist->videos->count() }}</a></td>
-                            <td>{{ $artist->gender }}</td>
+                            <td>0</td>
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     {{-- @can('location.write') --}}
@@ -112,32 +112,37 @@
                                         </button>
                                     </span>
                                     {{-- @endcan --}}
-                                    {{-- @can('location.delete') --}}
-                                    <!-- Delete -->
-                                    <form action="{{ route('artist.destroy', $artist->id) }}" method="post" class="d-inline delete-form">
-                                      @method('DELETE')
-                                      @csrf
-                                      <button type="button" class="btn btn-sm btn-icon delete-btn" data-bs-toggle="tooltip"
-                                              data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                              data-bs-original-title="Remove">
-                                          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                              <path opacity="0.5"
-                                                    d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492"
-                                                    stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
-                                              <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5"
-                                                    stroke-linecap="round" />
-                                              <path
-                                                  d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492"
-                                                  stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
-                                              <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C"
-                                                    stroke-width="1.5" stroke-linecap="round" />
-                                              <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C"
-                                                    stroke-width="1.5" stroke-linecap="round" />
-                                          </svg>
-                                      </button>
-                                  </form>
+                                    @if ($artist->videos->count() == 0 && $artist->songs->count() == 0)
+                                        {{-- @can('location.delete') --}}
 
-                                    {{-- @endcan --}}
+                                        <!-- Delete -->
+                                        <form action="{{ route('artist.destroy', $artist->id) }}" method="post"
+                                            class="d-inline delete-form">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="button" class="btn btn-sm btn-icon delete-btn"
+                                                data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                data-bs-html="true" data-bs-original-title="Remove">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.5"
+                                                        d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492"
+                                                        stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5"
+                                                        stroke-linecap="round" />
+                                                    <path
+                                                        d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492"
+                                                        stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449"
+                                                        stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449"
+                                                        stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        {{-- @endcan --}}
+                                    @endif
+
                                 </div>
                                 {{-- @can('artist.write') --}}
                                 <x-modal id="editModal{{ $artist->id }}" title="Edit Artist" saveBtnText="Update"
@@ -199,13 +204,13 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="songs-tab" data-toggle="tab" href="#songs" role="tab"
                         aria-controls="songs" aria-selected="true">
-                        Total Songs - Total 125 - 12GB
+                        Total Songs &nbsp;<span id="total_songs">125 - 12GB</span>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab"
                         aria-controls="videos" aria-selected="false">
-                        Total Video Clips - Total 125 - 12GB
+                        Total Video Clips &nbsp;<span id="total_videos">125 - 12GB</span>
                     </a>
                 </li>
             </ul>
@@ -468,6 +473,10 @@
                     let artistImage = $(this).attr('data-image');
                     let artistGender = $(this).attr('data-gender');
                     let artistProvince = $(this).attr('data-province');
+                    let totalSongs = 0;
+                    let totalSongsMbs = 0;
+                    let totalVideos = 0;
+                    let totalVideosMbs = 0;
                     let section = $(this).attr('data-section');
 
                     $('#artistName').text(artistName);
@@ -484,7 +493,7 @@
                         },
                         success: function(response) {
                             // Log the response to see the structure
-                            console.log(response);
+
 
                             // Clear existing data
                             $('#songs-tbody').empty();
@@ -493,6 +502,7 @@
                             // Update Songs Tab
                             if (response.songs && response.songs.length > 0) {
                                 response.songs.forEach(song => {
+                                    totalSongsMbs += parseInt(song.file_size);
                                     const deleteUrl =
                                         '{{ url('/') }}/musics/delete_song/' + song
                                         ._id;
@@ -500,7 +510,7 @@
                                     <tr>
                                         <td>${song.custom_id || song._id}</td>
                                         <td><p class="m-0">${song.name}</p>
-                                            <small><i>${song.file_size}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
+                                            <small><i>${song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB'}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
                                         <td><audio src="{{ asset('storage/${song.audio}') }}" controls></audio></td>
                                         <td>${song.total_listen || 'N/A'}</td>
@@ -526,6 +536,10 @@
                                 `);
                                 });
 
+                                totalSongs = response.songs.length;
+                                totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs/1024).toFixed(2)+'GB' : totalSongsMbs.toFixed(2)+'MB');
+                                $('#total_songs').html(`<i>${totalSongs} / ${totalSongsMbs}</i>`);
+
                             } else {
                                 $('#songs-tbody').append(
                                     '<tr><td class="text-center" colspan="8"><b>No Data found.</b></td></tr>'
@@ -535,6 +549,7 @@
                             // Update Videos Tab
                             if (response.clips && response.clips.length > 0) {
                                 response.clips.forEach(video => {
+                                    totalVideosMbs += parseInt(video.video_file_size);
                                     const deleteVideoUrl =
                                         '{{ url('/') }}/video-clips/' + video._id;
                                     $('#videos-tbody').append(`
@@ -542,7 +557,7 @@
                                             <td>${video.custom_id || video._id}</td>
                                             <td>
                                                 <p class="m-0">${video.video_file_name}</p>
-                                                <small><i>${video.video_file_size}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
+                                                <small><i>${video.video_file_size >= 1024 ? (video.video_file_size/1024)+'GB' : video.video_file_size+'MB'}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
                                             </td>
                                             <td><video src="{{ asset('storage/${video.video}') }}" width="100" height="60"></video></td>
                                             <td>${video.total_listen || 'N/A'}</td>
@@ -567,6 +582,10 @@
                                         </tr>
                                     `);
                                 });
+
+                                totalVideos = response.clips.length;
+                                totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs/1024).toFixed(2)+'GB' : totalVideosMbs.toFixed(2)+'MB');
+                                $('#total_videos').html(`<i>${totalVideos} / ${totalVideosMbs}</i>`);
                             } else {
                                 $('#videos-tbody').append(
                                     '<tr><td class="text-center" colspan="8"><b>No Data found.</b></td></tr>'
