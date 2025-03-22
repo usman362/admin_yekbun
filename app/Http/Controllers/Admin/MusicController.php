@@ -15,6 +15,7 @@ use FFMpeg;
 use App\Http\Requests\StoreSongRequest;
 use App\Http\Controllers\Admin\FileController;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 // use Illuminate\Support\Facades\Storage;
 
 class MusicController extends Controller
@@ -71,8 +72,7 @@ class MusicController extends Controller
         });
         $music_category  = MusicCategory::doesntHave('musics')->get();
         $artists = Artist::get();
-        $albums = Album::get();
-        return view('content.music.index', compact('music', 'music_category', 'artists', 'type', 'albums', 'totalSongsSize'));
+        return view('content.music.index', compact('music', 'music_category', 'artists', 'type', 'totalSongsSize'));
     }
 
     /**
@@ -236,8 +236,7 @@ class MusicController extends Controller
         $music = Music::find($music_id);
         $music_category  = MusicCategory::get();
         $artists = Artist::get();
-        $albums = Album::get();
-        return view('content.video_clips.view', compact('songs', 'music', 'music_category', 'artists', 'albums'));
+        return view('content.video_clips.view', compact('songs', 'music', 'music_category', 'artists'));
     }
 
     public function store_song(Request $request)
@@ -245,7 +244,7 @@ class MusicController extends Controller
         try {
             foreach ($request->songs as $key => $audioPath) {
                 $song = new Song();
-                $song->name = $request->songs_file_name[$key] ?? '';
+                $song->name = Str::after($audioPath,'___');
                 $song->music_id = $request->music_id;
                 $song->album_id = $request->album_id;
                 $song->artist_id = $request->artist_id;

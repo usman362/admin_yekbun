@@ -193,11 +193,8 @@ class ArtistController extends Controller
     public function getArtistDetail(Request $request)
     {
         $artist = Artist::find($request->id);
-        $albums = Album::where('artist_id',$artist->id)->with(['artist'=>function($q){
-            $q->with('songs');
-        }])->get();
         $songs = Song::where('artist_id',$artist->id)->get();
         $clips = VideoClip::where('artist_id',$artist->id)->get();
-        return response()->json(['albums' => $albums,'songs' => $songs,'clips' => $clips],200);
+        return response()->json(['songs' => $songs,'clips' => $clips],200);
     }
 }

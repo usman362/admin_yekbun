@@ -13,26 +13,6 @@
                     @enderror
                 </div> --}}
 
-                @if (!empty(request()->music_id))
-                    <input type="hidden" name="music_id" id="music_id" value="{{ request()->music_id }}">
-                @else
-                    @php
-                        $musics = \App\Models\Music::all();
-                    @endphp
-                    <div class="col-md-12">
-                        <label class="form-label" for="music_id">Choose Music</label>
-                        <select class="form-select" aria-label="Select Music" name="music_id">
-                            <option selected>Select</option>
-                            @foreach ($musics as $music)
-                                <option value="{{ $music->id }}">{{ $music->music_category->name ?? 'N/A' }}</option>
-                            @endforeach
-                        </select>
-                        @error('music_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                @endif
-
                 @isset($artists)
                     <div class="col-md-12">
                         <label class="form-label" for="fullname">Choose Artist</label>

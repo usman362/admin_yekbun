@@ -176,7 +176,7 @@
 .swal2-container {
   display: grid;
   position: fixed;
-  z-index: 1060;
+  z-index: 99999;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1641,13 +1641,13 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 }
 
 .light-style .swal2-container {
-  z-index: 1090;
+  z-index: 99999;
 }
 .light-style .swal2-container .tooltip {
-  z-index: 1092;
+  z-index: 99999;
 }
 .light-style .swal2-container .popover {
-  z-index: 1091;
+  z-index: 99999;
 }
 .light-style .swal2-modal.swal2-popup {
   font-family: var(--bs-font-sans-serif);
@@ -1709,13 +1709,13 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 }
 
 .dark-style .swal2-container {
-  z-index: 1090;
+  z-index: 99999;
 }
 .dark-style .swal2-container .tooltip {
-  z-index: 1092;
+  z-index: 99999;
 }
 .dark-style .swal2-container .popover {
-  z-index: 1091;
+  z-index: 99999;
 }
 .dark-style .swal2-modal.swal2-popup {
   background: #2b2c40;
