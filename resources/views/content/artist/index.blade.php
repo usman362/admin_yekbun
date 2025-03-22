@@ -537,7 +537,7 @@
                                 });
 
                                 totalSongs = response.songs.length;
-                                totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs/1024).toFixed(2)+'GB' : totalSongsMbs.toFixed(2)+'MB');
+                                totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs/1024).toFixed(1)+'GB' : totalSongsMbs.toFixed(1)+'MB');
                                 $('#total_songs').html(`<i>${totalSongs} / ${totalSongsMbs}</i>`);
 
                             } else {
@@ -584,7 +584,7 @@
                                 });
 
                                 totalVideos = response.clips.length;
-                                totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs/1024).toFixed(2)+'GB' : totalVideosMbs.toFixed(2)+'MB');
+                                totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs/1024).toFixed(1)+'GB' : totalVideosMbs.toFixed(1)+'MB');
                                 $('#total_videos').html(`<i>${totalVideos} / ${totalVideosMbs}</i>`);
                             } else {
                                 $('#videos-tbody').append(
