@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <a href="javascript:void(0)" class="text-body text-truncate">
-                                            <span class="fw-semibold">{{ $artist->first_name }}</span>
+                                            <span class="fw-semibold">{{ $artist->name }}</span>
                                         </a>
                                         <small class="fw-semibold">{{ $artist->gender }} -
                                             {{ $artist->province->name ?? 'N/A' }}</small>
@@ -80,12 +80,12 @@
                             </td>
                             <td><a href="javascript:void(0)" class="text-black artistDetail" data-id="{{ $artist->id }}"
                                     data-section="songs" data-bs-toggle="modal"
-                                    data-image="{{ asset('storage/' . $artist->image) }}"
-                                    data-name="{{ $artist->first_name }}" data-gender="{{ $artist->gender }}"
+                                    data-image="{{ asset('storage/' . $artist->image) }}" data-name="{{ $artist->name }}"
+                                    data-gender="{{ $artist->gender }}"
                                     data-province="{{ $artist->province->name ?? 'N/A' }}"
                                     data-bs-target="#artistDetailModal">{{ $artist->songs->count() }}</a></td>
                             <td><a href="javascript:void(0)" class="text-black artistDetail" data-id="{{ $artist->id }}"
-                                    data-section="videos" data-bs-toggle="modal" data-name="{{ $artist->first_name }}"
+                                    data-section="videos" data-bs-toggle="modal" data-name="{{ $artist->name }}"
                                     data-image="{{ asset('storage/' . $artist->image) }}"
                                     data-gender="{{ $artist->gender }}"
                                     data-province="{{ $artist->province->name ?? 'N/A' }}"
@@ -114,30 +114,29 @@
                                     {{-- @endcan --}}
                                     {{-- @can('location.delete') --}}
                                     <!-- Delete -->
-                                    <form action="{{ route('artist.destroy', $artist->id) }}"
-                                        onsubmit="confirmAction(event, () => event.target.submit())" method="post"
-                                        class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                            data-bs-original-title="Remove"><svg width="25" height="25"
-                                                viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.5"
+                                    <form action="{{ route('artist.destroy', $artist->id) }}" method="post" class="d-inline delete-form">
+                                      @method('DELETE')
+                                      @csrf
+                                      <button type="button" class="btn btn-sm btn-icon delete-btn" data-bs-toggle="tooltip"
+                                              data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                              data-bs-original-title="Remove">
+                                          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                              <path opacity="0.5"
                                                     d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492"
                                                     stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
-                                                <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5"
+                                              <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5"
                                                     stroke-linecap="round" />
-                                                <path
-                                                    d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492"
-                                                    stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
-                                                <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C"
+                                              <path
+                                                  d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492"
+                                                  stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                              <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C"
                                                     stroke-width="1.5" stroke-linecap="round" />
-                                                <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C"
+                                              <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C"
                                                     stroke-width="1.5" stroke-linecap="round" />
-                                            </svg>
-                                        </button>
-                                    </form>
+                                          </svg>
+                                      </button>
+                                  </form>
+
                                     {{-- @endcan --}}
                                 </div>
                                 {{-- @can('artist.write') --}}
@@ -220,9 +219,6 @@
                                     <th>Song Title</th>
                                     <th>Tracks</th>
                                     <th>Total Listen</th>
-                                    <th>Uploaded Date</th>
-                                    <th>Size</th>
-                                    <th>Length</th>
                                     <th>Option</th>
                                 </tr>
                             </thead>
@@ -243,9 +239,6 @@
                                     <th>Clip Title</th>
                                     <th>Clip</th>
                                     <th>Total Listen</th>
-                                    <th>Uploaded Date</th>
-                                    <th>Size</th>
-                                    <th>Length</th>
                                     <th>Option</th>
                                 </tr>
                             </thead>
@@ -282,6 +275,31 @@
                     }
                 });
             }
+
+            $(document).ready(function() {
+                $('.delete-btn').on('click', function(event) {
+                    event.preventDefault(); // Stop any default action
+                    let form = $(this).closest('.delete-form'); // Get the closest form
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure you want to delete this?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, cancel!',
+                        customClass: {
+                            confirmButton: 'btn btn-danger me-3',
+                            cancelButton: 'btn btn-label-secondary'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Submit the form after confirmation
+                        }
+                    });
+                });
+            });
         </script>
 
         <script>
@@ -456,7 +474,7 @@
                     $('#artistImage').text(artistImage);
                     $('#artistGender').text(artistGender);
                     $('#artistProvince').text(artistProvince);
-                    $('#artistImage').attr('src',artistImage);
+                    $('#artistImage').attr('src', artistImage);
                     $.ajax({
                         url: '{{ route('get.artist.detail') }}',
                         method: 'get',
@@ -482,13 +500,10 @@
                                     <tr>
                                         <td>${song.custom_id || song._id}</td>
                                         <td><p class="m-0">${song.name}</p>
-                                            <small><i>${song.file_size}&nbsp; - &nbsp;${formatDate(song.created_at)}</i></small>
+                                            <small><i>${song.file_size}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
                                         <td><audio src="{{ asset('storage/${song.audio}') }}" controls></audio></td>
                                         <td>${song.total_listen || 'N/A'}</td>
-                                        <td>${new Date(song.created_at).toLocaleDateString()}</td>
-                                        <td>${song.file_size} MB</td>
-                                        <td>${song.length}</td>
                                         <td>
                                             <div class="d-flex justify-content-start align-items-center">
                                                 <!-- Delete -->
@@ -525,12 +540,12 @@
                                     $('#videos-tbody').append(`
                                         <tr>
                                             <td>${video.custom_id || video._id}</td>
-                                            <td>${video.video_file_name}</td>
+                                            <td>
+                                                <p class="m-0">${video.video_file_name}</p>
+                                                <small><i>${video.video_file_size}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
+                                            </td>
                                             <td><video src="{{ asset('storage/${video.video}') }}" width="100" height="60"></video></td>
                                             <td>${video.total_listen || 'N/A'}</td>
-                                            <td>${new Date(video.created_at).toLocaleDateString()}</td>
-                                            <td>${video.video_file_size} MB</td>
-                                            <td>${video.video_file_length || 'N/A'}</td>
                                             <td>
                                                 <div class="d-flex justify-content-start align-items-center">
                                                                             <!-- Edit -->

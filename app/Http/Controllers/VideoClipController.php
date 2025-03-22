@@ -8,6 +8,7 @@ use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Models\MusicCategory;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class VideoClipController extends Controller
 {
@@ -56,7 +57,15 @@ class VideoClipController extends Controller
         ]);
 
         try {
-            VideoClip::create($validated);
+            VideoClip::create([
+                'video_file_name' => Str::after($request->video, '___'),
+                'artist_id' => $request->artist_id,
+                'video' => $request->video,
+                'thumbnail' => $request->thumbnail,
+                'video_file_size' => $request->video_file_size,
+                'video_file_length' => $request->video_file_length,
+                'status' => $request->status,
+            ]);
             return redirect()->back()->with('success', 'Video clip Has been added');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add video clip');

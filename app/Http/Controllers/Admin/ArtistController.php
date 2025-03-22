@@ -47,7 +47,7 @@ class ArtistController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
+            'name' => 'required',
             // 'last_name' => 'required',
             // 'city' => 'required',
             'gender' => 'required',
@@ -55,7 +55,7 @@ class ArtistController extends Controller
         ]);
 
         $artist = new Artist();
-        $artist->first_name = $request->first_name;
+        $artist->name = $request->name;
         // $artist->last_name = $request->last_name;
         $artist->gender = $request->gender;
         $artist->status = $request->status;
@@ -104,7 +104,7 @@ class ArtistController extends Controller
     public function update(Request $request, $id)
     {
         $artist = Artist::findorFail($id);
-        $artist->first_name = $request->first_name;
+        $artist->name = $request->name;
         // $artist->last_name = $request->last_name;
         $artist->dob = $request->dob;
         $artist->gender = $request->gender;

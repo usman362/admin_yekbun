@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-12">
                     <label class="form-label" for="fullname">Artist Name - Lastname</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="first_name">
+                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="name">
                 </div>
                 {{-- <div class="col-md-12">
                     <label class="form-label" for="fullname">Last Name</label>

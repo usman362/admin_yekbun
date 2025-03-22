@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -33,12 +34,27 @@ class FileController extends Controller
 
         $fileSize = $this->formatSizeUnits($uploadedFile->getSize());
         // $filtered_path = url('/') . '/storage/' .  $filePath;
-
+        $durationType = '';
         try {
             $audio = new \wapmorgan\Mp3Info\Mp3Info($request->file('file'), true);
             $durationInSeconds = $audio->duration;
+            $durationType = 'audio';
         } catch (\Exception $e) {
             $durationInSeconds = '';
+            $durationType = 'video';
+        }
+
+        if ($durationType == 'video') {
+            // Initialize FFMpeg
+            $ffmpeg = FFMpeg::create();
+            // Open the media file (you need to get the real path of the uploaded file)
+            $media = $ffmpeg->open($request->file('file'));
+            // Get the format of the file to retrieve metadata, including the duration
+            $format = $media->getFormat();
+            // Get duration in seconds (or any other format you want)
+            $duration = $format->get('duration'); // Duration is in seconds
+
+            $durationInSeconds = $duration;
         }
 
         if ($durationInSeconds !== '') {

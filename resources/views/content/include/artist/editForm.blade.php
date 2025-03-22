@@ -21,7 +21,7 @@
 
             <div class="row g-3">
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="form-label" for="fullname">Gender</label>
                     <select name="gender" class="form-select">
                         <option>Select Gender</option>
@@ -35,17 +35,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-12">
-                    <label class="form-label" for="fullname">First Name</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="first_name"
-                        value="{{ $artist->first_name ?? '' }}">
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label" for="fullname">Last Name</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="last_name"
-                        value="{{ $artist->last_name ?? '' }}">
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label class="form-label" for="fullname">Province</label>
                     <select name="province" class="form-control province_id" id="province_id" data-url={{ url('get/city') }} value="{{ old('province_id') }}" data-selected="{{ $artist->city_id }}">
                         <option value="">Select province</option>
@@ -54,17 +44,13 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-8">
-                    <label class="form-label" for="fullname">City</label>
-                    <select name="city" class="form-control city_id" id="city_id">
-                        <option value="">Select province</option>
-                    </select>
+
+                <div class="col-md-12">
+                    <label class="form-label" for="fullname">Artist Name - Lastname</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="name"
+                        value="{{ $artist->name ?? '' }}">
                 </div>
-                {{-- <div class="col-md-12">
-                    <label class="form-label" for="fullname">City</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="lorem" name="city" value="{{ $artist->city ?? '' }}">
-                </div>
-                --}}
+
                 <div class="col-12">
                     <div class="card">
                         <h5 class="card-header">Image</h5>
