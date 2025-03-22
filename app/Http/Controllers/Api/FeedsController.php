@@ -252,7 +252,7 @@ class FeedsController extends Controller
                 'parent_id' => $request->parent_id ?? null,
                 'audio' => Helpers::fileUpload($request->audio,'feeds/audio') ?? null,
                 'emoji' => $request->emoji,
-                'image' => Helpers::fileUpload($request->audio,'feeds/image') ?? null,
+                'image' => Helpers::fileUpload($request->image,'feeds/image') ?? null,
                 'status' => 1
             ]);
 
