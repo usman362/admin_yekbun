@@ -300,17 +300,17 @@ class FeedsController extends Controller
                 'user' => $user
             ];
 
-            switch ($request->feed_type) {
-                case 'admin_feeds':
-                    event(new AdminFeedsComments($data));
-                    break;
-                case 'history':
-                    event(new HistoryComments($data));
-                    break;
-                default:
-                    event(new UserFeedsComments($data));
-                    break;
-            }
+            // switch ($request->feed_type) {
+            //     case 'admin_feeds':
+            //         event(new AdminFeedsComments($data));
+            //         break;
+            //     case 'history':
+            //         event(new HistoryComments($data));
+            //         break;
+            //     default:
+            //         event(new UserFeedsComments($data));
+            //         break;
+            // }
 
             return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         } catch (Exception $e) {
