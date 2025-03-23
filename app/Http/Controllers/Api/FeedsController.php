@@ -243,6 +243,17 @@ class FeedsController extends Controller
         $request->validate(['comment' => 'required|string', 'feed_type' => 'required','audio' => 'nullable|mimes:mp3,wav,aac|max:5120','emoji' => 'nullable|string','image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',]);
 
         try {
+            if($request->file('image')){
+                $image = Helpers::fileUpload($request->image,'feeds/image');
+            }else{
+                $image = null;
+            }
+
+            if($request->file('audio')){
+                $audio = Helpers::fileUpload($request->audio,'feeds/audio');
+            }else{
+                $audio = null;
+            }
             $comment = FeedComments::create([
                 'user_id' => auth()->id(),
                 'feed_id' => $id,
@@ -250,9 +261,9 @@ class FeedsController extends Controller
                 'comment' => $request->comment,
                 'comment_type' => $request->comment_type ?? 'normal',
                 'parent_id' => $request->parent_id ?? null,
-                'audio' => Helpers::fileUpload($request->audio,'feeds/audio') ?? null,
+                'audio' => $audio,
                 'emoji' => $request->emoji,
-                'image' => Helpers::fileUpload($request->image,'feeds/image') ?? null,
+                'image' =>  $image,
                 'status' => 1
             ]);
 
