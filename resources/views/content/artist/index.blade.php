@@ -537,7 +537,8 @@
                                 });
 
                                 totalSongs = response.songs.length;
-                                totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs/1024).toFixed(1)+'GB' : totalSongsMbs.toFixed(1)+'MB');
+                                totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs / 1024)
+                                    .toFixed(1) + 'GB' : totalSongsMbs.toFixed(1) + 'MB');
                                 $('#total_songs').html(`<i>${totalSongs} / ${totalSongsMbs}</i>`);
 
                             } else {
@@ -584,8 +585,10 @@
                                 });
 
                                 totalVideos = response.clips.length;
-                                totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs/1024).toFixed(1)+'GB' : totalVideosMbs.toFixed(1)+'MB');
-                                $('#total_videos').html(`<i>${totalVideos} / ${totalVideosMbs}</i>`);
+                                totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs / 1024)
+                                    .toFixed(1) + 'GB' : totalVideosMbs.toFixed(1) + 'MB');
+                                $('#total_videos').html(
+                                `<i>${totalVideos} / ${totalVideosMbs}</i>`);
                             } else {
                                 $('#videos-tbody').append(
                                     '<tr><td class="text-center" colspan="8"><b>No Data found.</b></td></tr>'
@@ -633,6 +636,14 @@
                     let music_id = $(this).attr('data-music_id');
                     $('#music_id').val(music_id);
                 });
+
+                $('button').click(function() {
+                    $('audio, video').each(function() {
+                        this.pause(); // Pause the media
+                        this.currentTime = 0; // Reset to start
+                    });
+                });
+
             });
         </script>
     @endsection
