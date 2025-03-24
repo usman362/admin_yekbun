@@ -128,11 +128,6 @@ use FFMpeg\FFMpeg;
 |
 */
 
-Route::get('test', function () {
-    event(new PopComments("Testing 123"));
-    // PopComments::dispatch('test');
-    return response()->json(['status' => 'Message sent!']);
-});
 
 $controller_path = 'App\Http\Controllers';
 

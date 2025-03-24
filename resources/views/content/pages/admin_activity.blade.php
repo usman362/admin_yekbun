@@ -3272,7 +3272,7 @@
         });
     </script>
 
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    {{-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
@@ -3289,6 +3289,6 @@
             $('.comments-list').html(comments);
             $('.likes-count span').text(data?.data?.like_count);
         });
-    </script>
+    </script> --}}
 @endsection
 @endsection
