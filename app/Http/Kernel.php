@@ -73,6 +73,5 @@ class Kernel extends HttpKernel
     'permission' => \App\Http\Middleware\CustomPermissionMiddleware::class,
     '2fa' => \App\Http\Middleware\Check2FA::class,
     'jwt.custom' => \App\Http\Middleware\JwtMiddleware::class,
-    'cors' => \App\Http\Middleware\Cors::class,
   ];
 }
