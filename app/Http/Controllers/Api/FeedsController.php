@@ -255,7 +255,7 @@ class FeedsController extends Controller
                 $audio = null;
             }
 
-            if($image == null && $audio == null && ($request->comment == "" || $request->comment == null)){
+            if($image == null && $audio == null && ($request->comment == "" || $request->comment == null) && ($request->emoji == "" || $request->emoji == null)){
                 return ResponseHelper::sendResponse(null, 'Select Content Before Comment!', false, 403);
             }
 
