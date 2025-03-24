@@ -240,7 +240,7 @@ class FeedsController extends Controller
 
     public function storeComments(Request $request,$id)
     {
-        $request->validate(['comment' => 'required|string', 'feed_type' => 'required','audio' => 'nullable|mimes:mp3,wav,aac|max:5120','emoji' => 'nullable|string','image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',]);
+        $request->validate(['comment' => 'nullable|string', 'feed_type' => 'required','audio' => 'nullable|mimes:mp3,wav,aac|max:5120','emoji' => 'nullable|string','image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',]);
 
         try {
             if($request->file('image')){
@@ -254,6 +254,11 @@ class FeedsController extends Controller
             }else{
                 $audio = null;
             }
+
+            if($image == null && $audio == null && ($request->comment == "" || $request->comment == null)){
+                return ResponseHelper::sendResponse(null, 'Select Content Before Comment!', false, 403);
+            }
+
             $comment = FeedComments::create([
                 'user_id' => auth()->id(),
                 'feed_id' => $id,
