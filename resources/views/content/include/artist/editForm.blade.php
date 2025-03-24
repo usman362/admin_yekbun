@@ -82,129 +82,80 @@
     </div>
 </form>
 
-
 <script>
     'use strict';
 
+    function initializeDropzones() {
+        if (window.dropzonesInitialized) return; // Prevent multiple initializations
+        window.dropzonesInitialized = true;
 
-    //  <div class="progress">
-        // <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-        //                                                     </div>
+        document.querySelectorAll(".dropzone").forEach((dropzoneElement) => {
+            if (dropzoneElement.dataset.initialized) return; // Prevent duplicate initialization
 
-    dropZoneInitFunctions.push(function() {
-        // previewTemplate: Updated Dropzone default previewTemplate
+            dropzoneElement.dataset.initialized = true; // Mark as initialized
 
-        const previewTemplate = `<div class="row">
-                                            <div class="col-md-12 col-12 d-flex justify-content-center">
-                                                <div class="dz-preview dz-file-preview w-100">
-                                                    <div class="dz-details">
-                                                        <div class="dz-thumbnail" style="width:95%">
-                                                            <img data-dz-thumbnail >
-                                                            <span class="dz-nopreview">No preview</span>
-                                                            <div class="dz-success-mark"></div>
-                                                            <div class="dz-error-mark"></div>
-                                                            <div class="dz-error-message"><span data-dz-errormessage></span></div>
-
-                                                        </div>
-                                                        <div class="dz-filename" data-dz-name></div>
-                                                            <div class="dz-size" data-dz-size></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`;
-
-        // image
-        const dropzoneMulti1 = new Dropzone('#dropzone-img{{ $artist->id }}', {
-            url: '{{ route('file.upload') }}',
-            previewTemplate: previewTemplate,
-            parallelUploads: 1,
-            maxFilesize: 100,
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            acceptedFiles: 'image/*',  // Accept only images
-            maxFiles: 1,  // Allow only one file to be selected
-            sending: function(file, xhr, formData) {
-                formData.append('folder', 'music');
-            },
-            success: function(file, response) {
-
-                if (file.previewElement) {
+            const dropzoneInstance = new Dropzone(dropzoneElement, {
+                url: '{{ route('file.upload') }}',
+                previewTemplate: `<div class="row">
+                    <div class="col-md-12 col-12 d-flex justify-content-center">
+                        <div class="dz-preview dz-file-preview w-100">
+                            <div class="dz-details">
+                                <div class="dz-thumbnail" style="width:95%">
+                                    <img data-dz-thumbnail >
+                                    <span class="dz-nopreview">No preview</span>
+                                    <div class="dz-success-mark"></div>
+                                    <div class="dz-error-mark"></div>
+                                    <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                </div>
+                                <div class="dz-filename" data-dz-name></div>
+                                <div class="dz-size" data-dz-size></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                parallelUploads: 1,
+                maxFilesize: 100,
+                addRemoveLinks: true,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                acceptedFiles: 'image/*',
+                maxFiles: 1,
+                sending: function(file, xhr, formData) {
+                    formData.append('folder', 'music');
+                },
+                success: function(file, response) {
                     file.previewElement.classList.add("dz-success");
-                }
-                file.previewElement.dataset.path = response.path;
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.innerHTML +=
-                    `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
+                    file.previewElement.dataset.path = response.path;
+                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container').querySelector('.hidden-inputs');
+                    hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
+                },
+                removedfile: function(file) {
+                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container').querySelector('.hidden-inputs');
+                    hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
 
-            },
-            removedfile: function(file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.querySelector(
-                    `input[data-path="${file.previewElement.dataset.path}"]`).remove();
-
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
+
+                    $.ajax({
+                        url: '{{ route('artists.delete-img', $artist->id) }}',
+                        method: 'delete',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: { path: file.previewElement.dataset.path },
+                        success: function() {}
+                    });
+
+                    return this._updateMaxFilesReachedClass();
                 }
-
-                $.ajax({
-                    url: '{{ route('artists.delete-img', $artist->id) }}',
-                    method: 'delete',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    data: {
-                        path: file.previewElement.dataset.path
-                    },
-                    success: function() {}
-                });
-
-                return this._updateMaxFilesReachedClass();
-            }
-        });
-
-        @if($artist->image)
-        $("document").ready(() => {
-            var path = "{{ asset('storage/'.$artist->image) }}";
-            var rpath = "{{ $artist->image }}";
-            const parts = rpath.split("___");
-
-            imageUrlToFile(path,parts).then((file) => {
-                file['status'] = "success";
-                file['previewElement'] = "div.dz-preview.dz-image-preview";
-                file['previewTemplate'] = "div.dz-preview.dz-image-preview";
-                file['_removeLink'] = "a.dz-remove";
-                // file['webkitRelativePath'] = "";
-                file['width'] = 500;
-                file['height'] = 500;
-                file['accepted'] = true;
-                file['dataURL'] = path;
-                file['processing'] = true;
-                file['addPathToDataset'] = true;
-                dropzoneMulti1.on('addedfile', function(file) {
-                    if (file.addPathToDataset)
-                        file.previewElement.dataset.path = rpath;
-                });
-                file['upload'] = {
-                    bytesSent: 0,
-                    progress: 0,
-                };
-
-                // Update the preview template to include the music title
-
-                dropzoneMulti1.emit("addedfile", file, path);
-                dropzoneMulti1.emit("thumbnail", file, path);
-                // dropzoneMulti1.files.push(file);
+                
             });
         });
-        @endif
-    })
+    }
+    initializeDropzones();
+    // Attach event listener to the button
+    // document.getElementById("initDropzones").addEventListener("click", initializeDropzones);
 </script>
-
 <script>
     async function imageUrlToFile(imageUrl, fileName) {
         // Fetch the image

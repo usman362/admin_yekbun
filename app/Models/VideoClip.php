@@ -10,6 +10,9 @@ class VideoClip extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mongodb';
+    protected $collection = 'video_clips';
+
     protected $fillable = [
         'name',
         'video_file_name',
@@ -46,11 +49,13 @@ class VideoClip extends Model
     public function music_category(){
         return $this->belongsTo(MusicCategory::class , 'category_id' );
     }
+
     public function music(){
         return $this->belongsTo(Music::class , 'music_id' );
     }
 
-    public function artist(){
-        return $this->belongsTo(Artist::class , 'artist_id');
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class, 'artist_id', '_id');
     }
 }

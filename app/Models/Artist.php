@@ -15,9 +15,8 @@ class Artist extends Model
     protected $connection = 'mongodb';
     protected $collection = 'artists';
 
-    protected $fillable=[
-        'first_name',
-        'last_name',
+    protected $fillable = [
+        'name',
         'city',
         'dob',
         'gender',
@@ -29,22 +28,23 @@ class Artist extends Model
         return LogOptions::defaults();
     }
 
-    public function musics(){
-        return $this->hasMany(Music::class , 'artist_id' , 'id');
+    public function musics()
+    {
+        return $this->hasMany(Music::class, 'artist_id', 'id');
     }
 
-    public function songs(){
-        return $this->hasMany(Song::class , 'artist_id' , 'id');
+    public function songs()
+    {
+        return $this->hasMany(Song::class, 'artist_id');
     }
 
-    public function videos(){
-        return $this->hasMany(VideoClip::class , 'artist_id' , 'id');
+    public function videos()
+    {
+        return $this->hasMany(VideoClip::class, 'artist_id', '_id');
     }
 
     public function province()
     {
         return $this->belongsTo(Region::class, 'province_id');
     }
-
-
 }
