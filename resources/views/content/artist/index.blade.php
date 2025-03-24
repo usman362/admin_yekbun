@@ -128,13 +128,13 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="songs-tab" data-toggle="tab" href="#songs" role="tab"
                         aria-controls="songs" aria-selected="true">
-                        Total Songs &nbsp;<span id="total_songs">125 - 12GB</span>
+                        Total Songs &nbsp;<span id="total_songs">0</span>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab"
                         aria-controls="videos" aria-selected="false">
-                        Total Video Clips &nbsp;<span id="total_videos">125 - 12GB</span>
+                        Total Video Clips &nbsp;<span id="total_videos">0</span>
                     </a>
                 </li>
             </ul>
@@ -160,23 +160,8 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
-                    <div class="table-responsive text-nowrap pd-t-24px">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Clip ID</th>
-                                    <th>Clip Title</th>
-                                    <th>Clip</th>
-                                    <th>Total Listen</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-                            <tbody id="videos-tbody" class="table-border-bottom-0">
-                                <tr>
-                                    <td class="text-center" colspan="8"><b>No Data found.</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="row container pb-4" id="videos-tbody">
+
                     </div>
                 </div>
             </div>
@@ -391,7 +376,7 @@
 
     <script>
         $(document).ready(function() {
-            $('table').on('click','.artistDetail',function() {
+            $('table').on('click', '.artistDetail', function() {
                 let id = $(this).attr('data-id');
                 let artistName = $(this).attr('data-name');
                 let artistImage = $(this).attr('data-image');
@@ -477,34 +462,60 @@
                                 totalVideosMbs += parseFloat(video.video_file_size);
                                 const deleteVideoUrl =
                                     '{{ url('/') }}/video-clips/' + video._id;
+
                                 $('#videos-tbody').append(`
-                                        <tr>
-                                            <td>${video.custom_id || video._id}</td>
-                                            <td>
-                                                <p class="m-0">${video.video_file_name}</p>
-                                                <small><i>${video.video_file_size >= 1024 ? (video.video_file_size/1024)+'GB' : video.video_file_size+'MB'}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
-                                            </td>
-                                            <td><video src="{{ asset('storage/${video.video}') }}" width="100" height="60"></video></td>
-                                            <td>${video.total_listen || 'N/A'}</td>
-                                            <td>
-                                                <div class="d-flex justify-content-start align-items-center">
-                                                                            <!-- Edit -->
-                                                                                                                <!-- Delete -->
-                                        <form action="${deleteVideoUrl}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                    <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                </svg>
-                                            </button>
-                                        </form>
-                                                                    </div>
-                                            </td>
-                                        </tr>
+                                    <div class="col-md-4">
+                                            <div id="feed-post-1" class="card is-post mt-4 pl-4 pr-4">
+                                                <!-- Main wrap -->
+                                                <div class="content-wrap">
+                                                    <!-- Post header -->
+                                                    <div class="card-heading d-flex p-3">
+                                                        <!-- User meta -->
+                                                        <div class="user-block">
+                                                            <div class="user-info">
+                                                                <span class="d-flex"><a href="javascript:void(0)">${video.video_file_name}</a></span>
+                                                                <small class="time"><i>${video.video_file_size >= 1024 ? (video.video_file_size/1024)+'GB' : video.video_file_size+'MB'}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="dropdown is-spaced is-right is-neutral dropdown-trigger" style=" position: absolute;left: auto;right: 8px;">
+                                                            <div>
+                                                               <form action="${deleteVideoUrl}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                                                 @csrf
+                                                                 @method('DELETE')
+                                                                 <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                         <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                                         <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                                         <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                                         <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                                         <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                                     </svg>
+                                                                 </button>
+                                                             </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /Post header -->
+
+                                                    <!-- Post body -->
+                                                    <div class="card-body pt-0 pb-2">
+                                                        <div class="post-image">
+                                                            <a data-fancybox="post1" data-lightbox-type="comments">
+                                                                <video controls="" class="videoclass w-100">
+                                                                <source src="{{ asset('storage/${video.video}') }}">
+                                                            </video>
+                                                            </a>
+                                                            <!-- Action buttons -->
+
+                                                        </div>
+                                                        <small>${video.total_listen || '0'} Views</small>
+                                                    </div>
+                                                    <!-- /Post body -->
+                                                </div>
+                                                <!-- /Main wrap -->
+                                            </div>
+                                        </div>
                                     `);
                             });
 
