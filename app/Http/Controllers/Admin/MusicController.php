@@ -245,8 +245,7 @@ class MusicController extends Controller
             foreach ($request->songs as $key => $audioPath) {
                 $song = new Song();
                 $song->name = Str::after($audioPath,'___');
-                $song->music_id = $request->music_id;
-                $song->album_id = $request->album_id;
+                $song->music_type = $request->music_type;
                 $song->artist_id = $request->artist_id;
                 $song->audio = $audioPath;
                 $song->file_size = $request->songs_file_size[$key] ?? '';

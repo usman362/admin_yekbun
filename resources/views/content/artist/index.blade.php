@@ -47,7 +47,7 @@
     <div class="card">
         <h5 class="card-header">Artist List</h5>
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table class="table artist-table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -643,6 +643,16 @@
                         this.currentTime = 0; // Reset to start
                     });
                 });
+
+                $('[name="music_type"]').change(function(){
+                    if($(this).val() !== "" && $(this).val() !== null){
+                        $('#song-upload').css('display','block');
+                    }else{
+                        $('#song-upload').css('display','none');
+                    }
+                })
+
+                // $('table').DataTable({});
 
             });
         </script>
