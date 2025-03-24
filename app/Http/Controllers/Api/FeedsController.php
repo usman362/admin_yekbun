@@ -247,7 +247,7 @@ class FeedsController extends Controller
         //  'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        try {
+        // try {
             if($request->file('image')){
                 $image = Helpers::fileUpload($request->image,'feeds/image');
             }else{
@@ -323,9 +323,9 @@ class FeedsController extends Controller
             // }
 
             return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
-        } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
-        }
+        // } catch (Exception $e) {
+        //     return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
+        // }
     }
 
     public function feedLike(Request $request,$id)
