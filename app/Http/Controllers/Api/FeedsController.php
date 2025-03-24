@@ -240,6 +240,7 @@ class FeedsController extends Controller
 
     public function storeComments(Request $request,$id)
     {
+        dd($request->all());
         $request->validate(['comment' => 'nullable|string',
          'feed_type' => 'required',
         //  'audio' => 'nullable|mimes:mp3,wav,aac|max:5120|file',
