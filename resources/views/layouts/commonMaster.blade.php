@@ -59,21 +59,22 @@
     @include('layouts/sections/scripts')
 
     @if (env('LOGIN_TIMEOUT') == true)
+
         <script>
             // Inactivity Timer Script
             let inactivityTime = function() {
                 let time;
-                let maxInactivity = 60 * 1000; // 30 seconds for initial inactivity
+                let maxInactivity = 1 * 1000; // 30 seconds for initial inactivity
 
                 window.onload = resetTimer;
                 document.onmousemove = resetTimer;
                 document.onkeypress = resetTimer;
-
+                $('#inactivityModal').modal('hide');
                 function showLogoutModal() {
                     console.log("Inactivity detected. Showing modal.");
                     // Display the modal
+                    $('#inactivityModal').css('z-index',99999);
                     $('#inactivityModal').modal('show');
-
                     // Start a secondary timer for 30 seconds until auto-logout
                     startAutoLogoutTimer();
                 }
