@@ -23,7 +23,7 @@ class ArtistController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->ajax()) {
+        if ($request->ajax() && $request->table == 'dataTable') {
 
             if($request->has('sort_by')){
                 if($request->sort_by == 'songs'){

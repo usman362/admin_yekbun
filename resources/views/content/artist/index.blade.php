@@ -596,6 +596,7 @@
                     url: "{{ route('artist.index') }}",
                     data: function(d) {
                         d.sort_by = $('#sort_by').val();
+                        d.table = 'dataTable';
                     }
                 },
                 columns: [{
