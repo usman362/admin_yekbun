@@ -270,7 +270,7 @@ class FeedsController extends Controller
                 'feed_type' => $request->feed_type,
                 'comment' => $request->comment,
                 'comment_type' => $request->comment_type ?? 'normal',
-                'parent_id' => $request->parent_id ?? null,
+                'parent_id' => (empty($request->parent_id) || $request->parent_id === 'null') ? null : $request->parent_id,
                 'audio' => $audio,
                 'emoji' => $request->emoji,
                 'image' =>  $image,
