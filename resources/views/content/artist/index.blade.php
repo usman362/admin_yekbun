@@ -473,7 +473,7 @@
                                                         <!-- User meta -->
                                                         <div class="user-block">
                                                             <div class="user-info">
-                                                                <span class="d-flex"><a href="javascript:void(0)">${video.video_file_name}</a></span>
+                                                                <span class="d-flex"><img src="${artistImage}" width="34px" height="34px"><a href="javascript:void(0)" style="line-height:2;">${artistName}</a></span>
                                                                 <small class="time"><i>${video.video_file_size >= 1024 ? (video.video_file_size/1024)+'GB' : video.video_file_size+'MB'}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
                                                             </div>
                                                         </div>
@@ -509,6 +509,7 @@
                                                             <!-- Action buttons -->
 
                                                         </div>
+                                                        <small>${video.video_file_name || 'N/A'}</small>&nbsp;&nbsp;
                                                         <small>${video.total_listen || '0'} Views</small>
                                                     </div>
                                                     <!-- /Post body -->
