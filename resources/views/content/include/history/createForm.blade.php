@@ -6,6 +6,7 @@
 
 <form id="createForm" method="POST" action="{{ route('history.store') }}" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" name="history_id">
     <div class="hidden-inputs"></div>
     <div class="row">
         <div class="col-lg-12 mx-auto">

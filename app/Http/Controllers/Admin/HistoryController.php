@@ -177,24 +177,97 @@ class HistoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $test = $request->validate([
             'title' => 'required',
             // 'category_id'=>'required',
             'description' => 'nullable',
             // 'image'=> 'required',
             //  'video_path'=> 'string'
         ]);
-        $history = History::find($id);
+
+        $history = History::find($request->id);
         $history->title  = $request->title;
-        $history->description  = $request->description;
-        //$history->language  = $request->language;
-        $history->category_id = $request->category_id;
-        $history->image = $request->image_paths ?? [];
-        $history->video = $request->video_paths ?? [];
-        if ($history->update()) {
-            return redirect()->route('history.index')->with('success', 'History Has been Updated');
+        $history->is_comments  = $request->comments ?? 0;
+        $history->is_share  = $request->share ?? 0;
+        $history->is_emoji  = $request->emoji ?? 0;
+        // $history->user_id = auth()->user()->id;
+        //   $history->category_id = $request->category_id;
+        //   $history->description = $request->description;
+
+        // if ($request->has('image_paths')) {
+        //     foreach ($request->image_paths as $key => $image) {
+        //         $images[] = [
+        //             'path' => $image,
+        //             'name' => $request->image_name[$key] ?? '',
+        //             'size' => $request->image_sizes[$key] ?? '',
+        //         ];
+        //     }
+        //     $history->images = $images; // Store as an array of objects in MongoDB
+        // }
+
+        if ($request->has('video_paths')) {
+            foreach ($request->video_paths as $key => $video) {
+                $videos[] = [
+                    'path' => $video,
+                    'name' => $request->video_name[$key] ?? '',
+                    'duration' => $request->video_durations[$key] ?? '',
+                    'size' => $request->video_sizes[$key] ?? '',
+                ];
+            }
+            $history->video = $videos; // Store as an array of objects in MongoDB
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $history->thumbnail = $cleanedThumbnail;
+        }
+
+        if ($history->save()) {
+            // $id = $history->id;
+            // for image
+            // if($request->image_paths != null){
+            //     foreach($request->image_paths  as $image){
+            //         $post_gallery = new PostGallery();
+            //         $post_gallery->history_id = $id;
+            //         $post_gallery->media_url = url('/') . '/storage/' . $image;
+            //         $post_gallery->media_type = 0;
+            //         $post_gallery->user_id = $request->userId;
+            //         if($request->has('post_id')){
+            //             $post_gallery->post_id = $request->post_id;
+            //         }
+            //         if($request->has('vote_id')){
+            //             $post_gallery->vote_id = $request->vote_id;
+            //         }
+            //         if($request->has('news_id')){
+            //             $post_gallery->news_id = $request->news_id;
+            //         }
+            //         $post_gallery->save();
+            //     }
+            // }
+
+            // for video
+            // if($request->video_paths != null){
+
+
+            // foreach($request->video_paths  as $video){
+            //     $post_gallery = new PostGallery();
+            //     $post_gallery->history_id = $id;
+            //     $post_gallery->media_url = url('/') . '/storage/' . $video;
+            //     $post_gallery->media_type = 1;
+            //     $post_gallery->user_id = $request->userId;
+            //     if($request->has('post_id')){
+            //         $post_gallery->post_id = $request->post_id;
+            //     }
+            //     if($request->has('vote_id')){
+            //         $post_gallery->vote_id = $request->vote_id;
+            //     }
+            //     if($request->has('news_id')){
+            //         $post_gallery->news_id = $request->news_id;
+            //     }
+            //     $post_gallery->save();
+            // }
+            // }
+            return redirect()->route('history.index')->with('success', 'History Has been inserted');
         } else {
-            return redirect()->route('history.index')->with('error', 'Failed to update history');
+            return redirect()->route('history.index')->with('error', 'Failed to add history');
         }
     }
 
