@@ -458,7 +458,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     //     'historycat-status'
     // );
 
-    Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
 
     Route::prefix('donations')
