@@ -205,20 +205,20 @@ class HistoryController extends Controller
         //     $history->images = $images; // Store as an array of objects in MongoDB
         // }
 
-        if ($request->has('video_paths')) {
-            foreach ($request->video_paths as $key => $video) {
-                $videos[] = [
-                    'path' => $video,
-                    'name' => $request->video_name[$key] ?? '',
-                    'duration' => $request->video_durations[$key] ?? '',
-                    'size' => $request->video_sizes[$key] ?? '',
-                ];
-            }
-            $history->video = $videos; // Store as an array of objects in MongoDB
-            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
-            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
-            $history->thumbnail = $cleanedThumbnail;
-        }
+        // if ($request->has('video_paths')) {
+        //     foreach ($request->video_paths as $key => $video) {
+        //         $videos[] = [
+        //             'path' => $video,
+        //             'name' => $request->video_name[$key] ?? '',
+        //             'duration' => $request->video_durations[$key] ?? '',
+        //             'size' => $request->video_sizes[$key] ?? '',
+        //         ];
+        //     }
+        //     $history->video = $videos; // Store as an array of objects in MongoDB
+        //     $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+        //     $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+        //     $history->thumbnail = $cleanedThumbnail;
+        // }
 
         if ($history->save()) {
             // $id = $history->id;
