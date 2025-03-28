@@ -3020,33 +3020,32 @@
     <script>
         function getComments(data) {
             let comments = '';
+            let commentData = '';
             data.data.comments.forEach(function(data, index) {
                 let child = '';
-                let commentData = '';
-                console.log('First Comment', data.emoji);
-                if (data.child_comments.length > 0) {
-                    if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
-                        commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
-                    } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
-                        commentData = `<img src="{{ asset('storage') }}/${data.emoji}" width="80" height="80">`;
-                    } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
-                        commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                       <audio src="{{asset('storage')}}/${data.audio}" id="comment-audio-input"></audio>
-                                            <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
-                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
+                    commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
+                } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
+                    commentData = `<img src="{{ asset('storage') }}/${data.emoji}" width="80" height="80">`;
+                } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
+                    commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
+                                   <audio src="{{asset('storage')}}/${data.audio}" id="comment-audio-input"></audio>
+                                        <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
 
-                                                <span style="color: gray; margin-left: 5px;" id="comment-audio-duration">00:00</span>
-                                            </div>
-                                        </div>`;
-                    } else {
-                        commentData = data.comment;
-                    }
+                                            <span style="color: gray; margin-left: 5px;" id="comment-audio-duration">00:00</span>
+                                        </div>
+                                    </div>`;
+                } else {
+                    commentData = data.comment;
+                }
+                if (data.child_comments.length > 0) {
 
                     comments += `
                             <div class="media is-comment com_container" data-id="${data._id}">
@@ -3071,6 +3070,29 @@
                         ++index;
 
                         let height = 65;
+
+                        if (child.image && child.image.trim() !== "" && child.image !== "null" && child.image !== null) {
+                            commentData = `<img src="{{ asset('storage') }}/${child.image}" width="80" height="80">`;
+                        } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" && child.emoji !== null) {
+                            commentData = `<img src="{{ asset('storage') }}/${child.emoji}" width="80" height="80">`;
+                        } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" && child.audio !== null) {
+                            commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
+                                        <audio src="{{asset('storage')}}/${child.audio}" id="comment-audio-input"></audio>
+                                                <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+
+                                                    <span style="color: gray; margin-left: 5px;" id="comment-audio-duration">00:00</span>
+                                                </div>
+                                            </div>`;
+                        } else {
+                            commentData = child.comment;
+                        }
                         if (child.child_comments.length > 0) {
                             height += 85 * child.child_comments.length;
                             let commentLine2 =
@@ -3095,7 +3117,7 @@
                                             <div class="username">${child?.user?.name} ${child?.user?.last_name}</div>
                                             <span>${moment(child?.created_at).fromNow()}</span>
                                         </div>
-                                        <p class="mb-2">${child?.comment}</p>
+                                        <p class="mb-2">${commentData}</p>
                                     </div>
                                     <a href="javascript:void(0)" class="comment-reply" data-username="@${child?.user?.username}" data-parent_id="${child._id}"><i class="fas fa-reply"></i></a>
                                 </div>`;
@@ -3103,6 +3125,28 @@
                                 index3) {
                                 ++index3
 
+                                if (childUltra.image && childUltra.image.trim() !== "" && childUltra.image !== "null" && childUltra.image !== null) {
+                                    commentData = `<img src="{{ asset('storage') }}/${childUltra.image}" width="80" height="80">`;
+                                } else if (childUltra.emoji && childUltra.emoji.trim() !== "" && childUltra.emoji !== "null" && childUltra.emoji !== null) {
+                                    commentData = `<img src="{{ asset('storage') }}/${childUltra.emoji}" width="80" height="80">`;
+                                } else if (childUltra.audio && childUltra.audio.trim() !== "" && childUltra.audio !== "null" && childUltra.audio !== null) {
+                                    commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
+                                                <audio src="{{asset('storage')}}/${childUltra.audio}" id="comment-audio-input"></audio>
+                                                        <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+
+                                                            <span style="color: gray; margin-left: 5px;" id="comment-audio-duration">00:00</span>
+                                                        </div>
+                                                    </div>`;
+                                } else {
+                                    commentData = childUltra.comment;
+                                }
                                 let commentLine2 =
                                     `<div class="comment-line-2" ></div>`;
                                 comments +=
@@ -3121,7 +3165,7 @@
                                             <div class="username">${childUltra?.user?.name} ${childUltra?.user?.last_name}</div>
                                             <span>${moment(childUltra?.created_at).fromNow()}</span>
                                         </div>
-                                        <p class="mb-2">${childUltra?.comment}</p>
+                                        <p class="mb-2">${commentData}</p>
                                     </div>
                                     <a href="javascript:void(0)" class="comment-reply" data-username="@${childUltra?.user?.username}" data-parent_id="${childUltra.parent_id}"><i class="fas fa-reply"></i></a>
                                 </div>`;
@@ -3146,7 +3190,7 @@
                                             <div class="username">${child?.user?.name} ${child?.user?.last_name}</div>
                                             <span>${moment(child?.created_at).fromNow()}</span>
                                         </div>
-                                        <p class="mb-2">${child?.comment}</p>
+                                        <p class="mb-2">${commentData}</p>
                                     </div>
                                     <a href="javascript:void(0)" class="comment-reply" data-username="@${child?.user?.username}" data-parent_id="${child._id}"><i class="fas fa-reply"></i></a>
                                 </div>`;
@@ -3167,7 +3211,7 @@
                                         <div class="username">${data?.user?.name} ${data?.user?.last_name}</div>
                                         <span>${moment(data.created_at).fromNow()}</span>
                                     </div>
-                                    <p class="mb-2">${data.comment}</p>
+                                    <p class="mb-2">${commentData}</p>
                                 </div>
                                 <a href="javascript:void(0)" class="comment-reply" data-username="@${data?.user?.username}" data-parent_id="${data._id}"><i class="fas fa-reply"></i></a>
                             </div>`;
