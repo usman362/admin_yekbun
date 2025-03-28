@@ -49,10 +49,10 @@
         }
 
         /*
-                                                                                                    .custom-option-body img{
-                                                                                                        height:136px;
-                                                                                                    }
-                                                                                            */
+                                                                                                            .custom-option-body img{
+                                                                                                                height:136px;
+                                                                                                            }
+                                                                                                    */
         .dropdown-item h6,
         .h6,
         h5,
@@ -3022,7 +3022,32 @@
             let comments = '';
             data.data.comments.forEach(function(data, index) {
                 let child = '';
+                let commentData = '';
+                console.log('First Comment', data.emoji);
                 if (data.child_comments.length > 0) {
+                    if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
+                        commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
+                    } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
+                        commentData = `<img src="{{ asset('storage') }}/${data.emoji}" width="80" height="80">`;
+                    } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
+                        commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
+                                       <audio src="{{asset('storage')}}/${data.audio}" id="comment-audio-input"></audio>
+                                            <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+                                                <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Wave" class="img-fluid audio-wave" style="height: 57px; width: 40px;">
+
+                                                <span style="color: gray; margin-left: 5px;" id="comment-audio-duration">00:00</span>
+                                            </div>
+                                        </div>`;
+                    } else {
+                        commentData = data.comment;
+                    }
+
                     comments += `
                             <div class="media is-comment com_container" data-id="${data._id}">
                                 <div class="comment-line"></div>
@@ -3037,7 +3062,7 @@
                                         <div class="username">${data?.user?.name} ${data?.user?.last_name}</div>
                                         <span>${moment(data.created_at).fromNow()}</span>
                                     </div>
-                                    <p class="mb-2">${data.comment}</p>
+                                    <p class="mb-2">${commentData}</p>
                                 </div>
                                 <a href="javascript:void(0)" class="comment-reply" data-username="@${data?.user?.username}" data-parent_id="${data._id}"><i class="fas fa-reply"></i></a>
                             </div>`;
@@ -3153,6 +3178,75 @@
 
             return comments;
         }
+    </script>
+    <script>
+
+$(document).ready(function () {
+    // Use event delegation for dynamically added elements
+    $('body').on("click", "#comment-audio-play", function () {
+        let container = $(this).closest("#comment-audio");
+        let audio = container.find('#comment-audio-input')[0]; // Get the associated hidden audio element
+        let playButton = container.find("#comment-audio-play");
+        let pauseButton = container.find("#comment-audio-pause");
+        let waves = container.find(".audio-wave");
+        let durationDisplay = container.find("#comment-audio-duration");
+
+        if (audio.paused) {
+            // Pause any other playing audio
+            $("audio").each(function () {
+                this.pause();
+                $(this).next("#comment-audio").find("#comment-audio-play").show();
+                $(this).next("#comment-audio").find("#comment-audio-pause").hide();
+                $(this).next("#comment-audio").find(".audio-wave").css("opacity", "0.5");
+            });
+
+            // Play selected audio
+            audio.play();
+            playButton.hide();
+            pauseButton.show();
+            waves.css("opacity", "1"); // Highlight wave animation
+
+            // Update duration dynamically
+            audio.addEventListener("timeupdate", function () {
+                let minutes = Math.floor(audio.currentTime / 60);
+                let seconds = Math.floor(audio.currentTime % 60);
+                durationDisplay.text(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+            });
+
+            // Reset UI when audio ends
+            audio.addEventListener("ended", function () {
+                playButton.show();
+                pauseButton.hide();
+                waves.css("opacity", "0.5");
+            });
+        }
+    });
+
+    $(document).on("click", "#comment-audio-pause", function () {
+        let container = $(this).closest("#comment-audio");
+        let audio = container.prev("audio")[0];
+        let playButton = container.find("#comment-audio-play");
+        let pauseButton = container.find("#comment-audio-pause");
+        let waves = container.find(".audio-wave");
+
+        audio.pause();
+        playButton.show();
+        pauseButton.hide();
+        waves.css("opacity", "0.5");
+    });
+
+    // Load audio duration when the comment is appended
+    $(document).on("loadedmetadata", "audio", function () {
+        let container = $(this).next("#comment-audio");
+        let durationDisplay = container.find("#comment-audio-duration");
+        let audio = this;
+        let minutes = Math.floor(audio.duration / 60);
+        let seconds = Math.floor(audio.duration % 60);
+        durationDisplay.text(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+    });
+});
+
+
     </script>
     <script>
         function closeFancyBox() {
