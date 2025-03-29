@@ -112,6 +112,10 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('feeds/{id}/comments',[FeedsController::class, 'getComments']);
     Route::post('feeds/{id}/comments',[FeedsController::class, 'storeComments']);
     Route::post('feeds/{id}/likes',[FeedsController::class, 'feedLike']);
+
+    //Feeds Section
+    Route::post('feeds', [FeedsController::class, 'store']);
+    Route::get('feeds', [FeedsController::class, 'index']);
 });
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
@@ -145,9 +149,6 @@ Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.updat
 Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
 Route::get('get-cities', [CityController::class, 'getCities']);
 
-//Feeds Section
-Route::post('feeds', [FeedsController::class, 'store']);
-Route::get('feeds', [FeedsController::class, 'index']);
 
 //Emojis Section
 Route::get('emojis', [EmojiFeedController::class, 'index']);
