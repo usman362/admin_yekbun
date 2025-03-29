@@ -157,9 +157,9 @@ class FeedsController extends Controller
 
         // Save the feed
         $feeds->save();
-
+        $feed = Feed::with('user')->find($feeds->id);
         if ($feeds->save()) {
-            return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feeds, 'success' => true], 201);
+            return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feed, 'success' => true], 201);
         } else {
             return response()->json(['message' => 'Something went Wrong!', 'success' => false], 403);
         }
