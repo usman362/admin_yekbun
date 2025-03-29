@@ -124,6 +124,7 @@ class FeedsController extends Controller
         $feeds->text_properties = $request->text_properties;
         $feeds->user_type = $request->user_type;
         $feeds->feed_type = $request->feed_type;
+        $feeds->user_id = auth()->user()->id;
         $images = [];
         $videos = [];
 
