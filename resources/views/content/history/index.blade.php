@@ -426,6 +426,7 @@
                     commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData = `<img src="{{env('APP_URL')}}/${getEmoji(data.emoji)}" width="80" height="80">`;
+                    console.log('emoji',`{{env('APP_URL')}}/${getEmoji(data.emoji)}`);
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
                                    <audio src="{{ asset('storage') }}/${data.audio}" id="comment-audio-input"></audio>
@@ -537,7 +538,6 @@
                                     childUltra.emoji !== "null" && childUltra.emoji !== null) {
                                     commentData =
                                         `<img src="{{env('APP_URL')}}/${getEmoji(childUltra.emoji)}" width="80" height="80">`;
-                                        console.log('emoji',`{{env('APP_URL')}}/${getEmoji(childUltra.emoji)}`);
                                 } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
                                     childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
