@@ -3238,7 +3238,7 @@
                 url: "{{url('get-emoji-url')}}",
                 type: 'POST',
                 data: {
-                    emoji: data.emoji
+                    emoji: name
                 },
                 success: function(response) {
                     return response.emoji;
