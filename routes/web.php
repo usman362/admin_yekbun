@@ -332,7 +332,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/get-emoji-url', function (Request $request) {
         $emojiUrl = Helpers::showEmojibyName($request->emoji);
-        return Response::json(['emoji' => $emojiUrl]);
+        return response()->json(['emoji' => $emojiUrl]);
     });
     Route::get('/prefix', [PrefixController::class, 'index'])->name('prefix');
     Route::get('setting/music/prefix', [PrefixController::class, 'index'])->name('music.prefix');
