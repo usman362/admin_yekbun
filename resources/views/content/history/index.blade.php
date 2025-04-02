@@ -537,6 +537,7 @@
                                     childUltra.emoji !== "null" && childUltra.emoji !== null) {
                                     commentData =
                                         `<img src="{{env('APP_URL')}}/${getEmoji(childUltra.emoji)}" width="80" height="80">`;
+                                        console.log('emoji',`{{env('APP_URL')}}/${getEmoji(childUltra.emoji)}`);
                                 } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
                                     childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
