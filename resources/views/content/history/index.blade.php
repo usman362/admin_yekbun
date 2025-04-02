@@ -640,6 +640,7 @@
                     emoji: name
                 },
                 success: function(response) {
+                    console.log(response);
                     return response.emoji;
                 }
             });
