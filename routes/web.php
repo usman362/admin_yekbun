@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\PopComments;
+use App\Helpers\Helpers;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\WizardController;
@@ -112,6 +113,8 @@ use App\Mail\TestMail;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use FFMpeg\FFMpeg;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 //use App\Http\Controllers\GreetingsController;
 
@@ -147,7 +150,7 @@ Route::get('/db-seed/{cmd}', function ($cmd) {
     echo $output;
 });
 
-Route::get('test-ffmpeg',function(){
+Route::get('test-ffmpeg', function () {
     dd(FFMpeg::create());
 });
 
@@ -326,6 +329,11 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
             Route::get('add_verses', [WishesReasonController::class, 'add_verses']);
         });
+
+    Route::post('/get-emoji-url', function (Request $request) {
+        $emojiUrl = Helpers::showEmojibyName($request->emoji);
+        return Response::json(['emoji' => $emojiUrl]);
+    });
     Route::get('/prefix', [PrefixController::class, 'index'])->name('prefix');
     Route::get('setting/music/prefix', [PrefixController::class, 'index'])->name('music.prefix');
     Route::get('setting/live/prefix', [PrefixController::class, 'index'])->name('live.prefix');
@@ -452,7 +460,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
 
 
-    Route::post('/generate-thumbnail',[HistoryController::class, 'generateThumbnail']);
+    Route::post('/generate-thumbnail', [HistoryController::class, 'generateThumbnail']);
     // Route::resource('/history-category', HistoryCategoryController::class);
     // Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(
     //     'historycat-status'
@@ -659,7 +667,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         Route::delete('file/delete', [FileController::class, 'delete'])->name('file.delete');
         Route::post('file/images', [FileController::class, 'upload_bg'])->name('file.images');
 
-        Route::get('/manage_video', [ReportVideoController::class, 'manage_video']);
         Route::resource('app-policy', PolicyAndTermsController::class);
 
         Route::resource('/news', NewsController::class);

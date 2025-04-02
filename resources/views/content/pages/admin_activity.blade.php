@@ -3026,10 +3026,10 @@
                 if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
                     commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
-                    commentData = `<img src="{{ asset('storage') }}/${data.emoji}" width="80" height="80">`;
+                    commentData = `<img src="${getEmoji(data.emoji)}" width="80" height="80">`;
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                   <audio src="{{asset('storage')}}/${data.audio}" id="comment-audio-input"></audio>
+                                   <audio src="{{ asset('storage') }}/${data.audio}" id="comment-audio-input"></audio>
                                         <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                             <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                             <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3071,13 +3071,18 @@
 
                         let height = 65;
 
-                        if (child.image && child.image.trim() !== "" && child.image !== "null" && child.image !== null) {
-                            commentData = `<img src="{{ asset('storage') }}/${child.image}" width="80" height="80">`;
-                        } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" && child.emoji !== null) {
-                            commentData = `<img src="{{ asset('storage') }}/${child.emoji}" width="80" height="80">`;
-                        } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" && child.audio !== null) {
+                        if (child.image && child.image.trim() !== "" && child.image !== "null" && child
+                            .image !== null) {
+                            commentData =
+                                `<img src="{{ asset('storage') }}/${child.image}" width="80" height="80">`;
+                        } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" &&
+                            child.emoji !== null) {
+                            commentData =
+                                `<img src="${getEmoji(child.emoji)}" width="80" height="80">`;
+                        } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" &&
+                            child.audio !== null) {
                             commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                        <audio src="{{asset('storage')}}/${child.audio}" id="comment-audio-input"></audio>
+                                        <audio src="{{ asset('storage') }}/${child.audio}" id="comment-audio-input"></audio>
                                                 <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3125,13 +3130,18 @@
                                 index3) {
                                 ++index3
 
-                                if (childUltra.image && childUltra.image.trim() !== "" && childUltra.image !== "null" && childUltra.image !== null) {
-                                    commentData = `<img src="{{ asset('storage') }}/${childUltra.image}" width="80" height="80">`;
-                                } else if (childUltra.emoji && childUltra.emoji.trim() !== "" && childUltra.emoji !== "null" && childUltra.emoji !== null) {
-                                    commentData = `<img src="{{ asset('storage') }}/${childUltra.emoji}" width="80" height="80">`;
-                                } else if (childUltra.audio && childUltra.audio.trim() !== "" && childUltra.audio !== "null" && childUltra.audio !== null) {
+                                if (childUltra.image && childUltra.image.trim() !== "" && childUltra
+                                    .image !== "null" && childUltra.image !== null) {
+                                    commentData =
+                                        `<img src="{{ asset('storage') }}/${childUltra.image}" width="80" height="80">`;
+                                } else if (childUltra.emoji && childUltra.emoji.trim() !== "" &&
+                                    childUltra.emoji !== "null" && childUltra.emoji !== null) {
+                                    commentData =
+                                        `<img src="${getEmoji(childUltra.emoji)}" width="80" height="80">`;
+                                } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
+                                    childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                                <audio src="{{asset('storage')}}/${childUltra.audio}" id="comment-audio-input"></audio>
+                                                <audio src="{{ asset('storage') }}/${childUltra.audio}" id="comment-audio-input"></audio>
                                                         <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3221,6 +3231,19 @@
             });
 
             return comments;
+        }
+
+        function getEmoji(name) {
+            $.ajax({
+                url: "{{url('get-emoji-url')}}",
+                type: 'POST',
+                data: {
+                    emoji: data.emoji
+                },
+                success: function(response) {
+                    return response.emoji;
+                }
+            });
         }
     </script>
     <script>
