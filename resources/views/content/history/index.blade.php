@@ -425,8 +425,10 @@
                 if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
                     commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
-                    commentData = `<img src="{{env('APP_URL')}}/${getEmoji(data.emoji)}" width="80" height="80">`;
-                    console.log('emoji',`{{env('APP_URL')}}/${getEmoji(data.emoji)}`);
+                    getEmoji(data.emoji, function(emoji) {
+                            commentData =
+                                `<img src="{{ env('APP_URL') }}/${emoji}" width="80" height="80">`;
+                        });
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
                                    <audio src="{{ asset('storage') }}/${data.audio}" id="comment-audio-input"></audio>
@@ -478,7 +480,7 @@
                         } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" &&
                             child.emoji !== null) {
                             commentData =
-                                `<img src="{{env('APP_URL')}}/${getEmoji(child.emoji)}" width="80" height="80">`;
+                                `<img src="{{ env('APP_URL') }}/${getEmoji(child.emoji)}" width="80" height="80">`;
                         } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" &&
                             child.audio !== null) {
                             commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
@@ -537,7 +539,7 @@
                                 } else if (childUltra.emoji && childUltra.emoji.trim() !== "" &&
                                     childUltra.emoji !== "null" && childUltra.emoji !== null) {
                                     commentData =
-                                        `<img src="{{env('APP_URL')}}/${getEmoji(childUltra.emoji)}" width="80" height="80">`;
+                                        `<img src="{{ env('APP_URL') }}/${getEmoji(childUltra.emoji)}" width="80" height="80">`;
                                 } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
                                     childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
@@ -633,19 +635,19 @@
             return comments;
         }
 
-        function getEmoji(name) {
+        function getEmoji(name, callback) {
             $.ajax({
-                url: "{{url('get-emoji-url')}}",
+                url: "{{ url('get-emoji-url') }}",
                 type: 'GET',
                 data: {
                     emoji: name
                 },
                 success: function(response) {
-                    console.log('emojiUrl',`{{env('APP_URL')}}${response.emoji}`);
-                    return response.emoji;
+                    callback(response.emoji);
                 }
             });
         }
+
     </script>
     <script>
         $(document).ready(function() {
@@ -653,7 +655,7 @@
             $('body').on("click", "#comment-audio-play", function() {
                 let container = $(this).closest("#comment-audio");
                 let audio = container.find('#comment-audio-input')[
-                0]; // Get the associated hidden audio element
+                    0]; // Get the associated hidden audio element
                 let playButton = container.find("#comment-audio-play");
                 let pauseButton = container.find("#comment-audio-pause");
                 let waves = container.find(".audio-wave");
