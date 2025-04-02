@@ -641,7 +641,7 @@
                     emoji: name
                 },
                 success: function(response) {
-                    console.log(`{{env('APP_URL')}}${response.emoji}`);
+                    console.log('emojiUrl',`{{env('APP_URL')}}${response.emoji}`);
                     return response.emoji;
                 }
             });
