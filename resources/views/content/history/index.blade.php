@@ -634,6 +634,7 @@
         }
 
         function getEmoji(name) {
+            let emoji;
             $.ajax({
                 url: "{{url('get-emoji-url')}}",
                 type: 'GET',
@@ -641,10 +642,11 @@
                     emoji: name
                 },
                 success: function(response) {
-                    console.log(response);
+                    emoji = response.emoji;
                     return response.emoji;
                 }
             });
+            console.log('Emoji',emoji)
         }
     </script>
     <script>
