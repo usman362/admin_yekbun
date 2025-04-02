@@ -330,7 +330,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
             Route::get('add_verses', [WishesReasonController::class, 'add_verses']);
         });
 
-    Route::post('/get-emoji-url', function (Request $request) {
+    Route::get('/get-emoji-url', function (Request $request) {
         $emojiUrl = Helpers::showEmojibyName($request->emoji);
         return Response::json(['emoji' => $emojiUrl]);
     });

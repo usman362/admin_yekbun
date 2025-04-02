@@ -3236,7 +3236,7 @@
         function getEmoji(name) {
             $.ajax({
                 url: "{{url('get-emoji-url')}}",
-                type: 'POST',
+                type: 'GET',
                 data: {
                     emoji: name
                 },
