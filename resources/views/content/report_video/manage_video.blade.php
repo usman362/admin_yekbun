@@ -274,6 +274,9 @@
                 </div>
             </div>
             <div class="row container pb-4">
+                <input type="hidden" name="feed_id" id="feed_id">
+                <input type="hidden" name="feed_type" id="feed_type" value="history">
+                <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 @foreach ($videos as $video)
                     <div class="col-md-4">
                         <div class="post-image">
@@ -766,7 +769,6 @@
             $(document).on('click', '.like-btn', function() {
                 let button = $(this);
                 let postId = $('#feed_id').val();
-
                 $.ajax({
                     url: "{{ route('post.like') }}",
                     type: "POST",
