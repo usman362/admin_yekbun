@@ -305,7 +305,7 @@
                                                 <div class="row">
                                                     <div class="col-md-2 p-0">
                                                         <img src="{{ asset('storage/' . @$video->user->image) }}"
-                                                            style="width: 100%;height:auto">
+                                                            style="width: 120px !important;height:50px !important;">
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="mt-2">
