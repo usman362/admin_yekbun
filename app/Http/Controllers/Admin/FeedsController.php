@@ -181,9 +181,9 @@ class FeedsController extends Controller
 
         try {
             $feedType = $request->feed_type;
-            $comments = FeedComments::with(['child_comments' => function ($q) {
-                $q->with(['child_comments' => function ($q) {
-                    $q->with(['user' =>  function ($q) {
+            $comments = FeedComments::with(['emoji_data', 'child_comments' => function ($q) {
+                $q->with(['emoji_data', 'child_comments' => function ($q) {
+                    $q->with(['emoji_data', 'user' =>  function ($q) {
                         $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                     }]);
                 }, 'user' =>  function ($q) {
