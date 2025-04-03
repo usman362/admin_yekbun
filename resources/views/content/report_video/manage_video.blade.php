@@ -150,6 +150,19 @@
             gap: 5px
         }
 
+        .modal-content {
+            max-height: 90vh !important;
+            /* Set max height */
+            overflow: unset !important;
+            /* Prevent overflow */
+        }
+
+        .modal-body {
+            max-height: 70vh !important;
+            /* Adjust based on your layout */
+            overflow-y: auto !important;
+            /* Enables scrolling if content exceeds max height */
+        }
     </style>
 @endsection
 @section('vendor-style')
