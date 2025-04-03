@@ -24682,3 +24682,14 @@ a.bg-vimeo:hover, a.bg-vimeo:focus {
   font-family: Genos;
   color: #1b1e34;
 }
+
+.video-thumbnail-duration{
+    font-size: 12px;
+    color: #fff;
+    background-color: black;
+    padding: 1px 5px;
+    position: absolute;
+    right: 6px;
+    border-radius: 4px;
+    bottom: 6px;
+}

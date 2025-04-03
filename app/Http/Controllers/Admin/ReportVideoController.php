@@ -97,10 +97,6 @@ class ReportVideoController extends Controller
         }
     }
 
-    public function manage_video(){
-        return view('content.report_video.manage_video');
-    }
-
      public function video_request(){
         return view('content.report_video.video_request');
     }

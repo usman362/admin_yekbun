@@ -101,6 +101,7 @@ use App\Http\Controllers\Admin\FeedsController;
 use App\Http\Controllers\Admin\liveStream\livestreamController;
 use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\BackgroundFeedController;
 use App\Http\Controllers\DepartmentController;
 use App\Models\FanPageType;
@@ -290,6 +291,10 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/feeds-policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('feeds.policy_terms');
 
+    Route::get('/manage_video', [VideoController::class, 'manage_video'])->name('manage_video');
+    Route::post('/manage_video', [VideoController::class, 'store'])->name('manage_video.store');
+    Route::get('/delete_video', [VideoController::class, 'destroy'])->name('delete_video');
+
     Route::get('/video_request', [ReportVideoController::class, 'video_request']);
 
     Route::resource('app-setting/department', DepartmentController::class);
@@ -373,7 +378,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::resource('/manage-ads', ManageAdController::class);
     Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
 
-    Route::get('/manage_video', [ReportVideoController::class, 'manage_video']);
     Route::get('/app/tickets', $controller_path . '\apps\tickets\Ticket@index')->name('app-ticket');
     Route::get('/app/tickets', $controller_path . '\apps\tickets\Ticket@index')->name('app-ticket');
 
