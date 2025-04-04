@@ -202,7 +202,7 @@ class FeedsController extends Controller
             // ->withCount('reports')
                 ->where('feed_id', $id)->where('feed_type', $feedType)->where('parent_id', null)->get();
 
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->user()->id);
 
             if ($feedType == 'admin_feeds') {
                 $feed = PopFeeds::with(['user' => function ($q) {
