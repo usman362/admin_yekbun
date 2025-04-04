@@ -49,8 +49,4 @@ class FeedComments extends Model
         return $this->hasMany(ReportComments::class, 'comment_id');
     }
 
-    public function getReportsCountAttribute()
-    {
-        return $this->reports()->count();
-    }
 }
