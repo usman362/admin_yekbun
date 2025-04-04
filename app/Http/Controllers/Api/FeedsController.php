@@ -185,7 +185,7 @@ class FeedsController extends Controller
         try {
             $feedType = $request->feed_type;
             $comments = FeedComments::with(['reports','child_comments' => function ($q) {
-                $q->with(['reports','reports_all','child_comments' => function ($q) {
+                $q->with(['reports','child_comments' => function ($q) {
                     $q->with(['reports','user' =>  function ($q) {
                         $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                     }])
