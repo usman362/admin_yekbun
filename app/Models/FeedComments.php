@@ -44,4 +44,13 @@ class FeedComments extends Model
     {
         return $this->hasOne(Emoji::class, 'emoji', 'name');
     }
+
+    public function reports(){
+        return $this->hasMany(ReportComments::class, 'comment_id');
+    }
+
+    public function getReportsCountAttribute()
+    {
+        return $this->reports()->count();
+    }
 }

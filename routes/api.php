@@ -64,6 +64,7 @@ use App\Http\Controllers\Api\AvatarsController;
 use App\Http\Controllers\Api\EmojiFeedController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
+use App\Http\Controllers\Api\ReportCommentsController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
 use App\Http\Controllers\Api\VotingReactionController;
@@ -112,6 +113,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('feeds/{id}/comments',[FeedsController::class, 'getComments']);
     Route::post('feeds/{id}/comments',[FeedsController::class, 'storeComments']);
     Route::post('feeds/{id}/likes',[FeedsController::class, 'feedLike']);
+    Route::get('comments/{id}/report',[ReportCommentsController::class, 'index']);
+    Route::post('comments/{id}/report',[ReportCommentsController::class, 'store']);
 
     //Feeds Section
     Route::post('feeds', [FeedsController::class, 'store']);

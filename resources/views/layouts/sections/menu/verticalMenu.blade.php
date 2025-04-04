@@ -779,31 +779,6 @@
                     </li>
 
 
-
-
-
-                    <li class="menu-item  {{ Request::is('video_request') ? 'active' : '' }}">
-                        <a href="{{ url('/video_request') }}" class="menu-link">
-                            <div>Reported Videos</div>
-                        </a>
-
-
-                    </li>
-
-
-
-                    <li class="menu-item  ">
-                        <a href="javascript:void(0)" class="menu-link">
-                            <div>Max. Upload Page</div>
-                        </a>
-
-
-                    </li>
-
-
-
-
-
                     <li
                         class="menu-item {{ Request::is('reason') ? 'active open' : '' }} {{ Request::is('prefix') ? 'active open' : '' }} {{ Request::is('policyterms') ? 'active open' : '' }}">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -813,28 +788,11 @@
 
                         <ul class="menu-sub">
 
-
-
-                            <li class="menu-item {{ Request::is('reason') ? 'active' : '' }}">
-                                <a href="{{ url('/reason') }}" class="menu-link">
-                                    <div>Reasons</div>
+                        <li class="menu-item">
+                                <a href="javascript:void(0)" class="menu-link">
+                                    <div>Max. Upload Page</div>
                                 </a>
-
-
-                            </li>
-
-
-
-                            <li class="menu-item  {{ Request::is('policyterms') ? 'active' : '' }} ">
-                                <a href="{{ url('/policyterms') }}" class="menu-link">
-                                    <div>Policy and Terms</div>
-                                </a>
-
-
-                            </li>
-
-
-
+                        </li>
                         </ul>
                     </li>
                 </ul>

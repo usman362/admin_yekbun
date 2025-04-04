@@ -184,17 +184,22 @@ class FeedsController extends Controller
 
         try {
             $feedType = $request->feed_type;
-            $comments = FeedComments::with(['child_comments' => function ($q) {
-                $q->with(['child_comments' => function ($q) {
-                    $q->with(['user' =>  function ($q) {
+            $comments = FeedComments::with(['reports','child_comments' => function ($q) {
+                $q->with(['reports','reports_all','child_comments' => function ($q) {
+                    $q->with(['reports','user' =>  function ($q) {
                         $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                    }]);
+                    }])
+                    // ->withCount('reports')
+                    ;
                 }, 'user' =>  function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }]);
+                }])
+                // ->withCount('reports')
+                ;
             }, 'user' => function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
+            // ->withCount('reports')
                 ->where('feed_id', $id)->where('feed_type', $feedType)->where('parent_id', null)->get();
 
             $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
