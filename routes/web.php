@@ -92,6 +92,7 @@ use App\Http\Controllers\Admin\Settings\ReasonController;
 
 use App\Http\Controllers\VideoClipController;
 use App\Http\Controllers\Admin\ChannelReasonController;
+use App\Http\Controllers\Admin\ClipsController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesReasonController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPrefixController;
 use App\Http\Controllers\Admin\WishesandThanks\WishesPolicyandTermController;
@@ -924,8 +925,8 @@ Route::delete('reels/song/delete/{id}', [ReelSongController::class, 'destroy'])-
 Route::get('reels/stories_time', [ReelSongController::class, 'storage_setting']);
 Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name('reel.time.store');
 Route::delete('/reel-list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
-Route::get('reel/ReportedStories', [ReelSongController::class, 'ReportedStories']);
 Route::get('reel/ManageStories', [ReelSongController::class, 'ManageStories']);
+Route::get('manage-clips', [ClipsController::class, 'manage_video']);
 
 
 //Advertismen cards
