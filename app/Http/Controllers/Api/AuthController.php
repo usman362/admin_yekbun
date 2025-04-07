@@ -105,6 +105,14 @@ class AuthController extends Controller
             $email = strtolower($request->email);
             $emailTaken = User::where('email', $email)->first();
 
+            $unverifyEmails = User::where('email', $email)->where('is_verfied',0)->get();
+
+            if($unverifyEmails){
+                foreach($unverifyEmails as $unverified){
+                    $unverified->delete();
+                }
+            }
+
             if ($emailTaken) {
                 return response()->json([
                     'success' => false,
@@ -314,6 +322,7 @@ class AuthController extends Controller
         }
 
         if ((int)$code->code == (int)$request->otp) {
+            $user->email = $email;
             $user->email_verified_at = Carbon::now();
             $user->is_verfied = (int)1;
             $user->save();
