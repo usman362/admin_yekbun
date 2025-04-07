@@ -291,6 +291,9 @@
                 .post-image .dropdown{
                     margin-top: -215px;
                 }
+                .dropdown-content{
+                    border: none !important;
+                }
             </style>
             <div class="row container pb-4">
                 <input type="hidden" name="feed_id" id="feed_id">
@@ -363,7 +366,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-menu" role="menu" style="top: -215px;left: 33px;right: auto;">
                                         <div class="dropdown-content">
                                             <a href="javascript:void(0)" class="dropdown-item">
                                                 <div class="media">
@@ -397,16 +400,6 @@
                                                         </select>
                                                         <select class="form-control mt-1">
                                                             <option value="">Select Downgrade User</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                <div class="media">
-                                                    <div class="media-content">
-                                                        <h3>Remove FanPage</h3>
-                                                        <select class="form-control mt-1">
-                                                            <option value="">Select the Reason</option>
                                                         </select>
                                                     </div>
                                                 </div>
