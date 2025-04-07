@@ -202,7 +202,7 @@
                                         <div class="card-body col-sm-12">
                                             <div class="row">
                                                 @if(isset($feed->images[0]))
-                                                    <div class="post-image col-sm-12" style="width:500px; margin:0 auto">
+                                                    <div class="post-image col-sm-12 mb-2">
                                                         <a data-fancybox="post1" data-lightbox-type="comments"
                                                            data-thumb="{{ asset('storage/'.$feed->images[0]['path']) }}"
                                                            href="{{ asset('storage/'.$feed->images[0]['path']) }}"
