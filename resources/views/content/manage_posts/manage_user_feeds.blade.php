@@ -215,7 +215,7 @@
                                                                 data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}">
                                                                 <img src="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                                     data-demo-src="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                                    alt="Post Image">
+                                                                    alt="Post Image" style="height: 500px;width: 100%;">
                                                             </a>
                                                         </div>
                                                     @else
@@ -225,7 +225,7 @@
                                                                     data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}">
-                                                                    <video src="{{ asset('storage/' . $feed->videos[0]['path']) }}" controls></video>
+                                                                    <video src="{{ asset('storage/' . $feed->videos[0]['path']) }}" style="height: 500px;width: 100%;" controls></video>
                                                                 </a>
                                                             </div>
                                                         @endif
