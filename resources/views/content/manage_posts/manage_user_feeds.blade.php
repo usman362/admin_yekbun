@@ -204,8 +204,12 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                                <form action="{{route('manage.feeds.delete',$feed->id)}}" id="feedDel{{$feed->id}}" method="post">
+                                                    @csrf
+                                                </form>
 
                                                 <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
+                                                    <button class="btn btn-danger" onclick="document.getElementById('feedDel{{$feed->id}}').submit()">Delete</button>
                                                     <div>
                                                         <div class="button">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"

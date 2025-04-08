@@ -161,6 +161,16 @@ class FeedsController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $feed = Feed::find($id);
+        if ($feed->delete()) {
+            return back();
+        } else {
+            return back();
+        }
+    }
+
     private function getMediaDuration($file)
     {
         // Initialize FFMpeg

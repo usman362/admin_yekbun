@@ -282,6 +282,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/manage-user-feeds', [FeedsController::class, 'index'])->name('manage.user.feeds');
 
+    Route::post('/manage-delete-feeds/{id}', [FeedsController::class, 'destroy'])->name('manage.feeds.delete');
+
     Route::get("/feeds/comments", [FeedsController::class, 'getComments'])->name('get.comments');
 
     Route::post("/feeds/comments", [FeedsController::class, 'storeComments'])->name('post.comments');
