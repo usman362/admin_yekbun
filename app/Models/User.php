@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Mail;
 use Exception;
 use App\Mail\SendCodeMail;
 use Laravel\Sanctum\HasApiTokens;
@@ -13,6 +12,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Mail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Maklad\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -97,11 +97,6 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(Report::class, 'reported_user_id', 'id');
     }
 
-    public function ads()
-    {
-        return $this->hasMany(Ads::class);
-    }
-
     public function country()
     {
         return $this->belongsTo(Country::class);
@@ -120,11 +115,6 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function feeds()
     {
         return $this->hasMany(Feed::class);
-    }
-
-    public function pop_feed_comments()
-    {
-        return $this->hasMany(PopFeedComments::class);
     }
 
     public function user_feeds()
@@ -220,4 +210,15 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     {
         return $this->hasMany(VotingReaction::class);
     }
+
+    public function friends()
+    {
+        return $this->hasMany(UserFriends::class, 'user_id');
+    }
+
+    public function user_requests()
+    {
+        return $this->hasMany(UserRequest::class, 'user_id')->where('status', 1);
+    }
+    
 }

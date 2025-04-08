@@ -67,6 +67,7 @@ use App\Http\Controllers\Api\FeedsController;
 use App\Http\Controllers\Api\ReportCommentsController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
+use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VotingReactionController;
 
 /*
@@ -108,18 +109,25 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
-    Route::post('/accept-privacy-policy',[AuthController::class, 'acceptPrivacyPolicy']);
+    Route::post('/accept-privacy-policy', [AuthController::class, 'acceptPrivacyPolicy']);
 
-    Route::get('feeds/{id}/comments',[FeedsController::class, 'getComments']);
-    Route::post('feeds/{id}/comments',[FeedsController::class, 'storeComments']);
-    Route::post('feeds/{id}/likes',[FeedsController::class, 'feedLike']);
-    Route::get('comments/{id}/report',[ReportCommentsController::class, 'index']);
-    Route::post('comments/{id}/report',[ReportCommentsController::class, 'store']);
+    Route::get('feeds/{id}/comments', [FeedsController::class, 'getComments']);
+    Route::post('feeds/{id}/comments', [FeedsController::class, 'storeComments']);
+    Route::post('feeds/{id}/likes', [FeedsController::class, 'feedLike']);
+    Route::get('comments/{id}/report', [ReportCommentsController::class, 'index']);
+    Route::post('comments/{id}/report', [ReportCommentsController::class, 'store']);
 
     //Feeds Section
     Route::post('feeds', [FeedsController::class, 'store']);
     Route::get('feeds', [FeedsController::class, 'index']);
 });
+
+Route::get('get-users-list', [UsersController::class, 'users_list']);
+Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
+Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
+Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
+Route::post('send-users-request', [UsersController::class, 'sendRequest']);
+Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
 Route::get("/admin-activity/donation", [AdminActivityController::class, 'getDonations']);
