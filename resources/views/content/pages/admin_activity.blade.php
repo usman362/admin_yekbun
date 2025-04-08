@@ -49,10 +49,10 @@
         }
 
         /*
-                                                                                                            .custom-option-body img{
-                                                                                                                height:136px;
-                                                                                                            }
-                                                                                                    */
+                                                                                                                .custom-option-body img{
+                                                                                                                    height:136px;
+                                                                                                                }
+                                                                                                        */
         .dropdown-item h6,
         .h6,
         h5,
@@ -1390,14 +1390,19 @@
                                             @if ($feed->video != null)
                                                 <!-- Custom controls are defined here -->
                                                 {{-- <video src="{{ asset('storage/' . $feed->video) }}" style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block"></video> --}}
-
-                                                <video id="my-player" class="video-js" controls preload="auto"
-                                                    {{-- poster="//vjs.zencdn.net/v/oceans.png" --}} data-setup='{}'
-                                                    style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                                    <source src="{{ asset('storage/' . $feed->video) }}"
-                                                        type="video/mp4">
-                                                    </source>
-                                                </video>
+                                                <a class="view-post" data-fancybox="post1" data-lightbox-type="comments"
+                                                    data-thumb="{{ asset('storage/' . $feed->video) }}"
+                                                    href="{{ asset('storage/' . $feed->video) }}"
+                                                    data-id="{{ $feed->_id }}"
+                                                    data-demo-href="{{ asset('storage/' . $feed->video) }}">
+                                                    <video id="my-player" class="video-js" controls preload="auto"
+                                                        {{-- poster="//vjs.zencdn.net/v/oceans.png" --}} data-setup='{}'
+                                                        style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                                        <source src="{{ asset('storage/' . $feed->video) }}"
+                                                            type="video/mp4">
+                                                        </source>
+                                                    </video>
+                                                </a>
                                             @else
                                                 <a class="view-post" data-fancybox="post1" data-lightbox-type="comments"
                                                     data-thumb="{{ asset('storage/' . $feed->image) }}"
@@ -3232,12 +3237,12 @@
         }
     </script>
     <script>
-
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Use event delegation for dynamically added elements
-            $('body').on("click", "#comment-audio-play", function () {
+            $('body').on("click", "#comment-audio-play", function() {
                 let container = $(this).closest("#comment-audio");
-                let audio = container.find('#comment-audio-input')[0]; // Get the associated hidden audio element
+                let audio = container.find('#comment-audio-input')[
+                0]; // Get the associated hidden audio element
                 let playButton = container.find("#comment-audio-play");
                 let pauseButton = container.find("#comment-audio-pause");
                 let waves = container.find(".audio-wave");
@@ -3245,7 +3250,7 @@
 
                 if (audio.paused) {
                     // Pause any other playing audio
-                    $("audio").each(function () {
+                    $("audio").each(function() {
                         this.pause();
                         $(this).next("#comment-audio").find("#comment-audio-play").show();
                         $(this).next("#comment-audio").find("#comment-audio-pause").hide();
@@ -3259,14 +3264,14 @@
                     waves.css("opacity", "1"); // Highlight wave animation
 
                     // Update duration dynamically
-                    audio.addEventListener("timeupdate", function () {
+                    audio.addEventListener("timeupdate", function() {
                         let minutes = Math.floor(audio.currentTime / 60);
                         let seconds = Math.floor(audio.currentTime % 60);
                         durationDisplay.text(`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
                     });
 
                     // Reset UI when audio ends
-                    audio.addEventListener("ended", function () {
+                    audio.addEventListener("ended", function() {
                         playButton.show();
                         pauseButton.hide();
                         waves.css("opacity", "0.5");
@@ -3274,7 +3279,7 @@
                 }
             });
 
-            $(document).on("click", "#comment-audio-pause", function () {
+            $(document).on("click", "#comment-audio-pause", function() {
                 let container = $(this).closest("#comment-audio");
                 let audio = container.prev("audio")[0];
                 let playButton = container.find("#comment-audio-play");
@@ -3288,7 +3293,7 @@
             });
 
             // Load audio duration when the comment is appended
-            $(document).on("loadedmetadata", "audio", function () {
+            $(document).on("loadedmetadata", "audio", function() {
                 let container = $(this).next("#comment-audio");
                 let durationDisplay = container.find("#comment-audio-duration");
                 let audio = this;
@@ -3306,6 +3311,11 @@
 
         $('.view-post').click(function() {
             $('#feed_id').val($(this).attr('data-id'));
+            $('video').each(function() {
+                this.pause();
+                this.currentTime = 0; // reset to beginning
+            });
+
             $.ajax({
                 url: "{{ route('get.comments') }}",
                 type: 'GET',
