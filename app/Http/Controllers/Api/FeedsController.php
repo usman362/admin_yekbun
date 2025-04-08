@@ -28,7 +28,7 @@ class FeedsController extends Controller
 
     public function index()
     {
-        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->get();
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
         return response()->json(['feeds' => $feeds, 'success' => true], 200);
     }
 
