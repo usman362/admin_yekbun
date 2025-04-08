@@ -298,15 +298,10 @@
                                                                     data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}">
-                                                                    <video id="my-player" class="video-js" controls
-                                                                        preload="auto" {{-- poster="//vjs.zencdn.net/v/oceans.png" --}}
-                                                                        data-setup='{}'
-                                                                        style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                                                        <source
-                                                                            src="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                                            type="video/mp4">
-                                                                        </source>
-                                                                    </video>
+                                                                    <video
+                                                                        src="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                                                        style="height: 500px;width: 100%;"
+                                                                        controls></video>
                                                                 </a>
                                                             </div>
                                                         @endif
