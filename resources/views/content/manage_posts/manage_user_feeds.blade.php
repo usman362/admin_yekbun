@@ -83,6 +83,7 @@
     <link rel="stylesheet" href="{{ asset('assets/friendkit/css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/friendkit/css/core.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
 @endsection
 
 @section('vendor-script')
@@ -130,6 +131,7 @@
     <script src="{{ asset('assets/friendkit/js/webcam.js') }}"></script>
     <script src="{{ asset('assets/friendkit/js/compose.js') }}"></script>
     <script src="{{ asset('assets/friendkit/js/autocompletes.js') }}"></script>
+    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
 @endsection
 
 @section('content')
@@ -202,6 +204,77 @@
                                                         </span>
                                                     </div>
                                                 </div>
+
+                                                <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
+                                                    <div>
+                                                        <div class="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-more-vertical">
+                                                                <circle cx="12" cy="12" r="1"></circle>
+                                                                <circle cx="12" cy="5" r="1"></circle>
+                                                                <circle cx="12" cy="19" r="1"></circle>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <div class="dropdown-content">
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Remove the Feed</h3>
+                                                                        <select class="form-control mt-1">
+                                                                            <option value="">Select the Reason
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Remove Feed - Flag FanPage</h3>
+                                                                        <select class="form-control mt-1">
+                                                                            <option value="">Select the Reason
+                                                                            </option>
+                                                                        </select>
+                                                                        <select class="form-control mt-1">
+                                                                            <option value="">Select the Flag</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Remove Feed - Block FanPage</h3>
+                                                                        <select class="form-control mt-1">
+                                                                            <option value="">Select the Reason
+                                                                            </option>
+                                                                        </select>
+                                                                        <select class="form-control mt-1">
+                                                                            <option value="">Select Downgrade User
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                                <div class="media">
+                                                                    <div class="media-content">
+                                                                        <h3>Remove FanPage</h3>
+                                                                        <select class="form-control mt-1">
+                                                                            <option value="">Select the Reason
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <!-- Post body -->
@@ -225,7 +298,15 @@
                                                                     data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}">
-                                                                    <video src="{{ asset('storage/' . $feed->videos[0]['path']) }}" style="height: 500px;width: 100%;" controls></video>
+                                                                    <video id="my-player" class="video-js" controls
+                                                                        preload="auto" {{-- poster="//vjs.zencdn.net/v/oceans.png" --}}
+                                                                        data-setup='{}'
+                                                                        style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                                                        <source
+                                                                            src="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                                                            type="video/mp4">
+                                                                        </source>
+                                                                    </video>
                                                                 </a>
                                                             </div>
                                                         @endif
@@ -238,22 +319,38 @@
 
                                             <!-- Post footer -->
                                             <div class="card-footer">
-                                                <div class="social-count">
-                                                    <div class="shares-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/Share.svg') }}" width="20"
-                                                            alt="">
-                                                        <span>12k</span>
+                                                <div
+                                                    style="height:29px;width:100%;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-top:7px">
+                                                    <div
+                                                        style="display:flex;align-items:center;justify-content:space-between;width:200px;height:100%">
+
+
+                                                        @if ($feed->is_comments == 1)
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                        @endif
+                                                        @if ($feed->is_share == 1)
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                        @endif
                                                     </div>
-                                                    <div class="likes-count" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/views.svg') }}"
-                                                            width="20" alt="">
-                                                        <span>1225</span>
-                                                    </div>
-                                                    <div class="comments-count is-comment-light" style="cursor: pointer">
-                                                        <img src="{{ asset('assets/svg/icons/Comments.svg') }}"
-                                                            width="20" alt="">
-                                                        <span>123</span>
-                                                    </div>
+                                                    @if ($feed->is_emoji == 1)
+                                                        <div style="display:flex;align-items:center;gap:2px;height:100%">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
