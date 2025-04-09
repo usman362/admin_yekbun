@@ -1430,9 +1430,9 @@
                                             @endif
                                         </div>
                                         <div
-                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-top:7px">
+                                            style="height:29px;display:flex;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-top:7px">
                                             <div
-                                                style="display:flex;align-items:center;justify-content:space-between;width:200px;height:100%">
+                                                style="display:flex;align-items:center;height:100%;gap:10px">
 
                                                 {{-- <div style="display:flex;align-items:center;gap:3px;height:100%"><img
                                                         src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Eye%20Scan.svg') }}"
