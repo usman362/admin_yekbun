@@ -12,6 +12,7 @@ use App\Models\Event;
 use App\Models\Feed;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
+use App\Models\FeedReason;
 use App\Models\History;
 use App\Models\News;
 use App\Models\PopFeeds;
@@ -19,6 +20,7 @@ use App\Models\User;
 use Exception;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FeedsController extends Controller
 {
@@ -26,7 +28,8 @@ class FeedsController extends Controller
     public function index()
     {
         $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
-        return view('content.manage_posts.manage_user_feeds', compact('feeds'));
+        $reasons = FeedReason::all();
+        return view('content.manage_posts.manage_user_feeds', compact('feeds','reasons'));
     }
 
     public function news()
@@ -335,5 +338,23 @@ class FeedsController extends Controller
             'like_count' => $likeCount
         ];
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
+    }
+
+    public function action(Request $request,$id)
+    {
+        try{
+            $feed = Feed::find($id);
+            $feed->reason_id = $request->reason_id;
+            $feed->save();
+            $user = User::find($feed->user_id);
+            $user->user_type = $request->user_type ?? $user->user_type;
+            $user->level = $request->user_type == 'cultivated' ? 1 : 0;
+            $user->save();
+            return back()->with(['success' => 'Feed Status has been Updated!']);
+        }catch(Exception $e){
+            DB::rollback();
+            return back()->with(['error' => 'Failed to Change Feed Status!']);
+        }
+
     }
 }

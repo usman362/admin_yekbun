@@ -69,6 +69,20 @@
         #tab3 {
             display: none;
         }
+
+        .pop_description {
+            font-size: 14px;
+            font-weight: 400;
+            color: gray;
+            text-align: left;
+            background: #f7f7f7;
+            padding: 7px;
+            font-family: Genos;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+        }
     </style>
 @endsection
 
@@ -172,6 +186,14 @@
 
                             <div class="column column is-6 tab-content" id="tab1">
 
+                                @if (session('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                @endif
+
+                                @if (session('error'))
+                                    <div class="alert alert-danger">{{ session('error') }}</div>
+                                @endif
+
                                 @foreach ($feeds as $feed)
                                     <div id="feed-post-1" class="card is-post">
                                         <div class="content-wrap">
@@ -204,12 +226,12 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('manage.feeds.delete',$feed->id)}}" id="feedDel{{$feed->id}}" method="post">
+                                                <form action="{{ route('manage.feeds.delete', $feed->id) }}"
+                                                    id="feedDel{{ $feed->id }}" method="post">
                                                     @csrf
                                                 </form>
 
                                                 <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                                    <button class="btn btn-danger" onclick="document.getElementById('feedDel{{$feed->id}}').submit()">Delete</button>
                                                     <div>
                                                         <div class="button">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -225,57 +247,47 @@
                                                     </div>
                                                     <div class="dropdown-menu" role="menu">
                                                         <div class="dropdown-content">
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove the Feed</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
+                                                            <form action="{{ route('manage.action.feeds', $feed->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                                    <div class="media">
+                                                                        <div class="media-content">
+                                                                            <h3>Select Reason</h3>
+                                                                            <select class="form-control mt-1"
+                                                                                name="reason_id" required>
+                                                                                <option value="">Select the Reason
+                                                                                </option>
+                                                                                @foreach ($reasons as $reason)
+                                                                                    <option value="{{ $reason->id }}">
+                                                                                        {{ $reason->title }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove Feed - Flag FanPage</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Flag</option>
-                                                                        </select>
+                                                                </a>
+                                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                                    <div class="media">
+                                                                        <div class="media-content">
+                                                                            <h3>User Section</h3>
+                                                                            <select class="form-control mt-1"
+                                                                                name="user_type" required>
+                                                                                <option value="">Select the Option
+                                                                                </option>
+                                                                                <option value="educated">Educated</option>
+                                                                                @if ($feed->user->level == 2)
+                                                                                    <option value="cultivated">Cultivated
+                                                                                    </option>
+                                                                                @endif
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove Feed - Block FanPage</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select Downgrade User
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                                <div class="media">
-                                                                    <div class="media-content">
-                                                                        <h3>Remove FanPage</h3>
-                                                                        <select class="form-control mt-1">
-                                                                            <option value="">Select the Reason
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
+                                                                </a>
+                                                                <center>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary w-50 mt-2 mb-2">Submit</button>
+                                                                </center>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,9 +295,10 @@
 
                                             <!-- Post body -->
                                             <div class="card-body col-sm-12">
+                                                <div class="pop_description">{{ $feed->description ?? 'No description available.' }}</div>
                                                 <div class="row">
                                                     @if (isset($feed->images[0]))
-                                                        <div class="post-image col-sm-12 mb-2">
+                                                        <div class="post-image col-sm-12">
                                                             <a data-fancybox="post1" data-lightbox-type="comments"
                                                                 data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                                 href="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -297,7 +310,7 @@
                                                         </div>
                                                     @else
                                                         @if (isset($feed->videos[0]))
-                                                            <div class="post-image col-sm-12 mb-2">
+                                                            <div class="post-image col-sm-12">
                                                                 <a data-fancybox="post1" data-lightbox-type="comments"
                                                                     data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                     href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
@@ -316,15 +329,9 @@
                                                         @endif
                                                     @endif
                                                 </div>
-                                                <div class="alert alert-secondary" role="alert">
-                                                    {{ $feed->description ?? 'No description available.' }}
-                                                </div>
-                                            </div>
 
-                                            <!-- Post footer -->
-                                            <div class="card-footer">
                                                 <div
-                                                    style="height:29px;width:100%;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-top:7px">
+                                                    style="height:29px;width:100%;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-bottom:10px">
                                                     <div
                                                         style="display:flex;align-items:center;justify-content:space-between;width:200px;height:100%">
 
@@ -356,432 +363,13 @@
                                                         </div>
                                                     @endif
                                                 </div>
+
                                             </div>
+
                                         </div>
                                     </div>
                                 @endforeach
-
-
                             </div>
-
-                            {{-- <div class="column column is-6 tab-content" id="tab2">
-                            <div id="feed-post-1" class="card is-post">
-                                <!-- Main wrap -->
-                                <div class="content-wrap">
-                                    <!-- Post header -->
-                                    <div class="card-heading">
-                                        <!-- User meta -->
-                                        <div class="user-block">
-                                            <div class="image">
-                                                <img src="https://yekbun.hellodev.site/public//assets/img/avatars/13.png"
-                                                    data-demo-src="https://yekbun.hellodev.site/public//assets/img/avatars/13.png"
-                                                    data-user-popover="1" alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span class="d-flex justify-content-center align-items-center"><a
-                                                        href="#">Karim Saif</a>&nbsp; <i class="	fa fa-circle"
-                                                        style="font-size: 4px;color: #c3c3c3;padding-left: 3px;"></i>&nbsp;
-                                                    <i class="fa fa-clock-o"></i>&nbsp; <i class="	fa fa-circle"
-                                                        style="font-size: 4px;color: #c3c3c3;"></i></span>
-                                                <span class="time d-flex ">&nbsp; <i class="	fa fa-circle pr-1"
-                                                        style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i> Date
-                                                    &amp; Time &nbsp; <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                        </div>
-                                        <!-- Right side dropdown -->
-                                        <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
-                                        <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                            <div>
-                                                <div class="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-more-vertical">
-                                                        <circle cx="12" cy="12" r="1"></circle>
-                                                        <circle cx="12" cy="5" r="1"></circle>
-                                                        <circle cx="12" cy="19" r="1"></circle>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <div class="dropdown-menu" role="menu">
-                                                <div class="dropdown-content">
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove the Feed</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove Feed - Flag User</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Flag</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove Feed - Block User</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select Downgrade User</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove User Block Device</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post header -->
-
-                                    <!-- Post body -->
-                                    <div class="card-body col-sm-12">
-                                        <!-- Post body text -->
-
-                                        <!-- Featured image -->
-                                        <div class="row">
-                                            <div class="post-image col-sm-12">
-                                                <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                    href="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                    data-demo-href="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg">
-                                                    <img src="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                        data-demo-src="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                        alt="">
-                                                </a>
-                                                <!-- Action buttons -->
-
-                                            </div>
-                                            <!--                                             <div class="post-image col-sm-6 p-1">-->
-                                            <!--                                              <a data-fancybox="post1" data-lightbox-type="comments"-->
-                                            <!--                                                  data-thumb="https://yekbun.hellodev.site/public//assets/img/soldier.mp4"-->
-                                            <!--                                                  href="https://yekbun.hellodev.site/public//assets/img/soldier.mp4"-->
-                                            <!--                                                  data-demo-href="https://yekbun.hellodev.site/public//assets/img/soldier.mp4">-->
-                                            <!--                                                  <video style="height:-webkit-fill-available;" width="320" height="-webkit-fill-available" controls>-->
-                                            <!--<source src="https://yekbun.hellodev.site/public//assets/img/soldier.mp4" type="video/mp4">-->
-                                            <!--</video>-->
-                                            <!--                                              </a>-->
-
-
-
-
-
-
-
-
-
-
-
-                                            <!-- Action buttons -->
-
-                                            <!--                                          </div>-->
-                                        </div>
-                                        <div class="alert alert-secondary" role="alert">
-                                            Some Text will be here when the User have
-                                        </div>
-                                    </div>
-                                    <!-- /Post body -->
-
-                                    <!-- Post footer -->
-                                    <div class="card-footer">
-                                        <!-- Followers avatars -->
-                                        <div class="likers-group">
-                                            <!--<img src="https://yekbun.hellodev.site/public//assets/svg/icons/emojitwo.png"-->
-                                            <!--    data-demo-src="https://yekbun.hellodev.site/public//assets/svg/icons/emojitwo.png"-->
-                                            <!--    data-user-popover="1" alt="">-->
-                                            <!--<img src="https://yekbun.hellodev.site/public//assets/svg/icons/emojithree.png"-->
-                                            <!--    data-demo-src="https://yekbun.hellodev.site/public//assets/svg/icons/emojithree.png"-->
-                                            <!--    data-user-popover="4" alt="">-->
-                                            <img style="height:60px;width:140px;"
-                                                src="https://yekbun.hellodev.site/public//assets/img/emojiall.png"
-                                                data-demo-src="https://yekbun.hellodev.site/public//assets/img/emojiall.png"
-                                                data-user-popover="5" alt="">
-
-                                        </div>
-                                        <!-- Followers text -->
-                                        <div class="likers-text">
-
-                                        </div>
-                                        <!-- Post statistics -->
-                                        <div class="social-count">
-                                            <div class="shares-count" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/Share.svg"
-                                                    width="20" alt="">
-                                                <span>12k <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                            <div class="likes-count" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/views.svg"
-                                                    width="20" alt="">
-                                                <span>1225 <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                            <div class="comments-count is-comment-light" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/Comments.svg"
-                                                    width="20" alt="">
-                                                <span>123 <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                            <div class="comments-count" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/voice.svg"
-                                                    width="20" alt="">
-                                                <span>1.1M</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post footer -->
-                                </div>
-                                <!-- /Main wrap -->
-
-                                <!-- Post #1 Comments -->
-                                <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
-                                    <div class="comments-header">
-                                        @if (request('type') === 'flag')
-                                        <img src="{{asset('assets/img/exclamation-mark.png')}}"
-                                            style="position: absolute;top:1rem;right:3.5rem" width="15" alt="">
-                                        @endif
-                                    </div>
-                                    <!-- Comments body -->
-                                    <!--  <div class="comments-body has-slimscroll">-->
-                                    <!--    <img src="{{asset('assets/svg/icons/Comment- area.svg')}}" style="width: 100%" alt="">-->
-                                    <!--</div>-->
-                                    <!-- /Comments body -->
-                                </div>
-                                <!-- /Post #1 Comments -->
-                            </div>
-                        </div>
-
-
-                        <div class="column column is-6 tab-content" id="tab3">
-                            <div id="feed-post-1" class="card is-post">
-                                <!-- Main wrap -->
-                                <div class="content-wrap">
-                                    <!-- Post header -->
-                                    <div class="card-heading">
-                                        <!-- User meta -->
-                                        <div class="user-block">
-                                            <div class="image">
-                                                <img src="https://yekbun.hellodev.site/public//assets/img/avatars/13.png"
-                                                    data-demo-src="https://yekbun.hellodev.site/public//assets/img/avatars/13.png"
-                                                    data-user-popover="1" alt="">
-                                            </div>
-                                            <div class="user-info">
-                                                <span class="d-flex justify-content-center align-items-center"><a
-                                                        href="#">Karim Saif</a>&nbsp; <i class="	fa fa-circle"
-                                                        style="font-size: 4px;color: #c3c3c3;padding-left: 3px;"></i>&nbsp;
-                                                    <i class="fa fa-clock-o"></i>&nbsp; <i class="	fa fa-circle"
-                                                        style="font-size: 4px;color: #c3c3c3;"></i></span>
-                                                <span class="time d-flex ">&nbsp; <i class="	fa fa-circle pr-1"
-                                                        style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i> Date
-                                                    &amp; Time &nbsp; <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-top: 7px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                        </div>
-                                        <!-- Right side dropdown -->
-                                        <!-- /partials/pages/feed/dropdowns/feed-post-dropdown.html -->
-                                        <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                            <div>
-                                                <div class="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-more-vertical">
-                                                        <circle cx="12" cy="12" r="1"></circle>
-                                                        <circle cx="12" cy="5" r="1"></circle>
-                                                        <circle cx="12" cy="19" r="1"></circle>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <div class="dropdown-menu" role="menu">
-                                                <div class="dropdown-content">
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove the Feed</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove Feed - Flag User</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Flag</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove Feed - Block User</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select Downgrade User</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="javascript:void(0)" class="dropdown-item">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <h3>Remove User Block Device</h3>
-                                                                <select class="form-control mt-1">
-                                                                    <option value="">Select the Reason</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post header -->
-
-                                    <!-- Post body -->
-                                    <div class="card-body col-sm-12">
-                                        <!-- Post body text -->
-
-                                        <!-- Featured image -->
-                                        <div class="row">
-                                            <div class="post-image col-sm-12">
-                                                <a data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                    href="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                    data-demo-href="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg">
-                                                    <img src="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                        data-demo-src="https://yekbun.hellodev.site/public//assets/img/PersianWomen.jpg"
-                                                        alt="">
-                                                </a>
-                                                <!-- Action buttons -->
-
-                                            </div>
-                                            <!--                                             <div class="post-image col-sm-6 p-1">-->
-                                            <!--                                              <a data-fancybox="post1" data-lightbox-type="comments"-->
-                                            <!--                                                  data-thumb="https://yekbun.hellodev.site/public//assets/img/soldier.mp4"-->
-                                            <!--                                                  href="https://yekbun.hellodev.site/public//assets/img/soldier.mp4"-->
-                                            <!--                                                  data-demo-href="https://yekbun.hellodev.site/public//assets/img/soldier.mp4">-->
-                                            <!--                                                  <video style="height:-webkit-fill-available;" width="320" height="-webkit-fill-available" controls>-->
-                                            <!--<source src="https://yekbun.hellodev.site/public//assets/img/soldier.mp4" type="video/mp4">-->
-                                            <!--</video>-->
-                                            <!--                                              </a>-->
-
-
-
-
-
-
-
-
-
-
-
-                                            <!-- Action buttons -->
-
-                                            <!--                                          </div>-->
-                                        </div>
-                                        <div class="alert alert-secondary" role="alert">
-                                            Some Text will be here when the User have
-                                        </div>
-                                    </div>
-                                    <!-- /Post body -->
-
-                                    <!-- Post footer -->
-                                    <div class="card-footer">
-                                        <!-- Followers avatars -->
-                                        <div class="likers-group">
-                                            <!--<img src="https://yekbun.hellodev.site/public//assets/svg/icons/emojitwo.png"-->
-                                            <!--    data-demo-src="https://yekbun.hellodev.site/public//assets/svg/icons/emojitwo.png"-->
-                                            <!--    data-user-popover="1" alt="">-->
-                                            <!--<img src="https://yekbun.hellodev.site/public//assets/svg/icons/emojithree.png"-->
-                                            <!--    data-demo-src="https://yekbun.hellodev.site/public//assets/svg/icons/emojithree.png"-->
-                                            <!--    data-user-popover="4" alt="">-->
-                                            <img style="height:60px;width:140px;"
-                                                src="https://yekbun.hellodev.site/public//assets/img/emojiall.png"
-                                                data-demo-src="https://yekbun.hellodev.site/public//assets/img/emojiall.png"
-                                                data-user-popover="5" alt="">
-
-                                        </div>
-                                        <!-- Followers text -->
-                                        <div class="likers-text">
-
-                                        </div>
-                                        <!-- Post statistics -->
-                                        <div class="social-count">
-                                            <div class="shares-count" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/Share.svg"
-                                                    width="20" alt="">
-                                                <span>12k <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                            <div class="likes-count" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/views.svg"
-                                                    width="20" alt="">
-                                                <span>1225 <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                            <div class="comments-count is-comment-light" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/Comments.svg"
-                                                    width="20" alt="">
-                                                <span>123 <i class="	fa fa-circle"
-                                                        style="font-size: 4px;margin-bottom: 10px;color: #c3c3c3;"></i></span>
-                                            </div>
-                                            <div class="comments-count" style="cursor: pointer">
-                                                <img src="https://yekbun.hellodev.site/public//assets/svg/icons/voice.svg"
-                                                    width="20" alt="">
-                                                <span>1.1M</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post footer -->
-                                </div>
-                                <!-- /Main wrap -->
-
-                                <!-- Post #1 Comments -->
-                                <div class="comments-wrap is-hidden" style="top: 0rem;position: relative;">
-                                    <div class="comments-header">
-                                    </div>
-                                    <!-- Comments body -->
-                                    <!--  <div class="comments-body has-slimscroll">-->
-                                    <!--    <img src="https://yekbun.hellodev.site/public//assets/svg/icons/Comment- area.svg" style="width: 100%" alt="">-->
-                                    <!--</div>-->
-                                    <!-- /Comments body -->
-                                </div>
-                                <!-- /Post #1 Comments -->
-                            </div>
-                        </div> --}}
 
                             <div class="column is-3"></div>
 
@@ -823,6 +411,13 @@
             $(activeTab).fadeIn();
             return false;
         });
+
+        $('#feed-post-1').click(function() {
+            $('video').each(function() {
+                this.pause();
+                this.currentTime = 0; // reset to beginning
+            });
+        })
     </script>
     <script>
         function confirmAction(event, callback) {

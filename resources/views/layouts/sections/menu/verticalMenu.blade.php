@@ -657,9 +657,9 @@
 
 
 
-                    <li class="menu-item {{ Request::is('manage-fanpage-feeds') ? 'active' : '' }}">
-                        <a href="{{ url('/manage-fanpage-feeds') }}" class="menu-link">
-                            <div>Manage Fanpage Feed</div>
+                    <li class="menu-item {{ Request::is('manage-channel-feeds') ? 'active' : '' }}">
+                        <a href="{{ url('/manage-channel-feeds') }}" class="menu-link">
+                            <div>Manage Channel Feed</div>
                         </a>
 
 

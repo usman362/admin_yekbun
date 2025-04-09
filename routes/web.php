@@ -282,6 +282,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/manage-user-feeds', [FeedsController::class, 'index'])->name('manage.user.feeds');
 
+    Route::post('/manage-action-feeds/{id}', [FeedsController::class, 'action'])->name('manage.action.feeds');
+
     Route::post('/manage-delete-feeds/{id}', [FeedsController::class, 'destroy'])->name('manage.feeds.delete');
 
     Route::get("/feeds/comments", [FeedsController::class, 'getComments'])->name('get.comments');
@@ -290,7 +292,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::post('/feeds/like', [FeedsController::class, 'feedLike'])->name('post.like');
 
-    Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
+    Route::view('/manage-channel-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.channel.feeds');
 
     Route::get('/feeds-policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('feeds.policy_terms');
 
@@ -365,12 +367,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/app/events', $controller_path . '\apps\event\Event@index')->name('app-event');
     Route::get('/app/events/add-event', $controller_path . '\apps\event\Event@create')->name('app-event-create');
-
-    // Route::view('/manage-fanpage-feeds', 'content.manage_posts.manage_fanpage_feeds')->name('manage.fanpage.feeds');
-    // Route::view('/manage-user-comments', 'content.manage_posts.manage_user_comments')->name('manage.user.comments');
-    // Route::view('/manage-fanpage-comments', 'content.manage_posts.manage_fanpage_comments')->name(
-    //     'manage.fanpage.comments'
-    // );
 
     Route::get('story/ManageStories', [StoryController::class, 'ManageStories']);
 
