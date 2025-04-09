@@ -157,10 +157,10 @@ Route::delete('provinces/{id}', [RegionController::class, 'destroy'])->name('pro
 Route::get('kurdish-peoples',[CountryController::class,'kurdishPeoples'])->name('kurdish.peoples');
 
 //Cities
-// Route::get('cities', [CityController::class, 'index'])->name('cities.index');
-// Route::post('cities', [CityController::class, 'store'])->name('cities.store');
-// Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
-// Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
+Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+Route::post('cities', [CityController::class, 'store'])->name('cities.store');
+Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
+Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
 Route::get('get-cities', [CityController::class, 'getCities']);
 
 
