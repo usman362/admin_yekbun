@@ -155,10 +155,10 @@ Route::put('provinces/{id}', [RegionController::class, 'update'])->name('provinc
 Route::delete('provinces/{id}', [RegionController::class, 'destroy'])->name('provinces.destroy');
 
 //Cities
-Route::get('cities', [CityController::class, 'index'])->name('cities.index');
-Route::post('cities', [CityController::class, 'store'])->name('cities.store');
-Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
-Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
+// Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+// Route::post('cities', [CityController::class, 'store'])->name('cities.store');
+// Route::put('cities/{id}', [CityController::class, 'update'])->name('cities.update');
+// Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
 Route::get('get-cities', [CityController::class, 'getCities']);
 
 

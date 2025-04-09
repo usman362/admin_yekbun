@@ -43,18 +43,29 @@ class CityController extends Controller
         }
 
         if (!empty($request->search)) {
-            $cities->where('name', 'LIKE',$request->search . '%');
+            $cities->where('name', 'LIKE', $request->search . '%');
             $hasConditions = true;
         }
 
 
-        // If no conditions applied, limit results to 15
-        if (!$hasConditions) {
-            $cities->limit(15);
-        }
+        if (!empty($request->limit)) {
 
-        // Get results
-        $cities = $cities->get();
+            if ($request->limit !== 'all') {
+                $limit = (int)$request->limit;
+                $cities->limit($limit);
+            }
+
+            // Get results
+            $cities = $cities->get();
+        } else {
+            // If no conditions applied, limit results to 15
+            if (!$hasConditions) {
+                $cities->limit(15);
+            }
+
+            // Get results
+            $cities = $cities->get();
+        }
 
         return response()->json([
             'cities' => $cities
