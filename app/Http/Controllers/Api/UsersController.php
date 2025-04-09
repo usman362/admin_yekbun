@@ -9,6 +9,7 @@ use App\Models\UserFriends;
 use App\Models\UserRequest;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -31,16 +32,28 @@ class UsersController extends Controller
             'user_id' => 'required',
             'status' => 'required'
         ]);
-        $status = (int)$request->status;
-        // try {
+
+        $status = (int) $request->status;
+
+        try {
             $user_request = UserRequest::updateOrCreate(
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id],
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id, 'status' => $status]
             );
+
             return ResponseHelper::sendResponse($user_request, 'User Request Send Successfully');
-        // } catch (Exception $e) {
-        //     return ResponseHelper::sendResponse(null, 'Error to Send Request', false, 403);
-        // }
+        } catch (Exception $e) {
+            // Log error with file name, line number, and full message
+            Log::error('UserRequest Error: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+                'user_id' => auth()->id(),
+                'request_data' => $request->all()
+            ]);
+
+            return ResponseHelper::sendResponse(null, 'Error to Send Request', false, 403);
+        }
     }
 
     public function acceptRequest(Request $request)
