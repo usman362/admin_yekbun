@@ -305,7 +305,7 @@
                                                                 data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}">
                                                                 <img src="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                                     data-demo-src="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                                    alt="Post Image" style="height: 500px;width: 100%;">
+                                                                    alt="Post Image" style="width: 100%;">
                                                             </a>
                                                         </div>
                                                     @else
@@ -318,7 +318,7 @@
                                                                     <video id="my-player" class="video-js" controls
                                                                         preload="auto" {{-- poster="//vjs.zencdn.net/v/oceans.png" --}}
                                                                         data-setup='{}'
-                                                                        style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
+                                                                        style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block">
                                                                         <source
                                                                             src="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                                                             type="video/mp4">
