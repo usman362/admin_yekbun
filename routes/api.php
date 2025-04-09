@@ -154,6 +154,8 @@ Route::post('provinces', [RegionController::class, 'store'])->name('provinces.st
 Route::put('provinces/{id}', [RegionController::class, 'update'])->name('provinces.update');
 Route::delete('provinces/{id}', [RegionController::class, 'destroy'])->name('provinces.destroy');
 
+Route::get('kurdish-peoples',[CountryController::class,'kurdishPeoples'])->name('kurdish.peoples');
+
 //Cities
 // Route::get('cities', [CityController::class, 'index'])->name('cities.index');
 // Route::post('cities', [CityController::class, 'store'])->name('cities.store');

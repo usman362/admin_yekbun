@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-
+use App\Helpers\ResponseHelper;
 use App\Models\Countrylocations;
 use App\Models\Stateslocations;
 use App\Models\Citylocations;
@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
 use App\Models\Country;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -91,5 +92,11 @@ class CountryController extends Controller
         $country->delete();
 
         return response()->json(['message' => 'Country successfully deleted.','country' => $country],201);
+    }
+
+    public function kurdishPeoples(Request $request)
+    {
+        $users = User::where('origin','kurdish')->select('username','image')->get();
+        return ResponseHelper::sendResponse($users,'Kurdish Peoples Successfully Fetch!');
     }
 }
