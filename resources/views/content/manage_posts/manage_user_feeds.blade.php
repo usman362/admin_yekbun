@@ -275,7 +275,7 @@
                                                                                 <option value="">Select the Option
                                                                                 </option>
                                                                                 <option value="educated">Educated</option>
-                                                                                @if ($feed->user->level == 2)
+                                                                                @if (isset($feed->user->level) && $feed->user->level == 2)
                                                                                     <option value="cultivated">Cultivated
                                                                                     </option>
                                                                                 @endif
