@@ -195,7 +195,7 @@
                                 @endif
 
                                 @foreach ($feeds as $feed)
-                                    <div id="feed-post-1" class="card is-post">
+                                    <div id="feed-post-1" class="card is-post view-post">
                                         <div class="content-wrap">
                                             <!-- Post header -->
                                             <div class="card-heading">
@@ -412,7 +412,7 @@
             return false;
         });
 
-        $('#feed-post-1').click(function() {
+        $('.view-post').click(function() {
             $('video').each(function() {
                 this.pause();
                 this.currentTime = 0; // reset to beginning
