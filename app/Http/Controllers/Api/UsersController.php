@@ -32,15 +32,15 @@ class UsersController extends Controller
             'status' => 'required'
         ]);
         $status = (int)$request->status;
-        try {
+        // try {
             $user_request = UserRequest::updateOrCreate(
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id],
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id, 'status' => $status]
             );
             return ResponseHelper::sendResponse($user_request, 'User Request Send Successfully');
-        } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Error to Send Request', false, 403);
-        }
+        // } catch (Exception $e) {
+        //     return ResponseHelper::sendResponse(null, 'Error to Send Request', false, 403);
+        // }
     }
 
     public function acceptRequest(Request $request)
