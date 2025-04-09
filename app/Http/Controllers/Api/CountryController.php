@@ -23,8 +23,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::select('name','flag_path')->orderBy("name", "ASC")->get();
-        return response()->json(['countries' => $countries],200);
+        $countries = Country::select('name', 'flag_path')->orderBy("name", "ASC")->get();
+        return response()->json(['countries' => $countries], 200);
     }
 
     public function search_location(Request $request)
@@ -32,18 +32,16 @@ class CountryController extends Controller
 
         $searchval = $request->search;
 
-		$results =  Citylocations::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
+        $results =  Citylocations::where('name', 'like', '%' .  $searchval . '%')->orderBy('name', 'asc')->get();
 
-		$aray = array();
+        $aray = array();
 
-		foreach($results as $row){
+        foreach ($results as $row) {
 
-			$aray[] = $row->country->name . " " . $row->state->name . " " . $row->name;
+            $aray[] = $row->country->name . " " . $row->state->name . " " . $row->name;
+        }
 
-		}
-
-        return response()->json(['message' => 'Ok','locations' => $aray],201);
-
+        return response()->json(['message' => 'Ok', 'locations' => $aray], 201);
     }
 
     /**
@@ -58,7 +56,7 @@ class CountryController extends Controller
 
         $country = Country::create($validated);
 
-        return response()->json(['message' => 'Country successfully added.','country' => $country],201);
+        return response()->json(['message' => 'Country successfully added.', 'country' => $country], 201);
     }
 
     /**
@@ -76,7 +74,7 @@ class CountryController extends Controller
         $country->fill($validated);
         $country->save();
 
-        return response()->json(['message' => 'Country successfully updated.','country' => $country],201);
+        return response()->json(['message' => 'Country successfully updated.', 'country' => $country], 201);
     }
 
     /**
@@ -91,12 +89,23 @@ class CountryController extends Controller
 
         $country->delete();
 
-        return response()->json(['message' => 'Country successfully deleted.','country' => $country],201);
+        return response()->json(['message' => 'Country successfully deleted.', 'country' => $country], 201);
     }
 
     public function kurdishPeoples(Request $request)
     {
-        $users = User::where('origin','kurdish')->select('username','image')->get();
-        return ResponseHelper::sendResponse($users,'Kurdish Peoples Successfully Fetch!');
+        $users = User::where('origin', 'kurdish')->select('username', 'image');
+
+        if (!empty($request->province)) {
+            $users->where('province', $request->province);
+        }
+
+        if (!empty($request->city)) {
+            $users->where('city', $request->city);
+        }
+
+        $users = $users->get();
+
+        return ResponseHelper::sendResponse($users, 'Kurdish Peoples Successfully Fetch!');
     }
 }
