@@ -123,12 +123,12 @@ Route::middleware('jwt.custom')->group(function () {
 
     Route::post('send-users-request', [UsersController::class, 'sendRequest']);
     Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
+    Route::get('get-users-list', [UsersController::class, 'users_list']);
+    Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
+    Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
+    Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
 });
 
-Route::get('get-users-list', [UsersController::class, 'users_list']);
-Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
-Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
-Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
 Route::get("/admin-activity/donation", [AdminActivityController::class, 'getDonations']);

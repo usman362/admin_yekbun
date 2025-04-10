@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
     public function users_list(Request $request)
     {
-        $users = User::select('id', 'user_id', 'username', 'image')->where('is_admin_user', 0)->get();
+        $users = User::select('id', 'user_id', 'username', 'image')->where('_id','!=',auth()->user()->id)->where('is_admin_user', 0)->limit(5)->get();
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
 
@@ -82,7 +82,7 @@ class UsersController extends Controller
     public function freind_list(Request $request, $id)
     {
         try {
-            $user = User::select('id')->with(['friends' => function ($q) {
+            $user = User::select('_id')->with(['friends' => function ($q) {
                 $q->with('user');
             }])->find($id);
             $friends_list = $user->friends;
