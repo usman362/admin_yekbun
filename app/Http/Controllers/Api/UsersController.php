@@ -95,7 +95,7 @@ class UsersController extends Controller
     public function request_list(Request $request, $id)
     {
         try {
-            $user = User::select('id')->with(['user_requests' => function ($q) {
+            $user = User::select('id','name')->with(['user_requests' => function ($q) {
                 $q->with('user');
             }])->find($id);
             $friends_list = $user->user_requests;

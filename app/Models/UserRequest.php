@@ -20,6 +20,6 @@ class UserRequest extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'request_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
