@@ -67,7 +67,7 @@ class UsersController extends Controller
                 ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
                 ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
             );
-            $oldRequests = UserRequest::where('request_id', $request->user_id)->where('user_id', auth()->user()->id)->get();
+            $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
             if ($oldRequests) {
                 foreach ($oldRequests as $request) {
                     $request->delete();
