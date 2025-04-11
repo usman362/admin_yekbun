@@ -15,13 +15,13 @@ class UsersController extends Controller
 {
     public function users_list(Request $request)
     {
-        $users = User::select('id', 'user_id', 'username', 'image')->where('_id','!=',auth()->user()->id)->where('is_admin_user', 0)->get();
+        $users = User::select('id', 'user_id', 'username', 'image', 'is_online')->where('_id', '!=', auth()->user()->id)->where('is_admin_user', 0)->get();
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
 
     public function users_details(Request $request, $id)
     {
-        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city')
+        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'is_online')
             ->with(['user_feeds', 'friends', 'user_requests'])->find($id);
         return ResponseHelper::sendResponse($user, 'User Details Fetch Successfully');
     }
@@ -108,13 +108,30 @@ class UsersController extends Controller
     public function request_list(Request $request, $id)
     {
         try {
-            $user = User::select('id','name')->with(['user_requests' => function ($q) {
+            $user = User::select('id', 'name')->with(['user_requests' => function ($q) {
                 $q->with('user');
             }])->find($id);
             $friends_list = $user->user_requests;
             return ResponseHelper::sendResponse($friends_list, 'Requests List Fetch Successfully');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Error to Fetch Requests List', false, 403);
+        }
+    }
+
+    public function store_user_online(Request $request, $id)
+    {
+        $request->validate([
+            'value' => 'required'
+        ]);
+
+        $user = User::find($id);
+        if ($user) {
+            $user->is_online = (int)$request->value;
+            $user->save();
+            (int)$request->value == 1 ? $status = 'Online' : $status = 'Offline';
+            return ResponseHelper::sendResponse($user, 'User ' . $status . ' Successfully!');
+        } else {
+            return ResponseHelper::sendResponse(null, 'User Not Found!', false, 403);
         }
     }
 }
