@@ -126,6 +126,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('get-users-list', [UsersController::class, 'users_list']);
     Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
     Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
+    Route::get('get-family-list/{id}', [UsersController::class, 'family_list']);
     Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
 });
 
