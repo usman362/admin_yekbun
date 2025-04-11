@@ -67,6 +67,11 @@ class UsersController extends Controller
                 ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
                 ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
             );
+
+            $user_request_to = UserFriends::updateOrCreate(
+                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id],
+                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id, 'user_type' => $request->user_type]
+            );
             $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
             if ($oldRequests) {
                 foreach ($oldRequests as $request) {
@@ -83,7 +88,7 @@ class UsersController extends Controller
     {
         try {
             $user = User::select('_id')->with(['friends' => function ($q) {
-                $q->with(['user','friend']);
+                $q->with('user');
             }])->find($id);
             $friends_list = $user->friends;
             return ResponseHelper::sendResponse($friends_list, 'Friends List Fetch Successfully');
@@ -96,7 +101,7 @@ class UsersController extends Controller
     {
         try {
             $user = User::select('_id')->with(['family' => function ($q) {
-                $q->with(['user','family']);
+                $q->with('user');
             }])->find($id);
             $family_list = $user->friends;
             return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
