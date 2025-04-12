@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
 use session;
 use App\Models\User;
 use App\Models\UserCode;
@@ -105,10 +106,10 @@ class AuthController extends Controller
             $email = strtolower($request->email);
             $emailTaken = User::where('email', $email)->first();
 
-            $unverifyEmails = User::where('email', $email)->where('is_verfied',0)->get();
+            $unverifyEmails = User::where('email', $email)->where('is_verfied', 0)->get();
 
-            if($unverifyEmails){
-                foreach($unverifyEmails as $unverified){
+            if ($unverifyEmails) {
+                foreach ($unverifyEmails as $unverified) {
                     $unverified->delete();
                 }
             }
@@ -248,10 +249,10 @@ class AuthController extends Controller
                     'username' => $user->username ?? 'User',
                 ];
                 Mail::to($request['email'])->send(new SendCodeMail($details));
-                return response()->json(['success' => true, "message" => "Verfication Code sent to your email", 'user' => $user->id, 'code' => $code], 201);
+                $data = ['user' => $user, 'otp' => $code];
+                return ResponseHelper::sendResponse($data, 'Verfication Code sent to your email');
             } catch (\Exception $e) {
-                info("Error: " . $e->getMessage());
-                return response()->json(['success' => false, 'message' => $e->getMessage()], 505);
+                return ResponseHelper::sendResponse(null, $e->getMessage(), false, 505);
             }
         }
     }
@@ -265,40 +266,27 @@ class AuthController extends Controller
             'device_type' => 'required',
             'device_imei' => 'required',
             'device_name' => 'required',
-            'otp' => 'required',
         ]);
         $email = strtolower($request->email);
         $user = User::where('email', $email)->first();
         if (!$user) {
             return response()->json(['message' => 'User not Found!'], 404);
         }
-
-        $code = UserCode::where('user_id', $user->id)->first();
-
-        if (!$code) {
-            return response()->json(['status' => false, 'message' => 'Code not found!'], 404);
-        }
-        if ((int)$code->code == (int)$request->otp) {
-
-            try {
-                $email = strtolower($request->email);
-                User::updateOrCreate(
-                    ['email' => $email],
-                    [
-                        'device_serial' => $request->device_serial,
-                        'device_type' => $request->device_type,
-                        'device_model' => $request->device_model,
-                        'device_imei' => $request->device_imei,
-                        'device_name' => $request->device_name,
-                    ]
-                );
-                UserCode::where('user_id', $user->id)->delete();
-                return response()->json(['message' => 'New device registered successfully.'], 201);
-            } catch (\Exception $e) {
-                return response()->json(['message' => 'Failed to register device'], 403);
-            }
-        } else {
-            return response()->json(['status' => false, 'message' => 'Invalid Code!'], 403);
+        try {
+            $email = strtolower($request->email);
+            $createdUser = User::updateOrCreate(
+                ['email' => $email],
+                [
+                    'device_serial' => $request->device_serial,
+                    'device_type' => $request->device_type,
+                    'device_model' => $request->device_model,
+                    'device_imei' => $request->device_imei,
+                    'device_name' => $request->device_name,
+                ]
+            );
+            return ResponseHelper::sendResponse($createdUser, 'New device registered successfully.');
+        } catch (\Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to register device', false, 403);
         }
     }
 
@@ -312,13 +300,13 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
 
         if (!$user) {
-            return response()->json(['status' => false, 'message' => 'User not found!'], 404);
+            return ResponseHelper::sendResponse(null, 'User not found!', false, 404);
         }
 
         $code = UserCode::where('user_id', $user->id)->first();
 
         if (!$code) {
-            return response()->json(['status' => false, 'message' => 'Code not found!'], 404);
+            return ResponseHelper::sendResponse(null, 'Code not found!', false, 404);
         }
 
         if ((int)$code->code == (int)$request->otp) {
@@ -326,9 +314,9 @@ class AuthController extends Controller
             $user->email_verified_at = Carbon::now();
             $user->is_verfied = (int)1;
             $user->save();
-            return response()->json(['status' => true, 'message' => 'Valid Code!'], 200);
+            return ResponseHelper::sendResponse($user, 'Valid Code');
         } else {
-            return response()->json(['status' => false, 'message' => 'Invalid Code!'], 403);
+            return ResponseHelper::sendResponse(null, 'Invalid Code!', false, 403);
         }
     }
 
@@ -488,10 +476,10 @@ class AuthController extends Controller
                 'isPrivacyPolicyAccepted' => $request->privacy_policy,
             ]);
             $user = User::find(Auth::id());
-            if($user->isPrivacyPolicyAccepted == true){
-                return response()->json(['message' => 'Privacy Policy has been Accepted!','user' => $user, 'success' => true], 200);
-            }else{
-                return response()->json(['message' => 'Privacy Policy has been Rejected!','user' => $user, 'success' => true], 200);
+            if ($user->isPrivacyPolicyAccepted == true) {
+                return response()->json(['message' => 'Privacy Policy has been Accepted!', 'user' => $user, 'success' => true], 200);
+            } else {
+                return response()->json(['message' => 'Privacy Policy has been Rejected!', 'user' => $user, 'success' => true], 200);
             }
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something Went Wrong', 'success' => false], 403);
