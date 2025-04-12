@@ -23,7 +23,15 @@ class UsersController extends Controller
     {
         $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'is_online')
             ->with(['user_feeds', 'friends', 'user_requests'])->find($id);
-        return ResponseHelper::sendResponse($user, 'User Details Fetch Successfully');
+
+        $friend = UserFriends::where('friend_id', $user->id)->where('user_id', auth()->user()->id)->first();
+        if ($friend) {
+            $is_friend = 1;
+        } else {
+            $is_friend = 0;
+        }
+        $data = ['user' => $user,'is_friend'=> $is_friend];
+        return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
     public function sendRequest(Request $request)
