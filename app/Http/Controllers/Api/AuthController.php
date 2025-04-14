@@ -53,11 +53,15 @@ class AuthController extends Controller
             if ($user->email !== 'test_yekbun@gmail.com') {
                 if ($user->device_imei != $request->device_imei) {
                     $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
-                    return response()->json(['message' => 'Device IMEI is not registered', 'imeis' => $imeis], 404);
+                    if(!$imeis){
+                        return ResponseHelper::sendResponse(['imeis' => $imeis], 'Device IMEI is not registered', false, 404);
+                    }else{
+                        return ResponseHelper::sendResponse(null, 'Invalid Creadentials!', false, 404);
+                    }
                 }
             }
         } else {
-            return response()->json(['message' => 'User not Found!'], 404);
+            return ResponseHelper::sendResponse(null, 'User not Found!', false, 404);
         }
 
         // Check if the credentials are correct (email, password)
@@ -66,29 +70,22 @@ class AuthController extends Controller
 
             // Ensure the user's email is verified
             if ($user->email_verified_at == null || $user->email_verified_at == '') {
-                return response()->json(['success' => false, 'message' => 'Your email is not verified.']);
+                return ResponseHelper::sendResponse(null, 'Youre Email is not verified!', false, 403);
             }
 
             // Generate a JWT token for the authenticated user
             try {
                 if (!$token = JWTAuth::fromUser($user)) {
-                    return response()->json(['error' => 'Invalid credentials'], 400);
+                    return ResponseHelper::sendResponse(null, 'Invalid Creadentials!', false, 400);
                 }
             } catch (JWTException $e) {
-                return response()->json(['error' => 'Could not create token'], 500);
+                return ResponseHelper::sendResponse(null, 'Could not create token!', false, 500);
             }
 
-            // Return the user data and JWT token
-            return response()->json([
-                'success' => true,
-                'data' => [
-                    'user' => $user,
-                    'token' => $token  // This is your Bearer token
-                ]
-            ], 200);
+            return ResponseHelper::sendResponse(['user' => $user, 'token' => $token], 'User Successfully Login!');
         } else {
             // If credentials are incorrect, return an error
-            return response()->json(['success' => false, 'message' => 'Email or password is incorrect.']);
+            return ResponseHelper::sendResponse(null, 'Email or password is incorrect', false, 403);
         }
     }
 
