@@ -281,6 +281,10 @@ class AuthController extends Controller
                     'device_name' => $request->device_name,
                 ]
             );
+            UserImei::updateOrCreate(['user_id' => $createdUser->id],[
+                'user_id' => $createdUser->id,
+                'device_imei' => $request['device_imei'],
+            ]);
             return ResponseHelper::sendResponse($createdUser, 'New device registered successfully.');
         } catch (\Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to register device', false, 403);
