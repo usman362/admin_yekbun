@@ -53,7 +53,7 @@ class AuthController extends Controller
             if ($user->email !== 'test_yekbun@gmail.com') {
                 if ($user->device_imei != $request->device_imei) {
                     $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
-                    if(!$imeis){
+                    if($imeis){
                         return ResponseHelper::sendResponse(['imeis' => $imeis], 'Device IMEI is not registered', false, 404);
                     }else{
                         return ResponseHelper::sendResponse(null, 'Invalid Creadentials!', false, 404);
