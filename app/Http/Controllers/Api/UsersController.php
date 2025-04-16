@@ -10,6 +10,8 @@ use App\Models\UserRequest;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Google\Client as GoogleClient;
 
 class UsersController extends Controller
 {
@@ -71,22 +73,33 @@ class UsersController extends Controller
             'user_type' => 'required'
         ]);
         try {
-            $user_request = UserFriends::updateOrCreate(
-                ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
-                ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
-            );
+            if($request->user_type !== 'rejected'){
+                $user_request = UserFriends::updateOrCreate(
+                    ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
+                    ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
+                );
 
-            $user_request_to = UserFriends::updateOrCreate(
-                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id],
-                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id, 'user_type' => $request->user_type]
-            );
-            $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
-            if ($oldRequests) {
-                foreach ($oldRequests as $request) {
-                    $request->delete();
+                $user_request_to = UserFriends::updateOrCreate(
+                    ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id],
+                    ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id, 'user_type' => $request->user_type]
+                );
+                $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
+                if ($oldRequests) {
+                    foreach ($oldRequests as $request) {
+                        $request->delete();
+                    }
                 }
+                return ResponseHelper::sendResponse($user_request, 'Request Accept Successfully');
+            }else{
+                $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
+                if ($oldRequests) {
+                    foreach ($oldRequests as $request) {
+                        $request->delete();
+                    }
+                }
+                return ResponseHelper::sendResponse(null, 'Request Rejected Successfully');
             }
-            return ResponseHelper::sendResponse($user_request, 'Request Accept Successfully');
+
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Error to Accept Request', false, 403);
         }
@@ -158,6 +171,89 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse($user, 'User ' . $status . ' Successfully!');
         } else {
             return ResponseHelper::sendResponse(null, 'User Not Found!', false, 403);
+        }
+    }
+
+
+    public function updateDeviceToken(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,_id',
+            'fcm_token' => 'required|string',
+        ]);
+
+        $request->user()->update(['fcm_token' => $request->fcm_token]);
+
+        return response()->json(['message' => 'Device token updated successfully']);
+    }
+
+
+    public function sendNotification(Request $request)
+
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,_id',
+            'title' => 'required|string',
+            'body' => 'required|string',
+        ]);
+
+        $user = \App\Models\User::find($request->user_id);
+        $fcm = $user->fcm_token;
+
+        if (!$fcm) {
+            return response()->json(['message' => 'User does not have a device token'], 400);
+        }
+
+        $title = $request->title;
+        $description = $request->body;
+        $projectId = env('FCM_PROJECT_ID'); # INSERT COPIED PROJECT ID
+
+        $credentialsFilePath = Storage::path('json/services.json');
+        $client = new GoogleClient();
+        $client->setAuthConfig($credentialsFilePath);
+        $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+        $client->refreshTokenWithAssertion();
+        $token = $client->getAccessToken();
+
+        $access_token = $token['access_token'];
+
+        $headers = [
+            "Authorization: Bearer $access_token",
+            'Content-Type: application/json'
+        ];
+
+        $data = [
+            "message" => [
+                "token" => $fcm,
+                "notification" => [
+                    "title" => $title,
+                    "body" => $description,
+                ],
+            ]
+        ];
+        $payload = json_encode($data);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_VERBOSE, true); // Enable verbose output for debugging
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+
+        if ($err) {
+            return response()->json([
+                'message' => 'Curl Error: ' . $err
+            ], 500);
+        } else {
+            return response()->json([
+                'message' => 'Notification has been sent',
+                'response' => json_decode($response, true)
+            ]);
         }
     }
 }
