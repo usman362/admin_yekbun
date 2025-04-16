@@ -137,7 +137,7 @@ class UsersController extends Controller
             $user = User::select('_id')->with(['family' => function ($q) {
                 $q->with('user');
             }])->find($id);
-            $family_list = $user->friends;
+            $family_list = $user->family;
             return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Error to Fetch Family List', false, 403);
