@@ -30,7 +30,7 @@ class UsersController extends Controller
         } else {
             $is_friend = 0;
         }
-        $data = ['user' => $user,'is_friend'=> $is_friend];
+        $data = ['user' => $user, 'is_friend' => $is_friend];
         return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
@@ -89,6 +89,19 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse($user_request, 'Request Accept Successfully');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Error to Accept Request', false, 403);
+        }
+    }
+
+    public function unfriend_user(Request $request, $id)
+    {
+        try {
+            $friend = UserFriends::where('user_id', $id)->where('friend_id', auth()->user()->id)->first();
+            $friend_to = UserFriends::where('friend_id', $id)->where('user_id', auth()->user()->id)->first();
+            $friend->delete();
+            $friend_to->delete();
+            return ResponseHelper::sendResponse(null, 'Unfriend has been Successfully');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Unfriend!', false, 403);
         }
     }
 
