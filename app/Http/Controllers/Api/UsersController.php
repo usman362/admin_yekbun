@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\NotificationHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserFriends;
 use App\Models\UserRequest;
+use App\Models\UserVisitor;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -50,7 +52,8 @@ class UsersController extends Controller
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id],
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id, 'status' => $status]
             );
-
+            $user = User::select('name', 'last_name', 'username', 'image', 'is_online')->find($request->user_id);
+            NotificationHelper::sendNotification($request->user_id, 'Request Notification', $user);
             return ResponseHelper::sendResponse($user_request, 'User Request Send Successfully');
         } catch (Exception $e) {
             // Log error with file name, line number, and full message
@@ -181,6 +184,26 @@ class UsersController extends Controller
         }
     }
 
+    public function vistor(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+        ]);
+
+        try {
+            $visitor = UserVisitor::updateOrCreate(
+                ['user_id' => $request->user_id, 'visitor_id' => auth()->user()->id],
+                ['user_id' => $request->user_id, 'visitor_id' => auth()->user()->id]
+            );
+            $totalVisitors = UserVisitor::where('user_id', $request->user_id)->count();
+            $user = User::find($request->user_id);
+            $user->total_views = $totalVisitors;
+            $user->save();
+            return ResponseHelper::sendResponse($visitor, 'User Visit has been Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Visit User!', false, 403);
+        }
+    }
 
     public function updateDeviceToken(Request $request)
     {
