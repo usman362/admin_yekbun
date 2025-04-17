@@ -21,4 +21,9 @@ class UserVisitor extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function visitor()
+    {
+        return $this->belongsTo(User::class, 'visitor_id');
+    }
 }

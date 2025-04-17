@@ -205,6 +205,22 @@ class UsersController extends Controller
         }
     }
 
+    public function get_vistor(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+        ]);
+
+        try {
+            $visitors = UserVisitor::with(['user', 'visitor'])->where('user_id', $request->user_id)->get();
+            $totalVisitors = UserVisitor::where('user_id', $request->user_id)->count();
+            $data = ['visitors' => $visitors, 'total_views' => $totalVisitors];
+            return ResponseHelper::sendResponse($data, 'User Visit has been Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Visit User!', false, 403);
+        }
+    }
+
     public function updateDeviceToken(Request $request)
     {
         $request->validate([

@@ -131,6 +131,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('unfriend-user/{id}', [UsersController::class, 'unfriend_user']);
     Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
     Route::get('user-visitor/{id}', [UsersController::class, 'vistor']);
+    Route::get('get-user-visitor/{id}', [UsersController::class, 'get_vistor']);
     Route::post('update-fcm-token', [UsersController::class, 'updateDeviceToken']);
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
 });
