@@ -53,9 +53,9 @@ class AuthController extends Controller
             if ($user->email !== 'test_yekbun@gmail.com') {
                 if ($user->device_imei != $request->device_imei) {
                     $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
-                    if($imeis){
+                    if ($imeis) {
                         return ResponseHelper::sendResponse(['imeis' => $imeis], 'Device IMEI is not registered', false, 404);
-                    }else{
+                    } else {
                         return ResponseHelper::sendResponse(null, 'Invalid Creadentials!', false, 404);
                     }
                 }
@@ -281,7 +281,7 @@ class AuthController extends Controller
                     'device_name' => $request->device_name,
                 ]
             );
-            UserImei::updateOrCreate(['user_id' => $createdUser->id],[
+            UserImei::updateOrCreate(['user_id' => $createdUser->id], [
                 'user_id' => $createdUser->id,
                 'device_imei' => $request['device_imei'],
             ]);
@@ -323,11 +323,15 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // Revoke the current user's token
-        $request->user()->currentAccessToken()->delete();
-
+        if (!empty($request->status)) {
+            $user = User::find(auth()->user()->id);
+            $user->app_status = $request->status;
+            $user->save();
+        }
+        // dd(JWTAuth::getToken());
+        JWTAuth::parseToken()->invalidate(true);
         // Return a response indicating success
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        return ResponseHelper::sendResponse(null,'Logout Successfully!');
     }
 
     public function forgot_password(Request $request)
