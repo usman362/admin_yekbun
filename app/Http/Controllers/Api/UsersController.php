@@ -141,6 +141,29 @@ class UsersController extends Controller
         }
     }
 
+    public function update_freind_list(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'user_type' => 'required'
+        ]);
+        try {
+            $user_request = UserFriends::updateOrCreate(
+                ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
+                ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
+            );
+
+            $user_request_to = UserFriends::updateOrCreate(
+                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id],
+                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id, 'user_type' => $request->user_type]
+            );
+
+            return ResponseHelper::sendResponse($user_request, 'Friends/Family Updated Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Fail to Update Friends/Family!', false, 403);
+        }
+    }
+
     public function family_list(Request $request, $id)
     {
         try {
