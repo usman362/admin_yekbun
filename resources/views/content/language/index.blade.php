@@ -176,9 +176,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex justify-content-between">
-                        <h5 class="modal-title" id="modalCenterTitle">
+                        <h5 class="modal-title" id="modalCenterTitle">Edit
                             <span class="text-info languageName">{{ $language->title }}</span>
-                            Language Sections
+                            Language
                         </h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -227,12 +227,15 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">Edit
-                        <span class="text-info languageName">{{ $language->title }}</span>
-                        Language Keyword
+                    <h5 class="modal-title" id="modalCenterTitle">
+                        Edit  <span class="text-primary">"<span class="sectionName"></span>"</span>
+                        <span class="text-info languageName">- {{ $language->title }}</span>
+                        Language
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
+
                 <form id="updateKeywordsForm" action="{{ route('languages.keywords.store') }}" method="POST">
                     @csrf
                     <input type="hidden" id="keyword_language_id" name="language_id">
@@ -345,7 +348,7 @@
                 </td>
                 <td>${done}</td>
                 <td>${total}</td>
-                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
+                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}"   class="edit_section_details">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
                         <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
@@ -363,7 +366,7 @@
                 </tr>`;
                     });
 
-                    data.main_sections.forEach((main_section,index) => {
+                    data.main_sections.forEach((main_section, index) => {
                         tabs += `
                              <li class="nav-item" role="presentation">
                                 <button class="nav-link ${index == 0 ? 'active' : ''} change-section-tab" id="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}-tab"
@@ -378,7 +381,7 @@
                 });
             })
 
-            $('body').on('click','.change-section-tab',function(){
+            $('body').on('click', '.change-section-tab', function() {
                 let id = $(this).attr('data-id');
                 let section_name = $(this).attr('data-section_name');
                 $.get(`/languages/${id}/sections/${section_name}`, function(data) {
@@ -396,7 +399,7 @@
                 </td>
                 <td>${done}</td>
                 <td>${total}</td>
-                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" data-bs-toggle="modal" data-bs-target="#editKeywordsModal" class="edit_section_details">
+                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}"   class="edit_section_details">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
                         <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
@@ -424,34 +427,60 @@
             }
 
 
-            $('table').on('click', '.edit_section_details', function() {
+            $('table').on('click', '.edit_section_details', function(e) {
+                e.preventDefault();
+
                 let section_name = $(this).attr('data-section_name');
                 let language_id = $(this).attr('data-language_id');
                 $('.ajax_status').html('');
                 $('#keyword_section_name').val(section_name);
                 $('#keyword_language_id').val(language_id);
+                // Set section name in modal title
+                $('.sectionName').text(section_name);
                 // Fetch existing keywords via AJAX
                 $.get(`/languages/${language_id}/keywords/${section_name}`, function(data) {
                     let html = '';
                     data.keywords.forEach((section, index) => {
                         html += `
-                          <div class="row">
-                            <div class="col-md-6">
-                                <h6 class="m-0">${camelCaseToTitle(section.keyword)}</h6>
-                                <input type="hidden" name="keyword[]" value="${section.keyword}">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control"
-                                    name="translated[]"
-                                    value="${section.translated}"
-                                    placeholder="${camelCaseToTitle(section.keyword)}">
-                            </div>
-                        </div><hr>`;
+              <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0">${camelCaseToTitle(section.keyword)}</h6>
+                    <input type="hidden" name="keyword[]" value="${section.keyword}">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control"
+                        name="translated[]"
+                        value="${section.translated}"
+                        placeholder="${camelCaseToTitle(section.keyword)}">
+                </div>
+              </div><hr>`;
                     });
 
                     $('#keywordsTable').html(html);
+
+                    // Hide the first modal
+                    const editDetailsModal = bootstrap.Modal.getInstance(document.getElementById(
+                        'editDetailsModal'));
+                    if (editDetailsModal) {
+                        editDetailsModal.hide();
+                    }
+
+                    // Show the second modal
+                    const editKeywordsModal = new bootstrap.Modal(document.getElementById(
+                        'editKeywordsModal'), {
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    editKeywordsModal.show();
                 });
             });
+
+            // When second modal closes, reopen the first modal
+            document.getElementById('editKeywordsModal').addEventListener('hidden.bs.modal', function() {
+                const editDetailsModal = new bootstrap.Modal(document.getElementById('editDetailsModal'));
+                editDetailsModal.show();
+            });
+
 
             $('#updateKeywordsForm').on('submit', function(e) {
                 e.preventDefault();

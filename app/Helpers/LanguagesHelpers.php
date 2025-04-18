@@ -389,6 +389,188 @@ class LanguagesHelpers
             ['keyword' => 'latestReels', 'translated' => 'Latest Reels', 'main_section' => 'Settings', 'section_name' => 'App Profile'],
             ['keyword' => 'wishesAndThanks', 'translated' => 'Wishes & Thanks', 'main_section' => 'Settings', 'section_name' => 'App Profile'],
             ['keyword' => 'latestStories', 'translated' => 'Latest Stories', 'main_section' => 'Settings', 'section_name' => 'App Profile'],
+
+// my account
+            ['keyword' => 'My account', 'translated' => 'My account', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'User Name', 'translated' => 'User Name', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'My Information', 'translated' => 'My Information', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Nick Name', 'translated' => 'Nick Name', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Status', 'translated' => 'Status', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'My Email', 'translated' => 'My Email', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Manage Email', 'translated' => 'Manage Email', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'My Password', 'translated' => 'My Password', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Manage My Password', 'translated' => 'Manage My Password', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => ' My Residence', 'translated' => 'My Residence', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => ' My Living and birth location', 'translated' => 'My Living and birth location', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => ' My Profile', 'translated' => 'My Profile', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => ' Close My Profile', 'translated' => ' Close My Profile', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Yekbun Support', 'translated' => ' Yekbun Support', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Yekbun Terms', 'translated' => ' Yekbun Terms', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Yekbun Contacts', 'translated' => ' Yekbun Contacts', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+            ['keyword' => 'Yekbun About us', 'translated' => ' Yekbun About us', 'main_section' => 'Settings', 'section_name' => 'My Account'],
+
+
+            // My account information
+            ['keyword' => 'My Account INformation', 'translated' => ' My Account INformation', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Profile Setting', 'translated' => 'Profile Setting', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Edit my nick name', 'translated' => 'Edit my nick name', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Edit my nick name', 'translated' => 'Edit my nick name', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Information', 'translated' => 'Information', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Status Setting', 'translated' => 'Status Setting', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Single', 'translated' => 'Single', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Engagment', 'translated' => 'Engagment', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Married', 'translated' => 'Married', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+            ['keyword' => 'Save', 'translated' => 'Save', 'main_section' => 'Settings', 'section_name' => 'My Account Information'],
+
+   // My account Email
+
+             ['keyword' => 'My Account - My  Email', 'translated' => 'My Account - My  Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Your Current Email', 'translated' => 'Your Current Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Email setting', 'translated' => 'Email setting', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Your Old Email', 'translated' => 'Your Old Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Your new Email', 'translated' => 'Your new Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'type your Email here', 'translated' => 'Your new Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Repeat new Email', 'translated' => 'Repeat new Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'type your Email here', 'translated' => 'Your new Email', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Submit', 'translated' => 'Submit', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'An Authentication code has been sent to', 'translated' => 'An Authentication code has been sent to', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'I didnot received the code', 'translated' => 'I didnot received the code', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Resend Code', 'translated' => 'Resend Code', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+             ['keyword' => 'Verify now', 'translated' => 'Verify now', 'main_section' => 'Settings', 'section_name' => 'My Account My Email'],
+   // My account Email
+             ['keyword' => 'My Account - My password', 'translated' => 'My Account - My password', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'Password Setting', 'translated' => 'Password Setting', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'Your Old Password', 'translated' => 'Your Old Password', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'Password will be visible here', 'translated' => 'Password will be visible here', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'New  Password', 'translated' => 'New  Password', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'has atleast 8-10 characters  ', 'translated' => 'has atleast 8-10 characters', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'has an upper case or lower  ', 'translated' => 'has an upper case or lower', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'has a numbers ', 'translated' => 'has a numbers', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+             ['keyword' => 'Continue ', 'translated' => 'Continue', 'main_section' => 'Settings', 'section_name' => 'My Account My Password'],
+  // My account Resedence
+
+            ['keyword' => 'My Account - My Residence', 'translated' => 'My Account - My Residence', 'main_section' => 'Settings', 'section_name' => 'My Account My Residence'],
+            ['keyword' => ' Residence', 'translated' => 'Residence', 'main_section' => 'Settings', 'section_name' => 'My Account My Residence'],
+            ['keyword' => ' state zip code,city', 'translated' => 'state zip code,city', 'main_section' => 'Settings', 'section_name' => 'My Account My Residence'],
+            ['keyword' => ' Change your location here', 'translated' => 'Change your location here', 'main_section' => 'Settings', 'section_name' => 'My Account My Residence'],
+            ['keyword' => 'Select  country ', 'translated' => 'Change your location here', 'main_section' => 'Settings', 'section_name' => 'My Account My Residence'],
+            ['keyword' => 'Search  ', 'translated' => 'Search', 'main_section' => 'Settings', 'section_name' => 'My Account My Residence'],
+
+//setting privacy
+
+            ['keyword' => 'setting privacy', 'translated' => 'setting privacy', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'my profile image', 'translated' => 'my profile image', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'profile image privacy', 'translated' => 'profile image privacy', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'for public', 'translated' => 'for public', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'Friends only', 'translated' => 'Friends only', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'family only', 'translated' => 'family only', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'Everyone can see', 'translated' => 'Everyone can see', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'Contact permission', 'translated' => 'Contact permission', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'privacy setting', 'translated' => 'privacy setting', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'user request', 'translated' => 'user request', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'Get greeting', 'translated' => 'Get greeting ', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'recived friend request ', 'translated' => 'recived friend request', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'recived user greeting', 'translated' => 'recived user greeting', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'Visiblities', 'translated' => 'Visiblities', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+            ['keyword' => 'List me in Search', 'translated' => 'List me in Search', 'main_section' => 'Settings', 'section_name' => 'Setting Privacy'],
+
+             //setting Notification
+
+            ['keyword' => 'Setting Notification', 'translated' => 'Setting Notification', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'Notification', 'translated' => 'Notification', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'calls', 'translated' => 'calls', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'message', 'translated' => 'message', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'Ringtone', 'translated' => 'Ringtone', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'Admin Feed', 'translated' => 'Admin Feed', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New Music', 'translated' => 'New Music', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New history', 'translated' => 'New history', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New votes', 'translated' => 'New votes', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New videos', 'translated' => 'New videos', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New events', 'translated' => 'New events', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New Donation', 'translated' => 'New Donation', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New clips', 'translated' => 'New clips', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New wishes', 'translated' => 'New wishes', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'New emotions', 'translated' => 'New emotions', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'Info Banner', 'translated' => 'Info Banner', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'None', 'translated' => 'None', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'Banner', 'translated' => 'Banner', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+            ['keyword' => 'Alert', 'translated' => 'Alert', 'main_section' => 'Settings', 'section_name' => 'Setting Notification'],
+
+//Manage Ringtone
+            ['keyword' => 'Manage Ringtone', 'translated' => 'Manage Ringtone', 'main_section' => 'Settings', 'section_name' => 'Manage Ringtone'],
+            ['keyword' => 'select Ringtone ', 'translated' => 'select Ringtone', 'main_section' => 'Settings', 'section_name' => 'Manage Ringtone'],
+            ['keyword' => 'save & close', 'translated' => 'save & close', 'main_section' => 'Settings', 'section_name' => 'Manage Ringtone'],
+
+//Setting my network
+          ['keyword' => 'Setting My Network', 'translated' => 'Setting My Network', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'Network', 'translated' => 'Network', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'Live Stream', 'translated' => 'Live Stream', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'Play Music', 'translated' => 'Play Music', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'Play Video', 'translated' => 'Play Video', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'Audio Call', 'translated' => 'Audio Call', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'Interview', 'translated' => 'Interview', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+          ['keyword' => 'wifi 5g', 'translated' => 'wifi 5g', 'main_section' => 'Settings', 'section_name' => 'Setting My Network'],
+//Setting my storage
+        ['keyword' => 'Setting My Storage', 'translated' => 'Setting My Storage', 'main_section' => 'Settings', 'section_name' => 'Setting My Storage'],
+        ['keyword' => 'yekbun  Storage', 'translated' => 'yekbun  Storage', 'main_section' => 'Settings', 'section_name' => 'Setting My Storage'],
+        ['keyword' => 'In development will be avaialble soon', 'translated' => 'In development will be avaialble soon', 'main_section' => 'Settings', 'section_name' => 'Setting My Storage'],
+
+
+//Setting policy and terms
+         ['keyword' => 'Setting Policy & Terms', 'translated' => 'Setting Policy & Terms', 'main_section' => 'Settings', 'section_name' => 'Setting Policy & Terms'],
+          ['keyword' => 'Policy & Terms', 'translated' => ' Policy & Terms', 'main_section' => 'Settings', 'section_name' => 'Setting Policy & Terms'],
+
+
+//Setting Contact us
+        ['keyword' => 'Setting Contact us', 'translated' => 'Setting Contact us', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Contact Subject', 'translated' => 'Contact Subject', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Online Shop', 'translated' => 'Online Shop', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Servcies', 'translated' => 'Servcies', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Ads', 'translated' => 'Ads', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Account', 'translated' => 'Account', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Payment', 'translated' => 'Payment', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Else', 'translated' => 'Else', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Type the Title', 'translated' => 'Type the Title', 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'Type the Title here', 'translated' => 'Type the Title here' , 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'How we can help you', 'translated' => 'How we can help you' , 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+        ['keyword' => 'type here', 'translated' => 'type here' , 'main_section' => 'Settings', 'section_name' => 'Setting Contact Us'],
+
+//Setting About us
+
+        ['keyword' => 'Setting About Us', 'translated' => 'Setting About Us' , 'main_section' => 'Settings', 'section_name' => 'Setting About Us'],
+        ['keyword' => 'About us', 'translated' => 'About us' , 'main_section' => 'Settings', 'section_name' => 'Setting About Us'],
+        ['keyword' => 'Notes', 'translated' => 'Notes' , 'main_section' => 'Settings', 'section_name' => 'Setting About Us'],
+
+
+
+
+
+
+            ['keyword' => 'lost_device', 'translated' => 'Lost Device', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'login_error_description', 'translated' => 'Login error Device Description', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'loginerror', 'translated' => 'Login Error', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'newdevice', 'translated' => 'New  Device', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Setup a New  Device', 'translated' => 'Setup a New  Device', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Email Verification', 'translated' => 'Email Verification', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Email Verification Description', 'translated' => 'Email Verification Description', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Type your Email', 'translated' => 'Type your Email', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Email sent to', 'translated' => 'Email sent to  ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Code Verification', 'translated' => 'Code Verification  ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Code Verification Description', 'translated' => 'Code Verification Description ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => ' didnot recived the code ', 'translated' => 'I didnot recived the code ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Resend code', 'translated' => 'Resend code  ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'second left', 'translated' => 'second left  ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Verifiy now', 'translated' => 'Verifiy now  ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'setup a new device', 'translated' => 'setup a new device  ', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'start now', 'translated' => 'start now', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'your new device', 'translated' => 'your new device', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'your_old_device', 'translated' => 'your old device', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+
+            ['keyword' => 'Take me to signin', 'translated' => 'Take me to signin', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Congratulations', 'translated' => 'Congratulations', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Congratulations message', 'translated' => 'Congratulations message', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+
+
         ];
 
 
@@ -410,4 +592,5 @@ class LanguagesHelpers
             return 'Error: ' . $e->getMessage();
         }
     }
+
 }
