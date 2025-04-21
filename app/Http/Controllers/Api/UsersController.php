@@ -123,19 +123,19 @@ class UsersController extends Controller
     public function freind_list(Request $request, $id)
     {
         try {
-            if ($request->user_type == 'family') {
-                $user = User::select('_id')->with(['family' => function ($q) {
-                    $q->with('user');
-                }])->find($id);
-                $family_list = $user->family;
-                return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
-            } else {
-                $user = User::select('_id')->with(['friends' => function ($q) {
-                    $q->with('user');
-                }])->find($id);
-                $friends_list = $user->friends;
-                return ResponseHelper::sendResponse($friends_list, 'Friends List Fetch Successfully');
-            }
+            // if ($request->user_type == 'family') {
+            $user = User::select('_id')->with(['family' => function ($q) {
+                $q->with('user');
+            }])->find($id);
+            $family_list = $user->family;
+            // return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
+            // } else {
+            $user = User::select('_id')->with(['friends' => function ($q) {
+                $q->with('user');
+            }])->find($id);
+            $friends_list = $user->friends;
+            return ResponseHelper::sendResponse(['friends_list' => $friends_list, 'family_list' => $family_list], 'Friends List Fetch Successfully');
+            // }
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Error to Fetch Friends List', false, 403);
         }
