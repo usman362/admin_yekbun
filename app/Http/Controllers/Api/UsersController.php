@@ -117,6 +117,11 @@ class UsersController extends Controller
                 $user->is_online = 0;
                 $user->save();
             }
+            $user = User::find(auth()->user()->id);
+            if ($user) {
+                $user->is_online = 0;
+                $user->save();
+            }
             $friend->delete();
             $friend_to->delete();
             return ResponseHelper::sendResponse(null, 'Unfriend has been Successfully');
