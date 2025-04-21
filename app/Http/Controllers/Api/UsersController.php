@@ -94,12 +94,12 @@ class UsersController extends Controller
                 }
                 $user = User::find($request->user_id);
                 if ($user) {
-                    $user->is_online = 0;
+                    $user->is_online = 1;
                     $user->save();
                 }
                 $user = User::find(auth()->user()->id);
                 if ($user) {
-                    $user->is_online = 0;
+                    $user->is_online = 1;
                     $user->save();
                 }
                 return ResponseHelper::sendResponse($user_request, 'Request Accept Successfully');
