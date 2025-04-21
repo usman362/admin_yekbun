@@ -1324,7 +1324,68 @@
 
     @can('admins.read')
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Entertainment</span>
+            <span class="menu-header-text">Yekbun TV</span>
+        </li>
+
+        <li
+            class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-tv"></i>
+                <div>Zarok TV</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Stories</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Movies</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Series</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Videos</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li
+            class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-tv"></i>
+                <div>Malbat TV</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Movies</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Series</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li
+            class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div>Settings</div>
+            </a>
+            <ul class="menu-sub">
+
+            </ul>
         </li>
     @endcan
 

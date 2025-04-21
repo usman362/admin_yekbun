@@ -53,8 +53,4 @@ class Song extends Model
     public function artist(){
         return $this->belongsTo(Artist::class , 'artist_id');
     }
-
-    public function album(){
-        return $this->belongsTo(Album::class , 'album_id');
-    }
 }

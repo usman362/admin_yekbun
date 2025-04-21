@@ -6,14 +6,12 @@ use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\BazarController;
 use App\Http\Controllers\Api\MediaController;
-use App\Http\Controllers\SongController;
-use App\Http\Controllers\Api\MusicController;
-use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\VotingController;
+use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\Admin\Donation\DonationController as DonationDonationController;
 use App\Http\Controllers\Api\FanPageController;
 use App\Http\Controllers\Api\HistoryController;
@@ -28,12 +26,8 @@ use App\Http\Controllers\Api\StandardUserController;
 use App\Http\Controllers\Api\EventCategoryController;
 use App\Http\Controllers\Api\ManageFanPageController;
 use App\Http\Controllers\Api\MediaCategoryController;
-use App\Http\Controllers\Api\MusicCategoryController;
 use App\Http\Controllers\Api\VotingCategoryController;
 use App\Http\Controllers\Api\HistoryCategoryController;
-use App\Http\Controllers\Api\UploadVideoClipController;
-use App\Http\Controllers\Api\UploadVideoCategoryController;
-use App\Http\Controllers\Api\UploadVideoController;
 use App\Http\Controllers\Api\UploadMovieCategoryController;
 use App\Http\Controllers\Api\UploadMovieController;
 use App\Http\Controllers\Api\AuthController;
@@ -54,11 +48,8 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\UpgradeAccountController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\AnimationEmojiController;
-use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\MarketServiceContorller;
-use App\Http\Controllers\Api\PlaylistController;
 use App\Http\Controllers\Api\ReactionController;
-use App\Http\Controllers\Api\AlbumController;
 use App\Http\Controllers\Api\PostGalleryController;
 use App\Http\Controllers\Api\AvatarsController;
 use App\Http\Controllers\Api\EmojiFeedController;
@@ -242,6 +233,13 @@ Route::prefix('user-roles')
         Route::get('/academic', [UserRolesController::class, 'academic'])->name('academic');
     });
 
+Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
+Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
+Route::get('/get-artist-songs/{id}', [MultimediaController::class, 'getSongByArtists']);
+Route::get('/get-artist-videos/{id}', [MultimediaController::class, 'getClipsByArtists']);
+Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
+Route::get('/get-artists-details/{id}', [MultimediaController::class, 'getArtistDetail']);
+
 // News
 Route::resource('news', NewsController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 Route::resource('news-category', NewsCategoryController::class)->only([
@@ -251,20 +249,7 @@ Route::resource('news-category', NewsCategoryController::class)->only([
     'show',
     'destroy',
 ]);
-Route::resource('music-category', MusicCategoryController::class)->only([
-    'index',
-    'store',
-    'show',
-    'update',
-    'destroy',
-]);
-Route::resource('video-clip', UploadVideoClipController::class)->only([
-    'index',
-    'store',
-    'show',
-    'destroy',
-    'update',
-]);
+
 Route::resource('fan-page', FanPageController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
 Route::resource('manage-fanpage', ManageFanPageController::class)->only([
     'index',
@@ -297,17 +282,6 @@ Route::resource('history-category', HistoryCategoryController::class)->only([
     'update',
 ]);
 
-Route::resource('/storysong', SongController::class);
-Route::resource('/storysong', SongController::class)->names([
-    'index' => 'storysong.index',
-    'create' => 'storysong.create',
-    'store' => 'storysong.store',
-    'show' => 'storysong.show',
-    'edit' => 'storysong.edit',
-    'update' => 'storysong.update',
-    'destroy' => 'storysong.destroy',
-]);
-
 Route::resource('bazar-subcategory', BazarSubCategoryController::class)->only([
     'index',
     'store',
@@ -318,14 +292,6 @@ Route::resource('bazar-subcategory', BazarSubCategoryController::class)->only([
 
 Route::resource('bazar', BazarController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
 
-Route::resource('video-category', UploadVideoCategoryController::class)->only([
-    'index',
-    'store',
-    'show',
-    'destroy',
-    'update',
-]);
-Route::resource('video', UploadVideoController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
 Route::resource('movie-category', UploadMovieCategoryController::class)->only([
     'index',
     'store',
@@ -464,53 +430,9 @@ Route::get('/get-all-emoji/{userId?}/{type?}/{value?}', [AnimationEmojiControlle
 // Reaction
 Route::post('/store-reaction', [ReactionController::class, 'store_reaction'])->name('store-reaction');
 
-// Music
-Route::get('/music', [MusicController::class, 'index'])->name('music');
-Route::get('/popular-song/{id}', [MusicController::class, 'popular_song'])->name('popular-song');
-
-// Artist
-Route::get('/artist-music', [ArtistController::class, 'get_all_artist_music'])->name('artist-music');
-Route::get('/single-aritst-music/{id}', [ArtistController::class, 'get_single_artist_music'])->name(
-    'single-aritst-music'
-);
-Route::get('/get-latest-artist', [ArtistController::class, 'get_two_latest_artist'])->name('get-latest-artist');
-
-// Album
-Route::get('/albums', [AlbumController::class, 'albums']);
-Route::get('/albums/new', [AlbumController::class, 'new_albums']);
-Route::get('/album-details/{id}', [AlbumController::class, 'albums_details']);
 
 // Market Service
 Route::post('/market-services', [MarketServiceContorller::class, 'market_services'])->name('market-services');
-// Route::post('/market-categories' ,[MarketServiceContorller::class , 'market_categories'])->name('market-categories');
-// Route::post('/market-gallery' ,[MarketServiceContorller::class , 'market_gallery'])->name('market-gallery');
-// Route::post('/market-view-options' , [MarketServiceContorller::class , 'market_view_option'])->name('market-view-options');
-
-// Playlist
-Route::post('/playlists', [PlaylistController::class, 'playlist'])->name('playlists');
-Route::post('/get-playlist', [PlaylistController::class, 'get_playlist'])->name('get-playlist');
-Route::get('/get-single-playlist/{playlist_id}', [PlaylistController::class, 'get_single_playlist'])->name(
-    'get-single-playlist'
-);
-// Set music to playlist
-Route::post('/set-music-playlist', [PlaylistController::class, 'set_music_to_playlist'])->name('set-music-playlist');
-// fovourite artist
-Route::post('/favourite-artist', [PlaylistController::class, 'favourite_artist'])->name('favourite-aritst');
-Route::get('/get-favourite-artist/{user_id}', [PlaylistController::class, 'get_favourite_artist'])->name(
-    'get-favourite-artist'
-);
-Route::get('/get-favourite-artist-id/{user_id}', [PlaylistController::class, 'get_favourite_artist_ids'])->name(
-    'get-favourite-artist-id'
-);
-// Route::get('/get-music-playlist' , [PlaylistController::class , 'get_music_playlist'])->name('get-music-playlist');
-// Ablbum controller
-Route::post('/favourite-album', [AlbumController::class, 'favourite_album'])->name('favourite-album');
-Route::get('/get-favourite-album/{user_id}', [AlbumController::class, 'get_favourite_album'])->name(
-    'get-favourite-album'
-);
-Route::get('/get-favourite-album-id/{user_id}', [AlbumController::class, 'get_favourite_album_ids'])->name(
-    'get-favourite-album-id'
-);
 
 // Post gallery
 Route::post('/get-gallery', [PostGalleryController::class, 'get_gallery']);
