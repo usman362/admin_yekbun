@@ -92,6 +92,16 @@ class UsersController extends Controller
                         $request->delete();
                     }
                 }
+                $user = User::find($request->user_id);
+                if ($user) {
+                    $user->is_online = 0;
+                    $user->save();
+                }
+                $user = User::find(auth()->user()->id);
+                if ($user) {
+                    $user->is_online = 0;
+                    $user->save();
+                }
                 return ResponseHelper::sendResponse($user_request, 'Request Accept Successfully');
             } else {
                 $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
