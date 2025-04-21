@@ -29,12 +29,18 @@ class UsersController extends Controller
             ->with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
 
         $friend = UserFriends::where('friend_id', $user->id)->where('user_id', auth()->user()->id)->first();
+        $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', auth()->user()->id)->first();
         if ($friend) {
             $is_friend = 1;
         } else {
             $is_friend = 0;
         }
-        $data = ['user' => $user, 'is_friend' => $is_friend];
+        if ($requestfriend) {
+            $is_request = 1;
+        } else {
+            $is_request = 0;
+        }
+        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request];
         return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
