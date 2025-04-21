@@ -30,6 +30,7 @@ class UsersController extends Controller
 
         $friend = UserFriends::where('friend_id', $user->id)->where('user_id', auth()->user()->id)->first();
         $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', auth()->user()->id)->first();
+        $comingrequest = UserRequest::where('user_id', $user->id)->where('request_id', auth()->user()->id)->first();
         if ($friend) {
             $is_friend = 1;
         } else {
@@ -40,7 +41,12 @@ class UsersController extends Controller
         } else {
             $is_request = 0;
         }
-        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request];
+        if ($comingrequest) {
+            $is_coming = 1;
+        } else {
+            $is_coming = 0;
+        }
+        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request, 'is_coming' => $is_coming];
         return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
