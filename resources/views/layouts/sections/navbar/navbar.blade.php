@@ -529,6 +529,13 @@ $navbarDetached = ($navbarDetached ?? '');
                                         <span class="align-middle">Admin Activity</span>
                                     </a>
                                 </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('system.status') }}">
+                                        <i class="bx bx-chart me-2"></i>
+                                        <span class="align-middle">System Status</span>
+                                    </a>
+                                </li>
                                 @endcan
                                 @if (Auth::check() && false && Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <li>

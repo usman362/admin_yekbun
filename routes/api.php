@@ -75,6 +75,9 @@ use App\Http\Controllers\Api\VotingReactionController;
 Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
 Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
 
+Route::get('/ping', function () {
+    return response()->json(['status' => 'ok']);
+});
 // Authentication
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);

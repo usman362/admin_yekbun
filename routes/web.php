@@ -228,6 +228,8 @@ Route::middleware('check.role:Super Admin')->group(function () {
     Route::post("/admin_activity/news", [AdminProfileController::class, 'store_news'])->name('admin_activity.store_news');
     Route::post("/admin_activity/event", [AdminProfileController::class, 'store_event'])->name('admin_activity.store_event');
     Route::post("/admin_activity/feeds", [AdminProfileController::class, 'store_feeds'])->name('admin_activity.store_feeds');
+
+    Route::get('system-status', [AdminProfileController::class, 'systemStatus'])->name('system.status');
 });
 
 

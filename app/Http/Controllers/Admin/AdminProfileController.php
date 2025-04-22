@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Helpers\Helpers;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use App\Models\News;
 use App\Models\PopFeeds;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class AdminProfileController extends Controller
@@ -449,4 +451,70 @@ class AdminProfileController extends Controller
         return response()->json(['popfeeds' => $popfeeds], 200);
     }
 
+    public function systemStatus()
+    {
+        $statuses = [
+            'Apache' => $this->checkApache(),
+            'MongoDB' => $this->checkMongoDB(),
+            'API' => $this->checkAPI(),
+            'Storage' => $this->checkStorage(),
+        ];
+        // $response = Http::timeout(1)->get('http://127.0.0.1:2002/api/ping');
+        dd($statuses);
+        return view('content.system_status.index', compact('statuses'));
+    }
+
+    private function checkApache()
+    {
+        return function_exists('apache_get_version') ? 'Running' : 'Unknown';
+    }
+
+    private function checkMongoDB()
+    {
+        try {
+            new \MongoDB\Client(); // requires mongodb/mongodb package
+            return 'Running';
+        } catch (\Exception $e) {
+            return 'Not Running';
+        }
+    }
+
+    private function checkAPI()
+    {
+        try {
+            $response = Http::timeout(2)->get('https://admin.yekbun.net/api/ping');
+            return $response->ok() ? 'Running' : 'Not Responding';
+        } catch (\Exception $e) {
+            return 'Not Responding';
+        }
+    }
+
+    private function checkStorage()
+    {
+        $path = base_path(); // or use '/' for root filesystem
+
+        $free = disk_free_space($path);
+        $total = disk_total_space($path);
+        $used = $total - $free;
+
+        return [
+            'total' => $this->formatBytes($total),
+            'used' => $this->formatBytes($used),
+            'free' => $this->formatBytes($free),
+            'percent_used' => round(($used / $total) * 100, 2),
+        ];
+    }
+
+    private function formatBytes($bytes, $precision = 2)
+    {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        $bytes /= pow(1024, $pow);
+
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
 }
