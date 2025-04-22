@@ -45,27 +45,52 @@
                 </thead>
                 <tbody class="table-border-bottom-0">
                     <tr>
-                        <td>
+                        <td>1</td>
+                        <th>
                             Apache
-                        </td>
+                        </th>
                         <td>
-
+                            <span class="badge bg-success">{{$statuses['Apache']}}</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td>2</td>
+                        <th>
                             MongoDB
-                        </td>
+                        </th>
                         <td>
-
+                            <span class="badge bg-success">{{$statuses['MongoDB']}}</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td>3</td>
+                        <th>
                             API
-                        </td>
+                        </th>
                         <td>
-
+                            <span class="badge bg-success">{{$statuses['API']}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <th>
+                            Storage
+                        </th>
+                        <td>
+                           <table class="table" border="1">
+                            <tbody>
+                                @foreach ($statuses['Storage'] as $key => $storage)
+                                <tr style="border-bottom: 1px solid">
+                                    <th>
+                                        {{$key}}
+                                    </th>
+                                    <td style="text-align:right">
+                                        {{$key == 'percent_used' ? round($storage).'%' : $storage}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                           </table>
                         </td>
                     </tr>
                 </tbody>

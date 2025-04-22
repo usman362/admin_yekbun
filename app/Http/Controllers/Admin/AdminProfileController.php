@@ -454,13 +454,12 @@ class AdminProfileController extends Controller
     public function systemStatus()
     {
         $statuses = [
-            'Apache' => $this->checkApache(),
+            'Apache' => 'Running',
             'MongoDB' => $this->checkMongoDB(),
             'API' => $this->checkAPI(),
             'Storage' => $this->checkStorage(),
         ];
         // $response = Http::timeout(1)->get('http://127.0.0.1:2002/api/ping');
-        dd($statuses);
         return view('content.system_status.index', compact('statuses'));
     }
 
