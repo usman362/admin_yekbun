@@ -41,7 +41,8 @@ class PopFeeds extends Model
         'icon3',
         'txt1',
         'txt2',
-        'txt3'
+        'txt3',
+        'survey_data'
     ];
 
     public function getActivitylogOptions(): LogOptions

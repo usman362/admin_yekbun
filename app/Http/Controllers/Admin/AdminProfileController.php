@@ -225,9 +225,33 @@ class AdminProfileController extends Controller
                         $postpop->event_city = $request->event_city;
                         $postpop->event_address = $request->event_address;
                     }
-                    $postpop->txt1 = $request->txt1;
-                    $postpop->txt2 = $request->txt2;
-                    $postpop->txt3 = $request->txt3;
+                    $data = [
+                        ['text' => $request->txt1],
+                        ['text' => $request->txt2],
+                        ['text' => $request->txt3],
+                    ];
+
+                    if ($request->hasFile('icon1')) {
+                        $image = $request->file('icon1');
+                        $icon1 = time() . '-icon1.' . $image->getClientOriginalExtension();
+                        $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
+                        $data[0]['icon'] = $icon1Path;
+                        // $postpop->icon1 = $icon1Path;
+                    }
+                    if ($request->hasFile('icon2')) {
+                        $image = $request->file('icon2');
+                        $icon2 = time()  . '-icon2.' . $image->getClientOriginalExtension();
+                        $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
+                        // $postpop->icon2 = $icon2Path;
+                        $data[1]['icon'] = $icon2Path;
+                    }
+                    if ($request->hasFile('icon3')) {
+                        $image = $request->file('icon3');
+                        $icon3 = time()  . '-icon3.' . $image->getClientOriginalExtension();
+                        $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
+                        // $postpop->icon3 = $icon3Path;
+                        $data[2]['icon'] = $icon3Path;
+                    }
 
                     if ($request->hasFile('image')) {
                         $file = $request->file('image');
@@ -248,31 +272,14 @@ class AdminProfileController extends Controller
                         }
                     }
 
-                    if ($request->hasFile('icon1')) {
-                        $image = $request->file('icon1');
-                        $icon1 = time() . '-icon.' . $image->getClientOriginalExtension();
-                        $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
-                        $postpop->icon1 = $icon1Path;
-                    }
-                    if ($request->hasFile('icon2')) {
-                        $image = $request->file('icon2');
-                        $icon2 = time()  . '-icon.' . $image->getClientOriginalExtension();
-                        $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
-                        $postpop->icon2 = $icon2Path;
-                    }
-                    if ($request->hasFile('icon3')) {
-                        $image = $request->file('icon3');
-                        $icon3 = time()  . '-icon.' . $image->getClientOriginalExtension();
-                        $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
-                        $postpop->icon3 = $icon3Path;
-                    }
+
                     if ($request->hasFile('audio')) {
                         $audio = $request->file('audio');
                         $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
                         $audioPath =  $audio->storeAs("/audio", $audioName, "public");
                         $postpop->audio = $audioPath;
                     }
-
+                    $postpop->survey_data = $data;
                     $postpop->update();
                 }
                 return back()->with('success', 'Popup Feed updated successfully.');
@@ -309,17 +316,17 @@ class AdminProfileController extends Controller
 
             if ($request->hasFile('icon1')) {
                 $icon1Image = $request->file('icon1');
-                $icon1 = time() . '-icon.' . $icon1Image->getClientOriginalExtension();
+                $icon1 = time() . '-icon1.' . $icon1Image->getClientOriginalExtension();
                 $icon1Path =  $icon1Image->storeAs("/images/icons", $icon1, "public");
             }
             if ($request->hasFile('icon2')) {
                 $icon2Image = $request->file('icon2');
-                $icon2 = time()  . '-icon.' . $icon2Image->getClientOriginalExtension();
+                $icon2 = time()  . '-icon2.' . $icon2Image->getClientOriginalExtension();
                 $icon2Path =  $icon2Image->storeAs("/images/icons", $icon2, "public");
             }
             if ($request->hasFile('icon3')) {
                 $icon3Image = $request->file('icon3');
-                $icon3 = time()  . '-icon.' . $icon3Image->getClientOriginalExtension();
+                $icon3 = time()  . '-icon3.' . $icon3Image->getClientOriginalExtension();
                 $icon3Path =  $icon3Image->storeAs("/images/icons", $icon3, "public");
             }
 
@@ -360,12 +367,20 @@ class AdminProfileController extends Controller
                     'is_share' => $request->share ?? 0,
                     'is_emoji' => $request->emoji ?? 0,
                     'type' => $request->type,
-                    'icon1' => $icon1Path ?? '',
-                    'icon2' => $icon2Path ?? '',
-                    'icon3' => $icon3Path ?? '',
-                    'txt1' => $request->txt1,
-                    'txt2' => $request->txt2,
-                    'txt3' => $request->txt3
+                    'survey_data' => [
+                        [
+                            'text' => $request->txt1,
+                            'icon' => $icon1Path ?? '',
+                        ],
+                        [
+                            'text' => $request->txt2,
+                            'icon' => $icon2Path ?? '',
+                        ],
+                        [
+                            'text' => $request->txt3,
+                            'icon' => $icon3Path ?? '',
+                        ],
+                    ],
                 ]);
 
                 if ($request->type == "Event") {
