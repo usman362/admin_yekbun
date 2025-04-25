@@ -64,11 +64,24 @@ class UsersController extends Controller
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id],
                 ['request_id' => $request->user_id, 'user_id' => auth()->user()->id, 'status' => $status]
             );
-            $user = User::select('name', 'last_name', 'username', 'image', 'is_online')->find($request->user_id);
-            NotificationHelper::sendNotification($request->user_id, 'Request Notification', $user);
-            return ResponseHelper::sendResponse($user_request, 'User Request Send Successfully');
+            $user = User::select('name', 'last_name', 'username', 'image', 'is_online', 'fcm_token')->find($request->user_id);
+            $username = $user->name . ' ' . $user->last_name;
+            NotificationHelper::sendNotification($request->user_id, $username, 'You have a New Friend Request!');
+            $data = [
+                "to" => $user->fcm_token,
+                "notification" => [
+                    "title" => $username,
+                    "body" => "You have a New Friend Request!"
+                ],
+                "data" => [
+                    "type" => "friend_request",
+                    "user_id" => $request->user_id,
+                    "sender" => auth()->user
+                ]
+            ];
+            return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
         } catch (Exception $e) {
-            // Log error with file name, line number, and full message
+            // Log errorwith file name, line number, and full message
             Log::error('UserRequest Error: ' . $e->getMessage(), [
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
