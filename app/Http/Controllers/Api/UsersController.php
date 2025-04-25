@@ -67,20 +67,24 @@ class UsersController extends Controller
             $user = User::select('name', 'last_name', 'username', 'image', 'is_online', 'fcm_token')->find($request->user_id);
             $username = $user->name . ' ' . $user->last_name;
             $current_user = User::find(auth()->user()->id);
-            NotificationHelper::sendNotification($request->user_id, ($current_user->name.' '.$current_user->last_name), 'You have a New Friend Request!');
-            $data = [
-                "to" => $user->fcm_token,
-                "notification" => [
-                    "title" => $current_user->name.' '.$current_user->last_name,
-                    "body" => "You have a New Friend Request!"
-                ],
-                "data" => [
-                    "type" => "friend_request",
-                    "user_id" => $request->user_id,
-                    "sender" => $current_user
-                ]
-            ];
-            return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
+            if($request->status == 1){
+                NotificationHelper::sendNotification($request->user_id, ($current_user->name.' '.$current_user->last_name), 'You have a New Friend Request!');
+                $data = [
+                    "to" => $user->fcm_token,
+                    "notification" => [
+                        "title" => $current_user->name.' '.$current_user->last_name,
+                        "body" => "You have a New Friend Request!"
+                    ],
+                    "data" => [
+                        "type" => "friend_request",
+                        "user_id" => $request->user_id,
+                        "sender" => $current_user
+                    ]
+                ];
+                return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
+            }else{
+                return ResponseHelper::sendResponse(null, 'User Request Cancelled Successfully');
+            }
         } catch (Exception $e) {
             // Log errorwith file name, line number, and full message
             Log::error('UserRequest Error: ' . $e->getMessage(), [
