@@ -132,6 +132,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
 });
 
+Route::post('send-test-notification',[UsersController::class,'testNotification']);
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
 Route::get("/admin-activity/donation", [AdminActivityController::class, 'getDonations']);
