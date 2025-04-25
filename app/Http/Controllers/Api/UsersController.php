@@ -134,16 +134,16 @@ class UsersController extends Controller
         try {
             $friend = UserFriends::where('user_id', $id)->where('friend_id', auth()->user()->id)->first();
             $friend_to = UserFriends::where('friend_id', $id)->where('user_id', auth()->user()->id)->first();
-            $user = User::find($id);
-            if ($user) {
-                $user->is_online = 0;
-                $user->save();
-            }
-            $user = User::find(auth()->user()->id);
-            if ($user) {
-                $user->is_online = 0;
-                $user->save();
-            }
+            // $user = User::find($id);
+            // if ($user) {
+            //     $user->is_online = 0;
+            //     $user->save();
+            // }
+            // $user = User::find(auth()->user()->id);
+            // if ($user) {
+            //     $user->is_online = 0;
+            //     $user->save();
+            // }
             $friend->delete();
             $friend_to->delete();
             return ResponseHelper::sendResponse(null, 'Unfriend has been Successfully');
