@@ -71,7 +71,7 @@ class UsersController extends Controller
             $data = [
                 "to" => $user->fcm_token,
                 "notification" => [
-                    "title" => $username,
+                    "title" => $current_user->name.' '.$current_user->last_name,
                     "body" => "You have a New Friend Request!"
                 ],
                 "data" => [
