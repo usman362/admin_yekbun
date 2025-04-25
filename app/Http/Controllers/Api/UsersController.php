@@ -67,6 +67,7 @@ class UsersController extends Controller
             $user = User::select('name', 'last_name', 'username', 'image', 'is_online', 'fcm_token')->find($request->user_id);
             $username = $user->name . ' ' . $user->last_name;
             NotificationHelper::sendNotification($request->user_id, $username, 'You have a New Friend Request!');
+            $current_user = User::find(auth()->user()->id);
             $data = [
                 "to" => $user->fcm_token,
                 "notification" => [
@@ -76,7 +77,7 @@ class UsersController extends Controller
                 "data" => [
                     "type" => "friend_request",
                     "user_id" => $request->user_id,
-                    "sender" => auth()->user
+                    "sender" => $current_user
                 ]
             ];
             return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
