@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Voting;
@@ -328,6 +329,42 @@ class VotingController extends Controller
                 ]
             ],
         ], 200);
+    }
+
+    public function get_province_statistics($id)
+    {
+        $vote = Voting::select('options')->find($id);
+        if (empty($vote)) {
+            return response()->json(['message' => 'Vote Not Found!', 'success' => false], 404);
+        }
+
+        // Fetch only Kurdish users
+        $users = DB::table('users')
+            ->where('origin', 'kurdish')
+            ->select('_id', 'province')
+            ->get();
+
+        // Group users by province
+        $usersByProvince = $users->groupBy('province');
+
+        $statistics = [];
+
+        foreach ($usersByProvince as $province => $provinceUsers) {
+            $userIds = $provinceUsers->pluck('_id')->toArray();
+
+            // Fetch reactions for users in this province
+            $reactions = DB::table('voting_reactions')
+                ->whereIn('user_id', $userIds)
+                ->where('voting_id', $id)
+                ->count();
+
+            $statistics[] = [
+                'province' => $province,
+                'total_votes' => $reactions
+            ];
+        }
+        
+        return ResponseHelper::sendResponse(['vote' => $vote,'statistics' => $statistics],'Voting Statistics by Province!');
     }
 }
 

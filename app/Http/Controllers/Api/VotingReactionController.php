@@ -18,7 +18,7 @@ class VotingReactionController extends Controller
         $reactions = VotingReaction::select('voting_id', 'user_id', 'type')
             ->where('voting_id', $voting_id)
             ->with(['user' => function ($q) {
-                $q->select('name', 'username', 'email', 'last_name');
+                $q->select('name','image', 'username', 'email', 'last_name');
             }]);
         if (!empty($request->user_id)) {
             $reactions->where('user_id', $request->user_id);

@@ -425,6 +425,7 @@ Route::get('/fetch-voting/{id?}', [VotingController::class, 'fetch']);
 Route::get('/fetch-voting/all/{id?}', [VotingController::class, 'fetch_all']);
 Route::get('/voting-details/{id}/{user_id?}', [VotingController::class, 'get_details']);
 Route::get('/voting-stats/{id}', [VotingController::class, 'get_statistics']);
+Route::get('/voting-province-stats/{id}', [VotingController::class, 'get_province_statistics']);
 
 //Animation Emojji
 Route::get('/get-all-emoji/{userId?}/{type?}/{value?}', [AnimationEmojiController::class, 'get_all_emoji'])->name(
