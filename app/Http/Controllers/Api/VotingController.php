@@ -315,20 +315,59 @@ class VotingController extends Controller
             $total_neutrals += $stat['male']['neutrals'] + $stat['female']['neutrals'];
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Voting Statistics!',
-            'data' => [
-                'vote' => $vote,
-                'statistics' => $statistics,
-                'totals' => [
-                    'reviews' => $total_reviews,
-                    'likes' => $total_likes,
-                    'neutrals' => $total_neutrals,
-                    'dislikes' => $total_dislikes
-                ]
-            ],
-        ], 200);
+        // Fetch only Kurdish users
+        $users = DB::table('users')
+            ->where('origin', 'kurdish')
+            ->select('_id', 'province')
+            ->get();
+
+        // Group users by province
+        $usersByProvince = $users->groupBy('province');
+
+        $province_statistics = [];
+
+        foreach ($usersByProvince as $province => $provinceUsers) {
+            $userIds = $provinceUsers->pluck('_id')->toArray();
+
+            // Fetch reactions for users in this province
+            $province_reactions = DB::table('voting_reactions')
+                ->whereIn('user_id', $userIds)
+                ->where('voting_id', $id)
+                ->count();
+
+            $province_statistics[] = [
+                'province' => $province,
+                'total_votes' => $province_reactions
+            ];
+        }
+
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Voting Statistics!',
+        //     'data' => [
+        //         'vote' => $vote,
+        //         'statistics' => $statistics,
+        //         'province_statistics' => $province_statistics,
+        //         'totals' => [
+        //             'reviews' => $total_reviews,
+        //             'likes' => $total_likes,
+        //             'neutrals' => $total_neutrals,
+        //             'dislikes' => $total_dislikes
+        //         ]
+        //     ],
+        // ], 200);
+
+        return ResponseHelper::sendResponse([
+            'vote' => $vote,
+            'statistics' => $statistics,
+            'province_statistics' => $province_statistics,
+            'totals' => [
+                'reviews' => $total_reviews,
+                'likes' => $total_likes,
+                'neutrals' => $total_neutrals,
+                'dislikes' => $total_dislikes
+            ]
+        ], 'Voting Statistics!');
     }
 
     public function get_province_statistics($id)
@@ -363,8 +402,8 @@ class VotingController extends Controller
                 'total_votes' => $reactions
             ];
         }
-        
-        return ResponseHelper::sendResponse(['vote' => $vote,'statistics' => $statistics],'Voting Statistics by Province!');
+
+        return ResponseHelper::sendResponse(['vote' => $vote, 'statistics' => $statistics], 'Voting Statistics by Province!');
     }
 }
 
