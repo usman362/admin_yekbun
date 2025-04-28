@@ -40,7 +40,9 @@ class MultimediaController extends Controller
 
     public function getArtists()
     {
-        $artists = Artist::with(['songs', 'videos', 'province'])->orderBy('created_at', 'desc')->get();
+        $artists = Artist::with(['songs', 'videos', 'province' => function($q){
+            $q->with('country');
+        }])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
 
