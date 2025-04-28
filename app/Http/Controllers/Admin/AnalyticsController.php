@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Music;
+use App\Models\Song;
 use App\Models\Country;
 
 class AnalyticsController extends Controller
@@ -17,7 +17,7 @@ class AnalyticsController extends Controller
     $female_account = User::where('gender', '=', 'female')->count();
 //     $music=0;
 // $country=0;
-    $music = Music::count(); 
+    $music = Song::count();
     $country  = Country::count();
     return view('content.dashboard.dashboards-analytics' , compact('male_account', 'female_account', 'music' , 'country'));
   }

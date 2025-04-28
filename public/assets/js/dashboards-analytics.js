@@ -835,3 +835,21 @@
     weeklyExpenses.render();
   }
 })();
+const canvas = document.getElementById("trafficChart");
+const ctx = canvas.getContext("2d");
+
+const data = [11, 11, 11, 11, 11, 45];
+const colors = ["#f050a1", "#8e44ad", "#b388eb", "#3d348b", "#4a148c", "#dddddd", "#001d3d"];
+
+let startAngle = 0;
+
+data.forEach((value, index) => {
+  const sliceAngle = (value / 100) * 2 * Math.PI;
+  ctx.beginPath();
+  ctx.fillStyle = colors[index];
+  ctx.moveTo(70, 70);
+  ctx.arc(70, 70, 60, startAngle, startAngle + sliceAngle);
+  ctx.closePath();
+  ctx.fill();
+  startAngle += sliceAngle;
+});
