@@ -185,7 +185,7 @@ class MultimediaController extends Controller
     public function store_artist_video_views(Request $request, $id)
     {
         try {
-            $views = SongViews::updateOrCreate(
+            $views = VideoClipViews::updateOrCreate(
                 ['user_id' => auth()->user()->id, 'artist_id' => $id],
                 ['user_id' => auth()->user()->id, 'artist_id' => $id]
             );
