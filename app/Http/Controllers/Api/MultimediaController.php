@@ -153,7 +153,7 @@ class MultimediaController extends Controller
     {
         $artist = Artist::with(['songs', 'videos'])->find($id);
         $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', auth()->user()->id)->get();
-        if ($fav) {
+        if ($fav->count() > 0) {
             $is_favorite = 1;
         } else {
             $is_favorite = 0;
