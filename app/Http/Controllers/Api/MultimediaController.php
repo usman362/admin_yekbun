@@ -6,9 +6,12 @@ use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Artist;
+use App\Models\ArtistFavorite;
 use App\Models\Song;
+use App\Models\SongViews;
 use App\Models\Video;
 use App\Models\VideoClip;
+use App\Models\VideoClipViews;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -40,9 +43,26 @@ class MultimediaController extends Controller
 
     public function getArtists()
     {
-        $artists = Artist::with(['songs', 'videos', 'province' => function($q){
+        $artists = Artist::with(['songs', 'videos', 'province' => function ($q) {
             $q->with('country');
         }])->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
+    }
+
+    public function getFavArtists()
+    {
+        $artist_ids = ArtistFavorite::where('user_id', auth()->user()->id)->pluck('artist_id');
+        $artists = Artist::whereIn('id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
+            $q->with('country');
+        }])->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
+    }
+
+    public function getPopularArtists()
+    {
+        $artists = Artist::with(['songs', 'videos', 'province' => function ($q) {
+            $q->with('country');
+        }])->orderBy('total_views', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
 
@@ -132,6 +152,67 @@ class MultimediaController extends Controller
     public function getArtistDetail(Request $request, $id)
     {
         $artist = Artist::with(['songs', 'videos'])->find($id);
-        return ResponseHelper::sendResponse($artist, 'Artist Detail Fetch Successfully!');
+        $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', auth()->user()->id)->get();
+        if ($fav) {
+            $is_favorite = 1;
+        } else {
+            $is_favorite = 0;
+        }
+        return ResponseHelper::sendResponse(['artist' => $artist, 'is_favorite' => $is_favorite], 'Artist Detail Fetch Successfully!');
+    }
+
+    public function store_artist_song_views(Request $request, $id)
+    {
+        try {
+            $views = SongViews::updateOrCreate(
+                ['user_id' => auth()->user()->id, 'artist_id' => $id],
+                ['user_id' => auth()->user()->id, 'artist_id' => $id]
+            );
+
+            $songViews = SongViews::where('artist_id', $id)->get();
+            $videoViews = VideoClipViews::where('artist_id', $id)->get();
+
+            $artist = new Artist();
+            $artist->song_views = $songViews->count();
+            $artist->total_views = $songViews->count() + $videoViews->count();
+            $artist->save();
+            return ResponseHelper::sendResponse(['song_views' => $songViews->count(), 'video_views' => $videoViews->count(), 'total_views' => ($songViews->count() + $videoViews->count())], 'Artist Views has been Successfully Saved!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Save Artist Views', false, 403);
+        }
+    }
+
+    public function store_artist_video_views(Request $request, $id)
+    {
+        try {
+            $views = SongViews::updateOrCreate(
+                ['user_id' => auth()->user()->id, 'artist_id' => $id],
+                ['user_id' => auth()->user()->id, 'artist_id' => $id]
+            );
+
+            $songViews = SongViews::where('artist_id', $id)->get();
+            $videoViews = VideoClipViews::where('artist_id', $id)->get();
+
+            $artist = new Artist();
+            $artist->video_views = $songViews->count();
+            $artist->total_views = $songViews->count() + $videoViews->count();
+            $artist->save();
+            return ResponseHelper::sendResponse(['song_views' => $songViews->count(), 'video_views' => $videoViews->count(), 'total_views' => ($songViews->count() + $videoViews->count())], 'Artist Views has been Successfully Saved!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Save Artist Views', false, 403);
+        }
+    }
+
+    public function store_artist_favorites(Request $request, $id)
+    {
+        try {
+            $favorites = ArtistFavorite::updateOrCreate(
+                ['user_id' => auth()->user()->id, 'artist_id' => $id],
+                ['user_id' => auth()->user()->id, 'artist_id' => $id]
+            );
+            return ResponseHelper::sendResponse(null, 'Artist Favorites has been Successfully Saved!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Save Artist Favorites', false, 403);
+        }
     }
 }

@@ -130,9 +130,13 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('get-user-visitor/{id}', [UsersController::class, 'get_vistor']);
     Route::post('update-fcm-token', [UsersController::class, 'updateDeviceToken']);
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
+    Route::get('get-favorite-artists', [MultiMediaController::class, 'getFavArtists']);
+    Route::get('store-artist-song-views/{id}', [MultiMediaController::class, 'store_artist_song_views']);
+    Route::get('store-artist-video-views/{id}', [MultiMediaController::class, 'store_artist_video_views']);
+    Route::get('store-artist-favorites/{id}', [MultiMediaController::class, 'store_artist_favorites']);
 });
 
-Route::post('send-test-notification',[UsersController::class,'testNotification']);
+Route::post('send-test-notification', [UsersController::class, 'testNotification']);
 
 Route::get("/admin-activity/system-info", [AdminActivityController::class, 'getSystemInfo']);
 Route::get("/admin-activity/donation", [AdminActivityController::class, 'getDonations']);
