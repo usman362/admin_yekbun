@@ -16,25 +16,25 @@ class MultimediaController extends Controller
 {
     public function getAllSongs()
     {
-        $songs = Song::with('artist')->get();
+        $songs = Song::with('artist')->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($songs, 'All Songs Fetch Successfully!');
     }
 
     public function getAllClips()
     {
-        $videos = VideoClip::with('artist')->get();
+        $videos = VideoClip::with('artist')->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($videos, 'All Video Clips Fetch Successfully!');
     }
 
     public function getSongByArtists(Request $request, $id)
     {
-        $songs = Song::where('artist_id', $id)->get();
+        $songs = Song::where('artist_id', $id)->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($songs, 'Songs Fetch Successfully!');
     }
 
     public function getClipsByArtists(Request $request, $id)
     {
-        $videos = VideoClip::where('artist_id', $id)->get();
+        $videos = VideoClip::where('artist_id', $id)->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($videos, 'Video Clips Fetch Successfully!');
     }
 
