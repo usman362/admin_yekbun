@@ -194,7 +194,7 @@ class MultimediaController extends Controller
             $videoViews = VideoClipViews::where('artist_id', $id)->get();
 
             $artist = new Artist();
-            $artist->video_views = $songViews->count();
+            $artist->video_views = $videoViews->count();
             $artist->total_views = $songViews->count() + $videoViews->count();
             $artist->save();
             return ResponseHelper::sendResponse(['song_views' => $songViews->count(), 'video_views' => $videoViews->count(), 'total_views' => ($songViews->count() + $videoViews->count())], 'Artist Views has been Successfully Saved!');
