@@ -92,6 +92,19 @@ class UserProfileController extends Controller
         if (!empty($request->marital_status) && $request->marital_status !== "") {
             $profile->marital_status  = $request->marital_status;
         }
+        if (!empty($request->is_language) && $request->is_language !== "") {
+            $profile->is_language  = $request->is_language;
+        }
+        if (!empty($request->is_music) && $request->is_music !== "") {
+            $profile->is_music  = $request->is_music;
+        }
+        if (!empty($request->is_else) && $request->is_else !== "") {
+            $profile->is_else  = $request->is_else;
+        }
+
+        if (!empty($request->is_disabled) && $request->is_disabled !== "") {
+            $profile->is_disabled  = $request->is_disabled;
+        }
 
         if (!empty($request->password) && $request->password !== "") {
             if(!Hash::check($request->old_password,$profile->password)){
