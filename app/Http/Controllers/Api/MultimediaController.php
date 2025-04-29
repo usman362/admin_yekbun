@@ -151,7 +151,9 @@ class MultimediaController extends Controller
 
     public function getArtistDetail(Request $request, $id)
     {
-        $artist = Artist::with(['songs', 'videos'])->find($id);
+        $artist = Artist::with(['songs', 'videos', 'province' => function ($q) {
+            $q->with('country');
+        }])->find($id);
         $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', auth()->user()->id)->get();
         if ($fav->count() > 0) {
             $is_favorite = 1;
