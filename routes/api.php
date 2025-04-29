@@ -84,7 +84,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register-verify-device', [AuthController::class, 'verifyDevice']);
 Route::post('/register-device', [AuthController::class, 'registerDevice']);
 Route::post('forgot-password', [AuthController::class, 'forgot_password']);
-Route::post('change-password', [AuthController::class, 'change_password']);
+// Route::post('change-password', [AuthController::class, 'change_password']);
 Route::post('/reset', [AuthController::class, 'reset'])->name('password.reset');
 Route::post('/reset/password', [AuthController::class, 'resetpassword'])->name('reset.complete');
 Route::post('/user-otp-code', [AuthController::class, 'getCode'])->name('get.userCode');
@@ -342,8 +342,7 @@ Route::delete('/destroy_donation/{id}', [DonationDonationController::class, 'des
 
 // Account Setting  Controller
 Route::post('/change-password', [AccountSettingController::class, 'change_password'])
-    ->name('change-password')
-    ->middleware('auth:sanctum');
+    ->name('change-password');
 
 Route::post('/send-old-email-code', [AccountSettingController::class, 'send_old_email_code'])->name('send-old-email-code');
 Route::post('/send-new-email-code', [AccountSettingController::class, 'send_new_email_code'])->name('send-new-email-code');
