@@ -580,7 +580,7 @@
 
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <img src=" {{ $items>image ? asset('storage/' . $items>image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                                    <img src=" {{ $items->image ? asset('storage/' . $items->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                         alt="user" height="24" class="me-2">
                                                     <span>{{ $items->name }}{{ $items->last_name }}</span>
                                                 </div>
