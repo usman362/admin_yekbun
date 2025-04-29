@@ -66,7 +66,12 @@ class AccountSettingController extends Controller
         );
 
         try {
-            Mail::to($request->newEmail)->send(new SendCodeMail(['code' => $code]));
+            $details = [
+                'title' => 'Mail from Yekbun.org',
+                'code' => $code,
+                'username' => 'User',
+            ];
+            Mail::to($request->newEmail)->send(new SendCodeMail($details));
             return response()->json(['success' => true, 'message' => "OTP sent to new email."]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => "Failed to send OTP.", 'error' => $e->getMessage()]);
