@@ -41,6 +41,9 @@ class UserProfileController extends Controller
         if (!empty($request->name) && $request->name !== "") {
             $profile->name = $request->name;
         }
+        if (!empty($request->nickname) && $request->nickname !== "") {
+            $profile->nickname = $request->nickname;
+        }
         if (!empty($request->username) && $request->username !== "") {
             $profile->username = $request->username;
         }
@@ -56,6 +59,40 @@ class UserProfileController extends Controller
         if (!empty($request->phone) && $request->phone !== "") {
             $profile->phone  = $request->phone;
         }
+        if (!empty($request->public_image) && $request->public_image !== "") {
+            $profile->public_image  = $request->public_image;
+        }
+        if (!empty($request->friends_image) && $request->friends_image !== "") {
+            $profile->friends_image  = $request->friends_image;
+        }
+        if (!empty($request->family_image) && $request->family_image !== "") {
+            $profile->family_image  = $request->family_image;
+        }
+        if (!empty($request->friends_request) && $request->friends_request !== "") {
+            $profile->friends_request  = $request->friends_request;
+        }
+        if (!empty($request->get_greetings) && $request->get_greetings !== "") {
+            $profile->get_greetings  = $request->get_greetings;
+        }
+        if (!empty($request->search_option) && $request->search_option !== "") {
+            $profile->search_option  = $request->search_option;
+        }
+        if (!empty($request->origin) && $request->origin !== "") {
+            $profile->origin  = $request->origin;
+        }
+        if (!empty($request->city) && $request->city !== "") {
+            $profile->city  = $request->city;
+        }
+        if (!empty($request->province) && $request->province !== "") {
+            $profile->province  = $request->province;
+        }
+        if (!empty($request->country) && $request->country !== "") {
+            $profile->country  = $request->country;
+        }
+        if (!empty($request->marital_status) && $request->marital_status !== "") {
+            $profile->marital_status  = $request->marital_status;
+        }
+
         if (!empty($request->password) && $request->password !== "") {
             if(!Hash::check($request->old_password,$profile->password)){
                 return response()->json(['message', 'Invalid Old Password'],403);
@@ -67,6 +104,7 @@ class UserProfileController extends Controller
             $image_path = Helpers::fileUpload($request->image, 'images/user');
             $profile->image = $image_path;
         }
+
         if ($profile->update()) {
             return response()->json(['message', 'Your profile has been updated'],201);
         } else {
