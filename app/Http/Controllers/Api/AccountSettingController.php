@@ -105,7 +105,7 @@ class AccountSettingController extends Controller
         $user->update(['email' => $request->newEmail]);
 
         // Delete used OTPs
-        $oldOtp->delete();
+        // $oldOtp->delete();
         $newOtp->delete();
 
         return response()->json(['success' => true, 'message' => 'Email successfully updated.']);
