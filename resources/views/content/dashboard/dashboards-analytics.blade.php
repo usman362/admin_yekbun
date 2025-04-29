@@ -580,14 +580,14 @@
 
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <img src=" {{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                                    <img src=" {{ $items>image ? asset('storage/' . $items>image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                         alt="user" height="24" class="me-2">
                                                     <span>{{ $items->name }}{{ $items->last_name }}</span>
                                                 </div>
                                             </td>
                                             <td>{{ $items->device_imei }}</td>
                                             <td>
-                                                {{ $item->device_model }}
+                                                {{ $items->device_model }}
                                             </td>
                                             <td>
                                                 {{ $items->device_serial }}
@@ -618,7 +618,7 @@
 
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <img src=" {{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                                    <img src=" {{ $ios->image ? asset('storage/' . $ios->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                         alt="user" height="24" class="me-2">
                                                     <span>{{ $ios->name }}{{ $ios->last_name }}</span>
                                                 </div>
