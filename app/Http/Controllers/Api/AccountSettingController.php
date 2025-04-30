@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Models\User;
 use App\Models\UserCode;
 use App\Mail\SendCodeMail;
@@ -20,13 +21,13 @@ class AccountSettingController extends Controller
             'oldPassword' => 'required',
 
         ]);
-        if (!Hash::check($request->oldPassword, $request->user()->password)) {
-            return response()->json(['success' => false, 'message' => 'Current password is incorrect.']);
+        if (!Hash::check($request->oldPassword, Auth::user()->password)) {
+            return ResponseHelper::sendResponse(null, 'Current password is incorrect!', false, 403);
         } else {
             User::where('id', Auth::id())->update([
                 'password' => Hash::make($request->password)
             ]);
-            return response()->json(['success' => true, 'message' => 'Password successfully updated.']);
+            return ResponseHelper::sendResponse(null, 'Password successfully updated!');
         }
     }
 
