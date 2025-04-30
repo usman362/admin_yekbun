@@ -110,6 +110,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('/change-password', [AccountSettingController::class, 'change_password'])
     ->name('change-password');
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/get-my-details', [AuthController::class, 'getMyDetails']);
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
     Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
     Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);

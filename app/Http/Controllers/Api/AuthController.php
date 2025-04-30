@@ -490,4 +490,10 @@ class AuthController extends Controller
             return response()->json(['message' => 'Something Went Wrong', 'success' => false], 403);
         }
     }
+
+    public function getMyDetails()
+    {
+        $user = User::find(Auth::id());
+        return ResponseHelper::sendResponse($user,'My Details has been Fetched Successfully!');
+    }
 }
