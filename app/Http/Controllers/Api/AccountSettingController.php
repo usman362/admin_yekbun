@@ -7,6 +7,7 @@ use App\Models\UserCode;
 use App\Mail\SendCodeMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -22,7 +23,7 @@ class AccountSettingController extends Controller
         if (!Hash::check($request->oldPassword, $request->user()->password)) {
             return response()->json(['success' => false, 'message' => 'Current password is incorrect.']);
         } else {
-            User::whereId($request->user()->id)->update([
+            User::where('id', Auth::id())->update([
                 'password' => Hash::make($request->password)
             ]);
             return response()->json(['success' => true, 'message' => 'Password successfully updated.']);

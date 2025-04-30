@@ -96,8 +96,19 @@ Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
 
 //User Profile
 
+// Account Setting  Controller
+
+Route::post('/send-old-email-code', [AccountSettingController::class, 'send_old_email_code'])->name('send-old-email-code');
+Route::post('/send-new-email-code', [AccountSettingController::class, 'send_new_email_code'])->name('send-new-email-code');
+Route::post('/change-email', [AccountSettingController::class, 'change_email'])->name('change-email');
+Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
+Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
+
 
 Route::middleware('jwt.custom')->group(function () {
+
+    Route::post('/change-password', [AccountSettingController::class, 'change_password'])
+    ->name('change-password');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
     Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
@@ -339,16 +350,6 @@ Route::put('/edit_donation/{id}', [DonationDonationController::class, 'edit_dona
 Route::delete('/destroy_donation/{id}', [DonationDonationController::class, 'destroy_donation'])->name(
     'destroy.donation'
 );
-
-// Account Setting  Controller
-Route::post('/change-password', [AccountSettingController::class, 'change_password'])
-    ->name('change-password');
-
-Route::post('/send-old-email-code', [AccountSettingController::class, 'send_old_email_code'])->name('send-old-email-code');
-Route::post('/send-new-email-code', [AccountSettingController::class, 'send_new_email_code'])->name('send-new-email-code');
-Route::post('/change-email', [AccountSettingController::class, 'change_email'])->name('change-email');
-Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
-Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
 
 // Contact Us Controller
 Route::post('/contact-us', [ContactUsController::class, 'contact_us'])->name('contact-us');
