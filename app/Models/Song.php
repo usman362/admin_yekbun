@@ -32,16 +32,16 @@ class Song extends Model
         'audio' => ''
      ];
 
-     protected static function boot()
-     {
-         parent::boot();
+    //  protected static function boot()
+    //  {
+    //      parent::boot();
 
-         static::creating(function ($history) {
-             $lastHistory = self::orderBy('id', 'desc')->first();
-             $lastId = $lastHistory ? intval(substr($lastHistory->custom_id, 2)) : 99;
-             $history->custom_id = 'MU-' . ($lastId + 1);
-         });
-     }
+    //      static::creating(function ($history) {
+    //          $lastHistory = self::orderBy('id', 'desc')->first();
+    //          $lastId = $lastHistory ? intval(substr($lastHistory->custom_id, 2)) : 99;
+    //          $history->custom_id = 'MU-' . ($lastId + 1);
+    //      });
+    //  }
 
     public function music_category(){
         return $this->belongsTo(MusicCategory::class , 'category_id' );

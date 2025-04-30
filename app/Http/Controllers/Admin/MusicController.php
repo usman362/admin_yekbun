@@ -243,8 +243,15 @@ class MusicController extends Controller
     {
         try {
             foreach ($request->songs as $key => $audioPath) {
+                $songCount = Song::count() + 1;
                 $song = new Song();
-                $song->name = Str::after($audioPath,'___');
+                $name = pathinfo($request->songs_file_name[$key], PATHINFO_FILENAME);
+                // Step 2: Replace special delimiters (like "_-_" and "_") with spaces
+                $prettyName = str_replace(['_-_', '_'], ' ', $name);
+                // Optional: Trim multiple spaces
+                $prettyName = preg_replace('/\s+/', ' ', $prettyName);
+                $song->name = $prettyName;
+                $song->custom_id = 'MU-' . str_pad($songCount, 3, '0', STR_PAD_LEFT);
                 $song->music_type = $request->music_type;
                 $song->artist_id = $request->artist_id;
                 $song->audio = $audioPath;

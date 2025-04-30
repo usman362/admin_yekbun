@@ -53,7 +53,7 @@ class ArtistController extends Controller
                                 <a href="javascript:void(0)" class="text-body text-truncate">
                                     <span class="fw-semibold">' . e($artist->name) . '</span>
                                 </a>
-                                <small class="fw-semibold">' . e($artist->gender) . ' - ' . ($artist->province->name ?? 'N/A') . '</small>
+                                <small class="fw-semibold">'. ($artist->province->name ?? 'N/A') . '</small>
                             </div>
                         </div>';
                     return $info;

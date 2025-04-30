@@ -42,7 +42,7 @@
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmusicModal">Add Songs</button>
             {{-- @endcan --}}
             {{-- @can('artist.create') --}}
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add Video
+            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add Video
                 Clips</button>
             {{-- @endcan --}}
         </div>
@@ -145,6 +145,7 @@
                             <thead>
                                 <tr>
                                     <th>Song ID</th>
+                                    <th>Label</th>
                                     <th>Song Title</th>
                                     <th>Tracks</th>
                                     <th>Total Listen</th>
@@ -305,18 +306,18 @@
                     const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
                         '.hidden-inputs');
                     hiddenInputsContainer.innerHTML +=
-                        `<input type="hidden" name="${hiddenInputName}" value="${response.path}" data-path="${response.path}">`;
+                        `<input type="hidden" name="${hiddenInputName}" value="${response.path}" id="file_path" data-path="${response.path}">`;
                     let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
                         return match.slice(0, -2);
                     });
                     if (limit == 1) {
 
                         hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                            `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
                         hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_length" value="${response.duration}">`;
+                            `<input type="hidden" name="${fileInputName}_file_length" id="file_length" value="${response.duration}">`;
                         hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_size" value="${response.size}">`;
+                            `<input type="hidden" name="${fileInputName}_file_size" id="file_size" value="${response.size}">`;
                     } else {
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
@@ -325,6 +326,19 @@
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_size[]" value="${response.size}">`;
                         dropzoneKey++;
+                    }
+
+                    if (hiddenInputName == 'video') {
+                        // ✅ Get video duration
+                        const video = document.createElement('video');
+                        video.preload = 'metadata';
+                        video.src = URL.createObjectURL(file);
+                        video.onloadedmetadata = function() {
+                            const duration = video.duration.toFixed(2); // ✅ Video duration in seconds
+                            generateThumbnails(response.path, parseInt(duration));
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_durations" id="file_duration" value="${duration}" data-path="${response.path}">`;
+                        }
                     }
 
                 },
@@ -352,6 +366,10 @@
                         }
                     });
 
+                    $('#error-thumbnail').text("");
+                    $('#thumbnail-history').css('display', 'none');
+                    $('#generated-thumbnails').css('display', 'none');
+
                     return this._updateMaxFilesReachedClass();
                 }
             });
@@ -365,7 +383,62 @@
             initializeDropzone('#dropzone-audio', 'audio', 'audios', 'audio/*');
 
         });
+
+        function generateThumbnails(videoPath, videoDuration) {
+            let timestamp = $("#timestamp").val();
+            console.log([videoPath, videoDuration]);
+            if (!videoPath) {
+                $('#error-thumbnail').text("Please Select Video first!");
+                return;
+            }
+
+            if (timestamp > videoDuration) {
+                $('#error-thumbnail').text("Video Duration is " + videoDuration + " seconds");
+                return;
+            }
+
+            $.ajax({
+                url: "/generate-thumbnail", // Laravel route
+                type: "POST",
+                data: {
+                    video_path: videoPath,
+                    duration: videoDuration,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    $('#error-thumbnail').text("");
+                    $('#thumbnail-history').css('display', 'block');
+                    $('#generated-thumbnails').css('display', 'block');
+                    let newSrc1 = response.thumbnail[0] + "?t=" + new Date().getTime();
+                    let newSrc2 = response.thumbnail[1] + "?t=" + new Date().getTime();
+                    let newSrc3 = response.thumbnail[2] + "?t=" + new Date().getTime();
+                    $("#thumbnail-history #img1").attr("src", newSrc1);
+                    $("#thumbnail-history #img2").attr("src", newSrc2);
+                    $("#thumbnail-history #img3").attr("src", newSrc3);
+                },
+                error: function() {
+                    $('#error-thumbnail').text("Failed to generate thumbnail.");
+                }
+            });
+        };
     </script>
+
+<script>
+    $(document).ready(function() {
+
+        $('.add-video-clips').click(function() {
+            $('#error-thumbnail').text("");
+            $('#thumbnail-history').css('display', 'none');
+            $('#generated-thumbnails').css('display', 'none');
+        })
+
+        $('.generated-img').click(function(){
+            let src = $(this).attr('src');
+            $('.dz-thumbnail img').attr('src',src);
+            $('#thumbnail').val(src);
+        })
+    });
+</script>
 
     <script>
         function drpzone_init() {
@@ -418,6 +491,7 @@
                                 $('#songs-tbody').append(`
                                     <tr>
                                         <td>${song.custom_id || song._id}</td>
+                                        <td><span class="badge bg-danger">${(song.music_type || 'N/A').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span></td>
                                         <td><p class="m-0">${song.name}</p>
                                             <small><i>${song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB'}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
