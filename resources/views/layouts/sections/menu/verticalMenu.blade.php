@@ -33,6 +33,186 @@
             </li>
         @endcan
 
+       
+
+
+
+        @can('music.read')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Content Adds</span>
+        </li>
+        <li
+            class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-music"></i>
+                <div>Music</div>
+            </a>
+
+
+            <ul class="menu-sub">
+
+                <li class="menu-item  {{ Request::is('artist') ? 'active' : '' }}">
+                    <a href="{{ url('/artist') }}" class="menu-link">
+                        <div>Add Artist</div>
+                    </a>
+                </li>
+
+                <li
+                    class="menu-item {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/*') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('setting/music/pricing') ? 'active' : '' }}">
+                            <a href="{{ url('/setting/music/pricing') }}" class="menu-link">
+                                <div>Pricing</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
+
+
+
+
+    @can('voting.read')
+        <li
+            class="menu-item {{ Request::is('vote-category') ? 'active open' : '' }} {{ Request::is('vote') ? 'active open' : '' }} {{ Request::is('settings/voting/*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-sort"></i>
+                <div>Voting</div>
+            </a>
+
+
+            <ul class="menu-sub">
+
+
+
+                {{-- <li class="menu-item {{ Request::is('vote-category') ? 'active' : '' }}">
+                    <a href="{{ url('/vote-category') }}" class="menu-link">
+                        <div>Add Category</div>
+                    </a>
+
+
+                </li> --}}
+
+
+
+                <li class="menu-item {{ Request::is('vote') ? 'active' : '' }} ">
+                    <a href="{{ url('/vote') }}" class="menu-link">
+                        <div>Manage Vote</div>
+                    </a>
+
+
+                </li>
+
+
+
+            </ul>
+        </li>
+    @endcan
+
+
+
+
+
+
+    @can('history.read')
+        <li
+            class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-history"></i>
+                <div>History</div>
+            </a>
+
+
+            <ul class="menu-sub">
+
+
+
+                {{-- <li class="menu-item {{ Request::is('history-category') ? 'active' : '' }} ">
+                    <a href="{{ url('/history-category') }}" class="menu-link">
+                        <div>Add Category</div>
+                    </a>
+
+
+                </li> --}}
+
+
+
+                <li class="menu-item {{ Request::is('history') ? 'active' : '' }}  ">
+                    <a href="{{ url('/history') }}" class="menu-link">
+                        <div>Add Manage History</div>
+                    </a>
+
+
+                </li>
+
+
+
+                {{-- <li class="menu-item {{ Request::is('settings/history/*') ? 'active open' : '' }}">
+          <a href="javascript:void(0)" class="menu-link menu-toggle">
+            <div>Settings</div>
+          </a>
+
+
+          <ul class="menu-sub">
+
+
+
+            <li class="menu-item  {{ Request::is('settings/history/prefix') ? 'active' : '' }}">
+              <a href="{{url('/settings/history/prefix')}}" class="menu-link">
+                <div>Prefix</div>
+              </a>
+
+
+            </li>
+          </ul>
+        </li> --}}
+            </ul>
+        </li>
+    @endcan
+
+
+
+
+
+
+    @can('donation.read')
+        <li
+            class="menu-item {{ Request::is('donations/*') ? 'active open' : '' }} {{ Request::is('donations') ? 'active open' : '' }}{{ Request::is('settings/donation/*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-donate-heart"></i>
+                <div>Donation</div>
+            </a>
+
+
+            <ul class="menu-sub">
+
+
+
+                <li class="menu-item {{ Request::is('donations') ? 'active' : '' }}">
+                    <a href="{{ url('/donations') }}" class="menu-link">
+                        <div>Add Manage Donation</div>
+                    </a>
+
+
+                </li>
+
+
+
+                <li class="menu-item {{ Request::is('donations/organizations') ? 'active' : '' }}">
+                    <a href="{{ url('/donations/organizations') }}" class="menu-link">
+                        <div>Add Manage Organization</div>
+                    </a>
+
+
+                </li>
+            </ul>
+        </li>
+    @endcan
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Assistent</span>
         </li>
@@ -1139,188 +1319,9 @@
 
 
 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Content Adds</span>
-        </li>
+       
     @endcan
 
-
-
-
-
-    @can('music.read')
-        <li
-            class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-music"></i>
-                <div>Music</div>
-            </a>
-
-
-            <ul class="menu-sub">
-
-                <li class="menu-item  {{ Request::is('artist') ? 'active' : '' }}">
-                    <a href="{{ url('/artist') }}" class="menu-link">
-                        <div>Add Artist</div>
-                    </a>
-                </li>
-
-                <li
-                    class="menu-item {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/*') ? 'active open' : '' }}">
-                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                        <div>Settings</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item {{ Request::is('setting/music/pricing') ? 'active' : '' }}">
-                            <a href="{{ url('/setting/music/pricing') }}" class="menu-link">
-                                <div>Pricing</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    @endcan
-
-
-
-
-    @can('voting.read')
-        <li
-            class="menu-item {{ Request::is('vote-category') ? 'active open' : '' }} {{ Request::is('vote') ? 'active open' : '' }} {{ Request::is('settings/voting/*') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-sort"></i>
-                <div>Voting</div>
-            </a>
-
-
-            <ul class="menu-sub">
-
-
-
-                {{-- <li class="menu-item {{ Request::is('vote-category') ? 'active' : '' }}">
-                    <a href="{{ url('/vote-category') }}" class="menu-link">
-                        <div>Add Category</div>
-                    </a>
-
-
-                </li> --}}
-
-
-
-                <li class="menu-item {{ Request::is('vote') ? 'active' : '' }} ">
-                    <a href="{{ url('/vote') }}" class="menu-link">
-                        <div>Manage Vote</div>
-                    </a>
-
-
-                </li>
-
-
-
-            </ul>
-        </li>
-    @endcan
-
-
-
-
-
-
-    @can('history.read')
-        <li
-            class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-history"></i>
-                <div>History</div>
-            </a>
-
-
-            <ul class="menu-sub">
-
-
-
-                {{-- <li class="menu-item {{ Request::is('history-category') ? 'active' : '' }} ">
-                    <a href="{{ url('/history-category') }}" class="menu-link">
-                        <div>Add Category</div>
-                    </a>
-
-
-                </li> --}}
-
-
-
-                <li class="menu-item {{ Request::is('history') ? 'active' : '' }}  ">
-                    <a href="{{ url('/history') }}" class="menu-link">
-                        <div>Add Manage History</div>
-                    </a>
-
-
-                </li>
-
-
-
-                {{-- <li class="menu-item {{ Request::is('settings/history/*') ? 'active open' : '' }}">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-
-
-          <ul class="menu-sub">
-
-
-
-            <li class="menu-item  {{ Request::is('settings/history/prefix') ? 'active' : '' }}">
-              <a href="{{url('/settings/history/prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-          </ul>
-        </li> --}}
-            </ul>
-        </li>
-    @endcan
-
-
-
-
-
-
-    @can('donation.read')
-        <li
-            class="menu-item {{ Request::is('donations/*') ? 'active open' : '' }} {{ Request::is('donations') ? 'active open' : '' }}{{ Request::is('settings/donation/*') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-donate-heart"></i>
-                <div>Donation</div>
-            </a>
-
-
-            <ul class="menu-sub">
-
-
-
-                <li class="menu-item {{ Request::is('donations') ? 'active' : '' }}">
-                    <a href="{{ url('/donations') }}" class="menu-link">
-                        <div>Add Manage Donation</div>
-                    </a>
-
-
-                </li>
-
-
-
-                <li class="menu-item {{ Request::is('donations/organizations') ? 'active' : '' }}">
-                    <a href="{{ url('/donations/organizations') }}" class="menu-link">
-                        <div>Add Manage Organization</div>
-                    </a>
-
-
-                </li>
-            </ul>
-        </li>
-    @endcan
 
     @can('admins.read')
         <li class="menu-header small text-uppercase">
