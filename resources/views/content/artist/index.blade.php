@@ -42,7 +42,8 @@
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createmusicModal">Add Songs</button>
             {{-- @endcan --}}
             {{-- @can('artist.create') --}}
-            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add Video
+            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add
+                Video
                 Clips</button>
             {{-- @endcan --}}
         </div>
@@ -423,22 +424,22 @@
         };
     </script>
 
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
 
-        $('.add-video-clips').click(function() {
-            $('#error-thumbnail').text("");
-            $('#thumbnail-history').css('display', 'none');
-            $('#generated-thumbnails').css('display', 'none');
-        })
+            $('.add-video-clips').click(function() {
+                $('#error-thumbnail').text("");
+                $('#thumbnail-history').css('display', 'none');
+                $('#generated-thumbnails').css('display', 'none');
+            })
 
-        $('.generated-img').click(function(){
-            let src = $(this).attr('src');
-            $('.dz-thumbnail img').attr('src',src);
-            $('#thumbnail').val(src);
-        })
-    });
-</script>
+            $('.generated-img').click(function() {
+                let src = $(this).attr('src');
+                $('.dz-thumbnail img').attr('src', src);
+                $('#thumbnail').val(src);
+            })
+        });
+    </script>
 
     <script>
         function drpzone_init() {
@@ -491,7 +492,9 @@
                                 $('#songs-tbody').append(`
                                     <tr>
                                         <td>${song.custom_id || song._id}</td>
-                                        <td><span class="badge bg-danger">${(song.music_type || 'N/A').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span></td>
+                                        <td>
+                                            ${song.music_type ? `<img src="{{ asset('assets/svg/labels/') }}/${song.music_type}.svg" />`: 'N/A'}
+                                            </td>
                                         <td><p class="m-0">${song.name}</p>
                                             <small><i>${song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB'}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
