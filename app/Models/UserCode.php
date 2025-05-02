@@ -13,6 +13,11 @@ class UserCode extends Model
     use HasFactory , LogsActivity;
     public $table = "user_codes";
 
+    protected $casts = [
+        'expires_at' => 'datetime',
+    ];
+
+
     protected $fillable = [
         'user_id',
         'type',
