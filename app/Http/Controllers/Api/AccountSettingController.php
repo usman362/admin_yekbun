@@ -87,22 +87,13 @@ class AccountSettingController extends Controller
         $request->validate([
             'oldEmail' => 'required|email|exists:users,email',
             'newEmail' => 'required|email|unique:users,email',
-            // 'oldOtp' => 'required|digits:4',
             'newOtp' => 'required|digits:4',
         ]);
 
         $user = User::where('email', $request->oldEmail)->first();
 
-        // Check OTP for old email
-        // $oldOtp = UserCode::where(['user_id' => $user->id, 'type' => 'email_change_old', 'code' => $request->oldOtp])
-        //     ->where('expires_at', '>=', now())->first();
-
-        // if (!$oldOtp) {
-        //     return response()->json(['success' => false, 'message' => 'Invalid or expired OTP for old email.']);
-        // }
-
         // Check OTP for new email
-        $newOtp = UserCode::where(['email' => $request->newEmail, 'type' => 'email_change_new', 'code' => $request->newOtp])
+        $newOtp = UserCode::where(['email' => $request->newEmail, 'code' => $request->newOtp])
             ->where('expires_at', '>=', now())->first();
 
         if (!$newOtp) {
@@ -113,7 +104,6 @@ class AccountSettingController extends Controller
         $user->update(['email' => $request->newEmail]);
 
         // Delete used OTPs
-        // $oldOtp->delete();
         $newOtp->delete();
 
         return response()->json(['success' => true, 'message' => 'Email successfully updated.']);
