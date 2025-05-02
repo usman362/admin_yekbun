@@ -289,9 +289,10 @@ class MultimediaController extends Controller
     public function deletePlaylist($id)
     {
         $playlist = UserPlaylist::find($id);
-        if ($playlist->delete()) {
+        try{
+            $playlist->delete();
             return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
-        } else {
+        }catch(Exception $e){
             return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 403);
         }
     }
