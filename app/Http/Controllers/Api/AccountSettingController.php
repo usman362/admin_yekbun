@@ -62,8 +62,9 @@ class AccountSettingController extends Controller
         ]);
 
         $code = rand(1000, 9999);
+
         UserCode::updateOrCreate(
-            ['email' => $request->newEmail, 'type' => 'email_change_new'],
+            ['email' => $request->newEmail],
             ['code' => $code, 'expires_at' => now()->addMinutes(10)]
         );
 
