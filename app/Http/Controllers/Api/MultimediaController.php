@@ -240,10 +240,8 @@ class MultimediaController extends Controller
 
     public function getSongsPlaylist(Request $request)
     {
-        $songs = User::with(['songs_playlist' => function ($q) {
-            $q->with('song');
-        }])->find(auth()->user()->id);
-        return ResponseHelper::sendResponse($songs, 'Songs Playlist has been Fetch Successfully!');
+        $playlists = UserPlaylist::with('song')->where('user_id', auth()->user()->id)->where('type', 'audio')->get();
+        return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Fetch Successfully!');
     }
 
     public function storeSongsPlaylist(Request $request)
@@ -257,10 +255,8 @@ class MultimediaController extends Controller
                 'media_id' => $request->media_id,
                 'type' => 'audio'
             ]);
-            $songs = User::with(['songs_playlist' => function ($q) {
-                $q->with('song');
-            }])->find(auth()->user()->id);
-            return ResponseHelper::sendResponse($songs, 'Songs Playlist has been Created Successfully!');
+            $playlists = UserPlaylist::with('song')->where('user_id', auth()->user()->id)->where('type', 'audio')->get();
+            return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!');
         }
@@ -268,10 +264,8 @@ class MultimediaController extends Controller
 
     public function getClipsPlaylist(Request $request)
     {
-        $clips = User::with(['clips_playlist' => function ($q) {
-            $q->with('video');
-        }])->find(auth()->user()->id);
-        return ResponseHelper::sendResponse($clips, 'Clips Playlist has been Fetch Successfully!');
+        $playlists = UserPlaylist::with('video')->where('user_id', auth()->user()->id)->where('type', 'video')->get();
+        return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Fetch Successfully!');
     }
 
     public function storeClipsPlaylist(Request $request)
@@ -285,10 +279,8 @@ class MultimediaController extends Controller
                 'media_id' => $request->media_id,
                 'type' => 'video'
             ]);
-            $clips = User::with(['clips_playlist' => function ($q) {
-                $q->with('video');
-            }])->find(auth()->user()->id);
-            return ResponseHelper::sendResponse($clips, 'Clips Playlist has been Created Successfully!');
+            $playlists = UserPlaylist::with('video')->where('user_id', auth()->user()->id)->where('type', 'video')->get();
+            return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Created Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!');
         }
