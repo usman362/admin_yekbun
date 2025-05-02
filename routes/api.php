@@ -142,6 +142,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('get-user-visitor/{id}', [UsersController::class, 'get_vistor']);
     Route::post('update-fcm-token', [UsersController::class, 'updateDeviceToken']);
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
+    Route::post('my-service',[UsersController::class,'storeMyService']);
 
     Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
     Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
@@ -154,6 +155,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('store-artist-song-views/{id}', [MultimediaController::class, 'store_artist_song_views']);
     Route::get('store-artist-video-views/{id}', [MultimediaController::class, 'store_artist_video_views']);
     Route::get('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
+
+
 
 
     //Playlist

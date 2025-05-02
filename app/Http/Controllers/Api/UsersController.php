@@ -67,12 +67,12 @@ class UsersController extends Controller
             $user = User::select('name', 'last_name', 'username', 'image', 'is_online', 'fcm_token')->find($request->user_id);
             $username = $user->name . ' ' . $user->last_name;
             $current_user = User::find(auth()->user()->id);
-            if($request->status == 1){
-                NotificationHelper::sendNotification($request->user_id, ($current_user->name.' '.$current_user->last_name), 'You have a New Friend Request!');
+            if ($request->status == 1) {
+                NotificationHelper::sendNotification($request->user_id, ($current_user->name . ' ' . $current_user->last_name), 'You have a New Friend Request!');
                 $data = [
                     "to" => $user->fcm_token,
                     "notification" => [
-                        "title" => $current_user->name.' '.$current_user->last_name,
+                        "title" => $current_user->name . ' ' . $current_user->last_name,
                         "body" => "You have a New Friend Request!"
                     ],
                     "data" => [
@@ -82,7 +82,7 @@ class UsersController extends Controller
                     ]
                 ];
                 return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
-            }else{
+            } else {
                 return ResponseHelper::sendResponse(null, 'User Request Cancelled Successfully');
             }
         } catch (Exception $e) {
@@ -432,5 +432,13 @@ class UsersController extends Controller
                 'response' => json_decode($response, true)
             ]);
         }
+    }
+
+    public function storeMyService(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+        $user->my_service = (int)$request->my_service;
+        $user->save();
+        return ResponseHelper::sendResponse($user, 'Service Updated Successfully!');
     }
 }
