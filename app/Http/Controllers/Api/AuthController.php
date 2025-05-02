@@ -496,4 +496,10 @@ class AuthController extends Controller
         $user = User::find(Auth::id());
         return ResponseHelper::sendResponse($user,'My Details has been Fetched Successfully!');
     }
+    public function deleteMyAccount()
+    {
+        $user = User::find(Auth::id());
+        $user->delete();
+        return ResponseHelper::sendResponse(null,'Account has been Deleted Successfully!');
+    }
 }
