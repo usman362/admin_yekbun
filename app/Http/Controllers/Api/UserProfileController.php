@@ -89,8 +89,8 @@ class UserProfileController extends Controller
         if (!empty($request->country) && $request->country !== "") {
             $profile->country  = $request->country;
         }
-        if (!empty($request->marital_status) && $request->marital_status !== "") {
-            $profile->marital_status  = $request->marital_status;
+        if (!empty($request->maritalStatus) && $request->maritalStatus !== "") {
+            $profile->maritalStatus  = $request->maritalStatus;
         }
         if (!empty($request->is_language) && $request->is_language !== "") {
             $profile->is_language  = $request->is_language;
