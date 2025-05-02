@@ -108,7 +108,7 @@ Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_accou
 Route::middleware('jwt.custom')->group(function () {
 
     Route::post('/change-password', [AccountSettingController::class, 'change_password'])
-    ->name('change-password');
+        ->name('change-password');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/get-my-details', [AuthController::class, 'getMyDetails']);
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
@@ -154,6 +154,14 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('store-artist-song-views/{id}', [MultimediaController::class, 'store_artist_song_views']);
     Route::get('store-artist-video-views/{id}', [MultimediaController::class, 'store_artist_video_views']);
     Route::get('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
+
+
+    //Playlist
+    Route::get('get-songs-playlist', [MultimediaController::class, 'getSongsPlaylist']);
+    Route::post('store-songs-playlist', [MultimediaController::class, 'storeSongsPlaylist']);
+    Route::get('get-clips-playlist', [MultimediaController::class, 'getClipsPlaylist']);
+    Route::post('store-clips-playlist', [MultimediaController::class, 'storeClipsPlaylist']);
+    Route::get('delete-playlist/{id}', [MultimediaController::class, 'deletePlaylist']);
 });
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);

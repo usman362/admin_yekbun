@@ -9,7 +9,9 @@ use App\Models\Artist;
 use App\Models\ArtistFavorite;
 use App\Models\Song;
 use App\Models\SongViews;
+use App\Models\User;
 use App\Models\Video;
+use App\Models\UserPlaylist;
 use App\Models\VideoClip;
 use App\Models\VideoClipViews;
 use Exception;
@@ -234,5 +236,68 @@ class MultimediaController extends Controller
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to Save Artist Favorites', false, 403);
         }
+    }
+
+    public function getSongsPlaylist(Request $request)
+    {
+        $songs = User::with(['songs_playlist' => function ($q) {
+            $q->with('song');
+        }])->find(auth()->user()->id);
+        return ResponseHelper::sendResponse($songs, 'Songs Playlist has been Fetch Successfully!');
+    }
+
+    public function storeSongsPlaylist(Request $request)
+    {
+        $request->validate([
+            'media_id' => 'required'
+        ]);
+        try {
+            $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
+                'user_id' => auth()->user()->id,
+                'media_id' => $request->media_id,
+                'type' => 'audio'
+            ]);
+            $songs = User::with(['songs_playlist' => function ($q) {
+                $q->with('song');
+            }])->find(auth()->user()->id);
+            return ResponseHelper::sendResponse($songs, 'Songs Playlist has been Created Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!');
+        }
+    }
+
+    public function getClipsPlaylist(Request $request)
+    {
+        $clips = User::with(['clips_playlist' => function ($q) {
+            $q->with('video');
+        }])->find(auth()->user()->id);
+        return ResponseHelper::sendResponse($clips, 'Clips Playlist has been Fetch Successfully!');
+    }
+
+    public function storeClipsPlaylist(Request $request)
+    {
+        $request->validate([
+            'media_id' => 'required'
+        ]);
+        try {
+            $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
+                'user_id' => auth()->user()->id,
+                'media_id' => $request->media_id,
+                'type' => 'video'
+            ]);
+            $clips = User::with(['clips_playlist' => function ($q) {
+                $q->with('video');
+            }])->find(auth()->user()->id);
+            return ResponseHelper::sendResponse($clips, 'Clips Playlist has been Created Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!');
+        }
+    }
+
+    public function deletePlaylist($id)
+    {
+        $playlist = UserPlaylist::find($id);
+        $playlist->delete();
+        return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
     }
 }

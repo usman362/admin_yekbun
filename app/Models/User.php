@@ -214,12 +214,12 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function friends()
     {
-        return $this->hasMany(UserFriends::class, 'friend_id')->where('user_type','friends')->limit(5);
+        return $this->hasMany(UserFriends::class, 'friend_id')->where('user_type', 'friends')->limit(5);
     }
 
     public function family()
     {
-        return $this->hasMany(UserFriends::class, 'friend_id')->where('user_type','family')->limit(5);
+        return $this->hasMany(UserFriends::class, 'friend_id')->where('user_type', 'family')->limit(5);
     }
 
     public function user_requests()
@@ -227,4 +227,13 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(UserRequest::class, 'request_id')->where('status', 1)->limit(5);
     }
 
+    public function songs_playlist()
+    {
+        return $this->hasMany(UserPlaylist::class, 'user_id')->where('type', 'audio');
+    }
+
+    public function clips_playlist()
+    {
+        return $this->hasMany(UserPlaylist::class, 'user_id')->where('type', 'video');
+    }
 }
