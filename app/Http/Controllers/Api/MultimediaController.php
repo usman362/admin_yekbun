@@ -258,7 +258,7 @@ class MultimediaController extends Controller
             $playlists = UserPlaylist::with('song')->where('user_id', auth()->user()->id)->where('type', 'audio')->get();
             return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!');
+            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
         }
     }
 
@@ -282,14 +282,17 @@ class MultimediaController extends Controller
             $playlists = UserPlaylist::with('video')->where('user_id', auth()->user()->id)->where('type', 'video')->get();
             return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Created Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!');
+            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
         }
     }
 
     public function deletePlaylist($id)
     {
         $playlist = UserPlaylist::find($id);
-        $playlist->delete();
-        return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
+        if ($playlist->delete()) {
+            return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
+        } else {
+            return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 403);
+        }
     }
 }
