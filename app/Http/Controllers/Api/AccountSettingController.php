@@ -94,7 +94,8 @@ class AccountSettingController extends Controller
 
         // Check OTP for new email
         $newOtp = UserCode::where(['email' => $request->newEmail, 'code' => $request->newOtp])
-            ->where('expires_at', '>=', now())->first();
+            // ->where('expires_at', '>=', now())
+            ->first();
 
         if (!$newOtp) {
             return response()->json(['success' => false, 'message' => 'Invalid or expired OTP for new email.']);
