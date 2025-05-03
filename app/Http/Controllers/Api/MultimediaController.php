@@ -245,7 +245,9 @@ class MultimediaController extends Controller
         $userId = auth()->user()->id;
 
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-            $q->with('song');
+            $q->with(['song' => function ($a) {
+                $a->with('artist');
+            }]);
         }])->where('user_id', $userId)->get();
 
         if ($playlists->isEmpty()) {
@@ -257,7 +259,9 @@ class MultimediaController extends Controller
             ]);
 
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-                $q->with('song');
+                $q->with(['song' => function ($a) {
+                    $a->with('artist');
+                }]);
             }])->where('user_id', $userId)->get();
         }
 
@@ -269,7 +273,9 @@ class MultimediaController extends Controller
         $userId = auth()->user()->id;
 
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-            $q->with('song');
+            $q->with(['song' => function ($a) {
+                $a->with('artist');
+            }]);
         }])->where('user_id', $userId)->find($id);
 
         return ResponseHelper::sendResponse($playlists, 'Playlist has been Fetch Successfully!');
@@ -306,7 +312,9 @@ class MultimediaController extends Controller
                 'type' => 'audio'
             ]);
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-                $q->with('song');
+                $q->with(['song' => function ($a) {
+                    $a->with('artist');
+                }]);
             }])->where('user_id', auth()->user()->id)->get();
             return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
