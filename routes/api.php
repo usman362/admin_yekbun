@@ -144,6 +144,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('update-fcm-token', [UsersController::class, 'updateDeviceToken']);
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
     Route::post('my-service',[UsersController::class,'storeMyService']);
+    Route::post('my-network',[UsersController::class,'storeMyNetwork']);
+    Route::post('my-notification',[UsersController::class,'storeMyNotification']);
 
     Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
     Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);

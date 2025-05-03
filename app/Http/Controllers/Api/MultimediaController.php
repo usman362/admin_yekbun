@@ -252,6 +252,7 @@ class MultimediaController extends Controller
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover.jpg',
                 'type' => 'free',
             ]);
 

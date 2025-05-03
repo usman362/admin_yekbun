@@ -441,4 +441,60 @@ class UsersController extends Controller
         $user->save();
         return ResponseHelper::sendResponse($user, 'Service Updated Successfully!');
     }
+
+    public function storeMyNetwork(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+        if (!empty($request->live_stream) && $request->live_stream !== "") {
+            $user->live_stream  = $request->live_stream;
+        }
+        if (!empty($request->upload_video) && $request->upload_video !== "") {
+            $user->upload_video  = $request->upload_video;
+        }
+        if (!empty($request->play_music) && $request->play_music !== "") {
+            $user->play_music  = $request->play_music;
+        }
+        if (!empty($request->play_video) && $request->play_video !== "") {
+            $user->play_video  = $request->play_video;
+        }
+        if (!empty($request->interview) && $request->interview !== "") {
+            $user->interview  = $request->interview;
+        }
+        if (!empty($request->video_call) && $request->video_call !== "") {
+            $user->video_call  = $request->video_call;
+        }
+        $user->save();
+        return ResponseHelper::sendResponse($user, 'My Network Updated Successfully!');
+    }
+
+    public function storeMyNotification(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+        if (!empty($request->new_news) && $request->new_news !== "") {
+            $user->new_news  = $request->new_news;
+        }
+        if (!empty($request->new_music) && $request->new_music !== "") {
+            $user->new_music  = $request->new_music;
+        }
+        if (!empty($request->new_history) && $request->new_history !== "") {
+            $user->new_history  = $request->new_history;
+        }
+        if (!empty($request->new_votes) && $request->new_votes !== "") {
+            $user->new_votes  = $request->new_votes;
+        }
+        if (!empty($request->new_videos) && $request->new_videos !== "") {
+            $user->new_videos  = $request->new_videos;
+        }
+        if (!empty($request->new_events) && $request->new_events !== "") {
+            $user->new_events  = $request->new_events;
+        }
+        if (!empty($request->new_donation) && $request->new_donation !== "") {
+            $user->new_donation  = $request->new_donation;
+        }
+        if (!empty($request->info_banner) && $request->info_banner !== "") {
+            $user->info_banner  = $request->info_banner;
+        }
+        $user->save();
+        return ResponseHelper::sendResponse($user, 'My Notifcation Updated Successfully!');
+    }
 }
