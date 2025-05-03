@@ -166,6 +166,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('get-clips-playlist', [MultimediaController::class, 'getClipsPlaylist']);
     Route::post('store-clips-playlist', [MultimediaController::class, 'storeClipsPlaylist']);
     Route::delete('delete-playlist/{id}', [MultimediaController::class, 'deletePlaylist']);
+    Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
 });
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);
