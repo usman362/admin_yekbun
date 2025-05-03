@@ -242,19 +242,24 @@ class MultimediaController extends Controller
 
     public function getSongsPlaylist(Request $request)
     {
+        $userId = auth()->user()->id;
+
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
             $q->with('song');
-        }])->where('user_id', auth()->user()->id)->get();
-        if (!$playlists) {
+        }])->where('user_id', $userId)->get();
+
+        if ($playlists->isEmpty()) {
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
-                'user_id' => auth()->user()->id,
+                'user_id' => $userId,
                 'type' => 'free',
             ]);
+
+            $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+                $q->with('song');
+            }])->where('user_id', $userId)->get();
         }
-        $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-            $q->with('song');
-        }])->where('user_id', auth()->user()->id)->get();
+
         return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Fetch Successfully!');
     }
 
