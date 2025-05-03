@@ -78,7 +78,7 @@
                             <img src="{{ asset('assets/img/illustrations/man-with-laptop-' . $configData['style'] . '.png') }}"
                                 height="140" alt="View Badge User"
                                 data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                                data-app-light-img="illustrations/man-with-laptop-light.png">
+                                data-app-light-img="illustrations/man-with-laptop-light.png" >
                         </div>
                     </div>
                 </div>

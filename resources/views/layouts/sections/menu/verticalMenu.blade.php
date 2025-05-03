@@ -723,7 +723,7 @@
 
 
 
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Assistent</span>
         </li>
 
@@ -877,7 +877,7 @@
             <div>Prefix</div>
           </a>
         </li> --}}
-                            <li class="menu-item {{ Request::is('channels/policy_terms') ? 'active' : '' }}">
+                            {{-- <li class="menu-item {{ Request::is('channels/policy_terms') ? 'active' : '' }}">
                                 <a href="{{ url('channels/policy_terms') }}" class="menu-link">
                                     <div>Channels Policy </div>
                                 </a>
@@ -897,7 +897,14 @@
                     <div>Flagged Channels</div>
                 </a>
             </li>
-        @endcan
+        @endcan   --}}
+
+
+
+
+
+
+
 
         @can('onlineshop.read')
             <li class="menu-header small text-uppercase">

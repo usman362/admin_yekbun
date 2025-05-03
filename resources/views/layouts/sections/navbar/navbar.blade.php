@@ -12,7 +12,12 @@ $navbarDetached = ($navbarDetached ?? '');
 .dropdown-submenu {
   position: relative;
 }
-
+ 
+        img, svg {
+    vertical-align: middle;
+    height: 25px;
+}
+    
 .dropdown-submenu > .dropdown-menu {
   top: 0;
   left: 100%;
@@ -76,35 +81,11 @@ $navbarDetached = ($navbarDetached ?? '');
                 <!-- /Search -->
                 <div class="col-1 mb-0"></div>
                 @endif
-                <div class="col-9 card mb-0 " style="float: right;">
+                <div class="col-9 card offset-1  mb-0  ms-auto " style="float: right ml-auto" >
                     <ul class="navbar-nav flex-row align-items-center justify-content-around">
                         @if(!isset($menuHorizontal))
                         <!-- Language -->
-                        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1" style="position: sticky;top:0;">
-
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item">
-                                        <span class="align-middle">English</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item">
-                                        <span class="align-middle">French</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item">
-                                        <span class="align-middle">Arabic</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item">
-                                        <span class="align-middle">German</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        
 
                         <!-- <li class="nav-item me-2 me-xl-0">
                             <a class="nav-item nav-link" href="{{url('app/user/notes?type=all-news')}}">
@@ -308,19 +289,19 @@ $navbarDetached = ($navbarDetached ?? '');
                         <ul class="dropdown-menu dropdown-menu-end" style="list-style: none; padding-left: 20px; margin: 0;"> 
                             <li>
                                 <a class="dropdown-item" href="{{ url('/users/educated') }}">
-                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu" style="width: 32px; height: 46px; margin-right: 8px;">
+                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu" style="width: 32px; height: 25px; margin-right: 8px;">
                                     <span class="align-middle">Educated User</span>
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url('/users/cultivated') }}">
-                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="cul" style="width: 32px; height: 46px; margin-right: 8px;">
+                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="cul" style="width: 32px; height: 25px; margin-right: 8px;">
                                     Cultivated User
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url('/users/academic') }}">
-                                    <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="acad" style="width: 32px; height: 46px; margin-right: 8px;">
+                                    <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="acad" style="width: 32px; height: 25px; margin-right: 8px;">
                                     Academic User
                                 </a>
                             </li>
@@ -347,7 +328,7 @@ $navbarDetached = ($navbarDetached ?? '');
                                 <div style="display: flex; flex-direction: column;">
                                     <span class="fw-semibold d-block" style="margin-right: 5px;">Avatars</span>
                                 </div>
-                                <img src="{{ asset('assets/img/avatar.svg') }}" alt="channel">
+                                <img src="{{ asset('assets/img/avatar.svg') }}" alt="avaters">
                             </div>
                         </a>
 
@@ -362,123 +343,33 @@ $navbarDetached = ($navbarDetached ?? '');
                     </li>
                     <!-- enduser -->
                     <!-- flag -->
-                    <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <!-- Left side: Down arrow + Text -->
-                                <div style="display: flex; flex-direction: column;">
-                                    <div style="display: flex; align-items: center;">
-                                        <!-- <span style="font-size: 16px; color: #2c3e50;">▼</span> -->
-                                        <span class="fw-semibold d-block" style=" color: #2c3e50; margin-right: 5px;">Flag user</span>
-
-                                    </div>
-                                    <!-- <small style="color: gray; font-size: 13px;">Total</small> -->
-                                </div>
-
-                                <!-- Right side: Channel icon -->
-                                <img src="{{ asset('assets/img/flaged.svg') }}" alt="channel">
+                    <li class="nav-item me-3 me-xl-1">
+                        <a class="nav-link d-flex align-items-center justify-content-between" href="{{ url('reports/flagged-users') }}" style="text-decoration: none;">
+                            <div class="d-flex flex-column">
+                                <span class="fw-semibold d-block" style="color: #2c3e50;">Flag user</span>
                             </div>
+                            <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged User Icon" style="margin-left: 10px;">
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="{{ url('reports/flagged-users') }}">
-                                    <img src="{{ asset('assets/img/flaged.svg') }}" alt="flag">
-                                    <span class="align-middle">Flag User</span>
-                                </a>
-                            </li>
-                            <!-- <li>
-                                    <a class="dropdown-item">
-                                        <i class="bx bx-moon me-2"></i>
-                                        <span class="align-middle">Dark</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item">
-                                        <i class="bx bx-desktop me-2"></i>
-                                        <span class="align-middle">System</span>
-                                    </a>
-                                </li> -->
-                        </ul>
                     </li>
-                    <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <!-- Left side: Down arrow + Text -->
-                                <div style="display: flex; flex-direction: column;">
-                                    <div style="display: flex; align-items: center;">
-                                        <!-- <span style="font-size: 16px; color: #2c3e50;">▼</span> -->
-                                        <span class="fw-semibold d-block" style=" color: #2c3e50; margin-right: 5px;">Flag Channels</span>
-
-                                    </div>
-                                    <!-- <small style="color: gray; font-size: 13px;">Total</small> -->
-                                </div>
-
-                                <!-- Right side: Channel icon -->
-                                <img src="{{ asset('assets/img/flaged.svg') }}" alt="channel">
+                    
+                    <li class="nav-item me-3 me-xl-1">
+                        <a class="nav-link d-flex align-items-center justify-content-between" href="{{ url('flaggedfanpage') }}" style="text-decoration: none;">
+                            <div class="d-flex flex-column">
+                                <span class="fw-semibold d-block" style="color: #2c3e50;">Flag Channels</span>
                             </div>
+                            <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged Channel Icon" style="margin-left: 10px;">
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="{{ url('flaggedfanpage') }}">
-                                    <img src="{{ asset('assets/img/flaged.svg') }}" alt="flag">
-                                    <span class="align-middle">Flag Channels</span>
-                                </a>
-                            </li>
-                            <!-- <li>
-                                    <a class="dropdown-item">
-                                        <i class="bx bx-moon me-2"></i>
-                                        <span class="align-middle">Dark</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item">
-                                        <i class="bx bx-desktop me-2"></i>
-                                        <span class="align-middle">System</span>
-                                    </a>
-                                </li> -->
-                        </ul>
                     </li>
-                    <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <!-- Left side: Down arrow + Text -->
-                                <div style="display: flex; flex-direction: column;">
-                                    <div style="display: flex; align-items: center;">
-                                        <!-- <span style="font-size: 16px; color: #2c3e50;">▼</span> -->
-                                        <span class="fw-semibold d-block" style=" color: #2c3e50; margin-right: 5px;">Agents</span>
-
-                                    </div>
-                                    <!-- <small style="color: gray; font-size: 13px;">Total</small> -->
-                                </div>
-
-                                <!-- Right side: Channel icon -->
-                                <img src="{{ asset('assets/img/Agents.svg') }}" alt="channel">
+                    
+                    <li class="nav-item me-3 me-xl-1">
+                        <a class="nav-link d-flex align-items-center justify-content-between" href="" style="text-decoration: none;">
+                            <div class="d-flex flex-column">
+                                <span class="fw-semibold d-block" style="color: #2c3e50;">Agents</span>
                             </div>
+                            <img src="{{ asset('assets/img/Agents.svg') }}" alt="Agents Icon" style="margin-left: 10px;">
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item">
-                                    <img src="{{ asset('assets/img/Agents.svg') }}" alt="flag">
-                                    <span class="align-middle">Add/Manage Agents</span>
-                                </a>
-                            </li>
-                            <!-- <li>
-                                    <a class="dropdown-item">
-                                        <i class="bx bx-moon me-2"></i>
-                                        <span class="align-middle">Dark</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item">
-                                        <i class="bx bx-desktop me-2"></i>
-                                        <span class="align-middle">System</span>
-                                    </a>
-                                </li> -->
-                        </ul>
                     </li>
+                    
 
                     <!-- endflag -->
                     <!-- Notification -->
