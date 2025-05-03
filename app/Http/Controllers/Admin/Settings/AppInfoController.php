@@ -52,6 +52,9 @@ class AppInfoController extends Controller
                     'time_to' => $request->time_to,
                 ]);
                 $appInfo->description = $request->description;
+                $appInfo->email = $request->email;
+                $appInfo->fax_no = $request->fax_no;
+                $appInfo->st_no = $request->st_no;
                 $appInfo->save();
                 if ($request->has('image')) {
                     $image_path = Helpers::fileUpload($request->image, 'images/appinfo');

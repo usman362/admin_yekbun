@@ -238,6 +238,12 @@
                                     </div>
                                     <label for="">Address</label>
                                     <input type="text" class="form-control mb-2" name="address" id="address" value="{{ @$appInfo->address }}" required>
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control mb-2" name="email" id="email" value="{{ @$appInfo->email }}" required>
+                                    <label for="">Fax no.</label>
+                                    <input type="text" class="form-control mb-2" name="fax_no" id="fax_no" value="{{ @$appInfo->fax_no }}" required>
+                                    <label for="">St no.</label>
+                                    <input type="text" class="form-control mb-2" name="st_no" id="st_no" value="{{ @$appInfo->st_no }}" required>
                                     <label for="">Description</label>
                                     <div id="snow-toolbar">
                                         <span class="ql-formats">
