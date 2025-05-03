@@ -783,7 +783,7 @@
                                             <div class="user-info">
                                                 <div class="row">
                                                     <div class="col-md-2 p-0">
-                                                        <img src="${artistImage}" style="width: 45px !important;height:45px !important;">
+                                                        <img src="${artistImage}" style="width: 100px !important;height:45px !important;">
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="mt-2">
