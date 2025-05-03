@@ -58,4 +58,9 @@ class VideoClip extends Model
     {
         return $this->belongsTo(Artist::class, 'artist_id', '_id');
     }
+
+    public function playlists()
+    {
+        return $this->hasMany(UserPlaylist::class, 'media_id');
+    }
 }

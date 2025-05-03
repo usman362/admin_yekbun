@@ -23,25 +23,25 @@ class MultimediaController extends Controller
 {
     public function getAllSongs()
     {
-        $songs = Song::with('artist')->orderBy('created_at', 'desc')->get();
+        $songs = Song::with(['artist', 'playlists'])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($songs, 'All Songs Fetch Successfully!');
     }
 
     public function getAllClips()
     {
-        $videos = VideoClip::with('artist')->orderBy('created_at', 'desc')->get();
+        $videos = VideoClip::with(['artist', 'playlists'])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($videos, 'All Video Clips Fetch Successfully!');
     }
 
     public function getSongByArtists(Request $request, $id)
     {
-        $songs = Song::where('artist_id', $id)->orderBy('created_at', 'desc')->get();
+        $songs = Song::with(['artist', 'playlists'])->where('artist_id', $id)->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($songs, 'Songs Fetch Successfully!');
     }
 
     public function getClipsByArtists(Request $request, $id)
     {
-        $videos = VideoClip::where('artist_id', $id)->orderBy('created_at', 'desc')->get();
+        $videos = VideoClip::with(['artist', 'playlists'])->where('artist_id', $id)->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($videos, 'Video Clips Fetch Successfully!');
     }
 
@@ -262,6 +262,17 @@ class MultimediaController extends Controller
         }
 
         return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Fetch Successfully!');
+    }
+
+    public function getPlaylistDetail(Request $request, $id)
+    {
+        $userId = auth()->user()->id;
+
+        $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+            $q->with('song');
+        }])->where('user_id', $userId)->find($id);
+
+        return ResponseHelper::sendResponse($playlists, 'Playlist has been Fetch Successfully!');
     }
 
     public function storeGroupPlaylist(Request $request)

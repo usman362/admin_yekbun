@@ -27,10 +27,10 @@ class Song extends Model
 
     protected $casts = [
         'audio' => 'string'
-     ];
-     protected $attributes = [
+    ];
+    protected $attributes = [
         'audio' => ''
-     ];
+    ];
 
     //  protected static function boot()
     //  {
@@ -43,14 +43,22 @@ class Song extends Model
     //      });
     //  }
 
-    public function music_category(){
-        return $this->belongsTo(MusicCategory::class , 'category_id' );
+    public function music_category()
+    {
+        return $this->belongsTo(MusicCategory::class, 'category_id');
     }
-    public function music(){
-        return $this->belongsTo(Music::class , 'music_id' );
+    public function music()
+    {
+        return $this->belongsTo(Music::class, 'music_id');
     }
 
-    public function artist(){
-        return $this->belongsTo(Artist::class , 'artist_id');
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class, 'artist_id');
+    }
+
+    public function playlists()
+    {
+        return $this->hasMany(UserPlaylist::class, 'media_id');
     }
 }
