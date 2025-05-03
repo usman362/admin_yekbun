@@ -229,15 +229,15 @@
                                     <div class="row mb-2">
                                         <div class="col-md-6">
                                             <input type="time" class="form-control" name="time_from" id="time_from"
-                                                required>
+                                                value="{{ @$app->time_from }}" required>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="time" class="form-control" name="time_to" id="time_to"
-                                                required>
+                                            value="{{ @$app->time_to }}" required>
                                         </div>
                                     </div>
                                     <label for="">Address</label>
-                                    <input type="text" class="form-control mb-2" name="address" id="address" required>
+                                    <input type="text" class="form-control mb-2" name="address" id="address" value="{{ @$app->address }}" required>
                                     <label for="">Description</label>
                                     <div id="snow-toolbar">
                                         <span class="ql-formats">
@@ -284,7 +284,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        var appinfo = `<?php echo $appInfo->address ?? ''; ?>`;
+        var appinfo = `<?php echo $appInfo->description ?? ''; ?>`;
     </script>
     <script src="{{ asset('assets/vendor/libs/quill/quill.js') }}"></script>
     <script src="{{ asset('assets/js/forms-editors.js') }}"></script>
