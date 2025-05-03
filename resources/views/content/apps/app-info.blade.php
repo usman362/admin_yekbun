@@ -229,15 +229,15 @@
                                     <div class="row mb-2">
                                         <div class="col-md-6">
                                             <input type="time" class="form-control" name="time_from" id="time_from"
-                                                value="{{ @$app->time_from }}" required>
+                                                value="{{ @$appInfo->time_from }}" required>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="time" class="form-control" name="time_to" id="time_to"
-                                            value="{{ @$app->time_to }}" required>
+                                            value="{{ @$appInfo->time_to }}" required>
                                         </div>
                                     </div>
                                     <label for="">Address</label>
-                                    <input type="text" class="form-control mb-2" name="address" id="address" value="{{ @$app->address }}" required>
+                                    <input type="text" class="form-control mb-2" name="address" id="address" value="{{ @$appInfo->address }}" required>
                                     <label for="">Description</label>
                                     <div id="snow-toolbar">
                                         <span class="ql-formats">
