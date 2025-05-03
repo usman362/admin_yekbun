@@ -203,7 +203,7 @@
                         <!-- Locations Tab -->
                         <form class="tab-pane fade show active" action="{{ route('settings.appsetting.appinfo.store') }}"
                             method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="{{$appInfo->id ?? ''}}">
+                            <input type="hidden" name="id" value="{{ $appInfo->id ?? '' }}">
                             @csrf
                             <div class="card mb-4">
                                 <div class="card-body">
@@ -214,8 +214,8 @@
                                                 for="avatarUploader">
                                                 <img id="viewer"
                                                     onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
-                                                    class="avatar-img"
-                                                    src="{{ asset('storage/' . $appInfo->image) }}" alt="Image">
+                                                    class="avatar-img" src="{{ asset('storage/' . $appInfo->image) }}"
+                                                    alt="Image">
                                                 <input type="file" name="image"
                                                     class="js-file-attach avatar-uploader-input" id="customFileEg1"
                                                     accept=".jpg, .png, .jpeg, .webp">
@@ -225,7 +225,20 @@
                                             </label>
                                         </a>
                                     </div>
-
+                                    <label for="">Timings</label>
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <input type="time" class="form-control" name="time_from" id="time_from"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="time" class="form-control" name="time_to" id="time_to"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <label for="">Address</label>
+                                    <input type="text" class="form-control mb-2" name="address" id="address" required>
+                                    <label for="">Description</label>
                                     <div id="snow-toolbar">
                                         <span class="ql-formats">
                                             <select class="ql-font"></select>
@@ -254,11 +267,11 @@
                                     </div>
                                     <div id="snow-editor">
                                     </div>
-                                    <input type="hidden" id="textedit_content" name="address" value=""
+                                    <input type="hidden" id="textedit_content" name="description" value=""
                                         class="form-control" />
-                                        <div class="d-flex justify-content-end gap-3 mt-4">
-                                            <button type="submit" id="btn-app-info" class="btn btn-primary">Save</button>
-                                        </div>
+                                    <div class="d-flex justify-content-end gap-3 mt-4">
+                                        <button type="submit" id="btn-app-info" class="btn btn-primary">Save</button>
+                                    </div>
                                 </div>
                             </div>
                     </div>

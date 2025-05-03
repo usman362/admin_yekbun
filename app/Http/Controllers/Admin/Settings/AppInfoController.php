@@ -35,6 +35,9 @@ class AppInfoController extends Controller
     {
         $rules = [
             'address' => 'required',
+            'description' => 'required',
+            'time_from' => 'required',
+            'time_to' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -44,7 +47,10 @@ class AppInfoController extends Controller
         } else {
             try {
                 $appInfo = AppInfo::updateOrCreate(['_id' => $request->id], [
-                    'address' => $request->address
+                    'address' => $request->address,
+                    'time_from' => $request->time_from,
+                    'time_to' => $request->time_to,
+                    'description,' => $request->description,
                 ]);
                 if ($request->has('image')) {
                     $image_path = Helpers::fileUpload($request->image, 'images/appinfo');
