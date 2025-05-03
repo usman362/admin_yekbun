@@ -12,10 +12,12 @@ use App\Models\SongViews;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\UserPlaylist;
+use App\Models\UserPlaylistGroup;
 use App\Models\VideoClip;
 use App\Models\VideoClipViews;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MultimediaController extends Controller
 {
@@ -240,22 +242,52 @@ class MultimediaController extends Controller
 
     public function getSongsPlaylist(Request $request)
     {
-        $playlists = UserPlaylist::with('song')->where('user_id', auth()->user()->id)->where('type', 'audio')->get();
+        $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+            $q->with('song');
+        }])->where('user_id', auth()->user()->id)->get();
+        if (!$playlists) {
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => auth()->user()->id,
+                'type' => 'free',
+            ]);
+        }
         return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Fetch Successfully!');
+    }
+
+    public function storeGroupPlaylist(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+        ]);
+        try {
+            $playlist = UserPlaylistGroup::updateOrCreate(['id' => $request->id], [
+                'user_id' => auth()->user()->id,
+                'group_id' => $request->group_id,
+                'type' => $request->type
+            ]);
+            return ResponseHelper::sendResponse($playlist, 'Songs Playlist has been Created Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
+        }
     }
 
     public function storeSongsPlaylist(Request $request)
     {
         $request->validate([
-            'media_id' => 'required'
+            'media_id' => 'required',
+            'group_id' => 'required',
         ]);
         try {
             $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
                 'user_id' => auth()->user()->id,
                 'media_id' => $request->media_id,
+                'group_id' => $request->group_id,
                 'type' => 'audio'
             ]);
-            $playlists = UserPlaylist::with('song')->where('user_id', auth()->user()->id)->where('type', 'audio')->get();
+            $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+                $q->with('song');
+            }])->where('user_id', auth()->user()->id)->get();
             return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
@@ -264,36 +296,73 @@ class MultimediaController extends Controller
 
     public function getClipsPlaylist(Request $request)
     {
-        $playlists = UserPlaylist::with('video')->where('user_id', auth()->user()->id)->where('type', 'video')->get();
+        $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+            $q->with('video');
+        }])->where('user_id', auth()->user()->id)->get();
         return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Fetch Successfully!');
     }
 
     public function storeClipsPlaylist(Request $request)
     {
         $request->validate([
-            'media_id' => 'required'
+            'media_id' => 'required',
+            'group_id' => 'required'
         ]);
         try {
             $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
                 'user_id' => auth()->user()->id,
                 'media_id' => $request->media_id,
+                'group_id' => $request->group_id,
                 'type' => 'video'
             ]);
-            $playlists = UserPlaylist::with('video')->where('user_id', auth()->user()->id)->where('type', 'video')->get();
+            $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+                $q->with('video');
+            }])->where('user_id', auth()->user()->id)->get();
             return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Created Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
         }
     }
 
+    public function deletePlaylistGroup($id)
+    {
+        $group = UserPlaylistGroup::find($id);
+        if (!$group) {
+            return ResponseHelper::sendResponse(null, 'Playlist Group not found.', false, 404);
+        }
+        $playlists = UserPlaylist::where('group_id', $id)->get();
+        try {
+            DB::beginTransaction();
+            if ($playlists) {
+                foreach ($playlists as $playlist) {
+                    $playlist->delete();
+                }
+            }
+            $group->delete();
+            DB::commit();
+            return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 403);
+        }
+    }
+
     public function deletePlaylist($id)
     {
         $playlist = UserPlaylist::find($id);
-        try{
+
+        if (!$playlist) {
+            return ResponseHelper::sendResponse(null, 'Playlist not found.', false, 404);
+        }
+
+        try {
+            DB::beginTransaction();
             $playlist->delete();
+            DB::commit();
             return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
-        }catch(Exception $e){
-            return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 403);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 500);
         }
     }
 }

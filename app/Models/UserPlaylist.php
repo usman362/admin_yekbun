@@ -10,6 +10,7 @@ class UserPlaylist extends Model
     use HasFactory;
 
     protected $fillable =  [
+        'group_id',
         'user_id',
         'media_id',
         'type',
