@@ -7,6 +7,12 @@
     data-template="{{ $configData['layout'] . '-menu-' . $configData['theme'] . '-' . $configData['style'] }}">
 
 <head>
+    <style>
+        img, svg {
+    vertical-align: middle;
+    height: 25px;
+}
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
