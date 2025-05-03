@@ -61,6 +61,6 @@ class VideoClip extends Model
 
     public function playlists()
     {
-        return $this->hasMany(UserPlaylist::class, 'media_id');
+        return $this->hasMany(UserPlaylist::class, 'media_id')->where('user_id',auth()->user()->id);
     }
 }
