@@ -245,7 +245,7 @@ class MultimediaController extends Controller
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
             $q->with('song');
         }])->where('user_id', auth()->user()->id)->get();
-        if (!$playlists) {
+        if ($playlists->count() == 0) {
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => auth()->user()->id,
