@@ -41,7 +41,7 @@ class AppInfoController extends Controller
         ];
 
         $validator = Validator::make($request->all(), $rules);
-
+// dd($request->all());
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
@@ -50,8 +50,9 @@ class AppInfoController extends Controller
                     'address' => $request->address,
                     'time_from' => $request->time_from,
                     'time_to' => $request->time_to,
-                    'description,' => $request->description,
                 ]);
+                $appInfo->description = $request->description;
+                $appInfo->save();
                 if ($request->has('image')) {
                     $image_path = Helpers::fileUpload($request->image, 'images/appinfo');
                     $appInfo->image = $image_path;
