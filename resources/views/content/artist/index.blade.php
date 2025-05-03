@@ -8,14 +8,229 @@
         #DataTables_Table_0_wrapper .row:first-child {
             display: none;
         }
+
+        .btn-primary {
+            color: #fff !important;
+            background-color: #696cff !important;
+            border-color: #696cff !important;
+            box-shadow: 0 0.125rem 0.25rem 0 rgba(105, 108, 255, 0.4) !important;
+        }
+
+        .modal-content {
+            overflow: unset !important;
+        }
+
+        .pop-img {
+            width: 100%;
+        }
+
+        .pop-heading {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .pop-txt {
+            color: #000;
+            font-size: 14px;
+        }
+
+        .pop_action_div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 24px;
+            left: auto;
+            right: 20px;
+        }
+
+        .pop_action {
+            background: #F2F2F2;
+            border-radius: 7px;
+            width: 30px;
+            height:
+                30px;
+            margin: 5px;
+            cursor: pointer;
+            border: 0px;
+        }
+
+        .pop_action_image {
+            width: 30px;
+            padding: 5px;
+            height: 30px;
+            object-fit: cover
+        }
+
+        .pop_div {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 5px
+        }
+
+        .pop_sub {
+            height: 30;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            top: 10px
+        }
+
+        .pop_head {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px
+        }
+
+        .pop_tit {
+            display: flex;
+            align-items: start;
+            align-items: center
+        }
+
+        .pop_heading {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: flex-start;
+            margin-left: 5px;
+            gap: 8px
+        }
+
+        .pop_head_line {
+            font-family: Genos;
+            font-size: 20px;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .pop_title {
+            border-radius: 45%;
+            background: #00000066
+        }
+
+        .pop_description {
+            font-size: 14px;
+            font-weight: 400;
+            color: gray;
+            text-align: left;
+            background: #f7f7f7;
+            padding: 7px;
+            font-family: Genos;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: left
+        }
+
+        .pop_main_image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .1)
+        }
+
+        .pop_overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            background: #1c274C99;
+            gap: 5px
+        }
+
+        .modal-content {
+            max-height: 90vh !important;
+            /* Set max height */
+            overflow: unset !important;
+            /* Prevent overflow */
+        }
+
+        .modal-body {
+            max-height: 70vh !important;
+            /* Adjust based on your layout */
+            overflow-y: auto !important;
+            /* Enables scrolling if content exceeds max height */
+        }
+    </style>
+    <style>
+        .card-post {
+            box-shadow: none;
+            cursor: pointer;
+        }
+
+        .card-post:hover {
+            box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+            background-clip: padding-box;
+            cursor: pointer;
+            background: #f6f6f6;
+        }
+
+        .card-post-thumbnail {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            border-radius: 12px;
+        }
+
+        .post-image {
+            position: relative;
+        }
+
+        .post-image .dropdown {
+            margin-top: -215px;
+            display: none;
+        }
+
+        .dropdown-content {
+            border: none !important;
+        }
+
+        .fancybox__container {
+            z-index: 99999 !important;
+        }
+
+        .fancybox__nav {
+            display: none !important;
+        }
+
+        .fancybox__thumbs {
+            display: none !important;
+        }
     </style>
 @endsection
 @section('vendor-style')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/tagify/tagify.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/friendkit/css/app-2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/friendkit/css/core.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 @endsection
 @section('vendor-script')
+    <!-- Fancybox -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
     <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
@@ -539,62 +754,117 @@
                                 totalVideosMbs += parseFloat(video.video_file_size);
                                 const deleteVideoUrl =
                                     '{{ url('/') }}/video-clips/' + video._id;
-
+                                var photoThumbnail;
+                                if (video.thumbnail !== null) {
+                                    photoThumbnail = `
+                                        <div style="background-image: url('{{ asset('storage/${video.thumbnail}') }}');" class="card-post-thumbnail">
+                                            <span class="video-thumbnail-duration">${video.video_file_length || '00:00'}</span>
+                                        </div>`;
+                                } else {
+                                    photoThumbnail = ` <div style="background-color: grey;" class="card-post-thumbnail">
+                                            <center><i class="fas fa-photo-film" style="position: absolute;top: 66px;bottom: auto;font-size: 50px;right: auto;left: 111px;"></i></center>
+                                            <span class="video-thumbnail-duration">${video.video_file_length || '00:00'}</span>
+                                        </div>`;
+                                }
                                 $('#videos-tbody').append(`
-                                    <div class="col-md-4">
-                                            <div id="feed-post-1" class="card is-post mt-4 pl-4 pr-4">
-                                                <!-- Main wrap -->
-                                                <div class="content-wrap">
-                                                    <!-- Post header -->
-                                                    <div class="card-heading d-flex p-3">
-                                                        <!-- User meta -->
-                                                        <div class="user-block">
-                                                            <div class="user-info">
-                                                                <span class="d-flex"><img src="${artistImage}" width="34px" height="34px"><a href="javascript:void(0)" style="line-height:2;">${artistName}</a></span>
-                                                                <small class="time"><i>${video.video_file_size >= 1024 ? (video.video_file_size/1024)+'GB' : video.video_file_size+'MB'}&nbsp; - ${video.video_file_length} - &nbsp;${formatDate(video.created_at)}</i></small>
-                                                            </div>
-                                                        </div>
 
+                    <div class="col-md-4">
+                        <div class="post-image">
+                            <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post" data-fancybox="post1" data-lightbox-type="comments" data-thumb="{{ asset('storage/${video.video}') }}" href="{{ asset('storage/${video.video}') }}" data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('storage/${video.video}') }}">
+                                <!-- Main wrap -->
+                                <div class="content-wrap">
 
-                                                        <div class="dropdown is-spaced is-right is-neutral dropdown-trigger" style=" position: absolute;left: auto;right: 8px;">
-                                                            <div>
-                                                               <form action="${deleteVideoUrl}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
-                                                                 @csrf
-                                                                 @method('DELETE')
-                                                                 <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                         <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                         <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                         <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                         <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                         <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                     </svg>
-                                                                 </button>
-                                                             </form>
-                                                            </div>
-                                                        </div>
+                                    <!-- Post body -->
+                                    <div class="card-body p-0">
+                                        ${photoThumbnail}
+                                    </div>
+                                    <div class="card-footer mt-0">
+                                        <div class="user-block">
+                                            <div class="user-info">
+                                                <div class="row">
+                                                    <div class="col-md-2 p-0">
+                                                        <img src="${artistImage}" style="width: 45px !important;height:45px !important;">
                                                     </div>
-                                                    <!-- /Post header -->
+                                                    <div class="col-md-10">
+                                                        <div class="mt-2">
+                                                            <p class="m-0" title="${video.video_file_name || 'N/A'}">
+                                                                <b>${(video.video_file_name || 'N/A').length > 17 ? video.video_file_name.substring(0, 17) + '...' : video.video_file_name || 'N/A'}</b>
+                                                            </p>
 
-                                                    <!-- Post body -->
-                                                    <div class="card-body pt-0 pb-2">
-                                                        <div class="post-image">
-                                                            <a data-fancybox="post1" data-lightbox-type="comments">
-                                                                <video controls="" class="videoclass w-100">
-                                                                <source src="{{ asset('storage/${video.video}') }}">
-                                                            </video>
-                                                            </a>
-                                                            <!-- Action buttons -->
-
+                                                            <p class="m-0">
+                                                                ${artistName}
+                                                            </p>
+                                                            <small class="time"><i>${video.total_listen || '0'} Views .
+                                                                    &nbsp;&nbsp;${formatDate(video.created_at)}</i></small>
                                                         </div>
-                                                        <small>${video.video_file_name || 'N/A'}</small>&nbsp;&nbsp;
-                                                        <small>${video.total_listen || '0'} Views</small>
+
                                                     </div>
-                                                    <!-- /Post body -->
                                                 </div>
-                                                <!-- /Main wrap -->
                                             </div>
                                         </div>
-                                    `);
+                                    </div>
+                                    <!-- /Post body -->
+                                </div>
+                                <!-- /Main wrap -->
+                            </div>
+                            <div class="card-heading">
+                                <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
+                                    <div>
+                                        <div class="button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                                <circle cx="12" cy="12" r="1"></circle>
+                                                <circle cx="12" cy="5" r="1"></circle>
+                                                <circle cx="12" cy="19" r="1"></circle>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-menu" role="menu" style="top: -215px;left: 33px;right: auto;">
+                                        <div class="dropdown-content">
+                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                <div class="media">
+                                                    <div class="media-content">
+                                                        <h3>Remove the Feed</h3>
+                                                        <select class="form-control mt-1">
+                                                            <option value="">Select the Reason</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                <div class="media">
+                                                    <div class="media-content">
+                                                        <h3>Remove Feed - Flag FanPage</h3>
+                                                        <select class="form-control mt-1">
+                                                            <option value="">Select the Reason</option>
+                                                        </select>
+                                                        <select class="form-control mt-1">
+                                                            <option value="">Select the Flag</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                <div class="media">
+                                                    <div class="media-content">
+                                                        <h3>Remove Feed - Block FanPage</h3>
+                                                        <select class="form-control mt-1">
+                                                            <option value="">Select the Reason</option>
+                                                        </select>
+                                                        <select class="form-control mt-1">
+                                                            <option value="">Select Downgrade User</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                `);
+
                             });
 
                             totalVideos = response.clips.length;
