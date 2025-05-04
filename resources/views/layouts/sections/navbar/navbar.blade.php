@@ -111,17 +111,26 @@ $navbarDetached = ($navbarDetached ?? '');
 
             <div class="navbar-nav-right d-flex align-items-center row" id="navbar-collapse">
                 <!-- Search Column -->
-                @if (!isset($menuHorizontal))
-                    <div class="col-2 card mb-0 px-3 search-wrap d-flex justify-content-center" style="height:54px;">
-                        <div class="navbar-nav">
-                            <div class="nav-item navbar-search-wrapper mb-0">
-                                <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
-                                    <i class="bx bx-search bx-sm"></i>
-                                    <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+               <!-- Search Column -->
+@if (!isset($menuHorizontal))
+<div class="col-2 card mb-0 px-3 search-wrap d-flex justify-content-center" style="height:54px;">
+    <div class="navbar-nav w-100">
+        <div class="nav-item navbar-search-wrapper mb-0 w-100">
+            <div class="input-group input-group-merge">
+                <span class="input-group-text" style="background: transparent; border-right: none;">
+                    <i class="bx bx-search bx-sm"></i>
+                </span>
+                <input 
+                    type="text" 
+                    class="form-control border-start-0" 
+                    placeholder="Search (Ctrl+/)" 
+                    aria-label="Search"
+                    style="background: transparent; border-left: none;"
+                >
+            </div>
+        </div>
+    </div>
+</div>
                 @endif
                 
                 <!-- Quick Links Column -->
