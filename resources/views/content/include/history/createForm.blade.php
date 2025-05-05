@@ -24,7 +24,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div> --}}
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="form-label" for="inputTitle">Name</label>
                     <input type="text" id="inputTitle" class="form-control" placeholder="Name" name="title">
                     <input type="hidden" name="thumbnail" id="thumbnail">
@@ -32,27 +32,36 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-md-12" id="generated-thumbnails" style="display: none">
-                    <div class="card">
-                        <h5 class="card-header">Generated Thumbnails</h5>
-                        <div class="card-body">
-                            <div class="row">
-                                <div id="thumbnail-history" style="display: none">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img id="img1" class="generated-img"
-                                                style="width: 100%;height: 100px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                src="" alt="">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <img id="img2" class="generated-img"
-                                                style="width: 100%;height: 100px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                src="" alt="">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <img id="img3" class="generated-img"
-                                                style="width: 100%;height: 100px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                src="" alt="">
+                <div class="col-md-6">
+                    <label class="form-label" for="inputSource">Source</label>
+                    <input type="text" id="inputSource" class="form-control" placeholder="Source" name="source">
+                    @error('source')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-4">
+                    <div id="generated-thumbnails" style="display: block">
+                        <div class="card">
+                            <h5 class="card-header">Thumbnails</h5>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div id="thumbnail-history" style="display: block">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img id="img1" class="generated-img"
+                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
+                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <img id="img2" class="generated-img"
+                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
+                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <img id="img3" class="generated-img"
+                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
+                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="card">
                         <h5 class="card-header">Video Upload</h5>
                         <div class="card-body">
@@ -82,7 +91,8 @@
                             <!-- Toggle 1 -->
                             <div class="toggle-item">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input comments" name="comments" id="comments" checked="">
+                                    <input type="checkbox" value="1" class="form-check-input comments"
+                                        name="comments" id="comments" checked="">
                                     <label for="comments" class="form-check-label"></label>
                                 </div>
                                 <span>Comments</span>
@@ -91,7 +101,8 @@
                             <!-- Toggle 2 -->
                             <div class="toggle-item">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input share" name="share" id="share">
+                                    <input type="checkbox" value="1" class="form-check-input share" name="share"
+                                        id="share">
                                     <label for="share" class="form-check-label"></label>
                                 </div>
                                 <span>Voice Comments</span>
@@ -100,7 +111,8 @@
                             <!-- Toggle 3 -->
                             <div class="toggle-item">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input emoji" name="emoji" id="emoji">
+                                    <input type="checkbox" value="1" class="form-check-input emoji" name="emoji"
+                                        id="emoji">
                                     <label for="emoji" class="form-check-label"></label>
                                 </div>
                                 <span>Emoji</span>
@@ -218,8 +230,9 @@
                 });
 
                 $('#error-thumbnail').text("");
-                $('#thumbnail-history').css('display', 'none');
-                $('#generated-thumbnails').css('display', 'none');
+                $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
+                // $('#thumbnail-history').css('display', 'none');
+                // $('#generated-thumbnails').css('display', 'none');
 
                 return this._updateMaxFilesReachedClass();
 
@@ -276,13 +289,13 @@
 
         $('.add-history').click(function() {
             $('#error-thumbnail').text("");
-            $('#thumbnail-history').css('display', 'none');
-            $('#generated-thumbnails').css('display', 'none');
+            // $('#thumbnail-history').css('display', 'none');
+            // $('#generated-thumbnails').css('display', 'none');
         })
 
-        $('.generated-img').click(function(){
+        $('.generated-img').click(function() {
             let src = $(this).attr('src');
-            $('.dz-thumbnail img').attr('src',src);
+            $('.dz-thumbnail img').attr('src', src);
             $('#thumbnail').val(src);
         })
     });

@@ -277,7 +277,7 @@
                                                         method="post" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <div class="pop_action_div"><button class="pop_action"><img
+                                                        <div class="pop_action_div"><button class="pop_action" style="width:36px"><img
                                                                     type="submit"
                                                                     src="{{ asset('assets/svg/delete.svg') }}"
                                                                     class="pop_action_image"></button>
@@ -319,7 +319,7 @@
                                                 <div
                                                     style="height:29px;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;width:100%;">
                                                     <div
-                                                        style="display:flex;align-items:center;justify-content:space-between;width:100%;height:100%">
+                                                        style="display:flex;align-items:center;width:100%;height:100%">
 
                                                         @if ($feed->is_comments == 1)
                                                             <div
@@ -331,22 +331,22 @@
                                                         @endif
                                                         @if ($feed->is_share == 1)
                                                             <div
-                                                                style="display:flex;align-items:center;gap:3px;height:100%">
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;margin-left:8px">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
                                                                     style="width:100%;height:100%;object-fit:cover"><span
                                                                     style="font-weight:400;font-family:Genos">0</span>
                                                             </div>
                                                         @endif
+                                                        @if ($feed->is_emoji == 1)
+                                                            <div style="display:flex;align-items:center;gap:2px;height:100%;margin-left:8px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover">
+                                                                <span style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                        @endif
                                                     </div>
-                                                    @if ($feed->is_emoji == 1)
-                                                        <div style="display:flex;align-items:center;gap:2px;height:100%">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -423,10 +423,10 @@
             data.data.comments.forEach(function(data, index) {
                 let child = '';
                 if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
-                    commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
+                    commentData = `<img src="{{ asset('storage') }}/${data.image}" style="width:100px;height:100px">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData =
-                        `<img src="{{ asset('/') }}storage/${data?.emoji_data?.image}" width="80" height="80">`;
+                        `<img src="{{ asset('/') }}storage/${data?.emoji_data?.image}" style="width:100px;height:100px">`;
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
                                    <audio src="{{ asset('storage') }}/${data.audio}" id="comment-audio-input"></audio>
@@ -474,11 +474,11 @@
                         if (child.image && child.image.trim() !== "" && child.image !== "null" && child
                             .image !== null) {
                             commentData =
-                                `<img src="{{ asset('storage') }}/${child.image}" width="80" height="80">`;
+                                `<img src="{{ asset('storage') }}/${child.image}" style="width:100px;height:100px">`;
                         } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" &&
                             child.emoji !== null) {
                             commentData =
-                                `<img src="{{ asset('/') }}storage/${child?.emoji_data?.image}" width="80" height="80">`;
+                                `<img src="{{ asset('/') }}storage/${child?.emoji_data?.image}" style="width:100px;height:100px">`;
                         } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" &&
                             child.audio !== null) {
                             commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
@@ -533,11 +533,11 @@
                                 if (childUltra.image && childUltra.image.trim() !== "" && childUltra
                                     .image !== "null" && childUltra.image !== null) {
                                     commentData =
-                                        `<img src="{{ asset('storage') }}/${childUltra.image}" width="80" height="80">`;
+                                        `<img src="{{ asset('storage') }}/${childUltra.image}" style="width:100px;height:100px">`;
                                 } else if (childUltra.emoji && childUltra.emoji.trim() !== "" &&
                                     childUltra.emoji !== "null" && childUltra.emoji !== null) {
                                     commentData =
-                                        `<img src="{{ asset('/') }}storage/${childUltra?.emoji_data?.image}" width="80" height="80">`;
+                                        `<img src="{{ asset('/') }}storage/${childUltra?.emoji_data?.image}" style="width:100px;height:100px">`;
                                 } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
                                     childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
