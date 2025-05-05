@@ -155,9 +155,9 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('/get-popular-artists', [MultimediaController::class, 'getPopularArtists']);
     Route::get('/get-artists-details/{id}', [MultimediaController::class, 'getArtistDetail']);
     Route::get('get-favorite-artists', [MultimediaController::class, 'getFavArtists']);
-    Route::get('store-artist-song-views/{id}', [MultimediaController::class, 'store_artist_song_views']);
-    Route::get('store-artist-video-views/{id}', [MultimediaController::class, 'store_artist_video_views']);
-    Route::get('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
+    Route::post('store-artist-song-views/{id}', [MultimediaController::class, 'store_artist_song_views']);
+    Route::post('store-artist-video-views/{id}', [MultimediaController::class, 'store_artist_video_views']);
+    Route::post('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
 
 
 
