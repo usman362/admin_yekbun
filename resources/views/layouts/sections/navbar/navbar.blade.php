@@ -321,7 +321,7 @@
                     <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col text-center">
                             <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
-                                <i class="menu-icon tf-icons bx bx-music"></i>
+                                <img src="{{ asset('assets/img/Add History.svg') }}" alt="Agents Icon" style="width: 20px; height: 20px;">
                             </span>
                             <a href="{{ url('/artist') }}"  class="stretched-link d-block">Add Artist</a>
                             

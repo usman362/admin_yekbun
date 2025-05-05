@@ -1573,20 +1573,7 @@
         </li>
     @endcan
 
-    @can('admins.read')
-        {{-- <li class="menu-item {{ Request::is('settings/countrieslist') ? 'active' : '' }}">
-            <a href="{{ url('/settings/countrieslist') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-flag"></i>
-                <div>Select Country</div>
-            </a>
-        </li> --}}
-        <li class="menu-item {{ Request::is('app/popup') ? 'active' : '' }} ">
-            <a href="{{ url('/app/popup') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-message-square-add"></i>
-                <div>Add Popup</div>
-            </a>
-        </li>
-    @endcan
+    
     @can('manageorigin.read')
         <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
             <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">

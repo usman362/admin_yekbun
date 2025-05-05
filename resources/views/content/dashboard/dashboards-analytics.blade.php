@@ -61,32 +61,10 @@
         }
     </style>
     <div class="row">
-        <div class="col-lg-8 mb-4 order-0">
-            <div class="card">
-                <div class="d-flex align-items-end row">
-                    <div class="col-sm-7">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-                            <p class="mb-4">You have done <span class="fw-bold">72%</span> more sales today. Check your
-                                new badge in your profile.</p>
-
-                            <a href="javascript:;" class="btn btn-sm btn-label-primary">View Badges</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                            <img src="{{ asset('assets/img/illustrations/man-with-laptop-' . $configData['style'] . '.png') }}"
-                                height="140" alt="View Badge User"
-                                data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                                data-app-light-img="illustrations/man-with-laptop-light.png" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 order-1">
+       
+        <div class="col-lg-12 col-md-4 order-1">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                <div class="col-lg-3 col-md-12 col-6 mb-4">
                     <div class="card">
                         <div class="card-body pb-0">
                             <div class="m-auto text-center">
@@ -98,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                <div class="col-lg-3 col-md-12 col-6 mb-4">
                     <div class="card">
                         <div class="card-body pb-0">
                             <div class="m-auto text-center">
@@ -107,6 +85,31 @@
                             </div>
                             <span class="d-block fw-semibold mb-1 text-center mt-3">Female Account</span>
                             <h3 class="card-title mb-1 text-center">{{ $female_account ?? '' }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <div class="m-auto text-center">
+                                <span class="badge bg-label-info p-2"><i class='bx bx-globe'
+                                        style="font-size:70px;"></i></span>
+                            </div>
+                            <span class="d-block fw-semibold mb-1 text-center mt-3">Total Country</span>
+                            <h3 class="card-title mb-1 text-center">{{ $country ?? '' }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-12 col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <div class="m-auto text-center">
+                                <span class="badge bg-label-primary p-2"><i class='bx bx-music'
+                                        style="font-size:70px;"></i></span>
+                            </div>
+                            <span class="d-block fw-semibold mb-1 text-center mt-3">Music Uploaded</span>
+                            <h3 class="card-title mb-1 text-center">{{ $music ?? '' }}</h3>
                         </div>
                     </div>
                 </div>
@@ -166,38 +169,7 @@
             </div>
         </div>
         <!--/ Total Revenue -->
-        <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <div class="m-auto text-center">
-                                <span class="badge bg-label-info p-2"><i class='bx bx-globe'
-                                        style="font-size:70px;"></i></span>
-                            </div>
-                            <span class="d-block fw-semibold mb-1 text-center mt-3">Total Country</span>
-                            <h3 class="card-title mb-1 text-center">{{ $country ?? '' }}</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <div class="m-auto text-center">
-                                <span class="badge bg-label-primary p-2"><i class='bx bx-music'
-                                        style="font-size:70px;"></i></span>
-                            </div>
-                            <span class="d-block fw-semibold mb-1 text-center mt-3">Music Uploaded</span>
-                            <h3 class="card-title mb-1 text-center">{{ $music ?? '' }}</h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- </div>
-        <div class="row"> -->
-
-            </div>
-        </div>
+        
     </div>
     <div class="row">
         <!-- Order Statistics -->
