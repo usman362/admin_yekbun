@@ -132,7 +132,7 @@
    
     
     <!-- Channels Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 90px;">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -174,7 +174,7 @@
     </div>
     
     <!-- Users Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 70px;">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 70px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -237,12 +237,12 @@
     </div>
     
     <!-- Avatars Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 85px;">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 85px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="d-flex align-items-center gap-2">
-                        <img src="{{ asset('assets/img/avatar.svg') }}" alt="avatars" style="width: 20px; height: 20px;">
+                        <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars" style="width: 20px; height: 20px;">
                         <span class="fw-semibold" style="font-size: 0.85rem;">Avatars</span>
                        
                     </div>
@@ -256,7 +256,7 @@
     </div>
     
     <!-- Flag User Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 90px;">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx- ms-4" style="height:54px; min-width: 90px;">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="{{ url('reports/flagged-users') }}">
@@ -269,7 +269,7 @@
     </div>
     
     <!-- Flag Channels Column -->
-    <div class="col-auto card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 110px;">
+    <div class="col-auto card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 110px;">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="{{ url('flaggedfanpage') }}">
@@ -282,7 +282,7 @@
     </div>
     
     <!-- Agents Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 80px;">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 80px;">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" href="">
@@ -295,7 +295,8 @@
     </div>
     
  <!-- Combined Layout for Shortcuts, Notifications, and Profile -->
-<div class="col-auto card mb-0 d-flex justify-content-center align-items-center mx-1 px-2" style="height:54px; min-width: 27%;">
+ <div class="col-2 card mb-0 d-flex justify-content-center align-items-center mx-1 px-2 ms-4" style="height:54px;">
+ 
     <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
 
         <!-- Shortcuts -->
