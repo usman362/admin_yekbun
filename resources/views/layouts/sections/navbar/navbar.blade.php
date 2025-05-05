@@ -321,17 +321,33 @@
                     <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col text-center">
                             <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
-                                <i class="bx bx-calendar fs-4"></i>
+                                <i class="menu-icon tf-icons bx bx-music"></i>
                             </span>
-                            <a href="{{ url('app/calendar') }}" class="stretched-link d-block">Calendar</a>
-                            <small class="text-muted mb-0">Appointments</small>
+                            <a href="{{ url('/artist') }}"  class="stretched-link d-block">Add Artist</a>
+                            
+                        </div>
+                        <div class="dropdown-shortcuts-item col text-center">
+                            <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
+                                <i class="menu-icon tf-icons bx bx-history"></i>
+                            </span>
+                            <a href="{{ url('history') }}" class="stretched-link d-block">Add  History</a>
+                            
+                        </div>    
+                    </div>
+                    <div class="row row-bordered overflow-visible g-0">
+                        <div class="dropdown-shortcuts-item col text-center">
+                            <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
+                                <i class="menu-icon tf-icons bx bx-sort"></i>
+                            </span>
+                            <a href="{{ url('/vote') }}"  class="stretched-link d-block">Add Voting</a>
+                            
                         </div>
                         <div class="dropdown-shortcuts-item col text-center">
                             <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
                                 <i class="bx bx-food-menu fs-4"></i>
                             </span>
-                            <a href="{{ url('app/invoice/list') }}" class="stretched-link d-block">Invoice App</a>
-                            <small class="text-muted mb-0">Manage Accounts</small>
+                            <a href="{{ url('language') }}" class="stretched-link d-block">Manage Languages</a>
+                            
                         </div>
                     </div>
                 </div>
