@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Region;
@@ -47,29 +48,37 @@ class CityController extends Controller
             $hasConditions = true;
         }
 
+        $cities = $cities->paginate(10);
+        // if (!empty($request->limit)) {
 
-        if (!empty($request->limit)) {
+        //     if ($request->limit !== 'all') {
+        //         $limit = (int)$request->limit;
+        //         $cities->limit($limit);
+        //     }
 
-            if ($request->limit !== 'all') {
-                $limit = (int)$request->limit;
-                $cities->limit($limit);
-            }
+        //     // Get results
+        //     $cities = $cities->get();
+        // } else {
+        //     // If no conditions applied, limit results to 15
+        //     if (!$hasConditions) {
+        //         $cities->limit(15);
+        //     }
 
-            // Get results
-            $cities = $cities->get();
-        } else {
-            // If no conditions applied, limit results to 15
-            if (!$hasConditions) {
-                $cities->limit(15);
-            }
+        //     // Get results
+        //     $cities = $cities->get();
+        // }
 
-            // Get results
-            $cities = $cities->get();
-        }
+        $data = [
+            'feeds' => $cities->items(),
+            'pagination' => [
+                'page' => $cities->currentPage(),
+                'count' => $cities->perPage(),
+                'totalItems' => $cities->total(),
+                'totalPages' => $cities->lastPage(),
+            ]
+        ];
 
-        return response()->json([
-            'cities' => $cities
-        ], 200);
+        return ResponseHelper::sendResponse($data, 'Cities has been Fetch Successfully!');
     }
 
 
