@@ -113,39 +113,38 @@
     </div>
 @endif
 
-<div class="navbar-nav-right d-flex align-items-center row" id="navbar-collapse">
+<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="gap: 4px;">
     <!-- Search Column -->
     @if (!isset($menuHorizontal))
-        <div class="col-2 card mb-0 px-3 search-wrap d-flex justify-content-center" style="height:54px;">
-            <div class="navbar-nav">
-                <div class="nav-item navbar-search-wrapper mb-0">
-                    <div class="nav-item nav-link px-0 d-flex align-items-center">
-                        <i class="bx bx-search bx-sm me-1"></i>
-                        <input type="text" class="form-control form-control-sm" placeholder="Search (Ctrl+/)"
-                            style="border: none; box-shadow: none;" />
-                    </div>
+    <div class="col-2 card mb-0 px-3 search-wrap d-flex justify-content-center" style="height:54px;">
+        <div class="navbar-nav">
+            <div class="nav-item navbar-search-wrapper mb-0">
+                <div class="nav-item nav-link px-0 d-flex align-items-center">
+                    <i class="bx bx-search bx-sm me-1"></i>
+                    <input type="text" class="form-control form-control-sm" placeholder="Search (Ctrl+/)" style="border: none; box-shadow: none;" />
                 </div>
             </div>
         </div>
-    @endif
+    </div>
+@endif
 
-
+    
     <!-- Quick Links Column -->
-    <div
-        class="col-1 card mb-0  px-3 d-flex justify-content-center"style="height:54px;  margin-left:7px;margin-right:7px">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 50px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" aria-expanded="false">
                     <i class='bx bx-grid-alt bx-sm'></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end py-0">
+                <div class="dropdown-menu dropdown-menu-end py-0" style="width: 300px;">
                     <div class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
                             <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
                             <a href="javascript:void(0)" class="dropdown-shortcuts-add text-body"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i
-                                    class="bx bx-sm bx-plus-circle"></i></a>
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts">
+                                <i class="bx bx-sm bx-plus-circle"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="dropdown-shortcuts-list scrollable-container">
@@ -165,103 +164,46 @@
                                 <small class="text-muted mb-0">Manage Accounts</small>
                             </div>
                         </div>
-                        <div class="row row-bordered overflow-visible g-0">
-                            <div class="dropdown-shortcuts-item col">
-                                <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                                    <i class="bx bx-user fs-4"></i>
-                                </span>
-                                <a href="{{ url('app/user/list') }}" class="stretched-link">User App</a>
-                                <small class="text-muted mb-0">Manage Users</small>
-                            </div>
-                            <div class="dropdown-shortcuts-item col">
-                                <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                                    <i class="bx bx-check-shield fs-4"></i>
-                                </span>
-                                <a href="{{ url('app/access-roles') }}" class="stretched-link">Role Management</a>
-                                <small class="text-muted mb-0">Permission</small>
-                            </div>
-                        </div>
-                        <div class="row row-bordered overflow-visible g-0">
-                            <div class="dropdown-shortcuts-item col">
-                                <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                                    <i class="bx bx-pie-chart-alt-2 fs-4"></i>
-                                </span>
-                                <a href="{{ url('/') }}" class="stretched-link">Dashboard</a>
-                                <small class="text-muted mb-0">User Profile</small>
-                            </div>
-                            <div class="dropdown-shortcuts-item col">
-                                <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                                    <i class="bx bx-cog fs-4"></i>
-                                </span>
-                                <a href="{{ url('pages/account-settings-account') }}"
-                                    class="stretched-link">Setting</a>
-                                <small class="text-muted mb-0">Account Settings</small>
-                            </div>
-                        </div>
-                        <div class="row row-bordered overflow-visible g-0">
-                            <div class="dropdown-shortcuts-item col">
-                                <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                                    <i class="bx bx-help-circle fs-4"></i>
-                                </span>
-                                <a href="{{ url('pages/help-center-landing') }}" class="stretched-link">Help Center</a>
-                                <small class="text-muted mb-0">FAQs & Articles</small>
-                            </div>
-                            <div class="dropdown-shortcuts-item col">
-                                <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                                    <i class="bx bx-window-open fs-4"></i>
-                                </span>
-                                <a href="{{ url('modal-examples') }}" class="stretched-link">Modals</a>
-                                <small class="text-muted mb-0">Useful Popups</small>
-                            </div>
-                        </div>
+                        <!-- Additional shortcut rows... -->
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-
-
+    
     <!-- Channels Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center" style="height:54px; margin-left:6px;margin-right:6px">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 90px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" aria-expanded="false">
-                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <div style="display: flex; flex-direction: column;">
-                            <span class="fw-semibold d-block"
-                                style="margin-right: 3px; font-size: 0.85rem;">Channels</span>
-                        </div>
-                        <img src="{{ asset('assets/img/Channels.svg') }}" alt="channel">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fw-semibold" style="font-size: 0.85rem;">Channels</span>
+                        <img src="{{ asset('assets/img/Channels.svg') }}" alt="channel" style="width: 20px; height: 20px;">
                     </div>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end p-0"
-                    style="min-width: 220px !important; width: 220px !important;">
+                <ul class="dropdown-menu dropdown-menu-end p-0" style="min-width: 220px;">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                            href="{{ url('managecategories') }}" style="font-size: 0.85rem;">
-                            <i class="bx bx-moon me-2" style="font-size: 1rem;"></i>
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('managecategories') }}">
+                            <i class="bx bx-moon me-2"></i>
                             <span>Manage Categories</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                            href="{{ url('channelrequest?view=new_request') }}" style="font-size: 0.85rem;">
-                            <i class="bx bx-desktop me-2" style="font-size: 1rem;"></i>
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('channelrequest?view=new_request') }}">
+                            <i class="bx bx-desktop me-2"></i>
                             <span>Channel Request</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                            href="{{ url('managechannel?view=new_request') }}" style="font-size: 0.85rem;">
-                            <i class="bx bx-desktop me-2" style="font-size: 1rem;"></i>
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('managechannel?view=new_request') }}">
+                            <i class="bx bx-desktop me-2"></i>
                             <span>Manage Channel</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('channeladmin') }}"
-                            style="font-size: 0.85rem;">
-                            <i class="bx bx-user me-2" style="font-size: 1rem;"></i>
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('channeladmin') }}">
+                            <i class="bx bx-user me-2"></i>
                             <span>Channel Admin</span>
                         </a>
                     </li>
@@ -269,75 +211,59 @@
             </li>
         </ul>
     </div>
+    
     <!-- Users Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center" style="height:54px;margin-left:6px;margin-right:6px">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 70px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <div style="display: flex; flex-direction: column;">
-                            <span class="fw-semibold d-block"
-                                style="margin-right: 5px; font-size: 0.85rem;">User</span>
-                        </div>
-                        <img src="{{ asset('assets/img/Users.svg') }}" alt="user"
-                            style="width: 20px; height: 20px;">
+                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fw-semibold" style="font-size: 0.85rem;">User</span>
+                        <img src="{{ asset('assets/img/Users.svg') }}" alt="user" style="width: 20px; height: 20px;">
                     </div>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end p-0"
-                    style="min-width: 220px !important; width: 220px !important;">
+                <ul class="dropdown-menu dropdown-menu-end p-0" style="min-width: 220px;">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                            href="{{ url('/users/educated') }}" style="font-size: 0.85rem;">
-                            <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu"
-                                style="width: 20px; height: 20px; margin-right: 10px;">
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('/users/educated') }}">
+                            <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu" style="width: 20px; height: 20px; margin-right: 10px;">
                             <span>Educated User</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                            href="{{ url('/users/cultivated') }}" style="font-size: 0.85rem;">
-                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="cul"
-                                style="width: 20px; height: 20px; margin-right: 10px;">
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('/users/cultivated') }}">
+                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="cul" style="width: 20px; height: 20px; margin-right: 10px;">
                             <span>Cultivated User</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                            href="{{ url('/users/academic') }}" style="font-size: 0.85rem;">
-                            <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="acad"
-                                style="width: 20px; height: 20px; margin-right: 10px;">
+                        <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('/users/academic') }}">
+                            <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="acad" style="width: 20px; height: 20px; margin-right: 10px;">
                             <span>Academic User</span>
                         </a>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3"
-                            href="#" style="font-size: 0.85rem;">
+                        <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#">
                             <span>Setting</span>
                             <i class="bx bx-chevron-right"></i>
                         </a>
-                        <ul class="dropdown-menu" style="min-width: 200px !important; margin-left: 0 !important;">
+                        <ul class="dropdown-menu" style="min-width: 200px;">
                             <li>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                                    href="{{ url('/profile-banner') }}" style="font-size: 0.85rem;">
+                                <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('settings/profile-banner') }}">
                                     Profile Banner
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                                    href="{{ url('/user-roles') }}" style="font-size: 0.85rem;">
+                                <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('/settings/user-roles/educated') }}">
                                     User Roles
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                                    href="{{ url('/reasons') }}" style="font-size: 0.85rem;">
+                                <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('/settings/reasons') }}">
                                     Reasons
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                                    href="{{ url('/settings/user/prefix') }}" style="font-size: 0.85rem;">
+                                <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('/settings/user/prefix') }}">
                                     User Prefix
                                 </a>
                             </li>
@@ -347,132 +273,181 @@
             </li>
         </ul>
     </div>
-
+    
     <!-- Avatars Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center" style="height:54px; margin-left:6px;margin-right:6px">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 85px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <div style="display: flex; flex-direction: column;">
-                            <span class="fw-semibold d-block" style="margin-right: 5px;">Avatars</span>
-                        </div>
-                        <img src="{{ asset('assets/img/avatar.svg') }}" alt="avaters">
+                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fw-semibold" style="font-size: 0.85rem;">Avatars</span>
+                        <img src="{{ asset('assets/img/avatar.svg') }}" alt="avatars" style="width: 20px; height: 20px;">
                     </div>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" style="list-style: disc; padding-left: 20px; margin: 0;">
+                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 200px;">
                     <li><a class="dropdown-item" href="{{ url('/avatars') }}">Add/manage Avatars</a></li>
                     <li><a class="dropdown-item" href="{{ url('/avatars') }}">Manage AI Posts</a></li>
                 </ul>
             </li>
         </ul>
     </div>
-
+    
     <!-- Flag User Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center" style="height:54px; margin-left:6px;margin-right:6px">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 90px;">
         <ul class="navbar-nav">
-            <li class="nav-item d-flex align-items-center">
-                <a class="nav-link d-flex align-items-center" href="{{ url('reports/flagged-users') }}"
-                    style="text-decoration: none; gap: 8px;">
-                    <span class="fw-semibold d-block">Flag user</span>
-                    <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged User Icon"
-                        style="width: 20px; height: 20px;">
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="{{ url('reports/flagged-users') }}">
+                    <span class="fw-semibold">Flag user</span>
+                    <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged User Icon" style="width: 20px; height: 20px;">
                 </a>
             </li>
         </ul>
     </div>
-
+    
     <!-- Flag Channels Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center"style="height:54px;  margin-left:6px;margin-right:6px">
+    <div class="col-auto card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 110px;">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center justify-content-between"
-                    href="{{ url('flaggedfanpage') }}" style="text-decoration: none;">
-                    <div class="d-flex flex-column">
-                        <span class="fw-semibold d-block">Flag Channels</span>
-                    </div>
-                    <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged Channel Icon"
-                        style="margin-left: 10px;">
+                <a class="nav-link d-flex align-items-center gap-2" href="{{ url('flaggedfanpage') }}">
+                    <span class="fw-semibold">Flag Channels</span>
+                    <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged Channel Icon" style="width: 20px; height: 20px;">
                 </a>
             </li>
         </ul>
     </div>
-
+    
     <!-- Agents Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center"style="height:54px; margin-left:6px;margin-right:6px">
+    <div class="col-1 card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 80px;">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center justify-content-between" href=""
-                    style="text-decoration: none;">
-                    <div class="d-flex flex-column">
-                        <span class="fw-semibold d-block">Agents</span>
-                    </div>
-                    <img src="{{ asset('assets/img/Agents.svg') }}" alt="Agents Icon" style="margin-left: 10px;">
+                <a class="nav-link d-flex align-items-center gap-2" href="">
+                    <span class="fw-semibold">Agents</span>
+                    <img src="{{ asset('assets/img/Agents.svg') }}" alt="Agents Icon" style="width: 20px; height: 20px;">
                 </a>
             </li>
         </ul>
     </div>
-
-    <!-- Notifications Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center"style="height:54px; margin-left:6px;margin-right:6px">
-        <ul class="navbar-nav">
-            <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside" aria-expanded="false">
+    
+  <!-- Notifications Column -->
+<div class="col-1 card mb-0 d-flex justify-content-center align-items-center mx-1" style="height:54px; min-width: 54px;"> <!-- Changed min-width to match height -->
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow d-flex justify-content-center align-items-center" 
+               href="javascript:void(0);" 
+               data-bs-toggle="dropdown"
+               data-bs-auto-close="outside" 
+               aria-expanded="false"
+               style="width: 100%; height: 100%;">
+                <div class="position-relative">
                     <i class="bx bx-bell bx-sm"></i>
-                    <span class="badge bg-danger rounded-pill badge-notifications">5</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end py-0">
-                    <li class="dropdown-menu-header border-bottom">
-                        <div class="dropdown-header d-flex align-items-center py-3">
-                            <h5 class="text-body mb-0 me-auto">Notification</h5>
-                            <a href="javascript:void(0)" class="dropdown-notifications-all text-body"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
-                                    class="bx fs-4 bx-envelope-open"></i></a>
-                        </div>
-                    </li>
-                    <li class="dropdown-notifications-list scrollable-container">
-                        <ul class="list-group list-group-flush">
-                            <!-- Notification items here -->
-                        </ul>
-                    </li>
-                    <li class="dropdown-menu-footer border-top">
-                        <a href="javascript:void(0);"
-                            class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40">
-                            View all notifications
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill badge-notifications">5</span>
+                </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end py-0" style="width: 320px;">
+                <li class="dropdown-menu-header border-bottom">
+                    <div class="dropdown-header d-flex align-items-center py-3">
+                        <h5 class="text-body mb-0 me-auto">Notification</h5>
+                        <a href="javascript:void(0)" class="dropdown-notifications-all text-body"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read">
+                            <i class="bx fs-4 bx-envelope-open"></i>
                         </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-    <!-- User Profile Column -->
-    <div class="col-1 card mb-0 d-flex justify-content-center"style="height:54px; margin-left:6px;margin-right:6px">
-        <ul class="navbar-nav">
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                        <img src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != 'NULL' ? asset('storage/' . Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
-                            alt class="w-px-40 h-px-40 rounded-circle">
                     </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <!-- User profile dropdown items here -->
-                </ul>
-            </li>
-        </ul>
-    </div>
+                </li>
+                <li class="dropdown-notifications-list scrollable-container">
+                    <ul class="list-group list-group-flush">
+                        <!-- Notification items would go here -->
+                    </ul>
+                </li>
+                <li class="dropdown-menu-footer border-top">
+                    <a href="javascript:void(0);"
+                        class="dropdown-item d-flex justify-content-center text-primary p-2">
+                        View all notifications
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
 
-<!-- Search Small Screens -->
+<!-- User Profile Column -->
+<div class="col-1 card mb-0 d-flex justify-content-center align-items-center mx-1" style="height:54px; min-width: 54px;"> <!-- Changed min-width to match height -->
+    <ul class="navbar-nav">
+        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow d-flex justify-content-center align-items-center" 
+               href="javascript:void(0);" 
+               data-bs-toggle="dropdown"
+               style="width: 100%; height: 100%;">
+                <div class="avatar avatar-online d-flex justify-content-center align-items-center">
+                    <img src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != 'NULL' ? asset('storage/' . Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
+                        alt class="w-px-40 h-px-40 rounded-circle">
+                </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" style="min-width: 240px;">
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin_profile') }}">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="avatar avatar-online">
+                                    <img src="{{ Auth::user() && Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
+                                        alt class="w-px-40 h-px-40 rounded-circle">
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <span class="fw-semibold d-block">
+                                    @if (Auth::check())
+                                        {{ Auth::user()->name }}
+                                    @else
+                                        John Doe
+                                    @endif
+                                </span>
+                                <small class="text-muted">{{ Auth::user()->email }}</small>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin_profile') }}">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin_activity') }}">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">Admin Activity</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class='bx bx-power-off me-2'></i>
+                        <span class="align-middle">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+
+<!-- Hidden logout form -->
+<form method="POST" id="logout-form" action="{{ route('admin.logout') }}">
+    @csrf
+</form>
+
+{{-- <!-- Search Small Screens -->
 <div class="navbar-search-wrapper search-input-wrapper {{ isset($menuHorizontal) ? $containerNav : '' }} d-none">
     <input type="text"
         class="form-control search-input {{ isset($menuHorizontal) ? '' : $containerNav }} border-0"
         placeholder="Search..." aria-label="Search...">
     <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
-</div>
+</div> --}}
 
 @if (!isset($navbarDetached))
     </div>
@@ -987,5 +962,4 @@
             });
         });
 </script>
-
-</script>
+ 
