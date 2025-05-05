@@ -19,6 +19,6 @@ class UserPlaylistGroup extends Model
 
     public function playlists()
     {
-        return $this->hasMany(UserPlaylist::class, 'group_id');
+        return $this->hasMany(UserPlaylist::class, 'playlist_id');
     }
 }

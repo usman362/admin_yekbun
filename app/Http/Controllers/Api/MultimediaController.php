@@ -177,12 +177,13 @@ class MultimediaController extends Controller
             $q->with('country');
         }])->find($id);
         $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', auth()->user()->id)->get();
+        $favourites = ArtistFavorite::where('artist_id', $id)->get();
         if ($fav->count() > 0) {
             $is_favorite = 1;
         } else {
             $is_favorite = 0;
         }
-        return ResponseHelper::sendResponse(['artist' => $artist, 'is_favorite' => $is_favorite], 'Artist Detail Fetch Successfully!');
+        return ResponseHelper::sendResponse(['artist' => $artist, 'is_favorite' => $is_favorite, 'favorite_count' => $favourites->count()], 'Artist Detail Fetch Successfully!');
     }
 
     public function store_artist_song_views(Request $request, $id)
@@ -230,10 +231,15 @@ class MultimediaController extends Controller
     public function store_artist_favorites(Request $request, $id)
     {
         try {
-            $favorites = ArtistFavorite::updateOrCreate(
-                ['user_id' => auth()->user()->id, 'artist_id' => $id],
-                ['user_id' => auth()->user()->id, 'artist_id' => $id]
-            );
+            $exists = ArtistFavorite::where('user_id', auth()->user()->id)->where('artist_id', $id)->first();
+            if (!empty($exists)) {
+                $exists->delete();
+            } else {
+                $favorites = ArtistFavorite::updateOrCreate(
+                    ['user_id' => auth()->user()->id, 'artist_id' => $id],
+                    ['user_id' => auth()->user()->id, 'artist_id' => $id]
+                );
+            }
             return ResponseHelper::sendResponse(null, 'Artist Favorites has been Successfully Saved!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse(null, 'Failed to Save Artist Favorites', false, 403);
@@ -289,7 +295,7 @@ class MultimediaController extends Controller
         try {
             $playlist = UserPlaylistGroup::updateOrCreate(['id' => $request->id], [
                 'user_id' => auth()->user()->id,
-                'group_id' => $request->group_id,
+                'playlist_id' => $request->playlist_id,
                 'type' => $request->type
             ]);
             return ResponseHelper::sendResponse($playlist, 'Songs Playlist has been Created Successfully!');
@@ -302,13 +308,13 @@ class MultimediaController extends Controller
     {
         $request->validate([
             'media_id' => 'required',
-            'group_id' => 'required',
+            'playlist_id' => 'required',
         ]);
         try {
             $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
                 'user_id' => auth()->user()->id,
                 'media_id' => $request->media_id,
-                'group_id' => $request->group_id,
+                'playlist_id' => $request->playlist_id,
                 'type' => 'audio'
             ]);
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
@@ -334,13 +340,13 @@ class MultimediaController extends Controller
     {
         $request->validate([
             'media_id' => 'required',
-            'group_id' => 'required'
+            'playlist_id' => 'required'
         ]);
         try {
             $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
                 'user_id' => auth()->user()->id,
                 'media_id' => $request->media_id,
-                'group_id' => $request->group_id,
+                'playlist_id' => $request->playlist_id,
                 'type' => 'video'
             ]);
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
@@ -358,7 +364,7 @@ class MultimediaController extends Controller
         if (!$group) {
             return ResponseHelper::sendResponse(null, 'Playlist Group not found.', false, 404);
         }
-        $playlists = UserPlaylist::where('group_id', $id)->get();
+        $playlists = UserPlaylist::where('playlist_id', $id)->get();
         try {
             DB::beginTransaction();
             if ($playlists) {
