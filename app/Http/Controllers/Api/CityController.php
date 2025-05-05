@@ -48,7 +48,7 @@ class CityController extends Controller
             $hasConditions = true;
         }
 
-        $cities = $cities->paginate(10);
+        $cities = $cities->paginate(15);
         // if (!empty($request->limit)) {
 
         //     if ($request->limit !== 'all') {
@@ -69,7 +69,7 @@ class CityController extends Controller
         // }
 
         $data = [
-            'feeds' => $cities->items(),
+            'cities' => $cities->items(),
             'pagination' => [
                 'page' => $cities->currentPage(),
                 'count' => $cities->perPage(),
