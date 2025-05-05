@@ -301,58 +301,62 @@
 
         <!-- Shortcuts -->
         <li class="nav-item dropdown-shortcuts dropdown">
-            <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" 
-               href="javascript:void(0);" 
-               data-bs-toggle="dropdown" 
+            <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center"
+               href="javascript:void(0);"
+               data-bs-toggle="dropdown"
                data-bs-auto-close="outside"
                aria-expanded="false">
-                <i class='bx bx-grid-alt bx-sm'></i>
+              <i class='bx bx-grid-alt bx-sm'></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-end py-0" style="width: 300;">
-                <div class="dropdown-menu-header border-bottom">
-                    <div class="dropdown-header d-flex align-items-center py-3">
-                        <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
-                        <a href="javascript:void(0)" class="dropdown-shortcuts-add text-body" title="Add shortcuts">
-                            <i class="bx bx-sm bx-plus-circle"></i>
-                        </a>
-                    </div>
+            <div class="dropdown-menu dropdown-menu-end py-0" style="width: 300px;">
+              <div class="dropdown-menu-header border-bottom">
+                <div class="dropdown-header d-flex align-items-center py-3">
+                  <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
+                  <a href="javascript:void(0)" class="dropdown-shortcuts-add text-body" title="Add shortcuts">
+                    <i class="bx bx-sm bx-plus-circle"></i>
+                  </a>
                 </div>
-                <div class="dropdown-shortcuts-list scrollable-container">
-                    <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col text-center">
-                            <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
-                                <img src="{{ asset('assets/img/Add History.svg') }}" alt="Agents Icon" style="width: 20px; height: 20px;">
-                            </span>
-                            <a href="{{ url('/artist') }}"  class="stretched-link d-block">Add Artist</a>
-                            
-                        </div>
-                        <div class="dropdown-shortcuts-item col text-center">
-                            <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
-                                <i class="menu-icon tf-icons bx bx-history"></i>
-                            </span>
-                            <a href="{{ url('history') }}" class="stretched-link d-block">Add  History</a>
-                            
-                        </div>    
-                    </div>
-                    <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col text-center">
-                            <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
-                                <i class="menu-icon tf-icons bx bx-sort"></i>
-                            </span>
-                            <a href="{{ url('/vote') }}"  class="stretched-link d-block">Add Voting</a>
-                            
-                        </div>
-                        <div class="dropdown-shortcuts-item col text-center">
-                            <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2 d-inline-block">
-                                <i class="bx bx-food-menu fs-4"></i>
-                            </span>
-                            <a href="{{ url('language') }}" class="stretched-link d-block">Manage Languages</a>
-                            
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="dropdown-shortcuts-list scrollable-container">
+                
+                <!-- Shortcut Item -->
+                <a href="{{ url('/artist') }}" class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                  <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                    <img src="{{ asset('assets/img/Add Music.svg') }}" alt="Music Icon" style="width: 20px; height: 20px;">
+                  </span>
+                  <span class="text-body">Add Music</span>
+                </a>
+          
+                <!-- Shortcut Item -->
+                <a href="{{ url('/history') }}" class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                  <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                    <img src="{{ asset('assets/img/Add History.svg') }}" alt="Music Icon" style="width: 20px; height: 20px;">
+                  </span>
+                  <span class="text-body">Add History</span>
+                </a>
+          
+                <!-- Shortcut Item -->
+                <a href="{{ url('/vote') }}" class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                  <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                    <img src="{{ asset('assets/img/Add Surveys.svg') }}" alt="Music Icon" style="width: 20px; height: 20px;">
+
+                  </span>
+                  <span class="text-body">Add Voting</span>
+                </a>
+          
+                <!-- Shortcut Item -->
+                <a href="{{ url('/language') }}" class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                  <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                    <img src="{{ asset('assets/img/Add Language.svg') }}" alt="Music Icon" style="width: 20px; height: 20px;">
+
+                  </span>
+                  <span class="text-body">Add Languages</span>
+                </a>
+          
+              </div>
             </div>
-        </li>
+          </li>
+          
 {{-- asim --}}
         <!-- Notifications -->
         <li class="nav-item dropdown-notifications dropdown">
