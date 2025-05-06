@@ -311,7 +311,11 @@ class MultimediaController extends Controller
             'playlist_id' => 'required',
         ]);
         try {
-            $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
+            $exists = UserPlaylist::where('user_id',auth()->user()->id)->where('media_id',$request->media_id)->where('playlist_id',$request->playlist_id)->first();
+            if(!empty($exists)){
+                return ResponseHelper::sendResponse([], 'Already Added in Playlist!', false, 403);
+            }
+            $playlist = UserPlaylist::create([
                 'user_id' => auth()->user()->id,
                 'media_id' => $request->media_id,
                 'playlist_id' => $request->playlist_id,
