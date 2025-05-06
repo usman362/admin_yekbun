@@ -1,7 +1,9 @@
+
 <style>
     #dropzone-img {
         border: 2px dashed #ccc;
         transition: all 0.3s;
+        cursor: pointer;
     }
 
     #dropzone-img:hover {
@@ -42,17 +44,16 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
+                <!-- Image Upload -->
                 <div class="col-12">
                     <h5 class="card-header">Image</h5>
                     <div class="card-body p-2 text-center">
-                        <div class="dropzone needsclick" action="/" id="dropzone-img"
-                            style="width: 150px; height: 150px; margin: 0 auto; border-radius: 50%; overflow: hidden;">
-                            <div class="dz-message needsclick d-flex justify-content-center align-items-center h-100"
-                                style="font-size: 0.8rem;">
-                                Drop files here or click to upload
-                            </div>
-                            <div class="fallback">
-                                <input type="file" name="image" id="image" />
+                        <div class="dropzone needsclick" id="dropzone-img"
+                             style="width: 150px; height: 150px; margin: 0 auto; border-radius: 50%; overflow: hidden;">
+                            <input type="file" name="image_fallback" style="display: none;" />
+                            <div class="dz-message needsclick d-flex justify-content-center align-items-center h-2700"
+                                 style="font-size: 0.8rem;">
+                                Drop files here  
                             </div>
                         </div>
                     </div>
@@ -60,7 +61,7 @@
 
                 <!-- Name, Email, Password, Roles, Status -->
                 <div class="col-md-6">
-                    <label class="form-label" for="inputName">Name -Lastname</label>
+                    <label class="form-label" for="inputName">Name - Lastname</label>
                     <input type="text" id="inputName" name="name" class="form-control" value="{{ old('name') }}">
                     @error('name') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
@@ -115,7 +116,7 @@
     </div>
 </form>
 
-<!-- Password visibility toggle -->
+<!-- Password Visibility Toggle -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const togglePassword = document.querySelectorAll('.toggle-password');
@@ -127,6 +128,13 @@
                 icon.classList.toggle('fa-eye');
                 icon.classList.toggle('fa-eye-slash');
             });
+        });
+
+        // Ensure file input click on Dropzone click
+        const dzElement = document.querySelector('#dropzone-img');
+        dzElement.addEventListener('click', function () {
+            const input = this.querySelector('input[type="file"]');
+            if (input) input.click();
         });
     });
 </script>
@@ -140,30 +148,30 @@
                 <div class="dz-image rounded-circle overflow-hidden mx-auto" style="width: 120px; height: 120px;">
                     <img data-dz-thumbnail style="object-fit: cover; width: 100%; height: 100%;" />
                 </div>
-                <div class="dz-filename mt-2" data-dz-name></div>
-                <div class="dz-size" data-dz-size></div>
                 <div class="dz-error-message"><span data-dz-errormessage></span></div>
             </div>`;
 
-        const dropzoneMulti1 = new Dropzone('#dropzone-img', {
+        const dropzoneImg = new Dropzone('#dropzone-img', {
             url: '{{ route('file.upload') }}',
             previewTemplate: previewTemplate,
-            parallelUploads: 1,
-            maxFilesize: 100,
+            maxFiles: 1,
+            maxFilesize: 5, // MB
+            acceptedFiles: 'image/*',
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             sending: function (file, xhr, formData) {
-                formData.append('folder', 'music');
+                formData.append('folder', 'team-members');
             },
             success: function (file, response) {
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-success");
                 }
                 file.previewElement.dataset.path = response.path;
+
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
+                hiddenInputsContainer.innerHTML = `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
                 const form = file.previewElement.closest('form');
@@ -185,27 +193,3 @@
         });
     });
 </script>
-
-<!-- Optional: Tagify roles (disabled here) -->
-{{-- <script>
-    window.addEventListener('load', function () {
-        const TagifyRolesListEl = document.querySelector('#rolesInput');
-        let rolesList = {!! json_encode($roles) !!}.map(item => ({
-            value: item.name,
-            name: item.name,
-            id: item.id
-        }));
-        let TagifyRolesList = new Tagify(TagifyRolesListEl, {
-            tagTextProp: 'name',
-            enforceWhitelist: true,
-            skipInvalid: true,
-            dropdown: {
-                closeOnSelect: false,
-                enabled: 0,
-                classname: 'users-list',
-                searchKeys: ['name']
-            },
-            whitelist: rolesList
-        });
-    });
-</script> --}}
