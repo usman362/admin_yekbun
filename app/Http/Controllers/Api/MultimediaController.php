@@ -383,12 +383,12 @@ class MultimediaController extends Controller
         $playlist = UserPlaylist::find($id);
 
         if (!$playlist) {
-            return ResponseHelper::sendResponse(null, 'Playlist not found.', false, 404);
+            return ResponseHelper::sendResponse(null, 'Song not found.', false, 404);
         }
 
         try {
             $playlist->delete();
-            return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
+            return ResponseHelper::sendResponse(null, 'Song has been Deleted Successfully!');
         } catch (\Exception $e) {
             return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 500);
         }
