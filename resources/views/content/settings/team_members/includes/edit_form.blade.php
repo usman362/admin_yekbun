@@ -19,31 +19,6 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-md-12">
-                    <label class="form-label" for="inputName{{ $user->id }}">Name</label>
-                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control" value="{{ old('name')?? $user->name }}">
-                    @error('name')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label" for="inputEmail{{ $user->id }}">Email</label>
-                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control" value="{{ old('email')?? $user->email }}">
-                    @error('email')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label" for="inputPassword">Password <span class="text-warning text-capitalize">( Leave empty if you don't want to change password )</span></label>
-                    <input type="text" id="inputPassword" name="password" class="form-control">
-                    @error('password')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password <span class="text-warning text-capitalize">( Leave empty if you don't want to change password )</span></label>
-                    <input type="text" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
-                </div>
                 <div class="col-12">
                     <div class="card">
                         <h5 class="card-header">Image</h5>
@@ -59,7 +34,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <label class="form-label" for="inputName{{ $user->id }}">Name</label>
+                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control" value="{{ old('name')?? $user->name }}">
+                    @error('name')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="inputEmail{{ $user->id }}">Email</label>
+                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control" value="{{ old('email')?? $user->email }}">
+                    @error('email')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="inputPassword">Password </label>
+                    <input type="text" id="inputPassword" name="password" class="form-control">
+                    @error('password')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password  </label>
+                    <input type="text" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
+                </div>
+              
+                <div class="col-md-6">
                     <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
                     <select class="form-control" name="roles" id="rolesInput2">
                         @foreach($roles as $role)
@@ -70,7 +71,7 @@
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="form-label" for="imageInput{{ $user->id }}">Status</label>
                     <select class="form-control" name="status" id="imageInput{{ $user->id }}">
                         <option value="1" {{ $user->status? 'selected': '' }}>Active</option>

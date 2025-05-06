@@ -1,4 +1,17 @@
-<!-- Add Role Modal -->
+<style>
+  #addRoleModal .modal-body {
+      padding-top: 0;
+      position: relative;
+  }
+
+  #addRoleModal .btn-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1051;
+  }
+</style>
+
 <div class="modal fade" id="addRoleModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-simple modal-dialog-centered modal-add-new-role">
       <div class="modal-content p-0">
