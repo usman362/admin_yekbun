@@ -6,8 +6,8 @@
 
   #addRoleModal .btn-close {
       position: absolute;
-      top: 40px;
-      right: 20px;
+      top: 20px;
+      right: 10px;
       z-index: 1051;
   }
 </style>
