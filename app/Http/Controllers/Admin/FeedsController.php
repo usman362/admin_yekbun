@@ -245,7 +245,7 @@ class FeedsController extends Controller
 
             return ResponseHelper::sendResponse($data, 'Comment Fetch successfully');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to fetch Comment!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to fetch Comment!', false, 403);
         }
     }
 
@@ -299,7 +299,7 @@ class FeedsController extends Controller
 
             return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to send Comment!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
         }
     }
 
@@ -314,7 +314,7 @@ class FeedsController extends Controller
         $postId = $request->feed_id;
 
         if (!$user) {
-            return ResponseHelper::sendResponse(null, 'User not authenticated!', false, 403);
+            return ResponseHelper::sendResponse([], 'User not authenticated!', false, 403);
         }
 
         $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $postId)->where('feed_type', $request->feed_type)->first();

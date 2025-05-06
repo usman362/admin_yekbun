@@ -27,7 +27,7 @@ class ReportCommentsController extends Controller
             ->exists();
 
         if ($existingReport) {
-            return ResponseHelper::sendResponse(null, 'You have already reported this comment.',false, 400);
+            return ResponseHelper::sendResponse([], 'You have already reported this comment.',false, 400);
         }
 
         $report = ReportComments::updateOrCreate(

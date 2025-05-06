@@ -83,7 +83,7 @@ class UsersController extends Controller
                 ];
                 return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
             } else {
-                return ResponseHelper::sendResponse(null, 'User Request Cancelled Successfully');
+                return ResponseHelper::sendResponse([], 'User Request Cancelled Successfully');
             }
         } catch (Exception $e) {
             // Log errorwith file name, line number, and full message
@@ -95,7 +95,7 @@ class UsersController extends Controller
                 'request_data' => $request->all()
             ]);
 
-            return ResponseHelper::sendResponse(null, 'Error to Send Request', false, 403);
+            return ResponseHelper::sendResponse([], 'Error to Send Request', false, 403);
         }
     }
 
@@ -140,10 +140,10 @@ class UsersController extends Controller
                         $request->delete();
                     }
                 }
-                return ResponseHelper::sendResponse(null, 'Request Rejected Successfully');
+                return ResponseHelper::sendResponse([], 'Request Rejected Successfully');
             }
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Error to Accept Request', false, 403);
+            return ResponseHelper::sendResponse([], 'Error to Accept Request', false, 403);
         }
     }
 
@@ -164,9 +164,9 @@ class UsersController extends Controller
             // }
             $friend->delete();
             $friend_to->delete();
-            return ResponseHelper::sendResponse(null, 'Unfriend has been Successfully');
+            return ResponseHelper::sendResponse([], 'Unfriend has been Successfully');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Unfriend!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Unfriend!', false, 403);
         }
     }
 
@@ -187,7 +187,7 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse(['friends_list' => $friends_list, 'family_list' => $family_list], 'Friends List Fetch Successfully');
             // }
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Error to Fetch Friends List', false, 403);
+            return ResponseHelper::sendResponse([], 'Error to Fetch Friends List', false, 403);
         }
     }
 
@@ -210,7 +210,7 @@ class UsersController extends Controller
 
             return ResponseHelper::sendResponse($user_request, 'Friends/Family Updated Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Fail to Update Friends/Family!', false, 403);
+            return ResponseHelper::sendResponse([], 'Fail to Update Friends/Family!', false, 403);
         }
     }
 
@@ -223,7 +223,7 @@ class UsersController extends Controller
             $family_list = $user->family;
             return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Error to Fetch Family List', false, 403);
+            return ResponseHelper::sendResponse([], 'Error to Fetch Family List', false, 403);
         }
     }
 
@@ -236,7 +236,7 @@ class UsersController extends Controller
             $friends_list = $user->user_requests;
             return ResponseHelper::sendResponse($friends_list, 'Requests List Fetch Successfully');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Error to Fetch Requests List', false, 403);
+            return ResponseHelper::sendResponse([], 'Error to Fetch Requests List', false, 403);
         }
     }
 
@@ -253,7 +253,7 @@ class UsersController extends Controller
             (int)$request->value == 1 ? $status = 'Online' : $status = 'Offline';
             return ResponseHelper::sendResponse($user, 'User ' . $status . ' Successfully!');
         } else {
-            return ResponseHelper::sendResponse(null, 'User Not Found!', false, 403);
+            return ResponseHelper::sendResponse([], 'User Not Found!', false, 403);
         }
     }
 
@@ -274,7 +274,7 @@ class UsersController extends Controller
             $user->save();
             return ResponseHelper::sendResponse($visitor, 'User Visit has been Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Visit User!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Visit User!', false, 403);
         }
     }
 
@@ -287,7 +287,7 @@ class UsersController extends Controller
             $data = ['visitors' => $visitors, 'total_views' => $totalVisitors];
             return ResponseHelper::sendResponse($data, 'User Visit has been Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Visit User!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Visit User!', false, 403);
         }
     }
 

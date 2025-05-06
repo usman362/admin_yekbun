@@ -56,12 +56,12 @@ class AuthController extends Controller
                     if ($imeis) {
                         return ResponseHelper::sendResponse(['imeis' => $imeis], 'Device IMEI is not registered', false, 404);
                     } else {
-                        return ResponseHelper::sendResponse(null, 'Invalid Creadentials!', false, 404);
+                        return ResponseHelper::sendResponse([], 'Invalid Creadentials!', false, 404);
                     }
                 }
             }
         } else {
-            return ResponseHelper::sendResponse(null, 'User not Found!', false, 404);
+            return ResponseHelper::sendResponse([], 'User not Found!', false, 404);
         }
 
         // Check if the credentials are correct (email, password)
@@ -70,22 +70,22 @@ class AuthController extends Controller
 
             // Ensure the user's email is verified
             if ($user->email_verified_at == null || $user->email_verified_at == '') {
-                return ResponseHelper::sendResponse(null, 'Youre Email is not verified!', false, 403);
+                return ResponseHelper::sendResponse([], 'Youre Email is not verified!', false, 403);
             }
 
             // Generate a JWT token for the authenticated user
             try {
                 if (!$token = JWTAuth::fromUser($user)) {
-                    return ResponseHelper::sendResponse(null, 'Invalid Creadentials!', false, 400);
+                    return ResponseHelper::sendResponse([], 'Invalid Creadentials!', false, 400);
                 }
             } catch (JWTException $e) {
-                return ResponseHelper::sendResponse(null, 'Could not create token!', false, 500);
+                return ResponseHelper::sendResponse([], 'Could not create token!', false, 500);
             }
 
             return ResponseHelper::sendResponse(['user' => $user, 'token' => $token], 'User Successfully Login!');
         } else {
             // If credentials are incorrect, return an error
-            return ResponseHelper::sendResponse(null, 'Email or password is incorrect', false, 403);
+            return ResponseHelper::sendResponse([], 'Email or password is incorrect', false, 403);
         }
     }
 
@@ -249,7 +249,7 @@ class AuthController extends Controller
                 $data = ['user' => $user, 'otp' => $code];
                 return ResponseHelper::sendResponse($data, 'Verfication Code sent to your email');
             } catch (\Exception $e) {
-                return ResponseHelper::sendResponse(null, $e->getMessage(), false, 505);
+                return ResponseHelper::sendResponse([], $e->getMessage(), false, 505);
             }
         }
     }
@@ -287,7 +287,7 @@ class AuthController extends Controller
             ]);
             return ResponseHelper::sendResponse($createdUser, 'New device registered successfully.');
         } catch (\Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to register device', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to register device', false, 403);
         }
     }
 
@@ -301,13 +301,13 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
 
         if (!$user) {
-            return ResponseHelper::sendResponse(null, 'User not found!', false, 404);
+            return ResponseHelper::sendResponse([], 'User not found!', false, 404);
         }
 
         $code = UserCode::where('user_id', $user->id)->first();
 
         if (!$code) {
-            return ResponseHelper::sendResponse(null, 'Code not found!', false, 404);
+            return ResponseHelper::sendResponse([], 'Code not found!', false, 404);
         }
 
         if ((int)$code->code == (int)$request->otp) {
@@ -317,7 +317,7 @@ class AuthController extends Controller
             $user->save();
             return ResponseHelper::sendResponse($user, 'Valid Code');
         } else {
-            return ResponseHelper::sendResponse(null, 'Invalid Code!', false, 403);
+            return ResponseHelper::sendResponse([], 'Invalid Code!', false, 403);
         }
     }
 
@@ -331,7 +331,7 @@ class AuthController extends Controller
         // dd(JWTAuth::getToken());
         JWTAuth::parseToken()->invalidate(true);
         // Return a response indicating success
-        return ResponseHelper::sendResponse(null,'Logout Successfully!');
+        return ResponseHelper::sendResponse([],'Logout Successfully!');
     }
 
     public function forgot_password(Request $request)
@@ -500,6 +500,6 @@ class AuthController extends Controller
     {
         $user = User::find(Auth::id());
         $user->delete();
-        return ResponseHelper::sendResponse(null,'Account has been Deleted Successfully!');
+        return ResponseHelper::sendResponse([],'Account has been Deleted Successfully!');
     }
 }

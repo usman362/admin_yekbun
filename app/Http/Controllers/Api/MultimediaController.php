@@ -110,7 +110,7 @@ class MultimediaController extends Controller
 
             return ResponseHelper::sendResponse($artist, 'Artist has been added successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Add Artist!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Add Artist!', false, 403);
         }
     }
 
@@ -136,7 +136,7 @@ class MultimediaController extends Controller
 
             return ResponseHelper::sendResponse($artist, 'Artist has been Updated successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Update Artist!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Update Artist!', false, 403);
         }
     }
 
@@ -151,9 +151,9 @@ class MultimediaController extends Controller
         }
 
         if ($artist->delete($artist->id)) {
-            return ResponseHelper::sendResponse(null, 'Artist  has been deleted successfully!');
+            return ResponseHelper::sendResponse([], 'Artist  has been deleted successfully!');
         } else {
-            return ResponseHelper::sendResponse(null, 'Failed to Delete Artist!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Delete Artist!', false, 403);
         }
     }
 
@@ -167,7 +167,7 @@ class MultimediaController extends Controller
         if ($artist->update()) {
             return ResponseHelper::sendResponse($artist, 'Status Has been Updated!');
         } else {
-            return ResponseHelper::sendResponse(null, 'Failed to Change Status', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Change Status', false, 403);
         }
     }
 
@@ -203,7 +203,7 @@ class MultimediaController extends Controller
             $artist->save();
             return ResponseHelper::sendResponse(['song_views' => $songViews->count(), 'video_views' => $videoViews->count(), 'total_views' => ($songViews->count() + $videoViews->count())], 'Artist Views has been Successfully Saved!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Save Artist Views', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Save Artist Views', false, 403);
         }
     }
 
@@ -224,7 +224,7 @@ class MultimediaController extends Controller
             $artist->save();
             return ResponseHelper::sendResponse(['song_views' => $songViews->count(), 'video_views' => $videoViews->count(), 'total_views' => ($songViews->count() + $videoViews->count())], 'Artist Views has been Successfully Saved!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Save Artist Views', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Save Artist Views', false, 403);
         }
     }
 
@@ -240,9 +240,9 @@ class MultimediaController extends Controller
                     ['user_id' => auth()->user()->id, 'artist_id' => $id]
                 );
             }
-            return ResponseHelper::sendResponse(null, 'Artist Favorites has been Successfully Saved!');
+            return ResponseHelper::sendResponse([], 'Artist Favorites has been Successfully Saved!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Save Artist Favorites', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Save Artist Favorites', false, 403);
         }
     }
 
@@ -300,7 +300,7 @@ class MultimediaController extends Controller
             ]);
             return ResponseHelper::sendResponse($playlist, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Create Playlist!', false, 403);
         }
     }
 
@@ -324,7 +324,7 @@ class MultimediaController extends Controller
             }])->where('user_id', auth()->user()->id)->get();
             return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Create Playlist!', false, 403);
         }
     }
 
@@ -354,7 +354,7 @@ class MultimediaController extends Controller
             }])->where('user_id', auth()->user()->id)->get();
             return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Created Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Failed to Create Playlist!', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Create Playlist!', false, 403);
         }
     }
 
@@ -362,7 +362,7 @@ class MultimediaController extends Controller
     {
         $group = UserPlaylistGroup::find($id);
         if (!$group) {
-            return ResponseHelper::sendResponse(null, 'Playlist Group not found.', false, 404);
+            return ResponseHelper::sendResponse([], 'Playlist Group not found.', false, 404);
         }
         $playlists = UserPlaylist::where('playlist_id', $id)->get();
         try {
@@ -372,9 +372,9 @@ class MultimediaController extends Controller
                 }
             }
             $group->delete();
-            return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
+            return ResponseHelper::sendResponse([], 'Playlist has been Deleted Successfully!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 403);
+            return ResponseHelper::sendResponse([], 'Something Went Wrong!', false, 403);
         }
     }
 
@@ -383,14 +383,14 @@ class MultimediaController extends Controller
         $playlist = UserPlaylist::find($id);
 
         if (!$playlist) {
-            return ResponseHelper::sendResponse(null, 'Song not found.', false, 404);
+            return ResponseHelper::sendResponse([], 'Song not found.', false, 404);
         }
 
         try {
             $playlist->delete();
-            return ResponseHelper::sendResponse(null, 'Song has been Deleted Successfully!');
+            return ResponseHelper::sendResponse([], 'Song has been Deleted Successfully!');
         } catch (\Exception $e) {
-            return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 500);
+            return ResponseHelper::sendResponse([], 'Something Went Wrong!', false, 500);
         }
     }
 }
