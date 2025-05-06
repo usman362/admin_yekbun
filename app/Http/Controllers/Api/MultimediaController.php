@@ -366,17 +366,14 @@ class MultimediaController extends Controller
         }
         $playlists = UserPlaylist::where('playlist_id', $id)->get();
         try {
-            DB::beginTransaction();
             if ($playlists) {
                 foreach ($playlists as $playlist) {
                     $playlist->delete();
                 }
             }
             $group->delete();
-            DB::commit();
             return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
         } catch (Exception $e) {
-            DB::rollBack();
             return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 403);
         }
     }
@@ -390,12 +387,9 @@ class MultimediaController extends Controller
         }
 
         try {
-            DB::beginTransaction();
             $playlist->delete();
-            DB::commit();
             return ResponseHelper::sendResponse(null, 'Playlist has been Deleted Successfully!');
         } catch (\Exception $e) {
-            DB::rollBack();
             return ResponseHelper::sendResponse(null, 'Something Went Wrong!', false, 500);
         }
     }
