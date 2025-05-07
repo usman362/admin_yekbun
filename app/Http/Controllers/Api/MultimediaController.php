@@ -399,6 +399,9 @@ class MultimediaController extends Controller
 
     public function movePlaylist(Request $request, $id)
     {
+        $request->validate([
+            'playlist_id' => 'required'
+        ]);
         $playlist = UserPlaylist::find($id);
         $group = UserPlaylistGroup::find($request->playlist_id);
         if (!$playlist) {
