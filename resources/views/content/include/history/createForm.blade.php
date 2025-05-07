@@ -42,7 +42,7 @@
                 <div class="col-md-4">
                     <div id="generated-thumbnails" style="display: block">
                         <div class="card">
-                            <h5 class="card-header">Thumbnails</h5>
+                            {{-- <h5 class="card-header">Thumbnails</h5> --}}
                             <div class="card-body">
                                 <div class="row">
                                     <div id="thumbnail-history" style="display: block">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card">
-                        <h5 class="card-header">Video Upload</h5>
+                        {{-- <h5 class="card-header">Video Upload</h5> --}}
                         <div class="card-body">
                             <div class="dropzone needsclick" action="/" id="dropzone-video">
                                 <div class="dz-message needsclick">
