@@ -168,6 +168,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('store-songs-playlist', [MultimediaController::class, 'storeSongsPlaylist']);
     Route::get('get-clips-playlist', [MultimediaController::class, 'getClipsPlaylist']);
     Route::post('store-clips-playlist', [MultimediaController::class, 'storeClipsPlaylist']);
+    Route::post('move-playlist-music/{id}', [MultimediaController::class, 'movePlaylist']);
     Route::delete('delete-playlist-music/{id}', [MultimediaController::class, 'deletePlaylist']);
     Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
 });
