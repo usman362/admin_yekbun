@@ -1,4 +1,24 @@
 <!-- Add Role Modal -->
+<style>
+  /* Applies to both add and edit modals */
+  .modal .modal-content {
+     
+      padding-top: 0;
+      position: relative;
+  }
+
+  .modal .btn-close {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      z-index: 1055;
+  }
+
+  .modal .modal-body {
+      padding-top: 2.5rem; /* leaves space for close button */
+  }
+</style>
+
 <div class="modal fade" id="editRoleModal{{ $role->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-simple modal-dialog-centered modal-add-new-role">
       <div class="modal-content p-0">
