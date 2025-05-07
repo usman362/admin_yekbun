@@ -33,7 +33,7 @@
             </li>
         @endcan
 
-       
+
 
 
 
@@ -82,7 +82,7 @@
             class="menu-item {{ Request::is('vote-category') ? 'active open' : '' }} {{ Request::is('vote') ? 'active open' : '' }} {{ Request::is('settings/voting/*') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-sort"></i>
-                <div>Voting</div>
+                <div>Surveys</div>
             </a>
 
 
@@ -102,7 +102,7 @@
 
                 <li class="menu-item {{ Request::is('vote') ? 'active' : '' }} ">
                     <a href="{{ url('/vote') }}" class="menu-link">
-                        <div>Manage Vote</div>
+                        <div>Manage Surveys</div>
                     </a>
 
 
@@ -345,7 +345,7 @@
 
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-video"></i>
-            <div>Videos</div>
+            <div>User Videos</div>
         </a>
 
 
@@ -479,7 +479,7 @@
     <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }} ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-credit-card"></i>
-            <div>Wishes &amp; Thanks</div>
+            <div>Sympathie</div>
         </a>
 
 
@@ -675,7 +675,7 @@
         : '' }}">
     <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bxs-videos"></i>
-        <div>Clips</div>
+        <div>User Clips</div>
     </a>
 
     <ul class="menu-sub">
@@ -1573,7 +1573,7 @@
         </li>
     @endcan
 
-    
+
     @can('manageorigin.read')
         <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
             <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">
