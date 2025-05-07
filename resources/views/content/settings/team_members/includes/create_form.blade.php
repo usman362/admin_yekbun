@@ -1,38 +1,41 @@
-
 <style>
-    #dropzone-img {
+    #dropzone-img-create {
         border: 2px dashed #ccc;
         transition: all 0.3s;
         cursor: pointer;
+        text-align: center;
+        padding: 20px;
+        position: relative;
     }
 
-    #dropzone-img:hover {
+    #dropzone-img-create:hover {
         border-color: #666;
         background-color: #f8f9fa;
     }
 
-    #dropzone-img.dz-drag-hover {
+    #dropzone-img-create.dz-drag-hover {
         border-color: #2196f3;
         background-color: #e3f2fd;
     }
 
-    #dropzone-img .dz-preview {
-        margin: 0;
-        width: 150px;
-        height: 150px;
-    }
-
-    #dropzone-img .dz-image {
+    .avatar-preview {
+        border-radius: 50%;
+        object-fit: cover;
         width: 120px;
         height: 120px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin: 0 auto;
+        margin-bottom: 10px;
+        cursor: pointer;
     }
 
-    #dropzone-img .dz-image img {
-        width: 100%;
-        height: 100%;
+    .dz-preview {
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .dz-image img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
         object-fit: cover;
     }
 </style>
@@ -46,20 +49,15 @@
             <div class="row g-3">
                 <!-- Image Upload -->
                 <div class="col-12">
-                    <h5 class="card-header">Image</h5>
-                    <div class="card-body p-2 text-center">
-                        <div class="dropzone needsclick" id="dropzone-img"
-                             style="width: 150px; height: 150px; margin: 0 auto; border-radius: 50%; overflow: hidden;">
-                            <input type="file" name="image_fallback" style="display: none;" />
-                            <div class="dz-message needsclick d-flex justify-content-center align-items-center h-2700"
-                                 style="font-size: 0.8rem;">
-                                Drop files here  
-                            </div>
-                        </div>
+                    <div class="dropzone needsclick" id="dropzone-img-create">
+                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview" id="uploadIcon" alt="Avatar">
+                        <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
+                        <div class="hidden-inputs"></div>
+
                     </div>
                 </div>
 
-                <!-- Name, Email, Password, Roles, Status -->
+                <!-- Form Inputs -->
                 <div class="col-md-6">
                     <label class="form-label" for="inputName">Name - Lastname</label>
                     <input type="text" id="inputName" name="name" class="form-control" value="{{ old('name') }}">
@@ -116,11 +114,10 @@
     </div>
 </form>
 
-<!-- Password Visibility Toggle -->
+<!-- Password Toggle -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const togglePassword = document.querySelectorAll('.toggle-password');
-        togglePassword.forEach(function (element) {
+        document.querySelectorAll('.toggle-password').forEach(function (element) {
             element.addEventListener('click', function () {
                 const input = this.previousElementSibling;
                 const icon = this.querySelector('i');
@@ -129,65 +126,71 @@
                 icon.classList.toggle('fa-eye-slash');
             });
         });
-
-        // Ensure file input click on Dropzone click
-        const dzElement = document.querySelector('#dropzone-img');
-        dzElement.addEventListener('click', function () {
-            const input = this.querySelector('input[type="file"]');
-            if (input) input.click();
-        });
     });
 </script>
 
-<!-- Dropzone Init -->
+<!-- Dropzone Logic -->
 <script>
-    'use strict';
-    dropZoneInitFunctions.push(function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const previewTemplate = `
-            <div class="dz-preview dz-file-preview text-center">
-                <div class="dz-image rounded-circle overflow-hidden mx-auto" style="width: 120px; height: 120px;">
-                    <img data-dz-thumbnail style="object-fit: cover; width: 100%; height: 100%;" />
+            <div class="dz-preview dz-file-preview">
+                <div class="dz-image">
+                    <img data-dz-thumbnail />
                 </div>
-                <div class="dz-error-message"><span data-dz-errormessage></span></div>
             </div>`;
 
-        const dropzoneImg = new Dropzone('#dropzone-img', {
+        const dropzoneCreate = new Dropzone('#dropzone-img-create', {
             url: '{{ route('file.upload') }}',
             previewTemplate: previewTemplate,
-            maxFiles: 1,
-            maxFilesize: 5, // MB
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
+            maxFilesize: 100,
+            addRemoveLinks: false,
+            clickable: '#uploadIcon', // clicking on icon opens file selector
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            sending: function (file, xhr, formData) {
-                formData.append('folder', 'team-members');
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
+            sending: function(file, xhr, formData) {
+                formData.append('folder', 'music');
             },
-            success: function (file, response) {
+            success: function(file, response) {
+                const defaultAvatar = document.querySelector('.avatar-preview');
+                if (defaultAvatar) defaultAvatar.style.display = 'none';
+
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-success");
-                }
-                file.previewElement.dataset.path = response.path;
+                    file.previewElement.dataset.path = response.path;
 
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                hiddenInputsContainer.innerHTML = `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
+                    const hiddenInputsContainer = document.querySelector('#createForm .hidden-inputs');
+                    hiddenInputsContainer.innerHTML = `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
+
+                    document.querySelector('#dropzone-img-create').appendChild(file.previewElement);
+                }
             },
-            removedfile: function (file) {
-                const form = file.previewElement.closest('form');
-                form.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`)?.remove();
+            removedfile: function(file) {
+                const hiddenInputsContainer = document.querySelector('#createForm .hidden-inputs');
+                const hiddenInput = hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`);
+                if (hiddenInput) hiddenInput.remove();
+
                 if (file.previewElement && file.previewElement.parentNode) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
                 }
+
+                const defaultAvatar = document.querySelector('.avatar-preview');
+                if (defaultAvatar) defaultAvatar.style.display = 'inline-block';
+
                 $.ajax({
-                    url: '{{ route("file.delete") }}',
+                    url: '{{ route('settings.user.delete-img', 0) }}',
                     method: 'delete',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    data: { path: file.previewElement.dataset.path },
-                    success: function () {}
+                    data: {
+                        path: file.previewElement.dataset.path
+                    },
+                    success: function() {}
                 });
+
                 return this._updateMaxFilesReachedClass();
             }
         });
