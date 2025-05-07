@@ -13,28 +13,7 @@
         position: relative;
     }
 
-    /* For all flag items */
-    .navbar-nav .flag-item {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-    }
-
-    .navbar-nav .flag-item span {
-        font-size: 0.85rem !important;
-        color: #2c3e50 !important;
-    }
-
-    .navbar-nav .flag-item img {
-        width: 20px !important;
-        height: 20px !important;
-    }
-
-    img,
-    svg {
-        vertical-align: middle;
-        height: 25px;
-    }
+ 
 
     .dropdown-menu {
         width: 220px;
