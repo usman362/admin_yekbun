@@ -235,9 +235,9 @@
                                                 data-bs-target="#createhistoryModal"><i class="bx bx-plus me-0 me-sm-1"></i>
                                                 Add History</button>
 
-                                            <button class="btn btn-primary mt-2">
-                                                {{-- <i class="bx bx-plus me-0 me-sm-1"></i> --}}
-                                                Reported Histories</button>
+                                            {{-- <button class="btn btn-primary mt-2">
+                                                <i class="bx bx-plus me-0 me-sm-1"></i>
+                                                Reported Histories</button> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +277,9 @@
                                                         method="post" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <div class="pop_action_div"><button class="pop_action"
+                                                        <div class="pop_action_div">
+                                                            <a href="javascript:void(0)" style="color: #2e2e2e;font-size: 12px;padding: 5px 12px;height:unset;width:unset;" class="pop_action">Reported Comments</a>
+                                                            <button class="pop_action"
                                                                 style="width:36px"><img type="submit"
                                                                     src="{{ asset('assets/svg/delete.svg') }}"
                                                                     class="pop_action_image"></button>
