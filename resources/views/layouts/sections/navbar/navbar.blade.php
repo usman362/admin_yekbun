@@ -7,7 +7,58 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+<style>
+    /* For nested dropdowns */
+    .dropdown-submenu {
+        position: relative;
+    }
+
  
+
+    .dropdown-menu {
+        width: 220px;
+        padding: 0.25rem 0;
+    }
+
+    .dropdown-item {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Force dropdown sizing */
+    .navbar-nav .dropdown-menu {
+        min-width: 220px !important;
+        width: 220px !important;
+        padding: 0 !important;
+    }
+
+    /* Style dropdown items */
+    .navbar-nav .dropdown-item {
+        font-size: 0.85rem !important;
+        padding: 0.5rem 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Icon sizing */
+    .navbar-nav .dropdown-item i {
+        font-size: 1rem !important;
+        width: 20px !important;
+        text-align: center !important;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+        display: none;
+        position: absolute;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+</style>
 <!-- Navbar -->
 @if (isset($navbarDetached) && $navbarDetached == 'navbar-detached')
     <nav class="layout-navbar {{ $containerNav }} navbar navbar-expand-xl {{ $navbarDetached }} align-items-center bg-navbar-theme"
