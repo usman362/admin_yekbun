@@ -277,8 +277,8 @@
                                                         method="post" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <div class="pop_action_div"><button class="pop_action" style="width:36px"><img
-                                                                    type="submit"
+                                                        <div class="pop_action_div"><button class="pop_action"
+                                                                style="width:36px"><img type="submit"
                                                                     src="{{ asset('assets/svg/delete.svg') }}"
                                                                     class="pop_action_image"></button>
                                                             <a href="javascript:void(0)" class="pop_action edit-history"
@@ -319,26 +319,10 @@
                                                 <div
                                                     style="height:29px;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;width:100%;">
                                                     <div
-                                                        style="display:flex;align-items:center;width:100%;height:100%">
-
-                                                        @if ($feed->is_comments == 1)
-                                                            <div
-                                                                style="display:flex;align-items:center;gap:3px;height:100%">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
-                                                                    style="width:100%;height:100%;object-fit:cover"><span
-                                                                    style="font-weight:400;font-family:Genos">0</span>
-                                                            </div>
-                                                        @endif
-                                                        @if ($feed->is_share == 1)
-                                                            <div
-                                                                style="display:flex;align-items:center;gap:3px;height:100%;margin-left:8px">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
-                                                                    style="width:100%;height:100%;object-fit:cover"><span
-                                                                    style="font-weight:400;font-family:Genos">0</span>
-                                                            </div>
-                                                        @endif
+                                                        style="display:flex;align-items:center;justify-content:space-between;width:100%;height:100%">
                                                         @if ($feed->is_emoji == 1)
-                                                            <div style="display:flex;align-items:center;gap:2px;height:100%;margin-left:8px">
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:2px;height:100%">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
                                                                     style="width:100%;height:100%;object-fit:cover">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
@@ -347,6 +331,20 @@
                                                             </div>
                                                         @endif
                                                     </div>
+                                                    @if ($feed->is_comments == 1)
+                                                        <div style="display:flex;align-items:center;gap:3px;height:100%">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    @endif
+                                                    @if ($feed->is_share == 1)
+                                                        <div style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -423,7 +421,8 @@
             data.data.comments.forEach(function(data, index) {
                 let child = '';
                 if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
-                    commentData = `<img src="{{ asset('storage') }}/${data.image}" style="width:100px;height:100px">`;
+                    commentData =
+                        `<img src="{{ asset('storage') }}/${data.image}" style="width:100px;height:100px">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData =
                         `<img src="{{ asset('/') }}storage/${data?.emoji_data?.image}" style="width:100px;height:100px">`;
