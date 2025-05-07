@@ -311,8 +311,8 @@ class MultimediaController extends Controller
             'playlist_id' => 'required',
         ]);
         try {
-            $exists = UserPlaylist::where('user_id',auth()->user()->id)->where('media_id',$request->media_id)->where('playlist_id',$request->playlist_id)->first();
-            if(!empty($exists)){
+            $exists = UserPlaylist::where('user_id', auth()->user()->id)->where('media_id', $request->media_id)->where('playlist_id', $request->playlist_id)->first();
+            if (!empty($exists)) {
                 return ResponseHelper::sendResponse([], 'Already Added in Playlist!', false, 403);
             }
             $playlist = UserPlaylist::create([
@@ -385,7 +385,6 @@ class MultimediaController extends Controller
     public function deletePlaylist($id)
     {
         $playlist = UserPlaylist::find($id);
-
         if (!$playlist) {
             return ResponseHelper::sendResponse([], 'Song not found.', false, 404);
         }
@@ -393,6 +392,27 @@ class MultimediaController extends Controller
         try {
             $playlist->delete();
             return ResponseHelper::sendResponse([], 'Song has been Deleted Successfully!');
+        } catch (\Exception $e) {
+            return ResponseHelper::sendResponse([], 'Something Went Wrong!', false, 500);
+        }
+    }
+
+    public function movePlaylist(Request $request, $id)
+    {
+        $playlist = UserPlaylist::find($id);
+        $group = UserPlaylistGroup::find($request->playlist_id);
+        if (!$playlist) {
+            return ResponseHelper::sendResponse([], 'Song not found.', false, 404);
+        }
+
+        if (!$group) {
+            return ResponseHelper::sendResponse([], 'Playlist not found.', false, 404);
+        }
+
+        try {
+            $playlist->playlist_id = $request->playlist_id;
+            $playlist->save();
+            return ResponseHelper::sendResponse([], 'Song has been Moved Successfully!');
         } catch (\Exception $e) {
             return ResponseHelper::sendResponse([], 'Something Went Wrong!', false, 500);
         }
