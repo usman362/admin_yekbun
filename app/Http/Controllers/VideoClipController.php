@@ -57,15 +57,17 @@ class VideoClipController extends Controller
         ]);
 
         try {
-            VideoClip::create([
+            $vc = VideoClip::create([
                 'video_file_name' => Str::after($request->video, '___'),
                 'artist_id' => $request->artist_id,
                 'video' => $request->video,
-                'thumbnail' => $request->thumbnail,
                 'video_file_size' => $request->video_file_size,
                 'video_file_length' => $request->video_file_length,
                 'status' => $request->status,
             ]);
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $vc->thumbnail = $cleanedThumbnail;
             return redirect()->back()->with('success', 'Video clip Has been added');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add video clip');

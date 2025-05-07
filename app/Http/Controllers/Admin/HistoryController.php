@@ -300,11 +300,11 @@ class HistoryController extends Controller
 
     public function generateThumbnail(Request $request)
     {
-        $thumbnail = $this->generateThumbnailFromPath($request->video_path, $request->duration, $request->directory);
+        $thumbnail = $this->generateThumbnailFromPath($request->video_path, $request->duration);
         return response()->json(['thumbnail' => $thumbnail], 200);
     }
 
-    private function generateThumbnailFromPath($videoPath, $duration,$directory = 'history')
+    private function generateThumbnailFromPath($videoPath, $duration)
     {
         // Initialize FFMpeg
         $ffmpeg = FFMpeg::create();
@@ -321,7 +321,7 @@ class HistoryController extends Controller
 
         foreach ($timestamps as $index => $time) {
             // Generate unique thumbnail name
-            $thumbnailPath = $directory.'/' . pathinfo($videoPath, PATHINFO_FILENAME) . "_thumb_{$index}.jpg";
+            $thumbnailPath = 'thumbnails/' . pathinfo($videoPath, PATHINFO_FILENAME) . "_thumb_{$index}.jpg";
 
             // Delete if already exists
             if (Storage::exists($thumbnailPath)) {
