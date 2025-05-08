@@ -48,8 +48,8 @@
         border: 2px solid #fff;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         position: absolute;
-        top: 36%;
-        left: 27%;
+        top: 34%;
+        left: 28%;
         transform: translate(-50%, -50%);
     }
 
@@ -58,7 +58,9 @@
         display: none !important;
     }
 </style>
-
+@php
+    $permissions = App\Models\Permission::all();
+@endphp
 <form id="createForm" action="{{ route('settings.team.members.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="hidden-inputs"></div>
@@ -97,8 +99,9 @@
                     </div>
 
                     <div style="font-size: 13px; color: #ed1c24; font-weight: 500; margin-top: 2px;">
-                        Create a Admin "Create Role"
+                        Create an Admin <a href="#" data-bs-toggle="modal" data-bs-target="#addRoleModal">"Create Role"</a> 
                     </div>
+                    
                 </div>
 
 
@@ -180,6 +183,14 @@
         </div>
     </div>
 </form>
+
+
+@include('content.settings.roles.includes.create_form')
+
+
+
+
+
 
 <!-- Password Toggle -->
 <script>
