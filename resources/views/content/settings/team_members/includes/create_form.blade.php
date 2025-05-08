@@ -286,7 +286,7 @@
                 // Process the queue first
                 dropzoneCreate.processQueue();
                 
-                // When queue completes, submit the form
+                // When queue completes, submit t ashe form
                 dropzoneCreate.on('queuecomplete', function() {
                     form.submit();
                 });
