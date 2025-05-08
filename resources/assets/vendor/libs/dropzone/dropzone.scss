@@ -120,8 +120,8 @@ $dz-icon-block-size: 3.75rem !default;
 
 .dz-preview .progress {
   position: absolute;
-  left: 1.25rem;
-  right: 1.25rem;
+//   left: 1.25rem;
+//   right: 1.25rem;
   top: 50%;
   margin-top: -$dz-progress-height * 0.5;
   z-index: 30;

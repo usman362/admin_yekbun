@@ -18,7 +18,7 @@
                 </div> --}}
 
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="form-label" for="fullname">Select Artist</label>
                     <select class="form-select" aria-label="Default select example" name="artist_id">
                         <option selected value="">Select</option>
@@ -30,10 +30,21 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="fullname">Status</label>
+                    <select class="form-select" aria-label="Default select example" name="status">
+                        <option selected value="1">Select</option>
+                        <option value="0">UnPublish</option>
+                        <option value="1">Publish</option>
+
+                    </select>
+                    @error('status')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
                 <input type="hidden" name="thumbnail" id="thumbnail">
                 <div class="col-md-12" id="generated-thumbnails" style="display: none">
                     <div class="card">
-                        <h5 class="card-header">Generated Thumbnails</h5>
                         <div class="card-body">
                             <div class="row">
                                 <div id="thumbnail-history" style="display: none">
@@ -61,7 +72,6 @@
                 </div>
                <div class="col-12">
                   <div class="card">
-                    <h5 class="card-header">Video Clip Upload</h5>
                     <div class="card-body">
                         <div class="dropzone needsclick" action="/" id="dropzone-video">
                             <div class="dz-message needsclick">
@@ -73,18 +83,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <label class="form-label" for="fullname">Status</label>
-                <select class="form-select" aria-label="Default select example" name="status">
-                    <option selected value="1">Select</option>
-                    <option value="0">UnPublish</option>
-                    <option value="1">Publish</option>
-
-                </select>
-                @error('status')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
             </div>
         </div>
     </div>
