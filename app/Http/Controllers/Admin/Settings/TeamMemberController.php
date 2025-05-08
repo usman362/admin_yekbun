@@ -41,6 +41,7 @@ class TeamMemberController extends Controller
      */
     public function store(StoreTeamMemberRequest $request)
     {
+        dd($request->all());
         $validated = $request->validated();
         $validated['image'] = $request->image??null;
         $imagePath = null;
