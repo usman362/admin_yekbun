@@ -263,7 +263,7 @@
             </li>
         </ul>
     </div>
-   @endcan  
+  
     <!-- Agents Column -->
     <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 80px;">
         <ul class="navbar-nav">
@@ -276,7 +276,7 @@
             </li>
         </ul>
     </div>
-    
+    @endcan    
  <!-- Combined Layout for Shortcuts, Notifications, and Profile -->
  <div class="col-2 card mb-0 d-flex justify-content-center align-items-center mx-1 px-2 ms-4" style="height:54px;">
  
