@@ -120,13 +120,10 @@ class TeamMemberController extends Controller
             return back()->with("error", "User not found.");
         }
     
-        // Loop through all roles assigned to this user
+        // Loop through all roles assigned to this user and delete them
         foreach ($user->roles as $role) {
-            // Detach the role from the user
-            $user->roles()->detach($role->id);
-    
-            // Delete the role from the roles table
-            $role->delete();
+            // Delete the role from the roles collection
+            Role::where('_id', $role->id)->delete();
         }
     
         // Remove the user's image if it exists
@@ -140,6 +137,5 @@ class TeamMemberController extends Controller
     
         return back()->with("success", "User and associated roles successfully deleted.");
     }
-    
     
 }
