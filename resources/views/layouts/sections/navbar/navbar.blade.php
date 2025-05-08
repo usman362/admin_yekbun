@@ -108,7 +108,7 @@
 @endif
 
     
-   
+@can('channels.read')
     
     <!-- Channels Column -->
     <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px;">
@@ -151,8 +151,9 @@
             </li>
         </ul>
     </div>
-    
+@endcan  
     <!-- Users Column -->
+    @can('users.read')  
     <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 70px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -214,8 +215,9 @@
             </li>
         </ul>
     </div>
-    
+ @endcan   
     <!-- Avatars Column -->
+    @can('avatars.read')
     <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 85px;">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -233,8 +235,9 @@
             </li>
         </ul>
     </div>
-    
+ @endcan   
     <!-- Flag User Column -->
+    @can('flaggedUser.read')
     <div class="col-1 card mb-0 d-flex justify-content-center mx- ms-4" style="height:54px; min-width: 90px;">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -246,8 +249,9 @@
             </li>
         </ul>
     </div>
-    
+    @endcan   
     <!-- Flag Channels Column -->
+    @can('flaggedchannels.read')
     <div class="col-auto card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 110px;">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -259,7 +263,7 @@
             </li>
         </ul>
     </div>
-    
+   @endcan  
     <!-- Agents Column -->
     <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 80px;">
         <ul class="navbar-nav">
