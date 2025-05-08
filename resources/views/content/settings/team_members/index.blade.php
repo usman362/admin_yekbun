@@ -149,7 +149,7 @@
     <!--/ Basic Bootstrap Table -->
     @include('content.settings.roles.includes.create_form')
 
-    <x-modal id="createModal" title="Add Member" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm"
+    <x-modal id="createModal"   saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm"
         size="md" :show="old('showCreateFormModal') ? true : false">
         @include('content.settings.team_members.includes.create_form')
     </x-modal>

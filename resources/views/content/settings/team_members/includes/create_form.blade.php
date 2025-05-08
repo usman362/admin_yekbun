@@ -45,12 +45,47 @@
     <div class="hidden-inputs"></div>
     <input type="hidden" name="showCreateFormModal" value="1">
     <div class="row">
-        <div class="col-lg-12 mx-auto">
+        <div class="col-lg-12 mx-auto" style="margin-top: 0; padding-top: 0;">
+
             <div class="row g-3">
-                <!-- Image Upload -->
+
+                <div style="
+                width: 1100%;
+                max-width: 529px;
+                height: 90px;
+                background: #f8d3d6;
+                border-radius: 14px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 10px 6px 10px;
+                margin-bottom: 16px;
+                margin-top: -29px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                border: 1px solid #f2b2b5;
+                text-align: center;
+            "> 
+                <img src="{{ asset('assets/svg/svg-dialog/donations/Check Circle.svg') }}"
+                     alt="check icon"
+                     style="width: 30px; height: 30px; margin-bottom: 4px;">
+            
+                <div style="font-weight: 600; color: #4b5563; font-size: 16px; display: flex; align-items: center; gap: 6px;">
+                    <span style="width: 4px; height: 4px; background-color: #00000066; border-radius: 50%;"></span>
+                    Please Create a Role Before 
+                    <span style="width: 4px; height: 4px; background-color: #00000066; border-radius: 50%;"></span>
+                </div>
+            
+                <div style="font-size: 13px; color: #ed1c24; font-weight: 500; margin-top: 2px;">
+                    Create a Admin  "Create Role"
+                </div>
+            </div>
+            
+
                 <div class="col-12">
                     <div class="dropzone needsclick" id="dropzone-img-create">
-                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview" id="uploadIcon" alt="Avatar">
+                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview"
+                            id="uploadIcon" alt="Avatar">
                         <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
                         <div class="hidden-inputs"></div>
 
@@ -60,31 +95,41 @@
                 <!-- Form Inputs -->
                 <div class="col-md-6">
                     <label class="form-label" for="inputName">Name - Lastname</label>
-                    <input type="text" id="inputName" name="name" class="form-control" value="{{ old('name') }}">
-                    @error('name') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                    <input type="text" id="inputName" name="name" class="form-control"
+                        value="{{ old('name') }}">
+                    @error('name')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label" for="inputEmail">Email</label>
-                    <input type="email" id="inputEmail" name="email" class="form-control" autocomplete="off">
-                    @error('email') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                    <input type="email" id="inputEmail" name="email" class="form-control" autocomplete="new-email">
+                    @error('email')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label" for="inputPassword">Password</label>
                     <div class="input-group">
-                        <input type="password" id="inputPassword" name="password" class="form-control">
+                        <input type="password" id="inputPassword" name="password" class="form-control"
+                            autocomplete="new-password">
                         <span class="input-group-text toggle-password" style="cursor: pointer">
                             <i class="fas fa-eye"></i>
                         </span>
                     </div>
-                    @error('password') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                    @error('password')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
+
 
                 <div class="col-md-6">
                     <label class="form-label" for="inputPasswordConfirmation">Confirm Password</label>
                     <div class="input-group">
-                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
+                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation"
+                            class="form-control">
                         <span class="input-group-text toggle-password" style="cursor: pointer">
                             <i class="fas fa-eye"></i>
                         </span>
@@ -99,7 +144,9 @@
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
                     </select>
-                    @error('roles') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                    @error('roles')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-6">
@@ -116,9 +163,9 @@
 
 <!-- Password Toggle -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.toggle-password').forEach(function (element) {
-            element.addEventListener('click', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.toggle-password').forEach(function(element) {
+            element.addEventListener('click', function() {
                 const input = this.previousElementSibling;
                 const icon = this.querySelector('i');
                 input.type = input.type === 'password' ? 'text' : 'password';
@@ -131,7 +178,7 @@
 
 <!-- Dropzone Logic -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const previewTemplate = `
             <div class="dz-preview dz-file-preview">
                 <div class="dz-image">
@@ -161,15 +208,18 @@
                     file.previewElement.classList.add("dz-success");
                     file.previewElement.dataset.path = response.path;
 
-                    const hiddenInputsContainer = document.querySelector('#createForm .hidden-inputs');
-                    hiddenInputsContainer.innerHTML = `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
+                    const hiddenInputsContainer = document.querySelector(
+                        '#createForm .hidden-inputs');
+                    hiddenInputsContainer.innerHTML =
+                        `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
 
                     document.querySelector('#dropzone-img-create').appendChild(file.previewElement);
                 }
             },
             removedfile: function(file) {
                 const hiddenInputsContainer = document.querySelector('#createForm .hidden-inputs');
-                const hiddenInput = hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`);
+                const hiddenInput = hiddenInputsContainer.querySelector(
+                    `input[data-path="${file.previewElement.dataset.path}"]`);
                 if (hiddenInput) hiddenInput.remove();
 
                 if (file.previewElement && file.previewElement.parentNode) {

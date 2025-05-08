@@ -1694,11 +1694,11 @@
                         <div>Add/Manage Team</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('settings/team/roles') ? 'active ' : '' }}">
+                {{-- <li class="menu-item {{ Request::is('settings/team/roles') ? 'active ' : '' }}">
                     <a href="{{ url('/settings/team/roles') }}" class="menu-link">
                         <div>Add/Manage Roles</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
         <li class="menu-item {{ Request::is('app-setting/department') ? 'active open' : '' }}">

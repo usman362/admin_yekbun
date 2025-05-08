@@ -36,7 +36,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             @endif
-            <div class="modal-body" style="overflow-y: scroll;">
+            {{-- <div class="modal-body" style="overflow-y: scroll;"> --}}
+            <div class="modal-body" >
                 {{ $slot }}
             </div>
             @if ($showFooter)
