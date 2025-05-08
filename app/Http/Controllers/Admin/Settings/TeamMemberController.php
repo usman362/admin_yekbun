@@ -114,15 +114,32 @@ class TeamMemberController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+    
+        // Check if the user exists
+        if (!$user) {
+            return back()->with("error", "User not found.");
+        }
+    
+        // Loop through all roles assigned to this user
+        foreach ($user->roles as $role) {
+            // Detach the role from the user
+            $user->roles()->detach($role->id);
+    
+            // Delete the role from the roles table
+            $role->delete();
+        }
+    
+        // Remove the user's image if it exists
         $imagePath = public_path('storage/' . $user->image);
-
-        if ($user->image != NULL && $imagePath && file_exists($imagePath)){
+        if ($user->image != NULL && file_exists($imagePath)) {
             unlink($imagePath);
         }
-
-
-        $objectId = new \MongoDB\BSON\ObjectId($id);
-        User::where('_id', $objectId)->delete();
-        return back()->with("success", "Role successfully deleted.");
+    
+        // Delete the user from the database
+        $user->delete();
+    
+        return back()->with("success", "User and associated roles successfully deleted.");
     }
+    
+    
 }
