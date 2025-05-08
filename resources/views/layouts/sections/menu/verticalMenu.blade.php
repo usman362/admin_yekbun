@@ -1367,6 +1367,11 @@
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Documentary</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
                         <div>Add Movies</div>
                     </a>
                 </li>
@@ -1385,7 +1390,16 @@
                 <div>Settings</div>
             </a>
             <ul class="menu-sub">
-
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Zarok TV</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Malbat TV</div>
+                    </a>
+                </li>
             </ul>
         </li>
     @endcan

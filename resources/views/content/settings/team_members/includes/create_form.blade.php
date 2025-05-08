@@ -195,98 +195,98 @@
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const previewTemplate = `
-            <div class="dz-preview dz-file-preview">
-                <div class="dz-image">
-                    <img data-dz-thumbnail />
-                </div>
-            </div>`;
-    
-        const dropzoneCreate = new Dropzone('#dropzone-img-create', {
-            url: '{{ route('file.upload') }}',
-            previewTemplate: previewTemplate,
-            maxFilesize: 100,
-            addRemoveLinks: false,
-            clickable: '#uploadIcon',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            maxFiles: 1,
-            acceptedFiles: 'image/*',
-            autoProcessQueue: true,
-            parallelUploads: 1,
-            uploadMultiple: false,
-            sending: function(file, xhr, formData) {
-                formData.append('folder', 'team_members');
-            },
-            success: function(file, response) {
-                const defaultAvatar = document.querySelector('#uploadIcon');
-                if (defaultAvatar) defaultAvatar.style.display = 'none';
-    
-                if (file.previewElement) {
-                    file.previewElement.classList.add("dz-success");
-                    file.previewElement.dataset.path = response.path;
-    
-                    // Create or update hidden input
-                    let hiddenInput = document.querySelector('input[name="image_path"]');
-                    if (!hiddenInput) {
-                        hiddenInput = document.createElement('input');
-                        hiddenInput.type = 'hidden';
-                        hiddenInput.name = 'image_path';
-                        document.querySelector('#createForm').appendChild(hiddenInput);
+document.addEventListener("DOMContentLoaded", function() {
+    const previewTemplate = `
+        <div class="dz-preview dz-file-preview">
+            <div class="dz-image">
+                <img data-dz-thumbnail />
+            </div>
+        </div>`;
+
+    const dropzoneCreate = new Dropzone('#dropzone-img-create', {
+        url: '{{ route('file.upload') }}',
+        previewTemplate: previewTemplate,
+        maxFilesize: 100,
+        addRemoveLinks: false,
+        clickable: '#uploadIcon',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        maxFiles: 1,
+        acceptedFiles: 'image/*',
+        autoProcessQueue: true,
+        parallelUploads: 1,
+        uploadMultiple: false,
+        sending: function(file, xhr, formData) {
+            formData.append('folder', 'team_members');
+        },
+        success: function(file, response) {
+            const defaultAvatar = document.querySelector('#uploadIcon');
+            if (defaultAvatar) defaultAvatar.style.display = 'none';
+
+            if (file.previewElement) {
+                file.previewElement.classList.add("dz-success");
+                file.previewElement.dataset.path = response.path;
+
+                // Create or update hidden input
+                let hiddenInput = document.querySelector('input[name="image_path"]');
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'image_path';
+                    document.querySelector('#createForm').appendChild(hiddenInput);
+                }
+                hiddenInput.value = response.path;
+            }
+        },
+        error: function(file, message) {
+            alert('Image upload failed: ' + message);
+        },
+        removedfile: function(file) {
+            const defaultAvatar = document.querySelector('#uploadIcon');
+            if (defaultAvatar) defaultAvatar.style.display = 'block';
+
+            // Remove hidden input if exists
+            const hiddenInput = document.querySelector('input[name="image_path"]');
+            if (hiddenInput) hiddenInput.remove();
+
+            // Remove preview
+            if (file.previewElement && file.previewElement.parentNode) {
+                file.previewElement.parentNode.removeChild(file.previewElement);
+            }
+
+            // Delete from server if needed
+            if (file.previewElement?.dataset?.path) {
+                $.ajax({
+                    url: '{{ route('settings.user.delete-img', 0) }}',
+                    method: 'delete',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        path: file.previewElement.dataset.path
                     }
-                    hiddenInput.value = response.path;
-                }
-            },
-            error: function(file, message) {
-                alert('Image upload failed: ' + message);
-            },
-            removedfile: function(file) {
-                const defaultAvatar = document.querySelector('#uploadIcon');
-                if (defaultAvatar) defaultAvatar.style.display = 'block';
-    
-                // Remove hidden input if exists
-                const hiddenInput = document.querySelector('input[name="image_path"]');
-                if (hiddenInput) hiddenInput.remove();
-    
-                // Remove preview
-                if (file.previewElement && file.previewElement.parentNode) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
-                }
-    
-                // Delete from server if needed
-                if (file.previewElement?.dataset?.path) {
-                    $.ajax({
-                        url: '{{ route('settings.user.delete-img', 0) }}',
-                        method: 'delete',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        data: {
-                            path: file.previewElement.dataset.path
-                        }
-                    });
-                }
-            }
-        });
-    
-        // Handle form submission
-        document.querySelector('#createForm').addEventListener('submit', function(e) {
-            const submitButton = this.querySelector('[type="submit"]');
-            
-            // If there's a file but not yet uploaded
-            if (dropzoneCreate.files.length > 0 && !dropzoneCreate.files[0].upload.uuid) {
-                e.preventDefault();
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Uploading...';
-                
-                dropzoneCreate.on('queuecomplete', function() {
-                    document.querySelector('#createForm').submit();
                 });
-                
-                dropzoneCreate.processQueue();
             }
-        });
+        }
     });
-    </script>
+
+    // Handle form submission
+    document.querySelector('#createForm').addEventListener('submit', function(e) {
+        const submitButton = this.querySelector('[type="submit"]');
+        
+        // If there's a file but not yet uploaded
+        if (dropzoneCreate.files.length > 0 && !dropzoneCreate.files[0].upload.uuid) {
+            e.preventDefault();
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Uploading...';
+            
+            dropzoneCreate.on('queuecomplete', function() {
+                document.querySelector('#createForm').submit();
+            });
+            
+            dropzoneCreate.processQueue();
+        }
+    });
+});
+</script>
