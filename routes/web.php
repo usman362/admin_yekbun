@@ -1,27 +1,16 @@
 <?php
 
-use App\Events\PopComments;
 use App\Helpers\Helpers;
-use App\Http\Controllers\AdController;
 use App\Http\Controllers\Admin\ActivityController;
-use App\Http\Controllers\Admin\WizardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\user\Diamond;
-use App\Http\Controllers\user\Premium;
-use App\Http\Controllers\user\Standard;
 use App\Http\Controllers\AdvertismentController;
-use App\Http\Controllers\fanpage\FanPage;
 use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\ReelController;
 use App\Http\Controllers\ReelSongController;
 use App\Http\Controllers\ReelReasonController;
 use App\Http\Controllers\Admin\ChannelPolicyController;
-
 use App\Http\Controllers\Admin\EventController;
-
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\ProfileBannerController;
 use App\Http\Controllers\Admin\StoryController;
@@ -30,40 +19,24 @@ use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SeriesController;
-use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\VotingController;
-
 use App\Http\Controllers\Admin\HistoryController;
+use App\Http\Controllers\Admin\AIVideosController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DonationController;
-
 use App\Http\Controllers\Admin\DiamondUserController;
 use App\Http\Controllers\Admin\FlaggedUserController;
 use App\Http\Controllers\Admin\PremiumUserController;
 use App\Http\Controllers\Admin\ReportVideoController;
-
 use App\Http\Controllers\Admin\UploadMovieController;
-
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\StandardUserController;
-use App\Http\Controllers\Admin\BazarCategoryController;
-use App\Http\Controllers\Admin\EventCategoryController;
 use App\Http\Controllers\Admin\FileController;
-
-use App\Http\Controllers\Admin\MusicCategoryController;
-
-use App\Http\Controllers\Admin\OnlineCategoryController;
-
-use App\Http\Controllers\Admin\VotingCategoryController;
-use App\Http\Controllers\laravel_example\UserManagement;
-use App\Http\Controllers\Admin\HistoryCategoryController;
-
+use App\Http\Controllers\Admin\MusicCategoryController;;
 use App\Http\Controllers\Admin\UploadMovieCategoryController;
-use App\Http\Controllers\Admin\UploadVideoCategoryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PaymentOfficeController;
-
 use App\Http\Controllers\Admin\Settings\PaymentMethodController;
 use App\Http\Controllers\Admin\Settings\PricingController;
 use App\Http\Controllers\Admin\Settings\SettingController;
@@ -73,23 +46,16 @@ use App\Http\Controllers\Admin\Settings\CityController;
 use App\Http\Controllers\Admin\Settings\CountryController;
 use App\Http\Controllers\Admin\Settings\RegionController;
 use App\Http\Controllers\Admin\SystemLogController;
-use App\Http\Controllers\Admin\MobileSettingsController;
 use App\Http\Controllers\Admin\RoleController;
-
 use App\Http\Controllers\Admin\Settings\TeamMemberController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\TranslationController;
-use App\Http\Controllers\Admin\TextController;
 use App\Http\Controllers\Admin\ManageAdController;
-
 use App\Http\Controllers\Admin\TicketServiceController;
-
 use App\Http\Controllers\Admin\BankTransferController;
-
 use App\Http\Controllers\Admin\Settings\PrefixController;
 use App\Http\Controllers\Admin\Settings\ReasonController;
-
 use App\Http\Controllers\VideoClipController;
 use App\Http\Controllers\Admin\ChannelReasonController;
 use App\Http\Controllers\Admin\ClipsController;
@@ -105,8 +71,6 @@ use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\BackgroundFeedController;
 use App\Http\Controllers\DepartmentController;
-use App\Models\FanPageType;
-use App\Models\Story;
 use App\Http\Controllers\AvatarsController;
 use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\CountryLocationController;
@@ -116,7 +80,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 //use App\Http\Controllers\GreetingsController;
 
@@ -463,6 +426,9 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/history/{id}/video', [HistoryController::class, 'deleteVideo'])->name('history.delete-video');
     Route::resource('/history', HistoryController::class);
     Route::get('/history/{id}/{status}', [HistoryController::class, 'status'])->name('history-status');
+
+    //Ai Videos
+    Route::resource('/ai-videos', AIVideosController::class);
 
 
     Route::post('/generate-thumbnail', [HistoryController::class, 'generateThumbnail']);

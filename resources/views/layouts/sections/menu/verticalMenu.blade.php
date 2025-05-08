@@ -214,6 +214,25 @@
         </li>
     @endcan
 
+    <li
+            class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <img src="{{asset('assets/img/Avatar.svg')}}" alt="avatars" style="width: 20px; height: 20px;margin-right: 0.5rem;">
+                <div>AI Videos</div>
+            </a>
+
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('ai-videos') ? 'active' : '' }}  ">
+                    <a href="{{ url('/ai-videos') }}" class="menu-link">
+                        <div>Manage AI Videos</div>
+                    </a>
+
+
+                </li>
+            </ul>
+        </li>
+
     @can('feeds.read')
     <li class="menu-header small text-uppercase">
         <span class="menu-header-text">User adds</span>
