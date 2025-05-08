@@ -71,7 +71,7 @@
                     </div>
                 </div>
                <div class="col-12">
-                  <div class="card">
+                  <div class="card box-shadow-none">
                     <div class="card-body">
                         <div class="dropzone needsclick" action="/" id="dropzone-video">
                             <div class="dz-message needsclick">
