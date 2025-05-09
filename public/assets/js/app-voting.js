@@ -50,7 +50,7 @@ $(document).ready(function() {
 
         // To show banner
         const banner_container = editModal.find(".vote-banner.dropzone");
-        banner_container.find("img")[0].src = '/public'+storagePath(vote.banner);
+        banner_container.find("img")[0].src = storagePath(vote.banner);
 
         if(vote.vote_type == 'individual') {
             editModal.find(".vote-header .title").text('Individual Vote')
@@ -58,7 +58,7 @@ $(document).ready(function() {
             hidden_div.appendChild(single_vote_options);
             for(let i=0; i<3; i++) {
                 const option = $(individual_vote_options).find(`div.individual-reaction-option[data-index='${i}']`);
-                option.find("img")[0].src = '/public'+storagePath(vote.options[i].image);
+                option.find("img")[0].src = storagePath(vote.options[i].image);
                 option.find(`input[name='reaction_option[${i}][title]']`).val(vote.options[i].title);
                 option.find(`input[name='reaction_option[${i}][image]']`).val(vote.options[i].image);
             }

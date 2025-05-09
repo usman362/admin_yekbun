@@ -58,6 +58,8 @@ return [
 
   'asset_url' => env('ASSET_URL'),
 
+  'asset_mode' => env('ASSET_URL') === '/public' ? 'public' : 'url',
+
   /*
     |--------------------------------------------------------------------------
     | Application Timezone

@@ -202,7 +202,7 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                option.find("img")[0].src = `/storage/${response.path}`;
+                option.find("img")[0].src = `/public/storage/${response.path}`;
                 option.find(`input[name='reaction_option[${index}][image]'`).val(response.path);
                 option.find(".individual-vote-react-option-image").addClass("uploaded")
                 e.target.value = '';

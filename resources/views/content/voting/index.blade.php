@@ -287,8 +287,15 @@
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('assets/js/app-voting.js') }}"></script>
-    <script src="{{ asset('assets/js/app-upload-audio.js') }}"></script>
+
+    @if (config('app.asset_mode') === 'public')
+        <script src="assets/js/app-voting.js"></script>
+        <script src="assets/js/app-upload-audio.js"></script>
+    @else
+        <script src="{{ asset('assets/js/app-voting.js') }}"></script>
+        <script src="{{ asset('assets/js/app-upload-audio.js') }}"></script>
+    @endif
+
     <script>
         function confirmAction(event, callback) {
             event.preventDefault();

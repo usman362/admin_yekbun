@@ -16,7 +16,7 @@ class UploadAudio {
             this.container.find(".mak-upload-audio .upload-progress").addClass('hidden');
             this.container.find('.mak-upload-audio #remove_audio_btn').prop('disabled', false);
 
-            this.container.find("#audio_player")[0].src = storagePath(defaultSrc);
+            this.container.find("#audio_player")[0].src = '/public'+storagePath(defaultSrc);
         }
 
         this.initialize();
