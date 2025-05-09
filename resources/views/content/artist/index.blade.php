@@ -266,7 +266,7 @@
 
     <!-- Artist List Table -->
     <div class="card">
-        <h5 class="card-header">Artist List</h5>
+         
         <div class="table-responsive container pb-4 text-nowrap">
             <div class="row">
                 <div class="col-md-6"></div>
@@ -556,7 +556,7 @@
                                 `<input type="hidden" name="${fileInputName}_file_durations" id="file_duration" value="${duration}" data-path="${response.path}">`;
                         }
                     }
-                    $('data-dz-remove').text('DELETE');
+
                 },
                 removedfile: function(file) {
                     const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
@@ -661,7 +661,7 @@
             dropZoneInitFunctions.forEach(callback => callback());
         }
     </script>
-    <script src="{{asset('assets/js/dropzone.min.js')}}" onload="drpzone_init()"></script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 
     <script>
         $(document).ready(function() {
