@@ -457,7 +457,7 @@ class MultimediaController extends Controller
     {
         try {
             $group = UserPlaylistGroup::find($id);
-            $group->titile = $request->title;
+            $group->title = $request->title;
             $group->save();
             return ResponseHelper::sendResponse($group, 'Playlist has been Updated Successfully!');
         } catch (Exception $e) {
