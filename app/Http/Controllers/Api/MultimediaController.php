@@ -285,6 +285,8 @@ class MultimediaController extends Controller
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
             $q->with(['song' => function ($a) {
                 $a->with('artist');
+            }])->with(['video' => function ($a) {
+                $a->with('artist');
             }]);
         }])->where('user_id', $userId)->find($id);
 
@@ -338,9 +340,29 @@ class MultimediaController extends Controller
 
     public function getClipsPlaylist(Request $request)
     {
+        $userId = auth()->user()->id;
+
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-            $q->with('video');
-        }])->where('user_id', auth()->user()->id)->get();
+            $q->with(['video' => function ($a) {
+                $a->with('artist');
+            }]);
+        }])->where('user_id', $userId)->get();
+
+        if ($playlists->isEmpty()) {
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover.jpg',
+                'type' => 'free',
+            ]);
+
+            $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+                $q->with(['video' => function ($a) {
+                    $a->with('artist');
+                }]);
+            }])->where('user_id', $userId)->get();
+        }
+
         return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Fetch Successfully!');
     }
 
@@ -348,17 +370,23 @@ class MultimediaController extends Controller
     {
         $request->validate([
             'media_id' => 'required',
-            'playlist_id' => 'required'
+            'playlist_id' => 'required',
         ]);
         try {
-            $playlist = UserPlaylist::updateOrCreate(['id' => $request->id], [
+            $exists = UserPlaylist::where('user_id', auth()->user()->id)->where('media_id', $request->media_id)->where('playlist_id', $request->playlist_id)->first();
+            if (!empty($exists)) {
+                return ResponseHelper::sendResponse([], 'Already Added in Playlist!', false, 403);
+            }
+            $playlist = UserPlaylist::create([
                 'user_id' => auth()->user()->id,
                 'media_id' => $request->media_id,
                 'playlist_id' => $request->playlist_id,
                 'type' => 'video'
             ]);
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
-                $q->with('video');
+                $q->with(['video' => function ($a) {
+                    $a->with('artist');
+                }]);
             }])->where('user_id', auth()->user()->id)->get();
             return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Created Successfully!');
         } catch (Exception $e) {
@@ -422,6 +450,18 @@ class MultimediaController extends Controller
             return ResponseHelper::sendResponse([], 'Song has been Moved Successfully!');
         } catch (\Exception $e) {
             return ResponseHelper::sendResponse([], 'Something Went Wrong!', false, 500);
+        }
+    }
+
+    public function editPlaylist(Request $request, $id)
+    {
+        try {
+            $group = UserPlaylistGroup::find($id);
+            $group->titile = $request->title;
+            $group->save();
+            return ResponseHelper::sendResponse($group, 'Playlist has been Updated Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse([], 'Playlist has been Updated Successfully!', false, 403);
         }
     }
 }
