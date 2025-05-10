@@ -56,7 +56,7 @@ class VideoClip extends Model
 
     public function artist()
     {
-        return $this->belongsTo(Artist::class, 'artist_id', '_id');
+        return $this->belongsTo(Artist::class, 'artist_id');
     }
 
     public function playlists()
