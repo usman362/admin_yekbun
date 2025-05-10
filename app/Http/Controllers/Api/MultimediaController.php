@@ -342,7 +342,7 @@ class MultimediaController extends Controller
     {
         $userId = auth()->user()->id;
 
-        $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+        $playlists = UserPlaylistGroup::with(['clip_playlists' => function ($q) {
             $q->with(['video' => function ($a) {
                 $a->with('artist');
             }]);
@@ -356,7 +356,7 @@ class MultimediaController extends Controller
                 'type' => 'free',
             ]);
 
-            $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+            $playlists = UserPlaylistGroup::with(['clip_playlists' => function ($q) {
                 $q->with(['video' => function ($a) {
                     $a->with('artist');
                 }]);
@@ -383,7 +383,7 @@ class MultimediaController extends Controller
                 'playlist_id' => $request->playlist_id,
                 'type' => 'video'
             ]);
-            $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
+            $playlists = UserPlaylistGroup::with(['clip_playlists' => function ($q) {
                 $q->with(['video' => function ($a) {
                     $a->with('artist');
                 }]);

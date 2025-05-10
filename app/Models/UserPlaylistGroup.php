@@ -19,6 +19,11 @@ class UserPlaylistGroup extends Model
 
     public function playlists()
     {
-        return $this->hasMany(UserPlaylist::class, 'playlist_id');
+        return $this->hasMany(UserPlaylist::class, 'playlist_id')->where('type','audio');
+    }
+
+    public function clip_playlists()
+    {
+        return $this->hasMany(UserPlaylist::class, 'playlist_id')->where('type','video');
     }
 }
