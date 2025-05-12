@@ -286,8 +286,10 @@
                                                                             <i class="fas fa-ellipsis-vertical"></i>
                                                                         </div>
                                                                     </a>
-                                                                    <div class="dropdown-menu dropdown-menu-end" style="min-width: unset;width:100px;padding:0;" data-bs-popper="static">
+                                                                    <div class="dropdown-menu text-center dropdown-menu-end" style="min-width: unset;width:100px;" data-bs-popper="static">
+                                                                        <span style="font-family:Genos;color:#c0c0c0">Options</span>
                                                                         <div class="row ml-0" style="width:100px;">
+
                                                                             <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                                                                 <a class="dropdown-item edit-history" style="padding: 0" href="javascript:void(0)"
                                                                                 data-bs-toggle="modal" data-bs-target="#createhistoryModal"
