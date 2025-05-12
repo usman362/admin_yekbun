@@ -35,14 +35,22 @@ class MultimediaController extends Controller
 
     public function getSongByArtists(Request $request, $id)
     {
-        $songs = Song::with(['artist', 'playlists'])->where('artist_id', $id)->orderBy('created_at', 'desc')->get();
-        return ResponseHelper::sendResponse($songs, 'Songs Fetch Successfully!');
+        $artist = Artist::with(['province' => function ($q) {
+            $q->with('country');
+        }])->with(['songs' => function ($q) {
+            $q->with('playlists');
+        }])->find($id);
+        return ResponseHelper::sendResponse($artist, 'Songs Fetch Successfully!');
     }
 
     public function getClipsByArtists(Request $request, $id)
     {
-        $videos = VideoClip::with(['artist', 'playlists'])->where('artist_id', $id)->orderBy('created_at', 'desc')->get();
-        return ResponseHelper::sendResponse($videos, 'Video Clips Fetch Successfully!');
+        $artist = Artist::with(['province' => function ($q) {
+            $q->with('country');
+        }])->with(['videos' => function ($q) {
+            $q->with('playlists');
+        }])->find($id);
+        return ResponseHelper::sendResponse($artist, 'Video Clips Fetch Successfully!');
     }
 
     public function getArtists()
