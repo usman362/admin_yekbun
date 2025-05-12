@@ -40,7 +40,8 @@ class MultimediaController extends Controller
         }])->with(['songs' => function ($q) {
             $q->with('playlists');
         }])->find($id);
-        return ResponseHelper::sendResponse($artist, 'Songs Fetch Successfully!');
+        $songs = Song::with('playlists')->where('artist_id', $id)->get();
+        return ResponseHelper::sendResponse(['artist' => $artist, 'songs' => $songs], 'Songs Fetch Successfully!');
     }
 
     public function getClipsByArtists(Request $request, $id)
@@ -50,7 +51,8 @@ class MultimediaController extends Controller
         }])->with(['videos' => function ($q) {
             $q->with('playlists');
         }])->find($id);
-        return ResponseHelper::sendResponse($artist, 'Video Clips Fetch Successfully!');
+        $videos = VideoClip::with('playlists')->where('artist_id', $id)->get();
+        return ResponseHelper::sendResponse(['artist' => $artist, 'videos' => $videos], 'Video Clips Fetch Successfully!');
     }
 
     public function getArtists()
