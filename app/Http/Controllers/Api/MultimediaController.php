@@ -37,8 +37,6 @@ class MultimediaController extends Controller
     {
         $artist = Artist::with(['province' => function ($q) {
             $q->with('country');
-        }])->with(['songs' => function ($q) {
-            $q->with('playlists');
         }])->find($id);
         $songs = Song::with('playlists')->where('artist_id', $id)->get();
         return ResponseHelper::sendResponse(['artist' => $artist, 'songs' => $songs], 'Songs Fetch Successfully!');
@@ -48,8 +46,6 @@ class MultimediaController extends Controller
     {
         $artist = Artist::with(['province' => function ($q) {
             $q->with('country');
-        }])->with(['videos' => function ($q) {
-            $q->with('playlists');
         }])->find($id);
         $videos = VideoClip::with('playlists')->where('artist_id', $id)->get();
         return ResponseHelper::sendResponse(['artist' => $artist, 'videos' => $videos], 'Video Clips Fetch Successfully!');
