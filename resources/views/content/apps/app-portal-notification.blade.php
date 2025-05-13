@@ -66,9 +66,32 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_music">Music</td>
                                                 <td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="new_music">Songs</td>
+                                                <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_music"
                                                             name="new_music" @checked(@$notification->new_music == 'true')>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="new_artist">Artist</td>
+                                                <td>
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input" type="checkbox" id="new_artist"
+                                                            name="new_artist" @checked(@$notification->new_artist == 'true')>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="new_video_clips">Video Clips</td>
+                                                <td>
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input" type="checkbox" id="new_video_clips"
+                                                            name="new_video_clips" @checked(@$notification->new_video_clips == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
