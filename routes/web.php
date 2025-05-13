@@ -142,6 +142,7 @@ Route::get('/test-fcm', function () {
     if ($users) {
         foreach ($users as $user) {
             App\Helpers\NotificationHelper::sendNotification($user->id, 'Notification', 'Notification Body');
+            dd($user->id);
         }
     }
     return 'success';
