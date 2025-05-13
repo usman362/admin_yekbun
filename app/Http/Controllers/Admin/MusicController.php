@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\NotificationHelper;
 use App\Models\Music;
 use App\Models\Artist;
 use App\Models\Album;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Controller;
 use FFMpeg;
 use App\Http\Requests\StoreSongRequest;
 use App\Http\Controllers\Admin\FileController;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 // use Illuminate\Support\Facades\Storage;
@@ -259,6 +261,16 @@ class MusicController extends Controller
                 $song->length = $request->songs_file_length[$key] ?? '';
                 $song->status = (int)$request->status;
                 $song->save();
+            }
+            try {
+                $users = User::where('fcm_token', '!==', null)->where('new_music', '!==', null)->get();
+                if ($users) {
+                    foreach ($users as $user) {
+                        NotificationHelper::sendNotification($user->id, 'Music Notification', 'New Music ' . $name . ' has been added!');
+                    }
+                }
+            } catch (\Exception $e) {
+                return back()->with("success", "Song successfully added.");
             }
             return back()->with("success", "Song successfully added.");
         } catch (\Exception $e) {
