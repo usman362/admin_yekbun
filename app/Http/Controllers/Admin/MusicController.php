@@ -263,7 +263,7 @@ class MusicController extends Controller
                 $song->save();
             }
             try {
-                $users = User::where('fcm_token', '!==', null)->where('new_music', '!==', null)->get();
+                $users = User::where('fcm_token', '!==', null)->where('new_music', 'true')->get();
                 if ($users) {
                     foreach ($users as $user) {
                         NotificationHelper::sendNotification($user->id, 'Music Notification', 'New Music ' . $name . ' has been added!');
