@@ -138,7 +138,7 @@ Route::get('/test-fcm-id', function () {
 Route::get('/test-fcm', function () {
     $users = App\Models\User::whereNotNull('fcm_token')
     ->where('fcm_token', '!=', '')->get();
-    dd($users);
+    // dd($users);
     if ($users) {
         foreach ($users as $user) {
             App\Helpers\NotificationHelper::sendNotification($user->id, 'Notification', 'Notification Body');
