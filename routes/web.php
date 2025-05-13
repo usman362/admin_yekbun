@@ -124,6 +124,26 @@ Route::get('/send-test-email', function () {
     return 'Test email sent successfully!';
 });
 
+Route::get('/test-fcm-id', function () {
+    $users = App\Models\User::where('fcm_token', '!==', null)->where('new_music', 'true')->get();
+    if ($users) {
+        foreach ($users as $user) {
+            App\Helpers\NotificationHelper::sendNotification($user->id, 'Notification', 'Notification Body');
+        }
+    }
+    return 'success';
+});
+
+Route::get('/test-fcm', function () {
+    $users = App\Models\User::where('fcm_token', '!==', null)->get();
+    if ($users) {
+        foreach ($users as $user) {
+            App\Helpers\NotificationHelper::sendNotification($user->id, 'Notification', 'Notification Body');
+        }
+    }
+    return 'success';
+});
+
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
