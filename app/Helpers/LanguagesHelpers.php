@@ -122,33 +122,30 @@ class LanguagesHelpers
             ['keyword' => 'accountCreated', 'translated' => 'Account Created!', 'main_section' => 'Home Page', 'section_name' => 'Home Page Sign Up'],
             ['keyword' => 'yourAccountHadBeedCreatedSuccessfully', 'translated' => 'Your account had been created successfully.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Sign Up'],
             ['keyword' => 'pleaseSignInToUseYourAccountAndEnjoy', 'translated' => 'Please sign in to use your account and enjoy', 'main_section' => 'Home Page', 'section_name' => 'Home Page Sign Up'],
+
+
             ['keyword' => 'search', 'translated' => 'Search', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'enterYourFirstname', 'translated' => 'Enter Your Firstname', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'enterYourLastname', 'translated' => 'Enter Your Lastname', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'enterYourUsername', 'translated' => 'Enter Your Username', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'acceptPolicyAnd', 'translated' => 'Accept policy and', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'terms', 'translated' => 'terms', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'pleaseEnterAValidEmail', 'translated' => 'Please enter a valid email.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'failedToResetDevicePleaseTryAgain', 'translated' => 'Failed to reset device. Please try again.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'weWillSendAMailToTheEmailAddressYouRegisteredToRegainYourPassword', 'translated' => 'We will send a mail to the email address you registered to regain your password.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'passwordResetEmailSent', 'translated' => 'Password Reset Email Sent', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'anEmailHasBeenSentToYouFollowDirectionsInTheEmailToResetYourPassword', 'translated' => 'An email has been sent to you. Follow directions in the email to reset your password.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'invalidCode', 'translated' => 'Invalid Code', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'pleaseEnterThe4DigitOtpCode', 'translated' => 'Please enter the 4-digit OTP code', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'success', 'translated' => 'Success', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'otpVerifiedSuccessfully', 'translated' => 'OTP verified successfully!', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'otpVerificationFailed', 'translated' => 'OTP verification failed', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'failedToVerifyOtpPleaseTryAgain', 'translated' => 'Failed to verify OTP. Please try again.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'resendDisabled', 'translated' => 'Resend Disabled', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'pleaseWaitUntilTheTimerEndsToResendTheCode', 'translated' => 'Please wait until the timer ends to resend the code.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'verification', 'translated' => 'Verification', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'passwordHasBeenSuccessfullyReset', 'translated' => 'Password has been successfully reset.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'passwordResetFailed', 'translated' => 'Password reset failed', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'noResponseFromTheServerPleaseTryAgain', 'translated' => 'No response from the server. Please try again.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'somethingWentWrongPleaseTryAgainLater', 'translated' => 'Something went wrong. Please try again later.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'createPassword', 'translated' => 'Create Password', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'chooseASecurePasswordThatWillBeEasyForYouToRemember', 'translated' => 'Choose a secure password that will be easy for you to remember.', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
-            ['keyword' => 'confirmYourPasswordHere', 'translated' => 'Confirm your password here', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
+       //landing page
+            ['keyword' => 'Advertisment', 'translated' => 'Advertisment', 'main_section' => 'Settings', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'Latest Feeds', 'translated' => 'Latest Feeds', 'main_section' => 'Settings', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'Username', 'translated' => 'Username', 'main_section' => 'Settings', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'justnow', 'translated' => 'justnow', 'main_section' => 'Settings', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'some text will be here', 'translated' => 'some text will be here', 'main_section' => 'Settings', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'Add a commment here', 'translated' => 'some text will be here', 'main_section' => 'Settings', 'section_name' => 'Home Page Landing Page'],     
+            
+            //end landing page
+
+
+
+
+
+
+
+
+
+
+
+
             ['keyword' => 'createAccountError', 'translated' => 'Create Account Error', 'main_section' => 'Home Page', 'section_name' => 'Home Page Sign Up'],
             ['keyword' => 'thisDeviceIsAlreadyLinkedToAnExistingAccountCreatingANewAccountIsNotPossibleYouHaveTheFollowingOptions:', 'translated' => 'This device is already linked to an existing account. Creating a new account is not possible. You have the following options:', 'main_section' => 'Home Page', 'section_name' => 'Home Page Sign Up'],
             ['keyword' => 'mailAndPasswordNeedIt', 'translated' => 'Mail & Password need it', 'main_section' => 'Home Page', 'section_name' => 'Home Page Sign Up'],
