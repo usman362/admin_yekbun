@@ -66,6 +66,7 @@ use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\EmojiFeedController;
 use App\Http\Controllers\Admin\FeedsController;
 use App\Http\Controllers\Admin\liveStream\livestreamController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\Admin\VideoController;
@@ -587,7 +588,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
         Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
 
-        Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
+        Route::get('/app/portal-notification', [NotificationController::class,'index'])->name('app.portal.notification');
+        Route::post('/app/portal-notification', [NotificationController::class,'store'])->name('store.portal.notification');
 
         Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
 
@@ -619,15 +621,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         Route::get('channels/reason', [FlaggedUserController::class, 'reason']);
         Route::get('channels/prefix', [FlaggedUserController::class, 'prefix']);
         Route::get('channels/policy_terms', [FlaggedUserController::class, 'policy_terms']);
-
-
-        Route::post('/add_channel_category', [ChannelCategoryController::class, 'add_channel_category'])->name('add.channel.category');
-        Route::delete('/channels/{id}', [ChannelCategoryController::class, 'destroy_channel'])->name('channels.destroy');
-        Route::post('/edit_channel', [ChannelCategoryController::class, 'edit_channel'])->name('edit.category');
-        Route::post('/add_channel_subcategory', [ChannelCategoryController::class, 'add_channel_subcategory'])->name('channel.subcategory');
-        Route::put('/edit_channel_subcategory/{id}', [ChannelCategoryController::class, 'edit_channel_subcategory'])->name('edit.channel.subcat');
-        Route::delete('/channels_subcategory/{id}', [ChannelCategoryController::class, 'destroy_channel_subcategory'])->name('channels.subcat.destroy');
-
 
         //ProfileBanner
         Route::get('settings/profile-banner', [ProfileBannerController::class, 'index'])->name('profile.banner');
@@ -879,7 +872,6 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     );
     Route::get('/app/popup', $controller_path . '\apps\popup\Popup@index')->name('app.popup');
     Route::get('/app/user/storage', $controller_path . '\apps\popup\Popup@index')->name('user.storage');
-    Route::view('/app/portal-notification', 'content.apps.app-portal-notification')->name('app.portal.notification');
     Route::view('/app/live-meeting', 'content.apps.app-live-meeting');
     Route::view('/app/join-now', 'content.apps.app-join-now');
 
