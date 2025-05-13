@@ -126,6 +126,7 @@ Route::get('/send-test-email', function () {
 
 Route::get('/test-fcm-id', function () {
     $users = App\Models\User::where('fcm_token', '!==', null)->where('new_music', 'true')->get();
+    dd($users);
     if ($users) {
         foreach ($users as $user) {
             App\Helpers\NotificationHelper::sendNotification($user->id, 'Notification', 'Notification Body');
@@ -135,7 +136,8 @@ Route::get('/test-fcm-id', function () {
 });
 
 Route::get('/test-fcm', function () {
-    $users = App\Models\User::where('email', 'usmanshoaib362@gmail.com')->get();
+    $users = App\Models\User::where('fcm_token', '!==', null)->get();
+    dd($users);
     if ($users) {
         foreach ($users as $user) {
             App\Helpers\NotificationHelper::sendNotification($user->id, 'Notification', 'Notification Body');
