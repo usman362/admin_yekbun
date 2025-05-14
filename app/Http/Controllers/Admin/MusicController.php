@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use FFMpeg;
 use App\Http\Requests\StoreSongRequest;
 use App\Http\Controllers\Admin\FileController;
+use App\Models\Notifications;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -262,15 +263,18 @@ class MusicController extends Controller
                 $song->status = (int)$request->status;
                 $song->save();
             }
-            try {
-                $users = User::whereNotNull('fcm_token')->get();
-                if ($users) {
-                    foreach ($users as $user) {
-                        NotificationHelper::sendNotification($user->id, 'Music Notification', 'New Music ' . $name . ' has been added!');
+            $notification = Notifications::first();
+            if($notification->new_music == 'true'){
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, 'Music Notification', 'New Music ' . $name . ' has been added!');
+                        }
                     }
+                } catch (\Exception $e) {
+                    return back()->with("success", "Song successfully added.");
                 }
-            } catch (\Exception $e) {
-                return back()->with("success", "Song successfully added.");
             }
             return back()->with("success", "Song successfully added.");
         } catch (\Exception $e) {

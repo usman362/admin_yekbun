@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
+use App\Helpers\NotificationHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
+use App\Models\Notifications;
 use App\Models\PopFeeds;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -352,6 +354,16 @@ class AdminProfileController extends Controller
                     'is_emoji' => $request->emoji ?? 0,
                     'type' => $request->type,
                 ]);
+
+                $notification = Notifications::first();
+                if($notification->new_donation == 'true'){
+                    $users = User::whereNotNull('fcm_token')->where('new_donation','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, 'Donation Notification', 'New Donation ' . $request->title . ' has been added!');
+                        }
+                    }
+                }
             } else {
                 $postpop = PopFeeds::create([
                     'user_id' => auth()->user()->id ?? 0,
@@ -390,6 +402,16 @@ class AdminProfileController extends Controller
                     $postpop->event_city = $request->event_city;
                     $postpop->event_address = $request->event_address;
                     $postpop->save();
+
+                    $notification = Notifications::first();
+                    if($notification->new_events == 'true'){
+                        $users = User::whereNotNull('fcm_token')->where('new_events','true')->whereIn('info_banner',['banner','alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, 'Event Notification', 'New Event ' . $request->title . ' has been added!');
+                            }
+                        }
+                    }
                 }
             }
 

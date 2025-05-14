@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\NotificationHelper;
 use App\Helpers\ResponseHelper;
 use App\Models\History;
 use App\Models\PostGallery;
@@ -10,6 +11,7 @@ use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
 use App\Models\HistoryComments;
 use App\Models\HistoryLikes;
+use App\Models\Notifications;
 use App\Models\User;
 use Exception;
 use FFMpeg\Coordinate\TimeCode;
@@ -81,6 +83,20 @@ class HistoryController extends Controller
         }
 
         if ($history->save()) {
+
+            $notification = Notifications::first();
+            if($notification->new_history == 'true'){
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_history','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, 'History Notification', 'New History ' . $history->title . ' has been added!');
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return redirect()->route('history.index')->with('success', 'History Has been inserted');
+                }
+            }
             return redirect()->route('history.index')->with('success', 'History Has been inserted');
         } else {
             return redirect()->route('history.index')->with('error', 'Failed to add history');

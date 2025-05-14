@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\NotificationHelper;
 use App\Models\City;
 use App\Models\Artist;
 use App\Models\Region;
@@ -9,7 +10,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\MusicCategory;
+use App\Models\Notifications;
 use App\Models\Song;
+use App\Models\User;
 use App\Models\VideoClip;
 use Yajra\DataTables\DataTables;
 
@@ -126,6 +129,20 @@ class ArtistController extends Controller
         $artist->province_id = $request->province;
         $artist->image = $request->image ?? '';
         if ($artist->save()) {
+            $notification = Notifications::first();
+            if($notification->new_artist == 'true'){
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, 'Artist Notification', 'New Artist ' . $artist->name . ' has been added!');
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return back()->with("success", "Artist has been added successfully.");
+                }
+            }
+
             // return redirect()->route('artist.index')->with('success', 'Artist Has been inserted');
             return back()->with("success", "Artist has been added successfully.");
         } else {

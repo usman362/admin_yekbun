@@ -17,7 +17,7 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
         $notification = Notifications::updateOrCreate(
-            ['id' => $request->id],
+            ['_id' => $request->id],
             [
                 'new_donation' => $request->new_donation == 'on' ? 'true' : 'false',
                 'new_events' => $request->new_events == 'on' ? 'true' : 'false',

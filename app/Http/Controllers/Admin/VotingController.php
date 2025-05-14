@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
+use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Notifications;
 use App\Models\PostGallery;
+use App\Models\User;
 use App\Models\Voting;
 use App\Models\VotingCategory;
 use Carbon\Carbon;
@@ -87,6 +90,20 @@ class VotingController extends Controller
             //     $post_gallery->history_id = $request->history_id;
             // }
             // $post_gallery->save();
+
+            $notification = Notifications::first();
+            if($notification->new_votes == 'true'){
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_votes','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, 'Voting Notification', 'New Vote ' . $vote->name . ' has been added!');
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return redirect()->route('vote.index')->with('success', 'Vote Has been inserted');
+                }
+            }
 
             return redirect()->route('vote.index')->with('success', 'Vote Has been inserted');
         } else {

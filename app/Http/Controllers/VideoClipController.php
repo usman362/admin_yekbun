@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotificationHelper;
 use App\Models\Artist;
 use App\Models\VideoClip;
 use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Models\MusicCategory;
+use App\Models\Notifications;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -68,6 +71,20 @@ class VideoClipController extends Controller
             $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
             $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
             $vc->thumbnail = $cleanedThumbnail;
+
+            $notification = Notifications::first();
+            if($notification->new_video_clips == 'true'){
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, 'Clips Notification', 'New Video Clip ' . $vc->video_file_name . ' has been added!');
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('success', 'Video clip Has been added');
+                }
+            }
             return redirect()->back()->with('success', 'Video clip Has been added');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add video clip');
