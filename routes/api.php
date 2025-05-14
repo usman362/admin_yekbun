@@ -104,7 +104,12 @@ Route::post('/change-email', [AccountSettingController::class, 'change_email'])-
 Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
 Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
 
-
+Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
+Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
+Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
+Route::get('feeds', [FeedsController::class, 'index']);
+Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
+Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
 Route::middleware('jwt.custom')->group(function () {
 
     Route::post('/change-password', [AccountSettingController::class, 'change_password'])
@@ -113,8 +118,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('/get-my-details', [AuthController::class, 'getMyDetails']);
     Route::delete('/delete-my-account', [AuthController::class, 'deleteMyAccount']);
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
-    Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
-    Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
+
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
     Route::post('/accept-privacy-policy', [AuthController::class, 'acceptPrivacyPolicy']);
@@ -127,7 +131,6 @@ Route::middleware('jwt.custom')->group(function () {
 
     //Feeds Section
     Route::post('feeds', [FeedsController::class, 'store']);
-    Route::get('feeds', [FeedsController::class, 'index']);
 
     Route::post('send-users-request', [UsersController::class, 'sendRequest']);
     Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
@@ -147,11 +150,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('my-network',[UsersController::class,'storeMyNetwork']);
     Route::post('my-notification',[UsersController::class,'storeMyNotification']);
 
-    Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
-    Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
     Route::get('/get-artist-songs/{id}', [MultimediaController::class, 'getSongByArtists']);
     Route::get('/get-artist-videos/{id}', [MultimediaController::class, 'getClipsByArtists']);
-    Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
     Route::get('/get-popular-artists', [MultimediaController::class, 'getPopularArtists']);
     Route::get('/get-artists-details/{id}', [MultimediaController::class, 'getArtistDetail']);
     Route::get('get-favorite-artists', [MultimediaController::class, 'getFavArtists']);
