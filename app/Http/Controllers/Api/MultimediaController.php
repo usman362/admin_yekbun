@@ -33,6 +33,18 @@ class MultimediaController extends Controller
         return ResponseHelper::sendResponse($videos, 'All Video Clips Fetch Successfully!');
     }
 
+    public function getAllSongsPublic()
+    {
+        $songs = Song::with('artist')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($songs, 'All Songs Fetch Successfully!');
+    }
+
+    public function getAllClipsPublic()
+    {
+        $videos = VideoClip::with('artist')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($videos, 'All Video Clips Fetch Successfully!');
+    }
+
     public function getSongByArtists(Request $request, $id)
     {
         $artist = Artist::with(['province' => function ($q) {
@@ -52,6 +64,24 @@ class MultimediaController extends Controller
     }
 
     public function getArtists()
+    {
+        $alphabet = request('alphabet'); // e.g., ?alphabet=A
+
+        $artists = Artist::when($alphabet, function ($query, $alphabet) {
+            $query->where('name', 'LIKE', $alphabet . '%');
+        })
+            ->with([
+                'songs',
+                'videos',
+                'province.country'
+            ])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
+    }
+
+    public function getArtistsPublic()
     {
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
 

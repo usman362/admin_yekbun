@@ -104,12 +104,12 @@ Route::post('/change-email', [AccountSettingController::class, 'change_email'])-
 Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
 Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
 
-Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
-Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
-Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
 Route::get('feeds', [FeedsController::class, 'index']);
-Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
-Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
+Route::get('voting-public',[VotingController::class,'votingPublic']);
+Route::get('/get-artists-public', [MultimediaController::class, 'getArtistsPublic']);
+Route::get('/get-all-songs-public', [MultimediaController::class, 'getAllSongsPublic']);
+Route::get('/get-all-videos-public', [MultimediaController::class, 'getAllClipsPublic']);
+
 Route::middleware('jwt.custom')->group(function () {
 
     Route::post('/change-password', [AccountSettingController::class, 'change_password'])
@@ -119,6 +119,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::delete('/delete-my-account', [AuthController::class, 'deleteMyAccount']);
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
 
+    Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
+    Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
     Route::post('/accept-privacy-policy', [AuthController::class, 'acceptPrivacyPolicy']);
@@ -163,6 +165,9 @@ Route::middleware('jwt.custom')->group(function () {
 
 
     //Playlist
+    Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
+    Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
+    Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
     Route::get('get-songs-playlist', [MultimediaController::class, 'getSongsPlaylist']);
     Route::get('get-playlist/{id}', [MultimediaController::class, 'getPlaylistDetail']);
     Route::post('edit-playlist/{id}',[MultimediaController::class, 'editPlaylist']);

@@ -21,7 +21,13 @@ class VotingController extends Controller
     public function index()
     {
         $votings = Voting::with('reactions')->get();
-        return response()->json(['Voting' => $votings, 'success' => true], 200);
+        return ResponseHelper::sendResponse($votings,'Votings Fetch Successfully!');
+    }
+
+    public function votingPublic()
+    {
+        $votings = Voting::all();
+        return ResponseHelper::sendResponse($votings,'Votings Fetch Successfully!');
     }
 
     /**
