@@ -59,17 +59,20 @@ class VideoClipController extends Controller
         ]);
 
         try {
-            $vc = VideoClip::create([
-                'video_file_name' => Str::after($request->video, '___'),
+            $vc = VideoClip::updateOrCreate(['_id' => $request->video_id],[
                 'artist_id' => $request->artist_id,
-                'video' => $request->video,
-                'video_file_size' => $request->video_file_size,
-                'video_file_length' => $request->video_file_length,
                 'status' => $request->status,
             ]);
-            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
-            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
-            $vc->thumbnail = $cleanedThumbnail;
+            if($request->video){
+                $vc->video_file_name = Str::after($request->video, '___');
+                $vc->video = $request->video;
+                $vc->video_file_size = $request->video_file_size;
+                $vc->video_file_length = $request->video_file_length;
+                $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+                $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+                $vc->thumbnail = $cleanedThumbnail;
+                $vc->save();
+            }
 
             $notification = Notifications::first();
             if ($notification->new_video_clips == 'true') {
