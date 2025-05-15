@@ -278,39 +278,51 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <div class="pop_action_div">
-                                                            <a href="javascript:void(0)" style="margin-right:24px;color: #2e2e2e;font-size: 12px;padding: 5px 12px;height:unset;width:unset;" class="pop_action">Reported Comments</a>
+                                                            <a href="javascript:void(0)"
+                                                                style="margin-right:24px;color: #2e2e2e;font-size: 12px;padding: 5px 12px;height:unset;width:unset;"
+                                                                class="pop_action">Reported Comments</a>
+                                                            <div class="nav-item dropdown">
+                                                                <a class="nav-link dropdown-toggle hide-arrow"
+                                                                    href="#" data-bs-toggle="dropdown"
+                                                                    aria-expanded="true">
+                                                                    <div class="d-flex align-items-center gap-2">
+                                                                        <i class="fas fa-ellipsis-vertical"></i>
+                                                                    </div>
+                                                                </a>
+                                                                <div class="dropdown-menu text-center dropdown-menu-end"
+                                                                    style="min-width: unset;width:100px;"
+                                                                    data-bs-popper="static">
+                                                                    <span
+                                                                        style="font-family:Genos;color:#c0c0c0">Options</span>
+                                                                    <div class="row ml-0" style="width:100px;">
 
-                                                                <div class="nav-item dropdown">
-                                                                    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-                                                                        <div class="d-flex align-items-center gap-2">
-                                                                            <i class="fas fa-ellipsis-vertical"></i>
-                                                                        </div>
-                                                                    </a>
-                                                                    <div class="dropdown-menu text-center dropdown-menu-end" style="min-width: unset;width:100px;" data-bs-popper="static">
-                                                                        <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                        <div class="row ml-0" style="width:100px;">
-
-                                                                            <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                                                                <a class="dropdown-item edit-history" style="padding: 0" href="javascript:void(0)"
-                                                                                data-bs-toggle="modal" data-bs-target="#createhistoryModal"
+                                                                        <div class="col-md-6"
+                                                                            style="border-right: 1px solid #c0c0c0">
+                                                                            <a class="dropdown-item edit-history"
+                                                                                style="padding: 0" href="javascript:void(0)"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#createhistoryModal"
                                                                                 data-id="{{ $feed->id }}"
                                                                                 data-name="{{ $feed->title }}"
                                                                                 data-video="{{ $feed->video[0]['path'] }}"
                                                                                 data-comments="{{ $feed->is_comments }}"
                                                                                 data-share="{{ $feed->is_share }}"
                                                                                 data-emoji="{{ $feed->is_emoji }}"
-                                                                                for="customRadioPrime"
-
-                                                                                >
-                                                                                    <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <button type="submit" class="dropdown-item" style="padding: 0">
-                                                                                    <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                            </div>
+                                                                                for="customRadioPrime">
+                                                                                <img class="pop_action_image"
+                                                                                    style="height: 26px"
+                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <button type="submit" class="dropdown-item"
+                                                                                style="padding: 0">
+                                                                                <img class="pop_action_image"
+                                                                                    style="height: 26px"
+                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -358,7 +370,8 @@
                                                         </div>
                                                     @endif
                                                     @if ($feed->is_share == 1)
-                                                        <div style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px">
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
                                                                 style="width:100%;height:100%;object-fit:cover"><span
                                                                 style="font-weight:400;font-family:Genos">0</span>

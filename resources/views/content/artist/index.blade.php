@@ -266,7 +266,7 @@
 
     <!-- Artist List Table -->
     <div class="card">
-         
+
         <div class="table-responsive container pb-4 text-nowrap">
             <div class="row">
                 <div class="col-md-6"></div>
@@ -324,12 +324,6 @@
         @include('content.video_clips.createSong', ['form' => 'createmusicForm'])
     </x-modal>
 
-    {{-- Video Clips Modal --}}
-    <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createvideoForm" size="md">
-        @include('content.include.video_clips.createForm', ['form' => 'createvideoForm'])
-    </x-modal>
-
     <x-modal id="musicCategoryModal" title="Move the Songs" saveBtnText="Save" saveBtnType="submit"
         saveBtnForm="musicCategoryForm" size="md">
         @include('content.include.music_category.category', [
@@ -385,6 +379,11 @@
         </div>
     </x-modal>
 
+    {{-- Video Clips Modal --}}
+    <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
+        saveBtnForm="createvideoForm" size="md">
+        @include('content.include.video_clips.createForm', ['form' => 'createvideoForm'])
+    </x-modal>
 @section('page-script')
     <script>
         function confirmAction(event, callback) {
@@ -768,102 +767,69 @@
                                 }
                                 $('#videos-tbody').append(`
 
-                    <div class="col-md-4">
-                        <div class="post-image">
-                            <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post" data-fancybox="post1" data-lightbox-type="comments" data-thumb="{{ asset('storage/${video.video}') }}" href="{{ asset('storage/${video.video}') }}" data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('storage/${video.video}') }}">
-                                <!-- Main wrap -->
-                                <div class="content-wrap">
+                                <div class="col-md-4">
+                                    <div class="post-image">
+                                        <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post" data-fancybox="post1" data-lightbox-type="comments" data-thumb="{{ asset('storage/${video.video}') }}" href="{{ asset('storage/${video.video}') }}" data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('storage/${video.video}') }}">
+                                            <!-- Main wrap -->
+                                            <div class="content-wrap">
 
-                                    <!-- Post body -->
-                                    <div class="card-body p-0">
-                                        ${photoThumbnail}
-                                    </div>
-                                    <div class="card-footer mt-0">
-                                        <div class="user-block">
-                                            <div class="user-info">
-                                                <div class="row">
-                                                    <div class="col-md-2 p-0">
-                                                        <img src="${artistImage}" style="width: 100px !important;height:45px !important;">
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="mt-2">
-                                                            <p class="m-0" title="${video.video_file_name || 'N/A'}">
-                                                                <b>${(video.video_file_name || 'N/A').length > 17 ? video.video_file_name.substring(0, 17) + '...' : video.video_file_name || 'N/A'}</b>
-                                                            </p>
+                                                <!-- Post body -->
+                                                <div class="card-body p-0">
+                                                    ${photoThumbnail}
+                                                </div>
+                                                <div class="card-footer mt-0">
+                                                    <div class="user-block">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-2 p-0">
+                                                                    <img src="${artistImage}" style="width: 100px !important;height:45px !important;">
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <div class="mt-2">
+                                                                        <p class="m-0" title="${video.video_file_name || 'N/A'}">
+                                                                            <b>${(video.video_file_name || 'N/A').length > 17 ? video.video_file_name.substring(0, 17) + '...' : video.video_file_name || 'N/A'}</b>
+                                                                        </p>
+                                                                        <small class="time"><i>${video.total_listen || '0'} Views .
+                                                                                &nbsp;&nbsp;${formatDate(video.created_at)}</i></small>
+                                                                    </div>
 
-                                                            <p class="m-0">
-                                                                ${artistName}
-                                                            </p>
-                                                            <small class="time"><i>${video.total_listen || '0'} Views .
-                                                                    &nbsp;&nbsp;${formatDate(video.created_at)}</i></small>
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /Post body -->
+                                            </div>
+                                            <!-- /Main wrap -->
+                                        </div>
+                                        <div class="nav-item dropdown d-block" style="margin-top: 0;position: absolute;right: 24px;top: 45vh;bottom: auto;">
+                                            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="fas fa-cog"></i>
+                                                </div>
+                                            </a>
+                                            <div class="dropdown-menu text-center dropdown-menu-end" style="min-width: unset;width:100px;" data-bs-popper="static">
+                                                <span style="font-family:Genos;color:#c0c0c0">Options</span>
+                                                <div class="row ml-0" style="width:100px;">
 
+                                                    <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
+                                                        <a class="dropdown-item edit-video" style="padding: 0" href="javascript:void(0)"
+                                                        data-id="${video._id}"
+                                                        data-thumbnail="${video.thumbnail}"
+                                                        data-artist_id="${video.artist_id}"
+                                                        data-status="${video.status}"
+                                                        for="customRadioPrime">
+                                                            <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/edit.svg') }}"></a>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="button" data-id="${video._id}" class="dropdown-item delete-video" style="padding: 0">
+                                                            <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/delete.svg') }}"></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /Post body -->
-                                </div>
-                                <!-- /Main wrap -->
-                            </div>
-                            <div class="card-heading">
-                                <div class="dropdown is-spaced is-right is-neutral dropdown-trigger">
-                                    <div>
-                                        <div class="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                                                <circle cx="12" cy="12" r="1"></circle>
-                                                <circle cx="12" cy="5" r="1"></circle>
-                                                <circle cx="12" cy="19" r="1"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-menu" role="menu" style="top: -215px;left: 33px;right: auto;">
-                                        <div class="dropdown-content">
-                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                <div class="media">
-                                                    <div class="media-content">
-                                                        <h3>Remove the Feed</h3>
-                                                        <select class="form-control mt-1">
-                                                            <option value="">Select the Reason</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                <div class="media">
-                                                    <div class="media-content">
-                                                        <h3>Remove Feed - Flag FanPage</h3>
-                                                        <select class="form-control mt-1">
-                                                            <option value="">Select the Reason</option>
-                                                        </select>
-                                                        <select class="form-control mt-1">
-                                                            <option value="">Select the Flag</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="dropdown-item">
-                                                <div class="media">
-                                                    <div class="media-content">
-                                                        <h3>Remove Feed - Block FanPage</h3>
-                                                        <select class="form-control mt-1">
-                                                            <option value="">Select the Reason</option>
-                                                        </select>
-                                                        <select class="form-control mt-1">
-                                                            <option value="">Select Downgrade User</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                                `);
+                                </div>`);
 
                             });
 
@@ -934,6 +900,62 @@
                     $('#song-upload').css('display', 'none');
                 }
             })
+            $(document).on('click', '.edit-video', function() {
+                $('#artist_id').val($(this).attr('data-artist_id'));
+                $('#video_id').val($(this).attr('data-id'));
+                $('#status').val($(this).attr('data-status'));
+                $('#artist_id').val($(this).attr('data-artist_id'));
+                const secondModal = new bootstrap.Modal(document.getElementById('createvideoModal'));
+                secondModal.show();
+            });
+            $(document).on('click', '.delete-video', function() {
+                let video_id = $(this).attr('data-id');
+                let button = $(this);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Are you sure you want to delete this?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    customClass: {
+                        confirmButton: 'btn btn-danger me-3',
+                        cancelButton: 'btn btn-label-secondary'
+                    },
+                    buttonsStyling: false
+                }).then(function(result) {
+                    if (result.value) {
+                        $.ajax({
+                            url: `/video-clips/${video_id}`, // Laravel route like Route::delete('video-clips/delete/{id}', ...)
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: 'The video has been deleted.',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+
+                                // Optionally remove the item from the DOM
+                                // $(`#video-row-${video_id}`).remove();
+                                button.closest('.col-md-4').remove();
+
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'Something went wrong while deleting.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
         });
 
         $(document).ready(function() {

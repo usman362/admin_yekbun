@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\NotificationHelper;
+use App\Helpers\ResponseHelper;
 use App\Models\Artist;
 use App\Models\VideoClip;
 use App\Models\Album;
@@ -25,9 +26,7 @@ class VideoClipController extends Controller
         $video  = VideoClip::with('music_category')->get();
         $music_category  = MusicCategory::get();
         $artists = Artist::get();
-        $albums = Album::get();
-
-        return view('content.video_clips.index', compact('video', 'music_category', 'artists', 'albums'));
+        return view('content.video_clips.index', compact('video', 'music_category', 'artists'));
     }
 
     /**
@@ -73,9 +72,9 @@ class VideoClipController extends Controller
             $vc->thumbnail = $cleanedThumbnail;
 
             $notification = Notifications::first();
-            if($notification->new_video_clips == 'true'){
+            if ($notification->new_video_clips == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, 'Clips Notification', 'New Video Clip ' . $vc->video_file_name . ' has been added!');
@@ -168,14 +167,7 @@ class VideoClipController extends Controller
     public function destroy($id)
     {
         $video = VideoClip::findorFail($id);
-        // if($video->audio){
-        //     foreach($video->video as $video_file){
-        //         $image_path = public_path('storage/'.$video_file);
-        //         if(file_exists($image_path)){
-        //             unlink($image_path);
-        //         }
-        //     }
-        // }
+        // dd(public_path('storage/' . $video->video));
 
         if ($video->video) {
             $file_path = public_path('storage/' . $video->video);
@@ -192,12 +184,12 @@ class VideoClipController extends Controller
             }
         }
 
-        if ($video->delete($video->id)) {
+        if ($video->delete()) {
             //    return redirect()->route('video-clips.index')->with('success', 'Video  Has been Deleted');
-            return redirect()->back()->with('success', 'Video  Has been Deleted');
+            return ResponseHelper::sendResponse($video, 'Video Clip has been Deleted!');
         } else {
             //    return redirect()->route('video-clips.index')->with('error', 'Video not Deleted');
-            return redirect()->back()->with('error', 'Video not Deleted');
+            return ResponseHelper::sendResponse($video, 'Error to Delete Video Clip!', false, 403);
         }
     }
     public function status($id, $status)

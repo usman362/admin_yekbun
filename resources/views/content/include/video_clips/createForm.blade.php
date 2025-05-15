@@ -1,5 +1,6 @@
 <form id="{{ isset($form) ? $form : 'createForm'}}" method="POST" action="{{ route('video-clips.store') }}" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" id="video_id" name="video_id">
     <div class="hidden-inputs"></div>
     <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -20,7 +21,7 @@
 
                 <div class="col-md-6">
                     <label class="form-label" for="fullname">Select Artist</label>
-                    <select class="form-select" aria-label="Default select example" name="artist_id">
+                    <select class="form-select" aria-label="Default select example" name="artist_id" id="artist_id">
                         <option selected value="">Select</option>
                         @foreach($artists as $artists)
                         <option value="{{ $artists->id }}">{{ $artists->name .' '.$artists->last_name ?? '' }}</option>
@@ -32,7 +33,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="fullname">Status</label>
-                    <select class="form-select" aria-label="Default select example" name="status">
+                    <select class="form-select" aria-label="Default select example" name="status" id="status">
                         <option selected value="1">Select</option>
                         <option value="0">UnPublish</option>
                         <option value="1">Publish</option>
