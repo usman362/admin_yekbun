@@ -26,7 +26,7 @@
 <style>
     img, svg {
     vertical-align: middle !important;
-    height: 48px  !important;
+    height: 48px  !important; 
 }
 </style>
 @section('content')
