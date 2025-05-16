@@ -10,6 +10,22 @@
     .dz-filename {
     display: none !important;
 }
+.dz-preview.dz-file-preview {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 10px auto;
+}
+.dz-thumbnail {
+    
+    justify-content: center;
+    align-items: center;
+    width: 150px !important;
+    height: 150px !important;
+    
+}
 </style>
 
 <form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
