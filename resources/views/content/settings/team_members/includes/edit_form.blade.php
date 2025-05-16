@@ -137,7 +137,7 @@
                                             <div class="col-md-12 col-12 d-flex justify-content-center">
                                                 <div class="dz-preview dz-file-preview w-100">
                                                     <div class="dz-details">
-                                                        <div class="dz-thumbnail" style="width:95%">
+                                                        <div class="dz-thumbnail" style="width:95%;height:10%">
                                                             <img data-dz-thumbnail >
                                                             <span class="dz-nopreview">No preview</span>
                                                             <div class="dz-success-mark"></div>
