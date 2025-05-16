@@ -1,64 +1,108 @@
  <style>
-.edit-form .dropzone {
-display: flex;
-flex-wrap: wrap;
-}
+    /* Dropzone Container */
+    #dropzone-img-create {
+        border: 2px dashed #ccc;
+        transition: all 0.3s;
+        cursor: pointer;
+        position: relative;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        background-color: #f8f9fa;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-```
-.edit-form .dropzone .dz-message {
-    width: 100%;
-}
-```
+    /* Default Upload Icon */
+    #uploadIcon {
+        width: 60px;
+        height: 60px;
+        opacity: 0.7;
+        transition: all 0.3s;
+        position: relative;
+        /* Changed from absolute */
+        z-index: 1;
+    }
 
+    /* Dropzone Preview Container */
+    .dz-preview {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* The actual preview image */
+    .dz-image img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 34%;
+        left: 28%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Hide default dropzone elements */
+    .dz-message {
+        display: none !important;
+    }
 </style>
 
-<form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post"
-    enctype="multipart/form-data">
+<form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
+
     <div class="hidden-inputs">
+        {{-- Store existing image path --}}
         <input type="hidden" name="image" value="{{ $user->image }}" data-path="{{ $user->image }}">
     </div>
     <input type="hidden" name="showEditFormModal{{ $user->id }}" value="1">
+
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-12">
-                    <div class="card">
-                        <h5 class="card-header">Image</h5>
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-img{{ $user->id }}">
-                                <div class="dz-message needsclick">
-                                    Drop files here or click to upload
-                                </div>
-                                <div class="fallback">
-                                    <input type="file" name="image" />
-                                </div>
-                            </div>
-                        </div>
+                  <div class="col-12">
+                    <div class="dropzone needsclick" id="dropzone-img-create">
+                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview"
+                            id="uploadIcon" alt="Avatar">
+                        <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
+                        <div class="hidden-inputs"></div>
+
                     </div>
                 </div>
+
+
                 <div class="col-md-6">
                     <label class="form-label" for="inputName{{ $user->id }}">Name - Lastname</label>
-                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control"
-                        value="{{ old('name') ?? $user->name }}">
+                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control" value="{{ old('name') ?? $user->name }}">
                     @error('name')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="inputEmail{{ $user->id }}">Email</label>
-                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control"
-                        value="{{ old('email') ?? $user->email }}">
+                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control" value="{{ old('email') ?? $user->email }}">
                     @error('email')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="inputPassword">Password</label>
                     <div class="input-group">
-                        <input type="password" id="inputPassword" name="password" class="form-control"
-                            autocomplete="new-password">
+                        <input type="password" id="inputPassword" name="password" class="form-control" autocomplete="new-password">
                         <span class="input-group-text toggle-password1" style="cursor: pointer">
                             <i class="fas fa-eye"></i>
                         </span>
@@ -67,117 +111,67 @@ flex-wrap: wrap;
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label class="form-label" for="inputPasswordConfirmation">Confirm Password</label>
                     <div class="input-group">
-                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation"
-                            class="form-control">
+                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
                         <span class="input-group-text toggle-password1" style="cursor: pointer">
                             <i class="fas fa-eye"></i>
                         </span>
                     </div>
                 </div>
 
-```
-            <div class="col-md-6">
-                <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
-                <select class="form-control" name="roles" id="rolesInput2">
-                    @foreach ($roles as $role)
-                        @if ($role->name !== 'Super Admin')
-                            <option value="{{ $role->id }}"
-                                {{ $user->role_id == $role->id ? 'selected' : '' }}>
-                                {{ $role->name }}
-                            </option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('roles')
-                    <div class="invalid-feedback d-bloc-k">{{ $message }}</div>
-                @enderror
+                <div class="col-md-6">
+                    <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
+                    <select class="form-control" name="roles" id="rolesInput{{ $user->id }}">
+                        @foreach ($roles as $role)
+                            @if ($role->name !== 'Super Admin')
+                                <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @error('roles')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
 
-            </div>
-            <div class="col-md-6">
-                <label class="form-label" for="imageInput{{ $user->id }}">Status</label>
-                <select class="form-control" name="status" id="imageInput{{ $user->id }}">
-                    <option value="1" {{ $user->status ? 'selected' : '' }}>Active</option>
-                    <option value="0" {{ !$user->status ? 'selected' : '' }}>Disabled</option>
-                </select>
+                <div class="col-md-6">
+                    <label class="form-label" for="statusInput{{ $user->id }}">Status</label>
+                    <select class="form-control" name="status" id="statusInput{{ $user->id }}">
+                        <option value="1" {{ $user->status ? 'selected' : '' }}>Active</option>
+                        <option value="0" {{ !$user->status ? 'selected' : '' }}>Disabled</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-</div>
-```
-
 </form>
-<script>
-    window.addEventListener('load', function() {
-        const TagifyRolesListEl = document.querySelector('#rolesInput{{ $user->id }}');
-
-```
-    let rolesList = {!! json_encode($roles) !!};
-    rolesList = rolesList.map(item => ({
-        value: item.name,
-        name: item.name,
-        id: item.id
-    }))
-    // console.log(rolesList);
-    // new Tagify(TagifyRolesListEl)
-    let TagifyRolesLIst = new Tagify(TagifyRolesListEl, {
-        tagTextProp: 'name', // very important since a custom template is used with this property as text. allows typing a "value" or a "name" to match input with whitelist
-        enforceWhitelist: true,
-        skipInvalid: true, // do not remporarily add invalid tags
-        dropdown: {
-            closeOnSelect: false,
-            enabled: 0,
-            classname: 'users-list',
-            searchKeys: [
-                'name'] // very important to set by which keys to search for suggesttions when typing
-        },
-        // templates: {
-        // tag: tagTemplate,
-        // dropdownItem: suggestionItemTemplate
-        // },
-        whitelist: rolesList
-        // whitelist:  [{value:"Super Admin", name:"Super Admin"}]
-    });
-})
-```
-
-</script>
 
 <script>
-    'use strict';
+window.addEventListener('load', function() {
+    // Roles tagify initialization if needed (optional)
 
-
-    //  <div class="progress">
-    // <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-    //                                                     </div>
-
+    // Initialize Dropzone for this user form
     dropZoneInitFunctions.push(function() {
-        // previewTemplate: Updated Dropzone default previewTemplate
+        const previewTemplate = `
+            <div class="dz-preview dz-file-preview w-100">
+                <div class="dz-details">
+                    <div class="dz-thumbnail" style="width: 150px; height: 150px;">
+                        <img data-dz-thumbnail />
+                        <span class="dz-nopreview">No preview</span>
+                        <div class="dz-success-mark"></div>
+                        <div class="dz-error-mark"></div>
+                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                    </div>
+                    <div class="dz-filename" data-dz-name></div>
+                    <div class="dz-size" data-dz-size></div>
+                </div>
+            </div>`;
 
-        const previewTemplate = `<div class="row">
-                                            <div class="col-md-12 col-12 d-flex justify-content-center">
-                                                <div class="dz-preview dz-file-preview w-100">
-                                                    <div class="dz-details">
-                                                        <div class="dz-thumbnail" style="width:95%">
-                                                            <img data-dz-thumbnail >
-                                                            <span class="dz-nopreview">No preview</span>
-                                                            <div class="dz-success-mark"></div>
-                                                            <div class="dz-error-mark"></div>
-                                                            <div class="dz-error-message"><span data-dz-errormessage></span></div>
-
-                                                        </div>
-                                                        <div class="dz-filename" data-dz-name></div>
-                                                            <div class="dz-size" data-dz-size></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`;
-
-        // image
-        const dropzoneMulti1 = new Dropzone('#dropzone-img{{ $user->id }}', {
+        const dropzoneMulti = new Dropzone('#dropzone-img{{ $user->id }}', {
             url: '{{ route('file.upload') }}',
             previewTemplate: previewTemplate,
             parallelUploads: 1,
@@ -190,24 +184,25 @@ flex-wrap: wrap;
                 formData.append('folder', 'music');
             },
             success: function(file, response) {
-
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-success");
                 }
                 file.previewElement.dataset.path = response.path;
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
+
+                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
+
+                // Remove old inputs before adding new to avoid duplicates
+                hiddenInputsContainer.querySelectorAll('input[name="image"]').forEach(input => input.remove());
+
                 hiddenInputsContainer.innerHTML +=
                     `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
-
             },
             removedfile: function(file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.querySelector(
-                    `input[data-path="${file.previewElement.dataset.path}"]`).remove();
+                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
+                const inputToRemove = hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`);
+                if (inputToRemove) inputToRemove.remove();
 
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
+                if (file.previewElement && file.previewElement.parentNode) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
                 }
 
@@ -228,68 +223,50 @@ flex-wrap: wrap;
         });
 
         @if ($user->image)
-            $("document").ready(() => {
-                var path = "{{ asset('storage/' . $user->image) }}";
-                var rpath = "{{ $user->image }}";
-                const parts = rpath.split("___");
+        // Load existing image preview on page load
+        $(document).ready(() => {
+            var path = "{{ asset('storage/' . $user->image) }}";
+            var rpath = "{{ $user->image }}";
+            const parts = rpath.split("___");
 
-                imageUrlToFile(path, parts).then((file) => {
-                    file['status'] = "success";
-                    file['previewElement'] = "div.dz-preview.dz-image-preview";
-                    file['previewTemplate'] = "div.dz-preview.dz-image-preview";
-                    file['_removeLink'] = "a.dz-remove";
-                    // file['webkitRelativePath'] = "";
-                    file['width'] = 500;
-                    file['height'] = 500;
-                    file['accepted'] = true;
-                    file['dataURL'] = path;
-                    file['processing'] = true;
-                    file['addPathToDataset'] = true;
-                    dropzoneMulti1.on('addedfile', function(file) {
-                        if (file.addPathToDataset)
-                            file.previewElement.dataset.path = rpath;
-                    });
-                    file['upload'] = {
-                        bytesSent: 0,
-                        progress: 0,
-                    };
+            imageUrlToFile(path, parts).then((file) => {
+                file.status = "success";
+                file.accepted = true;
+                file.dataURL = path;
+                file.addPathToDataset = true;
 
-                    // Update the preview template to include the music title
-
-                    dropzoneMulti1.emit("addedfile", file, path);
-                    dropzoneMulti1.emit("thumbnail", file, path);
-                    // dropzoneMulti1.files.push(file);
+                dropzoneMulti.on('addedfile', function(file) {
+                    if (file.addPathToDataset)
+                        file.previewElement.dataset.path = rpath;
                 });
+
+                dropzoneMulti.emit("addedfile", file, path);
+                dropzoneMulti.emit("thumbnail", file, path);
             });
-        @endif
-    })
-</script>
-
-<script>
-    async function imageUrlToFile(imageUrl, fileName) {
-        // Fetch the image
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-
-        // Create a File object
-        const file = new File([blob], fileName[1], {
-            type: blob.type
         });
+        @endif
+    });
+});
 
-        return file;
-    }
-</script>
+async function imageUrlToFile(imageUrl, fileNameParts) {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.toggle-password1').forEach(function(element) {
-            element.addEventListener('click', function() {
-                const input = this.previousElementSibling;
-                const icon = this.querySelector('i');
-                input.type = input.type === 'password' ? 'text' : 'password';
-                icon.classList.toggle('fa-eye');
-                icon.classList.toggle('fa-eye-slash');
-            });
+    // Use second part from split as file name fallback
+    const file = new File([blob], fileNameParts[1] || "image.png", { type: blob.type });
+
+    return file;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.toggle-password1').forEach(function(element) {
+        element.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('i');
+            input.type = input.type === 'password' ? 'text' : 'password';
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
         });
     });
+});
 </script>
