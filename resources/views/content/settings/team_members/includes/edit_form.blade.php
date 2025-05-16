@@ -214,7 +214,7 @@
                         for="avatarUploader">
                         <img id="viewer"
                             onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
-                            class="avatar-img" src="{{ asset('storage/' . auth()->user()->image) }}" alt="Image">
+                            class="avatar-img" src="{{ asset('storage/' . $user->image) }}" alt="Image">
                         <input type="file" name="image" class="js-file-attach avatar-uploader-input" id="customFileEg1"
                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                         <label class="avatar-uploader-trigger" for="customFileEg1">
