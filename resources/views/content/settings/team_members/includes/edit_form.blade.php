@@ -7,6 +7,9 @@
     .edit-form .dropzone .dz-message {
         width: 100%;
     }
+    .dz-filename {
+    display: none !important;
+}
 </style>
 
 <form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
