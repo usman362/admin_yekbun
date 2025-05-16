@@ -304,6 +304,8 @@
                                                                                 data-bs-target="#createhistoryModal"
                                                                                 data-id="{{ $feed->id }}"
                                                                                 data-name="{{ $feed->title }}"
+                                                                                data-source="{{ $feed->source }}"
+                                                                                data-thumbnail="{{ asset('storage/'.$feed->thumbnail) }}"
                                                                                 data-video="{{ $feed->video[0]['path'] }}"
                                                                                 data-comments="{{ $feed->is_comments }}"
                                                                                 data-share="{{ $feed->is_share }}"
@@ -849,6 +851,8 @@
             $('.modal-header h4').text('Create History');
             $('.modal-footer [type="submit"]').text('Create');
             $('[name="history_id"]').val('');
+            $('#dropzone-video').css('background-image', 'unset');
+            $('#dropzone-video').css('background-size', 'unset');
             $('#createForm')[0].reset();
         })
 
@@ -864,6 +868,9 @@
 
             $('[name="history_id"]').val(id);
             $('[name="title"]').val(name);
+            $('[name="source"]').val($(this).attr('data-source'));
+            $('#dropzone-video').css('background-image', 'url(' + $(this).attr("data-thumbnail") + ')');
+            $('#dropzone-video').css('background-size', 'cover');
             comments == true ? $('[name="comments"]').attr('checked', true) : $('[name="comments"]').attr('checked',
                 false);
             share == true ? $('[name="share"]').attr('checked', true) : $('[name="share"]').attr('checked', false);

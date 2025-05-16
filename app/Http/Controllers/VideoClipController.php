@@ -49,7 +49,7 @@ class VideoClipController extends Controller
     {
         // $request->dd();
         $validated = $request->validate([
-            'video_file_name' => 'required',
+            'video_file_name' => 'nullable',
             'artist_id' => 'required',
             'video' => 'nullable',
             'thumbnail' => 'nullable',

@@ -130,6 +130,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('comments/{id}/edit', [FeedsController::class, 'editComments']);
     Route::post('feeds/{id}/likes', [FeedsController::class, 'feedLike']);
     Route::post('comments/{id}/likes', [FeedsController::class, 'commentLike']);
+    Route::post('comments/{id}/delete', [FeedsController::class, 'commentDelete']);
     Route::get('comments/{id}/report', [ReportCommentsController::class, 'index']);
     Route::post('comments/{id}/report', [ReportCommentsController::class, 'store']);
 

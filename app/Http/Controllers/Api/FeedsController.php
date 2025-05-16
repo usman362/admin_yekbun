@@ -450,6 +450,51 @@ class FeedsController extends Controller
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 
+    public function commentDelete($id)
+    {
+        try {
+            $comment = FeedComments::find($id);
+            $childs = FeedComments::where('parent_id', $id)->get();
+            if ($childs) {
+                foreach ($childs as $child) {
+                    if ($child->audio) {
+                        $file_path = public_path('storage/' . $child->audio);
+                        if (file_exists($file_path)) {
+                            unlink($file_path);
+                        }
+                    }
+
+                    if ($child->image) {
+                        $file_path = public_path('storage/' . $child->image);
+                        if (file_exists($file_path)) {
+                            unlink($file_path);
+                        }
+                    }
+                    $child->delete();
+                }
+            }
+
+            if ($comment->audio) {
+                $file_path = public_path('storage/' . $comment->audio);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+
+            if ($comment->image) {
+                $file_path = public_path('storage/' . $comment->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+            $comment->delete();
+
+            return ResponseHelper::sendResponse([], 'Comment has been Deleted!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse([], 'Failed to Delete Comment', false, 403 );
+        }
+    }
+
     public function feedLike(Request $request, $id)
     {
         $request->validate([

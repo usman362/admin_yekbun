@@ -901,14 +901,30 @@
                 }
             })
             $(document).on('click', '.edit-video', function() {
-                $('#artist_id').val($(this).attr('data-artist_id'));
-                $('#video_id').val($(this).attr('data-id'));
-                $('#status').val($(this).attr('data-status'));
+                $('#createvideoModal #artist_id').val($(this).attr('data-artist_id'));
+                $('#createvideoModal #video_id').val($(this).attr('data-id'));
+                $('#createvideoModal #status').val($(this).attr('data-status'));
+                $('#createvideoModal .modal-header h4').text('Edit Video Clips');
+                $('button[type="submit"]').text('Update');
                 const secondModal = new bootstrap.Modal(document.getElementById('createvideoModal'));
                 secondModal.show();
                 $('#dropzone-video').css('background-image', 'url(' + $(this).attr("data-thumbnail") + ')');
                 $('#dropzone-video').css('background-size', 'cover');
             });
+
+            $(document).on('click', '[data-bs-dismiss="modal"]', function () {
+                let modalElement = $(this).closest('.modal').attr('id');
+                $('#'+modalElement+' #artist_id').val('');
+                $('#'+modalElement+' #video_id').val('');
+                $('#'+modalElement+' #status').val('');
+                $('#createvideoModal .modal-header h4').text('Create Video Clips');
+                $('button[type="submit"]').text('Create');
+                $('#dropzone-video').css('background-image', 'unset');
+                $('#dropzone-video').css('background-size', 'unset');
+                $('#'+modalElement).hide();
+                $('.modal-backdrop:last').remove();
+            });
+
             $(document).on('click', '.delete-video', function() {
                 let video_id = $(this).attr('data-id');
                 let button = $(this);
