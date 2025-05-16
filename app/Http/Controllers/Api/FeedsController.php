@@ -10,6 +10,7 @@ use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CommentsLike;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\FeedComments;
@@ -211,7 +212,7 @@ class FeedsController extends Controller
             }, 'user' => function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
-                // ->withCount('reports')
+                ->with('likes')
                 ->where('feed_id', $id)->where('feed_type', $feedType)->where('parent_id', null)->get();
 
             $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->user()->id);
@@ -307,7 +308,8 @@ class FeedsController extends Controller
         }, 'user' => function ($q) {
             $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
         }])
-            ->where('feed_id', $id)->where('parent_id', null)->where('feed_type', $request->feed_type)->get();
+            ->with('likes')->where('feed_id', $id)->where('parent_id', null)
+            ->where('feed_type', $request->feed_type)->get();
 
         $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
         $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $request->feed_type)->count();
@@ -333,6 +335,119 @@ class FeedsController extends Controller
         // } catch (Exception $e) {
         //     return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
         // }
+    }
+
+    public function editComments(Request $request, $id)
+    {
+        $request->validate([
+            'comment' => 'nullable|string',
+            // 'feed_type' => 'required',
+            'emoji' => 'nullable|string',
+        ]);
+
+        // try {
+        if ($request->file('image')) {
+            $image = Helpers::fileUpload($request->image, 'feeds/image');
+        } else {
+            $image = null;
+        }
+
+        if ($request->file('audio')) {
+            $audio = Helpers::fileUpload($request->audio, 'feeds/audio');
+        } else {
+            $audio = null;
+        }
+
+        if ($image == null && $audio == null && ($request->comment == "" || $request->comment == null) && ($request->emoji == "" || $request->emoji == null)) {
+            return ResponseHelper::sendResponse([], 'Select Content Before Comment!', false, 403);
+        }
+
+        $comment = FeedComments::find($id);
+
+        $comment->comment = $request->comment;
+        if ($request->file('audio')) {
+            $comment->audio = $audio;
+        }
+        if ($request->emoji) {
+            $comment->emoji = $request->emoji;
+        }
+        if ($request->file('image')) {
+            $comment->image =  $image;
+        }
+        $comment->save();
+
+        $comments = FeedComments::with(['child_comments' => function ($q) {
+            $q->with(['child_comments' => function ($q) {
+                $q->with(['user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                }]);
+            }, 'user' =>  function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+            }]);
+        }, 'user' => function ($q) {
+            $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+        }])->with('likes')
+            ->where('feed_id', $comment->feed_id)->where('parent_id', null)->where('feed_type', $comment->feed_type)->get();
+
+        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+        $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $comment->feed_type)->count();
+        $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $comment->feed_id)->where('feed_type', $comment->feed_type)->first();
+
+        if ($like) {
+            $liked = true;
+        } else {
+            $liked = false;
+        }
+
+        $likeCount = FeedLikes::where('feed_id', $comment->feed_id)->where('feed_type', $comment->feed_type)->count();
+
+        $data = [
+            'comments' => $comments,
+            'comments_count' => $commentCount,
+            'liked' => $liked,
+            'like_count' => $likeCount,
+            'user' => $user
+        ];
+
+        return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
+        // } catch (Exception $e) {
+        //     return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
+        // }
+    }
+
+    public function commentLike(Request $request, $id)
+    {
+        $request->validate([
+            'emoji' => 'nullable|string',
+        ]);
+
+        $user = Auth::user();
+
+        if (!$user) {
+            return ResponseHelper::sendResponse([], 'User not authenticated!', false, 403);
+        }
+
+        $like = CommentsLike::where('user_id', $user->id)->where('comment_id', $id)->first();
+
+        if ($like) {
+            $like->delete();
+            $liked = false;
+        } else {
+            CommentsLike::create([
+                'user_id' => $user->id,
+                'comment_id' => $id,
+                'emoji' => $request->emoji
+            ]);
+            $liked = true;
+        }
+
+        $likeCount = CommentsLike::where('comment_id', $id)->count();
+
+        $data = [
+            'liked' => $liked,
+            'like_count' => $likeCount
+        ];
+        return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 
     public function feedLike(Request $request, $id)

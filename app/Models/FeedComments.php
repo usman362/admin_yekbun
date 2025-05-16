@@ -49,4 +49,8 @@ class FeedComments extends Model
         return $this->hasMany(ReportComments::class, 'comment_id');
     }
 
+    public function likes(){
+        return $this->hasMany(CommentsLike::class, 'comment_id');
+    }
+
 }
