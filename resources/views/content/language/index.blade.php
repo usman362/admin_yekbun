@@ -23,6 +23,12 @@
 @endsection
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
+<style>
+    img, svg {
+    vertical-align: middle !important;
+    height: 48px  !important;
+}
+</style>
 @section('content')
 
     <div class="d-flex justify-content-between">
