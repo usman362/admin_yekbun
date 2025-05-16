@@ -4,11 +4,11 @@ display: flex;
 flex-wrap: wrap;
 }
 
-
+```
 .edit-form .dropzone .dz-message {
     width: 100%;
 }
-
+```
 
 </style>
 
@@ -31,10 +31,9 @@ flex-wrap: wrap;
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload
                                 </div>
-                              <div class="fallback">
-    <input type="file" name="image" hidden>
-</div>
-
+                                <div class="fallback">
+                                    <input type="file" name="image" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,7 +78,7 @@ flex-wrap: wrap;
                     </div>
                 </div>
 
-
+```
             <div class="col-md-6">
                 <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
                 <select class="form-control" name="roles" id="rolesInput2">
@@ -107,14 +106,14 @@ flex-wrap: wrap;
         </div>
     </div>
 </div>
-
+```
 
 </form>
 <script>
     window.addEventListener('load', function() {
         const TagifyRolesListEl = document.querySelector('#rolesInput{{ $user->id }}');
 
-
+```
     let rolesList = {!! json_encode($roles) !!};
     rolesList = rolesList.map(item => ({
         value: item.name,
@@ -142,7 +141,7 @@ flex-wrap: wrap;
         // whitelist:  [{value:"Super Admin", name:"Super Admin"}]
     });
 })
-
+```
 
 </script>
 
