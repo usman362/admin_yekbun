@@ -201,18 +201,18 @@ class FeedsController extends Controller
                 $q->with(['reports', 'child_comments' => function ($q) {
                     $q->with(['reports', 'user' =>  function ($q) {
                         $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                    }])
+                    }])->with('likes')->with('liked')
                         // ->withCount('reports')
                     ;
                 }, 'user' =>  function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])
+                }])->with('likes')->with('liked')
                     // ->withCount('reports')
                 ;
             }, 'user' => function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
-                ->with('likes')
+                ->with('likes')->with('liked')
                 ->where('feed_id', $id)->where('feed_type', $feedType)->where('parent_id', null)->get();
 
             $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->user()->id);
@@ -301,14 +301,14 @@ class FeedsController extends Controller
             $q->with(['child_comments' => function ($q) {
                 $q->with(['user' =>  function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }]);
+                }])->with('likes')->with('liked');
             }, 'user' =>  function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }]);
+            }])->with('likes')->with('liked');
         }, 'user' => function ($q) {
             $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
         }])
-            ->with('likes')->where('feed_id', $id)->where('parent_id', null)
+            ->with('likes')->with('liked')->where('feed_id', $id)->where('parent_id', null)
             ->where('feed_type', $request->feed_type)->get();
 
         $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
@@ -380,13 +380,13 @@ class FeedsController extends Controller
             $q->with(['child_comments' => function ($q) {
                 $q->with(['user' =>  function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }]);
+                }])->with('likes')->with('liked');
             }, 'user' =>  function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }]);
+            }])->with('likes')->with('liked');
         }, 'user' => function ($q) {
             $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-        }])->with('likes')
+        }])->with('likes')->with('liked')
             ->where('feed_id', $comment->feed_id)->where('parent_id', null)->where('feed_type', $comment->feed_type)->get();
 
         $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());

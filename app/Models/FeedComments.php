@@ -53,4 +53,8 @@ class FeedComments extends Model
         return $this->hasMany(CommentsLike::class, 'comment_id');
     }
 
+    public function liked()
+    {
+        return $this->hasMany(CommentsLike::class, 'comment_id')->where('user_id', auth()->user()->id);
+    }
 }
