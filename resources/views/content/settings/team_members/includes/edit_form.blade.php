@@ -138,7 +138,7 @@
 
         const previewTemplate = `<div class="row">
                                             <div class="col-md-12 col-12 d-flex justify-content-center">
-                                                <div class="dz-preview dz-file-preview w-10">
+                                                <div class="dz-preview dz-file-preview w-20">
                                                     <div class="dz-details">
                                                         <div class="dz-thumbnail" style="width:95%;height:10%">
                                                             <img data-dz-thumbnail >
