@@ -1,15 +1,19 @@
-<style>
-    .edit-form .dropzone {
-        display: flex;
-        flex-wrap: wrap;
-    }
+ <style>
+.edit-form .dropzone {
+display: flex;
+flex-wrap: wrap;
+}
 
-    .edit-form .dropzone .dz-message {
-        width: 100%;
-    }
+
+.edit-form .dropzone .dz-message {
+    width: 100%;
+}
+
+
 </style>
 
-<form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
+<form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post"
+    enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <div class="hidden-inputs">
@@ -27,87 +31,119 @@
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload
                                 </div>
-                                <div class="fallback">
-                                    <input type="file" name="image" />
-                                </div>
+                              <div class="fallback">
+    <input type="file" name="image" hidden>
+</div>
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="inputName{{ $user->id }}">Name</label>
-                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control" value="{{ old('name')?? $user->name }}">
+                    <label class="form-label" for="inputName{{ $user->id }}">Name - Lastname</label>
+                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control"
+                        value="{{ old('name') ?? $user->name }}">
                     @error('name')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="inputEmail{{ $user->id }}">Email</label>
-                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control" value="{{ old('email')?? $user->email }}">
+                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control"
+                        value="{{ old('email') ?? $user->email }}">
                     @error('email')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="inputPassword">Password </label>
-                    <input type="text" id="inputPassword" name="password" class="form-control">
+                    <label class="form-label" for="inputPassword">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="inputPassword" name="password" class="form-control"
+                            autocomplete="new-password">
+                        <span class="input-group-text toggle-password1" style="cursor: pointer">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                     @error('password')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password  </label>
-                    <input type="text" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
+                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation"
+                            class="form-control">
+                        <span class="input-group-text toggle-password1" style="cursor: pointer">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                 </div>
-              
-                <div class="col-md-6">
-                    <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
-                    <select class="form-control" name="roles" id="rolesInput2">
-                        @foreach($roles as $role)
-                        <option value="{{$role->id}}" {{ $user->role_id == $role->id? 'selected': '' }}>{{$role->name}}</option>
-                        @endforeach
-                    </select>
-                    @error('roles')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label" for="imageInput{{ $user->id }}">Status</label>
-                    <select class="form-control" name="status" id="imageInput{{ $user->id }}">
-                        <option value="1" {{ $user->status? 'selected': '' }}>Active</option>
-                        <option value="0" {{ !$user->status? 'selected': '' }}>Disabled</option>
-                    </select>
-                </div>
+
+
+            <div class="col-md-6">
+                <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
+                <select class="form-control" name="roles" id="rolesInput2">
+                    @foreach ($roles as $role)
+                        @if ($role->name !== 'Super Admin')
+                            <option value="{{ $role->id }}"
+                                {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                {{ $role->name }}
+                            </option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('roles')
+                    <div class="invalid-feedback d-bloc-k">{{ $message }}</div>
+                @enderror
+
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="imageInput{{ $user->id }}">Status</label>
+                <select class="form-control" name="status" id="imageInput{{ $user->id }}">
+                    <option value="1" {{ $user->status ? 'selected' : '' }}>Active</option>
+                    <option value="0" {{ !$user->status ? 'selected' : '' }}>Disabled</option>
+                </select>
             </div>
         </div>
     </div>
+</div>
+
+
 </form>
 <script>
-    window.addEventListener('load', function () {
+    window.addEventListener('load', function() {
         const TagifyRolesListEl = document.querySelector('#rolesInput{{ $user->id }}');
 
-        let rolesList = {!! json_encode($roles) !!};
-        rolesList = rolesList.map(item => ({value: item.name, name:item.name, id: item.id}))
-        // console.log(rolesList);
-        // new Tagify(TagifyRolesListEl)
-        let TagifyRolesLIst = new Tagify(TagifyRolesListEl, {
-            tagTextProp: 'name', // very important since a custom template is used with this property as text. allows typing a "value" or a "name" to match input with whitelist
-            enforceWhitelist: true,
-            skipInvalid: true, // do not remporarily add invalid tags
-            dropdown: {
+
+    let rolesList = {!! json_encode($roles) !!};
+    rolesList = rolesList.map(item => ({
+        value: item.name,
+        name: item.name,
+        id: item.id
+    }))
+    // console.log(rolesList);
+    // new Tagify(TagifyRolesListEl)
+    let TagifyRolesLIst = new Tagify(TagifyRolesListEl, {
+        tagTextProp: 'name', // very important since a custom template is used with this property as text. allows typing a "value" or a "name" to match input with whitelist
+        enforceWhitelist: true,
+        skipInvalid: true, // do not remporarily add invalid tags
+        dropdown: {
             closeOnSelect: false,
             enabled: 0,
             classname: 'users-list',
-            searchKeys: ['name'] // very important to set by which keys to search for suggesttions when typing
-            },
-            // templates: {
-            // tag: tagTemplate,
-            // dropdownItem: suggestionItemTemplate
-            // },
-            whitelist: rolesList
-            // whitelist:  [{value:"Super Admin", name:"Super Admin"}]
-        });
-    })
+            searchKeys: [
+                'name'] // very important to set by which keys to search for suggesttions when typing
+        },
+        // templates: {
+        // tag: tagTemplate,
+        // dropdownItem: suggestionItemTemplate
+        // },
+        whitelist: rolesList
+        // whitelist:  [{value:"Super Admin", name:"Super Admin"}]
+    });
+})
+
+
 </script>
 
 <script>
@@ -115,8 +151,8 @@
 
 
     //  <div class="progress">
-        // <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-        //                                                     </div>
+    // <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+    //                                                     </div>
 
     dropZoneInitFunctions.push(function() {
         // previewTemplate: Updated Dropzone default previewTemplate
@@ -192,40 +228,40 @@
             }
         });
 
-        @if($user->image)
-        $("document").ready(() => {
-            var path = "{{ asset('storage/'.$user->image) }}";
-            var rpath = "{{ $user->image }}";
-            const parts = rpath.split("___");
+        @if ($user->image)
+            $("document").ready(() => {
+                var path = "{{ asset('storage/' . $user->image) }}";
+                var rpath = "{{ $user->image }}";
+                const parts = rpath.split("___");
 
-            imageUrlToFile(path,parts).then((file) => {
-                file['status'] = "success";
-                file['previewElement'] = "div.dz-preview.dz-image-preview";
-                file['previewTemplate'] = "div.dz-preview.dz-image-preview";
-                file['_removeLink'] = "a.dz-remove";
-                // file['webkitRelativePath'] = "";
-                file['width'] = 500;
-                file['height'] = 500;
-                file['accepted'] = true;
-                file['dataURL'] = path;
-                file['processing'] = true;
-                file['addPathToDataset'] = true;
-                dropzoneMulti1.on('addedfile', function(file) {
-                    if (file.addPathToDataset)
-                        file.previewElement.dataset.path = rpath;
+                imageUrlToFile(path, parts).then((file) => {
+                    file['status'] = "success";
+                    file['previewElement'] = "div.dz-preview.dz-image-preview";
+                    file['previewTemplate'] = "div.dz-preview.dz-image-preview";
+                    file['_removeLink'] = "a.dz-remove";
+                    // file['webkitRelativePath'] = "";
+                    file['width'] = 500;
+                    file['height'] = 500;
+                    file['accepted'] = true;
+                    file['dataURL'] = path;
+                    file['processing'] = true;
+                    file['addPathToDataset'] = true;
+                    dropzoneMulti1.on('addedfile', function(file) {
+                        if (file.addPathToDataset)
+                            file.previewElement.dataset.path = rpath;
+                    });
+                    file['upload'] = {
+                        bytesSent: 0,
+                        progress: 0,
+                    };
+
+                    // Update the preview template to include the music title
+
+                    dropzoneMulti1.emit("addedfile", file, path);
+                    dropzoneMulti1.emit("thumbnail", file, path);
+                    // dropzoneMulti1.files.push(file);
                 });
-                file['upload'] = {
-                    bytesSent: 0,
-                    progress: 0,
-                };
-
-                // Update the preview template to include the music title
-
-                dropzoneMulti1.emit("addedfile", file, path);
-                dropzoneMulti1.emit("thumbnail", file, path);
-                // dropzoneMulti1.files.push(file);
             });
-        });
         @endif
     })
 </script>
@@ -237,8 +273,24 @@
         const blob = await response.blob();
 
         // Create a File object
-        const file = new File([blob], fileName[1], { type: blob.type });
+        const file = new File([blob], fileName[1], {
+            type: blob.type
+        });
 
         return file;
     }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.toggle-password1').forEach(function(element) {
+            element.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                input.type = input.type === 'password' ? 'text' : 'password';
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            });
+        });
+    });
 </script>
