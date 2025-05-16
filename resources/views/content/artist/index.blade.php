@@ -802,7 +802,7 @@
                                             </div>
                                             <!-- /Main wrap -->
                                         </div>
-                                        <div class="nav-item dropdown d-block" style="margin-top: 0;position: absolute;right: 24px;top: 45vh;bottom: auto;">
+                                        <div class="nav-item dropdown d-block" style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
                                             <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="true">
                                                 <div class="d-flex align-items-center gap-2">
                                                     <i class="fas fa-cog"></i>
@@ -815,7 +815,7 @@
                                                     <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                                         <a class="dropdown-item edit-video" style="padding: 0" href="javascript:void(0)"
                                                         data-id="${video._id}"
-                                                        data-thumbnail="${video.thumbnail}"
+                                                        data-thumbnail="{{ asset('storage/') }}${video.thumbnail}"
                                                         data-artist_id="${video.artist_id}"
                                                         data-status="${video.status}"
                                                         for="customRadioPrime">
@@ -904,9 +904,10 @@
                 $('#artist_id').val($(this).attr('data-artist_id'));
                 $('#video_id').val($(this).attr('data-id'));
                 $('#status').val($(this).attr('data-status'));
-                $('#artist_id').val($(this).attr('data-artist_id'));
                 const secondModal = new bootstrap.Modal(document.getElementById('createvideoModal'));
                 secondModal.show();
+                $('#dropzone-video').css('background-image', 'url(' + $(this).attr("data-thumbnail") + ')');
+                $('#dropzone-video').css('background-size', 'cover');
             });
             $(document).on('click', '.delete-video', function() {
                 let video_id = $(this).attr('data-id');
