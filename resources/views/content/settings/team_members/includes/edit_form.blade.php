@@ -1,62 +1,32 @@
- <style>
-    /* Dropzone Container */
-    #dropzone-img-create {
-        border: 2px dashed #ccc;
-        transition: all 0.3s;
-        cursor: pointer;
-        position: relative;
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        margin: 0 auto;
-        background-color: #f8f9fa;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+<style>
+.edit-form .dropzone {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    /* Default Upload Icon */
-    #uploadIcon {
-        width: 60px;
-        height: 60px;
-        opacity: 0.7;
-        transition: all 0.3s;
-        position: relative;
-        /* Changed from absolute */
-        z-index: 1;
-    }
+.edit-form .dropzone .dz-message {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 40px 0;
+}
 
-    /* Dropzone Preview Container */
-    .dz-preview {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.dz-preview .dz-thumbnail {
+    width: 150px !important;
+    height: 150px !important;
+    margin: auto;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    /* The actual preview image */
-    .dz-image img {
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border: 2px solid #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        position: absolute;
-        top: 34%;
-        left: 28%;
-        transform: translate(-50%, -50%);
-    }
-
-    /* Hide default dropzone elements */
-    .dz-message {
-        display: none !important;
-    }
+.dz-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
 </style>
 
 <form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
@@ -72,16 +42,21 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                  <div class="col-12">
-                    <div class="dropzone needsclick" id="dropzone-img-create">
-                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview"
-                            id="uploadIcon" alt="Avatar">
-                        <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
-                        <div class="hidden-inputs"></div>
-
+                <div class="col-12">
+                    <div class="card">
+                        <h5 class="card-header">Image</h5>
+                        <div class="card-body">
+                            <div class="dropzone needsclick" action="/" id="dropzone-img{{ $user->id }}">
+                                <div class="dz-message needsclick">
+                                    Drop files here or click to upload
+                                </div>
+                                <div class="fallback">
+                                    <input type="file" name="image" hidden>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
 
                 <div class="col-md-6">
                     <label class="form-label" for="inputName{{ $user->id }}">Name - Lastname</label>
