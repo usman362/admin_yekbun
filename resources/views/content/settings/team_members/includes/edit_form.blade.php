@@ -7,9 +7,39 @@
     .edit-form .dropzone .dz-message {
         width: 100%;
     }
+
+    .dz-filename {
+        display: none !important;
+    }
+
+    .dz-preview.dz-file-preview {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .dz-thumbnail {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        transition: 0.3s ease;
+    }
+
+    .dz-thumbnail:hover {
+        border-color: #007bff;
+    }
+
+    .dz-message {
+        cursor: pointer;
+    }
 </style>
 
-<form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
+<form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data" class="edit-form">
     @method('PUT')
     @csrf
     <div class="hidden-inputs">
@@ -19,226 +49,286 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
-                <div class="col-12">
-                    <div class="card">
-                        <h5 class="card-header">Image</h5>
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-img{{ $user->id }}">
-                                <div class="dz-message needsclick">
-                                    Drop files here or click to upload
-                                </div>
-                                <div class="fallback">
-                                    <input type="file" name="image" />
-                                </div>
-                            </div>
-                        </div>
+
+                <!-- Avatar Image Upload -->
+              <div class="card mb-3 mb-lg-5" id="generalDiv">
+
+                    <div class="profile-cover">
+                        
                     </div>
+                    <style>
+                        .card>.profile-cover,
+                        .card>.profile-cover .profile-cover-img,
+                        .card>.profile-cover .profile-cover-img-wrapper {
+                            border-bottom-right-radius: 0;
+                            border-bottom-left-radius: 0;
+                        }
+
+                        @media (min-width: 992px) {
+                            .profile-cover {
+                                height: 1rem;
+                            }
+                        }
+
+                        .profile-cover {
+                            position: relative;
+                            height: 7.5rem;
+                            padding: 1.75rem 2rem;
+                            border-radius: 0.75rem;
+                        }
+
+                        .profile-cover-img-wrapper {
+                            height: 10rem;
+                        }
+
+                        .profile-cover-img-wrapper {
+                            position: absolute;
+                            top: 0;
+                            inset-inline-end: 0;
+                            inset-inline-start: 0;
+                            height: 7.5rem;
+                            background-color: #e7eaf3;
+                            border-radius: 0.75rem;
+                        }
+
+                        .avatar:not(img) {
+                            background-color: #fff;
+                        }
+
+                        .profile-cover-avatar {
+                            display: -ms-flexbox;
+                            display: flex;
+                            margin: -6.3rem auto 0.5rem;
+                        }
+
+                        .avatar-uploader {
+                            cursor: pointer;
+                            display: inline-block;
+                            transition: .2s;
+                            margin-bottom: 0;
+                        }
+
+                        .avatar-xxl {
+                            width: 7.875rem;
+                            height: 7.875rem;
+                        }
+
+                        .avatar-border-lg {
+                            border: 0.1875rem solid #fff;
+                        }
+
+                        .avatar-circle {
+                            border-radius: 50% !important;
+                        }
+
+                        .avatar {
+                            position: relative;
+                            display: inline-block;
+                            /*width: 7.625rem;*/
+                            /*height: 7.625rem;*/
+                            border-radius: 0.3125rem;
+                        }
+
+                        label {
+                            color: #334257;
+                            text-transform: capitalize;
+                        }
+
+                        label {
+                            display: inline-block;
+                            margin-bottom: 0.5rem;
+                        }
+
+                        .avatar-circle .avatar-img,
+                        .avatar-circle .avatar-initials {
+                            border-radius: 50%;
+                        }
+
+                        .avatar-img {
+                            display: block;
+                            max-width: 100%;
+                            height: 100%;
+                            -o-object-fit: cover;
+                            object-fit: cover;
+                            pointer-events: none;
+                            border-radius: 0.3125rem;
+                        }
+
+                        .avatar-uploader-input {
+                            position: absolute;
+                            top: 0;
+                            inset-inline-end: 0;
+                            inset-inline-start: 0;
+                            z-index: -1;
+                            opacity: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(19, 33, 68, .25);
+                            border-radius: 50%;
+                            transition: .2s;
+                        }
+
+                        .avatar-uploader-trigger {
+                            position: absolute;
+                            bottom: 0;
+                            inset-inline-end: 0;
+                            cursor: pointer;
+                            border-radius: 50%;
+                        }
+
+                        .avatar-xxl .avatar-uploader-icon {
+                            width: 2.1875rem;
+                            height: 2.1875rem;
+                        }
+
+                        .shadow-soft {
+                            box-shadow: 0 3px 6px 0 rgba(140, 152, 164, .25) !important;
+                        }
+
+                        .avatar-uploader-icon {
+                            display: -ms-inline-flexbox;
+                            display: inline-flex;
+                            -ms-flex-negative: 0;
+                            flex-shrink: 0;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            color: #677788;
+                            background-color: #fff;
+                            border-radius: 50%;
+                            transition: .2s;
+                        }
+
+                        .field-icon {
+                            float: right;
+                            margin-right    : 12px;
+                            margin-top: -25px;
+                            position: relative;
+                            z-index: 2;
+                            cursor: pointer;
+                        }
+                    </style>
+
+                    <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar"
+                        for="avatarUploader">
+                        <img id="viewer"
+                            onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
+                            class="avatar-img" src="{{ asset('storage/' . $user->image) }}" alt="Image">
+                        <input type="file" name="image" class="js-file-attach avatar-uploader-input" id="customFileEg1"
+                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                        <label class="avatar-uploader-trigger" for="customFileEg1">
+                            <i class="avatar-uploader-icon fa fa-pencil shadow-soft"></i>
+                        </label>
+                    </label>
+                   
                 </div>
+
+                <!-- Name -->
                 <div class="col-md-6">
                     <label class="form-label" for="inputName{{ $user->id }}">Name</label>
-                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control" value="{{ old('name')?? $user->name }}">
+                    <input type="text" id="inputName{{ $user->id }}" name="name" class="form-control" value="{{ old('name') ?? $user->name }}">
                     @error('name')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <!-- Email -->
                 <div class="col-md-6">
                     <label class="form-label" for="inputEmail{{ $user->id }}">Email</label>
-                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control" value="{{ old('email')?? $user->email }}">
+                    <input type="text" id="inputEmail{{ $user->id }}" name="email" class="form-control" value="{{ old('email') ?? $user->email }}">
                     @error('email')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <!-- Password -->
                 <div class="col-md-6">
-                    <label class="form-label" for="inputPassword">Password </label>
-                    <input type="text" id="inputPassword" name="password" class="form-control">
+                    <label class="form-label" for="inputPassword">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="inputPassword" name="password" class="form-control" autocomplete="new-password">
+                        <span class="input-group-text toggle-password1" style="cursor: pointer">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                     @error('password')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <!-- Confirm Password -->
                 <div class="col-md-6">
-                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password  </label>
-                    <input type="text" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
+                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
+                        <span class="input-group-text toggle-password1" style="cursor: pointer">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                 </div>
-              
+
+                <!-- Roles -->
                 <div class="col-md-6">
                     <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
                     <select class="form-control" name="roles" id="rolesInput2">
                         @foreach($roles as $role)
-                        <option value="{{$role->id}}" {{ $user->role_id == $role->id? 'selected': '' }}>{{$role->name}}</option>
+                            @if ($role->name !== 'Super Admin')
+                                <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
+                            @endif
                         @endforeach
                     </select>
                     @error('roles')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <!-- Status -->
                 <div class="col-md-6">
                     <label class="form-label" for="imageInput{{ $user->id }}">Status</label>
                     <select class="form-control" name="status" id="imageInput{{ $user->id }}">
-                        <option value="1" {{ $user->status? 'selected': '' }}>Active</option>
-                        <option value="0" {{ !$user->status? 'selected': '' }}>Disabled</option>
+                        <option value="1" {{ $user->status ? 'selected' : '' }}>Active</option>
+                        <option value="0" {{ !$user->status ? 'selected' : '' }}>Disabled</option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<!-- JS -->
 <script>
-    window.addEventListener('load', function () {
-        const TagifyRolesListEl = document.querySelector('#rolesInput{{ $user->id }}');
-
-        let rolesList = {!! json_encode($roles) !!};
-        rolesList = rolesList.map(item => ({value: item.name, name:item.name, id: item.id}))
-        // console.log(rolesList);
-        // new Tagify(TagifyRolesListEl)
-        let TagifyRolesLIst = new Tagify(TagifyRolesListEl, {
-            tagTextProp: 'name', // very important since a custom template is used with this property as text. allows typing a "value" or a "name" to match input with whitelist
-            enforceWhitelist: true,
-            skipInvalid: true, // do not remporarily add invalid tags
-            dropdown: {
-            closeOnSelect: false,
-            enabled: 0,
-            classname: 'users-list',
-            searchKeys: ['name'] // very important to set by which keys to search for suggesttions when typing
-            },
-            // templates: {
-            // tag: tagTemplate,
-            // dropdownItem: suggestionItemTemplate
-            // },
-            whitelist: rolesList
-            // whitelist:  [{value:"Super Admin", name:"Super Admin"}]
-        });
-    })
-</script>
-
-<script>
-    'use strict';
-
-
-    //  <div class="progress">
-        // <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-        //                                                     </div>
-
-    dropZoneInitFunctions.push(function() {
-        // previewTemplate: Updated Dropzone default previewTemplate
-
-        const previewTemplate = `<div class="row">
-                                            <div class="col-md-12 col-12 d-flex justify-content-center">
-                                                <div class="dz-preview dz-file-preview w-100">
-                                                    <div class="dz-details">
-                                                        <div class="dz-thumbnail" style="width:95%">
-                                                            <img data-dz-thumbnail >
-                                                            <span class="dz-nopreview">No preview</span>
-                                                            <div class="dz-success-mark"></div>
-                                                            <div class="dz-error-mark"></div>
-                                                            <div class="dz-error-message"><span data-dz-errormessage></span></div>
-
-                                                        </div>
-                                                        <div class="dz-filename" data-dz-name></div>
-                                                            <div class="dz-size" data-dz-size></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`;
-
-        // image
-        const dropzoneMulti1 = new Dropzone('#dropzone-img{{ $user->id }}', {
-            url: '{{ route('file.upload') }}',
-            previewTemplate: previewTemplate,
-            parallelUploads: 1,
-            maxFilesize: 100,
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            sending: function(file, xhr, formData) {
-                formData.append('folder', 'music');
-            },
-            success: function(file, response) {
-
-                if (file.previewElement) {
-                    file.previewElement.classList.add("dz-success");
-                }
-                file.previewElement.dataset.path = response.path;
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.innerHTML +=
-                    `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
-
-            },
-            removedfile: function(file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-inputs');
-                hiddenInputsContainer.querySelector(
-                    `input[data-path="${file.previewElement.dataset.path}"]`).remove();
-
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
-                }
-
-                $.ajax({
-                    url: '{{ route('settings.user.delete-img', $user->id) }}',
-                    method: 'delete',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    data: {
-                        path: file.previewElement.dataset.path
-                    },
-                    success: function() {}
-                });
-
-                return this._updateMaxFilesReachedClass();
-            }
-        });
-
-        @if($user->image)
-        $("document").ready(() => {
-            var path = "{{ asset('storage/'.$user->image) }}";
-            var rpath = "{{ $user->image }}";
-            const parts = rpath.split("___");
-
-            imageUrlToFile(path,parts).then((file) => {
-                file['status'] = "success";
-                file['previewElement'] = "div.dz-preview.dz-image-preview";
-                file['previewTemplate'] = "div.dz-preview.dz-image-preview";
-                file['_removeLink'] = "a.dz-remove";
-                // file['webkitRelativePath'] = "";
-                file['width'] = 500;
-                file['height'] = 500;
-                file['accepted'] = true;
-                file['dataURL'] = path;
-                file['processing'] = true;
-                file['addPathToDataset'] = true;
-                dropzoneMulti1.on('addedfile', function(file) {
-                    if (file.addPathToDataset)
-                        file.previewElement.dataset.path = rpath;
-                });
-                file['upload'] = {
-                    bytesSent: 0,
-                    progress: 0,
-                };
-
-                // Update the preview template to include the music title
-
-                dropzoneMulti1.emit("addedfile", file, path);
-                dropzoneMulti1.emit("thumbnail", file, path);
-                // dropzoneMulti1.files.push(file);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password1').forEach(function (element) {
+            element.addEventListener('click', function () {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                input.type = input.type === 'password' ? 'text' : 'password';
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
             });
         });
-        @endif
-    })
-</script>
 
-<script>
-    async function imageUrlToFile(imageUrl, fileName) {
-        // Fetch the image
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
+        // Avatar upload and preview
+        const dropzone = document.getElementById('avatarDropzone{{ $user->id }}');
+        const fileInput = document.getElementById('avatarInput{{ $user->id }}');
+        const preview = document.getElementById('avatarPreview{{ $user->id }}');
 
-        // Create a File object
-        const file = new File([blob], fileName[1], { type: blob.type });
+        dropzone.addEventListener('click', function () {
+            fileInput.click();
+        });
 
-        return file;
-    }
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
 </script>
