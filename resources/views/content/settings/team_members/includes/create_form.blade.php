@@ -159,7 +159,7 @@
                     </div>
                 </div>
 
-                 <div class="col-md-6">
+                <div class="col-md-6">
     <label for="rolesInput1" class="form-label">Roles</label>
     <select class="form-control" name="roles" id="rolesInput1">
         <option value="" selected disabled></option>
@@ -173,6 +173,7 @@
         <div class="invalid-feedback d-block">{{ $message }}</div>
     @enderror
 </div>
+
 
                 <div class="col-md-6">
                     <label class="form-label" for="imageInput">Status</label>
