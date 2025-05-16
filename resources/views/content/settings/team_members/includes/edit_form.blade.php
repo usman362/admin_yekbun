@@ -3,6 +3,31 @@
     display: flex;
     flex-wrap: wrap;
 }
+.dropzone-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+.dropzone-centered img.avatar-preview1 {
+    width: 80px; /* or your desired size */
+    height: auto;
+    opacity: 0.7;
+}
+
+.dropzone-centered .dz-message {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+}
+
 
 .edit-form .dropzone .dz-message {
     width: 100%;
@@ -27,7 +52,7 @@
     max-height: 100%;
     object-fit: contain;
 }
-<style>
+ 
     /* Dropzone Container */
     #dropzone-img-create1 {
         border: 2px dashed #ccc;
@@ -86,8 +111,70 @@
     .dz-message {
         display: none !important;
     }
+    /* Main Dropzone styling */
+#dropzone-img-create1 {
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Default Upload Icon */
+#uploadIcon {
+    width: 60px;
+    height: 60px;
+    opacity: 0.7;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+/* Hide Dropzone's default message */
+.dz-message {
+    display: none !important;
+}
+
+/* Preview container – centered absolutely */
+.dz-preview {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+/* Preview image itself */
+.dz-preview .dz-image img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#uploadIcon {
+    width: 447px;
+    height: 60px;
+    opacity: 0.7;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
 </style>
-</style>
+ 
 
 <form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
@@ -105,14 +192,13 @@
                  
 
                 <div class="col-12">
-                    <div class="dropzone needsclick" id="dropzone-img-create1">
-                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview1"
-                            id="uploadIcon" alt="Avatar">
-                        <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
-                        <div class="hidden-inputs"></div>
+    <div class="dropzone needsclick dropzone-centered" id="dropzone-img-create1">
+        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview1" id="uploadIcon" alt="Avatar">
+        <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
+        <div class="hidden-inputs"></div>
+    </div>
+</div>
 
-                    </div>
-                </div>
 
                 <div class="col-md-6">
                     <label class="form-label" for="inputName{{ $user->id }}">Name - Lastname</label>
