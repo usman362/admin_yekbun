@@ -815,7 +815,7 @@
                                                     <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                                         <a class="dropdown-item edit-video" style="padding: 0" href="javascript:void(0)"
                                                         data-id="${video._id}"
-                                                        data-thumbnail="{{ asset('storage/') }}${video.thumbnail}"
+                                                        data-thumbnail="{{ asset('storage/${video.thumbnail}') }}"
                                                         data-artist_id="${video.artist_id}"
                                                         data-status="${video.status}"
                                                         for="customRadioPrime">
