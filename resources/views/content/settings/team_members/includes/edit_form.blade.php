@@ -27,6 +27,66 @@
     max-height: 100%;
     object-fit: contain;
 }
+<style>
+    /* Dropzone Container */
+    #dropzone-img-create1 {
+        border: 2px dashed #ccc;
+        transition: all 0.3s;
+        cursor: pointer;
+        position: relative;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        background-color: #f8f9fa;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Default Upload Icon */
+    #uploadIcon {
+        width: 60px;
+        height: 60px;
+        opacity: 0.7;
+        transition: all 0.3s;
+        position: relative;
+        /* Changed from absolute */
+        z-index: 1;
+    }
+
+    /* Dropzone Preview Container */
+    .dz-preview {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* The actual preview image */
+    .dz-image img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 34%;
+        left: 28%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Hide default dropzone elements */
+    .dz-message {
+        display: none !important;
+    }
+</style>
 </style>
 
 <form id="editForm{{ $user->id }}" action="{{ route('settings.team.members.update', $user->id) }}" method="post" enctype="multipart/form-data">
@@ -42,19 +102,15 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
+                 
+
                 <div class="col-12">
-                    <div class="card">
-                        <h5 class="card-header">Image</h5>
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-img{{ $user->id }}">
-                                <div class="dz-message needsclick">
-                                    Drop files here or click to upload
-                                </div>
-                                <div class="fallback">
-                                    <input type="file" name="image" hidden>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="dropzone needsclick" id="dropzone-img-create1">
+                        <img src="{{ asset('assets/img/Upload new images-Videos.svg') }}" class="avatar-preview1"
+                            id="uploadIcon" alt="Avatar">
+                        <div class="dz-message needsclick d-none">Drop files here or click to upload</div>
+                        <div class="hidden-inputs"></div>
+
                     </div>
                 </div>
 
@@ -245,3 +301,103 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const previewTemplate = `
+            <div class="dz-preview dz-file-preview">
+                <div class="dz-image">
+                    <img data-dz-thumbnail />
+                </div>
+            </div>`;
+    
+        const dropzoneCreate = new Dropzone('#dropzone-img-create1', {
+            url: '{{ route('file.upload') }}',
+            previewTemplate: previewTemplate,
+            maxFilesize: 100,
+            addRemoveLinks: false,
+            clickable: '#uploadIcon',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
+            autoProcessQueue: true,
+            parallelUploads: 1,
+            uploadMultiple: false,
+            sending: function(file, xhr, formData) {
+                formData.append('folder', 'team_members');
+            },
+            success: function(file, response) {
+                const defaultAvatar = document.querySelector('#uploadIcon');
+                if (defaultAvatar) defaultAvatar.style.display = 'none';
+    
+                if (file.previewElement) {
+                    file.previewElement.classList.add("dz-success");
+                    file.previewElement.dataset.path = response.path;
+    
+                    // Create or update hidden input
+                    let hiddenInput = document.querySelector('input[name="image"]');
+                    if (!hiddenInput) {
+                        hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = 'image';
+                        document.querySelector('#createForm').appendChild(hiddenInput);
+                    }
+                    hiddenInput.value = response.path;
+                }
+            },
+            error: function(file, message) {
+                alert('Image upload failed: ' + message);
+            },
+            removedfile: function(file) {
+                const defaultAvatar = document.querySelector('#uploadIcon');
+                if (defaultAvatar) defaultAvatar.style.display = 'block';
+    
+                // Remove hidden input if exists
+                const hiddenInput = document.querySelector('input[name="image"]');
+                if (hiddenInput) hiddenInput.remove();
+    
+                // Remove preview
+                if (file.previewElement && file.previewElement.parentNode) {
+                    file.previewElement.parentNode.removeChild(file.previewElement);
+                }
+    
+                // Delete from server if needed
+                if (file.previewElement?.dataset?.path) {
+                    $.ajax({
+                        url: '{{ route('settings.user.delete-img', 0) }}',
+                        method: 'delete',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            path: file.previewElement.dataset.path
+                        }
+                    });
+                }
+            }
+        });
+    
+        // Handle form submission
+        document.querySelector('#createForm').addEventListener('submit', function(e) {
+            const submitButton = this.querySelector('[type="submit"]');
+            const form = this;
+            
+            // If there's a file but not yet uploaded
+            if (dropzoneCreate.files.length > 0 && !dropzoneCreate.files[0].status === 'success') {
+                e.preventDefault();
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Uploading...';
+                
+                // Process the queue first
+                dropzoneCreate.processQueue();
+                
+                // When queue completes, submit t ashe form
+                dropzoneCreate.on('queuecomplete', function() {
+                    form.submit();
+                });
+            }
+        });
+    });
+    </script>
