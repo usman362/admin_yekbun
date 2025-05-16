@@ -75,16 +75,18 @@
                     </div>
                 </div>
               
-                <div class="col-md-6">
-                    <label for="rolesInput{{ $user->id }}" class="form-label">Roles</label>
-                    <select class="form-control" name="roles" id="rolesInput2">
-                        @foreach($roles as $role)
-                        <option value="{{$role->id}}" {{ $user->role_id == $role->id? 'selected': '' }}>{{$role->name}}</option>
+                  <div class="col-md-6">
+                    <label class="form-label">Roles</label>
+                    <select class="form-control" name="roles">
+                        <option disabled selected></option>
+                        @foreach ($roles as $role)
+                            @if ($role->name !== 'Super Admin')
+                                <option value="{{ $role->id }}" {{ $member->role_id == $role->id ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
+                            @endif
                         @endforeach
                     </select>
-                    @error('roles')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="imageInput{{ $user->id }}">Status</label>
