@@ -45,12 +45,18 @@ class FeedComments extends Model
         return $this->hasOne(Emoji::class, 'emoji', 'name');
     }
 
-    public function reports(){
+    public function reports()
+    {
         return $this->hasMany(ReportComments::class, 'comment_id');
     }
 
-    public function likes(){
+    public function likes()
+    {
         return $this->hasMany(CommentsLike::class, 'comment_id');
     }
 
+    public function liked()
+    {
+        return $this->hasMany(CommentsLike::class, 'comment_id')->where('user_id', auth()->user()->id);
+    }
 }
