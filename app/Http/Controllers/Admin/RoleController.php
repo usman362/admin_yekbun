@@ -114,30 +114,26 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-public function update(UpdateRoleRequest $request, $id)
-{
-    $validated = $request->validated();
+    public function update(UpdateRoleRequest $request, $id)
+    {
+        $validated = $request->validated();
+        if (array_key_exists('permissions', $validated)) {
+            $permissions = $validated['permissions'];
+        } else {
+            $permissions = [];
+        }
 
-    $role = Role::findOrFail($id);
+        $role = Role::find($id);
+        if ($role->name === 'Super Admin')
+            abort(403);
+        $role->name = $validated['name'];
+        $role->permission = $permissions;
+        $role->save();
 
-    if ($role->name === 'Super Admin') {
-        abort(403);
+        session(['permissions' => $permissions]);
+
+        return back()->with("success", "Role successfully updated.");
     }
-
-    $role->name = $validated['name'];
-
-    $role->save();
-
-    // If permissions input exists, sync them; otherwise, detach all.
-    if (array_key_exists('permissions', $validated)) {
-        $role->permissions()->sync($validated['permissions']);
-    } else {
-        $role->permissions()->sync([]);
-    }
-
-    return back()->with('success', 'Role successfully updated.');
-}
-
 
     /**
      * Remove the specified resource from storage.
