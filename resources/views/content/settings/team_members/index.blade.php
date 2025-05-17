@@ -109,16 +109,15 @@
                             <td>
                                 <div>
                                     <!-- Edit -->
-                                    <span data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}">
-                                        <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4"
-                                            data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
-                                            <i class="bx bx-edit"></i>
-                                        </button>
-                                    </span>
-                                    <button type="button" class="btn btn-sm btn-outline-primary ms-2"
-                                        data-bs-toggle="modal" data-bs-target="#editUserRolesModal{{ $user->id }}">
-                                        <i class="bx bx-pencil"></i> Edit Roles
-                                    </button>
+                                    <button class="btn btn-sm btn-icon me-4" data-bs-toggle="tooltip" data-bs-offset="0,4"
+    data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
+    <i class="bx bx-edit"></i>
+</button>
+<button type="button" class="btn btn-sm btn-icon ms-2" 
+    data-bs-toggle="modal" data-bs-target="#editUserRolesModal{{ $user->id }}">
+    <i class="bx bx-pencil"></i> Edit Roles
+</button>
+
 
 
                                     @if (!$user->is_superadmin)
@@ -128,7 +127,7 @@
                                             class="d-inline">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
+                                            <button type="submit" class="btn btn-sm btn-icon ms-4" data-bs-toggle="tooltip"
                                                 data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                                 data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
                                         </form>
