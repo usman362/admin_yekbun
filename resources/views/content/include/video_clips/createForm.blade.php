@@ -34,7 +34,7 @@
                 <div class="col-md-6">
                     <label class="form-label" for="fullname">Status</label>
                     <select class="form-select" aria-label="Default select example" name="status" id="status">
-                        <option selected value="1">Select</option>
+                        <option selected>Select</option>
                         <option value="0">UnPublish</option>
                         <option value="1">Publish</option>
 
