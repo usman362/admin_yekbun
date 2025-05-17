@@ -183,29 +183,16 @@
                 <div class="text-center mb-4">
                     <h3 class="role-title mt-4">Edit Roles for {{ $user->name }}</h3>
                     <p>Select and assign roles to the user</p>
-
-                    @if($user->roles->count() > 0)
-                        <div class="mt-2">
-                            <strong>Current Roles:</strong>
-                            <ul class="list-unstyled mb-0">
-                                @foreach($user->roles as $role)
-                                    <li>{{ $role->name }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
 
                 <form action="{{ route('settings.team.roles.update', $user->roles->first()->id ?? 0) }}"
                     id="editRoleForm{{ $user->id }}" class="row g-3" method="post">
                     @method('PUT')
                     @csrf
-
                     <div class="col-12 mb-4">
                         <label class="form-label" for="inputRoleName{{ $user->id }}">Role Name</label>
                         <input type="text" id="inputRoleName{{ $user->id }}" name="name"
-                            class="form-control"
-                            value="{{ old('name') ?? ($user->roles->first()->name ?? '') }}"
+                            class="form-control" value="{{ old('name') ?? ($user->roles->first()->name ?? '') }}"
                             placeholder="Enter a role name" tabindex="-1" disabled />
                     </div>
 
@@ -215,10 +202,10 @@
                             <table class="table table-flush-spacing">
                                 <tbody>
                                     <tr>
-                                        <td class="text-nowrap fw-semibold">
-                                            Administrator Access
+                                        <td class="text-nowrap fw-semibold">Administrator Access
                                             <i class="bx bx-info-circle bx-xs" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Allows a full access to the system"></i>
+                                                data-bs-placement="top"
+                                                title="Allows full access to the system"></i>
                                         </td>
                                         <td>
                                             <div class="form-check">
@@ -237,14 +224,14 @@
                                                 {{ $permission->label ?? ucfirst(str_replace('_', ' ', $permission->name)) }}
                                             </td>
                                             <td>
-                                                <div class="d-flex">
+                                                <div class="d-flex flex-wrap">
                                                     @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
                                                         <div class="form-check me-3 me-lg-5">
                                                             <input class="form-check-input" type="checkbox"
                                                                 name="permissions[]"
                                                                 value="{{ $childPermission->name }}"
                                                                 id="permission{{ $childPermission->id }}"
-                                                                {{ \App\Helpers\Helpers::array_in($childPermission->name, $user->permission) ? 'checked' : '' }} />
+                                                                {{ in_array($childPermission->name, $user->permission ?? []) ? 'checked' : '' }} />
                                                             <label class="form-check-label"
                                                                 for="permission{{ $childPermission->id }}">
                                                                 {{ $childPermission->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermission->name))) }}
@@ -262,14 +249,14 @@
                                                         {{ $childpermissiontop->label ?? ucfirst(str_replace('_', ' ', $childpermissiontop->name)) }}
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex">
+                                                        <div class="d-flex flex-wrap">
                                                             @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
                                                                 <div class="form-check me-3 me-lg-5">
                                                                     <input class="form-check-input" type="checkbox"
                                                                         name="permissions[]"
                                                                         value="{{ $childPermissionbottom->name }}"
                                                                         id="permission{{ $childPermissionbottom->id }}"
-                                                                        {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $user->permission) ? 'checked' : '' }} />
+                                                                        {{ in_array($childPermissionbottom->name, $user->permission ?? []) ? 'checked' : '' }} />
                                                                     <label class="form-check-label"
                                                                         for="permission{{ $childPermissionbottom->id }}">
                                                                         {{ $childPermissionbottom->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermissionbottom->name))) }}
