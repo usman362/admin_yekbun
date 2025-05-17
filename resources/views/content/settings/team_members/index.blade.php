@@ -109,20 +109,18 @@
                             <td>
                                 <div>
                                     <!-- Edit -->
-                                    <button class="btn btn-sm btn-icon me-4" data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                   <button class="btn btn-sm btn-icon me-2" data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}"
+    data-bs-toggle="tooltip" data-bs-offset="0,4"
     data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
     <i class="bx bx-edit"></i>
 </button>
-                <span data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}">
-                                        <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4"
-                                            data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
-                                            <i class="bx bx-edit"></i>
-                                        </button>
-                                    </span>
-                                    </span>     <button type="button" class="btn btn-sm btn-icon ms-2" 
-                    data-bs-toggle="modal" data-bs-target="#editUserRolesModal{{ $user->id }}">
-                    <i class="bx bx-pencil"></i> Edit Roles
-                </button>
+
+
+<button type="button" class="btn btn-sm btn-icon ms-2" 
+    data-bs-toggle="modal" data-bs-target="#editUserRolesModal{{ $user->id }}">
+    <i class="bx bx-pencil"></i> Edit Roles
+</button>
+
 
 
 
