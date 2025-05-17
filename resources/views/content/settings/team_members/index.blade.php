@@ -185,7 +185,9 @@
             @csrf
             <div class="col-12 mb-4">
               <label class="form-label" for="inputRoleName{{ $user->id }}">Role Name</label>
-              <input type="text" id="inputRoleName{{ $user->id }}" name="name" class="form-control" value="{{ old('name')?? $user->name }}" placeholder="Enter a role name" tabindex="-1" />
+              <input type="text" id="inputRoleName{{ $user->id }}" name="name" class="form-control" value="{{ old('name') ?? ($user->roles->first()->name ?? '') }}"
+ placeholder="Enter a role name" tabindex="-1" />
+           
             </div>
 
             <div class="col-12">
