@@ -180,7 +180,7 @@
                         <p>Select and assign roles to the user</p>
                     </div>
 
-                     <form action="{{ route('settings.team.roles.update', $user->id) }}" id="editRoleForm{{ $user->id }}" class="row g-3" method="post">
+                     <form action="{{ route('settings.team.roles.update', $user->roles->first()->id ?? 0) }}" id="editRoleForm{{ $user->id }}" class="row g-3" method="post">
             @method('PUT')
             @csrf
             <div class="col-12 mb-4">

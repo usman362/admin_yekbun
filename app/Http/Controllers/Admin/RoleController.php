@@ -116,6 +116,7 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, $id)
     {
+        
         $validated = $request->validated();
         if (array_key_exists('permissions', $validated)) {
             $permissions = $validated['permissions'];
