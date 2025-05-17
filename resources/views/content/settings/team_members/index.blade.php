@@ -36,8 +36,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('donations.organizations.create') }}">
-          <button class="btn btn-primary">Add Organization</button>
-        </a> -->
+              <button class="btn btn-primary">Add Organization</button>
+            </a> -->
         </div>
     </div>
     <!-- Basic Bootstrap Table -->
@@ -48,8 +48,7 @@
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                     <i class="bx bx-plus me-0 me-sm-1"></i> Add Member
                 </button>
-                <button data-bs-target="#addRoleModal" data-bs-toggle="modal"
-                    class="btn btn-primary  ">
+                <button data-bs-target="#addRoleModal" data-bs-toggle="modal" class="btn btn-primary  ">
                     <i class="bx bx-plus me-0 me-sm-1"></i>
                     Add New Role
                 </button>
@@ -116,6 +115,11 @@
                                             <i class="bx bx-edit"></i>
                                         </button>
                                     </span>
+                                    <button type="button" class="btn btn-sm btn-outline-primary ms-2"
+                                        data-bs-toggle="modal" data-bs-target="#editUserRolesModal{{ $user->id }}">
+                                        <i class="bx bx-pencil"></i> Edit Roles
+                                    </button>
+
 
                                     @if (!$user->is_superadmin)
                                         <!-- Delete -->
@@ -146,11 +150,122 @@
             </table>
         </div>
     </div>
+    <style>
+        /* Applies to both add and edit modals */
+        .modal .modal-content {
+            padding-top: 0;
+            position: relative;
+        }
+
+        .modal .btn-close {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            z-index: 1055;
+        }
+
+        .modal .modal-body {
+            padding-top: 2.5rem;
+            /* space for close button */
+        }
+    </style>
+
+    <div class="modal fade" id="editUserRolesModal{{ $user->id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-dialog-centered modal-md">
+            <div class="modal-content p-0">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <div class="text-center mb-4">
+                        <h3 class="role-title mt-4">Edit Roles for {{ $user->name }}</h3>
+                        <p>Select and assign roles to the user</p>
+                    </div>
+
+                     <form action="{{ route('settings.team.roles.update', $user->id) }}" id="editRoleForm{{ $user->id }}" class="row g-3" method="post">
+            @method('PUT')
+            @csrf
+            <div class="col-12 mb-4">
+              <label class="form-label" for="inputRoleName{{ $user->id }}">Role Name</label>
+              <input type="text" id="inputRoleName{{ $user->id }}" name="name" class="form-control" value="{{ old('name')?? $user->name }}" placeholder="Enter a role name" tabindex="-1" />
+            </div>
+
+            <div class="col-12">
+              <h4>Role Permissions</h4>
+              <!-- Permission table -->
+              <div class="table-responsive overflow-hidden">
+                <table class="table table-flush-spacing">
+                  <tbody>
+                    <tr>
+                      <td class="text-nowrap fw-semibold">Administrator Access <i class="bx bx-info-circle bx-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Allows a full access to the system"></i></td>
+                      <td>
+                        <div class="form-check">
+                          <input class="form-check-input admin-access" type="checkbox" id="administratorPermission" />
+                          <label class="form-check-label" for="administratorPermission">
+                            Select All
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                    @foreach ($permissions->whereNull('parent_id') as $permission)
+                    <tr>
+                      <td class="text-nowrap fw-semibold">{{ $permission->label?? ucfirst(str_replace('_', ' ', $permission->name)) }}</td>
+                      <td>
+                        <div class="d-flex">
+                          @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
+                          <div class="form-check me-3 me-lg-5">
+                            {{-- {{dd($user->permission)}} --}}
+                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermission->name }}" id="permission{{ $childPermission->id }}"   {{ \App\Helpers\Helpers::array_in($childPermission->name, $user->permission) ? 'checked': '' }}  />
+                            <label class="form-check-label" for="permission{{ $childPermission->id }}">
+                              {{ $childPermission->label??  ucfirst(str_replace('_', ' ', str_replace($permission->name.'.', '', $childPermission->name))) }}
+                            </label>
+                          </div>
+                          @break
+                          @endforeach
+                        </div>
+                      </td>
+                    </tr>
+                    @foreach ($permissions->where('parent_child_id', "1") as $childpermissiontop)
+                      @if ($childpermissiontop->parent_id === $permission->id)
+                        <tr>
+                          <td class="pl-3">▪ {{ $childpermissiontop->label?? ucfirst(str_replace('_', ' ', $childpermissiontop->name))}}</td>
+                          <td>
+                            <div class="d-flex">
+                              @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
+                                <div class="form-check me-3 me-lg-5">
+                                  <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermissionbottom->name }}" id="permission{{ $childPermissionbottom->id }}" {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $user->permission) ? 'checked': '' }} />
+                                  <label class="form-check-label" for="permission{{ $childPermissionbottom->id }}"  >
+                                    {{ $childPermissionbottom->label??  ucfirst(str_replace('_', ' ', str_replace($permission->name.'.', '', $childPermissionbottom->name))) }}
+                                  </label>
+                                </div>
+                              @endforeach
+                            </div>
+                          </tr>
+                        </tr>
+                      @endif
+                    @endforeach
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <!-- Permission table -->
+            </div>
+
+            <div class="col-12 text-center">
+              <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+              <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+          </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--/ Basic Bootstrap Table -->
     @include('content.settings.roles.includes.create_form')
+    @include('content.settings.roles.includes.edit_form')
 
-    <x-modal id="createModal"   saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm"
-        size="md" :show="old('showCreateFormModal') ? true : false">
+    <x-modal id="createModal" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
+        :show="old('showCreateFormModal') ? true : false">
         @include('content.settings.team_members.includes.create_form')
     </x-modal>
 @endsection

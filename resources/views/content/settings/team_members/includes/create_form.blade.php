@@ -61,9 +61,12 @@
 @php
     $permissions = App\Models\Permission::all();
 @endphp
-<form id="createForm" action="{{ route('settings.team.members.store') }}" method="post" enctype="multipart/form-data">
+     <form id="createForm" method="POST" enctype="multipart/form-data">
+
     @csrf
     <div class="hidden-inputs"></div>
+    <input type="hidden" name="role_id" id="roleIdInput">
+
     <input type="hidden" name="showCreateFormModal" value="1">
     <div class="row">
         <div class="col-lg-12 mx-auto" style="margin-top: 0; padding-top: 0;">
@@ -308,4 +311,22 @@
             }
         });
     });
-    </script>
+    </script><script>
+function editRole(button) {
+    const roleId = button.getAttribute('data-role-id');
+    const roleName = button.getAttribute('data-role-name');
+
+    // Set form action for updating role
+    const form = document.getElementById('createForm');
+    form.setAttribute('action', `/settings/roles/${roleId}`);
+    document.getElementById('formMethod').value = 'PUT';
+
+    // Set input values
+    document.getElementById('inputName').value = roleName;
+    document.getElementById('roleIdInput').value = roleId;
+
+    // Optional: update modal title to indicate editing
+    const modalTitle = document.querySelector('#addRoleModal .modal-title');
+    if (modalTitle) modalTitle.innerText = 'Edit Role';
+}
+</script>
