@@ -277,7 +277,7 @@
     <div class="content-wrapper">
 
         <!-- Content -->
-        <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="container-xxl card flex-grow-1 container-p-y">
 
             <div class="view-wrapper">
                 <div id="main-feed" class="container">
