@@ -309,10 +309,11 @@
                                                                     onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                             </div>
                                                             <div class="col-md-10">
-                                                                    <p class="m-0" title="{{ $feed->title }}">
-                                                                        <b>{{ $feed->title }}</b>
-                                                                    </p>
-                                                                    <small class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                <p class="m-0" title="{{ $feed->title }}">
+                                                                    <b>{{ $feed->title }}</b>
+                                                                </p>
+                                                                <small
+                                                                    class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -331,10 +332,10 @@
                                             <div class="mt-2 mb-2">
                                                 <div
                                                     style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;">
-                                                    <div
-                                                        style="display:flex;align-items:center;width:100%;height:100%">
+                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
                                                         @if ($feed->is_comments == 1)
-                                                            <div style="display:flex;align-items:center;gap:3px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-right:2px">
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-right:2px">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
                                                                     style="width:100%;height:100%;object-fit:cover"><span
                                                                     style="font-weight:400;font-family:Genos">0</span>
@@ -350,15 +351,15 @@
                                                         @endif
                                                     </div>
                                                     @if ($feed->is_emoji == 1)
-                                                            <div
-                                                                style="display:flex;align-items:center;gap:2px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px 16px 5px 5px;">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                                    style="width:100%;height:100%;object-fit:cover">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                                    style="width:100%;height:100%;object-fit:cover">
-                                                                <span style="font-weight:400;font-family:Genos">0</span>
-                                                            </div>
-                                                        @endif
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:2px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px 16px 5px 5px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -378,8 +379,8 @@
                                             style="min-width: unset; width: 100px;">
                                             <span style="font-family:Genos;color:#c0c0c0">Options</span>
                                             <form action="{{ route('history.destroy', $feed->id) }}"
-                                                onsubmit="confirmAction(event, () => event.target.submit())" method="post"
-                                                class="d-inline">
+                                                onsubmit="confirmAction(event, () => event.target.submit())"
+                                                method="post" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="row ml-0" style="width:100px;">
@@ -388,7 +389,8 @@
                                                         <a class="dropdown-item edit-history" style="padding: 0"
                                                             href="javascript:void(0)" data-bs-toggle="modal"
                                                             data-bs-target="#createhistoryModal"
-                                                            data-id="{{ $feed->id }}" data-name="{{ $feed->title }}"
+                                                            data-id="{{ $feed->id }}"
+                                                            data-name="{{ $feed->title }}"
                                                             data-source="{{ $feed->source }}"
                                                             data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
                                                             data-video="{{ $feed->video[0]['path'] }}"
@@ -413,146 +415,6 @@
                             </div>
                         @endforeach
                     </div>
-
-                    {{-- <div id="feed-post-1" class="card is-post">
-                                        <div class="content-wrap">
-                                            <!-- Post header -->
-                                            <div class="card-heading">
-                                                <div class="pop_sub">
-                                                    <div class="pop_head">
-                                                        <div class="pop_tit"><img
-                                                                src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
-                                                                style="width:32px;height:32px;object-fit:cover"
-                                                                onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
-                                                            <div class="pop_heading" style="">
-                                                                <div class="pop_head_line" style="">
-                                                                    <div class="pop_title" style=""></div>YekBun Team
-                                                                    <div
-                                                                        style="width:2px;height:2px;border-radius:45%;background:#00000066">
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    style="width:150px;height:6px;font-family:Genos;font-size:14px;text-align:left;text-underline-position:from-font;text-decoration-skip-ink:none;color:#7e7e7e;display:flex;align-items:center;gap:5px;position: relative;top:-9px">
-                                                                    {{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <form action="{{ route('history.destroy', $feed->id) }}"
-                                                        onsubmit="confirmAction(event, () => event.target.submit())"
-                                                        method="post" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="pop_action_div">
-                                                            <a href="javascript:void(0)"
-                                                                style="margin-right:24px;color: #2e2e2e;font-size: 12px;padding: 5px 12px;height:unset;width:unset;"
-                                                                class="pop_action">Reported Comments</a>
-                                                            <div class="nav-item dropdown">
-                                                                <a class="nav-link dropdown-toggle hide-arrow"
-                                                                    href="#" data-bs-toggle="dropdown"
-                                                                    aria-expanded="true">
-                                                                    <div class="d-flex align-items-center gap-2">
-                                                                        <i class="fas fa-ellipsis-vertical"></i>
-                                                                    </div>
-                                                                </a>
-                                                                <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                    style="min-width: unset;width:100px;"
-                                                                    data-bs-popper="static">
-                                                                    <span
-                                                                        style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-history"
-                                                                                style="padding: 0" href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createhistoryModal"
-                                                                                data-id="{{ $feed->id }}"
-                                                                                data-name="{{ $feed->title }}"
-                                                                                data-source="{{ $feed->source }}"
-                                                                                data-thumbnail="{{ asset('storage/'.$feed->thumbnail) }}"
-                                                                                data-video="{{ $feed->video[0]['path'] }}"
-                                                                                data-comments="{{ $feed->is_comments }}"
-                                                                                data-share="{{ $feed->is_share }}"
-                                                                                data-emoji="{{ $feed->is_emoji }}"
-                                                                                for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit" class="dropdown-item"
-                                                                                style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-
-                                            <!-- Post body -->
-                                            <div class="card-body col-sm-12">
-                                                <div class="row">
-                                                    <div class="post-image col-sm-12">
-                                                        <a class="view-post" data-fancybox="post1"
-                                                            data-lightbox-type="comments"
-                                                            data-thumb="{{ asset('storage/' . $feed->video[0]['path']) }}"
-                                                            href="{{ asset('storage/' . $feed->video[0]['path']) }}"
-                                                            data-id="{{ $feed->_id }}"
-                                                            data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
-                                                            <img src="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                                style="width:100%;height:450px;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Post footer -->
-                                            <div class="card-footer pt-0">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;width:100%;">
-                                                    <div
-                                                        style="display:flex;align-items:center;justify-content:space-between;width:100%;height:100%">
-                                                        @if ($feed->is_emoji == 1)
-                                                            <div
-                                                                style="display:flex;align-items:center;gap:2px;height:100%">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                                    style="width:100%;height:100%;object-fit:cover">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                                    style="width:100%;height:100%;object-fit:cover">
-                                                                <span style="font-weight:400;font-family:Genos">0</span>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    @if ($feed->is_comments == 1)
-                                                        <div style="display:flex;align-items:center;gap:3px;height:100%">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover"><span
-                                                                style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    @endif
-                                                    @if ($feed->is_share == 1)
-                                                        <div
-                                                            style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover"><span
-                                                                style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
-
-
-
                 </div>
             </div>
         </div>
