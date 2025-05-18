@@ -146,6 +146,53 @@
             gap: 5px
         }
     </style>
+    <style>
+        .card-post {
+            box-shadow: none;
+            cursor: pointer;
+        }
+
+        .card-post:hover {
+            box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+            background-clip: padding-box;
+            cursor: pointer;
+            background: #f6f6f6;
+        }
+
+        .card-post-thumbnail {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            border-radius: 12px;
+        }
+
+        .post-image {
+            position: relative;
+        }
+
+        .post-image .dropdown {
+            margin-top: -215px;
+            display: none;
+        }
+
+        .dropdown-content {
+            border: none !important;
+        }
+
+        .fancybox__container {
+            z-index: 99999 !important;
+        }
+
+        .fancybox__nav {
+            display: none !important;
+        }
+
+        .fancybox__thumbs {
+            display: none !important;
+        }
+    </style>
 @endsection
 
 @section('vendor-style')
@@ -212,6 +259,21 @@
         const dropZoneInitFunctions = [];
     </script>
 
+    <div class="d-flex justify-content-between container">
+        <div>
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">History /</span> List
+            </h4>
+        </div>
+        <div class="">
+
+            {{-- @can('artist.create') --}}
+            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createhistoryModal">Add
+                History</button>
+            {{-- @endcan --}}
+        </div>
+    </div>
+
     <div class="content-wrapper">
 
         <!-- Content -->
@@ -219,36 +281,107 @@
 
             <div class="view-wrapper">
                 <div id="main-feed" class="container">
-                    <div id="activity-feed" class="view-wrap true-dom">
 
-                        <div class="columns">
-                            <div class="column is-3 is-hidden-mobile">
-                                <div class="card">
-                                    <div class="card-body p-0 border-none">
-                                        <div class="list-group nav nav-tab p-4" role="tablist">
-                                            {{-- <a class="list-group-item list-group-item-action {{ request('type') == 'admin-feeds' ? 'active' : '' }}"
-                                                href="#tab1">
-                                                Add History<br>
+                    <input type="hidden" name="feed_id" id="feed_id">
+                    <input type="hidden" name="feed_type" id="feed_type" value="history">
+                    <input type="hidden" name="comment_parent_id" id="comment_parent_id">
 
-                                            </a> --}}
-                                            <button class="btn btn-primary add-history" data-bs-toggle="modal"
-                                                data-bs-target="#createhistoryModal"><i class="bx bx-plus me-0 me-sm-1"></i>
-                                                Add History</button>
+                    <div class="row pb-4">
+                        @foreach ($history as $feed)
+                            <div class="col-md-3">
+                                <div class="post-image">
+                                    <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post"
+                                        data-fancybox="post1" data-lightbox-type="comments"
+                                        data-thumb="{{ asset('storage/' . $feed->video[0]['path']) }}"
+                                        href="{{ asset('storage/' . $feed->video[0]['path']) }}"
+                                        data-id="{{ $feed->_id }}"
+                                        data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
+                                        <!-- Main wrap -->
+                                        <div class="content-wrap">
 
-                                            {{-- <button class="btn btn-primary mt-2">
-                                                <i class="bx bx-plus me-0 me-sm-1"></i>
-                                                Reported Histories</button> --}}
+                                            <!-- Post body -->
+                                            <div class="card-body p-0">
+
+                                                <div style="background-image: url({{ asset('storage/' . $feed->thumbnail) }});"
+                                                    class="card-post-thumbnail">
+                                                    <span class="video-thumbnail-duration">04:49</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer mt-0">
+                                                <div class="user-block">
+                                                    <div class="user-info">
+                                                        <div class="row">
+                                                            <div class="col-md-2 p-0">
+                                                                <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                                    style="width: 100px !important;height:45px !important;"
+                                                                    onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="mt-2">
+                                                                    <p class="m-0" title="Şeyda Were">
+                                                                        <b>{{ $feed->title }}</b>
+                                                                    </p>
+                                                                    <small class="time"><i>0 Views .
+                                                                            &nbsp;&nbsp;{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Post body -->
+                                        </div>
+                                        <!-- /Main wrap -->
+                                    </div>
+                                    <div class="nav-item dropdown d-block"
+                                        style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
+                                        <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class="fas fa-cog"></i>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu text-center dropdown-menu-end"
+                                            style="min-width: unset; width: 100px;">
+                                            <span style="font-family:Genos;color:#c0c0c0">Options</span>
+                                            <form action="{{ route('history.destroy', $feed->id) }}"
+                                                onsubmit="confirmAction(event, () => event.target.submit())" method="post"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="row ml-0" style="width:100px;">
+
+                                                    <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
+                                                        <a class="dropdown-item edit-history" style="padding: 0"
+                                                            href="javascript:void(0)" data-bs-toggle="modal"
+                                                            data-bs-target="#createhistoryModal"
+                                                            data-id="{{ $feed->id }}" data-name="{{ $feed->title }}"
+                                                            data-source="{{ $feed->source }}"
+                                                            data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
+                                                            data-video="{{ $feed->video[0]['path'] }}"
+                                                            data-comments="{{ $feed->is_comments }}"
+                                                            data-share="{{ $feed->is_share }}"
+                                                            data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
+                                                            <img class="pop_action_image" style="height: 26px"
+                                                                src="{{ asset('assets/svg/edit.svg') }}"></a>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="submit" data-id="681b3efba782bfb52205cc22"
+                                                            class="dropdown-item" style="padding: 0">
+                                                            <img class="pop_action_image" style="height: 26px"
+                                                                src="{{ asset('assets/svg/delete.svg') }}"></button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
 
-                            <div class="column column is-6 tab-content" id="tab1">
-                                <input type="hidden" name="feed_id" id="feed_id">
-                                <input type="hidden" name="feed_type" id="feed_type" value="history">
-                                <input type="hidden" name="comment_parent_id" id="comment_parent_id">
-                                @foreach ($history as $feed)
-                                    <div id="feed-post-1" class="card is-post">
+                    {{-- <div id="feed-post-1" class="card is-post">
                                         <div class="content-wrap">
                                             <!-- Post header -->
                                             <div class="card-heading">
@@ -382,12 +515,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="column is-3"></div>
-                        </div>
-                    </div>
+                                    </div> --}}
+
+
+
+
                 </div>
             </div>
         </div>

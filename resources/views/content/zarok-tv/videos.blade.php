@@ -1,0 +1,1020 @@
+@extends('layouts/layoutMaster')
+
+@section('title', 'ZarokTV Videos')
+
+@section('page-style')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    <style>
+        #DataTables_Table_0_wrapper .row:first-child {
+            display: none;
+        }
+
+        .btn-primary {
+            color: #fff !important;
+            background-color: #696cff !important;
+            border-color: #696cff !important;
+            box-shadow: 0 0.125rem 0.25rem 0 rgba(105, 108, 255, 0.4) !important;
+        }
+
+        .modal-content {
+            overflow: unset !important;
+        }
+
+        .pop-img {
+            width: 100%;
+        }
+
+        .pop-heading {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .pop-txt {
+            color: #000;
+            font-size: 14px;
+        }
+
+        .pop_action_div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 24px;
+            left: auto;
+            right: 20px;
+        }
+
+        .pop_action {
+            background: #F2F2F2;
+            border-radius: 7px;
+            width: 30px;
+            height:
+                30px;
+            margin: 5px;
+            cursor: pointer;
+            border: 0px;
+        }
+
+        .pop_action_image {
+            width: 30px;
+            padding: 5px;
+            height: 30px;
+            object-fit: cover
+        }
+
+        .pop_div {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 5px
+        }
+
+        .pop_sub {
+            height: 30;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            top: 10px
+        }
+
+        .pop_head {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px
+        }
+
+        .pop_tit {
+            display: flex;
+            align-items: start;
+            align-items: center
+        }
+
+        .pop_heading {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: flex-start;
+            margin-left: 5px;
+            gap: 8px
+        }
+
+        .pop_head_line {
+            font-family: Genos;
+            font-size: 20px;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .pop_title {
+            border-radius: 45%;
+            background: #00000066
+        }
+
+        .pop_description {
+            font-size: 14px;
+            font-weight: 400;
+            color: gray;
+            text-align: left;
+            background: #f7f7f7;
+            padding: 7px;
+            font-family: Genos;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: left
+        }
+
+        .pop_main_image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .1)
+        }
+
+        .pop_overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            background: #1c274C99;
+            gap: 5px
+        }
+
+        .modal-content {
+            max-height: 90vh !important;
+            /* Set max height */
+            overflow: unset !important;
+            /* Prevent overflow */
+        }
+
+        .modal-body {
+            max-height: 70vh !important;
+            /* Adjust based on your layout */
+            overflow-y: auto !important;
+            /* Enables scrolling if content exceeds max height */
+        }
+    </style>
+    <style>
+        .card-post {
+            box-shadow: none;
+            cursor: pointer;
+        }
+
+        .card-post:hover {
+            box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+            background-clip: padding-box;
+            cursor: pointer;
+            background: #f6f6f6;
+        }
+
+        .card-post-thumbnail {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            border-radius: 12px;
+        }
+
+        .post-image {
+            position: relative;
+        }
+
+        .post-image .dropdown {
+            margin-top: -215px;
+            display: none;
+        }
+
+        .dropdown-content {
+            border: none !important;
+        }
+
+        .fancybox__container {
+            z-index: 99999 !important;
+        }
+
+        .fancybox__nav {
+            display: none !important;
+        }
+
+        .fancybox__thumbs {
+            display: none !important;
+        }
+    </style>
+@endsection
+@section('vendor-style')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/tagify/tagify.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/friendkit/css/app-2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/friendkit/css/core.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+@endsection
+@section('vendor-script')
+    <!-- Fancybox -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@endsection
+
+@section('content')
+    <script>
+        const dropZoneInitFunctions = [];
+    </script>
+    {{-- Nav TAb --}}
+    <div class="d-flex justify-content-between">
+        <div>
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">ZarokTV /</span> Videos
+            </h4>
+        </div>
+        <div class="">
+
+            {{-- @can('artist.create') --}}
+            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add
+                Video
+                Clips</button>
+            {{-- @endcan --}}
+        </div>
+    </div>
+
+    <!-- Artist List Table -->
+    <div class="card">
+
+        <div class="table-responsive container pb-4 text-nowrap">
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="row m-4">
+                        <div class="col-md-6">
+                            <label for="search">Search</label>
+                            <input type="search" class="form-control" id="search" name="search">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sort_by">Sort By</label>
+                            <select name="sort_by" id="sort_by" class="form-control">
+                                <option value="">Select Sort By</option>
+                                <option value="songs">Most Songs</option>
+                                <option value="videos">Most Videos</option>
+                                <option value="likes">Most Likes</option>
+                                <option value="followers">Most Followers</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-4">
+                <div class="col-md-3">
+                    <div class="post-image">
+                        <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post"
+                            data-fancybox="post1" data-lightbox-type="comments"
+                            data-thumb="https://admin.yekbun.net/public/storage/videos/681b3eed5abae___6810a4194df3a___Şeyda_-_Were.mp4"
+                            href="https://admin.yekbun.net/public/storage/videos/681b3eed5abae___6810a4194df3a___Şeyda_-_Were.mp4"
+                            data-id="67ef066938c58e2bce0a4d72"
+                            data-demo-href="https://admin.yekbun.net/public/storage/videos/681b3eed5abae___6810a4194df3a___Şeyda_-_Were.mp4">
+                            <!-- Main wrap -->
+                            <div class="content-wrap">
+
+                                <!-- Post body -->
+                                <div class="card-body p-0">
+
+                                    <div style="background-image: url('https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg');"
+                                        class="card-post-thumbnail">
+                                        <span class="video-thumbnail-duration">04:49</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer mt-0">
+                                    <div class="user-block">
+                                        <div class="user-info">
+                                            <div class="row">
+                                                <div class="col-md-2 p-0">
+                                                    <img src="https://admin.yekbun.net/public/storage/images/68109b6ca0171___sheyda.jpg"
+                                                        style="width: 100px !important;height:45px !important;">
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="mt-2">
+                                                        <p class="m-0" title="Şeyda Were">
+                                                            <b>Şeyda Were</b>
+                                                        </p>
+                                                        <small class="time"><i>0 Views .
+                                                                &nbsp;&nbsp;07 May 2025</i></small>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Post body -->
+                            </div>
+                            <!-- /Main wrap -->
+                        </div>
+                        <div class="nav-item dropdown d-block"
+                            style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu text-center dropdown-menu-end"
+                                style="min-width: unset; width: 100px;">
+                                <span style="font-family:Genos;color:#c0c0c0">Options</span>
+                                <div class="row ml-0" style="width:100px;">
+
+                                    <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
+                                        <a class="dropdown-item edit-video" style="padding: 0" href="javascript:void(0)"
+                                            data-id="681b3efba782bfb52205cc22"
+                                            data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                            data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
+                                            for="customRadioPrime">
+                                            <img class="pop_action_image" style="height: 26px"
+                                                src="https://admin.yekbun.net/public/assets/svg/edit.svg"></a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" data-id="681b3efba782bfb52205cc22"
+                                            class="dropdown-item delete-video" style="padding: 0">
+                                            <img class="pop_action_image" style="height: 26px"
+                                                src="https://admin.yekbun.net/public/assets/svg/delete.svg"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Video Clips Modal --}}
+    <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
+        saveBtnForm="createvideoForm" size="md">
+        @include('content.include.zarok_videos.createForm', ['form' => 'createvideoForm'])
+    </x-modal>
+
+    @section('page-script')
+    <script>
+        function confirmAction(event, callback) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to delete this?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    confirmButton: 'btn btn-danger me-3',
+                    cancelButton: 'btn btn-label-secondary'
+                },
+                buttonsStyling: false
+            }).then(function(result) {
+                if (result.value) {
+                    callback();
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('table').on('click', '.delete-btn', function(event) {
+                event.preventDefault(); // Stop any default action
+                let form = $(this).closest('.delete-form'); // Get the closest form
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Are you sure you want to delete this?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    customClass: {
+                        confirmButton: 'btn btn-danger me-3',
+                        cancelButton: 'btn btn-label-secondary'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // Submit the form after confirmation
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $('.province_id').change(function() {
+            let url = $(this).data('url');
+            let id = $(this).val();
+            const self = this;
+
+            $.ajax({
+                type: 'get',
+                url: url + '/' + id,
+                success: function(response) {
+                    const cityIdEl = $(self).closest('form').find('.city_id');
+                    cityIdEl.html('');
+                    $.each(response, function(index, value) {
+                        console.log(index, value);
+                        cityIdEl.append('<option value="' + value.id + '">' + value.name +
+                            '</option>')
+                    })
+                }
+            })
+
+        });
+
+        $(document).ready(function() {
+            $('.edit-form .province_id').each(function(index, provinceEl) {
+                let url = $(provinceEl).data('url');
+                let id = $(provinceEl).val();
+                let selected = $(provinceEl).data('selected');
+
+                $.ajax({
+                    type: 'get',
+                    url: url + '/' + id,
+                    success: function(response) {
+                        const cityIdEl = $(provinceEl).closest('form').find('.city_id');
+                        cityIdEl.html('');
+                        $.each(response, function(index, value) {
+                            cityIdEl.append('<option value="' + value.id + '" ' + (value
+                                    .id == selected ? 'selected' : '') + '>' + value
+                                .name + '</option>')
+                        })
+                    }
+                })
+
+            });
+        });
+    </script>
+
+    <script>
+        'use strict';
+
+        function initializeDropzone(dropzoneId, hiddenInputName, folder, acceptedFiles, limit = 1) {
+            const previewTemplate = `<div class="row"><div class="col-md-12 d-flex justify-content-center"><div class="dz-preview dz-file-preview w-100">
+                                    <div class="dz-details">
+                                      <div class="dz-thumbnail" style="width:95%">
+                                        <img data-dz-thumbnail >
+                                        <span class="dz-nopreview">No preview</span>
+                                        <div class="dz-success-mark"></div>
+                                        <div class="dz-error-mark"></div>
+                                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                                        </div>
+                                      </div>
+                                      <div class="dz-filename" data-dz-name></div>
+                                      <div class="dz-size" data-dz-size></div>
+                                    </div>
+                                    </div></div></div>`;
+            let dropzoneKey = 0;
+            return new Dropzone(dropzoneId, {
+                url: '{{ route('file.upload') }}',
+                previewTemplate: previewTemplate,
+                parallelUploads: 1,
+                maxFilesize: 100,
+                addRemoveLinks: true,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                acceptedFiles: acceptedFiles, // Accept specified file types
+                maxFiles: limit, // Allow only one file to be selected
+                sending: function(file, xhr, formData) {
+                    formData.append('folder', folder);
+                },
+                success: function(file, response) {
+                    if (file.previewElement) {
+                        file.previewElement.classList.add("dz-success");
+                    }
+                    file.previewElement.dataset.path = response.path;
+                    const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
+                        '.hidden-inputs');
+                    hiddenInputsContainer.innerHTML +=
+                        `<input type="hidden" name="${hiddenInputName}" value="${response.path}" id="file_path" data-path="${response.path}">`;
+                    let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
+                        return match.slice(0, -2);
+                    });
+                    if (limit == 1) {
+
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${fileInputName}_file_length" id="file_length" value="${response.duration}">`;
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${fileInputName}_file_size" id="file_size" value="${response.size}">`;
+                    } else {
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${fileInputName}_file_length[]" value="${response.duration}">`;
+                        hiddenInputsContainer.innerHTML +=
+                            `<input type="hidden" name="${fileInputName}_file_size[]" value="${response.size}">`;
+                        dropzoneKey++;
+                    }
+
+                    if (hiddenInputName == 'video') {
+                        // ✅ Get video duration
+                        const video = document.createElement('video');
+                        video.preload = 'metadata';
+                        video.src = URL.createObjectURL(file);
+                        video.onloadedmetadata = function() {
+                            const duration = video.duration.toFixed(2); // ✅ Video duration in seconds
+                            generateThumbnails(response.path, parseInt(duration));
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_durations" id="file_duration" value="${duration}" data-path="${response.path}">`;
+                        }
+                    }
+
+                },
+                removedfile: function(file) {
+                    const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
+                        '.hidden-inputs');
+                    hiddenInputsContainer.querySelector(
+                        `input[data-path="${file.previewElement.dataset.path}"]`).remove();
+
+                    if (file.previewElement != null && file.previewElement.parentNode != null) {
+                        file.previewElement.parentNode.removeChild(file.previewElement);
+                    }
+
+                    $.ajax({
+                        url: '{{ route('file.delete') }}',
+                        method: 'delete',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            path: file.previewElement.dataset.path
+                        },
+                        success: function() {
+                            dropzoneKey--;
+                        }
+                    });
+
+                    $('#error-thumbnail').text("");
+                    $('#thumbnail-history').css('display', 'none');
+                    $('#generated-thumbnails').css('display', 'none');
+
+                    return this._updateMaxFilesReachedClass();
+                }
+            });
+        }
+
+        // Initialize multiple Dropzones
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDropzone('#dropzone-artist-img', 'image', 'images', 'image/*');
+            initializeDropzone('#dropzone-video', 'video', 'videos', 'video/*');
+            initializeDropzone('#dropzone-song', 'songs[]', 'audios', 'audio/*', 100);
+            initializeDropzone('#dropzone-audio', 'audio', 'audios', 'audio/*');
+
+        });
+
+        function generateThumbnails(videoPath, videoDuration) {
+            let timestamp = $("#timestamp").val();
+            console.log([videoPath, videoDuration]);
+            if (!videoPath) {
+                $('#error-thumbnail').text("Please Select Video first!");
+                return;
+            }
+
+            if (timestamp > videoDuration) {
+                $('#error-thumbnail').text("Video Duration is " + videoDuration + " seconds");
+                return;
+            }
+
+            $.ajax({
+                url: "/generate-thumbnail", // Laravel route
+                type: "POST",
+                data: {
+                    video_path: videoPath,
+                    duration: videoDuration,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    $('#error-thumbnail').text("");
+                    $('#thumbnail-history').css('display', 'block');
+                    $('#generated-thumbnails').css('display', 'block');
+                    let newSrc1 = response.thumbnail[0] + "?t=" + new Date().getTime();
+                    let newSrc2 = response.thumbnail[1] + "?t=" + new Date().getTime();
+                    let newSrc3 = response.thumbnail[2] + "?t=" + new Date().getTime();
+                    $("#thumbnail-history #img1").attr("src", newSrc1);
+                    $("#thumbnail-history #img2").attr("src", newSrc2);
+                    $("#thumbnail-history #img3").attr("src", newSrc3);
+                },
+                error: function() {
+                    $('#error-thumbnail').text("Failed to generate thumbnail.");
+                }
+            });
+        };
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('.add-video-clips').click(function() {
+                $('#error-thumbnail').text("");
+                $('#thumbnail-history').css('display', 'none');
+                $('#generated-thumbnails').css('display', 'none');
+            })
+
+            $('.generated-img').click(function() {
+                let src = $(this).attr('src');
+                $('.dz-thumbnail img').attr('src', src);
+                $('#thumbnail').val(src);
+            })
+        });
+    </script>
+
+    <script>
+        function drpzone_init() {
+            dropZoneInitFunctions.forEach(callback => callback());
+        }
+    </script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('table').on('click', '.artistDetail', function() {
+                let id = $(this).attr('data-id');
+                let artistName = $(this).attr('data-name');
+                let artistImage = $(this).attr('data-image');
+                let artistGender = $(this).attr('data-gender');
+                let artistProvince = $(this).attr('data-province');
+                let totalSongs = 0;
+                let totalSongsMbs = 0;
+                let totalVideos = 0;
+                let totalVideosMbs = 0;
+                let section = $(this).attr('data-section');
+
+                $('#artistName').text(artistName);
+                $('#artistImage').text(artistImage);
+                $('#artistGender').text(artistGender);
+                $('#artistProvince').text(artistProvince);
+                $('#artistImage').attr('src', artistImage);
+                $.ajax({
+                    url: '{{ route('get.artist.detail') }}',
+                    method: 'get',
+                    data: {
+                        id: id,
+                        section: section
+                    },
+                    success: function(response) {
+                        // Log the response to see the structure
+
+
+                        // Clear existing data
+                        $('#songs-tbody').empty();
+                        $('#videos-tbody').empty();
+
+                        // Update Songs Tab
+                        if (response.songs && response.songs.length > 0) {
+                            response.songs.forEach(song => {
+                                totalSongsMbs += parseFloat(song.file_size);
+                                const deleteUrl =
+                                    '{{ url('/') }}/musics/delete_song/' + song
+                                    ._id;
+                                $('#songs-tbody').append(`
+                                    <tr>
+                                        <td>${song.custom_id || song._id}</td>
+                                        <td>
+                                            ${song.music_type ? `<img src="{{ asset('assets/svg/labels/') }}/${song.music_type}.svg" />`: 'N/A'}
+                                            </td>
+                                        <td><p class="m-0">${song.name}</p>
+                                            <small><i>${song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB'}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
+                                        </td>
+                                        <td><audio src="{{ asset('storage/${song.audio}') }}" controls></audio></td>
+                                        <td>${song.total_listen || 'N/A'}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <!-- Delete -->
+                                                <form action="${deleteUrl}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove">
+                                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path opacity="0.5" d="M9.84961 4.04492C10.2614 2.87973 11.3727 2.04492 12.6789 2.04492C13.9851 2.04492 15.0964 2.87973 15.5082 4.04492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                            <path d="M21.1798 6.04492H4.17969" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                            <path d="M19.5124 8.54492L19.0524 15.444C18.8754 18.0989 18.7869 19.4264 17.9219 20.2357C17.0569 21.0449 15.7265 21.0449 13.0657 21.0449H12.2924C9.63155 21.0449 8.30115 21.0449 7.43614 20.2357C6.57113 19.4264 6.48264 18.0989 6.30564 15.444L5.8457 8.54492" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                            <path opacity="0.5" d="M10.1797 11.0449L10.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                            <path opacity="0.5" d="M15.1797 11.0449L14.6797 16.0449" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `);
+                            });
+
+                            totalSongs = response.songs.length;
+                            totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs / 1024)
+                                .toFixed(1) + 'GB' : totalSongsMbs.toFixed(1) + 'MB');
+                            $('#total_songs').html(`<i>${totalSongs} / ${totalSongsMbs}</i>`);
+
+                        } else {
+                            $('#songs-tbody').append(
+                                '<tr><td class="text-center" colspan="8"><b>No Data found.</b></td></tr>'
+                            );
+                        }
+
+                        // Update Videos Tab
+                        if (response.clips && response.clips.length > 0) {
+                            response.clips.forEach(video => {
+                                totalVideosMbs += parseFloat(video.video_file_size);
+                                const deleteVideoUrl =
+                                    '{{ url('/') }}/video-clips/' + video._id;
+                                var photoThumbnail;
+                                if (video.thumbnail !== null) {
+                                    photoThumbnail = `
+                                        <div style="background-image: url('{{ asset('storage/${video.thumbnail}') }}');" class="card-post-thumbnail">
+                                            <span class="video-thumbnail-duration">${video.video_file_length || '00:00'}</span>
+                                        </div>`;
+                                } else {
+                                    photoThumbnail = ` <div style="background-color: grey;" class="card-post-thumbnail">
+                                            <center><i class="fas fa-photo-film" style="position: absolute;top: 66px;bottom: auto;font-size: 50px;right: auto;left: 111px;"></i></center>
+                                            <span class="video-thumbnail-duration">${video.video_file_length || '00:00'}</span>
+                                        </div>`;
+                                }
+                                $('#videos-tbody').append(`
+
+                                <div class="col-md-4">
+                                    <div class="post-image">
+                                        <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post" data-fancybox="post1" data-lightbox-type="comments" data-thumb="{{ asset('storage/${video.video}') }}" href="{{ asset('storage/${video.video}') }}" data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('storage/${video.video}') }}">
+                                            <!-- Main wrap -->
+                                            <div class="content-wrap">
+
+                                                <!-- Post body -->
+                                                <div class="card-body p-0">
+                                                    ${photoThumbnail}
+                                                </div>
+                                                <div class="card-footer mt-0">
+                                                    <div class="user-block">
+                                                        <div class="user-info">
+                                                            <div class="row">
+                                                                <div class="col-md-2 p-0">
+                                                                    <img src="${artistImage}" style="width: 100px !important;height:45px !important;">
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <div class="mt-2">
+                                                                        <p class="m-0" title="${video.video_file_name || 'N/A'}">
+                                                                            <b>${(video.video_file_name || 'N/A').length > 17 ? video.video_file_name.substring(0, 17) + '...' : video.video_file_name || 'N/A'}</b>
+                                                                        </p>
+                                                                        <small class="time"><i>${video.total_listen || '0'} Views .
+                                                                                &nbsp;&nbsp;${formatDate(video.created_at)}</i></small>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /Post body -->
+                                            </div>
+                                            <!-- /Main wrap -->
+                                        </div>
+                                        <div class="nav-item dropdown d-block" style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
+                                            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="fas fa-cog"></i>
+                                                </div>
+                                            </a>
+                                            <div class="dropdown-menu text-center dropdown-menu-end" style="min-width: unset;width:100px;" data-bs-popper="static">
+                                                <span style="font-family:Genos;color:#c0c0c0">Options</span>
+                                                <div class="row ml-0" style="width:100px;">
+
+                                                    <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
+                                                        <a class="dropdown-item edit-video" style="padding: 0" href="javascript:void(0)"
+                                                        data-id="${video._id}"
+                                                        data-thumbnail="{{ asset('storage/${video.thumbnail}') }}"
+                                                        data-artist_id="${video.artist_id}"
+                                                        data-status="${video.status}"
+                                                        for="customRadioPrime">
+                                                            <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/edit.svg') }}"></a>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="button" data-id="${video._id}" class="dropdown-item delete-video" style="padding: 0">
+                                                            <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/delete.svg') }}"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`);
+
+                            });
+
+                            totalVideos = response.clips.length;
+                            totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs / 1024)
+                                .toFixed(1) + 'GB' : totalVideosMbs.toFixed(1) + 'MB');
+                            $('#total_videos').html(
+                                `<i>${totalVideos} / ${totalVideosMbs}</i>`);
+                        } else {
+                            $('#videos-tbody').append(
+                                '<tr><td class="text-center" colspan="8"><b>No Data found.</b></td></tr>'
+                            );
+                        }
+                    }
+                });
+            });
+
+            function formatDate(dateString) {
+                let date = new Date(dateString);
+                let options = {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                };
+                return date.toLocaleDateString('en-GB', options).replace(',', '');
+            }
+
+            $('form').on('submit', function(event) {
+                event.preventDefault();
+                const form = $(this);
+                const formData = new FormData(form[0]);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: form.attr('method'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Handle success
+                        $('#editAlbumModal' + formData.get('id')).modal('hide');
+                        window.location.reload();
+                    },
+                    error: function(error) {
+                        // Handle error
+                        alert('Failed to Submit!');
+                    }
+                });
+            });
+
+
+            $(document).on('click', '.change_music_category', function() {
+                let music_id = $(this).attr('data-music_id');
+                $('#music_id').val(music_id);
+            });
+
+            $('button').click(function() {
+                $('audio, video').each(function() {
+                    this.pause(); // Pause the media
+                    this.currentTime = 0; // Reset to start
+                });
+            });
+
+            $('[name="music_type"]').change(function() {
+                if ($(this).val() !== "" && $(this).val() !== null) {
+                    $('#song-upload').css('display', 'block');
+                } else {
+                    $('#song-upload').css('display', 'none');
+                }
+            })
+            $(document).on('click', '.edit-video', function() {
+                $('#createvideoModal #artist_id').val($(this).attr('data-artist_id'));
+                $('#createvideoModal #video_id').val($(this).attr('data-id'));
+                $('#createvideoModal #status').val($(this).attr('data-status'));
+                $('#createvideoModal .modal-header h4').text('Edit Video Clips');
+                $('button[type="submit"]').text('Update');
+                const secondModal = new bootstrap.Modal(document.getElementById('createvideoModal'));
+                secondModal.show();
+                $('#dropzone-video').css('background-image', 'url(' + $(this).attr("data-thumbnail") + ')');
+                $('#dropzone-video').css('background-size', 'cover');
+            });
+
+            $(document).on('click', '[data-bs-dismiss="modal"]', function () {
+                let modalElement = $(this).closest('.modal').attr('id');
+                $('#'+modalElement+' #artist_id').val('');
+                $('#'+modalElement+' #video_id').val('');
+                $('#'+modalElement+' #status').val('');
+                $('#createvideoModal .modal-header h4').text('Create Video Clips');
+                $('button[type="submit"]').text('Create');
+                $('#dropzone-video').css('background-image', 'unset');
+                $('#dropzone-video').css('background-size', 'unset');
+                $('#'+modalElement).hide();
+                $('.modal-backdrop:last').remove();
+            });
+
+            $(document).on('click', '.delete-video', function() {
+                let video_id = $(this).attr('data-id');
+                let button = $(this);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Are you sure you want to delete this?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    customClass: {
+                        confirmButton: 'btn btn-danger me-3',
+                        cancelButton: 'btn btn-label-secondary'
+                    },
+                    buttonsStyling: false
+                }).then(function(result) {
+                    if (result.value) {
+                        $.ajax({
+                            url: `/video-clips/${video_id}`, // Laravel route like Route::delete('video-clips/delete/{id}', ...)
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: 'The video has been deleted.',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+
+                                // Optionally remove the item from the DOM
+                                // $(`#video-row-${video_id}`).remove();
+                                button.closest('.col-md-4').remove();
+
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'Something went wrong while deleting.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            let table = $('.artist-table').DataTable({
+                // processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('artist.index') }}",
+                    data: function(d) {
+                        d.sort_by = $('#sort_by').val();
+                        d.table = 'dataTable';
+                    }
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'artist_info',
+                        name: 'artist_info'
+                    },
+                    {
+                        data: 'total_songs',
+                        name: 'total_songs'
+                    },
+                    {
+                        data: 'total_videos',
+                        name: 'total_videos'
+                    },
+                    {
+                        data: 'like',
+                        name: 'like'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+
+            $('#sort_by').on('change', function() {
+                table.draw();
+            });
+
+            $('#search').on('keyup', function() {
+                table.search($(this).val()).draw();
+            });
+        });
+    </script>
+@endsection
+@endsection
