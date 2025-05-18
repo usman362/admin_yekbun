@@ -162,7 +162,7 @@
         .card-post-thumbnail {
             height: 200px;
             width: 100%;
-            background-size: cover;
+            background-size: 100% 230px;
             background-repeat: no-repeat;
             position: relative;
             border-radius: 12px;
