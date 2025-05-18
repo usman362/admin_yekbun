@@ -289,6 +289,7 @@
                     <div class="row pb-4">
                         @foreach ($history as $feed)
                             <div class="col-md-3">
+
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
@@ -298,44 +299,75 @@
                                         data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
-
-                                            <!-- Post body -->
-                                            <div class="card-body p-0">
-
-                                                <div style="background-image: url({{ asset('storage/' . $feed->thumbnail) }});"
-                                                    class="card-post-thumbnail">
-                                                    <span class="video-thumbnail-duration">04:49</span>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer mt-0">
+                                            <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                                                 <div class="user-block">
                                                     <div class="user-info">
                                                         <div class="row">
                                                             <div class="col-md-2 p-0">
                                                                 <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
-                                                                    style="width: 100px !important;height:45px !important;"
+                                                                    style="width: 100px !important;height:36px !important;"
                                                                     onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                             </div>
                                                             <div class="col-md-10">
-                                                                <div class="mt-2">
-                                                                    <p class="m-0" title="Şeyda Were">
+                                                                    <p class="m-0" title="{{ $feed->title }}">
                                                                         <b>{{ $feed->title }}</b>
                                                                     </p>
-                                                                    <small class="time"><i>0 Views .
-                                                                            &nbsp;&nbsp;{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
-                                                                </div>
-
+                                                                    <small class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Post body -->
+                                            <div class="card-body p-0">
+
+                                                <div style="background-image: url({{ asset('storage/' . $feed->thumbnail) }});"
+                                                    class="card-post-thumbnail">
+                                                    {{-- <span class="video-thumbnail-duration">04:49</span> --}}
+                                                </div>
+                                            </div>
+
                                             <!-- /Post body -->
+                                            <div class="mt-2 mb-2">
+                                                <div
+                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;">
+                                                    <div
+                                                        style="display:flex;align-items:center;width:100%;height:100%">
+                                                        @if ($feed->is_comments == 1)
+                                                            <div style="display:flex;align-items:center;gap:3px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                        @endif
+                                                        @if ($feed->is_share == 1)
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-left:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                    @if ($feed->is_emoji == 1)
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:2px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px 16px 5px 5px;">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover">
+                                                                <span style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                        @endif
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                         <!-- /Main wrap -->
                                     </div>
                                     <div class="nav-item dropdown d-block"
-                                        style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
+                                        style="margin-top: 0;position: absolute;right: 16px;top: 20px;bottom: auto;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center gap-2">
@@ -377,6 +409,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         @endforeach
                     </div>
