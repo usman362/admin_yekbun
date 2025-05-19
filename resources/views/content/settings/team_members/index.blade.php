@@ -36,8 +36,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('donations.organizations.create') }}">
-                          <button class="btn btn-primary">Add Organization</button>
-                        </a> -->
+                      <button class="btn btn-primary">Add Organization</button>
+                    </a> -->
         </div>
     </div>
     <!-- Basic Bootstrap Table -->
@@ -117,13 +117,10 @@
                                     </button>
 
 
-                                    <button type="button" class="btn btn-sm btn-icon ms-2 edit-role-btn"
-                                        data-role-id="{{ $user->roles->first()->id ?? '' }}"
-                                        data-user-id="{{ $user->id }}" data-bs-toggle="modal"
-                                        data-bs-target="#editUserRolesModal">
+                                    <button type="button" class="btn btn-sm btn-icon ms-2" data-bs-toggle="modal"
+                                        data-bs-target="#editUserRolesModal{{ $user->id }}">
                                         <i class="bx bx-pencil"></i> Edit Roles
                                     </button>
-
 
 
 
@@ -176,8 +173,8 @@
             /* space for close button */
         }
     </style>
- <div class="modal fade" id="editUserRolesModal" tabindex="-1" aria-hidden="true">
 
+    <div class="modal fade" id="editUserRolesModal{{ $user->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-dialog-centered modal-md">
             <div class="modal-content p-0">
                 <div class="modal-body">
@@ -222,58 +219,44 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @foreach ($permissions->whereNull('parent_id') as $permission)
-                                            <tr>
-                                                <td class="text-nowrap fw-semibold">
-                                                    {{ $permission->label ?? ucfirst(str_replace('_', ' ', $permission->name)) }}
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
-                                                            <div class="form-check me-3 me-lg-5">
-                                                                {{-- {{dd($user->permission)}} --}}
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="permissions[]"
-                                                                    value="{{ $childPermission->name }}"
-                                                                    id="permission{{ $childPermission->id }}"
-                                                                    {{ \App\Helpers\Helpers::array_in($childPermission->name, $user->permission) ? 'checked' : '' }} />
-                                                                <label class="form-check-label"
-                                                                    for="permission{{ $childPermission->id }}">
-                                                                    {{ $childPermission->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermission->name))) }}
-                                                                </label>
-                                                            </div>
-                                                        @break
-                                                    @endforeach
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @foreach ($permissions->where('parent_child_id', '1') as $childpermissiontop)
-                                            @if ($childpermissiontop->parent_id === $permission->id)
-                                                <tr>
-                                                    <td class="pl-3">▪
-                                                        {{ $childpermissiontop->label ?? ucfirst(str_replace('_', ' ', $childpermissiontop->name)) }}
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex">
-                                                            @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
-                                                                <div class="form-check me-3 me-lg-5">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="permissions[]"
-                                                                        value="{{ $childPermissionbottom->name }}"
-                                                                        id="permission{{ $childPermissionbottom->id }}"
-                                                                        {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $user->permission) ? 'checked' : '' }} />
-                                                                    <label class="form-check-label"
-                                                                        for="permission{{ $childPermissionbottom->id }}">
-                                                                        {{ $childPermissionbottom->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermissionbottom->name))) }}
-                                                                    </label>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                </tr>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    @endforeach
+                                          @foreach ($permissions->whereNull('parent_id') as $permission)
+                    <tr>
+                      <td class="text-nowrap fw-semibold">{{ $permission->label?? ucfirst(str_replace('_', ' ', $permission->name)) }}</td>
+                      <td>
+                        <div class="d-flex">
+                          @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
+                          <div class="form-check me-3 me-lg-5">
+                            {{-- {{dd($role->permission)}} --}}
+                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermission->name }}" id="permission{{ $childPermission->id }}"   {{ \App\Helpers\Helpers::array_in($childPermission->name, $role->permission) ? 'checked': '' }}  />
+                            <label class="form-check-label" for="permission{{ $childPermission->id }}">
+                              {{ $childPermission->label??  ucfirst(str_replace('_', ' ', str_replace($permission->name.'.', '', $childPermission->name))) }}
+                            </label>
+                          </div>
+                          @break
+                          @endforeach
+                        </div>
+                      </td>
+                    </tr>
+                    @foreach ($permissions->where('parent_child_id', "1") as $childpermissiontop)
+                      @if ($childpermissiontop->parent_id === $permission->id)
+                        <tr>
+                          <td class="pl-3">▪ {{ $childpermissiontop->label?? ucfirst(str_replace('_', ' ', $childpermissiontop->name))}}</td>
+                          <td>
+                            <div class="d-flex">
+                              @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
+                                <div class="form-check me-3 me-lg-5">
+                                  <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $childPermissionbottom->name }}" id="permission{{ $childPermissionbottom->id }}" {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $role->permission) ? 'checked': '' }} />
+                                  <label class="form-check-label" for="permission{{ $childPermissionbottom->id }}"  >
+                                    {{ $childPermissionbottom->label??  ucfirst(str_replace('_', ' ', str_replace($permission->name.'.', '', $childPermissionbottom->name))) }}
+                                  </label>
+                                </div>
+                              @endforeach
+                            </div>
+                          </tr>
+                        </tr>
+                      @endif
+                    @endforeach
+                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -371,43 +354,5 @@
         dropZoneInitFunctions.forEach(callback => callback());
     }
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const editRoleModal = document.getElementById('editUserRolesModal');
-    const inputRoleName = document.querySelector('#editUserRolesModal input[name="name"]');
-    const permissionCheckboxes = document.querySelectorAll('#editUserRolesModal input[type="checkbox"][name="permissions[]"]');
-
-    document.querySelectorAll('.edit-role-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const roleId = this.dataset.roleId;
-            const userId = this.dataset.userId;
-
-            // Reset all permissions
-            permissionCheckboxes.forEach(checkbox => checkbox.checked = false);
-
-            fetch(`/settings/team/roles/${roleId}/edit`)
-                .then(response => response.json())
-                .then(data => {
-                    inputRoleName.value = data.role.name;
-
-                    // Set permissions
-                    permissionCheckboxes.forEach(checkbox => {
-                        if (data.permissions.includes(checkbox.value)) {
-                            checkbox.checked = true;
-                        }
-                    });
-
-                    // Update form action
-                    document.querySelector(`#editUserRolesModal form`).action =
-                        `/settings/team/roles/${roleId}`;
-                })
-                .catch(error => {
-                    console.error('Failed to load role data:', error);
-                });
-        });
-    });
-});
-</script>
-
 <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 @endsection
