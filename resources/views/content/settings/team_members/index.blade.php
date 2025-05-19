@@ -371,5 +371,43 @@
         dropZoneInitFunctions.forEach(callback => callback());
     }
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const editRoleModal = document.getElementById('editUserRolesModal');
+    const inputRoleName = document.querySelector('#editUserRolesModal input[name="name"]');
+    const permissionCheckboxes = document.querySelectorAll('#editUserRolesModal input[type="checkbox"][name="permissions[]"]');
+
+    document.querySelectorAll('.edit-role-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const roleId = this.dataset.roleId;
+            const userId = this.dataset.userId;
+
+            // Reset all permissions
+            permissionCheckboxes.forEach(checkbox => checkbox.checked = false);
+
+            fetch(`/settings/team/roles/${roleId}/edit`)
+                .then(response => response.json())
+                .then(data => {
+                    inputRoleName.value = data.role.name;
+
+                    // Set permissions
+                    permissionCheckboxes.forEach(checkbox => {
+                        if (data.permissions.includes(checkbox.value)) {
+                            checkbox.checked = true;
+                        }
+                    });
+
+                    // Update form action
+                    document.querySelector(`#editUserRolesModal form`).action =
+                        `/settings/team/roles/${roleId}`;
+                })
+                .catch(error => {
+                    console.error('Failed to load role data:', error);
+                });
+        });
+    });
+});
+</script>
+
 <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 @endsection
