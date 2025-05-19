@@ -63,6 +63,7 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
+        dd($request->all());
 
         $permissions = Permission::whereIn('name', ['dashboard.read'])->get();
 
