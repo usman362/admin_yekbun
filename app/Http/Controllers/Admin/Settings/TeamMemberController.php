@@ -25,13 +25,16 @@ class TeamMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $users = User::where('status', 1)->where('is_admin_user', 1);
-        $users = $users->with('roles')->get();
-        $roles = Role::all();
-        return view("content.settings.team_members.index", compact("users", "roles"));
-    }
+public function index()
+{
+    $users = User::where('status', 1)->where('is_admin_user', 1)
+                 ->with('roles') // eager load roles
+                 ->get();
+
+    $roles = Role::all();
+    return view("content.settings.team_members.index", compact("users", "roles"));
+}
+
 
     /**
      * Store a newly created resource in storage.
