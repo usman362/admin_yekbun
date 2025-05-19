@@ -36,8 +36,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('donations.organizations.create') }}">
-                      <button class="btn btn-primary">Add Organization</button>
-                    </a> -->
+                          <button class="btn btn-primary">Add Organization</button>
+                        </a> -->
         </div>
     </div>
     <!-- Basic Bootstrap Table -->
@@ -117,10 +117,19 @@
                                     </button>
 
 
-                                    <button type="button" class="btn btn-sm btn-icon ms-2" data-bs-toggle="modal"
-                                        data-bs-target="#editUserRolesModal{{ $user->id }}">
-                                        <i class="bx bx-pencil"></i> Edit Roles
-                                    </button>
+                                    @if ($user->roles->isNotEmpty())
+                                        <button type="button" class="btn btn-sm btn-icon ms-2" data-bs-toggle="modal"
+                                            data-bs-target="#editUserRolesModal{{ $user->roles->first()->id }}">
+                                            <i class="bx bx-pencil"></i> Edit Roles
+                                        </button>
+
+                                        @include('content.settings.roles.includes.edit_form', [
+                                            'role' => $user->roles->first(),
+                                            'permissions' => $permissions,
+                                        ])
+                                    @else
+                                        
+                                    @endif
 
 
 

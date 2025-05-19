@@ -993,3 +993,4 @@ Route::delete('/list-prays-card/{card}', [WishesReasonController::class, 'destro
 //Sympathy
 Route::post('/list-sympathy-cards-store', [WishesReasonController::class, 'sympathyStore'])->name('list.sympathy-cards.store');
 Route::delete('/list-sympathy-card/{card}', [WishesReasonController::class, 'destroysympathy'])->name('list.sympathy-cards.delete');
+Route::get('/settings/team/roles/{id}/edit', [RoleController::class, 'edit2'])->name('settings.team.roles.edit');
