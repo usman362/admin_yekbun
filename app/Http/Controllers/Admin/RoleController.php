@@ -63,7 +63,7 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        dd($request->all());
+       // dd($request->all());
 
         $permissions = Permission::whereIn('name', ['dashboard.read'])->get();
 
@@ -108,6 +108,7 @@ class RoleController extends Controller
 
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -149,4 +150,14 @@ class RoleController extends Controller
         Role::where('_id', $objectId)->delete();
         return back()->with("success", "Role successfully deleted.");
     }
+    public function edit($id)
+{
+    $role = Role::findOrFail($id);
+    $rolePermissions = $role->permissions()->pluck('name')->toArray();
+
+    return response()->json([
+        'role' => $role,
+        'permissions' => $rolePermissions,
+    ]);
+}
 }

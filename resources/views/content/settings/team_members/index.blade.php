@@ -36,8 +36,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('donations.organizations.create') }}">
-                      <button class="btn btn-primary">Add Organization</button>
-                    </a> -->
+                          <button class="btn btn-primary">Add Organization</button>
+                        </a> -->
         </div>
     </div>
     <!-- Basic Bootstrap Table -->
@@ -117,10 +117,13 @@
                                     </button>
 
 
-                                    <button type="button" class="btn btn-sm btn-icon ms-2" data-bs-toggle="modal"
-                                        data-bs-target="#editUserRolesModal{{ $user->id }}">
+                                    <button type="button" class="btn btn-sm btn-icon ms-2 edit-role-btn"
+                                        data-role-id="{{ $user->roles->first()->id ?? '' }}"
+                                        data-user-id="{{ $user->id }}" data-bs-toggle="modal"
+                                        data-bs-target="#editUserRolesModal">
                                         <i class="bx bx-pencil"></i> Edit Roles
                                     </button>
+
 
 
 
@@ -173,8 +176,8 @@
             /* space for close button */
         }
     </style>
+ <div class="modal fade" id="editUserRolesModal" tabindex="-1" aria-hidden="true">
 
-    <div class="modal fade" id="editUserRolesModal{{ $user->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-dialog-centered modal-md">
             <div class="modal-content p-0">
                 <div class="modal-body">
