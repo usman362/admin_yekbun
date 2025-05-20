@@ -61,7 +61,37 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'fcm_token',
         'is_admin_user',
         'is_superadmin',
-        'isPrivacyPolicyAccepted'
+        'isPrivacyPolicyAccepted',
+        'maritalStatus',
+        'is_else',
+        'is_language',
+        'is_music',
+        'family_image',
+        'friends_image',
+        'friends_request',
+        'get_greetings',
+        'public_image',
+        'search_option',
+        'info_banner',
+        'new_donation',
+        'new_events',
+        'new_history',
+        'new_music',
+        'new_news',
+        'new_videos',
+        'new_votes',
+        'live_stream',
+        'play_video',
+        'video_call',
+        'interview',
+        'upload_video',
+        'play_music',
+        'public_image',
+        'friends_image',
+        'family_image',
+        'friends_request',
+        'get_greetings',
+        'search_option',
     ];
 
     /**
@@ -129,7 +159,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     }
 
 
-  
+
     public function role()
 {
     return $this->belongsToMany(Role::class)->limit(1);

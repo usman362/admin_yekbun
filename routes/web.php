@@ -150,7 +150,20 @@ Route::get('/test-fcm', function () {
     return 'success';
 });
 
-
+Route::get('test',function(){
+    $users = App\Models\User::all();
+    foreach($users as $user)
+    {
+        $user->public_image="true";
+        $user->friends_image= "true";
+        $user->family_image= "true";
+        $user->friends_request= "true";
+        $user->get_greetings= "true";
+        $user->search_option="true";
+        $user->save();
+    }
+    return 'success';
+});
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
 
