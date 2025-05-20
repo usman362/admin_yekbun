@@ -168,7 +168,7 @@
                             <li><a class="dropdown-item" href=" ">Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" action="">
                                     @csrf
                                     <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
