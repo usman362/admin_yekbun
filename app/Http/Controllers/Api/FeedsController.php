@@ -178,6 +178,44 @@ class FeedsController extends Controller
         }
     }
 
+    public function search_user(Request $request)
+    {
+        $users = User::whereHas('feeds')->where('name', 'LIKE', '%' . $request->search . '%')->OrWhere('last_name', 'LIKE', '%' . $request->search . '%')->get();
+        return ResponseHelper::sendResponse($users, 'Users has been Fetched Successfully!');
+    }
+
+    public function change_permission(Request $request, $id)
+    {
+        $feed = Feed::find($id);
+        $feed->user_type = $request->user_type;
+        $feed->save();
+        return ResponseHelper::sendResponse($feed, 'Feed has been Updated Successfully!');
+    }
+
+    public function delete($id)
+    {
+        $feed = Feed::find($id);
+        if (!empty($feed->images)) {
+            foreach ($feed->images as $image) {
+                $file_path = public_path('storage/' . $image['path']);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+        }
+
+        if (!empty($feed->videos)) {
+            foreach ($feed->videos as $video) {
+                $file_path = public_path('storage/' . $video['path']);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+        }
+        $feed->delete();
+        return ResponseHelper::sendResponse([], 'Feed has been Deleted Successfully!');
+    }
+
     private function getMediaDuration($file)
     {
         // Initialize FFMpeg
@@ -491,7 +529,7 @@ class FeedsController extends Controller
 
             return ResponseHelper::sendResponse([], 'Comment has been Deleted!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse([], 'Failed to Delete Comment', false, 403 );
+            return ResponseHelper::sendResponse([], 'Failed to Delete Comment', false, 403);
         }
     }
 
