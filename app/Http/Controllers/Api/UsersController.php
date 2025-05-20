@@ -26,7 +26,6 @@ class UsersController extends Controller
     public function users_details(Request $request, $id)
     {
         $user = User::with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
-
         $friend = UserFriends::where('friend_id', $user->id)->where('user_id', auth()->user()->id)->first();
         $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', auth()->user()->id)->first();
         $comingrequest = UserRequest::where('user_id', $user->id)->where('request_id', auth()->user()->id)->first();
@@ -45,7 +44,16 @@ class UsersController extends Controller
         } else {
             $is_coming = 0;
         }
-        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request, 'is_coming' => $is_coming];
+        if($user->public_image === 'true'){
+            $is_image = 1;
+        }elseif($user->family_image === 'true' && $is_friend == 1){
+            $is_image = 1;
+        }elseif($user->friends_image === 'true' && $is_friend == 1){
+            $is_image = 1;
+        }else{
+            $is_image = 0;
+        }
+        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request, 'is_coming' => $is_coming,'is_image' => $is_image];
         return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
