@@ -125,12 +125,12 @@
             @endcan
 
             @can('flaggedUser.read')
-                <a href="{{ route('flagged.users') }}" class="btn btn-outline-danger btn-sm">Flagged Users</a>
+                <a href="" class="btn btn-outline-danger btn-sm">Flagged Users</a>
             @endcan
 
             @can('flaggedchannels.read')
-                <a href="{{ route('flagged.channels') }}" class="btn btn-outline-warning btn-sm">Flagged Channels</a>
-                <a href="{{ route('agents.index') }}" class="btn btn-outline-dark btn-sm">Agents</a>
+                <a href="" class="btn btn-outline-warning btn-sm">Flagged Channels</a>
+                <a href="" class="btn btn-outline-dark btn-sm">Agents</a>
             @endcan
 
             {{-- Right Section: Shortcuts, Notifications, Profile --}}
@@ -139,7 +139,7 @@
 
                     {{-- Shortcuts --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dashboard') }}" title="Dashboard">
+                        <a class="nav-link" href="" title="Dashboard">
                             <i class="bx bx-grid-alt"></i>
                         </a>
                     </li>
@@ -164,8 +164,8 @@
                             <span class="d-none d-sm-inline">{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ route('settings') }}">Settings</a></li>
+                            <li><a class="dropdown-item" href=" ">Profile</a></li>
+                            <li><a class="dropdown-item" href=" ">Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
