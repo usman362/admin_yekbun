@@ -83,7 +83,7 @@
     // Final column for profile, shortcuts, notifications
     $cardCount++;
 
-    $colWidth = 80 / $cardCount;
+    $colWidth = 70 / $cardCount;
 @endphp
 
 <!--  Brand demo (display only for navbar-full and hide on below xl) -->
