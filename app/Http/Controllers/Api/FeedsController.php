@@ -18,6 +18,7 @@ use App\Models\FeedLikes;
 use App\Models\History;
 use App\Models\News;
 use App\Models\PopFeeds;
+use Carbon\Carbon;
 use Exception;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Auth;
@@ -219,6 +220,91 @@ class FeedsController extends Controller
         }
         $feed->delete();
         return ResponseHelper::sendResponse([], 'Feed has been Deleted Successfully!');
+    }
+
+    public function get_statistics($id){
+        $feed = Feed::with([
+            'user',
+            'views.user',
+            'likes.user',
+            'comments.user',
+            'voice_comments.user',
+            'shares.user'
+        ])->find($id);
+
+        if (!$feed) {
+            return response()->json(['message' => 'Feed not found.'], 404);
+        }
+
+        // 1. Gender count (for feed user + all related users)
+        $genderStats = ['male' => 0, 'female' => 0];
+
+        // 2. Age group buckets
+        $ageGroups = [
+            '18-24' => 0,
+            '25-30' => 0,
+            '31-35' => 0,
+            '36-40' => 0
+        ];
+
+        $totalUsers = 0;
+        $userIds = [];
+
+        // Helper function to process user
+        $processUser = function ($user) use (&$genderStats, &$ageGroups, &$userIds, &$totalUsers) {
+            if ($user && !in_array($user->_id, $userIds)) {
+                $userIds[] = $user->_id;
+                $totalUsers++;
+
+                // Gender
+                if ($user->gender === 'male') {
+                    $genderStats['male']++;
+                } elseif ($user->gender === 'female') {
+                    $genderStats['female']++;
+                }
+
+                // Age
+                if (!empty($user->dob)) {
+                    $age = Carbon::parse($user->dob)->age;
+                    if ($age >= 18 && $age <= 24) $ageGroups['18-24']++;
+                    elseif ($age >= 25 && $age <= 30) $ageGroups['25-30']++;
+                    elseif ($age >= 31 && $age <= 35) $ageGroups['31-35']++;
+                    elseif ($age >= 36 && $age <= 40) $ageGroups['36-40']++;
+                }
+            }
+        };
+
+        // Feed owner
+        $processUser($feed->user);
+
+        // Related users (views, likes, comments, etc.)
+        foreach (['views', 'likes', 'comments', 'voice_comments', 'shares'] as $relation) {
+            foreach ($feed->$relation as $item) {
+                $processUser($item->user ?? null);
+            }
+        }
+
+        // 3. Totals
+        $totalStats = [
+            'comments' => count($feed->comments),
+            'voice_comments' => count($feed->voice_comments),
+            'shares' => count($feed->shares),
+            'views' => count($feed->views),
+            'likes' => count($feed->likes),
+        ];
+
+        // Convert age group counts to percentages
+        $ageGroupPercentages = [];
+        foreach ($ageGroups as $range => $count) {
+            $ageGroupPercentages[$range] = $totalUsers > 0 ? round(($count / $totalUsers) * 100, 2) : 0;
+        }
+
+        // ✅ Final Response
+        return response()->json([
+            'gender_stats' => $genderStats,
+            'age_group_percentages' => $ageGroupPercentages,
+            'total_stats' => $totalStats
+        ]);
     }
 
     private function getMediaDuration($file)
