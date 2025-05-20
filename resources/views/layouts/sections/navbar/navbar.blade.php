@@ -446,7 +446,7 @@
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                         <img src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != 'NULL' ? asset('storage/' . Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
-                            alt class="w-px-40 h-px-40 rounded-circle">
+                            alt  style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" style="min-width: 240px;">
