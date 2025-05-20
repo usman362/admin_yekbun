@@ -175,16 +175,16 @@ class UsersController extends Controller
         try {
             // if ($request->user_type == 'family') {
             $user = User::with(['family' => function ($q) {
-                $q->with('user');
+                $q->with(['user','friend']);
             }])->find($id);
             $family_list = $user->family ?? [];
             // return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
             // } else {
             $user = User::with(['friends' => function ($q) {
-                $q->with('user');
+                $q->with(['user','friend']);
             }])->find($id);
             $friends_list = $user->friends ?? [];
-            return ResponseHelper::sendResponse(['user' => User::find($id),'friends_list' => $friends_list, 'family_list' => $family_list], 'Friends List Fetch Successfully');
+            return ResponseHelper::sendResponse(['friends_list' => $friends_list, 'family_list' => $family_list], 'Friends List Fetch Successfully');
             // }
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Error to Fetch Friends List', false, 403);
