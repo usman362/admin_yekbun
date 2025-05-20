@@ -237,7 +237,7 @@ Route::middleware('check.role:Super Admin')->group(function () {
 
 //TV Section
 
-Route::get('zarok-videos',[TVController::class,'zarokVideos'])->name('zarok.videos');
+Route::get('zarok-videos',[TvController::class,'zarokVideos'])->name('zarok.videos');
 
 
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
