@@ -180,13 +180,9 @@ class FeedsController extends Controller
 
     public function search_user(Request $request)
     {
-        $users = User::whereHas('feeds')
-            ->where(function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->search . '%')
-                    ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
-            })
-            ->get();
-
+        $users = User::whereHas('feeds')->where('name', 'LIKE', '%' . $request->search . '%')
+        // ->OrWhere('last_name', 'LIKE', '%' . $request->search . '%')
+        ->get();
         return ResponseHelper::sendResponse($users, 'Users has been Fetched Successfully!');
     }
 
