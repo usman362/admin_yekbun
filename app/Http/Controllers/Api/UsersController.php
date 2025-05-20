@@ -174,13 +174,13 @@ class UsersController extends Controller
     {
         try {
             // if ($request->user_type == 'family') {
-            $user = User::select('_id')->with(['family' => function ($q) {
+            $user = User::with(['family' => function ($q) {
                 $q->with('user');
             }])->find($id);
             $family_list = $user->family ?? [];
             // return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
             // } else {
-            $user = User::select('_id')->with(['friends' => function ($q) {
+            $user = User::with(['friends' => function ($q) {
                 $q->with('user');
             }])->find($id);
             $friends_list = $user->friends ?? [];
