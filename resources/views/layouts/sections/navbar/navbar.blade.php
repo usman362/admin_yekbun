@@ -69,11 +69,27 @@
         style="box-shadow: none; background: transparent !important;">
         <div class="{{ $containerNav }}">
 @endif
+@php
+    // Count how many cards will be visible
+    $cardCount = 0;
+
+    if (!isset($menuHorizontal)) $cardCount++;
+    if (auth()->user()?->can('channels.read')) $cardCount++;
+    if (auth()->user()?->can('users.read')) $cardCount++;
+    if (auth()->user()?->can('avatars.read')) $cardCount++;
+    if (auth()->user()?->can('flaggedUser.read')) $cardCount++;
+    if (auth()->user()?->can('flaggedchannels.read')) $cardCount++;
+    
+    // Final column for profile, shortcuts, notifications
+    $cardCount++;
+
+    $colWidth = 80 / $cardCount;
+@endphp
 
 <!--  Brand demo (display only for navbar-full and hide on below xl) -->
 @if (isset($navbarFull))
     <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
-        <a href="{{ url('/') }}" class="app-brand-link gap-2">
+        <a href="{{ url('/') }}" class="app-brand-link gap-1">
             <span class="app-brand-logo demo">
                 @include('_partials.macros', ['width' => 25, 'withbg' => '#696cff'])
             </span>
@@ -95,7 +111,9 @@
 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="gap: 4px;">
     <!-- Search Column -->
     @if (!isset($menuHorizontal))
-        <div class="col-2 card mb-0 px-3 search-wrap d-flex justify-content-center" style="height:54px;">
+    <div class="card mb-0 px-3 search-wrap d-flex justify-content-center align-items-center" style="height:54px; min-width: 200px;">
+
+       
             <div class="navbar-nav">
                 <div class="nav-item navbar-search-wrapper mb-0">
                     <div class="nav-item nav-link px-0 d-flex align-items-center">
@@ -111,12 +129,14 @@
 
     @can('channels.read')
         <!-- Channels Column -->
-        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px;">
+        <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
+       
             <ul class="navbar-nav">
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" aria-expanded="false">
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-1">
                             <img src="{{ asset('assets/img/Channels.svg') }}" alt="channel"
                                 style="width: 20px; height: 20px;">
                             <span class="fw-semibold" style="font-size: 0.85rem;">Channels</span>
@@ -158,12 +178,14 @@
     @endcan
     <!-- Users Column -->
     @can('users.read')
-        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 70px;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
+         
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-1">
                             <img src="{{ asset('assets/img/Users.svg') }}" alt="user"
                                 style="width: 20px; height: 20px;">
                             <span class="fw-semibold" style="font-size: 0.85rem;">User</span>
@@ -235,12 +257,14 @@
     @endcan
     <!-- Avatars Column -->
     @can('avatars.read')
-        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 85px;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
+       
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-1">
                             <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
                                 style="width: 20px; height: 20px;">
                             <span class="fw-semibold" style="font-size: 0.85rem;">Avatars</span>
@@ -257,10 +281,12 @@
     @endcan
     <!-- Flag User Column -->
     @can('flaggedUser.read')
-        <div class="col-1 card mb-0 d-flex justify-content-center mx- ms-4" style="height:54px; min-width: 90px;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
+         
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="{{ url('reports/flagged-users') }}">
+                    <a class="nav-link d-flex align-items-center gap-1" href="{{ url('reports/flagged-users') }}">
                         <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged User Icon"
                             style="width: 20px; height: 20px;">
                         <span class="fw-semibold">Flag user</span>
@@ -272,10 +298,11 @@
     @endcan
     <!-- Flag Channels Column -->
     @can('flaggedchannels.read')
-        <div class="col-auto card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 110px;">
+         <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="{{ url('flaggedfanpage') }}">
+                    <a class="nav-link d-flex align-items-center gap-1" href="{{ url('flaggedfanpage') }}">
                         <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged Channel Icon"
                             style="width: 20px; height: 20px;">
                         <span class="fw-semibold">Flag Channels</span>
@@ -286,10 +313,11 @@
         </div>
 
         <!-- Agents Column -->
-        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 80px;">
+           <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="">
+                    <a class="nav-link d-flex align-items-center gap-1" href="">
                         <img src="{{ asset('assets/img/Agents.svg') }}" alt="Agents Icon"
                             style="width: 20px; height: 20px;">
                         <span class="fw-semibold">Agents</span>
@@ -300,7 +328,8 @@
         </div>
     @endcan
     <!-- Combined Layout for Shortcuts, Notifications, and Profile -->
-    <div class="col-2 card mb-0 d-flex justify-content-center align-items-center mx-1 px-2 ms-4" style="height:54px;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+
 
         <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
 
@@ -960,7 +989,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-md-11">
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-1">
                                 <img src="{{ asset('assets/img/10.png') }}" alt="Avatar" class="rounded-circle"
                                     width="40" height="40">
                                 <input type="text" class="form-control form-rounded" />
