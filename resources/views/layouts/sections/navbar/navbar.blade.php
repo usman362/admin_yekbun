@@ -467,10 +467,14 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
+                    
+                    @if (Auth::user() && Auth::user()->email === 'admin@gmail.com')
                     <li><a class="dropdown-item" href="{{ route('admin_profile') }}"><i
                                 class="bx bx-user me-2"></i>My Profile</a></li>
                     <li><a class="dropdown-item" href="{{ route('admin_activity') }}"><i
                                 class="bx bx-list-ul me-2"></i>Admin Activity</a></li>
+@endif
+
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
