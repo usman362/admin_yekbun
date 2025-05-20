@@ -92,129 +92,371 @@
     </div>
 @endif
 
- <div class="navbar-nav-right d-flex align-items-center flex-wrap" id="navbar-collapse" style="gap: 10px;">
-
-    {{-- Search Box --}}
+<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="gap: 4px;">
+    <!-- Search Column -->
     @if (!isset($menuHorizontal))
-    <div class="card mb-0 px-3 py-1 d-flex align-items-center justify-content-center" style="height: 54px; min-width: 200px;">
-        <div class="navbar-search-wrapper mb-0 d-flex align-items-center">
-            <i class="bx bx-search bx-sm me-2"></i>
-            <input type="text" class="form-control form-control-sm border-0 shadow-none" placeholder="Search (Ctrl+/)" />
+        <div class="col-2 card mb-0 px-3 search-wrap d-flex justify-content-center" style="height:54px;">
+            <div class="navbar-nav">
+                <div class="nav-item navbar-search-wrapper mb-0">
+                    <div class="nav-item nav-link px-0 d-flex align-items-center">
+                        <i class="bx bx-search bx-sm me-1"></i>
+                        <input type="text" class="form-control form-control-sm" placeholder="Search (Ctrl+/)"
+                            style="border: none; box-shadow: none;" />
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     @endif
 
-    {{-- Channels --}}
+
     @can('channels.read')
-    <x-navbar.card icon="Channels.svg" title="Channels">
-        <x-navbar.item icon="bx bx-moon" url="{{ url('managecategories') }}" label="Manage Categories" />
-        <x-navbar.item icon="bx bx-desktop" url="{{ url('channelrequest?view=new_request') }}" label="Channel Request" />
-        <x-navbar.item icon="bx bx-desktop" url="{{ url('managechannel?view=new_request') }}" label="Manage Channel" />
-        <x-navbar.item icon="bx bx-user" url="{{ url('channeladmin') }}" label="Channel Admin" />
-    </x-navbar.card>
-    @endcan
+        <!-- Channels Column -->
+        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px;">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside" aria-expanded="false">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('assets/img/Channels.svg') }}" alt="channel"
+                                style="width: 20px; height: 20px;">
+                            <span class="fw-semibold" style="font-size: 0.85rem;">Channels</span>
 
-    {{-- Users --}}
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-0" style="min-width: 220px;">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('managecategories') }}">
+                                <i class="bx bx-moon me-2"></i>
+                                <span>Manage Categories</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('channelrequest?view=new_request') }}">
+                                <i class="bx bx-desktop me-2"></i>
+                                <span>Channel Request</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('managechannel?view=new_request') }}">
+                                <i class="bx bx-desktop me-2"></i>
+                                <span>Manage Channel</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3" href="{{ url('channeladmin') }}">
+                                <i class="bx bx-user me-2"></i>
+                                <span>Channel Admin</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    @endcan
+    <!-- Users Column -->
     @can('users.read')
-    <x-navbar.card icon="Users.svg" title="User">
-        <x-navbar.image-item icon="svg-dialog/educated.svg" url="{{ url('/users/educated') }}" label="Educated User" />
-        <x-navbar.image-item icon="svg-dialog/cultivated.svg" url="{{ url('/users/cultivated') }}" label="Cultivated User" />
-        <x-navbar.image-item icon="svg-dialog/academic.svg" url="{{ url('/users/academic') }}" label="Academic User" />
-        <x-navbar.submenu label="Setting">
-            <x-navbar.item url="{{ url('settings/profile-banner') }}" label="Profile Banner" />
-            <x-navbar.item url="{{ url('/settings/user-roles/educated') }}" label="User Roles" />
-            <x-navbar.item url="{{ url('/settings/reasons') }}" label="Reasons" />
-            <x-navbar.item url="{{ url('/settings/user/prefix') }}" label="User Prefix" />
-        </x-navbar.submenu>
-    </x-navbar.card>
-    @endcan
+        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 70px;">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('assets/img/Users.svg') }}" alt="user"
+                                style="width: 20px; height: 20px;">
+                            <span class="fw-semibold" style="font-size: 0.85rem;">User</span>
 
-    {{-- Avatars --}}
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-0" style="min-width: 220px;">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('/users/educated') }}">
+                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu"
+                                    style="width: 20px; height: 20px; margin-right: 10px;">
+                                <span>Educated User</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('/users/cultivated') }}">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="cul"
+                                    style="width: 20px; height: 20px; margin-right: 10px;">
+                                <span>Cultivated User</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('/users/academic') }}">
+                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="acad"
+                                    style="width: 20px; height: 20px; margin-right: 10px;">
+                                <span>Academic User</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3"
+                                href="#">
+                                <span>Setting</span>
+                                <i class="bx bx-chevron-right"></i>
+                            </a>
+                            <ul class="dropdown-menu" style="min-width: 200px;">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                        href="{{ url('settings/profile-banner') }}">
+                                        Profile Banner
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                        href="{{ url('/settings/user-roles/educated') }}">
+                                        User Roles
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                        href="{{ url('/settings/reasons') }}">
+                                        Reasons
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                        href="{{ url('/settings/user/prefix') }}">
+                                        User Prefix
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    @endcan
+    <!-- Avatars Column -->
     @can('avatars.read')
-    <x-navbar.card icon="Avatar.svg" title="Avatars">
-        <x-navbar.item url="{{ url('/avatars') }}" label="Add/manage Avatars" />
-        <x-navbar.item url="{{ url('/avatars') }}" label="Manage AI Posts" />
-    </x-navbar.card>
-    @endcan
+        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 85px;">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
+                                style="width: 20px; height: 20px;">
+                            <span class="fw-semibold" style="font-size: 0.85rem;">Avatars</span>
 
-    {{-- Flagged Users --}}
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" style="min-width: 200px;">
+                        <li><a class="dropdown-item" href="{{ url('/avatars') }}">Add/manage Avatars</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/avatars') }}">Manage AI Posts</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    @endcan
+    <!-- Flag User Column -->
     @can('flaggedUser.read')
-    <x-navbar.link-card icon="flaged.svg" label="Flag user" url="{{ url('reports/flagged-users') }}" />
-    @endcan
+        <div class="col-1 card mb-0 d-flex justify-content-center mx- ms-4" style="height:54px; min-width: 90px;">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{ url('reports/flagged-users') }}">
+                        <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged User Icon"
+                            style="width: 20px; height: 20px;">
+                        <span class="fw-semibold">Flag user</span>
 
-    {{-- Flagged Channels + Agents --}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endcan
+    <!-- Flag Channels Column -->
     @can('flaggedchannels.read')
-    <x-navbar.link-card icon="flaged.svg" label="Flag Channels" url="{{ url('flaggedfanpage') }}" />
-    <x-navbar.link-card icon="Agents.svg" label="Agents" url="#" />
+        <div class="col-auto card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 110px;">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{ url('flaggedfanpage') }}">
+                        <img src="{{ asset('assets/img/flaged.svg') }}" alt="Flagged Channel Icon"
+                            style="width: 20px; height: 20px;">
+                        <span class="fw-semibold">Flag Channels</span>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Agents Column -->
+        <div class="col-1 card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 80px;">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="">
+                        <img src="{{ asset('assets/img/Agents.svg') }}" alt="Agents Icon"
+                            style="width: 20px; height: 20px;">
+                        <span class="fw-semibold">Agents</span>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
     @endcan
+    <!-- Combined Layout for Shortcuts, Notifications, and Profile -->
+    <div class="col-2 card mb-0 d-flex justify-content-center align-items-center mx-1 px-2 ms-4" style="height:54px;">
 
-    {{-- Right Side: Shortcuts + Notifications + Profile --}}
-    <div class="card mb-0 d-flex align-items-center justify-content-center px-2 py-1" style="height:54px; min-width: 200px;">
-        <ul class="navbar-nav d-flex flex-row align-items-center gap-3 mb-0">
+        <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
 
-            {{-- Shortcuts --}}
+            <!-- Shortcuts -->
             <li class="nav-item dropdown-shortcuts dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-                    <i class="bx bx-grid-alt bx-sm"></i>
+                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
+                    data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    <i class='bx bx-grid-alt bx-sm'></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end py-0" style="width: 300px;">
-                    <div class="dropdown-menu-header border-bottom py-2 px-3 d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Shortcuts</h6>
-                        <i class="bx bx-sm bx-plus-circle text-muted"></i>
+                    <div class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
+                            <a href="javascript:void(0)" class="dropdown-shortcuts-add text-body"
+                                title="Add shortcuts">
+                                <i class="bx bx-sm bx-plus-circle"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="dropdown-shortcuts-list scrollable-container">
-                        <x-navbar.shortcut icon="Add Music.svg" label="Add Music" url="{{ url('/artist') }}" />
-                        <x-navbar.shortcut icon="Add History.svg" label="Add History" url="{{ url('/history') }}" />
-                        <x-navbar.shortcut icon="Add Surveys.svg" label="Add Voting" url="{{ url('/vote') }}" />
-                        <x-navbar.shortcut icon="Add Language.svg" label="Add Languages" url="{{ url('/language') }}" />
+
+                        <!-- Shortcut Item -->
+                        <a href="{{ url('/artist') }}"
+                            class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                            <span
+                                class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="width: 35px; height: 35px;">
+                                <img src="{{ asset('assets/img/Add Music.svg') }}" alt="Music Icon"
+                                    style="width: 20px; height: 20px;">
+                            </span>
+                            <span class="text-body">Add Music</span>
+                        </a>
+
+                        <!-- Shortcut Item -->
+                        <a href="{{ url('/history') }}"
+                            class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                            <span
+                                class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="width: 35px; height: 35px;">
+                                <img src="{{ asset('assets/img/Add History.svg') }}" alt="Music Icon"
+                                    style="width: 20px; height: 20px;">
+                            </span>
+                            <span class="text-body">Add History</span>
+                        </a>
+
+                        <!-- Shortcut Item -->
+                        <a href="{{ url('/vote') }}"
+                            class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                            <span
+                                class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="width: 35px; height: 35px;">
+                                <img src="{{ asset('assets/img/Add Surveys.svg') }}" alt="Music Icon"
+                                    style="width: 20px; height: 20px;">
+
+                            </span>
+                            <span class="text-body">Add Voting</span>
+                        </a>
+
+                        <!-- Shortcut Item -->
+                        <a href="{{ url('/language') }}"
+                            class="dropdown-shortcuts-item d-flex align-items-center px-3 py-2">
+                            <span
+                                class="dropdown-shortcuts-icon bg-label-secondary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="width: 35px; height: 35px;">
+                                <img src="{{ asset('assets/img/Add Language.svg') }}" alt="Music Icon"
+                                    style="width: 20px; height: 20px;">
+
+                            </span>
+                            <span class="text-body">Add Languages</span>
+                        </a>
+
                     </div>
                 </div>
             </li>
 
-            {{-- Notifications --}}
+            {{-- asim --}}
+            <!-- Notifications -->
             <li class="nav-item dropdown-notifications dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
+                    data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <div class="position-relative">
                         <i class="bx bx-bell bx-sm"></i>
-                        <span class="badge bg-danger rounded-pill badge-notifications position-absolute top-0 start-100 translate-middle">5</span>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill badge-notifications">5</span>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end py-0" style="width: 320px;">
-                    <li class="dropdown-menu-header border-bottom py-3 px-3 d-flex justify-content-between">
-                        <span>Notifications</span>
-                        <i class="bx bx-envelope-open"></i>
+                    <li class="dropdown-menu-header border-bottom">
+                        <div class="dropdown-header d-flex align-items-center py-3">
+                            <h5 class="text-body mb-0 me-auto">Notifications</h5>
+                            <a href="javascript:void(0)" class="dropdown-notifications-all text-body"
+                                title="Mark all as read">
+                                <i class="bx fs-4 bx-envelope-open"></i>
+                            </a>
+                        </div>
                     </li>
                     <li class="dropdown-notifications-list scrollable-container">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">No new notifications</li>
                         </ul>
                     </li>
-                    <li class="dropdown-menu-footer border-top text-center">
-                        <a href="#" class="dropdown-item text-primary p-2">View all notifications</a>
+                    <li class="dropdown-menu-footer border-top">
+                        <a href="javascript:void(0);"
+                            class="dropdown-item d-flex justify-content-center text-primary p-2">
+                            View all notifications
+                        </a>
                     </li>
                 </ul>
             </li>
 
-            {{-- Profile --}}
+            <!-- User Profile -->
             <li class="nav-item dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ Auth::user()?->image ? asset('storage/' . Auth::user()->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
-                            class="w-px-40 h-px-40 rounded-circle" alt="user" />
+                        <img src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != 'NULL' ? asset('storage/' . Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
+                            alt class="w-px-40 h-px-40 rounded-circle">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" style="min-width: 240px;">
                     <li class="px-3 py-2">
-                        <strong>{{ Auth::user()->name }}</strong>
-                        <br />
-                        <small>{{ Auth::user()->email }}</small>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="avatar avatar-online">
+                                    <img src="{{ Auth::user() && Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}"
+                                        alt class="w-px-40 h-px-40 rounded-circle">
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <span class="fw-semibold d-block">{{ Auth::user()->name ?? 'John Doe' }}</span>
+                                <small class="text-muted">{{ Auth::user()->email }}</small>
+                            </div>
+                        </div>
                     </li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('admin_profile') }}"><i
+                                class="bx bx-user me-2"></i>My Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin_activity') }}"><i
+                                class="bx bx-list-ul me-2"></i>Admin Activity</a></li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class='bx bx-power-off me-2'></i>Logout
+                        </a>
+                    </li>
                 </ul>
             </li>
-
         </ul>
     </div>
+
+
 </div>
 
 <!-- Hidden logout form -->
