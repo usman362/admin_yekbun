@@ -139,6 +139,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('search-feeds-users', [FeedsController::class, 'search_user']);
     Route::post('feeds-permission/{id}', [FeedsController::class, 'change_permission']);
     Route::delete('feeds/{id}', [FeedsController::class, 'delete']);
+    Route::get('get-feeds-statistics/{id}', [FeedsController::class, 'get_statistics']);
 
     Route::post('send-users-request', [UsersController::class, 'sendRequest']);
     Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
