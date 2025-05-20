@@ -29,7 +29,7 @@ class FeedsController extends Controller
 
     public function index()
     {
-        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        $feeds = Feed::with(['user','views','likes','comments','voice_comments','shares'])->orderBy('created_at', 'desc')->paginate(5);
 
         $data = [
             'feeds' => $feeds->items(),
