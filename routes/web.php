@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\ProfileBannerController;
 use App\Http\Controllers\Admin\StoryController;
-use App\Http\Controllers\Admin\TvController;
+use App\Http\Controllers\Admin\TVController;
 use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -237,7 +237,7 @@ Route::middleware('check.role:Super Admin')->group(function () {
 
 //TV Section
 
-Route::get('zarok-videos',[TvController::class,'zarokVideos'])->name('zarok.videos');
+Route::get('zarok-videos',[TVController::class,'zarokVideos'])->name('zarok.videos');
 
 
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
