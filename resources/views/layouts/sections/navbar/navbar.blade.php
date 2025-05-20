@@ -113,15 +113,15 @@
 
             {{-- Dynamic Buttons Based on Permissions --}}
             @can('channels.read')
-                <a href="{{ route('channels.index') }}" class="btn btn-outline-primary btn-sm">Channels</a>
+                <a href="" class="btn btn-outline-primary btn-sm">Channels</a>
             @endcan
 
             @can('users.read')
-                <a href="{{ route('users.index') }}" class="btn btn-outline-secondary btn-sm">Users</a>
+                <a href=" " class="btn btn-outline-secondary btn-sm">Users</a>
             @endcan
 
             @can('avatars.read')
-                <a href="{{ route('avatars.index') }}" class="btn btn-outline-info btn-sm">Avatars</a>
+                <a href=" " class="btn btn-outline-info btn-sm">Avatars</a>
             @endcan
 
             @can('flaggedUser.read')
