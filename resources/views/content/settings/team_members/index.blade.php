@@ -36,8 +36,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('donations.organizations.create') }}">
-                          <button class="btn btn-primary">Add Organization</button>
-                        </a> -->
+                              <button class="btn btn-primary">Add Organization</button>
+                            </a> -->
         </div>
     </div>
     <!-- Basic Bootstrap Table -->
@@ -62,7 +62,7 @@
                         <th>#</th>
                         <th>Member</th>
                         <th>Roles</th>
-                          <th>Permissions</th>
+                        <th>Permissions</th>
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
@@ -100,27 +100,20 @@
                                     <span class="badge bg-label-warning">Not assigned yet</span>
                                 @endif
                             </td>
-                             <td style="max-width: 250px; white-space: normal;">
-                        @php
-                            $permissionsList = $user->roles
-                                ->flatMap(function ($role) {
-                                    return $role->permission ?? []; // assuming 'permission' is already loaded
-                                })
-                                ->unique()
-                                ->pluck('label')
-                                ->filter()
-                                ->values()
-                                ->toArray();
-                        @endphp
+                            <td>
+                                @php
+                                    $permissions = $user->roles->flatMap->permissions->pluck('name')->unique();
+                                @endphp
 
-                        @if (count($permissionsList))
-                            @foreach ($permissionsList as $permission)
-                                <span class="badge bg-label-info mb-1">{{ $permission }}</span>
-                            @endforeach
-                        @else
-                            <span class="text-muted">No permissions</span>
-                        @endif
-                    </td>
+                                @if ($permissions->isNotEmpty())
+                                    @foreach ($permissions as $permission)
+                                        <span class="badge bg-label-info">{{ $permission }}</span>
+                                    @endforeach
+                                @else
+                                    <span class="badge bg-label-warning">No permissions</span>
+                                @endif
+                            </td>
+
                             <td>
                                 @if ((int) $user->status)
                                     <span class="badge bg-label-success me-1">Active</span>
@@ -150,7 +143,6 @@
                                             'permissions' => $permissions,
                                         ])
                                     @else
-                                        
                                     @endif
 
 
@@ -185,19 +177,19 @@
             </table>
         </div>
     </div>
-    
 
-    
-</div>
 
-<!--/ Basic Bootstrap Table -->
-@include('content.settings.roles.includes.create_form')
-@include('content.settings.roles.includes.edit_form')
 
-<x-modal id="createModal" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
-    :show="old('showCreateFormModal') ? true : false">
-    @include('content.settings.team_members.includes.create_form')
-</x-modal>
+    </div>
+
+    <!--/ Basic Bootstrap Table -->
+    @include('content.settings.roles.includes.create_form')
+    @include('content.settings.roles.includes.edit_form')
+
+    <x-modal id="createModal" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
+        :show="old('showCreateFormModal') ? true : false">
+        @include('content.settings.team_members.includes.create_form')
+    </x-modal>
 @endsection
 
 
@@ -207,39 +199,39 @@
 
 
 @section('page-script')
-<script>
-    function confirmAction(event, callback) {
-        event.preventDefault();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Are you sure you want to delete this?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            customClass: {
-                confirmButton: 'btn btn-danger me-3',
-                cancelButton: 'btn btn-label-secondary'
-            },
-            buttonsStyling: false
-        }).then(function(result) {
-            if (result.value) {
-                callback();
-            }
-        });
-    }
-</script>
-<script>
-    const rolesList = [
-        @foreach ($roles as $role)
-            {
-                value: {{ $role->id }},
-                name: '{{ $role->name }}',
-            },
-        @endforeach
-    ];
+    <script>
+        function confirmAction(event, callback) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to delete this?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    confirmButton: 'btn btn-danger me-3',
+                    cancelButton: 'btn btn-label-secondary'
+                },
+                buttonsStyling: false
+            }).then(function(result) {
+                if (result.value) {
+                    callback();
+                }
+            });
+        }
+    </script>
+    <script>
+        const rolesList = [
+            @foreach ($roles as $role)
+                {
+                    value: {{ $role->id }},
+                    name: '{{ $role->name }}',
+                },
+            @endforeach
+        ];
 
-    function tagTemplate(tagData) {
-        return `
+        function tagTemplate(tagData) {
+            return `
     <tag title="${tagData.title || tagData.email}"
       contenteditable='false'
       spellcheck='false'
@@ -253,22 +245,22 @@
       </div>
     </tag>
   `;
-    }
+        }
 
-    function suggestionItemTemplate(tagData) {
-        return `
+        function suggestionItemTemplate(tagData) {
+            return `
     <div ${this.getAttributes(tagData)}
       class='tagify__dropdown__item align-items-center ${tagData.class ? tagData.class : ''}'
       tabindex="0"
       role="option"
     ><strong>${tagData.name}</strong></div>
   `;
-    }
-</script>
-<script>
-    function drpzone_init() {
-        dropZoneInitFunctions.forEach(callback => callback());
-    }
-</script>
-<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
+        }
+    </script>
+    <script>
+        function drpzone_init() {
+            dropZoneInitFunctions.forEach(callback => callback());
+        }
+    </script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 @endsection
