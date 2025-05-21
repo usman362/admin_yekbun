@@ -31,14 +31,35 @@ class FeedsController extends Controller
     public function index(Request $request)
     {
         if (!empty($request->user_id)) {
-            $feeds = Feed::with('user')->where('user_id', $request->user_id)->orderBy('created_at', 'desc')->paginate(5);
+            $feeds = Feed::with('user')
+                ->where('user_id', $request->user_id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
         } else {
-            $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
+            $feeds = Feed::with('user')
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
         }
-        $feed = Feed::with('user')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+
+        // Get authenticated user's latest feed
+        $authFeed = Feed::with('user')
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
+        $feedItems = $feeds->items();
+        if ($authFeed) {
+            // Check if the feed already exists in the paginated items to avoid duplication
+            $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
+            if (!$alreadyExists) {
+                array_unshift($feedItems, $authFeed);
+            }
+        }
+
         $data = [
-            'feeds' => $feeds->items(),
-            'auth_feed' => $feed,
+            'feeds' => $feedItems,
+            'auth_feed' => $authFeed,
             'pagination' => [
                 'page' => $feeds->currentPage(),
                 'count' => $feeds->perPage(),
@@ -49,6 +70,7 @@ class FeedsController extends Controller
 
         return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
     }
+
 
     public function public_index(Request $request)
     {
