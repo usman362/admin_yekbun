@@ -45,7 +45,7 @@ class FeedsController extends Controller
                 ->paginate(5);
         } else {
             $feeds = Feed::with('user')
-                ->where('_id','!==',$authFeed->id)
+                ->where('_id','!==',$authFeed->_id)
                 ->orderBy('created_at', 'desc')
                 ->paginate(5);
         }
