@@ -59,7 +59,7 @@ class FeedsController extends Controller
 
         $data = [
             'feeds' => $feedItems,
-            'auth_feed' => $authFeed,
+            // 'auth_feed' => $authFeed,
             'pagination' => [
                 'page' => $feeds->currentPage(),
                 'count' => $feeds->perPage(),
