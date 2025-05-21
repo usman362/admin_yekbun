@@ -62,7 +62,8 @@
                         <th>#</th>
                         <th>Member</th>
                         <th>Roles</th>
-                        <th>Permission</th>
+                        <th>Permissoins</th>
+                       
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
@@ -100,28 +101,21 @@
                                     <span class="badge bg-label-warning">Not assigned yet</span>
                                 @endif
                             </td>
-                            <td>
-    @php
-        $permissions = collect();
-        foreach ($user->roles as $role) {
-            if (is_array($role->permissions)) {
-                $permissions = $permissions->merge($role->permissions);
-            }
-        }
-        $permissions = $permissions->unique();
-    @endphp
-
-    @if ($permissions->isNotEmpty())
-        @foreach ($permissions as $permission)
-            <span class="badge bg-label-info mb-1">
-                {{ ucfirst(str_replace('_', ' ', $permission)) }}
-            </span>
-        @endforeach
-    @else
-        <span class="text-muted">No permissions</span>
-    @endif
-</td>
-
+                             <td>
+                                {{-- {{var_dump($user->roles)}} --}}
+                                @if (isset($user->roles))
+                                    @foreach ($user->roles as $role)
+                                        @if ($role->name === 'Super Admin')
+                                            <span class="badge bg-label-primary">{{ $role->permission: }}</span>
+                                        @else
+                                            <span class="badge bg-label-dark">{{ $role->permission: }}</span>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <span class="badge bg-label-warning">Not assigned yet</span>
+                                @endif
+                            </td>
+                            
                             <td>
                                 @if ((int) $user->status)
                                     <span class="badge bg-label-success me-1">Active</span>
