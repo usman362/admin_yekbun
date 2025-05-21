@@ -174,10 +174,7 @@
 @include('content.settings.roles.includes.create_form')
 @include('content.settings.roles.includes.edit_form')
 
-<x-modal id="createModal" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md"
-    :show="old('showCreateFormModal') ? true : false">
-    @include('content.settings.team_members.includes.create_form')
-</x-modal>
+ 
 @endsection
 
 @section('page-script')
