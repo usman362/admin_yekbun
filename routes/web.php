@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\ProfileBannerController;
 use App\Http\Controllers\Admin\StoryController;
-use App\Http\Controllers\Admin\TvController;
+use App\Http\Controllers\Admin\TVController;
 use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
