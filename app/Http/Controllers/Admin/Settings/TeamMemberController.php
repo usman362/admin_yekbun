@@ -27,13 +27,17 @@ class TeamMemberController extends Controller
      */
 public function index()
 {
-    $users = User::where('status', 1)->where('is_admin_user', 1)
-                ->with('roles.permissions')
-                 ->get();
+    $users = User::where('status', 1)
+        ->where('is_admin_user', 1)
+        ->with(['roles.permissions']) // Load roles + permissions
+        ->get();
 
     $roles = Role::all();
-    return view("content.settings.team_members.index", compact("users", "roles"));
+    $permissions = Permission::all(); // Make sure this is passed if used in views
+
+    return view("content.settings.team_members.index", compact("users", "roles", "permissions"));
 }
+
 
 
     /**
