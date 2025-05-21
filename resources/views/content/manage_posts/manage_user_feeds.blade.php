@@ -198,6 +198,12 @@
             scroll-behavior: smooth;
         }
 
+        #main-feed .dragging {
+            cursor: grabbing;
+            cursor: -webkit-grabbing;
+            user-select: none;
+        }
+
         #main-feed .is-post {
             width: 360px;
             margin: 0 8px;
@@ -215,6 +221,7 @@
             padding: 8px 16px;
             border-radius: 5px;
         }
+
         #scrollRight {
             background-color: #696dff;
             border: 1px solid #696dff;
@@ -314,7 +321,7 @@
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
-                <div id="main-feed" class="container">
+                <div id="main-feed" class="container main-feed">
                     @foreach ($feeds as $feed)
                         <div class="post-image">
                             <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post" data-fancybox="post1"
@@ -490,73 +497,119 @@
     </script>
 
 
-    @section('page-script')
-        <script>
-            $('.nav-tab a:first-child').addClass('active');
+@section('page-script')
+    <script>
+        $('.nav-tab a:first-child').addClass('active');
+        $('.tab-content').hide();
+        let ii = $('.tab-content');
+        ii[1].style.display = 'block';
+        // Click function
+        $('.nav-tab a').click(function() {
+            $('.nav-tab a').removeClass('active');
+            $(this).addClass('active');
             $('.tab-content').hide();
-            let ii = $('.tab-content');
-            ii[1].style.display = 'block';
-            // Click function
-            $('.nav-tab a').click(function() {
-                $('.nav-tab a').removeClass('active');
-                $(this).addClass('active');
-                $('.tab-content').hide();
 
-                var activeTab = $(this).attr('href');
-                $(activeTab).fadeIn();
-                return false;
+            var activeTab = $(this).attr('href');
+            $(activeTab).fadeIn();
+            return false;
+        });
+
+        $('.view-post').click(function() {
+            $('video').each(function() {
+                this.pause();
+                this.currentTime = 0; // reset to beginning
             });
-
-            $('.view-post').click(function() {
-                $('video').each(function() {
-                    this.pause();
-                    this.currentTime = 0; // reset to beginning
-                });
-            })
-        </script>
-        <script>
-            function confirmAction(event, callback) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Are you sure you want to delete this?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    customClass: {
-                        confirmButton: 'btn btn-danger me-3',
-                        cancelButton: 'btn btn-label-secondary'
-                    },
-                    buttonsStyling: false
-                }).then(function(result) {
-                    if (result.value) {
-                        callback();
-                    }
-                });
-            }
-        </script>
-        <script>
-            function drpzone_init() {
-                dropZoneInitFunctions.forEach(callback => callback());
-            }
-        </script>
-        <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-        <script>
-            // Scroll right by 300px
-            $('#scrollRight').click(function() {
-                const container = document.getElementById('main-feed');
-                container.scrollLeft += 300;
-
-                // If near end, load more
-                if (container.scrollWidth - container.clientWidth - container.scrollLeft < 400) {
-                    loadMoreFeeds();
+        })
+    </script>
+    <script>
+        function confirmAction(event, callback) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to delete this?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    confirmButton: 'btn btn-danger me-3',
+                    cancelButton: 'btn btn-label-secondary'
+                },
+                buttonsStyling: false
+            }).then(function(result) {
+                if (result.value) {
+                    callback();
                 }
             });
+        }
+    </script>
+    <script>
+        function drpzone_init() {
+            dropZoneInitFunctions.forEach(callback => callback());
+        }
+    </script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
+    <script>
+        // Scroll right by 300px
+        $('#scrollRight').click(function() {
+            const container = document.getElementById('main-feed');
+            container.scrollLeft += 300;
 
-            // Scroll left by 300px
-            $('#scrollLeft').click(function() {
-                document.getElementById('main-feed').scrollLeft -= 300;
-            });
-        </script>
-    @endsection
+            // If near end, load more
+            if (container.scrollWidth - container.clientWidth - container.scrollLeft < 400) {
+                loadMoreFeeds();
+            }
+        });
+
+        // Scroll left by 300px
+        $('#scrollLeft').click(function() {
+            document.getElementById('main-feed').scrollLeft -= 300;
+        });
+    </script>
+
+    <script>
+        const slider = document.getElementById('main-feed');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('dragging');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('dragging');
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('dragging');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll-fast multiplier
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // Optional: Mobile touch support
+        let touchStartX = 0;
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('touchmove', (e) => {
+            const touchX = e.touches[0].clientX;
+            const walk = (touchStartX - touchX) * 2;
+            slider.scrollLeft = scrollLeft + walk;
+        });
+    </script>
+
+@endsection
 @endsection
