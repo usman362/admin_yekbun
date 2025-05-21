@@ -22,15 +22,15 @@ class Role extends Eloquent
         'guard_name',
         'permissions'
     ];
-    // public function getPermissionsAttribute()
-    // {
+    public function getPermissionsAttribute()
+    {
         
-    //     if (array_key_exists('permissions', $this->attributes)) {
-    //         return $this->attributes['permissions'];
-    //     } else {
-    //         return [];
-    //     }
-    // }
+        if (array_key_exists('permissions', $this->attributes)) {
+            return $this->attributes['permissions'];
+        } else {
+            return [];
+        }
+    }
 
     public function permissions() {
         
