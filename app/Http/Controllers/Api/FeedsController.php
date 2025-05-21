@@ -30,7 +30,7 @@ class FeedsController extends Controller
 
     public function index()
     {
-        $feeds = Feed::with(['user','views','likes','comments','voice_comments','shares'])->orderBy('created_at', 'desc')->paginate(5);
+        $feeds = Feed::with(['user', 'views', 'likes', 'comments', 'voice_comments', 'shares'])->orderBy('created_at', 'desc')->paginate(5);
 
         $data = [
             'feeds' => $feeds->items(),
@@ -182,11 +182,11 @@ class FeedsController extends Controller
     public function search_user(Request $request)
     {
         $users = User::whereHas('feeds')
-        ->where(function ($query) use ($request) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
-        })
-        ->get();
+            ->where(function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
+            })
+            ->get();
         return ResponseHelper::sendResponse($users, 'Users has been Fetched Successfully!');
     }
 
@@ -222,7 +222,8 @@ class FeedsController extends Controller
         return ResponseHelper::sendResponse([], 'Feed has been Deleted Successfully!');
     }
 
-    public function get_statistics($id){
+    public function get_statistics($id)
+    {
         $feed = Feed::with([
             'user',
             'views.user',
@@ -233,7 +234,7 @@ class FeedsController extends Controller
         ])->find($id);
 
         if (!$feed) {
-            return response()->json(['message' => 'Feed not found.'], 404);
+            return ResponseHelper::sendResponse([], 'Feed not found!', false, 404);
         }
 
         // 1. Gender count (for feed user + all related users)
@@ -277,21 +278,32 @@ class FeedsController extends Controller
         // Feed owner
         $processUser($feed->user);
 
-        // Related users (views, likes, comments, etc.)
-        foreach (['views', 'likes', 'comments', 'voice_comments', 'shares'] as $relation) {
-            foreach ($feed->$relation as $item) {
-                $processUser($item->user ?? null);
-            }
-        }
+        // Sections where you want images and counts
+        $sections = ['likes', 'shares', 'comments', 'voice_comments', 'views'];
+        $sectionDetails = [];
 
-        // 3. Totals
-        $totalStats = [
-            'comments' => count($feed->comments),
-            'voice_comments' => count($feed->voice_comments),
-            'shares' => count($feed->shares),
-            'views' => count($feed->views),
-            'likes' => count($feed->likes),
-        ];
+        foreach ($sections as $section) {
+            $items = $feed->$section;
+            $sectionUserImages = [];
+
+            foreach ($items as $item) {
+                $user = $item->user ?? null;
+                if ($user && !empty($user->image)) {
+                    $sectionUserImages[] = [
+                        'user_id' => $user->_id,
+                        'name' => $user->name ?? '',
+                        'image' => $user->image
+                    ];
+                }
+                $processUser($user);
+                if (count($sectionUserImages) >= 10) break; // Limit to 10 users with image
+            }
+
+            $sectionDetails[$section] = [
+                'count' => count($items),
+                'users' => $sectionUserImages
+            ];
+        }
 
         // Convert age group counts to percentages
         $ageGroupPercentages = [];
@@ -300,11 +312,11 @@ class FeedsController extends Controller
         }
 
         // ✅ Final Response
-        return response()->json([
+        return ResponseHelper::sendResponse([
             'gender_stats' => $genderStats,
             'age_group_percentages' => $ageGroupPercentages,
             'total_stats' => $totalStats
-        ]);
+        ], 'Statistics has been Fetched Successfully!');
     }
 
     private function getMediaDuration($file)
