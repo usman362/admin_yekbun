@@ -30,22 +30,26 @@ class FeedsController extends Controller
 
     public function index(Request $request)
     {
-        if (!empty($request->user_id)) {
-            $feeds = Feed::with('user')
-                ->where('user_id', $request->user_id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        } else {
-            $feeds = Feed::with('user')
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        }
 
         // Get authenticated user's latest feed
         $authFeed = Feed::with('user')
             ->where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->first();
+
+        if (!empty($request->user_id)) {
+            $feeds = Feed::with('user')
+                ->where('user_id', $request->user_id)
+                ->where('_id','!==',$authFeed->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
+        } else {
+            $feeds = Feed::with('user')
+                ->where('_id','!==',$authFeed->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
+        }
+
 
         // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
         $feedItems = $feeds->items();
