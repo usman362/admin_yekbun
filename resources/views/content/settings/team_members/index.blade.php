@@ -62,7 +62,6 @@
                         <th>#</th>
                         <th>Member</th>
                         <th>Roles</th>
-                        <th>Permissions</th>
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
@@ -100,20 +99,6 @@
                                     <span class="badge bg-label-warning">Not assigned yet</span>
                                 @endif
                             </td>
-                            <td>
-    @php
-        $permissions = $user->roles->flatMap->permissions->pluck('name')->unique();
-    @endphp
-
-    @if ($permissions->isNotEmpty())
-        @foreach ($permissions as $permission)
-            <span class="badge bg-label-info">{{ $permission }}</span>
-        @endforeach
-    @else
-        <span class="badge bg-label-warning">No permissions</span>
-    @endif
-</td>
-
                             <td>
                                 @if ((int) $user->status)
                                     <span class="badge bg-label-success me-1">Active</span>
