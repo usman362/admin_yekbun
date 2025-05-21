@@ -102,10 +102,10 @@
                             </td>
                             <td>
                                 @if (isset($user->roles))
-                                   @foreach ($role->permissions as $permission)
+                                   @foreach ($roles->permissions as $permission)
     <span class="badge bg-label-info mb-1">{{ $permission->name }}</span>
 @endforeach
-{{ dd($role->permissions) }}
+{{ dd($roles->permissions) }}
 
                                 @else
                                     <span class="badge bg-label-warning">No roles</span>
