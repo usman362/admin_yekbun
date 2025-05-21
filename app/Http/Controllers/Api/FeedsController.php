@@ -315,7 +315,7 @@ class FeedsController extends Controller
         return ResponseHelper::sendResponse([
             'gender_stats' => $genderStats,
             'age_group_percentages' => $ageGroupPercentages,
-            'total_stats' => $totalStats
+            'total_stats' => $sectionDetails
         ], 'Statistics has been Fetched Successfully!');
     }
 
