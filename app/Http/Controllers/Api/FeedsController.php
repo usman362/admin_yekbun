@@ -28,10 +28,14 @@ use Spatie\Activitylog\Models\Activity;
 class FeedsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
-        $feed = Feed::with('user')->where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->first();
+        if (!empty($request->user_id)) {
+            $feeds = Feed::with('user')->where('user_id', $request->user_id)->orderBy('created_at', 'desc')->paginate(5);
+        } else {
+            $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        }
+        $feed = Feed::with('user')->where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
         $data = [
             'feeds' => $feeds->items(),
             'auth_feed' => $feed,
@@ -46,9 +50,13 @@ class FeedsController extends Controller
         return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
     }
 
-    public function public_index()
+    public function public_index(Request $request)
     {
-        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        if (!empty($request->user_id)) {
+            $feeds = Feed::with('user')->where('user_id', $request->user_id)->orderBy('created_at', 'desc')->paginate(5);
+        } else {
+            $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        }
         $data = [
             'feeds' => $feeds->items(),
             'pagination' => [
