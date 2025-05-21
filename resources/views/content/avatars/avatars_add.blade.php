@@ -58,14 +58,14 @@
 		float:right;
 		width:100px;
 	}
-	
+
 	.source_list{
 		width:calc(100% - 50px);
 		float:left;
 		margin-bottom:10px;
 	}
 	.sources{
-		
+
 	}
 	.source_btn{
 		width:40px;
@@ -103,7 +103,7 @@
 
         <!-- Content -->
                   <div class="container-xxl flex-grow-1 container-p-y">
-            
+
             <div class="d-flex justify-content-between">
     <h4 class="fw-bold py-3 mb-4">
           Create Avatar
@@ -121,7 +121,7 @@
             <div class="modal-body">
                 <div class="row">
                     <form method="POST" id="addForm" action="#">
-                        @crsf                        
+                        @crsf
                        	<div class="col mb-3">
                             <label for="nameLarge" class="form-label">Category Name</label>
                             <input type="text" id="nameLarge" class="form-control" placeholder="Category Name" name="news_category">
@@ -146,30 +146,30 @@
 
 <!-- Basic Bootstrap Table -->
 <div class="card">
-    
-  
-        
+
+
+
         <form method="POST" enctype="multipart/form-data">
-        	
+
             @csrf
-            
+
                 <div class="row">
-                    
+
                     <h4>Create Avatar</h4>
                     <p>Add New Avatar</p>
                     <hr />
-                    
+
                     <div class="col-md-6">
-                    
+
                     	<div class="" style="text-align:center;;margin-top:30px;">
-                        
+
                         	<label for="uploadimage"><img id="avatar_image" src="{{asset('/images/uploadimage.png')}}" />	</label>
                             <input name="dp" id="uploadimage" type="file" onchange="loadFile(event)" class="dropify" data-height="90" accept="image/*" />
-                            
+
                             <button type="button" class="btn btn-danger removebtn">X</button>
-                            
+
                         </div>
-                    
+
                     	<div class="details">
                             <h4><b>Avatar Details</b></h4>
                             <div class="txt">Name and Task of Avatar</div>
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="details"
                             <h4><b>Avatar Activity</b></h4>
                             <div class="txt">Working Time</div>
@@ -212,7 +212,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="details"
                             <h4><b>Avatar Article</b></h4>
                             <div class="txt">Amount per Time</div>
@@ -239,8 +239,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="details"
                             <h4><b>Sharing Options</b></h4>
                             <div class="txt">Who can see the Post</div>
@@ -250,34 +250,34 @@
                                     	<label for="alluser">All Users</label>
                                     	<input type="radio" id="alluser"  name="sharing_options" value="0"  />
                                     </div>
-                                	
+
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="bordered">
+                                        <label for="cul_users">Cultivated Users</label>
+                                        <input type="radio" id="cul_users" name="sharing_options" value="1" checked="checked" />
+                                    </div>
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="bordered">
                                     	<label for="educated_users">Educated Users</label>
-                                    	<input type="radio" id="educated_users" name="sharing_options" value="1" checked="checked"  />
+                                    	<input type="radio" id="educated_users" name="sharing_options" value="2"/>
                                     </div>
-                                </div>
-                                <div class="col-md-6 ">
-                                	<div class="bordered">
-                                    	<label for="cul_users">Cultivated Users</label>
-                                    	<input type="radio" id="cul_users" name="sharing_options" value="2"  />
-                                    </div>
-                                	
                                 </div>
                                 <div class="col-md-6 ">
                                 	<div class="bordered">
                                     	<label for="ac_users">Academic Users</label>
                                     	<input type="radio" id="ac_users" name="sharing_options" value="3"  />
                                     </div>
-                                	
+
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                    
-                    
+
+
+
+
                     <div class="details">
                             <h4><b>Reaction Options</b></h4>
                             <div class="txt">User reactions for Post</div>
@@ -288,7 +288,7 @@
                                           <input class="form-check-input closetogglebtn" checked="checked" name="text_comments" type="checkbox" >
                                         </div>
                                     </div>
-                                	
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="bordered">
@@ -303,7 +303,7 @@
                                           <input class="form-check-input closetogglebtn" name="share_post" type="checkbox" >
                                         </div>
                                     </div>
-                                	
+
                                 </div>
                                 <div class="col-md-6 ">
                                 	<div class="bordered">
@@ -311,13 +311,13 @@
                                           <input class="form-check-input closetogglebtn" name="like_post" type="checkbox" >
                                         </div>
                                     </div>
-                                	
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                     <!-- col6 start -->
                     <div class="col-md-6">
                         <div class="details">
@@ -336,7 +336,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="details">
                             <h4><b>Image Setting</b>
                                  <div  class="form-check form-switch mb-2 righ-check-option">
@@ -353,7 +353,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="details">
                             <h4><b>Video Setting</b>
                                  <div  class="form-check form-switch mb-2 righ-check-option">
@@ -384,21 +384,21 @@
                                     <select class="form-control" name="select_lang">
                                         <option value="">Select Language</option>
 
-                                        
+
                                             <option value="English">English</option>
                                             <option value="Kurdi">Kurdi</option>
                                             <option value="Deutsch">Deutsch</option>
                                             <option value="Arabic">Arabic</option>
-                                        
+
 
                                     </select>
-                                	
+
                                 </div>
                                 <div class="col-md-6">
                                 <select class="form-control" name="translate_lang">
                                         <option value="">Translate To</option>
-                                        
-                                        
+
+
                                         <option value="English">English</option>
                                             <option value="Kurdi">Kurdi</option>
                                             <option value="Deutsch">Deutsch</option>
@@ -409,11 +409,11 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="details">
                             <h4><b>Sources</b>
-                                 
+
                             </h4>
                             <div class="txt">Article Sources List</div>
                             <div class="row" id="sourcelist">
@@ -422,25 +422,25 @@
                                     <button type="button" onclick="addnew();" class="btn btn-sm btn-icon source_btn" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Add">
                                 	<i class="bx bx-plus"></i>
                                 </button>
-                                    
+
                                 </div>
-                                
-                               
+
+
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
                     <!-- col6 ends -->
-                   
-                    
+
+
                    <!-- row -->
                     </div>
-               
+
 
             <div class="row">
             	<div class="col-md-12 text-center">
-                
+
                 	<a href="{{url('avatars')}}" class="btn btn-label-secondary">Back</a>
                 	<button type="submit" class="btn btn-default" style="border: solid 2px;">Save changes</button>
             	</div>
@@ -457,57 +457,57 @@
           </div>
           <!-- / Content -->
 
-        
+
           <div class="content-backdrop fade"></div>
         </div>
         <!--/ Content wrapper -->
         @section('page-script')
-      
+
 	  	<script>
-			
-			
+
+
 			var imgsrc = $("#avatar_image").attr("src");
-			
-			
-			
+
+
+
 			setTimeout(function(){
 				$(".alert-message").fadeOut("slow");
 			}, 5000);
-		
-		
+
+
 			function addnew(){
 				var str = '<div class="col-md-12 sources">'
                 str = str + '<input class="form-control source_list" name="source_link[]" placeholder="Add Source Link Here" />'
 				str = str + '<button type="button"  class="btn btn-sm btn-icon source_btn remove" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Add">';
 				str = str + '<i class="bx bx-trash"></i></button></div>';
-				
-				$("#sourcelist").append(str);	
+
+				$("#sourcelist").append(str);
 			}
-			
+
 			$(document).on("click", ".remove", function(){
 				$(this).closest(".sources").html("");
-				
+
 			});
-			
-			
+
+
 			var loadFile = function(event) {
 				var image = document.getElementById('avatar_image');
-				
+
 				image.src = URL.createObjectURL(event.target.files[0]);
 				$(".removebtn").show();
 			};
-			
+
 			$(document).on("click", ".removebtn", function(){
 				$("#avatar_image").attr("src", imgsrc);
 				$(".removebtn").hide();
-				
+
 				var fileInput = document.getElementById('uploadimage')
 			   fileInput.value = ''
 			   fileInput.dispatchEvent(new Event('change'));
-				
+
 			});
-		
-    
+
+
 
 </script>
 @endsection

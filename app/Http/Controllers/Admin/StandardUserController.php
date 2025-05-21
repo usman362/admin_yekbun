@@ -163,8 +163,8 @@ class StandardUserController extends Controller
         }
 
         $levels = [
-            0 => 'Educated',
-            1 => 'Cultivated',
+            0 => 'Cultivated',
+            1 => 'Educated',
             2 => 'Academic'
         ];
 

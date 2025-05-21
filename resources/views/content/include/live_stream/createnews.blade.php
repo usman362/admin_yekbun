@@ -287,14 +287,14 @@
                                                         class="btn btn-label-secondary btn btn-outline-secondary usertypepicker active">
                                                         <input type="radio" class="form-check-input" name="user_type"
                                                             value="all" id="all" checked />All</label>
-                                                    <label for="educated"
-                                                        class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
-                                                        <input type="radio" class="form-check-input" name="user_type"
-                                                            value="educated" id="educated" />Educated</label>
-                                                    <label for="cultivated"
-                                                        class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
-                                                        <input type="radio" class="form-check-input" name="user_type"
+                                                            <label for="cultivated"
+                                                            class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
+                                                            <input type="radio" class="form-check-input" name="user_type"
                                                             value="cultivated" id="cultivated" />Cultivated</label>
+                                                            <label for="educated"
+                                                                class="btn btn-label-secondary btn btn-outline-secondary usertypepicker">
+                                                                <input type="radio" class="form-check-input" name="user_type"
+                                                                    value="educated" id="educated" />Educated</label>
                                                     <label for="academic"
                                                         class="btn btn-label-secondary  btn btn-outline-secondary usertypepicker">
                                                         <input type="radio" class="form-check-input" name="user_type"

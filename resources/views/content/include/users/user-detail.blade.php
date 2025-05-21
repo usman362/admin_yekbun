@@ -15,7 +15,7 @@
                     </p> --}}
                     <b>
                         <p class="mb-2 "><img height="20px;width:20px"
-                            src="{{asset('assets/svg/svg-dialog/'.($user->level == 0 ? 'educated' : ($user->level == 1 ? 'cultivated' : 'academic')).'.svg')}}"> {{$user->level == 0 ? 'Educated' : ($user->level == 1 ? 'Cultivated' : 'Academic')}} User</p>
+                            src="{{asset('assets/svg/svg-dialog/'.($user->level == 0 ? 'cultivated' : ($user->level == 1 ? 'educated' : 'academic')).'.svg')}}"> {{$user->level == 0 ? 'Cultivated' : ($user->level == 1 ? 'Educated' : 'Academic')}} User</p>
                     </b>
                     @if ($user->user_id)
                         <span>User Id: {{$user->user_id}}</span>

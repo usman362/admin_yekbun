@@ -1526,6 +1526,29 @@ text-decoration-skip-ink: none;
                                 Users</span>
                         </button>
 
+                        <button id="button3Modal12" class="toggle-buttonModal12"
+                            onclick="toggleColorModal12('button3Modal12')"
+                            style="
+    border: none;
+    background: #F2F2F2;
+    padding: 0;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 7px;
+    transition: transform 0.2s ease;
+  ">
+                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                style="width: 55px; height: 55px;" />
+                            <span
+                                style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                        </button>
+
                         <button id="button2Modal12" class="toggle-buttonModal12"
                             onclick="toggleColorModal12('button2Modal12')"
                             style="
@@ -1549,28 +1572,7 @@ text-decoration-skip-ink: none;
                                 style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                         </button>
 
-                        <button id="button3Modal12" class="toggle-buttonModal12"
-                            onclick="toggleColorModal12('button3Modal12')"
-                            style="
-    border: none;
-    background: #F2F2F2;
-    padding: 0;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 7px;
-    transition: transform 0.2s ease;
-  ">
-                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                style="width: 55px; height: 55px;" />
-                            <span
-                                style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                        </button>
+
 
                         <button id="button4Modal12" class="toggle-buttonModal12"
                             onclick="toggleColorModal12('button4Modal12')"
@@ -2156,6 +2158,15 @@ text-decoration-skip-ink: none;
                                     Users</span>
                             </label>
 
+                            <label id="button3Modal8_2" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button3Modal8_2')">
+                                <input class="options_btns button3Modal8" type="radio" name="option_2"
+                                    value="cultivated">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                            </label>
                             <label id="button2Modal8_2" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button2Modal8_2')">
                                 <input class="options_btns button2Modal8" type="radio" name="option_2"
@@ -2168,15 +2179,6 @@ text-decoration-skip-ink: none;
                                     style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                             </label>
 
-                            <label id="button3Modal8_2" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8_2')">
-                                <input class="options_btns button3Modal8" type="radio" name="option_2"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
 
                             <label id="button4Modal8_2" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button4Modal8_2')">
@@ -3361,6 +3363,15 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     Users</span>
                             </label>
 
+                            <label id="button3Modal8" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button3Modal8')">
+                                <input class="options_btns button3Modal8" type="radio" name="option"
+                                    value="cultivated">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                            </label>
                             <label id="button2Modal8" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button2Modal8')">
                                 <input class="options_btns button2Modal8" type="radio" name="option"
@@ -3373,15 +3384,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                             </label>
 
-                            <label id="button3Modal8" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8')">
-                                <input class="options_btns button3Modal8" type="radio" name="option"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
 
                             <label id="button4Modal8" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button4Modal8')">
@@ -3738,6 +3740,16 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     Users</span>
                             </label>
 
+                            <label id="button3Modal8_3" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button3Modal8_3')">
+                                <input class="options_btns button3Modal8_3" type="radio" name="option_3"
+                                    value="cultivated">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                            </label>
+
                             <label id="button2Modal8_3" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button2Modal8_3')">
                                 <input class="options_btns button2Modal8_3" type="radio" name="option_3"
@@ -3750,15 +3762,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                             </label>
 
-                            <label id="button3Modal8_3" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8_3')">
-                                <input class="options_btns button3Modal8_3" type="radio" name="option_3"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
 
                             <label id="button4Modal8_3" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button4Modal8_3')">
@@ -4326,6 +4329,16 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     Users</span>
                             </label>
 
+                            <label id="button3Modal8_3" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button3Modal8_3')">
+                                <input class="options_btns button3Modal8_3" type="radio" name="option_3"
+                                    value="cultivated">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                            </label>
+
                             <label id="button2Modal8_3" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button2Modal8_3')">
                                 <input class="options_btns button2Modal8_3" type="radio" name="option_3"
@@ -4338,15 +4351,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                             </label>
 
-                            <label id="button3Modal8_3" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8_3')">
-                                <input class="options_btns button3Modal8_3" type="radio" name="option_3"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
 
                             <label id="button4Modal8_3" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button4Modal8_3')">
@@ -4707,6 +4711,16 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     Users</span>
                             </label>
 
+                            <label id="button3Modal8_4" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button3Modal8_4')">
+                                <input class="options_btns button3Modal8_4" type="radio" name="option_4"
+                                    value="cultivated">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                            </label>
+
                             <label id="button2Modal8_4" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button2Modal8_4')">
                                 <input class="options_btns button2Modal8_4" type="radio" name="option_4"
@@ -4719,15 +4733,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                             </label>
 
-                            <label id="button3Modal8_4" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8_4')">
-                                <input class="options_btns button3Modal8_4" type="radio" name="option_4"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
 
                             <label id="button4Modal8_4" class="toggle-buttonModal8 "
                                 onclick="toggleColor('button4Modal8_4')">
@@ -5657,6 +5662,29 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                 Users</span>
                         </button>
 
+                        <button id="button3Modal9" class="toggle-buttonModal9"
+                            onclick="toggleColorModal9('button3Modal9')"
+                            style="
+                  border: none;
+                  background: #F2F2F2;
+                  padding: 0;
+                  cursor: pointer;
+                  width: 80px;
+                  height: 80px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  text-align: center;
+                  border-radius: 7px;
+                  transition: transform 0.2s ease;
+                  ">
+                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                style="width: 55px; height: 55px;" />
+                            <span
+                                style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                        </button>
+
                         <button id="button2Modal9" class="toggle-buttonModal9"
                             onclick="toggleColorModal9('button2Modal9')"
                             style="
@@ -5680,28 +5708,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                 style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                         </button>
 
-                        <button id="button3Modal9" class="toggle-buttonModal9"
-                            onclick="toggleColorModal9('button3Modal9')"
-                            style="
-      border: none;
-      background: #F2F2F2;
-      padding: 0;
-      cursor: pointer;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border-radius: 7px;
-      transition: transform 0.2s ease;
-    ">
-                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                style="width: 55px; height: 55px;" />
-                            <span
-                                style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                        </button>
 
                         <button id="button4Modal9" class="toggle-buttonModal9"
                             onclick="toggleColorModal9('button4Modal9')"
@@ -6082,6 +6088,14 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:#fff">All
                                     Users</span></label>
 
+                            <label id="button3Modal8_9" class="toggle-buttonModal8"
+                                style="background:rgb(242, 242, 242)"
+                                onclick='toggleColor("button3Modal8_9")'><input class="options_btns button3Modal8"
+                                    type="radio" name="option_5" value="cultivated"> <img
+                                    src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width:55px;height:55px"><span
+                                    style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:gray">Cultivated</span></label>
+
                             <label id="button2Modal8_9" class="toggle-buttonModal8"
                                 style="background:rgb(242, 242, 242)"
                                 onclick='toggleColor("button2Modal8_9")'><input class="options_btns button2Modal8"
@@ -6090,13 +6104,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="width:55px;height:55px"><span
                                     style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:gray">Educated</span></label>
 
-                            <label id="button3Modal8_9" class="toggle-buttonModal8"
-                                style="background:rgb(242, 242, 242)"
-                                onclick='toggleColor("button3Modal8_9")'><input class="options_btns button3Modal8"
-                                    type="radio" name="option_5" value="cultivated"> <img
-                                    src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width:55px;height:55px"><span
-                                    style="font-size:12px;font-weight:700;margin-top:5px;font-family:Genos;color:gray">Cultivated</span></label>
 
                             <label id="button4Modal8_9" class="toggle-buttonModal8"
                                 style="background:rgb(242, 242, 242)"
@@ -6868,6 +6875,29 @@ text-decoration-skip-ink: none;
                                 Users</span>
                         </button>
 
+                        <button id="button3Modal17" class="toggle-buttonModal17"
+                            onclick="toggleColorModal17('button3Modal17')"
+                            style="
+                    border: none;
+                    background: #F2F2F2;
+                    padding: 0;
+                    cursor: pointer;
+                    width: 80px;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    border-radius: 7px;
+                    transition: transform 0.2s ease;
+                    ">
+                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                style="width: 55px; height: 55px;" />
+                            <span
+                                style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
+                        </button>
+                        
                         <button id="button2Modal17" class="toggle-buttonModal17"
                             onclick="toggleColorModal17('button2Modal17')"
                             style="
@@ -6891,28 +6921,6 @@ text-decoration-skip-ink: none;
                                 style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
                         </button>
 
-                        <button id="button3Modal17" class="toggle-buttonModal17"
-                            onclick="toggleColorModal17('button3Modal17')"
-                            style="
-    border: none;
-    background: #F2F2F2;
-    padding: 0;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 7px;
-    transition: transform 0.2s ease;
-  ">
-                            <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                style="width: 55px; height: 55px;" />
-                            <span
-                                style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                        </button>
 
                         <button id="button4Modal17" class="toggle-buttonModal17"
                             onclick="toggleColorModal17('button4Modal17')"

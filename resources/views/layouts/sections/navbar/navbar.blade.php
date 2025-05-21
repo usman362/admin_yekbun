@@ -79,7 +79,7 @@
     if (auth()->user()?->can('avatars.read')) $cardCount++;
     if (auth()->user()?->can('flaggedUser.read')) $cardCount++;
     if (auth()->user()?->can('flaggedchannels.read')) $cardCount++;
-    
+
     // Final column for profile, shortcuts, notifications
     $cardCount++;
 
@@ -113,7 +113,7 @@
     @if (!isset($menuHorizontal))
     <div class="card mb-0 px-3 search-wrap d-flex justify-content-center align-items-center" style="height:54px; min-width: 200px;">
 
-       
+
             <div class="navbar-nav">
                 <div class="nav-item navbar-search-wrapper mb-0">
                     <div class="nav-item nav-link px-0 d-flex align-items-center">
@@ -131,7 +131,7 @@
         <!-- Channels Column -->
         <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
-       
+
             <ul class="navbar-nav">
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -180,7 +180,7 @@
     @can('users.read')
       <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
-         
+
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
@@ -195,18 +195,18 @@
                     <ul class="dropdown-menu dropdown-menu-end p-0" style="min-width: 220px;">
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                                href="{{ url('/users/educated') }}">
-                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu"
-                                    style="width: 20px; height: 20px; margin-right: 10px;">
-                                <span>Educated User</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
                                 href="{{ url('/users/cultivated') }}">
                                 <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="cul"
                                     style="width: 20px; height: 20px; margin-right: 10px;">
                                 <span>Cultivated User</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2 px-3"
+                                href="{{ url('/users/educated') }}">
+                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="edu"
+                                    style="width: 20px; height: 20px; margin-right: 10px;">
+                                <span>Educated User</span>
                             </a>
                         </li>
                         <li>
@@ -259,7 +259,7 @@
     @can('avatars.read')
       <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
-       
+
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
@@ -283,7 +283,7 @@
     @can('flaggedUser.read')
       <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
-         
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-1" href="{{ url('reports/flagged-users') }}">
@@ -464,8 +464,8 @@
                             </div>
                         </div>
                     </li>
-                   
-                    
+
+
                     @if (Auth::user() && Auth::user()->email === 'admin@gmail.com')
                      <li>
                         <div class="dropdown-divider"></div>
