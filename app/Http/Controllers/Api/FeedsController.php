@@ -18,7 +18,6 @@ use App\Models\FeedLikes;
 use App\Models\History;
 use App\Models\News;
 use App\Models\PopFeeds;
-use Carbon\Carbon;
 use Exception;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Auth;
@@ -28,61 +27,10 @@ use Spatie\Activitylog\Models\Activity;
 class FeedsController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
 
-        // Get authenticated user's latest feed
-        $authFeed = Feed::with('user')
-            ->where('user_id', auth()->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->first();
-
-        if (!empty($request->user_id)) {
-            $feeds = Feed::with('user')
-                ->where('user_id', $request->user_id)
-                ->where('_id','!=',$authFeed->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        } else {
-            $feeds = Feed::with('user')
-                ->where('_id','!=',$authFeed->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        }
-
-
-        // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
-        $feedItems = $feeds->items();
-
-        if ($authFeed && $feeds->currentPage() == 1) {
-            $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
-            if (!$alreadyExists) {
-                array_unshift($feedItems, $authFeed);
-            }
-        }
-
-        $data = [
-            'feeds' => $feedItems,
-            // 'auth_feed' => $authFeed,
-            'pagination' => [
-                'page' => $feeds->currentPage(),
-                'count' => $feeds->perPage(),
-                'totalItems' => $feeds->total(),
-                'totalPages' => $feeds->lastPage(),
-            ]
-        ];
-
-        return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
-    }
-
-
-    public function public_index(Request $request)
-    {
-        if (!empty($request->user_id)) {
-            $feeds = Feed::with('user')->where('user_id', $request->user_id)->orderBy('created_at', 'desc')->paginate(5);
-        } else {
-            $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
-        }
         $data = [
             'feeds' => $feeds->items(),
             'pagination' => [
@@ -95,6 +43,7 @@ class FeedsController extends Controller
 
         return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
     }
+
 
     public function news()
     {
@@ -227,150 +176,6 @@ class FeedsController extends Controller
         } else {
             return response()->json(['message' => 'Something went Wrong!', 'success' => false], 403);
         }
-    }
-
-    public function search_user(Request $request)
-    {
-        $users = User::whereHas('feeds')->with('country')
-            ->where(function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->search . '%')
-                    ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
-            })
-            ->get();
-        return ResponseHelper::sendResponse($users, 'Users has been Fetched Successfully!');
-    }
-
-    public function change_permission(Request $request, $id)
-    {
-        $feed = Feed::find($id);
-        $feed->user_type = $request->user_type;
-        $feed->save();
-        return ResponseHelper::sendResponse($feed, 'Feed has been Updated Successfully!');
-    }
-
-    public function delete($id)
-    {
-        $feed = Feed::find($id);
-        if (!empty($feed->images)) {
-            foreach ($feed->images as $image) {
-                $file_path = public_path('storage/' . $image['path']);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
-            }
-        }
-
-        if (!empty($feed->videos)) {
-            foreach ($feed->videos as $video) {
-                $file_path = public_path('storage/' . $video['path']);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
-            }
-        }
-        $feed->delete();
-        return ResponseHelper::sendResponse([], 'Feed has been Deleted Successfully!');
-    }
-
-    public function get_statistics($id)
-    {
-        $feed = Feed::with([
-            'user',
-            'views.user',
-            'likes.user',
-            'comments.user',
-            'voice_comments.user',
-            'shares.user'
-        ])->find($id);
-
-        if (!$feed) {
-            return ResponseHelper::sendResponse([], 'Feed not found!', false, 404);
-        }
-
-        // Gender and Age Group Tracking
-        $genderStats = ['male' => 0, 'female' => 0];
-
-        $ageGroups = [
-            '18-24' => ['male' => 0, 'female' => 0],
-            '25-30' => ['male' => 0, 'female' => 0],
-            '31-35' => ['male' => 0, 'female' => 0],
-            '36-40' => ['male' => 0, 'female' => 0]
-        ];
-
-        $totalUsers = 0;
-        $userIds = [];
-
-        // Helper to process user
-        $processUser = function ($user) use (&$genderStats, &$ageGroups, &$userIds, &$totalUsers) {
-            if ($user && !in_array($user->_id, $userIds)) {
-                $userIds[] = $user->_id;
-                $totalUsers++;
-
-                if ($user->gender === 'male') $genderStats['male']++;
-                elseif ($user->gender === 'female') $genderStats['female']++;
-
-                if (!empty($user->dob)) {
-                    $age = Carbon::parse($user->dob)->age;
-                    $gender = $user->gender;
-
-                    if ($gender === 'male' || $gender === 'female') {
-                        if ($age >= 18 && $age <= 24) $ageGroups['18-24'][$gender]++;
-                        elseif ($age >= 25 && $age <= 30) $ageGroups['25-30'][$gender]++;
-                        elseif ($age >= 31 && $age <= 35) $ageGroups['31-35'][$gender]++;
-                        elseif ($age >= 36 && $age <= 40) $ageGroups['36-40'][$gender]++;
-                    }
-                }
-            }
-        };
-
-        // Feed owner
-        $processUser($feed->user);
-
-        // Sections: likes, shares, views, etc.
-        $sections = ['likes', 'shares', 'comments', 'voice_comments', 'views'];
-        $sectionDetails = [];
-
-        foreach ($sections as $section) {
-            $items = $feed->$section;
-            $sectionUserImages = [];
-
-            foreach ($items as $item) {
-                $user = $item->user ?? null;
-                if ($user) {
-                    $processUser($user);
-
-                    if (!empty($user->image) && count($sectionUserImages) < 10) {
-                        $sectionUserImages[] = [
-                            'user_id' => $user->_id,
-                            'name' => $user->name ?? '',
-                            'image' => $user->image
-                        ];
-                    }
-                }
-            }
-
-            $sectionDetails[$section] = [
-                'count' => count($items),
-                'users' => $sectionUserImages
-            ];
-        }
-
-        // Format age group breakdown
-        $formattedAgeGroups = [];
-        foreach ($ageGroups as $range => $counts) {
-            $formattedAgeGroups[] = [
-                'age' => $range,
-                'male' => $counts['male'],
-                'female' => $counts['female']
-            ];
-        }
-
-        // Final response
-        return ResponseHelper::sendResponse([
-            'gender_stats' => $genderStats,
-            'age_group' => $formattedAgeGroups,
-            'total_stats' => $sectionDetails
-        ], 'Statistics has been Fetched Successfully!');
     }
 
     private function getMediaDuration($file)
@@ -686,7 +491,7 @@ class FeedsController extends Controller
 
             return ResponseHelper::sendResponse([], 'Comment has been Deleted!');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse([], 'Failed to Delete Comment', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to Delete Comment', false, 403 );
         }
     }
 

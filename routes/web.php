@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\MusicController;
 use App\Http\Controllers\ProfileBannerController;
 use App\Http\Controllers\Admin\StoryController;
-use App\Http\Controllers\Admin\TVController;
+use App\Http\Controllers\Admin\TvController;
 use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -150,20 +150,7 @@ Route::get('/test-fcm', function () {
     return 'success';
 });
 
-Route::get('test',function(){
-    $users = App\Models\User::all();
-    foreach($users as $user)
-    {
-        $user->public_image="true";
-        $user->friends_image= "true";
-        $user->family_image= "true";
-        $user->friends_request= "true";
-        $user->get_greetings= "true";
-        $user->search_option="true";
-        $user->save();
-    }
-    return 'success';
-});
+
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
 

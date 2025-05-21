@@ -104,8 +104,8 @@ Route::post('/change-email', [AccountSettingController::class, 'change_email'])-
 Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
 Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
 
-Route::get('public-feeds', [FeedsController::class, 'public_index']);
-Route::get('voting-public', [VotingController::class, 'votingPublic']);
+Route::get('feeds', [FeedsController::class, 'index']);
+Route::get('voting-public',[VotingController::class,'votingPublic']);
 Route::get('/get-artists-public', [MultimediaController::class, 'getArtistsPublic']);
 Route::get('/get-all-songs-public', [MultimediaController::class, 'getAllSongsPublic']);
 Route::get('/get-all-videos-public', [MultimediaController::class, 'getAllClipsPublic']);
@@ -135,12 +135,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('comments/{id}/report', [ReportCommentsController::class, 'store']);
 
     //Feeds Section
-    Route::get('feeds', [FeedsController::class, 'index']);
     Route::post('feeds', [FeedsController::class, 'store']);
-    Route::post('search-feeds-users', [FeedsController::class, 'search_user']);
-    Route::post('feeds-permission/{id}', [FeedsController::class, 'change_permission']);
-    Route::delete('feeds/{id}', [FeedsController::class, 'delete']);
-    Route::get('get-feeds-statistics/{id}', [FeedsController::class, 'get_statistics']);
 
     Route::post('send-users-request', [UsersController::class, 'sendRequest']);
     Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
@@ -156,9 +151,9 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('get-user-visitor/{id}', [UsersController::class, 'get_vistor']);
     Route::post('update-fcm-token', [UsersController::class, 'updateDeviceToken']);
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
-    Route::post('my-service', [UsersController::class, 'storeMyService']);
-    Route::post('my-network', [UsersController::class, 'storeMyNetwork']);
-    Route::post('my-notification', [UsersController::class, 'storeMyNotification']);
+    Route::post('my-service',[UsersController::class,'storeMyService']);
+    Route::post('my-network',[UsersController::class,'storeMyNetwork']);
+    Route::post('my-notification',[UsersController::class,'storeMyNotification']);
 
     Route::get('/get-artist-songs/{id}', [MultimediaController::class, 'getSongByArtists']);
     Route::get('/get-artist-videos/{id}', [MultimediaController::class, 'getClipsByArtists']);
@@ -178,7 +173,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
     Route::get('get-songs-playlist', [MultimediaController::class, 'getSongsPlaylist']);
     Route::get('get-playlist/{id}', [MultimediaController::class, 'getPlaylistDetail']);
-    Route::post('edit-playlist/{id}', [MultimediaController::class, 'editPlaylist']);
+    Route::post('edit-playlist/{id}',[MultimediaController::class, 'editPlaylist']);
     Route::post('store-songs-playlist', [MultimediaController::class, 'storeSongsPlaylist']);
     Route::get('get-clips-playlist', [MultimediaController::class, 'getClipsPlaylist']);
     Route::post('store-clips-playlist', [MultimediaController::class, 'storeClipsPlaylist']);

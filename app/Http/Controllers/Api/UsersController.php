@@ -25,7 +25,9 @@ class UsersController extends Controller
 
     public function users_details(Request $request, $id)
     {
-        $user = User::with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
+        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'is_online')
+            ->with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
+
         $friend = UserFriends::where('friend_id', $user->id)->where('user_id', auth()->user()->id)->first();
         $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', auth()->user()->id)->first();
         $comingrequest = UserRequest::where('user_id', $user->id)->where('request_id', auth()->user()->id)->first();
@@ -44,16 +46,7 @@ class UsersController extends Controller
         } else {
             $is_coming = 0;
         }
-        if($user->public_image === 'true'){
-            $is_image = 1;
-        }elseif($user->family_image === 'true' && $is_friend == 1){
-            $is_image = 1;
-        }elseif($user->friends_image === 'true' && $is_friend == 1){
-            $is_image = 1;
-        }else{
-            $is_image = 0;
-        }
-        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request, 'is_coming' => $is_coming,'is_image' => $is_image];
+        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request, 'is_coming' => $is_coming];
         return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
@@ -181,14 +174,14 @@ class UsersController extends Controller
     {
         try {
             // if ($request->user_type == 'family') {
-            $user = User::with(['family' => function ($q) {
-                $q->with(['user','friend']);
+            $user = User::select('_id')->with(['family' => function ($q) {
+                $q->with('user');
             }])->find($id);
             $family_list = $user->family ?? [];
             // return ResponseHelper::sendResponse($family_list, 'Family List Fetch Successfully');
             // } else {
-            $user = User::with(['friends' => function ($q) {
-                $q->with(['user','friend']);
+            $user = User::select('_id')->with(['friends' => function ($q) {
+                $q->with('user');
             }])->find($id);
             $friends_list = $user->friends ?? [];
             return ResponseHelper::sendResponse(['friends_list' => $friends_list, 'family_list' => $family_list], 'Friends List Fetch Successfully');
