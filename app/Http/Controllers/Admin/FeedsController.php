@@ -1,99 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Events\AdminFeedsComments;
 use App\Events\HistoryComments;
 use App\Events\UserFeedsComments;
-use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\CommentsLike;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
+use App\Models\FeedReason;
 use App\Models\History;
 use App\Models\News;
 use App\Models\PopFeeds;
-use Carbon\Carbon;
+use App\Models\User;
 use Exception;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\DB;
 
 class FeedsController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-
-        // Get authenticated user's latest feed
-        $authFeed = Feed::with('user')
-            ->where('user_id', auth()->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->first();
-
-        if (!empty($request->user_id)) {
-            $feeds = Feed::with('user')
-                ->where('user_id', $request->user_id)
-                ->where('_id','!=',$authFeed->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        } else {
-            $feeds = Feed::with('user')
-                ->where('_id','!=',$authFeed->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(5);
-        }
-
-
-        // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
-        $feedItems = $feeds->items();
-
-        if ($authFeed && $feeds->currentPage() == 1) {
-            $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
-            if (!$alreadyExists) {
-                array_unshift($feedItems, $authFeed);
-            }
-        }
-
-        $data = [
-            'feeds' => $feedItems,
-            // 'auth_feed' => $authFeed,
-            'pagination' => [
-                'page' => $feeds->currentPage(),
-                'count' => $feeds->perPage(),
-                'totalItems' => $feeds->total(),
-                'totalPages' => $feeds->lastPage(),
-            ]
-        ];
-
-        return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
-    }
-
-
-    public function public_index(Request $request)
-    {
-        if (!empty($request->user_id)) {
-            $feeds = Feed::with('user')->where('user_id', $request->user_id)->orderBy('created_at', 'desc')->paginate(5);
-        } else {
-            $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
-        }
-        $data = [
-            'feeds' => $feeds->items(),
-            'pagination' => [
-                'page' => $feeds->currentPage(),
-                'count' => $feeds->perPage(),
-                'totalItems' => $feeds->total(),
-                'totalPages' => $feeds->lastPage(),
-            ]
-        ];
-
-        return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        $reasons = FeedReason::all();
+        return view('content.manage_posts.manage_user_feeds', compact('feeds','reasons'));
     }
 
     public function news()
@@ -188,7 +124,6 @@ class FeedsController extends Controller
         $feeds->text_properties = $request->text_properties;
         $feeds->user_type = $request->user_type;
         $feeds->feed_type = $request->feed_type;
-        $feeds->user_id = auth()->user()->id;
         $images = [];
         $videos = [];
 
@@ -221,11 +156,21 @@ class FeedsController extends Controller
 
         // Save the feed
         $feeds->save();
-        $feed = Feed::with('user')->find($feeds->id);
+
         if ($feeds->save()) {
-            return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feed, 'success' => true], 201);
+            return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feeds, 'success' => true], 201);
         } else {
             return response()->json(['message' => 'Something went Wrong!', 'success' => false], 403);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $feed = Feed::find($id);
+        if ($feed->delete()) {
+            return back();
+        } else {
+            return back();
         }
     }
 
@@ -387,46 +332,42 @@ class FeedsController extends Controller
         return $duration;
     }
 
-    public function getComments(Request $request, $id)
+    public function getComments(Request $request)
     {
+        $request->validate(['feed_id' => 'required']);
 
         try {
             $feedType = $request->feed_type;
-            $comments = FeedComments::with(['reports', 'child_comments' => function ($q) {
-                $q->with(['reports', 'child_comments' => function ($q) {
-                    $q->with(['reports', 'user' =>  function ($q) {
+            $comments = FeedComments::with(['emoji_data', 'child_comments' => function ($q) {
+                $q->with(['emoji_data', 'child_comments' => function ($q) {
+                    $q->with(['emoji_data', 'user' =>  function ($q) {
                         $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                    }])->with('likes')->with('liked')
-                        // ->withCount('reports')
-                    ;
+                    }]);
                 }, 'user' =>  function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])->with('likes')->with('liked')
-                    // ->withCount('reports')
-                ;
+                }]);
             }, 'user' => function ($q) {
                 $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
             }])
-                ->with('likes')->with('liked')
-                ->where('feed_id', $id)->where('feed_type', $feedType)->where('parent_id', null)->get();
+                ->where('feed_id', $request->feed_id)->where('feed_type', $feedType)->where('parent_id', null)->get();
 
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->user()->id);
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
 
             if ($feedType == 'admin_feeds') {
                 $feed = PopFeeds::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])->find($id);
+                }])->find($request->feed_id);
             } elseif ($feedType == 'history') {
                 $feed = History::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])->find($id);
+                }])->find($request->feed_id);
             } else {
                 $feed = Feed::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])->find($id);
+                }])->find($request->feed_id);
             }
 
-            $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $id)->where('feed_type', $feedType)->first();
+            $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $request->feed_id)->where('feed_type', $feedType)->first();
 
             if ($like) {
                 $liked = true;
@@ -434,8 +375,8 @@ class FeedsController extends Controller
                 $liked = false;
             }
 
-            $likeCount = FeedLikes::where('feed_id', $id)->where('feed_type', $feedType)->count();
-            $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $feedType)->count();
+            $likeCount = FeedLikes::where('feed_id', $request->feed_id)->where('feed_type', $feedType)->count();
+            $commentCount = FeedComments::where('feed_id', $request->feed_id)->where('feed_type', $feedType)->count();
 
             $data = [
                 'comments' => $comments,
@@ -452,252 +393,69 @@ class FeedsController extends Controller
         }
     }
 
-    public function storeComments(Request $request, $id)
+    public function storeComments(Request $request)
     {
-        $request->validate([
-            'comment' => 'nullable|string',
-            'feed_type' => 'required',
-            //  'audio' => 'nullable|mimes:mp3,wav,aac|max:5120|file',
-            'emoji' => 'nullable|string',
-            //  'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        $request->validate(['comment' => 'required|string', 'feed_type' => 'required']);
 
-        // try {
-        if ($request->file('image')) {
-            $image = Helpers::fileUpload($request->image, 'feeds/image');
-        } else {
-            $image = null;
-        }
-
-        if ($request->file('audio')) {
-            $audio = Helpers::fileUpload($request->audio, 'feeds/audio');
-        } else {
-            $audio = null;
-        }
-
-        if ($image == null && $audio == null && ($request->comment == "" || $request->comment == null) && ($request->emoji == "" || $request->emoji == null)) {
-            return ResponseHelper::sendResponse([], 'Select Content Before Comment!', false, 403);
-        }
-
-        $comment = FeedComments::create([
-            'user_id' => auth()->id(),
-            'feed_id' => $id,
-            'feed_type' => $request->feed_type,
-            'comment' => $request->comment,
-            'comment_type' => $request->comment_type ?? 'normal',
-            'parent_id' => (empty($request->parent_id) || $request->parent_id === 'null') ? null : $request->parent_id,
-            'audio' => $audio,
-            'emoji' => $request->emoji,
-            'image' =>  $image,
-            'status' => 1
-        ]);
-
-        $comments = FeedComments::with(['child_comments' => function ($q) {
-            $q->with(['child_comments' => function ($q) {
-                $q->with(['user' =>  function ($q) {
-                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])->with('likes')->with('liked');
-            }, 'user' =>  function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }])->with('likes')->with('liked');
-        }, 'user' => function ($q) {
-            $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-        }])
-            ->with('likes')->with('liked')->where('feed_id', $id)->where('parent_id', null)
-            ->where('feed_type', $request->feed_type)->get();
-
-        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
-        $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $request->feed_type)->count();
-        $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $id)->where('feed_type', $request->feed_type)->first();
-
-        if ($like) {
-            $liked = true;
-        } else {
-            $liked = false;
-        }
-
-        $likeCount = FeedLikes::where('feed_id', $id)->where('feed_type', $request->feed_type)->count();
-
-        $data = [
-            'comments' => $comments,
-            'comments_count' => $commentCount,
-            'liked' => $liked,
-            'like_count' => $likeCount,
-            'user' => $user
-        ];
-
-        return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
-        // } catch (Exception $e) {
-        //     return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
-        // }
-    }
-
-    public function editComments(Request $request, $id)
-    {
-        $request->validate([
-            'comment' => 'nullable|string',
-            // 'feed_type' => 'required',
-            'emoji' => 'nullable|string',
-        ]);
-
-        // try {
-        if ($request->file('image')) {
-            $image = Helpers::fileUpload($request->image, 'feeds/image');
-        } else {
-            $image = null;
-        }
-
-        if ($request->file('audio')) {
-            $audio = Helpers::fileUpload($request->audio, 'feeds/audio');
-        } else {
-            $audio = null;
-        }
-
-        if ($image == null && $audio == null && ($request->comment == "" || $request->comment == null) && ($request->emoji == "" || $request->emoji == null)) {
-            return ResponseHelper::sendResponse([], 'Select Content Before Comment!', false, 403);
-        }
-
-        $comment = FeedComments::find($id);
-
-        $comment->comment = $request->comment;
-        if ($request->file('audio')) {
-            $comment->audio = $audio;
-        }
-        if ($request->emoji) {
-            $comment->emoji = $request->emoji;
-        }
-        if ($request->file('image')) {
-            $comment->image =  $image;
-        }
-        $comment->save();
-
-        $comments = FeedComments::with(['child_comments' => function ($q) {
-            $q->with(['child_comments' => function ($q) {
-                $q->with(['user' =>  function ($q) {
-                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-                }])->with('likes')->with('liked');
-            }, 'user' =>  function ($q) {
-                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-            }])->with('likes')->with('liked');
-        }, 'user' => function ($q) {
-            $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
-        }])->with('likes')->with('liked')
-            ->where('feed_id', $comment->feed_id)->where('parent_id', null)->where('feed_type', $comment->feed_type)->get();
-
-        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
-        $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $comment->feed_type)->count();
-        $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $comment->feed_id)->where('feed_type', $comment->feed_type)->first();
-
-        if ($like) {
-            $liked = true;
-        } else {
-            $liked = false;
-        }
-
-        $likeCount = FeedLikes::where('feed_id', $comment->feed_id)->where('feed_type', $comment->feed_type)->count();
-
-        $data = [
-            'comments' => $comments,
-            'comments_count' => $commentCount,
-            'liked' => $liked,
-            'like_count' => $likeCount,
-            'user' => $user
-        ];
-
-        return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
-        // } catch (Exception $e) {
-        //     return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
-        // }
-    }
-
-    public function commentLike(Request $request, $id)
-    {
-        $request->validate([
-            'emoji' => 'nullable|string',
-        ]);
-
-        $user = Auth::user();
-
-        if (!$user) {
-            return ResponseHelper::sendResponse([], 'User not authenticated!', false, 403);
-        }
-
-        $like = CommentsLike::where('user_id', $user->id)->where('comment_id', $id)->first();
-
-        if ($like) {
-            $like->delete();
-            $liked = false;
-        } else {
-            CommentsLike::create([
-                'user_id' => $user->id,
-                'comment_id' => $id,
-                'emoji' => $request->emoji
-            ]);
-            $liked = true;
-        }
-
-        $likeCount = CommentsLike::where('comment_id', $id)->count();
-
-        $data = [
-            'liked' => $liked,
-            'like_count' => $likeCount
-        ];
-        return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
-    }
-
-    public function commentDelete($id)
-    {
         try {
-            $comment = FeedComments::find($id);
-            $childs = FeedComments::where('parent_id', $id)->get();
-            if ($childs) {
-                foreach ($childs as $child) {
-                    if ($child->audio) {
-                        $file_path = public_path('storage/' . $child->audio);
-                        if (file_exists($file_path)) {
-                            unlink($file_path);
-                        }
-                    }
+            $comment = FeedComments::create([
+                'user_id' => auth()->id(),
+                'feed_id' => $request->feed_id,
+                'feed_type' => $request->feed_type,
+                'comment' => $request->comment,
+                'comment_type' => $request->comment_type ?? 'normal',
+                'parent_id' => $request->parent_id ?? null,
+                'status' => 1
+            ]);
 
-                    if ($child->image) {
-                        $file_path = public_path('storage/' . $child->image);
-                        if (file_exists($file_path)) {
-                            unlink($file_path);
-                        }
-                    }
-                    $child->delete();
-                }
+            $comments = FeedComments::with(['child_comments' => function ($q) {
+                $q->with(['child_comments' => function ($q) {
+                    $q->with(['user' =>  function ($q) {
+                        $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                    }]);
+                }, 'user' =>  function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                }]);
+            }, 'user' => function ($q) {
+                $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+            }])
+                ->where('feed_id', $request->feed_id)->where('parent_id', null)->where('feed_type', $request->feed_type)->get();
+
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+            $commentCount = FeedComments::where('feed_id', $request->feed_id)->where('feed_type', $request->feed_type)->count();
+            $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $request->feed_id)->where('feed_type', $request->feed_type)->first();
+
+            if ($like) {
+                $liked = true;
+            } else {
+                $liked = false;
             }
 
-            if ($comment->audio) {
-                $file_path = public_path('storage/' . $comment->audio);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
-            }
+            $likeCount = FeedLikes::where('feed_id', $request->feed_id)->where('feed_type', $request->feed_type)->count();
 
-            if ($comment->image) {
-                $file_path = public_path('storage/' . $comment->image);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
-            }
-            $comment->delete();
+            $data = [
+                'comments' => $comments,
+                'comments_count' => $commentCount,
+                'liked' => $liked,
+                'like_count' => $likeCount,
+                'user' => $user
+            ];
 
-            return ResponseHelper::sendResponse([], 'Comment has been Deleted!');
+            return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         } catch (Exception $e) {
-            return ResponseHelper::sendResponse([], 'Failed to Delete Comment', false, 403);
+            return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
         }
     }
 
-    public function feedLike(Request $request, $id)
+    public function feedLike(Request $request)
     {
         $request->validate([
+            'feed_id' => 'required',
             'feed_type' => 'required',
         ]);
 
         $user = Auth::user();
-        $postId = $id;
+        $postId = $request->feed_id;
 
         if (!$user) {
             return ResponseHelper::sendResponse([], 'User not authenticated!', false, 403);
@@ -724,5 +482,23 @@ class FeedsController extends Controller
             'like_count' => $likeCount
         ];
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
+    }
+
+    public function action(Request $request,$id)
+    {
+        try{
+            $feed = Feed::find($id);
+            $feed->reason_id = $request->reason_id;
+            $feed->save();
+            $user = User::find($feed->user_id);
+            $user->user_type = $request->user_type ?? $user->user_type;
+            $user->level = $request->user_type == 'cultivated' ? 1 : 0;
+            $user->save();
+            return back()->with(['success' => 'Feed Status has been Updated!']);
+        }catch(Exception $e){
+            DB::rollback();
+            return back()->with(['error' => 'Failed to Change Feed Status!']);
+        }
+
     }
 }
