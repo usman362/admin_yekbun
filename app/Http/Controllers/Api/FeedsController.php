@@ -30,8 +30,25 @@ class FeedsController extends Controller
 
     public function index()
     {
-        $feeds = Feed::with(['user', 'views', 'likes', 'comments', 'voice_comments', 'shares'])->orderBy('created_at', 'desc')->paginate(5);
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
+        $feed = Feed::with('user')->where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->first();
+        $data = [
+            'feeds' => $feeds->items(),
+            'auth_feed' => $feed,
+            'pagination' => [
+                'page' => $feeds->currentPage(),
+                'count' => $feeds->perPage(),
+                'totalItems' => $feeds->total(),
+                'totalPages' => $feeds->lastPage(),
+            ]
+        ];
 
+        return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
+    }
+
+    public function public_index()
+    {
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(5);
         $data = [
             'feeds' => $feeds->items(),
             'pagination' => [
@@ -44,7 +61,6 @@ class FeedsController extends Controller
 
         return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
     }
-
 
     public function news()
     {

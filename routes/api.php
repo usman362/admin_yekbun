@@ -104,7 +104,7 @@ Route::post('/change-email', [AccountSettingController::class, 'change_email'])-
 Route::post('/resend-email', [AccountSettingController::class, 'resend_email_code'])->name('resend-email');
 Route::post('/upgrade-account', [AccountsettingController::class, 'upgrade_account'])->name('upgrade-account');
 
-Route::get('feeds', [FeedsController::class, 'index']);
+Route::get('public-feeds', [FeedsController::class, 'public_index']);
 Route::get('voting-public', [VotingController::class, 'votingPublic']);
 Route::get('/get-artists-public', [MultimediaController::class, 'getArtistsPublic']);
 Route::get('/get-all-songs-public', [MultimediaController::class, 'getAllSongsPublic']);
@@ -135,6 +135,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('comments/{id}/report', [ReportCommentsController::class, 'store']);
 
     //Feeds Section
+    Route::get('feeds', [FeedsController::class, 'index']);
     Route::post('feeds', [FeedsController::class, 'store']);
     Route::post('search-feeds-users', [FeedsController::class, 'search_user']);
     Route::post('feeds-permission/{id}', [FeedsController::class, 'change_permission']);
