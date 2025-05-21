@@ -36,8 +36,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('donations.organizations.create') }}">
-                                      <button class="btn btn-primary">Add Organization</button>
-                                    </a> -->
+                          <button class="btn btn-primary">Add Organization</button>
+                        </a> -->
         </div>
     </div>
     <!-- Basic Bootstrap Table -->
@@ -62,7 +62,6 @@
                         <th>#</th>
                         <th>Member</th>
                         <th>Roles</th>
-                        <th>Permissions</th>
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
@@ -101,16 +100,6 @@
                                 @endif
                             </td>
                             <td>
-                                @foreach ($user->roles as $role)
-    @foreach ($role->permissions as $permission)
-        <span class="badge bg-label-info mb-1">{{ $permission->name }}</span>
-    @endforeach
-@endforeach
-
-                            </td>
-
-
-                            <td>
                                 @if ((int) $user->status)
                                     <span class="badge bg-label-success me-1">Active</span>
                                 @else
@@ -139,6 +128,7 @@
                                             'permissions' => $permissions,
                                         ])
                                     @else
+                                        
                                     @endif
 
 
