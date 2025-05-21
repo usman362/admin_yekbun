@@ -28,7 +28,7 @@ class TeamMemberController extends Controller
 public function index()
 {
     $users = User::where('status', 1)->where('is_admin_user', 1)
-                 ->with('roles') // eager load roles
+                ->with('roles.permissions')
                  ->get();
 
     $roles = Role::all();

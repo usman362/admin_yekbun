@@ -62,6 +62,7 @@
                         <th>#</th>
                         <th>Member</th>
                         <th>Roles</th>
+                          <th>Permissions</th>
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
@@ -99,6 +100,22 @@
                                     <span class="badge bg-label-warning">Not assigned yet</span>
                                 @endif
                             </td>
+                            <td>
+    @if (isset($user->roles))
+        @foreach ($user->roles as $role)
+            @if ($role->permissions && count($role->permissions))
+                @foreach ($role->permissions as $permission)
+                    <span class="badge bg-label-info mb-1">{{ $permission->name }}</span>
+                @endforeach
+            @else
+                <span class="badge bg-label-secondary">No permissions</span>
+            @endif
+        @endforeach
+    @else
+        <span class="badge bg-label-warning">No roles</span>
+    @endif
+</td>
+
                             <td>
                                 @if ((int) $user->status)
                                     <span class="badge bg-label-success me-1">Active</span>
