@@ -40,12 +40,12 @@ class FeedsController extends Controller
         if (!empty($request->user_id)) {
             $feeds = Feed::with('user')
                 ->where('user_id', $request->user_id)
-                ->where('_id','!==',$authFeed->id)
+                ->where('_id','!=',$authFeed->id)
                 ->orderBy('created_at', 'desc')
                 ->paginate(5);
         } else {
             $feeds = Feed::with('user')
-                ->where('_id','!==',$authFeed->_id)
+                ->where('_id','!=',$authFeed->id)
                 ->orderBy('created_at', 'desc')
                 ->paginate(5);
         }
