@@ -197,7 +197,7 @@ class FeedsController extends Controller
 
     public function search_user(Request $request)
     {
-        $users = User::whereHas('feeds')
+        $users = User::whereHas('feeds')->with('country')
             ->where(function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%')
                     ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
