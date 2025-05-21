@@ -49,8 +49,8 @@ class FeedsController extends Controller
 
         // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
         $feedItems = $feeds->items();
-        if ($authFeed) {
-            // Check if the feed already exists in the paginated items to avoid duplication
+
+        if ($authFeed && $feeds->currentPage() == 1) {
             $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
             if (!$alreadyExists) {
                 array_unshift($feedItems, $authFeed);
