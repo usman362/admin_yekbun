@@ -103,22 +103,46 @@
                         @endif
                     </td>
                     <td>
-                        @if (isset($user->roles))
-                            @foreach ($user->roles as $role)
-                                <div class="mb-2">
-                                    @if (!empty($role->permission) && is_array($role->permission))
-                                        @foreach ($role->permission as $perm)
-                                            <span class="badge bg-label-info">{{ $perm }}</span>
-                                        @endforeach
-                                    @else
-                                        <span class="badge bg-label-secondary">No permissions</span>
-                                    @endif
-                                </div>
-                            @endforeach
-                        @else
-                            <span class="badge bg-label-warning">Not assigned yet</span>
-                        @endif
-                    </td>
+    @if (isset($user->roles) && $user->roles->count() > 0)
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#permissionsModal{{ $user->id }}">
+            View Permissions
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="permissionsModal{{ $user->id }}" tabindex="-1" aria-labelledby="permissionsModalLabel{{ $user->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="permissionsModalLabel{{ $user->id }}">Permissions for {{ $user->name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($user->roles as $role)
+                            <h6>{{ $role->name }} Permissions:</h6>
+                            @if (!empty($role->permission) && is_array($role->permission))
+                                <ul>
+                                    @foreach ($role->permission as $perm)
+                                        <li>{{ $perm }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p><em>No permissions assigned.</em></p>
+                            @endif
+                            <hr>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @else
+        <span class="badge bg-label-warning">No Roles Assigned</span>
+    @endif
+</td>
+
                     <td>
                         @if ((int) $user->status)
                             <span class="badge bg-label-success me-1">Active</span>
