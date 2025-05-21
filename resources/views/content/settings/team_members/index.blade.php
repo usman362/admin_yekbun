@@ -55,53 +55,52 @@
             </div>
         </div>
 
-       <div class="table-responsive text-nowrap">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Member</th>
-                <th>Roles</th>
-                <th>Permissions</th> {{-- ✅ New Column --}}
-                <th>Status</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-            @forelse($users as $user)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>
-                        <div class="d-flex justify-content-start align-items-center user-name">
-                            <div class="avatar-wrapper">
-                                <div class="avatar avatar-sm me-3">
-                                    <img src="{{ $user->image ? asset('storage/' . $user->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
-                                        alt="Avatar" class="rounded-circle">
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Member</th>
+                        <th>Roles</th>
+                          <th>Permissions</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @forelse($users as $user)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <div class="d-flex justify-content-start align-items-center user-name">
+                                    <div class="avatar-wrapper">
+                                        <div class="avatar avatar-sm me-3"><img
+                                                src="{{ $user->image ? asset('storage/' . $user->image) : 'https://www.w3schools.com/howto/img_avatar.png' }}"
+                                                alt="Avatar" class="rounded-circle"></div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <a href="javascript:void(0)" class="text-body text-truncate">
+                                            <span class="fw-semibold">{{ $user->name }}</span>
+                                        </a>
+                                        <small class="text-muted">{{ $user->email }}</small>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <a href="javascript:void(0)" class="text-body text-truncate">
-                                    <span class="fw-semibold">{{ $user->name }}</span>
-                                </a>
-                                <small class="text-muted">{{ $user->email }}</small>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>
-                        @if (isset($user->roles))
-                            @foreach ($user->roles as $role)
-                                <span class="badge {{ $role->name === 'Super Admin' ? 'bg-label-primary' : 'bg-label-dark' }}">
-                                    {{ $role->name }}
-                                </span>
-                            @endforeach
-                        @else
-                            <span class="badge bg-label-warning">Not assigned yet</span>
-                        @endif
-                    </td>
-
-                    {{-- ✅ Permissions Column --}}
-                    <td style="max-width: 250px; white-space: normal;">
+                            </td>
+                            <td>
+                                {{-- {{var_dump($user->roles)}} --}}
+                                @if (isset($user->roles))
+                                    @foreach ($user->roles as $role)
+                                        @if ($role->name === 'Super Admin')
+                                            <span class="badge bg-label-primary">{{ $role->name }}</span>
+                                        @else
+                                            <span class="badge bg-label-dark">{{ $role->name }}</span>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <span class="badge bg-label-warning">Not assigned yet</span>
+                                @endif
+                            </td>
+                             <td style="max-width: 250px; white-space: normal;">
                         @php
                             $permissionsList = $user->roles
                                 ->flatMap(function ($role) {
@@ -122,30 +121,69 @@
                             <span class="text-muted">No permissions</span>
                         @endif
                     </td>
+                            <td>
+                                @if ((int) $user->status)
+                                    <span class="badge bg-label-success me-1">Active</span>
+                                @else
+                                    <span class="badge bg-label-secondary me-1">Disabled</span>
+                                @endif
+                            </td>
+                            <td>
+                                <div>
+                                    <!-- Edit -->
+                                    <button class="btn btn-sm btn-icon me-2" data-bs-toggle="modal"
+                                        data-bs-target="#editModal{{ $user->id }}" data-bs-toggle="tooltip"
+                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                        data-bs-original-title="Edit">
+                                        <i class="bx bx-edit"></i>
+                                    </button>
 
-                    <td>
-                        @if ((int) $user->status)
-                            <span class="badge bg-label-success me-1">Active</span>
-                        @else
-                            <span class="badge bg-label-secondary me-1">Disabled</span>
-                        @endif
-                    </td>
 
-                    <td>
-                        <!-- Options buttons here (Edit, Edit Roles, Delete) -->
-                        {{-- Your existing code remains unchanged here --}}
-                        {{-- ... --}}
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td class="text-center" colspan="6"><b>No member found.</b></td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+                                    @if ($user->roles->isNotEmpty())
+                                        <button type="button" class="btn btn-sm btn-icon ms-2" data-bs-toggle="modal"
+                                            data-bs-target="#editUserRolesModal{{ $user->roles->first()->id }}">
+                                            <i class="bx bx-pencil"></i> Edit Roles
+                                        </button>
 
+                                        @include('content.settings.roles.includes.edit_form', [
+                                            'role' => $user->roles->first(),
+                                            'permissions' => $permissions,
+                                        ])
+                                    @else
+                                        
+                                    @endif
+
+
+
+
+                                    @if (!$user->is_superadmin)
+                                        <!-- Delete -->
+                                        <form action="{{ route('settings.team.members.destroy', $user->id) }}"
+                                            onsubmit="confirmAction(event, () => event.target.submit())" method="post"
+                                            class="d-inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-icon ms-4" data-bs-toggle="tooltip"
+                                                data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
+                                        </form>
+                                    @endif
+                                </div>
+                                <x-modal id="editModal{{ $user->id }}" title="Edit Member" saveBtnText="Update"
+                                    saveBtnType="submit" saveBtnForm="editForm{{ $user->id }}" size="md"
+                                    :show="old('showEditFormModal' . $user->id) ? true : false">
+                                    @include('content.settings.team_members.includes.edit_form')
+                                </x-modal>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="text-center" colspan="5"><b>No member found.<b></td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
     
 
