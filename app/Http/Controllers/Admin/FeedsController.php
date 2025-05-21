@@ -28,8 +28,8 @@ class FeedsController extends Controller
     public function index()
     {
         $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
-        $reasons = FeedReason::all();
-        return view('content.manage_posts.manage_user_feeds', compact('feeds','reasons'));
+        // $reasons = FeedReason::all();
+        return view('content.manage_posts.manage_user_feeds', compact('feeds'));
     }
 
     public function news()
