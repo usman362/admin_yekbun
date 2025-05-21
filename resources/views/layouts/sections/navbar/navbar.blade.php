@@ -232,7 +232,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center py-2 px-3"
-                                        href="{{ url('/settings/user-roles/educated') }}">
+                                        href="{{ url('/settings/user-roles/cultivated') }}">
                                         User Roles
                                     </a>
                                 </li>
