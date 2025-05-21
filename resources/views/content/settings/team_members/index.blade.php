@@ -112,7 +112,7 @@
                                         @endif
                                     @endforeach
 
-                                    {{ dd($roles->permissions) }}
+                                    
                                 @else
                                     <span class="badge bg-label-warning">No roles</span>
                                 @endif
