@@ -24,9 +24,9 @@ class PremiumUserController extends Controller
         }
 
         if ($view === 'blocked')
-            $users = User::where("level", 1)->where('is_verfied', 1)->where('is_admin_user', 0)->where('status', 0)->orderBy("updated_at", "DESC")->get();
+            $users = User::where("level", 0)->where('is_verfied', 1)->where('is_admin_user', 0)->where('status', 0)->orderBy("updated_at", "DESC")->get();
         else
-            $users = User::where("level", 1)->where('is_verfied', 1)->where('is_admin_user', 0)->where('gender', $view)->orderBy("updated_at", "DESC")->get();
+            $users = User::where("level", 0)->where('is_verfied', 1)->where('is_admin_user', 0)->where('gender', $view)->orderBy("updated_at", "DESC")->get();
 
         return view("content.users.premium.index", compact("users", "view"));
     }
@@ -57,7 +57,7 @@ class PremiumUserController extends Controller
             $validated["image"] = $imagePath;
         }
 
-        $validated['level'] = 1; // Add level of premium user
+        $validated['level'] = 0; // Add level of premium user
 
         $user = User::create($validated);
 
