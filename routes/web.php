@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\StandardUserController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\MusicCategoryController;;
+
 use App\Http\Controllers\Admin\UploadMovieCategoryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PaymentOfficeController;
@@ -139,7 +140,7 @@ Route::get('/test-fcm-id', function () {
 
 Route::get('/test-fcm', function () {
     $users = App\Models\User::whereNotNull('fcm_token')
-    ->where('fcm_token', '!=', '')->get();
+        ->where('fcm_token', '!=', '')->get();
     // dd($users);
     if ($users) {
         foreach ($users as $user) {
@@ -150,6 +151,14 @@ Route::get('/test-fcm', function () {
     return 'success';
 });
 
+Route::get('test', function () {
+
+    foreach (App\Models\User::where('user_type', 'educated')->get() as $user) {
+        $user->user_type = 'cultivated';
+        $user->save();
+    }
+    return 'success';
+});
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
@@ -224,7 +233,7 @@ Route::middleware('check.role:Super Admin')->group(function () {
 
 //TV Section
 
-Route::get('zarok-videos',[TVController::class,'zarokVideos'])->name('zarok.videos');
+Route::get('zarok-videos', [TVController::class, 'zarokVideos'])->name('zarok.videos');
 
 
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
@@ -594,8 +603,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
         Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
 
-        Route::get('/app/portal-notification', [NotificationController::class,'index'])->name('app.portal.notification');
-        Route::post('/app/portal-notification', [NotificationController::class,'store'])->name('store.portal.notification');
+        Route::get('/app/portal-notification', [NotificationController::class, 'index'])->name('app.portal.notification');
+        Route::post('/app/portal-notification', [NotificationController::class, 'store'])->name('store.portal.notification');
 
         Route::get('yekbun-location/countries', [CountryController::class, 'index'])->name('yekbun_location.countries.index');
 
