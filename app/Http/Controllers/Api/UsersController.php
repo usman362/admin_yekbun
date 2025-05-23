@@ -60,9 +60,12 @@ class UsersController extends Controller
         ]);
 
         $status = (int) $request->status;
-
+        $friendUser = User::find($request->user_id);
+        if(!$friendUser){
+            return ResponseHelper::sendResponse([], 'User Not Available!', false, 409);
+        }
         $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'friends_allow_request');
-        $allowRequest2 = PermissionHelper::checkPermission(User::find($request->user_id)->level, 'friends_allow_request');
+        $allowRequest2 = PermissionHelper::checkPermission($friendUser->level, 'friends_allow_request');
         $familyLimit = PermissionHelper::checkPermission(auth()->user()->level, 'friends_total_family');
         $friendLimit = PermissionHelper::checkPermission(auth()->user()->level, 'friends_total_friends');
 
