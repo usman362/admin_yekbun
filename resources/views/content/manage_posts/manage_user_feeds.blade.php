@@ -308,7 +308,7 @@
 
     <div class="content-wrapper">
 
-        <!-- Reported Feeds -->
+        
         <div class="card pb-4">
             <div class="card-header">
                 <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
@@ -494,8 +494,7 @@
                 </div>
             </div>
         </div>
-        <!-- Reported Feeds -->
-
+        
         <!-- Reported Comments -->
         <div class="card pb-4">
             <div class="card-header">
