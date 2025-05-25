@@ -6,6 +6,7 @@ use App\Events\AdminFeedsComments;
 use App\Events\HistoryComments;
 use App\Events\UserFeedsComments;
 use App\Helpers\Helpers;
+use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -170,6 +171,11 @@ class FeedsController extends Controller
 
     public function store(Request $request)
     {
+
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_allow_feeds');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not allowed to share feeds.', false, 409);
+        }
         $validate = $request->validate([
             'user_type' => 'required',
             'feed_type' => 'required',
@@ -194,6 +200,10 @@ class FeedsController extends Controller
 
         // Handle multiple image uploads
         if ($request->hasFile('images')) {
+            $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_share_images');
+                if ($allowRequest !== true) {
+                    return ResponseHelper::sendResponse([], 'You are not Allowed to Share Images.', false, 409);
+                }
             foreach ($request->file('images') as $image) {
                 $uniqueName = uniqid() . '___' . str_replace(' ', '_', $image->getClientOriginalName());
                 $images[] = [
@@ -207,6 +217,10 @@ class FeedsController extends Controller
 
         // Handle multiple video uploads
         if ($request->hasFile('videos')) {
+            $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_share_videos');
+                if ($allowRequest !== true) {
+                    return ResponseHelper::sendResponse([], 'You are not Allowed to Share Videos.', false, 409);
+                }
             foreach ($request->file('videos') as $video) {
                 $uniqueName = uniqid() . '___' . str_replace(' ', '_', $video->getClientOriginalName());
                 $videos[] = [
@@ -454,6 +468,22 @@ class FeedsController extends Controller
 
     public function storeComments(Request $request, $id)
     {
+
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_text_comments');
+        $allowHistoryRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_text_comments');
+
+        if($request->feed_type == 'user_feeds'){
+            if ($allowRequest !== true) {
+                return ResponseHelper::sendResponse([], 'You are not Allowed to Text Comments.', false, 409);
+            }
+        }
+
+        if($request->feed_type == 'history'){
+            if ($allowHistoryRequest !== true) {
+                return ResponseHelper::sendResponse([], 'You are not Allowed to Text Comments.', false, 409);
+            }
+        }
+
         $request->validate([
             'comment' => 'nullable|string',
             'feed_type' => 'required',
@@ -470,6 +500,20 @@ class FeedsController extends Controller
         }
 
         if ($request->file('audio')) {
+            $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_voice_comments');
+            $allowHistoryRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_voice_comments');
+
+            if($request->feed_type == 'user_feeds'){
+                if ($allowRequest !== true) {
+                    return ResponseHelper::sendResponse([], 'You are not Allowed to Voice Comments.', false, 409);
+                }
+            }
+
+            if($request->feed_type == 'history'){
+                if ($allowHistoryRequest !== true) {
+                    return ResponseHelper::sendResponse([], 'You are not Allowed to Voice Comments.', false, 409);
+                }
+            }
             $audio = Helpers::fileUpload($request->audio, 'feeds/audio');
         } else {
             $audio = null;
@@ -692,6 +736,20 @@ class FeedsController extends Controller
 
     public function feedLike(Request $request, $id)
     {
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_like_button');
+        $allowHistoryRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_like_button');
+        if($request->feed_type == 'user_feeds'){
+            if ($allowRequest !== true) {
+                return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
+            }
+        }
+
+        if($request->feed_type == 'history'){
+            if ($allowHistoryRequest !== true) {
+                return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
+            }
+        }
+
         $request->validate([
             'feed_type' => 'required',
         ]);

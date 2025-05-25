@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\HistoryComments as EventsHistoryComments;
+use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,6 +22,10 @@ class HistoryController extends Controller
      */
     public function index()
     {
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_allow_history');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
+        }
         return response()->json(['History' => History::get(), 'success' => true], 200);
     }
 
@@ -120,61 +125,60 @@ class HistoryController extends Controller
 
     public function categorgy_history($id)
     {
-        $history = History::select('id','description','title','category_id' ,'created_at')->with('gallery')->where('category_id', $id)->inRandomOrder() ->limit(8)->get();
-        if($history->isNotEmpty()){
-            $history = $history->map(function($histories){
+        $history = History::select('id', 'description', 'title', 'category_id', 'created_at')->with('gallery')->where('category_id', $id)->inRandomOrder()->limit(8)->get();
+        if ($history->isNotEmpty()) {
+            $history = $history->map(function ($histories) {
                 $formatDate = $histories->created_at->format('M d Y');
-                $histories->setAttribute('formatted_created_at',$formatDate);
+                $histories->setAttribute('formatted_created_at', $formatDate);
                 return $histories;
             });
             return response()->json(['success' => true, 'data' => $history]);
         }
 
-        return response()->json(['success' => false ,'message' => 'No history found.']);
+        return response()->json(['success' => false, 'message' => 'No history found.']);
     }
 
     public function cover_history()
     {
-        $history = History::select('id','title','description','category_id' , 'created_at')->with('gallery')->limit(3)->get();
-        if($history->isNotEmpty()){
-            $history = $history->map(function($histories){
+        $history = History::select('id', 'title', 'description', 'category_id', 'created_at')->with('gallery')->limit(3)->get();
+        if ($history->isNotEmpty()) {
+            $history = $history->map(function ($histories) {
                 $formatDate = $histories->created_at->format('M d Y');
-                $histories->setAttribute('formatted_created_at',$formatDate);
+                $histories->setAttribute('formatted_created_at', $formatDate);
                 return $histories;
             });
             return response()->json(['success' => true, 'data' => $history]);
         }
 
-        return response()->json(['success' => false ,  'message' => 'No history found.']);
+        return response()->json(['success' => false,  'message' => 'No history found.']);
     }
 
     public function categories()
     {
         $categories = HistoryCategory::all();
-        if($categories->isNotEmpty()){
+        if ($categories->isNotEmpty()) {
             return response()->json(['success' => true, 'data' => $categories]);
         }
-        return response()->json(['success' => false ,  'message' => 'No history category  found.']);
+        return response()->json(['success' => false,  'message' => 'No history category  found.']);
     }
 
     public function detail($id)
     {
-        $history = History::select('id','title','description','category_id' , 'created_at')->with(['history_category','gallery'])->find($id);
-        if($history != [])
-        {
+        $history = History::select('id', 'title', 'description', 'category_id', 'created_at')->with(['history_category', 'gallery'])->find($id);
+        if ($history != []) {
             $histories = $history->created_at->format('M d Y');
-            $history = $history->setAttribute('formatted_created_at',$histories);
+            $history = $history->setAttribute('formatted_created_at', $histories);
             return response()->json(['success' => true, 'data' => $history]);
         }
-        return response()->json(['success' => false , 'message' => 'No history found.']);
+        return response()->json(['success' => false, 'message' => 'No history found.']);
     }
 
     public function search(Request $request)
     {
-        $history = History::select('id','description','title','category_id')->with('gallery')->where('title', 'like', '%' . $request->search . '%')->get();
-        if($history->isNotEmpty()){
+        $history = History::select('id', 'description', 'title', 'category_id')->with('gallery')->where('title', 'like', '%' . $request->search . '%')->get();
+        if ($history->isNotEmpty()) {
             return response()->json(['success' => true, 'data' => $history]);
         }
-        return response()->json(['success' => false , 'message' => 'No history found.']);
+        return response()->json(['success' => false, 'message' => 'No history found.']);
     }
 }
