@@ -7,6 +7,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Artist;
 use App\Models\ArtistFavorite;
+use App\Models\MusicPlay;
 use App\Models\Song;
 use App\Models\SongViews;
 use App\Models\User;
@@ -15,6 +16,7 @@ use App\Models\UserPlaylist;
 use App\Models\UserPlaylistGroup;
 use App\Models\VideoClip;
 use App\Models\VideoClipViews;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -224,6 +226,46 @@ class MultimediaController extends Controller
             $is_favorite = 0;
         }
         return ResponseHelper::sendResponse(['artist' => $artist, 'is_favorite' => $is_favorite, 'favorite_count' => $favourites->count()], 'Artist Detail Fetch Successfully!');
+    }
+
+    public function playMusic(Request $request, $id)
+    {
+        $userId = auth()->id();
+        $today = Carbon::today();
+
+        // 1. Delete old records (only keep today’s)
+        MusicPlay::where('user_id', $userId)
+            ->whereDate('created_at', '<', $today)
+            ->delete();
+
+        // 2. Count today's unique music plays
+        $todayPlayCount = MusicPlay::where('user_id', $userId)
+            ->whereDate('created_at', $today)
+            ->distinct('music_id')
+            ->count('music_id');
+
+        // 3. Check if user already played this music today
+        $alreadyPlayed = MusicPlay::where('user_id', $userId)
+            ->where('music_id', $id)
+            ->whereDate('created_at', $today)
+            ->exists();
+
+        // 4. If not played and limit reached, reject
+        if (!$alreadyPlayed && $todayPlayCount >= 5) {
+                return response()->json([
+                    'success' => false,
+                    'message' => "Your daily music play limit has been exceeded."
+                ], 403);
+                return ResponseHelper::sendResponse([],'Your daily music play limit has been exceeded.',false,409);
+        }
+
+        // 5. Log the music play
+        MusicPlay::create([
+            'user_id' => $userId,
+            'music_id' => $id,
+        ]);
+
+        return ResponseHelper::sendResponse([],'Music played successfully.');
     }
 
     public function store_artist_song_views(Request $request, $id)

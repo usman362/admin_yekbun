@@ -177,6 +177,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
     Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
     Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
+    Route::get('/play-music/{id}',[MultimediaController::class, 'playMusic']);
     Route::get('get-songs-playlist', [MultimediaController::class, 'getSongsPlaylist']);
     Route::get('get-playlist/{id}', [MultimediaController::class, 'getPlaylistDetail']);
     Route::post('edit-playlist/{id}', [MultimediaController::class, 'editPlaylist']);
