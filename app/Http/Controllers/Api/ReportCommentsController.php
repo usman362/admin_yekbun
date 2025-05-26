@@ -56,9 +56,9 @@ public function reportfeedstore(Request $request, $id)
     $reportFeed->feed_id = $id;
     $reportFeed->report_type = $request->report_type;
     $reportFeed->user_id = Auth::id();  // or auth()->id()
-    dd( $reportFeed->user_id );
-    $reportFeed->save();
-
+   // dd( $reportFeed->user_id );
+   $data= $reportFeed->save();
+dd( $data);
     return response()->json([
         'success' => true,
         'message' => 'Report submitted successfully.',
