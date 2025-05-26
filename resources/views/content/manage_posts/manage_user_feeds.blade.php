@@ -321,8 +321,7 @@
                     <button id="scrollLeft"><i class="fas fa-chevron-left"></i></button>
                     <button id="scrollRight"><i class="fas fa-chevron-right"></i></button>
                 </div> --}}
-            </div>
-            <div class="view-wrapper">
+                  <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
@@ -493,6 +492,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+          
         </div>
         
         <!-- Reported Comments -->
