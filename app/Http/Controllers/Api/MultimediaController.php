@@ -310,6 +310,10 @@ class MultimediaController extends Controller
 
     public function store_artist_favorites(Request $request, $id)
     {
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'music_favorite_artist');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not Allowed to Add Artist as Favorite.', false, 409);
+        }
         try {
             $exists = ArtistFavorite::where('user_id', auth()->user()->id)->where('artist_id', $id)->first();
             if (!empty($exists)) {
