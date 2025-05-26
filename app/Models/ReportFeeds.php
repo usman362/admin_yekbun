@@ -7,25 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReportFeeds extends Model
 {
-    use HasFactory;
+    protected $fillable = ['feed_id', 'report_type'];
 
-  protected $fillable = [
-        'user_id',
-        'report_type',
-        'feed_id',
-    ];
-//    public function users()
-//     {
-//         return $this->hasMany(User::class, 'user_id');
-//     }
+    public static function store($data)
+    {
+        $report = new self();
+        $report->feed_id = $data['feed_id'];
+        $report->report_type = $data['report_type'];
+        $report->save();
 
-//     public function feeds()
-//     {
-//         return $this->belongsTo(Feed::class);
-//     }
-
-
-
-
-
+        return $report;
+    }
 }
+

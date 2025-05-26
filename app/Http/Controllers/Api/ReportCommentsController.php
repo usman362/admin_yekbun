@@ -48,21 +48,22 @@ class ReportCommentsController extends Controller
 
 public function reportfeedstore(Request $request, $id)
 {
-   $data= $request->validate([
+    $request->validate([
         'report_type' => 'required'
     ]);
-//dd($data);
-    $report = ReportFeeds::create([
+
+    $report = ReportFeeds::store([
         'feed_id' => $id,
         'report_type' => $request->report_type
     ]);
-dd( $report);
+
     return response()->json([
         'success' => true,
         'message' => 'Report submitted successfully.',
         'data' => $report
     ], 201);
 }
+
 
 
 
