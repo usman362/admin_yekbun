@@ -65,14 +65,12 @@ public function reportfeedstore(Request $request, $id)
         ], 400);
     }
 
-    $now = now();
-
     $data = [
         'feed_id' => $id,
         'report_type' => $request->report_type,
         'user_id' => $userId,
-        'created_at' => $now,
-        'updated_at' => $now,
+        'created_at' => now(),
+        'updated_at' => now(),
     ];
 
     $inserted = DB::table('report_feeds')->insert($data);
@@ -81,10 +79,11 @@ public function reportfeedstore(Request $request, $id)
         return response()->json([
             'success' => true,
             'message' => 'Feed Report submitted successfully.',
-            'feed_id' => $data['feed_id'],
-            'report_type' => $data['report_type'],
-            'user_id' => $data['user_id'],
-            
+            'data' => [
+                'feed_id' => $data['feed_id'],
+                'report_type' => $data['report_type'],
+                'user_id' => $data['user_id'],
+            ]
         ], 201);
     } else {
         return response()->json([
@@ -93,6 +92,7 @@ public function reportfeedstore(Request $request, $id)
         ], 500);
     }
 }
+
 
 
 }
