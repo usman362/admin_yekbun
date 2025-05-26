@@ -6,6 +6,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ReportComments;
 use App\Models\ReportFeeds;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -45,25 +46,37 @@ class ReportCommentsController extends Controller
     }
 
 
+ 
+
+
 public function reportfeedstore(Request $request, $id)
 {
     $request->validate([
         'report_type' => 'required',
     ]);
 
-    $reportFeed = new ReportFeeds();
-   
-    $reportFeed->feed_id = $id;
-    $reportFeed->report_type = $request->report_type;
-    $reportFeed->user_id = Auth::id();  // or auth()->id()
-   // dd( $reportFeed->user_id );
-   $data= $reportFeed->save();
-dd( $data);
-    return response()->json([
-        'success' => true,
-        'message' => 'Report submitted successfully.',
-        'data' => $reportFeed
-    ], 201);
+    $data = [
+        'feed_id' => $id,
+        'report_type' => $request->report_type,
+        'user_id' => Auth::id(),
+        'created_at' => now(),
+        'updated_at' => now(),
+    ];
+
+    // Insert directly into DB table, returns boolean true on success
+    $inserted = DB::table('report_feeds')->insert($data);
+
+    if ($inserted) {
+        return response()->json([
+            'success' => true,
+            'message' => 'Report submitted successfully.',
+        ], 201);
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to submit report.',
+        ], 500);
+    }
 }
 
 
