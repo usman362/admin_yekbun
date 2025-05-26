@@ -9,10 +9,7 @@
             background-color: transparent !important;
             border: none !important;
         }
-        
-.post-image {
-    margin: 0 !important;
-}
+
         .form-check-input:checked,
         .form-check-input[type=checkbox] {
             background-color: transparent !important;
@@ -100,7 +97,7 @@
         }
 
         .main-feed {
-          /* ///  overflow-x: hidden; */
+          ///  overflow-x: hidden;
             /* Prevents horizontal scroll */
         }
 
@@ -328,8 +325,7 @@
     <div class="content-wrapper">
 
 
-       <div class="card ms-0 ps-0">
-
+        <div class="card pb-4">
             <div class="card-header">
                 <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                 <div>
