@@ -43,32 +43,42 @@ class ReportCommentsController extends Controller
         return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
     }
 
-       public function reportfeedstore(Request $request, $id)
-    {
-        $request->validate([
-            'report_type' => 'required'
-        ]);
+public function reportfeedstore(Request $request, $id)
+{
+    $request->validate([
+        'report_type' => 'required'
+    ]);
 
-        $existingReport = ReportFeeds::where('user_id', auth()->id())
-            ->where('feed_id', $id)
-            ->exists();
+    $userId = auth()->id();
 
-        if ($existingReport) {
-            return ResponseHelper::sendResponse([], 'You have already reported this feed.',false, 400);
-        }
+    $existingReport = ReportFeeds::where('user_id', $userId)
+        ->where('feed_id', $id)
+        ->exists();
 
+    if ($existingReport) {
+        return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
+    }
+
+    // Create a new report (no update if report_id is not provided)
+    if ($request->filled('report_id')) {
         $report = ReportFeeds::updateOrCreate(
             ['id' => $request->report_id],
             [
                 'feed_id' => $id,
                 'report_type' => Str::slug($request->report_type),
-                'user_id' => auth()->user()->id,
+                'user_id' => $userId,
             ]
         );
-
-        return ResponseHelper::sendResponse($report, 'Report Feeds Successfully');
+    } else {
+        $report = ReportFeeds::create([
+            'feed_id' => $id,
+            'report_type' => Str::slug($request->report_type),
+            'user_id' => $userId,
+        ]);
     }
 
+    return ResponseHelper::sendResponse($report, 'Report Feeds Successfully');
+}
 
 
 
