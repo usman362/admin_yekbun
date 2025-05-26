@@ -90,6 +90,22 @@
             cursor: pointer;
         }
 
+        .card .row {
+            flex-wrap: wrap;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .main-feed {
+            overflow-x: hidden;
+            /* Prevents horizontal scroll */
+        }
+
+        .card {
+            overflow-x: hidden;
+        }
+
+
         .card-post:hover {
             box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
             background-clip: padding-box;
@@ -308,7 +324,7 @@
 
     <div class="content-wrapper">
 
-        
+
         <div class="card pb-4">
             <div class="card-header">
                 <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
@@ -327,7 +343,9 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                    <div class="row">
+             
+                 <div class="row gx-3 gy-4">
+
                         @foreach ($feeds as $feed)
                             <div class="col-md-3">
                                 <div class="post-image">
@@ -349,7 +367,7 @@
                                             <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                                                 <div class="user-block">
                                                     <div class="user-info">
-                                                        <div class="row">
+                                                         <div class="row gx-3 gy-4">
                                                             <div class="col-sm-2 p-0">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
@@ -494,7 +512,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Reported Comments -->
         <div class="card pb-4">
             <div class="card-header">
@@ -514,7 +532,7 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                    <div class="row">
+                     <div class="row gx-3 gy-4">
                         @foreach ($feeds as $feed)
                             <div class="col-md-3">
                                 <div class="post-image">
@@ -537,7 +555,7 @@
                                             <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                                                 <div class="user-block">
                                                     <div class="user-info">
-                                                        <div class="row">
+                                                         <div class="row gx-3 gy-4">
                                                             <div class="col-sm-2 p-0">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
@@ -705,7 +723,7 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                    <div class="row">
+                     <div class="row gx-3 gy-4">
                         @foreach ($feeds as $feed)
                             <div class="col-md-3">
                                 <div class="post-image">
@@ -728,7 +746,7 @@
                                             <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                                                 <div class="user-block">
                                                     <div class="user-info">
-                                                        <div class="row">
+                                                         <div class="row gx-3 gy-4">
                                                             <div class="col-sm-2 p-0">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
