@@ -79,6 +79,7 @@ class ReportCommentsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Feed Report submitted successfully.',
+                'data' => $data,
             ], 201);
         } else {
             return response()->json([
