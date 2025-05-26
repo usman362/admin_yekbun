@@ -30,7 +30,7 @@ class ReportCommentsController extends Controller
             ->exists();
 
         if ($existingReport) {
-            return ResponseHelper::sendResponse([], 'You have already reported this comment.',false, 400);
+            return ResponseHelper::sendResponse([], 'You have already reported this comment.', false, 400);
         }
 
         $report = ReportComments::updateOrCreate(
@@ -45,46 +45,46 @@ class ReportCommentsController extends Controller
         return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
     }
 
+    public function reportfeedstore(Request $request, $id)
+    {
+        $request->validate([
+            'report_type' => 'required',
+        ]);
 
- 
+        $userId = Auth::id();
 
+        $exists = DB::table('report_feeds')
+            ->where('feed_id', $id)
+            ->where('user_id', $userId)
+            ->exists();
 
-public function reportfeedstore(Request $request, $id)
-{
-    $request->validate([
-        'report_type' => 'required',
-    ]);
+        if ($exists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have already reported this feed.',
+            ], 400);
+        }
 
-    $data = [
-        'feed_id' => $id,
-        'report_type' => $request->report_type,
-        'user_id' => Auth::id(),
-        'created_at' => now(),
-        'updated_at' => now(),
-    ];
+        $data = [
+            'feed_id' => $id,
+            'report_type' => $request->report_type,
+            'user_id' => $userId,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
 
-    // Insert directly into DB table, returns boolean true on success
-    $inserted = DB::table('report_feeds')->insert($data);
+        $inserted = DB::table('report_feeds')->insert($data);
 
-    if ($inserted) {
-        return response()->json([
-            'success' => true,
-            'message' => 'Feed Report submitted successfully.',
-        ], 201);
-    } else {
-        return response()->json([
-            'success' => false,
-            'message' => 'Failed to submit report.',
-        ], 500);
+        if ($inserted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Feed Report submitted successfully.',
+            ], 201);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to submit report.',
+            ], 500);
+        }
     }
-}
-
-
-
-
-
-
-
-
- 
 }
