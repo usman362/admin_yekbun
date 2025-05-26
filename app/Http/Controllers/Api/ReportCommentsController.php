@@ -52,12 +52,12 @@ public function reportfeedstore(Request $request, $id)
         'report_type' => 'required'
     ]);
 
-    $userId = auth()->id();
+    //$userId = auth()->id();
 
     $report = ReportFeeds::create([
         'feed_id' => $id,
         'report_type' => Str::slug($request->report_type),
-        'user_id' => $userId,
+         
     ]);
 
     return response()->json([

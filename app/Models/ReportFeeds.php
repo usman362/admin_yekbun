@@ -14,15 +14,15 @@ class ReportFeeds extends Model
         'report_type',
         'feed_id',
     ];
-   public function users()
-    {
-        return $this->hasMany(User::class, 'user_id');
-    }
+//    public function users()
+//     {
+//         return $this->hasMany(User::class, 'user_id');
+//     }
 
-    public function feeds()
-    {
-        return $this->belongsTo(Feed::class);
-    }
+//     public function feeds()
+//     {
+//         return $this->belongsTo(Feed::class);
+//     }
 
 
 
