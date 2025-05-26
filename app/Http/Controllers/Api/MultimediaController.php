@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helpers;
+use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Artist;
@@ -250,12 +251,9 @@ class MultimediaController extends Controller
             ->whereDate('created_at', $today)
             ->exists();
 
+        $musicCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'music_daily_songs');
         // 4. If not played and limit reached, reject
-        if (!$alreadyPlayed && $todayPlayCount >= 5) {
-                return response()->json([
-                    'success' => false,
-                    'message' => "Your daily music play limit has been exceeded."
-                ], 403);
+        if (!$alreadyPlayed && $todayPlayCount >= $musicCounnt) {
                 return ResponseHelper::sendResponse([],'Your daily music play limit has been exceeded.',false,409);
         }
 

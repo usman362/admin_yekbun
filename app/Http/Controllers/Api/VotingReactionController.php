@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\PermissionHelper;
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Voting;
 use App\Models\VotingReaction;
@@ -32,6 +34,10 @@ class VotingReactionController extends Controller
      */
     public function store(Request $request)
     {
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'vote_allow_vote');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not Allowed to Vote.', false, 409);
+        }
         $request->validate([
             'voting_id' => 'required',
             'type' => 'required',
