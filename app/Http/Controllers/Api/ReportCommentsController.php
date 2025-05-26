@@ -79,13 +79,13 @@ class ReportCommentsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Feed Report submitted successfully.',
-                'data' => $data,
+                'data' => $inserted,
             ], 201);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to submit report.',
-                'data' => $data,
+                'data' => $inserted,
             ], 500);
         }
     }
