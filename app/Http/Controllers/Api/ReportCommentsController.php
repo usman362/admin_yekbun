@@ -69,7 +69,7 @@ public function reportfeedstore(Request $request, $id)
     if ($inserted) {
         return response()->json([
             'success' => true,
-            'message' => 'Report submitted successfully.',
+            'message' => 'Feed Report submitted successfully.',
         ], 201);
     } else {
         return response()->json([
