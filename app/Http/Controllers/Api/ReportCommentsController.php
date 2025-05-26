@@ -52,7 +52,7 @@ public function reportfeedstore(Request $request, $id)
     ]);
 
     $reportFeed = new ReportFeeds();
-    dd(' $reportFeed');
+   dd($id);
     $reportFeed->feed_id = $id;
     $reportFeed->report_type = $request->report_type;
     $reportFeed->user_id = Auth::id();  // or auth()->id()
