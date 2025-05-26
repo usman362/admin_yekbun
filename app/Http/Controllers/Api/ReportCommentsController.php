@@ -45,7 +45,7 @@ class ReportCommentsController extends Controller
 
 public function reportfeedstore(Request $request, $id)
 {
-    dd($request->all());
+    //dd($request->all());
     $request->validate([
         'report_type' => 'required'
     ]);
@@ -53,13 +53,13 @@ public function reportfeedstore(Request $request, $id)
     $userId = auth()->id();
 
     // Prevent duplicate reports
-    $alreadyReported = ReportFeeds::where('user_id', $userId)
-        ->where('feed_id', $id)
-        ->exists();
+    // $alreadyReported = ReportFeeds::where('user_id', $userId)
+    //     ->where('feed_id', $id)
+    //     ->exists();
 
-    if ($alreadyReported) {
-        return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
-    }
+    // if ($alreadyReported) {
+    //     return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
+    // }
 
     // Create new report
     $report = ReportFeeds::create([
