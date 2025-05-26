@@ -97,7 +97,7 @@
         }
 
         .main-feed {
-            overflow-x: hidden;
+          /* ///  overflow-x: hidden; */
             /* Prevents horizontal scroll */
         }
 
