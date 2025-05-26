@@ -232,6 +232,12 @@ class MultimediaController extends Controller
 
     public function playMusic(Request $request, $id)
     {
+
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'music_allow_music');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not Allowed to Use Musics.', false, 409);
+        }
+
         $userId = auth()->id();
         $today = Carbon::today();
 
@@ -269,6 +275,11 @@ class MultimediaController extends Controller
 
     public function playVideo(Request $request, $id)
     {
+        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'video_allow_video');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not Allowed to Use Videos.', false, 409);
+        }
+
         $userId = auth()->id();
         $today = Carbon::today();
 
