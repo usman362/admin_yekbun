@@ -17,6 +17,7 @@ use App\Models\UserPlaylist;
 use App\Models\UserPlaylistGroup;
 use App\Models\VideoClip;
 use App\Models\VideoClipViews;
+use App\Models\VideoPlay;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -264,6 +265,43 @@ class MultimediaController extends Controller
         ]);
 
         return ResponseHelper::sendResponse([],'Music played successfully.');
+    }
+
+    public function playVideo(Request $request, $id)
+    {
+        $userId = auth()->id();
+        $today = Carbon::today();
+
+        // 1. Delete old records (only keep today’s)
+        VideoPlay::where('user_id', $userId)
+            ->whereDate('created_at', '<', $today)
+            ->delete();
+
+        // 2. Count today's unique video plays
+        $todayPlayCount = VideoPlay::where('user_id', $userId)
+            ->whereDate('created_at', $today)
+            ->distinct('video_id')
+            ->count('video_id');
+
+        // 3. Check if user already played this video today
+        $alreadyPlayed = VideoPlay::where('user_id', $userId)
+            ->where('video_id', $id)
+            ->whereDate('created_at', $today)
+            ->exists();
+
+        $videoCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'video_daily_songs');
+        // 4. If not played and limit reached, reject
+        if (!$alreadyPlayed && $todayPlayCount >= $videoCounnt) {
+                return ResponseHelper::sendResponse([],'Your daily video play limit has been exceeded.',false,409);
+        }
+
+        // 5. Log the video play
+        VideoPlay::create([
+            'user_id' => $userId,
+            'video_id' => $id,
+        ]);
+
+        return ResponseHelper::sendResponse([],'Video played successfully.');
     }
 
     public function store_artist_song_views(Request $request, $id)
