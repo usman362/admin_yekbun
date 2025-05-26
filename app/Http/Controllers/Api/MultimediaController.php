@@ -289,7 +289,7 @@ class MultimediaController extends Controller
             ->whereDate('created_at', $today)
             ->exists();
 
-        $videoCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'video_daily_songs');
+        $videoCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'video_daily_videos');
         // 4. If not played and limit reached, reject
         if (!$alreadyPlayed && $todayPlayCount >= $videoCounnt) {
                 return ResponseHelper::sendResponse([],'Your daily video play limit has been exceeded.',false,409);
