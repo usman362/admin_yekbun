@@ -51,34 +51,25 @@ public function reportfeedstore(Request $request, $id)
 
     $userId = auth()->id();
 
-    $existingReport = ReportFeeds::where('user_id', $userId)
+    // Prevent duplicate reports
+    $alreadyReported = ReportFeeds::where('user_id', $userId)
         ->where('feed_id', $id)
         ->exists();
 
-    if ($existingReport) {
+    if ($alreadyReported) {
         return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
     }
 
-    // Create a new report (no update if report_id is not provided)
-    if ($request->filled('report_id')) {
-        $report = ReportFeeds::updateOrCreate(
-            ['id' => $request->report_id],
-            [
-                'feed_id' => $id,
-                'report_type' => Str::slug($request->report_type),
-                'user_id' => $userId,
-            ]
-        );
-    } else {
-        $report = ReportFeeds::create([
-            'feed_id' => $id,
-            'report_type' => Str::slug($request->report_type),
-            'user_id' => $userId,
-        ]);
-    }
+    // Create new report
+    $report = ReportFeeds::create([
+        'feed_id' => $id,
+        'report_type' => Str::slug($request->report_type),
+        'user_id' => $userId,
+    ]);
 
     return ResponseHelper::sendResponse($report, 'Report Feeds Successfully');
 }
+
 
 
 
