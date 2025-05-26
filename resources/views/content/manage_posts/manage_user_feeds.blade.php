@@ -89,21 +89,19 @@
             box-shadow: none;
             cursor: pointer;
         }
-
         .card .row {
-            flex-wrap: wrap;
-            margin-right: 0;
-            margin-left: 0;
-        }
+    flex-wrap: wrap;
+    margin-right: 0;
+    margin-left: 0;
+}
 
-        .main-feed {
-          ///  overflow-x: hidden;
-            /* Prevents horizontal scroll */
-        }
+.main-feed {
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
 
-        .card {
-            overflow-x: hidden;
-        }
+.card {
+    overflow-x: hidden;
+}
 
 
         .card-post:hover {
@@ -324,7 +322,7 @@
 
     <div class="content-wrapper">
 
-
+        
         <div class="card pb-4">
             <div class="card-header">
                 <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
@@ -510,7 +508,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Reported Comments -->
         <div class="card pb-4">
             <div class="card-header">
