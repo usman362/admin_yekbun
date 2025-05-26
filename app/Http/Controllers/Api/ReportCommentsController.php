@@ -8,7 +8,7 @@ use App\Models\ReportComments;
 use App\Models\ReportFeeds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Auth;
 
 class ReportCommentsController extends Controller
 {
@@ -45,22 +45,22 @@ class ReportCommentsController extends Controller
     }
 
 
-
 public function reportfeedstore(Request $request, $id)
 {
     $request->validate([
-        'report_type' => 'required'
+        'report_type' => 'required',
     ]);
 
-    $report = ReportFeeds::store([
-        'feed_id' => $id,
-        'report_type' => $request->report_type
-    ]);
+    $reportFeed = new ReportFeeds();
+    $reportFeed->feed_id = $id;
+    $reportFeed->report_type = $request->report_type;
+    $reportFeed->user_id = Auth::id();  // or auth()->id()
+    $reportFeed->save();
 
     return response()->json([
         'success' => true,
         'message' => 'Report submitted successfully.',
-        'data' => $report
+        'data' => $reportFeed
     ], 201);
 }
 
