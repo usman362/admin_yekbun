@@ -9,6 +9,7 @@ use App\Models\ReportFeeds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+
 class ReportCommentsController extends Controller
 {
     public function index(Request $request, $id)
@@ -43,34 +44,28 @@ class ReportCommentsController extends Controller
         return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
     }
 
+
+
 public function reportfeedstore(Request $request, $id)
 {
-    //dd($request->all());
     $request->validate([
         'report_type' => 'required'
     ]);
 
     $userId = auth()->id();
 
-    // Prevent duplicate reports
-    // $alreadyReported = ReportFeeds::where('user_id', $userId)
-    //     ->where('feed_id', $id)
-    //     ->exists();
-
-    // if ($alreadyReported) {
-    //     return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
-    // }
-
-    // Create new report
     $report = ReportFeeds::create([
         'feed_id' => $id,
         'report_type' => Str::slug($request->report_type),
         'user_id' => $userId,
     ]);
 
-    return ResponseHelper::sendResponse($report, 'Report Feeds Successfully');
+    return response()->json([
+        'success' => true,
+        'message' => 'Report submitted successfully.',
+        'data' => $report
+    ], 201);
 }
-
 
 
 
