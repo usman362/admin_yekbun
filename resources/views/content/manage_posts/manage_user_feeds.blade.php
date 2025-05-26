@@ -89,20 +89,7 @@
             box-shadow: none;
             cursor: pointer;
         }
-        .card .row {
-    flex-wrap: wrap;
-    margin-right: 0;
-    margin-left: 0;
-}
-
-.main-feed {
-    overflow-x: hidden; /* Prevents horizontal scroll */
-}
-
-.card {
-    overflow-x: hidden;
-}
-
+        
 
         .card-post:hover {
             box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
