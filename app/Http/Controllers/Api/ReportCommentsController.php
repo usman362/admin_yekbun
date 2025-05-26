@@ -45,6 +45,7 @@ class ReportCommentsController extends Controller
 
 public function reportfeedstore(Request $request, $id)
 {
+    dd($request->all());
     $request->validate([
         'report_type' => 'required'
     ]);
