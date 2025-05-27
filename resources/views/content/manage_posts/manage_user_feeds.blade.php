@@ -387,8 +387,8 @@
                                                         class="card-post-thumbnail">
                                                     </div> --}}
 
-                                                @if (isset($feed->images[0]))
-                                                    <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                @if (isset($reportfeed->images[0]))
+                                                    <div style="background-image: url({{ asset('storage/' . $reportfeed->images[0]['path']) }});"
                                                         class="card-post-thumbnail">
                                                     </div>
                                                 @else
@@ -417,7 +417,7 @@
                                                                 style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
 
-                                                        {{-- @if ($feed->is_comments == 1) --}}
+                                                        {{-- @if ($reportfeed->is_comments == 1) --}}
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
@@ -425,7 +425,7 @@
                                                                 style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
                                                         {{-- @endif --}}
-                                                        {{-- @if ($feed->is_share == 1) --}}
+                                                        {{-- @if ($reportfeed->is_share == 1) --}}
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
@@ -434,7 +434,7 @@
                                                         </div>
                                                         {{-- @endif --}}
                                                     </div>
-                                                    {{-- @if ($feed->is_emoji == 1) --}}
+                                                    {{-- @if ($reportfeed->is_emoji == 1) --}}
                                                     <div
                                                         style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
                                                         <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
@@ -463,7 +463,7 @@
                                         <div class="dropdown-menu text-center dropdown-menu-end"
                                             style="min-width: unset; width: 100px;">
                                             <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                            <form action="{{ route('history.destroy', $feed->id) }}"
+                                            <form action="{{ route('history.destroy', $reportfeed->id) }}"
                                                 onsubmit="confirmAction(event, () => event.target.submit())"
                                                 method="post" class="d-inline">
                                                 @csrf
@@ -474,13 +474,13 @@
                                                         <a class="dropdown-item edit-history" style="padding: 0"
                                                             href="javascript:void(0)" data-bs-toggle="modal"
                                                             data-bs-target="#createhistoryModal"
-                                                            data-id="{{ $feed->id }}"
-                                                            data-name="{{ $feed->title }}"
-                                                            data-source="{{ $feed->source }}"
-                                                            data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}} data-comments="{{ $feed->is_comments }}"
-                                                            data-share="{{ $feed->is_share }}"
-                                                            data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
+                                                            data-id="{{ $reportfeed->id }}"
+                                                            data-name="{{ $reportfeed->title }}"
+                                                            data-source="{{ $reportfeed->source }}"
+                                                            data-thumbnail="{{ asset('storage/' . $reportfeed->thumbnail) }}"
+                                                            {{-- data-path="{{ $reportfeed->feed_type == 'videos' ? $reportfeed->videos[0]['path'] : $reportfeed->images[0]['path'] }}" --}} data-comments="{{ $reportfeed->is_comments }}"
+                                                            data-share="{{ $reportfeed->is_share }}"
+                                                            data-emoji="{{ $reportfeed->is_emoji }}" for="customRadioPrime">
                                                             <img class="pop_action_image" style="height: 26px"
                                                                 src="{{ asset('assets/svg/edit.svg') }}"></a>
                                                     </div>
