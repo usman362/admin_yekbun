@@ -364,13 +364,13 @@
                                                                     title="{{ optional($feed->user)->name }}">
                                                                     <b>{{ optional($feed->user)->name }}</b>
                                                                 </p>
-                                                               <small class="time">
-    <i>
-        {{ is_object($feed->created_at) && method_exists($feed->created_at, 'diffForHumans') 
-            ? $feed->created_at->diffForHumans() 
-            : 'Unknown time' }}
-    </i>
-</small>
+                                                                <small class="time">
+                                                                    {{-- <i>
+                                                                        {{ is_object($feed->created_at) && method_exists($feed->created_at, 'diffForHumans')
+                                                                            ? $feed->created_at->diffForHumans()
+                                                                            : 'Unknown time' }}
+                                                                    </i> --}}
+                                                                </small>
 
 
                                                             </div>
