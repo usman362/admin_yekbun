@@ -110,7 +110,7 @@
             position: relative;
             width: 100%;
             font-family: 'Genos';
-            margin: 0 
+            margin: 0 ;
         }
 
         .post-image .dropdown {
@@ -327,7 +327,7 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                   <div class="row g-4">
+                    <div class="row">
                         @foreach ($reportfeeds as $report)
                             @php $feed = $report->feed; @endphp
                             @if ($feed)
