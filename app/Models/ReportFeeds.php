@@ -16,6 +16,10 @@ class ReportFeeds extends Eloquent // ✅ Use MongoDB Eloquent Model
         'report_type',
         'feed_id',
     ];
+    protected $casts = [
+    'created_at' => 'datetime',
+    'updated_at' => 'datetime',
+];
 
     public function user()
     {

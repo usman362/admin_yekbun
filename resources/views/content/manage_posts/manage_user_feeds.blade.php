@@ -308,7 +308,7 @@
 
     <div class="content-wrapper">
 
-        
+
         <div class="card pb-4">
             <div class="card-header">
                 <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
@@ -364,8 +364,12 @@
                                                                     title="{{ optional($feed->user)->name }}">
                                                                     <b>{{ optional($feed->user)->name }}</b>
                                                                 </p>
-                                                                <small
-                                                                    class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                <small class="time">
+                                                                    <i>
+                                                                        {{ is_a($feed->created_at, \Carbon\Carbon::class) ? $feed->created_at->diffForHumans() : 'Unknown time' }}
+                                                                    </i>
+                                                                </small>
+
                                                             </div>
                                                         </div>
                                                         <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}"
@@ -494,7 +498,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Reported Comments -->
         <div class="card pb-4">
             <div class="card-header">
