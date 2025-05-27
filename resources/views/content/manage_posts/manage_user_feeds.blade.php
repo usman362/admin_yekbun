@@ -308,7 +308,7 @@
 
     <div class="content-wrapper">
 
-        
+
         <div class="card pb-4">
             <div class="card-header">
                 <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
@@ -328,19 +328,19 @@
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
-                        @foreach ($feeds as $feed)
+                        @foreach ($reportfeeds as $reportfeed)
                             <div class="col-md-3">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
-                                        data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $feed->_id }}"
-                                        @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                        data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $reportfeed->_id }}"
+                                        @if (isset($reportfeed->images[0])) data-thumb="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
+                                                        href="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
+                                                        data-demo-href="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
                                                     @else
-                                                        @if (isset($feed->videos[0]))
-                                                            data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                                        @if (isset($reportfeed->videos[0]))
+                                                            data-thumb="{{ asset('storage/' . $reportfeed->videos[0]['path']) }}"
+                                                            href="{{ asset('storage/' . $reportfeed->videos[0]['path']) }}"
+                                                            data-demo-href="{{ asset('storage/' . $reportfeed->videos[0]['path']) }}"
                                                     @else @endif
                                         @endif
                                         >
@@ -351,21 +351,28 @@
                                                     <div class="user-info">
                                                         <div class="row">
                                                             <div class="col-sm-2 p-0">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
+                                                                <img src="{{ asset('assets/svg/svg-dialog/' . optional($reportfeed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
                                                             </div>
                                                             <div class="col-sm-2 p-0">
-                                                                <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                                <img src="{{ asset('storage/' . (optional($reportfeed->user)->image ?? '')) }}"
                                                                     style="width: 25px !important;height: 25px !important;border-radius: 4px !important;margin: 9px 6px;"
                                                                     onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <p class="m-0"
-                                                                    title="{{ optional($feed->user)->name }}">
-                                                                    <b>{{ optional($feed->user)->name }}</b>
+                                                                    title="{{ optional($reportfeed->user)->name }}">
+                                                                    <b>{{ optional($reportfeed->user)->name }}</b>
                                                                 </p>
-                                                                <small
-                                                                    class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                <small class="time">
+                                                                    {{-- <i>
+                                                                        {{ is_object($reportfeed->created_at) && method_exists($reportfeed->created_at, 'diffForHumans')
+                                                                            ? $reportfeed->created_at->diffForHumans()
+                                                                            : 'Unknown time' }}
+                                                                    </i> --}}
+                                                                </small>
+
+
                                                             </div>
                                                         </div>
                                                         <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}"
@@ -380,8 +387,8 @@
                                                         class="card-post-thumbnail">
                                                     </div> --}}
 
-                                                @if (isset($feed->images[0]))
-                                                    <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                @if (isset($reportfeed->images[0]))
+                                                    <div style="background-image: url({{ asset('storage/' . $reportfeed->images[0]['path']) }});"
                                                         class="card-post-thumbnail">
                                                     </div>
                                                 @else
@@ -410,7 +417,7 @@
                                                                 style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
 
-                                                        {{-- @if ($feed->is_comments == 1) --}}
+                                                        {{-- @if ($reportfeed->is_comments == 1) --}}
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
@@ -418,7 +425,7 @@
                                                                 style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
                                                         {{-- @endif --}}
-                                                        {{-- @if ($feed->is_share == 1) --}}
+                                                        {{-- @if ($reportfeed->is_share == 1) --}}
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
@@ -427,7 +434,7 @@
                                                         </div>
                                                         {{-- @endif --}}
                                                     </div>
-                                                    {{-- @if ($feed->is_emoji == 1) --}}
+                                                    {{-- @if ($reportfeed->is_emoji == 1) --}}
                                                     <div
                                                         style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
                                                         <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
@@ -456,7 +463,7 @@
                                         <div class="dropdown-menu text-center dropdown-menu-end"
                                             style="min-width: unset; width: 100px;">
                                             <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                            <form action="{{ route('history.destroy', $feed->id) }}"
+                                            <form action="{{ route('history.destroy', $reportfeed->id) }}"
                                                 onsubmit="confirmAction(event, () => event.target.submit())"
                                                 method="post" class="d-inline">
                                                 @csrf
@@ -467,13 +474,13 @@
                                                         <a class="dropdown-item edit-history" style="padding: 0"
                                                             href="javascript:void(0)" data-bs-toggle="modal"
                                                             data-bs-target="#createhistoryModal"
-                                                            data-id="{{ $feed->id }}"
-                                                            data-name="{{ $feed->title }}"
-                                                            data-source="{{ $feed->source }}"
-                                                            data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}} data-comments="{{ $feed->is_comments }}"
-                                                            data-share="{{ $feed->is_share }}"
-                                                            data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
+                                                            data-id="{{ $reportfeed->id }}"
+                                                            data-name="{{ $reportfeed->title }}"
+                                                            data-source="{{ $reportfeed->source }}"
+                                                            data-thumbnail="{{ asset('storage/' . $reportfeed->thumbnail) }}"
+                                                            {{-- data-path="{{ $reportfeed->feed_type == 'videos' ? $reportfeed->videos[0]['path'] : $reportfeed->images[0]['path'] }}" --}} data-comments="{{ $reportfeed->is_comments }}"
+                                                            data-share="{{ $reportfeed->is_share }}"
+                                                            data-emoji="{{ $reportfeed->is_emoji }}" for="customRadioPrime">
                                                             <img class="pop_action_image" style="height: 26px"
                                                                 src="{{ asset('assets/svg/edit.svg') }}"></a>
                                                     </div>
@@ -494,7 +501,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Reported Comments -->
         <div class="card pb-4">
             <div class="card-header">
@@ -553,7 +560,9 @@
                                                                     <b>{{ optional($feed->user)->name }}</b>
                                                                 </p>
                                                                 <small
-                                                                    class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                    class="time">
+                                                                    {{-- <i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i> --}}
+                                                                </small>
                                                             </div>
                                                         </div>
                                                         <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}"
@@ -744,7 +753,9 @@
                                                                     <b>{{ optional($feed->user)->name }}</b>
                                                                 </p>
                                                                 <small
-                                                                    class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                    class="time">
+                                                                    {{-- <i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i> --}}
+                                                                </small>
                                                             </div>
                                                         </div>
                                                         <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}"

@@ -1,20 +1,33 @@
-<?php
+<?php 
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class ReportFeeds extends Model
+class ReportFeeds extends Eloquent // ✅ Use MongoDB Eloquent Model
 {
     use HasFactory;
 
-    // Specify the table name explicitly
-    protected $table = 'report_feeds';
+    protected $collection = 'report_feeds'; // Optional, 'table' is fine too
 
     protected $fillable = [
         'user_id',
         'report_type',
         'feed_id',
     ];
+    protected $casts = [
+    'created_at' => 'datetime',
+    'updated_at' => 'datetime',
+];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', '_id');
+    }
+
+    public function feed()
+    {
+        return $this->belongsTo(Feed::class, 'feed_id', '_id');
+    }
 }
