@@ -332,7 +332,7 @@
                             @php $feed = $report->feed; @endphp
                             @if ($feed)
                                 {{-- Ensure feed exists --}}
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                  <div class="col-md-4">
                                     <div class="post-image">
                                         <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                             data-fancybox="post1" data-lightbox-type="comments"
