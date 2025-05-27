@@ -40,6 +40,10 @@ class Feed extends Model
         });
     }
 
+    public function reportFeeds()
+    {
+        return $this->hasMany(ReportFeeds::class, 'feed_id', '_id');
+    }
     public function background(){
         return $this->hasMany(BackgroundFeed::class  , 'id' , 'background_id');
     }
