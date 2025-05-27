@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
+use App\Models\ReportFeeds;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
 use App\Models\FeedReason;
@@ -25,12 +26,12 @@ use Illuminate\Support\Facades\DB;
 class FeedsController extends Controller
 {
 
-    public function index()
-    {
-        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(4);
-        // $reasons = FeedReason::all();
-        return view('content.manage_posts.manage_user_feeds', compact('feeds'));
-    }
+public function index()
+{
+    $feeds = ReportFeeds::with('feed')->orderBy('created_at', 'desc')->paginate(4);
+    dd($feeds);
+    return view('content.manage_posts.manage_user_feeds', compact('feeds'));
+}
 
     public function news()
     {
