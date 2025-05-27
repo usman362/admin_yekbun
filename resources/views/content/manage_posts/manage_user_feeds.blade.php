@@ -108,9 +108,9 @@
 
         .post-image {
             position: relative;
-            width: 360px;
+            width: 100%;
             font-family: 'Genos';
-            margin: 0 8px;
+            margin: 0 ;
         }
 
         .post-image .dropdown {
@@ -327,11 +327,11 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                    <div class="row">
+                    <div class="row g-4">
                       @foreach ($reportfeeds as $report)
     @php $feed = $report->feed; @endphp
     @if ($feed) {{-- Ensure feed exists --}}
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="post-image">
             <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                 data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $feed->_id }}"
@@ -349,7 +349,7 @@
                     <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                         <div class="user-block">
                             <div class="user-info">
-                                <div class="row">
+                                <div class="row g-4">
                                     <div class="col-sm-2 p-0">
                                         <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type . '.svg') }}"
                                             style="width: 25px; height: 25px; background-color: #fff; padding: 4px; border-radius: 4px; margin: 9px 6px;">
@@ -455,9 +455,9 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                    <div class="row">
+                    <div class="row g-4">
                         @foreach ($feeds as $feed)
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
@@ -478,7 +478,7 @@
                                             <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                                                 <div class="user-block">
                                                     <div class="user-info">
-                                                        <div class="row">
+                                                        <div class="row g-4">
                                                             <div class="col-sm-2 p-0">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
@@ -575,7 +575,7 @@
                                         </div>
                                         <!-- /Main wrap -->
                                     </div>
-                                    <div class="nav-item dropdown d-block"
+                                     <div class="nav-item dropdown d-block"
                                         style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -648,9 +648,9 @@
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
-                    <div class="row">
+                    <div class="row g-4">
                         @foreach ($feeds as $feed)
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
@@ -671,7 +671,7 @@
                                             <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
                                                 <div class="user-block">
                                                     <div class="user-info">
-                                                        <div class="row">
+                                                        <div class="row g-4">
                                                             <div class="col-sm-2 p-0">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
