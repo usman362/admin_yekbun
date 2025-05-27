@@ -328,19 +328,19 @@
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
-                        @foreach ($feeds as $feed)
+                        @foreach ($reportfeeds as $reportfeed)
                             <div class="col-md-3">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
-                                        data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $feed->_id }}"
-                                        @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                        data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $reportfeed->_id }}"
+                                        @if (isset($reportfeed->images[0])) data-thumb="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
+                                                        href="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
+                                                        data-demo-href="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
                                                     @else
-                                                        @if (isset($feed->videos[0]))
-                                                            data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                                        @if (isset($reportfeed->videos[0]))
+                                                            data-thumb="{{ asset('storage/' . $reportfeed->videos[0]['path']) }}"
+                                                            href="{{ asset('storage/' . $reportfeed->videos[0]['path']) }}"
+                                                            data-demo-href="{{ asset('storage/' . $reportfeed->videos[0]['path']) }}"
                                                     @else @endif
                                         @endif
                                         >
@@ -351,23 +351,23 @@
                                                     <div class="user-info">
                                                         <div class="row">
                                                             <div class="col-sm-2 p-0">
-                                                                <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
+                                                                <img src="{{ asset('assets/svg/svg-dialog/' . optional($reportfeed->user)->user_type) . '.svg' }}"
                                                                     style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
                                                             </div>
                                                             <div class="col-sm-2 p-0">
-                                                                <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                                <img src="{{ asset('storage/' . (optional($reportfeed->user)->image ?? '')) }}"
                                                                     style="width: 25px !important;height: 25px !important;border-radius: 4px !important;margin: 9px 6px;"
                                                                     onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <p class="m-0"
-                                                                    title="{{ optional($feed->user)->name }}">
-                                                                    <b>{{ optional($feed->user)->name }}</b>
+                                                                    title="{{ optional($reportfeed->user)->name }}">
+                                                                    <b>{{ optional($reportfeed->user)->name }}</b>
                                                                 </p>
                                                                 <small class="time">
                                                                     {{-- <i>
-                                                                        {{ is_object($feed->created_at) && method_exists($feed->created_at, 'diffForHumans')
-                                                                            ? $feed->created_at->diffForHumans()
+                                                                        {{ is_object($reportfeed->created_at) && method_exists($reportfeed->created_at, 'diffForHumans')
+                                                                            ? $reportfeed->created_at->diffForHumans()
                                                                             : 'Unknown time' }}
                                                                     </i> --}}
                                                                 </small>
