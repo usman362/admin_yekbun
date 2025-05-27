@@ -575,7 +575,7 @@
                                         </div>
                                         <!-- /Main wrap -->
                                     </div>
-                                    <div class="nav-item dropdown d-block"
+                                     <div class="nav-item dropdown d-block"
                                         style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
