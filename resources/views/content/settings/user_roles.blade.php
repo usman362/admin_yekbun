@@ -1425,9 +1425,9 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                     data-permission="music_playlist_price_amount"></i>
                             </div>
                             <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs"></i>
-                                <span>€ $</span>
-                                <i class="bx bx-chevron-up bx-xs"></i>
+                                <i class="bx bx-chevron-down bx-xs down-currency" data-permission="music_playlist_price_currency"></i>
+                                <span data-permission="music_playlist_price_currency">{{ $permissions['value']['music_playlist_price_currency'] ?? '$' }}</span>
+                                <i class="bx bx-chevron-up bx-xs up-currency" data-permission="music_playlist_price_currency"></i>
                             </div>
                         </div>
                     </div>
@@ -1562,9 +1562,9 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                     data-permission="video_playlist_price_amount"></i>
                             </div>
                             <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs"></i>
-                                <span>€ $</span>
-                                <i class="bx bx-chevron-up bx-xs"></i>
+                                <i class="bx bx-chevron-down bx-xs down-currency" data-permission="video_playlist_price_currency"></i>
+                                <span data-permission="video_playlist_price_currency">{{ $permissions['value']['video_playlist_price_currency'] ?? '$' }}</span>
+                                <i class="bx bx-chevron-up bx-xs up-currency" data-permission="video_playlist_price_currency"></i>
                             </div>
                         </div>
                     </div>
