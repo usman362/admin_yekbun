@@ -328,7 +328,7 @@
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
-                        @foreach ($feeds as $feed)
+                        @foreach ($reportfeeds as $feed)
                             <div class="col-md-4">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
