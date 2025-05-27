@@ -28,10 +28,11 @@ class FeedsController extends Controller
 
 public function index()
 {
-    $feeds = ReportFeeds::with('feed')->orderBy('created_at', 'desc')->paginate(4);
+    $feeds = ReportFeeds::with('feed')->get();
     dd($feeds);
     return view('content.manage_posts.manage_user_feeds', compact('feeds'));
 }
+
 
     public function news()
     {
