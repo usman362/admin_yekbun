@@ -29,7 +29,7 @@ class FeedsController extends Controller
 public function index()
 {
     $feeds = ReportFeeds::with('feed')->get();
-    dd($feeds);
+   // dd($feeds);
     return view('content.manage_posts.manage_user_feeds', compact('feeds'));
 }
 
