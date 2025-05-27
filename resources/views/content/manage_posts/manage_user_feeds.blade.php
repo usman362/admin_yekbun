@@ -9,83 +9,7 @@
             background-color: transparent !important;
             border: none !important;
         }
-/* Main container */
-.main-feed .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -8px;
-    margin-left: -8px;
-}
 
-.main-feed .col-md-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-    padding-right: 8px;
-    padding-left: 8px;
-    margin-bottom: 16px;
-}
-
-/* Card styling */
-.custom-post-card {
-    height: 100%;
-    min-height: 420px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-.card-post {
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-}
-
-.card-post:hover {
-    box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
-    cursor: pointer;
-}
-
-/* Image container */
-.card-post-thumbnail {
-    height: 200px;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 12px;
-}
-
-/* Content layout */
-.content-wrap {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-}
-
-.card-body {
-    padding: 0;
-    flex-grow: 1;
-}
-
-.card-footer {
-    margin-top: auto;
-    padding: 0;
-}
-
-/* User block */
-.user-block {
-    background-color: #F2F2F2;
-    width: 100%;
-    height: 42px;
-    border-radius: 5px;
-    position: relative;
-    padding: 4px;
-}
         .form-check-input:checked,
         .form-check-input[type=checkbox] {
             background-color: transparent !important;
@@ -405,8 +329,8 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
                         @foreach ($reportfeeds as $reportfeed)
-                            <div class="col-md-3">
-                                <div class="post-image custom-post-card">
+                            <div class="col-md-4">
+                                <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $reportfeed->_id }}"
                                         @if (isset($reportfeed->images[0])) data-thumb="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
@@ -599,8 +523,8 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
                         @foreach ($feeds as $feed)
-                            <div class="col-md-3">
-                                <div class="post-image custom-post-card">
+                            <div class="col-md-4">
+                                <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-id="{{ $feed->_id }}"
@@ -792,7 +716,7 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
                         @foreach ($feeds as $feed)
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
