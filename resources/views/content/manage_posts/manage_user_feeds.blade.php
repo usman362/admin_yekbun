@@ -331,7 +331,7 @@
                       @foreach ($reportfeeds as $report)
     @php $feed = $report->feed; @endphp
     @if ($feed) {{-- Ensure feed exists --}}
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="post-image">
             <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                 data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $feed->_id }}"
