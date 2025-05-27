@@ -9,6 +9,21 @@
             background-color: transparent !important;
             border: none !important;
         }
+        .custom-post-card {
+    height: 100%;
+    min-height: 420px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-post-thumbnail {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
 
         .form-check-input:checked,
         .form-check-input[type=checkbox] {
@@ -329,8 +344,8 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
                         @foreach ($reportfeeds as $reportfeed)
-                            <div class="col-md-4">
-                                <div class="post-image">
+                            <div class="col-md-3">
+                                <div class="post-image custom-post-card">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $reportfeed->_id }}"
                                         @if (isset($reportfeed->images[0])) data-thumb="{{ asset('storage/' . $reportfeed->images[0]['path']) }}"
@@ -523,8 +538,8 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
                         @foreach ($feeds as $feed)
-                            <div class="col-md-4">
-                                <div class="post-image">
+                            <div class="col-md-3">
+                                <div class="post-image custom-post-card">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-id="{{ $feed->_id }}"
@@ -716,8 +731,8 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row">
                         @foreach ($feeds as $feed)
-                            <div class="col-md-4">
-                                <div class="post-image">
+                            <div class="col-md-3">
+                                <div class="post-image custom-post-card">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-id="{{ $feed->_id }}"
