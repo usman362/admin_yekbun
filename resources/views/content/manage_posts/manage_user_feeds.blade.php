@@ -132,7 +132,7 @@
 
         .btn-white {
             background: #fff;
-            padding: 0px 80px !important;
+            padding: 0px 28px !important;
             display: flex;
             align-items: flex-start;
             justify-content: start;
