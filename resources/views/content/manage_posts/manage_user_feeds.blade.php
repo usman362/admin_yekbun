@@ -89,6 +89,28 @@
             box-shadow: none;
             cursor: pointer;
         }
+       
+        .btn-white {
+            background: #fff;
+            padding: 0px 80px !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            text-align: left;
+            padding-left: 5px !important;
+        }
+
+        .btn-white_01 {
+            background: #fff;
+            padding: 2px 3px !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            text-align: left;
+            font-size: 12px;
+        }
+   
+
 
         .card-post:hover {
             box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
@@ -432,22 +454,26 @@
                                             </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center p-3"
-                                            style="background-color: pink;">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    ID: <span class="text-primary mx-1">234234</span>,
-                                                    <span class="text-primary mx-1">5/29/2025</span>
-                                                    User Total: <span class="text-primary mx-1">150k</span>
-                                                </div>
-                                                <div class="mt-2">
-                                                    Reason: <span class="text-primary mx-1">Reason will be here in
-                                                        paragraph</span>,
-                                                    <span class="text-primary mx-1">5/29/2025</span>
-                                                    User Total: <span class="text-primary mx-1">150k</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div style="background-color: pink;" class="p-1">
+                <div class="d-flex justify-content-between align-items-center" >
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-white p-3">ID</button>
+                    </div>
+                    <div class="d-flex align-items-center" style="gap: 7px;">
+                        <button class="btn btn-white_01 p-3">11.10.2025</button>
+                        <button class="btn btn-white_01 p-3">User Total: 150k</button>
+                    </div>
+                    </div>
+                    <p class="mb-0 mt-2 p-1" style="    font-size: 14px;
+    background: #fff; border-radius: 4px;">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
                                         <!-- Dropdown for edit/delete -->
                                         <div class="nav-item dropdown d-block"
