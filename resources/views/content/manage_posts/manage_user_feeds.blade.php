@@ -471,7 +471,7 @@
                                                 style="    font-size: 14px;
     background: #fff; border-radius: 4px;">
                                                 Reason:
-                                                ipsum dolor sit amet, consectetur adipisicing.</p>
+                                              {{$feed->report_type}}</p>
                                         </div>
 
                                         <div class="nav-item dropdown d-block"
