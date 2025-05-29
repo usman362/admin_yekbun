@@ -357,7 +357,7 @@
                                 {{-- Ensure feed exists --}}
                                 <div class="col-md-3">
                                     <div class="post-image">
-                                        <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
+                                        <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                             data-fancybox="post1" data-lightbox-type="comments"
                                             data-id="{{ $feed->_id }}"
                                             @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -455,7 +455,7 @@
                                             </div>
                                             </div>
                                         </div>
-                                        <div style="background-color: pink;" class="p-1">
+                                        <div style="background-color: pink; border-radius:4px" class="p-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex align-items-center">
                                                     <button class="btn btn-white p-3">ID</button>
@@ -547,7 +547,7 @@
                         @foreach ($feeds as $feed)
                             <div class="col-md-3">
                                 <div class="post-image">
-                                    <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
+                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-id="{{ $feed->_id }}"
                                         @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -739,7 +739,7 @@
                         @foreach ($feeds as $feed)
                             <div class="col-md-3">
                                 <div class="post-image">
-                                    <div id="feed-post-1" class="card is-post mt-4 p-1 view-post card-post"
+                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-id="{{ $feed->_id }}"
                                         @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
