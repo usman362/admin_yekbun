@@ -677,8 +677,7 @@
                                             </div>
                                             <p class="mb-0 mt-2 p-1"
                                                 style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                                Reason:
-                                               {{ $feed->report_type }}</p>
+                                               Reason: {{ $report->report_type }}</p>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
