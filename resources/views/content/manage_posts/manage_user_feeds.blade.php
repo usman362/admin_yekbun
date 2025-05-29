@@ -876,7 +876,7 @@
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex align-items-center">
                                                     <button class="btn btn-white p-3">ID</button>
-                                                    <button class="btn btn-white p-3">{{  }}</button>
+                                                    <button class="btn btn-white p-3">{{ optional($feed->user)->user_id }}</button>
                                                 </div>
                                                 <div class="d-flex align-items-center" style="gap: 7px;">
                                                     <button class="btn btn-white_01 p-3">11.10.2025</button>
