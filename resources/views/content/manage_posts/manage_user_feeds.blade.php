@@ -389,11 +389,21 @@
                                                 </div>
                                             </div>
                                         </div>
- <div class="d-flex justify-content-between align-item-center">
-<div class="d-flex  align-item-center">
-    ID: <span class="text-primary mx-1"> 234234</span>,    <span class="text-primary mx-1"> 5/29/2025</span>
+ <div class="d-flex justify-content-between align-items-center p-3" style="background-color: pink;">
+  <div class="d-flex flex-column">
+    <div>
+      ID: <span class="text-primary mx-1">234234</span>, 
+      <span class="text-primary mx-1">5/29/2025</span> 
+      User Total: <span class="text-primary mx-1">150k</span>
+    </div>
+    <div class="mt-2">
+      Reason: <span class="text-primary mx-1">Reason will be here in paragraph</span>, 
+      <span class="text-primary mx-1">5/29/2025</span> 
+      User Total: <span class="text-primary mx-1">150k</span>
+    </div>
+  </div>
 </div>
- </div>
+
                                         <!-- Dropdown for edit/delete -->
                                         <div class="nav-item dropdown d-block"
                                             style="position: absolute; right: 6px; top: 6px;">
