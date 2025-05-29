@@ -383,26 +383,71 @@
                                                     @endif
                                                 </div>
 
-                                                <div class="mt-2 mb-0">
-                                                    <!-- interaction icons -->
-                                                    {{-- (no change here, kept as-is) --}}
+                                                   <div class="mt-2 mb-0">
+                                                <div
+                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
+                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+
+                                                        {{-- @if ($feed->is_comments == 1) --}}
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                        {{-- @endif --}}
+                                                        {{-- @if ($feed->is_share == 1) --}}
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                        {{-- @endif --}}
+                                                    </div>
+                                                    {{-- @if ($feed->is_emoji == 1) --}}
+                                                    <div
+                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span style="font-weight:400;font-family:Genos">0</span>
+                                                    </div>
+                                                    {{-- @endif --}}
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center p-3"
+                                            style="background-color: pink;">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    ID: <span class="text-primary mx-1">234234</span>,
+                                                    <span class="text-primary mx-1">5/29/2025</span>
+                                                    User Total: <span class="text-primary mx-1">150k</span>
+                                                </div>
+                                                <div class="mt-2">
+                                                    Reason: <span class="text-primary mx-1">Reason will be here in
+                                                        paragraph</span>,
+                                                    <span class="text-primary mx-1">5/29/2025</span>
+                                                    User Total: <span class="text-primary mx-1">150k</span>
                                                 </div>
                                             </div>
                                         </div>
- <div class="d-flex justify-content-between align-items-center p-3" style="background-color: pink;">
-  <div class="d-flex flex-column">
-    <div>
-      ID: <span class="text-primary mx-1">234234</span>, 
-      <span class="text-primary mx-1">5/29/2025</span> 
-      User Total: <span class="text-primary mx-1">150k</span>
-    </div>
-    <div class="mt-2">
-      Reason: <span class="text-primary mx-1">Reason will be here in paragraph</span>, 
-      <span class="text-primary mx-1">5/29/2025</span> 
-      User Total: <span class="text-primary mx-1">150k</span>
-    </div>
-  </div>
-</div>
 
                                         <!-- Dropdown for edit/delete -->
                                         <div class="nav-item dropdown d-block"
@@ -450,7 +495,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             @endif
                         @endforeach
 
