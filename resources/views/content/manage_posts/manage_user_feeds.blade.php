@@ -445,7 +445,7 @@
                     <p class="mb-0 mt-2 p-1" style="    font-size: 14px;
     background: #fff; border-radius: 4px;">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
                 </div>
-
+                                    </div>
                                         </div>
 
                                         <!-- Dropdown for edit/delete -->
