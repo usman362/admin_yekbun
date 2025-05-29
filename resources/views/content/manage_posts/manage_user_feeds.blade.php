@@ -129,7 +129,8 @@
         .fancybox__nav {
             display: none !important;
         }
-          .btn-white {
+
+        .btn-white {
             background: #fff;
             padding: 0px 80px !important;
             display: flex;
@@ -148,8 +149,9 @@
             text-align: left;
             font-size: 12px;
         }
-        .btn-white_01:hover{
-               background: #fff;
+
+        .btn-white_01:hover {
+            background: #fff;
         }
 
 
@@ -406,53 +408,53 @@
                                                     @endif
                                                 </div>
 
-                                                  <div class="mt-2 mb-0">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-                                                        <div
-                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover"><span
-                                                                style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-
-                                                        <div
-                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover"><span
-                                                                style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-
-                                                        {{-- @if ($feed->is_comments == 1) --}}
-                                                        <div
-                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover"><span
-                                                                style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                        {{-- @endif --}}
-                                                        {{-- @if ($feed->is_share == 1) --}}
-                                                        <div
-                                                            style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
-                                                                style="width:100%;height:100%;object-fit:cover"><span
-                                                                style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                        {{-- @endif --}}
-                                                    </div>
-                                                    {{-- @if ($feed->is_emoji == 1) --}}
+                                                <div class="mt-2 mb-0">
                                                     <div
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover">
-                                                        <span style="font-weight:400;font-family:Genos">0</span>
+                                                        style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
+                                                        <div style="display:flex;align-items:center;width:100%;height:100%">
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+
+                                                            {{-- @if ($feed->is_comments == 1) --}}
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                            {{-- @endif --}}
+                                                            {{-- @if ($feed->is_share == 1) --}}
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                            {{-- @endif --}}
+                                                        </div>
+                                                        {{-- @if ($feed->is_emoji == 1) --}}
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                        {{-- @endif --}}
                                                     </div>
-                                                    {{-- @endif --}}
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                         <div style="background-color: pink; border-radius:6px" class="p-1">
@@ -467,7 +469,8 @@
                                             </div>
                                             <p class="mb-0 mt-2 p-1"
                                                 style="    font-size: 14px;
-    background: #fff; border-radius: 4px;">Reason:
+    background: #fff; border-radius: 4px;">
+                                                Reason:
                                                 ipsum dolor sit amet, consectetur adipisicing.</p>
                                         </div>
 
@@ -480,7 +483,8 @@
                                                         alt="">
                                                 </div>
                                             </a>
-                                            <div class="dropdown-menu text-center dropdown-menu-end" style="width: 100px;">
+                                            <div class="dropdown-menu text-center dropdown-menu-end"
+                                                style="width: 100px;">
                                                 <span style="font-family:Genos;color:#c0c0c0">Options</span>
                                                 <form action="{{ route('history.destroy', $feed->id) }}"
                                                     onsubmit="confirmAction(event, () => event.target.submit())"
@@ -660,7 +664,22 @@
 
 
                                         </div>
-                                        <!-- /Main wrap -->
+                                      <div style="background-color: pink; border-radius:6px" class="p-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <button class="btn btn-white p-3">ID</button>
+                                                </div>
+                                                <div class="d-flex align-items-center" style="gap: 7px;">
+                                                    <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                                    <button class="btn btn-white_01 p-3">User Total: 150k</button>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0 mt-2 p-1"
+                                                style="    font-size: 14px;
+    background: #fff; border-radius: 4px;">
+                                                Reason:
+                                                ipsum dolor sit amet, consectetur adipisicing.</p>
+                                        </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
                                         style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
@@ -853,6 +872,22 @@
 
                                         </div>
                                         <!-- /Main wrap -->
+                                        <div style="background-color: pink; border-radius:6px" class="p-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <button class="btn btn-white p-3">ID</button>
+                                                </div>
+                                                <div class="d-flex align-items-center" style="gap: 7px;">
+                                                    <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                                    <button class="btn btn-white_01 p-3">User Total: 150k</button>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0 mt-2 p-1"
+                                                style="    font-size: 14px;
+    background: #fff; border-radius: 4px;">
+                                                Reason:
+                                                ipsum dolor sit amet, consectetur adipisicing.</p>
+                                        </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
                                         style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
