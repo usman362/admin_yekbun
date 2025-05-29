@@ -129,6 +129,26 @@
         .fancybox__nav {
             display: none !important;
         }
+          .btn-white {
+            background: #fff;
+            padding: 0px 80px !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            text-align: left;
+            padding-left: 5px !important;
+        }
+
+        .btn-white_01 {
+            background: #fff;
+            padding: 2px 3px !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            text-align: left;
+            font-size: 12px;
+        }
+
 
         .fancybox__thumbs {
             display: none !important;
