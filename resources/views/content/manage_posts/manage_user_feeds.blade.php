@@ -148,6 +148,9 @@
             text-align: left;
             font-size: 12px;
         }
+        .btn-white_01:hover{
+               background: #fff;
+        }
 
 
         .fancybox__thumbs {
