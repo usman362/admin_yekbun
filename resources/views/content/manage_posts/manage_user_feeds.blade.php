@@ -342,10 +342,11 @@
                     <small>Total: 1k</small>
                 </div>
 
-                {{-- <div class="scroll-buttons">
-                    <button id="scrollLeft"><i class="fas fa-chevron-left"></i></button>
-                    <button id="scrollRight"><i class="fas fa-chevron-right"></i></button>
-                </div> --}}
+                <div class="d-flex justify-content-end mt-4">
+    <button id="seeMoreBtn" class="btn btn-primary">See More</button>
+</div>
+
+
             </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
@@ -354,10 +355,11 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
                         @foreach ($reportfeeds as $report)
+                        @php $count = 0; @endphp
                             @php $feed = $report->feed; @endphp
                             @if ($feed)
                                 {{-- Ensure feed exists --}}
-                                <div class="col-md-3">
+                                <div    class="col-md-3 report-feed-card {{ $count >= 3 ? 'd-none extra-feed' : '' }}">
                                     <div class="post-image">
                                         <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                             data-fancybox="post1" data-lightbox-type="comments"
@@ -520,6 +522,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                 @php $count++; @endphp
                             @endif
                         @endforeach
 
@@ -528,6 +531,11 @@
             </div>
         </div>
 
+
+
+
+
+        
         <!-- Reported Comments -->
         <div class="card pb-4">
             <div class="card-header">
@@ -1007,68 +1015,13 @@
             }
         </script>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-        {{-- <script>
-        // Scroll right by 300px
-        $('#scrollRight').click(function() {
-            const container = document.getElementById('main-feed');
-            container.scrollLeft += 300;
+         <script>
+    document.getElementById('seeMoreBtn').addEventListener('click', function () {
+        document.querySelectorAll('.extra-feed').forEach(el => el.classList.remove('d-none'));
+        this.style.display = 'none'; // Hide button after click
+    });
+</script>
 
-            // If near end, load more
-            if (container.scrollWidth - container.clientWidth - container.scrollLeft < 400) {
-                loadMoreFeeds();
-            }
-        });
-
-        // Scroll left by 300px
-        $('#scrollLeft').click(function() {
-            document.getElementById('main-feed').scrollLeft -= 300;
-        });
-    </script>
-
-    <script>
-        const slider = document.getElementById('main-feed');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('dragging');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll-fast multiplier
-            slider.scrollLeft = scrollLeft - walk;
-        });
-
-        // Optional: Mobile touch support
-        let touchStartX = 0;
-        slider.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('touchmove', (e) => {
-            const touchX = e.touches[0].clientX;
-            const walk = (touchStartX - touchX) * 2;
-            slider.scrollLeft = scrollLeft + walk;
-        });
-    </script> --}}
 
     @endsection
 @endsection
