@@ -40,6 +40,15 @@ class FeedsController extends Controller
         return view('content.manage_posts.reported_feeds', compact('reportfeeds'));
     }
 
+    public function allcommentsfeedindex()
+    {
+         
+          $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(20);
+
+        return view('content.manage_posts.reportedcomments', compact('reportfeeds'));
+    }
+
+
     public function news()
     {
         $news = News::orderBy('created_at', 'desc')->get();
