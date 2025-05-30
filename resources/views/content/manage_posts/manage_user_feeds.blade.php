@@ -335,21 +335,19 @@
 
 
         <div class="card pb-4">
-            <div class="card-header">
-                <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
-                <div>
-                    <p>Reported Feeds</p>
-                    <small>Total: 1k</small>
-                </div>
-
-               @if ($reportfeeds->count() > 3)
-    <div class="text-center mt-3">
-        <button class="btn btn-primary btn-sm" id="see-more-btn">See More</button>
+           <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+        <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
+        <div class="ms-2">
+            <p class="mb-0">Reported Feeds</p>
+            <small>Total: {{ $reportfeeds->total() }}</small>
+        </div>
     </div>
-@endif
-
-
-            </div>
+    
+    @if ($reportfeeds->count() > 3)
+        <button class="btn btn-primary btn-sm" id="see-more-btn">See More</button>
+    @endif
+</div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
