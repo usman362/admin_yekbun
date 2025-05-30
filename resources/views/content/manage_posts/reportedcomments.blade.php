@@ -225,7 +225,7 @@
             font-size: 12px;
         }
     </style>
- 
+
 @endsection
 
 @section('vendor-style')
@@ -295,7 +295,7 @@
     <div class="content-wrapper">
 
 
-          <div class="card pb-4">
+        <div class="card pb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
@@ -306,8 +306,7 @@
                 </div>
 
                 @if ($feeds->count() > 3)
-                    <a href="{{ route('manage.user.reportedcomments') }}" class="btn btn-primary btn-md"
-                        id="see-more-btn">
+                    <a href="{{ route('manage.user.reportedcomments') }}" class="btn btn-primary btn-md" id="see-more-btn">
                         See More
                     </a>
                 @endif
@@ -322,8 +321,7 @@
                             <div class="col-md-3">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                        data-fancybox="post1" data-lightbox-type="comments"
-                                        data-id="{{ $feed->_id }}"
+                                        data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $feed->_id }}"
                                         @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                         href="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                         data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -448,7 +446,7 @@
                                             </div>
                                             <p class="mb-0 mt-2 p-1"
                                                 style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                                Reason:  </p>
+                                                Reason: </p>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
@@ -478,8 +476,7 @@
                                                             data-name="{{ $feed->title }}"
                                                             data-source="{{ $feed->source }}"
                                                             data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}}
-                                                            data-comments="{{ $feed->is_comments }}"
+                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}} data-comments="{{ $feed->is_comments }}"
                                                             data-share="{{ $feed->is_share }}"
                                                             data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
                                                             <img class="pop_action_image" style="height: 26px"
@@ -498,8 +495,11 @@
                                 </div>
                             </div>
                         @endforeach
-                        {{ $feeds->links() }}
+                      
                     </div>
+                    <div class="mt-3">
+    {{ $feeds->links() }}
+</div>
                 </div>
             </div>
         </div>
