@@ -473,7 +473,7 @@
                                                 style="    font-size: 14px;
     background: #fff; border-radius: 4px;">
                                                 Reason:
-                                                {{ $feeds->report_type }}</p>
+                                                {{ $report->report_type }}</p>
                                         </div>
 
                                         <div class="nav-item dropdown d-block"
