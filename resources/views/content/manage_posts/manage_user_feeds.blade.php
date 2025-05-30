@@ -342,9 +342,12 @@
             <p class="mb-0">Reported Feeds</p>
             <small>Total: 1k</small>
         </div>
-    </div>
+    </div> manage.user.reportedfeeds
     
-    <button id="seeMoreBtn" class="btn btn-primary btn-md">See More</button>
+   <div class="ms-auto">
+    <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md">See More</a>
+</div>
+
 </div>
 
             <div class="view-wrapper">

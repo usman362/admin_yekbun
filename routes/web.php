@@ -286,6 +286,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
 
     Route::get('/manage-user-feeds', [FeedsController::class, 'index'])->name('manage.user.feeds');
+    Route::get('/manage-all-reportedfeeds', [FeedsController::class, 'allreportedfeedindex'])->name('manage.user.reportedfeeds');
 
     Route::post('/manage-action-feeds/{id}', [FeedsController::class, 'action'])->name('manage.action.feeds');
 
