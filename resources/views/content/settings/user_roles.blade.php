@@ -1165,8 +1165,8 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                 src="{{ asset('assets/userrole/icons/votesection.svg') }}" alt="voteSection"></div>
                     </div>
                     <div class="d-flex flex-column genos-font">
-                        <span class="fw-semibold">Vote Section</span>
-                        <small class="text-muted">Manage Vote</small>
+                        <span class="fw-semibold">Surveys Section</span>
+                        <small class="text-muted">Manage Surveys</small>
                     </div>
                 </div>
             </button>
@@ -1181,16 +1181,16 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                     src="{{ asset('assets/userrole/icons/votesection.svg') }}" alt="Avatar"></div>
                         </div>
                         <div class="d-flex flex-column genos-font">
-                            <span class="fw-semibold">Vote Section</span>
-                            <small class="text-muted">Permission to Vote</small>
+                            <span class="fw-semibold">Surveys Section</span>
+                            <small class="text-muted">Permission to Surveys</small>
                         </div>
                     </div>
                     <!-- <hr class="m-0"> -->
                     <div class="content-group d-flex justify-content-between align-center ms-2">
                         <div class="d-flex justify-content-start align-items-center">
                             <div class="d-flex flex-column genos-font">
-                                <span class="fw-semibold">Vote Section</span>
-                                <small class="text-muted">User Allowed to Vote</small>
+                                <span class="fw-semibold">Surveys Section</span>
+                                <small class="text-muted">User Allowed to Surveys</small>
                             </div>
                         </div>
                         <!-- <hr class="m-0"> -->
@@ -1247,7 +1247,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         </div>
                         <div class="d-flex flex-column genos-font">
                             <span class="fw-semibold">Music Section</span>
-                            <small class="text-muted">Permission to Vote</small>
+                            <small class="text-muted">Permission to Surveys</small>
                         </div>
                     </div>
                     <!-- <hr class="m-0"> -->
