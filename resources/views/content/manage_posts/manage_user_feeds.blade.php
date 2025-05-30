@@ -335,18 +335,18 @@
 
 
         <div class="card pb-4">
-            <div class="card-header">
-                <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
-                <div>
-                    <p>Reported Feeds</p>
-                    <small>Total: 1k</small>
-                </div>
-  <div class="text-end mt-2 me-3">
-        <button id="seeMoreBtn" class="btn btn-primary btn-sm">See More</button>
+             <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+        <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="" class="me-2">
+        <div>
+            <p class="mb-0">Reported Feeds</p>
+            <small>Total: 1k</small>
+        </div>
     </div>
+    
+    <button id="seeMoreBtn" class="btn btn-primary btn-sm">See More</button>
+</div>
 
-
-            </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
