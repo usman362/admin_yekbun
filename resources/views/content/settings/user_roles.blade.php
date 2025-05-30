@@ -260,7 +260,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         <div class="d-flex">
                             <div>
                                 <label class="switch me-0">
-                                    <input type="checkbox" class="switch-input" data-permission="friends_allow_request">
+                                    <input type="checkbox" class="switch-input" data-permission="friends_allow_request" {{ $permissions['value']['friends_allow_request'] ? 'checked' : '' }}>
                                     <span class="switch-toggle-slider">
 
                                     </span>
@@ -301,6 +301,29 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                     value="{{ $permissions['value']['friends_total_family'] }}">
                                 <i class="bx bx-chevron-up bx-xs up-icon" data-permission="friends_total_family"></i>
                             </div>
+                        </div>
+                    </div>
+                    <div class="content-group d-flex justify-content-between align-center ms-8">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <div class="d-flex flex-column genos-font">
+                                <span class="fw-semibold">Say Hello Button</span>
+                                <small class="text-muted">say hello</small>
+                            </div>
+                        </div>
+                        <!-- <hr class="m-0"> -->
+                        <div class="d-flex">
+                            <label class="switch me-0">
+                                <input type="checkbox" class="switch-input"
+                                    @if (isset($permissions['value']['friends_say_hello']))
+                                    {{ $permissions['value']['friends_say_hello'] ? 'checked' : '' }}
+
+                                    @endif
+                                    data-permission="friends_say_hello">
+                                <span class="switch-toggle-slider">
+
+                                </span>
+                                <span class="switch-label"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -1003,23 +1026,7 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                             </div>
                         </div>
                     </div>
-                    <div class="content-group d-flex justify-content-between align-center ms-4">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <div class="d-flex flex-column genos-font">
-                                <span class="fw-semibold">Videos Per day</span>
-                                <small class="text-muted">Allowed Watch Videos per day</small>
-                            </div>
-                        </div>
-                        <!-- <hr class="m-0"> -->
-                        <div class="d-flex">
-                            <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs down-icon" data-permission="history_daily_share"></i>
-                                <input type="text" class="value-input" data-permission="history_daily_share"
-                                    value="{{ $permissions['value']['history_daily_share'] }}">
-                                <i class="bx bx-chevron-up bx-xs up-icon" data-permission="history_daily_share"></i>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="content-group d-flex justify-content-between align-center ms-4">
                         <div class="d-flex justify-content-start align-items-center">
                             <div class="avatar-wrapper">
@@ -1309,63 +1316,6 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                     <div class="content-group d-flex justify-content-between align-center ms-8">
                         <div class="d-flex justify-content-start align-items-center">
                             <div class="d-flex flex-column genos-font">
-                                <span class="fw-semibold">Alowed Playlist</span>
-                                <small class="text-muted">Allowed of Playlist Amounts for free</small>
-                            </div>
-                        </div>
-                        <!-- <hr class="m-0"> -->
-                        <div class="d-flex">
-                            <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs down-icon"
-                                    data-permission="music_allowed_playlist"></i>
-                                <input type="text" class="value-input" data-permission="music_allowed_playlist"
-                                    value="{{ $permissions['value']['music_allowed_playlist'] }}">
-                                <i class="bx bx-chevron-up bx-xs up-icon" data-permission="music_allowed_playlist"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-group d-flex justify-content-between align-center ms-8">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <div class="d-flex flex-column genos-font">
-                                <span class="fw-semibold">Buy Songs</span>
-                                <small class="text-muted">Allowed User to Share songs</small>
-                            </div>
-                        </div>
-                        <!-- <hr class="m-0"> -->
-                        <div class="d-flex">
-                            <div>
-                                <label class="switch me-0">
-                                    <input type="checkbox" class="switch-input"
-                                        {{ $permissions['value']['music_buy_songs'] ? 'checked' : '' }}
-                                        data-permission="music_buy_songs">
-                                    <span class="switch-toggle-slider">
-
-                                    </span>
-                                    <span class="switch-label"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-group d-flex justify-content-between align-center ms-8">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <div class="d-flex flex-column genos-font">
-                                <span class="fw-semibold">Songs Per day</span>
-                                <small class="text-muted">Allowed Songs to listen per day</small>
-                            </div>
-                        </div>
-                        <!-- <hr class="m-0"> -->
-                        <div class="d-flex">
-                            <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs down-icon" data-permission="music_daily_songs"></i>
-                                <input type="text" class="value-input" data-permission="music_daily_songs"
-                                    value="{{ $permissions['value']['music_daily_songs'] }}">
-                                <i class="bx bx-chevron-up bx-xs up-icon" data-permission="music_daily_songs"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-group d-flex justify-content-between align-center ms-8">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <div class="d-flex flex-column genos-font">
                                 <span class="fw-semibold">Favorite Songs</span>
                                 <small class="text-muted">Add Tracks to Favorite</small>
                             </div>
@@ -1524,23 +1474,6 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                                 <input type="text" class="value-input" data-permission="video_allowed_playlist"
                                     value="{{ $permissions['value']['video_allowed_playlist'] }}">
                                 <i class="bx bx-chevron-up bx-xs up-icon" data-permission="video_allowed_playlist"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-group d-flex justify-content-between align-center ms-8">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <div class="d-flex flex-column genos-font">
-                                <span class="fw-semibold">Videos Per day</span>
-                                <small class="text-muted">Allowed Watch Videos per day</small>
-                            </div>
-                        </div>
-                        <!-- <hr class="m-0"> -->
-                        <div class="d-flex">
-                            <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs down-icon" data-permission="video_daily_videos"></i>
-                                <input type="text" class="value-input" data-permission="video_daily_videos"
-                                    value="{{ $permissions['value']['video_daily_videos'] }}">
-                                <i class="bx bx-chevron-up bx-xs up-icon" data-permission="video_daily_videos"></i>
                             </div>
                         </div>
                     </div>
