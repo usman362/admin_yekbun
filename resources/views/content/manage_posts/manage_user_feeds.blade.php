@@ -341,10 +341,9 @@
                     <p>Reported Feeds</p>
                     <small>Total: 1k</small>
                 </div>
-
-                <div class="d-flex justify-content-end mt-4">
-    <button id="seeMoreBtn" class="btn btn-primary">See More</button>
-</div>
+  <div class="text-end mt-2 me-3">
+        <button id="seeMoreBtn" class="btn btn-primary btn-sm">See More</button>
+    </div>
 
 
             </div>
