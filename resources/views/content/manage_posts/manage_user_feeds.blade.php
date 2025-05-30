@@ -336,20 +336,20 @@
 
         <div class="card pb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
-                    <div class="ms-2">
-                        <p class="mb-0">Reported Feeds</p>
-                        <small>Total: {{ $reportfeeds->total() }}</small>
-                    </div>
-                </div>
-
-                @if ($reportfeeds->count() > 3)
-                    <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
-                        See More
-                    </a>
-                @endif
-            </div>
+    <div class="d-flex align-items-center">
+        <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
+        <div class="ms-2">
+            <p class="mb-0">Reported Feeds</p>
+            <small>Total: {{ $reportfeeds->total() }}</small>
+        </div>
+    </div>
+    
+    @if ($reportfeeds->count() > 3)
+        <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
+            See More
+        </a>
+    @endif
+</div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
@@ -534,21 +534,17 @@
 
         <!-- Reported Comments -->
         <div class="card pb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
-                    <div class="ms-2">
-                        <p class="mb-0">Reported Comments</p>
-                        <small>Total: {{ $feeds->total() }}</small>
-                    </div>
+            <div class="card-header">
+                <img src="{{ asset('assets/svg/svg-dialog/reported-comments.svg') }}" alt="">
+                <div>
+                    <p>Reported Comments</p>
+                    <small>Total: 1k</small>
                 </div>
 
-                @if ($feeds->count() > 3)
-                    <a href="{{ route('manage.user.reportedcomments') }}" class="btn btn-primary btn-md"
-                        id="see-more-btn">
-                        See More
-                    </a>
-                @endif
+                {{-- <div class="scroll-buttons">
+                    <button id="scrollLeft"><i class="fas fa-chevron-left"></i></button>
+                    <button id="scrollRight"><i class="fas fa-chevron-right"></i></button>
+                </div> --}}
             </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
@@ -745,17 +741,21 @@
 
         <!-- Latest Feeds -->
         <div class="card pb-4">
-            <div class="card-header">
-                <img src="{{ asset('assets/svg/svg-dialog/latest-feeds.svg') }}" alt="">
-                <div>
-                    <p>Latest Feeds</p>
-                    <small>Total: 1k</small>
+             <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
+                    <div class="ms-2">
+                        <p class="mb-0">Latest Feeds</p>
+                        <small>Total: {{ $feeds->total() }}</small>
+                    </div>
                 </div>
 
-                {{-- <div class="scroll-buttons">
-                    <button id="scrollLeft"><i class="fas fa-chevron-left"></i></button>
-                    <button id="scrollRight"><i class="fas fa-chevron-right"></i></button>
-                </div> --}}
+                @if ($feeds->count() > 3)
+                    <a href="{{ route('manage.user.latestfeed') }}" class="btn btn-primary btn-md"
+                        id="see-more-btn">
+                        See More
+                    </a>
+                @endif
             </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
