@@ -331,6 +331,9 @@
 
 @section('content')
 
+@php
+     $feeds=0;
+@endphp
     <div class="content-wrapper">
 
 
