@@ -344,7 +344,7 @@
         </div>
     </div>
     
-    <button id="seeMoreBtn" class="btn btn-primary btn-sm">See More</button>
+    <button id="seeMoreBtn" class="btn btn-primary btn-md">See More</button>
 </div>
 
             <div class="view-wrapper">
