@@ -1017,12 +1017,7 @@
             }
         </script>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-         <script>
-    document.getElementById('seeMoreBtn').addEventListener('click', function () {
-        document.querySelectorAll('.extra-feed').forEach(el => el.classList.remove('d-none'));
-        this.style.display = 'none'; // Hide button after click
-    });
-</script>
+         
 
 
     @endsection
