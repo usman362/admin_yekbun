@@ -37,7 +37,7 @@ class FeedsController extends Controller
     {
          
        $reportfeeds = ReportFeeds::with('feed')->paginate(20);
-        return view('content.manage_posts.manage_user_feeds', compact('reportfeeds'));
+        return view('content.manage_posts.reported_feeds', compact('reportfeeds'));
     }
 
     public function news()

@@ -334,6 +334,203 @@
     <div class="content-wrapper">
 
 
+        <div class="card pb-4">
+            <div class="card-header">
+                <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
+                <div>
+                    <p>Reported Feeds</p>
+                    <small>Total: 1k</small>
+                </div>
+
+               @if ($reportfeeds->count() > 3)
+    <div class="text-center mt-3">
+        <button class="btn btn-primary btn-sm" id="see-more-btn">See More</button>
+    </div>
+@endif
+
+
+            </div>
+            <div class="view-wrapper">
+                <input type="hidden" name="feed_id" id="feed_id">
+                <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
+                <input type="hidden" name="comment_parent_id" id="comment_parent_id">
+                <div id="main-feed" class="container main-feed">
+                    <div class="row g-4">
+                        @foreach ($reportfeeds as $report)
+                            @php $feed = $report->feed; @endphp
+                            @if ($feed)
+                                {{-- Ensure feed exists --}}
+                                <div class="col-md-3">
+                                    <div class="post-image">
+                                        <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                            data-fancybox="post1" data-lightbox-type="comments"
+                                            data-id="{{ $feed->_id }}"
+                                            @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                    href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                    data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                @elseif (isset($feed->videos[0]))
+                    data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                    href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                    data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}" @endif>
+                                            <div class="content-wrap">
+                                                <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
+                                                    <div class="user-block">
+                                                        <div class="user-info">
+                                                            <div class="row g-4">
+                                                                <div class="col-sm-2 p-0">
+                                                                    <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type . '.svg') }}"
+                                                                        style="width: 25px; height: 25px; background-color: #fff; padding: 4px; border-radius: 4px; margin: 9px 6px;">
+                                                                </div>
+                                                                <div class="col-sm-2 p-0">
+                                                                    <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                                        style="width: 25px; height: 25px; border-radius: 4px; margin: 9px 6px;"
+                                                                        onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
+                                                                </div>
+                                                                <div class="col-sm-8">
+                                                                    <p class="m-0"
+                                                                        title="{{ optional($feed->user)->name }}">
+                                                                        <b>{{ optional($feed->user)->name }}</b>
+                                                                    </p>
+                                                                    <small
+                                                                        class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                                </div>
+                                                            </div>
+                                                            <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}"
+                                                                class="user-heart">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body p-0">
+                                                    @if (isset($feed->images[0]))
+                                                        <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                            class="card-post-thumbnail"></div>
+                                                    @else
+                                                        <div style="background-image: url('https://st2.depositphotos.com/4202565/7675/v/450/depositphotos_76756387-stock-illustration-video-player-with-black.jpg');"
+                                                            class="card-post-thumbnail"></div>
+                                                    @endif
+                                                </div>
+
+                                                <div class="mt-2 mb-0">
+                                                    <div
+                                                        style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
+                                                        <div style="display:flex;align-items:center;width:100%;height:100%">
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+
+                                                            {{-- @if ($feed->is_comments == 1) --}}
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                            {{-- @endif --}}
+                                                            {{-- @if ($feed->is_share == 1) --}}
+                                                            <div
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover"><span
+                                                                    style="font-weight:400;font-family:Genos">0</span>
+                                                            </div>
+                                                            {{-- @endif --}}
+                                                        </div>
+                                                        {{-- @if ($feed->is_emoji == 1) --}}
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                        {{-- @endif --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="background-color: pink; border-radius:6px" class="p-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <button class="btn btn-white p-3">ID :
+                                                        {{ optional($feed->user)->user_id }}</button>
+                                                </div>
+                                                <div class="d-flex align-items-center" style="gap: 7px;">
+                                                    <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                                    <button class="btn btn-white_01 p-3">User Total: 150k</button>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0 mt-2 p-1"
+                                                style="    font-size: 14px;
+    background: #fff; border-radius: 4px;">
+                                                Reason:
+                                                {{ $report->report_type }}</p>
+                                        </div>
+
+                                        <div class="nav-item dropdown d-block"
+                                            style="position: absolute; right: 6px; top: 6px;">
+                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                                data-bs-toggle="dropdown">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
+                                                        alt="">
+                                                </div>
+                                            </a>
+                                            <div class="dropdown-menu text-center dropdown-menu-end"
+                                                style="width: 100px;">
+                                                <span style="font-family:Genos;color:#c0c0c0">Options</span>
+                                                <form action="{{ route('history.destroy', $feed->id) }}"
+                                                    onsubmit="confirmAction(event, () => event.target.submit())"
+                                                    method="post" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="row ml-0" style="width:100px;">
+                                                        <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
+                                                            <a class="dropdown-item edit-history" style="padding: 0"
+                                                                href="javascript:void(0)" data-bs-toggle="modal"
+                                                                data-bs-target="#createhistoryModal"
+                                                                data-id="{{ $feed->id }}"
+                                                                data-name="{{ $feed->title }}"
+                                                                data-source="{{ $feed->source }}"
+                                                                data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
+                                                                data-comments="{{ $feed->is_comments }}"
+                                                                data-share="{{ $feed->is_share }}"
+                                                                data-emoji="{{ $feed->is_emoji }}">
+                                                                <img class="pop_action_image" style="height: 26px"
+                                                                    src="{{ asset('assets/svg/edit.svg') }}">
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="submit" class="dropdown-item"
+                                                                style="padding: 0">
+                                                                <img class="pop_action_image" style="height: 26px"
+                                                                    src="{{ asset('assets/svg/delete.svg') }}">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Reported Comments -->
         <div class="card pb-4">
