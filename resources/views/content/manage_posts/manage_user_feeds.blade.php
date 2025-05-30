@@ -335,7 +335,7 @@
 
 
         <div class="card pb-4">
-           <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-header d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
         <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
         <div class="ms-2">
@@ -345,7 +345,9 @@
     </div>
     
     @if ($reportfeeds->count() > 3)
-        <button class="btn btn-primary btn-sm" id="see-more-btn">See More</button>
+        <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
+            See More
+        </a>
     @endif
 </div>
             <div class="view-wrapper">
