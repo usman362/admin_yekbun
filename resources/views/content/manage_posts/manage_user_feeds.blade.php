@@ -344,7 +344,7 @@
         </div>
     </div>
     
-    @if ($reportfeeds->count() > 3)
+    @if ($reportfeeds->count() > 4)
         <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
             See More
         </a>
