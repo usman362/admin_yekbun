@@ -15,9 +15,9 @@ class ReportComments extends Model
         'comment_id',
     ];
 
-public function users()
+public function user()
 {
-    return $this->belongsTo(User::class, null, '_id', 'user_id');
+    return $this->belongsTo(User::class, 'user_id', '_id');
 }
 
     public function comments()
