@@ -34,7 +34,7 @@ class FeedsController extends Controller
         $reportfeeds = ReportFeeds::with('feed')->paginate(4);
             $reportscomments = ReportComments::with(['comments.feed'])->get(); // eager load nested feed
 
-         dd($reportscomments);
+        // dd($reportscomments);
         return view('content.manage_posts.manage_user_feeds', compact('feeds','reportfeeds','reportscomments'));
     }
     public function allreportedfeedindex()
