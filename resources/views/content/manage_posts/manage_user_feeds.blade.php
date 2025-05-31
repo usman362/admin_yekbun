@@ -651,9 +651,9 @@
                     </div>
                     <p class="mb-0 mt-2 p-1" style="font-size: 14px;background: #fff; border-radius: 4px;">
                        <div class="col-sm-2 p-0">
-                                          <img src="{{ asset('storage/' . ($reportcomments->users->image ?? '')) }}"
-     style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;"
-     onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
+                                           <img src="{{ $reportcomments->users && $reportcomments->users->image ? asset('storage/' . $reportcomments->users->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+     style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
+
 
                                     </div> comments: {{ $reportcomments->report_type }}
                     </p>
