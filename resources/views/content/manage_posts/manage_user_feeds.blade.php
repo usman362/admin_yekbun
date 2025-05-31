@@ -577,7 +577,7 @@
                             @endif
 
                             <div class="text-end mt-2">
-                                <form action="{{ route('report_comments.destroy', $report->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this report?')">
+                                <form action="" method="POST" onsubmit="return confirm('Are you sure you want to delete this report?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Delete Report</button>
