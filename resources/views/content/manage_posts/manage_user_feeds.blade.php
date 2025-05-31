@@ -690,8 +690,13 @@
                                             <p class="mb-0 mt-2 p-1"
 
                                                 style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
-                                                                    style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
+                                                  <img src="{{ $reportcomments->users && $reportcomments->users->image 
+            ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://']) 
+                ? $reportcomments->users->image 
+                : asset('storage/' . $reportcomments->users->image))
+            : 'https://www.w3schools.com/w3images/avatar2.png' }}" 
+            style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
+
                                                 @if ($reportcomments->comments)
                                                     @php $comment = $reportcomments->comments; @endphp
 
