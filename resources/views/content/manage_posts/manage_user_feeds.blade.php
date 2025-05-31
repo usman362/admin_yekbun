@@ -547,7 +547,7 @@
             <div class="row g-4">
                 @foreach ($reportscomments as $report)
                     @php
-                        $comment = $report->comment;
+                        $comment = $report->comments;
                         $feed = $comment->feed ?? null;
                         $user = $comment->user ?? null;
                     @endphp
