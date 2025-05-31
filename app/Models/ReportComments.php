@@ -15,10 +15,11 @@ class ReportComments extends Model
         'comment_id',
     ];
 
-    public function users()
-    {
-        return $this->hasMany(User::class, 'user_id');
-    }
+public function users()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
 
     public function comments()
 {
