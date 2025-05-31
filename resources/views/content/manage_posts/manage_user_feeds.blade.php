@@ -659,7 +659,7 @@
             style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
     </div>
 
-    <strong>Reported For:</strong> {{ $reportcomments->report_type }}<br>
+    
 
     @if ($reportcomments->comments)
         @php $comment = $reportcomments->comments; @endphp
