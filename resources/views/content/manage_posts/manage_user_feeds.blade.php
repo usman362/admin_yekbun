@@ -556,7 +556,7 @@
     @php
         $comment = $reportcomments->comments;
         $feed = optional($comment)->feed;
-        $user = optional($feed)->users;
+        $user = optional($feed)->user;
         $reportUser = optional($reportcomments)->users;
     @endphp
 
