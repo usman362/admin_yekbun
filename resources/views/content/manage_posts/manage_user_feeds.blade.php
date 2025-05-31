@@ -649,14 +649,41 @@
                             <button class="btn btn-white_01 p-3">User Total: 150k</button>
                         </div>
                     </div>
-                    <p class="mb-0 mt-2 p-1" style="font-size: 14px;background: #fff; border-radius: 4px;">
-                       <div class="col-sm-2 p-0">
-                                           <img src="{{ $reportcomments->users && $reportcomments->users->image ? asset('storage/' . $reportcomments->users->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}"
-     style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
+                     <p class="mb-0 mt-2 p-1" style="font-size: 14px; background: #fff; border-radius: 4px;">
+    <div class="col-sm-2 p-0">
+        <img src="{{ $reportcomments->users && $reportcomments->users->image 
+            ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://']) 
+                ? $reportcomments->users->image 
+                : asset('storage/' . $reportcomments->users->image))
+            : 'https://www.w3schools.com/w3images/avatar2.png' }}" 
+            style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
+    </div>
 
+    <strong>Reported For:</strong> {{ $reportcomments->report_type }}<br>
 
-                                    </div> comments: {{ $reportcomments->report_type }}
-                    </p>
+    @if ($reportcomments->comments)
+        @php $comment = $reportcomments->comments; @endphp
+
+        @if ($comment->comment_type === 'normal' && $comment->comment)
+            <span>{{ $comment->comment ?? '' }} </span>
+
+        @elseif ($comment->comment_type === 'audio' && $comment->audio)
+            <audio controls>
+                <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+        @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+            <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+
+        @else
+            <em>No content available.</em>
+        @endif
+    @else
+        <em>Comment not found.</em>
+    @endif
+</p>
+
                 </div>
             </div>
 
