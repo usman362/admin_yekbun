@@ -33,8 +33,8 @@ class ReportCommentsController extends Controller
             return ResponseHelper::sendResponse([], 'You have already reported this comment.', false, 400);
         }
 
-        $report = ReportComments::create(
-            
+        $report = ReportComments::updateOrCreate(
+            ['id' => $request->report_id],
             [
                 'comment_id' => $id,
                 'report_type' => Str::slug($request->report_type),
