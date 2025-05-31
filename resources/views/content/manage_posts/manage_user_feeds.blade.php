@@ -336,20 +336,20 @@
 
         <div class="card pb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-    <div class="d-flex align-items-center">
-        <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
-        <div class="ms-2">
-            <p class="mb-0">Reported Feeds</p>
-            <small>Total: {{ $reportfeeds->total() }}</small>
-        </div>
-    </div>
-    
-    @if ($reportfeeds->count() > 3)
-        <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
-            See More
-        </a>
-    @endif
-</div>
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
+                    <div class="ms-2">
+                        <p class="mb-0">Reported Feeds</p>
+                        <small>Total: {{ $reportfeeds->total() }}</small>
+                    </div>
+                </div>
+
+                @if ($reportfeeds->count() > 3)
+                    <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
+                        See More
+                    </a>
+                @endif
+            </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
@@ -552,13 +552,13 @@
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-                         @foreach ($reportscomments as $reportcomments)
-    @php
-        $comment = $reportcomments->comments;
-        $feed = optional($comment)->feed;
-        $user = optional($feed)->user;
-        $reportUser = optional($reportcomments)->users;
-    @endphp
+                        @foreach ($reportscomments as $reportcomments)
+                            @php
+                                $comment = $reportcomments->comments;
+                                $feed = optional($comment)->feed;
+                                $user = optional($feed)->user;
+                                $reportUser = optional($reportcomments)->users;
+                            @endphp
 
                             <div class="col-md-3">
                                 <div class="post-image">
@@ -688,29 +688,30 @@
                                                 </div>
                                             </div>
                                             <p class="mb-0 mt-2 p-1"
+
                                                 style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                              @if ($reportcomments->comments)
-        @php $comment = $reportcomments->comments; @endphp
+                                                 <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
+                                                                    style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
+                                                @if ($reportcomments->comments)
+                                                    @php $comment = $reportcomments->comments; @endphp
 
-        @if ($comment->comment_type === 'normal' && $comment->comment)
-            <span>{{ $comment->comment ?? '' }} </span>
-
-        @elseif ($comment->comment_type === 'audio' && $comment->audio)
-            <audio controls>
-                <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-
-        @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-            <span style="font-size: 24px;">{{ $comment->emoji }}</span>
-
-        @else
-            <em>No content available.</em>
-        @endif
-    @else
-        <em>Comment not found.</em>
-    @endif
-</p>
+                                                    @if ($comment->comment_type === 'normal' && $comment->comment)
+                                                        <span>{{ $comment->comment ?? '' }} </span>
+                                                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                                                        <audio controls>
+                                                            <source src="{{ asset('storage/' . $comment->audio) }}"
+                                                                type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                                                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+                                                    @else
+                                                        <em>No content available.</em>
+                                                    @endif
+                                                @else
+                                                    <em>Comment not found.</em>
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
@@ -769,7 +770,7 @@
 
         <!-- Latest Feeds -->
         <div class="card pb-4">
-             <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
@@ -779,8 +780,7 @@
                 </div>
 
                 @if ($feeds->count() > 3)
-                    <a href="{{ route('manage.user.latestfeed') }}" class="btn btn-primary btn-md"
-                        id="see-more-btn">
+                    <a href="{{ route('manage.user.latestfeed') }}" class="btn btn-primary btn-md" id="see-more-btn">
                         See More
                     </a>
                 @endif
