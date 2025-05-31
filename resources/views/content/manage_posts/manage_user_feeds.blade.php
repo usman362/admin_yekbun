@@ -689,7 +689,28 @@
                                             </div>
                                             <p class="mb-0 mt-2 p-1"
                                                 style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                                Reason: {{ $report->report_type }}</p>
+                                              @if ($reportcomments->comments)
+        @php $comment = $reportcomments->comments; @endphp
+
+        @if ($comment->comment_type === 'normal' && $comment->comment)
+            <span>{{ $comment->comment ?? '' }} </span>
+
+        @elseif ($comment->comment_type === 'audio' && $comment->audio)
+            <audio controls>
+                <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+        @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+            <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+
+        @else
+            <em>No content available.</em>
+        @endif
+    @else
+        <em>Comment not found.</em>
+    @endif
+</p>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
