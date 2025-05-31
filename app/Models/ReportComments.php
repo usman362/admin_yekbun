@@ -21,9 +21,9 @@ class ReportComments extends Model
     }
 
     public function comments()
-    {
-        return $this->belongsTo(FeedComments::class);
-    }
+{
+    return $this->belongsTo(FeedComments::class, 'comment_id');
+}
     public function feed()
 {
     return $this->hasOneThrough(
