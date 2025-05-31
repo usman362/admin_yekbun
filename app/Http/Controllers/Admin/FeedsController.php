@@ -32,7 +32,8 @@ class FeedsController extends Controller
     {
         $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(4);
         $reportfeeds = ReportFeeds::with('feed')->paginate(4);
-         $reportscomments = ReportComments::with('comments')->get();
+            $reportscomments = ReportComments::with(['comment.feed'])->get(); // eager load nested feed
+
          dd($reportscomments);
         return view('content.manage_posts.manage_user_feeds', compact('feeds','reportfeeds','reportscomments'));
     }

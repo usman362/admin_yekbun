@@ -29,6 +29,10 @@ class FeedComments extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function feed()
+{
+    return $this->belongsTo(Feed::class, 'feed_id');
+}
 
     public function child_comments()
     {

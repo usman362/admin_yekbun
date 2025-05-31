@@ -24,4 +24,15 @@ class ReportComments extends Model
     {
         return $this->belongsTo(FeedComments::class);
     }
+    public function feed()
+{
+    return $this->hasOneThrough(
+        Feed::class,
+        FeedComments::class,
+        '_id',       // Foreign key on FeedComments (local comment_id matches FeedComments _id)
+        '_id',       // Foreign key on Feed (local feed_id in FeedComments matches Feed _id)
+        'comment_id',// Local key on ReportComments
+        'feed_id'    // Local key on FeedComments
+    );
+}
 }
