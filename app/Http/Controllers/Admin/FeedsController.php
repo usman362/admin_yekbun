@@ -14,6 +14,7 @@ use App\Models\Feed;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
 use App\Models\FeedReason;
+use App\Models\ReportComments;
 use App\Models\History;
 use App\Models\News;
 use App\Models\PopFeeds;
