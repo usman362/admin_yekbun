@@ -552,7 +552,7 @@
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-                        @foreach ($reportscomments as $report)
+                        @foreach ($reportscomments as $reportcomments)
                           
                         
                         <div class="col-md-3">
@@ -682,7 +682,7 @@
                                         </div>
                                         <p class="mb-0 mt-2 p-1"
                                             style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                            Reason: {{ $report->report_type }}</p>
+                                            Reason: {{ $reportcomments->report_type }}</p>
                                     </div>
                                 </div>
                                 <div class="nav-item dropdown d-block"
