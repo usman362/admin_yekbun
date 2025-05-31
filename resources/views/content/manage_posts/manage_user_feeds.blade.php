@@ -553,12 +553,12 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
                         @foreach ($reportscomments as $report)
-                            @php
-                                $comment = $report->comments; // use 'comments' here to match the relationship
-                                $feed = $comment->feed ?? null;
-                                $user = $comment->user ?? null;
-                            @endphp
-                        
+                          @php
+        $comment = $report->comments; // using 'comments' method name
+        $feed = $comment->feed ?? null;
+        $user = $comment->user ?? null;
+    @endphp
+                           @if ($feed)
                         <div class="col-md-3">
                             <div class="post-image">
                                 <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
@@ -733,6 +733,7 @@
                                 </div>
                             </div>
                         </div>
+                         @endif
                         @endforeach
                     </div>
                 </div>
