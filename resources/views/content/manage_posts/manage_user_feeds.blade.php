@@ -556,7 +556,8 @@
     @php
         $comment = $reportcomments->comments;
         $feed = optional($comment)->feed;
-        $user = optional($feed)->user;
+        $user = optional($feed)->users;
+        $reportUser = optional($reportcomments)->users;
     @endphp
 
     <div class="col-md-3">
@@ -650,10 +651,10 @@
                     </div>
                     <p class="mb-0 mt-2 p-1" style="font-size: 14px;background: #fff; border-radius: 4px;">
                        <div class="col-sm-2 p-0">
-                                        <img src="{{ asset('storage/' . (optional($user)->image ?? '')) }}"
-                                            style="width: 25px !important;height: 25px !important;border-radius: 4px !important;margin: 9px 6px;"
-                                            onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
-                                    </div> {{ $reportcomments->report_type }}
+                                          <img src="{{ asset('storage/' . ($reportUser->image ?? '')) }}"
+             style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;"
+             onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
+                                    </div> comments: {{ $reportcomments->report_type }}
                     </p>
                 </div>
             </div>
