@@ -4,6 +4,9 @@
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    <!-- Include WaveSurfer.js -->
+<script src="https://unpkg.com/wavesurfer.js"></script>
+
     <style>
         .custom-option-icon .form-check-input {
             background-color: transparent !important;
@@ -703,11 +706,10 @@
                                                     @if ($comment->comment_type === 'normal' && $comment->comment)
                                                         <span>{{ $comment->comment ?? '' }} </span>
                                                     @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                        <audio controls>
-                                                            <source src="{{ asset('storage/' . $comment->audio) }}"
-                                                                type="audio/mpeg">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
+                                                        <div class="waveform-container mt-2" style="padding: 10px; background: #f5f5f5; border-radius: 8px;">
+        <div id="waveform-{{ $reportcomments->id }}"></div>
+        <button class="btn btn-sm btn-primary mt-2" onclick="togglePlay('{{ $reportcomments->id }}')">Play / Pause</button>
+    </div>
                                                     @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
                                                         <span style="font-size: 24px;">{{ $comment->emoji }}</span>
                                                     @else
@@ -1050,68 +1052,10 @@
             }
         </script>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-        {{-- <script>
-        // Scroll right by 300px
-        $('#scrollRight').click(function() {
-            const container = document.getElementById('main-feed');
-            container.scrollLeft += 300;
-
-            // If near end, load more
-            if (container.scrollWidth - container.clientWidth - container.scrollLeft < 400) {
-                loadMoreFeeds();
-            }
-        });
-
-        // Scroll left by 300px
-        $('#scrollLeft').click(function() {
-            document.getElementById('main-feed').scrollLeft -= 300;
-        });
-    </script>
-
-    <script>
-        const slider = document.getElementById('main-feed');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('dragging');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll-fast multiplier
-            slider.scrollLeft = scrollLeft - walk;
-        });
-
-        // Optional: Mobile touch support
-        let touchStartX = 0;
-        slider.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('touchmove', (e) => {
-            const touchX = e.touches[0].clientX;
-            const walk = (touchStartX - touchX) * 2;
-            slider.scrollLeft = scrollLeft + walk;
-        });
-    </script> --}}
+       <div class="waveform-container mt-2" style="padding: 10px; background: #f5f5f5; border-radius: 8px;">
+        <div id="waveform-{{ $reportcomments->id }}"></div>
+        <button class="btn btn-sm btn-primary mt-2" onclick="togglePlay('{{ $reportcomments->id }}')">Play / Pause</button>
+    </div>
 
     @endsection
 @endsection
