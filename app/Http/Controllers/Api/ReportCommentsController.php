@@ -48,17 +48,34 @@ public function getUserReportedComments($userId)
 {
     $reportComments = ReportComments::with(['comments.feed', 'user'])
         ->where('user_id', $userId)
-        ->get();
+        ->get()
+        ->map(fn($item) => [
+            'type' => 'comment',
+            'data' => $item,
+            'created_at' => $item->created_at,  // For sorting
+        ]);
 
-    $reportFeeds = ReportFeeds::where('user_id', $userId)->get();
+    $reportFeeds = ReportFeeds::where('user_id', $userId)
+        ->get()
+        ->map(fn($item) => [
+            'type' => 'feed',
+            'data' => $item,
+            'created_at' => $item->created_at,  // For sorting
+        ]);
 
-    // Merge the two collections (both are Eloquent Collections)
-    $mergedReports = $reportComments->merge($reportFeeds);
+    $mergedReports = $reportComments->merge($reportFeeds)
+        ->sortByDesc('created_at')
+        ->values() // reindex collection keys after sorting
+        ->map(fn($item) => [
+            'type' => $item['type'],
+            'data' => $item['data'],
+        ]);
 
     return ResponseHelper::sendResponse([
         'reported_items' => $mergedReports,
     ], 'Reported items fetched successfully');
 }
+
 
 
 
