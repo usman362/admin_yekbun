@@ -89,6 +89,11 @@
             box-shadow: none;
             cursor: pointer;
         }
+        .waveform {
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
 
         .card-post:hover {
             box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
@@ -327,6 +332,8 @@
     <script src="{{ asset('assets/friendkit/js/compose.js') }}"></script>
     <script src="{{ asset('assets/friendkit/js/autocompletes.js') }}"></script>
     <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+
 @endsection
 
 @section('content')
@@ -687,76 +694,53 @@
                                                     <button class="btn btn-white_01 p-3">User Total: 150k</button>
                                                 </div>
                                             </div>
-                                            {{-- <p class="mb-0 mt-2 p-1"
-                                                style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                                <img src="{{ $reportcomments->users && $reportcomments->users->image
-                                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
-                                                        ? $reportcomments->users->image
-                                                        : asset('storage/' . $reportcomments->users->image))
-                                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
-                                                    style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
 
-                                                @if ($reportcomments->comments)
-                                                    @php $comment = $reportcomments->comments; @endphp
-
-                                                    @if ($comment->comment_type === 'normal' && $comment->comment)
-                                                        <span>{{ $comment->comment ?? '' }} </span>
-                                                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                        <audio controls>
-                                                            <source src="{{ asset('storage/' . $comment->audio) }}"
-                                                                type="audio/mpeg">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-                                                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
-                                                    @else
-                                                        <em>No content available.</em>
-                                                    @endif
-                                                @else
-                                                    <em>Comment not found.</em>
-                                                @endif
-                                            </p> --}}
-                                            <div class="d-flex align-items-center">  <img src="{{ $reportcomments->users && $reportcomments->users->image
-                                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
-                                                        ? $reportcomments->users->image
-                                                        : asset('storage/' . $reportcomments->users->image))
-                                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                            <div class="d-flex align-items-center"> <img
+                                                    src="{{ $reportcomments->users && $reportcomments->users->image
+                                                        ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
+                                                            ? $reportcomments->users->image
+                                                            : asset('storage/' . $reportcomments->users->image))
+                                                        : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                     style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
                                                 <div class="w-100 d-flex flex-column">
-                                                       <div class="mb-0 mt-2 p-1"
-                                                style="font-size: 14px;  border-radius: 4px; background: #fff; ">
-                                                <span style="font-weight: bold;">User name</span>
+                                                    <div class="mb-0 mt-2 p-1"
+                                                        style="font-size: 14px;  border-radius: 4px; background: #fff; ">
+                                                        <span style="font-weight: bold;">User name</span>
 
-                                                @if ($reportcomments->comments)
-                                                    @php $comment = $reportcomments->comments; @endphp
+                                                        @if ($reportcomments->comments)
+                                                            @php $comment = $reportcomments->comments; @endphp
 
-                                                    @if ($comment->comment_type === 'normal' && $comment->comment)
-                                                        <p class="mb-0">{{ $comment->comment ?? '' }} </p>
-                                                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                        <audio controls style="width: -webkit-fill-available;">
-                                                            <source src="{{ asset('storage/' . $comment->audio) }}"
-                                                                type="audio/mpeg">
-                                                            Your browser does not support the audio element.
-                                                        </audio>
-                                                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-                                                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
-                                                    @else
-                                                        <em>No content available.</em>
-                                                    @endif
-                                                @else
-                                                    <em>Comment not found.</em>
-                                                @endif
-                                                    </div>  
+                                                            @if ($comment->comment_type === 'normal' && $comment->comment)
+                                                                <p class="mb-0">{{ $comment->comment ?? '' }} </p>
+                                                            @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                                                                <div class="audio-comment-wrapper">
+                                                                    <div id="waveform-{{ $comment->id }}"
+                                                                        class="waveform"style="width: -webkit-fill-available;">
+                                                                    </div>
+                                                                    <button onclick="playPause('{{ $comment->id }}')"
+                                                                        class="btn btn-sm btn-primary mt-2">Play /
+                                                                        Pause</button>
+                                                                </div>
+                                                            @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                                                                <span
+                                                                    style="font-size: 24px;">{{ $comment->emoji }}</span>
+                                                            @else
+                                                                <em>No content available.</em>
+                                                            @endif
+                                                        @else
+                                                            <em>Comment not found.</em>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                </div>
+
+
+
+
+
+
+
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
@@ -1084,6 +1068,33 @@
                 });
             }
         </script>
+        <script>
+    const waves = {};
+
+    document.addEventListener("DOMContentLoaded", function () {
+        @if ($comment->comment_type === 'audio' && $comment->audio)
+            const id = "{{ $comment->id }}";
+            const audioUrl = "{{ asset('storage/' . $comment->audio) }}";
+
+            waves[id] = WaveSurfer.create({
+                container: '#waveform-' + id,
+                waveColor: '#a0c4ff',
+                progressColor: '#3a86ff',
+                height: 60,
+                responsive: true
+            });
+
+            waves[id].load(audioUrl);
+        @endif
+    });
+
+    function playPause(id) {
+        if (waves[id]) {
+            waves[id].playPause();
+        }
+    }
+</script>
+
         <script>
             function drpzone_init() {
                 dropZoneInitFunctions.forEach(callback => callback());
