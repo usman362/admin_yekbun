@@ -46,7 +46,7 @@ class ReportCommentsController extends Controller
     }
 public function getUserReportedComments($userId)
 {
-    $reports = ReportComment::with(['comment.feed', 'user'])
+    $reports = ReportComments::with(['comments.feed', 'user'])
         ->where('user_id', $userId)
         ->paginate(4);
 
