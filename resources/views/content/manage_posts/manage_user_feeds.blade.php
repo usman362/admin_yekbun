@@ -738,15 +738,23 @@
                                                         <p class="mb-0">{{ $comment->comment ?? '' }} </p>
                                                     @elseif ($comment->comment_type === 'audio' && $comment->audio)
                                                          <div class="p-2 mb-2" style="background-color: #f0f2f5; border-radius: 10px;">
+         <div class="d-flex align-items-center">
+    <div class="flex-grow-1">
+        <strong>{{ $comment->user->name ?? 'Anonymous' }}</strong>
         <div class="d-flex align-items-center">
-            
-            <div class="flex-grow-1">
-                <strong></strong>
-                <div id="waveform-{{ $comment->id }}" style="height: 40px; margin-top: 5px;"></div>
-                <button class="btn btn-sm btn-outline-success mt-1" onclick="playPause('{{ $comment->id }}')">▶️ Play</button>
-            </div>
-            <span id="duration-{{ $comment->id }}" class="ms-2 text-muted">0:00</span>
+            {{-- Play Icon --}}
+            <span onclick="playPause('{{ $comment->id }}')" 
+                  style="cursor: pointer; font-size: 22px; color: #28a745; margin-right: 10px;">
+                ▶️
+            </span>
+
+            {{-- Waveform --}}
+            <div id="waveform-{{ $comment->id }}" style="height: 40px; width: 100%;"></div>
         </div>
+    </div>
+    <span id="duration-{{ $comment->id }}" class="ms-2 text-muted">0:00</span>
+</div>
+
     </div>
                                                     @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
                                                         <span style="font-size: 24px;">{{ $comment->emoji }}</span>
