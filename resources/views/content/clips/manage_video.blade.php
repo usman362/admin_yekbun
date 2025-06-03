@@ -306,7 +306,7 @@
                 </div>
 
                 <a href="javascript:void(0)" class="btn btn-primary btn-md" data-bs-toggle="modal"
-                    data-bs-target="#createClipsTemplateModal">
+                    data-bs-target="#createClipsTemplateModal" style="z-index: 2">
                     Upload Template
                 </a>
             </div>
