@@ -731,7 +731,7 @@
                                                     @php $comment = $reportcomments->comments; @endphp
 
                                                     @if ($comment->comment_type === 'normal' && $comment->comment)
-                                                        <span>{{ $comment->comment ?? '' }} </span>
+                                                        <p class="mb-0">{{ $comment->comment ?? '' }} </p>
                                                     @elseif ($comment->comment_type === 'audio' && $comment->audio)
                                                         <audio controls style="width: -webkit-fill-available;">
                                                             <source src="{{ asset('storage/' . $comment->audio) }}"
