@@ -722,10 +722,10 @@
                                                         : asset('storage/' . $reportcomments->users->image))
                                                     : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                     style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
-                                                <div class="w-100">
+                                                <div class="w-100 d-flex flex-column">
                                                        <p class="mb-0 mt-2 p-1"
                                                 style="font-size: 14px;  border-radius: 4px;">
-                                                
+                                                <span style="font-weight: bold;">User name</span>
 
                                                 @if ($reportcomments->comments)
                                                     @php $comment = $reportcomments->comments; @endphp
@@ -733,7 +733,7 @@
                                                     @if ($comment->comment_type === 'normal' && $comment->comment)
                                                         <span>{{ $comment->comment ?? '' }} </span>
                                                     @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                        <audio controls>
+                                                        <audio controls style="width: -webkit-fill-available;">
                                                             <source src="{{ asset('storage/' . $comment->audio) }}"
                                                                 type="audio/mpeg">
                                                             Your browser does not support the audio element.
