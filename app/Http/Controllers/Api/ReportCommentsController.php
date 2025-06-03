@@ -46,7 +46,7 @@ class ReportCommentsController extends Controller
     }
 public function getUserReportedComments($userId)
 {
-    $reportComments = ReportComments::with(['comments.feed', 'user'])
+    $reportComments = ReportComments::with(['comments.feed.user', 'user'])
         ->where('user_id', $userId)
         ->get()
         ->map(fn($item) => [
@@ -55,7 +55,8 @@ public function getUserReportedComments($userId)
             'created_at' => $item->created_at,  // For sorting
         ]);
 
-    $reportFeeds = ReportFeeds::with(['feed','user'])->where('user_id', $userId)
+    $reportFeeds = ReportFeeds::with(['feed.user', 'user']) // Ensure feed's user is loaded
+        ->where('user_id', $userId)
         ->get()
         ->map(fn($item) => [
             'type' => 'feed',
@@ -65,7 +66,7 @@ public function getUserReportedComments($userId)
 
     $mergedReports = $reportComments->merge($reportFeeds)
         ->sortByDesc('created_at')
-        ->values() // reindex collection keys after sorting
+        ->values()
         ->map(fn($item) => [
             'type' => $item['type'],
             'data' => $item['data'],
@@ -75,8 +76,6 @@ public function getUserReportedComments($userId)
         'reported_items' => $mergedReports,
     ], 'Reported items fetched successfully');
 }
-
-
 
 
 
