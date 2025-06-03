@@ -729,7 +729,7 @@
                                                 <div class="w-100 d-flex flex-column">
                                                        <div class="mb-0 mt-2 p-1"
                                                 style="font-size: 14px;  border-radius: 4px; background: #fff; ">
-                                                <span style="font-weight: bold;">User name</span>
+                                                <span style="font-weight: bold;">{{ $comment->user->name ?? 'Anonymous' }}</span>
 
                                                 @if ($reportcomments->comments)
                                                     @php $comment = $reportcomments->comments; @endphp
@@ -739,9 +739,9 @@
                                                     @elseif ($comment->comment_type === 'audio' && $comment->audio)
                                                          <div class="p-2 mb-2" style="background-color: #f0f2f5; border-radius: 10px;">
         <div class="d-flex align-items-center">
-            <img src="{{ asset('images/avatar.png') }}" class="rounded-circle me-2" width="40" height="40" alt="user">
+            
             <div class="flex-grow-1">
-                <strong>{{ $comment->user->name ?? 'Anonymous' }}</strong>
+                <strong></strong>
                 <div id="waveform-{{ $comment->id }}" style="height: 40px; margin-top: 5px;"></div>
                 <button class="btn btn-sm btn-outline-success mt-1" onclick="playPause('{{ $comment->id }}')">▶️ Play</button>
             </div>
