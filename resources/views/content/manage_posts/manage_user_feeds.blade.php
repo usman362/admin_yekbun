@@ -716,15 +716,15 @@
                                                     <em>Comment not found.</em>
                                                 @endif
                                             </p> --}}
-                                            <div class="d-flex">  <img src="{{ $reportcomments->users && $reportcomments->users->image
+                                            <div class="d-flex align-items-center">  <img src="{{ $reportcomments->users && $reportcomments->users->image
                                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
                                                         ? $reportcomments->users->image
                                                         : asset('storage/' . $reportcomments->users->image))
                                                     : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                     style="width: 25px !important; height: 25px !important; border-radius: 4px !important; margin: 9px 6px;">
-                                                <div>
+                                                <div class="w-100">
                                                        <p class="mb-0 mt-2 p-1"
-                                                style="font-size: 14px;background: #fff; border-radius: 4px;">
+                                                style="font-size: 14px;  border-radius: 4px;">
                                                 
 
                                                 @if ($reportcomments->comments)
