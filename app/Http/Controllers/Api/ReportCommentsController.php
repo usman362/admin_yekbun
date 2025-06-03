@@ -49,13 +49,13 @@ public function getUserReportedComments($userId)
     $reportComments = ReportComments::with(['comments.feed', 'user'])
         ->where('user_id', $userId)
         ->get();
-        $reportfeeds = ReportFeeds::with('feed') ->where('user_id', $userId)->get();
+      $reportfeeds = ReportFeeds::with('feed') ->where('user_id', $userId)->get();
 
      
 
     return ResponseHelper::sendResponse([
         'report_comments' => $reportComments,
-        'report_feeds' => $reportfeeds
+       // 'report_feeds' => $reportfeeds
     ], 'Reported items fetched successfully');
 }
 
