@@ -279,6 +279,8 @@
     <link rel="stylesheet" href="{{ asset('assets/friendkit/css/core.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+
 @endsection
 
 @section('vendor-script')
@@ -735,11 +737,15 @@
                                                     @if ($comment->comment_type === 'normal' && $comment->comment)
                                                         <p class="mb-0">{{ $comment->comment ?? '' }} </p>
                                                     @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                        <div class="audio-comment-wrapper p-2 bg-light rounded" style="max-width: 500px;">
-        <div id="waveform-{{ $comment->id }}" style="height: 50px; border-radius: 6px; overflow: hidden;"></div>
-        <div class="d-flex justify-content-between align-items-center mt-2">
-            <button class="btn btn-sm btn-primary" onclick="playPause('{{ $comment->id }}')">▶️ Play / Pause</button>
-            <span id="duration-{{ $comment->id }}" class="text-muted" style="font-size: 12px;">0:00</span>
+                                                         <div class="p-2 mb-2" style="background-color: #f0f2f5; border-radius: 10px;">
+        <div class="d-flex align-items-center">
+            <img src="{{ asset('images/avatar.png') }}" class="rounded-circle me-2" width="40" height="40" alt="user">
+            <div class="flex-grow-1">
+                <strong>{{ $comment->user->name ?? 'Anonymous' }}</strong>
+                <div id="waveform-{{ $comment->id }}" style="height: 40px; margin-top: 5px;"></div>
+                <button class="btn btn-sm btn-outline-success mt-1" onclick="playPause('{{ $comment->id }}')">▶️ Play</button>
+            </div>
+            <span id="duration-{{ $comment->id }}" class="ms-2 text-muted">0:00</span>
         </div>
     </div>
                                                     @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
@@ -1067,7 +1073,8 @@
                 });
             })
         </script>
-        <script>
+        <script src="https://unpkg.com/wavesurfer.js"></script>
+<script>
     const waves = {};
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -1077,13 +1084,13 @@
 
             waves[id] = WaveSurfer.create({
                 container: '#waveform-' + id,
-                waveColor: '#d3d3d3',
-                progressColor: '#4a90e2',
-                barWidth: 2,
-                height: 50,
-                responsive: true,
+                waveColor: '#d4f7d4',        // soft green
+                progressColor: '#28a745',    // bold green like your image
+                barWidth: 3,
                 barRadius: 3,
-                cursorColor: '#4a90e2'
+                height: 40,
+                responsive: true,
+                cursorWidth: 0
             });
 
             waves[id].load(audioUrl);
@@ -1113,7 +1120,7 @@
     }
 </script>
 
-        <script>
+                 <script>
             function confirmAction(event, callback) {
                 event.preventDefault();
                 Swal.fire({
