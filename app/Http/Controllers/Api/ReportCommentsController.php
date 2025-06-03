@@ -49,7 +49,7 @@ public function getUserReportedComments($userId)
     $reportComments = ReportComments::with(['comments.feed', 'user'])
         ->where('user_id', $userId)
         ->get();
-        $reportfeeds = ReportFeeds::with('feed') ->where('user_id', $userId);
+        $reportfeeds = ReportFeeds::with('feed') ->where('user_id', $userId)->get();
 
      
 
