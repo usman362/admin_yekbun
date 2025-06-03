@@ -47,10 +47,11 @@ class ReportCommentsController extends Controller
 public function getUserReportedComments($userId)
 {
     $reports = ReportComments::with(['comments.feed', 'user'])
-        ->where('user_id', $userId)
-        ->paginate(4);
+        ->where('user_id', $userId)->get();
+        return ResponseHelper::sendResponse($reports, 'Report Comments Successfully');
 
-    return response()->json($reports);
+
+    
 }
 
 
