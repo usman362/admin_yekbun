@@ -55,7 +55,7 @@ public function getUserReportedComments($userId)
             'created_at' => $item->created_at,  // For sorting
         ]);
 
-    $reportFeeds = ReportFeeds::with('feed')->where('user_id', $userId)
+    $reportFeeds = ReportFeeds::with(['feed','user'])->where('user_id', $userId)
         ->get()
         ->map(fn($item) => [
             'type' => 'feed',
