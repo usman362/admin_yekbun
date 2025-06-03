@@ -89,22 +89,6 @@
             box-shadow: none;
             cursor: pointer;
         }
-        .audio-control-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 22px;
-    color: #28a745;
-    margin-right: 10px;
-    padding: 0;
-}
-
-.waveform-container {
-    height: 40px;
-    width: 100%;
-    background: #e9ecef;
-    border-radius: 4px;
-}
 
         .card-post:hover {
             box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
@@ -295,8 +279,6 @@
     <link rel="stylesheet" href="{{ asset('assets/friendkit/css/core.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/wavesurfer.js"></script>
-
 @endsection
 
 @section('vendor-script')
@@ -736,68 +718,47 @@
                                                     <em>Comment not found.</em>
                                                 @endif
                                             </p> --}}
-                                            <div class="d-flex align-items-center"> <img
-                                                    src="{{ $reportcomments->users && $reportcomments->users->image
-                                                        ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
-                                                            ? $reportcomments->users->image
-                                                            : asset('storage/' . $reportcomments->users->image))
-                                                        : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                            <div class="d-flex align-items-center">  <img src="{{ $reportcomments->users && $reportcomments->users->image
+                                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
+                                                        ? $reportcomments->users->image
+                                                        : asset('storage/' . $reportcomments->users->image))
+                                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                                     style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
                                                 <div class="w-100 d-flex flex-column">
-                                                    <div class="mb-0 mt-2 p-1"
-                                                        style="font-size: 14px;  border-radius: 4px; background: #fff; ">
-                                                        <span
-                                                            style="font-weight: bold;">{{ $comment->user->name ?? 'Anonymous' }}</span>
+                                                       <div class="mb-0 mt-2 p-1"
+                                                style="font-size: 14px;  border-radius: 4px; background: #fff; ">
+                                                <span style="font-weight: bold;">{{ $comment->user->name ?? 'Anonymous' }}</span>
 
-                                                        @if ($reportcomments->comments)
-                                                            @php $comment = $reportcomments->comments; @endphp
+                                                @if ($reportcomments->comments)
+                                                    @php $comment = $reportcomments->comments; @endphp
 
-                                                            @if ($comment->comment_type === 'normal' && $comment->comment)
-                                                                <p class="mb-0">{{ $comment->comment ?? '' }} </p>
-                                                            @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                                <div class="p-2 mb-2"
-                                                                    style="background-color: #f0f2f5; border-radius: 10px;">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="flex-grow-1">
-                                                                            <strong>{{ $comment->user->name ?? 'Anonymous' }}</strong>
-                                                                            <div class="d-flex align-items-center">
-                                                                                <!-- Play/Pause Button -->
-                                                                                <button class="audio-control-btn"
-                                                                                    data-comment-id="{{ $comment->id }}"
-                                                                                    aria-label="Play/Pause">
-                                                                                    ▶️
-                                                                                </button>
-
-                                                                                <!-- Waveform Container -->
-                                                                                <div id="waveform-{{ $comment->id }}"
-                                                                                    class="waveform-container">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <span id="duration-{{ $comment->id }}"
-                                                                            class="ms-2 text-muted">0:00</span>
-                                                                    </div>
-                                                                </div>
-                                                            @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-                                                                <span
-                                                                    style="font-size: 24px;">{{ $comment->emoji }}</span>
-                                                            @else
-                                                                <em>No content available.</em>
-                                                            @endif
-                                                        @else
-                                                            <em>Comment not found.</em>
-                                                        @endif
-                                                    </div>
+                                                    @if ($comment->comment_type === 'normal' && $comment->comment)
+                                                        <p class="mb-0">{{ $comment->comment ?? '' }} </p>
+                                                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                                                        <audio controls style="width: -webkit-fill-available;">
+                                                            <source src="{{ asset('storage/' . $comment->audio) }}"
+                                                                type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                                                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+                                                    @else
+                                                        <em>No content available.</em>
+                                                    @endif
+                                                @else
+                                                    <em>Comment not found.</em>
+                                                @endif
+                                                    </div>  
                                                 </div>
-
-
-
-
-
-
-
-
-                                            </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
@@ -1104,46 +1065,6 @@
                 });
             })
         </script>
-    <script>
-        // Store Wavesurfer instances globally
-const wavesurfers = {};
-
-// Initialize all audio players
-document.querySelectorAll('.audio-control-btn').forEach(btn => {
-    const commentId = btn.dataset.commentId;
-    const audioUrl = `{{ asset('storage/' . $comment->audio) }}`; // Adjust path as needed
-    
-    // Initialize Wavesurfer
-    wavesurfers[commentId] = WaveSurfer.create({
-        container: `#waveform-${commentId}`,
-        waveColor: '#28a745',
-        progressColor: '#1e7e34',
-        cursorWidth: 0,
-        barWidth: 2,
-        height: 40,
-        url: audioUrl,
-    });
-
-    // Play/Pause on button click
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent parent click events (if needed)
-        const ws = wavesurfers[commentId];
-        
-        ws.playPause();
-        btn.textContent = ws.isPlaying() ? '⏸️' : '▶️';
-    });
-
-    // Update duration on load
-    wavesurfers[commentId].on('ready', () => {
-        const duration = wavesurfers[commentId].getDuration();
-        const minutes = Math.floor(duration / 60);
-        const seconds = Math.floor(duration % 60);
-        document.getElementById(`duration-${commentId}`).textContent = 
-            `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    });
-});
-    </script>
-
         <script>
             function confirmAction(event, callback) {
                 event.preventDefault();
