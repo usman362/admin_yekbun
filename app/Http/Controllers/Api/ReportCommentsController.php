@@ -49,15 +49,17 @@ public function getUserReportedComments($userId)
     $reportComments = ReportComments::with(['comments.feed', 'user'])
         ->where('user_id', $userId)
         ->get();
-    $reportfeeds = ReportFeeds::where('user_id', $userId)->get(); // No relation
 
-     
+    $reportFeeds = ReportFeeds::where('user_id', $userId)->get();
+
+    // Merge the two collections (both are Eloquent Collections)
+    $mergedReports = $reportComments->merge($reportFeeds);
 
     return ResponseHelper::sendResponse([
-        'report_comments' => $reportComments,
-        'report_feeds' => $reportfeeds
+        'reported_items' => $mergedReports,
     ], 'Reported items fetched successfully');
 }
+
 
 
 
