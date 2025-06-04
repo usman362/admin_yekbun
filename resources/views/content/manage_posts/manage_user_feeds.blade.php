@@ -224,6 +224,33 @@
             border-radius: 5px;
             font-size: 12px;
         }
+        <style>
+    .see-all-link {
+        font-family: 'Genos', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #343a40; /* dark gray */
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .see-all-link .arrow {
+        font-size: 18px;
+        transition: transform 0.3s ease;
+    }
+
+    .see-all-link:hover {
+        color: #007bff; /* Bootstrap primary color */
+    }
+
+    .see-all-link:hover .arrow {
+        transform: translateX(4px);
+    }
+</style>
+
     </style>
 
     {{-- <style>
@@ -347,9 +374,9 @@
                 </div>
 
                 @if ($reportfeeds->count() > 3)
-                    <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
-                        See More
-                    </a>
+                <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
+                        See All <span class="arrow">→</span>
+                    </a>                     
                 @endif
             </div>
             <div class="view-wrapper">
@@ -475,7 +502,7 @@
                                             </div>
                                             <p class="mb-0 mt-2 p-1"
                                                 style="    font-size: 14px;
-    background: #fff; border-radius: 4px;">
+                                                   background: #fff; border-radius: 4px;">
                                                 Reason:
                                                 {{ $report->report_type }}</p>
                                         </div>
