@@ -364,8 +364,8 @@
 
 
         <div class="card pb-4">
-            <div class=" row g-4 card-header d-flex justify-content-between align-items-center">
-                <div class="col-auto d-flex align-items-center">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
                         <p class="mb-0">Reported Feeds</p>
@@ -374,11 +374,14 @@
                 </div>
 
                 @if ($reportfeeds->count() > 3)
-                <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
-                        See All <span class="arrow">→</span>
-                    </a>                     
+                 
+
+                    <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
+                        See More
+                    </a>
                 @endif
             </div>
+            <br>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
