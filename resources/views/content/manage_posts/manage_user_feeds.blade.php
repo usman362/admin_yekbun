@@ -656,7 +656,7 @@
                                             </div>
 
                                             <!-- /Post body -->
-                                            <div class="mt-2 mb-0">
+                                              <div class="mt-2 mb-0">
                                                 <div
                                                     style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
                                                     <div style="display:flex;align-items:center;width:100%;height:100%">
@@ -703,6 +703,7 @@
                                                     {{-- @endif --}}
                                                 </div>
                                             </div>
+
 
 
                                         </div>
