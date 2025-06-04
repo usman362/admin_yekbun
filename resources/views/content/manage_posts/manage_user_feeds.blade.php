@@ -787,19 +787,10 @@
                                                 <div class="row ml-0" style="width:100px;">
 
                                                     <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                                        <a class="dropdown-item edit-history" style="padding: 0"
-                                                            href="javascript:void(0)" data-bs-toggle="modal"
-                                                            data-bs-target="#createhistoryModal"
-                                                            data-id="{{ $feed->id }}"
-                                                            data-name="{{ $feed->title }}"
-                                                            data-source="{{ $feed->source }}"
-                                                            data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}}
-                                                            data-comments="{{ $feed->is_comments }}"
-                                                            data-share="{{ $feed->is_share }}"
-                                                            data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
-                                                            <img class="pop_action_image" style="height: 26px"
-                                                                src="{{ asset('assets/svg/edit.svg') }}"></a>
+                                                         <a class="dropdown-item open-edit-modal" href="javascript:void(0)" data-id="{{ $feed->id }}">
+  <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/edit.svg') }}">
+</a>
+
                                                     </div>
                                                     <div class="col-md-6">
                                                         <button type="submit" data-id="681b3efba782bfb52205cc22"
@@ -819,6 +810,20 @@
             </div>
         </div>
        
+<!-- Modal -->
+<div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editFeedModalLabel">Edit Feed</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="editFeedContent">
+        <!-- Feed content will be injected here -->
+      </div>
+    </div>
+  </div>
+</div>
 
 
         <!-- Latest Feeds -->
@@ -1045,6 +1050,31 @@
             $('#delete_form').attr('action', link);
         }
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".edit-history").forEach(button => {
+        button.addEventListener("click", function () {
+            const card = this.closest('.card-post');
+
+            // Clone feed card
+            const cardClone = card.cloneNode(true);
+
+            // Clean dropdown from clone (optional)
+            const dropdown = cardClone.querySelector('.dropdown');
+            if (dropdown) dropdown.remove();
+
+            // Inject into modal
+            const modalBody = document.getElementById('editFeedContent');
+            modalBody.innerHTML = '';
+            modalBody.appendChild(cardClone);
+
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
+            modal.show();
+        });
+    });
+});
+</script>
 
 
     @section('page-script')
