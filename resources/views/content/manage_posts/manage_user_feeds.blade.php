@@ -374,9 +374,9 @@
                 </div>
 
                 @if ($reportfeeds->count() > 3)
-                 <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link d-flex align-items-center gap-2">
+                 <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link d-flex align-items-center gap-2 text-dark">
     See All 
-    <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow" class="see-all-arrow" style="width: 16px; height: 16px;">
+    <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow" class="see-all-arrow" style="width: 25px; height: 25px;">
 </a>
 
                      
@@ -577,8 +577,8 @@
                 </div>
 
                 @if ($reportfeeds->count() > 3)
-                <a href="{{ route('reportedcommmentsindex') }}" class="see-all-link">
-                        See All  <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow" class="see-all-arrow" style="width: 16px; height: 16px;">
+                <a href="{{ route('reportedcommmentsindex') }}" class="see-all-link d-flex align-items-center gap-2 text-dark">
+                        See All  <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow" class="see-all-arrow" style="width: 25px; height: 25px;">
                     </a>
 
                      
