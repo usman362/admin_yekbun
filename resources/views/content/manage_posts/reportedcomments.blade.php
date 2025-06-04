@@ -295,20 +295,23 @@
     <div class="content-wrapper">
 
 
-        <div class="card pb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="card pb-4">
+            
+             <div class="card-header d-flex justify-content-between align-items-center py-2">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
                         <p class="mb-0">Reported Comments</p>
-                        <small>Total: {{ $feeds->total() }}</small>
+                        <small>Total: {{ $reportscomments->total() }}</small>
                     </div>
                 </div>
 
-                @if ($feeds->count() > 3)
-                    <a href="{{ route('manage.user.reportedcomments') }}" class="btn btn-primary btn-md" id="see-more-btn">
-                        See More
+                @if ($reportfeeds->count() > 3)
+                <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
+                        See All <span class="arrow">→</span>
                     </a>
+
+                     
                 @endif
             </div>
             <div class="view-wrapper">
@@ -317,11 +320,19 @@
                 <input type="hidden" name="comment_parent_id" id="comment_parent_id">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-                        @foreach ($feeds as $feed)
+                        @foreach ($reportscomments as $reportcomments)
+                            @php
+                                $comment = $reportcomments->comments;
+                                $feed = optional($comment)->feed;
+                                $user = optional($feed)->user;
+                                $reportUser = optional($reportcomments)->users;
+                            @endphp
+
                             <div class="col-md-3">
                                 <div class="post-image">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                        data-fancybox="post1" data-lightbox-type="comments" data-id="{{ $feed->_id }}"
+                                        data-fancybox="post1" data-lightbox-type="comments"
+                                        data-id="{{ $feed->_id }}"
                                         @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                         href="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                         data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -441,12 +452,51 @@
                                                 </div>
                                                 <div class="d-flex align-items-center" style="gap: 7px;">
                                                     <button class="btn btn-white_01 p-3">11.10.2025</button>
-                                                    <button class="btn btn-white_01 p-3">User Total: 150k</button>
+                                                     
                                                 </div>
                                             </div>
-                                            <p class="mb-0 mt-2 p-1"
-                                                style="font-size: 14px;background: #fff; border-radius: 4px;">
-                                                Reason: </p>
+                                            
+                                            <div class="d-flex align-items-center">  <img src="{{ $reportcomments->users && $reportcomments->users->image
+                                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
+                                                        ? $reportcomments->users->image
+                                                        : asset('storage/' . $reportcomments->users->image))
+                                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                                    style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
+                                                <div class="w-100 d-flex flex-column">
+                                                       <div class="mb-0 mt-2 p-1"
+                                                style="font-size: 14px;  border-radius: 4px; background: #fff; ">
+                                                <span style="font-weight: bold;">{{ $comment->user->name ?? 'Anonymous' }}</span>
+
+                                                @if ($reportcomments->comments)
+                                                    @php $comment = $reportcomments->comments; @endphp
+
+                                                    @if ($comment->comment_type === 'normal' && $comment->comment)
+                                                        <p class="mb-0">{{ $comment->comment ?? '' }} </p>
+                                                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                                                        <audio controls style="width: -webkit-fill-available;">
+                                                            <source src="{{ asset('storage/' . $comment->audio) }}"
+                                                                type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                                                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+                                                    @else
+                                                        <em>No content available.</em>
+                                                    @endif
+                                                @else
+                                                    <em>Comment not found.</em>
+                                                @endif
+                                                    </div>  
+                                                </div>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="nav-item dropdown d-block"
@@ -476,7 +526,8 @@
                                                             data-name="{{ $feed->title }}"
                                                             data-source="{{ $feed->source }}"
                                                             data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}} data-comments="{{ $feed->is_comments }}"
+                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}}
+                                                            data-comments="{{ $feed->is_comments }}"
                                                             data-share="{{ $feed->is_share }}"
                                                             data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
                                                             <img class="pop_action_image" style="height: 26px"
@@ -495,13 +546,8 @@
                                 </div>
                             </div>
                         @endforeach
-                      
                     </div>
-                    
                 </div>
-            </div>
-             <div class="d-flex justify-content-center mt-4">
-                {{ $feeds->links('pagination::bootstrap-5') }}
             </div>
         </div>
 

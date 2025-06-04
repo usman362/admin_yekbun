@@ -46,9 +46,10 @@ class FeedsController extends Controller
 
  public function reportedcommmentsindex(Request $request)
     {
-        $reportscomments = ReportComments::with('comments')->get();
-       // dd(  $reports );
-          return view('content.manage_posts.manage_user_feeds', compact('reportscomments'));
+              $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(20);
+
+       
+          return view('content.manage_posts.reportedcomments', compact('reportscomments'));
 
     }
 

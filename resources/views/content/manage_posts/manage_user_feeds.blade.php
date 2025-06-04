@@ -565,16 +565,23 @@
 
         <!-- Reported Comments -->
         <div class="card pb-4">
-            <div class="card-header py-2" >
-                <img src="{{ asset('assets/svg/svg-dialog/reported-comments.svg') }}" alt="">
-                <div>
-                    <p>Reported Comments</p>
-                    <small>Total: {{ $reportscomments->total() }}</small>
+            
+             <div class="card-header d-flex justify-content-between align-items-center py-2">
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
+                    <div class="ms-2">
+                        <p class="mb-0">Reported Comments</p>
+                        <small>Total: {{ $reportscomments->total() }}</small>
+                    </div>
                 </div>
- <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
+
+                @if ($reportfeeds->count() > 3)
+                <a href="{{ route('reportedcommmentsindex') }}" class="see-all-link">
                         See All <span class="arrow">→</span>
                     </a>
-                 
+
+                     
+                @endif
             </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
