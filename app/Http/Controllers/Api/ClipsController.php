@@ -26,9 +26,9 @@ class ClipsController extends Controller
     {
         $clip = new Clips();
         $clip->title = $request->title;
-        $clip->json_paths = $request->json_paths;
-        $clip->json_sizes = $request->json_sizes;
-        $clip->json_name = $request->json_name;
+        $clip->json_paths = $request->json_paths[0] ?? '';
+        $clip->json_sizes = $request->json_sizes[0] ?? '';
+        $clip->json_name = $request->json_name[0] ?? '';
         $clip->save();
         if ($request->hasFile('json_file')) {
             $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
