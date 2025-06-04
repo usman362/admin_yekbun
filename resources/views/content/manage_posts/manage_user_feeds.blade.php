@@ -604,7 +604,7 @@
 
                             <div class="col-md-3">
                                 <div class="post-image">
-                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                    <div  id="feed-card-{{ $feed->id }}"  class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-id="{{ $feed->_id }}"
                                         @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -1064,17 +1064,17 @@
             $('#delete_form').attr('action', link);
         }
     </script>
-   <script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.open-edit-modal').forEach(function (button) {
         button.addEventListener('click', function () {
             const feedId = this.dataset.id;
 
-            // Find the card by ID
+            // Fix: Correct ID selector
             const originalCard = document.querySelector('#feed-card-' + feedId);
 
             if (originalCard) {
-                const modalBody = document.getElementById('editFeedModalBody');
+                const modalBody = document.getElementById('editFeedContent'); // Fix: Correct modal body ID
                 modalBody.innerHTML = ''; // Clear old content
                 modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
                 const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
