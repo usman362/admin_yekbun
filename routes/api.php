@@ -52,6 +52,7 @@ use App\Http\Controllers\Api\MarketServiceContorller;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\PostGalleryController;
 use App\Http\Controllers\Api\AvatarsController;
+use App\Http\Controllers\Api\ClipsController;
 use App\Http\Controllers\Api\EmojiFeedController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
@@ -173,8 +174,9 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('store-artist-video-views/{id}', [MultimediaController::class, 'store_artist_video_views']);
     Route::post('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
 
-
-
+    //Clips
+    Route::get('get-clips',[ClipsController::class,'index']);
+    Route::post('store-clips',[ClipsController::class,'store_clips']);
 
     //Playlist
     Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
