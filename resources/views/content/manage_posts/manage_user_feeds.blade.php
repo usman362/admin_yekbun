@@ -604,9 +604,9 @@
 
                             <div class="col-md-3">
                                 <div class="post-image">
-                                    <div  id="feed-card-{{ $feed->id }}"  class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                        data-fancybox="post1" data-lightbox-type="comments"
-                                        data-id="{{ $feed->_id }}"
+                                    <div id="feed-card-{{ $feed->id }}"
+                                        class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
+                                        data-lightbox-type="comments" data-id="{{ $feed->_id }}"
                                         @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                         href="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                                         data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
@@ -718,7 +718,7 @@
 
 
                                         </div>
-                                        <div style="background-color: pink; border-radius:6px" class="p-1">
+                                        <div style="background-color: pink; border-radius:6px" data-comment-id="{{ $comment->id }}" class="p-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex align-items-center">
                                                     <button
@@ -799,9 +799,8 @@
 
                                                     <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                                         <a class="dropdown-item open-edit-modal" href="javascript:void(0)"
-                                                            data-id="{{ $feed->id }}">
-                                                            <img class="pop_action_image" style="height: 26px"
-                                                                src="{{ asset('assets/svg/edit.svg') }}">
+                                                            data-id="{{ $feed->id }}"
+                                                            data-comment-id="{{ $comment->id }}">
                                                         </a>
 
                                                     </div>
@@ -1064,19 +1063,34 @@
             $('#delete_form').attr('action', link);
         }
     </script>
-<script>
+ <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.open-edit-modal').forEach(function (button) {
         button.addEventListener('click', function () {
             const feedId = this.dataset.id;
+            const commentId = this.dataset.commentId;
 
-            // Fix: Correct ID selector
             const originalCard = document.querySelector('#feed-card-' + feedId);
 
             if (originalCard) {
-                const modalBody = document.getElementById('editFeedContent'); // Fix: Correct modal body ID
+                const modalBody = document.getElementById('editFeedContent');
                 modalBody.innerHTML = ''; // Clear old content
-                modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+
+                // Clone the feed card
+                const clonedCard = originalCard.cloneNode(true);
+
+                // Now find and highlight or update the comment inside the clonedCard
+                const allComments = clonedCard.querySelectorAll('[data-comment-id]');
+                allComments.forEach(comment => {
+                    if (comment.dataset.commentId !== commentId) {
+                        comment.style.display = 'none'; // hide other comments
+                    } else {
+                        comment.style.backgroundColor = '#fff3cd'; // optional: highlight selected comment
+                    }
+                });
+
+                modalBody.appendChild(clonedCard);
+
                 const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
                 modal.show();
             } else {
