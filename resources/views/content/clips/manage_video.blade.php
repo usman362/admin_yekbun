@@ -226,9 +226,13 @@
         }
 
         .fancybox-content {
-            width: 246px !important;
-            height: 433px !important;
+            /* width: 246px !important;
+                        height: 433px !important; */
             border-radius: 8px !important;
+        }
+
+        .fancybox-content {
+            background: none !important;
         }
 
         .fancybox-iframe,
@@ -404,6 +408,15 @@
             background: #fef2f2;
             border-color: #ef4444;
         }
+
+        .fancybox-slide--html .fancybox-close-small {
+            color: rgb(255 255 255);
+            padding: 10px;
+            right: 0;
+            top: 0;
+            border: 1px solid;
+            border-radius: 30px;
+        }
     </style>
 @endsection
 
@@ -488,13 +501,17 @@
                     data-bs-target="#createClipsTemplateModal" style="z-index: 2">
                     Upload Template
                 </a>
+
             </div>
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
                         <div class="col-md-2">
                             <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox
+                                    data-src="#video-popup" href="javascript:;"
+                                    data-thumb="{{ asset('videos/user-clip.mp4') }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
+                                    data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('videos/user-clip.mp4') }}"
                                     style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
@@ -578,119 +595,6 @@
 
                             </div>
                         </div>
-
-
-                        {{-- <div class="reported-feeds">
-                            <div class="header">
-                                <h2>Reported Feeds</h2>
-                                <p>Manage User Feeds</p>
-                                <button class="close-btn">×</button>
-                            </div>
-                            <center>
-                                <div class="user-info">
-                                    <div>
-                                        <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
-                                            class="profile-img" />
-                                    </div>
-                                    <div class="user-details">
-                                        <div class="d-flex" style="margin: 0 auto;width: 150px;">
-                                            <strong>User Name</strong>
-                                            <span class="mt-1 ml-2">3 of 5 Flags</span>
-                                        </div>
-                                        <div class="locations">
-                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
-                                            · Qamishlo · <img src="{{ asset('images/germany-flag-sm.png') }}"
-                                                alt=""> Hannover
-                                        </div>
-                                    </div>
-                                </div>
-                            </center>
-
-                            <form class="action-form">
-                                <!-- Level 0 -->
-                                <label class="action level0">
-                                    <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
-                                            alt=""></div>
-                                    <div style="line-height: 1">
-                                        <strong>Level #0</strong>
-                                        <p class="m-0">Ignore the Clip</p>
-                                    </div>
-                                    <input type="radio" name="action-level" checked />
-                                </label>
-
-                                <!-- Level 1 -->
-                                <label class="action level1">
-                                    <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
-                                            alt=""></div>
-                                    <div style="line-height: 1">
-                                        <strong>Level #1</strong>
-                                        <p class="m-0">Delete Clip, Flag User</p>
-                                    </div>
-                                    <input type="radio" name="action-level" />
-                                </label>
-
-                                <!-- Level 2 -->
-                                <label class="action level2">
-                                    <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
-                                            alt=""></div>
-                                    <div style="line-height: 1">
-                                        <strong>Level #2</strong>
-                                        <p class="m-0">Delete Clip, Downgrade User</p>
-                                        <div class="dropdowns">
-                                            <select>
-                                                <option>Select Reason</option>
-                                            </select>
-                                            <select>
-                                                <option>Select Duration</option>
-                                            </select>
-                                        </div>
-                                        <div class="warning">⚡ User Account will be downgraded to Educated</div>
-                                    </div>
-                                    <input type="radio" name="action-level" />
-                                </label>
-
-                                <!-- Level 3 -->
-                                <label class="action level3">
-                                    <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
-                                            alt=""></div>
-                                    <div style="line-height: 1">
-                                        <strong>Level #3</strong>
-                                        <p class="m-0">Delete Clip, Suspend User</p>
-                                        <div class="dropdowns">
-                                            <select>
-                                                <option>Select Reason</option>
-                                            </select>
-                                            <select>
-                                                <option>Select Duration</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <input type="radio" name="action-level" />
-                                </label>
-
-                                <!-- Level 4 -->
-                                <label class="action level4">
-                                    <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
-                                            alt=""></div>
-                                    <div style="line-height: 1">
-                                        <strong>Level #4</strong>
-                                        <p class="m-0">Remove Account, Block User</p>
-                                        <div class="dropdowns">
-                                            <select>
-                                                <option>Select Reason</option>
-                                            </select>
-                                            <select>
-                                                <option>Select Device</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <input type="radio" name="action-level" />
-                                </label>
-
-                                <button type="submit" class="submit-btn">Submit</button>
-                            </form>
-                        </div> --}}
-
                     </div>
                 </div>
             </div>
@@ -709,10 +613,10 @@
                     <div class="row g-4">
                         <div class="col-md-2">
                             <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    data-fancybox="post1" data-lightbox-type="comments"
-                                    data-thumb="{{ asset('videos/user-clip.mp4') }}"
-                                    href="{{ asset('videos/user-clip.mp4') }}" data-id="67ef066938c58e2bce0a4d72"
+                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox
+                                    data-src="#video-popup" href="javascript:;"
+                                    data-thumb="{{ asset('videos/user-clip.mp4') }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
+                                    data-id="67ef066938c58e2bce0a4d72"
                                     data-demo-href="{{ asset('videos/user-clip.mp4') }}"
                                     style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                     <!-- Main wrap -->
@@ -741,10 +645,6 @@
                                         </div>
                                         <!-- Post body -->
                                         <div class="card-body p-0">
-
-
-
-
                                             <!-- /Post body -->
                                             <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
                                                 <div
@@ -796,11 +696,11 @@
                     <div class="row g-4">
                         <div class="col-md-2">
                             <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
+                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox
+                                    data-src="#video-popup" href="javascript:;"
+                                    data-thumb="{{ asset('videos/user-clip.mp4') }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
+                                    data-id="67ef066938c58e2bce0a4d72"
+                                    data-demo-href="{{ asset('videos/user-clip.mp4') }}"
                                     style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
@@ -875,6 +775,136 @@
             saveBtnForm="createForm" size="md">
             @include('content.include.clips.createTemplate')
         </x-modal>
+
+
+        <div style="display: none;" id="video-popup">
+            <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
+
+                <!-- Left Column: Video -->
+                <div style="flex: -1;">
+                    <video class="fancybox-video" controls controlsList="nodownload"
+                        poster="{{ asset('videos/user-clip.mp4') }}"
+                        style="width: 335px; height: auto;outline:none">
+                        <source src="{{ asset('videos/user-clip.mp4') }}" type="video/mp4">
+                        Your browser doesn't support video.
+                    </video>
+                </div>
+
+                <!-- Right Column: Custom Report Panel -->
+                <div style="flex: 1; overflow-y: auto;">
+                    <div class="reported-feeds">
+                        <div class="header">
+                            <h2>Reported Feeds</h2>
+                            <p>Manage User Feeds</p>
+                            <button class="close-btn" data-fancybox-close>×</button>
+                        </div>
+                        <center>
+                            <div class="user-info">
+                                <div>
+                                    <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
+                                        class="profile-img" />
+                                </div>
+                                <div class="user-details">
+                                    <div class="d-flex" style="margin: 0 auto;width: 155px;">
+                                        <strong>User Name</strong>
+                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
+                                    </div>
+                                    <div class="locations">
+                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
+                                        · Qamishlo · <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                        Hannover
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+
+                        <form class="action-form">
+                            <!-- Level 0 -->
+                            <label class="action level0">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #0</strong>
+                                    <p class="m-0">Ignore the Clip</p>
+                                </div>
+                                <input type="radio" name="action-level" checked />
+                            </label>
+
+                            <!-- Level 1 -->
+                            <label class="action level1">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #1</strong>
+                                    <p class="m-0">Delete Clip, Flag User</p>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <!-- Level 2 -->
+                            <label class="action level2">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #2</strong>
+                                    <p class="m-0">Delete Clip, Downgrade User</p>
+                                    <div class="dropdowns">
+                                        <select>
+                                            <option>Select Reason</option>
+                                        </select>
+                                        <select>
+                                            <option>Select Duration</option>
+                                        </select>
+                                    </div>
+                                    <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <!-- Level 3 -->
+                            <label class="action level3">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #3</strong>
+                                    <p class="m-0">Delete Clip, Suspend User</p>
+                                    <div class="dropdowns">
+                                        <select>
+                                            <option>Select Reason</option>
+                                        </select>
+                                        <select>
+                                            <option>Select Duration</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <!-- Level 4 -->
+                            <label class="action level4">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #4</strong>
+                                    <p class="m-0">Remove Account, Block User</p>
+                                    <div class="dropdowns">
+                                        <select>
+                                            <option>Select Reason</option>
+                                        </select>
+                                        <select>
+                                            <option>Select Device</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="content-backdrop fade"></div>
     </div>
