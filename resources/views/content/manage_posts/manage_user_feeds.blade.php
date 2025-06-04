@@ -801,6 +801,8 @@
                                                         <a class="dropdown-item open-edit-modal" href="javascript:void(0)"
                                                             data-id="{{ $feed->id }}"
                                                             data-comment-id="{{ $comment->id }}">
+                                                             <img class="pop_action_image" style="height: 26px"
+                                                                src="{{ asset('assets/svg/edit.svg') }}">
                                                         </a>
 
                                                     </div>
@@ -828,7 +830,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editFeedModalLabel">View  Feed</h5>
+                        <h5 class="modal-title" id="editFeedModalLabel">View Feed</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="editFeedContent">
