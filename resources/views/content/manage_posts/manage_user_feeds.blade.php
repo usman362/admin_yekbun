@@ -801,8 +801,8 @@
                                                         <a class="dropdown-item open-edit-modal" href="javascript:void(0)"
                                                             data-id="{{ $feed->id }}"
                                                             data-comment-id="{{ $comment->id }}">
-                                                             <img class="pop_action_image" style="height: 26px"
-                                                                src="{{ asset('assets/svg/edit.svg') }}">
+                                                            <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/edit.svg') }}">
+
                                                         </a>
 
                                                     </div>
