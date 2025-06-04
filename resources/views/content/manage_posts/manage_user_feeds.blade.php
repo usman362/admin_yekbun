@@ -824,8 +824,8 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel"
-            aria-hidden="true">
+        <div class="modal fade show" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" style="display: block;" aria-modal="true" role="dialog">
+
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
