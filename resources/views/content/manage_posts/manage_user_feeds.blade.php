@@ -718,7 +718,7 @@
 
 
                                         </div>
-                                        <div style="background-color: pink; border-radius:6px" data-comment-id="{{ $comment->id }}" class="p-1">
+                                        <div style="background-color: pink; border-radius:6px" class="p-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex align-items-center">
                                                     <button
@@ -801,8 +801,6 @@
                                                         <a class="dropdown-item open-edit-modal" href="javascript:void(0)"
                                                             data-id="{{ $feed->id }}"
                                                             data-comment-id="{{ $comment->id }}">
-                                                            <img class="pop_action_image" style="height: 26px" src="{{ asset('assets/svg/edit.svg') }}">
-
                                                         </a>
 
                                                     </div>
@@ -830,7 +828,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editFeedModalLabel">View Feed</h5>
+                        <h5 class="modal-title" id="editFeedModalLabel">Edit Feed</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="editFeedContent">
@@ -1065,43 +1063,29 @@
             $('#delete_form').attr('action', link);
         }
     </script>
- <script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.open-edit-modal').forEach(function (button) {
-        button.addEventListener('click', function () {
-            const feedId = this.dataset.id;
-            const commentId = this.dataset.commentId;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.open-edit-modal').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const feedId = this.dataset.id;
 
-            const originalCard = document.querySelector('#feed-card-' + feedId);
+                    // Fix: Correct ID selector
+                    const originalCard = document.querySelector('#feed-card-' + feedId);
 
-            if (originalCard) {
-                const modalBody = document.getElementById('editFeedContent');
-                modalBody.innerHTML = ''; // Clear old content
-
-                // Clone the feed card
-                const clonedCard = originalCard.cloneNode(true);
-
-                // Now find and highlight or update the comment inside the clonedCard
-                const allComments = clonedCard.querySelectorAll('[data-comment-id]');
-                allComments.forEach(comment => {
-                    if (comment.dataset.commentId !== commentId) {
-                        comment.style.display = 'none'; // hide other comments
+                    if (originalCard) {
+                        const modalBody = document.getElementById(
+                        'editFeedContent'); // Fix: Correct modal body ID
+                        modalBody.innerHTML = ''; // Clear old content
+                        modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+                        const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
+                        modal.show();
                     } else {
-                        comment.style.backgroundColor = '#fff3cd'; // optional: highlight selected comment
+                        alert("Feed card not found.");
                     }
                 });
-
-                modalBody.appendChild(clonedCard);
-
-                const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
-                modal.show();
-            } else {
-                alert("Feed card not found.");
-            }
+            });
         });
-    });
-});
-</script>
+    </script>
 
 
 
