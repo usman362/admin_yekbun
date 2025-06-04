@@ -364,7 +364,7 @@
 
 
         <div class="card pb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-header d-flex justify-content-between align-items-center py-2">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
@@ -374,14 +374,13 @@
                 </div>
 
                 @if ($reportfeeds->count() > 3)
-                 
-
-                    <a href="{{ route('manage.user.reportedfeeds') }}" class="btn btn-primary btn-md" id="see-more-btn">
-                        See More
+                <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
+                        See All <span class="arrow">→</span>
                     </a>
+
+                     
                 @endif
             </div>
-            <br>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
                 <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
@@ -566,17 +565,16 @@
 
         <!-- Reported Comments -->
         <div class="card pb-4">
-            <div class="card-header">
+            <div class="card-header py-2" >
                 <img src="{{ asset('assets/svg/svg-dialog/reported-comments.svg') }}" alt="">
                 <div>
                     <p>Reported Comments</p>
                     <small>Total: {{ $reportscomments->total() }}</small>
                 </div>
-
-                {{-- <div class="scroll-buttons">
-                    <button id="scrollLeft"><i class="fas fa-chevron-left"></i></button>
-                    <button id="scrollRight"><i class="fas fa-chevron-right"></i></button>
-                </div> --}}
+ <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
+                        See All <span class="arrow">→</span>
+                    </a>
+                 
             </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
