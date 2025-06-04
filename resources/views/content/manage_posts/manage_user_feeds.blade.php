@@ -824,20 +824,20 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade show" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" style="display: block;" aria-modal="true" role="dialog">
-
-            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editFeedModalLabel">View Feed</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="post-image" id="editFeedContent">
-                        <!-- Feed content will be injected here -->
-                    </div>
-                </div>
+     <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editFeedModalLabel">View Feed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="editFeedContent">
+                <!-- Feed content will be injected here -->
             </div>
         </div>
+    </div>
+</div>
+
 
 
         <!-- Latest Feeds -->
