@@ -805,9 +805,9 @@
                                         class="profile-img" />
                                 </div>
                                 <div class="user-details">
-                                    <div class="d-flex" style="margin: 0 auto;width: 150px;">
+                                    <div class="d-flex" style="margin: 0 auto;width: 155px;">
                                         <strong>User Name</strong>
-                                        <span class="mt-1 ml-2">3 of 5 Flags</span>
+                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
                                     </div>
                                     <div class="locations">
                                         <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
