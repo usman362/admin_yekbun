@@ -832,7 +832,7 @@
                         <h5 class="modal-title" id="editFeedModalLabel">View Feed</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="editFeedContent">
+                    <div class="post-image" id="editFeedContent">
                         <!-- Feed content will be injected here -->
                     </div>
                 </div>
