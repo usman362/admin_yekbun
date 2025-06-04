@@ -926,6 +926,7 @@ Route::post('reels/story-time', [ReelSongController::class, 'storestory'])->name
 Route::delete('/reel-list-card/{card}', [ReelSongController::class, 'deleteCard'])->name('list.reel.cards.delete');
 Route::get('reel/ManageStories', [ReelSongController::class, 'ManageStories']);
 Route::get('manage-clips', [ClipsController::class, 'manage_video']);
+Route::post('manage-clips', [ClipsController::class, 'store_clips'])->name('store.clips');
 
 
 //Advertismen cards

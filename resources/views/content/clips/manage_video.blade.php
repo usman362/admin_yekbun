@@ -224,6 +224,186 @@
             border-radius: 5px;
             font-size: 12px;
         }
+
+        .fancybox-content {
+            width: 246px !important;
+            height: 433px !important;
+            border-radius: 8px !important;
+        }
+
+        .fancybox-iframe,
+        .fancybox-video {
+            border-radius: 8px !important;
+        }
+    </style>
+
+    <style>
+        .reported-feeds {
+            max-width: 340px;
+            font-family: 'Segoe UI', sans-serif;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 16px;
+            font-family: 'Genos';
+        }
+
+        .header {
+            text-align: center;
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .header h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: gray;
+            margin: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: red;
+            cursor: pointer;
+        }
+
+        .user-info {
+            /* display: flex; */
+            align-items: center;
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .profile-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #1fc9a1;
+        }
+
+        .user-details strong {
+            display: block;
+        }
+
+        .user-details span {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .locations {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .locations img {
+            width: 10px;
+        }
+
+        .action-form .action {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: 0.2s ease;
+            position: relative;
+        }
+
+        .action input[type="radio"] {
+            margin-top: 5px;
+            position: absolute;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            appearance: none;
+            border: 1px solid #00000036;
+            border-radius: 12px;
+        }
+
+        .action input[type="radio"]:checked {
+            background-color: #ffffff;
+            border: 6px solid #1DC9A0;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .dropdowns {
+            display: flex;
+        }
+
+        .dropdowns select {
+            margin-right: 8px;
+            margin-top: 4px;
+            padding: 6px;
+            font-size: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .warning {
+            font-size: 12px;
+            color: red;
+            margin-top: 6px;
+            background-color: #fff;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #00c78b;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .level0 {
+            background: #eafaf3;
+            border-color: #00c78b;
+        }
+
+        .level1 {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .level2 {
+            background: #f3f4f6;
+        }
+
+        .level3 {
+            background: #f3f4f6;
+        }
+
+        .level4 {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
     </style>
 @endsection
 
@@ -274,7 +454,7 @@
     <script src="{{ asset('assets/friendkit/js/modal-uploader.js') }}"></script>
     <script src="{{ asset('assets/friendkit/js/popovers-users.js') }}"></script>
     <script src="{{ asset('assets/friendkit/js/popovers-pages.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/lightbox.js') }}"></script>
+    {{-- <script src="{{ asset('assets/friendkit/js/lightbox.js') }}"></script> --}}
 
     <!-- Landing page js -->
 
@@ -295,7 +475,6 @@
     </script>
     <div class="content-wrapper">
 
-
         <div class="card pb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
@@ -313,7 +492,6 @@
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-
                         <div class="col-md-2">
                             <div class="post-image text-white">
                                 <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
@@ -400,446 +578,118 @@
 
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 260px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
 
 
-                                                        <div class="text-white"
-                                                            style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
-                                                            <h4 class="text-white"><b>Template ID</b></h4>
-                                                            <p>Upload Date Size</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <div class="nav-item dropdown d-block"
-                                                            style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                        alt="">
-                                                                </div>
-                                                            </a>
-                                                            <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                style="min-width: unset; width: 100px;">
-                                                                <span
-                                                                    style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                <form action=""
-                                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                                    method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-"
-                                                                                style="padding: 0"
-                                                                                href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createClipsTemplateModal"
-                                                                                data-id="6818b59673c0ff4a020cea12"
-                                                                                data-name="" data-source=""
-                                                                                data-thumbnail="/public/storage"
-                                                                                data-comments="" data-share=""
-                                                                                data-emoji="" for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit"
-                                                                                data-id="681b3efba782bfb52205cc22"
-                                                                                class="dropdown-item" style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
+                        {{-- <div class="reported-feeds">
+                            <div class="header">
+                                <h2>Reported Feeds</h2>
+                                <p>Manage User Feeds</p>
+                                <button class="close-btn">×</button>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 260px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
-                                                            <h4 class="text-white"><b>Template ID</b></h4>
-                                                            <p>Upload Date Size</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <div class="nav-item dropdown d-block"
-                                                            style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                        alt="">
-                                                                </div>
-                                                            </a>
-                                                            <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                style="min-width: unset; width: 100px;">
-                                                                <span
-                                                                    style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                <form action=""
-                                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                                    method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-"
-                                                                                style="padding: 0"
-                                                                                href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createClipsTemplateModal"
-                                                                                data-id="6818b59673c0ff4a020cea12"
-                                                                                data-name="" data-source=""
-                                                                                data-thumbnail="/public/storage"
-                                                                                data-comments="" data-share=""
-                                                                                data-emoji="" for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit"
-                                                                                data-id="681b3efba782bfb52205cc22"
-                                                                                class="dropdown-item" style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
+                            <center>
+                                <div class="user-info">
+                                    <div>
+                                        <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
+                                            class="profile-img" />
                                     </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 260px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
-                                                            <h4 class="text-white"><b>Template ID</b></h4>
-                                                            <p>Upload Date Size</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <div class="nav-item dropdown d-block"
-                                                            style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                        alt="">
-                                                                </div>
-                                                            </a>
-                                                            <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                style="min-width: unset; width: 100px;">
-                                                                <span
-                                                                    style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                <form action=""
-                                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                                    method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-"
-                                                                                style="padding: 0"
-                                                                                href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createClipsTemplateModal"
-                                                                                data-id="6818b59673c0ff4a020cea12"
-                                                                                data-name="" data-source=""
-                                                                                data-thumbnail="/public/storage"
-                                                                                data-comments="" data-share=""
-                                                                                data-emoji="" for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit"
-                                                                                data-id="681b3efba782bfb52205cc22"
-                                                                                class="dropdown-item" style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
+                                    <div class="user-details">
+                                        <div class="d-flex" style="margin: 0 auto;width: 150px;">
+                                            <strong>User Name</strong>
+                                            <span class="mt-1 ml-2">3 of 5 Flags</span>
                                         </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 260px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
-                                                            <h4 class="text-white"><b>Template ID</b></h4>
-                                                            <p>Upload Date Size</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <div class="nav-item dropdown d-block"
-                                                            style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                        alt="">
-                                                                </div>
-                                                            </a>
-                                                            <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                style="min-width: unset; width: 100px;">
-                                                                <span
-                                                                    style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                <form action=""
-                                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                                    method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-"
-                                                                                style="padding: 0"
-                                                                                href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createClipsTemplateModal"
-                                                                                data-id="6818b59673c0ff4a020cea12"
-                                                                                data-name="" data-source=""
-                                                                                data-thumbnail="/public/storage"
-                                                                                data-comments="" data-share=""
-                                                                                data-emoji="" for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit"
-                                                                                data-id="681b3efba782bfb52205cc22"
-                                                                                class="dropdown-item" style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
+                                        <div class="locations">
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
+                                            · Qamishlo · <img src="{{ asset('images/germany-flag-sm.png') }}"
+                                                alt=""> Hannover
                                         </div>
-
                                     </div>
-
                                 </div>
+                            </center>
 
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
+                            <form class="action-form">
+                                <!-- Level 0 -->
+                                <label class="action level0">
+                                    <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
+                                            alt=""></div>
+                                    <div style="line-height: 1">
+                                        <strong>Level #0</strong>
+                                        <p class="m-0">Ignore the Clip</p>
+                                    </div>
+                                    <input type="radio" name="action-level" checked />
+                                </label>
 
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
+                                <!-- Level 1 -->
+                                <label class="action level1">
+                                    <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
+                                            alt=""></div>
+                                    <div style="line-height: 1">
+                                        <strong>Level #1</strong>
+                                        <p class="m-0">Delete Clip, Flag User</p>
+                                    </div>
+                                    <input type="radio" name="action-level" />
+                                </label>
 
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 260px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
-                                                            <h4 class="text-white"><b>Template ID</b></h4>
-                                                            <p>Upload Date Size</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <div class="nav-item dropdown d-block"
-                                                            style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                        alt="">
-                                                                </div>
-                                                            </a>
-                                                            <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                style="min-width: unset; width: 100px;">
-                                                                <span
-                                                                    style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                <form action=""
-                                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                                    method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-"
-                                                                                style="padding: 0"
-                                                                                href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createClipsTemplateModal"
-                                                                                data-id="6818b59673c0ff4a020cea12"
-                                                                                data-name="" data-source=""
-                                                                                data-thumbnail="/public/storage"
-                                                                                data-comments="" data-share=""
-                                                                                data-emoji="" for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit"
-                                                                                data-id="681b3efba782bfb52205cc22"
-                                                                                class="dropdown-item" style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
+                                <!-- Level 2 -->
+                                <label class="action level2">
+                                    <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
+                                            alt=""></div>
+                                    <div style="line-height: 1">
+                                        <strong>Level #2</strong>
+                                        <p class="m-0">Delete Clip, Downgrade User</p>
+                                        <div class="dropdowns">
+                                            <select>
+                                                <option>Select Reason</option>
+                                            </select>
+                                            <select>
+                                                <option>Select Duration</option>
+                                            </select>
                                         </div>
-
+                                        <div class="warning">⚡ User Account will be downgraded to Educated</div>
                                     </div>
+                                    <input type="radio" name="action-level" />
+                                </label>
 
-                                </div>
+                                <!-- Level 3 -->
+                                <label class="action level3">
+                                    <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
+                                            alt=""></div>
+                                    <div style="line-height: 1">
+                                        <strong>Level #3</strong>
+                                        <p class="m-0">Delete Clip, Suspend User</p>
+                                        <div class="dropdowns">
+                                            <select>
+                                                <option>Select Reason</option>
+                                            </select>
+                                            <select>
+                                                <option>Select Duration</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="radio" name="action-level" />
+                                </label>
 
-                            </div>
-                        </div>
+                                <!-- Level 4 -->
+                                <label class="action level4">
+                                    <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
+                                            alt=""></div>
+                                    <div style="line-height: 1">
+                                        <strong>Level #4</strong>
+                                        <p class="m-0">Remove Account, Block User</p>
+                                        <div class="dropdowns">
+                                            <select>
+                                                <option>Select Reason</option>
+                                            </select>
+                                            <select>
+                                                <option>Select Device</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="radio" name="action-level" />
+                                </label>
+
+                                <button type="submit" class="submit-btn">Submit</button>
+                            </form>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -857,14 +707,13 @@
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-
                         <div class="col-md-2">
                             <div class="post-image text-white">
                                 <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
+                                    data-fancybox="post1" data-lightbox-type="comments"
+                                    data-thumb="{{ asset('videos/user-clip.mp4') }}"
+                                    href="{{ asset('videos/user-clip.mp4') }}" data-id="67ef066938c58e2bce0a4d72"
+                                    data-demo-href="{{ asset('videos/user-clip.mp4') }}"
                                     style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                     <!-- Main wrap -->
                                     <div class="content-wrap">
@@ -930,376 +779,6 @@
 
                             </div>
                         </div>
-
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -1315,7 +794,6 @@
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-
                         <div class="col-md-2">
                             <div class="post-image text-white">
                                 <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
@@ -1388,376 +866,6 @@
 
                             </div>
                         </div>
-
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                    {{-- data-fancybox="post1" data-lightbox-type="comments" data-id="6818b59673c0ff4a020cea12"
-                                    data-thumb="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png"
-                                    data-demo-href="http://127.0.0.1:2002/storage/images/user_feeds/6818b596040d4___ReactNative-snapshot-image659965770860654689.png" --}}
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
-
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
-                                                    </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-
-
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -1802,6 +910,11 @@
                 this.pause();
                 this.currentTime = 0; // reset to beginning
             });
+
+            $('.fancybox-slide .fancybox-content').after(`
+
+             <h1>TEST TEST TEST</h1>
+             `);
         })
     </script>
     <script>

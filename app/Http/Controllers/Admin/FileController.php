@@ -44,7 +44,7 @@ class FileController extends Controller
             $durationType = 'video';
         }
 
-        if ($durationType == 'video') {
+        if ($durationType == 'video' && $request->folder !== 'json_files') {
             // Initialize FFMpeg
             $ffmpeg = FFMpeg::create();
             // Open the media file (you need to get the real path of the uploaded file)

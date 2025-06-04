@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Models\Clips;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
+use FFMpeg\Media\Clip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ClipsController extends Controller
 {
-    public function manage_video(){
+    public function manage_video()
+    {
         $videos = Video::all();
-        return view('content.clips.manage_video',compact('videos'));
+        return view('content.clips.manage_video', compact('videos'));
     }
 
     public function store(Request $request)
@@ -50,6 +54,30 @@ class ClipsController extends Controller
         } else {
             return redirect()->route('manage_video')->with('error', 'Failed to add Video');
         }
+    }
+
+    public function store_clips(Request $request)
+    {
+        $clip = new Clips();
+        $clip->title = $request->title;
+
+        $jsonData = [
+            "json_paths" => $request->json_paths,
+            "json_sizes" => $request->json_sizes,
+            "json_name"  => $request->json_name,
+        ];
+
+        // Save as JSON string
+        $clip->json_data = json_encode($jsonData);
+
+        $clip->save();
+        if ($request->hasFile('json_file')) {
+            $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
+        }
+        if ($request->hasFile('video')) {
+            $clip->video = Helpers::fileUpload($request->video, 'videos');
+        }
+        return back();
     }
 
     public function destroy($id)
