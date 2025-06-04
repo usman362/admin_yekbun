@@ -306,13 +306,7 @@
                     </div>
                 </div>
 
-                @if ($reportfeeds->count() > 3)
-                <a href="{{ route('manage.user.reportedfeeds') }}" class="see-all-link">
-                        See All <span class="arrow">→</span>
-                    </a>
-
-                     
-                @endif
+               
             </div>
             <div class="view-wrapper">
                 <input type="hidden" name="feed_id" id="feed_id">
