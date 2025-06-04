@@ -364,8 +364,8 @@
 
 
         <div class="card pb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
+            <div class=" row g-4 card-header d-flex justify-content-between align-items-center">
+                <div class="col-auto d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
                         <p class="mb-0">Reported Feeds</p>
