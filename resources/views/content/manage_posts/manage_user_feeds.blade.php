@@ -364,7 +364,7 @@
 
 
         <div class="card pb-4">
-            <div class="card-header d-flex justify-content-between align-items-center py-2">
+            <div class="card-header d-flex justify-content-between align-items-center py-3">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
@@ -567,7 +567,7 @@
         <!-- Reported Comments -->
         <div class="card pb-4">
             
-             <div class="card-header d-flex justify-content-between align-items-center py-2">
+             <div class="card-header d-flex justify-content-between align-items-center py-3">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('assets/svg/svg-dialog/reported-feeds.svg') }}" alt="">
                     <div class="ms-2">
