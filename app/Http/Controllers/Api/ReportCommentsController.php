@@ -44,6 +44,44 @@ class ReportCommentsController extends Controller
 
         return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
     }
+public function getUserReportedComments($userId)
+{
+    $reportComments = ReportComments::with(['comments.feed.user', 'user'])
+        ->where('user_id', $userId)
+        ->get()
+        ->map(fn($item) => [
+            'type' => 'comment',
+            'data' => $item,
+            'created_at' => $item->created_at,  // For sorting
+        ]);
+
+    $reportFeeds = ReportFeeds::with(['feed.user', 'user']) // Ensure feed's user is loaded
+        ->where('user_id', $userId)
+        ->get()
+        ->map(fn($item) => [
+            'type' => 'feed',
+            'data' => $item,
+            'created_at' => $item->created_at,  // For sorting
+        ]);
+
+    $mergedReports = $reportComments->merge($reportFeeds)
+        ->sortByDesc('created_at')
+        ->values()
+        ->map(fn($item) => [
+            'type' => $item['type'],
+            'data' => $item['data'],
+        ]);
+
+    return ResponseHelper::sendResponse([
+        'reported_items' => $mergedReports,
+    ], 'Reported items fetched successfully');
+}
+
+
+
+
+
+
 
 public function reportfeedstore(Request $request, $id)
 {

@@ -30,4 +30,5 @@ class ReportFeeds extends Eloquent // ✅ Use MongoDB Eloquent Model
     {
         return $this->belongsTo(Feed::class, 'feed_id', '_id');
     }
+    
 }
