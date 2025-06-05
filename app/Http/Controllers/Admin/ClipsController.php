@@ -63,13 +63,21 @@ class ClipsController extends Controller
         $clip->json_paths = $request->json_paths[0] ?? '';
         $clip->json_sizes = $request->json_sizes[0] ?? '';
         $clip->json_name = $request->json_name[0] ?? '';
+        $clip->video_paths = $request->video_paths[0] ?? '';
+        $clip->video_sizes = $request->video_sizes[0] ?? '';
+        $clip->video_name = $request->video_name[0] ?? '';
+        if (!empty($request->thumbnail)) {
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $clip->thumbnail = $cleanedThumbnail;
+        }
         $clip->save();
-        if ($request->hasFile('json_file')) {
-            $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
-        }
-        if ($request->hasFile('video')) {
-            $clip->video = Helpers::fileUpload($request->video, 'videos');
-        }
+        // if ($request->hasFile('json_file')) {
+        //     $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
+        // }
+        // if ($request->hasFile('video')) {
+        //     $clip->video = Helpers::fileUpload($request->video, 'videos');
+        // }
         return back();
     }
 

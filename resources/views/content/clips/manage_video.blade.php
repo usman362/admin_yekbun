@@ -417,6 +417,9 @@
             border: 1px solid;
             border-radius: 30px;
         }
+        .modal-body{
+            overflow-y: scroll !important;
+        }
     </style>
 @endsection
 
