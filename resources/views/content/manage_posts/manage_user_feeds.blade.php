@@ -254,46 +254,423 @@
     </style>
 
     </style>
+  <style>
+        .custom-option-icon .form-check-input {
+            background-color: transparent !important;
+            border: none !important;
+        }
 
-    {{-- <style>
-        #main-feed {
+        .form-check-input:checked,
+        .form-check-input[type=checkbox] {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            background-image: none !important;
+        }
+
+        .dropdown.is-right .dropdown-menu {
+            left: 56px;
+            right: auto;
+            padding: 0;
+            top: -22px;
+        }
+
+        .dropdown-item h6,
+        .h6,
+        h5,
+        .h5,
+        h4,
+        .h4,
+        h3,
+        .h3,
+        h2,
+        .h2,
+        h1,
+        .h1 {
+            margin-bottom: 0 !important;
+        }
+
+        .card.is-post .user-block img,
+        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .user-block img {
+            width: 42px;
+            height: 42px;
+            border-radius: 0% !important;
+        }
+
+        .card.is-post .content-wrap .post-image img,
+        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .post-image img {
+            display: block;
+            border-radius: 5px;
+        }
+
+        .card.is-post .content-wrap .card-footer .social-count .shares-count span,
+        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .shares-count span,
+        .card.is-post .content-wrap .card-footer .social-count .comments-count span,
+        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .comments-count span,
+        .card.is-post .content-wrap .card-footer .social-count .likes-count span,
+        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .likes-count span {
+            display: block;
+            font-size: 18px !important;
+            color: #888da8;
+            margin: 0 5px;
+        }
+
+        #tab2,
+        #tab3 {
+            display: none;
+        }
+
+        .pop_description {
+            font-size: 14px;
+            font-weight: 400;
+            color: gray;
+            text-align: left;
+            background: #f7f7f7;
+            padding: 7px;
+            font-family: Genos;
+            border-radius: 5px;
             display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
+            align-items: center;
+            justify-content: left;
+        }
+    </style>
+    <style>
+        .card-post {
+            box-shadow: none;
+            cursor: pointer;
         }
 
-        #main-feed .dragging {
-            cursor: grabbing;
-            cursor: -webkit-grabbing;
-            user-select: none;
+        .card-post:hover {
+            box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+            background-clip: padding-box;
+            cursor: pointer;
+            background: #f6f6f6;
         }
 
-        #main-feed .is-post {
-            width: 360px;
-            margin: 0 8px;
+        .card-post-thumbnail {
+            height: 200px;
+            width: 100%;
+            background-size: 100% 230px;
+            background-repeat: no-repeat;
+            position: relative;
+            border-radius: 12px;
         }
 
-        .scroll-buttons {
+        .post-image {
+            position: relative;
+            width: 100%;
+            font-family: 'Genos';
+            margin: 0;
+        }
+
+        .post-image .dropdown {
+            margin-top: -215px;
+            display: none;
+        }
+
+        .dropdown-content {
+            border: none !important;
+        }
+
+        .fancybox__container {
+            z-index: 99999 !important;
+        }
+
+        .fancybox__nav {
+            display: none !important;
+        }
+
+        .btn-white {
+            background: #fff;
+            padding: 0px 28px !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            text-align: left;
+            padding-left: 5px !important;
+        }
+
+        .btn-white_01 {
+            background: #fff;
+            padding: 2px 3px !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .btn-white_01:hover {
+            background: #fff;
+        }
+
+
+        .fancybox__thumbs {
+            display: none !important;
+        }
+
+        .user-block {
+            background-color: #F2F2F2;
+            width: 230px;
+            height: 30px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .user-block .user-heart {
+            width: 25px !important;
+            height: 25px !important;
+            border-radius: 4px !important;
             position: absolute;
-            right: 30px;
+            top: 2px;
+            right: 2px;
         }
 
-        #scrollLeft {
-            background-color: #696dff;
-            border: 1px solid #696dff;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
+        .user-block small {
+            margin-top: -9px !important;
         }
 
-        #scrollRight {
-            background-color: #696dff;
-            border: 1px solid #696dff;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
+        .user-block p {
+            margin-top: 4px !important;
         }
-    </style> --}}
+
+        .card-header {
+            box-shadow: none;
+            padding-bottom: 0;
+        }
+
+        .card-header div {
+            font-family: Genos;
+            line-height: 1;
+            margin-left: 8px;
+        }
+
+        .card-header p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .card-header small {
+            font-size: 15px;
+            font-style: italic;
+            color: #888ea8;
+        }
+
+        .report-section {
+            background-color: #ED1C244D;
+            padding: 4px;
+            border-radius: 5px;
+            margin-top: 4px;
+        }
+
+        .report-section .d-flex:first-child {
+            gap: 76px;
+        }
+
+        .report-section .fields {
+            background-color: #fff;
+            margin: 0 4px;
+            padding: 0 4px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .fancybox-content {
+            /* width: 246px !important;
+                        height: 433px !important; */
+            border-radius: 8px !important;
+        }
+
+        .fancybox-content {
+            background: none !important;
+        }
+
+        .fancybox-iframe,
+        .fancybox-video {
+            border-radius: 8px !important;
+        }
+    </style>
+
+    <style>
+        .reported-feeds {
+            max-width: 340px;
+            font-family: 'Segoe UI', sans-serif;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 16px;
+            font-family: 'Genos';
+        }
+
+        .header {
+            text-align: center;
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .header h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: gray;
+            margin: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: red;
+            cursor: pointer;
+        }
+
+        .user-info {
+            /* display: flex; */
+            align-items: center;
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .profile-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #1fc9a1;
+        }
+
+        .user-details strong {
+            display: block;
+        }
+
+        .user-details span {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .locations {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .locations img {
+            width: 10px;
+        }
+
+        .action-form .action {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: 0.2s ease;
+            position: relative;
+        }
+
+        .action input[type="radio"] {
+            margin-top: 5px;
+            position: absolute;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            appearance: none;
+            border: 1px solid #00000036;
+            border-radius: 12px;
+        }
+
+        .action input[type="radio"]:checked {
+            background-color: #ffffff;
+            border: 6px solid #1DC9A0;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .dropdowns {
+            display: flex;
+        }
+
+        .dropdowns select {
+            margin-right: 8px;
+            margin-top: 4px;
+            padding: 6px;
+            font-size: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .warning {
+            font-size: 12px;
+            color: red;
+            margin-top: 6px;
+            background-color: #fff;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #00c78b;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .level0 {
+            background: #eafaf3;
+            border-color: #00c78b;
+        }
+
+        .level1 {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .level2 {
+            background: #f3f4f6;
+        }
+
+        .level3 {
+            background: #f3f4f6;
+        }
+
+        .level4 {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .fancybox-slide--html .fancybox-close-small {
+            color: rgb(255 255 255);
+            padding: 10px;
+            right: 0;
+            top: 0;
+            border: 1px solid;
+            border-radius: 30px;
+        }
+        .modal-body{
+            overflow-y: scroll !important;
+        }
+    </style>
 @endsection
 
 @section('vendor-style')
@@ -826,12 +1203,125 @@
         <!-- Modal -->
      <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 400px;">
-        <div class="modal-content">
+        
+        <div class="modal-content"style="flex: -1;">
             
             <div class="modal-body" id="editFeedContent">
                 <!-- Feed content will be injected here -->
             </div>
         </div>
+        <div style="flex: 1; overflow-y: auto;">
+                    <div class="reported-feeds">
+                        <div class="header">
+                            <h2>Reported Feeds</h2>
+                            <p>Manage User Feeds</p>
+                            <button class="close-btn" data-fancybox-close>×</button>
+                        </div>
+                        <center>
+                            <div class="user-info">
+                                <div>
+                                    <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
+                                        class="profile-img" />
+                                </div>
+                                <div class="user-details">
+                                    <div class="d-flex" style="margin: 0 auto;width: 155px;">
+                                        <strong>User Name</strong>
+                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
+                                    </div>
+                                    <div class="locations">
+                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
+                                        · Qamishlo · <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                        Hannover
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+
+                        <form class="action-form">
+                            <!-- Level 0 -->
+                            <label class="action level0">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #0</strong>
+                                    <p class="m-0">Ignore the Clip</p>
+                                </div>
+                                <input type="radio" name="action-level" checked />
+                            </label>
+
+                            <!-- Level 1 -->
+                            <label class="action level1">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #1</strong>
+                                    <p class="m-0">Delete Clip, Flag User</p>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <!-- Level 2 -->
+                            <label class="action level2">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #2</strong>
+                                    <p class="m-0">Delete Clip, Downgrade User</p>
+                                    <div class="dropdowns">
+                                        <select>
+                                            <option>Select Reason</option>
+                                        </select>
+                                        <select>
+                                            <option>Select Duration</option>
+                                        </select>
+                                    </div>
+                                    <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <!-- Level 3 -->
+                            <label class="action level3">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #3</strong>
+                                    <p class="m-0">Delete Clip, Suspend User</p>
+                                    <div class="dropdowns">
+                                        <select>
+                                            <option>Select Reason</option>
+                                        </select>
+                                        <select>
+                                            <option>Select Duration</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <!-- Level 4 -->
+                            <label class="action level4">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
+                                        alt=""></div>
+                                <div style="line-height: 1">
+                                    <strong>Level #4</strong>
+                                    <p class="m-0">Remove Account, Block User</p>
+                                    <div class="dropdowns">
+                                        <select>
+                                            <option>Select Reason</option>
+                                        </select>
+                                        <select>
+                                            <option>Select Device</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
     </div>
 </div>
 
