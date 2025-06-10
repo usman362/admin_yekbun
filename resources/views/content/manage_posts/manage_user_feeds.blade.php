@@ -477,7 +477,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                            height: 433px !important; */
+                                height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -1204,20 +1204,29 @@
         <!-- Modal -->
        <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 90%; width: 90%;">
-        <div class="modal-content" style="display: flex; flex-direction: row; height: 90vh;">
-            
-            <!-- Left Column -->
-            <div class="modal-body" id="editFeedContent" style="flex: 1; overflow-y: auto; padding: 20px; border-right: 1px solid #ddd;">
-                <!-- Feed content will be injected here -->
+        <div class="modal-content" style="display: flex; flex-direction: row; height: 90vh; border-radius: 8px; overflow: hidden;">
+
+            <!-- Left Panel -->
+            <div style="flex: 1; overflow-y: auto; position: relative; background: #f9f9f9; border-right: 1px solid #ddd;">
+                <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
+                    onclick="$('#editFeedModal').modal('hide')">
+                    &times;
+                </button>
+                <div class="modal-body" id="editFeedContent" style="padding: 20px;">
+                    <!-- Feed content will be injected here -->
+                </div>
             </div>
 
-            <!-- Right Column -->
-            <div style="flex: 1; overflow-y: auto; padding: 20px;">
-                <div class="reported-feeds">
+            <!-- Right Panel -->
+            <div style="flex: 1; overflow-y: auto; position: relative; background: #ffffff;">
+                <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
+                    onclick="$('#editFeedModal').modal('hide')">
+                    &times;
+                </button>
+                <div class="reported-feeds" style="padding: 20px;">
                     <div class="header">
                         <h2>Reported Feeds</h2>
                         <p>Manage User Feeds</p>
-                        <button class="close-btn" onclick="$('#editFeedModal').modal('hide')">×</button>
                     </div>
 
                     <center>
@@ -1238,96 +1247,75 @@
                         </div>
                     </center>
 
-                      <form class="action-form">
-                            <!-- Level 0 -->
-                            <label class="action level0">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
-                                        alt=""></div>
-                                <div style="line-height: 1">
-                                    <strong>Level #0</strong>
-                                    <p class="m-0">Ignore the Clip</p>
+                    <form class="action-form">
+                        <!-- Level 0 to 4 actions -->
+                        <label class="action level0">
+                            <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}" alt=""></div>
+                            <div style="line-height: 1">
+                                <strong>Level #0</strong>
+                                <p class="m-0">Ignore the Clip</p>
+                            </div>
+                            <input type="radio" name="action-level" checked />
+                        </label>
+
+                        <label class="action level1">
+                            <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}" alt=""></div>
+                            <div style="line-height: 1">
+                                <strong>Level #1</strong>
+                                <p class="m-0">Delete Clip, Flag User</p>
+                            </div>
+                            <input type="radio" name="action-level" />
+                        </label>
+
+                        <label class="action level2">
+                            <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}" alt=""></div>
+                            <div style="line-height: 1">
+                                <strong>Level #2</strong>
+                                <p class="m-0">Delete Clip, Downgrade User</p>
+                                <div class="dropdowns">
+                                    <select><option>Select Reason</option></select>
+                                    <select><option>Select Duration</option></select>
                                 </div>
-                                <input type="radio" name="action-level" checked />
-                            </label>
+                                <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                            </div>
+                            <input type="radio" name="action-level" />
+                        </label>
 
-                            <!-- Level 1 -->
-                            <label class="action level1">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
-                                        alt=""></div>
-                                <div style="line-height: 1">
-                                    <strong>Level #1</strong>
-                                    <p class="m-0">Delete Clip, Flag User</p>
+                        <label class="action level3">
+                            <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}" alt=""></div>
+                            <div style="line-height: 1">
+                                <strong>Level #3</strong>
+                                <p class="m-0">Delete Clip, Suspend User</p>
+                                <div class="dropdowns">
+                                    <select><option>Select Reason</option></select>
+                                    <select><option>Select Duration</option></select>
                                 </div>
-                                <input type="radio" name="action-level" />
-                            </label>
+                            </div>
+                            <input type="radio" name="action-level" />
+                        </label>
 
-                            <!-- Level 2 -->
-                            <label class="action level2">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
-                                        alt=""></div>
-                                <div style="line-height: 1">
-                                    <strong>Level #2</strong>
-                                    <p class="m-0">Delete Clip, Downgrade User</p>
-                                    <div class="dropdowns">
-                                        <select>
-                                            <option>Select Reason</option>
-                                        </select>
-                                        <select>
-                                            <option>Select Duration</option>
-                                        </select>
-                                    </div>
-                                    <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                        <label class="action level4">
+                            <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}" alt=""></div>
+                            <div style="line-height: 1">
+                                <strong>Level #4</strong>
+                                <p class="m-0">Remove Account, Block User</p>
+                                <div class="dropdowns">
+                                    <select><option>Select Reason</option></select>
+                                    <select><option>Select Device</option></select>
                                 </div>
-                                <input type="radio" name="action-level" />
-                            </label>
+                            </div>
+                            <input type="radio" name="action-level" />
+                        </label>
 
-                            <!-- Level 3 -->
-                            <label class="action level3">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
-                                        alt=""></div>
-                                <div style="line-height: 1">
-                                    <strong>Level #3</strong>
-                                    <p class="m-0">Delete Clip, Suspend User</p>
-                                    <div class="dropdowns">
-                                        <select>
-                                            <option>Select Reason</option>
-                                        </select>
-                                        <select>
-                                            <option>Select Duration</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <input type="radio" name="action-level" />
-                            </label>
-
-                            <!-- Level 4 -->
-                            <label class="action level4">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
-                                        alt=""></div>
-                                <div style="line-height: 1">
-                                    <strong>Level #4</strong>
-                                    <p class="m-0">Remove Account, Block User</p>
-                                    <div class="dropdowns">
-                                        <select>
-                                            <option>Select Reason</option>
-                                        </select>
-                                        <select>
-                                            <option>Select Device</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <input type="radio" name="action-level" />
-                            </label>
-
-                            <button type="submit" class="submit-btn">Submit</button>
-                        </form>
-
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </form>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
 
 
 
