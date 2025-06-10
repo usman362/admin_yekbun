@@ -1202,44 +1202,69 @@
         </div>
 
        <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 95%; width: 95%;">
-        <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 95%; width: 95%;">
+    <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
 
-            <div class="d-flex justify-content-start align-items-start" style="gap: 30px; flex-wrap: wrap;">
-                
-                <!-- Left Box (auto height) -->
-                <div class="bg-white shadow rounded" style="width: 48%; padding: 20px; position: relative;">
-                    <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
-                        onclick="$('#editFeedModal').modal('hide')">
-                        &times;
-                    </button>
-                    <div id="editFeedContent">
-                        <!-- Feed content will be injected here -->
-                        <h4>Edit Feed</h4>
-                        <p>This panel displays feed data only. It should not be stretched to match the height of the right panel.</p>
-                    </div>
-                </div>
+      <!-- Flex container with side-by-side boxes -->
+      <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
 
-                <!-- Right Box (scrollable if content is tall) -->
-                <div class="bg-white shadow rounded" style="width: 48%; padding: 20px; max-height: 90vh; overflow-y: auto; position: relative;">
-                    <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
-                        onclick="$('#editFeedModal').modal('hide')">
-                        &times;
-                    </button>
-                    <div class="reported-feeds">
-                        <div class="header">
-                            <h2>Reported Feeds</h2>
-                            <p>Manage User Feeds</p>
-                        </div>
-
-                        <!-- rest of the right content like user info and action form -->
-                        <!-- same content from earlier example -->
-                    </div>
-                </div>
-
-            </div>
+        <!-- Left Panel (Auto height) -->
+        <div class="bg-white shadow rounded" style="width: 45%; padding: 20px; position: relative;">
+          <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
+            onclick="$('#editFeedModal').modal('hide')">
+            &times;
+          </button>
+          <div id="editFeedContent">
+            <!-- Feed content will be injected here -->
+            <h4>Edit Feed</h4>
+            <p>This is short content. The height of this panel should not match the taller one.</p>
+          </div>
         </div>
+
+        <!-- Right Panel (Scroll if content is long) -->
+        <div class="bg-white shadow rounded" style="width: 50%; padding: 20px; max-height: 90vh; overflow-y: auto; position: relative;">
+          <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
+            onclick="$('#editFeedModal').modal('hide')">
+            &times;
+          </button>
+          <div class="reported-feeds">
+            <div class="header">
+              <h2>Reported Feeds</h2>
+              <p>Manage User Feeds</p>
+            </div>
+
+            <!-- User Info & Action Form (copy from your previous code) -->
+            <center>
+              <div class="user-info">
+                <div><img src="{{ asset('images/user-clips-report-user.png') }}" class="profile-img" /></div>
+                <div class="user-details">
+                  <div class="d-flex" style="margin: 0 auto; width: 155px;">
+                    <strong>User Name</strong>
+                    <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
+                  </div>
+                  <div class="locations">
+                    <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava · Qamishlo ·
+                    <img src="{{ asset('images/germany-flag-sm.png') }}" alt=""> Hannover
+                  </div>
+                </div>
+              </div>
+            </center>
+
+            <!-- Action Form here (levels 0-4) -->
+            <!-- ... (same as your previous form content) ... -->
+
+            <form class="action-form">
+              <!-- Level items here -->
+              <!-- ... -->
+              <button type="submit" class="submit-btn">Submit</button>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
 
 
