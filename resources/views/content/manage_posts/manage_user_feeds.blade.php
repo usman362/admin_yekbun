@@ -1227,7 +1227,18 @@
                 <div class="bg-white shadow " style="width: 48%; position: relative;  border-radious:12px !important">
                     <!-- One Close Icon (top-right) -->
                     <button type="button" class="close position-absolute"
-                        style="top: 10px; right: 10px; z-index: 10;" onclick="$('#editFeedModal').modal('hide')">
+                        style="
+    top: -27px;
+    right: -56px;
+    color: white;
+    opacity: 1;
+    z-index: 10;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 22px;
+" onclick="$('#editFeedModal').modal('hide')">
                         &times;
                     </button>
 
