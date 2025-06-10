@@ -1253,11 +1253,62 @@
             <!-- Action Form here (levels 0-4) -->
             <!-- ... (same as your previous form content) ... -->
 
-            <form class="action-form">
-              <!-- Level items here -->
-              <!-- ... -->
-              <button type="submit" class="submit-btn">Submit</button>
-            </form>
+           <form class="action-form">
+                            <!-- Level 0 to 4 actions -->
+                            <label class="action level0">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}" alt=""></div>
+                                <div><strong>Level #0</strong><p class="m-0">Ignore the Clip</p></div>
+                                <input type="radio" name="action-level" checked />
+                            </label>
+
+                            <label class="action level1">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}" alt=""></div>
+                                <div><strong>Level #1</strong><p class="m-0">Delete Clip, Flag User</p></div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <label class="action level2">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}" alt=""></div>
+                                <div>
+                                    <strong>Level #2</strong>
+                                    <p class="m-0">Delete Clip, Downgrade User</p>
+                                    <div class="dropdowns">
+                                        <select><option>Select Reason</option></select>
+                                        <select><option>Select Duration</option></select>
+                                    </div>
+                                    <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <label class="action level3">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}" alt=""></div>
+                                <div>
+                                    <strong>Level #3</strong>
+                                    <p class="m-0">Delete Clip, Suspend User</p>
+                                    <div class="dropdowns">
+                                        <select><option>Select Reason</option></select>
+                                        <select><option>Select Duration</option></select>
+                                    </div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <label class="action level4">
+                                <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}" alt=""></div>
+                                <div>
+                                    <strong>Level #4</strong>
+                                    <p class="m-0">Remove Account, Block User</p>
+                                    <div class="dropdowns">
+                                        <select><option>Select Reason</option></select>
+                                        <select><option>Select Device</option></select>
+                                    </div>
+                                </div>
+                                <input type="radio" name="action-level" />
+                            </label>
+
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
 
           </div>
         </div>
