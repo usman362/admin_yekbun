@@ -1216,7 +1216,7 @@
             <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
 
                 <!-- Left Panel (Auto height, Feed Edit) -->
-                <div class="bg-white shadow rounded" style="width: 58%; padding: 20px;">
+                <div class="bg-white shadow " style="width: 58%; padding: 20px; border-radious:12px !important">
                     <div id="editFeedContent">
                         <h4>Edit Feed</h4>
                         <p>This is short content. The height should remain minimal.</p>
@@ -1224,7 +1224,7 @@
                 </div>
 
                 <!-- Right Panel (Full Height, No Scroll) -->
-                <div class="bg-white shadow rounded" style="width: 48%; padding: 20px; position: relative;">
+                <div class="bg-white shadow " style="width: 48%; position: relative;  border-radious:12px !important">
                     <!-- One Close Icon (top-right) -->
                     <button type="button" class="close position-absolute"
                         style="top: 10px; right: 10px; z-index: 10;" onclick="$('#editFeedModal').modal('hide')">
