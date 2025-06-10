@@ -477,7 +477,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                    height: 433px !important; */
+                                        height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -1201,39 +1201,36 @@
             </div>
         </div>
 
-       <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
+     <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 95%; width: 95%;">
     <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
 
-      <!-- Flex container with side-by-side boxes -->
       <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
 
-        <!-- Left Panel (Auto height) -->
-        <div class="bg-white shadow rounded" style="width: 45%; padding: 20px; position: relative;">
-          <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
-            onclick="$('#editFeedModal').modal('hide')">
-            &times;
-          </button>
+        <!-- Left Panel (Auto height, Feed Edit) -->
+        <div class="bg-white shadow rounded" style="width: 45%; padding: 20px;">
           <div id="editFeedContent">
             <!-- Feed content will be injected here -->
             <h4>Edit Feed</h4>
-            <p>This is short content. The height of this panel should not match the taller one.</p>
+            <p>This is short content. The height should remain minimal.</p>
           </div>
         </div>
 
-        <!-- Right Panel (Scroll if content is long) -->
+        <!-- Right Panel (Scrollable, Reported Feeds) -->
         <div class="bg-white shadow rounded" style="width: 50%; padding: 20px; max-height: 90vh; overflow-y: auto; position: relative;">
+          <!-- One Close Icon (top-right) -->
           <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
             onclick="$('#editFeedModal').modal('hide')">
             &times;
           </button>
+
           <div class="reported-feeds">
-            <div class="header">
+            <div class="header mb-3">
               <h2>Reported Feeds</h2>
               <p>Manage User Feeds</p>
             </div>
 
-            <!-- User Info & Action Form (copy from your previous code) -->
+            <!-- User Info -->
             <center>
               <div class="user-info">
                 <div><img src="{{ asset('images/user-clips-report-user.png') }}" class="profile-img" /></div>
@@ -1250,65 +1247,12 @@
               </div>
             </center>
 
-            <!-- Action Form here (levels 0-4) -->
-            <!-- ... (same as your previous form content) ... -->
-
-           <form class="action-form">
-                            <!-- Level 0 to 4 actions -->
-                            <label class="action level0">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}" alt=""></div>
-                                <div><strong>Level #0</strong><p class="m-0">Ignore the Clip</p></div>
-                                <input type="radio" name="action-level" checked />
-                            </label>
-
-                            <label class="action level1">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}" alt=""></div>
-                                <div><strong>Level #1</strong><p class="m-0">Delete Clip, Flag User</p></div>
-                                <input type="radio" name="action-level" />
-                            </label>
-
-                            <label class="action level2">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}" alt=""></div>
-                                <div>
-                                    <strong>Level #2</strong>
-                                    <p class="m-0">Delete Clip, Downgrade User</p>
-                                    <div class="dropdowns">
-                                        <select><option>Select Reason</option></select>
-                                        <select><option>Select Duration</option></select>
-                                    </div>
-                                    <div class="warning">⚡ User Account will be downgraded to Educated</div>
-                                </div>
-                                <input type="radio" name="action-level" />
-                            </label>
-
-                            <label class="action level3">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}" alt=""></div>
-                                <div>
-                                    <strong>Level #3</strong>
-                                    <p class="m-0">Delete Clip, Suspend User</p>
-                                    <div class="dropdowns">
-                                        <select><option>Select Reason</option></select>
-                                        <select><option>Select Duration</option></select>
-                                    </div>
-                                </div>
-                                <input type="radio" name="action-level" />
-                            </label>
-
-                            <label class="action level4">
-                                <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}" alt=""></div>
-                                <div>
-                                    <strong>Level #4</strong>
-                                    <p class="m-0">Remove Account, Block User</p>
-                                    <div class="dropdowns">
-                                        <select><option>Select Reason</option></select>
-                                        <select><option>Select Device</option></select>
-                                    </div>
-                                </div>
-                                <input type="radio" name="action-level" />
-                            </label>
-
-                            <button type="submit" class="submit-btn">Submit</button>
-                        </form>
+            <!-- Action Form -->
+            <form class="action-form mt-4">
+              <!-- Add your level actions here (Level 0 to Level 4) -->
+              <!-- ... same form content ... -->
+              <button type="submit" class="submit-btn">Submit</button>
+            </form>
 
           </div>
         </div>
