@@ -477,7 +477,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                height: 433px !important; */
+                                    height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -1201,7 +1201,6 @@
             </div>
         </div>
 
-        <!-- Modal -->
        <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 90%; width: 90%;">
         <div class="modal-content" style="display: flex; flex-direction: row; height: 90vh; border-radius: 8px; overflow: hidden;">
@@ -1218,7 +1217,7 @@
             </div>
 
             <!-- Right Panel -->
-            <div style="flex: 1; overflow-y: auto; position: relative; background: #8f8585;">
+            <div style="flex: 1; overflow-y: auto; position: relative; background: #ffffff;">
                 <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
                     onclick="$('#editFeedModal').modal('hide')">
                     &times;
@@ -1315,6 +1314,7 @@
         </div>
     </div>
 </div>
+
 
 
 
