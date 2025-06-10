@@ -259,6 +259,7 @@
             background-color: transparent !important;
             border: none !important;
         }
+        
 
         .form-check-input:checked,
         .form-check-input[type=checkbox] {
@@ -267,6 +268,15 @@
             box-shadow: none !important;
             background-image: none !important;
         }
+
+        .modal-content, .modal-card {
+    margin: 0 20px;
+    max-height: calc(100vh - 160px);
+    overflow: inherit;
+    position: relative;
+    width: 100%;
+
+}
 
         .dropdown.is-right .dropdown-menu {
             left: 56px;
@@ -1203,7 +1213,7 @@
 
    <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
-        <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
+        <div class="modal-content" style="background: transparent; border: none; box-shadow: none; width:800px !important;">
 
             <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
 
