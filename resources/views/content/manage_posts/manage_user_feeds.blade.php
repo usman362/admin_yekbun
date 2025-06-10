@@ -1208,7 +1208,7 @@
             <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
 
                 <!-- Left Panel (Auto height, Feed Edit) -->
-                <div class="bg-white shadow rounded" style="width: 48%; padding: 20px;">
+                <div class="bg-white shadow rounded" style="width: 58%; padding: 20px;">
                     <div id="editFeedContent">
                         <h4>Edit Feed</h4>
                         <p>This is short content. The height should remain minimal.</p>
