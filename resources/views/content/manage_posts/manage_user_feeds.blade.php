@@ -254,7 +254,7 @@
     </style>
 
     </style>
-  <style>
+    <style>
         .custom-option-icon .form-check-input {
             background-color: transparent !important;
             border: none !important;
@@ -477,7 +477,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                        height: 433px !important; */
+                            height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -667,7 +667,8 @@
             border: 1px solid;
             border-radius: 30px;
         }
-        .modal-body{
+
+        .modal-body {
             overflow-y: scroll !important;
         }
     </style>
@@ -1201,16 +1202,16 @@
         </div>
 
         <!-- Modal -->
-     <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 400px;">
-        
-        <div class="modal-content"style="flex: -1;">
-            
-            <div class="modal-body" id="editFeedContent">
-                <!-- Feed content will be injected here -->
-            </div>
-        </div>
-        <div style="flex: 1; overflow-y: auto;">
+        <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 400px;">
+
+                <div class="modal-content"style="flex: -1;">
+
+                    <div class="modal-body" id="editFeedContent">
+                        <!-- Feed content will be injected here -->
+                    </div>
+                    <div style="flex: 1; overflow-y: auto;">
                     <div class="reported-feeds">
                         <div class="header">
                             <h2>Reported Feeds</h2>
@@ -1226,11 +1227,13 @@
                                 <div class="user-details">
                                     <div class="d-flex" style="margin: 0 auto;width: 155px;">
                                         <strong>User Name</strong>
-                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
+                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span
+                                                    class="text-success">5</span> Flags</span></b>
                                     </div>
                                     <div class="locations">
                                         <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
-                                        · Qamishlo · <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                        · Qamishlo · <img src="{{ asset('images/germany-flag-sm.png') }}"
+                                            alt="">
                                         Hannover
                                     </div>
                                 </div>
@@ -1322,8 +1325,10 @@
                         </form>
                     </div>
                 </div>
-    </div>
-</div>
+                </div>
+                
+            </div>
+        </div>
 
 
 
@@ -1562,7 +1567,7 @@
 
                     if (originalCard) {
                         const modalBody = document.getElementById(
-                        'editFeedContent'); // Fix: Correct modal body ID
+                            'editFeedContent'); // Fix: Correct modal body ID
                         modalBody.innerHTML = ''; // Clear old content
                         modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
                         const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
