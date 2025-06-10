@@ -1202,13 +1202,13 @@
         </div>
 
    <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 95%; width: 95%;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
         <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
 
             <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
 
                 <!-- Left Panel (Auto height, Feed Edit) -->
-                <div class="bg-white shadow rounded" style="width: 45%; padding: 20px;">
+                <div class="bg-white shadow rounded" style="width: 48%; padding: 20px;">
                     <div id="editFeedContent">
                         <h4>Edit Feed</h4>
                         <p>This is short content. The height should remain minimal.</p>
@@ -1216,7 +1216,7 @@
                 </div>
 
                 <!-- Right Panel (Full Height, No Scroll) -->
-                <div class="bg-white shadow rounded" style="width: 50%; padding: 20px; position: relative;">
+                <div class="bg-white shadow rounded" style="width: 48%; padding: 20px; position: relative;">
                     <!-- One Close Icon (top-right) -->
                     <button type="button" class="close position-absolute"
                         style="top: 10px; right: 10px; z-index: 10;" onclick="$('#editFeedModal').modal('hide')">
@@ -1320,7 +1320,6 @@
 
                             <button type="submit" class="submit-btn">Submit</button>
                         </form>
-
                     </div>
                 </div>
 
