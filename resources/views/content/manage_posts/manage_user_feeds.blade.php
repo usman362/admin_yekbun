@@ -1218,7 +1218,7 @@
             </div>
 
             <!-- Right Panel -->
-            <div style="flex: 1; overflow-y: auto; position: relative; background: #ffffff;">
+            <div style="flex: 1; overflow-y: auto; position: relative; background: #8f8585;">
                 <button type="button" class="close position-absolute" style="top: 10px; right: 10px; z-index: 10;"
                     onclick="$('#editFeedModal').modal('hide')">
                     &times;
