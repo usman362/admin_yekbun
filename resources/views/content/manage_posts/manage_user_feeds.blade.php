@@ -270,11 +270,9 @@
         }
 
         .modal-content, .modal-card {
-    margin: 0 20px;
-    max-height: calc(100vh - 160px);
-    overflow: inherit;
-    position: relative;
-    width: 100%;
+    
+    overflow: inherit !important;
+   
 
 }
 
