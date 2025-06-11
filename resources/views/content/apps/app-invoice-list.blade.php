@@ -24,7 +24,7 @@
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Event Title /</span> /Tickets
+        <span class="text-muted fw-light">Invoices /</span> Invoice List
     </h4>
 
     <!-- Invoice List Table -->
@@ -71,7 +71,7 @@
                                             class="bx bx-dots-vertical-rounded"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end"><a href="javascript:;"
                                             class="dropdown-item">Download</a><a
-                                            href="javascript:;" class="dropdown-item">Edit</a><a
+                                            href="{{url('app/invoice/edit')}}" class="dropdown-item">Edit</a><a
                                             href="javascript:;" class="dropdown-item">Duplicate</a>
                                         <div class="dropdown-divider"></div><a href="javascript:;"
                                             class="dropdown-item delete-record text-danger">Delete</a>
