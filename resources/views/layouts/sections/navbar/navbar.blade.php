@@ -108,7 +108,7 @@
     </div>
 @endif
 
-<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="gap: 4px;">
+<div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse " style="gap: 4px;">
     <!-- Search Column -->
     @if (!isset($menuHorizontal))
     <div class="card mb-0 px-3 search-wrap d-flex justify-content-center align-items-center" style="height:54px; min-width: 200px;">
@@ -129,7 +129,7 @@
 
     @can('channels.read')
         <!-- Channels Column -->
-        <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+        <div class="card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
 
             <ul class="navbar-nav">
@@ -178,7 +178,7 @@
     @endcan
     <!-- Users Column -->
     @can('users.read')
-      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 " style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
 
             <ul class="navbar-nav">
@@ -257,7 +257,7 @@
     @endcan
     <!-- Avatars Column -->
     @can('avatars.read')
-      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 " style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
 
             <ul class="navbar-nav">
@@ -281,7 +281,7 @@
     @endcan
     <!-- Flag User Column -->
     @can('flaggedUser.read')
-      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+      <div class="card mb-0 d-flex justify-content-center mx-1 " style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
 
             <ul class="navbar-nav">
@@ -298,7 +298,7 @@
     @endcan
     <!-- Flag Channels Column -->
     @can('flaggedchannels.read')
-         <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+         <div class="card mb-0 d-flex justify-content-center mx-1 " style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
 
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -328,10 +328,10 @@
         </div>
     @endcan
     <!-- Combined Layout for Shortcuts, Notifications, and Profile -->
-      <div class="card mb-0 d-flex justify-content-center mx-1 ms-4" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+      <div class="card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 175px; flex: 0 0 {{ $colWidth }}%;">
 
 
-        <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
+        <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0 justify-content-between">
 
             <!-- Shortcuts -->
             <li class="nav-item dropdown-shortcuts dropdown">
@@ -511,6 +511,12 @@
 @endif
 </nav>
 <!-- / Navbar -->
+
+
+
+
+
+
 
 <!-- Category Model -->
 <div class="modal fade" id="livestreammodel" tabindex="-1" aria-hidden="true">
