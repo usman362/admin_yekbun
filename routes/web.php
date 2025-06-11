@@ -72,6 +72,8 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\apps\income\Income;
+use App\Http\Controllers\apps\transaction\Transaction;
 use App\Http\Controllers\BackgroundFeedController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AvatarsController;
@@ -700,6 +702,11 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         Route::get('setting/live/streaming_duration', [PrefixController::class, 'index'])->name('live.streaming_durations');
 
         Route::get('chats/manage-group', [UserRolesController::class, 'standard'])->name('chats.manageGroup');
+
+
+        Route::get('incomes', [Income::class, 'index'])->name('incomes.index');
+
+        Route::get('transactions', [Transaction::class, 'index'])->name('transactions.index');
 
         Route::get('/app/online-shop-income', $controller_path . '\apps\income\Income@onlineShopIncome')->name(
             'app-online-shop-income'

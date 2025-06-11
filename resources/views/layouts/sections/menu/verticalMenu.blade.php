@@ -1427,13 +1427,74 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Bank &amp; Payments</span>
         </li>
-        <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
-            <a href="{{ url('/currency') }}" class="menu-link">
+        <li class="menu-item {{ Request::is('transactions') ? 'active' : '' }}">
+            <a href="{{ url('/transactions') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-devices"></i>
-                <div>Currency</div>
+                <div>Transactions</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('incomes') ? 'active' : '' }}">
+            <a href="{{ url('/incomes') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Income</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ Request::is('app/*') ? (Request::is('app/ftp/list') ? '' : 'active open') : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-money"></i>
+                <div>Settings</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
+                    <a href="{{ url('/app/user-income') }}" class="menu-link">
+                        <div>Invoice</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
+                    <a href="{{ url('/app/user-income') }}" class="menu-link">
+                        <div>Discounts</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
+                    <a href="{{ url('/currency') }}" class="menu-link">
+                        <div>Currency</div>
+                    </a>
+                </li>
+
+                <li
+            class="menu-item {{ Request::is('settings/payment-offices') ? 'active open' : '' }}{{ Request::is('settings/bank-transfer') ? 'active open' : '' }}{{ Request::is('settings/paypal-stripe') ? 'active open' : '' }}{{ Request::is('settings/payment-methods') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                <div>Payments</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('settings/payment-offices') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/payment-offices') }}" class="menu-link">
+                        <div>Payment Office</div>
+                    </a>
+                </li>
+                <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/bank-transfer') }}" class="menu-link">
+                        <div>Add Manage Bank Transfer</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/paypal-stripe') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/paypal-stripe') }}" class="menu-link">
+                        <div>Add Manage Paypal Transfer</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
+                        <div>Add Manage DebitCard</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+            </ul>
+        </li>
+
+        {{-- <li class="menu-item {{ Request::is('app/*') ? (Request::is('app/ftp/list') ? '' : 'active open') : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-money"></i>
                 <div>Income</div>
@@ -1559,7 +1620,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">App Settings</span>
