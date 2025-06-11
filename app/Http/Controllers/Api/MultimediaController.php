@@ -22,6 +22,8 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MultimediaController extends Controller
 {
@@ -597,11 +599,38 @@ class MultimediaController extends Controller
     public function mediaTrimmer(Request $request)
     {
         $request->validate([
-            'file' => 'required|file',
+            'file' => 'required|file|mimetypes:audio/*,video/*',
+            'startTime' => 'required|numeric|min:0',
+            'endTime' => 'required|numeric|min:0|gt:startTime',
         ]);
 
-        $filePath = Helpers::fileUpload($request->file, 'media');
-        $url = asset('storage/' . $filePath) . '?startTime=' . $request->startTime . '&endTime=' . $request->endTime;
-        return ResponseHelper::sendResponse($url, 'Url Generated!');
+        // Upload the original file
+        $originalPath = $request->file('file')->store('media/originals');
+
+        // Get full paths
+        $storagePath = storage_path('app/' . $originalPath);
+        $trimmedName = 'trimmed_' . Str::random(10) . '.' . $request->file('file')->getClientOriginalExtension();
+        $trimmedPath = storage_path('app/media/trimmed/' . $trimmedName);
+
+        // Ensure trimmed directory exists
+        Storage::makeDirectory('media/trimmed');
+
+        // Run FFmpeg trim command
+        $start = escapeshellarg($request->startTime);
+        $duration = escapeshellarg($request->endTime - $request->startTime);
+
+        $command = "ffmpeg -ss $start -i " . escapeshellarg($storagePath) . " -t $duration -c copy " . escapeshellarg($trimmedPath);
+        exec($command, $output, $returnCode);
+
+        if ($returnCode !== 0) {
+            return ResponseHelper::sendResponse([],'Trimming failed.',false,500);
+        }
+
+        // Optional: Delete original file if not needed
+        Storage::delete($originalPath);
+
+        // Return URL to trimmed file
+        $url = '/media/trimmed/' . $trimmedName;
+        return ResponseHelper::sendResponse($url,'Trimmed file uploaded successfully!');
     }
 }
