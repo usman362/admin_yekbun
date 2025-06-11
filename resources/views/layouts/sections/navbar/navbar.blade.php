@@ -328,7 +328,7 @@
         </div>
     @endcan
     <!-- Combined Layout for Shortcuts, Notifications, and Profile -->
-      <div class="card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 90px; flex: 0 0 {{ $colWidth }}%;">
+      <div class="card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 175px; flex: 0 0 {{ $colWidth }}%;">
 
 
         <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
