@@ -261,7 +261,7 @@ class MultimediaController extends Controller
         $musicCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'music_daily_songs');
         // 4. If not played and limit reached, reject
         if (!$alreadyPlayed && $todayPlayCount >= $musicCounnt) {
-                return ResponseHelper::sendResponse([],'Your daily music play limit has been exceeded.',false,409);
+            return ResponseHelper::sendResponse([], 'Your daily music play limit has been exceeded.', false, 409);
         }
 
         // 5. Log the music play
@@ -270,7 +270,7 @@ class MultimediaController extends Controller
             'music_id' => $id,
         ]);
 
-        return ResponseHelper::sendResponse([],'Music played successfully.');
+        return ResponseHelper::sendResponse([], 'Music played successfully.');
     }
 
     public function playVideo(Request $request, $id)
@@ -303,7 +303,7 @@ class MultimediaController extends Controller
         $videoCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'video_daily_videos');
         // 4. If not played and limit reached, reject
         if (!$alreadyPlayed && $todayPlayCount >= $videoCounnt) {
-                return ResponseHelper::sendResponse([],'Your daily video play limit has been exceeded.',false,409);
+            return ResponseHelper::sendResponse([], 'Your daily video play limit has been exceeded.', false, 409);
         }
 
         // 5. Log the video play
@@ -312,7 +312,7 @@ class MultimediaController extends Controller
             'video_id' => $id,
         ]);
 
-        return ResponseHelper::sendResponse([],'Video played successfully.');
+        return ResponseHelper::sendResponse([], 'Video played successfully.');
     }
 
     public function store_artist_song_views(Request $request, $id)
@@ -592,5 +592,16 @@ class MultimediaController extends Controller
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Playlist has been Updated Successfully!', false, 403);
         }
+    }
+
+    public function mediaTrimmer(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+
+        $filePath = Helpers::fileUpload($request->file, 'media');
+        $url = asset('storage/' . $filePath) . '?startTime=' . $request->startTime . '&endTime=' . $request->endTime;
+        return ResponseHelper::sendResponse($url, 'Url Generated!');
     }
 }

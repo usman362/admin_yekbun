@@ -110,7 +110,7 @@ Route::get('voting-public', [VotingController::class, 'votingPublic']);
 Route::get('/get-artists-public', [MultimediaController::class, 'getArtistsPublic']);
 Route::get('/get-all-songs-public', [MultimediaController::class, 'getAllSongsPublic']);
 Route::get('/get-all-videos-public', [MultimediaController::class, 'getAllClipsPublic']);
-
+Route::post('/media-trimmer', [MultimediaController::class, 'mediaTrimmer']);
 Route::middleware('jwt.custom')->group(function () {
 
     Route::post('/change-password', [AccountSettingController::class, 'change_password'])
