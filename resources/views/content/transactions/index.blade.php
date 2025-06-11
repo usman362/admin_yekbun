@@ -112,7 +112,7 @@
     </div>
     <div class="card mt-3">
         {{-- <h5 class="card-header">Table Basic</h5> --}}
-        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mt-2" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
                     type="button" role="tab" aria-controls="pills-home" aria-selected="true">Daily Income</button>
