@@ -108,7 +108,7 @@
     </div>
 @endif
 
-<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse" style="gap: 4px;">
+<div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse " style="gap: 4px;">
     <!-- Search Column -->
     @if (!isset($menuHorizontal))
     <div class="card mb-0 px-3 search-wrap d-flex justify-content-center align-items-center" style="height:54px; min-width: 200px;">
@@ -331,7 +331,7 @@
       <div class="card mb-0 d-flex justify-content-center mx-1" style="height:54px; min-width: 175px; flex: 0 0 {{ $colWidth }}%;">
 
 
-        <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0">
+        <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0 justify-content-between">
 
             <!-- Shortcuts -->
             <li class="nav-item dropdown-shortcuts dropdown">
