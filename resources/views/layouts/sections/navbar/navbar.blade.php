@@ -385,7 +385,7 @@
                                     style="width: 20px; height: 20px;">
 
                             </span>
-                            <span class="text-body">Add Voting</span>
+                            <span class="text-body">Add Survey</span>
                         </a>
 
                         <!-- Shortcut Item -->
