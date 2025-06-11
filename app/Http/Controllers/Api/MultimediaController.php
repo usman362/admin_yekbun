@@ -605,15 +605,15 @@ class MultimediaController extends Controller
         ]);
 
         // Upload the original file
-        $originalPath = $request->file('file')->store('media/originals');
+        $originalPath = $request->file('file')->store('public/media/originals');
 
         // Get full paths
         $storagePath = storage_path('app/' . $originalPath);
         $trimmedName = 'trimmed_' . Str::random(10) . '.' . $request->file('file')->getClientOriginalExtension();
-        $trimmedPath = storage_path('app/media/trimmed/' . $trimmedName);
+        $trimmedPath = storage_path('app/public/media/trimmed/' . $trimmedName);
 
         // Ensure trimmed directory exists
-        Storage::makeDirectory('media/trimmed');
+        Storage::makeDirectory('public/media/trimmed');
 
         // Run FFmpeg trim command
         $start = escapeshellarg($request->startTime);
