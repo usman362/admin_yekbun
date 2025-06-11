@@ -9,7 +9,7 @@
                 <div class="flex-fluid d-flex justify-content-end align-items-center">Total</div>
             </div>
             <div class="d-flex fw-bold" style="color: #333">
-                <div>Reviews qualification</div>
+                <div>Reviews qualification asim</div>
                 <div class="flex-fluid d-flex justify-content-end align-items-center total-reviews">{{ $total_reviews }}
                 </div>
             </div>
