@@ -103,7 +103,7 @@
     </style>
 <div class="vote-detail-modal">
      
-      <div class="modal fade" id="exampleModal" tabindex="-1">
+      <div class="modal fade" id="statisticVotingModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content p-3">
                 <div class="modal-header flex-column align-items-start border-bottom-0 pb-0">
