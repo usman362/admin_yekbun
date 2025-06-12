@@ -1,4 +1,4 @@
-
+{{-- 
 <style>
         .modal-content {
             border-radius: 15px;
@@ -282,4 +282,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
