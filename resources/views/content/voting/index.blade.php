@@ -408,7 +408,7 @@
                             <div class="d-flex">
                                 <img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="35">
                                 <div class="detail-progress mx-2">
-                                    <span><img src="{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
