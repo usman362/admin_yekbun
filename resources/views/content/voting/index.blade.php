@@ -357,7 +357,7 @@
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="images/img-05.svg" class="d-flex justify-content-center position-absolute"
+                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" class="d-flex justify-content-center position-absolute"
                                         width="50" style="transform: translate(3px, -55px);">
                                 </div>
                                 <div class="trophy-count">5,258</div>
@@ -369,7 +369,7 @@
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="images/img-05.svg" class="d-flex justify-content-center position-absolute"
+                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" class="d-flex justify-content-center position-absolute"
                                         width="50" style="transform: translate(3px, -55px);">
                                 </div>
                                 <div class="trophy-count">15,258</div>
@@ -379,9 +379,9 @@
                         <!-- Medal Bars -->
                         <div class="mini-stat-box">
                             <div class="d-flex">
-                                <img src="images/img-03.svg" width="35">
+                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="35">
                                 <div class="detail-progress mx-2">
-                                    <span><img src="images/img-02.svg" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -389,14 +389,14 @@
                                 </div>
                             </div>
                             <div class="detail-progress ">
-                                    <span><img src="images/img-02.svg" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             <div class="detail-progress">
-                                    <span><img src="images/img-02.svg" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 90%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
