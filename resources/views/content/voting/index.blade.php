@@ -551,9 +551,9 @@
         @include('content.include.voting.editForm')
     </x-modal>
 
-    {{-- Stastics Model Form --}}
+    {{-- Stastics Model Form
     <x-modal id="statisticVotingModal" title="Vote" :showFooter="false" :showHeader="false" size="md">
-    </x-modal>
+    </x-modal> --}}
 
     {{-- <script>
         (function() {
