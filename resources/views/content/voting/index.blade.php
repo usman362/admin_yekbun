@@ -345,7 +345,7 @@
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="images/img-04.svg" class="d-flex justify-content-center position-absolute"
+                                    <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" class="d-flex justify-content-center position-absolute"
                                         width="50" style="transform: translate(3px, -55px);">
                                 </div>
 
@@ -379,7 +379,7 @@
                         <!-- Medal Bars -->
                         <div class="mini-stat-box">
                             <div class="d-flex">
-                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="35">
+                                <img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="35">
                                 <div class="detail-progress mx-2">
                                     <span><img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
