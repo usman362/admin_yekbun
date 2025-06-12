@@ -307,7 +307,7 @@
                                     </form>
 
                                     <span>
-                                        <button class="btn btn-sm btn-icon btn-statistic-vote" data-bs-toggle="modal" data-bs-target="#statisticVotingModal"
+                                        <button class="btn btn-sm btn-icon btn-statistic-vote" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                             data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                             data-vote-id="{{ $vote->id }}"
                                             data-vote-name="{{ 'Vote for ' . $vote->name }}"
@@ -328,7 +328,7 @@
         </div>
     </div>
     <!--/ Basic Bootstrap Table -->
-  <div class="modal fade" id="statisticVotingModal" tabindex="-1">
+  <div class="modal fade" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content p-3">
                 <div class="modal-header flex-column align-items-start border-bottom-0 pb-0">
@@ -551,20 +551,7 @@
         @include('content.include.voting.editForm')
     </x-modal>
 
-    {{-- Stastics Model Form
-    <x-modal id="statisticVotingModal" title="Vote" :showFooter="false" :showHeader="false" size="md">
-    </x-modal> --}}
-
-    {{-- <script>
-        (function() {
-            ClassicEditor
-                .create(document.querySelector('#inputDescription'))
-                .catch(error => {
-                    console.error(error);
-                });
-
-        }());
-    </script> --}}
+   
 
 @endsection
 
