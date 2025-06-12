@@ -381,7 +381,7 @@
                             <div class="d-flex">
                                 <img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="35">
                                 <div class="detail-progress mx-2">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -389,14 +389,14 @@
                                 </div>
                             </div>
                             <div class="detail-progress ">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             <div class="detail-progress">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 90%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -406,9 +406,9 @@
                         </div>
                         <div class="mini-stat-box">
                             <div class="d-flex">
-                                <img src="images/img-01.svg" width="35">
+                                <img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="35">
                                 <div class="detail-progress mx-2">
-                                    <span><img src="images/img-02.svg" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -416,14 +416,14 @@
                                 </div>
                             </div>
                             <div class="detail-progress">
-                                    <span><img src="images/img-02.svg" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             <div class="detail-progress">
-                                    <span><img src="images/img-02.svg" width="18" alt="">&nbsp; 1258</span>
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="18" alt="">&nbsp; 1258</span>
                                     <div class="progress mt-1" style="width: 60px; height: 8px;">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 90%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
