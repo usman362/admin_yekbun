@@ -704,71 +704,7 @@ body.modal-open {
         }
     </style>
 @endsection
-
-@section('vendor-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/tagify/tagify.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/dropzone/dropzone.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/friendkit/css/app.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/friendkit/css/core.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
-@endsection
-
-@section('vendor-script')
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('assets/js/wizard-ex-property-listing.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <!-- Concatenated js plugins and jQuery -->
-    <script src="{{ asset('assets/friendkit/js/app.js') }}"></script>
-
-    <!-- Core js -->
-    <script src="{{ asset('assets/friendkit/js/global.js') }}"></script>
-
-    <!-- Navigation options js -->
-    <script src="{{ asset('assets/friendkit/js/navbar-v1.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/navbar-v2.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/navbar-mobile.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/navbar-options.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/sidebar-v1.js') }}"></script>
-
-    <!-- Core instance js -->
-    <script src="{{ asset('assets/friendkit/js/main.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/chat.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/touch.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/tour.js') }}"></script>
-
-    <!-- Components js -->
-    <script src="{{ asset('assets/friendkit/js/explorer.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/widgets.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/modal-uploader.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/popovers-users.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/popovers-pages.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/lightbox.js') }}"></script>
-
-    <!-- Landing page js -->
-
-    <!-- Signup page js -->
-
-    <!-- Feed pages js -->
-    <script src="{{ asset('assets/friendkit/js/feed.js') }}"></script>
-
-    <script src="{{ asset('assets/friendkit/js/webcam.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/compose.js') }}"></script>
-    <script src="{{ asset('assets/friendkit/js/autocompletes.js') }}"></script>
-    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
-    <script src="https://unpkg.com/wavesurfer.js"></script>
-
-@endsection
-
+ 
 @section('content')
 
     <div class="content-wrapper">
