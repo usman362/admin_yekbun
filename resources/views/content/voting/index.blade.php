@@ -475,11 +475,11 @@
                                     <div class="d-flex">
                                         <img
                                             src="{{ asset('assets/svg/svg-dialog/male.svg') }}"
-                                            width="35">
+                                            width="35" style="height: 30px">
                                         <div class="detail-progress mx-2">
                                             <span><img
                                                     src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
-                                                    width="18" alt>&nbsp;
+                                                    width="18" alt >&nbsp;
                                                 1258</span>
                                             <div class="progress mt-1"
                                                 style="width: 60px; height: 8px; background: #1BC4694D;
@@ -531,8 +531,8 @@
                                 <div class="mini-stat-box mt-3">
                                     <div class="d-flex">
                                         <img
-                                            src="{{ asset('assets/svg/svg-dialog/male.svg') }}"
-                                            width="35">
+                                            src="{{ asset('assets/svg/svg-dialog/female.svg') }}"
+                                            width="35" style="height: 30px">
                                         <div class="detail-progress mx-2">
                                             <span><img
                                                     src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
