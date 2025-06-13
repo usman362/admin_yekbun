@@ -26,7 +26,7 @@
         }
         /* Initial state for the backdrop (transparent) */
 .modal-backdrop-custom {
-    background-color: rgba(70, 61, 61, 0) !important;  /* Start with no background (transparent) */
+    background-color: rgba(8, 6, 6, 0) !important;  /* Start with no background (transparent) */
     z-index: 1040 !important;  /* Ensure it's above other elements */
     transition: background-color 0.3s ease-out; /* Smooth transition for background color */
 }
