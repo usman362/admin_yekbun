@@ -1,4 +1,4 @@
-can u plese check that is style is repeate like any attirbute vlaue is repaeate?@extends('layouts/layoutMaster')
+@extends('layouts/layoutMaster')
 
 @section('title', 'User Feeds')
 
