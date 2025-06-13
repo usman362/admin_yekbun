@@ -17,6 +17,20 @@
             box-shadow: none !important;
             background-image: none !important;
         }
+        /* Style for the background overlay */
+.modal-backdrop-custom {
+    background-color: rgba(0, 0, 0, 0.7) !important;  /* Black background with some transparency */
+    z-index: 1040 !important;  /* Ensure it's above other elements */
+}
+
+body.modal-open {
+    overflow: hidden;  /* Prevent background scrolling */
+}
+
+body.modal-open .modal-backdrop {
+    display: none;  /* Hide default backdrop */
+}
+
 
         .dropdown.is-right .dropdown-menu {
             left: 56px;
@@ -1647,6 +1661,18 @@
                 });
             }
         </script>
+        <script>
+    // jQuery to add custom class on modal open and remove on close
+    $('#editFeedModal').on('show.bs.modal', function () {
+        $('body').addClass('modal-open');  // Add the modal-open class
+        $('.modal-backdrop').addClass('modal-backdrop-custom');  // Add the custom backdrop
+    });
+
+    $('#editFeedModal').on('hide.bs.modal', function () {
+        $('body').removeClass('modal-open');  // Remove the modal-open class
+        $('.modal-backdrop').removeClass('modal-backdrop-custom');  // Remove the custom backdrop
+    });
+</script>
         <script>
             function drpzone_init() {
                 dropZoneInitFunctions.forEach(callback => callback());
