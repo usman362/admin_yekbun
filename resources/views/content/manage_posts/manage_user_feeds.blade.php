@@ -25,16 +25,18 @@
             top: -22px;
         }
         /* Initial state for the backdrop (transparent) */
+ /* Initial state for the backdrop (transparent) */
 .modal-backdrop-custom {
-    background-color:rgb(10, 10, 10) !important; /* Start with no background (transparent) */
+    background-color: rgba(0, 0, 0, 0.8) !important; /* 80% black with 80% opacity */
     z-index: 1040 !important;  /* Ensure it's above other elements */
     transition: background-color 0.3s ease-out; /* Smooth transition for background color */
 }
 
-/* Final state of the backdrop when modal is active (dark gray) */
+/* Final state of the backdrop when modal is active (80% black with high opacity) */
 .modal-open .modal-backdrop-custom {
-    background-color: rgb(8, 8, 8) !important;  /* Dark gray with high opacity */
+    background-color: rgba(0, 0, 0, 0.8) !important; /* 80% black with full opacity */
 }
+
 
 body.modal-open {
     overflow: hidden;  /* Prevent background scrolling */
