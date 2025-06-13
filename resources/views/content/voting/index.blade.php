@@ -428,7 +428,8 @@
                                                 src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
                                                 class="d-flex justify-content-center position-absolute"
                                                 width="50"
-                                                style="transform: translate(3px, -55px);">
+                                                
+                                                style="transform: translate(3px, -55px);height: 57px;">
                                         </div>
 
                                         <div class="trophy-count">10,258</div>
@@ -446,7 +447,7 @@
                                                 src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
                                                 class="d-flex justify-content-center position-absolute"
                                                 width="50"
-                                                style="transform: translate(3px, -55px);">
+                                                style="transform: translate(3px, -55px);height: 57px;">
                                         </div>
                                         <div class="trophy-count">5,258</div>
 
@@ -464,7 +465,7 @@
                                                 src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
                                                 class="d-flex justify-content-center position-absolute"
                                                 width="50"
-                                                style="transform: translate(3px, -55px);">
+                                                style="transform: translate(3px, -55px);height: 57px;">
                                         </div>
                                         <div class="trophy-count">15,258</div>
                                     </div>
