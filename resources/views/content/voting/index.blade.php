@@ -31,25 +31,36 @@
     <script>
         const dropZoneInitFunctions = [];
     </script>
-    <style>
-          <style>
+   
+           <style>
+        @import url('https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
         .modal-content {
             border-radius: 15px;
             font-family: 'Segoe UI', sans-serif;
         }
 
         .bg-tropy-column {
-            border: 1px dashed #d1d1d1;
+            /* border: 1px dashed #d1d1d1; */
             border-radius: 12px;
             background: #f9f9f9;
         }
-
+.gender-status{
+     border-radius: 15px;
+     padding: 15px ;
+           background: #F2F2F2;
+}
         .trophy-count {
-            font-weight: 700;
-            font-size: 18px;
+            font-family: "Genos", sans-serif;
+            font-weight: 600;
+            font-size: 22px;
             color: #333;
         }
-
+.detail-progress span{
+            font-family: "Genos", sans-serif;
+            font-weight: 500;  
+        }
         .trophy-card {
             flex: 1;
             text-align: center;
@@ -68,10 +79,10 @@
         }
 
         .age-bar {
-            height: 8px;
+            height:12px;
             border-radius: 5px;
             margin-bottom: 5px;
-            background-color: #eee;
+            background-color: #fff;
             position: relative;
         }
 
@@ -106,34 +117,95 @@
             display: flex;
             justify-content: space-between;
             font-weight: 600;
+
         }
+       
 
         .province-1 {
-            background: #ec1a82;
+            background: #F72585;
             width: 90%;
+                border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
         }
 
         .province-2 {
-            background: #a032ff;
+            background: #B5179E;
             border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
             border-top-right-radius: 0px !important;
             width: 85%;
         }
 
         .province-3 {
-            background: #fc6bbc;
+            background: #7209B7;
             border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
             border-top-right-radius: 0px !important;
             width: 80%;
         }
 
         .province-4 {
-            background: #4f2bc8;
+            background: #560BAD;
             border-top-left-radius: 0px !important;
+            /* border-bottom-left-radius: 0px !important; */
             border-top-right-radius: 0px !important;
             width: 70%;
         }
-    </style>
+
+        .bg-trophy-loader{
+            background: #F2F2F2;
+            padding: 12px;
+            border-radius: 15px;
+        }
+        
+        .text-states{
+            color: #9291A5;
+            font-family: 'Poppins';
+            font-weight: 500 !important;
+        }
+        .text-gender{
+             font-family: 'Poppins';
+            font-weight: 600 !important;
+        }
+        .text-male{
+            font-family: 'Poppins';
+            font-weight: 500 !important;
+        }
+        .text-age{
+             font-family: "Inter", sans-serif;
+             font-weight: 500;
+             color: #615E83;
+             font-size: 14px;
+        }
+        .text-province{
+           font-family: "Genos", sans-serif;
+            font-weight: 500 !important;  
+            color: #000;   
+        }
+         .province-item span{
+              font-family: "Genos", sans-serif;
+            font-weight: 500 !important; 
+            font-size: 20px;
+        }
+        .bg-success-01{
+            background: #1BC469;
+        }
+        .bg-warning-01{
+            background: #F1C21B;
+        }
+        .bg-info-01{
+            background: #1CA2ED;
+        }
+        .text-vote{
+            font-family: "Genos", sans-serif;
+            font-weight: 500 !important; 
+            color: #000000;  
+        }
+        .para-vote{
+            font-family: "Genos", sans-serif;
+            font-weight: 400 !important; 
+            color: #000000;  
+        }
     </style>
     <div class="row g-4 mb-4">
         <div class="col-sm-6  col-xl-6">
@@ -326,187 +398,293 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <!--/ Basic Bootstrap Table -->
-  <div class="modal fade" id="exampleModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content p-3">
-                <div class="modal-header flex-column align-items-start border-bottom-0 pb-0">
-                    <h5 class="modal-title">Vote Title</h5>
-                    <p class="text-muted mb-0">Category Name</p>
-                </div>
-                <div class="modal-body pt-0">
-                    <div class="bg-tropy-column p-3">
-                        <!-- Top Trophy Section -->
-                        <div class="d-flex justify-content-between mb-3">
-                            <div class="trophy-card">
-                                <div class="spinner-border text-success" style="width: 110px; height: 110px;"
-                                    role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" class="d-flex justify-content-center position-absolute"
-                                        width="50" style="transform: translate(3px, -55px);">
-                                </div>
+    </div> 
+     <div class="modal fade" id="exampleModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content p-0">
+                    <div
+                        class="modal-header flex-column align-items-start border-bottom-0 p-3 pt-1"
+                        style="background: #0000000D;
+">
+                        <h4 class="modal-title text-muted text-vote mb-0">Vote
+                            Title</h4>
+                        <p class="text-muted mb-0 para-vote">Category Name</p>
+                    </div>
+                    <div class="modal-body p-0 pt-0">
+                        <div class="bg-tropy-column p-3">
+                            <!-- Top Trophy Section -->
+                            <div class="bg-trophy-loader">
+                                <div class="d-flex justify-content-between">
+                                    <div class="trophy-card">
+                                        <div class="spinner-border text-success"
+                                            style="width: 110px; height: 110px;"
+                                            role="status">
+                                            <span
+                                                class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div
+                                            class="d-flex justify-content-center align-items-center">
+                                            <img
+                                                src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
+                                                class="d-flex justify-content-center position-absolute"
+                                                width="50"
+                                                style="transform: translate(3px, -55px);">
+                                        </div>
 
-                                <div class="trophy-count">10,258</div>
-                            </div>
-                            <div class="trophy-card">
-                                <div class="spinner-border text-warning" style="width: 110px; height: 110px;"
-                                    role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" class="d-flex justify-content-center position-absolute"
-                                        width="50" style="transform: translate(3px, -55px);">
-                                </div>
-                                <div class="trophy-count">5,258</div>
+                                        <div class="trophy-count">10,258</div>
+                                    </div>
+                                    <div class="trophy-card">
+                                        <div class="spinner-border text-warning"
+                                            style="width: 110px; height: 110px;"
+                                            role="status">
+                                            <span
+                                                class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div
+                                            class="d-flex justify-content-center align-items-center">
+                                            <img
+                                                src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
+                                                class="d-flex justify-content-center position-absolute"
+                                                width="50"
+                                                style="transform: translate(3px, -55px);">
+                                        </div>
+                                        <div class="trophy-count">5,258</div>
 
-                            </div>
-                            <div class="trophy-card">
-                                <div class="spinner-border text-info" style="width: 110px; height: 110px;"
-                                    role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" class="d-flex justify-content-center position-absolute"
-                                        width="50" style="transform: translate(3px, -55px);">
-                                </div>
-                                <div class="trophy-count">15,258</div>
-                            </div>
-                        </div>
-
-                        <!-- Medal Bars -->
-                        <div class="mini-stat-box">
-                            <div class="d-flex">
-                                <img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="35">
-                                <div class="detail-progress mx-2">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="18" alt="">&nbsp; 1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="trophy-card">
+                                        <div class="spinner-border text-info"
+                                            style="width: 110px; height: 110px;"
+                                            role="status">
+                                            <span
+                                                class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div
+                                            class="d-flex justify-content-center align-items-center">
+                                            <img
+                                                src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                                class="d-flex justify-content-center position-absolute"
+                                                width="50"
+                                                style="transform: translate(3px, -55px);">
+                                        </div>
+                                        <div class="trophy-count">15,258</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="detail-progress ">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18" alt="">&nbsp; 1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px;">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- Medal Bars -->
+                                <div class="mini-stat-box mt-3">
+                                    <div class="d-flex">
+                                        <img
+                                            src="{{ asset('assets/svg/svg-dialog/male.svg') }}"
+                                            width="35">
+                                        <div class="detail-progress mx-2">
+                                            <span><img
+                                                    src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
+                                                    width="18" alt>&nbsp;
+                                                1258</span>
+                                            <div class="progress mt-1"
+                                                style="width: 60px; height: 8px; background: #1BC4694D;
+">
+                                                <div
+                                                    class="progress-bar bg-success-01"
+                                                    role="progressbar"
+                                                    style="width: 50%"
+                                                    aria-valuenow="25"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="detail-progress ">
+                                        <span><img
+                                                src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                                width="18" alt>&nbsp;
+                                            1258</span>
+                                        <div class="progress mt-1"
+                                            style="width: 60px; height: 8px; background: #F9E59E80;">
+                                            <div
+                                                class="progress-bar bg-warning-01"
+                                                role="progressbar"
+                                                style="width: 80%"
+                                                aria-valuenow="25"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-progress">
+                                        <span><img
+                                                src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
+                                                width="18" alt>&nbsp;
+                                            1258</span>
+                                        <div class="progress mt-1"
+                                            style="width: 60px; height: 8px; background: #1CA2ED4D;
+">
+                                            <div class="progress-bar bg-info-01"
+                                                role="progressbar"
+                                                style="width: 80%"
+                                                aria-valuenow="25"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            <div class="detail-progress">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18" alt="">&nbsp; 1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px;">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 90%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="mini-stat-box mt-3">
+                                    <div class="d-flex">
+                                        <img
+                                            src="{{ asset('assets/svg/svg-dialog/male.svg') }}"
+                                            width="35">
+                                        <div class="detail-progress mx-2">
+                                            <span><img
+                                                    src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
+                                                    width="18" alt>&nbsp;
+                                                1258</span>
+                                            <div class="progress mt-1"
+                                                style="width: 60px; height: 8px; background: #1BC4694D;
+">
+                                                <div
+                                                    class="progress-bar bg-success-01"
+                                                    role="progressbar"
+                                                    style="width: 50%"
+                                                    aria-valuenow="25"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="detail-progress ">
+                                        <span><img
+                                                src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                                width="18" alt>&nbsp;
+                                            1258</span>
+                                        <div class="progress mt-1"
+                                            style="width: 60px; height: 8px; background: #F9E59E80;">
+                                            <div
+                                                class="progress-bar bg-warning-01"
+                                                role="progressbar"
+                                                style="width: 80%"
+                                                aria-valuenow="25"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-progress">
+                                        <span><img
+                                                src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
+                                                width="18" alt>&nbsp;
+                                            1258</span>
+                                        <div class="progress mt-1"
+                                            style="width: 60px; height: 8px; background: #1CA2ED4D;
+">
+                                            <div class="progress-bar bg-info-01"
+                                                role="progressbar"
+                                                style="width: 80%"
+                                                aria-valuenow="25"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                        </div>
-                        <div class="mini-stat-box">
-                            <div class="d-flex">
-                                <img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="35">
-                                <div class="detail-progress mx-2">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18" alt="">&nbsp; 1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <!-- Age and Gender Stats -->
+                            <div class="gender-status mt-3">
+                                <h6
+                                    class="text-muted text-states fw-bold">Statistics</h6>
+                                <div
+                                    class="d-flex justify-content-between align-items-center">
+                                    <p class="fw-bold text-gender">Age and
+                                        gender</p>
+                                    <div
+                                        class="d-flex justify-content-end mb-2">
+                                        <small class="me-3 text-male"><span
+                                                class="me-1"
+                                                style="color:#3d2dd6; font-size: 20px;">●</span>Male</small>
+                                        <small class="text-male"><span
+                                                class="me-1 "
+                                                style="color:#cc8ff5;font-size: 20px;">●</span>Female</small>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="detail-progress">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18" alt="">&nbsp; 1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px;">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- Bar 1 -->
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 text-age"
+                                        style="width: 50px;">18–24</span>
+                                    <div class="flex-grow-1 age-bar mb-0">
+                                        <div class="male"
+                                            style="width: 25%"></div>
+                                        <div class="female"
+                                            style="width: 30%"></div>
                                     </div>
+                                    <span class="ms-2">12.7%</span>
                                 </div>
-                            <div class="detail-progress">
-                                    <span><img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="18" alt="">&nbsp; 1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px;">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 90%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- Repeat for more bars -->
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 text-age"
+                                        style="width: 50px;">18–24</span>
+                                    <div class="flex-grow-1 age-bar mb-0">
+                                        <div class="male"
+                                            style="width: 60%"></div>
+                                        <div class="female"
+                                            style="width: 60%"></div>
                                     </div>
+                                    <span class="ms-2">12.7%</span>
                                 </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 text-age"
+                                        style="width: 50px;">18–24</span>
+                                    <div class="flex-grow-1 age-bar mb-0">
+                                        <div class="male"
+                                            style="width: 35%"></div>
+                                        <div class="female"
+                                            style="width: 35%"></div>
+                                    </div>
+                                    <span class="ms-2">12.7%</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 text-age"
+                                        style="width: 50px;">18–24</span>
+                                    <div class="flex-grow-1 age-bar mb-0">
+                                        <div class="male"
+                                            style="width: 20%"></div>
+                                        <div class="female"
+                                            style="width: 25%"></div>
+                                    </div>
+                                    <span class="ms-2">12.7%</span>
+                                </div>
+                            </div>
 
-                        </div>
-                        
-
-                       
-
-                        <!-- Age and Gender Stats -->
-                        <div>
-                            <h6 class="text-muted fw-bold">Statistics</h6>
-                            <p class="fw-bold">Age and gender</p>
-                            <div class="d-flex justify-content-end mb-2">
-                                <small class="me-3"><span class="me-1" style="color:#3d2dd6">●</span>Male</small>
-                                <small><span class="me-1" style="color:#cc8ff5">●</span>Female</small>
-                            </div>
-                            <!-- Bar 1 -->
-                            <div class="d-flex align-items-center mb-2">
-                                <span class="me-2" style="width: 50px;">18–24</span>
-                                <div class="flex-grow-1 age-bar">
-                                    <div class="male" style="width: 40%"></div>
-                                    <div class="female" style="width: 60%"></div>
+                            <!-- Province List -->
+                            <div class="gender-status mt-3">
+                                <h6 class="fw-bold text-province">List of
+                                    Provinces</h6>
+                                <div class="province-item province-1">
+                                    <span>Kurdistan – Rojava</span>
+                                    <span>1,200</span>
                                 </div>
-                                <span class="ms-2">12.7%</span>
-                            </div>
-                            <!-- Repeat for more bars -->
-                            <div class="d-flex align-items-center mb-2">
-                                <span class="me-2" style="width: 50px;">18–24</span>
-                                <div class="flex-grow-1 age-bar">
-                                    <div class="male" style="width: 30%"></div>
-                                    <div class="female" style="width: 70%"></div>
+                                <div class="province-item province-2">
+                                    <span>Kurdistan – Bakûr</span>
+                                    <span>1,200</span>
                                 </div>
-                                <span class="ms-2">12.7%</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <span class="me-2" style="width: 50px;">18–24</span>
-                                <div class="flex-grow-1 age-bar">
-                                    <div class="male" style="width: 45%"></div>
-                                    <div class="female" style="width: 55%"></div>
+                                <div class="province-item province-3">
+                                    <span>Kurdistan – Rojhilat</span>
+                                    <span>1,200</span>
                                 </div>
-                                <span class="ms-2">12.7%</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <span class="me-2" style="width: 50px;">18–24</span>
-                                <div class="flex-grow-1 age-bar">
-                                    <div class="male" style="width: 60%"></div>
-                                    <div class="female" style="width: 40%"></div>
+                                <div class="province-item province-4">
+                                    <span>Kurdistan – Başûr</span>
+                                    <span>950</span>
                                 </div>
-                                <span class="ms-2">12.7%</span>
-                            </div>
-                        </div>
-
-                        <!-- Province List -->
-                        <div class="mt-3">
-                            <h6 class="fw-bold">List of Provinces</h6>
-                            <div class="province-item province-1">
-                                <span>Kurdistan – Rojava</span>
-                                <span>1,200</span>
-                            </div>
-                            <div class="province-item province-2">
-                                <span>Kurdistan – Bakûr</span>
-                                <span>1,200</span>
-                            </div>
-                            <div class="province-item province-3">
-                                <span>Kurdistan – Rojhilat</span>
-                                <span>1,200</span>
-                            </div>
-                            <div class="province-item province-4">
-                                <span>Kurdistan – Başûr</span>
-                                <span>950</span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer justify-content-center border-top-0">
-                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                    <div
+                        class="modal-footer justify-content-center border-top-0 p-0">
+                        <button type="button"
+                            class="btn btn-label-secondary p-0"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <div class="modal fade deleted-modal" id="exampleModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" style="padding-right: 17px;" aria-modal="true">
         <div class="modal-dialog" role="document">
