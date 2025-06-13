@@ -24,11 +24,16 @@
             padding: 0;
             top: -22px;
         }
-        /* Solid black background with full opacity */
+        /* Initial state for the backdrop (transparent) */
 .modal-backdrop-custom {
-    background-color: #726e6e !important;  /* Full black color */
+    background-color: rgba(50, 50, 50, 0) !important;  /* Start with no background (transparent) */
     z-index: 1040 !important;  /* Ensure it's above other elements */
-    opacity: 1 !important;  /* Make sure it's solid black */
+    transition: background-color 0.3s ease-out; /* Smooth transition for background color */
+}
+
+/* Final state of the backdrop when modal is active (dark gray) */
+.modal-open .modal-backdrop-custom {
+    background-color: rgba(50, 50, 50, 0.9) !important;  /* Dark gray with high opacity */
 }
 
 body.modal-open {
@@ -1592,7 +1597,7 @@ body.modal-open {
             $('#delete_form').attr('action', link);
         }
     </script>
-<script>
+     <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.open-edit-modal').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -1610,7 +1615,7 @@ body.modal-open {
                     // Show modal
                     $('#editFeedModal').modal('show');
                     
-                    // Immediately apply black background with full opacity
+                    // Apply the gray background with fade-in effect
                     $('.modal-backdrop').addClass('modal-backdrop-custom');
                     $('body').addClass('modal-open');
                 } else {
@@ -1621,7 +1626,7 @@ body.modal-open {
 
         // Remove custom backdrop when modal closes
         $('#editFeedModal').on('hide.bs.modal', function () {
-            // Remove the black backdrop instantly when modal closes
+            // Remove the gray backdrop instantly when modal closes
             $('.modal-backdrop').removeClass('modal-backdrop-custom');
             $('body').removeClass('modal-open');
         });
