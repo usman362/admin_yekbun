@@ -26,7 +26,7 @@
         }
         /* Fully black background with no transparency */
 .modal-backdrop-custom {
-    background-color: rgba(0, 0, 0, 1) !important;  /* Fully black with no transparency */
+    background-color: #000 !important;  /* Solid black with no transparency */
     z-index: 1040 !important;  /* Ensure it's above other elements */
 }
 
@@ -1591,29 +1591,41 @@ body.modal-open {
             $('#delete_form').attr('action', link);
         }
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const feedId = this.dataset.id;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const feedId = this.dataset.id;
 
-                    // Fix: Correct ID selector
-                    const originalCard = document.querySelector('#feed-card-' + feedId);
+                const originalCard = document.querySelector('#feed-card-' + feedId);
 
-                    if (originalCard) {
-                        const modalBody = document.getElementById(
-                            'editFeedContent'); // Fix: Correct modal body ID
-                        modalBody.innerHTML = ''; // Clear old content
-                        modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
-                        const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
-                        modal.show();
-                    } else {
-                        alert("Feed card not found.");
-                    }
-                });
+                if (originalCard) {
+                    const modalBody = document.getElementById('editFeedContent');
+                    modalBody.innerHTML = '';  // Clear old content
+                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+
+                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
+                    
+                    // Show modal with black background instantly
+                    $('#editFeedModal').modal('show');
+                    
+                    // Apply solid black backdrop immediately
+                    $('.modal-backdrop').addClass('modal-backdrop-custom');
+                    $('body').addClass('modal-open');
+                } else {
+                    alert("Feed card not found.");
+                }
             });
         });
-    </script>
+
+        // Optionally, handle the closing of the modal
+        $('#editFeedModal').on('hide.bs.modal', function () {
+            // Remove the backdrop class instantly when modal closes
+            $('.modal-backdrop').removeClass('modal-backdrop-custom');
+            $('body').removeClass('modal-open');
+        });
+    });
+</script>
 
 
 
@@ -1662,42 +1674,6 @@ body.modal-open {
                 });
             }
         </script>
-        <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const feedId = this.dataset.id;
-
-                // Fix: Correct ID selector
-                const originalCard = document.querySelector('#feed-card-' + feedId);
-
-                if (originalCard) {
-                    const modalBody = document.getElementById('editFeedContent'); // Fix: Correct modal body ID
-                    modalBody.innerHTML = ''; // Clear old content
-                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
-                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
-                    modal.show();
-                } else {
-                    alert("Feed card not found.");
-                }
-            });
-        });
-
-        // jQuery to add custom class on modal open and remove on close
-        $('#editFeedModal').on('show.bs.modal', function () {
-            // Adding the custom background to the body and modal backdrop
-            $('body').addClass('modal-open');  // Disable background scroll
-            $('.modal-backdrop').addClass('modal-backdrop-custom');  // Darken the backdrop
-        });
-
-        $('#editFeedModal').on('hide.bs.modal', function () {
-            // Removing the custom background and restoring the normal backdrop
-            $('body').removeClass('modal-open');  // Enable background scroll again
-            $('.modal-backdrop').removeClass('modal-backdrop-custom');  // Remove custom backdrop
-        });
-    });
-</script>
-
         <script>
             function drpzone_init() {
                 dropZoneInitFunctions.forEach(callback => callback());
