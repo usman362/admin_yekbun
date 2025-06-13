@@ -26,14 +26,14 @@
         }
         /* Initial state for the backdrop (transparent) */
 .modal-backdrop-custom {
-    background-color: rgba(49, 45, 45, 0) !important;  /* Start with no background (transparent) */
+    background-color: rgba(241, 20, 20, 0) !important;  /* Start with no background (transparent) */
     z-index: 1040 !important;  /* Ensure it's above other elements */
     transition: background-color 0.3s ease-out; /* Smooth transition for background color */
 }
 
 /* Final state of the backdrop when modal is active (dark gray) */
 .modal-open .modal-backdrop-custom {
-    background-color: rgba(19, 13, 13, 0.9) !important;  /* Dark gray with high opacity */
+    background-color: rgba(212, 21, 21, 0.9) !important;  /* Dark gray with high opacity */
 }
 
 body.modal-open {
