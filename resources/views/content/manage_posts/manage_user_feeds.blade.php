@@ -640,12 +640,7 @@ body.modal-open {
                                                             <span style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Report Info Section -->
-                                        <div style="background-color: pink; border-radius:6px" class="p-1">
+                                                     <div style="background-color: pink; border-radius:6px" class="p-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex align-items-center">
                                                     <button class="btn btn-white p-3">ID :
@@ -660,6 +655,12 @@ body.modal-open {
                                                 Reason: {{ $report->report_type }}
                                             </p>
                                         </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Report Info Section -->
+                                       
                                     </div>
                                 </div>
                             @endif
