@@ -24,10 +24,11 @@
             padding: 0;
             top: -22px;
         }
-        /* Fully black background with no transparency */
+        /* Solid black background with full opacity */
 .modal-backdrop-custom {
-    background-color: #000 !important;  /* Solid black with no transparency */
+    background-color: #000 !important;  /* Full black color */
     z-index: 1040 !important;  /* Ensure it's above other elements */
+    opacity: 1 !important;  /* Make sure it's solid black */
 }
 
 body.modal-open {
@@ -1606,10 +1607,10 @@ body.modal-open {
 
                     const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
                     
-                    // Show modal with black background instantly
+                    // Show modal
                     $('#editFeedModal').modal('show');
                     
-                    // Apply solid black backdrop immediately
+                    // Immediately apply black background with full opacity
                     $('.modal-backdrop').addClass('modal-backdrop-custom');
                     $('body').addClass('modal-open');
                 } else {
@@ -1618,14 +1619,15 @@ body.modal-open {
             });
         });
 
-        // Optionally, handle the closing of the modal
+        // Remove custom backdrop when modal closes
         $('#editFeedModal').on('hide.bs.modal', function () {
-            // Remove the backdrop class instantly when modal closes
+            // Remove the black backdrop instantly when modal closes
             $('.modal-backdrop').removeClass('modal-backdrop-custom');
             $('body').removeClass('modal-open');
         });
     });
 </script>
+
 
 
 
