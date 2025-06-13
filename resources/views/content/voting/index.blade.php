@@ -678,9 +678,7 @@
                     </div>
                     <div
                         class="modal-footer justify-content-center border-top-0 p-0">
-                        <button type="button"
-                            class="btn btn-label-secondary p-0"
-                            data-bs-dismiss="modal">Close</button>
+                       <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
