@@ -26,7 +26,7 @@
         }
         /* Solid black background with full opacity */
 .modal-backdrop-custom {
-    background-color: #000 !important;  /* Full black color */
+    background-color: #3d3939 !important;  /* Full black color */
     z-index: 1040 !important;  /* Ensure it's above other elements */
     opacity: 1 !important;  /* Make sure it's solid black */
 }
