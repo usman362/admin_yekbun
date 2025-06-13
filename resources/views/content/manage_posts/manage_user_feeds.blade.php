@@ -24,15 +24,20 @@
             padding: 0;
             top: -22px;
         }
-        /* Set the backdrop to dark gray with high opacity (immediate effect) */
+        /* Initial state for the backdrop (transparent) */
 .modal-backdrop-custom {
-    background-color: rgba(50, 50, 50, 0.9) !important;  /* Dark gray with 90% opacity */
+    background-color: rgba(50, 50, 50, 0) !important;  /* Start with no background (transparent) */
     z-index: 1040 !important;  /* Ensure it's above other elements */
+    transition: background-color 0.3s ease-out; /* Smooth transition for background color */
 }
 
-/* Prevent background scrolling when modal is open */
+/* Final state of the backdrop when modal is active (dark gray) */
+.modal-open .modal-backdrop-custom {
+    background-color: rgba(50, 50, 50, 0.9) !important;  /* Dark gray with high opacity */
+}
+
 body.modal-open {
-    overflow: hidden;
+    overflow: hidden;  /* Prevent background scrolling */
 }
 
 /* Optional: Ensure modal content is above the backdrop */
@@ -1610,7 +1615,7 @@ body.modal-open {
                     // Show modal
                     $('#editFeedModal').modal('show');
                     
-                    // Apply the gray background instantly
+                    // Apply the gray background with fade-in effect
                     $('.modal-backdrop').addClass('modal-backdrop-custom');
                     $('body').addClass('modal-open');
                 } else {
