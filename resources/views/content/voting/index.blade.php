@@ -48,7 +48,7 @@
         }
 .gender-status{
      border-radius: 15px;
-     padding: 15px ;
+     padding: 8px ;
            background: #F2F2F2;
 }
         .trophy-count {
@@ -154,7 +154,7 @@
 
         .bg-trophy-loader{
             background: #F2F2F2;
-            padding: 12px;
+            padding: 8px;
             border-radius: 15px;
         }
         
@@ -471,7 +471,7 @@
                                     </div>
                                 </div>
                                 <!-- Medal Bars -->
-                                <div class="mini-stat-box mt-3">
+                                <div class="mini-stat-box mt-1">
                                     <div class="d-flex">
                                         <img
                                             src="{{ asset('assets/svg/svg-dialog/male.svg') }}"
@@ -528,7 +528,7 @@
                                     </div>
 
                                 </div>
-                                <div class="mini-stat-box mt-3">
+                                <div class="mini-stat-box mt-1">
                                     <div class="d-flex">
                                         <img
                                             src="{{ asset('assets/svg/svg-dialog/female.svg') }}"
@@ -589,7 +589,7 @@
                             </div>
 
                             <!-- Age and Gender Stats -->
-                            <div class="gender-status mt-3">
+                            <div class="gender-status mt-1">
                                 <h6
                                     class="text-muted text-states fw-bold">Statistics</h6>
                                 <div
@@ -655,7 +655,7 @@
                             </div>
 
                             <!-- Province List -->
-                            <div class="gender-status mt-3">
+                            <div class="gender-status mt-1">
                                 <h6 class="fw-bold text-province">List of
                                     Provinces</h6>
                                 <div class="province-item province-1">
