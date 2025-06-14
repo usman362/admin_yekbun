@@ -501,13 +501,13 @@ body.modal-open {
                                 <div class="col-md-3">
                                     <div class="post-image">
                                         <!-- Dropdown Menu - Correctly placed inside post-image but outside card is-post -->
-                                       <div class="nav-item dropdown d-block" style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
-                                            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <div class="d-flex align-items-center gap-2 open-edit-modalfree" data-id="{{ $feed->id }}" data-comment-id="{{ $report->id }}" data-section="reported-feeds">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
-                                                </div>
-                                            </a>
-                                        </div>
+                                      <div class="nav-item dropdown d-block" style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
+    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="d-flex align-items-center gap-2 open-edit-modalfree" data-id="{{ $feed->id }}" data-comment-id="{{ $report->id }}" data-section="reported-feeds">
+            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
+        </div>
+    </a>
+</div>
 
                                         <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                             data-fancybox="post1" data-lightbox-type="comments"
@@ -1011,7 +1011,7 @@ body.modal-open {
                 <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
                     <!-- Left Panel (Auto height, Feed Edit) -->
                     <div class="bg-white shadow" style="width: 58%; padding: 20px; border-radius:12px !important">
-                        <div id="editFeedContent">
+                        <div id="editFeedContentfree">
                             <!-- Dynamic content will be inserted here -->
                         </div>
                     </div>
@@ -1354,7 +1354,7 @@ body.modal-open {
                     }
 
                     // Insert the content into the modal
-                    const modalBody = document.getElementById('editFeedContent');
+                    const modalBody = document.getElementById('editFeedContentfree');
                     modalBody.innerHTML = contentHtml;
 
                     // Show the modal
@@ -1365,7 +1365,7 @@ body.modal-open {
 
             // Clear modal content when it's closed
             document.getElementById('editFeedModal').addEventListener('hidden.bs.modal', function () {
-                const modalBody = document.getElementById('editFeedContent');
+                const modalBody = document.getElementById('editFeedContentfree');
                 modalBody.innerHTML = '';  // Clear modal content
             });
         });
