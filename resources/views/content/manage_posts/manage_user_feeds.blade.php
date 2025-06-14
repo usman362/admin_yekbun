@@ -642,7 +642,7 @@ body.modal-open {
             <div class="modal-content" style="background: transparent; border: none; box-shadow: none; width:800px !important;">
                 <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
                     <div class="bg-white shadow" style="width: 58%; padding: 20px; border-radius:12px !important">
-                        <div id="editFeedContent">
+                        <div id="editFeedContent1">
                             <!-- Dynamic content will be inserted here -->
                         </div>
                     </div>
@@ -1355,7 +1355,7 @@ body.modal-open {
                     }
 
                     // Insert the content into the modal
-                    const modalBody = document.getElementById('editFeedContent');
+                    const modalBody = document.getElementById('editFeedContent1');
                     modalBody.innerHTML = contentHtml;
 
                     // Show the modal
@@ -1366,7 +1366,7 @@ body.modal-open {
 
             // Clear modal content when it's closed
             document.getElementById('open-edit-modal-unique').addEventListener('hidden.bs.modal', function () {
-                const modalBody = document.getElementById('editFeedContent');
+                const modalBody = document.getElementById('editFeedContent1');
                 modalBody.innerHTML = '';  // Clear modal content
             });
         });
