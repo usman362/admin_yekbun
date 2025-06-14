@@ -887,37 +887,10 @@ body.modal-open {
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
-                                                    alt="">
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu text-center dropdown-menu-end"
-                                            style="min-width: unset; width: 100px;">
-                                            <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                            <form action="{{ route('history.destroy', $feed->id) }}"
-                                                onsubmit="confirmAction(event, () => event.target.submit())"
-                                                method="post" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="row ml-0" style="width:100px;">
-
-                                                    <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                                        <a class="dropdown-item open-edit-modal" href="javascript:void(0)"
-                                                            data-id="{{ $feed->id }}"
-                                                            data-comment-id="{{ $comment->id }}">
-                                                            view
-                                                        </a>
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <button type="submit" data-id="681b3efba782bfb52205cc22"
-                                                            class="dropdown-item" style="padding: 0">
-                                                            <img class="pop_action_image" style="height: 26px"
-                                                                src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                    </div>
+                                                     <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="" class="open-modal" data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}">
                                                 </div>
-                                            </form>
-                                        </div>
+                                        </a>
+                                       
                                     </div>
                                 </div>
                             </div>
