@@ -3,684 +3,6 @@
 @section('title', 'User Feeds')
 
 @section('page-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
-    <style>
-        .custom-option-icon .form-check-input {
-            background-color: transparent !important;
-            border: none !important;
-        }
-
-        .form-check-input:checked,
-        .form-check-input[type=checkbox] {
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            background-image: none !important;
-        }
-
-        .dropdown.is-right .dropdown-menu {
-            left: 56px;
-            right: auto;
-            padding: 0;
-            top: -22px;
-        }
-
-        .dropdown-item h6,
-        .h6,
-        h5,
-        .h5,
-        h4,
-        .h4,
-        h3,
-        .h3,
-        h2,
-        .h2,
-        h1,
-        .h1 {
-            margin-bottom: 0 !important;
-        }
-
-        .card.is-post .user-block img,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .user-block img {
-            width: 42px;
-            height: 42px;
-            border-radius: 0% !important;
-        }
-
-        .card.is-post .content-wrap .post-image img,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .post-image img {
-            display: block;
-            border-radius: 5px;
-        }
-
-        .card.is-post .content-wrap .card-footer .social-count .shares-count span,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .shares-count span,
-        .card.is-post .content-wrap .card-footer .social-count .comments-count span,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .comments-count span,
-        .card.is-post .content-wrap .card-footer .social-count .likes-count span,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .likes-count span {
-            display: block;
-            font-size: 18px !important;
-            color: #888da8;
-            margin: 0 5px;
-        }
-
-        #tab2,
-        #tab3 {
-            display: none;
-        }
-
-        .pop_description {
-            font-size: 14px;
-            font-weight: 400;
-            color: gray;
-            text-align: left;
-            background: #f7f7f7;
-            padding: 7px;
-            font-family: Genos;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: left;
-        }
-    </style>
-    <style>
-        .card-post {
-            box-shadow: none;
-            cursor: pointer;
-        }
-
-        .card-post:hover {
-            box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
-            background-clip: padding-box;
-            cursor: pointer;
-            background: #f6f6f6;
-        }
-
-        .card-post-thumbnail {
-            height: 200px;
-            width: 100%;
-            background-size: 100% 230px;
-            background-repeat: no-repeat;
-            position: relative;
-            border-radius: 12px;
-        }
-
-        .post-image {
-            position: relative;
-            width: 100%;
-            font-family: 'Genos';
-            margin: 0;
-        }
-
-        .post-image .dropdown {
-            margin-top: -215px;
-            display: none;
-        }
-
-        .dropdown-content {
-            border: none !important;
-        }
-
-        .fancybox__container {
-            z-index: 99999 !important;
-        }
-
-        .fancybox__nav {
-            display: none !important;
-        }
-
-        .btn-white {
-            background: #fff;
-            padding: 0px 28px !important;
-            display: flex;
-            align-items: flex-start;
-            justify-content: start;
-            text-align: left;
-            padding-left: 5px !important;
-        }
-
-        .btn-white_01 {
-            background: #fff;
-            padding: 2px 3px !important;
-            display: flex;
-            align-items: flex-start;
-            justify-content: start;
-            text-align: left;
-            font-size: 12px;
-        }
-
-        .btn-white_01:hover {
-            background: #fff;
-        }
-
-
-        .fancybox__thumbs {
-            display: none !important;
-        }
-
-        .user-block {
-            background-color: #F2F2F2;
-            width: 230px;
-            height: 30px;
-            border-radius: 5px;
-            position: relative;
-        }
-
-        .user-block .user-heart {
-            width: 25px !important;
-            height: 25px !important;
-            border-radius: 4px !important;
-            position: absolute;
-            top: 2px;
-            right: 2px;
-        }
-
-        .user-block small {
-            margin-top: -9px !important;
-        }
-
-        .user-block p {
-            margin-top: 4px !important;
-        }
-
-        .card-header {
-            box-shadow: none;
-            padding-bottom: 0;
-        }
-
-        .card-header div {
-            font-family: Genos;
-            line-height: 1;
-            margin-left: 8px;
-        }
-
-        .card-header p {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .card-header small {
-            font-size: 15px;
-            font-style: italic;
-            color: #888ea8;
-        }
-
-        .report-section {
-            background-color: #ED1C244D;
-            padding: 4px;
-            border-radius: 5px;
-            margin-top: 4px;
-        }
-
-        .report-section .d-flex:first-child {
-            gap: 76px;
-        }
-
-        .report-section .fields {
-            background-color: #fff;
-            margin: 0 4px;
-            padding: 0 4px;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-
-        <style>.see-all-link {
-            font-family: 'Genos', sans-serif;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            color: #343a40;
-            /* dark gray */
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .see-all-link .arrow {
-            font-size: 18px;
-            transition: transform 0.3s ease;
-        }
-
-        .see-all-link:hover {
-            color: #007bff;
-            /* Bootstrap primary color */
-        }
-
-        .see-all-link:hover .arrow {
-            transform: translateX(4px);
-        }
-    </style>
-
-    </style>
-    <style>
-        .custom-option-icon .form-check-input {
-            background-color: transparent !important;
-            border: none !important;
-        }
-        
-
-        .form-check-input:checked,
-        .form-check-input[type=checkbox] {
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            background-image: none !important;
-        }
-
-        .modal-content, .modal-card {
-    
-    overflow: inherit !important;
-   
-
-}
-
-        .dropdown.is-right .dropdown-menu {
-            left: 56px;
-            right: auto;
-            padding: 0;
-            top: -22px;
-        }
-
-        .dropdown-item h6,
-        .h6,
-        h5,
-        .h5,
-        h4,
-        .h4,
-        h3,
-        .h3,
-        h2,
-        .h2,
-        h1,
-        .h1 {
-            margin-bottom: 0 !important;
-        }
-
-        .card.is-post .user-block img,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .user-block img {
-            width: 42px;
-            height: 42px;
-            border-radius: 0% !important;
-        }
-
-        .card.is-post .content-wrap .post-image img,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .post-image img {
-            display: block;
-            border-radius: 5px;
-        }
-
-        .card.is-post .content-wrap .card-footer .social-count .shares-count span,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .shares-count span,
-        .card.is-post .content-wrap .card-footer .social-count .comments-count span,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .comments-count span,
-        .card.is-post .content-wrap .card-footer .social-count .likes-count span,
-        .shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .content-wrap .card-footer .social-count .likes-count span {
-            display: block;
-            font-size: 18px !important;
-            color: #888da8;
-            margin: 0 5px;
-        }
-
-        #tab2,
-        #tab3 {
-            display: none;
-        }
-
-        .pop_description {
-            font-size: 14px;
-            font-weight: 400;
-            color: gray;
-            text-align: left;
-            background: #f7f7f7;
-            padding: 7px;
-            font-family: Genos;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: left;
-        }
-    </style>
-    <style>
-        .card-post {
-            box-shadow: none;
-            cursor: pointer;
-        }
-
-        .card-post:hover {
-            box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
-            background-clip: padding-box;
-            cursor: pointer;
-            background: #f6f6f6;
-        }
-
-        .card-post-thumbnail {
-            height: 200px;
-            width: 100%;
-            background-size: 100% 230px;
-            background-repeat: no-repeat;
-            position: relative;
-            border-radius: 12px;
-        }
-
-        .post-image {
-            position: relative;
-            width: 100%;
-            font-family: 'Genos';
-            margin: 0;
-        }
-
-        .post-image .dropdown {
-            margin-top: -215px;
-            display: none;
-        }
-
-        .dropdown-content {
-            border: none !important;
-        }
-
-        .fancybox__container {
-            z-index: 99999 !important;
-        }
-
-        .fancybox__nav {
-            display: none !important;
-        }
-
-        .btn-white {
-            background: #fff;
-            padding: 0px 28px !important;
-            display: flex;
-            align-items: flex-start;
-            justify-content: start;
-            text-align: left;
-            padding-left: 5px !important;
-        }
-
-        .btn-white_01 {
-            background: #fff;
-            padding: 2px 3px !important;
-            display: flex;
-            align-items: flex-start;
-            justify-content: start;
-            text-align: left;
-            font-size: 12px;
-        }
-
-        .btn-white_01:hover {
-            background: #fff;
-        }
-
-
-        .fancybox__thumbs {
-            display: none !important;
-        }
-
-        .user-block {
-            background-color: #F2F2F2;
-            width: 230px;
-            height: 30px;
-            border-radius: 5px;
-            position: relative;
-        }
-
-        .user-block .user-heart {
-            width: 25px !important;
-            height: 25px !important;
-            border-radius: 4px !important;
-            position: absolute;
-            top: 2px;
-            right: 2px;
-        }
-
-        .user-block small {
-            margin-top: -9px !important;
-        }
-
-        .user-block p {
-            margin-top: 4px !important;
-        }
-
-        .card-header {
-            box-shadow: none;
-            padding-bottom: 0;
-        }
-
-        .card-header div {
-            font-family: Genos;
-            line-height: 1;
-            margin-left: 8px;
-        }
-
-        .card-header p {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .card-header small {
-            font-size: 15px;
-            font-style: italic;
-            color: #888ea8;
-        }
-
-        .report-section {
-            background-color: #ED1C244D;
-            padding: 4px;
-            border-radius: 5px;
-            margin-top: 4px;
-        }
-
-        .report-section .d-flex:first-child {
-            gap: 76px;
-        }
-
-        .report-section .fields {
-            background-color: #fff;
-            margin: 0 4px;
-            padding: 0 4px;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-
-        .fancybox-content {
-            /* width: 246px !important;
-                                            height: 433px !important; */
-            border-radius: 8px !important;
-        }
-
-        .fancybox-content {
-            background: none !important;
-        }
-
-        .fancybox-iframe,
-        .fancybox-video {
-            border-radius: 8px !important;
-        }
-    </style>
-
-    <style>
-        .reported-feeds {
-            max-width: 340px;
-            font-family: 'Segoe UI', sans-serif;
-            border-radius: 16px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            padding: 16px;
-            font-family: 'Genos';
-        }
-
-        .header {
-            text-align: center;
-            position: relative;
-            margin-bottom: 16px;
-        }
-
-        .header h2 {
-            font-size: 16px;
-            margin: 0;
-        }
-
-        .header p {
-            font-size: 12px;
-            color: gray;
-            margin: 0;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: red;
-            cursor: pointer;
-        }
-
-        .user-info {
-            /* display: flex; */
-            align-items: center;
-            background: #fafafa;
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-
-        .profile-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid #1fc9a1;
-        }
-
-        .user-details strong {
-            display: block;
-        }
-
-        .user-details span {
-            font-size: 12px;
-            color: gray;
-        }
-
-        .locations {
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        .locations img {
-            width: 10px;
-        }
-
-        .action-form .action {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            background: #f9f9f9;
-            transition: 0.2s ease;
-            position: relative;
-        }
-
-        .action input[type="radio"] {
-            margin-top: 5px;
-            position: absolute;
-            right: 8px;
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            appearance: none;
-            border: 1px solid #00000036;
-            border-radius: 12px;
-        }
-
-        .action input[type="radio"]:checked {
-            background-color: #ffffff;
-            border: 6px solid #1DC9A0;
-        }
-
-        .icon {
-            font-size: 20px;
-            margin-top: 2px;
-        }
-
-        .dropdowns {
-            display: flex;
-        }
-
-        .dropdowns select {
-            margin-right: 8px;
-            margin-top: 4px;
-            padding: 6px;
-            font-size: 12px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        .warning {
-            font-size: 12px;
-            color: red;
-            margin-top: 6px;
-            background-color: #fff;
-            text-align: center;
-            padding: 4px 8px;
-            border-radius: 15px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: #00c78b;
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 12px;
-        }
-
-        .level0 {
-            background: #eafaf3;
-            border-color: #00c78b;
-        }
-
-        .level1 {
-            background: #fef2f2;
-            border-color: #f87171;
-        }
-
-        .level2 {
-            background: #f3f4f6;
-        }
-
-        .level3 {
-            background: #f3f4f6;
-        }
-
-        .level4 {
-            background: #fef2f2;
-            border-color: #ef4444;
-        }
-
-        .fancybox-slide--html .fancybox-close-small {
-            color: rgb(255 255 255);
-            padding: 10px;
-            right: 0;
-            top: 0;
-            border: 1px solid;
-            border-radius: 30px;
-        }
-
-        .modal-body {
-            overflow-y: scroll !important;
-        }
-    </style>
-@endsection
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
@@ -744,6 +66,401 @@
     <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js"></script>
 
+@endsection
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    <style>
+        /* Custom form check input */
+.custom-option-icon .form-check-input {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.form-check-input:checked,
+.form-check-input[type=checkbox] {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+/* Dropdown menu positioning */
+.dropdown.is-right .dropdown-menu {
+    left: 56px;
+    right: auto;
+    padding: 0;
+    top: -22px;
+}
+
+/* Modal backdrop custom styles (80% black with opacity) */
+.modal-backdrop-custom {
+    background-color: rgb(0, 0, 0) !important; /* Full black with opacity */
+    z-index: 1040 !important;
+    transition: background-color 0.3s ease-out; /* Smooth transition for background color */
+}
+
+/* Final state of the backdrop when modal is active (80% black with full opacity) */
+.modal-open .modal-backdrop-custom {
+    background-color: rgb(0, 0, 0) !important; /* 80% black with full opacity */
+}
+
+/* Prevent background scrolling */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Modal content above backdrop */
+.modal-content {
+    z-index: 1050 !important;
+}
+
+/* Remove margin-bottom from all heading tags */
+.dropdown-item h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+    margin-bottom: 0 !important;
+}
+
+/* User block image styling */
+.card.is-post .user-block img,
+.shop-wrapper .cart-container .cart-content .cart-summary .is-post.summary-card .user-block img {
+    width: 42px;
+    height: 42px;
+    border-radius: 0% !important;
+}
+
+/* Post image styling */
+.card.is-post .content-wrap .post-image img {
+    display: block;
+    border-radius: 5px;
+}
+
+/* Social count styling */
+.card.is-post .content-wrap .card-footer .social-count .shares-count span,
+.card.is-post .content-wrap .card-footer .social-count .comments-count span,
+.card.is-post .content-wrap .card-footer .social-count .likes-count span {
+    display: block;
+    font-size: 18px !important;
+    color: #888da8;
+    margin: 0 5px;
+}
+
+/* Card post hover effect */
+.card-post {
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.card-post:hover {
+    box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+    background-clip: padding-box;
+    cursor: pointer;
+    background: #f6f6f6;
+}
+
+/* Card post thumbnail */
+.card-post-thumbnail {
+    height: 200px;
+    width: 100%;
+    background-size: 100% 230px;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 12px;
+}
+
+/* Post image background */
+.post-image {
+    position: relative;
+    width: 100%;
+    font-family: 'Genos';
+    margin: 0;
+}
+
+/* Fancybox container z-index */
+.fancybox__container {
+    z-index: 99999 !important;
+}
+
+.fancybox__nav {
+    display: none !important;
+}
+
+/* Fancybox buttons */
+.btn-white {
+    background: #fff;
+    padding: 0px 28px !important;
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    text-align: left;
+    padding-left: 5px !important;
+}
+
+.fancybox-iframe,
+.fancybox-video {
+    border-radius: 8px !important;
+}
+
+/* Modal backdrop customization */
+.modal-content, .modal-card {
+    overflow: inherit !important;
+}
+
+/* Card header styling */
+.card-header {
+    box-shadow: none;
+    padding-bottom: 0;
+}
+
+.card-header div {
+    font-family: Genos;
+    line-height: 1;
+    margin-left: 8px;
+}
+
+.card-header p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-header small {
+    font-size: 15px;
+    font-style: italic;
+    color: #888ea8;
+}
+
+/* Report section */
+.report-section {
+    background-color: #ED1C244D;
+    padding: 4px;
+    border-radius: 5px;
+    margin-top: 4px;
+}
+
+.report-section .d-flex:first-child {
+    gap: 76px;
+}
+
+.report-section .fields {
+    background-color: #fff;
+    margin: 0 4px;
+    padding: 0 4px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+/* User block styling */
+.user-block {
+    background-color: #F2F2F2;
+    width: 230px;
+    height: 30px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.user-block .user-heart {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 4px !important;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.user-block small {
+    margin-top: -9px !important;
+}
+
+.user-block p {
+    margin-top: 4px !important;
+}
+
+/* Reported feeds styles */
+.reported-feeds {
+    max-width: 340px;
+    font-family: 'Segoe UI', sans-serif;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 16px;
+    font-family: 'Genos';
+}
+
+.header {
+    text-align: center;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.header h2 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.header p {
+    font-size: 12px;
+    color: gray;
+    margin: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+}
+
+/* User information styles */
+.user-info {
+    align-items: center;
+    background: #fafafa;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.profile-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #1fc9a1;
+}
+
+.user-details strong {
+    display: block;
+}
+
+.user-details span {
+    font-size: 12px;
+    color: gray;
+}
+
+.locations {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.locations img {
+    width: 10px;
+}
+
+/* Action form styling */
+.action-form .action {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    background: #f9f9f9;
+    transition: 0.2s ease;
+    position: relative;
+}
+
+.action input[type="radio"] {
+    margin-top: 5px;
+    position: absolute;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    appearance: none;
+    border: 1px solid #00000036;
+    border-radius: 12px;
+}
+
+.action input[type="radio"]:checked {
+    background-color: #ffffff;
+    border: 6px solid #1DC9A0;
+}
+
+.icon {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.dropdowns {
+    display: flex;
+}
+
+.dropdowns select {
+    margin-right: 8px;
+    margin-top: 4px;
+    padding: 6px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Warning styling */
+.warning {
+    font-size: 12px;
+    color: red;
+    margin-top: 6px;
+    background-color: #fff;
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 15px;
+}
+
+/* Submit button */
+.submit-btn {
+    width: 100%;
+    background: #00c78b;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+/* Level specific styles */
+.level0 {
+    background: #eafaf3;
+    border-color: #00c78b;
+}
+
+.level1 {
+    background: #fef2f2;
+    border-color: #f87171;
+}
+
+.level2 {
+    background: #f3f4f6;
+}
+
+.level3 {
+    background: #f3f4f6;
+}
+
+.level4 {
+    background: #fef2f2;
+    border-color: #ef4444;
+}
+
+/* Fancybox close button */
+.fancybox-slide--html .fancybox-close-small {
+    color: rgb(255 255 255);
+    padding: 10px;
+    right: 0;
+    top: 0;
+    border: 1px solid;
+    border-radius: 30px;
+}
+
+/* Scrollable modal content */
+.modal-body {
+    overflow-y: scroll !important;
+}
+
+    </style>
 @endsection
 
 @section('content')
@@ -923,12 +640,7 @@
                                                             <span style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Report Info Section -->
-                                        <div style="background-color: pink; border-radius:6px" class="p-1">
+                                                     <div style="background-color: pink; border-radius:6px" class="p-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="d-flex align-items-center">
                                                     <button class="btn btn-white p-3">ID :
@@ -943,6 +655,12 @@
                                                 Reason: {{ $report->report_type }}
                                             </p>
                                         </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Report Info Section -->
+                                       
                                     </div>
                                 </div>
                             @endif
@@ -1576,29 +1294,42 @@
             $('#delete_form').attr('action', link);
         }
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const feedId = this.dataset.id;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const feedId = this.dataset.id;
 
-                    // Fix: Correct ID selector
-                    const originalCard = document.querySelector('#feed-card-' + feedId);
+                const originalCard = document.querySelector('#feed-card-' + feedId);
 
-                    if (originalCard) {
-                        const modalBody = document.getElementById(
-                            'editFeedContent'); // Fix: Correct modal body ID
-                        modalBody.innerHTML = ''; // Clear old content
-                        modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
-                        const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
-                        modal.show();
-                    } else {
-                        alert("Feed card not found.");
-                    }
-                });
+                if (originalCard) {
+                    const modalBody = document.getElementById('editFeedContent');
+                    modalBody.innerHTML = '';  // Clear old content
+                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+
+                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
+                    
+                    // Show modal
+                    $('#editFeedModal').modal('show');
+                    
+                    // Apply the gray background with fade-in effect
+                    $('.modal-backdrop').addClass('modal-backdrop-custom');
+                    $('body').addClass('modal-open');
+                } else {
+                    alert("Feed card not found.");
+                }
             });
         });
-    </script>
+
+        // Remove custom backdrop when modal closes
+        $('#editFeedModal').on('hide.bs.modal', function () {
+            // Remove the gray backdrop instantly when modal closes
+            $('.modal-backdrop').removeClass('modal-backdrop-custom');
+            $('body').removeClass('modal-open');
+        });
+    });
+</script>
+
 
 
 
