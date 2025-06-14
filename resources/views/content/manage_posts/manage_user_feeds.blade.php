@@ -1416,44 +1416,8 @@ body.modal-open {
         </script>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
          
-         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.open-edit-modal-unique').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const feedId = this.dataset.id;
-                    const commentId = this.dataset.commentId;
-                    const section = this.dataset.section;
-
-                    let contentHtml = '';
-
-                    // Load content based on the section
-                    if (section === 'reported-feeds') {
-                        const feedElement = document.querySelector(`#feed-post-${feedId}`);
-                        contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
-                    } else if (section === 'reported-comments') {
-                        const commentElement = document.querySelector(`#comment-${commentId}`);
-                        contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
-                    }
-
-                    // Insert the content into the modal
-                    const modalBody = document.getElementById('editFeedContent-reported');
-                    modalBody.innerHTML = contentHtml;
-
-                    // Show the modal
-                    const modal = new bootstrap.Modal(document.getElementById('open-edit-modal-unique'));
-                    modal.show();
-                });
-            });
-
-            // Clear modal content when it's closed
-            document.getElementById('open-edit-modal-unique').addEventListener('hidden.bs.modal', function () {
-                const modalBody = document.getElementById('editFeedContent-reported');
-                modalBody.innerHTML = '';  // Clear modal content
-            });
-        });
-    </script>
-<script>
-    // Ensure correct modal is referenced
+        <script>
+            // Ensure correct modal is referenced
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.open-edit-modal-unique').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -1488,6 +1452,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-</script>
+        </script>
     @endsection
 @endsection
