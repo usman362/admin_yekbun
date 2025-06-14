@@ -505,43 +505,13 @@ body.modal-open {
                                             style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
                                             <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
-                                                        alt="">
-                                                </div>
-                                            </a>
-                                            <div class="dropdown-menu text-center dropdown-menu-end" style="width: 100px;">
-                                                <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                <form action="{{ route('history.destroy', $feed->id) }}"
-                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                    method="post" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="row ml-0" style="width:100px;">
-                                                        <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                                            <a class="dropdown-item edit-history" style="padding: 0"
-                                                                href="javascript:void(0)" data-bs-toggle="modal"
-                                                                data-bs-target="#createhistoryModal"
-                                                                data-id="{{ $feed->id }}"
-                                                                data-name="{{ $feed->title }}"
-                                                                data-source="{{ $feed->source }}"
-                                                                data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                                data-comments="{{ $feed->is_comments }}"
-                                                                data-share="{{ $feed->is_share }}"
-                                                                data-emoji="{{ $feed->is_emoji }}">
-                                                                <img class="pop_action_image" style="height: 26px"
-                                                                    src="{{ asset('assets/svg/edit.svg') }}">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <button type="submit" class="dropdown-item" style="padding: 0">
-                                                                <img class="pop_action_image" style="height: 26px"
-                                                                    src="{{ asset('assets/svg/delete.svg') }}">
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                <div class="d-flex align-items-center gap-2 open-edit-modal"   data-id="{{ $feed->id }}"
+                                                            data-comment-id="{{ $comment->id }}">
+                                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
+                                                    alt="">
                                             </div>
+                                            </a>
+                                          
                                         </div>
 
                                         <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
@@ -1208,45 +1178,13 @@ body.modal-open {
                                         style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                            <div class="d-flex align-items-center gap-2">
+                                           <div class="d-flex align-items-center gap-2 open-edit-modal"   data-id="{{ $feed->id }}"
+                                                            data-comment-id="{{ $comment->id }}">
                                                 <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
                                                     alt="">
                                             </div>
                                         </a>
-                                        <div class="dropdown-menu text-center dropdown-menu-end"
-                                            style="min-width: unset; width: 100px;">
-                                            <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                            <form action="{{ route('history.destroy', $feed->id) }}"
-                                                onsubmit="confirmAction(event, () => event.target.submit())"
-                                                method="post" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="row ml-0" style="width:100px;">
-
-                                                    <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                                        <a class="dropdown-item edit-history" style="padding: 0"
-                                                            href="javascript:void(0)" data-bs-toggle="modal"
-                                                            data-bs-target="#createhistoryModal"
-                                                            data-id="{{ $feed->id }}"
-                                                            data-name="{{ $feed->title }}"
-                                                            data-source="{{ $feed->source }}"
-                                                            data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
-                                                            {{-- data-path="{{ $feed->feed_type == 'videos' ? $feed->videos[0]['path'] : $feed->images[0]['path'] }}" --}}
-                                                            data-comments="{{ $feed->is_comments }}"
-                                                            data-share="{{ $feed->is_share }}"
-                                                            data-emoji="{{ $feed->is_emoji }}" for="customRadioPrime">
-                                                            <img class="pop_action_image" style="height: 26px"
-                                                                src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <button type="submit" data-id="681b3efba782bfb52205cc22"
-                                                            class="dropdown-item" style="padding: 0">
-                                                            <img class="pop_action_image" style="height: 26px"
-                                                                src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
