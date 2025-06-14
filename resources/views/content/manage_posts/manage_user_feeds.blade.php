@@ -887,7 +887,7 @@ body.modal-open {
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="d-flex align-items-center gap-2">
-                                                     <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="" class="open-modal" data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}">
+                                                     <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="" class="dropdown-item open-edit-modal" data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}">
                                                 </div>
                                         </a>
                                        
