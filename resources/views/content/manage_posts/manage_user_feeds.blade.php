@@ -647,7 +647,7 @@ body.modal-open {
                 <!-- Right Panel (Full Height, No Scroll) -->
                 <div class="bg-white shadow " style="width: 48%; position: relative;  border-radius:12px !important">
                     <!-- One Close Icon (top-right) -->
-                 <button type="button" class="close position-absolute" style="
+                   <button type="button" class="close position-absolute" style="
     top: -27px;
     right: -56px;
     color: white;
@@ -1332,7 +1332,7 @@ body.modal-open {
             $('.deleted-modal').modal('show');
             $('#delete_form').attr('action', link);
         }
-    </script>
+    </script>editFeedModalfreee
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.open-edit-modal').forEach(function(button) {
@@ -1368,41 +1368,42 @@ body.modal-open {
         });
     });
 </script>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const feedId = this.dataset.id;
+    // Ensure correct modal is referenced
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.open-edit-modal-unique').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const feedId = this.dataset.id;
+            const section = this.dataset.section;
 
-                const originalCard = document.querySelector('#feed-card-' + feedId);
+            let contentHtml = '';
 
-                if (originalCard) {
-                    const modalBody = document.getElementById('editFeedContent');
-                    modalBody.innerHTML = '';  // Clear old content
-                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+            // Load content based on the section
+            if (section === 'reported-feeds') {
+                const feedElement = document.querySelector(`#feed-post-${feedId}`);
+                contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+            } else if (section === 'reported-comments') {
+                const commentElement = document.querySelector(`#comment-${commentId}`);
+                contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
+            }
 
-                    const modal = new bootstrap.Modal(document.getElementById('editFeedModalfreee'));
-                    
-                    // Show modal
-                    $('#editFeedModalfreee').modal('show');
-                    
-                    // Apply the gray background with fade-in effect
-                    $('.modal-backdrop').addClass('modal-backdrop-custom');
-                    $('body').addClass('modal-open');
-                } else {
-                    alert("Feed card not found.");
-                }
-            });
-        });
+            // Insert the content into the modal
+            const modalBody = document.getElementById('editFeedContent-reported');
+            modalBody.innerHTML = contentHtml;
 
-        // Remove custom backdrop when modal closes
-        $('#editFeedModalfreee').on('hide.bs.modal', function () {
-            // Remove the gray backdrop instantly when modal closes
-            $('.modal-backdrop').removeClass('modal-backdrop-custom');
-            $('body').removeClass('modal-open');
+            // Show the modal
+            const modal = new bootstrap.Modal(document.getElementById('open-edit-modal-unique'));
+            modal.show();
         });
     });
+
+    // Clear modal content when it's closed
+    document.getElementById('open-edit-modal-unique').addEventListener('hidden.bs.modal', function () {
+        const modalBody = document.getElementById('editFeedContent-reported');
+        modalBody.innerHTML = '';  // Clear modal content
+    });
+});
+
 </script>
 
 
@@ -1495,42 +1496,6 @@ body.modal-open {
             });
         });
     </script>
-<script>
-    // Ensure correct modal is referenced
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.open-edit-modal-unique').forEach(function(button) {
-        button.addEventListener('click', function() {
-            const feedId = this.dataset.id;
-            const section = this.dataset.section;
 
-            let contentHtml = '';
-
-            // Load content based on the section
-            if (section === 'reported-feeds') {
-                const feedElement = document.querySelector(`#feed-post-${feedId}`);
-                contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
-            } else if (section === 'reported-comments') {
-                const commentElement = document.querySelector(`#comment-${commentId}`);
-                contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
-            }
-
-            // Insert the content into the modal
-            const modalBody = document.getElementById('editFeedContent-reported');
-            modalBody.innerHTML = contentHtml;
-
-            // Show the modal
-            const modal = new bootstrap.Modal(document.getElementById('open-edit-modal-unique'));
-            modal.show();
-        });
-    });
-
-    // Clear modal content when it's closed
-    document.getElementById('open-edit-modal-unique').addEventListener('hidden.bs.modal', function () {
-        const modalBody = document.getElementById('editFeedContent-reported');
-        modalBody.innerHTML = '';  // Clear modal content
-    });
-});
-
-</script>
     @endsection
 @endsection
