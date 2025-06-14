@@ -503,7 +503,7 @@ body.modal-open {
                                         <!-- Dropdown Menu - Correctly placed inside post-image but outside card is-post -->
                                        <div class="nav-item dropdown d-block" style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
                                             <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <div class="d-flex align-items-center gap-2 open-edit-modal" data-id="{{ $feed->id }}" data-comment-id="{{ $report->id }}" data-section="reported-feeds">
+                                                <div class="d-flex align-items-center gap-2 open-edit-modalfree" data-id="{{ $feed->id }}" data-comment-id="{{ $report->id }}" data-section="reported-feeds">
                                                     <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
                                                 </div>
                                             </a>
