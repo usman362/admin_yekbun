@@ -659,7 +659,7 @@ body.modal-open {
     border-radius: 50px;
     padding: 4px 14px;
     font-size: 22px;
-" onclick="$('#editFeedModal').modal('hide')">
+" onclick="$('#editFeedModalfreee').modal('hide')">
                         &times;
                     </button>
 
@@ -1370,6 +1370,41 @@ body.modal-open {
     });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const feedId = this.dataset.id;
+
+                const originalCard = document.querySelector('#feed-card-' + feedId);
+
+                if (originalCard) {
+                    const modalBody = document.getElementById('editFeedContent');
+                    modalBody.innerHTML = '';  // Clear old content
+                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+
+                    const modal = new bootstrap.Modal(document.getElementById('editFeedModalfreee'));
+                    
+                    // Show modal
+                    $('#editFeedModalfreee').modal('show');
+                    
+                    // Apply the gray background with fade-in effect
+                    $('.modal-backdrop').addClass('modal-backdrop-custom');
+                    $('body').addClass('modal-open');
+                } else {
+                    alert("Feed card not found.");
+                }
+            });
+        });
+
+        // Remove custom backdrop when modal closes
+        $('#editFeedModalfreee').on('hide.bs.modal', function () {
+            // Remove the gray backdrop instantly when modal closes
+            $('.modal-backdrop').removeClass('modal-backdrop-custom');
+            $('body').removeClass('modal-open');
+        });
+    });
+</script>
 
 
 
