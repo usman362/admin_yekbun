@@ -642,7 +642,7 @@ body.modal-open {
             <div class="modal-content" style="background: transparent; border: none; box-shadow: none; width:800px !important;">
                 <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
                     <div class="bg-white shadow" style="width: 58%; padding: 20px; border-radius:12px !important">
-                        <div id="editFeedContent1">
+                        <div id="editFeedContent1"> 
                             <!-- Dynamic content will be inserted here -->
                         </div>
                     </div>
