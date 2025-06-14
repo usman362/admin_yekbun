@@ -647,7 +647,8 @@ body.modal-open {
                 <!-- Right Panel (Full Height, No Scroll) -->
                 <div class="bg-white shadow " style="width: 48%; position: relative;  border-radius:12px !important">
                     <!-- One Close Icon (top-right) -->
-                   <button type="button" class="close position-absolute" style="
+                    <button type="button" class="close position-absolute"
+                        style="
     top: -27px;
     right: -56px;
     color: white;
@@ -657,10 +658,10 @@ body.modal-open {
     border: 2px solid #fff;
     border-radius: 50px;
     padding: 4px 14px;
-    font-size: 22px;" onclick="$('#open-edit-modal-unique').modal('hide')">
-    &times;
-</button>
-
+    font-size: 22px;
+" onclick="$('#editFeedModal').modal('hide')">
+                        &times;
+                    </button>
 
                     <div class="reported-feeds">
                         <div class="header mb-3">
@@ -1332,7 +1333,7 @@ body.modal-open {
             $('.deleted-modal').modal('show');
             $('#delete_form').attr('action', link);
         }
-    </script>editFeedModalfreee
+    </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.open-edit-modal').forEach(function(button) {
@@ -1368,43 +1369,7 @@ body.modal-open {
         });
     });
 </script>
-<script>
-    // Ensure correct modal is referenced
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.open-edit-modal-unique').forEach(function(button) {
-        button.addEventListener('click', function() {
-            const feedId = this.dataset.id;
-            const section = this.dataset.section;
 
-            let contentHtml = '';
-
-            // Load content based on the section
-            if (section === 'reported-feeds') {
-                const feedElement = document.querySelector(`#feed-post-${feedId}`);
-                contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
-            } else if (section === 'reported-comments') {
-                const commentElement = document.querySelector(`#comment-${commentId}`);
-                contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
-            }
-
-            // Insert the content into the modal
-            const modalBody = document.getElementById('editFeedContent-reported');
-            modalBody.innerHTML = contentHtml;
-
-            // Show the modal
-            const modal = new bootstrap.Modal(document.getElementById('open-edit-modal-unique'));
-            modal.show();
-        });
-    });
-
-    // Clear modal content when it's closed
-    document.getElementById('open-edit-modal-unique').addEventListener('hidden.bs.modal', function () {
-        const modalBody = document.getElementById('editFeedContent-reported');
-        modalBody.innerHTML = '';  // Clear modal content
-    });
-});
-
-</script>
 
 
 
