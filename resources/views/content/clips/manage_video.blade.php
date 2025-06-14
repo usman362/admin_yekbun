@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                        height: 433px !important; */
+                                        height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -417,7 +417,8 @@
             border: 1px solid;
             border-radius: 30px;
         }
-        .modal-body{
+
+        .modal-body {
             overflow-y: scroll !important;
         }
     </style>
@@ -596,6 +597,16 @@
 
                                 </div>
 
+                            </div>
+                        </div>
+                        @foreach ($clips as $clip)
+                            <div class="col-md-2">
+                                <div id="lottie-animation-{{ $clip->id }}" style="width: 300px; height: 300px;">
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="col-md-2">
+                            <div id="lottie-animation" style="width: 300px; height: 300px;">
                             </div>
                         </div>
                     </div>
@@ -786,8 +797,7 @@
                 <!-- Left Column: Video -->
                 <div style="flex: -1;">
                     <video class="fancybox-video" controls controlsList="nodownload"
-                        poster="{{ asset('videos/user-clip.mp4') }}"
-                        style="width: 335px; height: auto;outline:none">
+                        poster="{{ asset('videos/user-clip.mp4') }}" style="width: 335px; height: auto;outline:none">
                         <source src="{{ asset('videos/user-clip.mp4') }}" type="video/mp4">
                         Your browser doesn't support video.
                     </video>
@@ -810,7 +820,8 @@
                                 <div class="user-details">
                                     <div class="d-flex" style="margin: 0 auto;width: 155px;">
                                         <strong>User Name</strong>
-                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
+                                        <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span
+                                                    class="text-success">5</span> Flags</span></b>
                                     </div>
                                     <div class="locations">
                                         <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava
@@ -922,6 +933,29 @@
 
 
 @section('page-script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @foreach ($clips as $clip)
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-animation-{{ $clip->id }}'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: "{{ asset('storage/' . $clip->json_paths) }}"
+                });
+            @endforeach
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: "{{ asset('assets/json/Make_Peace_NEW_SHAPE.json') }}"
+            });
+        });
+    </script>
+
     <script>
         $('.nav-tab a:first-child').addClass('active');
         $('.tab-content').hide();

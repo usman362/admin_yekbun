@@ -18,7 +18,8 @@ class ClipsController extends Controller
     public function manage_video()
     {
         $videos = Video::all();
-        return view('content.clips.manage_video', compact('videos'));
+        $clips = Clips::all();
+        return view('content.clips.manage_video', compact('videos','clips'));
     }
 
     public function store(Request $request)
@@ -71,6 +72,8 @@ class ClipsController extends Controller
             $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
             $clip->thumbnail = $cleanedThumbnail;
         }
+        $clip->educated_price = $request->educated_price;
+        $clip->cultivated_price = $request->cultivated_price;
         $clip->save();
         // if ($request->hasFile('json_file')) {
         //     $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');

@@ -55,7 +55,26 @@
                         <div class="hidden-json"></div>
                     </div>
                 </div>
-
+                <div class="col-md-6">
+                    <label class="form-label" for="inputTitle">Educated Price</label>
+                    <select class="form-control" name="educated_price" id="educated_price">
+                        <option value="free">Free</option>
+                        <option value="0.99">0,99 €</option>
+                    </select>
+                    @error('educated_price')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="inputTitle">Cultivated Price</label>
+                    <select class="form-control" name="cultivated_price" id="cultivated_price">
+                        <option value="free">Free</option>
+                        <option value="0.49">0,49 €</option>
+                    </select>
+                    @error('cultivated_price')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div class="card">
                     {{-- <h5 class="card-header">Video Upload</h5> --}}
                     <div class="card-body">
