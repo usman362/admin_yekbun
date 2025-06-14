@@ -501,17 +501,12 @@ body.modal-open {
                                 <div class="col-md-3">
                                     <div class="post-image">
                                         <!-- Dropdown Menu - Correctly placed inside post-image but outside card is-post -->
-                                        <div class="nav-item dropdown d-block"
-                                            style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
-                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <div class="d-flex align-items-center gap-2 open-edit-modal"   data-id="{{ $feed->id }}"
-                                                            data-comment-id="{{ $report->id }}">
-                                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
-                                                    alt="">
-                                            </div>
+                                       <div class="nav-item dropdown d-block" style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
+                                            <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="d-flex align-items-center gap-2 open-edit-modal" data-id="{{ $feed->id }}" data-comment-id="{{ $report->id }}" data-section="reported-feeds">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
+                                                </div>
                                             </a>
-                                          
                                         </div>
 
                                         <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
@@ -1010,7 +1005,46 @@ body.modal-open {
     </div>
 </div>
 
+ <div class="modal fade" id="editFeedModalfeed" tabindex="-1" aria-labelledby="editFeedModalLabelfeee" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
+            <div class="modal-content" style="background: transparent; border: none; box-shadow: none; width:800px !important;">
+                <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
+                    <!-- Left Panel (Auto height, Feed Edit) -->
+                    <div class="bg-white shadow" style="width: 58%; padding: 20px; border-radius:12px !important">
+                        <div id="editFeedContent">
+                            <!-- Dynamic content will be inserted here -->
+                        </div>
+                    </div>
 
+                    <!-- Right Panel (Full Height, No Scroll) -->
+                    <div class="bg-white shadow" style="width: 48%; position: relative; border-radius:12px !important">
+                        <button type="button" class="close position-absolute" style="top: -27px; right: -56px;" onclick="$('#editFeedModal').modal('hide')">&times;</button>
+                        <div class="reported-feeds">
+                            <div class="header mb-3">
+                                <h2>Reported Feeds</h2>
+                                <p>Manage User Feeds</p>
+                            </div>
+                            <center>
+                                <div class="user-info">
+                                    <div><img src="{{ asset('images/user-clips-report-user.png') }}" class="profile-img" /></div>
+                                    <div class="user-details">
+                                        <div class="d-flex" style="margin: 0 auto; width: 155px;">
+                                            <strong>User Name</strong>
+                                            <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span class="text-success">5</span> Flags</span></b>
+                                        </div>
+                                        <div class="locations">
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""> Rojava · Qamishlo ·
+                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt=""> Hannover
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -1178,7 +1212,7 @@ body.modal-open {
                                         style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                           <div class="d-flex align-items-center gap-2 open-edit-modal"   data-id="{{ $feed->id }}"
+                                           <div class="d-flex align-items-center gap-2 open-edit-modalfree"   data-id="{{ $feed->id }}"
                                                             data-comment-id="{{ $comment->id }}">
                                                 <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
                                                     alt="">
@@ -1297,68 +1331,46 @@ body.modal-open {
             }
         </script>
         <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
-        {{-- <script>
-        // Scroll right by 300px
-        $('#scrollRight').click(function() {
-            const container = document.getElementById('main-feed');
-            container.scrollLeft += 300;
+           <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.open-edit-modalfree').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const feedId = this.dataset.id;
+                    const commentId = this.dataset.commentId;
+                    const section = this.dataset.section;
 
-            // If near end, load more
-            if (container.scrollWidth - container.clientWidth - container.scrollLeft < 400) {
-                loadMoreFeeds();
-            }
-        });
+                    let contentHtml = '';
 
-        // Scroll left by 300px
-        $('#scrollLeft').click(function() {
-            document.getElementById('main-feed').scrollLeft -= 300;
+                    // Load content based on the section
+                    if (section === 'reported-feeds') {
+                        const feedElement = document.querySelector(`#feed-post-${feedId}`);
+                        contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+                    } else if (section === 'reported-comments') {
+                        const commentElement = document.querySelector(`#comment-${commentId}`);
+                        contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
+                    } else if (section === 'latest-feeds') {
+                        const feedElement = document.querySelector(`#feed-post-${feedId}`);
+                        contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+                    }
+
+                    // Insert the content into the modal
+                    const modalBody = document.getElementById('editFeedContent');
+                    modalBody.innerHTML = contentHtml;
+
+                    // Show the modal
+                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
+                    modal.show();
+                });
+            });
+
+            // Clear modal content when it's closed
+            document.getElementById('editFeedModal').addEventListener('hidden.bs.modal', function () {
+                const modalBody = document.getElementById('editFeedContent');
+                modalBody.innerHTML = '';  // Clear modal content
+            });
         });
     </script>
 
-    <script>
-        const slider = document.getElementById('main-feed');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('dragging');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
-
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
-
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll-fast multiplier
-            slider.scrollLeft = scrollLeft - walk;
-        });
-
-        // Optional: Mobile touch support
-        let touchStartX = 0;
-        slider.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-            scrollLeft = slider.scrollLeft;
-        });
-
-        slider.addEventListener('touchmove', (e) => {
-            const touchX = e.touches[0].clientX;
-            const walk = (touchStartX - touchX) * 2;
-            slider.scrollLeft = scrollLeft + walk;
-        });
-    </script> --}}
 
     @endsection
 @endsection
