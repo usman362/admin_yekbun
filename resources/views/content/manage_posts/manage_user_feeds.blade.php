@@ -1005,7 +1005,7 @@ body.modal-open {
     </div>
 </div>
 
- <div class="modal fade" id="editFeedModalfeed" tabindex="-1" aria-labelledby="editFeedModalLabelfeee" aria-hidden="true">
+ <div class="modal fade" id="editFeedModalfee" tabindex="-1" aria-labelledby="editFeedModalLabelfeee" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
             <div class="modal-content" style="background: transparent; border: none; box-shadow: none; width:800px !important;">
                 <div class="d-flex flex-row justify-content-between align-items-start" style="gap: 30px; flex-wrap: nowrap;">
@@ -1018,7 +1018,7 @@ body.modal-open {
 
                     <!-- Right Panel (Full Height, No Scroll) -->
                     <div class="bg-white shadow" style="width: 48%; position: relative; border-radius:12px !important">
-                        <button type="button" class="close position-absolute" style="top: -27px; right: -56px;" onclick="$('#editFeedModal').modal('hide')">&times;</button>
+                        <button type="button" class="close position-absolute" style="top: -27px; right: -56px;" onclick="$('#editFeedModalfee').modal('hide')">&times;</button>
                         <div class="reported-feeds">
                             <div class="header mb-3">
                                 <h2>Reported Feeds</h2>
