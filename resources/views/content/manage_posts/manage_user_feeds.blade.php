@@ -515,15 +515,18 @@
                             <div class="col-md-3">
                                 <div class="post-image">
                                     <!-- Dropdown Menu - Correctly placed inside post-image but outside card is-post -->
-                                    <div class="nav-item dropdown d-block" style="...">
-    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
-        <div class="d-flex align-items-center gap-2 open-edit-modal-unique"
-             data-id="{{ $feed->id }}" data-section="latest-feeds">
-            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
-        </div>
-    </a>
-</div>
-
+                                    <div class="nav-item dropdown d-block"
+                                        style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
+                                        <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="d-flex align-items-center gap-2 open-edit-modal-unique"
+                                                data-id="{{ $feed->id }}" data-comment-id="{{ $report->id }}"
+                                                data-section="reported-feeds">
+                                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
+                                                    alt="">
+                                            </div>
+                                        </a>
+                                    </div>
 
                                     <div id="feed-post-{{ $feed->id }}" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                         data-fancybox="post1" data-lightbox-type="comments"
@@ -1330,18 +1333,15 @@
                                             ipsum dolor sit amet, consectetur adipisicing.</p>
                                     </div>
                                 </div>
-                                <div class="nav-item dropdown d-block"
-                                    style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="nav-item dropdown d-block" style="...">
+                                    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
                                         <div class="d-flex align-items-center gap-2 open-edit-modal-unique"
-                                            data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}">
-                                            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
-                                                alt="">
+                                            data-id="{{ $feed->id }}" data-section="latest-feeds">
+                                            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
                                         </div>
                                     </a>
-
                                 </div>
+
                             </div>
                         </div>
                     @endforeach
@@ -1466,15 +1466,15 @@
 
                     // Load content based on the section
                   if (section === 'reported-feeds') {
-                    const feedElement = document.querySelector(`#feed-post-${feedId}`);
-                    contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
-                } else if (section === 'reported-comments') {
-                    const commentElement = document.querySelector(`#comment-${commentId}`);
-                    contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
-                } else if (section === 'latest-feeds') {
-                    const feedElement = document.querySelector(`#feed-post-${feedId}`);
-                    contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
-                }
+                const feedElement = document.querySelector(`#feed-post-${feedId}`);
+                contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+            } else if (section === 'reported-comments') {
+                const commentElement = document.querySelector(`#comment-${commentId}`);
+                contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
+            } else if (section === 'latest-feeds') {
+                const feedElement = document.querySelector(`#feed-post-${feedId}`);
+                contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+            }
 
 
                     // Insert the content into the modal
