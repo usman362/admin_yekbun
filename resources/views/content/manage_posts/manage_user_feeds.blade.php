@@ -1337,7 +1337,7 @@
                                     style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
                                     <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <div class="d-flex align-items-center gap-2 open-edit-modal"
+                                        <div class="d-flex align-items-center gap-2 open-edit-modal-unique"
                                             data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}">
                                             <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
                                                 alt="">
@@ -1468,15 +1468,17 @@
                     let contentHtml = '';
 
                     // Load content based on the section
-                    if (section === 'reported-feeds') {
-                        const feedElement = document.querySelector(`#feed-post-${feedId}`);
-                        contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML :
-                            'Feed not found.';
-                    } else if (section === 'reported-comments') {
-                        const commentElement = document.querySelector(`#comment-${commentId}`);
-                        contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML :
-                            'Comment not found.';
-                    }
+                  if (section === 'reported-feeds') {
+    const feedElement = document.querySelector(`#feed-post-${feedId}`);
+    contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+} else if (section === 'reported-comments') {
+    const commentElement = document.querySelector(`#comment-${commentId}`);
+    contentHtml = commentElement ? commentElement.cloneNode(true).outerHTML : 'Comment not found.';
+} else if (section === 'latest-feeds') {
+    const feedElement = document.querySelector(`#feed-post-${feedId}`);
+    contentHtml = feedElement ? feedElement.cloneNode(true).outerHTML : 'Feed not found.';
+}
+
 
                     // Insert the content into the modal
                     const modalBody = document.getElementById('editFeedContent-reported');
