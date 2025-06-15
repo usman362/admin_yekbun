@@ -1333,15 +1333,18 @@
                                             ipsum dolor sit amet, consectetur adipisicing.</p>
                                     </div>
                                 </div>
-                                <div class="nav-item dropdown d-block" style="...">
-                                    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
+                                <div class="nav-item dropdown d-block"
+                                    style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
+                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center gap-2 open-edit-modal-unique"
                                             data-id="{{ $feed->id }}" data-section="latest-feeds">
-                                            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
+                                            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
+                                                alt="">
                                         </div>
                                     </a>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     @endforeach
