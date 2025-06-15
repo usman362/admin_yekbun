@@ -653,7 +653,7 @@
         </div>
     </div>
     <div class="modal fade" id="open-edit-modal-unique" tabindex="-1" aria-labelledby="editFeedModalLabel"
-        aria-hidden="true" style="padding-right: 15px;display: block;background-color: #000000B2;">
+        aria-hidden="true" style="background-color: #000000B2;">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
             <div class="modal-content"
                 style="background: transparent; border: none; box-shadow: none; width:800px !important;">
@@ -1019,8 +1019,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel"
-        aria-hidden="true" style="padding-right: 15px;display: block;background-color: #000000B2;">
+    <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel"style="background-color: #000000B2;"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
             <div class="modal-content"
                 style="background: transparent; border: none; box-shadow: none; width:800px !important;">
