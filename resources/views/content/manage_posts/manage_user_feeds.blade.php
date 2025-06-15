@@ -810,213 +810,116 @@
             @endif
         </div>
         <div class="view-wrapper">
-            <input type="hidden" name="feed_id" id="feed_id">
-            <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
-            <input type="hidden" name="comment_parent_id" id="comment_parent_id">
-            <div id="main-feed" class="container main-feed">
-                <div class="row g-4">
-                    @foreach ($reportscomments as $reportcomments)
-                        @php
-                            $comment = $reportcomments->comments;
-                            $feed = optional($comment)->feed;
-                            $user = optional($feed)->user;
-                            $reportUser = optional($reportcomments)->users;
-                        @endphp
+    <input type="hidden" name="feed_id" id="feed_id">
+    <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
+    <input type="hidden" name="comment_parent_id" id="comment_parent_id">
+    <div id="main-feed" class="container main-feed">
+        <div class="row g-4">
+            @foreach ($reportscomments as $reportcomments)
+                @php
+                    $comment = $reportcomments->comments;
+                    $feed = optional($comment)->feed; // Optional chaining to avoid errors
+                    $user = optional($feed)->user;
+                    $reportUser = optional($reportcomments)->users;
+                @endphp
 
-                        <div class="col-md-3">
-                            <div class="post-image">
-                                <div id="feed-card-{{ $feed->id }}"
-                                    class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
-                                    data-lightbox-type="comments" data-id="{{ $feed->_id }}"
-                                    @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                    @else
-                                                        @if (isset($feed->videos[0]))
-                                                            data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                    @else @endif
-                                    @endif
-                                    >
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
-                                            <div class="user-block">
-                                                <div class="user-info">
-                                                    <div class="row g-4">
-                                                        <div class="col-sm-2 p-0">
-                                                            <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type) . '.svg' }}"
-                                                                style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
-                                                        </div>
-                                                        <div class="col-sm-2 p-0">
-                                                            <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
-                                                                style="width: 25px !important;height: 25px !important;border-radius: 4px !important;margin: 9px 6px;"
-                                                                onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
-                                                        </div>
-                                                        <div class="col-sm-8">
-                                                            <p class="m-0"
-                                                                title="{{ optional($feed->user)->name }}">
-                                                                <b>{{ optional($feed->user)->name }}</b>
-                                                            </p>
-                                                            <small class="time">
-                                                                {{-- <i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i> --}}
-                                                            </small>
-                                                        </div>
+                @if ($feed)  <!-- Check if $feed is not null -->
+                    <div class="col-md-3">
+                        <div class="post-image">
+                            <div id="feed-card-{{ $feed->id }}"
+                                class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
+                                data-lightbox-type="comments" data-id="{{ $feed->_id }}"
+                                @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                    href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                    data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                @elseif (isset($feed->videos[0])) 
+                                    data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                    href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                    data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                @endif
+                            >
+                                <!-- Main wrap -->
+                                <div class="content-wrap">
+                                    <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
+                                        <div class="user-block">
+                                            <div class="user-info">
+                                                <div class="row g-4">
+                                                    <div class="col-sm-2 p-0">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/' . optional($feed->user)->user_type . '.svg') }}"
+                                                            style="width: 25px !important;height: 25px !important;background-color: #fff;padding: 4px;border-radius: 4px !important;margin: 9px 6px;">
                                                     </div>
-                                                    <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}"
-                                                        class="user-heart">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-                                            {{-- <div style="background-image: url('https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___%C5%9Eeyda_-_Were_thumb_2.jpg');"
-                                                        class="card-post-thumbnail">
-                                                    </div> --}}
-
-                                            @if (isset($feed->images[0]))
-                                                <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
-                                                    class="card-post-thumbnail">
-                                                </div>
-                                            @else
-                                                <div style="background-image: url('https://st2.depositphotos.com/4202565/7675/v/450/depositphotos_76756387-stock-illustration-video-player-with-black.jpg');"
-                                                    class="card-post-thumbnail">
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        <!-- /Post body -->
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:100%;height:100%">
-                                                    <div
-                                                        style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                    <div class="col-sm-2 p-0">
+                                                        <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                            style="width: 25px !important;height: 25px !important;border-radius: 4px !important;margin: 9px 6px;"
+                                                            onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
                                                     </div>
-
-                                                    <div
-                                                        style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                    <div class="col-sm-8">
+                                                        <p class="m-0" title="{{ optional($feed->user)->name }}">
+                                                            <b>{{ optional($feed->user)->name }}</b>
+                                                        </p>
                                                     </div>
-
-                                                    {{-- @if ($feed->is_comments == 1) --}}
-                                                    <div
-                                                        style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
-                                                    </div>
-                                                    {{-- @endif --}}
-                                                    {{-- @if ($feed->is_share == 1) --}}
-                                                    <div
-                                                        style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
-                                                    </div>
-                                                    {{-- @endif --}}
                                                 </div>
-                                                {{-- @if ($feed->is_emoji == 1) --}}
-                                                <div
-                                                    style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover">
-                                                    <span style="font-weight:400;font-family:Genos">0</span>
-                                                </div>
-                                                {{-- @endif --}}
+                                                <img src="{{ asset('assets/svg/svg-dialog/user-heart.svg') }}" class="user-heart">
                                             </div>
-                                        </div>
-
-
-
-                                    </div>
-                                    <div style="background-color: pink; border-radius:6px" class="p-1">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <button
-                                                    class="btn btn-white p-3">ID:{{ optional($feed->user)->user_id }}</button>
-
-                                            </div>
-                                            <div class="d-flex align-items-center" style="gap: 7px;">
-                                                <button class="btn btn-white_01 p-3">11.10.2025</button>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex align-items-center"> <img
-                                                src="{{ $reportcomments->users && $reportcomments->users->image
-                                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
-                                                        ? $reportcomments->users->image
-                                                        : asset('storage/' . $reportcomments->users->image))
-                                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
-                                                style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
-                                            <div class="w-100 d-flex flex-column">
-                                                <div class="mb-0 mt-2 p-1"
-                                                    style="font-size: 14px;  border-radius: 4px; background: #fff; ">
-                                                    <span
-                                                        style="font-weight: bold;">{{ $comment->user->name ?? 'Anonymous' }}</span>
-
-                                                    @if ($reportcomments->comments)
-                                                        @php $comment = $reportcomments->comments; @endphp
-
-                                                        @if ($comment->comment_type === 'normal' && $comment->comment)
-                                                            <p class="mb-0">{{ $comment->comment ?? '' }} </p>
-                                                        @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                            <audio controls style="width: -webkit-fill-available;">
-                                                                <source
-                                                                    src="{{ asset('storage/' . $comment->audio) }}"
-                                                                    type="audio/mpeg">
-                                                                Your browser does not support the audio element.
-                                                            </audio>
-                                                        @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-                                                            <span
-                                                                style="font-size: 24px;">{{ $comment->emoji }}</span>
-                                                        @else
-                                                            <em>No content available.</em>
-                                                        @endif
-                                                    @else
-                                                        <em>Comment not found.</em>
-                                                    @endif
-                                                </div>
-                                            </div>
-
-
-
-
-
-
-
-
                                         </div>
                                     </div>
+                                    <!-- Post body -->
+                                    <div class="card-body p-0">
+                                        @if (isset($feed->images[0]))
+                                            <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                class="card-post-thumbnail">
+                                            </div>
+                                        @else
+                                            <div style="background-image: url('https://st2.depositphotos.com/4202565/7675/v/450/depositphotos_76756387-stock-illustration-video-player-with-black.jpg');"
+                                                class="card-post-thumbnail">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <!-- /Post body -->
                                 </div>
-                                <div class="nav-item dropdown d-block"
-                                    style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <div class="d-flex align-items-center gap-2 open-edit-modal"
-                                            data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}">
-                                            <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
-                                                alt="">
-                                        </div>
-                                    </a>
+                            </div>
 
+                            <!-- Comment Section -->
+                            <div class="d-flex align-items-center">
+                                <img src="{{ $reportcomments->users && $reportcomments->users->image
+                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
+                                        ? $reportcomments->users->image
+                                        : asset('storage/' . $reportcomments->users->image))
+                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                    style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
+                                <div class="w-100 d-flex flex-column">
+                                    <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
+                                        <span style="font-weight: bold;">
+                                            {{ $comment->user->name ?? 'Anonymous' }}
+                                        </span>
+                                        @if ($reportcomments->comments)
+                                            @php $comment = $reportcomments->comments; @endphp
+                                            @if ($comment->comment_type === 'normal' && $comment->comment)
+                                                <p class="mb-0">{{ $comment->comment ?? '' }} </p>
+                                            @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                                                <audio controls style="width: -webkit-fill-available;">
+                                                    <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                                                <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+                                            @else
+                                                <em>No content available.</em>
+                                            @endif
+                                        @else
+                                            <em>Comment not found.</em>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
+    </div>
+</div>
+
     </div>
 
     <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel"style="background-color: #000000B2;"
