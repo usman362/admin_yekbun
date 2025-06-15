@@ -514,7 +514,7 @@
                         @if ($feed)
                             <div class="col-md-3">
                                 <div class="post-image">
-                                    <!-- Dropdown Menu - Correctly placed inside post-image but outside card is-post -->
+                                     
                                     <div class="nav-item dropdown d-block"
                                         style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
@@ -653,7 +653,7 @@
         </div>
     </div>
     <div class="modal fade" id="open-edit-modal-unique" tabindex="-1" aria-labelledby="editFeedModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" style="padding-right: 15px;display: block;background-color: #000000B2;">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
             <div class="modal-content"
                 style="background: transparent; border: none; box-shadow: none; width:800px !important;">
@@ -1020,7 +1020,7 @@
     </div>
 
     <div class="modal fade" id="editFeedModal" tabindex="-1" aria-labelledby="editFeedModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" style="padding-right: 15px;display: block;background-color: #000000B2;">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 98%; width: 98%;">
             <div class="modal-content"
                 style="background: transparent; border: none; box-shadow: none; width:800px !important;">
