@@ -514,7 +514,7 @@
                         @if ($feed)
                             <div class="col-md-3">
                                 <div class="post-image">
-                                     
+
                                     <div class="nav-item dropdown d-block"
                                         style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
                                         <a class="nav-link dropdown-toggle hide-arrow" href="#"
@@ -667,10 +667,10 @@
 
                     <!-- Right Panel (Full Height, No Scroll) -->
                     <div class="bg-white shadow "
-                        style="width: 48%; position: relative;  border-radius:12px !important">
+                        style="position: relative;  border-radius:12px !important">
                         <!-- One Close Icon (top-right) -->
                         <button type="button" class="close position-absolute"
-                            style="top: -27px; right: -56px; color: white; opacity: 1; z-index: 10; background: transparent; border: 2px solid #fff; border-radius: 50px; padding: 4px 14px; font-size: 22px;"
+                            style="top: -42px; right: -56px; color: rgb(255 255 255); opacity: 1; z-index: 10; background: transparent; border: 1px solid rgb(255 255 255); border-radius: 50px; padding: 4px 16px 8px 16px; font-size: 22px;"
                             onclick="$('#open-edit-modal-unique').modal('hide')">
                             &times;
                         </button>
@@ -680,6 +680,7 @@
                             <div class="header mb-3">
                                 <h2>Reported Feeds</h2>
                                 <p>Manage User Feeds</p>
+                                <button class="close-btn" onclick="$('#open-edit-modal-unique').modal('hide')">×</button>
                             </div>
 
                             <!-- User Info -->
@@ -708,7 +709,7 @@
                                 <label class="action level0">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
                                             alt=""></div>
-                                    <div><strong>Level #0</strong>
+                                    <div style="line-height: 1"><strong>Level #0</strong>
                                         <p class="m-0">Ignore the Clip</p>
                                     </div>
                                     <input type="radio" name="action-level" checked />
@@ -717,7 +718,7 @@
                                 <label class="action level1">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
                                             alt=""></div>
-                                    <div><strong>Level #1</strong>
+                                    <div style="line-height: 1"><strong>Level #1</strong>
                                         <p class="m-0">Delete Clip, Flag User</p>
                                     </div>
                                     <input type="radio" name="action-level" />
@@ -726,7 +727,7 @@
                                 <label class="action level2">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #2</strong>
                                         <p class="m-0">Delete Clip, Downgrade User</p>
                                         <div class="dropdowns">
@@ -745,7 +746,7 @@
                                 <label class="action level3">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #3</strong>
                                         <p class="m-0">Delete Clip, Suspend User</p>
                                         <div class="dropdowns">
@@ -763,7 +764,7 @@
                                 <label class="action level4">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #4</strong>
                                         <p class="m-0">Remove Account, Block User</p>
                                         <div class="dropdowns">
@@ -832,7 +833,7 @@
                                 @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                     href="{{ asset('storage/' . $feed->images[0]['path']) }}"
                                     data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                @elseif (isset($feed->videos[0])) 
+                                @elseif (isset($feed->videos[0]))
                                     data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                     href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
                                     data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
