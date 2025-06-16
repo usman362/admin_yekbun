@@ -1457,7 +1457,7 @@
                         <div>Discounts</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
+                <li class="menu-item {{ Request::is('settings/currency') ? 'active' : '' }}">
                     <a href="{{ url('/currency') }}" class="menu-link">
                         <div>Currency</div>
                     </a>
