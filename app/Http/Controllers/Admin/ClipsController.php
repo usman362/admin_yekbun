@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Clips;
+use App\Models\ClipTemplates;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
@@ -18,7 +19,8 @@ class ClipsController extends Controller
     public function manage_video()
     {
         $videos = Video::all();
-        $clips = Clips::all();
+        $clip = Clips::all();
+        $clips = ClipTemplates::all();
         return view('content.clips.manage_video', compact('videos','clips'));
     }
 
@@ -59,7 +61,7 @@ class ClipsController extends Controller
 
     public function store_clips(Request $request)
     {
-        $clip = new Clips();
+        $clip = new ClipTemplates();
         $clip->title = $request->title;
         $clip->json_paths = $request->json_paths[0] ?? '';
         $clip->json_sizes = $request->json_sizes[0] ?? '';
