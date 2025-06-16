@@ -1486,12 +1486,17 @@
                 </li>
                 <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
                     <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
-                        <div>Add Manage Apple Pay</div>
+                        <div>Add Manage ApplePay</div>
                     </a>
                 </li>
                  <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
                     <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
                         <div>Add Manage GooglePay</div>
+                    </a>
+                </li>
+                  <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
+                        <div> Manage Bank Transfer</div>
                     </a>
                 </li>
             </ul>
