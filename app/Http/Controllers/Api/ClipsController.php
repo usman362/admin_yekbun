@@ -40,8 +40,10 @@ class ClipsController extends Controller
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
         $clip->emoji = $request->emoji;
+        $clip->share_with = $request->share_with;
+        $clip->user_id = auth()->user()->id;
         $clip->save();
-        return back();
+        return ResponseHelper::sendResponse($clip,'Clip has been Created Successfully!');
     }
 
     public function store_templates(Request $request)
