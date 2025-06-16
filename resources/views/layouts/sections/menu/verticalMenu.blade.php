@@ -1498,7 +1498,7 @@
                     <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
                         <div> Manage Bank Transfer</div>
                     </a>
-                </li>
+                </li> 
             </ul>
         </li>
             </ul>
