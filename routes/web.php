@@ -529,10 +529,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/series/{id}/series', [UploadMovieController::class, 'deleteMovie'])->name('series.delete-video');
     Route::get('/series/{id}/thumbnail', [UploadMovieController::class, 'deleteImage'])->name('series.delete-thumbnail');
-
-    //   Route::get('/currency', [CurrencyController::class, 'index'])->name('index');
-
-
+ 
 
 
 
@@ -602,7 +599,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::middleware('check.role:Super Admin')->group(function ()  use ($controller_path) {
 
-        Route::resource('/settings/currency', CurrencyController::class);
+        Route::resource('/currency', CurrencyController::class);
 
         Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
 

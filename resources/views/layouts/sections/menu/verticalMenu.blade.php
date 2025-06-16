@@ -1432,7 +1432,8 @@
             </a>
         </li>
 
-        <li class="menu-item {{ Request::is('app/*') || Request::is('settings/*') ? 'active open' : '' }}">
+      <li class="menu-item {{ Request::is('app/*') || Request::is('currency*') || Request::is('settings/*') ? 'active open' : '' }}">
+
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-money"></i>
@@ -1450,7 +1451,7 @@
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
-                    <a href="{{ url('/settings/currency') }}" class="menu-link">
+                    <a href="{{ url('/currency') }}" class="menu-link">
                         <div>Currency</div>
                     </a>
                 </li>
