@@ -602,7 +602,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::middleware('check.role:Super Admin')->group(function ()  use ($controller_path) {
 
-        Route::resource('/currency', CurrencyController::class);
+      
 
         Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
 
@@ -785,6 +785,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
 
                 Route::resource('/bank-transfer', BankTransferController::class);
+                  Route::resource('/currency', CurrencyController::class);
 
                 Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
 
