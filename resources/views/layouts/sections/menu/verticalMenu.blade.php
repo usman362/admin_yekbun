@@ -1475,22 +1475,22 @@
                 </li> --}}
                 <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
                     <a href="{{ url('/settings/bank-transfer') }}" class="menu-link">
-                        <div>Add Manage Bank</div>
+                        <div> Manage Bank</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('settings/paypal-stripe') ? 'active' : '' }}">
                     <a href="{{ url('/settings/paypal-stripe') }}" class="menu-link">
-                        <div>Add Manage Paypal </div>
+                        <div> Manage Paypal </div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
                     <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
-                        <div>Add Manage ApplePay</div>
+                        <div> Manage ApplePay</div>
                     </a>
                 </li>
                  <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
                     <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
-                        <div>Add Manage GooglePay</div>
+                        <div> Manage GooglePay</div>
                     </a>
                 </li>
                   <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
