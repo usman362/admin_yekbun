@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Clips;
+use App\Models\ClipTemplates;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
@@ -22,9 +23,30 @@ class ClipsController extends Controller
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
+    public function get_templates()
+    {
+        $videos = ClipTemplates::all();
+        return ResponseHelper::sendResponse($videos, 'Clips Templates has been Fetch Successfully!');
+    }
+
     public function store_clips(Request $request)
     {
         $clip = new Clips();
+        $clip->json = $request->json;
+        $clip->video = $request->video;
+        $clip->audio = $request->audio;
+        $clip->video_volume = $request->video_volume;
+        $clip->audio_volume = $request->audio_volume;
+        $clip->text = $request->text;
+        $clip->text_properties = $request->text_properties;
+        $clip->emoji = $request->emoji;
+        $clip->save();
+        return back();
+    }
+
+    public function store_templates(Request $request)
+    {
+        $clip = new ClipTemplates();
         $clip->title = $request->title;
         $clip->json_paths = $request->json_paths[0] ?? '';
         $clip->json_sizes = $request->json_sizes[0] ?? '';

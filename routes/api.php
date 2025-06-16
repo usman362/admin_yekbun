@@ -176,7 +176,9 @@ Route::middleware('jwt.custom')->group(function () {
 
     //Clips
     Route::get('get-clips',[ClipsController::class,'index']);
+    Route::get('get-clips-templates',[ClipsController::class,'get_templates']);
     Route::post('store-clips',[ClipsController::class,'store_clips']);
+    Route::post('store-clips-templates',[ClipsController::class,'store_templates']);
 
     //Playlist
     Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
