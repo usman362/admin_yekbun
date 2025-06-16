@@ -1461,9 +1461,7 @@
                         <div>Currency</div>
                     </a>
                 </li>
-
-                <li
-            class="menu-item {{ Request::is('settings/payment-offices') ? 'active open' : '' }}{{ Request::is('settings/bank-transfer') ? 'active open' : '' }}{{ Request::is('settings/paypal-stripe') ? 'active open' : '' }}{{ Request::is('settings/payment-methods') ? 'active open' : '' }}">
+ <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 {{-- <i class="menu-icon tf-icons bx bx-credit-card"></i> --}}
                 <div>Payments</div>
