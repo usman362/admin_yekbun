@@ -1457,9 +1457,9 @@
                         <div>Discounts</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('settings/currency') ? 'active' : '' }}">
-                    <a href="{{ url('/currency') }}" class="menu-link">
-                        <div>Currency 1</div>
+                <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
+                    <a href="{{ url('settings/currency') }}" class="menu-link">
+                        <div>Currency</div>
                     </a>
                 </li>
              <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }}">
