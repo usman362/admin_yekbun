@@ -929,8 +929,11 @@
                                                         <span style="font-weight:400;font-family:Genos">0</span>
                                                     </div>
                                                 </div>
-                                                <div style="background-color: pink; border-radius:6px" class="p-1">
-                                                    <div class="d-flex justify-content-between align-items-center">
+                                                
+                                            </div>
+                        <div class="comment-section" data-comment-id="{{ $comment->id }}">
+                             <div style="background-color: pink; border-radius:6px" class="p-1">
+                                <div class="d-flex justify-content-between align-items-center">
                                                         <div class="d-flex align-items-center">
                                                             <button class="btn btn-white p-3">ID :
                                                                 {{ optional($feed->user)->user_id }}</button>
@@ -939,18 +942,7 @@
                                                             <button class="btn btn-white_01 p-3">11.10.2025</button>
                                                         </div>
                                                     </div>
-                                                    <p class="mb-0 mt-2 p-1"
-                                                        style="font-size: 14px; background: #fff; border-radius: 4px;">
-                                                        Reason: {{ $report->report_type }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                        <div class="comment-section" data-comment-id="{{ $comment->id }}">
-                             <div style="background-color: pink; border-radius:6px" class="p-1">
-                                
                             <div class="d-flex align-items-center">
-                                  <button class="btn btn-white p-3">ID :
-                                                                {{ optional($feed->user)->user_id }}</button>
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
                                         ? $reportcomments->users->image
