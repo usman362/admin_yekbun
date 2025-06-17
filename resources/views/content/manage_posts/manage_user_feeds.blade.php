@@ -950,7 +950,7 @@
                                     : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                     style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
                                 <div class="w-100 d-flex flex-column">
-                                    <div class="mb-0 mt-2 p-1" style="font-size: 0px; border-radius: 4px; background: #fff;">
+                                    <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
                                         <span style="font-weight: bold;">
                                             {{ $comment->user->name ?? 'Anonymous' }}
                                         </span>
