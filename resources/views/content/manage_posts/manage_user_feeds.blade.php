@@ -827,6 +827,18 @@
                 @if ($feed)  <!-- Check if $feed is not null -->
                     <div class="col-md-3">
                         <div class="post-image">
+                              <div class="nav-item dropdown d-block"
+                                        style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
+                                        <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="d-flex align-items-center gap-2 editFeedModal"
+                                                data-id="{{ $feed->id }}" data-comment-id="{{ $comment->id }}"
+                                                data-section="reported-comments">
+                                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}"
+                                                    alt="">
+                                            </div>
+                                        </a>
+                                    </div>
                             <div id="feed-card-{{ $feed->id }}"
                                 class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
                                 data-lightbox-type="comments" data-id="{{ $feed->_id }}"
