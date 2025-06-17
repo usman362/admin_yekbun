@@ -644,7 +644,7 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
                         @foreach ($clips as $clip)
-                            @if ($clip->video !== null && $clip->video !== 'undefined' && $clip->video !== {})
+                            @if ($clip->video !== null && $clip->video !== 'undefined' && !empty($clip->video))
                                 <div class="col-md-2">
                                     <div class="post-image text-white">
                                         <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
