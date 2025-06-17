@@ -1471,8 +1471,8 @@
                                 <div> Manage Bank</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Request::is('settings/paypal-stripe') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/paypal-stripe') }}" class="menu-link">
+                        <li class="menu-item {{ Request::is('settings/paypal') ? 'active' : '' }}">
+                            <a href="{{ url('/settings/paypal') }}" class="menu-link">
                                 <div> Manage Paypal </div>
                             </a>
                         </li>
@@ -1486,11 +1486,11 @@
                                 <div> Manage GooglePay</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
+                        {{-- <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
                             <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
                                 <div> Manage Bank Transfer</div>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
             </ul>
