@@ -630,7 +630,7 @@
                                                                 {{ optional($feed->user)->user_id }}</button>
                                                         </div>
                                                         <div class="d-flex align-items-center" style="gap: 7px;">
-                                                            <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                                           <button class="btn p-3" style="background-color: white; color: black;">11.10.2025</button>
                                                         </div>
                                                     </div>
                                                     <p class="mb-0 mt-2 p-1"
@@ -939,7 +939,7 @@
                                                                 {{ optional($feed->user)->user_id }}</button>
                                                         </div>
                                                         <div class="d-flex align-items-center" style="gap: 7px;">
-                                                            <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                                           <button class="btn p-3" style="background-color: white; color: black;">11.10.2025</button>
                                                         </div>
                              </div>
                             <div class="d-flex align-items-center">
@@ -1288,8 +1288,8 @@
 
                                             </div>
                                             <div class="d-flex align-items-center" style="gap: 7px;">
-                                                <button class="btn btn-white_01 p-3">11.10.2025</button>
-                                            <button class="btn p-3" style="background-color: white; color: black;">aa 11.10.2025</button>
+                                            
+                                            <button class="btn p-3" style="background-color: white; color: black;">aa11.10.2025</button>
 
                                             </div>
                                         </div>
