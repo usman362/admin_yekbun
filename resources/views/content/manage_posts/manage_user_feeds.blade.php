@@ -890,42 +890,38 @@
                             </div>
 
                             <!-- Comment Section -->
-                          <!-- Comment Section -->
-<div class="comment-section" data-comment-id="{{ $comment->id }}">
-    <div class="d-flex align-items-center">
-        <img src="{{ $reportcomments->users && $reportcomments->users->image
-            ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
-                ? $reportcomments->users->image
-                : asset('storage/' . $reportcomments->users->image))
-            : 'https://www.w3schools.com/w3images/avatar2.png' }}"
-            style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
-        <div class="w-100 d-flex flex-column">
-            <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
-                <span style="font-weight: bold;">
-                    {{ $comment->user->name ?? 'Anonymous' }}
-                </span>
-                @if ($reportcomments->comments)
-                    @php $comment = $reportcomments->comments; @endphp
-                    @if ($comment->comment_type === 'normal' && $comment->comment)
-                        <p class="mb-0">{{ $comment->comment ?? '' }} </p>
-                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                        <audio controls style="width: -webkit-fill-available;">
-                            <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
-                    @else
-                        <em>No content available.</em>
-                    @endif
-                @else
-                    <em>Comment not found.</em>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
+                            <div class="d-flex align-items-center">
+                                <img src="{{ $reportcomments->users && $reportcomments->users->image
+                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
+                                        ? $reportcomments->users->image
+                                        : asset('storage/' . $reportcomments->users->image))
+                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+                                    style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
+                                <div class="w-100 d-flex flex-column">
+                                    <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
+                                        <span style="font-weight: bold;">
+                                            {{ $comment->user->name ?? 'Anonymous' }}
+                                        </span>
+                                        @if ($reportcomments->comments)
+                                            @php $comment = $reportcomments->comments; @endphp
+                                            @if ($comment->comment_type === 'normal' && $comment->comment)
+                                                <p class="mb-0">{{ $comment->comment ?? '' }} </p>
+                                            @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                                                <audio controls style="width: -webkit-fill-available;">
+                                                    <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                                                <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+                                            @else
+                                                <em>No content available.</em>
+                                            @endif
+                                        @else
+                                            <em>Comment not found.</em>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endif
