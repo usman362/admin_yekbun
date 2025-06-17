@@ -949,6 +949,8 @@
                              <div style="background-color: pink; border-radius:6px" class="p-1">
                                 
                             <div class="d-flex align-items-center">
+                                  <button class="btn btn-white p-3">ID :
+                                                                {{ optional($feed->user)->user_id }}</button>
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
                                         ? $reportcomments->users->image
