@@ -1152,8 +1152,12 @@
             </div>
 
             @if ($feeds->count() > 3)
-                <a href="{{ route('manage.user.latestfeed') }}" class="btn btn-primary btn-md" id="see-more-btn">
-                    See More
+                 
+                 <a href="{{ route('manage.user.latestfeed') }}"
+                    class="see-all-link d-flex align-items-center gap-2 text-dark">
+                    See All
+                    <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow"
+                        class="see-all-arrow" style="width: 25px; height: 25px;">
                 </a>
             @endif
         </div>
@@ -1280,24 +1284,7 @@
 
                                     </div>
                                     <!-- /Main wrap -->
-                                    <div style="background-color: pink; border-radius:6px" class="p-1">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <button
-                                                    class="btn btn-white p-3">ID:{{ optional($feed->user)->user_id }}</button>
-
-                                            </div>
-                                            <div class="d-flex align-items-center" style="gap: 7px;">
-                                                <button class="btn btn-white p-3">11.10.2025</button>
-
-                                            </div>
-                                        </div>
-                                        <p class="mb-0 mt-2 p-1"
-                                            style="    font-size: 14px;
-    background: #fff; border-radius: 4px;">
-                                            Reason:
-                                            ipsum dolor sit amet, consectetur adipisicing.</p>
-                                    </div>
+                                    
                                 </div>
                                 <div class="nav-item dropdown d-block"
                                     style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
