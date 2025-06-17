@@ -57,6 +57,7 @@ use App\Http\Controllers\Admin\ManageAdController;
 use App\Http\Controllers\Admin\TicketServiceController;
 use App\Http\Controllers\Admin\BankTransferController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\ApplePayController;
 use App\Http\Controllers\Admin\Settings\PrefixController;
 use App\Http\Controllers\Admin\Settings\ReasonController;
 use App\Http\Controllers\VideoClipController;
@@ -784,6 +785,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
                 Route::resource('/bank-transfer', BankTransferController::class);
                 Route::resource('/paypal', PayPalController::class);
+                Route::resource('/applepay', ApplePayController::class);
 
                 Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
 
