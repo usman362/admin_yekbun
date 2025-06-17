@@ -890,6 +890,7 @@
                             </div>
 
                         <div class="comment-section" data-comment-id="{{ $comment->id }}">
+                             <div style="background-color: pink; border-radius:6px" class="p-1">
                             <div class="d-flex align-items-center">
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
@@ -921,7 +922,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div></div>
                         </div></div>
                     </div>
                 @endif
