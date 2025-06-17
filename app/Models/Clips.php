@@ -11,4 +11,9 @@ class Clips extends Model
     protected $collection = 'clips';
 
     use HasFactory;
+
+    public function template()
+    {
+        return $this->belongsTo(ClipTemplates::class, 'template_id');
+    }
 }
