@@ -19,6 +19,7 @@ use App\Http\Controllers\ChannelCategoryController;
 use App\Http\Controllers\Admin\ArtistController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\GooglePayPayController;
 use App\Http\Controllers\Admin\SeriesController;
 use App\Http\Controllers\Admin\VotingController;
 use App\Http\Controllers\Admin\HistoryController;
@@ -786,6 +787,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
                 Route::resource('/bank-transfer', BankTransferController::class);
                 Route::resource('/paypal', PayPalController::class);
                 Route::resource('/applepay', ApplePayController::class);
+                Route::resource('/googlepay', GooglePayPayController::class);
 
                 Route::get('chats/prefix', [PrefixController::class, 'index'])->name('chats.prefix');
 

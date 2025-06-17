@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Applepay list')
+@section('title', 'GooglePay list')
 
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-icons.css')}}" />
@@ -30,10 +30,10 @@
 <!-- Basic Bootstrap Table -->
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="m-0">ApplePay  List</h5>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createapplepaylModal"><i class="bx bx-plus me-0 me-sm-1"></i> Add ApplePay</button>
+        <h5 class="m-0">GooglePay  List</h5>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createGooglelModal"><i class="bx bx-plus me-0 me-sm-1"></i> Add GooglePay</button>
     </div>
-       @if(session('success'))
+    @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -45,50 +45,50 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead>
           <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>ApplePay Client Id</th>
-            <th>ApplePay Client Secret </th>
-            
+            <th>GooglePay Client Id</th>
+            <th>GooglePay Client Secret </th>            
             <th>Option</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-        @forelse($applepay as $bank)
+        @forelse($googlepay as $bank)
         <tr>
           <td>{{ $loop->iteration }}</td>
           <td>{{ $bank->add_title ?? '' }}</td>
-          <td>{{ $bank->applepay_cleint_id ?? '' }}</td>
-          <td>{{ $bank->applepay_cleint_secret ?? '' }}</td>
+          <td>{{ $bank->googlepay_cleint_id ?? '' }}</td>
+          <td>{{ $bank->googlepay_cleint_secret ?? '' }}</td>
           
           <td>
               <div class="dropdown d-inline-block">
                 <!-- Edit -->
-                <span data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#editpaypalModal{{ $bank->id }}">
+                <span data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#editgooglepaylModal{{ $bank->id }}">
                   <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Edit">
                     <i class="bx bx-edit"></i>
                   </button>
                 </span>
 
                 <!-- Delete -->
-                <form action="{{ route('settings.applepay.destroy',$bank->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                <form action="{{ route('settings.googlepay.destroy',$bank->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                   @method('DELETE')
                   @csrf
                   <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
                 </form>
            
               </div>
-              <x-modal id="editpaypalModal{{ $bank->id }}" 
+              <x-modal id="editgooglepaylModal{{ $bank->id }}" 
                   title="Edit Paypal "
                   saveBtnText="Update" 
                   saveBtnType="submit"
                 saveBtnForm="editForm{{ $bank->id }}" 
                     size="md">
-                @include('content.applepaytransfer.editForm')
+                @include('content.googlepaypaytransfer.editForm')
               </x-modal>
             </td>
         </tr>
@@ -102,8 +102,8 @@
     </div>
   </div>
   <!--/ Basic Bootstrap Table -->
-  <x-modal id="createapplepaylModal" title="Create Applepay" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md">
-    @include('content.include.applepay-transfer.createForm')
+  <x-modal id="createGooglelModal" title="Create GooglePay" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md">
+    @include('content.include.googlepay-transfer.createForm')
 </x-modal>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave-phone.js')}}"></script>

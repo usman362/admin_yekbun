@@ -1,5 +1,5 @@
 
-<form id="createForm" method="POST" action="{{ route('settings.applepay.store') }}" enctype="multipart/form-data">
+<form id="createForm" method="POST" action="{{ route('settings.googlepay.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -13,16 +13,16 @@
                     @enderror
                 </div>
                 <div class="col-md-12">
-                    <label class="form-label" for="inputTitle">ApplePay Client Id</label>
-                    <input type="text" id="inputTitle" class="form-control" placeholder="Apple Client Id" name="applepay_cleint_id">
-                    @error('applepay_cleint_id')
+                    <label class="form-label" for="inputTitle">GooglePay Client Id</label>
+                    <input type="text" id="inputTitle" class="form-control" placeholder="googlepay Client Id" name="googlepay_cleint_id">
+                    @error('googlepay_cleint_id')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-md-12">
-                    <label class="form-label" for="inputTitle">ApplePay Client Secret</label>
-                    <input type="text" id="inputTitle" class="form-control" placeholder="Paypal Client Secret" name="applepay_cleint_secret">
-                    @error('applepay_cleint_secret')
+                    <label class="form-label" for="inputTitle">GooglePay Client Secret</label>
+                    <input type="text" id="inputTitle" class="form-control" placeholder="Googlepay Client Secret" name="googlepay_cleint_secret">
+                    @error('googlepay_cleint_secret')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

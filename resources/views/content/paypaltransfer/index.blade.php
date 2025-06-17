@@ -33,6 +33,18 @@
         <h5 class="m-0">Paypal  List</h5>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createpaypalModal"><i class="bx bx-plus me-0 me-sm-1"></i> Add Paypal</button>
     </div>
+       @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead>
