@@ -890,38 +890,42 @@
                             </div>
 
                             <!-- Comment Section -->
-                            <div class="d-flex align-items-center">
-                                <img src="{{ $reportcomments->users && $reportcomments->users->image
-                                    ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
-                                        ? $reportcomments->users->image
-                                        : asset('storage/' . $reportcomments->users->image))
-                                    : 'https://www.w3schools.com/w3images/avatar2.png' }}"
-                                    style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
-                                <div class="w-100 d-flex flex-column">
-                                    <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
-                                        <span style="font-weight: bold;">
-                                            {{ $comment->user->name ?? 'Anonymous' }}
-                                        </span>
-                                        @if ($reportcomments->comments)
-                                            @php $comment = $reportcomments->comments; @endphp
-                                            @if ($comment->comment_type === 'normal' && $comment->comment)
-                                                <p class="mb-0">{{ $comment->comment ?? '' }} </p>
-                                            @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                <audio controls style="width: -webkit-fill-available;">
-                                                    <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
-                                                <span style="font-size: 24px;">{{ $comment->emoji }}</span>
-                                            @else
-                                                <em>No content available.</em>
-                                            @endif
-                                        @else
-                                            <em>Comment not found.</em>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
+                          <!-- Comment Section -->
+<div class="comment-section" data-comment-id="{{ $comment->id }}">
+    <div class="d-flex align-items-center">
+        <img src="{{ $reportcomments->users && $reportcomments->users->image
+            ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
+                ? $reportcomments->users->image
+                : asset('storage/' . $reportcomments->users->image))
+            : 'https://www.w3schools.com/w3images/avatar2.png' }}"
+            style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
+        <div class="w-100 d-flex flex-column">
+            <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
+                <span style="font-weight: bold;">
+                    {{ $comment->user->name ?? 'Anonymous' }}
+                </span>
+                @if ($reportcomments->comments)
+                    @php $comment = $reportcomments->comments; @endphp
+                    @if ($comment->comment_type === 'normal' && $comment->comment)
+                        <p class="mb-0">{{ $comment->comment ?? '' }} </p>
+                    @elseif ($comment->comment_type === 'audio' && $comment->audio)
+                        <audio controls style="width: -webkit-fill-available;">
+                            <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    @elseif ($comment->comment_type === 'emoji' && $comment->emoji)
+                        <span style="font-size: 24px;">{{ $comment->emoji }}</span>
+                    @else
+                        <em>No content available.</em>
+                    @endif
+                @else
+                    <em>Comment not found.</em>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
                         </div>
                     </div>
                 @endif
@@ -1281,41 +1285,43 @@
     }
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const feedId = this.dataset.id;
+    document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.open-edit-modal').forEach(function (button) {
+        button.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent default link
 
-                const originalCard = document.querySelector('#feed-card-' + feedId);
+            const feedId = this.dataset.id;
+            const commentId = this.dataset.commentId;
 
-                if (originalCard) {
-                    const modalBody = document.getElementById('editFeedContent');
-                    modalBody.innerHTML = ''; // Clear old content
-                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
+            const originalCard = document.querySelector('#feed-card-' + feedId);
 
-                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
+            if (originalCard) {
+                const modalBody = document.getElementById('editFeedContent');
+                modalBody.innerHTML = ''; // Clear old content
 
-                    // Show modal
-                    $('#editFeedModal').modal('show');
+                const clone = originalCard.cloneNode(true);
+                modalBody.appendChild(clone);
 
-                    // Apply the gray background with fade-in effect
-                    $('.modal-backdrop').addClass('modal-backdrop-custom');
-                    $('body').addClass('modal-open');
-                } else {
-                    alert("Feed card not found.");
+                // Optional: Also load comment details if needed
+                const comment = document.querySelector(`[data-comment-id="${commentId}"]`);
+                if (comment) {
+                    modalBody.appendChild(comment.cloneNode(true));
                 }
-            });
-        });
 
-        // Remove custom backdrop when modal closes
-        $('#editFeedModal').on('hide.bs.modal', function() {
-            // Remove the gray backdrop instantly when modal closes
-            $('.modal-backdrop').removeClass('modal-backdrop-custom');
-            $('body').removeClass('modal-open');
+                // Open modal
+                $('#editFeedModal').modal('show');
+            } else {
+                alert("Feed not found.");
+            }
         });
     });
-</script>
 
+    $('#editFeedModal').on('hide.bs.modal', function () {
+        $('body').removeClass('modal-open');
+    });
+});
+
+</script>
 
 
 
