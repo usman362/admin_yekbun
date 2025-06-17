@@ -1281,43 +1281,41 @@
     }
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.open-edit-modal').forEach(function (button) {
-        button.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent default link
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const feedId = this.dataset.id;
 
-            const feedId = this.dataset.id;
-            const commentId = this.dataset.commentId;
+                const originalCard = document.querySelector('#feed-card-' + feedId);
 
-            const originalCard = document.querySelector('#feed-card-' + feedId);
+                if (originalCard) {
+                    const modalBody = document.getElementById('editFeedContent');
+                    modalBody.innerHTML = ''; // Clear old content
+                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
 
-            if (originalCard) {
-                const modalBody = document.getElementById('editFeedContent');
-                modalBody.innerHTML = ''; // Clear old content
+                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
 
-                const clone = originalCard.cloneNode(true);
-                modalBody.appendChild(clone);
+                    // Show modal
+                    $('#editFeedModal').modal('show');
 
-                // Optional: Also load comment details if needed
-                const comment = document.querySelector(`[data-comment-id="${commentId}"]`);
-                if (comment) {
-                    modalBody.appendChild(comment.cloneNode(true));
+                    // Apply the gray background with fade-in effect
+                    $('.modal-backdrop').addClass('modal-backdrop-custom');
+                    $('body').addClass('modal-open');
+                } else {
+                    alert("Feed card not found.");
                 }
+            });
+        });
 
-                // Open modal
-                $('#editFeedModal').modal('show');
-            } else {
-                alert("Feed not found.");
-            }
+        // Remove custom backdrop when modal closes
+        $('#editFeedModal').on('hide.bs.modal', function() {
+            // Remove the gray backdrop instantly when modal closes
+            $('.modal-backdrop').removeClass('modal-backdrop-custom');
+            $('body').removeClass('modal-open');
         });
     });
-
-    $('#editFeedModal').on('hide.bs.modal', function () {
-        $('body').removeClass('modal-open');
-    });
-});
-
 </script>
+
 
 
 
