@@ -630,7 +630,7 @@
                                                                 {{ optional($feed->user)->user_id }}</button>
                                                         </div>
                                                         <div class="d-flex align-items-center" style="gap: 7px;">
-                                                            <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                                            <button class="btn btn-white p-3">11.10.2025</button>
                                                         </div>
                                                     </div>
                                                     <p class="mb-0 mt-2 p-1"
@@ -827,6 +827,15 @@
                 @if ($feed)  <!-- Check if $feed is not null -->
                     <div class="col-md-3">
                         <div class="post-image">
+                              <div class="nav-item dropdown d-block"
+                                        style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
+                                         <a href="#" class="open-edit-modal"
+                                data-id="{{ $feed->id }}"
+                                data-comment-id="{{ $comment->id }}"
+                                data-feed-section="reported-comments">
+                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
+                                </a>
+                                                                    </div>
                             <div id="feed-card-{{ $feed->id }}"
                                 class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
                                 data-lightbox-type="comments" data-id="{{ $feed->_id }}"
@@ -879,8 +888,60 @@
                                     <!-- /Post body -->
                                 </div>
                             </div>
+   <div class="mt-2 mb-0">
+                                                <div
+                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background-color:#f8f9fa;border-radius:5px;">
+                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
 
-                            <!-- Comment Section -->
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+
+                                                        <div
+                                                            style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span style="font-weight:400;font-family:Genos">0</span>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        <div class="comment-section" data-comment-id="{{ $comment->id }}">
+                             <div style="background-color: pink; border-radius:6px" class="p-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <button class="btn btn-white p-3">ID :
+                                                                {{ optional($feed->user)->user_id }}</button>
+                                                        </div>
+                                                        <div class="d-flex align-items-center" style="gap: 7px;">
+                                                            <button class="btn btn-white p-3">11.10.2025</button>
+                                                        </div>
+                             </div>
                             <div class="d-flex align-items-center">
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
@@ -898,7 +959,7 @@
                                             @if ($comment->comment_type === 'normal' && $comment->comment)
                                                 <p class="mb-0">{{ $comment->comment ?? '' }} </p>
                                             @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                <audio controls style="width: -webkit-fill-available;">
+                                                <audio controls style="width: -webkit-fill-available; height:15px">
                                                     <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
                                                     Your browser does not support the audio element.
                                                 </audio>
@@ -912,8 +973,8 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div></div>
+                        </div></div>
                     </div>
                 @endif
             @endforeach
@@ -961,10 +1022,11 @@
                             &times;
                         </button>
 
-                        <div class="reported-feeds">
+                           <div class="reported-feeds">
                             <div class="header mb-3">
                                 <h2>Reported Feeds</h2>
                                 <p>Manage User Feeds</p>
+                                <button class="close-btn" onclick="$('#open-edit-modal-unique').modal('hide')">×</button>
                             </div>
 
                             <!-- User Info -->
@@ -993,7 +1055,7 @@
                                 <label class="action level0">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
                                             alt=""></div>
-                                    <div><strong>Level #0</strong>
+                                    <div style="line-height: 1"><strong>Level #0</strong>
                                         <p class="m-0">Ignore the Clip</p>
                                     </div>
                                     <input type="radio" name="action-level" checked />
@@ -1002,7 +1064,7 @@
                                 <label class="action level1">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
                                             alt=""></div>
-                                    <div><strong>Level #1</strong>
+                                    <div style="line-height: 1"><strong>Level #1</strong>
                                         <p class="m-0">Delete Clip, Flag User</p>
                                     </div>
                                     <input type="radio" name="action-level" />
@@ -1011,7 +1073,7 @@
                                 <label class="action level2">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #2</strong>
                                         <p class="m-0">Delete Clip, Downgrade User</p>
                                         <div class="dropdowns">
@@ -1030,7 +1092,7 @@
                                 <label class="action level3">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #3</strong>
                                         <p class="m-0">Delete Clip, Suspend User</p>
                                         <div class="dropdowns">
@@ -1048,7 +1110,7 @@
                                 <label class="action level4">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #4</strong>
                                         <p class="m-0">Remove Account, Block User</p>
                                         <div class="dropdowns">
@@ -1090,8 +1152,12 @@
             </div>
 
             @if ($feeds->count() > 3)
-                <a href="{{ route('manage.user.latestfeed') }}" class="btn btn-primary btn-md" id="see-more-btn">
-                    See More
+                 
+                 <a href="{{ route('manage.user.latestfeed') }}"
+                    class="see-all-link d-flex align-items-center gap-2 text-dark">
+                    See All
+                    <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow"
+                        class="see-all-arrow" style="width: 25px; height: 25px;">
                 </a>
             @endif
         </div>
@@ -1218,24 +1284,7 @@
 
                                     </div>
                                     <!-- /Main wrap -->
-                                    <div style="background-color: pink; border-radius:6px" class="p-1">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <button
-                                                    class="btn btn-white p-3">ID:{{ optional($feed->user)->user_id }}</button>
-
-                                            </div>
-                                            <div class="d-flex align-items-center" style="gap: 7px;">
-                                                <button class="btn btn-white_01 p-3">11.10.2025</button>
-
-                                            </div>
-                                        </div>
-                                        <p class="mb-0 mt-2 p-1"
-                                            style="    font-size: 14px;
-    background: #fff; border-radius: 4px;">
-                                            Reason:
-                                            ipsum dolor sit amet, consectetur adipisicing.</p>
-                                    </div>
+                                    
                                 </div>
                                 <div class="nav-item dropdown d-block"
                                     style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
@@ -1270,41 +1319,50 @@
         $('#delete_form').attr('action', link);
     }
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-            button.addEventListener('click', function() {
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.open-edit-modal').forEach(function (button) {
+            button.addEventListener('click', function () {
                 const feedId = this.dataset.id;
+                const commentId = this.dataset.commentId;
 
                 const originalCard = document.querySelector('#feed-card-' + feedId);
+                const commentBlock = document.querySelector('.comment-section[data-comment-id="' + commentId + '"]');
 
+                const modalBody = document.getElementById('editFeedContent');
+                modalBody.innerHTML = ''; // Clear old content
+
+                // Clone and append feed card
                 if (originalCard) {
-                    const modalBody = document.getElementById('editFeedContent');
-                    modalBody.innerHTML = ''; // Clear old content
-                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
-
-                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
-
-                    // Show modal
-                    $('#editFeedModal').modal('show');
-
-                    // Apply the gray background with fade-in effect
-                    $('.modal-backdrop').addClass('modal-backdrop-custom');
-                    $('body').addClass('modal-open');
+                    modalBody.appendChild(originalCard.cloneNode(true));
                 } else {
-                    alert("Feed card not found.");
+                    console.warn("Feed card not found.");
                 }
+
+                // Clone and append comment block
+                if (commentBlock) {
+                    modalBody.appendChild(commentBlock.cloneNode(true));
+                } else {
+                    console.warn("Comment block not found.");
+                }
+
+                // Show modal
+                $('#editFeedModal').modal('show');
+
+                // Optional: add backdrop class
+                $('.modal-backdrop').addClass('modal-backdrop-custom');
+                $('body').addClass('modal-open');
             });
         });
 
-        // Remove custom backdrop when modal closes
-        $('#editFeedModal').on('hide.bs.modal', function() {
-            // Remove the gray backdrop instantly when modal closes
+        // Cleanup when modal is closed
+        $('#editFeedModal').on('hide.bs.modal', function () {
             $('.modal-backdrop').removeClass('modal-backdrop-custom');
             $('body').removeClass('modal-open');
         });
     });
 </script>
+
 
 
 

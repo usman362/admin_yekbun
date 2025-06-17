@@ -38,6 +38,7 @@
         <thead>
           <tr>
             <th>Id</th>
+            <th>Title</th>
             <th>Bank Name</th>
             <th>Owner Name </th>
             <th>Account No</th>
@@ -49,6 +50,7 @@
         @forelse($banks as $bank)
         <tr>
           <td>{{ $loop->iteration }}</td>
+          <td>{{ $bank->add_title ?? '' }}</td>
           <td>{{ $bank->bank_name ?? '' }}</td>
           <td>{{ $bank->account_holder_name ?? '' }}</td>
           <td>{{ $bank->account_no ?? '' }}</td>
