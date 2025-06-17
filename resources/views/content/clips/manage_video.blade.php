@@ -656,7 +656,7 @@
                                             data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '')  }}"
                                             data-user_image="{{ $clip->user ? ( !empty($clip->user->image) ? asset('storage/' . $clip->user->image) : asset('images/user-clips-report-user.png') ) : asset('images/user-clips-report-user.png') }}"
                                             data-user_level="{{ $clip->user->level ?? 0 }}"
-                                            style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
+                                            style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/'. $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                             <!-- Main wrap -->
                                             <div class="content-wrap">
                                                 <div class="mt-2 mb-0">
