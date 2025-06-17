@@ -43,6 +43,7 @@ class BankTransferController extends Controller
         ]);
 
         $bank  = new BankTransfer();
+        $bank->add_title = $request->add_title;
         $bank->bank_name = $request->bank_name;
         $bank->account_holder_name = $request->account_holder_name;
         $bank->account_no = $request->account_no;
@@ -87,6 +88,7 @@ class BankTransferController extends Controller
     public function update(Request $request, $id)
     {
         $bank = BankTransfer::find($id);
+        $bank->add_title = $request->add_title;
         $bank->bank_name = $request->bank_name;
         $bank->account_holder_name = $request->account_holder_name ;
         $bank->account_no = $request->account_no;
