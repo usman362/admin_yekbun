@@ -599,16 +599,12 @@
 
                             </div>
                         </div>
-                        @foreach ($clips as $clip)
+                        @foreach ($templates as $clip)
                             <div class="col-md-2">
                                 <div id="lottie-animation-{{ $clip->id }}" style="width: 300px; height: 300px;">
                                 </div>
                             </div>
                         @endforeach
-                        <div class="col-md-2">
-                            <div id="lottie-animation" style="width: 300px; height: 300px;">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -937,7 +933,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            @foreach ($clips as $clip)
+            @foreach ($templates as $clip)
                 lottie.loadAnimation({
                     container: document.getElementById('lottie-animation-{{ $clip->id }}'),
                     renderer: 'svg',
@@ -946,13 +942,6 @@
                     path: "{{ asset('storage/' . $clip->json_paths) }}"
                 });
             @endforeach
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-animation'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: "{{ asset('assets/json/Make_Peace_NEW_SHAPE.json') }}"
-            });
         });
     </script>
 

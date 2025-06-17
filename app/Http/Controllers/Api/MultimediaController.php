@@ -630,7 +630,7 @@ class MultimediaController extends Controller
         Storage::delete($originalPath);
 
         // Return URL to trimmed file
-        $url = '/media/trimmed/' . $trimmedName;
+        $url = 'media/trimmed/' . $trimmedName;
         return ResponseHelper::sendResponse($url,'Trimmed file uploaded successfully!');
     }
 }

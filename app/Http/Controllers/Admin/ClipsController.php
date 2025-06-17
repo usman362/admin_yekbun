@@ -19,9 +19,9 @@ class ClipsController extends Controller
     public function manage_video()
     {
         $videos = Video::all();
-        $clip = Clips::all();
-        $clips = ClipTemplates::all();
-        return view('content.clips.manage_video', compact('videos','clips'));
+        $clips = Clips::all();
+        $templates = ClipTemplates::all();
+        return view('content.clips.manage_video', compact('videos','clips','templates'));
     }
 
     public function store(Request $request)

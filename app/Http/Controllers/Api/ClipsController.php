@@ -19,7 +19,7 @@ class ClipsController extends Controller
 {
     public function index()
     {
-        $videos = Clips::all();
+        $videos = Clips::with('template')->get();
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
@@ -32,7 +32,8 @@ class ClipsController extends Controller
     public function store_clips(Request $request)
     {
         $clip = new Clips();
-        $clip->json = $request->json;
+        $clip->template_id = $request->template_id;
+        $clip->thumbnail = $request->thumbnail;
         $clip->video = $request->video;
         $clip->audio = $request->audio;
         $clip->video_volume = $request->video_volume;

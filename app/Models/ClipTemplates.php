@@ -11,4 +11,9 @@ class ClipTemplates extends Model
     protected $collection = 'clips_templates';
 
     use HasFactory;
+
+    public function clips()
+    {
+        return $this->hasMany(Clips::class, 'id', 'template_idd');
+    }
 }
