@@ -880,7 +880,7 @@
                                 </div>
                             </div>
 
-                            <!-- Comment Section -->
+                           <div style="background-color: pink; border-radius:6px" class="p-1">
                             <div class="d-flex align-items-center">
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
@@ -889,7 +889,7 @@
                                     : 'https://www.w3schools.com/w3images/avatar2.png' }}"
                                     style="width: 25px !important; height: 25px !important;  border-radius: 4px !important; margin: 9px 6px;">
                                 <div class="w-100 d-flex flex-column">
-                                    <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #e66666;">
+                                    <div class="mb-0 mt-2 p-1" style="font-size: 14px; border-radius: 4px; background: #fff;">
                                         <span style="font-weight: bold;">
                                             {{ $comment->user->name ?? 'Anonymous' }}
                                         </span>
@@ -912,7 +912,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div></div>
                         </div>
                     </div>
                 @endif
