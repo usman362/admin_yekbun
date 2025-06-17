@@ -941,7 +941,7 @@
                                                         <div class="d-flex align-items-center" style="gap: 7px;">
                                                             <button class="btn btn-white_01 p-3">11.10.2025</button>
                                                         </div>
-                                                    </div>
+                             </div>
                             <div class="d-flex align-items-center">
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
@@ -1289,6 +1289,7 @@
                                             </div>
                                             <div class="d-flex align-items-center" style="gap: 7px;">
                                                 <button class="btn btn-white_01 p-3">11.10.2025</button>
+                                            <button class="btn p-3" style="background-color: white; color: black;">11.10.2025</button>
 
                                             </div>
                                         </div>
