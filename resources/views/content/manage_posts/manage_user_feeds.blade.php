@@ -947,13 +947,7 @@
                                             </div>
                         <div class="comment-section" data-comment-id="{{ $comment->id }}">
                              <div style="background-color: pink; border-radius:6px" class="p-1">
-                                div class="d-flex align-items-center">
-                                                            <button class="btn btn-white p-3">ID :
-                                                                {{ optional($feed->user)->user_id }}</button>
-                                                        </div>
-                                                        <div class="d-flex align-items-center" style="gap: 7px;">
-                                                            <button class="btn btn-white_01 p-3">11.10.2025</button>
-                                                        </div>
+                                
                             <div class="d-flex align-items-center">
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
