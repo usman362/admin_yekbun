@@ -845,7 +845,7 @@
                             <div class="user-info">
                                 <div>
                                     <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
-                                        class="profile-img" id="user_image" />
+                                        class="profile-img" id="user_image" onerror="{{ asset('images/user-clips-report-user.png') }}"/>
                                 </div>
                                 <input type="hidden" id="user_id">
                                 <div class="user-details">
