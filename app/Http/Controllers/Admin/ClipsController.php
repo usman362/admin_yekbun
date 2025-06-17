@@ -19,9 +19,9 @@ class ClipsController extends Controller
     public function manage_video()
     {
         $videos = Video::all();
-        $clips = Clips::all();
-        $templates = ClipTemplates::all();
-        return view('content.clips.manage_video', compact('videos','clips','templates'));
+        $clips = Clips::with(['template','user'])->get();
+        $templates = ClipTemplates::with('clips')->get();
+        return view('content.clips.manage_video', compact('videos', 'clips', 'templates'));
     }
 
     public function store(Request $request)
@@ -83,6 +83,58 @@ class ClipsController extends Controller
         // if ($request->hasFile('video')) {
         //     $clip->video = Helpers::fileUpload($request->video, 'videos');
         // }
+        return back();
+    }
+
+    public function store_template(Request $request)
+    {
+        $clip = ClipTemplates::find($request->template_id);
+        if (empty($clip)) {
+            $clip = new ClipTemplates();
+        }
+        $clip->title = $request->title;
+        $clip->json_paths = $request->json_paths[0] ?? '';
+        $clip->json_sizes = $request->json_sizes[0] ?? '';
+        $clip->json_name = $request->json_name[0] ?? '';
+        $clip->video_paths = $request->video_paths[0] ?? '';
+        $clip->video_sizes = $request->video_sizes[0] ?? '';
+        $clip->video_name = $request->video_name[0] ?? '';
+        if (!empty($request->thumbnail)) {
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $clip->thumbnail = $cleanedThumbnail;
+        }
+        $clip->educated_price = $request->educated_price;
+        $clip->cultivated_price = $request->cultivated_price;
+        $clip->save();
+        // if ($request->hasFile('json_file')) {
+        //     $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
+        // }
+        // if ($request->hasFile('video')) {
+        //     $clip->video = Helpers::fileUpload($request->video, 'videos');
+        // }
+        return back();
+    }
+
+    public function delete_template($id)
+    {
+        $clip = ClipTemplates::find($id);
+        if (!$clip) {
+            return back();
+        }
+        if ($clip->json_paths) {
+            $file_path = public_path('storage/' . $clip->json_paths);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        $clips = Clips::where('template_id', $id)->get();
+        if ($clips) {
+            foreach ($clips as $cl) {
+                $cl->delete();
+            }
+        }
+        $clip->delete();
         return back();
     }
 

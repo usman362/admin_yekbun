@@ -24,17 +24,18 @@
     }
 </style>
 
-<form id="createForm" method="POST" action="{{ route('store.clips') }}" enctype="multipart/form-data">
+<form id="createForm" method="POST" action="{{ route('store.clipsTemplate') }}" enctype="multipart/form-data">
     @csrf
     {{-- <input type="hidden" name="history_id"> --}}
     {{-- <div class="hidden-inputs"></div> --}}
-    <input type="hidden" name="thumbnail" id="thumbnail">
+    {{-- <input type="hidden" name="thumbnail" id="thumbnail"> --}}
+    <input type="hidden" name="template_id" id="template_id">
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
                 <div class="col-md-12">
-                    <label class="form-label" for="inputTitle">Layout Title</label>
-                    <input type="text" id="inputTitle" class="form-control" placeholder="Layout Title" name="title"
+                    <label class="form-label" for="title">Layout Title</label>
+                    <input type="text" id="title" class="form-control" placeholder="Layout Title" name="title"
                         required>
                     @error('title')
                         <span class="text-danger">{{ $message }}</span>
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="inputTitle">Educated Price</label>
+                    <label class="form-label" for="educated_price">Educated Price</label>
                     <select class="form-control" name="educated_price" id="educated_price">
                         <option value="free">Free</option>
                         <option value="0.99">0,99 €</option>
@@ -66,7 +67,7 @@
                     @enderror
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="inputTitle">Cultivated Price</label>
+                    <label class="form-label" for="cultivated_price">Cultivated Price</label>
                     <select class="form-control" name="cultivated_price" id="cultivated_price">
                         <option value="free">Free</option>
                         <option value="0.49">0,49 €</option>
@@ -75,8 +76,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="card">
-                    {{-- <h5 class="card-header">Video Upload</h5> --}}
+                {{-- <div class="card">
                     <div class="card-body">
                         <div class="dropzone needsclick" action="/" id="dropzone-video">
                             <div class="dz-message needsclick">
@@ -89,7 +89,7 @@
                         </div>
                         <div class="hidden-videos"></div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

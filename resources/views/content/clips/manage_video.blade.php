@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                        height: 433px !important; */
+                                                                height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -497,11 +497,11 @@
                 <div class="d-flex align-items-center">
                     <div>
                         <p>Our Templates</p>
-                        <small>10 Templates</small>
+                        <small>{{ $clips->count() }} Templates</small>
                     </div>
                 </div>
 
-                <a href="javascript:void(0)" class="btn btn-primary btn-md" data-bs-toggle="modal"
+                <a href="javascript:void(0)" class="btn btn-primary create-template btn-md" data-bs-toggle="modal"
                     data-bs-target="#createClipsTemplateModal" style="z-index: 2">
                     Upload Template
                 </a>
@@ -510,98 +510,120 @@
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox
-                                    data-src="#video-popup" href="javascript:;"
-                                    data-thumb="{{ asset('videos/user-clip.mp4') }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
-                                    data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('videos/user-clip.mp4') }}"
-                                    style="background-image: url({{ asset('images/kung-fu-panda.png') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
+                        @foreach ($templates as $clip)
+                            <div class="col-md-2">
+                                <div class="post-image text-white">
+                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                        {{-- data-fancybox data-src="#video-popup" href="javascript:;"
+                                        data-thumb="{{ asset('videos/user-clip.mp4') }}"
+                                        data-id="67ef066938c58e2bce0a4d72"
+                                        data-demo-href="{{ asset('videos/user-clip.mp4') }}" --}}
+                                        style="
+                                    background-color: #7f7f7f;
+                                    height:335px;width:210px;background-size:cover;">
+                                        <!-- Main wrap -->
+                                        <div class="content-wrap">
+                                            <!-- Post body -->
+                                            <div class="card-body p-0">
+                                                <div id="lottie-animation-{{ $clip->id }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 260px;position: relative;bottom: auto;">
+                                    <div class="mt-2 mb-0"
+                                        style="top: 0;left:5px;position: absolute;bottom: auto;width:95%">
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
+                                                    style="background-color: rgba(0, 0, 0, 0.2);border-radius:8px;padding: 2px 6px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                                        width="15" alt=""> <span
+                                                        class="text-white">{{ $clip->educated_price == 'free' ? 'Free' : '0,99 €' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div
+                                                    style="background-color: rgba(0, 0, 0, 0.2);border-radius:8px;padding: 2px 6px;">
+                                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
+                                                        width="15" alt=""> <span
+                                                        class="text-white">{{ $clip->cultivated_price == 'free' ? 'Free' : '0,49 €' }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Post body -->
+                                    <div class="mt-2 mb-0" style="top: 260px;left:5px;position: absolute;bottom: auto;">
+                                        <div
+                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
+                                            <div style="display:flex;align-items:center;width:100%;height:100%">
 
 
-                                                        <div class="text-white"
-                                                            style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
-                                                            <h4 class="text-white"><b>Template ID</b></h4>
-                                                            <p>Upload Date Size</p>
+                                                <div class="text-white"
+                                                    style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
+                                                    <h4 class="text-white"><b>{{ substr($clip->id, 0, 5) }}</b>
+                                                    </h4>
+                                                    <p>{{ $clip->created_at->format('d M Y') }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-white"
+                                                style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+
+                                                <div class="nav-item dropdown d-block"
+                                                    style="margin-top: 0;position: absolute;right: -46px;top: 6px;bottom: auto;left: 154px;">
+                                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <img src="{{ asset('images/user-clips-cog.png') }}"
+                                                                alt="">
                                                         </div>
-                                                    </div>
+                                                    </a>
+                                                    <div class="dropdown-menu text-center dropdown-menu-end"
+                                                        style="min-width: unset; width: 100px;">
+                                                        <span style="font-family:Genos;color:#c0c0c0">Options</span>
+                                                        @php
+                                                            $message = 'Are you sure you want to delete this?';
+                                                            if ($clip->clips->count() > 0) {
+                                                                $message =
+                                                                    'This template contains clips. Do you want to delete it along with its clips?';
+                                                            }
+                                                        @endphp
+                                                        <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
+                                                            onsubmit="confirmAction(event, () => event.target.submit(),'{{ $message }}')"
+                                                            method="post" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="row ml-0" style="width:100px;">
 
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <div class="nav-item dropdown d-block"
-                                                            style="margin-top: 0;position: absolute;right: 6px;top: 6px;bottom: auto;">
-                                                            <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                        alt="">
+                                                                <div class="col-md-6"
+                                                                    style="border-right: 1px solid #c0c0c0">
+                                                                    <a class="dropdown-item edit-template"
+                                                                        style="padding: 0" href="javascript:void(0)"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#createClipsTemplateModal"
+                                                                        data-id="{{ $clip->id }}"
+                                                                        data-name="{{ $clip->title }}"
+                                                                        data-educated_price="{{ $clip->educated_price }}"
+                                                                        data-cultivated_price="{{ $clip->cultivated_price }}"
+                                                                        for="customRadioPrime">
+                                                                        <img class="pop_action_image" style="height: 26px"
+                                                                            src="{{ asset('assets/svg/edit.svg') }}"></a>
                                                                 </div>
-                                                            </a>
-                                                            <div class="dropdown-menu text-center dropdown-menu-end"
-                                                                style="min-width: unset; width: 100px;">
-                                                                <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                                <form action=""
-                                                                    onsubmit="confirmAction(event, () => event.target.submit())"
-                                                                    method="post" class="d-inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <div class="row ml-0" style="width:100px;">
-
-                                                                        <div class="col-md-6"
-                                                                            style="border-right: 1px solid #c0c0c0">
-                                                                            <a class="dropdown-item edit-"
-                                                                                style="padding: 0" href="javascript:void(0)"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#createClipsTemplateModal"
-                                                                                data-id="6818b59673c0ff4a020cea12"
-                                                                                data-name="" data-source=""
-                                                                                data-thumbnail="/public/storage"
-                                                                                data-comments="" data-share=""
-                                                                                data-emoji="" for="customRadioPrime">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <button type="submit"
-                                                                                data-id="681b3efba782bfb52205cc22"
-                                                                                class="dropdown-item" style="padding: 0">
-                                                                                <img class="pop_action_image"
-                                                                                    style="height: 26px"
-                                                                                    src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
+                                                                <div class="col-md-6">
+                                                                    <button type="submit" class="dropdown-item"
+                                                                        style="padding: 0">
+                                                                        <img class="pop_action_image" style="height: 26px"
+                                                                            src="{{ asset('assets/svg/delete.svg') }}"></button>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
-
                                                 </div>
                                             </div>
 
                                         </div>
-
                                     </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        @foreach ($templates as $clip)
-                            <div class="col-md-2">
-                                <div id="lottie-animation-{{ $clip->id }}" style="width: 300px; height: 300px;">
                                 </div>
                             </div>
                         @endforeach
@@ -615,80 +637,92 @@
             <div class="card-header">
                 <div>
                     <p>User Clips</p>
-                    <small>1.5k Clips 125 TB</small>
+                    <small>{{ $clips->count() }} Clips 125 TB</small>
                 </div>
             </div>
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-                        <div class="col-md-2">
-                            <div class="post-image text-white">
-                                <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox
-                                    data-src="#video-popup" href="javascript:;"
-                                    data-thumb="{{ asset('videos/user-clip.mp4') }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
-                                    data-id="67ef066938c58e2bce0a4d72"
-                                    data-demo-href="{{ asset('videos/user-clip.mp4') }}"
-                                    style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                    <!-- Main wrap -->
-                                    <div class="content-wrap">
-                                        <div class="mt-2 mb-0">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                </div>
+                        @foreach ($clips as $clip)
+                            @if ($clip->video !== null && $clip->video !== 'undefined')
+                                <div class="col-md-2">
+                                    <div class="post-image text-white">
+                                        <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                            data-fancybox data-src="#video-popup" href="javascript:;"
+                                            data-thumb="{{ asset('storage/' . $clip->thumbnail) }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
+                                            data-id="{{ $clip->id }}"
+                                            data-demo-href="{{ asset('storage/' . $clip->video) }}"
+                                            data-user_id="{{ $clip->user_id }}"
+                                            data-user_name="{{ $clip->user->name . ' ' . $clip->user->last_name }}"
+                                            data-user_image="{{ asset('storage/' . $clip->user->image) }}"
+                                            data-user_level="{{ $clip->user->level }}"
+                                            style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
+                                            <!-- Main wrap -->
+                                            <div class="content-wrap">
+                                                <div class="mt-2 mb-0">
+                                                    <div
+                                                        style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
+                                                        <div style="display:flex;align-items:center;width:34%;height:100%">
+                                                        </div>
 
-                                                <div
-                                                    style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                    <div style="display: flex">
-                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                            style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                        <h6 class="ml-2 text-white">Artist Name</h6>
+                                                        <div
+                                                            style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
+                                                            <div style="display: flex">
+                                                                <img src="{{ asset('images/user-clips-artist.png') }}"
+                                                                    style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
+                                                                <h6 class="ml-2 text-white">Artist Name</h6>
+                                                            </div>
+                                                            <div style="display: flex;margin-top:-6px">
+                                                                <img src="{{ asset('images/user-clips-flag.png') }}"
+                                                                    style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
+                                                                <p style="font-size: 9px" class="ml-2 text-white">Rojava
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                    <div style="display: flex;margin-top:-6px">
-                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                        <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                    </div>
                                                 </div>
+                                                <!-- Post body -->
+                                                <div class="card-body p-0">
+                                                    <!-- /Post body -->
+                                                    <div class="mt-2 mb-0"
+                                                        style="top: 250px;position: relative;bottom: auto;">
+                                                        <div
+                                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
+                                                            <div
+                                                                style="display:flex;align-items:center;width:100%;height:100%">
 
-                                            </div>
-                                        </div>
-                                        <!-- Post body -->
-                                        <div class="card-body p-0">
-                                            <!-- /Post body -->
-                                            <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                                <div
-                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
 
+                                                                <div class="text-white"
+                                                                    style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+                                                                    <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
+                                                                        style="width:100%;height:100%;object-fit:cover">
+                                                                    <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
+                                                                        style="width:100%;height:100%;object-fit:cover">
+                                                                    <span
+                                                                        style="font-weight:400;font-family:Genos">0</span>
+                                                                </div>
+                                                            </div>
 
-                                                        <div class="text-white"
-                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                            <div class="text-white"
+                                                                style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+
+                                                                <i class="fas fa-play"></i>
+                                                            </div>
+
                                                         </div>
                                                     </div>
 
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                        <i class="fas fa-play"></i>
-                                                    </div>
-
                                                 </div>
+
                                             </div>
 
                                         </div>
 
                                     </div>
-
                                 </div>
-
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -811,11 +845,12 @@
                             <div class="user-info">
                                 <div>
                                     <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
-                                        class="profile-img" />
+                                        class="profile-img" id="user_image" />
                                 </div>
+                                <input type="hidden" id="user_id">
                                 <div class="user-details">
                                     <div class="d-flex" style="margin: 0 auto;width: 155px;">
-                                        <strong>User Name</strong>
+                                        <strong id="user_name">User Name</strong>
                                         <b><span class="mt-1 ml-2"><span class="text-danger">3</span> of <span
                                                     class="text-success">5</span> Flags</span></b>
                                     </div>
@@ -960,25 +995,13 @@
             $(activeTab).fadeIn();
             return false;
         });
-
-        $('.view-post').click(function() {
-            $('video').each(function() {
-                this.pause();
-                this.currentTime = 0; // reset to beginning
-            });
-
-            $('.fancybox-slide .fancybox-content').after(`
-
-             <h1>TEST TEST TEST</h1>
-             `);
-        })
     </script>
     <script>
-        function confirmAction(event, callback) {
+        function confirmAction(event, callback, message) {
             event.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Are you sure you want to delete this?",
+                text: message,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',
@@ -993,6 +1016,40 @@
                 }
             });
         }
+
+        $('.edit-template').click(function() {
+            let template_id = $(this).attr('data-id');
+            let title = $(this).attr('data-name');
+            let educated_price = $(this).attr('data-educated_price');
+            let cultivated_price = $(this).attr('data-cultivated_price');
+            $('#template_id').val(template_id);
+            $('#title').val(title);
+            $('#educated_price').val(educated_price);
+            $('#cultivated_price').val(cultivated_price);
+        })
+
+        $('.create-template').click(function() {
+            $('#template_id').val('');
+            $('#title').val('');
+            $('#educated_price').val('free');
+            $('#cultivated_price').val('free');
+        })
+
+        $('.view-post').click(function() {
+            $('video').each(function() {
+                this.pause();
+                this.currentTime = 0; // reset to beginning
+            });
+
+            // $('.fancybox-slide .fancybox-content').after(`
+
+        //  <h1>TEST TEST TEST</h1>
+        //  `);
+
+            $('#user_id').val($(this).attr('data-user_id'));
+            $('#user_name').text($(this).attr('data-user_name'));
+            $('#user_image').attr('src', $(this).attr('data-user_image'));
+        })
     </script>
     <script>
         function drpzone_init() {

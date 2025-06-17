@@ -16,4 +16,10 @@ class Clips extends Model
     {
         return $this->belongsTo(ClipTemplates::class, 'template_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

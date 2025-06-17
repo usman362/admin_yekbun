@@ -530,7 +530,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/series/{id}/series', [UploadMovieController::class, 'deleteMovie'])->name('series.delete-video');
     Route::get('/series/{id}/thumbnail', [UploadMovieController::class, 'deleteImage'])->name('series.delete-thumbnail');
- 
+
 
 
 
@@ -934,6 +934,8 @@ Route::delete('/reel-list-card/{card}', [ReelSongController::class, 'deleteCard'
 Route::get('reel/ManageStories', [ReelSongController::class, 'ManageStories']);
 Route::get('manage-clips', [ClipsController::class, 'manage_video']);
 Route::post('manage-clips', [ClipsController::class, 'store_clips'])->name('store.clips');
+Route::post('store-clips-template', [ClipsController::class, 'store_template'])->name('store.clipsTemplate');
+Route::delete('delete-clips-template/{id}', [ClipsController::class, 'delete_template'])->name('delete.clipsTemplate');
 
 
 //Advertismen cards
