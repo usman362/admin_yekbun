@@ -830,12 +830,12 @@
                               <div class="nav-item dropdown d-block"
                                         style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
                                          <a href="#" class="open-edit-modal"
-   data-id="{{ $feed->id }}"
-   data-comment-id="{{ $comment->id }}"
-   data-feed-section="reported-comments">
-  <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
-</a>
-                                    </div>
+                                data-id="{{ $feed->id }}"
+                                data-comment-id="{{ $comment->id }}"
+                                data-feed-section="reported-comments">
+                                <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
+                                </a>
+                                                                    </div>
                             <div id="feed-card-{{ $feed->id }}"
                                 class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
                                 data-lightbox-type="comments" data-id="{{ $feed->_id }}"
@@ -970,10 +970,11 @@
                             &times;
                         </button>
 
-                        <div class="reported-feeds">
+                           <div class="reported-feeds">
                             <div class="header mb-3">
                                 <h2>Reported Feeds</h2>
                                 <p>Manage User Feeds</p>
+                                <button class="close-btn" onclick="$('#open-edit-modal-unique').modal('hide')">×</button>
                             </div>
 
                             <!-- User Info -->
@@ -1002,7 +1003,7 @@
                                 <label class="action level0">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-0.svg') }}"
                                             alt=""></div>
-                                    <div><strong>Level #0</strong>
+                                    <div style="line-height: 1"><strong>Level #0</strong>
                                         <p class="m-0">Ignore the Clip</p>
                                     </div>
                                     <input type="radio" name="action-level" checked />
@@ -1011,7 +1012,7 @@
                                 <label class="action level1">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-1.svg') }}"
                                             alt=""></div>
-                                    <div><strong>Level #1</strong>
+                                    <div style="line-height: 1"><strong>Level #1</strong>
                                         <p class="m-0">Delete Clip, Flag User</p>
                                     </div>
                                     <input type="radio" name="action-level" />
@@ -1020,7 +1021,7 @@
                                 <label class="action level2">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-2.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #2</strong>
                                         <p class="m-0">Delete Clip, Downgrade User</p>
                                         <div class="dropdowns">
@@ -1039,7 +1040,7 @@
                                 <label class="action level3">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-3.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #3</strong>
                                         <p class="m-0">Delete Clip, Suspend User</p>
                                         <div class="dropdowns">
@@ -1057,7 +1058,7 @@
                                 <label class="action level4">
                                     <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
                                             alt=""></div>
-                                    <div>
+                                    <div style="line-height: 1">
                                         <strong>Level #4</strong>
                                         <p class="m-0">Remove Account, Block User</p>
                                         <div class="dropdowns">
