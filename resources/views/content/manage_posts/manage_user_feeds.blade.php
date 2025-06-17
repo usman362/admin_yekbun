@@ -959,7 +959,7 @@
                                             @if ($comment->comment_type === 'normal' && $comment->comment)
                                                 <p class="mb-0">{{ $comment->comment ?? '' }} </p>
                                             @elseif ($comment->comment_type === 'audio' && $comment->audio)
-                                                <audio controls style="width: -webkit-fill-available;">
+                                                <audio controls style="width: -webkit-fill-available; height:15px">
                                                     <source src="{{ asset('storage/' . $comment->audio) }}" type="audio/mpeg">
                                                     Your browser does not support the audio element.
                                                 </audio>
