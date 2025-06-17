@@ -889,7 +889,7 @@
                                 </div>
                             </div>
 
-                            <!-- Comment Section -->
+                        <div class="comment-section" data-comment-id="{{ $comment->id }}">
                             <div class="d-flex align-items-center">
                                 <img src="{{ $reportcomments->users && $reportcomments->users->image
                                     ? (Str::startsWith($reportcomments->users->image, ['http://', 'https://'])
@@ -922,7 +922,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></div>
                     </div>
                 @endif
             @endforeach
@@ -1280,41 +1280,50 @@
         $('#delete_form').attr('action', link);
     }
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.open-edit-modal').forEach(function(button) {
-            button.addEventListener('click', function() {
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.open-edit-modal').forEach(function (button) {
+            button.addEventListener('click', function () {
                 const feedId = this.dataset.id;
+                const commentId = this.dataset.commentId;
 
                 const originalCard = document.querySelector('#feed-card-' + feedId);
+                const commentBlock = document.querySelector('.comment-section[data-comment-id="' + commentId + '"]');
 
+                const modalBody = document.getElementById('editFeedContent');
+                modalBody.innerHTML = ''; // Clear old content
+
+                // Clone and append feed card
                 if (originalCard) {
-                    const modalBody = document.getElementById('editFeedContent');
-                    modalBody.innerHTML = ''; // Clear old content
-                    modalBody.appendChild(originalCard.cloneNode(true)); // Clone and insert
-
-                    const modal = new bootstrap.Modal(document.getElementById('editFeedModal'));
-
-                    // Show modal
-                    $('#editFeedModal').modal('show');
-
-                    // Apply the gray background with fade-in effect
-                    $('.modal-backdrop').addClass('modal-backdrop-custom');
-                    $('body').addClass('modal-open');
+                    modalBody.appendChild(originalCard.cloneNode(true));
                 } else {
-                    alert("Feed card not found.");
+                    console.warn("Feed card not found.");
                 }
+
+                // Clone and append comment block
+                if (commentBlock) {
+                    modalBody.appendChild(commentBlock.cloneNode(true));
+                } else {
+                    console.warn("Comment block not found.");
+                }
+
+                // Show modal
+                $('#editFeedModal').modal('show');
+
+                // Optional: add backdrop class
+                $('.modal-backdrop').addClass('modal-backdrop-custom');
+                $('body').addClass('modal-open');
             });
         });
 
-        // Remove custom backdrop when modal closes
-        $('#editFeedModal').on('hide.bs.modal', function() {
-            // Remove the gray backdrop instantly when modal closes
+        // Cleanup when modal is closed
+        $('#editFeedModal').on('hide.bs.modal', function () {
             $('.modal-backdrop').removeClass('modal-backdrop-custom');
             $('body').removeClass('modal-open');
         });
     });
 </script>
+
 
 
 
