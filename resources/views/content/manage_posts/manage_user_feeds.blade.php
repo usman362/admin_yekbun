@@ -829,13 +829,11 @@
                         <div class="post-image">
                               <div class="nav-item dropdown d-block"
                                         style="position: absolute; right: 6px; top: 6px; z-index: 1000;">
-                                         <a href="#" data-bs-toggle="modal" data-bs-target="#editFeedModal">
-    <div class="d-flex align-items-center gap-2"
-         data-id="{{ $feed->id }}"
-         data-comment-id="{{ $comment->id }}"
-         data-section="reported-comments">
-        <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
-    </div>
+                                         <a href="#" class="open-edit-modal"
+   data-id="{{ $feed->id }}"
+   data-comment-id="{{ $comment->id }}"
+   data-feed-section="reported-comments">
+  <img src="{{ asset('assets/svg/svg-dialog/post-dropdown.svg') }}" alt="">
 </a>
                                     </div>
                             <div id="feed-card-{{ $feed->id }}"
