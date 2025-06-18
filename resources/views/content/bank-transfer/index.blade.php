@@ -200,15 +200,9 @@
     <h5 class="m-0"><strong>Transactions Bank Overview</strong></h5>
 
     <div class="d-flex align-items-center">
-        <div class="d-flex align-items-center ms-3" style="border-radius: 10px;">
-            <div class="input-group time_input" style="width: 260px;">
-                <input type="text" class="form-control time_input_field datepicker" style="height: 27px;margin-top: 7px;"
-                    placeholder="Select Date" name="duration" id="datepicker"
-                    aria-label="Datepicker 1" autocomplete="off" />
-                <button class="btn" type="button" onclick="$('.datepicker').daterangepicker('show')">
-                    <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg') }}" class="time_div_img">
-                </button>
-            </div>
+         <div class="d-flex align-items-center ms-3">     
+
+            <input type="text" class="form-control form-control-sm  time_input_field datepicker" onclick="$('.datepicker').daterangepicker('show')"  placeholder="Select Date"  aria-label="Datepicker 1"  autocomplete="off">
         </div>
 
         <!-- Sort by Service -->
