@@ -192,9 +192,41 @@
 
 <!-- Second Card: Transaction List -->
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="m-0"><strong>Transactions Bank Overview</strong></h5>
+        <!-- Filter Section on the Same Row -->
+        <div class="d-flex align-items-center">
+            <!-- Filter by Date -->
+            <div class="d-flex align-items-center ms-3">
+              
+                <select id="filterDate" class="form-select form-select-sm">
+                    <option selected>Sort by Date</option>
+                    <option value="1">01.01.2025 - 31.01.2025</option>
+                    <option value="2">01.02.2025 - 28.02.2025</option>
+                    <option value="3">01.03.2025 - 31.03.2025</option>
+                    <!-- Add more date ranges as needed -->
+                </select>
+            </div>
+
+            <!-- Sort by Service -->
+            <div class="d-flex align-items-center ms-3">
+                 
+                <select id="filterService" class="form-select form-select-sm">
+                    <option selected>Sort by Service</option>
+                    <option value="account">Account</option>
+                    <option value="music">Music</option>
+                    <option value="channels">Channels</option>
+                    
+                </select>
+            </div>
+
+            <!-- Search Button -->
+            <div class="d-flex align-items-center ms-3">
+                <button class="btn btn-outline-secondary btn-sm">Search</button>
+            </div>
+        </div>
     </div>
+
     <div class="card-body">
         <div class="table-responsive text-nowrap">
             <table class="table">
