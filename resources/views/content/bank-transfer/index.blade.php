@@ -249,14 +249,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Order</th>
-                        <th>Date & Time</th>
-                        <th>About User</th>
-                        <th>Service Type</th>
-                        <th>Payment Type</th>
-                        <th>Total Paid</th>
-                        <th>Options</th>
+                        <th style="font-size: 20px;">#</th>
+                        <th style="font-size: 20px;">Order</th>
+                        <th style="font-size: 20px;">Date & Time</th>
+                        <th style="font-size: 20px;">About User</th>
+                        <th style="font-size: 20px;">Service Type</th>
+                        <th style="font-size: 20px;">Payment Type</th>
+                        <th style="font-size: 20px;">Total Paid</th>
+                        <th style="font-size: 20px;">Options</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
