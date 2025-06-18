@@ -1440,11 +1440,6 @@
                 <div>Settings</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('app/invoice/list') ? 'active' : '' }}">
-                    <a href="{{ url('/app/invoice/list') }}" class="menu-link">
-                        <div>Invoice</div>
-                    </a>
-                </li>
                 <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
                     <a href="{{ url('/app/user-income') }}" class="menu-link">
                         <div>Discounts</div>
@@ -1454,6 +1449,29 @@
                     <a href="{{ url('/currency') }}" class="menu-link">
                         <div>Currency</div>
                     </a>
+                </li>
+                <li class="menu-item {{ Request::is('app/invoice/*') ? 'active open' : '' }}">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        {{-- <i class="menu-icon tf-icons bx bx-credit-card"></i> --}}
+                        <div>Invoice</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('app/invoice/list') ? 'active' : '' }}">
+                            <a href="{{ url('app/invoice/list') }}" class="menu-link">
+                                <div>Manage Invoice</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('app/invoice/add') ? 'active' : '' }}">
+                            <a href="{{ url('app/invoice/add') }}" class="menu-link">
+                                <div>Add Invoice</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('app/invoice/edit') ? 'active' : '' }}">
+                            <a href="{{ url('app/invoice/edit') }}" class="menu-link">
+                                <div>Edit Invoice</div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
