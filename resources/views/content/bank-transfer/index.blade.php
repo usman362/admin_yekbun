@@ -238,29 +238,29 @@
              <ul class="dropdown-menu" aria-labelledby="dropdownExport">
             <li>
                 <a class="dropdown-item" href="#" id="exportPDF">
-                    <img src="{{ asset('assets/svg/pdf-icon.svg') }}" class="icon-base bx bxs-file-pdf me-1" style="width: 20px; height: 20px;" alt="PDF"> PDF
+                    <img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="PDF"> PDF
                 </a>
             </li>
             <li>
                 <a class="dropdown-item" href="#" id="exportCSV">
-                    <img src="{{ asset('assets/svg/csv-icon.svg') }}" class="icon-base bx bx-file me-1" style="width: 20px; height: 20px;" alt="CSV"> CSV
+                    <img src="{{ asset('assets/img/file-csv.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="CSV"> CSV
                 </a>
             </li>
             <li>
                 <a class="dropdown-item" href="#" id="exportPrint">
-                    <img src="{{ asset('assets/svg/print-icon.svg') }}" class="icon-base bx bx-printer me-1" style="width: 20px; height: 20px;" alt="Print"> Print
+                    <img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Print"> Print
                 </a>
             </li>
             <li>
                 <a class="dropdown-item" href="#" id="exportExcel">
-                    <img src="{{ asset('assets/svg/excel-icon.svg') }}" class="icon-base bx bxs-file-export me-1" style="width: 20px; height: 20px;" alt="Excel"> Excel
+                    <img src="{{ asset('assets/img/file-excel.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Excel"> Excel
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a class="dropdown-item" href="#" id="exportCopy">
                     <img src="{{ asset('assets/svg/copy-icon.svg') }}" class="icon-base bx bx-copy me-1" style="width: 20px; height: 20px;" alt="Copy"> Copy
                 </a>
-            </li>
+            </li> --}}
         </ul>
         </div>
     </div>
@@ -310,7 +310,7 @@
                             <small>Educated</small>
                         </td>
                         <td class="line-height-1">
-                            <p class="m-0"><strong>Paypal</strong></p>
+                            <p class="m-0"><strong>Bank Transfer</strong></p>
                             <small>Transaction ID</small>
                         </td>
                         <td class="line-height-1">
