@@ -201,7 +201,7 @@
 
     <div class="d-flex align-items-center">
         <div class="d-flex align-items-center ms-3" style="border-radius: 10px;">
-            <div class="input-group time_input" style="width: 200px;">
+            <div class="input-group time_input" style="width: 260px;">
                 <input type="text" class="form-control time_input_field datepicker" style="height: 27px;margin-top: 7px;"
                     placeholder="Select Date" name="duration" id="datepicker"
                     aria-label="Datepicker 1" autocomplete="off" />
