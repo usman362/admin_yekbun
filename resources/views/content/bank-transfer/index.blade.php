@@ -19,6 +19,7 @@
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+
 <style>
   .ql-snow {
     overflow: hidden;
@@ -196,35 +197,77 @@
         <h5 class="m-0"><strong>Transactions Bank Overview</strong></h5>
         <!-- Filter Section on the Same Row -->
         <div class="d-flex align-items-center">
-            <!-- Filter by Date -->
-            <div class="d-flex align-items-center ms-3">
-              
-                <select id="filterDate" class="form-select form-select-sm">
-                    <option selected>Sort by Date</option>
-                    <option value="1">01.01.2025 - 31.01.2025</option>
-                    <option value="2">01.02.2025 - 28.02.2025</option>
-                    <option value="3">01.03.2025 - 31.03.2025</option>
-                    <!-- Add more date ranges as needed -->
-                </select>
-            </div>
+    <!-- Filter by Date -->
+    <div class="mb-3 card border-0 time_div">
+        <div class="row">
+            <div class="col-12" style="border-radius: 10px;">
+                <div class="input-group time_input" style="width: 200px;">
+                    <input type="text" class="form-control time_input_field datepicker"
+                        placeholder="Select Date" name="duration" id="datepicker"
+                        aria-label="Datepicker 1" autocomplete="off" />
 
-            <!-- Sort by Service -->
-            <div class="d-flex align-items-center ms-3">
-                 
-                <select id="filterService" class="form-select form-select-sm">
-                    <option selected>Sort by Service</option>
-                    <option value="account">Account</option>
-                    <option value="music">Music</option>
-                    <option value="channels">Channels</option>
-                    
-                </select>
-            </div>
-
-            <!-- Search Button -->
-            <div class="d-flex align-items-center ms-3">
-                <button class="btn btn-outline-secondary btn-sm">Search</button>
+                    <button class="btn" type="button"
+                        onclick="$('.datepicker').daterangepicker('show')">
+                        <img src="{{ asset('assets/svg/svg-dialog/Calendar%20Add.svg') }}"
+                            class="time_div_img">
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Sort by Service -->
+    <div class="d-flex align-items-center ms-3">
+        <select id="filterService" class="form-select form-select-sm">
+            <option selected>Sort by Service</option>
+            <option value="account">Account</option>
+            <option value="music">Music</option>
+            <option value="channels">Channels</option>
+        </select>
+    </div>
+
+    <!-- Search Button -->
+    <div class="d-flex align-items-center ms-3">
+        <input type="text" class="form-control form-control-sm" placeholder="Search">
+    </div>
+
+    <!-- Export Dropdown -->
+    <div class="d-flex align-items-center ms-3">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                Export
+            </button>
+             <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+            <li>
+                <a class="dropdown-item" href="#" id="exportPDF">
+                    <img src="{{ asset('assets/svg/pdf-icon.svg') }}" class="me-2" style="width: 20px; height: 20px;" alt="PDF"> PDF
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#" id="exportCSV">
+                    <img src="{{ asset('assets/svg/csv-icon.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="CSV"> CSV
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#" id="exportPrint">
+                    <img src="{{ asset('assets/svg/print-icon.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Print"> Print
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#" id="exportExcel">
+                    <img src="{{ asset('assets/svg/excel-icon.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Excel"> Excel
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#" id="exportCopy">
+                    <img src="{{ asset('assets/svg/copy-icon.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Copy"> Copy
+                </a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+
     </div>
 
     <div class="card-body">
@@ -319,5 +362,33 @@
       }
     });
   }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    // Initialize Flatpickr on the start date and end date input fields
+    flatpickr("#startDate", {
+        dateFormat: "Y-m-d",  // Specify the date format
+        minDate: "today",     // Optional: disable past dates
+        maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+        allowInput: true      // Allows users to type in the date
+    });
+
+    flatpickr("#endDate", {
+        dateFormat: "Y-m-d",  // Specify the date format
+        minDate: "today",     // Optional: disable past dates
+        maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+        allowInput: true      // Allows users to type in the date
+    });
+
+    // Handle "Sort by Date" dropdown click
+    document.getElementById('filterDate').addEventListener('change', function() {
+        const selectedValue = this.value;
+        if (selectedValue === 'start' || selectedValue === 'end') {
+            document.getElementById('datePickerSection').style.display = 'flex';
+        } else {
+            document.getElementById('datePickerSection').style.display = 'none';
+        }
+    });
 </script>
 @endsection
