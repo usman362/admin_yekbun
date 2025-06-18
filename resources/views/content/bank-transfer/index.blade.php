@@ -198,9 +198,8 @@
         <!-- Filter Section on the Same Row -->
         <div class="d-flex align-items-center">
     <!-- Filter by Date -->
-    <div class="mb-3 card border-0 time_div">
-        <div class="row">
-            <div class="col-12" style="border-radius: 10px;">
+     
+        <div class="d-flex align-items-center ms-3" style="border-radius: 10px;">
                 <div class="input-group time_input" style="width: 200px;">
                     <input type="text" class="form-control time_input_field datepicker"
                         placeholder="Select Date" name="duration" id="datepicker"
@@ -213,8 +212,7 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
+     
 
     <!-- Sort by Service -->
     <div class="d-flex align-items-center ms-3">
