@@ -24,6 +24,83 @@
     overflow: hidden;
   }
 </style>
+<style>
+    .card,
+    .modal {
+        font-family: 'Genos';
+    }
+
+    .transaction-icons img {
+        width: 100%;
+        height: 50px;
+        margin: 0 auto;
+    }
+
+    .transaction-icons h4 {
+        margin: 0;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .transaction-icons p {
+        font-size: 18px;
+        text-align: center;
+        margin: 0;
+    }
+
+    .transaction-icons i {
+        font-size: 14px;
+    }
+
+    .transaction-icons {
+        padding: 12px 38px 0px 38px;
+        width: 100%;
+        border-right: 2px solid #F2F2F2;
+    }
+
+    .transaction-icons:last-child {
+        border-right: none !important;
+    }
+
+    .nav-pills .nav-link {
+        font-size: 16px !important;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .nav-link.active:hover,
+    .nav-pills .nav-link.active:focus {
+        background-color: transparent !important;
+        color: #000 !important;
+        font-weight: bold !important;
+        box-shadow: none !important;
+    }
+
+    .line-height-1 {
+        line-height: 1 !important;
+    }
+
+    .user-area span {
+        font-size: 14px;
+    }
+
+    .user-area img {
+        width: 10px;
+        height: 10px;
+        margin: 4px 2px 0 2px;
+    }
+
+    .user-area .user-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 30px;
+    }
+
+    .user-area span {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 2px;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -101,7 +178,463 @@
       </table>
     </div>
   </div>
+
   <!--/ Basic Bootstrap Table -->
+  <!-- Space between the two cards -->
+<div style="height: 30px;"></div> <!-- This will create a clear gap between the cards -->
+
+<!-- Second Card: Transaction List -->
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0"><strong>Transactions ApplePay Overview</strong></h5>
+
+        <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center ms-3">
+
+                <input type="text" class="form-control form-control-sm  time_input_field datepicker" onclick="$('.datepicker').daterangepicker('show')" placeholder="Select Date" aria-label="Datepicker 1" autocomplete="off">
+            </div> -->
+            <!-- calender -->
+            <div class="row">
+                <!-- Date Input -->
+                   <div class="col-auto" style="border-radius: 10px; position: relative;">
+                    <input type="text"
+                        class="form-control form-control-sm datepicker"
+                        placeholder="Select Date"
+                        name="duration"
+                        id="datepicker"
+                        aria-label="Datepicker"
+                        autocomplete="off"
+                        style="padding-right: 40px; height: 32px;" />
+
+                    <button type="button"
+                        onclick="$('.datepicker').daterangepicker('show')"
+                        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
+                    </button>
+                </div>
+
+
+                <!-- Sort by Service Dropdown -->
+                <div class="col-auto d-flex align-items-center ms-3">
+                    <select id="filterService"
+                        class="form-select form-select-sm"
+                        style="height: 32px;">
+                        <option selected>Sort by Service</option>
+                        <option value="account">Account</option>
+                        <option value="music">Music</option>
+                        <option value="channels">Channels</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!-- Search Button -->
+            <div class="d-flex align-items-center ms-3">
+                <input type="text" class="form-control form-control-sm" placeholder="Search" style="height: 32px;">
+            </div>
+
+            <!-- Export Dropdown -->
+            <div class="d-flex align-items-center ms-3">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                        Export
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+                        <li><a class="dropdown-item" href="#" id="exportPDF"><img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
+                        <li><a class="dropdown-item" href="#" id="exportCSV"><img src="{{ asset('assets/img/file-csv.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
+                        <li><a class="dropdown-item" href="#" id="exportPrint"><img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
+                        <li><a class="dropdown-item" href="#" id="exportExcel"><img src="{{ asset('assets/img/file-excel.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="font-size: 20px;">#</th>
+                        <th style="font-size: 20px;">Order</th>
+                        <th style="font-size: 20px;">Date & Time</th>
+                        <th style="font-size: 20px;">About User</th>
+                        <th style="font-size: 20px;">Service Type</th>
+                        <th style="font-size: 20px;">Payment Type</th>
+                        <th style="font-size: 20px;">Total Paid</th>
+                        <th style="font-size: 20px;">Options</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    <tr>
+                        <td>01</td>
+                        <td>Order ID</td>
+                        <td class="line-height-1">
+                            <p class="m-0"><strong>DD.MM.YYYY</strong></p>
+                            <small>HH:MM</small>
+                        </td>
+                        <td class="line-height-1 user-area">
+                            <div class="d-flex">
+                                <img class="user-avatar" src="{{ asset('images/user-clips-artist.png') }}" alt="">
+                                <div>
+                                    <h5 class="m-0"><strong>Username</strong></h5>
+                                    <div class="d-flex">
+                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
+                                        <span>Rojava . Qamishlo</span>
+                                        <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                        <span>Hannover</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="line-height-1">
+                            <p class="m-0"><strong>Upgrades</strong></p>
+                            <small>Educated</small>
+                        </td>
+                        <td class="line-height-1">
+                            <p class="m-0"><strong>ApplePay </strong></p>
+                            <small>Transaction ID</small>
+                        </td>
+                        <td class="line-height-1">
+                            <p class="m-0"><strong>15,00€</strong></p>
+                            <small>-0% Discount</small>
+                        </td>
+                         <td>
+                        <div class="d-flex align-items-center"><a
+                                class="text-body" data-bs-placement="top" aria-label="Preview Invoice"
+                                data-bs-toggle="modal" data-bs-target="#sub-categories"
+                                data-bs-offset="0,4" href="javascript:void(0)" data-bs-html="true"
+                                data-bs-original-title="Edit"><img src="{{asset('assets/svg/eye.svg')}}" alt=""></a>
+                            
+                        </div>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+<!-- SubCategories Modal -->
+<div class="modal fade" id="sub-categories" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-sub-categories">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="content-wrapper">
+
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+
+
+                        <div class="row invoice-preview">
+                            <!-- Invoice -->
+                            <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
+                                <div class="card invoice-preview-card">
+                                    <div class="card-body">
+                                        <div
+                                            class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column p-sm-3 p-0">
+                                            <div class="mb-xl-0 mb-4">
+                                                <div class="d-flex svg-illustration mb-3 gap-2">
+                                                    <span class="app-brand-logo demo">
+                                                        <img src="http://127.0.0.1:8000/assets/img/logo-ff.jpeg" width="20" style="margin-left:-20px;height: 140px;">
+
+
+                                                    </span>
+                                                    <span class="app-brand-text demo text-body fw-bolder">
+                                                        Sneat
+                                                    </span>
+                                                </div>
+                                                <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
+                                                <p class="mb-1">San Diego County, CA 91905, USA</p>
+                                                <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
+                                            </div>
+                                            <div>
+                                                <h4>Invoice #3492</h4>
+                                                <div class="mb-2">
+                                                    <span class="me-1">Date Issues:</span>
+                                                    <span class="fw-semibold">25/08/2020</span>
+                                                </div>
+                                                <div>
+                                                    <span class="me-1">Date Due:</span>
+                                                    <span class="fw-semibold">29/08/2020</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-0">
+                                    <div class="card-body">
+                                        <div class="row p-sm-3 p-0">
+                                            <div
+                                                class="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+                                                <h6 class="pb-2">Invoice To:</h6>
+                                                <p class="mb-1">Thomas shelby</p>
+                                                <p class="mb-1">Shelby Company Limited</p>
+                                                <p class="mb-1">Small Heath, B10 0HF, UK</p>
+                                                <p class="mb-1">718-986-6062</p>
+                                                <p class="mb-0">peakyFBlinders@gmail.com</p>
+                                            </div>
+                                            <div class="col-xl-6 col-md-12 col-sm-7 col-12">
+                                                <h6 class="pb-2">Bill To:</h6>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="pe-3">Total Due:</td>
+                                                            <td>$12,110.55</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pe-3">Bank name:</td>
+                                                            <td>American Bank</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pe-3">Country:</td>
+                                                            <td>United States</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pe-3">IBAN:</td>
+                                                            <td>ETD95476213874685</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pe-3">SWIFT code:</td>
+                                                            <td>BR91905</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table border-top m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Description</th>
+                                                    <th>Cost</th>
+                                                    <th>Qty</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-nowrap">Vuexy Admin Template</td>
+                                                    <td class="text-nowrap">HTML Admin Template</td>
+                                                    <td>$32</td>
+                                                    <td>1</td>
+                                                    <td>$32.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap">Frest Admin Template</td>
+                                                    <td class="text-nowrap">Angular Admin Template</td>
+                                                    <td>$22</td>
+                                                    <td>1</td>
+                                                    <td>$22.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap">Apex Admin Template</td>
+                                                    <td class="text-nowrap">HTML Admin Template</td>
+                                                    <td>$17</td>
+                                                    <td>2</td>
+                                                    <td>$34.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap">Robust Admin Template</td>
+                                                    <td class="text-nowrap">React Admin Template</td>
+                                                    <td>$66</td>
+                                                    <td>1</td>
+                                                    <td>$66.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" class="align-top px-4 py-5">
+                                                        <p class="mb-2">
+                                                            <span class="me-1 fw-semibold">Salesperson:</span>
+                                                            <span>Alfie Solomons</span>
+                                                        </p>
+                                                        <span>Thanks for your business</span>
+                                                    </td>
+                                                    <td class="text-end px-4 py-5">
+                                                        <p class="mb-2">Subtotal:</p>
+                                                        <p class="mb-2">Discount:</p>
+                                                        <p class="mb-2">Tax:</p>
+                                                        <p class="mb-0">Total:</p>
+                                                    </td>
+                                                    <td class="px-4 py-5">
+                                                        <p class="fw-semibold mb-2">$154.25</p>
+                                                        <p class="fw-semibold mb-2">$00.00</p>
+                                                        <p class="fw-semibold mb-2">$50.00</p>
+                                                        <p class="fw-semibold mb-0">$204.25</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <span class="fw-semibold">Note:</span>
+                                                <span>It was a pleasure working with you and your team. We hope you will
+                                                    keep us in mind for future freelance
+                                                    projects. Thank You!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Invoice -->
+
+                            <!-- Invoice Actions -->
+                            <div class="col-xl-3 col-md-4 col-12 invoice-actions">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <button class="btn btn-primary d-grid w-100 mb-3" data-bs-toggle="offcanvas"
+                                            data-bs-target="#sendInvoiceOffcanvas">
+                                            <span
+                                                class="d-flex align-items-center justify-content-center text-nowrap"><i
+                                                    class="bx bx-paper-plane bx-xs me-1"></i>Send Invoice</span>
+                                        </button>
+                                        <button class="btn btn-label-secondary d-grid w-100 mb-3">
+                                            Download
+                                        </button>
+                                        <a class="btn btn-label-secondary d-grid w-100 mb-3" target="_blank"
+                                            href="http://127.0.0.1:8000/app/invoice/print">
+                                            Print
+                                        </a>
+                                        <a href="http://127.0.0.1:8000/app/invoice/edit"
+                                            class="btn btn-label-secondary d-grid w-100 mb-3">
+                                            Edit Invoice
+                                        </a>
+                                        <button class="btn btn-primary d-grid w-100" data-bs-toggle="offcanvas"
+                                            data-bs-target="#addPaymentOffcanvas">
+                                            <span
+                                                class="d-flex align-items-center justify-content-center text-nowrap"><i
+                                                    class="bx bx-dollar bx-xs me-1"></i>Add Payment</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Invoice Actions -->
+                        </div>
+
+                        <!-- Offcanvas -->
+                        <!-- Send Invoice Sidebar -->
+                        <div class="offcanvas offcanvas-end" id="sendInvoiceOffcanvas" aria-hidden="true">
+                            <div class="offcanvas-header mb-3">
+                                <h5 class="offcanvas-title">Send Invoice</h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body flex-grow-1">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="invoice-from" class="form-label">From</label>
+                                        <input type="text" class="form-control" id="invoice-from"
+                                            value="shelbyComapny@email.com" placeholder="company@email.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="invoice-to" class="form-label">To</label>
+                                        <input type="text" class="form-control" id="invoice-to"
+                                            value="qConsolidated@email.com" placeholder="company@email.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="invoice-subject" class="form-label">Subject</label>
+                                        <input type="text" class="form-control" id="invoice-subject"
+                                            value="Invoice of purchased Admin Templates"
+                                            placeholder="Invoice regarding goods">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="invoice-message" class="form-label">Message</label>
+                                        <textarea class="form-control" name="invoice-message" id="invoice-message" cols="3" rows="8">Dear Queen Consolidated,
+          Thank you for your business, always a pleasure to work with you!
+          We have generated a new invoice in the amount of $95.59
+          We would appreciate payment of this invoice by 05/11/2021</textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <span class="badge bg-label-primary">
+                                            <i class="bx bx-link bx-xs"></i>
+                                            <span class="align-middle">Invoice Attached</span>
+                                        </span>
+                                    </div>
+                                    <div class="mb-3 d-flex flex-wrap">
+                                        <button type="button" class="btn btn-primary me-3"
+                                            data-bs-dismiss="offcanvas">Send</button>
+                                        <button type="button" class="btn btn-label-secondary"
+                                            data-bs-dismiss="offcanvas">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Send Invoice Sidebar -->
+                        <!-- Add Payment Sidebar -->
+                        <div class="offcanvas offcanvas-end" id="addPaymentOffcanvas" aria-hidden="true">
+                            <div class="offcanvas-header mb-3">
+                                <h5 class="offcanvas-title">Add Payment</h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body flex-grow-1">
+                                <div class="d-flex justify-content-between bg-lighter p-2 mb-3">
+                                    <p class="mb-0">Invoice Balance:</p>
+                                    <p class="fw-bold mb-0">$5000.00</p>
+                                </div>
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="invoiceAmount">Payment Amount</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="text" id="invoiceAmount" name="invoiceAmount"
+                                                class="form-control invoice-amount" placeholder="100">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="payment-date">Payment Date</label>
+                                        <input id="payment-date" class="form-control invoice-date flatpickr-input"
+                                            type="text" readonly="readonly">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="payment-method">Payment Method</label>
+                                        <select class="form-select" id="payment-method">
+                                            <option value="" selected="" disabled="">Select payment
+                                                method</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Bank Transfer">Bank Transfer</option>
+                                            <option value="Debit Card">Debit Card</option>
+                                            <option value="Credit Card">Credit Card</option>
+                                            <option value="Paypal">Paypal</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="payment-note">Internal Payment Note</label>
+                                        <textarea class="form-control" id="payment-note" rows="2"></textarea>
+                                    </div>
+                                    <div class="mb-3 d-flex flex-wrap">
+                                        <button type="button" class="btn btn-primary me-3"
+                                            data-bs-dismiss="offcanvas">Send</button>
+                                        <button type="button" class="btn btn-label-secondary"
+                                            data-bs-dismiss="offcanvas">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Add Payment Sidebar -->
+                        <!-- /Offcanvas -->
+
+                        <!-- pricingModal -->
+                        <!--/ pricingModal -->
+
+                    </div>
+                    <!-- / Content -->
+
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
   <x-modal id="createapplepaylModal" title="Create Applepay" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md">
     @include('content.include.applepay-transfer.createForm')
 </x-modal>
@@ -135,5 +668,43 @@
       }
     });
   }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    // Initialize Flatpickr on the start date and end date input fields
+    flatpickr("#startDate", {
+        dateFormat: "Y-m-d", // Specify the date format
+        minDate: "today", // Optional: disable past dates
+        maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+        allowInput: true // Allows users to type in the date
+    });
+
+    flatpickr("#endDate", {
+        dateFormat: "Y-m-d", // Specify the date format
+        minDate: "today", // Optional: disable past dates
+        maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+        allowInput: true // Allows users to type in the date
+    });
+
+    // Handle "Sort by Date" dropdown click
+    $(document).ready(function() {
+        $('#datepicker').daterangepicker({
+            singleDatePicker: true,
+            autoUpdateInput: false, // prevent default fill
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('#datepicker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        });
+
+        // Automatically open on focus
+        $('#datepicker').on('focus', function() {
+            $(this).daterangepicker('show');
+        });
+    });
 </script>
 @endsection

@@ -353,8 +353,7 @@
                                             <div class="mb-xl-0 mb-4">
                                                 <div class="d-flex svg-illustration mb-3 gap-2">
                                                     <span class="app-brand-logo demo">
-                                                        <img src="http://127.0.0.1:8000/assets/img/logo-ff.jpeg"
-                                                            width="20" style="margin-left:-20px">
+                                                        <img src="http://127.0.0.1:8000/assets/img/logo-ff.jpeg" width="20" style="margin-left:-20px;height: 140px;">
 
 
                                                     </span>
