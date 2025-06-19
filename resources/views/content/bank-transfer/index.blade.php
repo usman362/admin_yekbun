@@ -21,96 +21,99 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 
 <style>
-  .ql-snow {
-    overflow: hidden;
-  }
-  .time_input, #filterService {
-    width: 200px; /* Adjust this width as necessary */
-}
+    .ql-snow {
+        overflow: hidden;
+    }
+
+    .time_input,
+    #filterService {
+        width: 200px;
+        /* Adjust this width as necessary */
+    }
 </style>
- <style>
-        .card,
-        .modal {
-            font-family: 'Genos';
-        }
+<style>
+    .card,
+    .modal {
+        font-family: 'Genos';
+    }
 
-        .transaction-icons img {
-            width: 100%;
-            height: 50px;
-            margin: 0 auto;
-        }
+    .transaction-icons img {
+        width: 100%;
+        height: 50px;
+        margin: 0 auto;
+    }
 
-        .transaction-icons h4 {
-            margin: 0;
-            font-size: 20px;
-            text-align: center;
-        }
+    .transaction-icons h4 {
+        margin: 0;
+        font-size: 20px;
+        text-align: center;
+    }
 
-        .transaction-icons p {
-            font-size: 18px;
-            text-align: center;
-            margin: 0;
-        }
+    .transaction-icons p {
+        font-size: 18px;
+        text-align: center;
+        margin: 0;
+    }
 
-        .transaction-icons i {
-            font-size: 14px;
-        }
+    .transaction-icons i {
+        font-size: 14px;
+    }
 
-        .transaction-icons {
-            padding: 12px 38px 0px 38px;
-            width: 100%;
-            border-right: 2px solid #F2F2F2;
-        }
+    .transaction-icons {
+        padding: 12px 38px 0px 38px;
+        width: 100%;
+        border-right: 2px solid #F2F2F2;
+    }
 
-        .transaction-icons:last-child {
-            border-right: none !important;
-        }
+    .transaction-icons:last-child {
+        border-right: none !important;
+    }
 
-        .nav-pills .nav-link {
-            font-size: 16px !important;
-        }
+    .nav-pills .nav-link {
+        font-size: 16px !important;
+    }
 
-        .nav-pills .nav-link.active,
-        .nav-pills .nav-link.active:hover,
-        .nav-pills .nav-link.active:focus {
-            background-color: transparent !important;
-            color: #000 !important;
-            font-weight: bold !important;
-            box-shadow: none !important;
-        }
+    .nav-pills .nav-link.active,
+    .nav-pills .nav-link.active:hover,
+    .nav-pills .nav-link.active:focus {
+        background-color: transparent !important;
+        color: #000 !important;
+        font-weight: bold !important;
+        box-shadow: none !important;
+    }
 
-        .line-height-1 {
-            line-height: 1 !important;
-        }
+    .line-height-1 {
+        line-height: 1 !important;
+    }
 
-        .user-area span {
-            font-size: 14px;
-        }
+    .user-area span {
+        font-size: 14px;
+    }
 
-        .user-area img {
-            width: 10px;
-            height: 10px;
-            margin: 4px 2px 0 2px;
-        }
+    .user-area img {
+        width: 10px;
+        height: 10px;
+        margin: 4px 2px 0 2px;
+    }
 
-        .user-area .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 30px;
-        }
+    .user-area .user-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 30px;
+    }
 
-        .user-area span {
-            font-size: 12px;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-    </style>
+    .user-area span {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 2px;
+    }
+</style>
 @endsection
 
 @section('content')
 <!-- Basic Bootstrap Table -->
 
- <div class="card mb-4"> <!-- First Card: Bank Transfer List -->
+<div class="card mb-4"> <!-- First Card: Bank Transfer List -->
     <div class="card-header d-flex align-items-center justify-content-between">
         <h5 class="m-0"><strong>Bank Transfer List</strong></h5>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createbankModal">
@@ -170,13 +173,13 @@
                                     <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
                                 </form>
                             </div>
-                            <x-modal id="editbankModal{{ $bank->id }}" 
+                            <x-modal id="editbankModal{{ $bank->id }}"
                                 title="Edit Bank "
-                                saveBtnText="Update" 
+                                saveBtnText="Update"
                                 saveBtnType="submit"
-                                saveBtnForm="editForm{{ $bank->id }}" 
+                                saveBtnForm="editForm{{ $bank->id }}"
                                 size="md">
-                            @include('content.bank-transfer.editForm')
+                                @include('content.bank-transfer.editForm')
                             </x-modal>
                         </td>
                     </tr>
@@ -197,45 +200,67 @@
 <!-- Second Card: Transaction List -->
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="m-0"><strong>Transactions Bank Overview</strong></h5>
+        <h5 class="m-0"><strong>Transactions Bank Overview</strong></h5>
 
-    <div class="d-flex align-items-center">
-         <div class="d-flex align-items-center ms-3">     
+        <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center ms-3">
 
-            <input type="text" class="form-control form-control-sm  time_input_field datepicker" onclick="$('.datepicker').daterangepicker('show')"  placeholder="Select Date"  aria-label="Datepicker 1"  autocomplete="off">
-        </div>
+                <input type="text" class="form-control form-control-sm  time_input_field datepicker" onclick="$('.datepicker').daterangepicker('show')" placeholder="Select Date" aria-label="Datepicker 1" autocomplete="off">
+            </div> -->
+            <!-- calender -->
+            <div class="row">
+                <!-- Date Input -->
+                <div class="col-auto" style="border-radius: 10px; position: relative;">
+                    <input type="text"
+                        class="form-control form-control-sm datepicker"
+                        placeholder="Select Date"
+                        name="duration"
+                        id="datepicker"
+                        aria-label="Datepicker"
+                        autocomplete="off"
+                        style="padding-right: 40px; height: 32px;" />
 
-        <!-- Sort by Service -->
-        <div class="d-flex align-items-center ms-3">
-            <select id="filterService" class="form-select form-select-sm">
-                <option selected>Sort by Service</option>
-                <option value="account">Account</option>
-                <option value="music">Music</option>
-                <option value="channels">Channels</option>
-            </select>
-        </div>
+                    <button type="button"
+                        onclick="$('.datepicker').daterangepicker('show')"
+                        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
+                    </button>
+                </div>
 
-        <!-- Search Button -->
-        <div class="d-flex align-items-center ms-3">
-            <input type="text" class="form-control form-control-sm" placeholder="Search">
-        </div>
+                <!-- Sort by Service Dropdown -->
+                <div class="col-auto d-flex align-items-center ms-3">
+                    <select id="filterService"
+                        class="form-select form-select-sm"
+                        style="height: 32px;">
+                        <option selected>Sort by Service</option>
+                        <option value="account">Account</option>
+                        <option value="music">Music</option>
+                        <option value="channels">Channels</option>
+                    </select>
+                </div>
+            </div>
 
-        <!-- Export Dropdown -->
-        <div class="d-flex align-items-center ms-3">
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
-                    Export
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownExport">
-                    <li><a class="dropdown-item" href="#" id="exportPDF"><img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
-                    <li><a class="dropdown-item" href="#" id="exportCSV"><img src="{{ asset('assets/img/file-csv.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
-                    <li><a class="dropdown-item" href="#" id="exportPrint"><img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
-                    <li><a class="dropdown-item" href="#" id="exportExcel"><img src="{{ asset('assets/img/file-excel.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
-                </ul>
+
+            <!-- Search Button -->
+            <div class="d-flex align-items-center ms-3">
+                <input type="text" class="form-control form-control-sm" placeholder="Search" style="height: 32px;">
+            </div>
+
+            <!-- Export Dropdown -->
+            <div class="d-flex align-items-center ms-3">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                        Export
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+                        <li><a class="dropdown-item" href="#" id="exportPDF"><img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
+                        <li><a class="dropdown-item" href="#" id="exportCSV"><img src="{{ asset('assets/img/file-csv.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
+                        <li><a class="dropdown-item" href="#" id="exportPrint"><img src="{{ asset('assets/img/print.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
+                        <li><a class="dropdown-item" href="#" id="exportExcel"><img src="{{ asset('assets/img/file-excel.svg') }}" class="me-1" style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <div class="card-body">
@@ -296,8 +321,8 @@
 </div>
 
 
-   <!--/ Basic Bootstrap Table -->
-  <x-modal id="createbankModal" title="Create Bank" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md">
+<!--/ Basic Bootstrap Table -->
+<x-modal id="createbankModal" title="Create Bank" saveBtnText="Create" saveBtnType="submit" saveBtnForm="createForm" size="md">
     @include('content.include.bank-transfer.createForm')
 </x-modal>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave.js')}}"></script>
@@ -311,52 +336,62 @@
 
 @section('page-script')
 <script>
-  function confirmAction(event, callback) {
-    event.preventDefault();
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Are you sure you want to delete this?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      customClass: {
-        confirmButton: 'btn btn-danger me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function (result) {
-      if (result.value) {
-        callback();
-      }
-    });
-  }
+    function confirmAction(event, callback) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Are you sure you want to delete this?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                confirmButton: 'btn btn-danger me-3',
+                cancelButton: 'btn btn-label-secondary'
+            },
+            buttonsStyling: false
+        }).then(function(result) {
+            if (result.value) {
+                callback();
+            }
+        });
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
     // Initialize Flatpickr on the start date and end date input fields
     flatpickr("#startDate", {
-        dateFormat: "Y-m-d",  // Specify the date format
-        minDate: "today",     // Optional: disable past dates
+        dateFormat: "Y-m-d", // Specify the date format
+        minDate: "today", // Optional: disable past dates
         maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
-        allowInput: true      // Allows users to type in the date
+        allowInput: true // Allows users to type in the date
     });
 
     flatpickr("#endDate", {
-        dateFormat: "Y-m-d",  // Specify the date format
-        minDate: "today",     // Optional: disable past dates
+        dateFormat: "Y-m-d", // Specify the date format
+        minDate: "today", // Optional: disable past dates
         maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
-        allowInput: true      // Allows users to type in the date
+        allowInput: true // Allows users to type in the date
     });
 
     // Handle "Sort by Date" dropdown click
-    document.getElementById('filterDate').addEventListener('change', function() {
-        const selectedValue = this.value;
-        if (selectedValue === 'start' || selectedValue === 'end') {
-            document.getElementById('datePickerSection').style.display = 'flex';
-        } else {
-            document.getElementById('datePickerSection').style.display = 'none';
-        }
+    $(document).ready(function() {
+        $('#datepicker').daterangepicker({
+            singleDatePicker: true,
+            autoUpdateInput: false, // prevent default fill
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('#datepicker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        });
+
+        // Automatically open on focus
+        $('#datepicker').on('focus', function() {
+            $(this).daterangepicker('show');
+        });
     });
 </script>
 @endsection
