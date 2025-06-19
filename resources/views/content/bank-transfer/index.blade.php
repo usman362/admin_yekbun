@@ -213,7 +213,7 @@
                 <div class="col-auto" style="border-radius: 10px; position: relative;">
                     <input type="text"
                         class="form-control form-control-sm datepicker"
-                        placeholder="Select Date"
+                        placeholder="Select Date  "
                         name="duration"
                         id="datepicker"
                         aria-label="Datepicker"
