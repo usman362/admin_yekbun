@@ -613,7 +613,7 @@ class MultimediaController extends Controller
         $trimmedPath = storage_path('app/public/media/trimmed/' . $trimmedName);
 
         // Ensure trimmed directory exists
-        Storage::makeDirectory('public/media/trimmed');
+        // Storage::makeDirectory('public/media/trimmed');
 
         // Run FFmpeg trim command
         $start = escapeshellarg($request->startTime);
