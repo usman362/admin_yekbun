@@ -212,11 +212,11 @@
                                             <label
                                                 class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar"
                                                 for="avatarUploader">
-                                               <img id="viewer"
-                                                onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
-                                                class="avatar-img"
-                                                src="{{ $appInfo && $appInfo->image ? asset('storage/' . $appInfo->image) : 'https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg' }}"
-                                                alt="Image">
+                                                <img id="viewer"
+                                                    onerror="this.src='https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg'"
+                                                    class="avatar-img"
+                                                    src="{{ $appInfo && $appInfo->image ? asset('storage/' . $appInfo->image) : 'https://efood-admin.6amtech.com/public/assets/admin/img/160x160/img1.jpg' }}"
+                                                    alt="Image">
 
                                                 <input type="file" name="image"
                                                     class="js-file-attach avatar-uploader-input" id="customFileEg1"
@@ -227,25 +227,29 @@
                                             </label>
                                         </a>
                                     </div>
-                                      <div class="row">
-                                         <div class="col-md-3">
-            <label for="city">Company Name</label>
-            <input type="text" class="form-control mb-2" name="company_name" id="company_name" value="{{ @$appInfo->company_name }}" required>
-        </div>
-        <div class="col-md-3">
-            <label for="city">City & Zip Code </label>
-            <input type="text" class="form-control mb-2" name="city_zipcode" id="city_zipcode" value="{{ @$appInfo->city_zipcode }}" required>
-        </div>
-         <div class="col-md-3">
-            <label for="address">Address</label>
-            <input type="text" class="form-control mb-2" name="address" id="address" value="{{ @$appInfo->address }}" required>
-        </div>
-          <div class="col-md-3">
-            <label for="house_number">House Number</label>
-            <input type="text" class="form-control mb-2" name="house_number" id="house_number" value="{{ @$appInfo->house_number }}" required>
-        </div>
-    </div> 
-  
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="city">Company Name</label>
+                                            <input type="text" class="form-control mb-2" name="company_name"
+                                                id="company_name" value="{{ @$appInfo->company_name }}" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="city">City & Zip Code </label>
+                                            <input type="text" class="form-control mb-2" name="city_zipcode"
+                                                id="city_zipcode" value="{{ @$appInfo->city_zipcode }}" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="address">Address</label>
+                                            <input type="text" class="form-control mb-2" name="address" id="address"
+                                                value="{{ @$appInfo->address }}" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="house_number">House Number</label>
+                                            <input type="text" class="form-control mb-2" name="house_number"
+                                                id="house_number" value="{{ @$appInfo->house_number }}" required>
+                                        </div>
+                                    </div>
+
                                     <label for="">Description</label>
                                     <div id="snow-toolbar">
                                         <span class="ql-formats">
@@ -278,7 +282,12 @@
                                     <input type="hidden" id="textedit_content" name="description" value=""
                                         class="form-control" />
                                     <div class="d-flex justify-content-end gap-3 mt-4">
-                                        <button type="submit" id="btn-app-info" class="btn btn-primary">Save</button>
+                                        <!-- Only one button (initially "Edit") -->
+                                        <button type="button" id="toggle-btn" class="btn btn-secondary">Edit</button>
+                                        <button type="submit" id="btn-app-info" class="btn btn-primary" style="display: none;">Save</button>
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -313,4 +322,26 @@
             readURL(this);
         });
     </script>
+ <script>
+    $(document).ready(function () {
+        // Initially, make fields read-only
+        $('input, textarea').prop('disabled', true);
+
+        // Only Edit button visible
+        $('#btn-app-info').hide();
+
+        $('#toggle-btn').click(function () {
+            // Enable all form fields
+            $('input, textarea').prop('disabled', false);
+
+            // Hide Edit button
+            $(this).hide();
+
+            // Show Save (submit) button
+            $('#btn-app-info').show();
+        });
+    });
+</script>
+
+
 @endsection
