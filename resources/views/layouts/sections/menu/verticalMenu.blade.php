@@ -1453,14 +1453,14 @@
                 <li class="menu-item {{ Request::is('app/invoice/*') ? 'active open' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         {{-- <i class="menu-icon tf-icons bx bx-credit-card"></i> --}}
-                        <div>Invoice</div>
+                        <div>Manage Invoice</div>
                     </a>
                     <ul class="menu-sub">
-                        <li class="menu-item {{ Request::is('app/invoice/list') ? 'active' : '' }}">
+                        {{-- <li class="menu-item {{ Request::is('app/invoice/list') ? 'active' : '' }}">
                             <a href="{{ url('app/invoice/list') }}" class="menu-link">
                                 <div>Manage Invoice</div>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="menu-item {{ Request::is('app/invoice/add') ? 'active' : '' }}">
                             <a href="{{ url('app/invoice/add') }}" class="menu-link">
                                 <div>Add Invoice</div>
@@ -1491,7 +1491,7 @@
                         </li>
                         <li class="menu-item {{ Request::is('settings/paypal') ? 'active' : '' }}">
                             <a href="{{ url('/settings/paypal') }}" class="menu-link">
-                                <div> Manage Paypal </div>
+                                <div> Manage PayPal </div>
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('settings/applepay') ? 'active' : '' }}">
