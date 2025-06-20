@@ -630,7 +630,7 @@ class MultimediaController extends Controller
         $trimmedName = 'trimmed_' . Str::random(10) . '.' . $extension;
         $trimmedPath = storage_path('app/public/media/trimmed/' . $trimmedName);
 
-        Storage::makeDirectory('public/media/trimmed');
+        // Storage::makeDirectory('public/media/trimmed');
 
         // Prepare and run FFmpeg command
         $start = escapeshellarg($request->startTime);
