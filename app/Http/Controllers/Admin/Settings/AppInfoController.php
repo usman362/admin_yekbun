@@ -52,6 +52,7 @@ class AppInfoController extends Controller
                 ]);
                 $appInfo->description = $request->description;
                 $appInfo->company_name = $request->company_name;
+                $appInfo->house_number = $request->house_number;
                
                 $appInfo->save();
                 if ($request->has('image')) {

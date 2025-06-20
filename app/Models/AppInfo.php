@@ -15,6 +15,7 @@ class AppInfo extends Model
     protected $fillable = [
         'city_zipcode',
         'zipcode',
+        'company_name',
         'address',
         'house_number',
         'description'
