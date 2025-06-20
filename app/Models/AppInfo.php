@@ -16,6 +16,7 @@ class AppInfo extends Model
         'city',
         'zipcode',
         'address',
-        'house_number'
+        'house_number',
+        'description'
     ];
 }

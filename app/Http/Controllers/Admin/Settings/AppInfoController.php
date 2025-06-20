@@ -38,6 +38,7 @@ class AppInfoController extends Controller
         'zipcode' => 'required|string|max:20',
         'address' => 'required|string|max:500',
         'house_number' => 'required|string|max:50',
+        'description' => 'required|string|max:50',
     ];
 
     $validator = Validator::make($request->all(), $rules);
@@ -54,6 +55,7 @@ class AppInfoController extends Controller
                 'zipcode' => $request->zipcode,
                 'address' => $request->address,
                 'house_number' => $request->house_number,
+                'description' => $request->description,
             ]
         );
     } catch (\Throwable $e) {
