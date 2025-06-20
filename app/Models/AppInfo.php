@@ -13,9 +13,11 @@ class AppInfo extends Model
     protected $collection = 'app_info';
 
     protected $fillable = [
-        'description',
+        'city_zipcode',
+        'zipcode',
+        'company_name',
         'address',
-        'time_from',
-        'time_to'
+        'house_number',
+        'description'
     ];
 }

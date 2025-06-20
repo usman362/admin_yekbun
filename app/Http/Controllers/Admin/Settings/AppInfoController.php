@@ -35,26 +35,25 @@ class AppInfoController extends Controller
     {
         $rules = [
             'address' => 'required',
-            'description' => 'required',
-            'time_from' => 'required',
-            'time_to' => 'required',
+            'description' => 'required',          
+            'house_number' => 'required',
+            'city_zipcode' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
-// dd($request->all());
+ 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             try {
                 $appInfo = AppInfo::updateOrCreate(['_id' => $request->id], [
-                    'address' => $request->address,
-                    'time_from' => $request->time_from,
-                    'time_to' => $request->time_to,
+                    'address' => $request->address,                    
+                    'city_zipcode' => $request->city_zipcode,
                 ]);
                 $appInfo->description = $request->description;
-                $appInfo->email = $request->email;
-                $appInfo->fax_no = $request->fax_no;
-                $appInfo->st_no = $request->st_no;
+                $appInfo->company_name = $request->company_name;
+                $appInfo->house_number = $request->house_number;
+               
                 $appInfo->save();
                 if ($request->has('image')) {
                     $image_path = Helpers::fileUpload($request->image, 'images/appinfo');
