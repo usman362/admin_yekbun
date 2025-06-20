@@ -13,7 +13,7 @@ class AppInfo extends Model
     protected $collection = 'app_info';
 
     protected $fillable = [
-        'city',
+        'city_zipcode',
         'zipcode',
         'address',
         'house_number',

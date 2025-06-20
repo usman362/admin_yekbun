@@ -186,7 +186,14 @@
 <!-- Second Card: Transaction List -->
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="m-0"><strong>Transactions PayPal Overview</strong></h5>
+      <h5 class="m-0">
+    <strong>Transactions</strong><br>
+   <small class="text-muted"> <span style="
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 2px;
+">PayPal Overview </span></small>
+</h5>
 
         <div class="d-flex align-items-center">
             <!-- <div class="d-flex align-items-center ms-3">

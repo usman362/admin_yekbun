@@ -35,24 +35,23 @@ class AppInfoController extends Controller
     {
         $rules = [
             'address' => 'required',
-            'description' => 'required',
-            'zipcode' => 'required',
+            'description' => 'required',          
             'house_number' => 'required',
-            'city' => 'required',
+            'city_zipcode' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
-// dd($request->all());
+ 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             try {
                 $appInfo = AppInfo::updateOrCreate(['_id' => $request->id], [
-                    'address' => $request->address,
-                    'zipcode' => $request->zipcode,
-                    'city' => $request->city,
+                    'address' => $request->address,                    
+                    'city_zipcode' => $request->city_zipcode,
                 ]);
                 $appInfo->description = $request->description;
+                $appInfo->company_name = $request->company_name;
                
                 $appInfo->save();
                 if ($request->has('image')) {
