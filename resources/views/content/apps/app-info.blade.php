@@ -236,7 +236,7 @@
                                     <input type="text" class="form-control mb-2" name="address" id="email" value="{{ @$appInfo->address }}" required>
                                     <label for="">House Number</label>
                                     <input type="text" class="form-control mb-2" name="house_number" id="house_number" value="{{ @$appInfo->house_number }}" required>
-                                    <label for="">St no.</label> 
+                                  
                                     <label for="">Description</label>
                                     <div id="snow-toolbar">
                                         <span class="ql-formats">
