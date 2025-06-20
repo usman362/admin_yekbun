@@ -31,40 +31,36 @@ class AppInfoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $rules = [
-            'address' => 'required',
-            'description' => 'required',
-            'time_from' => 'required',
-            'time_to' => 'required',
-        ];
+ public function store(Request $request)
+{
+    $rules = [
+        'city' => 'required|string|max:255',
+        'zipcode' => 'required|string|max:20',
+        'address' => 'required|string|max:500',
+        'house_number' => 'required|string|max:50',
+    ];
 
-        $validator = Validator::make($request->all(), $rules);
-// dd($request->all());
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        } else {
-            try {
-                $appInfo = AppInfo::updateOrCreate(['_id' => $request->id], [
-                    'address' => $request->address,
-                    'time_from' => $request->time_from,
-                    'time_to' => $request->time_to,
-                ]);
-                $appInfo->description = $request->description;
-                $appInfo->email = $request->email;
-                $appInfo->fax_no = $request->fax_no;
-                $appInfo->st_no = $request->st_no;
-                $appInfo->save();
-                if ($request->has('image')) {
-                    $image_path = Helpers::fileUpload($request->image, 'images/appinfo');
-                    $appInfo->image = $image_path;
-                    $appInfo->save();
-                }
-            } catch (\Throwable $e) {
-                return back()->with('success', 'App info has been created');
-            }
-            return back()->with('success', 'App info has been created');
-        }
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    try {
+        $appInfo = AppInfo::updateOrCreate(
+            ['_id' => $request->id],
+            [
+                'city' => $request->city,
+                'zipcode' => $request->zipcode,
+                'address' => $request->address,
+                'house_number' => $request->house_number,
+            ]
+        );
+    } catch (\Throwable $e) {
+        return back()->with('error', 'Something went wrong: ' . $e->getMessage());
+    }
+
+    return back()->with('success', 'App info has been saved successfully.');
+}
+
 }
