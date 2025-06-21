@@ -1463,7 +1463,7 @@
                         </li> --}}
                         <li class="menu-item {{ Request::is('app/invoice/add') ? 'active' : '' }}">
                             <a href="{{ url('app/invoice/add') }}" class="menu-link">
-                                <div>Add Invoice</div>
+                                <div>Create Bills</div>
                             </a>
                         </li>
                         <li class="menu-item {{ Request::is('app/invoice/edit') ? 'active' : '' }}">

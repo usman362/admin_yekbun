@@ -28,9 +28,11 @@
 @endsection
 
 @section('content')
+
     <script>
         const dropZoneInitFunctions = [];
     </script>
+   
     <div class="row invoice-edit">
         <!-- Invoice Edit-->
         <div class="col-lg-9 col-12 mb-lg-0 mb-4">
@@ -92,33 +94,31 @@
                             <p class="mb-1">Small Heath, B10 0HF, UK</p>
                             
                         </div>
-                        <div class="col-md-6 col-sm-7">
-                            <h6 class="pb-2">Bill To:</h6>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="pe-3">Total Due:</td>
-                                        <td>$12,110.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">Bank name:</td>
-                                        <td>American Bank</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">Country:</td>
-                                        <td>United States</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">IBAN:</td>
-                                        <td>ETD95476213874685</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">SWIFT code:</td>
-                                        <td>BR91905</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                       <div class="col-md-6 col-sm-7 ">
+       <h6 class="pb-2" style="
+                margin-left: 202px;">Bill To:</h6>
+        <table class="ms-auto">
+            <tbody>
+                <tr>
+                    <td class="pe-3">Total Due:</td>
+                    <td>$12,110.55</td>
+                </tr>
+                <tr>
+                    <td class="pe-3">Bank name:</td>
+                    <td>American Bank</td>
+                </tr>
+                <tr>
+                    <td class="pe-3">Country:</td>
+                    <td>United States</td>
+                </tr>
+                <tr>
+                    <td class="pe-3">IBAN:</td>
+                    <td>ETD95476213874685</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
                     </div>
 
                     <hr class="mx-n4" />
