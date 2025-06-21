@@ -28,85 +28,7 @@
 @endsection
 
 @section('content')
-    <style>
-        .card,
-        .modal {
-            font-family: 'Genos';
-        }
-.modal-dialog-scrollable .modal-body {
-     overflow-y: hidden;
-}
-        .transaction-icons img {
-            width: 100%;
-            height: 50px;
-            margin: 0 auto;
-        }
-
-        .transaction-icons h4 {
-            margin: 0;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .transaction-icons p {
-            font-size: 18px;
-            text-align: center;
-            margin: 0;
-        }
-
-        .transaction-icons i {
-            font-size: 14px;
-        }
-
-        .transaction-icons {
-            padding: 12px 38px 0px 38px;
-            width: 100%;
-            border-right: 2px solid #F2F2F2;
-        }
-
-        .transaction-icons:last-child {
-            border-right: none !important;
-        }
-
-        .nav-pills .nav-link {
-            font-size: 16px !important;
-        }
-
-        .nav-pills .nav-link.active,
-        .nav-pills .nav-link.active:hover,
-        .nav-pills .nav-link.active:focus {
-            background-color: transparent !important;
-            color: #000 !important;
-            font-weight: bold !important;
-            box-shadow: none !important;
-        }
-
-        .line-height-1 {
-            line-height: 1 !important;
-        }
-
-        .user-area span {
-            font-size: 14px;
-        }
-
-        .user-area img {
-            width: 10px;
-            height: 10px;
-            margin: 4px 2px 0 2px;
-        }
-
-        .user-area .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 30px;
-        }
-
-        .user-area span {
-            font-size: 12px;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-    </style>
+    
     <script>
         const dropZoneInitFunctions = [];
     </script>
@@ -127,8 +49,8 @@
             <div class="d-flex align-items-center">
                 <!-- <div class="d-flex align-items-center ms-3">
 
-                        <input type="text" class="form-control form-control-sm  time_input_field datepicker" onclick="$('.datepicker').daterangepicker('show')" placeholder="Select Date" aria-label="Datepicker 1" autocomplete="off">
-                    </div> -->
+                            <input type="text" class="form-control form-control-sm  time_input_field datepicker" onclick="$('.datepicker').daterangepicker('show')" placeholder="Select Date" aria-label="Datepicker 1" autocomplete="off">
+                        </div> -->
                 <!-- calender -->
                 <div class="row">
                     <!-- Date Input -->
@@ -196,14 +118,14 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="font-size: 20px;">#</th>
-                            <th style="font-size: 20px;">Order</th>
-                            <th style="font-size: 20px;">Date & Time</th>
-                            <th style="font-size: 20px;">About User</th>
-                            <th style="font-size: 20px;">Service Type</th>
-                            <th style="font-size: 20px;">Payment Type</th>
-                            <th style="font-size: 20px;">Total Paid</th>
-                            <th style="font-size: 20px;">Options</th>
+                            <th style="font-size: 13px;">#</th>
+                            <th style="font-size: 13px;">Order</th>
+                            <th style="font-size: 13px;">Date & Time</th>
+                            <th style="font-size: 13px;">About User</th>
+                            <th style="font-size: 13px;">Service Type</th>
+                            <th style="font-size: 13px;">Payment Type</th>
+                            <th style="font-size: 13px;">Total Paid</th>
+                            <th style="font-size: 13px;">Options</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -221,9 +143,9 @@
                                     <div>
                                         <h5 class="m-0"><strong>Username</strong></h5>
                                         <div class="d-flex">
-                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="" style=" height: 17px; width: 17px;">
                                             <span>Rojava . Qamishlo</span>
-                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="" style=" height: 17px; width: 17px;">
                                             <span>Hannover</span>
                                         </div>
                                     </div>
@@ -258,252 +180,296 @@
     </div>
 
 
- 
-<!-- Modal -->
-<div class="modal fade" id="createBillModal" tabindex="-1" aria-labelledby="createBillModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl "  style="display: block;padding-left: 0px;height: 140%;width: 104%;">
-    <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="createBillModalLabel">Create Bill</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="createBillModal" tabindex="-1" aria-labelledby="createBillModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl " style="display: block;padding-left: 0px;height: 140%;width: 104%;">
+            <div class="modal-content">
 
-      <div class="modal-body p-0">
-        <div class="row invoice-edit p-4">
-          <!-- Invoice Edit (Left Column) -->
-          <div class="col-lg-9 col-12 mb-lg-0 mb-4">
-            <div class="card invoice-preview-card">
-              <div class="card-body">
-
-                <!-- Header with Logo and Invoice Info -->
-                <div class="row p-sm-3 p-0">
-                  <div class="col-md-6 mb-md-0 mb-4">
-                    <img src="{{ asset('storage/' . $appinfo->image) }}" alt="logo" style="height:116px;width:116px;border-radius:8px;">
-                    <p class="mb-1">{{ $appinfo->company_name }}</p>
-                    <p class="mb-1">{{ $appinfo->address }},{{ $appinfo->house_number }}</p>
-                    <p class="mb-1">{{ $appinfo->city_zipcode }}</p>
-                  </div>
-                  <div class="col-md-6">
-                    <dl class="row mb-2">
-                      <dt class="col-sm-6 text-md-end"><span class="h4">Invoice #</span></dt>
-                      <dd class="col-sm-6 d-flex justify-content-md-end">
-                        <input type="text" class="form-control w-px-150" disabled value="3492">
-                      </dd>
-                      <dt class="col-sm-6 text-md-end"><span>Date:</span></dt>
-                      <dd class="col-sm-6 d-flex justify-content-md-end">
-                        <input type="text" class="form-control invoice-date w-px-150" placeholder="YYYY-MM-DD">
-                      </dd>
-                      <dt class="col-sm-6 text-md-end"><span>Due Date:</span></dt>
-                      <dd class="col-sm-6 d-flex justify-content-md-end">
-                        <input type="text" class="form-control due-date w-px-150" placeholder="YYYY-MM-DD">
-                      </dd>
-                    </dl>
-                  </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createBillModalLabel">Create Bill</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <hr class="my-4 mx-n4">
+                <div class="modal-body p-0">
+                    <div class="row invoice-edit p-4">
+                        <!-- Invoice Edit (Left Column) -->
+                        <div class="col-lg-9 col-12 mb-lg-0 mb-4">
+                            <div class="card invoice-preview-card">
+                                <div class="card-body">
 
-                <!-- Invoice To / Bill To Section -->
-                <div class="row p-sm-3 p-0">
-                  <div class="col-md-6">
-                    <h6 class="pb-2">Invoice To:</h6>
-                    <p class="mb-1">Thomas Shelby</p>
-                    <p class="mb-1">Shelby Company Limited</p>
-                    <p class="mb-1">Small Heath, B10 0HF, UK</p>
-                  </div>
-                  <div class="col-md-6 text-end">
-                    <h6 class="pb-2">Bill To:</h6>
-                    <table class="ms-auto">
-                      <tbody>
-                        <tr><td class="pe-3">Total Due:</td><td>$12,110.55</td></tr>
-                        <tr><td class="pe-3">Bank name:</td><td>American Bank</td></tr>
-                        <tr><td class="pe-3">Country:</td><td>United States</td></tr>
-                        <tr><td class="pe-3">IBAN:</td><td>ETD95476213874685</td></tr>
-                        <tr><td class="pe-3">SWIFT code:</td><td>BR91905</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                                    <!-- Header with Logo and Invoice Info -->
+                                    <div class="row p-sm-3 p-0">
+                                        <div class="col-md-6 mb-md-0 mb-4">
+                                            <img src="{{ asset('storage/' . $appinfo->image) }}" alt="logo"
+                                                style="height:116px;width:116px;border-radius:8px;">
+                                            <p class="mb-1">{{ $appinfo->company_name }}</p>
+                                            <p class="mb-1">{{ $appinfo->address }},{{ $appinfo->house_number }}</p>
+                                            <p class="mb-1">{{ $appinfo->city_zipcode }}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <dl class="row mb-2">
+                                                <dt class="col-sm-6 text-md-end"><span class="h4">Invoice #</span>
+                                                </dt>
+                                                <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                    <input type="text" class="form-control w-px-150" disabled
+                                                        value="3492">
+                                                </dd>
+                                                <dt class="col-sm-6 text-md-end"><span>Date:</span></dt>
+                                                <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                    <input type="text" class="form-control invoice-date w-px-150"
+                                                        placeholder="YYYY-MM-DD">
+                                                </dd>
+                                                <dt class="col-sm-6 text-md-end"><span>Due Date:</span></dt>
+                                                <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                    <input type="text" class="form-control due-date w-px-150"
+                                                        placeholder="YYYY-MM-DD">
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
 
-                <hr class="mx-n4">
+                                    <hr class="my-4 mx-n4">
 
-                <!-- Invoice Items Form -->
-                <form class="source-item py-sm-3">
-                  <div data-repeater-list="group-a">
-                    <div class="repeater-wrapper" data-repeater-item>
-                      <div class="d-flex border rounded position-relative pe-0">
-                        <div class="row w-100 m-0 p-3">
-                          <div class="col-md-6 ps-md-0 mb-3">
-                            <p class="mb-2">Item</p>
-                            <select class="form-select item-details mb-2">
-                              <option value="App Design">App Design</option>
-                              <option value="App Customization" selected>App Customization</option>
-                              <option value="ABC Template">ABC Template</option>
-                              <option value="App Development">App Development</option>
-                            </select>
-                            <textarea rows="2" class="form-control">The most developer friendly & highly customizable HTML5 Admin</textarea>
-                          </div>
-                          <div class="col-md-3 mb-3">
-                            <p class="mb-2">Cost</p>
-                            <input type="number" class="form-control invoice-item-price mb-2" value="24" min="12">
+                                    <!-- Invoice To / Bill To Section -->
+                                    <div class="row p-sm-3 p-0">
+                                        <div class="col-md-6">
+                                            <h6 class="pb-2">Invoice To:</h6>
+                                            <p class="mb-1">Thomas Shelby</p>
+                                            <p class="mb-1">Shelby Company Limited</p>
+                                            <p class="mb-1">Small Heath, B10 0HF, UK</p>
+                                        </div>
+                                        <div class="col-md-6 text-end">
+                                            <h6 class="pb-2">Bill To:</h6>
+                                            <table class="ms-auto">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="pe-3">Total Due:</td>
+                                                        <td>$12,110.55</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pe-3">Bank name:</td>
+                                                        <td>American Bank</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pe-3">Country:</td>
+                                                        <td>United States</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pe-3">IBAN:</td>
+                                                        <td>ETD95476213874685</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pe-3">SWIFT code:</td>
+                                                        <td>BR91905</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-n4">
+
+                                    <!-- Invoice Items Form -->
+                                    <form class="source-item py-sm-3">
+                                        <div data-repeater-list="group-a">
+                                            <div class="repeater-wrapper" data-repeater-item>
+                                                <div class="d-flex border rounded position-relative pe-0">
+                                                    <div class="row w-100 m-0 p-3">
+                                                        <div class="col-md-6 ps-md-0 mb-3">
+                                                            <p class="mb-2">Item</p>
+                                                            <select class="form-select item-details mb-2">
+                                                                <option value="App Design">App Design</option>
+                                                                <option value="App Customization" selected>App
+                                                                    Customization</option>
+                                                                <option value="ABC Template">ABC Template</option>
+                                                                <option value="App Development">App Development</option>
+                                                            </select>
+                                                            <textarea rows="2" class="form-control">The most developer friendly & highly customizable HTML5 Admin</textarea>
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <p class="mb-2">Cost</p>
+                                                            <input type="number"
+                                                                class="form-control invoice-item-price mb-2"
+                                                                value="24" min="12">
+                                                            <div>
+                                                                <span>Discount:</span><span class="discount me-2">0%</span>
+                                                                <span class="tax-1 me-2" data-bs-toggle="tooltip"
+                                                                    title="Tax 1">0%</span>
+                                                                <span class="tax-2" data-bs-toggle="tooltip"
+                                                                    title="Tax 2">0%</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 mb-3">
+                                                            <p class="mb-2">Qty</p>
+                                                            <input type="number" class="form-control invoice-item-qty"
+                                                                value="1" min="1">
+                                                        </div>
+                                                        <div class="col-md-1 pe-0">
+                                                            <p class="mb-2">Price</p>
+                                                            <p class="mb-0">$24.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column align-items-center justify-content-between border-start p-2">
+                                                        <i class="bx bx-x fs-4 text-muted cursor-pointer"
+                                                            data-repeater-delete></i>
+                                                        <div class="dropdown">
+                                                            <i class="bx bx-cog text-muted cursor-pointer"
+                                                                data-bs-toggle="dropdown"></i>
+                                                            <div class="dropdown-menu dropdown-menu-end p-3">
+                                                                <div class="row g-3 mb-3">
+                                                                    <div class="col-12">
+                                                                        <label class="form-label">Discount(%)</label>
+                                                                        <input type="number" id="discountInput"
+                                                                            class="form-control" min="0"
+                                                                            max="100">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label class="form-label">Tax 1</label>
+                                                                        <select id="taxInput1"
+                                                                            class="form-select tax-select">
+                                                                            <option value="0%" selected>0%</option>
+                                                                            <option value="1%">1%</option>
+                                                                            <option value="10%">10%</option>
+                                                                            <option value="18%">18%</option>
+                                                                            <option value="40%">40%</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label class="form-label">Tax 2</label>
+                                                                        <select id="taxInput2"
+                                                                            class="form-select tax-select">
+                                                                            <option value="0%" selected>0%</option>
+                                                                            <option value="1%">1%</option>
+                                                                            <option value="10%">10%</option>
+                                                                            <option value="18%">18%</option>
+                                                                            <option value="40%">40%</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <button
+                                                                    class="btn btn-label-primary btn-apply-changes">Apply</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" data-repeater-create>Add
+                                            Item</button>
+                                    </form>
+
+                                    <hr class="my-4 mx-n4">
+
+                                    <!-- Summary and Notes -->
+                                    <div class="row py-sm-3">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="d-flex mb-3">
+                                                <label class="form-label fw-semibold me-5">Salesperson:</label>
+                                                <input class="form-control" id="salesperson" value="Edward Crowley">
+                                            </div>
+                                            <textarea id="invoiceMsg" class="form-control">Thanks for your business</textarea>
+                                        </div>
+                                        <div class="col-md-6 d-flex justify-content-end">
+                                            <div class="invoice-calculations">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Subtotal:</span><span>$5000.25</span></div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Discount:</span><span>$0.00</span></div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Tax:</span><span>$100.00</span></div>
+                                                <hr />
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Total:</span><span>$5100.25</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <textarea id="note" class="form-control" rows="2">It was a pleasure working...</textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Actions (Right Column) -->
+                        <div class="col-lg-3 col-12 invoice-actions">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <button class="btn btn-primary d-grid w-100 mb-3" data-bs-toggle="offcanvas"
+                                        data-bs-target="#sendInvoiceOffcanvas">
+                                        <span class="d-flex align-items-center justify-content-center text-nowrap"><i
+                                                class="bx bx-paper-plane bx-xs me-1"></i>Send Invoice</span>
+                                    </button>
+                                    <a href="{{ url('app/invoice/preview') }}"
+                                        class="btn btn-label-secondary d-grid w-100 mb-3">Preview</a>
+                                    <button type="button" class="btn btn-label-secondary d-grid w-100">Save</button>
+                                </div>
+                            </div>
                             <div>
-                              <span>Discount:</span><span class="discount me-2">0%</span>
-                              <span class="tax-1 me-2" data-bs-toggle="tooltip" title="Tax 1">0%</span>
-                              <span class="tax-2" data-bs-toggle="tooltip" title="Tax 2">0%</span>
+                                <p class="mb-2">Accept payments via</p>
+                                <select class="form-select mb-4">
+                                    <option value="Bank Account">Bank Account</option>
+                                    <option value="Paypal">Paypal</option>
+                                    <option value="Card">Credit/Debit Card</option>
+                                    <option value="UPI Transfer">UPI Transfer</option>
+                                </select>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <label for="payment-terms" class="mb-0">Payment Terms</label>
+                                    <label class="switch switch-primary me-0">
+                                        <input type="checkbox" class="switch-input" id="payment-terms" checked="">
+                                        <span class="switch-toggle-slider">
+                                            <span class="switch-on">
+                                                <i class="bx bx-check"></i>
+                                            </span>
+                                            <span class="switch-off">
+                                                <i class="bx bx-x"></i>
+                                            </span>
+                                        </span>
+                                        <span class="switch-label"></span>
+                                    </label>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <label for="client-notes" class="mb-0">Client Notes</label>
+                                    <label class="switch switch-primary me-0">
+                                        <input type="checkbox" class="switch-input" id="client-notes">
+                                        <span class="switch-toggle-slider">
+                                            <span class="switch-on">
+                                                <i class="bx bx-check"></i>
+                                            </span>
+                                            <span class="switch-off">
+                                                <i class="bx bx-x"></i>
+                                            </span>
+                                        </span>
+                                        <span class="switch-label"></span>
+                                    </label>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <label for="payment-stub" class="mb-0">Payment Stub</label>
+                                    <label class="switch switch-primary me-0">
+                                        <input type="checkbox" class="switch-input" id="payment-stub">
+                                        <span class="switch-toggle-slider">
+                                            <span class="switch-on">
+                                                <i class="bx bx-check"></i>
+                                            </span>
+                                            <span class="switch-off">
+                                                <i class="bx bx-x"></i>
+                                            </span>
+                                        </span>
+                                        <span class="switch-label"></span>
+                                    </label>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-2 mb-3">
-                            <p class="mb-2">Qty</p>
-                            <input type="number" class="form-control invoice-item-qty" value="1" min="1">
-                          </div>
-                          <div class="col-md-1 pe-0">
-                            <p class="mb-2">Price</p><p class="mb-0">$24.00</p>
-                          </div>
                         </div>
-                        <div class="d-flex flex-column align-items-center justify-content-between border-start p-2">
-                          <i class="bx bx-x fs-4 text-muted cursor-pointer" data-repeater-delete></i>
-                          <div class="dropdown">
-                            <i class="bx bx-cog text-muted cursor-pointer" data-bs-toggle="dropdown"></i>
-                            <div class="dropdown-menu dropdown-menu-end p-3">
-                              <div class="row g-3 mb-3">
-                                <div class="col-12">
-                                  <label class="form-label">Discount(%)</label>
-                                  <input type="number" id="discountInput" class="form-control" min="0" max="100">
-                                </div>
-                                <div class="col-md-6">
-                                  <label class="form-label">Tax 1</label>
-                                  <select id="taxInput1" class="form-select tax-select">
-                                    <option value="0%" selected>0%</option>
-                                    <option value="1%">1%</option>
-                                    <option value="10%">10%</option>
-                                    <option value="18%">18%</option>
-                                    <option value="40%">40%</option>
-                                  </select>
-                                </div>
-                                <div class="col-md-6">
-                                  <label class="form-label">Tax 2</label>
-                                  <select id="taxInput2" class="form-select tax-select">
-                                    <option value="0%" selected>0%</option>
-                                    <option value="1%">1%</option>
-                                    <option value="10%">10%</option>
-                                    <option value="18%">18%</option>
-                                    <option value="40%">40%</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <button class="btn btn-label-primary btn-apply-changes">Apply</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-primary" data-repeater-create>Add Item</button>
-                </form>
 
-                <hr class="my-4 mx-n4">
-
-                <!-- Summary and Notes -->
-                <div class="row py-sm-3">
-                  <div class="col-md-6 mb-3">
-                    <div class="d-flex mb-3">
-                      <label class="form-label fw-semibold me-5">Salesperson:</label>
-                      <input class="form-control" id="salesperson" value="Edward Crowley">
-                    </div>
-                    <textarea id="invoiceMsg" class="form-control">Thanks for your business</textarea>
-                  </div>
-                  <div class="col-md-6 d-flex justify-content-end">
-                    <div class="invoice-calculations">
-                      <div class="d-flex justify-content-between mb-2"><span>Subtotal:</span><span>$5000.25</span></div>
-                      <div class="d-flex justify-content-between mb-2"><span>Discount:</span><span>$0.00</span></div>
-                      <div class="d-flex justify-content-between mb-2"><span>Tax:</span><span>$100.00</span></div>
-                      <hr/>
-                      <div class="d-flex justify-content-between"><span>Total:</span><span>$5100.25</span></div>
-                    </div>
-                  </div>
-                </div>
-
-                <hr class="my-4">
-
-                <textarea id="note" class="form-control" rows="2">It was a pleasure working...</textarea>
-
-              </div>
-            </div>
-          </div>
-
-          <!-- Invoice Actions (Right Column) -->
-           <div class="col-lg-3 col-12 invoice-actions">
-    <div class="card mb-4">
-      <div class="card-body">
-        <button class="btn btn-primary d-grid w-100 mb-3" data-bs-toggle="offcanvas" data-bs-target="#sendInvoiceOffcanvas">
-          <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="bx bx-paper-plane bx-xs me-1"></i>Send Invoice</span>
-        </button>
-        <a href="{{url('app/invoice/preview')}}" class="btn btn-label-secondary d-grid w-100 mb-3">Preview</a>
-        <button type="button" class="btn btn-label-secondary d-grid w-100">Save</button>
-      </div>
-    </div>
-    <div>
-      <p class="mb-2">Accept payments via</p>
-      <select class="form-select mb-4">
-        <option value="Bank Account">Bank Account</option>
-        <option value="Paypal">Paypal</option>
-        <option value="Card">Credit/Debit Card</option>
-        <option value="UPI Transfer">UPI Transfer</option>
-      </select>
-      <div class="d-flex justify-content-between mb-2">
-        <label for="payment-terms" class="mb-0">Payment Terms</label>
-        <label class="switch switch-primary me-0">
-          <input type="checkbox" class="switch-input" id="payment-terms" checked="">
-          <span class="switch-toggle-slider">
-            <span class="switch-on">
-              <i class="bx bx-check"></i>
-            </span>
-            <span class="switch-off">
-              <i class="bx bx-x"></i>
-            </span>
-          </span>
-          <span class="switch-label"></span>
-        </label>
-      </div>
-      <div class="d-flex justify-content-between mb-2">
-        <label for="client-notes" class="mb-0">Client Notes</label>
-        <label class="switch switch-primary me-0">
-          <input type="checkbox" class="switch-input" id="client-notes">
-          <span class="switch-toggle-slider">
-            <span class="switch-on">
-              <i class="bx bx-check"></i>
-            </span>
-            <span class="switch-off">
-              <i class="bx bx-x"></i>
-            </span>
-          </span>
-          <span class="switch-label"></span>
-        </label>
-      </div>
-      <div class="d-flex justify-content-between">
-        <label for="payment-stub" class="mb-0">Payment Stub</label>
-        <label class="switch switch-primary me-0">
-          <input type="checkbox" class="switch-input" id="payment-stub">
-          <span class="switch-toggle-slider">
-            <span class="switch-on">
-              <i class="bx bx-check"></i>
-            </span>
-            <span class="switch-off">
-              <i class="bx bx-x"></i>
-            </span>
-          </span>
-          <span class="switch-label"></span>
-        </label>
-      </div>
-    </div>
-  </div>
-
-        </div> <!-- /.row.invoice-edit -->
-      </div> <!-- /.modal-body -->
-    </div> <!-- /.modal-content -->
-  </div> <!-- /.modal-dialog -->
-</div> <!-- /.modal -->
+                    </div> <!-- /.row.invoice-edit -->
+                </div> <!-- /.modal-body -->
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
 
     <!-- Offcanvas -->
     @include('_partials/_offcanvas/offcanvas-send-invoice')

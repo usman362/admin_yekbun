@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GooglePay;
+use App\Models\AppInfo;
 
 class GooglePayPayController extends Controller
 {
@@ -15,7 +16,8 @@ class GooglePayPayController extends Controller
     public function index()
     {
          $googlepay = GooglePay::orderBy('id' , 'desc')->get();
-        return view('content.googlepaypaytransfer.index' , compact('googlepay'));
+          $appinfo = AppInfo::first();
+        return view('content.googlepaypaytransfer.index' , compact('googlepay','appinfo'));
     }
 
     /**

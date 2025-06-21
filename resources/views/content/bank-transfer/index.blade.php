@@ -31,83 +31,7 @@
             /* Adjust this width as necessary */
         }
     </style>
-    <style>
-        .card,
-        .modal {
-            font-family: 'Genos';
-        }
-
-        .transaction-icons img {
-            width: 100%;
-            height: 50px;
-            margin: 0 auto;
-        }
-
-        .transaction-icons h4 {
-            margin: 0;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .transaction-icons p {
-            font-size: 18px;
-            text-align: center;
-            margin: 0;
-        }
-
-        .transaction-icons i {
-            font-size: 14px;
-        }
-
-        .transaction-icons {
-            padding: 12px 38px 0px 38px;
-            width: 100%;
-            border-right: 2px solid #F2F2F2;
-        }
-
-        .transaction-icons:last-child {
-            border-right: none !important;
-        }
-
-        .nav-pills .nav-link {
-            font-size: 16px !important;
-        }
-
-        .nav-pills .nav-link.active,
-        .nav-pills .nav-link.active:hover,
-        .nav-pills .nav-link.active:focus {
-            background-color: transparent !important;
-            color: #000 !important;
-            font-weight: bold !important;
-            box-shadow: none !important;
-        }
-
-        .line-height-1 {
-            line-height: 1 !important;
-        }
-
-        .user-area span {
-            font-size: 14px;
-        }
-
-        .user-area img {
-            width: 10px;
-            height: 10px;
-            margin: 4px 2px 0 2px;
-        }
-
-        .user-area .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 30px;
-        }
-
-        .user-area span {
-            font-size: 12px;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-    </style>
+   
 @endsection
 
 @section('content')
@@ -277,14 +201,14 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="font-size: 20px;">#</th>
-                            <th style="font-size: 20px;">Order</th>
-                            <th style="font-size: 20px;">Date & Time</th>
-                            <th style="font-size: 20px;">About User</th>
-                            <th style="font-size: 20px;">Service Type</th>
-                            <th style="font-size: 20px;">Payment Type</th>
-                            <th style="font-size: 20px;">Total Paid</th>
-                            <th style="font-size: 20px;">Options</th>
+                            <th style="font-size: 13px;">#</th>
+                            <th style="font-size: 13px;">Order</th>
+                            <th style="font-size: 13px;">Date & Time</th>
+                            <th style="font-size: 13px;">About User</th>
+                            <th style="font-size: 13px;">Service Type</th>
+                            <th style="font-size: 13px;">Payment Type</th>
+                            <th style="font-size: 13px;">Total Paid</th>
+                            <th style="font-size: 13px;">Options</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -302,9 +226,9 @@
                                     <div>
                                         <h5 class="m-0"><strong>Username</strong></h5>
                                         <div class="d-flex">
-                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="" style="height: 17px;width: 17px;">
                                             <span>Rojava . Qamishlo</span>
-                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="" style=" height: 17px; width: 17px;">
                                             <span>Hannover</span>
                                         </div>
                                     </div>
@@ -356,233 +280,184 @@
                             <div class="row invoice-preview">
                                 <!-- Invoice -->
                                 <div class="col-lg-9 col-12 mb-lg-0 mb-4">
-            <div class="card invoice-preview-card">
-                <div class="card-body">
-                    <div class="row p-sm-3 p-0">
-                        <div class="col-md-6 mb-md-0 mb-4">
-                            <div class="d-flex svg-illustration mb-4 gap-2">
-                                <span class="app-brand-logo demo">
-                                    <img src="{{ asset('storage/' . $appinfo->image) }}" alt="App Info Image"
-                                        style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
-                                </span>
-                            </div>
+                                    <div class="card invoice-preview-card">
+                                        <div class="card-body">
+                                            <div class="row p-sm-3 p-0">
+                                                <div class="col-md-6 mb-md-0 mb-4">
+                                                    <div class="d-flex svg-illustration mb-4 gap-2">
+                                                        <span class="app-brand-logo demo">
+                                                            <img src="{{ asset('storage/' . $appinfo->image) }}"
+                                                                alt="App Info Image"
+                                                                style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
+                                                        </span>
+                                                    </div>
 
-                            <p class="mb-1">{{ $appinfo->company_name }}</p>
-                            <p class="mb-1">{{ $appinfo->address }},{{ $appinfo->house_number }}</p>
-                            <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
+                                                    <p class="mb-1">{{ $appinfo->company_name }}</p>
+                                                    <p class="mb-1">
+                                                        {{ $appinfo->address }},{{ $appinfo->house_number }}</p>
+                                                    <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
 
-                        </div>
-                        <div class="col-md-6">
-                            <dl class="row mb-2">
-                                <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
-                                    <span class="h4 text-capitalize mb-0 text-nowrap">Invoice #</span>
-                                </dt>
-                                <dd class="col-sm-6 d-flex justify-content-md-end">
-                                    <div class="w-px-150">
-                                        <input type="text" class="form-control" disabled placeholder="3492"
-                                            value="3492" id="invoiceId" />
-                                    </div>
-                                </dd>
-                                <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
-                                    <span class="fw-normal">Date:</span>
-                                </dt>
-                                <dd class="col-sm-6 d-flex justify-content-md-end">
-                                    <div class="w-px-150">
-                                        <input type="text" class="form-control invoice-date" placeholder="YYYY-MM-DD" />
-                                    </div>
-                                </dd>
-                                <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
-                                    <span class="fw-normal">Due Date:</span>
-                                </dt>
-                                <dd class="col-sm-6 d-flex justify-content-md-end">
-                                    <div class="w-px-150">
-                                        <input type="text" class="form-control due-date" placeholder="YYYY-MM-DD" />
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-
-                    <hr class="my-4 mx-n4" />
-
-                    <div class="row p-sm-3 p-0">
-                        <div class="col-md-6 col-sm-5 col-12 mb-sm-0 mb-4">
-                            <h6 class="pb-2">Invoice To:</h6>
-                            <p class="mb-1">Thomas shelby</p>
-                            <p class="mb-1">Shelby Company Limited</p>
-                            <p class="mb-1">Small Heath, B10 0HF, UK</p>
-
-                        </div>
-                        <div class="col-md-6 col-sm-7 ">
-                            <h6 class="pb-2" style="margin-left: 202px;">Bill To:</h6>
-                            <table class="ms-auto">
-                                <tbody>
-                                    <tr>
-                                        <td class="pe-3">Total Due:</td>
-                                        <td>$12,110.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">Bank name:</td>
-                                        <td>American Bank</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">Country:</td>
-                                        <td>United States</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">IBAN:</td>
-                                        <td>ETD95476213874685</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <hr class="mx-n4" />
-
-                    <form class="source-item py-sm-3">
-                        <div class="mb-3" data-repeater-list="group-a">
-                            <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item>
-                                <div class="d-flex border rounded position-relative pe-0">
-                                    <div class="row w-100 m-0 p-3">
-                                        <div class="col-md-6 col-12 mb-md-0 mb-3 ps-md-0">
-                                            <p class="mb-2 repeater-title">Item</p>
-                                            <select class="form-select item-details mb-2">
-                                                <option value="App Design">App Design</option>
-                                                <option value="App Customization" selected>App Customization</option>
-                                                <option value="ABC Template">ABC Template</option>
-                                                <option value="App Development">App Development</option>
-                                            </select>
-                                            <textarea class="form-control" rows="2">The most developer friendly & highly customizable HTML5 Admin</textarea>
-                                        </div>
-                                        <div class="col-md-3 col-12 mb-md-0 mb-3">
-                                            <p class="mb-2 repeater-title">Cost</p>
-                                            <input type="number" class="form-control invoice-item-price mb-2"
-                                                value="24" placeholder="24" min="12" />
-                                            <div>
-                                                <span>Discount:</span>
-                                                <span class="discount me-2">0%</span>
-                                                <span class="tax-1 me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Tax 1">0%</span>
-                                                <span class="tax-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Tax 2">0%</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <dl class="row mb-2">
+                                                        <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
+                                                            <span class="h4 text-capitalize mb-0 text-nowrap">Invoice
+                                                                #</span>
+                                                        </dt>
+                                                        <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                            <div class="w-px-150">
+                                                                <input type="text" class="form-control" disabled
+                                                                    placeholder="3492" value="3492" id="invoiceId" />
+                                                            </div>
+                                                        </dd>
+                                                        <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
+                                                            <span class="fw-normal">Date:</span>
+                                                        </dt>
+                                                        <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                            <div class="w-px-150">
+                                                                <input type="text" class="form-control invoice-date"
+                                                                    placeholder="YYYY-MM-DD" />
+                                                            </div>
+                                                        </dd>
+                                                        <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
+                                                            <span class="fw-normal">Due Date:</span>
+                                                        </dt>
+                                                        <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                            <div class="w-px-150">
+                                                                <input type="text" class="form-control due-date"
+                                                                    placeholder="YYYY-MM-DD" />
+                                                            </div>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-2 col-12 mb-md-0 mb-3">
-                                            <p class="mb-2 repeater-title">Qty</p>
-                                            <input type="number" class="form-control invoice-item-qty" value="1"
-                                                placeholder="1" min="1" max="50" />
-                                        </div>
-                                        <div class="col-md-1 col-12 pe-0">
-                                            <p class="mb-2 repeater-title">Price</p>
-                                            <p class="mb-0">$24.00</p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="d-flex flex-column align-items-center justify-content-between border-start p-2">
-                                        <i class="bx bx-x fs-4 text-muted cursor-pointer" data-repeater-delete></i>
-                                        <div class="dropdown">
-                                            <i class="bx bx-cog bx-xs text-muted cursor-pointer more-options-dropdown"
-                                                role="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false">
-                                            </i>
-                                            <div class="dropdown-menu dropdown-menu-end w-px-300 p-3"
-                                                aria-labelledby="dropdownMenuButton">
 
-                                                <div class="row g-3">
+                                            <hr class="my-4 mx-n4" />
+
+                                            <div class="row p-sm-3 p-0">
+                                                <div class="col-md-6 col-sm-5 col-12 mb-sm-0 mb-4">
+                                                    <h6 class="pb-2">Invoice To:</h6>
+                                                    <p class="mb-1">Thomas shelby</p>
+                                                    <p class="mb-1">Shelby Company Limited</p>
+                                                    <p class="mb-1">Small Heath, B10 0HF, UK</p>
+
+                                                </div>
+                                                <div class="col-md-6 col-sm-7 ">
+                                                    <h6 class="pb-2" style="margin-left: 202px;">Bill To:</h6>
+                                                    <table class="ms-auto">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="pe-3">Total Due:</td>
+                                                                <td>$12,110.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pe-3">Bank name:</td>
+                                                                <td>American Bank</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pe-3">Country:</td>
+                                                                <td>United States</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pe-3">IBAN:</td>
+                                                                <td>ETD95476213874685</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <hr class="mx-n4" />
+
+                                            <div class="table-responsive border border-bottom-0 border-top-0 rounded">
+                                                <table class="table m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Description</th>
+                                                            <th>Cost</th>
+                                                            <th>Qty</th>
+                                                            <th>Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-nowrap text-heading">Vuexy Admin Template</td>
+                                                            <td class="text-nowrap">HTML Admin Template</td>
+                                                            <td>$32</td>
+                                                            <td>1</td>
+                                                            <td>$32.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap text-heading">Frest Admin Template</td>
+                                                            <td class="text-nowrap">Angular Admin Template</td>
+                                                            <td>$22</td>
+                                                            <td>1</td>
+                                                            <td>$22.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap text-heading">Apex Admin Template</td>
+                                                            <td class="text-nowrap">HTML Admin Template</td>
+                                                            <td>$17</td>
+                                                            <td>2</td>
+                                                            <td>$34.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap text-heading">Robust Admin Template</td>
+                                                            <td class="text-nowrap">React Admin Template</td>
+                                                            <td>$66</td>
+                                                            <td>1</td>
+                                                            <td>$66.00</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <hr class="my-4 mx-n4" />
+
+                                            <div class="table-responsive">
+                                                <table class="table m-0 table-borderless">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="align-top pe-6 ps-0 py-6 text-body">
+                                                                <p class="mb-1">
+                                                                    <span class="me-2 h6">Salesperson:</span>
+                                                                    <span>Alfie Solomons</span>
+                                                                </p>
+                                                                <span>Thanks for your business</span>
+                                                            </td>
+                                                            <td class="px-0 py-6 w-px-100">
+                                                                <p class="mb-2">Subtotal:</p>
+                                                                <p class="mb-2">Discount:</p>
+                                                                <p class="mb-2 border-bottom pb-2">Tax:</p>
+                                                                <p class="mb-0">Total:</p>
+                                                            </td>
+                                                            <td class="text-end px-0 py-6 w-px-100 fw-medium text-heading">
+                                                                <p class="fw-medium mb-2">$1800</p>
+                                                                <p class="fw-medium mb-2">$28</p>
+                                                                <p class="fw-medium mb-2 border-bottom pb-2">21%</p>
+                                                                <p class="fw-medium mb-0">$1690</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <hr class="my-4" />
+
+                                            <div class="card-body p-0">
+                                                <div class="row">
                                                     <div class="col-12">
-                                                        <label for="discountInput" class="form-label">Discount(%)</label>
-                                                        <input type="number" class="form-control" id="discountInput"
-                                                            min="0" max="100" />
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="taxInput1" class="form-label">Tax 1</label>
-                                                        <select name="tax-1-input" id="taxInput1"
-                                                            class="form-select tax-select">
-                                                            <option value="0%" selected>0%</option>
-                                                            <option value="1%">1%</option>
-                                                            <option value="10%">10%</option>
-                                                            <option value="18%">18%</option>
-                                                            <option value="40%">40%</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="taxInput2" class="form-label">Tax 2</label>
-                                                        <select name="tax-2-input" id="taxInput2"
-                                                            class="form-select tax-select">
-                                                            <option value="0%" selected>0%</option>
-                                                            <option value="1%">1%</option>
-                                                            <option value="10%">10%</option>
-                                                            <option value="18%">18%</option>
-                                                            <option value="40%">40%</option>
-                                                        </select>
+                                                        <span class="fw-medium text-heading">Note:</span>
+                                                        <span>It was a pleasure working with you and your team. We hope you
+                                                            will keep us in mind for future freelance projects. Thank
+                                                            You!</span>
                                                     </div>
                                                 </div>
-                                                <div class="dropdown-divider my-3"></div>
-                                                <button type="button"
-                                                    class="btn btn-label-primary btn-apply-changes">Apply</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <button type="button" class="btn btn-primary" data-repeater-create>Add Item</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <hr class="my-4 mx-n4" />
-
-                    <div class="row py-sm-3">
-                        <div class="col-md-6 mb-md-0 mb-3">
-                            <div class="d-flex align-items-center mb-3">
-                                <label for="salesperson" class="form-label me-5 fw-semibold">Salesperson:</label>
-                                <input type="text" class="form-control" id="salesperson" placeholder="Edward Crowley"
-                                    value="Edward Crowley" />
-                            </div>
-                            <input type="text" class="form-control" id="invoiceMsg"
-                                placeholder="Thanks for your business" value="Thanks for your business" />
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-end">
-                            <div class="invoice-calculations">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">Subtotal:</span>
-                                    <span class="fw-semibold">$5000.25</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">Discount:</span>
-                                    <span class="fw-semibold">$00.00</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">Tax:</span>
-                                    <span class="fw-semibold">$100.00</span>
-                                </div>
-                                <hr />
-                                <div class="d-flex justify-content-between">
-                                    <span class="w-px-100">Total:</span>
-                                    <span class="fw-semibold">$5100.25</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="my-4" />
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label for="note" class="form-label fw-semibold">Note:</label>
-                                <textarea class="form-control" rows="2" id="note">It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
                                 <!-- /Invoice -->
 
                                 <!-- Invoice Actions -->
