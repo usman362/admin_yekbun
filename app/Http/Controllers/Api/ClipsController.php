@@ -33,28 +33,30 @@ class ClipsController extends Controller
     {
         $clip = new Clips();
         $clip->template_id = $request->template_id;
-        if($request->hasFile('thumbnail')){
-            $thumbnail =  Helpers::fileUpload($request->thumbnail,'clips-thumbnail');
-        }else{
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail =  Helpers::fileUpload($request->thumbnail, 'clips-thumbnail');
+        } else {
             $thumbnail = '';
         }
         $clip->thumbnail = $thumbnail;
-        if($request->hasFile('video')){
-            $video =  Helpers::fileUpload($request->video,'clips-video');
-        }else{
+        if ($request->hasFile('video')) {
+            $video =  Helpers::fileUpload($request->video, 'clips-video');
+        } else {
             $video = '';
         }
-        $clip->video = $video;
-        $clip->audio = $request->audio;
-        $clip->video_volume = $request->video_volume;
-        $clip->audio_volume = $request->audio_volume;
-        $clip->text = $request->text;
-        $clip->text_properties = $request->text_properties;
+        $clip->clip = [
+            'video'          => $video,
+            'audio'          => $request->audio,
+            'video_volume'   => $request->video_volume,
+            'audio_volume'   => $request->audio_volume,
+            'text'           => $request->text,
+            'text_properties' => $request->text_properties,
+        ];
         $clip->emoji = $request->emoji;
         $clip->share_with = $request->share_with;
         $clip->user_id = auth()->user()->id;
         $clip->save();
-        return ResponseHelper::sendResponse($clip,'Clip has been Created Successfully!');
+        return ResponseHelper::sendResponse($clip, 'Clip has been Created Successfully!');
     }
 
     public function store_templates(Request $request)
