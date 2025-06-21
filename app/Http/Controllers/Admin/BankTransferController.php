@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\BankTransfer;
+use App\Models\AppInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,8 @@ class BankTransferController extends Controller
     public function index()
     {
         $banks = BankTransfer::orderBy('id' , 'desc')->get();
-        return view('content.bank-transfer.index' , compact('banks'));
+        $appinfo = AppInfo::first();
+        return view('content.bank-transfer.index' , compact('banks', 'appinfo'));
     }
 
     /**
