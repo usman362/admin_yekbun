@@ -602,9 +602,9 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::middleware('check.role:Super Admin')->group(function ()  use ($controller_path) {
 
-        Route::resource('/currency', CurrencyController::class);
+        Route::resource('/currency_discount', CurrencyController::class);
 
-        Route::get('/app/user-income', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
+        Route::get('/app/subscription', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
 
         Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
 

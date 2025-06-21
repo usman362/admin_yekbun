@@ -262,14 +262,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="font-size: 20px;">#</th>
-                        <th style="font-size: 20px;">Order</th>
-                        <th style="font-size: 20px;">Date & Time</th>
-                        <th style="font-size: 20px;">About User</th>
-                        <th style="font-size: 20px;">Service Type</th>
-                        <th style="font-size: 20px;">Payment Type</th>
-                        <th style="font-size: 20px;">Total Paid</th>
-                        <th style="font-size: 20px;">Options</th>
+                        <th >#</th>
+                        <th >Order</th>
+                        <th >Date & Time</th>
+                        <th >About User</th>
+                        <th >Service Type</th>
+                        <th >Payment Type</th>
+                        <th >Total Paid</th>
+                        <th >Options</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -344,21 +344,19 @@
                                     <div class="card-body">
                                         <div
                                             class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column p-sm-3 p-0">
-                                            <div class="mb-xl-0 mb-4">
-                                                <div class="d-flex svg-illustration mb-3 gap-2">
-                                                    <span class="app-brand-logo demo">
-                                                        <img src="http://127.0.0.1:8000/assets/img/logo-ff.jpeg" width="20" style="margin-left:-20px;height: 140px;">
+                                              <div class="col-md-6 mb-md-0 mb-4">
+                            <div class="d-flex svg-illustration mb-4 gap-2">
+                                <span class="app-brand-logo demo">
+                                    <img src="{{ asset('storage/' . $appinfo->image) }}" alt="App Info Image"
+                                        style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
+                                </span>
+                            </div>
 
+                            <p class="mb-1">{{ $appinfo->company_name }}</p>
+                            <p class="mb-1">{{ $appinfo->address }},{{ $appinfo->house_number }}</p>
+                            <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
 
-                                                    </span>
-                                                    <span class="app-brand-text demo text-body fw-bolder">
-                                                        Sneat
-                                                    </span>
-                                                </div>
-                                                <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-                                                <p class="mb-1">San Diego County, CA 91905, USA</p>
-                                                <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
-                                            </div>
+                        </div>
                                             <div>
                                                 <h4>Invoice #3492</h4>
                                                 <div class="mb-2">
@@ -509,16 +507,7 @@
                                             href="http://127.0.0.1:8000/app/invoice/print">
                                             Print
                                         </a>
-                                        <a href="http://127.0.0.1:8000/app/invoice/edit"
-                                            class="btn btn-label-secondary d-grid w-100 mb-3">
-                                            Edit Invoice
-                                        </a>
-                                        <button class="btn btn-primary d-grid w-100" data-bs-toggle="offcanvas"
-                                            data-bs-target="#addPaymentOffcanvas">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                    class="bx bx-dollar bx-xs me-1"></i>Add Payment</span>
-                                        </button>
+                                        
                                     </div>
                                 </div>
                             </div>

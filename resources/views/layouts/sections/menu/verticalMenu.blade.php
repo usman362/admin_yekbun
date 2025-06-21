@@ -1441,13 +1441,13 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
-                    <a href="{{ url('/app/user-income') }}" class="menu-link">
-                        <div>Discounts</div>
+                    <a href="{{ url('/app/subscription') }}" class="menu-link">
+                        <div>Subscription</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
-                    <a href="{{ url('/currency') }}" class="menu-link">
-                        <div>Currency</div>
+                <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
+                    <a href="{{ url('/currency_discount') }}" class="menu-link">
+                        <div>Currency & Discount</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('app/invoice/*') ? 'active open' : '' }}">

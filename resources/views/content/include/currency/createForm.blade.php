@@ -1,4 +1,4 @@
-<form id=createForm method="POST" action="{{route('currency.store')}}" enctype="multipart/form-data">
+<form id=createForm method="POST" action="{{route('currency_discount.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="hidden-inputs"></div>
     <div class="row">
