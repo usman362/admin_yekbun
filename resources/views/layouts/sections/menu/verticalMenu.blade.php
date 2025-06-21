@@ -1441,21 +1441,12 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
-<<<<<<< HEAD
                     <a href="{{ url('/app/subscription') }}" class="menu-link">
                         <div>Subscription</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
                     <a href="{{ url('/currency_discount') }}" class="menu-link">
-=======
-                    <a href="{{ url('/app/user-income') }}" class="menu-link">
-                        <div>Subscription</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
-                    <a href="{{ url('/currency') }}" class="menu-link">
->>>>>>> fba7d18c3ec908613b3cd6be7368ef691583fcd7
                         <div>Currency & Discount</div>
                     </a>
                 </li>
@@ -1470,13 +1461,13 @@
                                 <div>Manage Invoice</div>
                             </a>
                         </li> --}}
-                        <li class="menu-item {{ Request::is('app/invoice/add') ? 'active' : '' }}">
-                            <a href="{{ url('app/invoice/add') }}" class="menu-link">
+                        <li class="menu-item {{ Request::is('create_bills') ? 'active' : '' }}">
+                            <a href="{{ url('create_bills') }}" class="menu-link">
                                 <div>Create Bills</div>
                             </a>
                         </li>
-                        <li class="menu-item {{ Request::is('app/invoice/edit') ? 'active' : '' }}">
-                            <a href="{{ url('app/invoice/edit') }}" class="menu-link">
+                        <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
+                            <a href="{{ url('app/edit_invoice') }}" class="menu-link">
                                 <div>Edit Invoice</div>
                             </a>
                         </li>

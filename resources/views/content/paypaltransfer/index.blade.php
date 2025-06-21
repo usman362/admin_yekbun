@@ -184,7 +184,6 @@
             <table class="table">
                 <thead>
                     <tr>
-<<<<<<< HEAD
                         <th >#</th>
                         <th >Order</th>
                         <th >Date & Time</th>
@@ -193,16 +192,6 @@
                         <th >Payment Type</th>
                         <th >Total Paid</th>
                         <th >Options</th>
-=======
-                        <th style="font-size: 13px;">#</th>
-                        <th style="font-size: 13px;">Order</th>
-                        <th style="font-size: 13px;">Date & Time</th>
-                        <th style="font-size: 13px;">About User</th>
-                        <th style="font-size: 13px;">Service Type</th>
-                        <th style="font-size: 13px;">Payment Type</th>
-                        <th style="font-size: 13px;">Total Paid</th>
-                        <th style="font-size: 13px;">Options</th>
->>>>>>> fba7d18c3ec908613b3cd6be7368ef691583fcd7
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -277,7 +266,6 @@
                                     <div class="card-body">
                                         <div
                                             class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column p-sm-3 p-0">
-<<<<<<< HEAD
                                              <div class="col-md-6 mb-md-0 mb-4">
                             <div class="d-flex svg-illustration mb-4 gap-2">
                                 <span class="app-brand-logo demo">
@@ -291,23 +279,6 @@
                             <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
 
                         </div>
-=======
-                                            <div class="col-md-6 mb-md-0 mb-4">
-                                                    <div class="d-flex svg-illustration mb-4 gap-2">
-                                                        <span class="app-brand-logo demo">
-                                                            <img src="{{ asset('storage/' . $appinfo->image) }}"
-                                                                alt="App Info Image"
-                                                                style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
-                                                        </span>
-                                                    </div>
-
-                                                    <p class="mb-1">{{ $appinfo->company_name }}</p>
-                                                    <p class="mb-1">
-                                                        {{ $appinfo->address }},{{ $appinfo->house_number }}</p>
-                                                    <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
-
-                                                </div>
->>>>>>> fba7d18c3ec908613b3cd6be7368ef691583fcd7
                                             <div>
                                                 <h4>Invoice #3492</h4>
                                                 <div class="mb-2">

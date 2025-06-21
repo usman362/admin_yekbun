@@ -606,7 +606,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
         Route::get('/app/subscription', $controller_path . '\apps\income\Income@userIncome')->name('app-user-income');
 
-        Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
+        Route::get('/app/edit_invoice', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
 
         Route::get('/app/portal-notification', [NotificationController::class, 'index'])->name('app.portal.notification');
         Route::post('/app/portal-notification', [NotificationController::class, 'store'])->name('store.portal.notification');
@@ -880,7 +880,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('/app/invoice/preview', $controller_path . '\apps\InvoicePreview@index')->name('app-invoice-preview');
     Route::get('/app/invoice/print', $controller_path . '\apps\InvoicePrint@index')->name('app-invoice-print');
     Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
-    Route::get('/app/invoice/add', $controller_path . '\apps\InvoiceAdd@index')->name('app-invoice-add');
+    Route::get('/create_bills', $controller_path . '\apps\InvoiceAdd@index')->name('app-invoice-add');
     Route::get('/app/user/list', $controller_path . '\apps\UserList@index')->name('app-user-list');
     Route::get('/app/task/list', $controller_path . '\Task\Task@index')->name('app-task-list');
     Route::get('/app/ftp/list', $controller_path . '\apps\FtpController@index')->name('app-ftp-list');
