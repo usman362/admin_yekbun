@@ -1442,7 +1442,7 @@
             <ul class="menu-sub">
                 <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
                     <a href="{{ url('/app/user-income') }}" class="menu-link">
-                        <div>Discounts</div>
+                        <div>Subscription</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
