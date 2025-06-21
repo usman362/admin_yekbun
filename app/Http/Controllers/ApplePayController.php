@@ -17,7 +17,11 @@ class ApplePayController extends Controller
     public function index()
     {
          $applepay = ApplePay::orderBy('id' , 'desc')->get();
+<<<<<<< HEAD
             $appinfo = AppInfo::first();
+=======
+           $appinfo = AppInfo::first();
+>>>>>>> fba7d18c3ec908613b3cd6be7368ef691583fcd7
         return view('content.applepaytransfer.index' , compact('applepay','appinfo'));
     }
 
@@ -109,6 +113,7 @@ class ApplePayController extends Controller
     public function destroy($id)
     {
         $bank = ApplePay::find($id);
+
         if($bank->delete($bank->id)){
             return redirect()->route('settings.applepay.index')->with('success' , 'Account has been deleted successfully.');
         }else{

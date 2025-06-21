@@ -999,7 +999,7 @@
 
                 <li class="menu-item ">
                     <a href="javascript:void(0)" class="menu-link">
-                        <div>Currency & Discount</div>
+                        <div>Currency</div>
                     </a>
 
 
@@ -1441,12 +1441,21 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
+<<<<<<< HEAD
                     <a href="{{ url('/app/subscription') }}" class="menu-link">
                         <div>Subscription</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
                     <a href="{{ url('/currency_discount') }}" class="menu-link">
+=======
+                    <a href="{{ url('/app/user-income') }}" class="menu-link">
+                        <div>Subscription</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('currency') ? 'active' : '' }}">
+                    <a href="{{ url('/currency') }}" class="menu-link">
+>>>>>>> fba7d18c3ec908613b3cd6be7368ef691583fcd7
                         <div>Currency & Discount</div>
                     </a>
                 </li>

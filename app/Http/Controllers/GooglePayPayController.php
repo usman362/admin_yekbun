@@ -16,7 +16,11 @@ class GooglePayPayController extends Controller
     public function index()
     {
          $googlepay = GooglePay::orderBy('id' , 'desc')->get();
+<<<<<<< HEAD
             $appinfo = AppInfo::first();
+=======
+          $appinfo = AppInfo::first();
+>>>>>>> fba7d18c3ec908613b3cd6be7368ef691583fcd7
         return view('content.googlepaypaytransfer.index' , compact('googlepay','appinfo'));
     }
 
