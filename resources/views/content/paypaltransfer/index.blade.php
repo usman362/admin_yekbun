@@ -287,9 +287,9 @@
                                 <div>
                                     <h5 class="m-0"><strong>Username</strong></h5>
                                     <div class="d-flex">
-                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt=""style=" height: 17px; width: 17px;">
+                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
                                         <span>Rojava . Qamishlo</span>
-                                        <img src="{{ asset('images/germany-flag-sm.png') }}" alt=""style=" height: 17px; width: 17px;">
+                                        <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
                                         <span>Hannover</span>
                                     </div>
                                 </div>
