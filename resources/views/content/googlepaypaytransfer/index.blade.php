@@ -24,7 +24,86 @@
     overflow: hidden;
   }
 </style>
- 
+ <style>
+        .card,
+        .modal {
+            font-family: 'Genos';
+        }
+.modal-dialog-scrollable .modal-body {
+     overflow-y: hidden;
+}
+        .transaction-icons img {
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .transaction-icons h4 {
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .transaction-icons p {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .transaction-icons i {
+            font-size: 14px;
+        }
+
+        .transaction-icons {
+            padding: 12px 38px 0px 38px;
+            width: 100%;
+            border-right: 2px solid #F2F2F2;
+        }
+
+        .transaction-icons:last-child {
+            border-right: none !important;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 16px !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,
+        .nav-pills .nav-link.active:focus {
+            background-color: transparent !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            box-shadow: none !important;
+        }
+
+        .line-height-1 {
+            line-height: 1 !important;
+        }
+
+        .user-area span {
+            font-size: 14px;
+        }
+
+        .user-area img {
+            width: 10px;
+            height: 10px;
+            margin: 4px 2px 0 2px;
+        }
+
+        .user-area .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+        }
+
+        .user-area span {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+    </style>
+
 @endsection
 
 @section('content')

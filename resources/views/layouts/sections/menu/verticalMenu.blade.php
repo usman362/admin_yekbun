@@ -1440,7 +1440,7 @@
                 <div>Settings</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('app/user-income') ? 'active' : '' }}">
+                <li class="menu-item {{ Request::is('app/subscription') ? 'active' : '' }}">
                     <a href="{{ url('/app/subscription') }}" class="menu-link">
                         <div>Subscription</div>
                     </a>
@@ -1461,8 +1461,8 @@
                                 <div>Manage Invoice</div>
                             </a>
                         </li> --}}
-                        <li class="menu-item {{ Request::is('create_bills') ? 'active' : '' }}">
-                            <a href="{{ url('create_bills') }}" class="menu-link">
+                        <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
+                            <a href="{{ url('app/create_bills') }}" class="menu-link">
                                 <div>Create Bills</div>
                             </a>
                         </li>
