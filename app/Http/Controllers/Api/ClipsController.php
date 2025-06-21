@@ -33,8 +33,18 @@ class ClipsController extends Controller
     {
         $clip = new Clips();
         $clip->template_id = $request->template_id;
-        $clip->thumbnail = $request->thumbnail;
-        $clip->video = $request->video;
+        if($request->hasFile('thumbnail')){
+            $thumbnail =  Helpers::fileUpload($request->thumbnail,'clips-thumbnail');
+        }else{
+            $thumbnail = '';
+        }
+        $clip->thumbnail = $thumbnail;
+        if($request->hasFile('video')){
+            $video =  Helpers::fileUpload($request->video,'clips-video');
+        }else{
+            $video = '';
+        }
+        $clip->video = $video;
         $clip->audio = $request->audio;
         $clip->video_volume = $request->video_volume;
         $clip->audio_volume = $request->audio_volume;
