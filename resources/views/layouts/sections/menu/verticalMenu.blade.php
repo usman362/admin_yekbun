@@ -999,7 +999,7 @@
 
                 <li class="menu-item ">
                     <a href="javascript:void(0)" class="menu-link">
-                        <div>Currency</div>
+                        <div>Currency & Discount</div>
                     </a>
 
 
