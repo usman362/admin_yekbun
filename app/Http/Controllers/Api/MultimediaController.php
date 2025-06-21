@@ -599,23 +599,40 @@ class MultimediaController extends Controller
     public function mediaTrimmer(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimetypes:audio/*,video/*',
             'startTime' => 'required|numeric|min:0',
             'endTime' => 'required|numeric|min:0|gt:startTime',
+            // Accept either a file upload or a URL
+            'file' => 'nullable|file|mimetypes:audio/*,video/*',
+            'url'  => 'nullable|url',
         ]);
 
-        // Upload the original file
-        $originalPath = $request->file('file')->store('public/media/originals');
+        // Determine source file path
+        if ($request->hasFile('file')) {
+            $originalPath = $request->file('file')->store('public/media/originals');
+            $storagePath = storage_path('app/' . $originalPath);
+            $extension = $request->file('file')->getClientOriginalExtension();
+        } elseif ($request->filled('url')) {
+            // Download the file from the given URL
+            $fileContents = file_get_contents($request->url);
 
-        // Get full paths
-        $storagePath = storage_path('app/' . $originalPath);
-        $trimmedName = 'trimmed_' . Str::random(10) . '.' . $request->file('file')->getClientOriginalExtension();
+            // Generate a unique file name
+            $extension = pathinfo(parse_url($request->url, PHP_URL_PATH), PATHINFO_EXTENSION);
+            $filename = 'original_' . Str::random(10) . '.' . $extension;
+            $originalPath = 'public/media/originals/' . $filename;
+
+            Storage::put($originalPath, $fileContents);
+            $storagePath = storage_path('app/' . $originalPath);
+        } else {
+            return ResponseHelper::sendResponse([], 'No valid file or URL provided.', false, 400);
+        }
+
+        // Prepare trim destination
+        $trimmedName = 'trimmed_' . Str::random(10) . '.' . $extension;
         $trimmedPath = storage_path('app/public/media/trimmed/' . $trimmedName);
 
-        // Ensure trimmed directory exists
         // Storage::makeDirectory('public/media/trimmed');
 
-        // Run FFmpeg trim command
+        // Prepare and run FFmpeg command
         $start = escapeshellarg($request->startTime);
         $duration = escapeshellarg($request->endTime - $request->startTime);
 
@@ -623,14 +640,14 @@ class MultimediaController extends Controller
         exec($command, $output, $returnCode);
 
         if ($returnCode !== 0) {
-            return ResponseHelper::sendResponse([],'Trimming failed.',false,500);
+            return ResponseHelper::sendResponse([], 'Trimming failed.', false, 500);
         }
 
-        // Optional: Delete original file if not needed
+        // Delete original file
         Storage::delete($originalPath);
 
-        // Return URL to trimmed file
+        // Return trimmed file URL
         $url = 'media/trimmed/' . $trimmedName;
-        return ResponseHelper::sendResponse($url,'Trimmed file uploaded successfully!');
+        return ResponseHelper::sendResponse($url, 'Trimmed file uploaded successfully!');
     }
 }
