@@ -310,8 +310,29 @@
                                     </div>
 
                                     <hr class="my-4 mx-n4">
-
-                                    <!-- Invoice To / Bill To Section -->
+<div class="dropdown">
+  <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    Select User
+  </button>
+  <ul class="dropdown-menu p-2" aria-labelledby="userDropdown" style="width: 300px;">
+    
+    <!-- Search input -->
+    <li>
+      <input type="text" class="form-control" id="userSearchInput" placeholder="Search name or ID...">
+    </li>
+    
+    <li><hr class="dropdown-divider"></li>
+    
+    <!-- Static user list -->
+    <div id="userList">
+      <li><a class="dropdown-item" href="#">Thomas Shelby (ID: YK-32)</a></li>
+      <li><a class="dropdown-item" href="#">Arthur Shelby (ID: YK-45)</a></li>
+      <li><a class="dropdown-item" href="#">John Shelby (ID: YK-87)</a></li>
+      <li><a class="dropdown-item" href="#">Polly Gray (ID: YK-23)</a></li>
+    </div>
+  </ul>
+</div>
+                                  
                                     <div class="row p-sm-3 p-0">
                                         <div class="col-md-6">
                                             <h6 class="pb-2">Invoice To:</h6>
