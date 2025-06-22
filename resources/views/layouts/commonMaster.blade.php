@@ -30,7 +30,8 @@
     <!-- Canonical SEO -->
     <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/svg/Yb_01062023_final.svg') }}" />
+   <link rel="icon" type="image/x-icon" sizes="180x180" href="{{ asset('assets/svg/yekbun_logo.svg') }}">
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
