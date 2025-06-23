@@ -603,7 +603,7 @@ class MultimediaController extends Controller
             'endTime' => 'required|numeric|min:0|gt:startTime',
             // Accept either a file upload or a URL
             'file' => 'nullable|file|mimetypes:audio/*,video/*',
-            'url'  => 'nullable|url',
+            'url'  => 'nullable',
         ]);
 
         // Determine source file path
