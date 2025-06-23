@@ -306,11 +306,11 @@ const dropZoneInitFunctions = [];
                           
                             <td class="line-height-1">
                                 <p class="m-0"><strong>DD.MM.YYYY</strong></p>
-                                <small>HH:MM</small>
+                                
                             </td>
                               <td class="line-height-1">
                                 <p class="m-0"><strong>DD.MM.YYYY</strong></p>
-                                <small>HH:MM</small>
+                               
                             </td>
                             <td class="line-height-1 user-area">
                                 <div class="d-flex">

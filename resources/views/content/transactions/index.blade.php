@@ -133,18 +133,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Upgrades</th>
-                                <th>Music</th>
-                                <th>Events</th>
-                                <th>Services</th>
-                                <th>Bazaar</th>
-                                <th>Shops</th>
-                                <th>Channels</th>
-                                <th>Sympathy</th>
-                                <th>G-Ads</th>
-                                <th>User-Ads</th>
+                                <th style="font-size: 13px;">#</th>
+                                <th style="font-size: 13px;">Date</th>
+                                <th style="font-size: 13px;">Upgrades</th>
+                                <th style="font-size: 13px;">Music</th>
+                                <th style="font-size: 13px;">Events</th>
+                                <th style="font-size: 13px;">Services</th>
+                                <th style="font-size: 13px;">Bazaar</th>
+                                <th style="font-size: 13px;">Shops</th>
+                                <th style="font-size: 13px;">Channels</th>
+                                <th style="font-size: 13px;">Sympathy</th>
+                                <th style="font-size: 13px;">G-Ads</th>
+                                <th style="font-size: 13px;">User-Ads</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -171,18 +171,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Upgrades</th>
-                                <th>Music</th>
-                                <th>Events</th>
-                                <th>Services</th>
-                                <th>Bazaar</th>
-                                <th>Shops</th>
-                                <th>Channels</th>
-                                <th>Sympathy</th>
-                                <th>G-Ads</th>
-                                <th>User-Ads</th>
+                                <th style="font-size: 13px;">#</th>
+                                <th style="font-size: 13px;">Date</th>
+                                <th style="font-size: 13px;">Upgrades</th>
+                                <th style="font-size: 13px;">Music</th>
+                                <th style="font-size: 13px;">Events</th>
+                                <th style="font-size: 13px;">Services</th>
+                                <th style="font-size: 13px;">Bazaar</th>
+                                <th style="font-size: 13px;">Shops</th>
+                                <th style="font-size: 13px;">Channels</th>
+                                <th style="font-size: 13px;">Sympathy</th>
+                                <th style="font-size: 13px;">G-Ads</th>
+                                <th style="font-size: 13px;">User-Ads</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -209,18 +209,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Upgrades</th>
-                                <th>Music</th>
-                                <th>Events</th>
-                                <th>Services</th>
-                                <th>Bazaar</th>
-                                <th>Shops</th>
-                                <th>Channels</th>
-                                <th>Sympathy</th>
-                                <th>G-Ads</th>
-                                <th>User-Ads</th>
+                                <th style="font-size: 13px;">#</th>
+                                <th style="font-size: 13px;">Date</th>
+                                <th style="font-size: 13px;"> Upgrades</th>
+                                <th style="font-size: 13px;">Music</th>
+                                <th style="font-size: 13px;">Events</th>
+                                <th style="font-size: 13px;">Services</th>
+                                <th style="font-size: 13px;">Bazaar</th>
+                                <th style="font-size: 13px;">Shops</th>
+                                <th style="font-size: 13px;">Channels</th>
+                                <th style="font-size: 13px;">Sympathy</th>
+                                <th style="font-size: 13px;">G-Ads</th>
+                                <th style="font-size: 13px;">User-Ads</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
