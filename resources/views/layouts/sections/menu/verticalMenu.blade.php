@@ -1437,28 +1437,16 @@
                 <div>Subscription</div>
             </a>
         </li>
-        <li
-            class="menu-item {{ Request::is('app/invoice/*') || Request::is('app/create_bills') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-credit-card"></i>
-                <div>Manage Invoice</div>
+         <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
+            <a href="{{ url('/app/create_bills') }}" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Create Bills</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
-                    <a href="{{ url('app/create_bills') }}" class="menu-link">
-                        <div>Create Bills</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
-                    <a href="{{ url('app/edit_invoice') }}" class="menu-link">
-                        <div>Edit Invoice</div>
-                    </a>
-                </li>
-            </ul>
         </li>
+        
 
+       <li class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
 
-        <li class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') ? 'active open' : '' }}">
 
 
 
@@ -1471,6 +1459,11 @@
                 <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
                     <a href="{{ url('/currency_discount') }}" class="menu-link">
                         <div>Currency & Discount</div>
+                    </a>
+                </li>
+                 <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
+                    <a href="{{ url('app/edit_invoice') }}" class="menu-link">
+                        <div>Edit Invoice</div>
                     </a>
                 </li>
                 <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
