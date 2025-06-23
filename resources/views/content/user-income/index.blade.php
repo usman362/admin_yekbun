@@ -187,6 +187,7 @@ const dropZoneInitFunctions = [];
             margin-top: 2px;
         }
     </style>
+    
 <h4 class="fw-bold py-3 mb-4">
     <span class="text-muted fw-light">User Subscription </span></h4>
 
@@ -219,38 +220,27 @@ const dropZoneInitFunctions = [];
   <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="m-0">
-                <strong style="font-size: 25px;">Transactions</strong><br>
-                <small class="text-muted"> <span
-                        style="
-                    font-size: 12px;
-                    font-weight: 500;
-                    margin-top: 2px;
-                ">Bank
-                        Transfer Overview
-                    </span></small>
+                <strong >Transactions</strong><br>
+                
             </h5>
 
             <div class="d-flex align-items-center">
 
                 <div class="row">
-                    <!-- Date Input -->
-                    <div class="col-auto" style="border-radius: 10px; position: relative;">
-                        <input type="text" class="form-control form-control-sm datepicker" placeholder="Select Date"
-                            name="duration" id="datepicker" aria-label="Datepicker" autocomplete="off"
-                            style="padding-right: 40px; height: 32px;" />
-
-                        <button type="button" onclick="$('.datepicker').daterangepicker('show')"
-                            style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
-                        </button>
+                   <div class="col-auto d-flex align-items-center ms-3">
+                        <select id="filterService" class="form-select form-select-sm" style="height: 32px;">
+                            <option selected>Sort by </option>
+                            <option value="account">Monthyl Plan</option>
+                            <option value="music">Yearly Plan</option>
+                             
+                        </select>
                     </div>
-
-                    <!-- Sort by Service Dropdown -->
                     <div class="col-auto d-flex align-items-center ms-3">
                         <select id="filterService" class="form-select form-select-sm" style="height: 32px;">
-                            <option selected>Sort by Service</option>
-                            <option value="account">Account</option>
-                            <option value="music">Music</option>
-                            <option value="channels">Channels</option>
+                            <option selected>Sort by User</option>
+                            <option value="account">Educated</option>
+                            <option value="music">Acadmic</option>
+                            <option value="channels">Cultivated</option>
                         </select>
                     </div>
                 </div>
@@ -293,23 +283,28 @@ const dropZoneInitFunctions = [];
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="font-size: 20px;">#</th>
-                            <th style="font-size: 20px;">Order</th>
-                            <th style="font-size: 20px;">Date & Time</th>
-                            <th style="font-size: 20px;">About User</th>
-                            <th style="font-size: 20px;">Service Type</th>
-                            <th style="font-size: 20px;">Payment Type</th>
-                            <th style="font-size: 20px;">Total Paid</th>
-                            <th style="font-size: 20px;">Options</th>
+                            <th style="font-size: 13px;">#</th>
+                            
+                            <th style="font-size: 13px;">Purchase Date</th>
+                            <th style="font-size: 13px;">Next Payment</th>
+                            <th style="font-size: 13px;">About User</th>
+                            <th style="font-size: 13px;">Service Type</th>
+                            <th style="font-size: 13px;">Payment Type</th>
+                            <th style="font-size: 13px;">Total Paid</th>
+                            <th style="font-size: 13px;">Options</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         <tr>
                             <td>01</td>
-                            <td>Order ID</td>
+                          
                             <td class="line-height-1">
                                 <p class="m-0"><strong>DD.MM.YYYY</strong></p>
                                 <small>HH:MM</small>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0">02/23/2025</p>
+                                
                             </td>
                             <td class="line-height-1 user-area">
                                 <div class="d-flex">

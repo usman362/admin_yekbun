@@ -1431,8 +1431,35 @@
                 <div>Income</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('app/subscription') ? 'active' : '' }}">
+            <a href="{{ url('/app/subscription') }}" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Subscription</div>
+            </a>
+        </li>
+        <li
+            class="menu-item {{ Request::is('app/invoice/*') || Request::is('app/create_bills') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                <div>Manage Invoice</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
+                    <a href="{{ url('app/create_bills') }}" class="menu-link">
+                        <div>Create Bills</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
+                    <a href="{{ url('app/edit_invoice') }}" class="menu-link">
+                        <div>Edit Invoice</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-      <li class="menu-item {{ Request::is('app/*') || Request::is('currency*') || Request::is('settings/*') ? 'active open' : '' }}">
+
+        <li class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') ? 'active open' : '' }}">
+
 
 
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -1440,77 +1467,33 @@
                 <div>Settings</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('app/subscription') ? 'active' : '' }}">
-                    <a href="{{ url('/app/subscription') }}" class="menu-link">
-                        <div>Subscription</div>
-                    </a>
-                </li>
+
                 <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
                     <a href="{{ url('/currency_discount') }}" class="menu-link">
                         <div>Currency & Discount</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('app/invoice/*') ? 'active open' : '' }}">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        {{-- <i class="menu-icon tf-icons bx bx-credit-card"></i> --}}
-                        <div>Manage Invoice</div>
+                <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/bank-transfer') }}" class="menu-link">
+                        <div> Manage Bank</div>
                     </a>
-                    <ul class="menu-sub">
-                        {{-- <li class="menu-item {{ Request::is('app/invoice/list') ? 'active' : '' }}">
-                            <a href="{{ url('app/invoice/list') }}" class="menu-link">
-                                <div>Manage Invoice</div>
-                            </a>
-                        </li> --}}
-                        <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
-                            <a href="{{ url('app/create_bills') }}" class="menu-link">
-                                <div>Create Bills</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
-                            <a href="{{ url('app/edit_invoice') }}" class="menu-link">
-                                <div>Edit Invoice</div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
-                <li class="menu-item {{ Request::is('settings/*') ? 'active open' : '' }}">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        {{-- <i class="menu-icon tf-icons bx bx-credit-card"></i> --}}
-                        <div>Payments</div>
+                <li class="menu-item {{ Request::is('settings/paypal') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/paypal') }}" class="menu-link">
+                        <div> Manage PayPal </div>
                     </a>
-                    <ul class="menu-sub">
-                        {{-- <li class="menu-item {{ Request::is('settings/payment-offices') ? 'active' : '' }}">
-                    <a href="{{ url('/settings/payment-offices') }}" class="menu-link">
-                        <div>Payment Office</div>
-                    </a>
-                </li> --}}
-                        <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/bank-transfer') }}" class="menu-link">
-                                <div> Manage Bank</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Request::is('settings/paypal') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/paypal') }}" class="menu-link">
-                                <div> Manage PayPal </div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Request::is('settings/applepay') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/applepay') }}" class="menu-link">
-                                <div> Manage ApplePay</div>
-                            </a>
-                        </li>
-                        <li class="menu-item {{ Request::is('settings/googlepay') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/googlepay') }}" class="menu-link">
-                                <div> Manage GooglePay</div>
-                            </a>
-                        </li>
-                        {{-- <li class="menu-item {{ Request::is('settings/payment-methods') ? 'active' : '' }}">
-                            <a href="{{ url('/settings/payment-methods') }}" class="menu-link">
-                                <div> Manage Bank Transfer</div>
-                            </a>
-                        </li> --}}
-                    </ul>
                 </li>
+                <li class="menu-item {{ Request::is('settings/applepay') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/applepay') }}" class="menu-link">
+                        <div> Manage ApplePay</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/googlepay') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/googlepay') }}" class="menu-link">
+                        <div> Manage GooglePay</div>
+                    </a>
+                </li>
+
             </ul>
         </li>
 
