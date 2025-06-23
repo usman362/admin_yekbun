@@ -134,7 +134,7 @@
           <th style="font-size: 15px;">Paypal Client Id</th>
           <th style="font-size: 15px;">Paypal Client Secret </th>
 
-          <th>Option</th>
+          <th style="font-size: 15px;">Option</th>
 
         </tr>
       </thead>

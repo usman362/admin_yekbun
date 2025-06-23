@@ -134,7 +134,7 @@
             <th style="font-size: 15px;">ApplePay Client Id</th>
             <th style="font-size: 15px;">ApplePay Client Secret </th>
             
-            <th>Option</th>
+            <th style="font-size: 15px;">Option</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
