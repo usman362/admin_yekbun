@@ -219,11 +219,17 @@ const dropZoneInitFunctions = [];
 <div style="height: 35px;"></div>
   <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="m-0">
-                <strong >Transactions</strong><br>
-                
+            
+ <h5 class="m-0">
+                <strong style="font-size: 25px;">Subscription</strong><br>
+                <small class="text-muted"> <span
+                        style="
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-top: 2px;
+                ">
+                       Plan Overview                    </span></small>
             </h5>
-
             <div class="d-flex align-items-center">
 
                 <div class="row">
@@ -240,7 +246,7 @@ const dropZoneInitFunctions = [];
                             <option selected>Sort by User</option>
                             <option value="account">Educated</option>
                             <option value="music">Acadmic</option>
-                            <option value="channels">Cultivated</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -302,9 +308,9 @@ const dropZoneInitFunctions = [];
                                 <p class="m-0"><strong>DD.MM.YYYY</strong></p>
                                 <small>HH:MM</small>
                             </td>
-                            <td class="line-height-1">
-                                <p class="m-0">02/23/2025</p>
-                                
+                              <td class="line-height-1">
+                                <p class="m-0"><strong>DD.MM.YYYY</strong></p>
+                                <small>HH:MM</small>
                             </td>
                             <td class="line-height-1 user-area">
                                 <div class="d-flex">

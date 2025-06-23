@@ -265,14 +265,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="font-size: 20px;">#</th>
-                        <th style="font-size: 20px;">Order</th>
-                        <th style="font-size: 20px;">Date & Time</th>
-                        <th style="font-size: 20px;">About User</th>
-                        <th style="font-size: 20px;">Service Type</th>
-                        <th style="font-size: 20px;">Payment Type</th>
-                        <th style="font-size: 20px;">Total Paid</th>
-                        <th style="font-size: 20px;">Options</th>
+                        <th style="font-size: 13px;">#</th>
+                        <th style="font-size: 13px;">Order</th>
+                        <th style="font-size: 13px;">Date & Time</th>
+                        <th style="font-size: 13px;">About User</th>
+                        <th style="font-size: 13px;">Service Type</th>
+                        <th style="font-size: 13px;">Payment Type</th>
+                        <th style="font-size: 13px;">Total Paid</th>
+                        <th style="font-size: 13px;">Options</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
