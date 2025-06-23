@@ -39,22 +39,46 @@ class ClipsController extends Controller
             $thumbnail = '';
         }
         $clip->thumbnail = $thumbnail;
-        if ($request->hasFile('video')) {
-            $video =  Helpers::fileUpload($request->video, 'clips-video');
-        } else {
-            $video = '';
-        }
-        $clip->clip = [
-            'video'          => $video,
-            'audio'          => $request->audio,
-            'video_volume'   => $request->video_volume,
-            'audio_volume'   => $request->audio_volume,
-            'text'           => $request->text,
-            'text_properties' => $request->text_properties,
-        ];
+        // if ($request->hasFile('video')) {
+        //     $video =  Helpers::fileUpload($request->video, 'clips-video');
+        // } else {
+        //     $video = '';
+        // }
+        $uid = uniqid();
         $clip->emoji = $request->emoji;
         $clip->share_with = $request->share_with;
         $clip->user_id = auth()->user()->id;
+
+        $videoPath = $request->video;
+        $audioPath = storage_path('app/public/'.$request->audio);
+        $outputPath = storage_path('app/public/videos/clip_'.$uid.'.mp4');
+
+        $text = $request->text ?? 'Default Text';
+        $videoVolume = $request->video_volume ?? 0.8; // 80% of original video volume
+        $audioVolume = $request->audio_volume ?? 0.5; // 50% of added background audio
+
+        $x = $request->x ?? '(w-text_w)/2';
+        $y = $request->y ?? '(h-text_h)/2';
+        $fontSize = $request->fontSize ?? 36;
+        $fontColor = $request->color ?? 'white';
+        // Escape text properly for shell
+        $escapedText = escapeshellarg($text);
+
+        // FFmpeg command WITHOUT custom font
+        $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
+        "\"[0:v]drawtext=text={$escapedText}:fontcolor={$fontColor}:fontsize={$fontSize}:x={$x}:y={$y}[v];" .
+        "[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
+        "[a1][a2]amix=inputs=2:duration=first[a]\" " .
+        "-map \"[v]\" -map \"[a]\" -shortest {$outputPath}";
+
+        exec($command, $output, $return_var);
+
+        if ($return_var === 0) {
+            $clip->clip = $outputPath;
+        }
+        // else {
+        //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
+        // }
         $clip->save();
         return ResponseHelper::sendResponse($clip, 'Clip has been Created Successfully!');
     }
