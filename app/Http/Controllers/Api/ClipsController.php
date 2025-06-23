@@ -50,8 +50,8 @@ class ClipsController extends Controller
         $clip->user_id = auth()->user()->id;
 
         $videoPath = $request->video;
-        $audioPath = storage_path('app/public/'.$request->audio);
-        $outputPath = storage_path('app/public/videos/clip_'.$uid.'.mp4');
+        $audioPath = storage_path('app/public/' . $request->audio);
+        $outputPath = storage_path('app/public/videos/clip_' . $uid . '.mp4');
 
         $text = $request->text ?? 'Default Text';
         $videoVolume = $request->video_volume ?? 0.8; // 80% of original video volume
@@ -64,9 +64,21 @@ class ClipsController extends Controller
         // Escape text properly for shell
         $escapedText = escapeshellarg($text);
 
+        // 👉 Get font file name from request
+        $fontFileName = $request->fontFamily; // Example: 'Roboto-Bold'
+        $fontPath = $fontFileName ? public_path('fonts/' . $fontFileName . '.tff') : null;
+
+        // Optional: Validate file exists
+        // if ($fontPath && !file_exists($fontPath)) {
+        //     return response()->json(['error' => 'Font file not found.'], 400);
+        // }
+
+        // Fontfile option
+        $fontOption = $fontPath ? "fontfile={$fontPath}:" : '';
+
         // FFmpeg command WITHOUT custom font
-        $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
-        "\"[0:v]drawtext=text={$escapedText}:fontcolor={$fontColor}:fontsize={$fontSize}:x={$x}:y={$y}[v];" .
+         $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
+        "\"[0:v]drawtext={$fontOption}text={$escapedText}:fontcolor={$fontColor}:fontsize={$fontSize}:x={$x}:y={$y}[v];" .
         "[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
         "[a1][a2]amix=inputs=2:duration=first[a]\" " .
         "-map \"[v]\" -map \"[a]\" -shortest {$outputPath}";
@@ -74,7 +86,7 @@ class ClipsController extends Controller
         exec($command, $output, $return_var);
 
         if ($return_var === 0) {
-            $clip->clip = $outputPath;
+            $clip->clip = Str::after($outputPath, 'public/');;
         }
         // else {
         //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
