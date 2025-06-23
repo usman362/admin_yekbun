@@ -138,19 +138,19 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="font-size: 13px ">#</th>
-                                <th style="font-size: 13px;">Date</th>
-                                <th style="font-size: 13px;">Total Transactions</th>
-                                <th style="font-size: 13px;">Bank Transfer</th>
-                                <th style="font-size: 13px;">  Paypal</th>
-                                <th style="font-size: 13px;">Apple Pay</th>
-                                <th style="font-size: 13px;">Google Pay</th>
-                                <th style="font-size: 13px;">Total€</th>
+                                <th style="font-size: 15px;">#</th>
+                                <th style="font-size: 15px;">Date</th>
+                                <th style="font-size: 15px;">Total Transactions</th>
+                                <th style="font-size: 15px;">Bank Transfer</th>
+                                <th style="font-size: 15px;">  Paypal</th>
+                                <th style="font-size: 15px;">Apple Pay</th>
+                                <th style="font-size: 15px;">Google Pay</th>
+                                <th style="font-size: 15px;">Total€</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
                             <tr>
-                                <td style="font-size: 13px;">01</td>
+                                <td style="font-size: 15px;">01</td>
                                 <td style="font-size: 13px ">Date</td>
                                 <td style="font-size: 13px "><a data-bs-toggle="modal" href="#dailyIncome" role="button">10</a></td>
                                 <td style="font-size: 13px ">Bank Transfer</td>
@@ -168,20 +168,20 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="font-size: 13px">#</th>
-                                <th style="font-size: 13px">Date</th>
-                                <th style="font-size: 13px">Total Transactions</th>
-                                <th style="font-size: 13px">Bank Transfer</th>
-                                <th style="font-size: 13px">Paypal</th>
-                                <th style="font-size: 13px">Apple Pay</th>
-                                <th style="font-size: 13px">Google Pay</th>
-                                <th style="font-size: 13px">Total€</th>
+                                <th style="font-size: 15px;">#</th>
+                                <th style="font-size: 15px;">Date</th>
+                                <th style="font-size: 15px;">Total Transactions</th>
+                                <th style="font-size: 15px;">Bank Transfer</th>
+                                <th style="font-size: 15px;">Paypal</th>
+                                <th style="font-size: 15px;">Apple Pay</th>
+                                <th style="font-size: 15px;">Google Pay</th>
+                                <th style="font-size: 15px;">Total€</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
                             <tr>
-                                <td style="font-size: 13px;">01</td>
-                                <td style="font-size: 13px;">Date</td>
+                                <td style="font-size: 15px;">01</td>
+                                <td style="font-size: 15px;">Date</td>
                                 <td style="font-size: 13px "><a data-bs-toggle="modal" href="#monthlyIncome" role="button">10</a></td>
                                 <td style="font-size: 13px ">Bank Transfer</td>
                                 <td style="font-size: 13px ">Paypal</td>
@@ -210,14 +210,14 @@
                         </thead>
                         <tbody class="table-border-bottom-0">
                             <tr>
-                                <td style="font-size: 13px ">01</td>
-                                <td style="font-size: 13px">Date</td>
-                                <td style="font-size: 13px "><a data-bs-toggle="modal" href="#yearlyIncome" role="button">10</a></td>
-                                <td style="font-size: 13px ">Bank Transfer</td>
-                                <td style="font-size: 13px ">Paypal</td>
-                                <td style="font-size: 13px ">Apple Pay</td>
-                                <td style="font-size: 13px ">Google Pay</td>
-                                <td style="font-size: 13px ">Total€</td>
+                                <td style="font-size: 15px;">01</td>
+                                <td style="font-size: 15px;">Date</td>
+                                <td style="font-size: 15px;"><a data-bs-toggle="modal" href="#yearlyIncome" role="button">10</a></td>
+                                <td style="font-size: 15px;">Bank Transfer</td>
+                                <td style="font-size: 15px;">Paypal</td>
+                                <td style="font-size: 15px;">Apple Pay</td>
+                                <td style="font-size: 15px;">Google Pay</td>
+                                <td style="font-size: 15px;">Total€</td>
                             </tr>
                         </tbody>
                     </table>
@@ -357,14 +357,14 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th style="font-size: 13px;">#</th>
-                                    <th style="font-size: 13px;">Order</th>
-                                    <th style="font-size: 13px;">Date & Time</th>
-                                    <th style="font-size: 13px;">About User</th>
-                                    <th style="font-size: 13px;">Service Type</th>
-                                    <th style="font-size: 13px ">Payment Type</th>
-                                    <th style="font-size: 13px ">Total Paid</th>
-                                    <th style="font-size: 13px ">Options</th>
+                                    <th style="font-size: 15px;">#</th>
+                                    <th style="font-size: 15px;">Order</th>
+                                    <th style="font-size: 15px;">Date & Time</th>
+                                    <th style="font-size: 15px;">About User</th>
+                                    <th style="font-size: 15px;">Service Type</th>
+                                    <th style="font-size: 15px;">Payment Type</th>
+                                    <th style="font-size: 15px;">Total Paid</th>
+                                    <th style="font-size: 15px;">Options</th>
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
@@ -472,14 +472,14 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th style="font-size: 13px ">#</th>
-                                    <th style="font-size: 13px ">Order</th>
-                                    <th style="font-size: 13px ">Date & Time</th>
-                                    <th style="font-size: 13px ">About User</th>
-                                    <th style="font-size: 13px ">Service Type</th>
-                                    <th style="font-size: 13px ">Payment Type</th>
-                                    <th style="font-size: 13px ">Total Paid</th>
-                                    <th style="font-size: 13px ">Options</th>
+                                    <th style="font-size: 15px;">#</th>
+                                    <th style="font-size: 15px;">Order</th>
+                                    <th style="font-size: 15px;">Date & Time</th>
+                                    <th style="font-size: 15px;">About User</th>
+                                    <th style="font-size: 15px;">Service Type</th>
+                                    <th style="font-size: 15px;">Payment Type</th>
+                                    <th style="font-size: 15px;">Total Paid</th>
+                                    <th style="font-size: 15px;">Options</th>
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">

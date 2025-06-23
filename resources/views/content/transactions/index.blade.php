@@ -133,18 +133,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="font-size: 13px;">#</th>
-                                <th style="font-size: 13px;">Date</th>
-                                <th style="font-size: 13px;">Upgrades</th>
-                                <th style="font-size: 13px;">Music</th>
-                                <th style="font-size: 13px;">Events</th>
-                                <th style="font-size: 13px;">Services</th>
-                                <th style="font-size: 13px;">Bazaar</th>
-                                <th style="font-size: 13px;">Shops</th>
-                                <th style="font-size: 13px;">Channels</th>
-                                <th style="font-size: 13px;">Sympathy</th>
-                                <th style="font-size: 13px;">G-Ads</th>
-                                <th style="font-size: 13px;">User-Ads</th>
+                                <th style="font-size: 15px;">#</th>
+                                <th style="font-size: 15px;">Date</th>
+                                <th style="font-size: 15px;">Upgrades</th>
+                                <th style="font-size: 15px;">Music</th>
+                                <th style="font-size: 15px;">Events</th>
+                                <th style="font-size: 15px;">Services</th>
+                                <th style="font-size: 15px;">Bazaar</th>
+                                <th style="font-size: 15px;">Shops</th>
+                                <th style="font-size: 15px;">Channels</th>
+                                <th style="font-size: 15px;">Sympathy</th>
+                                <th style="font-size: 15px;">G-Ads</th>
+                                <th style="font-size: 15px;">User-Ads</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -171,18 +171,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="font-size: 13px;">#</th>
-                                <th style="font-size: 13px;">Date</th>
-                                <th style="font-size: 13px;">Upgrades</th>
-                                <th style="font-size: 13px;">Music</th>
-                                <th style="font-size: 13px;">Events</th>
-                                <th style="font-size: 13px;">Services</th>
-                                <th style="font-size: 13px;">Bazaar</th>
-                                <th style="font-size: 13px;">Shops</th>
-                                <th style="font-size: 13px;">Channels</th>
-                                <th style="font-size: 13px;">Sympathy</th>
-                                <th style="font-size: 13px;">G-Ads</th>
-                                <th style="font-size: 13px;">User-Ads</th>
+                                <th style="font-size: 15px;">#</th>
+                                <th style="font-size: 15px;">Date</th>
+                                <th style="font-size: 15px;">Upgrades</th>
+                                <th style="font-size: 15px;">Music</th>
+                                <th style="font-size: 15px;">Events</th>
+                                <th style="font-size: 15px;">Services</th>
+                                <th style="font-size: 15px;">Bazaar</th>
+                                <th style="font-size: 15px;">Shops</th>
+                                <th style="font-size: 15px;">Channels</th>
+                                <th style="font-size: 15px;">Sympathy</th>
+                                <th style="font-size: 15px;">G-Ads</th>
+                                <th style="font-size: 15px;">User-Ads</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -209,18 +209,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="font-size: 13px;">#</th>
-                                <th style="font-size: 13px;">Date</th>
-                                <th style="font-size: 13px;"> Upgrades</th>
-                                <th style="font-size: 13px;">Music</th>
-                                <th style="font-size: 13px;">Events</th>
-                                <th style="font-size: 13px;">Services</th>
-                                <th style="font-size: 13px;">Bazaar</th>
-                                <th style="font-size: 13px;">Shops</th>
-                                <th style="font-size: 13px;">Channels</th>
-                                <th style="font-size: 13px;">Sympathy</th>
-                                <th style="font-size: 13px;">G-Ads</th>
-                                <th style="font-size: 13px;">User-Ads</th>
+                                <th style="font-size: 15px;">#</th>
+                                <th style="font-size: 15px;">Date</th>
+                                <th style="font-size: 15px;"> Upgrades</th>
+                                <th style="font-size: 15px;">Music</th>
+                                <th style="font-size: 15px;">Events</th>
+                                <th style="font-size: 15px;">Services</th>
+                                <th style="font-size: 15px;">Bazaar</th>
+                                <th style="font-size: 15px;">Shops</th>
+                                <th style="font-size: 15px;">Channels</th>
+                                <th style="font-size: 15px;">Sympathy</th>
+                                <th style="font-size: 15px;">G-Ads</th>
+                                <th style="font-size: 15px;">User-Ads</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">

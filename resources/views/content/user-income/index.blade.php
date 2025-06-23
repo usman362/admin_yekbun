@@ -291,13 +291,13 @@ const dropZoneInitFunctions = [];
                         <tr>
                             <th style="font-size: 13px;">#</th>
                             
-                            <th style="font-size: 13px;">Purchase Date</th>
-                            <th style="font-size: 13px;">Next Payment</th>
-                            <th style="font-size: 13px;">About User</th>
-                            <th style="font-size: 13px;">Service Type</th>
-                            <th style="font-size: 13px;">Payment Type</th>
-                            <th style="font-size: 13px;">Total Paid</th>
-                            <th style="font-size: 13px;">Options</th>
+                            <th style="font-size: 15px;">Purchase Date</th>
+                            <th style="font-size: 15px;">Next Payment</th>
+                            <th style="font-size: 15px;">About User</th>
+                            <th style="font-size: 15px;">Service Type</th>
+                            <th style="font-size: 15px;">Payment Type</th>
+                            <th style="font-size: 15px;">Total Paid</th>
+                            <th style="font-size: 15px;">Options</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
