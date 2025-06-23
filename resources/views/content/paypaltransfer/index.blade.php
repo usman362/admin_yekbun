@@ -24,83 +24,86 @@
     overflow: hidden;
   }
 </style>
-<style>
-    .card,
-    .modal {
-        font-family: 'Genos';
-    }
+ <style>
+        .card,
+        .modal {
+            font-family: 'Genos';
+        }
+.modal-dialog-scrollable .modal-body {
+     overflow-y: hidden;
+}
+        .transaction-icons img {
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+        }
 
-    .transaction-icons img {
-        width: 100%;
-        height: 50px;
-        margin: 0 auto;
-    }
+        .transaction-icons h4 {
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+        }
 
-    .transaction-icons h4 {
-        margin: 0;
-        font-size: 20px;
-        text-align: center;
-    }
+        .transaction-icons p {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
 
-    .transaction-icons p {
-        font-size: 18px;
-        text-align: center;
-        margin: 0;
-    }
+        .transaction-icons i {
+            font-size: 14px;
+        }
 
-    .transaction-icons i {
-        font-size: 14px;
-    }
+        .transaction-icons {
+            padding: 12px 38px 0px 38px;
+            width: 100%;
+            border-right: 2px solid #F2F2F2;
+        }
 
-    .transaction-icons {
-        padding: 12px 38px 0px 38px;
-        width: 100%;
-        border-right: 2px solid #F2F2F2;
-    }
+        .transaction-icons:last-child {
+            border-right: none !important;
+        }
 
-    .transaction-icons:last-child {
-        border-right: none !important;
-    }
+        .nav-pills .nav-link {
+            font-size: 16px !important;
+        }
 
-    .nav-pills .nav-link {
-        font-size: 16px !important;
-    }
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,
+        .nav-pills .nav-link.active:focus {
+            background-color: transparent !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            box-shadow: none !important;
+        }
 
-    .nav-pills .nav-link.active,
-    .nav-pills .nav-link.active:hover,
-    .nav-pills .nav-link.active:focus {
-        background-color: transparent !important;
-        color: #000 !important;
-        font-weight: bold !important;
-        box-shadow: none !important;
-    }
+        .line-height-1 {
+            line-height: 1 !important;
+        }
 
-    .line-height-1 {
-        line-height: 1 !important;
-    }
+        .user-area span {
+            font-size: 14px;
+        }
 
-    .user-area span {
-        font-size: 14px;
-    }
+        .user-area img {
+            width: 10px;
+            height: 10px;
+            margin: 4px 2px 0 2px;
+        }
 
-    .user-area img {
-        width: 10px;
-        height: 10px;
-        margin: 4px 2px 0 2px;
-    }
+        .user-area .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+        }
 
-    .user-area .user-avatar {
-        width: 28px;
-        height: 28px;
-        border-radius: 30px;
-    }
+        .user-area span {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+    </style>
 
-    .user-area span {
-        font-size: 12px;
-        font-weight: 500;
-        margin-top: 2px;
-    }
-</style>
 @endsection
 
 @section('content')
@@ -187,13 +190,9 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="m-0">
-    <strong>Transactions</strong><br>
-   <small class="text-muted"> <span style="
-    font-size: 12px;
-    font-weight: 500;
-    margin-top: 2px;
-">PayPal Overview </span></small>
-</h5>
+    <strong style="font-size: 24px;">Transactions</strong><br>
+   <small class="text-muted"> <span style="font-size: 18px;font-weight: 500;margin-top: 2px;">PayPal Overview </span></small>
+            </h5>
 
         <div class="d-flex align-items-center">
             <!-- <div class="d-flex align-items-center ms-3">
@@ -342,21 +341,19 @@
                                     <div class="card-body">
                                         <div
                                             class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column p-sm-3 p-0">
-                                            <div class="mb-xl-0 mb-4">
-                                                <div class="d-flex svg-illustration mb-3 gap-2">
-                                                   <span class="app-brand-logo demo">
-                                                        <img src="http://127.0.0.1:8000/assets/img/logo-ff.jpeg" width="20" style="margin-left:-20px;height: 140px;">
+                                             <div class="col-md-6 mb-md-0 mb-4">
+                            <div class="d-flex svg-illustration mb-4 gap-2">
+                                <span class="app-brand-logo demo">
+                                    <img src="{{ asset('storage/' . $appinfo->image) }}" alt="App Info Image"
+                                        style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
+                                </span>
+                            </div>
 
+                            <p class="mb-1">{{ $appinfo->company_name }}</p>
+                            <p class="mb-1">{{ $appinfo->address }},{{ $appinfo->house_number }}</p>
+                            <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
 
-                                                    </span>
-                                                    <span class="app-brand-text demo text-body fw-bolder">
-                                                        Sneat
-                                                    </span>
-                                                </div>
-                                                <p class="mb-1">Office 149, 450 South Brand Brooklyn</p>
-                                                <p class="mb-1">San Diego County, CA 91905, USA</p>
-                                                <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
-                                            </div>
+                        </div>
                                             <div>
                                                 <h4>Invoice #3492</h4>
                                                 <div class="mb-2">
@@ -507,16 +504,7 @@
                                             href="http://127.0.0.1:8000/app/invoice/print">
                                             Print
                                         </a>
-                                        <a href="http://127.0.0.1:8000/app/invoice/edit"
-                                            class="btn btn-label-secondary d-grid w-100 mb-3">
-                                            Edit Invoice
-                                        </a>
-                                        <button class="btn btn-primary d-grid w-100" data-bs-toggle="offcanvas"
-                                            data-bs-target="#addPaymentOffcanvas">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                    class="bx bx-dollar bx-xs me-1"></i>Add Payment</span>
-                                        </button>
+                                         
                                     </div>
                                 </div>
                             </div>

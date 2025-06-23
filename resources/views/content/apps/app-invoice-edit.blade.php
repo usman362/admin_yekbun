@@ -32,7 +32,86 @@
     <script>
         const dropZoneInitFunctions = [];
     </script>
-   
+<style>
+        .card,
+        .modal {
+            font-family: 'Genos';
+        }
+.modal-dialog-scrollable .modal-body {
+     overflow-y: hidden;
+}
+        .transaction-icons img {
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .transaction-icons h4 {
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .transaction-icons p {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .transaction-icons i {
+            font-size: 14px;
+        }
+
+        .transaction-icons {
+            padding: 12px 38px 0px 38px;
+            width: 100%;
+            border-right: 2px solid #F2F2F2;
+        }
+
+        .transaction-icons:last-child {
+            border-right: none !important;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 16px !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,
+        .nav-pills .nav-link.active:focus {
+            background-color: transparent !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            box-shadow: none !important;
+        }
+
+        .line-height-1 {
+            line-height: 1 !important;
+        }
+
+        .user-area span {
+            font-size: 14px;
+        }
+
+        .user-area img {
+            width: 10px;
+            height: 10px;
+            margin: 4px 2px 0 2px;
+        }
+
+        .user-area .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+        }
+
+        .user-area span {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+    </style>
+
     <div class="row invoice-edit">
         <!-- Invoice Edit-->
         <div class="col-lg-9 col-12 mb-lg-0 mb-4">
@@ -41,17 +120,16 @@
                     <div class="row p-sm-3 p-0">
                         <div class="col-md-6 mb-md-0 mb-4">
                             <div class="d-flex svg-illustration mb-4 gap-2">
-    <span class="app-brand-logo demo">  
-        <img src="{{ asset('storage/' . $appinfo->image) }}" 
-             alt="App Info Image" 
-             style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
-    </span>
-</div>
+                                <span class="app-brand-logo demo">
+                                    <img src="{{ asset('storage/' . $appinfo->image) }}" alt="App Info Image"
+                                        style="height: 116px; width: 116px; object-fit: cover; border-radius: 8px;">
+                                </span>
+                            </div>
 
                             <p class="mb-1">{{ $appinfo->company_name }}</p>
                             <p class="mb-1">{{ $appinfo->address }},{{ $appinfo->house_number }}</p>
                             <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
-                            
+
                         </div>
                         <div class="col-md-6">
                             <dl class="row mb-2">
@@ -92,33 +170,32 @@
                             <p class="mb-1">Thomas shelby</p>
                             <p class="mb-1">Shelby Company Limited</p>
                             <p class="mb-1">Small Heath, B10 0HF, UK</p>
-                            
+
                         </div>
-                       <div class="col-md-6 col-sm-7 ">
-       <h6 class="pb-2" style="
-                margin-left: 202px;">Bill To:</h6>
-        <table class="ms-auto">
-            <tbody>
-                <tr>
-                    <td class="pe-3">Total Due:</td>
-                    <td>$12,110.55</td>
-                </tr>
-                <tr>
-                    <td class="pe-3">Bank name:</td>
-                    <td>American Bank</td>
-                </tr>
-                <tr>
-                    <td class="pe-3">Country:</td>
-                    <td>United States</td>
-                </tr>
-                <tr>
-                    <td class="pe-3">IBAN:</td>
-                    <td>ETD95476213874685</td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </div>
+                        <div class="col-md-6 col-sm-7 ">
+                            <h6 class="pb-2" style="margin-left: 202px;">Bill To:</h6>
+                            <table class="ms-auto">
+                                <tbody>
+                                    <tr>
+                                        <td class="pe-3">Total Due:</td>
+                                        <td>$12,110.55</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pe-3">Bank name:</td>
+                                        <td>American Bank</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pe-3">Country:</td>
+                                        <td>United States</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pe-3">IBAN:</td>
+                                        <td>ETD95476213874685</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <hr class="mx-n4" />
@@ -271,15 +348,15 @@
         <div class="col-lg-3 col-12 invoice-actions">
             <div class="card mb-4">
                 <div class="card-body">
-                 
+
                     <div class="d-flex my-3">
                         <a href="{{ url('app/invoice/preview') }}" class="btn btn-label-secondary w-100 me-3">Preview</a>
                         <button type="button" class="btn btn-label-secondary w-100">Save</button>
                     </div>
-                   
+
                 </div>
             </div>
-            
+
         </div>
         <!-- /Invoice Actions -->
     </div>

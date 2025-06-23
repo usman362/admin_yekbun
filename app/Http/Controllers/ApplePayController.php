@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ApplePay;
+use App\Models\AppInfo;
 
 
 class ApplePayController extends Controller
@@ -16,7 +17,8 @@ class ApplePayController extends Controller
     public function index()
     {
          $applepay = ApplePay::orderBy('id' , 'desc')->get();
-        return view('content.applepaytransfer.index' , compact('applepay'));
+            $appinfo = AppInfo::first();
+        return view('content.applepaytransfer.index' , compact('applepay','appinfo'));
     }
 
     /**
@@ -107,6 +109,7 @@ class ApplePayController extends Controller
     public function destroy($id)
     {
         $bank = ApplePay::find($id);
+
         if($bank->delete($bank->id)){
             return redirect()->route('settings.applepay.index')->with('success' , 'Account has been deleted successfully.');
         }else{

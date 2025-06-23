@@ -43,14 +43,15 @@
     <span class="text-muted fw-light">Currencies
 </h4>
 </div>
-<div class="">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createserviceModal">Add Currency</button>
-</div>
+ 
 </div>
 
-   <!-- Basic Bootstrap Table -->
+ {{-- //currency --}}
   <div class="card">
-    <h5 class="card-header">Currency List</h5>
+    <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Currency List</h5>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createserviceModal">Add Currency</button>
+  </div>
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead>
@@ -59,6 +60,10 @@
             <th>Name</th>
             <th>Symbol</th>
             <th>Code</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th>Option</th>
           </tr>
         </thead>
@@ -69,10 +74,14 @@
                 <td>{{$currency->name}}</td>
                 <td>{{$currency->symbol}}</td>
                 <td>{{$currency->code}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
                     {{-- @can('location.delete') --}}
                     <!-- Delete -->
-                    <form action="{{ route('currency.destroy', $currency->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                    <form action="{{ route('currency_discount.destroy', $currency->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
                       @method('DELETE')
                       @csrf
                       <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
@@ -88,16 +97,75 @@
       </table>
     </div>
   </div>
-{{-- Create Music model --}}
+
+<div style="height: 30px;"></div>
+ <div class="d-flex justify-content-between">
+  <div>
+<h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Discounts
+</h4>
+</div>
+ 
+</div>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Discounts</h5>
+     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#creatediscount">Create Discount</button> 
+  </div>
+
+
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Option</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td></td>
+                <td> </td>
+                <td></td>
+                <td> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    
+                    <form action="{{ route('currency_discount.destroy', $currency->id) }}" onsubmit="confirmAction(event, () => event.target.submit())" method="post" class="d-inline">
+                      @method('DELETE')
+                      @csrf
+                      <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" data-bs-original-title="Remove"><i class="bx bx-trash me-1"></i></button>
+                    </form>
+               
+            </tr>
+           
+           
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
 <x-modal
-id="createserviceModal"
-title="Add Currency"
+id="creatediscount"
+title="Create Discount"
  saveBtnText="Add"
  saveBtnType="submit"
   saveBtnForm="createForm"
   size="md">
 
- @include('content.include.currency.createForm')
+ @include('content.include.discount.createForm')
 </x-modal>
 
 @section('page-script')

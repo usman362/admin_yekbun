@@ -5,16 +5,16 @@
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
                 <div class="col-md-12">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" id="name" class="form-control"  name="name" >
+                    <label class="form-label" for="name">Title</label>
+                    <input type="text" id="name" class="form-control"  name="title" >
                 </div>
                 <div class="col-md-12">
-                    <label class="form-label" for="symbol">Symbol</label>
-                    <input type="text" id="symbol" class="form-control"  name="symbol" >
+                    <label class="form-label" for="symbol">Type</label>
+                    <input type="text" id="symbol" class="form-control"  name="type" >
                 </div>
                 <div class="col-md-12">
-                    <label class="form-label" for="code">Code</label>
-                    <input type="text" id="code" class="form-control"  name="code" >
+                    <label class="form-label" for="code">Amount</label>
+                    <input type="text" id="code" class="form-control"  name="amount" >
                 </div>
 
         </div>

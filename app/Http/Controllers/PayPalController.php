@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paypal;
+use App\Models\AppInfo;
 
 
 class PayPalController extends Controller
@@ -16,7 +17,8 @@ class PayPalController extends Controller
     public function index()
     {
         $paypal = Paypal::orderBy('id' , 'desc')->get();
-        return view('content.paypaltransfer.index' , compact('paypal'));
+           $appinfo = AppInfo::first();
+        return view('content.paypaltransfer.index' , compact('paypal','appinfo'));
     }
 
     /**
