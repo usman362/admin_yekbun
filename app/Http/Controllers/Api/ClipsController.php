@@ -69,9 +69,9 @@ class ClipsController extends Controller
         $fontPath = $fontFileName ? public_path('fonts/' . $fontFileName . '.tff') : null;
 
         // Optional: Validate file exists
-        if ($fontPath && !file_exists($fontPath)) {
-            return response()->json(['error' => 'Font file not found.'], 400);
-        }
+        // if ($fontPath && !file_exists($fontPath)) {
+        //     return response()->json(['error' => 'Font file not found.'], 400);
+        // }
 
         // Fontfile option
         $fontOption = $fontPath ? "fontfile={$fontPath}:" : '';
@@ -86,7 +86,7 @@ class ClipsController extends Controller
         exec($command, $output, $return_var);
 
         if ($return_var === 0) {
-            $clip->clip = $outputPath;
+            $clip->clip = Str::after($outputPath, 'public/');;
         }
         // else {
         //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
