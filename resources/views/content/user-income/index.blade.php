@@ -28,317 +28,332 @@
 <script>
 const dropZoneInitFunctions = [];
 </script>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    <style>
+        .card,
+        .modal {
+            font-family: 'Genos';
+        }
 
+        .transaction-icons img {
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .transaction-icons h4 {
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .transaction-icons p {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .transaction-icons i {
+            font-size: 14px;
+        }
+
+        .transaction-icons {
+            padding: 12px 38px 0px 38px;
+            width: 100%;
+            border-right: 2px solid #F2F2F2;
+        }
+
+        .transaction-icons:last-child {
+            border-right: none !important;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 16px !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,
+        .nav-pills .nav-link.active:focus {
+            background-color: transparent !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            box-shadow: none !important;
+        }
+
+        .line-height-1 {
+            line-height: 1 !important;
+        }
+
+        .user-area span {
+            font-size: 14px;
+        }
+
+        .user-area img {
+            width: 10px;
+            height: 10px;
+            margin: 4px 2px 0 2px;
+        }
+
+        .user-area .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+        }
+
+        .user-area span {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+    </style>
+      <style>
+        .card,
+        .modal {
+            font-family: 'Genos';
+        }
+
+        .modal-dialog-scrollable .modal-body {
+            overflow-y: hidden;
+        }
+
+        .transaction-icons img {
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .transaction-icons h4 {
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .transaction-icons p {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .transaction-icons i {
+            font-size: 14px;
+        }
+
+        .transaction-icons {
+            padding: 12px 38px 0px 38px;
+            width: 100%;
+            border-right: 2px solid #F2F2F2;
+        }
+
+        .transaction-icons:last-child {
+            border-right: none !important;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 16px !important;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link.active:hover,
+        .nav-pills .nav-link.active:focus {
+            background-color: transparent !important;
+            color: #000 !important;
+            font-weight: bold !important;
+            box-shadow: none !important;
+        }
+
+        .line-height-1 {
+            line-height: 1 !important;
+        }
+
+        .user-area span {
+            font-size: 14px;
+        }
+
+        .user-area img {
+            width: 10px;
+            height: 10px;
+            margin: 4px 2px 0 2px;
+        }
+
+        .user-area .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+        }
+
+        .user-area span {
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+    </style>
 <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">User Income /</span> All Income
-</h4>
+    <span class="text-muted fw-light">User Subscription </span></h4>
 
-<div class="row g-4 mb-4">
-  <div class="col-sm-6 col-xl-4">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex align-items-start justify-content-between">
-          <div class="content-left">
-            <span>Today</span>
-            <div class="d-flex align-items-end mt-2">
-              <h4 class="mb-0 me-2">21,459</h4>
-              <small class="text-success">(+29%)</small>
+     <div class="card">
+        <div class="pb-2 pt-2 d-flex">
+            <div class="transaction-icons">
+                <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                <h4>Paypal</h4>
+                <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
             </div>
-            <small>Today analytic</small>
-          </div>
-          <span class="badge bg-label-primary rounded p-2">
-            <i class="bx bx-user bx-sm"></i>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xl-4">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex align-items-start justify-content-between">
-          <div class="content-left">
-            <span>This Month</span>
-            <div class="d-flex align-items-end mt-2">
-              <h4 class="mb-0 me-2">4,567</h4>
-              <small class="text-success">(+18%)</small>
+            <div class="transaction-icons">
+                <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                <h4>Apple Pay</h4>
+                <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
             </div>
-            <small>This month analytics</small>
-          </div>
-          <span class="badge bg-label-danger rounded p-2">
-            <i class="bx bx-user-plus bx-sm"></i>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xl-4">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex align-items-start justify-content-between">
-          <div class="content-left">
-            <span>This Year</span>
-            <div class="d-flex align-items-end mt-2">
-              <h4 class="mb-0 me-2">19,860</h4>
-              <small class="text-danger">(-14%)</small>
+            <div class="transaction-icons">
+                <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                <h4>Google Pay</h4>
+                <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
             </div>
-            <small>This year analytics</small>
-          </div>
-          <span class="badge bg-label-success rounded p-2">
-            <i class="bx bx-group bx-sm"></i>
-          </span>
+            <div class="transaction-icons">
+                <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                <h4>Transfer</h4>
+                <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 
-<div class="nav-align-top mb-4">
-    <ul class="nav nav-tabs nav-fill" role="tablist">
-    <li class="nav-item" role="presentation">
-            <a type="button" class="nav-link {{ $view === 'daily'? 'active': '' }}" href="?view=daily" aria-selected="true"> Daily Income</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a type="button" class="nav-link {{ $view === 'monthly'? 'active': '' }}" href="?view=monthly" aria-selected="false" tabindex="-1"> Monthly
-                Income</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a type="button" class="nav-link {{ $view === 'yearly'? 'active': '' }}" href="?view=yearly" aria-selected="false" tabindex="-1"> Yearly
-                Income</a>
-        </li>
-    </ul>
-    <div class="tab-content p-0">
-        <div class="tab-pane fade show active" id="solovedReportsTab" role="tabpanel">
-            <div class="table-responsive text-nowrap pd-t-24px">
-                <table class="{{ $view === 'daily'? 'table': 'd-none' }}">
+<div style="height: 35px;"></div>
+  <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="m-0">
+                <strong style="font-size: 25px;">Transactions</strong><br>
+                <small class="text-muted"> <span
+                        style="
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin-top: 2px;
+                ">Bank
+                        Transfer Overview
+                    </span></small>
+            </h5>
+
+            <div class="d-flex align-items-center">
+
+                <div class="row">
+                    <!-- Date Input -->
+                    <div class="col-auto" style="border-radius: 10px; position: relative;">
+                        <input type="text" class="form-control form-control-sm datepicker" placeholder="Select Date"
+                            name="duration" id="datepicker" aria-label="Datepicker" autocomplete="off"
+                            style="padding-right: 40px; height: 32px;" />
+
+                        <button type="button" onclick="$('.datepicker').daterangepicker('show')"
+                            style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
+                        </button>
+                    </div>
+
+                    <!-- Sort by Service Dropdown -->
+                    <div class="col-auto d-flex align-items-center ms-3">
+                        <select id="filterService" class="form-select form-select-sm" style="height: 32px;">
+                            <option selected>Sort by Service</option>
+                            <option value="account">Account</option>
+                            <option value="music">Music</option>
+                            <option value="channels">Channels</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Search Button -->
+                <div class="d-flex align-items-center ms-3">
+                    <input type="text" class="form-control form-control-sm" placeholder="Search" style="height: 32px;">
+                </div>
+
+                <!-- Export Dropdown -->
+                <div class="d-flex align-items-center ms-3">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                            id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                            Export
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+                            <li><a class="dropdown-item" href="#" id="exportPDF"><img
+                                        src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                        style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
+                            <li><a class="dropdown-item" href="#" id="exportCSV"><img
+                                        src="{{ asset('assets/img/file-csv.svg') }}" class="me-1"
+                                        style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
+                            <li><a class="dropdown-item" href="#" id="exportPrint"><img
+                                        src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                        style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
+                            <li><a class="dropdown-item" href="#" id="exportExcel"><img
+                                        src="{{ asset('assets/img/file-excel.svg') }}" class="me-1"
+                                        style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Total Services</th>
-                            <th>Bank Transfer </th>
-                            <th>Paypal </th>
-                            <th>Payment Office </th>
-                            <th>Discount</th>
-                            <th>Total </th>
-                            <th>Options</th>
+                            <th style="font-size: 20px;">#</th>
+                            <th style="font-size: 20px;">Order</th>
+                            <th style="font-size: 20px;">Date & Time</th>
+                            <th style="font-size: 20px;">About User</th>
+                            <th style="font-size: 20px;">Service Type</th>
+                            <th style="font-size: 20px;">Payment Type</th>
+                            <th style="font-size: 20px;">Total Paid</th>
+                            <th style="font-size: 20px;">Options</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         <tr>
                             <td>01</td>
-                            <td>
-                                12-05-2023
+                            <td>Order ID</td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>DD.MM.YYYY</strong></p>
+                                <small>HH:MM</small>
+                            </td>
+                            <td class="line-height-1 user-area">
+                                <div class="d-flex">
+                                    <img class="user-avatar" src="{{ asset('images/user-clips-artist.png') }}"
+                                        alt="">
+                                    <div>
+                                        <h5 class="m-0"><strong>Username</strong></h5>
+                                        <div class="d-flex">
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
+                                            <span>Rojava . Qamishlo</span>
+                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
+                                            <span>Hannover</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>Upgrades</strong></p>
+                                <small>Educated</small>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>Bank Transfer</strong></p>
+                                <small>Transaction ID</small>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>15,00€</strong></p>
+                                <small>-0% Discount</small>
                             </td>
                             <td>
-                                5
-                            </td>
-                            <td>
-                                50 $
-                            </td>
-                            <td>
-                                50 $
-                            </td>
-                            <td>
-                                1250 $
-                            </td>
-                            <td>
-                                0 $
-                            </td>
-                            <td>
-                                1250 $
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                    data-bs-original-title="Edit">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>
-                                11-05-2023
-                            </td>
-                            <td>
-                                10
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                0.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                    data-bs-original-title="Edit">View</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="{{ $view === 'monthly'? 'table': 'd-none' }}">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Total Services</th>
-                            <th>Bank Transfer </th>
-                            <th>Paypal </th>
-                            <th>Payment Office </th>
-                            <th>Discount</th>
-                            <th>Total </th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>01</td>
-                            <td>
-                                12-2023
-                            </td>
-                            <td>
-                                50
-                            </td>
-                            <td>
-                                12.5000 $
-                            </td>
-                            <td>
-                                10.000 $
-                            </td>
-                            <td>
-                                20.000 $
-                            </td>
-                            <td>
-                                0.000 $
-                            </td>
-                            <td>
-                                32.500 $
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                    data-bs-original-title="Edit">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>
-                                11-2023
-                            </td>
-                            <td>
-                                100
-                            </td>
-                            <td>
-                                10.000 $
-                            </td>
-                            <td>
-                                10.000 $
-                            </td>
-                            <td>
-                                50.000 $
-                            </td>
-                            <td>
-                                0.000 $
-                            </td>
-                            <td>
-                                70.000 $
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                    data-bs-original-title="Edit">View</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="{{ $view === 'yearly'? 'table': 'd-none' }}">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Date</th>
-                            <th>Total Services</th>
-                            <th>Bank Transfer </th>
-                            <th>Paypal </th>
-                            <th>Payment Office </th>
-                            <th>Discount</th>
-                            <th>Total </th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>01</td>
-                            <td>
-                                2023
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                0.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                    data-bs-original-title="Edit">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>
-                                2023
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                0.000 $
-                            </td>
-                            <td>
-                                150.000 $
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                    data-bs-original-title="Edit">View</button>
+                                <div class="d-flex align-items-center"><a class="text-body" data-bs-placement="top"
+                                        aria-label="Preview Invoice" data-bs-toggle="modal"
+                                        data-bs-target="#sub-categories" data-bs-offset="0,4" href="javascript:void(0)"
+                                        data-bs-html="true" data-bs-original-title="Edit"><img
+                                            src="{{ asset('assets/svg/eye.svg') }}" alt=""></a>
+
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
     </div>
-</div>
 
 <script>
   function delete_service(el) {
@@ -477,6 +492,44 @@ function drpzone_init() {
 }
 </script>
 <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        // Initialize Flatpickr on the start date and end date input fields
+        flatpickr("#startDate", {
+            dateFormat: "Y-m-d", // Specify the date format
+            minDate: "today", // Optional: disable past dates
+            maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+            allowInput: true // Allows users to type in the date
+        });
+
+        flatpickr("#endDate", {
+            dateFormat: "Y-m-d", // Specify the date format
+            minDate: "today", // Optional: disable past dates
+            maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+            allowInput: true // Allows users to type in the date
+        });
+
+        // Handle "Sort by Date" dropdown click
+        $(document).ready(function() {
+            $('#datepicker').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false, // prevent default fill
+                locale: {
+                    cancelLabel: 'Clear'
+                }
+            });
+
+            $('#datepicker').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('YYYY-MM-DD'));
+            });
+
+            // Automatically open on focus
+            $('#datepicker').on('focus', function() {
+                $(this).daterangepicker('show');
+            });
+        });
+    </script>
 @endsection
 
 @endsection

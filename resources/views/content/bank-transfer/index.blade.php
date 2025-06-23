@@ -31,14 +31,16 @@
             /* Adjust this width as necessary */
         }
     </style>
-   <style>
+    <style>
         .card,
         .modal {
             font-family: 'Genos';
         }
-.modal-dialog-scrollable .modal-body {
-     overflow-y: hidden;
-}
+
+        .modal-dialog-scrollable .modal-body {
+            overflow-y: hidden;
+        }
+
         .transaction-icons img {
             width: 100%;
             height: 50px;
@@ -305,9 +307,9 @@
                                     <div>
                                         <h5 class="m-0"><strong>Username</strong></h5>
                                         <div class="d-flex">
-                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="" >
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
                                             <span>Rojava . Qamishlo</span>
-                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="" >
+                                            <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
                                             <span>Hannover</span>
                                         </div>
                                     </div>
@@ -376,154 +378,158 @@
                                                         {{ $appinfo->address }},{{ $appinfo->house_number }}</p>
                                                     <p class="mb-1"> {{ $appinfo->city_zipcode }}</p>
 
-                        </div>
-                        <div class="col-md-6">
-                            <dl class="row mb-2">
-                                <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
-                                    <span class="h4 text-capitalize mb-0 text-nowrap">Invoice #</span>
-                                </dt>
-                                <dd class="col-sm-6 d-flex justify-content-md-end">
-                                    <div class="w-px-150">
-                                        <input type="text" class="form-control" disabled placeholder="3492"
-                                            value="3492" id="invoiceId" />
-                                    </div>
-                                </dd>
-                                <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
-                                    <span class="fw-normal">Date:</span>
-                                </dt>
-                                <dd class="col-sm-6 d-flex justify-content-md-end">
-                                    <div class="w-px-150">
-                                        <input type="text" class="form-control invoice-date" placeholder="YYYY-MM-DD" />
-                                    </div>
-                                </dd>
-                                <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
-                                    <span class="fw-normal">Due Date:</span>
-                                </dt>
-                                <dd class="col-sm-6 d-flex justify-content-md-end">
-                                    <div class="w-px-150">
-                                        <input type="text" class="form-control due-date" placeholder="YYYY-MM-DD" />
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <dl class="row mb-2">
+                                                        <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
+                                                            <span class="h4 text-capitalize mb-0 text-nowrap">Invoice
+                                                                #</span>
+                                                        </dt>
+                                                        <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                            <div class="w-px-150">
+                                                                <input type="text" class="form-control" disabled
+                                                                    placeholder="3492" value="3492" id="invoiceId" />
+                                                            </div>
+                                                        </dd>
+                                                        <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
+                                                            <span class="fw-normal">Date:</span>
+                                                        </dt>
+                                                        <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                            <div class="w-px-150">
+                                                                <input type="text" class="form-control invoice-date"
+                                                                    placeholder="YYYY-MM-DD" />
+                                                            </div>
+                                                        </dd>
+                                                        <dt class="col-sm-6 mb-2 mb-sm-0 text-md-end">
+                                                            <span class="fw-normal">Due Date:</span>
+                                                        </dt>
+                                                        <dd class="col-sm-6 d-flex justify-content-md-end">
+                                                            <div class="w-px-150">
+                                                                <input type="text" class="form-control due-date"
+                                                                    placeholder="YYYY-MM-DD" />
+                                                            </div>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
 
-                    <hr class="my-4 mx-n4" />
+                                            <hr class="my-4 mx-n4" />
 
-                    <div class="row p-sm-3 p-0">
-                        <div class="col-md-6 col-sm-5 col-12 mb-sm-0 mb-4">
-                            <h6 class="pb-2">Invoice To:</h6>
-                            <p class="mb-1">Thomas shelby</p>
-                            <p class="mb-1">Shelby Company Limited</p>
-                            <p class="mb-1">Small Heath, B10 0HF, UK</p>
+                                            <div class="row p-sm-3 p-0">
+                                                <div class="col-md-6 col-sm-5 col-12 mb-sm-0 mb-4">
+                                                    <h6 class="pb-2">Invoice To:</h6>
+                                                    <p class="mb-1">Thomas shelby</p>
+                                                    <p class="mb-1">Shelby Company Limited</p>
+                                                    <p class="mb-1">Small Heath, B10 0HF, UK</p>
 
-                        </div>
-                        <div class="col-md-6 col-sm-7 ">
-                            <h6 class="pb-2" style="margin-left: 202px;">Bill To:</h6>
-                            <table class="ms-auto">
-                                <tbody>
-                                    <tr>
-                                        <td class="pe-3">Total Due:</td>
-                                        <td>$12,110.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">Bank name:</td>
-                                        <td>American Bank</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">Country:</td>
-                                        <td>United States</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="pe-3">IBAN:</td>
-                                        <td>ETD95476213874685</td>
-                                    </tr>
+                                                </div>
+                                                <div class="col-md-6 col-sm-7 ">
+                                                    <h6 class="pb-2" style="margin-left: 202px;">Bill To:</h6>
+                                                    <table class="ms-auto">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="pe-3">Total Due:</td>
+                                                                <td>$12,110.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pe-3">Bank name:</td>
+                                                                <td>American Bank</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pe-3">Country:</td>
+                                                                <td>United States</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="pe-3">IBAN:</td>
+                                                                <td>ETD95476213874685</td>
+                                                            </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
 
-                    <hr class="mx-n4" />
+                                            <hr class="mx-n4" />
 
-                     <div class="table-responsive">
-                                        <table class="table border-top m-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item</th>
-                                                    <th>Description</th>
-                                                    <th>Cost</th>
-                                                    <th>Qty</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-nowrap">Vuexy Admin Template</td>
-                                                    <td class="text-nowrap">HTML Admin Template</td>
-                                                    <td>$32</td>
-                                                    <td>1</td>
-                                                    <td>$32.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-nowrap">Frest Admin Template</td>
-                                                    <td class="text-nowrap">Angular Admin Template</td>
-                                                    <td>$22</td>
-                                                    <td>1</td>
-                                                    <td>$22.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-nowrap">Apex Admin Template</td>
-                                                    <td class="text-nowrap">HTML Admin Template</td>
-                                                    <td>$17</td>
-                                                    <td>2</td>
-                                                    <td>$34.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-nowrap">Robust Admin Template</td>
-                                                    <td class="text-nowrap">React Admin Template</td>
-                                                    <td>$66</td>
-                                                    <td>1</td>
-                                                    <td>$66.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" class="align-top px-4 py-5">
-                                                        <p class="mb-2">
-                                                            <span class="me-1 fw-semibold">Salesperson:</span>
-                                                            <span>Alfie Solomons</span>
-                                                        </p>
-                                                        <span>Thanks for your business</span>
-                                                    </td>
-                                                    <td class="text-end px-4 py-5">
-                                                        <p class="mb-2">Subtotal:</p>
-                                                        <p class="mb-2">Discount:</p>
-                                                        <p class="mb-2">Tax:</p>
-                                                        <p class="mb-0">Total:</p>
-                                                    </td>
-                                                    <td class="px-4 py-5">
-                                                        <p class="fw-semibold mb-2">$154.25</p>
-                                                        <p class="fw-semibold mb-2">$00.00</p>
-                                                        <p class="fw-semibold mb-2">$50.00</p>
-                                                        <p class="fw-semibold mb-0">$204.25</p>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            <div class="table-responsive">
+                                                <table class="table border-top m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Description</th>
+                                                            <th>Cost</th>
+                                                            <th>Qty</th>
+                                                            <th>Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-nowrap">Vuexy Admin Template</td>
+                                                            <td class="text-nowrap">HTML Admin Template</td>
+                                                            <td>$32</td>
+                                                            <td>1</td>
+                                                            <td>$32.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">Frest Admin Template</td>
+                                                            <td class="text-nowrap">Angular Admin Template</td>
+                                                            <td>$22</td>
+                                                            <td>1</td>
+                                                            <td>$22.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">Apex Admin Template</td>
+                                                            <td class="text-nowrap">HTML Admin Template</td>
+                                                            <td>$17</td>
+                                                            <td>2</td>
+                                                            <td>$34.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">Robust Admin Template</td>
+                                                            <td class="text-nowrap">React Admin Template</td>
+                                                            <td>$66</td>
+                                                            <td>1</td>
+                                                            <td>$66.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" class="align-top px-4 py-5">
+                                                                <p class="mb-2">
+                                                                    <span class="me-1 fw-semibold">Salesperson:</span>
+                                                                    <span>Alfie Solomons</span>
+                                                                </p>
+                                                                <span>Thanks for your business</span>
+                                                            </td>
+                                                            <td class="text-end px-4 py-5">
+                                                                <p class="mb-2">Subtotal:</p>
+                                                                <p class="mb-2">Discount:</p>
+                                                                <p class="mb-2">Tax:</p>
+                                                                <p class="mb-0">Total:</p>
+                                                            </td>
+                                                            <td class="px-4 py-5">
+                                                                <p class="fw-semibold mb-2">$154.25</p>
+                                                                <p class="fw-semibold mb-2">$00.00</p>
+                                                                <p class="fw-semibold mb-2">$50.00</p>
+                                                                <p class="fw-semibold mb-0">$204.25</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <span class="fw-semibold">Note:</span>
-                                                <span>It was a pleasure working with you and your team. We hope you will
-                                                    keep us in mind for future freelance
-                                                    projects. Thank You!</span>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <span class="fw-semibold">Note:</span>
+                                                        <span>It was a pleasure working with you and your team. We hope you
+                                                            will
+                                                            keep us in mind for future freelance
+                                                            projects. Thank You!</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                </div>
-            </div>
-        </div>
+                                </div>
                                 <!-- /Invoice -->
 
                                 <!-- Invoice Actions -->
