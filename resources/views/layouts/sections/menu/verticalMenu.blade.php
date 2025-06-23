@@ -1422,13 +1422,13 @@
         <li class="menu-item {{ Request::is('transactions') ? 'active' : '' }}">
             <a href="{{ url('/transactions') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-devices"></i>
-                <div>Income</div>
+                <div>Transactions</div>
             </a>
         </li>
         <li class="menu-item {{ Request::is('incomes') ? 'active' : '' }}">
             <a href="{{ url('/incomes') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-devices"></i>
-                <div>Transactions</div>
+                <div>Income</div>
             </a>
         </li>
         <li class="menu-item {{ Request::is('app/subscription') ? 'active' : '' }}">

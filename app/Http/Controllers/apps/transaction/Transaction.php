@@ -9,6 +9,7 @@ class Transaction extends Controller
 {
   public function index()
   {
-    return view('content.transactions.index');
+       return view('content.incomes.index');
+    
   }
 }

@@ -9,7 +9,7 @@ class Income extends Controller
 {
   public function index()
   {
-    return view('content.incomes.index');
+    return view('content.transactions.index');
   }
 
   public function userIncome()
