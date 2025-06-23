@@ -110,7 +110,7 @@
 <!-- Basic Bootstrap Table -->
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
-    <h5 class="m-0">GooglePay List</h5>
+    <h5 class="m-0" style="font-size: 24px;"> <strong>GooglePay List</strong></h5>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createGooglelModal"><i class="bx bx-plus me-0 me-sm-1"></i> Add GooglePay</button>
   </div>
   @if(session('success'))
@@ -130,11 +130,11 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Title</th>
-          <th>GooglePay Client Id</th>
-          <th>GooglePay Client Secret </th>
-          <th>Option</th>
+          <th style="font-size: 15px;" >Id</th>
+          <th style="font-size: 15px;">Title</th>
+          <th style="font-size: 15px;">GooglePay Client Id</th>
+          <th style="font-size: 15px;">GooglePay Client Secret </th>
+          <th style="font-size: 15px;">Option</th>
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
@@ -263,14 +263,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="font-size: 13px;">#</th>
-                        <th style="font-size: 13px;">Order</th>
-                        <th style="font-size: 13px;">Date & Time</th>
-                        <th style="font-size: 13px;">About User</th>
-                        <th style="font-size: 13px;">Service Type</th>
-                        <th style="font-size: 13px;">Payment Type</th>
-                        <th style="font-size: 13px;">Total Paid</th>
-                        <th style="font-size: 13px;">Options</th>
+                        <th style="font-size: 15px;">#</th>
+                        <th style="font-size: 15px;">Order</th>
+                        <th style="font-size: 15px;">Date & Time</th>
+                        <th style="font-size: 15px;">About User</th>
+                        <th style="font-size: 15px;">Service Type</th>
+                        <th style="font-size: 15px;">Payment Type</th>
+                        <th style="font-size: 15px;">Total Paid</th>
+                        <th style="font-size: 15px;">Options</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
