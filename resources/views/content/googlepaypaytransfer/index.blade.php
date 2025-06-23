@@ -191,7 +191,7 @@
        <h5 class="m-0">
     <strong style="font-size: 25px;">Transactions</strong><br>
    <small class="text-muted"> <span style="
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     margin-top: 2px;
 ">GooglePay Overview </span></small>

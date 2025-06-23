@@ -191,7 +191,7 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="m-0">
     <strong style="font-size: 24px;">Transactions</strong><br>
-   <small class="text-muted"> <span style="font-size: 18px;font-weight: 500;margin-top: 2px;">PayPal Overview </span></small>
+   <small class="text-muted"> <span style="font-size: 16px;font-weight: 500;margin-top: 2px;">PayPal Overview </span></small>
             </h5>
 
         <div class="d-flex align-items-center">
