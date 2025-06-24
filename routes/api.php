@@ -441,6 +441,9 @@ Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 Route::get('/payment-details/{payment_id}', [PaymentController::class, 'payment_details']);
 
+//Payment List
+Route::get('get-payment-list',[PaymentController::class,'paymentList']);
+
 // Stripe
 Route::post('/stripe/checkout', [StripeController::class, 'index']);
 Route::get('/stripe/update-transaction', [StripeController::class, 'update']);

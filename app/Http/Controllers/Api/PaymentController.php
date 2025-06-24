@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Omnipay\Omnipay;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ApplePay;
+use App\Models\BankTransfer;
+use App\Models\GooglePay;
+use App\Models\Paypal;
 
 class PaymentController extends Controller
 {
@@ -36,7 +41,7 @@ class PaymentController extends Controller
      */
     public function charge(Request $request)
     {
-        
+
         try {
             $amountInDollars = $request->amount;
             $amountInCents = $amountInDollars;
@@ -108,7 +113,7 @@ class PaymentController extends Controller
                 $user = User::find(intval($payment->user_id));
                 $user->level = intval($payment->level);
                 $user->save();
-                
+
                 return redirect('/api/success?payment_id=' . $payment->payment_id);
             } else {
                 return response()->json(['success' => false, 'data' => $response->getMessage()]);
@@ -132,5 +137,22 @@ class PaymentController extends Controller
         $payment = Payment::where('payment_id', $payment_id)->first();
 
         return response()->json(['success' => true, 'data' => $payment]);
+    }
+
+    public function paymentList()
+    {
+        $applePays = ApplePay::all();
+        $bankTransfers = BankTransfer::all();
+        $googlePays = GooglePay::all();
+        $payPal = Paypal::all();
+
+        $payments = [
+            'apple_pay' => $applePays,
+            'bank_transfer' => $bankTransfers,
+            'google_pay' => $googlePays,
+            'paypal' => $payPal,
+        ];
+
+        return ResponseHelper::sendResponse($payments,'Payments List Fetch');
     }
 }
