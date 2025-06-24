@@ -11,10 +11,11 @@
 
     .transaction-icons img {
         width: 100%;
-        height: 50px;
+        height: 25px;
         margin: 0 auto;
     }
 
+    
     .transaction-icons h4 {
         margin: 0;
         font-size: 20px;
