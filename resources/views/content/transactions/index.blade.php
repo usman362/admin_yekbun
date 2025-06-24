@@ -40,9 +40,11 @@
         .transaction-icons:last-child {
             border-right: none !important;
         }
-        .nav-pills .nav-link{
+
+        .nav-pills .nav-link {
             font-size: 16px !important;
         }
+
         .nav-pills .nav-link.active,
         .nav-pills .nav-link.active:hover,
         .nav-pills .nav-link.active:focus {
@@ -55,14 +57,15 @@
 @endsection
 
 @section('content')
-     <h5 class="m-0">
-    <strong style="font-size: 25px;">Income</strong><br>
-   <small class="text-muted"> <span style="
+    <h5 class="m-0">
+        <strong style="font-size: 25px;">Income</strong><br>
+        <small class="text-muted"> <span style="
     font-size: 16px;
     font-weight: 500;
     margin-top: 2px;
-">Income Overview </span></small>
-</h5>
+">Income
+                Overview </span></small>
+    </h5>
     <div class="card" style="margin-top: 15px;">
         <div class="pb-2 pt-2 d-flex">
 
@@ -154,18 +157,94 @@
                         <tbody class="table-border-bottom-0">
                             <tr>
                                 <td>01</td>
-                                <td>Date</td>
-                                <td>Upgrades</td>
-                                <td>Music</td>
-                                <td>Events</td>
-                                <td>Services</td>
-                                <td>Bazaar</td>
-                                <td>Shops</td>
-                                <td>Channels</td>
-                                <td>Sympatdy</td>
-                                <td>G-Ads</td>
-                                <td>User-Ads</td>
+                                <td>01/06/2025</td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
                             </tr>
+                             <tr>
+                                <td>02</td>
+                                <td>01/06/2025</td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                            </tr>
+                           
+
                         </tbody>
                     </table>
                 </div>
@@ -190,19 +269,93 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr>
+                             <tr>
                                 <td>01</td>
-                                <td>Date</td>
-                                <td>Upgrades</td>
-                                <td>Music</td>
-                                <td>Events</td>
-                                <td>Services</td>
-                                <td>Bazaar</td>
-                                <td>Shops</td>
-                                <td>Channels</td>
-                                <td>Sympatdy</td>
-                                <td>G-Ads</td>
-                                <td>User-Ads</td>
+                                <td>01/06/2025</td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>02</td>
+                                <td>01/06/2025</td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -228,19 +381,93 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr>
+                              <tr>
                                 <td>01</td>
-                                <td>Date</td>
-                                <td>Upgrades</td>
-                                <td>Music</td>
-                                <td>Events</td>
-                                <td>Services</td>
-                                <td>Bazaar</td>
-                                <td>Shops</td>
-                                <td>Channels</td>
-                                <td>Sympatdy</td>
-                                <td>G-Ads</td>
-                                <td>User-Ads</td>
+                                <td>01/06/2025</td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>02</td>
+                                <td>01/06/2025</td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>2 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
+                                <td class="line-height-1">
+                                    <p class="m-0"><strong>150,00€</strong></p>
+                                    <small>10 Transactions</small>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -248,10 +475,68 @@
             </div>
         </div>
     </div>
+       
+<td colspan="12">
+     <div class="ps-3 pt-3 pb-3 pe-3" style="margin-top: 20px; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
+
+    <div class="row text-center gx-3 gy-2">
+         <div class="col-md-1" style=" hidden:yes">
+        
+      </div>
+       <div class="col-md-1">
+        
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+      <div class="col-md-1">
+        <strong>Total</strong>
+        <p class="m-0">150,00€</p>
+      </div>
+    </div>
+  </div>
+</td>
+
+
+ 
     <!--/ Basic Bootstrap Table -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // ================= Donut Chart =================
         const donutCtx = document.getElementById('incomeDonutChart').getContext('2d');
         new Chart(donutCtx, {
             type: 'doughnut',
@@ -259,9 +544,13 @@
                 labels: ['Users', 'Events', 'Playlist', 'Market', 'Shops', 'Google Ads', 'User Ads'],
                 datasets: [{
                     data: [60000, 30000, 20000, 10000, 8000, 5000, 7000],
-                    backgroundColor: ['#ff5722', '#03a9f4', '#9c27b0', '#4caf50', '#ffc107', '#2196f3',
-                        '#e91e63'
-                    ]
+                    backgroundColor: [
+                        '#ff5722', '#03a9f4', '#9c27b0',
+                        '#4caf50', '#ffc107', '#2196f3', '#e91e63'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    hoverOffset: 10
                 }]
             },
             options: {
@@ -269,17 +558,26 @@
                     legend: {
                         position: 'right',
                         labels: {
-                            boxWidth: 10
+                            boxWidth: 12,
+                            boxHeight: 12,
+                            padding: 10,
+                            color: '#555'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.parsed.toLocaleString()}€`;
+                            }
                         }
                     }
                 },
-                cutout: '60%'
+                cutout: '60%',
             }
         });
-    </script>
-    <script>
-        const ctx = document.getElementById('multiBarChart').getContext('2d');
 
+        // ================= Bar Chart =================
+        const ctx = document.getElementById('multiBarChart').getContext('2d');
         const data = {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
             datasets: [{
@@ -294,7 +592,7 @@
                 },
                 {
                     label: 'Playlist',
-                    data: [60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000],
+                    data: Array(12).fill(60000),
                     backgroundColor: '#2ECC71'
                 },
                 {
@@ -309,12 +607,12 @@
                 },
                 {
                     label: 'G-Ads',
-                    data: [60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000],
+                    data: Array(12).fill(60000),
                     backgroundColor: '#F39C12'
                 },
                 {
                     label: 'User-Ads',
-                    data: [60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000],
+                    data: Array(12).fill(60000),
                     backgroundColor: '#A3D5FF'
                 }
             ]
@@ -325,27 +623,50 @@
             plugins: {
                 legend: {
                     position: 'top',
+                    labels: {
+                        boxWidth: 12,
+                        color: '#333',
+                        padding: 15
+                    }
                 },
                 tooltip: {
                     mode: 'index',
-                    intersect: false
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.parsed.y.toLocaleString()}€`;
+                        }
+                    }
                 }
             },
             scales: {
                 x: {
-                    stacked: false,
                     grid: {
                         display: false
-                    }
+                    },
+                    ticks: {
+                        color: '#888'
+                    },
+                    categoryPercentage: 0.5, // spacing between bars group
+                    barPercentage: 0.4 // thickness of bars
                 },
                 y: {
-                    stacked: false,
                     beginAtZero: true,
                     ticks: {
+                        color: '#888',
                         callback: function(value) {
                             return value >= 1000 ? (value / 1000) + 'k' : value;
                         }
+                    },
+                    grid: {
+                        color: '#eee',
+                        borderDash: [4, 4]
                     }
+                }
+            },
+            datasets: {
+                bar: {
+                    borderRadius: 6
                 }
             }
         };
@@ -356,4 +677,5 @@
             options: options
         });
     </script>
+
 @endsection
