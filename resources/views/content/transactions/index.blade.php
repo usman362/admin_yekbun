@@ -221,7 +221,7 @@
                                 <td class="line-height-1">
                                     <p class="m-0"><strong>150,00€</strong></p>
                                     <small>10 Transactions</small>
-                                </td>
+                                </td> 
                                 <td class="line-height-1">
                                     <p class="m-0"><strong>150,00€</strong></p>
                                     <small>10 Transactions</small>
