@@ -86,9 +86,9 @@ class ClipsController extends Controller
 
         exec($command, $output, $return_var);
 
-        if ($return_var === 0) {
+        // if ($return_var === 0) {
             $clip->clip = Str::after($outputPath, 'public/');;
-        }
+        // }
         // else {
         //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
         // }
