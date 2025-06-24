@@ -19,7 +19,7 @@ class ClipsController extends Controller
 {
     public function index()
     {
-        $videos = Clips::with(['template','user'])->get();
+        $videos = Clips::with(['template','user'])->orderBy('created_at','desc')->get();
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
@@ -78,11 +78,11 @@ class ClipsController extends Controller
         $fontOption = $fontPath ? "fontfile={$fontPath}:" : '';
 
         // FFmpeg command WITHOUT custom font
-         $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
-        // "\"[0:v]drawtext={$fontOption}text={$escapedText}:fontcolor={$fontColor}:fontsize={$fontSize}:x={$x}:y={$y}[v];" .
-        "[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
-        "[a1][a2]amix=inputs=2:duration=first[a]\" " .
-        "-map \"[v]\" -map \"[a]\" -shortest {$outputPath}";
+        $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
+                "\"[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
+                "[a1][a2]amix=inputs=2:duration=first[a]\" " .
+                "-map 0:v -map \"[a]\" -shortest {$outputPath}";
+
 
         exec($command, $output, $return_var);
 
