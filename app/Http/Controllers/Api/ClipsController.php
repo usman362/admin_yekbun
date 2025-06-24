@@ -19,7 +19,7 @@ class ClipsController extends Controller
 {
     public function index()
     {
-        $videos = Clips::with(['template','user'])->get();
+        $videos = Clips::with(['template','user'])->orderBy('created_at','desc')->get();
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
