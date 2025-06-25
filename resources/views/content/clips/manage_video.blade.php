@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                        height: 433px !important; */
+                                                                                                                                    height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -678,6 +678,7 @@
                                         data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}"
                                         data-user_image="{{ $userImage }}"
                                         data-user_level="{{ $clip->user->level ?? 0 }}" data-text="{{ $clip->text }}"
+                                        data-emoji="{{ asset('emojis/' . $clip->emoji . '.gif') }}"
                                         data-text_properties="{{ $clip->text_properties }}"
                                         style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                         <!-- Main wrap -->
@@ -1092,20 +1093,38 @@
             const text = $(this).attr('data-text');
             const props = JSON.parse($(this).attr('data-text_properties'));
 
-            const span = $('<span>').text(text).css({
+            const $container = $('<div>').css({
                 position: 'absolute',
-                left: props.x + 'px',
-                top: props.y + 'px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                marginTop: '12px',
+                padding: '0 12px'
+            });
+
+            const $imgBefore = $('<img>').attr('src', $(this).attr('data-emoji')).css({
+                width: '24px',
+                height: '24px'
+            });
+
+            const $textSpan = $('<span>').text(text).css({
                 width: props.width + 'px',
                 height: props.height + 'px',
                 color: props.color,
                 fontSize: props.fontSize + 'px',
                 fontFamily: props.fontFamily,
                 textAlign: props.textAlign,
-                marginTop: props.marginTop + 'px',
                 textShadow: `${props.textShadowOffset.width}px ${props.textShadowOffset.height}px ${props.textShadowRadius}px ${props.textShadowColor}`
             });
-            $('#lottie-text').append(span);
+
+            const $imgAfter = $('<img>').attr('src', $(this).attr('data-emoji')).css({
+                width: '24px',
+                height: '24px'
+            });
+
+            $container.append($imgBefore, $textSpan, $imgAfter);
+            $('#lottie-text').append($container);
+
             $('#user_id').val($(this).attr('data-user_id'));
             $('#user_name').text($(this).attr('data-user_name'));
             $('#user_image').attr('src', $(this).attr('data-user_image'));
