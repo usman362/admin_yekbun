@@ -1097,6 +1097,7 @@
             const props = JSON.parse($(this).attr('data-text_properties'));
 
             const $container = $('<div>').css({
+                width: '100%',
                 position: 'absolute',
                 display: 'flex',
                 alignItems: 'center',
@@ -1106,12 +1107,13 @@
             });
 
             const $imgBefore = $('<img>').attr('src', $(this).attr('data-emoji')).css({
-                width: '24px',
-                height: '24px'
+                width: props.fontSize + 'px',
+                height: props.fontSize + 'px'
             });
 
             const $textSpan = $('<span>').text(text).css({
-                width: props.width + 'px',
+                // width: props.width + 'px',
+                width: '100%',
                 height: props.height + 'px',
                 color: props.color,
                 fontSize: props.fontSize + 'px',
@@ -1121,8 +1123,8 @@
             });
 
             const $imgAfter = $('<img>').attr('src', $(this).attr('data-emoji')).css({
-                width: '24px',
-                height: '24px'
+                width: props.fontSize + 'px',
+                height: props.fontSize + 'px'
             });
 
             $container.append($imgBefore, $textSpan, $imgAfter);
