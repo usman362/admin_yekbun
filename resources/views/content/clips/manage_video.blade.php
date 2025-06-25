@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                                                    height: 433px !important; */
+                                                                                                                                        height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -1074,9 +1074,14 @@
             });
 
             let clip = $(this).attr('data-demo-href');
-            console.log(clip);
-            $('.fancybox-video').attr('poster', clip);
-            $('.fancybox-source').attr('src', clip);
+            let $video = $('.fancybox-video');
+
+            // Update video source
+            $video.find('.fancybox-source').attr('src', clip);
+
+            // Reload and play the video
+            $video[0].load(); // Re-initialize the video with the new src
+            $video[0].play(); // Start playing
 
             if ($(this).attr('data-json') !== 'null') {
                 lottie.loadAnimation({
