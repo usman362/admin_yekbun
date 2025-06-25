@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                height: 433px !important; */
+                                                                            height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -510,14 +510,13 @@
             <div class="view-wrapper">
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
-                        @foreach ($templates as $clip)
+                        @foreach ($templates as $key => $clip)
                             <div class="col-md-2">
                                 <div class="post-image text-white">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                        {{-- data-fancybox data-src="#video-popup" href="javascript:;"
-                                        data-thumb="{{ asset('videos/user-clip.mp4') }}"
-                                        data-id="67ef066938c58e2bce0a4d72"
-                                        data-demo-href="{{ asset('videos/user-clip.mp4') }}" --}}
+                                        data-fancybox data-src="#template-popup-{{ $key }}" href="javascript:;"
+                                        data-thumb="{{ asset('videos/user-clip.mp4') }}" data-id="67ef066938c58e2bce0a4d72"
+                                        data-demo-href="{{ asset('videos/user-clip.mp4') }}"
                                         style="
                                     background-color: #7f7f7f;
                                     height:335px;width:210px;background-size:cover;">
@@ -626,6 +625,17 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div style="display: none;" id="template-popup-{{ $key }}">
+                                <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
+
+                                    <!-- Left Column: Video -->
+                                    <div style="flex: -1;">
+                                        <div id="lottie-animation-popup-{{ $clip->id }}" style="height: auto;width: 350px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -653,10 +663,10 @@
                                             data-id="{{ $clip->id }}"
                                             data-demo-href="{{ asset('storage/' . $clip->video) }}"
                                             data-user_id="{{ $clip->user_id }}"
-                                            data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '')  }}"
-                                            data-user_image="{{ $clip->user ? ( !empty($clip->user->image) ? asset('storage/' . $clip->user->image) : asset('images/user-clips-report-user.png') ) : asset('images/user-clips-report-user.png') }}"
+                                            data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}"
+                                            data-user_image="{{ $clip->user ? (!empty($clip->user->image) ? asset('storage/' . $clip->user->image) : asset('images/user-clips-report-user.png')) : asset('images/user-clips-report-user.png') }}"
                                             data-user_level="{{ $clip->user->level ?? 0 }}"
-                                            style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/'. $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
+                                            style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                             <!-- Main wrap -->
                                             <div class="content-wrap">
                                                 <div class="mt-2 mb-0">
@@ -845,7 +855,8 @@
                             <div class="user-info">
                                 <div>
                                     <img src="{{ asset('images/user-clips-report-user.png') }}" alt="User Photo"
-                                        class="profile-img" id="user_image" onerror="{{ asset('images/user-clips-report-user.png') }}"/>
+                                        class="profile-img" id="user_image"
+                                        onerror="{{ asset('images/user-clips-report-user.png') }}" />
                                 </div>
                                 <input type="hidden" id="user_id">
                                 <div class="user-details">
@@ -975,6 +986,14 @@
                     loop: true,
                     autoplay: true,
                     path: "{{ asset('storage/' . $clip->json_paths) }}"
+                });
+
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-animation-popup-{{ $clip->id }}'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: "{{ asset('storage/' . $clip->json_paths) }}",
                 });
             @endforeach
         });
