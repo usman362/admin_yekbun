@@ -664,8 +664,6 @@
                                         : asset('images/user-clips-report-user.png');
                             @endphp
 
-                            <div data-user_image="{{ $userImage }}"></div>
-
                             <div class="col-md-2">
                                 <div class="post-image text-white">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
