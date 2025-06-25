@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                    height: 433px !important; */
+                                                                                                        height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -655,6 +655,19 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
                         @foreach ($clips as $clip)
+                            @php
+                                use Illuminate\Support\Str;
+
+                                $userImage =
+                                    $clip->user && !empty($clip->user->image)
+                                        ? (Str::startsWith($clip->user->image, 'https://')
+                                            ? $clip->user->image
+                                            : asset('storage/' . $clip->user->image))
+                                        : asset('images/user-clips-report-user.png');
+                            @endphp
+
+                            <div data-user_image="{{ $userImage }}"></div>
+
                             <div class="col-md-2">
                                 <div class="post-image text-white">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
@@ -665,10 +678,9 @@
                                         data-demo-href="{{ asset('storage/' . $clip->clip) }}"
                                         data-user_id="{{ $clip->user_id }}"
                                         data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}"
-                                        data-user_image="{{ $clip->user ? (!empty($clip->user->image) ? asset('storage/' . $clip->user->image) : asset('images/user-clips-report-user.png')) : asset('images/user-clips-report-user.png') }}"
-                                        data-user_level="{{ $clip->user->level ?? 0 }}"
-                                        data-text="{{$clip->text}}"
-                                        data-text_properties="{{$clip->text_properties}}"
+                                        data-user_image="{{ $userImage }}"
+                                        data-user_level="{{ $clip->user->level ?? 0 }}" data-text="{{ $clip->text }}"
+                                        data-text_properties="{{ $clip->text_properties }}"
                                         style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
