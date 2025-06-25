@@ -259,113 +259,82 @@
                         <tr>
                             <th style="font-size: 15px;">#</th>
                             <th style="font-size: 15px;">Date</th>
-                            <th style="font-size: 15px;">Upgrades</th>
-                            <th style="font-size: 15px;">Music</th>
-                            <th style="font-size: 15px;">Events</th>
-                            <th style="font-size: 15px;">Services</th>
-                            <th style="font-size: 15px;">Bazaar</th>
-                            <th style="font-size: 15px;">Shops</th>
-                            <th style="font-size: 15px;">Channels</th>
-                            <th style="font-size: 15px;">Sympathy</th>
-                            <th style="font-size: 15px;">G-Ads</th>
-                            <th style="font-size: 15px;">User-Ads</th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Upgrades <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">Music <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">Events <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">Services <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">Bazaar <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">Shops <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">Channels <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">Sympathy <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">G-Ads <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">User-Ads <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         <tr>
                             <td>01</td>
                             <td>01/06/2025</td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
+                            <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
                         </tr>
+
+                        <!-- Total Block -->
                         <tr>
-                            <td>02</td>
-                            <td>01/06/2025</td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
+                            <td colspan="12">
+                                <div style="margin-top: 20px; width: 88%; margin-left: auto; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
+                                    <div class="row text-center gx-0 gy-2 px-3 py-3">
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
-
-
                     </tbody>
                 </table>
             </div>
         </div>
+
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="table-responsive text-nowrap">
                 <table class="table">
@@ -373,226 +342,240 @@
                         <tr>
                             <th style="font-size: 15px;">#</th>
                             <th style="font-size: 15px;">Date</th>
-                            <th style="font-size: 15px;">Upgrades</th>
-                            <th style="font-size: 15px;">Music</th>
-                            <th style="font-size: 15px;">Events</th>
-                            <th style="font-size: 15px;">Services</th>
-                            <th style="font-size: 15px;">Bazaar</th>
-                            <th style="font-size: 15px;">Shops</th>
-                            <th style="font-size: 15px;">Channels</th>
-                            <th style="font-size: 15px;">Sympathy</th>
-                            <th style="font-size: 15px;">G-Ads</th>
-                            <th style="font-size: 15px;">User-Ads</th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Upgrades
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Music
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Events
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Services
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Bazaar
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Shops
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Channels
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    Sympathy
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    G-Ads
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
+                            <th style="font-size: 15px;">
+                                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                    User-Ads
+                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         <tr>
                             <td>01</td>
                             <td>01/06/2025</td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
+                            <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
                         </tr>
+
+                        <!-- Total Row -->
                         <tr>
-                            <td>02</td>
-                            <td>01/06/2025</td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
+                            <td colspan="12">
+                                <div style="margin-top: 20px; width: 88%; margin-left: auto; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
+                                    <div class="row text-center gx-0 gy-2 px-3 py-3">
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <!-- yearly  -->
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-            <div class="table-responsive text-nowrap">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th style="font-size: 15px;">#</th>
-                            <th style="font-size: 15px;">Date</th>
-                            <th style="font-size: 15px;"> Upgrades</th>
-                            <th style="font-size: 15px;">Music</th>
-                            <th style="font-size: 15px;">Events</th>
-                            <th style="font-size: 15px;">Services</th>
-                            <th style="font-size: 15px;">Bazaar</th>
-                            <th style="font-size: 15px;">Shops</th>
-                            <th style="font-size: 15px;">Channels</th>
-                            <th style="font-size: 15px;">Sympathy</th>
-                            <th style="font-size: 15px;">G-Ads</th>
-                            <th style="font-size: 15px;">User-Ads</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>01</td>
-                            <td>01/06/2025</td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>01/06/2025</td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>2 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                            <td class="line-height-1">
-                                <p class="m-0"><strong>150,00€</strong></p>
-                                <small>10 Transactions</small>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="font-size: 15px;">#</th>
+                    <th style="font-size: 15px;">Date</th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Upgrades
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Music
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Events
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Services
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Bazaar
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Shops
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Channels
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            Sympathy
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            G-Ads
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                    <th style="font-size: 15px;">
+                        <span style="display: inline-flex; align-items: center; gap: 5px;">
+                            User-Ads
+                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                <tr>
+                    <td>01</td>
+                    <td>01/06/2025</td>
+                    <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                </tr>
+
+                <!-- Total Row -->
+                <tr>
+                    <td colspan="12">
+                        <div style="margin-top: 20px; width: 88%; margin-left: auto; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
+                            <div class="row text-center gx-0 gy-2 px-3 py-3">
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-<td colspan="12">
+
+    </div>
+</div>
+<!-- <td colspan="12">
     <div style="margin-top: 20px; width: 88%; margin-left: auto;  background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
         <div class="row text-center gx-0 gy-2 px-3 py-3" style="margin-left: 0px;">
 
@@ -641,7 +624,7 @@
             </div>
         </div>
     </div>
-</td>
+</td> -->
 
 
 
@@ -736,23 +719,32 @@
         ]
     };
 
-   const options = {
-    responsive: true,
-    plugins: {
-        legend: { display: false },
-        tooltip: {
-            mode: 'index',
-            intersect: false,
-            callbacks: {
-                label: function(context) {
-                    return `${context.dataset.label}: ${context.parsed.y.toLocaleString()}€`;
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                    label: function(context) {
+                        return `${context.dataset.label}: ${context.parsed.y.toLocaleString()}€`;
+                    }
                 }
             }
+        },
+        scales: {
+            /* your scales config */
+        },
+        datasets: {
+            bar: {
+                borderRadius: 6,
+                borderWidth: 2
+            }
         }
-    },
-    scales: { /* your scales config */ },
-    datasets: { bar: { borderRadius: 6, borderWidth: 2 } }
-};
+    };
 
 
     new Chart(ctx, {
