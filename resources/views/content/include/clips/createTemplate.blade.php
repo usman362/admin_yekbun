@@ -28,7 +28,7 @@
     @csrf
     {{-- <input type="hidden" name="history_id"> --}}
     {{-- <div class="hidden-inputs"></div> --}}
-    {{-- <input type="hidden" name="thumbnail" id="thumbnail"> --}}
+    <input type="hidden" name="thumbnail" id="thumbnail">
     <input type="hidden" name="template_id" id="template_id">
     <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -41,19 +41,36 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="card">
-                    {{-- <h5 class="card-header">Video Upload</h5> --}}
-                    <div class="card-body">
-                        <div class="dropzone needsclick" action="/" id="dropzone-json">
-                            <div class="dz-message needsclick">
-                                Upload File <br>
-                                <small style="font-size: 12px">JSON File</small>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dropzone needsclick" action="/" id="dropzone-json">
+                                <div class="dz-message needsclick">
+                                    Upload File <br>
+                                    <small style="font-size: 12px">JSON File</small>
+                                </div>
+                                <div class="fallback">
+                                    <input type="file" name="json_file" />
+                                </div>
                             </div>
-                            <div class="fallback">
-                                <input type="file" name="json_file" />
-                            </div>
+                            <div class="hidden-json"></div>
                         </div>
-                        <div class="hidden-json"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dropzone needsclick" action="/" id="dropzone-video">
+                                <div class="dz-message needsclick">
+                                    Upload Video <br>
+                                    <small style="font-size: 12px">Video File</small>
+                                </div>
+                                <div class="fallback">
+                                    <input type="file" name="video" />
+                                </div>
+                            </div>
+                            <div class="hidden-videos"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -76,20 +93,6 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                {{-- <div class="card">
-                    <div class="card-body">
-                        <div class="dropzone needsclick" action="/" id="dropzone-video">
-                            <div class="dz-message needsclick">
-                                Upload Video <br>
-                                <small style="font-size: 12px">Video File</small>
-                            </div>
-                            <div class="fallback">
-                                <input type="file" name="video" />
-                            </div>
-                        </div>
-                        <div class="hidden-videos"></div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -152,7 +155,7 @@
                 // video.preload = 'metadata';
                 // video.src = URL.createObjectURL(file);
                 // video.onloadedmetadata = function() {
-                //     const duration = video.duration.toFixed(2);
+                // const duration = video.duration.toFixed(2);
 
                 hiddenInputsContainer.innerHTML += `
             <input type="hidden" name="json_paths[]" id="json_path" value="${response.path}" data-path="${response.path}">
@@ -193,9 +196,9 @@
                 });
 
                 $('#error-thumbnail').text("");
-                // $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
-                // $('#thumbnail-history').css('display', 'none');
-                // $('#generated-thumbnails').css('display', 'none');
+                $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
+                $('#thumbnail-history').css('display', 'none');
+                $('#generated-thumbnails').css('display', 'none');
 
                 return this._updateMaxFilesReachedClass();
 
@@ -240,6 +243,7 @@
             },
             sending: function(file, xhr, formData) {
                 formData.append('folder', 'clips');
+                $('#dz-thumbnail').attr('src', '{{ asset('images/spin-loader.gif') }}');
             },
             success: function(file, response) {
                 if (this.files.length > 1) {
