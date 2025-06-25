@@ -656,11 +656,9 @@
                     <div class="row g-4">
                         @foreach ($clips as $clip)
                             @php
-                                use Illuminate\Support\Str;
-
                                 $userImage =
                                     $clip->user && !empty($clip->user->image)
-                                        ? (Str::startsWith($clip->user->image, 'https://')
+                                        ? (\Illuminate\Support\Str::startsWith($clip->user->image, 'https://')
                                             ? $clip->user->image
                                             : asset('storage/' . $clip->user->image))
                                         : asset('images/user-clips-report-user.png');
