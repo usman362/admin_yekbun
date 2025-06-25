@@ -1123,7 +1123,7 @@
             });
 
             $container.append($imgBefore, $textSpan, $imgAfter);
-            $('#lottie-text').append($container);
+            $('#lottie-text').html($container);
 
             $('#user_id').val($(this).attr('data-user_id'));
             $('#user_name').text($(this).attr('data-user_name'));
