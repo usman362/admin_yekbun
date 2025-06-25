@@ -692,7 +692,7 @@
                                                         <div style="display: flex">
                                                             <img src="{{ asset('images/user-clips-artist.png') }}"
                                                                 style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                            <h6 class="ml-2 text-white">Artist Name</h6>
+                                                            <h6 class="ml-2 text-white">{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}</h6>
                                                         </div>
                                                         <div style="display: flex;margin-top:-6px">
                                                             <img src="{{ asset('images/user-clips-flag.png') }}"
