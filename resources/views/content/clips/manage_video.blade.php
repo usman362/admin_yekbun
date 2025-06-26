@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                                                        height: 433px !important; */
+                                                                                                                                                    height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -421,6 +421,9 @@
         .modal-body {
             overflow-y: scroll !important;
         }
+        .template-thumbnails svg{
+            border-radius: 8px;
+        }
     </style>
 @endsection
 
@@ -515,8 +518,9 @@
                                 <div class="post-image text-white">
                                     <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
                                         data-fancybox data-src="#template-popup-{{ $key }}" href="javascript:;"
-                                        data-thumb="{{ asset('videos/user-clip.mp4') }}" data-id="67ef066938c58e2bce0a4d72"
-                                        data-demo-href="{{ asset('videos/user-clip.mp4') }}"
+                                        data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
+                                        data-id="67ef066938c58e2bce0a4d72"
+                                        data-demo-href="{{ asset('storage/' . $clip->thumbnail) }}"
                                         style="
                                     background-color: #7f7f7f;
                                     height:335px;width:210px;background-size:cover;">
@@ -524,7 +528,14 @@
                                         <div class="content-wrap">
                                             <!-- Post body -->
                                             <div class="card-body p-0">
-                                                <div id="lottie-animation-{{ $clip->id }}">
+                                                {{-- @if ($clip->video_paths)
+                                                    <video autoplay muted loop playsinline
+                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                                                        <source src="{{ asset('storage/' . $clip->video_paths) }}"
+                                                            type="video/mp4">
+                                                    </video>
+                                                @endif --}}
+                                                <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails" style="margin-top: -2px">
                                                 </div>
                                             </div>
                                         </div>
@@ -535,7 +546,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div
-                                                    style="background-color: rgba(0, 0, 0, 0.2);border-radius:8px;padding: 2px 6px;">
+                                                    style="background-color: rgb(0 0 0 / 50%);border-radius:8px;padding: 2px 6px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
                                                         width="15" alt=""> <span
                                                         class="text-white">{{ $clip->educated_price == 'free' ? 'Free' : '0,99 €' }}</span>
@@ -543,7 +554,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div
-                                                    style="background-color: rgba(0, 0, 0, 0.2);border-radius:8px;padding: 2px 6px;">
+                                                    style="background-color: rgb(0 0 0 / 50%);border-radius:8px;padding: 2px 6px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
                                                         width="15" alt=""> <span
                                                         class="text-white">{{ $clip->cultivated_price == 'free' ? 'Free' : '0,49 €' }}</span>
@@ -552,7 +563,7 @@
                                         </div>
                                     </div>
                                     <!-- /Post body -->
-                                    <div class="mt-2 mb-0" style="top: 260px;left:5px;position: absolute;bottom: auto;">
+                                    <div class="mt-2 mb-0" style="top: 260px;left:5px;position: absolute;bottom: auto;width:95%;background-color: rgb(0 0 0 / 50%);height:56px;border-radius:8px;">
                                         <div
                                             style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
                                             <div style="display:flex;align-items:center;width:100%;height:100%">
@@ -631,9 +642,20 @@
 
                                     <!-- Left Column: Video -->
                                     <div style="flex: -1;">
-                                        <div id="lottie-animation-popup-{{ $clip->id }}"
-                                            style="height: auto;width: 350px;">
-                                        </div>
+                                        @if ($clip->video_paths)
+                                            <video controls controlsList="nodownload"
+                                                style="position: absolute;top: 44px;left: 44px;width: 350px;height: auto;object-fit: cover;z-index: 1;border-radius: 8px;outline:none">
+                                                <source src="{{ asset('storage/' . $clip->video_paths) }}"
+                                                    type="video/mp4">
+                                            </video>
+                                            <div id="lottie-animation-popup-{{ $clip->id }}"
+                                                style="height: auto;width: 350px;opacity:0;">
+                                            </div>
+                                            @else
+                                            <div id="lottie-animation-popup-{{ $clip->id }}"
+                                                style="height: auto;width: 350px;">
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -692,7 +714,9 @@
                                                         <div style="display: flex">
                                                             <img src="{{ asset('images/user-clips-artist.png') }}"
                                                                 style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                            <h6 class="ml-2 text-white">{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}</h6>
+                                                            <h6 class="ml-2 text-white">
+                                                                {{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}
+                                                            </h6>
                                                         </div>
                                                         <div style="display: flex;margin-top:-6px">
                                                             <img src="{{ asset('images/user-clips-flag.png') }}"
