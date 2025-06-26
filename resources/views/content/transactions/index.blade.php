@@ -104,6 +104,125 @@
         border-radius: 50%;
         margin-right: 5px;
     }
+
+    .card,
+    .modal {
+        font-family: 'Genos';
+    }
+
+    .transaction-icons img {
+        width: 100%;
+        height: 50px;
+        margin: 0 auto;
+    }
+
+    .transaction-icons h4 {
+        margin: 0;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .transaction-icons p {
+        font-size: 18px;
+        text-align: center;
+        margin: 0;
+    }
+
+    .transaction-icons i {
+        font-size: 14px;
+    }
+
+    .transaction-icons {
+        padding: 12px 38px 0px 38px;
+        width: 100%;
+        border-right: 2px solid #F2F2F2;
+    }
+
+    .transaction-icons:last-child {
+        border-right: none !important;
+    }
+
+    .nav-pills .nav-link {
+        font-size: 16px !important;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .nav-link.active:hover,
+    .nav-pills .nav-link.active:focus {
+        background-color: transparent !important;
+        color: #000 !important;
+        font-weight: bold !important;
+        box-shadow: none !important;
+    }
+
+    .line-height-1 {
+        line-height: 1 !important;
+    }
+
+    .user-area span {
+        font-size: 14px;
+    }
+
+    .user-area img {
+        width: 10px;
+        height: 10px;
+        margin: 4px 2px 0 2px;
+    }
+
+    .user-area .user-avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 30px;
+    }
+
+    .user-area span {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 2px;
+    }
+    
+@media (max-width: 576px) {
+    .transaction-icons {
+        flex: 1 1 100%;
+        text-align: center;
+        border-right: none !important;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .pb-2.pt-2.d-flex {
+        flex-direction: column;
+        align-items: center;
+        width: 100% !important;
+        gap: 15px;
+    }
+
+    .user_search_icons {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .user_search_icons > div:first-child {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user_search_icons > div:last-child {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .user_search_icons input {
+        width: 100%;
+    }
+}
+
+
 </style>
 @endsection
 
@@ -260,19 +379,31 @@
                             <th style="font-size: 15px;">#</th>
                             <th style="font-size: 15px;">Date</th>
                             <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Upgrades <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                                <a data-bs-toggle="modal" href="#upgrade" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Upgrades <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span>
+                                </a>
                             </th>
-                            <th style="font-size: 15px;">Music <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">Events <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">Services <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">Bazaar <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">Shops <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">Channels <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">Sympathy <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">G-Ads <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
-                            <th style="font-size: 15px;">User-Ads <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"></th>
+                            <th style="font-size: 15px;">
+                                <a data-bs-toggle="modal" href="#music" role="button">
+                                    Music <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                </a>
+                            </th>
+
+                            <th style="font-size: 15px;">
+                                <a data-bs-toggle="modal" href="#events" role="button">Events <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a>
+                            </th>
+
+                            <th style="font-size: 15px;">
+                                <a data-bs-toggle="modal" href="#service" role="button">Services <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a>
+                            </th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#bazar" role="button">Bazaar <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a></th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#shop" role="button">Shops <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a></th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#chanel" role="button">Channels <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a></th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#sympathy" role="button">Sympathy <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a></th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#g_ads" role="button">G-Ads <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a></th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#user_ads" role="button">User-Ads <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;"> </a></th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -342,65 +473,67 @@
                         <tr>
                             <th style="font-size: 15px;">#</th>
                             <th style="font-size: 15px;">Date</th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Upgrades
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#upgrade" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Upgrades
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span>
+                                </a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Music
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#music" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Music
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span>
+                                </a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Events
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#events" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Events
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Services
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#service" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Services
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Bazaar
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#bazar" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Bazaar
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Shops
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#shop" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Shops
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Channels
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#chanel" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Channels
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    Sympathy
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#sympathy" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Sympathy
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    G-Ads
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#g_ads" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        G-Ads
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
-                            <th style="font-size: 15px;">
-                                <span style="display: inline-flex; align-items: center; gap: 5px;">
-                                    User-Ads
-                                    <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                                </span>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#user_ads" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        User-Ads
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
                             </th>
                         </tr>
                     </thead>
@@ -465,113 +598,134 @@
         </div>
         <!-- yearly  -->
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-    <div class="table-responsive text-nowrap">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="font-size: 15px;">#</th>
-                    <th style="font-size: 15px;">Date</th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Upgrades
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Music
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Events
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Services
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Bazaar
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Shops
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Channels
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            Sympathy
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            G-Ads
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                    <th style="font-size: 15px;">
-                        <span style="display: inline-flex; align-items: center; gap: 5px;">
-                            User-Ads
-                            <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
-                        </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
-                <tr>
-                    <td>01</td>
-                    <td>01/06/2025</td>
-                    <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                    <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
-                </tr>
+            <div class="table-responsive text-nowrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="font-size: 15px;">#</th>
+                            <th style="font-size: 15px;">Date</th>
+                            <th style="font-size: 15px;"> <a data-bs-toggle="modal" href="#upgrade" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Upgrades
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span>
+                                </a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#music" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Music
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span> </a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#events" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Events
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#service" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Services
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#bazar" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Bazaar
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#shop" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Shops
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#chanel" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Channels
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#sympathy" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        Sympathy
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#g_ads" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        G-Ads
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                            <th style="font-size: 15px;"><a data-bs-toggle="modal" href="#user_ads" role="button">
+                                    <span style="display: inline-flex; align-items: center; gap: 5px;">
+                                        User-Ads
+                                        <img src="{{ asset('assets/svg/arrow.svg') }}" style="width: 16px; height: 16px;">
+                                    </span></a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                            <td>01</td>
+                            <td>01/06/2025</td>
+                            <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>2 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                            <td><strong>150,00€</strong><br><small>10 Transactions</small></td>
+                        </tr>
 
-                <!-- Total Row -->
-                <tr>
-                    <td colspan="12">
-                        <div style="margin-top: 20px; width: 88%; margin-left: auto; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
-                            <div class="row text-center gx-0 gy-2 px-3 py-3">
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                                <div class="col"><strong>Total</strong><p class="m-0">150,00€</p></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+                        <!-- Total Row -->
+                        <tr>
+                            <td colspan="12">
+                                <div style="margin-top: 20px; width: 88%; margin-left: auto; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); color: #95b0e3;">
+                                    <div class="row text-center gx-0 gy-2 px-3 py-3">
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                        <div class="col"><strong>Total</strong>
+                                            <p class="m-0">150,00€</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -626,9 +780,919 @@
     </div>
 </td> -->
 
+<!-- upgrade start -->
+<div class="modal fade" id="upgrade" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/transactions-users.svg') }}" alt="">
+                    <div>
+                        <h4 style="margin: 0;">Users Upgrade</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="font-size: 20px ">User Type</th>
+                                <th style="font-size: 20px ">Transaction</th>
+                                <th style="font-size: 20px ">Bank Transfer</th>
+                                <th style="font-size: 20px ">PayPal</th>
+                                <th style="font-size: 20px ">Apple Pay</th>
+                                <th style="font-size: 20px ">Google Pay</th>
+                                <th style="font-size: 20px ">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            <tr>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex">
+                                        <img class="user-avatar" src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                            alt="educated">
+                                        <div>
+                                            <h5 class="m-0"><strong>Educated User</strong></h5>
+                                            <div class="d-flex">
+                                                <span>125k Users</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>150</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>50</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>10</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>22</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>10</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
 
 
+                                <td>
+                                  <small>view transaction</small>
+                                        </td>
+                            </tr>
+                            <tr>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex">
+                                        <img class="user-avatar" src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                            alt="">
+                                        <div>
+                                            <h5 class="m-0"><strong>Caltivated User</strong></h5>
+                                            <div class="d-flex">
+                                                <span>125k Users</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>150</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>50</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>10</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>22</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>10</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
 
+
+                                <td>
+                                       <small>view transaction</small>
+                                    <!-- <a href="javascript:void(0)"><img class="w-80"
+                                            src="{{ asset('assets/svg/eye.svg') }}" alt="view"></a> -->
+                                        </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  upgrade end -->
+<!-- Music start -->
+<div class="modal fade" id="music" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p> 0,00€<span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/threelines.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Music Playlist</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="font-size: 20px ">Seervice Type</th>
+                                <th style="font-size: 20px ">Transaction</th>
+                                <th style="font-size: 20px ">Bank Transfer</th>
+                                <th style="font-size: 20px ">PayPal</th>
+                                <th style="font-size: 20px ">Apple Pay</th>
+                                <th style="font-size: 20px ">Google Pay</th>
+                                <th style="font-size: 20px ">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            <tr>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex">
+                                        <img class="user-avatar" src="{{ asset('assets/svg/playlist.svg') }}" alt="educated" style="border-radius: 0;">
+                                        <div>
+                                            <h5 class="m-0"><strong>Playlist</strong></h5>
+                                            <div class="d-flex">
+                                                <span>125k purchase</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>150</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>50</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>10</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>22</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="line-height-1 user-area">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h5 class="m-0 d-flex align-items-center">
+                                                <strong>10</strong>
+                                                <img src="{{ asset('assets/svg/arrow2.svg') }}" alt="arrow2" style="height: 16px; width: 16px; margin-left: 5px;">
+                                            </h5>
+                                            <div>
+                                                <span>7100,500,95€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+
+                                <td>
+                                       <small>view transaction</small>
+                                    <!-- <a href="javascript:void(0)"><img class="w-80"
+                                            src="{{ asset('assets/svg/eye.svg') }}" alt="view"></a> -->
+                                        </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  music end -->
+<!-- events start -->
+<div class="modal fade" id="events" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€<span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/events_tickets.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Events & Tickets</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  events end -->
+  <!-- service start -->
+<div class="modal fade" id="service" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/service.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Services</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  services end -->
+<!-- bazar start -->
+<div class="modal fade" id="bazar" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/bazar.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Bazaar</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  bazar end -->
+  <!-- shop start -->
+<div class="modal fade" id="shop" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/shop.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Shops</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  shop end -->
+
+
+ <!-- chanel start -->
+<div class="modal fade" id="chanel" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/chanel.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Channels</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  channel end -->
+   <!-- sympathy start -->
+<div class="modal fade" id="sympathy" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/sympathy.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Sympathy</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  sympathy end -->
+     <!-- G-Ads start -->
+<div class="modal fade" id="g_ads" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/gads.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">G - Ads</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  G-Ads end -->
+    <!-- User-Ads start -->
+<div class="modal fade" id="user_ads" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="card position-relative" style="margin-top: 15px; box-shadow: none;">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 10px; right: 10px;"></button>
+
+                <div class="pb-2 pt-2 d-flex" style="background-color:whitesmoke; border-radius:20px; width:80%;margin:0 auto; gap: 20px;">
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/paypal.svg') }}" alt="">
+                        <h4>Paypal</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/apple.svg') }}" alt="">
+                        <h4>Apple Pay</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/google.svg') }}" alt="">
+                        <h4>Google Pay</h4>
+                        <p>31,856€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                    <div class="transaction-icons" style=" border-right: 1px solid #fff;">
+                        <img src="{{ asset('assets/svg/transfer.svg') }}" alt="">
+                        <h4>Transfer</h4>
+                        <p>0,00€ <span class="text-success"><i class="fas fa-arrow-up"></i>25%</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- search -->
+            <div class="user_search_icons" style="padding-top:20px; display: flex; justify-content: space-between; align-items: center; margin-left: 20px; margin-right: 20px;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="{{ asset('assets/svg/user_ads.svg') }}" alt="3">
+                    <div>
+                        <h4 style="margin: 0;">Users - Ads</h4>
+                        <p style="margin: 0;">01.25- 12.25</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <input type="search" placeholder="sort by date" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                    <input type="search" placeholder="search" style="border: 1px solid #ccc; border-radius: 4px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!--  G-Ads end -->
+  
 <!--/ Basic Bootstrap Table -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
