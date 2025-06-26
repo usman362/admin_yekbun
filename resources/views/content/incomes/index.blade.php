@@ -85,13 +85,14 @@
 
 @section('content')
     <h5 class="m-0">
-    <strong style="font-size: 25px;">Transaction</strong><br>
-   <small class="text-muted"> <span style="
+        <strong style="font-size: 25px;">Transaction</strong><br>
+        <small class="text-muted"> <span style="
     font-size: 16px;
     font-weight: 500;
     margin-top: 2px;
-">Transaction Overview </span></small>
-</h5>
+">Transaction
+                Overview </span></small>
+    </h5>
 
     <div class="card" style="margin-top: 15px">
         <div class="pb-2 pt-2 d-flex">
@@ -122,19 +123,21 @@
         {{-- <h5 class="card-header">Table Basic</h5> --}}
         <ul class="nav nav-pills mt-2" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                 <button class="nav-link active" id="pills-daily-tab" data-bs-toggle="pill" data-bs-target="#pills-daily"
-                type="button" role="tab" aria-controls="pills-daily" aria-selected="true"
-            style="font-size: 22px !important;">Daily Income</button>
+                <button class="nav-link active" id="pills-daily-tab" data-bs-toggle="pill" data-bs-target="#pills-daily"
+                    type="button" role="tab" aria-controls="pills-daily" aria-selected="true"
+                    style="font-size: 22px !important;">Daily Income</button>
 
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly"
-                    type="button" role="tab" aria-controls="pills-monthly" aria-selected="false"  style="font-size: 22px !important;">Monthly
+                    type="button" role="tab" aria-controls="pills-monthly" aria-selected="false"
+                    style="font-size: 22px !important;">Monthly
                     Income</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly"
-                    type="button" role="tab" aria-controls="pills-yearly" aria-selected="false"  style="font-size: 22px !important;">Yearly Income</button>
+                    type="button" role="tab" aria-controls="pills-yearly" aria-selected="false"
+                    style="font-size: 22px !important;">Yearly Income</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -147,7 +150,7 @@
                                 <th style="font-size: 15px;">Date</th>
                                 <th style="font-size: 15px;">Total Transactions</th>
                                 <th style="font-size: 15px;">Bank Transfer</th>
-                                <th style="font-size: 15px;">  Paypal</th>
+                                <th style="font-size: 15px;"> Paypal</th>
                                 <th style="font-size: 15px;">Apple Pay</th>
                                 <th style="font-size: 15px;">Google Pay</th>
                                 <th style="font-size: 15px;">Total€</th>
@@ -157,7 +160,8 @@
                             <tr>
                                 <td style="font-size: 15px;">01</td>
                                 <td style="font-size: 15px ">Date</td>
-                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome" role="button">10</a></td>
+                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome"
+                                        role="button">10</a></td>
                                 <td style="font-size: 15px ">Bank Transfer</td>
                                 <td style="font-size: 15px ">Paypal</td>
                                 <td style="font-size: 15px ">Apple Pay</td>
@@ -187,7 +191,8 @@
                             <tr>
                                 <td style="font-size: 15px;">01</td>
                                 <td style="font-size: 15px;">Date</td>
-                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#monthlyIncome" role="button">10</a></td>
+                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#monthlyIncome"
+                                        role="button">10</a></td>
                                 <td style="font-size: 15px ">Bank Transfer</td>
                                 <td style="font-size: 15px ">Paypal</td>
                                 <td style="font-size: 15px ">Apple Pay</td>
@@ -217,7 +222,8 @@
                             <tr>
                                 <td style="font-size: 15px;">01</td>
                                 <td style="font-size: 15px;">Date</td>
-                                <td style="font-size: 15px;"><a data-bs-toggle="modal" href="#yearlyIncome" role="button">10</a></td>
+                                <td style="font-size: 15px;"><a data-bs-toggle="modal" href="#yearlyIncome"
+                                        role="button">10</a></td>
                                 <td style="font-size: 15px;">Bank Transfer</td>
                                 <td style="font-size: 15px;">Paypal</td>
                                 <td style="font-size: 15px;">Apple Pay</td>
@@ -237,113 +243,288 @@
     <div class="modal fade" id="dailyIncome" aria-hidden="true" aria-labelledby="dailyIncomeLabel" tabindex="-1">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title" id="dailyIncomeLabel">
-                        <h5 class="m-0" style="font-size: 22px ">Transaction List</h5>
-                        <p class="m-0"style="font-size: 22px ">DD.MM. YYYY - Total Transkations: 15</p>
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="m-0">
+                            <strong style="font-size: 25px;">Daily Income</strong><br>
+                             
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="position: absolute; top: 15px; right: 20px;"></button>
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="row">
+                                <!-- Date Input -->
+                                <div class="col-auto" style="border-radius: 10px; position: relative;">
+                                    <input type="text" class="form-control form-control-sm datepicker"
+                                        placeholder="Select Date" name="duration" id="datepicker"
+                                        aria-label="Datepicker" autocomplete="off"
+                                        style="padding-right: 40px; height: 32px;" />
+
+                                    <button type="button" onclick="$('.datepicker').daterangepicker('show')"
+                                        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
+                                    </button>
+                                </div>
+
+                                <!-- Sort by Service Dropdown -->
+                                <div class="col-auto d-flex align-items-center ms-3">
+                                    <select id="filterService" class="form-select form-select-sm" style="height: 32px;">
+                                        <option selected>Sort by Service</option>
+                                        <option value="account">Account</option>
+                                        <option value="music">Music</option>
+                                        <option value="channels">Channels</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!-- Search Button -->
+                            <div class="d-flex align-items-center ms-3">
+                                <input type="text" class="form-control form-control-sm" placeholder="Search"
+                                    style="height: 32px;">
+                            </div>
+
+                            <!-- Export Dropdown -->
+                            <div class="d-flex align-items-center ms-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                                        id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Export
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+                                        <li><a class="dropdown-item" href="#" id="exportPDF"><img
+                                                    src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportCSV"><img
+                                                    src="{{ asset('assets/img/file-csv.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportPrint"><img
+                                                    src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportExcel"><img
+                                                    src="{{ asset('assets/img/file-excel.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive text-nowrap">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="font-size: 20px ">#</th>
-                                    <th style="font-size: 20px ">Order</th>
-                                    <th style="font-size: 20px ">Date & Time</th>
-                                    <th style="font-size: 20px ">About User</th>
-                                    <th style="font-size: 20px ">Service Type</th>
-                                    <th style="font-size: 20px ">Payment Type</th>
-                                    <th style="font-size: 20px ">Total Paid</th>
-                                    <th style="font-size: 20px ">Options</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td>01</td>
-                                    <td>Order ID</td>
-                                    <td class="line-height-1">
-                                        <p class="m-0"><strong>DD.MM.YYYY</strong></p>
-                                        <small>HH:MM</small>
-                                    </td>
-                                    <td class="line-height-1 user-area">
-                                        <div class="d-flex">
-                                            <img class="user-avatar" src="{{ asset('images/user-clips-artist.png') }}"
-                                                alt="">
-                                            <div>
-                                                <h5 class="m-0"><strong>Username</strong></h5>
-                                                <div class="d-flex">
-                                                    <img src="{{ asset('images/kurdistan-flag-sm.png') }}" alt="">
-                                                    <span>Rojava . Qamishlo</span>
-                                                    <img src="{{ asset('images/germany-flag-sm.png') }}" alt="">
-                                                    <span>Hannover</span>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: 15px;">#</th>
+                                        <th style="font-size: 15px;">Order</th>
+                                        <th style="font-size: 15px;">Date & Time</th>
+                                        <th style="font-size: 15px;">About User</th>
+                                        <th style="font-size: 15px;">Service Type</th>
+                                        <th style="font-size: 15px;">Payment Type</th>
+                                        <th style="font-size: 15px;">Total Paid</th>
+                                        <th style="font-size: 15px;">Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    <tr>
+                                        <td>01</td>
+                                        <td>Order ID</td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>DD.MM.YYYY</strong></p>
+                                            <small>HH:MM</small>
+                                        </td>
+                                        <td class="line-height-1 user-area">
+                                            <div class="d-flex">
+                                                <img class="user-avatar" src="{{ asset('images/user-clips-artist.png') }}"
+                                                    alt="">
+                                                <div>
+                                                    <h5 class="m-0"><strong>Username</strong></h5>
+                                                    <div class="d-flex">
+                                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}"
+                                                            alt="">
+                                                        <span>Rojava . Qamishlo</span>
+                                                        <img src="{{ asset('images/germany-flag-sm.png') }}"
+                                                            alt="">
+                                                        <span>Hannover</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="line-height-1">
-                                        <p class="m-0"><strong>Upgrades</strong></p>
-                                        <small>Educated</small>
-                                    </td>
-                                    <td class="line-height-1">
-                                        <p class="m-0"><strong>Paypal</strong></p>
-                                        <small>Transaction ID</small>
-                                    </td>
-                                    <td class="line-height-1">
-                                        <p class="m-0"><strong>15,00€</strong></p>
-                                        <small>-0% Discount</small>
-                                    </td>
-                                    <td><a href="javascript:void(0)"><img class="w-80"
-                                                src="{{ asset('assets/svg/eye.svg') }}" alt="view"></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>Upgrades</strong></p>
+                                            <small>Educated</small>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>Bank Transfer</strong></p>
+                                            <small>Transaction ID</small>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>15,00€</strong></p>
+                                            <small>-0% Discount</small>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><a class="text-body"
+                                                    data-bs-placement="top" aria-label="Preview Invoice"
+                                                    data-bs-toggle="modal" data-bs-target="#sub-categories"
+                                                    data-bs-offset="0,4" href="javascript:void(0)" data-bs-html="true"
+                                                    data-bs-original-title="Edit"><img
+                                                        src="{{ asset('assets/svg/eye.svg') }}" alt=""></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    {{-- monthly income --}}
     <div class="modal fade" id="monthlyIncome" aria-hidden="true" aria-labelledby="monthlyIncomeLabel" tabindex="-1">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title" id="monthlyIncomeLabel">
-                        <h5 class="m-0">Monthly Income</h5>
-                        <p class="m-0">MM. YYYY - Total Transkations: 15</p>
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="m-0">
+                            <strong style="font-size: 25px;">Monthly Income</strong><br>
+                             
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="position: absolute; top: 15px; right: 20px;"></button>
+                        <div class="d-flex align-items-center">
+
+                            <div class="row">
+                                <!-- Date Input -->
+                                <div class="col-auto" style="border-radius: 10px; position: relative;">
+                                    <input type="text" class="form-control form-control-sm datepicker"
+                                        placeholder="Select Date" name="duration" id="datepicker"
+                                        aria-label="Datepicker" autocomplete="off"
+                                        style="padding-right: 40px; height: 32px;" />
+
+                                    <button type="button" onclick="$('.datepicker').daterangepicker('show')"
+                                        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
+                                    </button>
+                                </div>
+
+                                <!-- Sort by Service Dropdown -->
+                                <div class="col-auto d-flex align-items-center ms-3">
+                                    <select id="filterService" class="form-select form-select-sm" style="height: 32px;">
+                                        <option selected>Sort by Service</option>
+                                        <option value="account">Account</option>
+                                        <option value="music">Music</option>
+                                        <option value="channels">Channels</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!-- Search Button -->
+                            <div class="d-flex align-items-center ms-3">
+                                <input type="text" class="form-control form-control-sm" placeholder="Search"
+                                    style="height: 32px;">
+                            </div>
+
+                            <!-- Export Dropdown -->
+                            <div class="d-flex align-items-center ms-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                                        id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Export
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+                                        <li><a class="dropdown-item" href="#" id="exportPDF"><img
+                                                    src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportCSV"><img
+                                                    src="{{ asset('assets/img/file-csv.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportPrint"><img
+                                                    src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportExcel"><img
+                                                    src="{{ asset('assets/img/file-excel.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive text-nowrap">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="font-size: 20px ">#</th>
-                                    <th style="font-size: 20px ">Date</th>
-                                    <th style="font-size: 20px ">Total Transactions</th>
-                                    <th style="font-size: 20px ">Bank Transfer</th>
-                                    <th style="font-size: 20px ">Paypal</th>
-                                    <th style="font-size: 20px ">Apple Pay</th>
-                                    <th style="font-size: 20px ">Google Pay</th>
-                                    <th style="font-size: 20px ">Total€</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td>01</td>
-                                    <td>Date</td>
-                                    <td><a data-bs-toggle="modal" href="#monthlyIncome2" role="button">10</a></td>
-                                    <td>Bank Transfer</td>
-                                    <td>Paypal</td>
-                                    <td>Apple Pay</td>
-                                    <td>Google Pay</td>
-                                    <td>Total€</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: 15px;">#</th>
+                                        <th style="font-size: 15px;">Order</th>
+                                        <th style="font-size: 15px;">Date & Time</th>
+                                        <th style="font-size: 15px;">About User</th>
+                                        <th style="font-size: 15px;">Service Type</th>
+                                        <th style="font-size: 15px;">Payment Type</th>
+                                        <th style="font-size: 15px;">Total Paid</th>
+                                        <th style="font-size: 15px;">Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    <tr>
+                                        <td>01</td>
+                                        <td>Order ID</td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>DD.MM.YYYY</strong></p>
+                                            <small>HH:MM</small>
+                                        </td>
+                                        <td class="line-height-1 user-area">
+                                            <div class="d-flex">
+                                                <img class="user-avatar"
+                                                    src="{{ asset('images/user-clips-artist.png') }}" alt="">
+                                                <div>
+                                                    <h5 class="m-0"><strong>Username</strong></h5>
+                                                    <div class="d-flex">
+                                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}"
+                                                            alt="">
+                                                        <span>Rojava . Qamishlo</span>
+                                                        <img src="{{ asset('images/germany-flag-sm.png') }}"
+                                                            alt="">
+                                                        <span>Hannover</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>Upgrades</strong></p>
+                                            <small>Educated</small>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>Bank Transfer</strong></p>
+                                            <small>Transaction ID</small>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>15,00€</strong></p>
+                                            <small>-0% Discount</small>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><a class="text-body"
+                                                    data-bs-placement="top" aria-label="Preview Invoice"
+                                                    data-bs-toggle="modal" data-bs-target="#sub-categories"
+                                                    data-bs-offset="0,4" href="javascript:void(0)" data-bs-html="true"
+                                                    data-bs-original-title="Edit"><img
+                                                        src="{{ asset('assets/svg/eye.svg') }}" alt=""></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -419,52 +600,151 @@
         </div>
     </div>
 
-
+    {{-- yearly income --}}
     <div class="modal fade" id="yearlyIncome" aria-hidden="true" aria-labelledby="yearlyIncomeLabel" tabindex="-1">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title" id="yearlyIncomeLabel">
-                        <h5 class="m-0">Yearly Income</h5>
-                        <p class="m-0">YYYY - Total Transkations: 15</p>
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="m-0">
+                            <strong style="font-size: 25px;">Yearly Income</strong><br>
+                            
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="position: absolute; top: 15px; right: 20px;"></button>
+                        <div class="d-flex align-items-center">
+
+                            <div class="row">
+                                <!-- Date Input -->
+                                <div class="col-auto" style="border-radius: 10px; position: relative;">
+                                    <input type="text" class="form-control form-control-sm datepicker"
+                                        placeholder="Select Date" name="duration" id="datepicker"
+                                        aria-label="Datepicker" autocomplete="off"
+                                        style="padding-right: 40px; height: 32px;" />
+
+                                    <button type="button" onclick="$('.datepicker').daterangepicker('show')"
+                                        style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); border: none; background: transparent; padding: 0; margin: 0; cursor: pointer;">
+                                    </button>
+                                </div>
+
+                                <!-- Sort by Service Dropdown -->
+                                <div class="col-auto d-flex align-items-center ms-3">
+                                    <select id="filterService" class="form-select form-select-sm" style="height: 32px;">
+                                        <option selected>Sort by Service</option>
+                                        <option value="account">Account</option>
+                                        <option value="music">Music</option>
+                                        <option value="channels">Channels</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!-- Search Button -->
+                            <div class="d-flex align-items-center ms-3">
+                                <input type="text" class="form-control form-control-sm" placeholder="Search"
+                                    style="height: 32px;">
+                            </div>
+
+                            <!-- Export Dropdown -->
+                            <div class="d-flex align-items-center ms-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                                        id="dropdownExport" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Export
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownExport">
+                                        <li><a class="dropdown-item" href="#" id="exportPDF"><img
+                                                    src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="PDF"> PDF</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportCSV"><img
+                                                    src="{{ asset('assets/img/file-csv.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="CSV"> CSV</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportPrint"><img
+                                                    src="{{ asset('assets/img/print.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="Print"> Print</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportExcel"><img
+                                                    src="{{ asset('assets/img/file-excel.svg') }}" class="me-1"
+                                                    style="width: 20px; height: 20px;" alt="Excel"> Excel</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive text-nowrap">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Date</th>
-                                    <th>Total Transactions</th>
-                                    <th>Bank Transfer</th>
-                                    <th>Paypal</th>
-                                    <th>Apple Pay</th>
-                                    <th>Google Pay</th>
-                                    <th>Total€</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td>01</td>
-                                    <td>Date</td>
-                                    <td><a data-bs-toggle="modal" href="#yearlyIncome2" role="button">10</a></td>
-                                    <td>Bank Transfer</td>
-                                    <td>Paypal</td>
-                                    <td>Apple Pay</td>
-                                    <td>Google Pay</td>
-                                    <td>Total€</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: 15px;">#</th>
+                                        <th style="font-size: 15px;">Order</th>
+                                        <th style="font-size: 15px;">Date & Time</th>
+                                        <th style="font-size: 15px;">About User</th>
+                                        <th style="font-size: 15px;">Service Type</th>
+                                        <th style="font-size: 15px;">Payment Type</th>
+                                        <th style="font-size: 15px;">Total Paid</th>
+                                        <th style="font-size: 15px;">Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    <tr>
+                                        <td>01</td>
+                                        <td>Order ID</td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>DD.MM.YYYY</strong></p>
+                                            <small>HH:MM</small>
+                                        </td>
+                                        <td class="line-height-1 user-area">
+                                            <div class="d-flex">
+                                                <img class="user-avatar"
+                                                    src="{{ asset('images/user-clips-artist.png') }}" alt="">
+                                                <div>
+                                                    <h5 class="m-0"><strong>Username</strong></h5>
+                                                    <div class="d-flex">
+                                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}"
+                                                            alt="">
+                                                        <span>Rojava . Qamishlo</span>
+                                                        <img src="{{ asset('images/germany-flag-sm.png') }}"
+                                                            alt="">
+                                                        <span>Hannover</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>Upgrades</strong></p>
+                                            <small>Educated</small>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>Bank Transfer</strong></p>
+                                            <small>Transaction ID</small>
+                                        </td>
+                                        <td class="line-height-1">
+                                            <p class="m-0"><strong>15,00€</strong></p>
+                                            <small>-0% Discount</small>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><a class="text-body"
+                                                    data-bs-placement="top" aria-label="Preview Invoice"
+                                                    data-bs-toggle="modal" data-bs-target="#sub-categories"
+                                                    data-bs-offset="0,4" href="javascript:void(0)" data-bs-html="true"
+                                                    data-bs-original-title="Edit"><img
+                                                        src="{{ asset('assets/svg/eye.svg') }}" alt=""></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="yearlyIncome2" aria-hidden="true" aria-labelledby="yearlyIncomeLabel2"
-        tabindex="-1">
+    <div class="modal fade" id="yearlyIncome2" aria-hidden="true" aria-labelledby="yearlyIncomeLabel2" tabindex="-1">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -638,6 +918,44 @@
             type: 'bar',
             data: data,
             options: options
+        });
+    </script>
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        // Initialize Flatpickr on the start date and end date input fields
+        flatpickr("#startDate", {
+            dateFormat: "Y-m-d", // Specify the date format
+            minDate: "today", // Optional: disable past dates
+            maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+            allowInput: true // Allows users to type in the date
+        });
+
+        flatpickr("#endDate", {
+            dateFormat: "Y-m-d", // Specify the date format
+            minDate: "today", // Optional: disable past dates
+            maxDate: new Date().fp_incr(365), // Optional: limit to 1 year in the future
+            allowInput: true // Allows users to type in the date
+        });
+
+        // Handle "Sort by Date" dropdown click
+        $(document).ready(function() {
+            $('#datepicker').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false, // prevent default fill
+                locale: {
+                    cancelLabel: 'Clear'
+                }
+            });
+
+            $('#datepicker').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('YYYY-MM-DD'));
+            });
+
+            // Automatically open on focus
+            $('#datepicker').on('focus', function() {
+                $(this).daterangepicker('show');
+            });
         });
     </script>
 @endsection
