@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                            height: 433px !important; */
+                                                                                                                                        height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -631,7 +631,8 @@
 
                                     <!-- Left Column: Video -->
                                     <div style="flex: -1;">
-                                        <div id="lottie-animation-popup-{{ $clip->id }}" style="height: auto;width: 350px;">
+                                        <div id="lottie-animation-popup-{{ $clip->id }}"
+                                            style="height: auto;width: 350px;">
                                         </div>
                                     </div>
                                 </div>
@@ -654,75 +655,83 @@
                 <div id="main-feed" class="container main-feed">
                     <div class="row g-4">
                         @foreach ($clips as $clip)
-                            @if ($clip->video !== null && $clip->video !== 'undefined' && !empty($clip->video))
-                                <div class="col-md-2">
-                                    <div class="post-image text-white">
-                                        <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                            data-fancybox data-src="#video-popup" href="javascript:;"
-                                            data-thumb="{{ asset('storage/' . $clip->thumbnail) }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
-                                            data-id="{{ $clip->id }}"
-                                            data-demo-href="{{ asset('storage/' . $clip->video) }}"
-                                            data-user_id="{{ $clip->user_id }}"
-                                            data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}"
-                                            data-user_image="{{ $clip->user ? (!empty($clip->user->image) ? asset('storage/' . $clip->user->image) : asset('images/user-clips-report-user.png')) : asset('images/user-clips-report-user.png') }}"
-                                            data-user_level="{{ $clip->user->level ?? 0 }}"
-                                            style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                            <!-- Main wrap -->
-                                            <div class="content-wrap">
-                                                <div class="mt-2 mb-0">
-                                                    <div
-                                                        style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                                        <div style="display:flex;align-items:center;width:34%;height:100%">
-                                                        </div>
+                            @php
+                                $userImage =
+                                    $clip->user && !empty($clip->user->image)
+                                        ? (\Illuminate\Support\Str::startsWith($clip->user->image, 'https://')
+                                            ? $clip->user->image
+                                            : asset('storage/' . $clip->user->image))
+                                        : asset('images/user-clips-report-user.png');
+                            @endphp
 
-                                                        <div
-                                                            style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                            <div style="display: flex">
-                                                                <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                                    style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                                <h6 class="ml-2 text-white">Artist Name</h6>
-                                                            </div>
-                                                            <div style="display: flex;margin-top:-6px">
-                                                                <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                                    style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                                <p style="font-size: 9px" class="ml-2 text-white">Rojava
-                                                                </p>
-                                                            </div>
-                                                        </div>
-
+                            <div class="col-md-2">
+                                <div class="post-image text-white">
+                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                        data-fancybox data-src="#video-popup" href="javascript:;"
+                                        data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
+                                        data-json="{{ $clip->template ? asset('storage/' . $clip->template->json_paths) : 'null' }}"
+                                        data-id="{{ $clip->id }}"
+                                        data-demo-href="{{ asset('storage/' . $clip->clip) }}"
+                                        data-user_id="{{ $clip->user_id }}"
+                                        data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}"
+                                        data-user_image="{{ $userImage }}"
+                                        data-user_level="{{ $clip->user->level ?? 0 }}" data-text="{{ $clip->text }}"
+                                        data-emoji="{{ asset('emojis/' . $clip->emoji . '.gif') }}"
+                                        data-text_properties="{{ $clip->text_properties }}"
+                                        style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
+                                        <!-- Main wrap -->
+                                        <div class="content-wrap">
+                                            <div class="mt-2 mb-0">
+                                                <div
+                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
+                                                    <div style="display:flex;align-items:center;width:34%;height:100%">
                                                     </div>
+
+                                                    <div
+                                                        style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
+                                                        <div style="display: flex">
+                                                            <img src="{{ asset('images/user-clips-artist.png') }}"
+                                                                style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
+                                                            <h6 class="ml-2 text-white">{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}</h6>
+                                                        </div>
+                                                        <div style="display: flex;margin-top:-6px">
+                                                            <img src="{{ asset('images/user-clips-flag.png') }}"
+                                                                style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
+                                                            <p style="font-size: 9px" class="ml-2 text-white">Rojava
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <!-- Post body -->
-                                                <div class="card-body p-0">
-                                                    <!-- /Post body -->
-                                                    <div class="mt-2 mb-0"
-                                                        style="top: 250px;position: relative;bottom: auto;">
+                                            </div>
+                                            <!-- Post body -->
+                                            <div class="card-body p-0">
+                                                <!-- /Post body -->
+                                                <div class="mt-2 mb-0"
+                                                    style="top: 250px;position: relative;bottom: auto;">
+                                                    <div
+                                                        style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
                                                         <div
-                                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                            <div
-                                                                style="display:flex;align-items:center;width:100%;height:100%">
+                                                            style="display:flex;align-items:center;width:100%;height:100%">
 
-
-                                                                <div class="text-white"
-                                                                    style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                                    <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                                        style="width:100%;height:100%;object-fit:cover">
-                                                                    <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                                        style="width:100%;height:100%;object-fit:cover">
-                                                                    <span
-                                                                        style="font-weight:400;font-family:Genos">0</span>
-                                                                </div>
-                                                            </div>
 
                                                             <div class="text-white"
                                                                 style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                                <i class="fas fa-play"></i>
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover">
+                                                                <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                    style="width:100%;height:100%;object-fit:cover">
+                                                                <span style="font-weight:400;font-family:Genos">0</span>
                                                             </div>
-
                                                         </div>
-                                                    </div>
 
+                                                        <div class="text-white"
+                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+
+                                                            <i class="fas fa-play"></i>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -730,8 +739,9 @@
                                         </div>
 
                                     </div>
+
                                 </div>
-                            @endif
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -835,10 +845,13 @@
             <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
 
                 <!-- Left Column: Video -->
-                <div style="flex: -1;">
-                    <video class="fancybox-video" controls controlsList="nodownload"
-                        poster="{{ asset('videos/user-clip.mp4') }}" style="width: 335px; height: auto;outline:none">
-                        <source src="{{ asset('videos/user-clip.mp4') }}" type="video/mp4">
+                <div style="position: relative;">
+                    <div id="lottie-text"></div>
+                    <div id="lottie-animation-video" style="height: auto;width: 350px;position: absolute;">
+                    </div>
+                    <video class="fancybox-video" controls controlsList="nodownload" poster=""
+                        style="width: 335px; height: auto;outline:none">
+                        <source src="" class="fancybox-source" type="video/mp4">
                         Your browser doesn't support video.
                     </video>
                 </div>
@@ -1060,10 +1073,62 @@
                 this.currentTime = 0; // reset to beginning
             });
 
-            // $('.fancybox-slide .fancybox-content').after(`
+            let clip = $(this).attr('data-demo-href');
+            let $video = $('.fancybox-video');
 
-        //  <h1>TEST TEST TEST</h1>
-        //  `);
+            // Update video source
+            $video.find('.fancybox-source').attr('src', clip);
+
+            // Reload and play the video
+            $video[0].load(); // Re-initialize the video with the new src
+            $video[0].play(); // Start playing
+
+            if ($(this).attr('data-json') !== 'null') {
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-animation-video'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: $(this).attr('data-json'),
+                });
+            }
+
+            const text = $(this).attr('data-text');
+            const props = JSON.parse($(this).attr('data-text_properties'));
+
+            const $container = $('<div>').css({
+                width: '100%',
+                position: 'absolute',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                marginTop: '12px',
+                padding: '0 12px'
+            });
+
+            const $imgBefore = $('<img>').attr('src', $(this).attr('data-emoji')).css({
+                width: props.fontSize + 'px',
+                height: props.fontSize + 'px'
+            });
+
+            const $textSpan = $('<span>').text(text).css({
+                // width: props.width + 'px',
+                width: '100%',
+                height: props.height + 'px',
+                color: props.color,
+                fontSize: props.fontSize + 'px',
+                fontFamily: props.fontFamily,
+                textAlign: props.textAlign,
+                textShadow: `${props.textShadowOffset.width}px ${props.textShadowOffset.height}px ${props.textShadowRadius}px ${props.textShadowColor}`
+            });
+
+            const $imgAfter = $('<img>').attr('src', $(this).attr('data-emoji')).css({
+                width: props.fontSize + 'px',
+                height: props.fontSize + 'px'
+            });
+
+            $container.append($imgBefore, $textSpan, $imgAfter);
+            $('#lottie-text').html($container);
 
             $('#user_id').val($(this).attr('data-user_id'));
             $('#user_name').text($(this).attr('data-user_name'));
