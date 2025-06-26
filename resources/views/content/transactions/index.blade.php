@@ -1240,7 +1240,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1303,7 +1303,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1366,7 +1366,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1429,7 +1429,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1494,7 +1494,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1557,7 +1557,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1620,7 +1620,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
@@ -1683,7 +1683,7 @@
 
             <div class="modal-body">
                 <div class="come_soon d-flex justify-content-center" style="padding: 25px;">
-                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 250px; height: 210px; max-width: none;">
+                    <img src="{{ asset('assets/svg/comsoon.svg') }}" alt="soon" style="width: 155px; height: 141px; max-width: none;">
                 </div>
             </div>
 
