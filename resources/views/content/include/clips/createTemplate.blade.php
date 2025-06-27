@@ -56,6 +56,7 @@
                             <div class="hidden-json"></div>
                         </div>
                     </div>
+                    <span class="text-danger" id="error-json"></span>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
@@ -72,6 +73,7 @@
                             <div class="hidden-videos"></div>
                         </div>
                     </div>
+                    <span class="text-danger" id="error-videos"></span>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="educated_price">Educated Price</label>
@@ -164,12 +166,12 @@
         `;
                 // generateThumbnails();
                 // };
-
+                $('#error-json').text('');
             },
 
             removedfile: function(file) {
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector(
-                    '.hidden-videos');
+                    '.hidden-json');
 
                 // ✅ Select all matching inputs with the same data-path
                 const hiddenInputs = hiddenInputsContainer.querySelectorAll(
@@ -276,6 +278,7 @@
                         <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
                     `;
                     generateThumbnails();
+                    $('#error-videos').text('');
                 };
 
             },
@@ -316,6 +319,26 @@
         });
 
     });
+
+
+    function submitForm() {
+        const templateId = $('#template_id').val();
+
+        // If template_id has a value, submit form immediately
+        // if (templateId !== '') {
+        //     $('#createForm').submit();
+        //     return;
+        // }
+        if ($('.hidden-videos').children().length === 0) {
+            $('#error-videos').text('Please select a Video');
+        } else if ($('.hidden-json').children().length === 0) {
+            $('#error-json').text('Please select a Json');
+        } else {
+            $('#createForm').submit();
+        }
+    };
+
+
 
     function generateThumbnails() {
         let videoPath = $('#video_path').val();
