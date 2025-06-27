@@ -1349,8 +1349,13 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                    <a href="{{route('zarok.stories')}}" class="menu-link">
                         <div>Add Stories</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{route('zarok.videos')}}" class="menu-link">
+                        <div>Add Videos</div>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -1361,11 +1366,6 @@
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link">
                         <div>Add Series</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
-                        <div>Add Videos</div>
                     </a>
                 </li>
             </ul>
@@ -1443,7 +1443,7 @@
                 <div>Create Bills</div>
             </a>
         </li>
-        
+
 
        <li class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
 

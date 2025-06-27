@@ -239,7 +239,10 @@ Route::middleware('check.role:Super Admin')->group(function () {
 //TV Section
 
 Route::get('zarok-videos', [TVController::class, 'zarokVideos'])->name('zarok.videos');
+Route::post('zarok-videos', [TVController::class, 'zarokVideosStore'])->name('zarok.videosStore');
 
+Route::get('zarok-stories', [TVController::class, 'zarokStories'])->name('zarok.stories');
+Route::post('zarok-stories', [TVController::class, 'zarokStoriesStore'])->name('zarok.storiesStore');
 
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
 Route::get('/admin/profile/security', [AdminProfileController::class, 'security'])->name('admin_profile.security');

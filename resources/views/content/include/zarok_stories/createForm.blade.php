@@ -1,4 +1,4 @@
-<form id="createvideoForm" method="POST" action="{{ route('zarok.videosStore') }}" enctype="multipart/form-data">
+<form id="createvideoForm" method="POST" action="{{ route('zarok.storiesStore') }}" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="video_id">
     <input type="hidden" name="thumbnail" id="thumbnail">
@@ -92,7 +92,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             sending: function(file, xhr, formData) {
-                formData.append('folder', 'zarok-videos');
+                formData.append('folder', 'zarok-stories');
             },
             success: function(file, response) {
                 if (this.files.length > 1) {
