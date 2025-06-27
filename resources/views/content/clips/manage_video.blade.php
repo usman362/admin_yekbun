@@ -859,7 +859,7 @@
             </div>
         </div>
 
-        <x-modal id="createClipsTemplateModal" title="Upload Layout" saveBtnText="Create" saveBtnType="submit"
+        <x-modal id="createClipsTemplateModal" title="Upload Layout" onSaveBtnClick="submitForm()" saveBtnText="Create" saveBtnType="button"
             saveBtnForm="createForm" size="md">
             @include('content.include.clips.createTemplate')
         </x-modal>
@@ -1082,11 +1082,15 @@
             $('#title').val(title);
             $('#educated_price').val(educated_price);
             $('#cultivated_price').val(cultivated_price);
+            $('#error-videos').text('');
+            $('#error-json').text('');
         })
 
         $('.create-template').click(function() {
             $('#template_id').val('');
             $('#title').val('');
+            $('#error-videos').text('');
+            $('#error-json').text('');
             $('#educated_price').val('free');
             $('#cultivated_price').val('free');
         })
