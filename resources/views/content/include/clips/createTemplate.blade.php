@@ -325,10 +325,10 @@
         const templateId = $('#template_id').val();
 
         // If template_id has a value, submit form immediately
-        if (templateId !== '') {
-            $('#createForm').submit();
-            return;
-        }
+        // if (templateId !== '') {
+        //     $('#createForm').submit();
+        //     return;
+        // }
         if ($('.hidden-videos').children().length === 0) {
             $('#error-videos').text('Please select a Video');
         } else if ($('.hidden-json').children().length === 0) {
