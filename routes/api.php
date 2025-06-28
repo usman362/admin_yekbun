@@ -56,6 +56,7 @@ use App\Http\Controllers\Api\ClipsController;
 use App\Http\Controllers\Api\EmojiFeedController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\FeedsController;
+use App\Http\Controllers\Api\PayPalController;
 use App\Http\Controllers\Api\ReportCommentsController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
@@ -440,6 +441,9 @@ Route::post('charge', [PaymentController::class, 'charge']);
 Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 Route::get('/payment-details/{payment_id}', [PaymentController::class, 'payment_details']);
+Route::post('/paypal/create-order', [PayPalController::class, 'createOrder']);
+Route::post('/paypal/capture-order', [PayPalController::class, 'captureOrder']);
+
 
 //Payment List
 Route::get('get-payment-list',[PaymentController::class,'paymentList']);
