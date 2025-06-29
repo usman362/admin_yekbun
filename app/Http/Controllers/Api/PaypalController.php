@@ -3,19 +3,43 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\PayPalService;
 use Illuminate\Http\Request;
+use App\Services\PayPalService;
 
-class PayPalController extends Controller {
-    public function createOrder(Request $request) {
-        $paypal = new PayPalService();
-        $order = $paypal->createOrder($request->amount);
-        return response()->json($order);
+class PayPalController extends Controller
+{
+    protected $paypal;
+
+    public function __construct(PayPalService $paypal)
+    {
+        $this->paypal = $paypal;
     }
 
-    public function captureOrder(Request $request) {
-        $paypal = new PayPalService();
-        $result = $paypal->captureOrder($request->orderId);
-        return response()->json($result);
+    public function createOrder(Request $request)
+    {
+        $request->validate(['amount' => 'required|numeric|min:0.1']);
+
+        $order = $this->paypal->createOrder($request->amount);
+        $approvalLink = collect($order->links)->firstWhere('rel', 'approve')->href;
+
+        return response()->json([
+            'order_id' => $order->id,
+            'approval_url' => $approvalLink,
+        ]);
+    }
+
+    public function captureOrder(Request $request)
+    {
+        $request->validate(['order_id' => 'required|string']);
+
+        $result = $this->paypal->captureOrder($request->order_id);
+
+        // Save transaction in DB
+        // Payment::create([...]);
+
+        return response()->json([
+            'status' => 'success',
+            'payment_details' => $result->result,
+        ]);
     }
 }

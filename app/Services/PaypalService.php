@@ -2,7 +2,11 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Core\ProductionEnvironment;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
 
 class PayPalService
 {
@@ -10,43 +14,40 @@ class PayPalService
 
     public function __construct()
     {
-        $this->client = new Client([
-            'base_uri' => config('paypal.mode') === 'live'
-                ? 'https://api-m.paypal.com'
-                : 'https://api-m.sandbox.paypal.com',
-        ]);
+        $env = config('paypal.settings.mode') === 'live'
+            ? new ProductionEnvironment(config('paypal.client_id'), config('paypal.secret'))
+            : new SandboxEnvironment(config('paypal.client_id'), config('paypal.secret'));
+
+        $this->client = new PayPalHttpClient($env);
     }
 
-    private function getAccessToken()
+    public function createOrder($amount, $currency = 'EUR')
     {
-        $response = $this->client->post('/v1/oauth2/token', [
-            'auth' => [config('paypal.client_id'), config('paypal.secret')],
-            'form_params' => ['grant_type' => 'client_credentials'],
-        ]);
-        return json_decode($response->getBody())->access_token;
-    }
-
-    public function createOrder($amount)
-    {
-        $token = $this->getAccessToken();
-        $response = $this->client->post('/v2/checkout/orders', [
-            'headers' => ['Authorization' => "Bearer $token", 'Content-Type' => 'application/json'],
-            'json' => [
-                'intent' => 'CAPTURE',
-                'purchase_units' => [[
-                    'amount' => ['currency_code' => 'USD', 'value' => $amount]
-                ]],
+        $request = new OrdersCreateRequest();
+        $request->prefer('return=representation');
+        $request->body = [
+            'intent' => 'CAPTURE',
+            'purchase_units' => [[
+                'amount' => [
+                    'currency_code' => $currency,
+                    'value' => number_format($amount, 2, '.', ''),
+                ]
+            ]],
+            'application_context' => [
+                'cancel_url' => url('/api/paypal/cancel'),
+                'return_url' => url('/api/paypal/success'),
             ]
-        ]);
-        return json_decode($response->getBody());
+        ];
+
+        $response = $this->client->execute($request);
+        dd($this->client);
+        return $response->result;
     }
 
     public function captureOrder($orderId)
     {
-        $token = $this->getAccessToken();
-        $response = $this->client->post("/v2/checkout/orders/$orderId/capture", [
-            'headers' => ['Authorization' => "Bearer $token"],
-        ]);
-        return json_decode($response->getBody());
+        $request = new OrdersCaptureRequest($orderId);
+        $request->prefer('return=representation');
+        return $this->client->execute($request);
     }
 }

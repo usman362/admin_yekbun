@@ -441,8 +441,11 @@ Route::post('charge', [PaymentController::class, 'charge']);
 Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 Route::get('/payment-details/{payment_id}', [PaymentController::class, 'payment_details']);
-Route::post('/paypal/create-order', [PayPalController::class, 'createOrder']);
-Route::post('/paypal/capture-order', [PayPalController::class, 'captureOrder']);
+Route::prefix('paypal')->group(function () {
+    Route::post('create-order', [PayPalController::class, 'createOrder']);
+    Route::post('capture-order', [PayPalController::class, 'captureOrder']);
+});
+
 
 
 //Payment List
