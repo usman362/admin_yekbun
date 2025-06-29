@@ -859,8 +859,8 @@
             </div>
         </div>
 
-        <x-modal id="createClipsTemplateModal" title="Upload Layout" onSaveBtnClick="submitForm()" saveBtnText="Create" saveBtnType="button"
-            saveBtnForm="createForm" size="md">
+        <x-modal id="createClipsTemplateModal" title="Upload Layout" saveBtnClass="btn btn-primary submit-clip-template"
+            saveBtnForm="createForm" onSaveBtnClick="submitForm()" saveBtnText="Create" saveBtnType="button" size="md">
             @include('content.include.clips.createTemplate')
         </x-modal>
 
@@ -1163,10 +1163,13 @@
             $('#user_image').attr('src', $(this).attr('data-user_image'));
         })
     </script>
+
+
     <script>
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
         }
+        $('.submit-clip-template').attr('disabled','true');
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 

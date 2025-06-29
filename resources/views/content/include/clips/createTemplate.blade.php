@@ -167,6 +167,10 @@
                 // generateThumbnails();
                 // };
                 $('#error-json').text('');
+
+                if ($('.hidden-videos').children().length !== 0) {
+                    $('.submit-clip-template').attr('disabled', false);
+                }
             },
 
             removedfile: function(file) {
@@ -201,7 +205,7 @@
                 $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
                 $('#thumbnail-history').css('display', 'none');
                 $('#generated-thumbnails').css('display', 'none');
-
+                $('.submit-clip-template').attr('disabled', true);
                 return this._updateMaxFilesReachedClass();
 
             }
@@ -310,8 +314,9 @@
                         path: file.previewElement.dataset.path
                     }
                 });
-
+                $('#thumbnail').val('');
                 $('#error-thumbnail').text("");
+                $('.submit-clip-template').attr('disabled', true);
                 return this._updateMaxFilesReachedClass();
 
             }
@@ -367,7 +372,9 @@
                 let newSrc = response.thumbnail[0] + "?t=" + new Date().getTime();
                 $("#thumbnail").val(newSrc);
                 $('#dz-thumbnail').attr('src', newSrc);
-
+                if ($('.hidden-json').children().length !== 0) {
+                    $('.submit-clip-template').attr('disabled', false);
+                }
             },
             error: function() {
                 $('#error-thumbnail').text("Failed to generate thumbnail.");
