@@ -244,6 +244,12 @@ Route::post('zarok-videos', [TVController::class, 'zarokVideosStore'])->name('za
 Route::get('zarok-stories', [TVController::class, 'zarokStories'])->name('zarok.stories');
 Route::post('zarok-stories', [TVController::class, 'zarokStoriesStore'])->name('zarok.storiesStore');
 
+Route::get('zarok-movies', [TVController::class, 'zarokMovies'])->name('zarok.movies');
+Route::post('zarok-movies', [TVController::class, 'zarokMoviesStore'])->name('zarok.moviesStore');
+
+Route::get('zarok-series', [TVController::class, 'zarokSeries'])->name('zarok.series');
+Route::post('zarok-series', [TVController::class, 'zarokSeriesStore'])->name('zarok.seriesStore');
+
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
 Route::get('/admin/profile/security', [AdminProfileController::class, 'security'])->name('admin_profile.security');
 Route::get('/admin/profile/account', [AdminProfileController::class, 'account'])->name('admin_profile.account');
