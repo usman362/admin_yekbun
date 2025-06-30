@@ -1342,30 +1342,30 @@
             <span class="menu-header-text">Yekbun TV</span>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-tv"></i>
                 <div>Zarok TV</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                <li class="menu-item {{ Request::is('zarok-stories') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.stories') }}" class="menu-link">
                         <div>Add Stories</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                <li class="menu-item {{ Request::is('zarok-videos') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.videos') }}" class="menu-link">
+                        <div>Add Videos</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('zarok-movies') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.movies') }}" class="menu-link">
                         <div>Add Movies</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                <li class="menu-item {{ Request::is('zarok-series') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.series') }}" class="menu-link">
                         <div>Add Series</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
-                        <div>Add Videos</div>
                     </a>
                 </li>
             </ul>
@@ -1437,15 +1437,16 @@
                 <div>Subscription</div>
             </a>
         </li>
-         <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
             <a href="{{ url('/app/create_bills') }}" class="menu-link ">
                 <i class="menu-icon tf-icons bx bx-devices"></i>
                 <div>Create Bills</div>
             </a>
         </li>
-        
 
-       <li class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
+
+        <li
+            class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
 
 
 
@@ -1461,7 +1462,7 @@
                         <div>Currency & Discount</div>
                     </a>
                 </li>
-                 <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
+                <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
                     <a href="{{ url('app/edit_invoice') }}" class="menu-link">
                         <div>Edit Invoice</div>
                     </a>

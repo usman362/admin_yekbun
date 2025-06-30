@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                                                                    height: 433px !important; */
+                                                                                                                                                        height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -421,7 +421,8 @@
         .modal-body {
             overflow-y: scroll !important;
         }
-        .template-thumbnails svg{
+
+        .template-thumbnails svg {
             border-radius: 8px;
         }
     </style>
@@ -535,18 +536,19 @@
                                                             type="video/mp4">
                                                     </video>
                                                 @endif --}}
-                                                <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails" style="margin-top: -2px">
+                                                <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails"
+                                                    style="margin-top: -2px">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="mt-2 mb-0"
-                                        style="top: 0;left:5px;position: absolute;bottom: auto;width:95%">
+                                    <div class="mt-1 mb-0"
+                                        style="top: 0;left: auto;position: absolute;bottom: auto;right: 6px;">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div
-                                                    style="background-color: rgb(0 0 0 / 50%);border-radius:8px;padding: 2px 6px;">
+                                                    style="background-color: rgb(0 0 0 / 30%);border-radius:8px;padding: 0px 6px 2px 6px;font-weight:bold;width:78px;height:24px;margin-left:26px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
                                                         width="15" alt=""> <span
                                                         class="text-white">{{ $clip->educated_price == 'free' ? 'Free' : '0,99 €' }}</span>
@@ -554,7 +556,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div
-                                                    style="background-color: rgb(0 0 0 / 50%);border-radius:8px;padding: 2px 6px;">
+                                                    style="background-color: rgb(0 0 0 / 30%);border-radius:8px;padding: 0px 6px 2px 6px;font-weight:bold;width:78px;height:24px;margin-left:4px">
                                                     <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
                                                         width="15" alt=""> <span
                                                         class="text-white">{{ $clip->cultivated_price == 'free' ? 'Free' : '0,49 €' }}</span>
@@ -563,17 +565,19 @@
                                         </div>
                                     </div>
                                     <!-- /Post body -->
-                                    <div class="mt-2 mb-0" style="top: 260px;left:5px;position: absolute;bottom: auto;width:95%;background-color: rgb(0 0 0 / 50%);height:56px;border-radius:8px;">
+                                    <div
+                                        style="top: auto;left:5px;position: absolute;bottom: 0px;width:95%;background-color: rgb(0 0 0 / 35%);height:36px;border-radius:8px;">
                                         <div
                                             style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
                                             <div style="display:flex;align-items:center;width:100%;height:100%">
 
 
                                                 <div class="text-white"
-                                                    style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold">
+                                                    style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold;line-height: 0.5;margin-bottom:4px;">
                                                     <h4 class="text-white"><b>{{ substr($clip->id, 0, 5) }}</b>
                                                     </h4>
-                                                    <p>{{ $clip->created_at->format('d M Y') }}</p>
+                                                    <p style="font-weight: 500;margin-bottom:2px;">
+                                                        {{ $clip->created_at->format('d M Y') }}</p>
                                                 </div>
                                             </div>
 
@@ -581,7 +585,7 @@
                                                 style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
 
                                                 <div class="nav-item dropdown d-block"
-                                                    style="margin-top: 0;position: absolute;right: -46px;top: 6px;bottom: auto;left: 154px;">
+                                                    style="position: absolute;right:4px;top: auto;bottom: 8px;left: auto;">
                                                     <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <div class="d-flex align-items-center gap-2">
@@ -651,7 +655,7 @@
                                             <div id="lottie-animation-popup-{{ $clip->id }}"
                                                 style="height: auto;width: 350px;opacity:0;">
                                             </div>
-                                            @else
+                                        @else
                                             <div id="lottie-animation-popup-{{ $clip->id }}"
                                                 style="height: auto;width: 350px;">
                                             </div>
@@ -859,8 +863,9 @@
             </div>
         </div>
 
-        <x-modal id="createClipsTemplateModal" title="Upload Layout" onSaveBtnClick="submitForm()" saveBtnText="Create" saveBtnType="button"
-            saveBtnForm="createForm" size="md">
+        <x-modal id="createClipsTemplateModal" title="Upload Layout" saveBtnClass="btn btn-primary submit-clip-template"
+            saveBtnForm="createForm" onSaveBtnClick="submitForm()" saveBtnText="Create" saveBtnType="button"
+            size="md">
             @include('content.include.clips.createTemplate')
         </x-modal>
 
@@ -1163,10 +1168,13 @@
             $('#user_image').attr('src', $(this).attr('data-user_image'));
         })
     </script>
+
+
     <script>
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
         }
+        $('.submit-clip-template').attr('disabled', 'true');
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 

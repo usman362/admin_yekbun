@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'ZarokTV Videos')
+@section('title', 'ZarokTV Movies')
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
@@ -246,15 +246,16 @@
     <div class="d-flex justify-content-between">
         <div>
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">ZarokTV /</span> Videos
+                <span class="text-muted fw-light">ZarokTV /</span> Movies
             </h4>
         </div>
         <div class="">
 
             {{-- @can('artist.create') --}}
             <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add
-                Video
-                Clips</button>
+               a Trailer</button>
+            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Upload
+                Movie</button>
             {{-- @endcan --}}
         </div>
     </div>
@@ -370,9 +371,9 @@
     </div>
 
     {{-- Video Clips Modal --}}
-    <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
+    <x-modal id="createvideoModal" title="Create Movie" saveBtnText="Create" saveBtnType="submit"
         saveBtnForm="createvideoForm" size="md">
-        @include('content.include.zarok_videos.createForm', ['form' => 'createvideoForm'])
+        @include('content.include.zarok_movies.createForm', ['form' => 'createvideoForm'])
     </x-modal>
 
 @section('page-script')

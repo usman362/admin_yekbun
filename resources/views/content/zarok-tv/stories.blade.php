@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'ZarokTV Videos')
+@section('title', 'ZarokTV Stories')
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
@@ -246,15 +246,14 @@
     <div class="d-flex justify-content-between">
         <div>
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">ZarokTV /</span> Videos
+                <span class="text-muted fw-light">ZarokTV /</span> Stories
             </h4>
         </div>
         <div class="">
 
             {{-- @can('artist.create') --}}
             <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add
-                Video
-                Clips</button>
+                Stories</button>
             {{-- @endcan --}}
         </div>
     </div>
@@ -276,7 +275,7 @@
                             <select name="sort_by" id="sort_by" class="form-control">
                                 <option value="">Select Sort By</option>
                                 <option value="songs">Most Songs</option>
-                                <option value="videos">Most Videos</option>
+                                <option value="videos">Most Stories</option>
                                 <option value="likes">Most Likes</option>
                                 <option value="followers">Most Followers</option>
                             </select>
@@ -370,9 +369,9 @@
     </div>
 
     {{-- Video Clips Modal --}}
-    <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
+    <x-modal id="createvideoModal" title="Create Stories" saveBtnText="Create" saveBtnType="submit"
         saveBtnForm="createvideoForm" size="md">
-        @include('content.include.zarok_videos.createForm', ['form' => 'createvideoForm'])
+        @include('content.include.zarok_stories.createForm', ['form' => 'createvideoForm'])
     </x-modal>
 
 @section('page-script')

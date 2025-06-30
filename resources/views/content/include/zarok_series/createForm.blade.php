@@ -1,4 +1,4 @@
-<form id="createvideoForm" method="POST" action="{{ route('zarok.videosStore') }}" enctype="multipart/form-data">
+<form id="createvideoForm" method="POST" action="{{ route('zarok.seriesStore') }}" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="video_id">
     <input type="hidden" name="thumbnail" id="thumbnail">
