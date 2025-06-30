@@ -546,42 +546,7 @@
                                     <div class="mt-1 mb-0"
                                         style="top: 0;left: auto;position: absolute;bottom: auto;right: 6px;">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div
-                                                    style="background-color: rgb(0 0 0 / 30%);border-radius:8px;padding: 0px 6px 2px 6px;font-weight:bold;width:78px;height:24px;margin-left:26px;">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
-                                                        width="15" alt=""> <span
-                                                        class="text-white">{{ $clip->educated_price == 'free' ? 'Free' : '0,99 €' }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div
-                                                    style="background-color: rgb(0 0 0 / 30%);border-radius:8px;padding: 0px 6px 2px 6px;font-weight:bold;width:78px;height:24px;margin-left:4px">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
-                                                        width="15" alt=""> <span
-                                                        class="text-white">{{ $clip->cultivated_price == 'free' ? 'Free' : '0,49 €' }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post body -->
-                                    <div
-                                        style="top: auto;left:5px;position: absolute;bottom: 0px;width:95%;background-color: rgb(0 0 0 / 35%);height:36px;border-radius:8px;">
-                                        <div
-                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                            <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                <div class="text-white"
-                                                    style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold;line-height: 0.5;margin-bottom:4px;">
-                                                    <h4 class="text-white"><b>{{ substr($clip->id, 0, 5) }}</b>
-                                                    </h4>
-                                                    <p style="font-weight: 500;margin-bottom:2px;">
-                                                        {{ $clip->created_at->format('d M Y') }}</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="text-white"
+                                              <div class="text-white"
                                                 style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
 
                                                 <div class="nav-item dropdown d-block"
@@ -635,6 +600,27 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                             
+                                        </div>
+                                    </div>
+                                    <!-- /Post body -->
+                                    <div
+                                        style="top: auto;left:5px;position: absolute;bottom: 0px;width:95%;background-color: rgb(0 0 0 / 35%);height:36px;border-radius:8px;">
+                                        <div
+                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
+                                            <div style="display:flex;align-items:center;width:100%;height:100%">
+
+
+                                                <div class="text-white"
+                                                    style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold;line-height: 0.5;margin-bottom:4px;">
+                                                    <h4 class="text-white"><b>{{ substr($clip->id, 0, 5) }}</b>
+                                                    </h4>
+                                                    <p style="font-weight: 500;margin-bottom:2px;">
+                                                        {{ $clip->created_at->format('d M Y') }}</p>
+                                                </div>
+                                            </div>
+
+                                          
 
                                         </div>
                                     </div>
