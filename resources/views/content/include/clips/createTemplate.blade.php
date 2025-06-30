@@ -281,7 +281,8 @@
                         <input type="hidden" name="video_durations[]" id="video_duration" value="${duration}" data-path="${response.path}">
                         <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
                     `;
-                    generateThumbnails();
+                    // generateThumbnails();
+                    $('.submit-clip-template').attr('disabled', false);
                     $('#error-videos').text('');
                 };
 
