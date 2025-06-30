@@ -512,160 +512,99 @@
 
             </div>
             <div class="view-wrapper">
-                <div id="main-feed" class="container main-feed">
-                    <div class="row g-4">
-                        @foreach ($templates as $key => $clip)
-                            <div class="col-md-2">
-                                <div class="post-image text-white">
-                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
-                                        data-fancybox data-src="#template-popup-{{ $key }}" href="javascript:;"
-                                        data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
-                                        data-id="67ef066938c58e2bce0a4d72"
-                                        data-demo-href="{{ asset('storage/' . $clip->thumbnail) }}"
-                                        style="
-                                    background-color: #7f7f7f;
-                                    height:335px;width:210px;background-size:cover;">
-                                        <!-- Main wrap -->
-                                        <div class="content-wrap">
-                                            <!-- Post body -->
-                                            <div class="card-body p-0">
-                                                {{-- @if ($clip->video_paths)
-                                                    <video autoplay muted loop playsinline
-                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-                                                        <source src="{{ asset('storage/' . $clip->video_paths) }}"
-                                                            type="video/mp4">
-                                                    </video>
-                                                @endif --}}
-                                                <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails"
-                                                    style="margin-top: -2px">
-                                                </div>
-                                            </div>
+               <div id="main-feed" class="container main-feed">
+    <div class="row g-4">
+        @foreach ($templates as $key => $clip)
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 rounded-lg bg-dark text-white position-relative h-100">
+                    <!-- Thumbnail with overlay -->
+                    <a data-fancybox data-src="#template-popup-{{ $key }}" href="javascript:;" 
+                       class="d-block" 
+                       style="background-image: url('{{ asset('storage/' . $clip->thumbnail) }}');
+                              background-size: cover; background-position: center; 
+                              height: 300px; border-radius: .5rem .5rem 0 0;">
+                    </a>
+
+                    <!-- Card content -->
+                    <div class="p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <h5 class="mb-0 text-white">#{{ substr($clip->id, 0, 5) }}</h5>
+                                <small class="text-muted">{{ $clip->created_at->format('d M Y') }}</small>
+                            </div>
+                            <div class="dropdown">
+                                <a href="#" class="text-white" data-bs-toggle="dropdown">
+                                    <img src="{{ asset('images/user-clips-cog.png') }}" width="20" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end text-center" style="width: 120px;">
+                                    <span class="d-block text-muted small">Options</span>
+                                    @php
+                                        $message = 'Are you sure you want to delete this?';
+                                        if ($clip->clips->count() > 0) {
+                                            $message = 'This template contains clips. Do you want to delete it along with its clips?';
+                                        }
+                                    @endphp
+                                    <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
+                                          method="POST"
+                                          onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="d-flex justify-content-between px-2 py-1">
+                                            <a href="javascript:void(0)" 
+                                               class="edit-template" 
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#createClipsTemplateModal"
+                                               data-id="{{ $clip->id }}"
+                                               data-name="{{ $clip->title }}"
+                                               data-educated_price="{{ $clip->educated_price }}"
+                                               data-cultivated_price="{{ $clip->cultivated_price }}">
+                                                <img src="{{ asset('assets/svg/edit.svg') }}" style="height: 26px;">
+                                            </a>
+                                            <button type="submit" class="btn p-0 bg-transparent border-0">
+                                                <img src="{{ asset('assets/svg/delete.svg') }}" style="height: 26px;">
+                                            </button>
                                         </div>
-                                    </div>
-
-                                    <div class="mt-1 mb-0"
-                                        style="top: 0;left: auto;position: absolute;bottom: auto;right: 6px;">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div
-                                                    style="background-color: rgb(0 0 0 / 30%);border-radius:8px;padding: 0px 6px 2px 6px;font-weight:bold;width:78px;height:24px;margin-left:26px;">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
-                                                        width="15" alt=""> <span
-                                                        class="text-white">{{ $clip->educated_price == 'free' ? 'Free' : '0,99 €' }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div
-                                                    style="background-color: rgb(0 0 0 / 30%);border-radius:8px;padding: 0px 6px 2px 6px;font-weight:bold;width:78px;height:24px;margin-left:4px">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
-                                                        width="15" alt=""> <span
-                                                        class="text-white">{{ $clip->cultivated_price == 'free' ? 'Free' : '0,49 €' }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post body -->
-                                    <div
-                                        style="top: auto;left:5px;position: absolute;bottom: 0px;width:95%;background-color: rgb(0 0 0 / 35%);height:36px;border-radius:8px;">
-                                        <div
-                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                            <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                <div class="text-white"
-                                                    style="align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;font-weight:bold;line-height: 0.5;margin-bottom:4px;">
-                                                    <h4 class="text-white"><b>{{ substr($clip->id, 0, 5) }}</b>
-                                                    </h4>
-                                                    <p style="font-weight: 500;margin-bottom:2px;">
-                                                        {{ $clip->created_at->format('d M Y') }}</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="text-white"
-                                                style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                <div class="nav-item dropdown d-block"
-                                                    style="position: absolute;right:4px;top: auto;bottom: 8px;left: auto;">
-                                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <img src="{{ asset('images/user-clips-cog.png') }}"
-                                                                alt="">
-                                                        </div>
-                                                    </a>
-                                                    <div class="dropdown-menu text-center dropdown-menu-end"
-                                                        style="min-width: unset; width: 100px;">
-                                                        <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                                        @php
-                                                            $message = 'Are you sure you want to delete this?';
-                                                            if ($clip->clips->count() > 0) {
-                                                                $message =
-                                                                    'This template contains clips. Do you want to delete it along with its clips?';
-                                                            }
-                                                        @endphp
-                                                        <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
-                                                            onsubmit="confirmAction(event, () => event.target.submit(),'{{ $message }}')"
-                                                            method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="row ml-0" style="width:100px;">
-
-                                                                <div class="col-md-6"
-                                                                    style="border-right: 1px solid #c0c0c0">
-                                                                    <a class="dropdown-item edit-template"
-                                                                        style="padding: 0" href="javascript:void(0)"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#createClipsTemplateModal"
-                                                                        data-id="{{ $clip->id }}"
-                                                                        data-name="{{ $clip->title }}"
-                                                                        data-educated_price="{{ $clip->educated_price }}"
-                                                                        data-cultivated_price="{{ $clip->cultivated_price }}"
-                                                                        for="customRadioPrime">
-                                                                        <img class="pop_action_image" style="height: 26px"
-                                                                            src="{{ asset('assets/svg/edit.svg') }}"></a>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <button type="submit" class="dropdown-item"
-                                                                        style="padding: 0">
-                                                                        <img class="pop_action_image" style="height: 26px"
-                                                                            src="{{ asset('assets/svg/delete.svg') }}"></button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
 
-                            <div style="display: none;" id="template-popup-{{ $key }}">
-                                <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
-
-                                    <!-- Left Column: Video -->
-                                    <div style="flex: -1;">
-                                        @if ($clip->video_paths)
-                                            <video controls controlsList="nodownload"
-                                                style="position: absolute;top: 44px;left: 44px;width: 350px;height: auto;object-fit: cover;z-index: 1;border-radius: 8px;outline:none">
-                                                <source src="{{ asset('storage/' . $clip->video_paths) }}"
-                                                    type="video/mp4">
-                                            </video>
-                                            <div id="lottie-animation-popup-{{ $clip->id }}"
-                                                style="height: auto;width: 350px;opacity:0;">
-                                            </div>
-                                        @else
-                                            <div id="lottie-animation-popup-{{ $clip->id }}"
-                                                style="height: auto;width: 350px;">
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+                        <!-- Price tags -->
+                        <div class="d-flex justify-content-between">
+                            <div class="badge bg-secondary d-flex align-items-center gap-1">
+                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="15">
+                                {{ $clip->educated_price == 'free' ? 'Free' : '0,99 €' }}
                             </div>
-                        @endforeach
+                            <div class="badge bg-secondary d-flex align-items-center gap-1">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="15">
+                                {{ $clip->cultivated_price == 'free' ? 'Free' : '0,49 €' }}
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Fancybox hidden preview -->
+                <div style="display: none;" id="template-popup-{{ $key }}">
+                    <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
+                        <div>
+                            @if ($clip->video_paths)
+                                <video controls controlsList="nodownload"
+                                       style="width: 350px; height: auto; border-radius: 8px;">
+                                    <source src="{{ asset('storage/' . $clip->video_paths) }}" type="video/mp4">
+                                </video>
+                                <div id="lottie-animation-popup-{{ $clip->id }}"
+                                     style="width: 350px; opacity:0;"></div>
+                            @else
+                                <div id="lottie-animation-popup-{{ $clip->id }}" style="width: 350px;"></div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
             </div>
         </div>
 
