@@ -303,11 +303,11 @@
                                                 <div class="user-block">
                                                     <div class="user-info">
                                                         <div class="row">
-                                                            <div class="col-md-2 p-0">
+                                                            {{-- <div class="col-md-2 p-0">
                                                                 <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
                                                                     style="width: 100px !important;height:36px !important;"
                                                                     onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="col-md-10">
                                                                 <p class="m-0" title="{{ $feed->title }}">
                                                                     <b>{{ $feed->title }}</b>
@@ -350,7 +350,7 @@
                                                             </div>
                                                         @endif
                                                     </div>
-                                                    @if ($feed->is_emoji == 1)
+                                                    {{-- @if ($feed->is_emoji == 1)
                                                         <div
                                                             style="display:flex;align-items:center;gap:2px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px 16px 5px 5px;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
@@ -359,7 +359,7 @@
                                                                 style="width:100%;height:100%;object-fit:cover">
                                                             <span style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
-                                                    @endif
+                                                    @endif --}}
                                                 </div>
                                             </div>
 
