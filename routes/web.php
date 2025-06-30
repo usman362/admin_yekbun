@@ -158,8 +158,8 @@ Route::get('/test-fcm', function () {
 
 Route::get('test', function () {
 
-    foreach (App\Models\User::where('user_type', 'cultivated')->get() as $user) {
-        $user->user_type = 'cultivated';
+    foreach (App\Models\User::all() as $user) {
+        $user->gender = 'male';
         $user->save();
     }
     return 'success';
