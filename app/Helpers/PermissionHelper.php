@@ -14,7 +14,7 @@ class PermissionHelper
             2 => 'academic',
         ];
         $permissions = Setting::where('name', $userType[$level])->first();
-        dd($permissions);
+        dd($key);
         $test = $permissions['value'][$key];
 
         if ($test === true) {
