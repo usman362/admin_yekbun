@@ -304,9 +304,9 @@
                                                     <div class="user-info">
                                                         <div class="row">
                                                             <div class="col-md-2 p-0">
-                                                                <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                                {{-- <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
                                                                     style="width: 100px !important;height:36px !important;"
-                                                                    onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'">
+                                                                    onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'"> --}}
                                                             </div>
                                                             <div class="col-md-10">
                                                                 <p class="m-0" title="{{ $feed->title }}">
