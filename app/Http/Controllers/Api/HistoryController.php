@@ -22,10 +22,10 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_allow_history');
-        if ($allowRequest !== true) {
-            return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
-        }
+        // $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_allow_history');
+        // if ($allowRequest !== true) {
+        //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
+        // }
         return response()->json(['History' => History::get(), 'success' => true], 200);
     }
 

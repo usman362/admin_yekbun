@@ -196,9 +196,6 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('move-playlist-music/{id}', [MultimediaController::class, 'movePlaylist']);
     Route::delete('delete-playlist-music/{id}', [MultimediaController::class, 'deletePlaylist']);
     Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
-
-
-    Route::get('/history', [HistoryController::class, 'index']);
 });
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);
@@ -472,6 +469,7 @@ Route::get('/news-detail/{id}', [NewsController::class, 'detail']);
 Route::post('/news-search', [NewsController::class, 'search']);
 
 // History
+Route::get('/history', [HistoryController::class, 'index']);
 Route::get('/category-history/{id}', [HistoryController::class, 'categorgy_history']);
 Route::get('/history-cover', [HistoryController::class, 'cover_history']);
 Route::get('/history-category', [HistoryController::class, 'categories']);
