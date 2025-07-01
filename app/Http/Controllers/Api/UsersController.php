@@ -27,28 +27,30 @@ class UsersController extends Controller
 
     public function users_details(Request $request, $id)
     {
-        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'is_online')
+        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'is_online', 'public_image', 'friends_image', 'family_image')
             ->with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
 
-        $friend = UserFriends::where('friend_id', $user->id)->where('user_id', auth()->user()->id)->first();
+        $friend = UserFriends::where('friend_id', $user->id)->where('type', 'friends')->where('user_id', auth()->user()->id)->first();
+        $family = UserFriends::where('friend_id', $user->id)->where('type', 'family')->where('user_id', auth()->user()->id)->first();
         $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', auth()->user()->id)->first();
         $comingrequest = UserRequest::where('user_id', $user->id)->where('request_id', auth()->user()->id)->first();
-        if ($friend) {
-            $is_friend = 1;
-        } else {
-            $is_friend = 0;
+
+        $is_request = $requestfriend ? 1 : 0;
+        $is_coming = $comingrequest ? 1 : 0;
+        $is_friend = $friend ? 1 : 0;
+        $is_family = $family ? 1 : 0;
+
+        $is_image = 0;
+
+        if ($is_friend && $user->friends_image === 'true') {
+            $is_image = 1;
+        } elseif ($is_family && $user->family_image === 'true') {
+            $is_image = 1;
+        } elseif ($user->public_image === 'true') {
+            $is_image = 1;
         }
-        if ($requestfriend) {
-            $is_request = 1;
-        } else {
-            $is_request = 0;
-        }
-        if ($comingrequest) {
-            $is_coming = 1;
-        } else {
-            $is_coming = 0;
-        }
-        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_request' => $is_request, 'is_coming' => $is_coming];
+
+        $data = ['user' => $user, 'is_friend' => $is_friend, 'is_family' => $is_family, 'is_request' => $is_request, 'is_coming' => $is_coming, 'is_image' => $is_image];
         return ResponseHelper::sendResponse($data, 'User Details Fetch Successfully');
     }
 
@@ -61,7 +63,7 @@ class UsersController extends Controller
 
         $status = (int) $request->status;
         $friendUser = User::find($request->user_id);
-        if(!$friendUser){
+        if (!$friendUser) {
             return ResponseHelper::sendResponse([], 'User Not Available!', false, 409);
         }
         $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'friends_allow_request');
@@ -145,13 +147,13 @@ class UsersController extends Controller
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not allowed to accept friend requests.', false, 409);
         }
-        if($request->user_type == 'family'){
+        if ($request->user_type == 'family') {
             if ($familyLimit !== true && ($totalFamily >= $familyLimit)) {
                 return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
             }
         }
 
-        if($request->user_type == 'friends'){
+        if ($request->user_type == 'friends') {
             if ($friendLimit !== true && ($totalFriends >= $friendLimit)) {
                 return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
             }
