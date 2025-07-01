@@ -304,7 +304,9 @@
         <div class="user-info">
             <div class="row">
                 <div class="col-md-2 p-0 d-flex align-items-center justify-content-center">
-                  
+                    <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                         style="width: 100px; height: 36px; object-fit: cover; visibility: visible;"
+                         onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='">
                 </div>
                 <div class="col-md-10 d-flex flex-column justify-content-center">
                     <p class="m-0" title="{{ $feed->title }}">
