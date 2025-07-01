@@ -15,13 +15,14 @@ class PermissionHelper
         ];
         $permissions = Setting::where('name', $userType[$level])->first();
         $test = $permissions['value'][$key];
-        dd($test);
 
         if ($test === true) {
             return true;
-        } elseif ($test !== true && $test !== false) {
-            return $test;
-        } else {
+        }
+        //  elseif ($test !== true && $test !== false) {
+        //     return $test;
+        // }
+        else {
             return false;
         }
     }
