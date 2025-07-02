@@ -566,7 +566,7 @@
                                             </a>
                                             <div class="dropdown-menu text-center dropdown-menu-end"
                                                  style="min-width: unset; width: 100px; z-index: 9999;">
-                                                <span style="font-family:Genos; color:#c0c0c0;">Options</span>
+                                                <span style="font-family:Genos; color:#585454;">Options</span>
                                                 @php
                                                     $message = $clip->clips->count()
                                                         ? 'This template contains clips. Do you want to delete it along with its clips?'
