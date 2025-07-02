@@ -549,10 +549,10 @@
                                 <div class="p-2">
                                     <div style="display: flex; justify-content: space-between;">
                                         <div>
-                                            <p class="m-0" style="font-weight: bold;" title="{{ $clip->title }}">
+                                            <p class="m-0" style="font-weight: bold; color:black" title="{{ $clip->title }}">
                                                 {{ $clip->title }}
                                             </p>
-                                            <p style="font-weight: 400; margin-top: -8px;">
+                                            <p style="font-weight: 400; margin-top: -8px;color:black">
                                                 {{ $clip->created_at->format('d/m/Y') }}
                                             </p>
                                         </div>
