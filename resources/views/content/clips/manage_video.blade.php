@@ -629,24 +629,6 @@
             </div>
         </div>
     </div>
-<!-- Global Video Modal -->
-<div class="modal fade" id="videoTemplateModal" tabindex="-1" aria-labelledby="videoTemplateModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-dark text-white">
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="videoTemplateModalLabel">Template Preview</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <video id="modalVideoPlayer" controls style="width:100%; border-radius: 10px;" controlsList="nodownload">
-                    <source src="" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div id="modalLottieAnimation" style="width: 100%; height: 300px; display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
     <div class="card pb-4">
@@ -998,58 +980,27 @@
 @section('page-script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
 
- <script>
-    document.querySelectorAll(".card-post").forEach((card, index) => {
-    card.addEventListener("click", function (e) {
-        if (
-            e.target.closest(".dropdown-menu") || 
-            e.target.closest(".dropdown-item") || 
-            e.target.closest(".edit-template") || 
-            e.target.closest("button") || 
-            e.target.closest("form")
-        ) {
-            return;
-        }
-
-        // Get the video source from the hidden template popup
-        const popup = document.getElementById(`template-popup-${index}`);
-        if (popup) {
-            const video = popup.querySelector("video");
-            const lottieContainer = popup.querySelector('[id^="lottie-animation-popup"]');
-
-            const modalVideo = document.getElementById("modalVideoPlayer");
-            const modalLottie = document.getElementById("modalLottieAnimation");
-
-            // Set video or lottie
-            if (video) {
-                modalVideo.querySelector("source").src = video.querySelector("source").src;
-                modalVideo.load();
-                modalVideo.style.display = "block";
-                modalLottie.style.display = "none";
-            } else if (lottieContainer) {
-                modalVideo.style.display = "none";
-                modalLottie.style.display = "block";
-            }
-
-            // Show Bootstrap modal
-            const modal = new bootstrap.Modal(document.getElementById("videoTemplateModal"));
-            modal.show();
-        }
-    });
-});
-
-</script>
 <script>
-    const modalEl = document.getElementById('videoTemplateModal');
-    modalEl.addEventListener('hidden.bs.modal', function () {
-        const video = document.getElementById('modalVideoPlayer');
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+        @foreach($templates as $clip)
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-animation-{{ $clip->id }}'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: "{{ asset('storage/' . $clip->json_paths) }}"
+        });
+
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-animation-popup-{{ $clip->id }}'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: "{{ asset('storage/' . $clip->json_paths) }}",
+        });
+        @endforeach
     });
 </script>
-
 
 <script>
     $('.nav-tab a:first-child').addClass('active');
