@@ -209,53 +209,6 @@
             border-radius: 5px;
             margin-top: 4px;
         }
-.card-post {
-    position: relative;
-    cursor: pointer;
-    border-radius: 8px;
-    overflow: hidden;
-    height: 335px;
-    width: 210px;
-    background: #000;
-}
-
-.card-post .template-thumbnails {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card-post .hover-info {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 10;
-    color: white;
-}
-
-.card-post:hover .hover-info {
-    display: block;
-}
-
-.card-post .dropdown-menu {
-    background-color: #1a1a1a;
-    border: none;
-    padding: 5px;
-}
-
-.card-post .dropdown-menu a,
-.card-post .dropdown-menu button {
-    background: none;
-    color: white;
-    text-align: center;
-    display: block;
-    width: 100%;
-}
 
         .report-section .d-flex:first-child {
             gap: 76px;
