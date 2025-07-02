@@ -34,7 +34,7 @@ class FeedsController extends Controller
 
         // Get authenticated user's latest feed
         $authFeed = Feed::with('user')
-            ->where('user_id', auth()->user()->id)
+            ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->first();
 
@@ -172,25 +172,25 @@ class FeedsController extends Controller
     public function store(Request $request)
     {
 
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_allow_feeds');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_allow_feeds');
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not allowed to share feeds.', false, 409);
         }
 
-        $allowVideoRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_video_cam');
+        $allowVideoRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_video_cam');
         if ($request->isCam == 1 && $allowVideoRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not allowed to share Cam feeds.', false, 409);
         }
 
         if ($request->hasFile('videos')) {
-            $allowVideoRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_share_videos');
+            $allowVideoRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_share_videos');
             if ($allowVideoRequest !== true) {
                 return ResponseHelper::sendResponse([], 'You are not Allowed to Share Videos.', false, 409);
             }
         }
 
         if ($request->hasFile('images')) {
-            $allowImageRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_share_images');
+            $allowImageRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_share_images');
             if ($allowImageRequest !== true) {
                 return ResponseHelper::sendResponse([], 'You are not Allowed to Share Images.', false, 409);
             }
@@ -213,13 +213,13 @@ class FeedsController extends Controller
         $feeds->text_properties = $request->text_properties;
         $feeds->user_type = $request->user_type;
         $feeds->feed_type = $request->feed_type;
-        $feeds->user_id = auth()->user()->id;
+        $feeds->user_id = Auth::id();
         $images = [];
         $videos = [];
 
         // Handle multiple image uploads
         if ($request->hasFile('images')) {
-            $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_share_images');
+            $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_share_images');
             if ($allowRequest !== true) {
                 return ResponseHelper::sendResponse([], 'You are not Allowed to Share Images.', false, 409);
             }
@@ -236,7 +236,7 @@ class FeedsController extends Controller
 
         // Handle multiple video uploads
         if ($request->hasFile('videos')) {
-            $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_share_videos');
+            $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_share_videos');
             if ($allowRequest !== true) {
                 return ResponseHelper::sendResponse([], 'You are not Allowed to Share Videos.', false, 409);
             }
@@ -443,7 +443,7 @@ class FeedsController extends Controller
                 ->with('likes')->with('liked')
                 ->where('feed_id', $id)->where('feed_type', $feedType)->where('parent_id', null)->get();
 
-            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->user()->id);
+            $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(Auth::id());
 
             if ($feedType == 'admin_feeds') {
                 $feed = PopFeeds::with(['user' => function ($q) {
@@ -488,8 +488,8 @@ class FeedsController extends Controller
     public function storeComments(Request $request, $id)
     {
 
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_text_comments');
-        $allowHistoryRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_text_comments');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_text_comments');
+        $allowHistoryRequest = PermissionHelper::checkPermission(Auth::user()->level, 'history_text_comments');
 
         if ($request->feed_type == 'user_feeds') {
             if ($allowRequest !== true) {
@@ -519,8 +519,8 @@ class FeedsController extends Controller
         }
 
         if ($request->file('audio')) {
-            $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_voice_comments');
-            $allowHistoryRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_voice_comments');
+            $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_voice_comments');
+            $allowHistoryRequest = PermissionHelper::checkPermission(Auth::user()->level, 'history_voice_comments');
 
             if ($request->feed_type == 'user_feeds') {
                 if ($allowRequest !== true) {
@@ -543,7 +543,7 @@ class FeedsController extends Controller
         }
 
         $comment = FeedComments::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'feed_id' => $id,
             'feed_type' => $request->feed_type,
             'comment' => $request->comment,
@@ -569,7 +569,7 @@ class FeedsController extends Controller
             ->with('likes')->with('liked')->where('feed_id', $id)->where('parent_id', null)
             ->where('feed_type', $request->feed_type)->get();
 
-        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(Auth::id());
         $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $request->feed_type)->count();
         $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $id)->where('feed_type', $request->feed_type)->first();
 
@@ -647,7 +647,7 @@ class FeedsController extends Controller
         }])->with('likes')->with('liked')
             ->where('feed_id', $comment->feed_id)->where('parent_id', null)->where('feed_type', $comment->feed_type)->get();
 
-        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(auth()->id());
+        $user = User::select('name', 'last_name', 'email', 'dob', 'image', 'username')->find(Auth::id());
         $commentCount = FeedComments::where('feed_id', $id)->where('feed_type', $comment->feed_type)->count();
         $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $comment->feed_id)->where('feed_type', $comment->feed_type)->first();
 
@@ -755,8 +755,8 @@ class FeedsController extends Controller
 
     public function feedLike(Request $request, $id)
     {
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'feed_like_button');
-        $allowHistoryRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_like_button');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_like_button');
+        $allowHistoryRequest = PermissionHelper::checkPermission(Auth::user()->level, 'history_like_button');
         if ($request->feed_type == 'user_feeds') {
             if ($allowRequest !== true) {
                 return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
