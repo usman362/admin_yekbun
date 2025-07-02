@@ -28,7 +28,7 @@
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.5);
-        color: rgb(131, 123, 123);
+        color: white;
         z-index: 2;
         pointer-events: none;
     }
