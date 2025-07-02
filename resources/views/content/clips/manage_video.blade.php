@@ -583,46 +583,50 @@
                                                         <i class="fas fa-cog text-white"></i>
                                                     </a>
                                                     <div class="dropdown-menu text-left dropdown-menu-end"
-                                                        style="min-width: unset; width: 100px; z-index: 9999;">
-                                                        <span style="font-family:Genos; color:#c0c0c0;"class="text-white">Options</span>
-                                                        @php
-                                                            $message = $clip->clips->count()
-                                                                ? 'This template contains clips. Do you want to delete it along with its clips?'
-                                                                : 'Are you sure you want to delete this?';
-                                                        @endphp
-                                                        <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
-                                                            onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')"
-                                                            method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="row ml-0" style="width:100px;">
-                                                                <div class="col-md-6"
-                                                                    style="border-right: 1px solid #c0c0c0;">
-                                                                    <a class="dropdown-item edit-template"
-                                                                        style="padding: 0;" href="javascript:void(0)"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#createClipsTemplateModal"
-                                                                        data-id="{{ $clip->id }}"
-                                                                        data-name="{{ $clip->title }}"
-                                                                        data-educated_price="{{ $clip->educated_price }}"
-                                                                        data-cultivated_price="{{ $clip->cultivated_price }}"
-                                                                        onclick="event.stopPropagation();">
-                                                                        <img class="pop_action_image" style="height: 26px;"
-                                                                            src="{{ asset('assets/svg/edit.svg') }}">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <button type="submit" class="dropdown-item"
-                                                                        style="padding: 0;"
-                                                                        onclick="event.stopPropagation();">
-                                                                        <img class="pop_action_image"
-                                                                            style="height: 26px;"
-                                                                            src="{{ asset('assets/svg/delete.svg') }}">
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+     style="min-width: unset; width: 100px; z-index: 9999; background-color: #1e1e1e; border: 1px solid #ccc;">
+
+    {{-- Options Title --}}
+    <span style="font-family: Genos, sans-serif; color: #c0c0c0; font-size: 14px; display: block; padding: 5px 10px;">
+        Options
+    </span>
+    
+    @php
+        $message = $clip->clips->count()
+            ? 'This template contains clips. Do you want to delete it along with its clips?'
+            : 'Are you sure you want to delete this?';
+    @endphp
+
+    <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
+          onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')"
+          method="post" class="d-inline">
+        @csrf
+        @method('DELETE')
+
+        <div class="row m-0" style="width: 100px;">
+            {{-- Edit --}}
+            <div class="col-6 text-center" style="border-right: 1px solid #c0c0c0;">
+                <a class="dropdown-item edit-template p-1" href="javascript:void(0)"
+                   data-bs-toggle="modal"
+                   data-bs-target="#createClipsTemplateModal"
+                   data-id="{{ $clip->id }}"
+                   data-name="{{ $clip->title }}"
+                   data-educated_price="{{ $clip->educated_price }}"
+                   data-cultivated_price="{{ $clip->cultivated_price }}"
+                   onclick="event.stopPropagation();">
+                    <img src="{{ asset('assets/svg/edit.svg') }}" style="height: 26px;">
+                </a>
+            </div>
+
+            {{-- Delete --}}
+            <div class="col-6 text-center">
+                <button type="submit" class="dropdown-item p-1" onclick="event.stopPropagation();">
+                    <img src="{{ asset('assets/svg/delete.svg') }}" style="height: 26px;">
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
                                                 </div>
                                                 <!-- END DROPDOWN -->
                                             </div>
