@@ -75,21 +75,21 @@ class UsersController extends Controller
         $totalFamily = UserFriends::where('friend_id', Auth::id())->where('user_type', 'family')->count();
         $totalFriends = UserFriends::where('friend_id', Auth::id())->where('user_type', 'friends')->count();
 
-        if ($allowRequest !== true) {
-            return ResponseHelper::sendResponse([], 'You are not allowed to send friend requests.', false, 409);
-        }
+        // if ($allowRequest !== true) {
+        //     return ResponseHelper::sendResponse([], 'You are not allowed to send friend requests.', false, 409);
+        // }
 
-        if ($allowRequest2 !== true) {
-            return ResponseHelper::sendResponse([], 'This user is not allowed to receive your request.', false, 409);
-        }
+        // if ($allowRequest2 !== true) {
+        //     return ResponseHelper::sendResponse([], 'This user is not allowed to receive your request.', false, 409);
+        // }
 
-        if ($totalFamily >= $familyLimit) {
-            return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
-        }
+        // if ($totalFamily >= $familyLimit) {
+        //     return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
+        // }
 
-        if ($totalFriends >= $friendLimit) {
-            return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
-        }
+        // if ($totalFriends >= $friendLimit) {
+        //     return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
+        // }
 
         try {
             $user_request = UserRequest::updateOrCreate(
@@ -145,20 +145,20 @@ class UsersController extends Controller
         $totalFamily = UserFriends::where('friend_id', Auth::id())->where('user_type', 'family')->count();
         $totalFriends = UserFriends::where('friend_id', Auth::id())->where('user_type', 'friends')->count();
 
-        if ($allowRequest !== true) {
-            return ResponseHelper::sendResponse([], 'You are not allowed to accept friend requests.', false, 409);
-        }
-        if ($request->user_type == 'family') {
-            if ($totalFamily >= $familyLimit) {
-                return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
-            }
-        }
+        // if ($allowRequest !== true) {
+        //     return ResponseHelper::sendResponse([], 'You are not allowed to accept friend requests.', false, 409);
+        // }
+        // if ($request->user_type == 'family') {
+        //     if ($totalFamily >= $familyLimit) {
+        //         return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
+        //     }
+        // }
 
-        if ($request->user_type == 'friends') {
-            if ($totalFriends >= $friendLimit) {
-                return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
-            }
-        }
+        // if ($request->user_type == 'friends') {
+        //     if ($totalFriends >= $friendLimit) {
+        //         return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
+        //     }
+        // }
         try {
             if ($request->user_type !== 'rejected') {
                 $user_request = UserFriends::updateOrCreate(
