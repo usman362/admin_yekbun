@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Mail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Maklad\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
@@ -211,7 +212,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         $code = rand(100000, 999999);
 
         UserCode::updateOrCreate(
-            ['user_id' => auth()->user()->id],
+            ['user_id' => Auth::id()],
             ['code' => $code]
         );
 
@@ -222,7 +223,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
                 'code' => $code
             ];
 
-            Mail::to(auth()->user()->email)->send(new SendCodeMail($details));
+            Mail::to(Auth::user()->email)->send(new SendCodeMail($details));
         } catch (Exception $e) {
             info("Error: " . $e->getMessage());
         }

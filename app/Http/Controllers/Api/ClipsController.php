@@ -12,6 +12,7 @@ use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use FFMpeg\Media\Clip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -47,7 +48,7 @@ class ClipsController extends Controller
         $uid = uniqid();
         $clip->emoji = $request->emoji;
         $clip->share_with = $request->share_with;
-        $clip->user_id = auth()->user()->id;
+        $clip->user_id = Auth::id();
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
         $videoPath = $request->video;

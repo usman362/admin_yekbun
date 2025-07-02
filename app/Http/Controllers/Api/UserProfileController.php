@@ -37,7 +37,7 @@ class UserProfileController extends Controller
     public function store(Request $request)
     {
 
-        $profile = User::find(auth()->user()->id);
+        $profile = User::find(Auth::id());
         if (!empty($request->name) && $request->name !== "") {
             $profile->name = $request->name;
         }
@@ -134,12 +134,12 @@ class UserProfileController extends Controller
     {
 
         if ($request->has('enable')) {
-            auth()->user()->enable_2fa  = true;
-            auth()->user()->save();
+            Auth::user()->enable_2fa  = true;
+            Auth::user()->save();
             return back()->with('success', 'Two Factor Authentication Enabled');
         } else {
-            auth()->user()->enable_2fa  = false;
-            auth()->user()->save();
+            Auth::user()->enable_2fa  = false;
+            Auth::user()->save();
             return back()->with('error', 'Two Factor Authentication Disabled');
         }
     }
@@ -170,12 +170,12 @@ class UserProfileController extends Controller
             'newPassword' => 'required',
             'confirmPassword' => 'required'
         ]);
-        if (!Hash::check($request->currentPassword, auth()->user()->password)) {
+        if (!Hash::check($request->currentPassword, Auth::user()->password)) {
             return back()->with("error", "Old Password Doesn't match!");
         } else {
             if ($request->newPassword == $request->confirmPassword) {
 
-                User::whereId(auth()->user()->id)->update([
+                User::whereId(Auth::id())->update([
                     'password' => Hash::make($request->newPassword)
                 ]);
                 return back()->with("success", "Password changed successfully!");

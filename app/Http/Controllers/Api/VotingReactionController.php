@@ -34,7 +34,7 @@ class VotingReactionController extends Controller
      */
     public function store(Request $request)
     {
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'vote_allow_vote');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'vote_allow_vote');
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not Allowed to Vote.', false, 409);
         }

@@ -353,7 +353,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         if (!empty($request->status)) {
-            $user = User::find(auth()->user()->id);
+            $user = User::find(Auth::id());
             $user->app_status = $request->status;
             $user->save();
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bazar;
+use Illuminate\Support\Facades\Auth;
 
 class BazarController extends Controller
 {
@@ -54,7 +55,7 @@ class BazarController extends Controller
         'category_id' => $request->category_id,
         'title' => $request->title,
         'image' => json_encode($images),
-        'user_id' => auth()->user()->id ?? null,
+        'user_id' => Auth::id() ?? null,
         'price' => $request->price,
         'status' => $request->status,
         'warranty' => $request->warranty,
@@ -100,7 +101,7 @@ class BazarController extends Controller
    */
   public function update($id, Request $request)
   {
-  
+
     $bazar = Bazar::findOrFail($id);
     $bazar->title = $request->title ?? $bazar->title;
     $bazar->category_id = $request->category_id ?? $bazar->category_id;

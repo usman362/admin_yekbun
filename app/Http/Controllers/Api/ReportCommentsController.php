@@ -25,7 +25,7 @@ class ReportCommentsController extends Controller
             'report_type' => 'required'
         ]);
 
-        $existingReport = ReportComments::where('user_id', auth()->id())
+        $existingReport = ReportComments::where('user_id', Auth::id())
             ->where('comment_id', $id)
             ->exists();
 
@@ -34,11 +34,11 @@ class ReportCommentsController extends Controller
         }
 
         $report = ReportComments::create(
-           
+
             [
                 'comment_id' => $id,
                 'report_type' => Str::slug($request->report_type),
-                'user_id' => auth()->user()->id,
+                'user_id' => Auth::id(),
             ]
         );
 
