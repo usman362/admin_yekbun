@@ -1001,26 +1001,24 @@
         });
         @endforeach
 
-        // Card click to open video popup
+        // Show popup when clicking card, excluding inner buttons/icons
         document.querySelectorAll(".card-post").forEach((card, index) => {
             card.addEventListener("click", function (e) {
+                // If the click originated from an excluded element, don't continue
+                if (e.target.closest(".dropdown-menu") || e.target.closest(".dropdown-item") || e.target.closest(".edit-template") || e.target.closest("button") || e.target.closest("form")) {
+                    return;
+                }
+
                 const popup = document.getElementById(`template-popup-${index}`);
                 if (popup) {
                     popup.style.display = "block";
 
-                    // Play video if exists
+                    // Optional: scroll into view
                     const video = popup.querySelector("video");
                     if (video) {
                         video.play();
                     }
                 }
-            });
-        });
-
-        // Prevent edit/delete icon clicks from triggering card popup
-        document.querySelectorAll(".dropdown-menu, .edit-template, .dropdown-item, .fa-cog, .pop_action_image, button").forEach(el => {
-            el.addEventListener("click", function (e) {
-                e.stopPropagation();
             });
         });
     });
