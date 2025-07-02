@@ -554,9 +554,7 @@
                                                         <p class="text-white" style="font-weight: 200; margin-top: -8px;">
                                                             {{ $clip->created_at->format('d/m/Y') }}
                                                         </p>
-                                                        <small class="time">
-                                                            <i>{{ optional($clip->created_at)->diffForHumans() ?? 'Unknown time' }}</i>
-                                                        </small>
+                                                       
                                                     </div>
 
                                                     <!-- Settings Dropdown -->
