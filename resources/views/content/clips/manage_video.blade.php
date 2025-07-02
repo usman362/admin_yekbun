@@ -113,10 +113,7 @@
             margin: 0;
         }
 
-        .post-image .dropdown {
-            margin-top: -215px;
-            display: none;
-        }
+      
 
         .dropdown-content {
             border: none !important;
@@ -227,7 +224,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                                                                                        height: 433px !important; */
+                                                                                                                                                                height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -252,6 +249,25 @@
             padding: 16px;
             font-family: 'Genos';
         }
+
+        .card-post .hover-info {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            color: white;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-post:hover .hover-info {
+            display: block;
+        }
+
 
         .header {
             text-align: center;
@@ -426,35 +442,6 @@
             border-radius: 8px;
         }
     </style>
-    <style>
-        .template-card {
-            position: relative;
-        }
-
-        .hover-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            opacity: 0;
-            background: rgba(0, 0, 0, 0.4);
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .template-card:hover .hover-overlay {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .hover-overlay .dropdown {
-            pointer-events: auto;
-            z-index: 10;
-        }
-    </style>
-
 @endsection
 
 @section('vendor-style')
@@ -546,126 +533,130 @@
                         @foreach ($templates as $key => $clip)
                             <div class="col-md-2">
                                 <div class="post-image" style="position: relative; overflow: visible;">
-                                    <div id="feed-post-1"
-                                        class="card is-post mt-4 p-1 mb-0 view-post card-post template-card" data-fancybox
-                                        data-src="#template-popup-{{ $key }}" href="javascript:;"
+                                    <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                                        data-fancybox data-src="#template-popup-{{ $key }}" href="javascript:;"
                                         data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
                                         data-id="{{ $clip->id }}"
                                         data-demo-href="{{ asset('storage/' . $clip->thumbnail) }}"
                                         style="height:335px; width:210px; background-size:cover; position: relative;">
 
-                                        {{-- Lottie animation always visible --}}
-                                        <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails"
-                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-                                        </div>
-
-                                        {{-- Overlay content only visible on hover --}}
-                                        <!-- HOVER OVERLAY -->
-                                        <div class="hover-overlay p-2" style="z-index: 3;">
-                                            <div style="display: flex; justify-content: space-between; align-items: start;">
-                                                <!-- Title & Date -->
-                                                <div>
-                                                    <p class="m-0 text-white" title="{{ $clip->title }}"
-                                                        style="font-weight: bold;">
-                                                        {{ $clip->title }}
-                                                    </p>
-                                                    <p class="text-white" style="font-weight: 200; margin-top: -8px;">
-                                                        {{ $clip->created_at->format('d/m/Y') }}
-                                                    </p>
-                                                    
-                                                </div>
-
-                                                <!-- ⚙️ SETTINGS DROPDOWN -->
-                                                <div class="nav-item dropdown d-block"
-                                                    style="position: relative; z-index: 10;">
-                                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
-                                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                                        onclick="event.stopPropagation();">
-                                                        <i class="fas fa-cog text-white"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu text-left dropdown-menu-end"
-                                                        style="min-width: unset; width: 100px; z-index: 9999; background-color: #1e1e1e; border: 1px solid #ccc;">
-
-                                                        {{-- Options Title --}}
-                                                        <span
-                                                            style="font-family: Genos, sans-serif; color: #c0c0c0; font-size: 14px; display: block; padding: 5px 10px;">
-                                                            Options
-                                                        </span>
-
-                                                        @php
-                                                            $message = $clip->clips->count()
-                                                                ? 'This template contains clips. Do you want to delete it along with its clips?'
-                                                                : 'Are you sure you want to delete this?';
-                                                        @endphp
-
-                                                        <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
-                                                            onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')"
-                                                            method="post" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <div class="row m-0" style="width: 100px;">
-                                                                {{-- Edit --}}
-                                                                <div class="col-6 text-center"
-                                                                    style="border-right: 1px solid #c0c0c0;">
-                                                                    <a class="dropdown-item edit-template p-1"
-                                                                        href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#createClipsTemplateModal"
-                                                                        data-id="{{ $clip->id }}"
-                                                                        data-name="{{ $clip->title }}"
-                                                                        data-educated_price="{{ $clip->educated_price }}"
-                                                                        data-cultivated_price="{{ $clip->cultivated_price }}"
-                                                                        onclick="event.stopPropagation();">
-                                                                        <img src="{{ asset('assets/svg/edit.svg') }}"
-                                                                            style="height: 26px;">
-                                                                    </a>
-                                                                </div>
-
-                                                                {{-- Delete --}}
-                                                                <div class="col-6 text-center">
-                                                                    <button type="submit" class="dropdown-item p-1"
-                                                                        onclick="event.stopPropagation();">
-                                                                        <img src="{{ asset('assets/svg/delete.svg') }}"
-                                                                            style="height: 26px;">
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                        <div class="content-wrap p-2" style="position: relative; height: 100%;">
+                                            {{-- Hover Info Block --}}
+                                            <div class="hover-info">
+                                                <div
+                                                    style="display: flex; justify-content: space-between; align-items: start;">
+                                                    <!-- Left side Title and Time -->
+                                                    <div>
+                                                        <p class="m-0" title="{{ $clip->title }}"
+                                                            style="font-weight: bold;">
+                                                            {{ $clip->title }}
+                                                        </p>
+                                                        <p class="text-white" style="font-weight: 200; margin-top: -8px;">
+                                                            {{ $clip->created_at->format('d/m/Y') }}
+                                                        </p>
+                                                        <small class="time">
+                                                            <i>{{ optional($clip->created_at)->diffForHumans() ?? 'Unknown time' }}</i>
+                                                        </small>
                                                     </div>
 
+                                                    <!-- Settings Dropdown -->
+                                                    <div class="nav-item dropdown d-block"
+                                                        style="position: absolute; right: 16px; top: 20px;">
+                                                        <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="fas fa-cog text-white"></i>
+                                                        </a>
+
+                                                        <div class="dropdown-menu text-center dropdown-menu-end"
+                                                            style="min-width: unset; width: 100px; z-index: 9999;">
+                                                            <span style="font-family:Genos; color:#c0c0c0;">Options</span>
+
+                                                            @php
+                                                                $message = 'Are you sure you want to delete this?';
+                                                                if ($clip->clips->count() > 0) {
+                                                                    $message =
+                                                                        'This template contains clips. Do you want to delete it along with its clips?';
+                                                                }
+                                                            @endphp
+
+                                                            <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
+                                                                onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')"
+                                                                method="post" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <div class="row ml-0" style="width:100px;">
+                                                                    <!-- Edit Icon -->
+                                                                    <div class="col-md-6"
+                                                                        style="border-right: 1px solid #c0c0c0;">
+                                                                        <a class="dropdown-item edit-template"
+                                                                            style="padding: 0;" href="javascript:void(0)"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#createClipsTemplateModal"
+                                                                            data-id="{{ $clip->id }}"
+                                                                            data-name="{{ $clip->title }}"
+                                                                            data-educated_price="{{ $clip->educated_price }}"
+                                                                            data-cultivated_price="{{ $clip->cultivated_price }}"
+                                                                            onclick="event.stopPropagation();">
+                                                                            <img class="pop_action_image"
+                                                                                style="height: 26px;"
+                                                                                src="{{ asset('assets/svg/edit.svg') }}">
+                                                                        </a>
+                                                                    </div>
+
+                                                                    <!-- Delete Icon -->
+                                                                    <div class="col-md-6">
+                                                                        <button type="submit" class="dropdown-item"
+                                                                            style="padding: 0;"
+                                                                            onclick="event.stopPropagation();">
+                                                                            <img class="pop_action_image"
+                                                                                style="height: 26px;"
+                                                                                src="{{ asset('assets/svg/delete.svg') }}">
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <!-- END DROPDOWN -->
+                                            </div>
+
+                                            {{-- Default Visible Video/Lottie --}}
+                                            <div class="card-body p-t">
+                                                <div id="lottie-animation-{{ $clip->id }}"
+                                                    class="template-thumbnails" style="margin-top: -2px;"></div>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <!-- Hidden Popup for Template View -->
-                                    <div style="display: none;" id="template-popup-{{ $key }}">
-                                        <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
-                                            <div style="flex: -1;">
-                                                @if ($clip->video_paths)
-                                                    <video controls controlsList="nodownload"
-                                                        style="position: absolute; top: 44px; left: 44px; width: 350px; height: auto; object-fit: cover; z-index: 1; border-radius: 8px; outline: none;">
-                                                        <source src="{{ asset('storage/' . $clip->video_paths) }}"
-                                                            type="video/mp4">
-                                                    </video>
-                                                    <div id="lottie-animation-popup-{{ $clip->id }}"
-                                                        style="height: auto; width: 350px; opacity: 0;"></div>
-                                                @else
-                                                    <div id="lottie-animation-popup-{{ $clip->id }}"
-                                                        style="height: auto; width: 350px;"></div>
-                                                @endif
-                                            </div>
-                                        </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Hidden Popup for Template View -->
+                            <div style="display: none;" id="template-popup-{{ $key }}">
+                                <div style="display: flex; gap: 20px; width: 100%; max-width: 90vw;">
+                                    <div style="flex: -1;">
+                                        @if ($clip->video_paths)
+                                            <video controls controlsList="nodownload"
+                                                style="position: absolute; top: 44px; left: 44px; width: 350px; height: auto; object-fit: cover; z-index: 1; border-radius: 8px; outline: none;">
+                                                <source src="{{ asset('storage/' . $clip->video_paths) }}"
+                                                    type="video/mp4">
+                                            </video>
+                                            <div id="lottie-animation-popup-{{ $clip->id }}"
+                                                style="height: auto; width: 350px; opacity: 0;"></div>
+                                        @else
+                                            <div id="lottie-animation-popup-{{ $clip->id }}"
+                                                style="height: auto; width: 350px;"></div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
+
                 </div>
             </div>
-
         </div>
 
 
