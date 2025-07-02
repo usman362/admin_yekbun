@@ -426,28 +426,28 @@
             border-radius: 8px;
         }
     </style>
-    <style>
-        .hover-overlay {
+     <style>
+.hover-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     opacity: 0;
     background: rgba(0, 0, 0, 0.4);
     transition: opacity 0.3s ease;
-    pointer-events: none; /* THIS BLOCKS INTERACTION – we'll override it below */
+    pointer-events: none;
     z-index: 2;
 }
 
 .template-card:hover .hover-overlay {
     opacity: 1;
-    pointer-events: auto; /* Allow clicks inside overlay on hover */
+    pointer-events: auto;
 }
 
 .hover-overlay .dropdown {
-    pointer-events: auto; /* Ensure dropdown can be clicked */
+    pointer-events: auto;
     z-index: 3;
 }
+</style>
 
-    </style>
 @endsection
 
 @section('vendor-style')
