@@ -18,6 +18,26 @@
             background-image: none !important;
         }
 
+     
+    .template-card .info-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .template-card:hover .info-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
         .dropdown.is-right .dropdown-menu {
             left: 56px;
             right: auto;
