@@ -328,6 +328,16 @@
             transition: 0.2s ease;
             position: relative;
         }
+.dropdown-menu {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+.dropdown-menu span {
+    color: #c0c0c0;
+    display: block;
+    padding: 5px 10px;
+}
 
         .action input[type="radio"] {
             margin-top: 5px;
