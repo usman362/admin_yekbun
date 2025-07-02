@@ -274,6 +274,17 @@
             position: relative;
             margin-bottom: 16px;
         }
+.post-image .dropdown {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    display: none;
+    z-index: 10;
+}
+
+.card-post:hover .dropdown {
+    display: block;
+}
 
         .header h2 {
             font-size: 16px;
