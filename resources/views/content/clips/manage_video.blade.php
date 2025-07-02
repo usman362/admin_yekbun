@@ -560,18 +560,21 @@
                                                     @method('DELETE')
                                                     <div class="row ml-0" style="width:100px;">
                                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0;">
-                                                            <a class="dropdown-item edit-template" style="padding: 0;" href="javascript:void(0)"
+                                                           <a class="dropdown-item edit-template" style="padding: 0;" href="javascript:void(0)"
                                                                 data-bs-toggle="modal" data-bs-target="#createClipsTemplateModal"
                                                                 data-id="{{ $clip->id }}" data-name="{{ $clip->title }}"
                                                                 data-educated_price="{{ $clip->educated_price }}"
-                                                                data-cultivated_price="{{ $clip->cultivated_price }}">
-                                                                <img class="pop_action_image" style="height: 26px;" src="{{ asset('assets/svg/edit.svg') }}">
-                                                            </a>
+                                                                data-cultivated_price="{{ $clip->cultivated_price }}"
+                                                                onclick="event.stopPropagation();">
+                                                                    <img class="pop_action_image" style="height: 26px;" src="{{ asset('assets/svg/edit.svg') }}">
+                                                                </a>
+
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button type="submit" class="dropdown-item" style="padding: 0;">
-                                                                <img class="pop_action_image" style="height: 26px;" src="{{ asset('assets/svg/delete.svg') }}">
-                                                            </button>
+                                                           <button type="submit" class="dropdown-item" style="padding: 0;" onclick="event.stopPropagation();">
+    <img class="pop_action_image" style="height: 26px;" src="{{ asset('assets/svg/delete.svg') }}">
+</button>
+
                                                         </div>
                                                     </div>
                                                 </form>
