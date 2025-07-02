@@ -19,9 +19,9 @@ class PermissionHelper
         if ($test === true) {
             return true;
         }
-        //  elseif ($test !== true && $test !== false) {
-        //     return $test;
-        // }
+         elseif ($test !== true && $test !== false) {
+            return $test;
+        }
         else {
             return false;
         }
