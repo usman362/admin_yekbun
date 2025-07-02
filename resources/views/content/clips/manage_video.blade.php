@@ -533,9 +533,7 @@
                                                 {{ $clip->title }}
                                             </p>
                                             <p style="font-weight: 500; margin-bottom: 2px;">{{ $clip->created_at->format('d M Y') }}</p>
-                                            <small class="time">
-                                                <i>{{ optional($clip->created_at)->diffForHumans() ?? 'Unknown time' }}</i>
-                                            </small>
+                                           
                                         </div>
 
                                         <!-- Settings Dropdown - Fixed for Working Buttons -->
