@@ -227,7 +227,7 @@
 
         .fancybox-content {
             /* width: 246px !important;
-                                                                                                                                                                height: 433px !important; */
+                                                                                                                                                                    height: 433px !important; */
             border-radius: 8px !important;
         }
 
@@ -428,29 +428,31 @@
     </style>
     <style>
         .template-card {
-    position: relative;
-}
+            position: relative;
+        }
 
-.hover-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    opacity: 0;
-    background: rgba(0, 0, 0, 0.4);
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 2;
-}
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            background: rgba(0, 0, 0, 0.4);
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
 
-.template-card:hover .hover-overlay {
-    opacity: 1;
-    pointer-events: auto;
-}
+        .template-card:hover .hover-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-.hover-overlay .dropdown {
-    pointer-events: auto;
-    z-index: 10;
-}
-
+        .hover-overlay .dropdown {
+            pointer-events: auto;
+            z-index: 10;
+        }
     </style>
 
 @endsection
@@ -558,65 +560,73 @@
                                         </div>
 
                                         {{-- Overlay content only visible on hover --}}
-                                       <!-- HOVER OVERLAY -->
-<div class="hover-overlay p-2" style="z-index: 3;">
-    <div style="display: flex; justify-content: space-between; align-items: start;">
-        <!-- Title & Date -->
-        <div>
-            <p class="m-0 text-white" title="{{ $clip->title }}" style="font-weight: bold;">
-                {{ $clip->title }}
-            </p>
-            <p class="text-white" style="font-weight: 200; margin-top: -8px;">
-                {{ $clip->created_at->format('d/m/Y') }}
-            </p>
-        </div>
+                                        <!-- HOVER OVERLAY -->
+                                        <div class="hover-overlay p-2" style="z-index: 3;">
+                                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                                <!-- Title & Date -->
+                                                <div>
+                                                    <p class="m-0 text-white" title="{{ $clip->title }}"
+                                                        style="font-weight: bold;">
+                                                        {{ $clip->title }}
+                                                    </p>
+                                                    <p class="text-white" style="font-weight: 200; margin-top: -8px;">
+                                                        {{ $clip->created_at->format('d/m/Y') }}
+                                                    </p>
+                                                </div>
 
-        <!-- ⚙️ SETTINGS DROPDOWN -->
-        <div class="nav-item dropdown d-block" style="position: relative; z-index: 10;">
-            <a class="nav-link dropdown-toggle hide-arrow" href="#" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false"
-               onclick="event.stopPropagation();" style="color: white;">
-                <i class="fas fa-cog text-white"></i>
-            </a>
-            <div class="dropdown-menu text-center dropdown-menu-end"
-                 style="min-width: unset; width: 100px; z-index: 9999;">
-                <span style="font-family:Genos; color:#c0c0c0;">Options</span>
-                @php
-                    $message = $clip->clips->count()
-                        ? 'This template contains clips. Do you want to delete it along with its clips?'
-                        : 'Are you sure you want to delete this?';
-                @endphp
-                <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
-                    onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')"
-                    method="post" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <div class="row ml-0" style="width:100px;">
-                        <div class="col-md-6" style="border-right: 1px solid #c0c0c0;">
-                            <a class="dropdown-item edit-template" style="padding: 0;" href="javascript:void(0)"
-                               data-bs-toggle="modal"
-                               data-bs-target="#createClipsTemplateModal"
-                               data-id="{{ $clip->id }}"
-                               data-name="{{ $clip->title }}"
-                               data-educated_price="{{ $clip->educated_price }}"
-                               data-cultivated_price="{{ $clip->cultivated_price }}"
-                               onclick="event.stopPropagation();">
-                                <img class="pop_action_image" style="height: 26px;" src="{{ asset('assets/svg/edit.svg') }}">
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="submit" class="dropdown-item" style="padding: 0;"
-                                    onclick="event.stopPropagation();">
-                                <img class="pop_action_image" style="height: 26px;" src="{{ asset('assets/svg/delete.svg') }}">
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- END DROPDOWN -->
-    </div>
-</div>
+                                                <!-- ⚙️ SETTINGS DROPDOWN -->
+                                                <div class="nav-item dropdown d-block"
+                                                    style="position: relative; z-index: 10;">
+                                                    <a class="nav-link dropdown-toggle hide-arrow" href="#"
+                                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                        onclick="event.stopPropagation();" style="color: white;">
+                                                        <i class="fas fa-cog text-white"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu text-center dropdown-menu-end"
+                                                        style="min-width: unset; width: 100px; z-index: 9999;">
+                                                        <span style="font-family:Genos; color:#c0c0c0;"class="text-white">Options</span>
+                                                        @php
+                                                            $message = $clip->clips->count()
+                                                                ? 'This template contains clips. Do you want to delete it along with its clips?'
+                                                                : 'Are you sure you want to delete this?';
+                                                        @endphp
+                                                        <form action="{{ route('delete.clipsTemplate', $clip->id) }}"
+                                                            onsubmit="confirmAction(event, () => event.target.submit(), '{{ $message }}')"
+                                                            method="post" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="row ml-0" style="width:100px;">
+                                                                <div class="col-md-6"
+                                                                    style="border-right: 1px solid #c0c0c0;">
+                                                                    <a class="dropdown-item edit-template"
+                                                                        style="padding: 0;" href="javascript:void(0)"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#createClipsTemplateModal"
+                                                                        data-id="{{ $clip->id }}"
+                                                                        data-name="{{ $clip->title }}"
+                                                                        data-educated_price="{{ $clip->educated_price }}"
+                                                                        data-cultivated_price="{{ $clip->cultivated_price }}"
+                                                                        onclick="event.stopPropagation();">
+                                                                        <img class="pop_action_image" style="height: 26px;"
+                                                                            src="{{ asset('assets/svg/edit.svg') }}">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <button type="submit" class="dropdown-item"
+                                                                        style="padding: 0;"
+                                                                        onclick="event.stopPropagation();">
+                                                                        <img class="pop_action_image"
+                                                                            style="height: 26px;"
+                                                                            src="{{ asset('assets/svg/delete.svg') }}">
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- END DROPDOWN -->
+                                            </div>
+                                        </div>
 
                                     </div>
 
