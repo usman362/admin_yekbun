@@ -532,7 +532,10 @@
                                             <p class="m-0" title="{{ $clip->title }}" style="font-weight: bold;">
                                                 {{ $clip->title }}
                                             </p>
-                                            <p style="font-weight: 500; margin-bottom: 2px;">{{ $clip->created_at->format('d M Y') }}</p>
+                                             <p style="font-weight: 500; margin-top: -8px;">
+    {{ $clip->created_at->format('d/m/Y') }}
+</p>
+
                                            
                                         </div>
 
