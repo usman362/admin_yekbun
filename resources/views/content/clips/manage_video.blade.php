@@ -415,6 +415,38 @@
             background: #fef2f2;
             border-color: #f87171;
         }
+       
+    .template-card {
+        position: relative;
+        overflow: hidden;
+        background-color: black;
+    }
+
+    .template-card .template-thumbnails {
+        width: 100%;
+        height: 100%;
+    }
+
+    .info-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .template-card:hover .info-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+ 
+
 
         .level2 {
             background: #f3f4f6;
