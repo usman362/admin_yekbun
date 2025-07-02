@@ -532,6 +532,7 @@
                                             <p class="m-0" title="{{ $clip->title }}" style="font-weight: bold;">
                                                 {{ $clip->title }}
                                             </p>
+                                            <p style="font-weight: 500; margin-bottom: 2px;">{{ $clip->created_at->format('d M Y') }}</p>
                                             <small class="time">
                                                 <i>{{ optional($clip->created_at)->diffForHumans() ?? 'Unknown time' }}</i>
                                             </small>
@@ -590,7 +591,7 @@
                             </div>
 
                             <!-- Bottom bar with ID and Date -->
-                            <div style="top: auto; left: 5px; position: absolute; bottom: 0px; width: 95%; background-color: rgb(0 0 0 / 35%); height: 36px; border-radius: 8px;">
+                            {{-- <div style="top: auto; left: 5px; position: absolute; bottom: 0px; width: 95%; background-color: rgb(0 0 0 / 35%); height: 36px; border-radius: 8px;">
                                 <div style="height: 29px; display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; border-radius: 5px;">
                                     <div style="display: flex; align-items: center; width: 100%; height: 100%;">
                                         <div class="text-white" style="align-items: center; gap: 2px; height: 100%; padding: 5px 16px 5px 5px; font-weight: bold; line-height: 0.5; margin-bottom: 4px;">
@@ -599,7 +600,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
