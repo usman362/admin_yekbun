@@ -83,11 +83,11 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse([], 'This user is not allowed to receive your request.', false, 409);
         }
 
-        if ($familyLimit !== true && ($totalFamily >= $familyLimit)) {
+        if ($totalFamily >= $familyLimit) {
             return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
         }
 
-        if ($friendLimit !== true && ($totalFriends >= $friendLimit)) {
+        if ($totalFriends >= $friendLimit) {
             return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
         }
 
@@ -149,13 +149,13 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse([], 'You are not allowed to accept friend requests.', false, 409);
         }
         if ($request->user_type == 'family') {
-            if ($familyLimit !== true && ($totalFamily >= $familyLimit)) {
+            if ($totalFamily >= $familyLimit) {
                 return ResponseHelper::sendResponse([], 'Your limit for family requests has been exceeded.', false, 409);
             }
         }
 
         if ($request->user_type == 'friends') {
-            if ($friendLimit !== true && ($totalFriends >= $friendLimit)) {
+            if ($totalFriends >= $friendLimit) {
                 return ResponseHelper::sendResponse([], 'Your limit for friend requests has been exceeded.', false, 409);
             }
         }
