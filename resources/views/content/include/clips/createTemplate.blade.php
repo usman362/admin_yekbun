@@ -152,20 +152,13 @@
                 // ✅ Convert file size to MB
                 const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
 
-                // ✅ Get video duration
-                // const video = document.createElement('video');
-                // video.preload = 'metadata';
-                // video.src = URL.createObjectURL(file);
-                // video.onloadedmetadata = function() {
-                // const duration = video.duration.toFixed(2);
 
                 hiddenInputsContainer.innerHTML += `
-            <input type="hidden" name="json_paths[]" id="json_path" value="${response.path}" data-path="${response.path}">
-            <input type="hidden" name="json_sizes[]" value="${fileSizeMB}" data-path="${response.path}">
-            <input type="hidden" name="json_name[]" value="${file.name}" data-path="${response.path}">
-        `;
-                // generateThumbnails();
-                // };
+                    <input type="hidden" name="json_paths[]" id="json_path" value="${response.path}" data-path="${response.path}">
+                    <input type="hidden" name="json_sizes[]" value="${fileSizeMB}" data-path="${response.path}">
+                    <input type="hidden" name="json_name[]" value="${file.name}" data-path="${response.path}">
+                `;
+
                 $('#error-json').text('');
 
                 if ($('.hidden-videos').children().length !== 0) {
@@ -281,8 +274,11 @@
                         <input type="hidden" name="video_durations[]" id="video_duration" value="${duration}" data-path="${response.path}">
                         <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
                     `;
-                    // generateThumbnails();
-                    $('.submit-clip-template').attr('disabled', false);
+                    @if (env('FFMPEG') == true)
+                        generateThumbnails();
+                    @else
+                        $('.submit-clip-template').attr('disabled', false);
+                    @endif
                     $('#error-videos').text('');
                 };
 

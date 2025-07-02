@@ -44,19 +44,23 @@ class FileController extends Controller
             $durationType = 'video';
         }
 
-        // if ($durationType == 'video' && $request->folder !== 'json_files') {
-        //     // Initialize FFMpeg
-        //     $ffmpeg = FFMpeg::create();
-        //     // Open the media file (you need to get the real path of the uploaded file)
-        //     $media = $ffmpeg->open($request->file('file'));
-        //     // Get the format of the file to retrieve metadata, including the duration
-        //     $format = $media->getFormat();
-        //     // Get duration in seconds (or any other format you want)
-        //     $duration = $format->get('duration'); // Duration is in seconds
+        if ($durationType == 'video' && $request->folder !== 'json_files') {
+            if (env('FFMPEG') == true) {
+                // Initialize FFMpeg
+                $ffmpeg = FFMpeg::create();
+                // Open the media file (you need to get the real path of the uploaded file)
+                $media = $ffmpeg->open($request->file('file'));
+                // Get the format of the file to retrieve metadata, including the duration
+                $format = $media->getFormat();
+                // Get duration in seconds (or any other format you want)
+                $duration = $format->get('duration'); // Duration is in seconds
 
-        //     $durationInSeconds = $duration;
-        // }
-        $durationInSeconds = 783456;
+                $durationInSeconds = $duration;
+            } else {
+                $durationInSeconds = 12345;
+            }
+        }
+
         if ($durationInSeconds !== '') {
             // Format duration in minutes:seconds
             $formattedDuration = Helpers::formatDuration($durationInSeconds);
