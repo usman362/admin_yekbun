@@ -129,37 +129,6 @@
         .fancybox__nav {
             display: none !important;
         }
-        <style>
-    .template-card {
-        position: relative;
-        overflow: hidden;
-        background-color: black;
-    }
-
-    .template-thumbnails {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .hover-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        background: rgba(0, 0, 0, 0.4);
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    .template-card:hover .hover-overlay {
-        opacity: 1;
-        pointer-events: auto;
-    }
-</style>
-
 
         .btn-white {
             background: #fff;
@@ -457,6 +426,37 @@
             border-radius: 8px;
         }
     </style>
+    <style>
+    .template-card {
+        position: relative;
+        overflow: hidden;
+        background-color: black;
+    }
+
+    .template-thumbnails {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        background: rgba(0, 0, 0, 0.4);
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .template-card:hover .hover-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+</style>
+
 @endsection
 
 @section('vendor-style')
