@@ -579,10 +579,10 @@
                                                     style="position: relative; z-index: 10;">
                                                     <a class="nav-link dropdown-toggle hide-arrow" href="#"
                                                         role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                                        onclick="event.stopPropagation();" style="color: white;">
+                                                        onclick="event.stopPropagation();" >
                                                         <i class="fas fa-cog text-white"></i>
                                                     </a>
-                                                    <div class="dropdown-menu text-center dropdown-menu-end"
+                                                    <div class="dropdown-menu text-left dropdown-menu-end"
                                                         style="min-width: unset; width: 100px; z-index: 9999;">
                                                         <span style="font-family:Genos; color:#c0c0c0;"class="text-white">Options</span>
                                                         @php
