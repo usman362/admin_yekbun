@@ -572,10 +572,7 @@
                                                     <p class="text-white" style="font-weight: 200; margin-top: -8px;">
                                                         {{ $clip->created_at->format('d/m/Y') }}
                                                     </p>
-                                                    <span
-                                                            style="font-family: Genos, sans-serif; color: #c0c0c0; font-size: 14px; display: block; padding: 5px 10px;">
-                                                            Options
-                                                        </span>
+                                                    
                                                 </div>
 
                                                 <!-- ⚙️ SETTINGS DROPDOWN -->
