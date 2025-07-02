@@ -257,7 +257,7 @@
             left: 0;
             padding: 10px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(190, 188, 188, 0.5);
             z-index: 2;
             color: white;
             border-top-left-radius: 8px;
