@@ -196,6 +196,9 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('move-playlist-music/{id}', [MultimediaController::class, 'movePlaylist']);
     Route::delete('delete-playlist-music/{id}', [MultimediaController::class, 'deletePlaylist']);
     Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
+
+    //Payments
+    Route::post('post-transaction',[PaymentController::class,'storeTransaction']);
 });
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);
