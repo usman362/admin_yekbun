@@ -6,6 +6,7 @@ use App\Events\AdminFeedsComments;
 use App\Events\HistoryComments;
 use App\Events\UserFeedsComments;
 use App\Helpers\Helpers;
+use App\Helpers\NotificationHelper;
 use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Models\User;
@@ -16,8 +17,10 @@ use App\Models\Event;
 use App\Models\Feed;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
+use App\Models\UserFriends;
 use App\Models\History;
 use App\Models\News;
+use App\Models\Notifications;
 use App\Models\PopFeeds;
 use Carbon\Carbon;
 use Exception;
@@ -261,6 +264,24 @@ class FeedsController extends Controller
         $feeds->save();
         $feed = Feed::with('user')->find($feeds->id);
         if ($feeds->save()) {
+            $notification = Notifications::first();
+                if($notification->new_donation == 'true'){
+                    if($request->user_type === 'friends' || $request->user_type === 'family'){
+                        $users = UserFriends::where('friend_id',Auth::id())->where('user_type',$request->user_type)->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', 'New Feed has been added!');
+                            }
+                        }
+                    }else{
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner',['banner','alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, 'Feeds Notification', 'New Feed has been added!');
+                            }
+                        }
+                    }
+                }
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feed, 'success' => true], 201);
         } else {
             return response()->json(['message' => 'Something went Wrong!', 'success' => false], 403);
