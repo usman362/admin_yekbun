@@ -183,11 +183,17 @@ class PaymentController extends Controller
 
                 if ($user) {
                     $current = Carbon::now();
-                    $newExpiry = match ($request->subscription_type) {
-                        'monthly' => $current->copy()->addMonth(),
-                        'yearly' => $current->copy()->addYear(),
-                        default => null
-                    };
+                    // $newExpiry = match ($request->subscription_type) {
+                    //     'monthly' => $current->copy()->addMonth(),
+                    //     'yearly' => $current->copy()->addYear(),
+                    //     default => null
+                    // };
+
+                    if($request->subscription_type === 'monthly'){
+                        $newExpiry = $current->copy()->addMonth();
+                    }else{
+                        $newExpiry = $current->copy()->addYear();
+                    }
 
                     if ($newExpiry) {
                         $user->expired_at = $newExpiry;
