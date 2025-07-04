@@ -522,8 +522,7 @@ class AuthController extends Controller
 
     public function getMyDetails()
     {
-        $user = User::find(Auth::id());
-        return ResponseHelper::sendResponse($user,'My Details has been Fetched Successfully!');
+        return ResponseHelper::sendResponse(Auth::user(),'My Details has been Fetched Successfully!');
     }
     public function deleteMyAccount()
     {
