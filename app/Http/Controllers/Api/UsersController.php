@@ -28,7 +28,7 @@ class UsersController extends Controller
 
     public function users_details(Request $request, $id)
     {
-        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city','expired_at', 'is_online', 'public_image', 'friends_image', 'family_image')
+        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'expired_at', 'subscription_type', 'is_online', 'public_image', 'friends_image', 'family_image')
             ->with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
 
         $friend = UserFriends::where('friend_id', $user->id)->where('type', 'friends')->where('user_id', Auth::id())->first();

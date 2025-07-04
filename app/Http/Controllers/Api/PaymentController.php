@@ -193,6 +193,7 @@ class PaymentController extends Controller
                         $user->expired_at = $newExpiry;
                         $user->level = $level[$request->userType];
                         $user->user_type = Str::lower($request->userType);
+                        $user->subscription_type = $request->subscription_type;
                         $user->save();
                     }
                 }
