@@ -45,11 +45,17 @@ class CityController extends Controller
         }
 
         // If limit is provided and not 'all', apply limit
-        if (!empty($request->limit) && $request->limit !== 'all') {
-            $limit = (int) $request->limit;
-            $data = $query->limit($limit)->get();
+        if (!empty($request->limit)) {
+            if ($request->limit !== 'all') {
+                $limit = (int) $request->limit;
+                $data = $query->limit($limit)->get();
 
-            return ResponseHelper::sendResponse($data, 'Cities fetched successfully!');
+                return ResponseHelper::sendResponse($data, 'Cities fetched successfully!');
+            } else {
+                $data = $query->get();
+
+                return ResponseHelper::sendResponse($data, 'Cities fetched successfully!');
+            }
         }
 
         // Otherwise use pagination
