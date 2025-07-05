@@ -558,7 +558,7 @@
                                                 <p class="text-white" style="font-weight: 200; margin-top: -8px;">
                                                     {{ $clip->created_at->format('d/m/Y') }}
                                                 </p>
-                                                
+
                                             </div>
 
                                             <!-- Settings Dropdown -->
@@ -807,78 +807,7 @@
         <div class="view-wrapper">
             <div id="main-feed" class="container main-feed">
                 <div class="row g-4">
-                    <div class="col-md-2">
-                        <div class="post-image text-white">
-                            <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox
-                                data-src="#video-popup" href="javascript:;"
-                                data-thumb="{{ asset('videos/user-clip.mp4') }}" {{-- href="{{ asset('videos/user-clip.mp4') }}" --}}
-                                data-id="67ef066938c58e2bce0a4d72"
-                                data-demo-href="{{ asset('videos/user-clip.mp4') }}"
-                                style="background-image: url({{ asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                <!-- Main wrap -->
-                                <div class="content-wrap">
-                                    <div class="mt-2 mb-0">
-                                        <div
-                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                            <div style="display:flex;align-items:center;width:34%;height:100%">
-                                            </div>
 
-                                            <div
-                                                style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                <div style="display: flex">
-                                                    <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                        style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                    <h6 class="ml-2 text-white">Artist Name</h6>
-                                                </div>
-                                                <div style="display: flex;margin-top:-6px">
-                                                    <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                        style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                    <p style="font-size: 9px" class="ml-2 text-white">Rojava</p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- Post body -->
-                                    <div class="card-body p-0">
-
-
-
-
-                                        <!-- /Post body -->
-                                        <div class="mt-2 mb-0" style="top: 250px;position: relative;bottom: auto;">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                <div style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                        <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg"
-                                                            style="width:100%;height:100%;object-fit:cover">
-                                                        <img src="http://127.0.0.1:2002/assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg"
-                                                            style="width:100%;height:100%;object-fit:cover">
-                                                        <span style="font-weight:400;font-family:Genos">0</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="text-white"
-                                                    style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                    <i class="fas fa-play"></i>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
