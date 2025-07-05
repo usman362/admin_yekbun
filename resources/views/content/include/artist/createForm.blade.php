@@ -44,7 +44,7 @@
 
                 <div class="col-12">
                     <div class="card">
-                        <h5 class="card-header">Image</h5>
+                        <h5>Image</h5>
                         <div class="card-body">
                             <div class="dropzone needsclick" action="/" id="dropzone-artist-img">
                                 <div class="dz-message needsclick">
