@@ -49,34 +49,26 @@ class CityController extends Controller
         }
 
         $cities = $cities->paginate(15);
-        // if (!empty($request->limit)) {
+        if (!empty($request->limit)) {
 
-        //     if ($request->limit !== 'all') {
-        //         $limit = (int)$request->limit;
-        //         $cities->limit($limit);
-        //     }
+            if ($request->limit !== 'all') {
+                $limit = (int)$request->limit;
+                $cities->limit($limit);
+            }
 
-        //     // Get results
-        //     $cities = $cities->get();
-        // } else {
-        //     // If no conditions applied, limit results to 15
-        //     if (!$hasConditions) {
-        //         $cities->limit(15);
-        //     }
-
-        //     // Get results
-        //     $cities = $cities->get();
-        // }
-
-        $data = [
-            'cities' => $cities->items(),
-            'pagination' => [
-                'page' => $cities->currentPage(),
-                'count' => $cities->perPage(),
-                'totalItems' => $cities->total(),
-                'totalPages' => $cities->lastPage(),
-            ]
-        ];
+            // Get results
+            $data = $cities->get();
+        } else {
+            $data = [
+                'cities' => $cities->items(),
+                'pagination' => [
+                    'page' => $cities->currentPage(),
+                    'count' => $cities->perPage(),
+                    'totalItems' => $cities->total(),
+                    'totalPages' => $cities->lastPage(),
+                ]
+            ];
+        }
 
         return ResponseHelper::sendResponse($data, 'Cities has been Fetch Successfully!');
     }
