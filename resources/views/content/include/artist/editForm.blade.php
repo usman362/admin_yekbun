@@ -83,8 +83,7 @@
         </div>
     </div>
 </form>
-
-<script>
+ <script>
     'use strict';
 
     function initializeDropzones() {
@@ -123,9 +122,11 @@
                 },
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
+
                 sending: function(file, xhr, formData) {
                     formData.append('folder', 'music');
                 },
+
                 success: function(file, response) {
                     file.previewElement.classList.add("dz-success");
                     file.previewElement.dataset.path = response.path;
@@ -139,47 +140,65 @@
 
                     // Add the new one
                     hiddenInputsContainer.innerHTML += `
-        <input type="hidden" name="image" value="${response.path}" data-path="${response.path}">
-    `;
+                        <input type="hidden" name="image" value="${response.path}" data-path="${response.path}">
+                    `;
                 },
 
-            removedfile: function(file) {
-    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container').querySelector('.hidden-inputs');
-    const input = hiddenInputsContainer.querySelector('input[name="image"]');
+                removedfile: function(file) {
+                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container').querySelector('.hidden-inputs');
+                    const input = hiddenInputsContainer.querySelector('input[name="image"]');
 
-   if (input) {
-    input.value = response.path;
-    input.dataset.path = response.path;
-} else {
-    hiddenInputsContainer.innerHTML += `
-        <input type="hidden" name="image" value="${response.path}" data-path="${response.path}">
-    `;
-}
+                    if (input) {
+                        input.value = '';
+                        input.dataset.path = '';
+                    }
 
-    file.previewElement.parentNode.removeChild(file.previewElement);
+                    if (file.previewElement && file.previewElement.parentNode) {
+                        file.previewElement.parentNode.removeChild(file.previewElement);
+                    }
 
-    $.ajax({
-        url: '{{ route('artists.delete-img', $artist->id) }}',
-        method: 'delete',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        data: {
-            path: file.previewElement.dataset.path
-        }
-    });
+                    $.ajax({
+                        url: '{{ route('artists.delete-img', $artist->id) }}',
+                        method: 'delete',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            path: file.previewElement?.dataset.path
+                        }
+                    });
 
-    return this._updateMaxFilesReachedClass();
-}
-
-
+                    return this._updateMaxFilesReachedClass();
+                }
             });
+
+            // ✅ Load existing image if present
+            const existingImagePath = dropzoneElement.closest('.dropzone-container')
+                .querySelector('input[name="image"]')?.value;
+
+            if (existingImagePath) {
+                const imageUrl = '{{ asset('storage') }}/' + existingImagePath.replace(/^\/?/, '');
+
+                const mockFile = {
+                    name: existingImagePath.split('/').pop(),
+                    size: 123456, // You can update this with real size if known
+                    dataURL: imageUrl
+                };
+
+                dropzoneInstance.emit("addedfile", mockFile);
+                dropzoneInstance.emit("thumbnail", mockFile, imageUrl);
+                dropzoneInstance.emit("complete", mockFile);
+
+                mockFile.previewElement.classList.add("dz-success", "dz-complete");
+                mockFile.previewElement.dataset.path = existingImagePath;
+            }
         });
     }
+
+    // Call the function
     initializeDropzones();
-    // Attach event listener to the button
-    // document.getElementById("initDropzones").addEventListener("click", initializeDropzones);
 </script>
+
 <script>
     async function imageUrlToFile(imageUrl, fileName) {
         // Fetch the image
