@@ -181,35 +181,37 @@ class ArtistController extends Controller
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $artist = Artist::findorFail($id);
-        $artist->name = $request->name;
-        // $artist->last_name = $request->last_name;
-        $artist->dob = $request->dob;
-        $artist->gender = $request->gender;
-        $artist->image = $request->image ?? '';
-        $artist->status = $request->status;
-        // $artist->city_id = $request->city;
-        $artist->province_id = $request->province;
+ public function update(Request $request, $id)
+{
+  
+    $artist = Artist::findOrFail($id);
 
-        // if($request->hasFile('image')){
-        //    if(isset($artist->image)){
-        //        $image_path  = public_path('storage/'.$artist->image);
-        //        if(file_exists($image_path)){
-        //            unlink($image_path);
-        //        }
-        //        $path = $request->file('image')->store('/images/artist' , 'public');
-        //        $artist->image = $path;
-        //    }
-        // }
+    $artist->name = $request->name;
+    $artist->dob = $request->dob;
+    $artist->gender = $request->gender;
+    $artist->status = $request->status;
+    $artist->province_id = $request->province;
+ 
+    // Check if new image is different from old one
+    if ($request->image && $request->image !== $artist->image) {
+        $oldImagePath = public_path($artist->image);
 
-        if ($artist->update()) {
-            return redirect()->route('artist.index')->with('success', 'Artist Has been Updated');
-        } else {
-            return redirect()->route('artist.index')->with('success', 'Artist not updated');
+        // Unlink only if file exists and is local
+        if ($artist->image && file_exists($oldImagePath)) {
+            @unlink($oldImagePath); // Use @ to suppress errors in case of missing file
         }
+
+        $artist->image = $request->image;
     }
+
+    if ($artist->save()) {
+        return redirect()->route('artist.index')->with('success', 'Artist has been updated');
+    } else {
+        return redirect()->route('artist.index')->with('error', 'Artist not updated');
+    }
+}
+
+
 
     /**
      * Remove the specified resource from storage.
