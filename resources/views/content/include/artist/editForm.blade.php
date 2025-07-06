@@ -54,7 +54,7 @@
 
         <div class="col-12">
             <div class="card">
-                <h5 >Image</h5>
+                <h5 style="margin-left: 12px; margin-top: 9px;" >Image</h5>
                 <div class="card-body">
                     <div class="dropzone needsclick" action="/" id="dropzone-img{{ $artist->id }}">
                         <div class="dz-message needsclick">
