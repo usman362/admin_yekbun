@@ -88,7 +88,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
-
+use App\Jobs\TestJob;
 //use App\Http\Controllers\GreetingsController;
 
 //use App\Http\Controllers\StateController;
@@ -163,6 +163,11 @@ Route::get('test', function () {
         $user->save();
     }
     return 'success';
+});
+
+Route::get('/test-job', function () {
+    TestJob::dispatch();
+    return 'TestJob dispatched!';
 });
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
