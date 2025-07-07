@@ -15,44 +15,36 @@
             border: 1px solid #696dff;
             background: #696dff;
         }
-
-        span[aria-current="page"] span {
+        span[aria-current="page"] span{
             background-color: #696dff !important;
             color: #fff !important;
             border: 1px solid #696eff !important;
         }
-
-        span[aria-label="pagination.previous"] {
+        span[aria-label="pagination.previous"]{
             display: none;
         }
-
-        span[aria-label="pagination.next"] {
+        span[aria-label="pagination.next"]{
             display: none;
         }
-
-        a[aria-label="pagination.next"] {
+        a[aria-label="pagination.next"]{
             display: none;
         }
-
-        a[aria-label="pagination.previous"] {
+        a[aria-label="pagination.previous"]{
             display: none;
         }
-
-        nav[role="navigation"]>div:first-child {
+        nav[role="navigation"]>div:first-child{
             display: none;
         }
-
         nav[role="navigation"]>div:last-child>div:last-child>span {
             box-shadow: none !important;
         }
 
-        nav[role="navigation"]>div:last-child>div:last-child {
+        nav[role="navigation"]>div:last-child>div:last-child{
             float: right;
             margin-top: -32px
         }
-
-        @media(max-width:1500px) {
-            nav[role="navigation"]>div:last-child>div:last-child {
+        @media(max-width:1500px){
+            nav[role="navigation"]>div:last-child>div:last-child{
                 float: right;
                 margin-top: 0 !important;
             }
@@ -95,35 +87,29 @@
 
     <div class="card">
         <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
-            <h5 class="m-0">City List</h5>
+    <h5 class="m-0">City List</h5>
 
-            <div class="d-flex flex-wrap align-items-center gap-2">
-                <!-- Filter & Search Form -->
-                <form method="GET" action="{{ route('settings.cities.index') }}"
-                    class="d-flex gap-2 align-items-center mb-0">
-                    <!-- Province Filter -->
-                    <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
-                        <option value="">Sort by Provinces</option>
-                        @foreach ($regions as $region)
-                            <option value="{{ $region->id }}"
-                                {{ request('region_id') == $region->id ? 'selected' : '' }}>
-                                {{ $region->name }}
-                            </option>
-                        @endforeach
-                    </select>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <!-- Filter & Search Form -->
+        <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center mb-0">
+            <!-- Province Filter -->
+            <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
+                <option value="">Sort by Provinces </option>
+                @foreach($regions as $region)
+                    <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
+                        {{ $region->name }}
+                    </option>
+                @endforeach
+            </select>
+ 
+        </form>
 
-                    <!-- Optional: Search box -->
-                    <input type="text" name="search" class="form-control form-control-sm"
-                        placeholder="Search city or zip" value="{{ request('search') }}">
-                </form>
-
-
-                <!-- Add City Button (Right beside filters) -->
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createModal">
-                    <i class="bx bx-plus me-0 me-sm-1"></i> Add City
-                </button>
-            </div>
-        </div>
+        <!-- Add City Button (Right beside filters) -->
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createModal">
+            <i class="bx bx-plus me-0 me-sm-1"></i> Add City
+        </button>
+    </div>
+</div>
 
 
         <div class="card-datatable table-responsive">
@@ -134,8 +120,8 @@
                         <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1"
                             style="width: 0px; display: none;" aria-label=""></th>
                         <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1"
-                            colspan="1" aria-label="Name: aktivieren, um Spalte absteigend zu sortieren"
-                            aria-sort="ascending">Country
+                            colspan="1"
+                            aria-label="Name: aktivieren, um Spalte absteigend zu sortieren" aria-sort="ascending">Country
                             Name</th>
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
                             aria-label="Position: aktivieren, um Spalte aufsteigend zu sortieren">
@@ -149,7 +135,8 @@
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1"
                             aria-label="Salary: aktivieren, um Spalte aufsteigend zu sortieren">Total
                             People</th>
-                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Actions</th>
+                        <th class="sorting_disabled" rowspan="1" colspan="1"
+                            aria-label="Actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -230,19 +217,16 @@
         }
     </script>
 
-    <script>
-        const regions = @json(
-            $countries->mapWithKeys(function ($country) {
-                return [
-                    $country->id => $country->regions->map(function ($region) {
-                        return [
-                            'id' => $region->id,
-                            'name' => $region->name,
-                        ];
-                    }),
-                ];
-            }));
-    </script>
+<script>
+    const regions = @json($countries->mapWithKeys(function ($country) {
+      return [$country->id => $country->regions->map(function ($region) {
+          return [
+              'id'   => $region->id,
+              'name' => $region->name,
+          ];
+      })];
+    }));
+  </script>
 
     <script>
         function loadRegions(event) {

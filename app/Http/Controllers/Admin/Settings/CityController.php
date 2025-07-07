@@ -20,9 +20,11 @@ class CityController extends Controller
      */
 public function index(Request $request)
 {
+    // Load all regions and countries for filters
     $regions = Region::orderBy("name", "ASC")->get();
     $countries = Country::orderBy("name", "ASC")->get();
 
+    // Prepare the query
     $query = City::query()->with(['region', 'country']);
 
     // Filter by region (province)
@@ -30,18 +32,24 @@ public function index(Request $request)
         $query->where('region_id', $request->region_id);
     }
 
-    // Search by city name or zip code
+    // Optional: Filter by search term (city name or zipcode)
     if ($request->filled('search')) {
-        $query->where(function($q) use ($request) {
+        $query->where(function ($q) use ($request) {
             $q->where('name', 'like', '%' . $request->search . '%')
               ->orWhere('zipcode', 'like', '%' . $request->search . '%');
         });
     }
 
+    // Paginate results
     $cities = $query->orderBy("zipcode", "ASC")->paginate(10);
 
+    // Retain filters in pagination links
+    $cities->appends($request->only(['region_id', 'search']));
+
+    // Return view with data
     return view("content.settings.cities.index", compact("regions", "countries", "cities"));
 }
+
 
 
 
