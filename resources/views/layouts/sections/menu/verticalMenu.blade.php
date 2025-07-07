@@ -213,7 +213,7 @@
                 </ul>
             </li>
         @endcan
-
+  @can('videos.read')
         <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
@@ -232,7 +232,7 @@
                 </li>
             </ul>
         </li>
-
+@endcan
         @can('feeds.read')
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">User adds</span>
@@ -1665,7 +1665,7 @@
     @endcan
 
 
-    @can('manageorigin.read')
+    @can('appinfo.read')
         <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
             <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-info-square"></i>
