@@ -233,6 +233,7 @@
                 $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
+                $('#thumbnail').val("");
                 $('.submit-clip-template').attr('disabled', true);
                 return this._updateMaxFilesReachedClass();
             }

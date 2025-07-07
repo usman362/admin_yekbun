@@ -218,6 +218,7 @@
 
                 $('#error-thumbnail').text("");
                 $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
+                $('#thumbnail').val("");
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
                 $('.submit-clip-template').attr('disabled', true);
@@ -281,29 +282,35 @@
         })
 
         $('.generated-img').click(function() {
-            let src = $(this).attr('src');
-            $('.dz-thumbnail img').attr('src', src);
-            $('#thumbnail').val(src);
-            if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
-                $('.submit-clip-template').attr('disabled', false);
+            if ($(this).attr('src') !== "{{ asset('assets/img/thumbnail.svg') }}") {
+                let src = $(this).attr('src');
+                $('.dz-thumbnail img').attr('src', src);
+                $('#thumbnail').val(src);
+                if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
+                    $('.submit-clip-template').attr('disabled', false);
+                }
             }
         })
 
-        $('[name="title"]').input(function(){
-            if($('#thumbnail').val() !== "" && $('[name="source"]').val() !== "" && $(this).val() !== ""){
-                $('.submit-clip-template').attr('disabled', false);
-            }else{
-                $('.submit-clip-template').attr('disabled', true);
-            }
-        })
+        $('[name="title"]').on('input', function() {
+            validateClipTemplateForm();
+        });
 
-        $('[name="source"]').input(function(){
-            if($('#thumbnail').val() !== "" && $('[name="title"]').val() !== "" && $(this).val() !== ""){
+        $('[name="source"]').on('input', function() {
+            validateClipTemplateForm();
+        });
+
+        function validateClipTemplateForm() {
+            const thumbnail = $('#thumbnail').val();
+            const title = $('[name="title"]').val();
+            const source = $('[name="source"]').val();
+
+            if (thumbnail !== "" && title !== "" && source !== "") {
                 $('.submit-clip-template').attr('disabled', false);
-            }else{
+            } else {
                 $('.submit-clip-template').attr('disabled', true);
             }
-        })
+        }
     });
 </script>
 
