@@ -293,11 +293,13 @@
         })
 
         $('.generated-img').click(function() {
-            let src = $(this).attr('src');
-            $('.dz-thumbnail img').attr('src', src);
-            $('#thumbnail').val(src);
-            if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
-                $('.submit-clip-template').attr('disabled', false);
+            if($(this).attr('src') !== "{{ asset('assets/img/thumbnail.svg') }}"){
+                let src = $(this).attr('src');
+                $('.dz-thumbnail img').attr('src', src);
+                $('#thumbnail').val(src);
+                if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
+                    $('.submit-clip-template').attr('disabled', false);
+                }
             }
         })
 
