@@ -86,8 +86,19 @@
     </div>
 
     <div class="card">
-        <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+  <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
     <h5 class="m-0">City List</h5>
+     <form method="GET" action="{{ route('settings.cities.index') }}" id="perPageForm">
+            <input type="hidden" name="region_id" value="{{ request('region_id') }}">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <select name="per_page" class="form-select form-select-sm" onchange="document.getElementById('perPageForm').submit()">
+                @foreach([10, 20, 50, 100] as $size)
+                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>
+                        Show {{ $size }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
 
     <div class="d-flex flex-wrap align-items-center gap-2">
         <!-- Filter & Search Form -->
@@ -101,10 +112,7 @@
             </option>
         @endforeach
     </select>
-{{-- 
-    <!-- Optional: Search box -->
-    <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city or zip"
-           value="{{ request('search') }}"> --}}
+ 
 </form>
 
 
