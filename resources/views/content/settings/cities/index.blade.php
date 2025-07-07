@@ -86,13 +86,32 @@
     </div>
 
     <div class="card">
-        <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="m-0">City List</h5>
+         <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+    <h5 class="m-0">City List</h5>
 
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
-                    class="bx bx-plus me-0 me-sm-1"></i> Add City</button>
+    <!-- Province Filter -->
+    <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center">
+        <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
+            <option value="">-- Sort by Province --</option>
+            @foreach($regions as $region)
+                <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
+                    {{ $region->name }}
+                </option>
+            @endforeach
+        </select>
 
-        </div>
+        <!-- Search Field -->
+        <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city..."
+            value="{{ request('search') }}">
+
+        <button type="submit" class="btn btn-sm btn-secondary">Filter</button>
+    </form>
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        <i class="bx bx-plus me-0 me-sm-1"></i> Add City
+    </button>
+</div>
+
         <div class="card-datatable table-responsive">
 
             <table class="table data-table dt-multilingual border-top no-footer dtr-column">
