@@ -18,31 +18,31 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $regions = Region::orderBy("name", "ASC")->get();
-        $countries = Country::orderBy("name", "ASC")->get();
-        $cities = City::orderBy("zipcode", "ASC")->paginate(10);
-        if ($request->ajax()) {
-            return DataTables::of($cities)
-                ->addColumn('country', function ($city) {
-                    return $city->country ? $city->country->name : '';
-                })
-                ->addColumn('region', function ($city) {
-                    return $city->region ? $city->region->name : '';
-                })
-                ->addColumn('total_people', function ($city) {
-                    return $city->users->count();
-                })
-                ->addColumn('actions', function ($city) {
-                    return view('content.settings.cities.includes.actions', compact('city'))->render();
-                })
-                ->rawColumns(['actions'])
-                ->make(true);
-        }
+public function index(Request $request)
+{
+    $regions = Region::orderBy("name", "ASC")->get();
+    $countries = Country::orderBy("name", "ASC")->get();
 
-        return view("content.settings.cities.index", compact("regions", "countries","cities"));
+    $query = City::query()->with(['region', 'country']);
+
+    // Filter by region (province)
+    if ($request->filled('region_id')) {
+        $query->where('region_id', $request->region_id);
     }
+
+    // Search by city name or zip code
+    if ($request->filled('search')) {
+        $query->where(function($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('zipcode', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    $cities = $query->orderBy("zipcode", "ASC")->paginate(10);
+
+    return view("content.settings.cities.index", compact("regions", "countries", "cities"));
+}
+
 
 
     /**
