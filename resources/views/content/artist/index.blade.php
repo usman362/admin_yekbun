@@ -543,9 +543,13 @@
                         dropzoneKey++;
                     }
                     if(folder === 'images' && folder !== 'videos'){
+                        if($('#createartistForm [name="status"]').val() !== ''){
                         $('.submit-artist-btn').attr('disabled', false);
+                        }
                     }else{
+                        if($('#createmusicForm [name="status"]').val() !== ''){
                         $('.submit-music-btn').attr('disabled', false);
+                        }
                     }
                     if (hiddenInputName == 'video') {
                         // ✅ Get video duration
@@ -655,7 +659,9 @@
                 let src = $(this).attr('src');
                 $('.dz-thumbnail img').attr('src', src);
                 $('#thumbnail').val(src);
-                $('.submit-video-btn').attr('disabled', false);
+                if($('#createvideoForm [name="status"]').val() !== ''){
+                    $('.submit-video-btn').attr('disabled', false);
+                }
             })
         });
     </script>
