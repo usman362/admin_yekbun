@@ -314,13 +314,13 @@
     </script>
     {{-- Artist Modal --}}
     <x-modal id="createartistModal" title="Create Artist" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createartistForm" size="md">
+        saveBtnForm="createartistForm" size="md" saveBtnClass="btn btn-primary submit-artist-btn">
         @include('content.include.artist.createForm', ['form' => 'createartistForm'])
     </x-modal>
 
     {{-- Songs Modal --}}
     <x-modal id="createmusicModal" title="Create Song" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createmusicForm" size="md">
+        saveBtnForm="createmusicForm" size="md" saveBtnClass="btn btn-primary submit-music-btn">
         @include('content.video_clips.createSong', ['form' => 'createmusicForm'])
     </x-modal>
 
@@ -381,7 +381,7 @@
 
     {{-- Video Clips Modal --}}
     <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createvideoForm" size="md">
+        saveBtnForm="createvideoForm" size="md" saveBtnClass="btn btn-primary submit-video-btn">
         @include('content.include.video_clips.createForm', ['form' => 'createvideoForm'])
     </x-modal>
 @section('page-script')
@@ -542,7 +542,11 @@
                             `<input type="hidden" name="${fileInputName}_file_size[]" value="${response.size}">`;
                         dropzoneKey++;
                     }
-
+                    if(folder === 'images' && folder !== 'videos'){
+                        $('.submit-artist-btn').attr('disabled', false);
+                    }else{
+                        $('.submit-artist-btn').attr('disabled', false);
+                    }
                     if (hiddenInputName == 'video') {
                         // ✅ Get video duration
                         const video = document.createElement('video');
@@ -584,7 +588,7 @@
                     $('#error-thumbnail').text("");
                     $('#thumbnail-history').css('display', 'none');
                     $('#generated-thumbnails').css('display', 'none');
-
+                    $('.submit-video-btn').attr('disabled', true);
                     return this._updateMaxFilesReachedClass();
                 }
             });
@@ -630,6 +634,7 @@
                     $("#thumbnail-history #img1").attr("src", newSrc1);
                     $("#thumbnail-history #img2").attr("src", newSrc2);
                     $("#thumbnail-history #img3").attr("src", newSrc3);
+                    $('.submit-video-btn').attr('disabled', false);
                 },
                 error: function() {
                     $('#error-thumbnail').text("Failed to generate thumbnail.");
@@ -658,6 +663,9 @@
     <script>
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
+            $('.submit-video-btn').attr('disabled', true);
+            $('.submit-music-btn').attr('disabled', true);
+            $('.submit-artist-btn').attr('disabled', true);
         }
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
