@@ -545,7 +545,7 @@
                     if(folder === 'images' && folder !== 'videos'){
                         $('.submit-artist-btn').attr('disabled', false);
                     }else{
-                        $('.submit-artist-btn').attr('disabled', false);
+                        $('.submit-music-btn').attr('disabled', false);
                     }
                     if (hiddenInputName == 'video') {
                         // ✅ Get video duration
@@ -588,7 +588,7 @@
                     $('#error-thumbnail').text("");
                     $('#thumbnail-history').css('display', 'none');
                     $('#generated-thumbnails').css('display', 'none');
-                    $('.submit-video-btn').attr('disabled', true);
+                    // $('.submit-video-btn').attr('disabled', true);
                     return this._updateMaxFilesReachedClass();
                 }
             });
