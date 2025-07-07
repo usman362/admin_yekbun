@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Models\Role;
-use App\Models\Permission;
+use Maklad\Permission\Models\Role;
+use Maklad\Permission\Models\Permission;
+ 
+// use App\Models\Role;
+// use App\Models\Permission;
 use MongoDB\BSON\ObjectId;
 //use Spatie\Permission\Traits\HasRoles;
 //use Spatie\Permission\Models\Role as SpatieRole;
@@ -116,27 +119,43 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, $id)
-    {
-        
-        $validated = $request->validated();
-        if (array_key_exists('permissions', $validated)) {
-            $permissions = $validated['permissions'];
-        } else {
-            $permissions = [];
-        }
 
-        $role = Role::find($id);
-        if ($role->name === 'Super Admin')
-            abort(403);
-        $role->name = $validated['name'];
-        $role->permission = $permissions;
-        $role->save();
+ 
 
-        session(['permissions' => $permissions]);
+public function update(UpdateRoleRequest $request, $id)
+{
+    // Validate input
+    $validated = $request->validated();
 
-        return back()->with("success", "Role successfully updated.");
+    // Extract permissions or default to empty array
+    $permissions = $validated['permissions'] ?? [];
+
+    // Find the role by ID
+    $role = Role::find($id);
+
+    if (!$role) {
+        return back()->withErrors("Role not found.");
     }
+
+    // Prevent editing Super Admin
+    if ($role->name === 'Super Admin') {
+        abort(403, 'Cannot edit Super Admin role.');
+    }
+
+    // Update the role name
+    $role->name = $validated['name'];
+    $role->save();
+
+    // Sync permissions properly using the package method
+    $role->syncPermissions($permissions);
+
+    // Update session if needed
+    session(['permissions' => $permissions]);
+
+    return back()->with("success", "Role successfully updated.");
+}
+
+
 
     /**
      * Remove the specified resource from storage.
