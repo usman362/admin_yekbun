@@ -288,6 +288,22 @@
                 $('.submit-clip-template').attr('disabled', false);
             }
         })
+
+        $('[name="title"]').input(function(){
+            if($('#thumbnail').val() !== "" && $('[name="source"]').val() !== "" && $(this).val() !== ""){
+                $('.submit-clip-template').attr('disabled', false);
+            }else{
+                $('.submit-clip-template').attr('disabled', true);
+            }
+        })
+
+        $('[name="source"]').input(function(){
+            if($('#thumbnail').val() !== "" && $('[name="title"]').val() !== "" && $(this).val() !== ""){
+                $('.submit-clip-template').attr('disabled', false);
+            }else{
+                $('.submit-clip-template').attr('disabled', true);
+            }
+        })
     });
 </script>
 
