@@ -91,17 +91,7 @@
     
 
     <div class="d-flex flex-wrap align-items-center gap-2">
-         <form method="GET" action="{{ route('settings.cities.index') }}" id="perPageForm">
-            <input type="hidden" name="region_id" value="{{ request('region_id') }}">
-            <input type="hidden" name="search" value="{{ request('search') }}">
-            <select name="per_page" class="form-select form-select-sm" onchange="document.getElementById('perPageForm').submit()" style="height: 34px;">
-                @foreach([10, 20, 50, 100] as $size)
-                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>
-                        Show {{ $size }}
-                    </option>
-                @endforeach
-            </select>
-        </form>
+       
         <!-- Filter & Search Form -->
         <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center mb-0">
     <!-- Province Filter -->
@@ -115,6 +105,17 @@
     </select>
  
 </form>
+  <form method="GET" action="{{ route('settings.cities.index') }}" id="perPageForm">
+            <input type="hidden" name="region_id" value="{{ request('region_id') }}">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <select name="per_page" class="form-select form-select-sm" onchange="document.getElementById('perPageForm').submit()" style="height: 34px;">
+                @foreach([10, 20, 50, 100] as $size)
+                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>
+                         {{ $size }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
 
 
         <!-- Add City Button (Right beside filters) -->
