@@ -119,6 +119,37 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return LogOptions::defaults();
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->user_id = self::generateCustomId();
+        });
+    }
+
+    public static function generateCustomId()
+    {
+        $length = 4;
+
+        while (true) {
+            $min = pow(10, $length - 1);
+            $max = pow(10, $length) - 1;
+
+            $customId = (string) random_int($min, $max);
+
+            if (!self::where('custom_id', $customId)->exists()) {
+                return $customId;
+            }
+
+            // If too many IDs exist, increase the length
+            if (self::whereBetween('custom_id', [$min, $max])->count() >= ($max - $min + 1)) {
+                $length++;
+            }
+        }
+    }
+
+
     public function stories()
     {
         return $this->hasMany(Story::class);
@@ -154,9 +185,9 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(Feed::class, 'id', 'user_id');
     }
     public function reportFeeds()
-{
-    return $this->hasMany(ReportFeeds::class, 'user_id', '_id');
-}
+    {
+        return $this->hasMany(ReportFeeds::class, 'user_id', '_id');
+    }
 
 
     public function user()
@@ -167,9 +198,9 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
 
     public function role()
-{
-    return $this->belongsToMany(Role::class)->limit(1);
-}
+    {
+        return $this->belongsToMany(Role::class)->limit(1);
+    }
 
     public function permissions()
     {
