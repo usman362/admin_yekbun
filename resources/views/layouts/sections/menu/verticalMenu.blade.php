@@ -1664,7 +1664,7 @@
         </li>
     @endcan
 
-
+{{-- // @can('manageorigin.read') wrong calling here --}}
     @can('appinfo.read')
         <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
             <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">
