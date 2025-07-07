@@ -101,10 +101,10 @@
         </select>
 
         <!-- Search Field -->
-        <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city..."
+        {{-- <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city..."
             value="{{ request('search') }}">
 
-        <button type="submit" class="btn btn-sm btn-secondary">Filter</button>
+        <button type="submit" class="btn btn-sm btn-secondary">Filter</button> --}}
     </form>
 
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
