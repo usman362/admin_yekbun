@@ -101,10 +101,10 @@
             </option>
         @endforeach
     </select>
-
+{{-- 
     <!-- Optional: Search box -->
     <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city or zip"
-           value="{{ request('search') }}">
+           value="{{ request('search') }}"> --}}
 </form>
 
 
