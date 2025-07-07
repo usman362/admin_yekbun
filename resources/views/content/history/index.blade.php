@@ -299,25 +299,28 @@
                                         data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
-                                           <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
-    <div class="user-block">
-        <div class="user-info">
-            <div class="row">
-                <div class="col-md-2 p-0 d-flex align-items-center justify-content-center">
-                    <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
-                         style="width: 100px; height: 36px; object-fit: cover; visibility: visible;"
-                         onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='">
-                </div>
-                <div class="col-md-10 d-flex flex-column justify-content-center">
-                    <p class="m-0" title="{{ $feed->title }}">
-                        <b>{{ $feed->title }}</b>
-                    </p>
-                    <small class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                            <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
+                                                <div class="user-block">
+                                                    <div class="user-info">
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-2 p-0 d-flex align-items-center justify-content-center">
+                                                                <img src="{{ asset('storage/' . (optional($feed->user)->image ?? '')) }}"
+                                                                    style="width: 100px; height: 36px; object-fit: cover; visibility: visible;"
+                                                                    onerror="this.onerror=null;this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='">
+                                                            </div>
+                                                            <div
+                                                                class="col-md-10 d-flex flex-column justify-content-center">
+                                                                <p class="m-0" title="{{ $feed->title }}">
+                                                                    <b>{{ $feed->title }}</b>
+                                                                </p>
+                                                                <small
+                                                                    class="time"><i>{{ optional($feed->created_at)->diffForHumans() ?? 'Unknown time' }}</i></small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <!-- Post body -->
                                             <div class="card-body p-0">
@@ -379,8 +382,8 @@
                                             style="min-width: unset; width: 100px;">
                                             <span style="font-family:Genos;color:#c0c0c0">Options</span>
                                             <form action="{{ route('history.destroy', $feed->id) }}"
-                                                onsubmit="confirmAction(event, () => event.target.submit())"
-                                                method="post" class="d-inline">
+                                                onsubmit="confirmAction(event, () => event.target.submit())" method="post"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="row ml-0" style="width:100px;">
@@ -422,7 +425,7 @@
         <div class="content-backdrop fade"></div>
 
         <x-modal id="createhistoryModal" title="Create History" saveBtnText="Create" saveBtnType="submit"
-            saveBtnForm="createForm" size="md">
+            saveBtnForm="createForm" size="md" saveBtnClass="btn btn-primary submit-clip-template">
             @include('content.include.history.createForm')
         </x-modal>
     </div>
@@ -928,6 +931,7 @@
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
         }
+        $('.submit-clip-template').attr('disabled', 'true');
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 
