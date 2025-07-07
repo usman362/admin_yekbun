@@ -73,13 +73,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            @forelse($user->roles as $role)
-                                <span class="badge {{ $role->name === 'Super Admin' ? 'bg-label-primary' : 'bg-label-dark' }}">{{ $role->name }}</span>
-                            @empty
-                                <span class="badge bg-label-warning">Not assigned yet</span>
-                            @endforelse
-                        </td>
+                     <td>
+    @foreach($user->roles as $role)
+        <span class="badge {{ $role->name === 'Super Admin' ? 'bg-label-primary' : 'bg-label-dark' }}">
+            {{ $role->name }}
+        </span>
+    @endforeach
+</td>
+
                         <td>
                             @if ($user->roles->isNotEmpty())
                                 <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#permissionsModal{{ $user->id }}">
