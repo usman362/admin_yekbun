@@ -124,32 +124,23 @@ class RoleController extends Controller
 
 public function update(UpdateRoleRequest $request, $id)
 {
-    // Validate input
     $validated = $request->validated();
-
-    // Extract permissions or default to empty array
     $permissions = $validated['permissions'] ?? [];
 
-    // Find the role by ID
     $role = Role::find($id);
-
-    if (!$role) {
-        return back()->withErrors("Role not found.");
+    if (!$role || $role->name === 'Super Admin') {
+        abort(403);
     }
 
-    // Prevent editing Super Admin
-    if ($role->name === 'Super Admin') {
-        abort(403, 'Cannot edit Super Admin role.');
-    }
-
-    // Update the role name
     $role->name = $validated['name'];
-    $role->save();
 
-    // Sync permissions properly using the package method
+    // Sync via package (updates permission_ids)
     $role->syncPermissions($permissions);
 
-    // Update session if needed
+    // Manually update `permission` array
+    $role->permission = $permissions;
+    $role->save();
+
     session(['permissions' => $permissions]);
 
     return back()->with("success", "Role successfully updated.");
