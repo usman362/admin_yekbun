@@ -220,7 +220,7 @@
                 $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
-                $('.submit-clip-template').attr('disabled', 'true');
+                $('.submit-clip-template').attr('disabled', true);
                 return this._updateMaxFilesReachedClass();
 
             }
@@ -262,7 +262,7 @@
                 $("#thumbnail-history #img1").attr("src", newSrc1);
                 $("#thumbnail-history #img2").attr("src", newSrc2);
                 $("#thumbnail-history #img3").attr("src", newSrc3);
-                $('.submit-clip-template').attr('disabled', 'false');
+                $('.submit-clip-template').attr('disabled', false);
             },
             error: function() {
                 $('#error-thumbnail').text("Failed to generate thumbnail.");
