@@ -53,6 +53,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th>#</th>
               <th>User</th>
               <th>Reason</th>
               <th>Date</th>
@@ -62,8 +63,13 @@
           </thead>
           <tbody class="table-border-bottom-0">
             @forelse($flaggedUsers as $flagged)
+
             <tr>
-              <td>{{ $flagged->user? $flagged->user->name: '' }}</td>
+               <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
+               <td>
+      {{ $flagged->user? $flagged->user->name: '' }}<br>
+      <small class="text-muted">{{ $flagged->user? $flagged->user->user_id : '' }}</small>
+    </td>
               <td>{{ $flagged->reason }}</td>
               <td>{{ $flagged->created_at->format('F jS, Y') }}</td>
               <td>

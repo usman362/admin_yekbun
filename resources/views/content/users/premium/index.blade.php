@@ -177,7 +177,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>User ID</th>
+                                    <th>#</th>
                                     <th>User</th>
                                     <th>Username</th>
                                     <th>Device Type</th>
@@ -193,7 +193,8 @@
                             <tbody class="table-border-bottom-0">
                                 @forelse($users as $userr)
                                     <tr>
-                                        <td>{{ $userr->user_id }}</td>
+                                        <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
+
                                         <td>
                                             <div class="d-flex justify-content-start align-items-center user-name">
                                                 <div class="avatar-wrapper">
@@ -213,7 +214,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ $userr->username }}</td>
+                                       <td>
+    {{ $userr->username }}<br>
+    <small class="text-muted">{{ $userr->user_id }}</small>
+</td>
+
+
+                                        </td>
                                         <td>{{ $userr->device_type }}</td>
                                         <td>{{ $userr->device_imei }}</td>
                                         <td>{{ $userr->device_model }}</td>
