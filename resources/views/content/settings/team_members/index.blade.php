@@ -43,6 +43,7 @@
             </button>
         </div>
     </div>
+@include('content.settings.team_members.includes.create_form')
 
     <div class="table-responsive text-nowrap">
         <table class="table">

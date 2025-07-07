@@ -43,43 +43,34 @@ public function index()
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTeamMemberRequest $request)
-    {
-       //  dd($request->all());
-        $validated = $request->validated();
-        $validated['image'] = $request->image??null;
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->image??'';
-            $validated["image"] = $imagePath;
-        }
+ public function store(StoreTeamMemberRequest $request)
+{
+    $validated = $request->validated();
 
-        $validated['is_admin_user'] = 1;
-        $validated['password'] = Hash::make($validated['password']);
-        $validated['status'] = (int)$request->status;
-        $validated['role_id'] = $validated['roles'];
-        $validated['user_type'] = 'team_member';
-
-        // $newUserPermission = Permission::firstOrCreate([
-        //     'name' => 'all',
-        //     'guard_name' => 'web', // Optional, depends on your configuration
-        //   ]);
-
-        // $role = Role::firstOrCreate([
-        //     'name' => 'admin',
-        //     'guard_name' => 'web', // Optional
-        //   ]);
-        $role = Role::find($validated['role_id']);
-        // $role->givePermissionTo($newUserPermission);
-
-        try {
-            $user = User::create($validated);
-            $user->assignRole($role);
-        } catch (\Throwable $e) {
-            return back()->with("success", "Team member successfully added.");
-        }
-        return back()->with("success", "Team member successfully added.");
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('team-members', 'public'); // Save in storage/app/public/team-members
+        $validated['image'] = $imagePath; // Now it's a string (e.g., "team-members/avatar.jpg")
+    } else {
+        $validated['image'] = null;
     }
+
+    $validated['is_admin_user'] = 1;
+    $validated['password'] = Hash::make($validated['password']);
+    $validated['status'] = (int)$request->status;
+    $validated['role_id'] = $validated['roles'];
+    $validated['user_type'] = 'team_member';
+
+    try {
+        $user = User::create($validated);
+        $role = Role::find($validated['role_id']);
+        $user->assignRole($role);
+    } catch (\Throwable $e) {
+        return back()->with("error", "Failed to add team member.");
+    }
+
+    return back()->with("success", "Team member successfully added.");
+}
+
 
     /**
      * Update the specified resource in storage.
