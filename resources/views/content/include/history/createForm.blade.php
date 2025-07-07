@@ -296,7 +296,9 @@
             let src = $(this).attr('src');
             $('.dz-thumbnail img').attr('src', src);
             $('#thumbnail').val(src);
+            if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
             $('.submit-clip-template').attr('disabled', false);
+            }
         })
     });
 </script>
