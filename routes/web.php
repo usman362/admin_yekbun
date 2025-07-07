@@ -167,9 +167,6 @@ Route::get('test', function () {
 
 Route::get('/test-job', function () {
     TestJob::dispatch();
-    Artisan::call('queue:work', [
-        '--timeout' => 300,
-    ]);
     return 'TestJob dispatched!';
 });
 
