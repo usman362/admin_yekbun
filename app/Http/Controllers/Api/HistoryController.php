@@ -27,7 +27,7 @@ class HistoryController extends Controller
         // if ($allowRequest !== true) {
         //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
         // }
-        return response()->json(['History' => History::get(), 'success' => true], 200);
+        return ResponseHelper::sendResponse(History::all(), 'History has been Fetch Successfully!');
     }
 
     /**
