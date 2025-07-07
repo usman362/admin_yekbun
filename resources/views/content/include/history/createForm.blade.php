@@ -274,7 +274,6 @@
                 $("#thumbnail-history #img1").attr("src", newSrc1);
                 $("#thumbnail-history #img2").attr("src", newSrc2);
                 $("#thumbnail-history #img3").attr("src", newSrc3);
-                $('.submit-clip-template').attr('disabled', false);
             },
             error: function() {
                 $('#error-thumbnail').text("Failed to generate thumbnail.");
@@ -297,6 +296,7 @@
             let src = $(this).attr('src');
             $('.dz-thumbnail img').attr('src', src);
             $('#thumbnail').val(src);
+            $('.submit-clip-template').attr('disabled', false);
         })
     });
 </script>
