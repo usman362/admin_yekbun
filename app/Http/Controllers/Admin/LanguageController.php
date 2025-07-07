@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helpers;
+use App\Helpers\LanguagesHelpers;
 use App\Models\Text;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\TranslateLanguageKeywords;
 use App\Models\LanguageData;
 use App\Models\StartPage;
 use App\Models\LanguageKeyword;
@@ -100,7 +101,7 @@ class LanguageController extends Controller
             $language->icon = $image_path;
         }
         if ($language->save()) {
-            Helpers::languages_keywords($language->id, $language->code);
+            TranslateLanguageKeywords::dispatch($language->id, $language->code);
             return redirect()
                 ->route('language.index')
                 ->with('success', 'Your language has been created successfully.');

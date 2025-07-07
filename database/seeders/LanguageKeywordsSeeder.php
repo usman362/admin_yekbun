@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Helpers\LanguagesHelpers;
+use App\Jobs\TranslateLanguageKeywords;
 use App\Models\Language;
 use App\Models\LanguageDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,8 +23,7 @@ class LanguageKeywordsSeeder extends Seeder
         LanguageDetail::truncate();
 
         foreach ($languages as $language) {
-            LanguagesHelpers::languages_keywords($language->id, $language->code);
-            LanguagesHelpers::languages_settings_keywords($language->id, $language->code);
+            TranslateLanguageKeywords::dispatch($language->id, $language->code);
         }
     }
 }
