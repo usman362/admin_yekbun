@@ -92,17 +92,21 @@
     <div class="d-flex flex-wrap align-items-center gap-2">
         <!-- Filter & Search Form -->
         <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center mb-0">
-            <!-- Province Filter -->
-            <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
-                <option value="">Sort by Provinces </option>
-                @foreach($regions as $region)
-                    <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
-                        {{ $region->name }}
-                    </option>
-                @endforeach
-            </select>
- 
-        </form>
+    <!-- Province Filter -->
+    <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
+        <option value="">Sort by Provinces</option>
+        @foreach($regions as $region)
+            <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
+                {{ $region->name }}
+            </option>
+        @endforeach
+    </select>
+
+    <!-- Optional: Search box -->
+    <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city or zip"
+           value="{{ request('search') }}">
+</form>
+
 
         <!-- Add City Button (Right beside filters) -->
         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createModal">
