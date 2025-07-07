@@ -542,10 +542,14 @@
                             `<input type="hidden" name="${fileInputName}_file_size[]" value="${response.size}">`;
                         dropzoneKey++;
                     }
-                    if(folder === 'images' && folder !== 'videos'){
-                        $('.submit-artist-btn').attr('disabled', false);
-                    }else{
-                        $('.submit-music-btn').attr('disabled', false);
+                    if (folder === 'images' && folder !== 'videos') {
+                        if ($('#createartistForm [name="status"]').val() !== '') {
+                            $('.submit-artist-btn').attr('disabled', false);
+                        }
+                    } else {
+                        if ($('#createmusicForm [name="status"]').val() !== '') {
+                            $('.submit-music-btn').attr('disabled', false);
+                        }
                     }
                     if (hiddenInputName == 'video') {
                         // ✅ Get video duration
@@ -566,7 +570,7 @@
                         '.hidden-inputs');
                     hiddenInputsContainer.querySelector(
                         `input[data-path="${file.previewElement.dataset.path}"]`).remove();
-
+                    hiddenInputsContainer.innerHTML = '';
                     if (file.previewElement != null && file.previewElement.parentNode != null) {
                         file.previewElement.parentNode.removeChild(file.previewElement);
                     }
@@ -640,6 +644,31 @@
                 }
             });
         };
+
+
+       $('#createartistForm [name="status"]').change(function(){
+           if($('#createartistForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
+                $('.submit-artist-btn').attr('disabled', false);
+            }else{
+                $('.submit-artist-btn').attr('disabled', true);
+            }
+       })
+
+       $('#createvideoForm [name="status"]').change(function(){
+            if($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
+                $('.submit-video-btn').attr('disabled', false);
+            }else{
+                $('.submit-video-btn').attr('disabled', true);
+            }
+       })
+
+        $('#createmusicForm [name="status"]').change(function() {
+            if($('#createmusicForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
+                $('.submit-music-btn').attr('disabled', false);
+            }else{
+                $('.submit-music-btn').attr('disabled', true);
+            }
+        })
     </script>
 
     <script>
@@ -655,7 +684,9 @@
                 let src = $(this).attr('src');
                 $('.dz-thumbnail img').attr('src', src);
                 $('#thumbnail').val(src);
-                $('.submit-video-btn').attr('disabled', false);
+                if ($('#createvideoForm [name="status"]').val() !== '') {
+                    $('.submit-video-btn').attr('disabled', false);
+                }
             })
         });
     </script>
@@ -920,16 +951,16 @@
                 $('#dropzone-video').css('background-size', 'cover');
             });
 
-            $(document).on('click', '[data-bs-dismiss="modal"]', function () {
+            $(document).on('click', '[data-bs-dismiss="modal"]', function() {
                 let modalElement = $(this).closest('.modal').attr('id');
-                $('#'+modalElement+' #artist_id').val('');
-                $('#'+modalElement+' #video_id').val('');
-                $('#'+modalElement+' #status').val('');
+                $('#' + modalElement + ' #artist_id').val('');
+                $('#' + modalElement + ' #video_id').val('');
+                $('#' + modalElement + ' #status').val('');
                 $('#createvideoModal .modal-header h4').text('Create Video Clips');
                 $('button[type="submit"]').text('Create');
                 $('#dropzone-video').css('background-image', 'unset');
                 $('#dropzone-video').css('background-size', 'unset');
-                $('#'+modalElement).hide();
+                $('#' + modalElement).hide();
                 $('.modal-backdrop:last').remove();
             });
 

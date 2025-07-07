@@ -37,17 +37,17 @@
                                             <div class="col-md-12">
                                                 <img id="img1" class="generated-img"
                                                     style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{ asset('assets/img/thumbnail.svg') }}" alt="">
                                             </div>
                                             <div class="col-md-12">
                                                 <img id="img2" class="generated-img"
                                                     style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{ asset('assets/img/thumbnail.svg') }}" alt="">
                                             </div>
                                             <div class="col-md-12">
                                                 <img id="img3" class="generated-img"
                                                     style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{ asset('assets/img/thumbnail.svg') }}" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -217,9 +217,10 @@
                 });
 
                 $('#error-thumbnail').text("");
-                $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
+                $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
+                $('.submit-clip-template').attr('disabled', true);
                 return this._updateMaxFilesReachedClass();
 
             }
@@ -261,7 +262,6 @@
                 $("#thumbnail-history #img1").attr("src", newSrc1);
                 $("#thumbnail-history #img2").attr("src", newSrc2);
                 $("#thumbnail-history #img3").attr("src", newSrc3);
-                $('.submit-clip-template').attr('disabled', false);
             },
             error: function() {
                 $('#error-thumbnail').text("Failed to generate thumbnail.");
@@ -284,7 +284,9 @@
             let src = $(this).attr('src');
             $('.dz-thumbnail img').attr('src', src);
             $('#thumbnail').val(src);
-            $('.submit-clip-template').attr('disabled', true);
+            if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
+                $('.submit-clip-template').attr('disabled', false);
+            }
         })
     });
 </script>
