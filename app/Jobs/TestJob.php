@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Models\JobTest;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -20,11 +22,10 @@ class TestJob implements ShouldQueue
 
     public function handle()
     {
-        Log::info('✅ TestJob executed at: ' . now());
-
-        // Optional: simulate some processing delay
-        sleep(5);
-
-        Log::info('✅ TestJob finished at: ' . now());
+        for ($i = 0; $i < 100; $i++) {
+            JobTest::create([
+                'now' => Carbon::now()->format('d') . $i
+            ]);
+        }
     }
 }
