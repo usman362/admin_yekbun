@@ -86,31 +86,34 @@
     </div>
 
     <div class="card">
-         <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
     <h5 class="m-0">City List</h5>
 
-    <!-- Province Filter -->
-    <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center">
-        <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
-            <option value="">-- Sort by Province --</option>
-            @foreach($regions as $region)
-                <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
-                    {{ $region->name }}
-                </option>
-            @endforeach
-        </select>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <!-- Filter & Search Form -->
+        <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center mb-0">
+            <!-- Province Filter -->
+            <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()">
+                <option value="">Sort by Provinces </option>
+                @foreach($regions as $region)
+                    <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
+                        {{ $region->name }}
+                    </option>
+                @endforeach
+            </select>
 
-        <!-- Search Field -->
-        {{-- <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city..."
-            value="{{ request('search') }}">
+            {{-- <!-- Search Field -->
+            <input type="text" name="search" class="form-control form-control-sm" placeholder="Search city..."
+                value="{{ request('search') }}"> --}}
+        </form>
 
-        <button type="submit" class="btn btn-sm btn-secondary">Filter</button> --}}
-    </form>
-
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-        <i class="bx bx-plus me-0 me-sm-1"></i> Add City
-    </button>
+        <!-- Add City Button (Right beside filters) -->
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createModal">
+            <i class="bx bx-plus me-0 me-sm-1"></i> Add City
+        </button>
+    </div>
 </div>
+
 
         <div class="card-datatable table-responsive">
 
