@@ -214,8 +214,11 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ $userr->username }}
-                                                              <small class="text-muted">{{ $userr->user_id }}</small>
+                                       <td>
+    {{ $userr->username }}<br>
+    <small class="text-muted">{{ $userr->user_id }}</small>
+</td>
+
 
                                         </td>
                                         <td>{{ $userr->device_type }}</td>
