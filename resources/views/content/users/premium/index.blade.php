@@ -177,7 +177,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>User ID</th>
+                                    <th>#</th>
                                     <th>User</th>
                                     <th>Username</th>
                                     <th>Device Type</th>
