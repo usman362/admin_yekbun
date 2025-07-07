@@ -647,7 +647,7 @@
 
 
        $('#createartistForm [name="status"]').change(function(){
-           if($('#createartistForm .hidden-inputs').html() !== ""){
+           if($('#createartistForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
                 $('.submit-artist-btn').attr('disabled', false);
             }else{
                 $('.submit-artist-btn').attr('disabled', true);
@@ -655,7 +655,7 @@
        })
 
        $('#createvideoForm [name="status"]').change(function(){
-            if($('#createvideoForm .hidden-inputs').html() !== ""){
+            if($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
                 $('.submit-video-btn').attr('disabled', false);
             }else{
                 $('.submit-video-btn').attr('disabled', true);
@@ -663,7 +663,7 @@
        })
 
         $('#createmusicForm [name="status"]').change(function() {
-            if($('#createmusicForm .hidden-inputs').html() !== ""){
+            if($('#createmusicForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
                 $('.submit-music-btn').attr('disabled', false);
             }else{
                 $('.submit-music-btn').attr('disabled', true);
