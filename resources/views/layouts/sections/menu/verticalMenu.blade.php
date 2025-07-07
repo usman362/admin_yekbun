@@ -1665,14 +1665,14 @@
     @endcan
 
 
-    @can('manageorigin.read')
+    {{-- @can('appinfo.read')
         <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
             <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-info-square"></i>
                 <div>App Info</div>
             </a>
         </li>
-    @endcan
+    @endcan --}}
 
     @can('addringtone.read')
         <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active open' : (Request::is('settings/app-setting/call-ringtone') ? 'active open' : '') }}"
