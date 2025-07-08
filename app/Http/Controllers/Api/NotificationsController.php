@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
+use App\Http\Controllers\Controller;
+use App\Models\NotificationCenter;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+
+class NotificationsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $notifications = NotificationCenter::with('user')->where('is_read', 0)->where('user_id', Auth::id())->get();
+        return ResponseHelper::sendResponse($notifications, 'History has been Fetch Successfully!');
+    }
+
+    public function store(Request $request)
+    {
+        $userImage = '';
+        if ($request->hasFile('user_image')) {
+            $userImage = Helpers::fileUpload($request->user_image, 'notification-users');
+        }
+        $notifications = NotificationCenter::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'user_image' => $userImage,
+            'type' => $request->type,
+            'is_read' => 0,
+        ]);
+        return ResponseHelper::sendResponse($notifications, 'Notification has been Sent!');
+    }
+
+    public function read($id)
+    {
+        $notification = NotificationCenter::find($id);
+        $notification->is_read = 1;
+        $notification->read_at = Carbon::now();
+        $notification->save();
+        return ResponseHelper::sendResponse($notification, 'Notification has been Read Successfully!');
+    }
+}

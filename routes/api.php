@@ -63,6 +63,7 @@ use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VotingReactionController;
+use App\Http\Controllers\Api\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -177,17 +178,17 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
 
     //Clips
-    Route::get('get-clips',[ClipsController::class,'index']);
-    Route::get('get-clips-templates',[ClipsController::class,'get_templates']);
-    Route::post('store-clips',[ClipsController::class,'store_clips']);
-    Route::post('store-clips-templates',[ClipsController::class,'store_templates']);
+    Route::get('get-clips', [ClipsController::class, 'index']);
+    Route::get('get-clips-templates', [ClipsController::class, 'get_templates']);
+    Route::post('store-clips', [ClipsController::class, 'store_clips']);
+    Route::post('store-clips-templates', [ClipsController::class, 'store_templates']);
 
     //Playlist
     Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
     Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
     Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
-    Route::get('/play-music/{id}',[MultimediaController::class, 'playMusic']);
-    Route::get('/play-video/{id}',[MultimediaController::class, 'playVideo']);
+    Route::get('/play-music/{id}', [MultimediaController::class, 'playMusic']);
+    Route::get('/play-video/{id}', [MultimediaController::class, 'playVideo']);
     Route::get('get-songs-playlist', [MultimediaController::class, 'getSongsPlaylist']);
     Route::get('get-playlist/{id}', [MultimediaController::class, 'getPlaylistDetail']);
     Route::post('edit-playlist/{id}', [MultimediaController::class, 'editPlaylist']);
@@ -199,8 +200,13 @@ Route::middleware('jwt.custom')->group(function () {
     Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
 
     //Payments
-    Route::post('post-transaction',[PaymentController::class,'storeTransaction']);
+    Route::post('post-transaction', [PaymentController::class, 'storeTransaction']);
+
+    Route::get('notifications-center', [NotificationsController::class, 'index']);
 });
+
+Route::post('notifications-center', [NotificationsController::class, 'store']);
+Route::get('notifications-center/{id}', [NotificationsController::class, 'read']);
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);
 
@@ -453,7 +459,7 @@ Route::prefix('paypal')->group(function () {
 
 
 //Payment List
-Route::get('get-payment-list',[PaymentController::class,'paymentList']);
+Route::get('get-payment-list', [PaymentController::class, 'paymentList']);
 
 // Stripe
 Route::post('/stripe/checkout', [StripeController::class, 'index']);
