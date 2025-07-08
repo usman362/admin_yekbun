@@ -20,7 +20,6 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        dd(Auth::id());
         $notifications = NotificationCenter::with('user')->where('is_read', 0)->where('user_id', Auth::id())->get();
         return ResponseHelper::sendResponse($notifications, 'Notifications has been Fetch Successfully!');
     }
