@@ -522,25 +522,31 @@
                         '.hidden-inputs');
                     hiddenInputsContainer.innerHTML +=
                         `<input type="hidden" name="${hiddenInputName}" value="${response.path}" id="file_path" data-path="${response.path}">`;
-                    let fileInputName = ''
-                    if (folder === 'audios') {
-                        fileInputName = extractCleanTitle(response.path);
-                    } else {
-                        fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
-                            return match.slice(0, -2);
-                        });
-                    }
-                    if (limit == 1) {
 
-                        hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                    let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
+                        return match.slice(0, -2);
+                    });
+
+                    if (limit == 1) {
+                        if (folder === 'audios') {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${extractCleanTitle(response.path)}">`;
+                        } else {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        }
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_length" id="file_length" value="${response.duration}">`;
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_size" id="file_size" value="${response.size}">`;
                     } else {
-                        hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        if (folder === 'audios') {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name[]" value="${extractCleanTitle(response.path)}">`;
+                        } else {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        }
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_length[]" value="${response.duration}">`;
                         hiddenInputsContainer.innerHTML +=
