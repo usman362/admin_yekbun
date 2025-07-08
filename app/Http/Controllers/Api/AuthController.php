@@ -98,7 +98,7 @@ class AuthController extends Controller
                 'lname' => 'required|max:100',
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-                'phone' => 'required|min:11',
+                // 'phone' => 'required|min:11',
             ]);
             $email = strtolower($request->email);
             $emailTaken = User::where('email', $email)->first();
