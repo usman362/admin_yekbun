@@ -2087,6 +2087,6 @@ class LanguageController extends Controller
 
     public function upload_json(Request $request)
     {
-        TranslateKeywordsJSON::dispatch($request->languagee_id, $request->code, $request->main_section, $request->section_name, $request->json);
+        TranslateKeywordsJSON::dispatch($request->language_id, $request->code, $request->main_section, $request->section_name, $request->json);
     }
 }
