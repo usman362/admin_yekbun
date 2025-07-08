@@ -8,6 +8,7 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Jobs\TranslateLanguageKeywords;
+use App\Jobs\TranslateKeywordsJSON;
 use App\Models\LanguageData;
 use App\Models\StartPage;
 use App\Models\LanguageKeyword;
@@ -2082,5 +2083,10 @@ class LanguageController extends Controller
                 ->back()
                 ->with('error', 'Error saving Section Settings: ' . $e->getMessage());
         }
+    }
+
+    public function upload_json(Request $request)
+    {
+        TranslateKeywordsJSON::dispatch($request->languagee_id, $request->code, $request->main_section, $request->section_name, $request->json);
     }
 }
