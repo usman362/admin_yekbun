@@ -522,9 +522,14 @@
                         '.hidden-inputs');
                     hiddenInputsContainer.innerHTML +=
                         `<input type="hidden" name="${hiddenInputName}" value="${response.path}" id="file_path" data-path="${response.path}">`;
-                    let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
-                        return match.slice(0, -2);
-                    });
+                    let fileInputName = ''
+                    if (folder === 'audios') {
+                        fileInputName = extractCleanTitle(response.path);
+                    } else {
+                        fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
+                            return match.slice(0, -2);
+                        });
+                    }
                     if (limit == 1) {
 
                         hiddenInputsContainer.innerHTML +=
@@ -607,6 +612,20 @@
 
         });
 
+        function extractCleanTitle(filePath) {
+            // Get the filename only (remove path)
+            const fileName = filePath.split('/').pop().replace('.mp3', '');
+
+            // Get the part after the last triple underscore
+            const parts = fileName.split('___');
+            const titleRaw = parts[parts.length - 1];
+
+            // Replace underscores and dashes with spaces
+            const cleanTitle = titleRaw.replace(/[_-]+/g, ' ').trim();
+
+            return cleanTitle;
+        }
+
         function generateThumbnails(videoPath, videoDuration) {
             let timestamp = $("#timestamp").val();
             console.log([videoPath, videoDuration]);
@@ -646,26 +665,26 @@
         };
 
 
-       $('#createartistForm [name="status"]').change(function(){
-           if($('#createartistForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
+        $('#createartistForm [name="status"]').change(function() {
+            if ($('#createartistForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
                 $('.submit-artist-btn').attr('disabled', false);
-            }else{
+            } else {
                 $('.submit-artist-btn').attr('disabled', true);
             }
-       })
+        })
 
-       $('#createvideoForm [name="status"]').change(function(){
-            if($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
+        $('#createvideoForm [name="status"]').change(function() {
+            if ($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
                 $('.submit-video-btn').attr('disabled', false);
-            }else{
+            } else {
                 $('.submit-video-btn').attr('disabled', true);
             }
-       })
+        })
 
         $('#createmusicForm [name="status"]').change(function() {
-            if($('#createmusicForm .hidden-inputs').html() !== "" && $(this).val() !== ''){
+            if ($('#createmusicForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
                 $('.submit-music-btn').attr('disabled', false);
-            }else{
+            } else {
                 $('.submit-music-btn').attr('disabled', true);
             }
         })
