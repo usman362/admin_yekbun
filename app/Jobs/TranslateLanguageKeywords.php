@@ -29,11 +29,11 @@ class TranslateLanguageKeywords implements ShouldQueue
     {
         $homekeywords = [
 
-            // languages section
+            // Home Page Languages
             ['keyword' => 'Languages', 'translated' => 'Languages', 'main_section' => 'Home Page', 'section_name' => 'Home Page Languages'],
-            // landing section
+            // Home Page App Policy
             ['keyword' => 'Privacy & Terms', 'translated' => 'Privacy & Terms', 'main_section' => 'Home Page', 'section_name' => 'Home Page App Policy'],
-            // landing section
+            // Home Page Landing Page
             ['keyword' => 'Advertisment', 'translated' => 'Advertisment', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'History', 'translated' => 'History', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Latest Artist', 'translated' => 'Latest Artist', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
@@ -206,6 +206,7 @@ class TranslateLanguageKeywords implements ShouldQueue
             ['keyword' => 'Account Created!', 'translated' => 'Account Created!', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Your account had beed created successfully.', 'translated' => 'Your account had beed created successfully.', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Please sign in to use your account and enjoy', 'translated' => 'Please sign in to use your account and enjoy', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Welcome to you', 'translated' => 'Welcome to you', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
 
 
             // ['keyword' => 'settingsOverview', 'translated' => 'Settings Overview', 'main_section' => 'Settings', 'section_name' => 'Settings Overview'],
