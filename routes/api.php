@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\Admin\Donation\DonationController as DonationDonationController;
 use App\Http\Controllers\Api\FanPageController;
 use App\Http\Controllers\Api\HistoryController;
+use App\Http\Controllers\Api\AIVideoController;
 use App\Http\Controllers\Api\PolicyAndTermsController;
 use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\DiamondUserController;
@@ -478,6 +479,9 @@ Route::get('/history-cover', [HistoryController::class, 'cover_history']);
 Route::get('/history-category', [HistoryController::class, 'categories']);
 Route::get('/history-detail/{id}', [HistoryController::class, 'detail']);
 Route::post('/history-search', [HistoryController::class, 'search']);
+
+//AI Videos
+Route::get('/ai-videos', [AIVideoController::class, 'index']);
 
 // Voting
 Route::get('/voting-cover/{id?}', [VotingController::class, 'get_cover']);
