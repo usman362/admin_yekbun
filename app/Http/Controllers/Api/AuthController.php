@@ -191,6 +191,7 @@ class AuthController extends Controller
                 'friends_request' => 'true',
                 'get_greetings' => 'true',
                 'search_option' => 'true',
+                'app_status' => 'online'
             ]);
 
             if ($request->has('image')) {

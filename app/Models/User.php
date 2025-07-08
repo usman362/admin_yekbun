@@ -93,6 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'friends_request',
         'get_greetings',
         'search_option',
+        'app_status',
     ];
 
     /**

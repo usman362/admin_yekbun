@@ -159,7 +159,7 @@ Route::get('/test-fcm', function () {
 Route::get('test', function () {
 
     foreach (App\Models\User::all() as $user) {
-        $user->gender = 'male';
+        $user->app_status = 'online';
         $user->save();
     }
     return 'success';
