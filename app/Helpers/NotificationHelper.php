@@ -40,6 +40,12 @@ class NotificationHelper
                     "title" => $title,
                     "body" => $body,
                 ],
+                'android' => [
+                    'priority' => 'high',
+                    'notification' => [
+                        'sound' => 'message1' // should match file name in `res/raw` folder
+                    ]
+                ],
             ]
         ];
         $payload = json_encode($data);
