@@ -404,7 +404,7 @@
         <img src="${uploadFileIcon}" width="24" height="24" alt="Upload JSON">
     </a>
 
-    <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Upload JSON">
+    <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Downlaod Json">
         <img src="${downlaodFileIcon}" width="24" height="24" alt="Upload JSON">
     </a>
                         </td>
