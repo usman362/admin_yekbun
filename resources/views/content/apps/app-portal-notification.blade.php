@@ -65,67 +65,76 @@
                                        <tr>
                                                 <td class="text-nowrap"  for="admin_activity">Admin Activity</td>
                                                 <td>
-                                                    <div class="form-check d-flex justify-content-center">
+                                                    {{-- <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="admin_activity"
                                                             name="admin_activity" @checked(@$notification->admin_activity == 'true')>
-                                                    </div>
+                                                    </div> --}}
                                                 </td>
                                             </tr>
                                                <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="system_share_system_info">System update</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_system_info">System Update</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="system_share_system_info"
-                                                            name="system_share_system_info" @checked(@$notification->system_share_system_info == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="admin_system_info"
+                                                            name="admin_system_info" @checked(@$notification->admin_system_info == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="donation_create_donation">Portal  Donation</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_donation">Portal Donation</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="donation_create_donation"
-                                                            name="donation_create_donation" @checked(@$notification->donation_create_donation == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="admin_donation"
+                                                            name="admin_donation" @checked(@$notification->admin_donation == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="survey_create_survey">Portal  Surveys</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_surveys">Portal Surveys</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="survey_create_survey"
-                                                            name="survey_create_survey" @checked(@$notification->survey_create_survey == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="admin_surveys"
+                                                            name="admin_surveys" @checked(@$notification->admin_surveys == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="greating_share_greating">Portal Event</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_greetings">Portal Greetings</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="greating_share_greating"
-                                                            name="greating_share_greating" @checked(@$notification->greating_share_greating == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="admin_greetings"
+                                                            name="admin_greetings" @checked(@$notification->admin_greetings == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="event_share_event">SOS</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_events">Portal Event</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="event_share_event"
-                                                            name="event_share_event" @checked(@$notification->event_share_event == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="admin_events"
+                                                            name="admin_events" @checked(@$notification->admin_events == 'true')>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_sos">SOS</td>
+                                                <td>
+                                                    <div class="form-check d-flex justify-content-center">
+                                                        <input class="form-check-input" type="checkbox" id="admin_sos"
+                                                            name="admin_sos" @checked(@$notification->admin_sos == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
                                              <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="user_warn_sos">Portal Live Stream</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_live_stream">Portal Live Stream</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="user_warn_sos"
-                                                            name="user_warn_sos" @checked(@$notification->user_warn_sos == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="admin_live_stream"
+                                                            name="admin_live_stream" @checked(@$notification->admin_live_stream == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
-                                                
+
 
 
 
@@ -212,11 +221,11 @@
                                             </tr>
 
                                             <tr>
-                                                <td class="text-nowrap" for="new_videos">Ai-Videos</td>
+                                                <td class="text-nowrap" for="new_ai_videos">Ai-Videos</td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="new_videos"
-                                                            name="new_videos" @checked(@$notification->new_videos == 'true')>
+                                                        <input class="form-check-input" type="checkbox" id="new_ai_videos"
+                                                            name="new_ai_videos" @checked(@$notification->new_ai_videos == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>

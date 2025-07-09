@@ -356,11 +356,11 @@ class AdminProfileController extends Controller
                 ]);
 
                 $notification = Notifications::first();
-                if($notification->new_donation == 'true'){
-                    $users = User::whereNotNull('fcm_token')->where('new_donation','true')->whereIn('info_banner',['banner','alert'])->get();
+                if ($notification->admin_donation == 'true') {
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Donation Notification', 'New Donation ' . $request->title . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, 'Donation Notification', 'New Donation ' . $request->title . ' Posted!');
                         }
                     }
                 }
@@ -395,6 +395,40 @@ class AdminProfileController extends Controller
                     ],
                 ]);
 
+                if ($request->type == 'System') {
+                    $notification = Notifications::first();
+                    if ($notification->admin_system_info == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, 'Sytem Info Notification', 'New System Info ' . $request->title . ' Posted!');
+                            }
+                        }
+                    }
+                }
+                if ($request->type == 'Surveys') {
+                    $notification = Notifications::first();
+                    if ($notification->admin_surveys == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, 'Surveys Notification', 'New Surveys ' . $request->title . ' Posted!');
+                            }
+                        }
+                    }
+                }
+                if ($request->type == 'Greetings') {
+                    $notification = Notifications::first();
+                    if ($notification->admin_greetings == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, 'Greetings Notification', 'New Greeting ' . $request->title . ' Posted!');
+                            }
+                        }
+                    }
+                }
+
                 if ($request->type == "Event") {
                     $postpop->start_time = $request->start_time;
                     $postpop->end_time = $request->end_time;
@@ -404,11 +438,11 @@ class AdminProfileController extends Controller
                     $postpop->save();
 
                     $notification = Notifications::first();
-                    if($notification->new_events == 'true'){
-                        $users = User::whereNotNull('fcm_token')->where('new_events','true')->whereIn('info_banner',['banner','alert'])->get();
+                    if ($notification->admin_events == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                         if ($users) {
                             foreach ($users as $user) {
-                                NotificationHelper::sendNotification($user->id, 'Event Notification', 'New Event ' . $request->title . ' has been added!');
+                                NotificationHelper::sendNotification($user->id, 'Event Notification', 'New Event ' . $request->title . ' Posted!');
                             }
                         }
                     }
