@@ -276,7 +276,7 @@
     <div class="modal fade" id="uploadFileModal" tabindex="-1" aria-labelledby="uploadFileModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
-            <form id="uploadFileForm" enctype="multipart/form-data" method="POST" >
+            <form id="uploadFileForm" enctype="multipart/form-data" method="POST">
                 @csrf
                 <input type="hidden" id="upload_section_name" name="section_name">
                 <input type="hidden" id="upload_language_id" name="language_id">
@@ -354,7 +354,10 @@
             $("#modalCenterTitle").text("Edit language");
         })
     </script>
-
+    <script>
+        const uploadFileIcon = "{{ asset('assets/svg/upload-file.svg') }}";
+        const downlaodFileIcon = "{{ asset('assets/svg/download-file.svg') }}";
+    </script>
     <script>
         $(document).ready(function() {
             $('.edit-details-btn').click(function() {
@@ -383,11 +386,27 @@
                         <td>${total}</td>
                         <td>
                             <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="edit_section_details me-2" title="Edit">
-                                ✏️
-                            </a>
-                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Add">
-                                ➕
-                            </a>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path d="M6 4C6 5.10457 5.10457 6 4 6C2.89543 6 2 5.10457 2 4C2 2.89543 2.89543 2 4 2C5.10457 2 6 2.89543 6 4Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path d="M6 20C6 21.1046 5.10457 22 4 22C2.89543 22 2 21.1046 2 20C2 18.8954 2.89543 18 4 18C5.10457 18 6 18.8954 6 20Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path d="M22 4C22 5.10457 21.1046 6 20 6C18.8954 6 18 5.10457 18 4C18 2.89543 18.8954 2 20 2C21.1046 2 22 2.89543 22 4Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path d="M22 20C22 21.1046 21.1046 22 20 22C18.8954 22 18 21.1046 18 20C18 18.8954 18.8954 18 20 18C21.1046 18 22 18.8954 22 20Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path opacity="0.5" d="M6 20H18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path opacity="0.5" d="M18 4H6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path opacity="0.5" d="M20 18L20 6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path opacity="0.5" d="M4 6L4 18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+    </svg>
+</a>
+
+                             <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Upload JSON">
+        <img src="${uploadFileIcon}" width="24" height="24" alt="Upload JSON">
+    </a>
+
+    <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Downlaod Json">
+        <img src="${downlaodFileIcon}" width="24" height="24" alt="Upload JSON">
+    </a>
                         </td>
                     </tr>`;
                     });
@@ -430,12 +449,28 @@
                         <td>${done}</td>
                         <td>${total}</td>
                         <td>
-                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="edit_section_details me-2" title="Edit">
-                                ✏️
-                            </a>
-                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Add">
-                                ➕
-                            </a>
+                             <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="edit_section_details me-2" title="Edit">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path d="M6 4C6 5.10457 5.10457 6 4 6C2.89543 6 2 5.10457 2 4C2 2.89543 2.89543 2 4 2C5.10457 2 6 2.89543 6 4Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path d="M6 20C6 21.1046 5.10457 22 4 22C2.89543 22 2 21.1046 2 20C2 18.8954 2.89543 18 4 18C5.10457 18 6 18.8954 6 20Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path d="M22 4C22 5.10457 21.1046 6 20 6C18.8954 6 18 5.10457 18 4C18 2.89543 18.8954 2 20 2C21.1046 2 22 2.89543 22 4Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path d="M22 20C22 21.1046 21.1046 22 20 22C18.8954 22 18 21.1046 18 20C18 18.8954 18.8954 18 20 18C21.1046 18 22 18.8954 22 20Z" stroke="#1C274C" stroke-width="1.5"></path>
+        <path opacity="0.5" d="M6 20H18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path opacity="0.5" d="M18 4H6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path opacity="0.5" d="M20 18L20 6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+        <path opacity="0.5" d="M4 6L4 18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+    </svg>
+</a>
+
+                             <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Upload JSON">
+        <img src="${uploadFileIcon}" width="24" height="24" alt="Upload JSON">
+    </a>
+
+    <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Downlaod Json">
+        <img src="${downlaodFileIcon}" width="24" height="24" alt="Upload JSON">
+    </a>
                         </td>
                     </tr>`;
                     });
@@ -510,7 +545,7 @@
                         window.location.reload();
                         $('.ajax_status').html(
                             `<span class="text-success">Keywords Created Successfully!</span>`
-                            );
+                        );
                     },
                     error: function(xhr, status, error) {
                         $('.ajax_status').html(
@@ -520,36 +555,36 @@
             });
 
             // ADD SECTION BUTTON HANDLER
-$('table').on('click', '.add_section_details', function (e) {
-    e.preventDefault();
-    const section_name = $(this).attr('data-section_name');
-    const language_id = $(this).attr('data-language_id');
+            $('table').on('click', '.add_section_details', function(e) {
+                e.preventDefault();
+                const section_name = $(this).attr('data-section_name');
+                const language_id = $(this).attr('data-language_id');
 
-    // Log for debugging (optional)
-    console.log(`Add button clicked for Section: ${section_name}, Language ID: ${language_id}`);
+                // Log for debugging (optional)
+                console.log(`Add button clicked for Section: ${section_name}, Language ID: ${language_id}`);
 
-    // Populate modal fields with the data
-    $('.upload-section-name').text(section_name); // Display the section name in the modal
-    $('#upload_language_id').val(language_id); // Set the language ID
-    $('#upload_section_name').val(section_name); // Set the section name
+                // Populate modal fields with the data
+                $('.upload-section-name').text(section_name); // Display the section name in the modal
+                $('#upload_language_id').val(language_id); // Set the language ID
+                $('#upload_section_name').val(section_name); // Set the section name
 
-    // Clear any previous upload status messages
-    $('.ajax_upload_status').html('');
-    $('#uploadFileInput').val(''); // Clear any selected file
+                // Clear any previous upload status messages
+                $('.ajax_upload_status').html('');
+                $('#uploadFileInput').val(''); // Clear any selected file
 
-    // Update form action to match your desired URL pattern
-    const formActionUrl = `/languages/${language_id}/keywords/${section_name}/upload-json`;
-    $('#uploadFileForm').attr('action', formActionUrl);  // Ensure the form action is POST
+                // Update form action to match your desired URL pattern
+                const formActionUrl = `/languages/${language_id}/keywords/${section_name}/upload-json`;
+                $('#uploadFileForm').attr('action', formActionUrl); // Ensure the form action is POST
 
-    // Initialize and show the modal using Bootstrap 5 modal API
-    const uploadFileModal = new bootstrap.Modal(document.getElementById('uploadFileModal'), {
-        backdrop: 'static',
-        keyboard: false
-    });
-    uploadFileModal.show();
-});
+                // Initialize and show the modal using Bootstrap 5 modal API
+                const uploadFileModal = new bootstrap.Modal(document.getElementById('uploadFileModal'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                uploadFileModal.show();
+            });
 
-           
+
 
         });
     </script>
