@@ -24,10 +24,11 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
 <style>
-    img, svg {
-    vertical-align: middle !important;
-    height: 48px  !important; 
-}
+    img,
+    svg {
+        vertical-align: middle !important;
+        height: 48px !important;
+    }
 </style>
 @section('content')
 
@@ -234,7 +235,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalCenterTitle">
-                        Edit  <span class="text-primary">"<span class="sectionName"></span>"</span>
+                        Edit <span class="text-primary">"<span class="sectionName"></span>"</span>
                         <span class="text-info languageName">- {{ $language->title }}</span>
                         Language
                     </h5>
@@ -272,6 +273,31 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="uploadFileModal" tabindex="-1" aria-labelledby="uploadFileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="uploadFileForm" enctype="multipart/form-data" method="POST" >
+                @csrf
+                <input type="hidden" id="upload_section_name" name="section_name">
+                <input type="hidden" id="upload_language_id" name="language_id">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Upload File for <span class="upload-section-name"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" name="file" id="uploadFileInput" class="form-control" required>
+                        <div class="ajax_upload_status mt-2"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <x-modal id="createlanguageModal" title="Create Language" saveBtnText="Create" saveBtnType="submit"
         saveBtnForm="createForm2" size="md">
@@ -331,97 +357,89 @@
 
     <script>
         $(document).ready(function() {
-
             $('.edit-details-btn').click(function() {
                 let id = $(this).attr('data-id');
                 $('.languageName').text($(this).attr('data-name'));
                 $('.add_language_section').attr('data-id', id);
                 $('.ajax_status').html('');
+
                 $.get(`/languages/${id}/sections`, function(data) {
                     let html = '';
                     let tabs = '';
-                    console.log(data);
+
                     data.sections.forEach(section => {
                         const total = section.total;
                         const done = section.done;
                         const progress = total > 0 ? Math.round((done / total) * 100) : 0;
+
                         html += `<tr>
-                <td>${section.section_name}</td>
-                <td>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
-                    </div>
-                </td>
-                <td>${done}</td>
-                <td>${total}</td>
-                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}"   class="edit_section_details">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path d="M6 4C6 5.10457 5.10457 6 4 6C2.89543 6 2 5.10457 2 4C2 2.89543 2.89543 2 4 2C5.10457 2 6 2.89543 6 4Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path d="M6 20C6 21.1046 5.10457 22 4 22C2.89543 22 2 21.1046 2 20C2 18.8954 2.89543 18 4 18C5.10457 18 6 18.8954 6 20Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path d="M22 4C22 5.10457 21.1046 6 20 6C18.8954 6 18 5.10457 18 4C18 2.89543 18.8954 2 20 2C21.1046 2 22 2.89543 22 4Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path d="M22 20C22 21.1046 21.1046 22 20 22C18.8954 22 18 21.1046 18 20C18 18.8954 18.8954 18 20 18C21.1046 18 22 18.8954 22 20Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path opacity="0.5" d="M6 20H18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M18 4H6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M20 18L20 6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M4 6L4 18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                    </svg>
-                    </a>
-                </td>
-                </tr>`;
+                        <td>${section.section_name}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
+                            </div>
+                        </td>
+                        <td>${done}</td>
+                        <td>${total}</td>
+                        <td>
+                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="edit_section_details me-2" title="Edit">
+                                ✏️
+                            </a>
+                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Add">
+                                ➕
+                            </a>
+                        </td>
+                    </tr>`;
                     });
 
                     data.main_sections.forEach((main_section, index) => {
                         tabs += `
-                             <li class="nav-item" role="presentation">
-                                <button class="nav-link ${index == 0 ? 'active' : ''} change-section-tab" id="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}-tab"
-                                data-bs-toggle="pill" data-bs-target="#pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}"
-                                type="button" role="tab" aria-controls="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}"
-                                aria-selected="true" data-id="${id}" data-section_name="${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}">${main_section.main_section}</button>
-                            </li>
-                        `;
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link ${index == 0 ? 'active' : ''} change-section-tab" id="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}-tab"
+                            data-bs-toggle="pill" data-bs-target="#pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}"
+                            type="button" role="tab" aria-controls="pills-${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}"
+                            aria-selected="true" data-id="${id}" data-section_name="${(main_section.main_section).toLowerCase().replace(/\s+/g, '-')}">
+                            ${main_section.main_section}</button>
+                        </li>
+                    `;
                     });
+
                     $('.sections-tabs').html(tabs);
                     $('#sectionsTable').html(html);
                 });
-            })
+            });
 
             $('body').on('click', '.change-section-tab', function() {
                 let id = $(this).attr('data-id');
                 let section_name = $(this).attr('data-section_name');
+
                 $.get(`/languages/${id}/sections/${section_name}`, function(data) {
                     let html = '';
                     data.sections.forEach(section => {
                         const total = section.total;
                         const done = section.done;
                         const progress = total > 0 ? Math.round((done / total) * 100) : 0;
+
                         html += `<tr>
-                <td>${section.section_name}</td>
-                <td>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
-                    </div>
-                </td>
-                <td>${done}</td>
-                <td>${total}</td>
-                <td><a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}"   class="edit_section_details">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path d="M12 15L12 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path d="M6 4C6 5.10457 5.10457 6 4 6C2.89543 6 2 5.10457 2 4C2 2.89543 2.89543 2 4 2C5.10457 2 6 2.89543 6 4Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path d="M6 20C6 21.1046 5.10457 22 4 22C2.89543 22 2 21.1046 2 20C2 18.8954 2.89543 18 4 18C5.10457 18 6 18.8954 6 20Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path d="M22 4C22 5.10457 21.1046 6 20 6C18.8954 6 18 5.10457 18 4C18 2.89543 18.8954 2 20 2C21.1046 2 22 2.89543 22 4Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path d="M22 20C22 21.1046 21.1046 22 20 22C18.8954 22 18 21.1046 18 20C18 18.8954 18.8954 18 20 18C21.1046 18 22 18.8954 22 20Z" stroke="#1C274C" stroke-width="1.5"></path>
-                        <path opacity="0.5" d="M6 20H18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M18 4H6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M20 18L20 6" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M4 6L4 18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
-                    </svg>
-                    </a>
-                </td>
-                </tr>`;
+                        <td>${section.section_name}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
+                            </div>
+                        </td>
+                        <td>${done}</td>
+                        <td>${total}</td>
+                        <td>
+                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="edit_section_details me-2" title="Edit">
+                                ✏️
+                            </a>
+                            <a href="#" data-section_name="${section.section_name}" data-language_id="${data.language_id}" class="add_section_details" title="Add">
+                                ➕
+                            </a>
+                        </td>
+                    </tr>`;
                     });
+
                     $('#sectionsTable').html(html);
                 });
             });
@@ -429,49 +447,41 @@
             function camelCaseToTitle(camelCaseStr) {
                 return camelCaseStr
                     .replace(/([A-Z])/g, ' $1')
-                    .replace(/^./, (str) => str.toUpperCase());
+                    .replace(/^./, str => str.toUpperCase());
             }
-
 
             $('table').on('click', '.edit_section_details', function(e) {
                 e.preventDefault();
 
                 let section_name = $(this).attr('data-section_name');
                 let language_id = $(this).attr('data-language_id');
+
                 $('.ajax_status').html('');
                 $('#keyword_section_name').val(section_name);
                 $('#keyword_language_id').val(language_id);
-                // Set section name in modal title
                 $('.sectionName').text(section_name);
-                // Fetch existing keywords via AJAX
+
                 $.get(`/languages/${language_id}/keywords/${section_name}`, function(data) {
                     let html = '';
-                    data.keywords.forEach((section, index) => {
+                    data.keywords.forEach(section => {
                         html += `
-              <div class="row">
-                <div class="col-md-6">
-                    <h6 class="m-0">${camelCaseToTitle(section.keyword)}</h6>
-                    <input type="hidden" name="keyword[]" value="${section.keyword}">
-                </div>
-                <div class="col-md-6">
-                    <input type="text" class="form-control"
-                        name="translated[]"
-                        value="${section.translated}"
-                        placeholder="${camelCaseToTitle(section.keyword)}">
-                </div>
-              </div><hr>`;
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="m-0">${camelCaseToTitle(section.keyword)}</h6>
+                                <input type="hidden" name="keyword[]" value="${section.keyword}">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="translated[]" value="${section.translated}" placeholder="${camelCaseToTitle(section.keyword)}">
+                            </div>
+                        </div><hr>`;
                     });
 
                     $('#keywordsTable').html(html);
 
-                    // Hide the first modal
                     const editDetailsModal = bootstrap.Modal.getInstance(document.getElementById(
                         'editDetailsModal'));
-                    if (editDetailsModal) {
-                        editDetailsModal.hide();
-                    }
+                    if (editDetailsModal) editDetailsModal.hide();
 
-                    // Show the second modal
                     const editKeywordsModal = new bootstrap.Modal(document.getElementById(
                         'editKeywordsModal'), {
                         backdrop: 'static',
@@ -481,21 +491,14 @@
                 });
             });
 
-            // When second modal closes, reopen the first modal
             document.getElementById('editKeywordsModal').addEventListener('hidden.bs.modal', function() {
                 const editDetailsModal = new bootstrap.Modal(document.getElementById('editDetailsModal'));
                 editDetailsModal.show();
             });
 
-
             $('#updateKeywordsForm').on('submit', function(e) {
                 e.preventDefault();
-
                 const formData = new FormData(this);
-
-                for (const [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
 
                 $.ajax({
                     url: $(this).attr('action'),
@@ -504,23 +507,52 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        // $('#updateKeywordsForm')[0].reset();
                         window.location.reload();
-                        console.log('Form submitted successfully:', response);
-                        $('.ajax_status').html(`
-                            <span class="text-success">Keywords Created Successfully!</span>
-                        `);
+                        $('.ajax_status').html(
+                            `<span class="text-success">Keywords Created Successfully!</span>`
+                            );
                     },
                     error: function(xhr, status, error) {
-                        console.error('Form submission failed:', error);
-                        $('.ajax_status').html(`
-                            <span class="text-danger">Something Went Wrong!</span>
-                        `);
+                        $('.ajax_status').html(
+                            `<span class="text-danger">Something Went Wrong!</span>`);
                     }
                 });
             });
 
+            // ADD SECTION BUTTON HANDLER
+$('table').on('click', '.add_section_details', function (e) {
+    e.preventDefault();
+    const section_name = $(this).attr('data-section_name');
+    const language_id = $(this).attr('data-language_id');
+
+    // Log for debugging (optional)
+    console.log(`Add button clicked for Section: ${section_name}, Language ID: ${language_id}`);
+
+    // Populate modal fields with the data
+    $('.upload-section-name').text(section_name); // Display the section name in the modal
+    $('#upload_language_id').val(language_id); // Set the language ID
+    $('#upload_section_name').val(section_name); // Set the section name
+
+    // Clear any previous upload status messages
+    $('.ajax_upload_status').html('');
+    $('#uploadFileInput').val(''); // Clear any selected file
+
+    // Update form action to match your desired URL pattern
+    const formActionUrl = `/languages/${language_id}/keywords/${section_name}/upload-json`;
+    $('#uploadFileForm').attr('action', formActionUrl);  // Ensure the form action is POST
+
+    // Initialize and show the modal using Bootstrap 5 modal API
+    const uploadFileModal = new bootstrap.Modal(document.getElementById('uploadFileModal'), {
+        backdrop: 'static',
+        keyboard: false
+    });
+    uploadFileModal.show();
+});
+
+           
+
         });
     </script>
+
 @endsection
 @endsection
