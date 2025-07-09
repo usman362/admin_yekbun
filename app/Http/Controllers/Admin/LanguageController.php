@@ -42,7 +42,7 @@ use App\Models\FooterChatSection;
 use App\Models\HeaderFeedSection;
 use App\Models\VisiterProfile;
 use App\Models\HeaderSectionStories;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\FooterCart;
 use App\Models\LanguageDetail;
 use App\Models\LanguageSection;
@@ -2088,7 +2088,20 @@ class LanguageController extends Controller
     public function upload_json(Request $request)
     {
         dd($request->all());
-        TranslateKeywordsJSON::dispatch($request->language_id, $request->code, $request->main_section, $request->section_name, $request->json);
+        $request->validate([
+            'language_id' => 'required',
+            'code' => 'required',
+            'main_section' => 'required',
+            'section_name' => 'required',
+            'file' => 'required|file'
+        ]);
+        $request->file('file')->storeAs('language', 'lang_data.json');
+        $json = Storage::get('language/lang_data.json');
+        $data = json_decode($json, true);
+        if (!is_array($data)) {
+            return response()->json(['error' => 'Invalid JSON format'], 400);
+        }
+        TranslateKeywordsJSON::dispatch($request->language_id, $request->code, $request->main_section, $request->section_name, $data);
         return response()->json([
             'success' => true,
             'message' => 'JSON file uploaded and processing started.',
