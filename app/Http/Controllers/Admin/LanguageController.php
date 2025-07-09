@@ -2085,13 +2085,36 @@ class LanguageController extends Controller
         }
     }
 
-    public function upload_json(Request $request)
-    {
-        dd($request->all());
-        TranslateKeywordsJSON::dispatch($request->language_id, $request->code, $request->main_section, $request->section_name, $request->json);
-        return response()->json([
-            'success' => true,
-            'message' => 'JSON file uploaded and processing started.',
-        ]);
+public function upload_json(Request $request)
+{
+    dd($request->all());
+    $request->validate([
+        'file' => 'required|file|mimes:json',
+        'language_id' => 'required|string',
+        'section_name' => 'required|string',
+    ]);
+
+    $jsonContent = file_get_contents($request->file('file')->getRealPath());
+
+    // Optional: validate JSON structure
+    $data = json_decode($jsonContent, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return response()->json(['success' => false, 'message' => 'Invalid JSON format'], 400);
     }
+// dd($jsonContent);
+    // Dispatch job with file content
+   $data= TranslateKeywordsJSON::dispatch(
+        $request->language_id,
+        $request->code ?? null,
+        $request->main_section ?? null,
+        $request->section_name,
+        $jsonContent
+    );
+//dd( $data);
+    return response()->json([
+        'success' => true,
+        'message' => 'JSON file uploaded and processing started.',
+    ]);
+}
+
 }
