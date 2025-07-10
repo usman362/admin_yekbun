@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\LanguagesHelpers;
 use App\Models\Text;
 use App\Models\Language;
+ 
 use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -2097,10 +2099,21 @@ public function upload_json(Request $request)
         'file'          => 'required|file',
     ]);
 
-    $language = Language::find($request->language_id);
+    $language = Language::findOrFail($request->language_id);
     $languageCode = $language->code;
 
-    $fileName = $languageCode . '_' . Str::slug($request->main_section) . '_' . Str::slug($request->section_name) . '.json';
+    // Properly extract and clean title from main_section
+    $rawSection = $request->main_section;
+    if (Str::startsWith($rawSection, 'publish-')) {
+        $rawSection = Str::after($rawSection, 'publish-');
+    }
+    $cleanMainSectionTitle = ucwords(str_replace('-', ' ', $rawSection));
+     $cleanMainSectionTitle = Str::replaceFirst('Publish ', '', $cleanMainSectionTitle);
+
+     //dd($cleanMainSectionTitle); // will be "Home Page"
+
+    $fileName = $languageCode . '_publish-' . $rawSection . '_' . Str::slug($request->section_name) . '.json';
+
     $request->file('file')->storeAs('language', $fileName);
 
     $json = Storage::get('language/' . $fileName);
@@ -2110,33 +2123,49 @@ public function upload_json(Request $request)
         return response()->json(['error' => 'Invalid JSON format'], 400);
     }
 
-    $mainSection = Str::replaceFirst('Publish ', '', $request->main_section);
-
     TranslateKeywordsJSON::dispatch(
         $request->language_id,
         $languageCode,
-        $mainSection,
+        $cleanMainSectionTitle,
         $request->section_name,
         $data
     );
 
     return back()->with('success', 'Translation job dispatched');
 }
- public function downloadJson($language_id, $section_name)
+
+public function downloadJson($language_id, $section_name, Request $request)
 {
+    $request->validate([
+        'main_section' => 'required|string',
+    ]);
+
     $language = Language::findOrFail($language_id);
 
-    // Build file name from real section (you can adjust logic if needed)
-    $fileName = $language->code . '_publish-' . Str::slug($section_name) . '_' . Str::slug($section_name) . '.json';
+    // Clean and format main_section
+    $cleanMainSectionSlug = str_replace('publish-', '', $request->main_section);
+    $cleanMainSectionTitle = ucwords(str_replace('-', ' ', $cleanMainSectionSlug)); // Fixes weird spacing
+
+    $sectionSlug = Str::slug($section_name);
+
+    // Trim to remove extra newlines or spaces
+    $cleanMainSectionTitle = trim(preg_replace('/\s+/', ' ', $cleanMainSectionTitle));
+
+    $fileName = $language->code . '_publish-' . $cleanMainSectionTitle . '_' . $sectionSlug . '.json';
 
     $path = storage_path("app/language/{$fileName}");
 
     if (!file_exists($path)) {
-       return redirect()->back()->with('error', 'File not found.');
-
+        dd('gal nh bni');
+        return redirect()->back()->with('error', "File not found: {$fileName}");
     }
-
+//dd('ban gae');
     return response()->download($path);
 }
+
+
+
+ 
+
 
 }
