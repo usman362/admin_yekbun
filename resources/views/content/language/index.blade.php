@@ -403,7 +403,7 @@
                     <td>${section.total}</td>
                     <td>
                         <a href="#" data-section_name="${section.section_name}" data-language_id="${languageId}" class="edit_section_details me-2" title="Edit">${editIconSvg}</a>
-                        <a href="#" class="add_section_details" data-section_name="${section.section_name}" data-language_id="${languageId}" title="Upload JSON">
+                        <a href="#" class="add_section_details me-3" data-section_name="${section.section_name}" data-language_id="${languageId}" title="Upload JSON">
                             <img src="${uploadFileIcon}" width="30" height="30" alt="Upload JSON">
                         </a>
                         <a href="#" class="download_section_details" data-section_name="${section.section_name}" data-language_id="${languageId}" title="Download JSON">
