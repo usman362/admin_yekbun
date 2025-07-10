@@ -404,10 +404,10 @@
                     <td>
                         <a href="#" data-section_name="${section.section_name}" data-language_id="${languageId}" class="edit_section_details me-2" title="Edit">${editIconSvg}</a>
                         <a href="#" class="add_section_details" data-section_name="${section.section_name}" data-language_id="${languageId}" title="Upload JSON">
-                            <img src="${uploadFileIcon}" width="24" height="24" alt="Upload JSON">
+                            <img src="${uploadFileIcon}" width="30" height="30" alt="Upload JSON">
                         </a>
                         <a href="#" class="download_section_details" data-section_name="${section.section_name}" data-language_id="${languageId}" title="Download JSON">
-                            <img src="${downloadFileIcon}" width="24" height="24" alt="Download JSON">
+                            <img src="${downloadFileIcon}" width="30" height="30" alt="Download JSON">
                         </a>
                     </td>
                 </tr>`;
@@ -452,26 +452,26 @@
                 });
             });
 
-        $('table').on('click', '.edit_section_details', function(e) {
-    e.preventDefault();
+            $('table').on('click', '.edit_section_details', function(e) {
+                e.preventDefault();
 
-    const sectionName = $(this).data('section_name');
-    const languageId = $(this).data('language_id');
+                const sectionName = $(this).data('section_name');
+                const languageId = $(this).data('language_id');
 
-    $('.ajax_status').html('');
-    $('#keyword_section_name').val(sectionName);
-    $('#keyword_language_id').val(languageId);
-    $('.sectionName').text(sectionName);
+                $('.ajax_status').html('');
+                $('#keyword_section_name').val(sectionName);
+                $('#keyword_language_id').val(languageId);
+                $('.sectionName').text(sectionName);
 
-    // 👉 Hide editDetailsModal first
-    const editDetailsModalEl = document.getElementById('editDetailsModal');
-    const editDetailsModal = bootstrap.Modal.getInstance(editDetailsModalEl);
-    if (editDetailsModal) {
-        editDetailsModal.hide();
-    }
+                // 👉 Hide editDetailsModal first
+                const editDetailsModalEl = document.getElementById('editDetailsModal');
+                const editDetailsModal = bootstrap.Modal.getInstance(editDetailsModalEl);
+                if (editDetailsModal) {
+                    editDetailsModal.hide();
+                }
 
-    $.get(`/languages/${languageId}/keywords/${sectionName}`, function(data) {
-        const html = data.keywords.map(k => `
+                $.get(`/languages/${languageId}/keywords/${sectionName}`, function(data) {
+                    const html = data.keywords.map(k => `
             <div class="row">
                 <div class="col-md-6">
                     <h6 class="m-0">${camelCaseToTitle(k.keyword)}</h6>
@@ -483,16 +483,17 @@
             </div><hr>
         `).join('');
 
-        $('#keywordsTable').html(html);
+                    $('#keywordsTable').html(html);
 
-        // 👉 Show editKeywordsModal after hiding the first
-        const editKeywordsModal = new bootstrap.Modal(document.getElementById('editKeywordsModal'), {
-            backdrop: 'static',
-            keyboard: false
-        });
-        editKeywordsModal.show();
-    });
-});
+                    // 👉 Show editKeywordsModal after hiding the first
+                    const editKeywordsModal = new bootstrap.Modal(document.getElementById(
+                        'editKeywordsModal'), {
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    editKeywordsModal.show();
+                });
+            });
 
 
             document.getElementById('editKeywordsModal').addEventListener('hidden.bs.modal', function() {
@@ -513,7 +514,7 @@
                         window.location.reload();
                         $('.ajax_status').html(
                             `<span class="text-success">Keywords Created Successfully!</span>`
-                            );
+                        );
                     },
                     error: function() {
                         $('.ajax_status').html(
@@ -551,7 +552,7 @@
                 const sectionName = $(this).data('section_name');
                 const languageId = $(this).data('language_id');
                 const mainSection = $('.nav-link.active').text()
-            .trim(); // Gets the active main_section tab text
+                    .trim(); // Gets the active main_section tab text
 
                 if (!sectionName || !languageId || !mainSection) {
                     alert('Missing section name, language ID, or main section.');

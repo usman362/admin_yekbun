@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\LanguagesHelpers;
 use App\Models\Text;
-use App\Models\Language;
- 
+use App\Models\Language; 
 use Illuminate\Support\Str;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\TranslateLanguageKeywords;
@@ -2134,34 +2133,41 @@ public function upload_json(Request $request)
     return back()->with('success', 'Translation job dispatched');
 }
 
-public function downloadJson($language_id, $section_name, Request $request)
+ 
+
+public function downloadJson($languageId, $section, Request $request)
 {
-    $request->validate([
-        'main_section' => 'required|string',
+    // dd($languageId);
+   $rawSection = trim(preg_replace('/\s+/', ' ', $request->main_section)); // "Publish Home Page"
+
+// Remove "Publish" word (case-insensitive) from beginning
+$rawSection = preg_replace('/^Publish\s*/i', '', $rawSection);
+// dd($rawSection );
+    $mainSection = $request->query('main_section');
+
+    // Fetch the keywords (example using Eloquent)
+    $keywords = LanguageDetail::where('language_id', $languageId)
+        ->where('section_name', $section)
+        ->where('main_section', $rawSection)
+        ->get(['keyword', 'translated']); // only these two fields
+//dd($keywords );
+    // Format to desired array
+    $data = $keywords->map(function ($item) {
+        return [
+            'keyword' => $item->keyword,
+            'translated' => $item->translated,
+        ];
+    });
+
+    $filename = "{$section}_{$rawSection}.json";
+
+    return response()->streamDownload(function () use ($data) {
+        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }, $filename, [
+        'Content-Type' => 'application/json',
     ]);
-
-    $language = Language::findOrFail($language_id);
-
-    // Clean and format main_section
-    $cleanMainSectionSlug = str_replace('publish-', '', $request->main_section);
-    $cleanMainSectionTitle = ucwords(str_replace('-', ' ', $cleanMainSectionSlug)); // Fixes weird spacing
-
-    $sectionSlug = Str::slug($section_name);
-
-    // Trim to remove extra newlines or spaces
-    $cleanMainSectionTitle = trim(preg_replace('/\s+/', ' ', $cleanMainSectionTitle));
-
-    $fileName = $language->code . '_publish-' . $cleanMainSectionTitle . '_' . $sectionSlug . '.json';
-
-    $path = storage_path("app/language/{$fileName}");
-
-    if (!file_exists($path)) {
-        dd('gal nh bni');
-        return redirect()->back()->with('error', "File not found: {$fileName}");
-    }
-//dd('ban gae');
-    return response()->download($path);
 }
+
 
 
 
