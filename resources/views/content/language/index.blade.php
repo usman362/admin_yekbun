@@ -452,38 +452,48 @@
                 });
             });
 
-            $('table').on('click', '.edit_section_details', function(e) {
-                e.preventDefault();
-                const sectionName = $(this).data('section_name');
-                const languageId = $(this).data('language_id');
+        $('table').on('click', '.edit_section_details', function(e) {
+    e.preventDefault();
 
-                $('.ajax_status').html('');
-                $('#keyword_section_name').val(sectionName);
-                $('#keyword_language_id').val(languageId);
-                $('.sectionName').text(sectionName);
+    const sectionName = $(this).data('section_name');
+    const languageId = $(this).data('language_id');
 
-                $.get(`/languages/${languageId}/keywords/${sectionName}`, function(data) {
-                    const html = data.keywords.map(k => `
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6 class="m-0">${camelCaseToTitle(k.keyword)}</h6>
-                            <input type="hidden" name="keyword[]" value="${k.keyword}">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="translated[]" value="${k.translated}" placeholder="${camelCaseToTitle(k.keyword)}">
-                        </div>
-                    </div><hr>`).join('');
+    $('.ajax_status').html('');
+    $('#keyword_section_name').val(sectionName);
+    $('#keyword_language_id').val(languageId);
+    $('.sectionName').text(sectionName);
 
-                    $('#keywordsTable').html(html);
+    // 👉 Hide editDetailsModal first
+    const editDetailsModalEl = document.getElementById('editDetailsModal');
+    const editDetailsModal = bootstrap.Modal.getInstance(editDetailsModalEl);
+    if (editDetailsModal) {
+        editDetailsModal.hide();
+    }
 
-                    const editKeywordsModal = new bootstrap.Modal(document.getElementById(
-                        'editKeywordsModal'), {
-                        backdrop: 'static',
-                        keyboard: false
-                    });
-                    editKeywordsModal.show();
-                });
-            });
+    $.get(`/languages/${languageId}/keywords/${sectionName}`, function(data) {
+        const html = data.keywords.map(k => `
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0">${camelCaseToTitle(k.keyword)}</h6>
+                    <input type="hidden" name="keyword[]" value="${k.keyword}">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="translated[]" value="${k.translated}" placeholder="${camelCaseToTitle(k.keyword)}">
+                </div>
+            </div><hr>
+        `).join('');
+
+        $('#keywordsTable').html(html);
+
+        // 👉 Show editKeywordsModal after hiding the first
+        const editKeywordsModal = new bootstrap.Modal(document.getElementById('editKeywordsModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
+        editKeywordsModal.show();
+    });
+});
+
 
             document.getElementById('editKeywordsModal').addEventListener('hidden.bs.modal', function() {
                 new bootstrap.Modal(document.getElementById('editDetailsModal')).show();
