@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\LanguagesHelpers;
 use App\Models\Text;
 use App\Models\Language;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Controllers\Controller;
 use App\Jobs\TranslateLanguageKeywords;
 use App\Jobs\TranslateKeywordsJSON;
@@ -2085,36 +2088,55 @@ class LanguageController extends Controller
         }
     }
 
-public function upload_json(Request $request)
+public function upload_json(Request $request) 
 {
-    dd($request->all());
     $request->validate([
-        'file' => 'required|file|mimes:json',
-        'language_id' => 'required|string',
-        'section_name' => 'required|string',
+        'language_id'   => 'required',
+        'main_section'  => 'required',
+        'section_name'  => 'required',
+        'file'          => 'required|file',
     ]);
 
-    $jsonContent = file_get_contents($request->file('file')->getRealPath());
+    $language = Language::find($request->language_id);
+    $languageCode = $language->code;
 
-    // Optional: validate JSON structure
-    $data = json_decode($jsonContent, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        return response()->json(['success' => false, 'message' => 'Invalid JSON format'], 400);
+    $fileName = $languageCode . '_' . Str::slug($request->main_section) . '_' . Str::slug($request->section_name) . '.json';
+    $request->file('file')->storeAs('language', $fileName);
+
+    $json = Storage::get('language/' . $fileName);
+    $data = json_decode($json, true);
+
+    if (!is_array($data)) {
+        return response()->json(['error' => 'Invalid JSON format'], 400);
     }
-// dd($jsonContent);
-    // Dispatch job with file content
-   $data= TranslateKeywordsJSON::dispatch(
+
+    $mainSection = Str::replaceFirst('Publish ', '', $request->main_section);
+
+    TranslateKeywordsJSON::dispatch(
         $request->language_id,
-        $request->code ?? null,
-        $request->main_section ?? null,
+        $languageCode,
+        $mainSection,
         $request->section_name,
-        $jsonContent
+        $data
     );
-//dd( $data);
-    return response()->json([
-        'success' => true,
-        'message' => 'JSON file uploaded and processing started.',
-    ]);
+
+    return back()->with('success', 'Translation job dispatched');
+}
+ public function downloadJson($language_id, $section_name)
+{
+    $language = Language::findOrFail($language_id);
+
+    // Build file name from real section (you can adjust logic if needed)
+    $fileName = $language->code . '_publish-' . Str::slug($section_name) . '_' . Str::slug($section_name) . '.json';
+
+    $path = storage_path("app/language/{$fileName}");
+
+    if (!file_exists($path)) {
+       return redirect()->back()->with('error', 'File not found.');
+
+    }
+
+    return response()->download($path);
 }
 
 }

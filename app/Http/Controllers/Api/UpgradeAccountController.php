@@ -30,7 +30,7 @@ class UpgradeAccountController extends Controller
         $invoice->invoice_no = time();
         $invoice->date =date('Y-m-d');
         $invoice->due_date = Carbon::now()->addDays(4)->format('Y-m-d');
-        $invoice->user_id = Auth::id()
+        $invoice->user_id = Auth::id();
         $invoice->total = $request->payment;
         $invoice->item = Json_encode(["name" => "User Account Upgrade"]);
         $invoice->status = "paid";

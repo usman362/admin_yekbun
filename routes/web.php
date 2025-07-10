@@ -593,6 +593,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::post('/languages/guest', [LanguageController::class, 'storeguest'])->name('languages.storeguest');
 
     Route::post('/languages/{language_id}/keywords/{section_name}/upload-json', [LanguageController::class, 'upload_json']);
+    Route::get('/languages/{language_id}/download-json/{section_name}', [LanguageController::class, 'downloadJson'])->name('languages.download-json');
 
 
 

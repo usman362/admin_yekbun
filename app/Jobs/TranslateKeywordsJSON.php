@@ -429,25 +429,47 @@ class TranslateKeywordsJSON implements ShouldQueue
 
         ];
 
-        foreach ($homekeywords as $keyword) {
-            $translated = $keyword['translated'];
+     foreach ($this->json as $item) {
+        $keyword = $item['keyword'] ?? null;
+        $translated = $item['translated'] ?? null;
 
-            if ($this->langCode !== 'en') {
-                try {
-                    $tr = new GoogleTranslate($this->langCode);
-                    $translated = $tr->translate($keyword['translated']);
-                } catch (\Exception $e) {
-                    $translated = $keyword['translated'];
-                }
+        if (!$keyword || !$translated) {
+            continue; // Skip if missing data
+        }
+
+        // Translate if the language is not English
+        if ($this->langCode !== 'en') {
+            try {
+                $tr = new \Stichoza\GoogleTranslate\GoogleTranslate($this->langCode);
+                $translated = $tr->translate($translated);
+            } catch (\Exception $e) {
+                // Keep original translated text on failure
             }
+        }
 
-            LanguageDetail::create([
+        // Check if the record already exists
+        $existing = \App\Models\LanguageDetail::where([
+            'language_id'  => $this->languageId,
+            'keyword'      => $keyword,
+            'main_section' => $this->mainSection,
+            'section_name' => $this->sectionName,
+        ])->first();
+
+        if ($existing) {
+            // Update the translated value
+            $existing->update([
+                'translated' => $translated,
+            ]);
+        } else {
+            // Insert new keyword
+            \App\Models\LanguageDetail::create([
                 'language_id'   => $this->languageId,
-                'keyword'       => $keyword['keyword'],
+                'keyword'       => $keyword,
                 'translated'    => $translated,
                 'main_section'  => $this->mainSection,
                 'section_name'  => $this->sectionName,
             ]);
         }
+    }
     }
 }
