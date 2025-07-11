@@ -207,6 +207,7 @@ Route::middleware('jwt.custom')->group(function () {
 
 Route::post('notifications-center', [NotificationsController::class, 'store']);
 Route::get('notifications-center/{id}', [NotificationsController::class, 'read']);
+Route::get('notifications-center/{id}/delete', [NotificationsController::class, 'delete']);
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);
 

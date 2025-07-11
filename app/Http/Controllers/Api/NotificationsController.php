@@ -49,4 +49,11 @@ class NotificationsController extends Controller
         $notification->save();
         return ResponseHelper::sendResponse($notification, 'Notification has been Read Successfully!');
     }
+
+    public function delete($id)
+    {
+        $notification = NotificationCenter::find($id);
+        $notification->delete();
+        return ResponseHelper::sendResponse([], 'Notification has been Deleted Successfully!');
+    }
 }
