@@ -19,6 +19,7 @@ class AIVideoController extends Controller
         // if ($allowRequest !== true) {
         //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
         // }
-        return ResponseHelper::sendResponse(AIVideo::all(), 'AI Videos has been Fetch Successfully!');
+        $ai_videos = AIVideo::orderBy('created_by', 'desc')->get();
+        return ResponseHelper::sendResponse($ai_videos, 'AI Videos has been Fetch Successfully!');
     }
 }

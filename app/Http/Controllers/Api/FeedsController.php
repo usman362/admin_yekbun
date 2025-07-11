@@ -21,6 +21,7 @@ use App\Models\UserFriends;
 use App\Models\History;
 use App\Models\News;
 use App\Models\Notifications;
+use App\Models\AIVideo;
 use App\Models\PopFeeds;
 use Carbon\Carbon;
 use Exception;
@@ -482,6 +483,10 @@ class FeedsController extends Controller
                 }])->find($id);
             } elseif ($feedType == 'history') {
                 $feed = History::with(['user' => function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                }])->find($id);
+            }elseif ($feedType == 'ai_videos') {
+                $feed = AIVideo::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }])->find($id);
             } else {
