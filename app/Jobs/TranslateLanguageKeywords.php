@@ -207,7 +207,14 @@ class TranslateLanguageKeywords implements ShouldQueue
             ['keyword' => 'Your account had beed created successfully.', 'translated' => 'Your account had beed created successfully.', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Please sign in to use your account and enjoy', 'translated' => 'Please sign in to use your account and enjoy', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Welcome to you', 'translated' => 'Welcome to you', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
-
+            ['keyword' => 'Accept policy and', 'translated' => 'Accept policy and', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => "I'm Male", 'translated' => "I'm Male", 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Your Data', 'translated' => 'Your Data', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'U must be at Least 16 Year Old', 'translated' => 'U must be at Least 16 Year Old', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Single', 'translated' => 'Single', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Married', 'translated' => 'Married', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Setup a new device', 'translated' => 'Setup a new device', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'OTP verification failed', 'translated' => 'OTP verification failed', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
 
             // ['keyword' => 'settingsOverview', 'translated' => 'Settings Overview', 'main_section' => 'Settings', 'section_name' => 'Settings Overview'],
             // ['keyword' => 'accountStatus', 'translated' => 'Account Status', 'main_section' => 'Settings', 'section_name' => 'Settings Overview'],
