@@ -77,7 +77,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="admin_system_info">
                                                     System Update</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_system_info_title"
+                                                    <input class="form-control" type="text" id="admin_system_info_title" autocomplete="off"
                                                         name="admin_system_info_title" value="{{@$notification->admin_system_info_title}}">
                                                 </td>
                                                 <td>
@@ -95,7 +95,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="admin_donation">
                                                     Portal Donation</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_donation_title"
+                                                    <input class="form-control" type="text" id="admin_donation_title" autocomplete="off"
                                                         name="admin_donation_title" value="{{@$notification->admin_donation_title}}">
                                                 </td>
                                                 <td>
@@ -112,7 +112,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="admin_surveys">
                                                     Portal Surveys</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_surveys_title"
+                                                    <input class="form-control" type="text" id="admin_surveys_title" autocomplete="off"
                                                         name="admin_surveys_title" value="{{@$notification->admin_surveys_title}}">
                                                 </td>
                                                 <td>
@@ -129,7 +129,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="admin_greetings">
                                                     Portal Greetings</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_greetings_title"
+                                                    <input class="form-control" type="text" id="admin_greetings_title" autocomplete="off"
                                                         name="admin_greetings_title" value="{{@$notification->admin_greetings_title}}">
                                                 </td>
                                                 <td>
@@ -147,7 +147,7 @@
                                                     Portal
                                                     Event</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_events_title"
+                                                    <input class="form-control" type="text" id="admin_events_title" autocomplete="off"
                                                         name="admin_events_title" value="{{@$notification->admin_events_title}}">
                                                 </td>
                                                 <td>
@@ -164,7 +164,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="admin_sos">SOS
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_sos_title"
+                                                    <input class="form-control" type="text" id="admin_sos_title" autocomplete="off"
                                                         name="admin_sos_title" value="{{@$notification->admin_sos_title}}">
                                                 </td>
                                                 <td>
@@ -181,7 +181,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px"
                                                     for="admin_live_stream">Portal Live Stream</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="admin_live_stream_title"
+                                                    <input class="form-control" type="text" id="admin_live_stream_title" autocomplete="off"
                                                         name="admin_live_stream_title" value="{{@$notification->admin_live_stream_title}}">
                                                 </td>
                                                 <td>
@@ -208,7 +208,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="new_music">Songs
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="new_music_title"
+                                                    <input class="form-control" type="text" id="new_music_title" autocomplete="off"
                                                         name="new_music_title" value="{{@$notification->new_music_title}}">
                                                 </td>
                                                 <td>
@@ -225,7 +225,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="new_artist">
                                                     Artist</td>
                                                <td>
-                                                    <input class="form-control" type="text" id="new_artist_title"
+                                                    <input class="form-control" type="text" id="new_artist_title" autocomplete="off"
                                                         name="new_artist_title" value="{{@$notification->new_artist_title}}">
                                                 </td>
                                                 <td>
@@ -242,7 +242,7 @@
                                                 <td class="text-nowrap" style="padding-left: 50px" for="new_video_clips">
                                                     Video Clips</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="new_video_clips_title"
+                                                    <input class="form-control" type="text" id="new_video_clips_title" autocomplete="off"
                                                         name="new_video_clips_title" value="{{@$notification->new_video_clips_title}}">
                                                 </td>
                                                 <td>
@@ -260,7 +260,7 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_donation">Donation</td>
                                                <td>
-                                                    <input class="form-control" type="text" id="new_donation_title"
+                                                    <input class="form-control" type="text" id="new_donation_title" autocomplete="off"
                                                         name="new_donation_title" value="{{@$notification->new_donation_title}}">
                                                 </td>
                                                 <td>
@@ -277,7 +277,7 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_events">Events</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="new_events_title"
+                                                    <input class="form-control" type="text" id="new_events_title" autocomplete="off"
                                                         name="new_events_title" value="{{@$notification->new_events_title}}">
                                                 </td>
                                                 <td>
@@ -294,7 +294,7 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_history">History</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="new_history_title"
+                                                    <input class="form-control" type="text" id="new_history_title" autocomplete="off"
                                                         name="new_history_title" value="{{@$notification->new_history_title}}">
                                                 </td>
                                                 <td>
@@ -311,7 +311,7 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_news">News</td>
                                                <td>
-                                                    <input class="form-control" type="text" id="new_news_title"
+                                                    <input class="form-control" type="text" id="new_news_title" autocomplete="off"
                                                         name="new_news_title" value="{{@$notification->new_news_title}}">
                                                 </td>
                                                 <td>
@@ -328,7 +328,7 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_ai_videos">Ai-Videos</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="new_ai_videos_title"
+                                                    <input class="form-control" type="text" id="new_ai_videos_title" autocomplete="off"
                                                         name="new_ai_videos_title" value="{{@$notification->new_ai_videos_title}}">
                                                 </td>
                                                 <td>
@@ -346,7 +346,7 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_votes">Survey</td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="new_votes_title"
+                                                    <input class="form-control" type="text" id="new_votes_title" autocomplete="off"
                                                         name="new_votes_title" value="{{@$notification->new_votes_title}}">
                                                 </td>
                                                 <td>
