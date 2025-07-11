@@ -77,10 +77,10 @@ class VideoClipController extends Controller
             $notification = Notifications::first();
             if ($notification->new_video_clips == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Clips Notification', 'New Video Clip ' . $vc->video_file_name . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_video_clips_title, 'New Video Clip ' . $vc->video_file_name . ' has been added!');
                         }
                     }
                 } catch (\Exception $e) {

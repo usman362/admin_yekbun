@@ -58,30 +58,49 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-nowrap">Type</th>
+                                                <th class="text-nowrap">Title</th>
+                                                <th class="text-nowrap">Desription</th>
                                                 <th class="text-nowrap text-center">👩🏻‍💻 App</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                       <tr>
-                                                <td class="text-nowrap"  for="admin_activity">Admin Activity</td>
+                                            <tr>
+                                                <td class="text-nowrap" for="admin_activity">Admin Activity</td>
                                                 <td>
-                                                    {{-- <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="admin_activity"
-                                                            name="admin_activity" @checked(@$notification->admin_activity == 'true')>
-                                                    </div> --}}
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
                                                 </td>
                                             </tr>
-                                               <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_system_info">System Update</td>
+                                            <tr>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_system_info">
+                                                    System Update</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_system_info_title"
+                                                        name="admin_system_info_title" value="{{@$notification->admin_system_info_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_system_info_description" name="admin_system_info_description">{{@$notification->admin_system_info_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="admin_system_info"
-                                                            name="admin_system_info" @checked(@$notification->admin_system_info == 'true')>
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="admin_system_info" name="admin_system_info"
+                                                            @checked(@$notification->admin_system_info == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_donation">Portal Donation</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_donation">
+                                                    Portal Donation</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_donation_title"
+                                                        name="admin_donation_title" value="{{@$notification->admin_donation_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_donation_description" name="admin_donation_description">{{@$notification->admin_donation_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="admin_donation"
@@ -90,7 +109,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_surveys">Portal Surveys</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_surveys">
+                                                    Portal Surveys</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_surveys_title"
+                                                        name="admin_surveys_title" value="{{@$notification->admin_surveys_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_surveys_description" name="admin_surveys_description">{{@$notification->admin_surveys_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="admin_surveys"
@@ -99,7 +126,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_greetings">Portal Greetings</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_greetings">
+                                                    Portal Greetings</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_greetings_title"
+                                                        name="admin_greetings_title" value="{{@$notification->admin_greetings_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_greetings_description" name="admin_greetings_description">{{@$notification->admin_greetings_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="admin_greetings"
@@ -108,7 +143,16 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_events">Portal Event</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_events">
+                                                    Portal
+                                                    Event</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_events_title"
+                                                        name="admin_events_title" value="{{@$notification->admin_events_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_events_description" name="admin_events_description">{{@$notification->admin_events_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="admin_events"
@@ -117,7 +161,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_sos">SOS</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_sos">SOS
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_sos_title"
+                                                        name="admin_sos_title" value="{{@$notification->admin_sos_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_sos_description" name="admin_sos_description">{{@$notification->admin_sos_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="admin_sos"
@@ -125,35 +177,43 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="admin_live_stream">Portal Live Stream</td>
+                                            <tr>
+                                                <td class="text-nowrap" style="padding-left: 50px"
+                                                    for="admin_live_stream">Portal Live Stream</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="admin_live_stream_title"
+                                                        name="admin_live_stream_title" value="{{@$notification->admin_live_stream_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="admin_live_stream_description" name="admin_live_stream_description">{{@$notification->admin_live_stream_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="admin_live_stream"
-                                                            name="admin_live_stream" @checked(@$notification->admin_live_stream == 'true')>
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="admin_live_stream" name="admin_live_stream"
+                                                            @checked(@$notification->admin_live_stream == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             <tr>
                                                 <td class="text-nowrap" for="new_music">Music</td>
                                                 <td>
                                                 </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="new_music">Songs</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="new_music">Songs
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="new_music_title"
+                                                        name="new_music_title" value="{{@$notification->new_music_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_music_description" name="new_music_description">{{@$notification->new_music_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_music"
@@ -162,7 +222,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="new_artist">Artist</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="new_artist">
+                                                    Artist</td>
+                                               <td>
+                                                    <input class="form-control" type="text" id="new_artist_title"
+                                                        name="new_artist_title" value="{{@$notification->new_artist_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_artist_description" name="new_artist_description">{{@$notification->new_artist_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_artist"
@@ -171,17 +239,33 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-nowrap" style="padding-left: 50px" for="new_video_clips">Video Clips</td>
+                                                <td class="text-nowrap" style="padding-left: 50px" for="new_video_clips">
+                                                    Video Clips</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="new_video_clips_title"
+                                                        name="new_video_clips_title" value="{{@$notification->new_video_clips_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_video_clips_description" name="new_video_clips_description">{{@$notification->new_video_clips_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="new_video_clips"
-                                                            name="new_video_clips" @checked(@$notification->new_video_clips == 'true')>
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="new_video_clips" name="new_video_clips"
+                                                            @checked(@$notification->new_video_clips == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td class="text-nowrap" for="new_donation">Donation</td>
+                                               <td>
+                                                    <input class="form-control" type="text" id="new_donation_title"
+                                                        name="new_donation_title" value="{{@$notification->new_donation_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_donation_description" name="new_donation_description">{{@$notification->new_donation_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_donation"
@@ -193,6 +277,13 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_events">Events</td>
                                                 <td>
+                                                    <input class="form-control" type="text" id="new_events_title"
+                                                        name="new_events_title" value="{{@$notification->new_events_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_events_description" name="new_events_description">{{@$notification->new_events_description}}</textarea>
+                                                </td>
+                                                <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_events"
                                                             name="new_events" @checked(@$notification->new_events == 'true')>
@@ -203,6 +294,13 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_history">History</td>
                                                 <td>
+                                                    <input class="form-control" type="text" id="new_history_title"
+                                                        name="new_history_title" value="{{@$notification->new_history_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_history_description" name="new_history_description">{{@$notification->new_history_description}}</textarea>
+                                                </td>
+                                                <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_history"
                                                             name="new_history" @checked(@$notification->new_history == 'true')>
@@ -212,6 +310,13 @@
 
                                             <tr>
                                                 <td class="text-nowrap" for="new_news">News</td>
+                                               <td>
+                                                    <input class="form-control" type="text" id="new_news_title"
+                                                        name="new_news_title" value="{{@$notification->new_news_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_news_description" name="new_news_description">{{@$notification->new_news_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_news"
@@ -223,15 +328,30 @@
                                             <tr>
                                                 <td class="text-nowrap" for="new_ai_videos">Ai-Videos</td>
                                                 <td>
+                                                    <input class="form-control" type="text" id="new_ai_videos_title"
+                                                        name="new_ai_videos_title" value="{{@$notification->new_ai_videos_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_ai_videos_description" name="new_ai_videos_description">{{@$notification->new_ai_videos_description}}</textarea>
+                                                </td>
+                                                <td>
                                                     <div class="form-check d-flex justify-content-center">
-                                                        <input class="form-check-input" type="checkbox" id="new_ai_videos"
-                                                            name="new_ai_videos" @checked(@$notification->new_ai_videos == 'true')>
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="new_ai_videos" name="new_ai_videos"
+                                                            @checked(@$notification->new_ai_videos == 'true')>
                                                     </div>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td class="text-nowrap" for="new_votes">Survey</td>
+                                                <td>
+                                                    <input class="form-control" type="text" id="new_votes_title"
+                                                        name="new_votes_title" value="{{@$notification->new_votes_title}}">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" id="new_votes_description" name="new_votes_description">{{@$notification->new_votes_description}}</textarea>
+                                                </td>
                                                 <td>
                                                     <div class="form-check d-flex justify-content-center">
                                                         <input class="form-check-input" type="checkbox" id="new_votes"
