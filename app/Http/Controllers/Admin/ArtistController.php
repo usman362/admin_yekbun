@@ -28,18 +28,18 @@ class ArtistController extends Controller
 
         if ($request->ajax() && $request->table == 'dataTable') {
 
-            if($request->has('sort_by')){
-                if($request->sort_by == 'songs'){
+            if ($request->has('sort_by')) {
+                if ($request->sort_by == 'songs') {
                     $artists = Artist::with('songs')->get()->sortByDesc(function ($artist) {
                         return $artist->songs->count();
                     });
-                }else{
+                } else {
                     $artists = Artist::with('videos')->get()->sortByDesc(function ($artist) {
                         return $artist->videos->count();
                     });
                 }
-            }else{
-                $artists = Artist::with(['songs','videos'])->get()->orderByDesc('created_at');
+            } else {
+                $artists = Artist::with(['songs', 'videos'])->get()->orderByDesc('created_at');
             }
 
             return DataTables::of($artists)
@@ -56,7 +56,7 @@ class ArtistController extends Controller
                                 <a href="javascript:void(0)" class="text-body text-truncate">
                                     <span class="fw-semibold">' . e($artist->name) . '</span>
                                 </a>
-                                <small class="fw-semibold">'. ($artist->province->name ?? 'N/A') . '</small>
+                                <small class="fw-semibold">' . ($artist->province->name ?? 'N/A') . '</small>
                             </div>
                         </div>';
                     return $info;
@@ -130,12 +130,17 @@ class ArtistController extends Controller
         $artist->image = $request->image ?? '';
         if ($artist->save()) {
             $notification = Notifications::first();
-            if($notification->new_artist == 'true'){
+            $description = str_replace(
+                ["[name]"],
+                [$request->name],
+                $notification->new_artist_description
+            );
+            if ($notification->new_artist == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Artist Notification', 'New Artist ' . $artist->name . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
                         }
                     }
                 } catch (\Exception $e) {
@@ -181,35 +186,35 @@ class ArtistController extends Controller
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
- public function update(Request $request, $id)
-{
-  
-    $artist = Artist::findOrFail($id);
+    public function update(Request $request, $id)
+    {
 
-    $artist->name = $request->name;
-    $artist->dob = $request->dob;
-    $artist->gender = $request->gender;
-    $artist->status = $request->status;
-    $artist->province_id = $request->province;
- 
-    // Check if new image is different from old one
-    if ($request->image && $request->image !== $artist->image) {
-        $oldImagePath = public_path($artist->image);
+        $artist = Artist::findOrFail($id);
 
-        // Unlink only if file exists and is local
-        if ($artist->image && file_exists($oldImagePath)) {
-            @unlink($oldImagePath); // Use @ to suppress errors in case of missing file
+        $artist->name = $request->name;
+        $artist->dob = $request->dob;
+        $artist->gender = $request->gender;
+        $artist->status = $request->status;
+        $artist->province_id = $request->province;
+
+        // Check if new image is different from old one
+        if ($request->image && $request->image !== $artist->image) {
+            $oldImagePath = public_path($artist->image);
+
+            // Unlink only if file exists and is local
+            if ($artist->image && file_exists($oldImagePath)) {
+                @unlink($oldImagePath); // Use @ to suppress errors in case of missing file
+            }
+
+            $artist->image = $request->image;
         }
 
-        $artist->image = $request->image;
+        if ($artist->save()) {
+            return redirect()->route('artist.index')->with('success', 'Artist has been updated');
+        } else {
+            return redirect()->route('artist.index')->with('error', 'Artist not updated');
+        }
     }
-
-    if ($artist->save()) {
-        return redirect()->route('artist.index')->with('success', 'Artist has been updated');
-    } else {
-        return redirect()->route('artist.index')->with('error', 'Artist not updated');
-    }
-}
 
 
 

@@ -40,7 +40,7 @@ class FeedsController extends Controller
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->first();
-        if($authFeed){
+        if ($authFeed) {
             if (!empty($request->user_id)) {
                 $feeds = Feed::with('user')
                     ->where('user_id', $request->user_id)
@@ -53,10 +53,10 @@ class FeedsController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->paginate(5);
             }
-        }else{
+        } else {
             $feeds = Feed::with('user')
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(5);
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
         }
 
 
@@ -265,23 +265,28 @@ class FeedsController extends Controller
         $feed = Feed::with('user')->find($feeds->id);
         if ($feeds->save()) {
             $notification = Notifications::first();
-                if($notification->new_donation == 'true'){
-                    if($request->user_type === 'friends' || $request->user_type === 'family'){
-                        $users = UserFriends::where('friend_id',Auth::id())->where('user_type',$request->user_type)->get();
-                        if ($users) {
-                            foreach ($users as $user) {
-                                NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', 'New Feed has been added!');
-                            }
+            $description = str_replace(
+                ["[name]"],
+                [$request->text],
+                $notification->new_donation_description
+            );
+            if ($notification->new_donation == 'true') {
+                if ($request->user_type === 'friends' || $request->user_type === 'family') {
+                    $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->user_id, $notification->new_donation_title, $description);
                         }
-                    }else{
-                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner',['banner','alert'])->get();
-                        if ($users) {
-                            foreach ($users as $user) {
-                                NotificationHelper::sendNotification($user->id, 'Feeds Notification', 'New Feed has been added!');
-                            }
+                    }
+                } else {
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, $notification->new_donation_title, $description);
                         }
                     }
                 }
+            }
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feed, 'success' => true], 201);
         } else {
             return response()->json(['message' => 'Something went Wrong!', 'success' => false], 403);

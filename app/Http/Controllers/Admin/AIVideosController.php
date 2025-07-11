@@ -76,12 +76,17 @@ class AIVideosController extends Controller
 
         if ($ai_video->save()) {
             $notification = Notifications::first();
+            $description = str_replace(
+                ["[name]"],
+                [$request->title],
+                $notification->new_ai_videos_description
+            );
             if ($notification->new_ai_videos == 'true') {
                 try {
                     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'AI Videos Notification', 'New AI Videos ' . $request->title . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_ai_videos_title, $description);
                         }
                     }
                 } catch (\Exception $e) {

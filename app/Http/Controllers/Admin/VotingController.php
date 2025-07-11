@@ -92,12 +92,17 @@ class VotingController extends Controller
             // $post_gallery->save();
 
             $notification = Notifications::first();
-            if($notification->new_votes == 'true'){
+            $description = str_replace(
+                ["[name]"],
+                [$request->name],
+                $notification->new_votes_description
+            );
+            if ($notification->new_votes == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_votes','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_votes', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Voting Notification', 'New Vote ' . $vote->name . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_votes_title, $description);
                         }
                     }
                 } catch (\Exception $e) {
@@ -155,7 +160,7 @@ class VotingController extends Controller
             $userIds = $users->map(fn($user) => (string) $user['_id'])->toArray();
 
             // Fetch reactions for these users
-            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id',$id)->get();
+            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id', $id)->get();
 
             // Initialize gender-based stats
             // $genderStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
@@ -166,7 +171,7 @@ class VotingController extends Controller
                 $user = $users->where('_id', $reaction['user_id'])->first();
                 $gender = $user['gender'] ?? 'male'; // Default male if missing
                 // Determine the category
-                if($gender == 'male'){
+                if ($gender == 'male') {
                     if ($reaction['type'] == 1) {
                         $maleStats['likes']++;
                     } elseif ($reaction['type'] == 2) {
@@ -175,7 +180,7 @@ class VotingController extends Controller
                         $maleStats['dislikes']++;
                     }
                     $maleStats['reviews']++;
-                }else{
+                } else {
                     if ($reaction['type'] == 1) {
                         $femaleStats['likes']++;
                     } elseif ($reaction['type'] == 2) {
