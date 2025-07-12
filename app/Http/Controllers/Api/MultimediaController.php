@@ -396,7 +396,25 @@ class MultimediaController extends Controller
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
-                'bg_image' => 'assets/img/playlistCover.jpg',
+                'bg_image' => 'assets/img/playlistCover1.png',
+                'type' => 'free',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover2.png',
+                'type' => 'free',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover3.png',
+                'type' => 'free',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover4.png',
                 'type' => 'free',
             ]);
 
@@ -484,8 +502,26 @@ class MultimediaController extends Controller
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
-                'bg_image' => 'assets/img/playlistCover.jpg',
+                'bg_image' => 'assets/img/playlistCover1.png',
                 'type' => 'free',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover2.png',
+                'type' => 'paid',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover3.png',
+                'type' => 'paid',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover4.png',
+                'type' => 'paid',
             ]);
 
             $playlists = UserPlaylistGroup::with(['clip_playlists' => function ($q) {
