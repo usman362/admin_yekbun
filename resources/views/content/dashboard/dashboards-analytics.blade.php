@@ -137,38 +137,41 @@
             color: #1C274C;
         }
     </style>
-    <div class="container-fluid">
+       <div class="container-fluid">
         <div class="row">
             <!-- Sidebar - col-md-2 -->
             <!-- <div class="col-md-2 sidebar">
-                        <h5 class="px-3 mb-4">Navigation</h5>
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="bi bi-people me-2"></i> Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="bi bi-server me-2"></i> Servers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="bi bi-list-check me-2"></i> Logs</a>
-                            </li>
-                        </ul>
-                    </div> -->
+                <h5 class="px-3 mb-4">Navigation</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-people me-2"></i> Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-server me-2"></i> Servers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-list-check me-2"></i> Logs</a>
+                    </li>
+                </ul>
+            </div> -->
 
             <!-- Main Content - col-md-10 -->
             <div class="col-md-12">
                 <!-- Top Row - 3 columns -->
                 <div class="row mb-4">
                     <!-- Server Status - col-md-4 -->
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <h5 class="mb-4">Server Status</h5>
+                    </div>
+                    <div class="col-md-4">
                         <div class="dashboard-card">
 
                             <div class="row text-center">
                                 <div class="col-lg-3 col-md-6 col-12 border-end">
+
                                     
                                     <img src="{{ asset('assets/img/server_img_01.png') }}" class="server-icon" alt="Server">
                                     <h6 class="fs-22 mb-0">ServerName</h6>
@@ -180,8 +183,8 @@
                                     <h6 class="fs-22">CPU - <span class="text-success">i9</span></h6>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar"
-                                            style="width: 40%; background: #3AACE6; border-radius: 50px;" aria-valuenow="30"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                            style="width: 40%; background: #3AACE6; border-radius: 50px;"
+                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
 
                                 </div>
@@ -190,8 +193,8 @@
                                     <h6 class="fs-22">RAM <span class="text-success">4TB</span></h6>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar"
-                                            style="width: 40%; background: #3AACE6; border-radius: 50px;" aria-valuenow="30"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                            style="width: 40%; background: #3AACE6; border-radius: 50px;"
+                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-12">
@@ -199,11 +202,11 @@
                                     <h6 class="fs-22">HD <span class="text-success">800TB</span></h6>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar"
-                                            style="width: 40%; background: #3AACE6; border-radius: 50px;" aria-valuenow="30"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                            style="width: 40%; background: #3AACE6; border-radius: 50px;"
+                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             <img src="{{ asset('assets/img/logout_icon.png') }}" class="img-fluid logout_icon" alt="">
                         </div>
                         <div class="row">
@@ -211,8 +214,7 @@
                                 <div class="dashboard-card p-2">
                                     <div class="row">
                                         <div class="col-md-6 text-center border-end">
-                                            <img src="{{ asset('assets/img/api_img.png') }}" class="img-fluid w-85 m-auto d-flex"
-                                                alt="">
+                                            <img src="{{ asset('assets/img/api_img.png') }}" class="img-fluid w-85 m-auto d-flex" alt="">
                                             <h3 class="mb-0 " style="
     font-size: 12px;
 ">API Status</h3>
@@ -229,8 +231,7 @@
                                             <div class="mb-1" style="margin-bottom: 10px;">
                                                 <h3 style="
     font-size: 10px;
-">Total APIs: &nbsp; &nbsp; <span
-                                                        class="text-success"> 21 </span>
+">Total APIs: &nbsp; &nbsp; <span class="text-success"> 21 </span>
                                                 </h3>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
@@ -247,7 +248,7 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                     <img src="{{ asset('assets/img/logout_icon.png') }}" class="img-fluid logout_icon" alt="">
 
                                 </div>
@@ -257,8 +258,7 @@
                                 <div class="dashboard-card p-2">
                                     <div class="row">
                                         <div class="col-md-6 text-center border-end">
-                                            <img src="{{ asset('assets/img/lock_img.png') }}" class="img-fluid w-85 m-auto d-flex"
-                                                alt="">
+                                            <img src="{{ asset('assets/img/lock_img.svg') }}" class="img-fluid w-85 m-auto d-flex" alt="">
                                             <h3 class="mb-0 " style="font-size: 12px;">OTP Status </h3>
                                             <div class="mb-0">
                                                 <h3 class="mb-0" style="font-size: 12px;">Status &nbsp; &nbsp; <span
@@ -297,10 +297,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card">
-                                        <img src="{{ asset('assets/img/card_img_01.png') }}" class="card-img-top" alt="...">
+                                        <img src="{{ asset('assets/img/card_img_01.svg') }}" class="card-img-top" alt="...">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_02"
-                                                alt="">
+                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_02" alt="">
                                         </div>
                                         <div class="card-body pt-2 pb-2 text-center">
                                             <h5 class="card-title mb-0">Owner Name</h5>
@@ -310,10 +309,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card">
-                                        <img src="{{ asset('assets/img/card_img_01.png') }}" class="card-img-top" alt="...">
+                                        <img src="{{ asset('assets/img/card_img_01.svg') }}" class="card-img-top" alt="...">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_02"
-                                                alt="">
+                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_02" alt="">
                                         </div>
                                         <div class="card-body pt-2 pb-2 text-center">
                                             <h5 class="card-title mb-0 mb-0">Owner Name</h5>
@@ -328,22 +326,7 @@
                                         <img src="{{ asset('assets/img/card_img_01.png') }}" class="card-img-top card-img-top_01"
                                             alt="...">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_03"
-                                                alt="">
-                                        </div>
-                                        <div class="card-body pt-2 pb-2 text-center">
-                                            <h6 class="card-title mb-0 mb-0">Owner Name</h6>
-                                            <p class="card-text mb-0">Autor</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card">
-                                        <img src="{{ asset('assets/img/card_img_01.png') }} " class="card-img-top card-img-top_01"
-                                            alt="...">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_03"
-                                                alt="">
+                                            <img src="{{ asset('assets/img/card_img_02.png') }} class="img-fluid card_img_03" alt="">
                                         </div>
                                         <div class="card-body pt-2 pb-2 text-center">
                                             <h6 class="card-title mb-0 mb-0">Owner Name</h6>
@@ -356,12 +339,24 @@
                                         <img src="{{ asset('assets/img/card_img_01.png') }}" class="card-img-top card-img-top_01"
                                             alt="...">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_03"
-                                                alt="">
+                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_03" alt="">
+                                        </div>
+                                        <div class="card-body pt-2 pb-2 text-center">
+                                            <h6 class="card-title mb-0 mb-0">Owner Name</h6>
+                                            <p class="card-text mb-0">Autor</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="card">
+                                        <img src="{{ asset('assets/img/card_img_01.png') }}" class="card-img-top card-img-top_01"
+                                            alt="...">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <img src="{{ asset('assets/img/card_img_02.png') }}" class="img-fluid card_img_03" alt="">
                                         </div>
                                         <div class="card-body pt-2 pb-2 text-center">
                                             <h6 class="card-title mb-0">Owner Name</h6>
-                                            <p class="card-text">Autor</p>
+                                            <p class="card-text">Autor as</p>
                                         </div>
                                     </div>
                                 </div>
@@ -501,8 +496,7 @@
 
 
                 </div>
-                
-
+               
             </div>
         </div>
     </div>
@@ -719,7 +713,7 @@
                 <div class="bg-white p-3 rounded shadow-sm">
                     <h6 class="fw-bold text-center">iOS Devices</h6>
                     <div class="text-center">
-                        <img src="{{ asset('assets/img/img-03.png') }}" style="width: 25px;" class="img-fluid">
+                        <img src="{{ asset('assets/img/img-03.svg') }}" style="width: 25px;" class="img-fluid">
                         <div class="fw-bold">15,258</div>
                     </div>
                     <div class="small">
@@ -758,39 +752,933 @@
         </div>
     </div>
     <div class="container-fluid py-3">
-        <div class="row g-3">
-            <div class="col-12">
-                <div class="card">
-                    <div class="row text-center">
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/user.png" width="24">
-                            Users<br><strong>31,800€</strong></div>
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/ticket.png" width="24">
-                            Event Ticket<br><strong>0.00€</strong></div>
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/music.png" width="24">
-                            Playlist<br><strong>31,800€</strong></div>
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/lock.png" width="24">
-                            Market<br><strong>0.00€</strong></div>
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/shop.png" width="24">
-                            Shops<br><strong>0.00€</strong></div>
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/ad.png" width="24"> Google
-                            Ads<br><strong>0.00€</strong></div>
-                        <div class="col"><img src="https://img.icons8.com/ios-filled/50/advertising.png"
-                                width="24"> User Ads<br><strong>0.00€</strong></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="mb-0">Income views</h3>
+                <p class="mb-0">All Sections</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex pe-3 flex-column align-items-center border-end">
+                        <img src="{{ asset('assets/img/img-18.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">Users</h5>
+                        <p class="mb-0">31,863€   25%</p>
                     </div>
+                    <div class="d-flex pe-3 flex-column align-items-center border-end">
+                        <img src="{{ asset('assets/img/img-19.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">Event Ticket</h5>
+                        <p class="mb-0">0,00€  25%</p>
+                    </div>
+                    <div class="d-flex pe-3 flex-column align-items-center border-end">
+                        <img src="{{ asset('assets/img/img-20.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">Playlist</h5>
+                        <p class="mb-0">31,863€  25%</p>
+                    </div>
+                     <div class="d-flex pe-3 flex-column align-items-center border-end">
+                        <img src="{{ asset('assets/img/img-21.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">Market</h5>
+                        <p class="mb-0">0,00€  25%</p>
+                    </div>
+                     <div class="d-flex pe-3 flex-column align-items-center border-end">
+                        <img src="{{ asset('assets/img/img-22.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">Shops</h5>
+                        <p class="mb-0">0,00€  25%</p>
+                    </div>
+                     <div class="d-flex pe-3 flex-column align-items-center border-end">
+                        <img src="{{ asset('assets/img/img-23.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">Google Ads</h5>
+                        <p class="mb-0">0,00€  25%</p>
+                    </div>
+                     <div class="d-flex pe-3 flex-column align-items-center">
+                        <img src="{{ asset('assets/img/img-24.svg') }}" style="width: 25px;" alt="">
+                        <h5 class="mb-0">User Ads</h5>
+                        <p class="mb-0">0,00€  25%</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-white p-3 rounded shadow-sm" style="height: 100%;"></div>
+            </div>
+        </div>
+            
+                    
                     <div class="row mt-4">
-                        <div class="col-md-9">
+                        <div class="col-md-8">
+                            
                             <canvas id="incomeBarChart" height="150"></canvas>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h6 class="fw-bold">Income Charts</h6>
                             <canvas id="incomeDonutChart" height="200"></canvas>
                         </div>
                     </div>
+               
+        
+    </div>
+    <div class="container-fluid p-3" style="background-color: #f6f7fb;">
+        <div class="row g-3">
+            <div class="col-md-12">
+                <h6 class="fw-bold mb-0">User Charts</h6>
+                <p class="text-muted small mb-0">Users, Devices, Countries</p>
+            </div>
+            <!-- Left: Country List -->
+            <div class="col-xl-7 col-lg-6 col-md-12">
+
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="d-flex align-items-center flex-wrap" style="justify-content: center; gap: 50px;">
+                        <div class="d-flex pe-4 flex-column align-items-center border-end">
+                            <img src="{{ asset('assets/img/img-04.svg') }}" alt="">
+                            <h4 class="mb-0 mt-3">Total User</h4>
+                            <p>31,863 25% </p>
+                        </div>
+                        <div class="d-flex pe-4 flex-column align-items-center border-end">
+                            <img src="{{ asset('assets/img/img-05.svg') }}" alt="">
+                            <h4 class="mb-0 mt-3">Educated</h4>
+                            <p>31,863 25% </p>
+                        </div>
+                        <div class="d-flex pe-4 flex-column align-items-center border-end">
+                            <img src="{{ asset('assets/img/img-06.svg') }}" alt="">
+                            <h4 class="mb-0 mt-3">Cultivated</h4>
+                            <p>31,863 25% </p>
+                        </div>
+                        <div class="d-flex pe-4 flex-column align-items-center">
+                            <img src="{{ asset('assets/img/img-07.svg') }}" alt="">
+                            <h4 class="mb-0 mt-3">Academic</h4>
+                            <p>31,863 25% </p>
+                        </div>
+                    </div>
+                    <!-- One user row example -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="left_side_box">
+                                <h4 class="mb-0 text-center">Ku-Rojava</h4>
+                                <div class="d-flex text-center justify-content-center align-items-center">
+                                    <p class="mb-0"><img src="{{ asset('assets/img/img-08.svg') }}" alt="">31,863 <img
+                                            src="{{ asset('assets/img/img-09.svg') }}" alt="">15,125<img src="{{ asset('assets/img/img-10.svg') }}"
+                                            alt="">15,235</p>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-11.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-15.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="left_side_box">
+                                <h4 class="mb-0 text-center">Ku-Rojava</h4>
+                                <div class="d-flex text-center justify-content-center align-items-center">
+                                    <p class="mb-0"><img src="{{ asset('assets/img/img-08.svg') }}" alt="">31,863 <img
+                                            src="{{ asset('assets/img/img-09.svg') }}" alt="">15,125<img src="{{ asset('assets/img/img-10.svg') }}"
+                                            alt="">15,235</p>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-11.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-15.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="left_side_box">
+                                <h4 class="mb-0 text-center">Ku-Rojava</h4>
+                                <div class="d-flex text-center justify-content-center align-items-center">
+                                    <p class="mb-0"><img src="{{ asset('assets/img/img-08.svg') }}">31,863 <img
+                                            src="{{ asset('assets/img/img-09.svg') }}" alt="">15,125<img src="images/img-10.svg"
+                                            alt="">15,235</p>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-11.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-15.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="images/img-12.svg" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="left_side_box">
+                                <h4 class="mb-0 text-center">Ku-Rojava</h4>
+                                <div class="d-flex text-center justify-content-center align-items-center">
+                                    <p class="mb-0"><img src="{{ asset('assets/img/img-08.svg') }}" alt="">31,863 <img
+                                            src="{{ asset('assets/img/img-09.svg') }}" alt="">15,125<img src="{{ asset('assets/img/img-10.svg') }}"
+                                            alt="">15,235</p>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-11.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="bg-white p-3 text-center" style="border-radius: 12px;">
+                                            <img src="{{ asset('assets/img/img-15.svg') }}" class="d-flex m-auto" alt="">
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-12.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 30%; background-color: tomato;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-13.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 90%; background-color: #F1C21B;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <img src="{{ asset('assets/img/img-14.svg') }}" class="img-fluid" alt="">
+                                                    <span>1258</span>
+                                                </div>
+                                                <div class="progress mt-1"
+                                                    style="height: 6px; background-color: #e5e5e5;">
+                                                    <div class="progress-bar"
+                                                        style="width: 50%; background-color: #1BC469;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Duplicate the above div for more rows if needed -->
+            </div>
+
+
+
+
+            <!-- App Sections -->
+            <div class="col-xl-2 col-lg-6 col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h6 class="fw-bold">Age and Gender</h6>
+                    <div class="text-center mb-2">
+                        <img src="{{ asset('assets/img/img-16.svg') }}" style="" class="img-fluid">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center" style="gap: 20px;">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <h6 class="mb-0"><i class="bx bxs-circle fs-10"></i>&nbsp; Male</h6>
+                            <h6 class="text-center mb-0">50,869</h6>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <h6 class="mb-0"><i class="bx bxs-circle fs-8 "></i>&nbsp; Female</h6>
+                            <h6 class="text-center mb-0">1,869</h6>
+                        </div>
+                    </div>
+                    <div class="small">
+                        <div class="d-flex justify-content-between mb-1"><span>18-24</span>
+                            <div class="d-flex">
+                                <span>25%</span> &nbsp; &nbsp;
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>25-34</span>
+                            <div class="d-flex">
+                                <span>25%</span> &nbsp; &nbsp;
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>35-44</span>
+                            <div class="d-flex">
+                                <span>25%</span> &nbsp; &nbsp;
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>45-64</span>
+                            <div class="d-flex">
+                                <span>25%</span> &nbsp; &nbsp;
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>65+</span>
+                            <div class="d-flex">
+                                <span>25%</span> &nbsp; &nbsp;
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
+
+            <!-- Android Devices -->
+            <div class="col-xl-3 col-lg-6 col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="p-3" style="background: #F2F2F2; border-radius: 12px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('assets/img/img_profile.svg') }}" class="img-fluid rounded-circle " style="width: 25px;"
+                                    alt="">
+                                <div class="profile_txt mx-2">
+                                    <h5 class="mb-0 fs-15">Artist Name</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/flag_img.svg') }}" alt=""> Rojava</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15">Upgrade Date</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/paypal.svg') }}" alt=""> PayPal</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15"><img src="{{ asset('assets/img/img-06.svg') }}" style="width: 25px;" alt="">
+                                    </h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="p-3 mt-2" style="background: #F2F2F2; border-radius: 12px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('assets/img/img_profile.svg') }}" class="img-fluid rounded-circle " style="width: 25px;"
+                                    alt="">
+                                <div class="profile_txt mx-2">
+                                    <h5 class="mb-0 fs-15">Artist Name</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/flag_img.svg') }}" alt=""> Rojava</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15">Upgrade Date</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/paypal.svg') }}" alt=""> PayPal</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15"><img src="{{ asset('assets/img/img-06.svg') }}" style="width: 25px;" alt="">
+                                    </h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="p-3 mt-2" style="background: #F2F2F2; border-radius: 12px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="images/img_profile.svg" class="img-fluid rounded-circle " style="width: 25px;"
+                                    alt="">
+                                <div class="profile_txt mx-2">
+                                    <h5 class="mb-0 fs-15">Artist Name</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/flag_img.svg') }}" alt=""> Rojava</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15">Upgrade Date</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/paypal.svg') }}" alt=""> PayPal</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15"><img src="{{ asset('assets/img/img-06.svg') }}" style="width: 25px;" alt="">
+                                    </h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="p-3 mt-2" style="background: #F2F2F2; border-radius: 12px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="images/img_profile.svg" class="img-fluid rounded-circle " style="width: 25px;"
+                                    alt="">
+                                <div class="profile_txt mx-2">
+                                    <h5 class="mb-0 fs-15">Artist Name</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/flag_img.svg') }}" alt=""> Rojava</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15">Upgrade Date</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/paypal.svg') }}" alt=""> PayPal</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15"><img src="{{ asset('assets/img/img-06.svg') }}" style="width: 25px;" alt="">
+                                    </h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="p-3 mt-2" style="background: #F2F2F2; border-radius: 12px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('assets/img/img_profile.svg') }}" class="img-fluid rounded-circle " style="width: 25px;"
+                                    alt="">
+                                <div class="profile_txt mx-2">
+                                    <h5 class="mb-0 fs-15">Artist Name</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/flag_img.svg') }}" alt=""> Rojava</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15">Upgrade Date</h5>
+                                    <p class="mb-0 fs-12"><img src="{{ asset('assets/img/paypal.svg') }}" alt=""> PayPal</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="profile_txt">
+                                    <h5 class="mb-0 fs-15"><img src="{{ asset('assets/img/img-06.svg') }}" style="width: 25px;" alt="">
+                                    </h5>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
+     <div class="container-fluid p-3" style="background-color: #f6f7fb;">
+        <div class="row g-3">
+
+            <!-- Left: Country List -->
+            <div class="col-xl-4 col-lg-6 col-md-12">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h6 class="fw-bold">Our Visitor</h6>
+                    <p class="text-muted small mb-3">Countries List</p>
+
+                    <!-- One user row example -->
+
+                    <div class="row mt-3 align-items-center">
+                        <div class="col-md-2">
+                            <img src="{{ asset('assets/img/img_profile.svg') }}" class="rounded-circle"
+                                style="width: 25px; display: flex; margin: auto;" alt="avatar">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="fw-semibold">Kurdistan</div>
+                                <div class="d-flex">
+                                    <span class="text-primary fw-semibold me-2">1.258</span>
+                                    <span class="text-danger fw-semibold">1.325</span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1" style="height: 6px; background-color: #e5e5e5;">
+                                <div class="progress-bar" style="width: 30%; background-color: tomato;"></div>
+                            </div>
+                            <small class="text-muted">Name of cities will appear here</small>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="row mt-3 align-items-center">
+                        <div class="col-md-2">
+                            <img src="{{ asset('assets/img/img_profile.svg') }}" class="rounded-circle"
+                                style="width: 25px; display: flex; margin: auto;" alt="avatar">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="fw-semibold">Kurdistan</div>
+                                <div class="d-flex">
+                                    <span class="text-primary fw-semibold me-2">1.258</span>
+                                    <span class="text-danger fw-semibold">1.325</span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1" style="height: 6px; background-color: #e5e5e5;">
+                                <div class="progress-bar" style="width: 30%; background-color: tomato;"></div>
+                            </div>
+                            <small class="text-muted">Name of cities will appear here</small>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="row mt-3 align-items-center">
+                        <div class="col-md-2">
+                            <img src="{{ asset('assets/img/img_profile.svg') }}" class="rounded-circle"
+                                style="width: 25px; display: flex; margin: auto;" alt="avatar">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="fw-semibold">Kurdistan</div>
+                                <div class="d-flex">
+                                    <span class="text-primary fw-semibold me-2">1.258</span>
+                                    <span class="text-danger fw-semibold">1.325</span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1" style="height: 6px; background-color: #e5e5e5;">
+                                <div class="progress-bar" style="width: 30%; background-color: tomato;"></div>
+                            </div>
+                            <small class="text-muted">Name of cities will appear here</small>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+                <!-- Duplicate the above div for more rows if needed -->
+            </div>
+
+
+            <!-- Traffic Card -->
+            <div class="col-xl-2 col-lg-6 col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h6 class="fw-bold">Traffic</h6>
+                    <div class="mt-3">
+                        <div class="mb-5">
+                            <div class="fw-bold text-primary">27 <small class="text-muted">September 2019</small></div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <div class="fw-bold text-primary">26 <small class="text-muted">September 2019</small></div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="fw-bold text-primary">25 <small class="text-muted">September 2019</small></div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Sections -->
+            <div class="col-xl-2 col-lg-6 col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h6 class="fw-bold">App Sections</h6>
+                    <div class="text-center mb-2">
+                        <img src="{{ asset('assets/img/img-01.svg') }}" style="width: 25px;" class="img-fluid">
+                        <div class="fw-bold">YekBun App</div>
+                    </div>
+                    <div class="small">
+                        <div class="d-flex justify-content-between mb-1"><span>News - Feeds</span><span>25%</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>Multimedia - Video</span><span>25%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>Multimedia - Music</span><span>25%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>Multimedia - Music</span><span>25%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-2">
+                        <div class="d-flex justify-content-between mb-1"><span>Multimedia - Music</span><span>25%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Android Devices -->
+            <div class="col-xl-2 col-lg-6 col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h6 class="fw-bold text-center">Android Devices</h6>
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/img-02.svg') }}" style="width: 25px;" class="img-fluid">
+                        <div class="fw-bold">15,258</div>
+                    </div>
+                    <div class="small">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3  ">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- iOS Devices -->
+            <div class="col-xl-2 col-lg-6 col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <h6 class="fw-bold text-center">iOS Devices</h6>
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/img-03.svg') }}" style="width: 25px;" class="img-fluid">
+                        <div class="fw-bold">15,258</div>
+                    </div>
+                    <div class="small">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-info" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-info" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-info" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-info" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="small mt-3">
+                        <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar bg-info" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <!-- Bootstrap Bundle with Popper -->
 
     <!-- Bootstrap Icons -->
