@@ -127,6 +127,30 @@ class TranslateLanguageKeywords implements ShouldQueue
             ['keyword' => "Didn't receive code?", 'translated' => "Didn't receive code?", 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
             ['keyword' => 'Resent Now', 'translated' => 'Resent Now', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
 
+//Header Section
+            ['keyword' => 'News', 'translated' => 'Resent Now', 'main_section' => 'Header', 'section_name' => 'Header'], 
+            ['keyword' => 'Multimedia', 'translated' => 'Multimedia', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Kurdistan', 'translated' => 'Kurdistan', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Market', 'translated' => 'Market', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Location', 'translated' => 'Location', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Home', 'translated' => 'Home', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Feeds', 'translated' => 'Feeds', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Sympathy', 'translated' => 'Sympathy', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Streams', 'translated' => 'Streams', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Music', 'translated' => 'Music', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'History', 'translated' => 'History', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'AI Videos', 'translated' => 'AI Videos', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Playlist', 'translated' => 'Playlist', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Surveys', 'translated' => 'Surveys', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Complaint', 'translated' => 'Complaint', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Legal', 'translated' => 'Legal', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Services', 'translated' => 'Services', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Bazaar', 'translated' => 'Bazaar', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Shops', 'translated' => 'Shops', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Lifestyle', 'translated' => 'Lifestyle', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Emergency', 'translated' => 'Emergency', 'main_section' => 'Header', 'section_name' => 'Header'],
+            ['keyword' => 'Help', 'translated' => 'Help', 'main_section' => 'Header', 'section_name' => 'Header'],
+
 
 
             // Home Page SignUp
