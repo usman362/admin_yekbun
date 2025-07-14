@@ -61,6 +61,7 @@ class TranslateLanguageKeywords implements ShouldQueue
             ['keyword' => 'Close', 'translated' => 'Close', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Select Your Language', 'translated' => 'Select Your Language', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Submit', 'translated' => 'Submit', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'New Songs', 'translated' => 'New Songs', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
 
             // Home Page SignIn
             ['keyword' => 'Email and Password are required.', 'translated' => 'Email and Password are required.', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
