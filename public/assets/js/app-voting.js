@@ -14,12 +14,12 @@ $(document).ready(function() {
 
         if(voteType == 'single_vote') {
             createModal.find("input[name='vote_type']").val('single');
-            createModal.find(".vote-header .title").text("Single Vote");
+            createModal.find(".vote-header .title").text("Single Survey");
             hidden_div.appendChild(individual_vote_options);
             options_container.appendChild(single_vote_options);
         } else {
             createModal.find("input[name='vote_type']").val('individual');
-            createModal.find(".vote-header .title").text("Individual Vote");
+            createModal.find(".vote-header .title").text("Individual Survey");
             hidden_div.appendChild(single_vote_options);
             options_container.appendChild(individual_vote_options);
         }

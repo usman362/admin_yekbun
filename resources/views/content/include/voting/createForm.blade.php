@@ -45,14 +45,14 @@
                 </div>
 
                 <div class="vote-title mt-3">
-                    <div class="fw-bold" style="color:#333;">Vote Title</div>
+                    <div class="fw-bold" style="color:#333;">Survey Title</div>
                     <div style="background:white;">
                         <input type="text" id="fullname" class="form-control" placeholder="title" name="name" required>
                     </div>
                 </div>
 
                 <div class="vote-description mt-3">
-                    <div class="fw-bold" style="color:#333;">Vote Description</div>
+                    <div class="fw-bold" style="color:#333;">Survey Description</div>
                     <div style="background:white;">
                         <textarea name="description" class="form-control" id="description" cols="30" rows="5"></textarea>
                     </div>
