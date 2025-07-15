@@ -91,6 +91,7 @@ class LanguageController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'icon' => 'required',
             'title' => 'required',
@@ -230,6 +231,7 @@ class LanguageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $language = Language::find($id);
         $language->title = $request->title;
         $language->status = $request->status;
