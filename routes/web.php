@@ -472,17 +472,13 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
 
-    Route::resource('/vote', VotingController::class);
-    Route::get('/vote/{id}/statistic', [VotingController::class, 'statistic'])->name('vote.statistics');
-    Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
-    Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
+    Route::resource('/surveys', VotingController::class);
+    Route::get('/surveys/{id}/statistic', [VotingController::class, 'statistic'])->name('surveys.statistics');
+    Route::get('/surveys/{id}/banner', [VotingController::class, 'deleteImage'])->name('surveys.delete-banner');
+    Route::get('/surveys/{id}/{status}', [VotingController::class, 'status'])->name('surveys-status');
 
     // Route::resource('/vote-category', VotingCategoryController::class);
     // Route::get('/vote_category/{id}/{status}', [VotingCategoryController::class, 'status'])->name('votecat-status');
-
-    Route::resource('/vote', VotingController::class);
-    Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
-    Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
 
     Route::delete('/history/{id}/image', [HistoryController::class, 'deleteImage'])->name('history.delete-image');
     Route::delete('/history/{id}/video', [HistoryController::class, 'deleteVideo'])->name('history.delete-video');

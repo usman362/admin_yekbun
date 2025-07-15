@@ -106,13 +106,13 @@ class VotingController extends Controller
                         }
                     }
                 } catch (\Exception $e) {
-                    return redirect()->route('vote.index')->with('success', 'Vote Has been inserted');
+                    return redirect()->route('surveys.index')->with('success', 'Vote Has been inserted');
                 }
             }
 
-            return redirect()->route('vote.index')->with('success', 'Vote Has been inserted');
+            return redirect()->route('surveys.index')->with('success', 'Survey has been Added Successfully');
         } else {
-            return redirect()->route('vote.index')->with('error', 'Failed to add vote');
+            return redirect()->route('surveys.index')->with('error', 'Failed to add Survey');
         }
     }
 
@@ -136,6 +136,7 @@ class VotingController extends Controller
 
     public function statistic($id)
     {
+
         $vote = Voting::with('voting_category')->findOrFail($id);
         $ageGroups = [
             '18-24' => [18, 24],
@@ -216,13 +217,70 @@ class VotingController extends Controller
             $total_neutrals += $stat['male']['neutrals'] + $stat['female']['neutrals'];
         }
 
+        // Fetch only Kurdish users
+        $users = DB::table('users')
+            ->where('origin', 'kurdish')
+            ->select('_id', 'province')
+            ->get();
+
+        // Group users by province
+        $usersByProvince = $users->groupBy('province');
+
+        $province_statistics = [];
+
+        foreach ($usersByProvince as $province => $provinceUsers) {
+            $userIds = $provinceUsers->pluck('_id')->toArray();
+
+            // Fetch reactions for users in this province
+            $province_reactions = DB::table('voting_reactions')
+                ->whereIn('user_id', $userIds)
+                ->where('voting_id', $id)
+                ->count();
+
+            $province_statistics[] = [
+                'province' => $province,
+                'total_votes' => $province_reactions
+            ];
+        }
+
+        // User type order: academic → cultivated → educated
+        $userTypes = ['academic', 'cultivated', 'educated'];
+
+        // All users count by user_type
+        $allCounts = DB::table('users')
+            ->select('user_type', DB::raw('count(*) as total'))
+            ->whereIn('user_type', $userTypes)
+            ->groupBy('user_type')
+            ->pluck('total', 'user_type');
+
+        // Female users count by user_type
+        $femaleCounts = DB::table('users')
+            ->select('user_type', DB::raw('count(*) as total'))
+            ->whereIn('user_type', $userTypes)
+            ->where('gender', 'female')
+            ->groupBy('user_type')
+            ->pluck('total', 'user_type');
+
+        // You can also calculate male counts if needed
+        $maleCounts = DB::table('users')
+            ->select('user_type', DB::raw('count(*) as total'))
+            ->whereIn('user_type', $userTypes)
+            ->where('gender', 'male')
+            ->groupBy('user_type')
+            ->pluck('total', 'user_type');
+
         return view('content.include.voting.statistic', compact(
             'vote',
             'statistics',
+            'province_statistics',
             'total_reviews',
             'total_likes',
             'total_dislikes',
-            'total_neutrals'
+            'total_neutrals',
+            'allCounts',
+            'femaleCounts',
+            'maleCounts',
+            'userTypes'
         ));
     }
 
@@ -261,9 +319,9 @@ class VotingController extends Controller
         if ($request->audio) $vote->audio = $request->audio;
 
         if ($vote->update()) {
-            return redirect()->route('vote.index')->with('success', 'Vote Has been Updated');
+            return redirect()->route('surveys.index')->with('success', 'Survey Has been Updated');
         } else {
-            return redirect()->route('vote.index')->with('error', 'Failed to update vote');
+            return redirect()->route('surveys.index')->with('error', 'Failed to Update Survey');
         }
     }
 
@@ -283,9 +341,9 @@ class VotingController extends Controller
             }
         }
         if ($vote->delete($vote->id)) {
-            return redirect()->route('vote.index')->with('success', 'Vote Has been Delted');
+            return redirect()->route('surveys.index')->with('success', 'Survey Has been Delted');
         } else {
-            return redirect()->route('vote.index')->with('success', 'Vote not deleted');
+            return redirect()->route('surveys.index')->with('success', 'Survey not deleted');
         }
     }
 
@@ -294,9 +352,9 @@ class VotingController extends Controller
         $vote = Voting::find($id);
         $vote->status = $status;
         if ($vote->update()) {
-            return redirect()->route('vote.index')->with('success', 'Status Has been Updated');
+            return redirect()->route('surveys.index')->with('success', 'Status Has been Updated');
         } else {
-            return redirect()->route('vote.index')->with('error', 'Status is not changed');
+            return redirect()->route('surveys.index')->with('error', 'Status is not changed');
         }
     }
 

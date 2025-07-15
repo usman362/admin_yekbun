@@ -74,50 +74,21 @@
             </li>
         @endcan
 
-
-
-
         @can('voting.read')
-            <li
-                class="menu-item {{ Request::is('vote-category') ? 'active open' : '' }} {{ Request::is('vote') ? 'active open' : '' }} {{ Request::is('settings/voting/*') ? 'active open' : '' }}">
+            <li class="menu-item {{ Request::is('surveys') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-sort"></i>
                     <div>Surveys</div>
                 </a>
-
-
                 <ul class="menu-sub">
-
-
-
-                    {{-- <li class="menu-item {{ Request::is('vote-category') ? 'active' : '' }}">
-                    <a href="{{ url('/vote-category') }}" class="menu-link">
-                        <div>Add Category</div>
-                    </a>
-
-
-                </li> --}}
-
-
-
-                    <li class="menu-item {{ Request::is('vote') ? 'active' : '' }} ">
-                        <a href="{{ url('/vote') }}" class="menu-link">
+                    <li class="menu-item {{ Request::is('surveys') ? 'active' : '' }} ">
+                        <a href="{{ url('/surveys') }}" class="menu-link">
                             <div>Manage Surveys</div>
                         </a>
-
-
                     </li>
-
-
-
                 </ul>
             </li>
         @endcan
-
-
-
-
-
 
         @can('history.read')
             <li
@@ -126,22 +97,7 @@
                     <i class="menu-icon tf-icons bx bx-history"></i>
                     <div>History</div>
                 </a>
-
-
                 <ul class="menu-sub">
-
-
-
-                    {{-- <li class="menu-item {{ Request::is('history-category') ? 'active' : '' }} ">
-                    <a href="{{ url('/history-category') }}" class="menu-link">
-                        <div>Add Category</div>
-                    </a>
-
-
-                </li> --}}
-
-
-
                     <li class="menu-item {{ Request::is('history') ? 'active' : '' }}  ">
                         <a href="{{ url('/history') }}" class="menu-link">
                             <div>Add Manage History</div>
@@ -149,36 +105,9 @@
 
 
                     </li>
-
-
-
-                    {{-- <li class="menu-item {{ Request::is('settings/history/*') ? 'active open' : '' }}">
-          <a href="javascript:void(0)" class="menu-link menu-toggle">
-            <div>Settings</div>
-          </a>
-
-
-          <ul class="menu-sub">
-
-
-
-            <li class="menu-item  {{ Request::is('settings/history/prefix') ? 'active' : '' }}">
-              <a href="{{url('/settings/history/prefix')}}" class="menu-link">
-                <div>Prefix</div>
-              </a>
-
-
-            </li>
-          </ul>
-        </li> --}}
                 </ul>
             </li>
         @endcan
-
-
-
-
-
 
         @can('donation.read')
             <li
@@ -187,57 +116,42 @@
                     <i class="menu-icon tf-icons bx bx-donate-heart"></i>
                     <div>Donation</div>
                 </a>
-
-
                 <ul class="menu-sub">
-
-
-
                     <li class="menu-item {{ Request::is('donations') ? 'active' : '' }}">
                         <a href="{{ url('/donations') }}" class="menu-link">
                             <div>Add Manage Donation</div>
                         </a>
-
-
                     </li>
-
-
-
                     <li class="menu-item {{ Request::is('donations/organizations') ? 'active' : '' }}">
                         <a href="{{ url('/donations/organizations') }}" class="menu-link">
                             <div>Add Manage Organization</div>
                         </a>
-
-
                     </li>
                 </ul>
             </li>
         @endcan
-  @can('videos.read')
-        <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
-                    style="width: 20px; height: 20px;margin-right: 0.5rem;">
-                <div>AI Videos</div>
-            </a>
+        @can('videos.read')
+            <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
+                        style="width: 20px; height: 20px;margin-right: 0.5rem;">
+                    <div>AI Videos</div>
+                </a>
 
 
-            <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('ai-videos') ? 'active' : '' }}  ">
-                    <a href="{{ url('/ai-videos') }}" class="menu-link">
-                        <div>Manage AI Videos</div>
-                    </a>
-
-
-                </li>
-            </ul>
-        </li>
-@endcan
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::is('ai-videos') ? 'active' : '' }}  ">
+                        <a href="{{ url('/ai-videos') }}" class="menu-link">
+                            <div>Manage AI Videos</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
         @can('feeds.read')
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">User adds</span>
             </li>
-
 
             <li
                 class="menu-item {{ Request::is('Feeds/*') ? 'active open' : '' }} {{ Request::is('manage-user-feeds') ? 'active open' : '' }}  {{ Request::is('manage-fanpage-feeds') ? 'active open' : '' }}  {{ Request::is('feed-background') ? 'active open' : '' }}{{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
@@ -248,26 +162,17 @@
 
 
                 <ul class="menu-sub">
-
                     <li class="menu-item {{ Request::is('manage-user-feeds') ? 'active' : '' }}">
                         <a href="{{ url('/manage-user-feeds') }}" class="menu-link">
                             <div>Manage User Feeds</div>
                         </a>
-
-
                     </li>
-
-
 
                     <li class="menu-item {{ Request::is('manage-channel-feeds') ? 'active' : '' }}">
                         <a href="{{ url('/manage-channel-feeds') }}" class="menu-link">
                             <div>Manage Channel Feed</div>
                         </a>
-
-
                     </li>
-
-
 
                     <li
                         class="menu-item  {{ Request::is('feed-background') ? 'active open' : '' }} {{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
@@ -278,8 +183,6 @@
 
                         <ul class="menu-sub">
 
-
-
                             <li class="menu-item ">
                                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                                     <div>Post Filter</div>
@@ -287,15 +190,10 @@
 
 
                                 <ul class="menu-sub">
-
-
-
                                     <li class="menu-item ">
                                         <a href="javascript:void(0)" class="menu-link">
                                             <div>Image Filter</div>
                                         </a>
-
-
                                     </li>
 
 
@@ -304,8 +202,6 @@
                                         <a href="javascript:void(0)" class="menu-link">
                                             <div>Video Filter</div>
                                         </a>
-
-
                                     </li>
 
 
@@ -314,8 +210,6 @@
                                         <a href="javascript:void(0)" class="menu-link">
                                             <div>Keywords Filter</div>
                                         </a>
-
-
                                     </li>
                                 </ul>
                             </li>
@@ -326,8 +220,6 @@
                                 <a href="{{ url('/feed-background') }}" class="menu-link">
                                     <div>Feed Background</div>
                                 </a>
-
-
                             </li>
 
 
@@ -336,8 +228,6 @@
                                 <a href="{{ url('feed-emoji') }}" class="menu-link">
                                     <div>Add Emojis</div>
                                 </a>
-
-
                             </li>
 
 
@@ -1342,7 +1232,8 @@
             <span class="menu-header-text">Yekbun TV</span>
         </li>
 
-        <li class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series') ? 'active open' : '' }}">
+        <li
+            class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-tv"></i>
                 <div>Zarok TV</div>
@@ -1664,7 +1555,7 @@
         </li>
     @endcan
 
-{{-- // @can('manageorigin.read') wrong calling here --}}
+    {{-- // @can('manageorigin.read') wrong calling here --}}
     @can('appinfo.read')
         <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
             <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">

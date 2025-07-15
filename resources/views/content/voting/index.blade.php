@@ -46,6 +46,11 @@
             margin-top: -38px !important;
         }
 
+        .dz-thumbnail>img {
+            width: 375px;
+            height: 330px;
+        }
+
         .bg-tropy-column {
             /* border: 1px dashed #d1d1d1; */
             border-radius: 12px;
@@ -110,7 +115,8 @@
             background: #cc8ff5;
             height: 100%;
             width: 50%;
-            left: 15%;
+            left: auto;
+            right: 0;
             position: absolute;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
@@ -141,7 +147,7 @@
             background: #B5179E;
             border-top-left-radius: 0px !important;
             border-bottom-left-radius: 0px !important;
-            border-top-right-radius: 0px !important;
+            /* border-top-right-radius: 0px !important; */
             width: 85%;
         }
 
@@ -149,7 +155,7 @@
             background: #7209B7;
             border-top-left-radius: 0px !important;
             border-bottom-left-radius: 0px !important;
-            border-top-right-radius: 0px !important;
+            /* border-top-right-radius: 0px !important; */
             width: 80%;
         }
 
@@ -157,7 +163,7 @@
             background: #560BAD;
             border-top-left-radius: 0px !important;
             /* border-bottom-left-radius: 0px !important; */
-            border-top-right-radius: 0px !important;
+            /* border-top-right-radius: 0px !important; */
             width: 70%;
         }
 
@@ -225,7 +231,8 @@
             font-weight: 400 !important;
             color: #000000;
         }
-        .btn-close{
+
+        .btn-close {
             z-index: 2;
         }
     </style>
@@ -388,7 +395,7 @@
                                     </span>
 
                                     <!-- Delete -->
-                                    <form action="{{ route('vote.destroy', $vote->id) }}"
+                                    <form action="{{ route('surveys.destroy', $vote->id) }}"
                                         onsubmit="confirmAction(event, () => event.target.submit())" method="post"
                                         class="d-inline">
                                         @method('DELETE')
@@ -402,7 +409,8 @@
 
                                     <span>
                                         <button class="btn btn-sm btn-icon btn-statistic-vote" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-bs-offset="0,4" data-bs-placement="top"
+                                            {{-- data-bs-target="#statisticVotingModal" --}}
+                                             data-bs-offset="0,4" data-bs-placement="top"
                                             data-bs-html="true" data-vote-id="{{ $vote->id }}"
                                             data-vote-name="{{ 'Survey for ' . $vote->name }}"
                                             data-bs-original-title="Statistic" aria-describedby="tooltip557134">
@@ -421,12 +429,14 @@
             </table>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1">
+
+{{-- Stastics Model Form --}}
+
+    <div class="modal fade" id="statisticVotingModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content p-0">
                 <div class="modal-header flex-column align-items-start border-bottom-0 p-3 pt-1"
-                    style="background: #0000000D;
-">
+                    style="background: #0000000D;">
                     <h4 class="modal-title text-muted text-vote mb-0">Survey
                         Title</h4>
                     <p class="text-muted mb-0 para-vote">Category Name</p>
