@@ -128,7 +128,7 @@ class TranslateLanguageKeywords implements ShouldQueue
             ['keyword' => 'Resent Now', 'translated' => 'Resent Now', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
 
 //Header Section
-            ['keyword' => 'News', 'translated' => 'Resent Now', 'main_section' => 'Header', 'section_name' => 'Header'], 
+            ['keyword' => 'News', 'translated' => 'Resent Now', 'main_section' => 'Header', 'section_name' => 'Header'],
             ['keyword' => 'Multimedia', 'translated' => 'Multimedia', 'main_section' => 'Header', 'section_name' => 'Header'],
             ['keyword' => 'Kurdistan', 'translated' => 'Kurdistan', 'main_section' => 'Header', 'section_name' => 'Header'],
             ['keyword' => 'Market', 'translated' => 'Market', 'main_section' => 'Header', 'section_name' => 'Header'],
@@ -462,21 +462,20 @@ class TranslateLanguageKeywords implements ShouldQueue
         ];
 
         foreach ($homekeywords as $keyword) {
-            $translated = $keyword['translated'];
 
-            if ($this->langCode !== 'en') {
-                try {
-                    $tr = new GoogleTranslate($this->langCode);
-                    $translated = $tr->translate($keyword['translated']);
-                } catch (\Exception $e) {
-                    $translated = $keyword['translated'];
-                }
-            }
+            // if ($this->langCode !== 'en') {
+            //     try {
+            //         $tr = new GoogleTranslate($this->langCode);
+            //         $translated = $tr->translate($keyword['translated']);
+            //     } catch (\Exception $e) {
+            //         $translated = $keyword['translated'];
+            //     }
+            // }
 
             LanguageDetail::create([
                 'language_id'   => $this->languageId,
                 'keyword'       => $keyword['keyword'],
-                'translated'    => $translated,
+                'translated'    => $keyword['translated'] ?? '',
                 'main_section'  => $keyword['main_section'],
                 'section_name'  => $keyword['section_name'],
             ]);
