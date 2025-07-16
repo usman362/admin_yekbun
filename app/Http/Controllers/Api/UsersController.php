@@ -343,12 +343,12 @@ class UsersController extends Controller
         }
     }
 
-    public function get_vistor($id)
+    public function get_vistor()
     {
 
         try {
-            $visitors = UserVisitor::with(['user', 'visitor'])->where('user_id', $id)->get();
-            $totalVisitors = UserVisitor::where('user_id', $id)->count();
+            $visitors = UserVisitor::with(['visitor'])->where('user_id', Auth::id())->get();
+            $totalVisitors = UserVisitor::where('user_id', Auth::id())->count();
             $data = ['visitors' => $visitors, 'total_views' => $totalVisitors];
             return ResponseHelper::sendResponse($data, 'User Visit has been Successfully!');
         } catch (Exception $e) {
