@@ -403,19 +403,19 @@ class MultimediaController extends Controller
                 'title' => 'My Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover2.png',
-                'type' => 'free',
+                'type' => 'paid',
             ]);
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover3.png',
-                'type' => 'free',
+                'type' => 'paid',
             ]);
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover4.png',
-                'type' => 'free',
+                'type' => 'paid',
             ]);
 
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
