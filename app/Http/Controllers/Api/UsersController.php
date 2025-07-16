@@ -28,7 +28,8 @@ class UsersController extends Controller
 
     public function users_may_you_know_list(Request $request)
     {
-        $users = User::select('id', 'user_id', 'username', 'image', 'is_online')
+        $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
+            ->with(['friends','family'])
             ->where('_id', '!=', Auth::id())
             ->where('is_admin_user', 0)
             ->doesntHave('friends')
