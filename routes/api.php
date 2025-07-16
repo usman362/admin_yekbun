@@ -155,6 +155,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
     Route::post('user-online/{id}', [UsersController::class, 'store_user_online']);
     Route::get('get-users-list', [UsersController::class, 'users_list']);
+    Route::get('get-users-may-you-know-list', [UsersController::class, 'users_may_you_know_list']);
     Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
     Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
     Route::post('update-friends-list', [UsersController::class, 'update_freind_list']);

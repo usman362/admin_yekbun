@@ -26,6 +26,17 @@ class UsersController extends Controller
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
 
+    public function users_may_you_know_list(Request $request)
+    {
+        $users = User::select('id', 'user_id', 'username', 'image', 'is_online')
+            ->where('_id', '!=', Auth::id())
+            ->where('is_admin_user', 0)
+            ->doesntHave('friends')
+            ->doesntHave('family')
+            ->get();
+        return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
+    }
+
     public function users_details(Request $request, $id)
     {
         $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'expired_at', 'subscription_type', 'is_online', 'public_image', 'friends_image', 'family_image')
