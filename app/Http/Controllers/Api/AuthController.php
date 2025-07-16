@@ -151,6 +151,7 @@ class AuthController extends Controller
                 'gender' => $request['gender'],
                 'origin' => $request['origin'],
                 'location' => $request['location'],
+                'country' => $request['country'],
                 'maritalStatus' => $request['maritalStatus'] ?? $request['marital_status'],
                 'dob' => $request['dob'],
                 'province' => $request['province'],
