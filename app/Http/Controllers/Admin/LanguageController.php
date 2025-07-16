@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\LanguagesHelpers;
 use App\Models\Text;
-use App\Models\Language; 
+use App\Models\Language;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -107,7 +107,7 @@ class LanguageController extends Controller
             $language->icon = $image_path;
         }
         if ($language->save()) {
-            TranslateLanguageKeywords::dispatch($language->id, $language->code);
+            LanguagesHelpers::languages_keywords($language->id, $language->code);
             return redirect()
                 ->route('language.index')
                 ->with('success', 'Your language has been created successfully.');
@@ -231,7 +231,7 @@ class LanguageController extends Controller
      */
     public function update(Request $request, $id)
     {
-       // dd($request->all());
+        // dd($request->all());
         $language = Language::find($id);
         $language->title = $request->title;
         $language->status = $request->status;
@@ -273,6 +273,12 @@ class LanguageController extends Controller
 
         try {
             if ($language->delete()) {
+                $details = LanguageDetail::where('language_id', $language->id)->get();
+                if (!empty($details)) {
+                    foreach ($details as $detail) {
+                        $detail->delete();
+                    }
+                }
                 return redirect()
                     ->route('language.index')
                     ->with('success', 'Your language has been deleted successfully.');
@@ -2091,89 +2097,82 @@ class LanguageController extends Controller
         }
     }
 
-public function upload_json(Request $request) 
-{
-    $request->validate([
-        'language_id'   => 'required',
-        'main_section'  => 'required',
-        'section_name'  => 'required',
-        'file'          => 'required|file',
-    ]);
+    public function upload_json(Request $request)
+    {
+        $request->validate([
+            'language_id'   => 'required',
+            'main_section'  => 'required',
+            'section_name'  => 'required',
+            'file'          => 'required|file',
+        ]);
 
-    $language = Language::findOrFail($request->language_id);
-    $languageCode = $language->code;
+        $language = Language::findOrFail($request->language_id);
+        $languageCode = $language->code;
 
-    // Properly extract and clean title from main_section
-    $rawSection = $request->main_section;
-    if (Str::startsWith($rawSection, 'publish-')) {
-        $rawSection = Str::after($rawSection, 'publish-');
+        // Properly extract and clean title from main_section
+        $rawSection = $request->main_section;
+        if (Str::startsWith($rawSection, 'publish-')) {
+            $rawSection = Str::after($rawSection, 'publish-');
+        }
+        $cleanMainSectionTitle = ucwords(str_replace('-', ' ', $rawSection));
+        $cleanMainSectionTitle = Str::replaceFirst('Publish ', '', $cleanMainSectionTitle);
+
+        //dd($cleanMainSectionTitle); // will be "Home Page"
+
+        $fileName = $languageCode . '_publish-' . $rawSection . '_' . Str::slug($request->section_name) . '.json';
+
+        $request->file('file')->storeAs('language', $fileName);
+
+        $json = Storage::get('language/' . $fileName);
+        $data = json_decode($json, true);
+
+        if (!is_array($data)) {
+            return response()->json(['error' => 'Invalid JSON format'], 400);
+        }
+
+        TranslateKeywordsJSON::dispatch(
+            $request->language_id,
+            $languageCode,
+            $cleanMainSectionTitle,
+            $request->section_name,
+            $data
+        );
+
+        return back()->with('success', 'Translation job dispatched');
     }
-    $cleanMainSectionTitle = ucwords(str_replace('-', ' ', $rawSection));
-     $cleanMainSectionTitle = Str::replaceFirst('Publish ', '', $cleanMainSectionTitle);
 
-     //dd($cleanMainSectionTitle); // will be "Home Page"
 
-    $fileName = $languageCode . '_publish-' . $rawSection . '_' . Str::slug($request->section_name) . '.json';
 
-    $request->file('file')->storeAs('language', $fileName);
+    public function downloadJson($languageId, $section, Request $request)
+    {
+        // dd($languageId);
+        $rawSection = trim(preg_replace('/\s+/', ' ', $request->main_section)); // "Publish Home Page"
 
-    $json = Storage::get('language/' . $fileName);
-    $data = json_decode($json, true);
+        // Remove "Publish" word (case-insensitive) from beginning
+        $rawSection = preg_replace('/^Publish\s*/i', '', $rawSection);
+        // dd($rawSection );
+        $mainSection = $request->query('main_section');
 
-    if (!is_array($data)) {
-        return response()->json(['error' => 'Invalid JSON format'], 400);
+        // Fetch the keywords (example using Eloquent)
+        $keywords = LanguageDetail::where('language_id', $languageId)
+            ->where('section_name', $section)
+            ->where('main_section', $rawSection)
+            ->get(['keyword', 'translated']); // only these two fields
+        //dd($keywords );
+        // Format to desired array
+        $data = $keywords->map(function ($item) {
+            return [
+                'keyword' => $item->keyword,
+                'translated' => $item->translated,
+            ];
+        });
+
+        $filename = "{$section}_{$rawSection}.json";
+
+        return response()->streamDownload(function () use ($data) {
+            echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        }, $filename, [
+            'Content-Type' => 'application/json',
+        ]);
     }
-
-    TranslateKeywordsJSON::dispatch(
-        $request->language_id,
-        $languageCode,
-        $cleanMainSectionTitle,
-        $request->section_name,
-        $data
-    );
-
-    return back()->with('success', 'Translation job dispatched');
-}
-
- 
-
-public function downloadJson($languageId, $section, Request $request)
-{
-    // dd($languageId);
-   $rawSection = trim(preg_replace('/\s+/', ' ', $request->main_section)); // "Publish Home Page"
-
-// Remove "Publish" word (case-insensitive) from beginning
-$rawSection = preg_replace('/^Publish\s*/i', '', $rawSection);
-// dd($rawSection );
-    $mainSection = $request->query('main_section');
-
-    // Fetch the keywords (example using Eloquent)
-    $keywords = LanguageDetail::where('language_id', $languageId)
-        ->where('section_name', $section)
-        ->where('main_section', $rawSection)
-        ->get(['keyword', 'translated']); // only these two fields
-//dd($keywords );
-    // Format to desired array
-    $data = $keywords->map(function ($item) {
-        return [
-            'keyword' => $item->keyword,
-            'translated' => $item->translated,
-        ];
-    });
-
-    $filename = "{$section}_{$rawSection}.json";
-
-    return response()->streamDownload(function () use ($data) {
-        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    }, $filename, [
-        'Content-Type' => 'application/json',
-    ]);
-}
-
-
-
-
- 
-
-
 }
