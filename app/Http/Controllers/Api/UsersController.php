@@ -29,11 +29,11 @@ class UsersController extends Controller
     public function users_may_you_know_list(Request $request)
     {
         $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
-            ->with(['friends','family'])
+            ->with(['user_friends','user_family'])
             ->where('_id', '!=', Auth::id())
             ->where('is_admin_user', 0)
-            ->doesntHave('friends')
-            ->doesntHave('family')
+            ->doesntHave('user_friends')
+            ->doesntHave('user_family')
             ->get();
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
