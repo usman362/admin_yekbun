@@ -425,7 +425,7 @@
             </div>
             <div>
                 <label class="form-label" for="inputPassword">Admin Password</label>
-                <input type="text" id="inputPassword" name="password" class="form-control" placeholder="Password">
+                <input type="text" id="inputPassword" name="password" class="form-control" placeholder="Password" autocomplete="off">
                 @error('warning_cause')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
