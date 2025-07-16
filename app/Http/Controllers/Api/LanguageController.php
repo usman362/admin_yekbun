@@ -69,12 +69,11 @@ class LanguageController extends Controller
     }
 
     public function languagesList()
-    {
-        $languages = Language::where('status','1')->all();
+{
+    $languages = Language::where('status', '1')->get();
 
-        return response()->json(['languages' => $languages],200);
-    }
-
+    return response()->json(['languages' => $languages], 200);
+}
     /**
      * Show the form for creating a new resource.
      *
