@@ -70,7 +70,7 @@ class LanguageController extends Controller
 
     public function languagesList()
     {
-        $languages = Language::all();
+        $languages = Language::where('status','1')->all();
 
         return response()->json(['languages' => $languages],200);
     }
