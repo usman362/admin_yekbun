@@ -28,14 +28,15 @@ class UsersController extends Controller
 
     public function users_may_you_know_list(Request $request)
     {
-        $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
-            ->whereHas('friends', function ($q) {
-                $q->where('user_id', '!=', Auth::id())
-                    ->where('friend_id', '!=', Auth::id());
-            })
-            ->where('_id', '!=', Auth::id())
-            ->where('is_admin_user', 0)
-            ->get();
+        $authId = Auth::id();
+
+    $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
+        ->where('_id', '!=', $authId)
+        ->where('is_admin_user', 0)
+        ->whereDoesntHave('friends', function ($q) use ($authId) {
+            $q->where('user_id', $authId)->where('user_type', 'friends');
+        })
+        ->get();
 
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
