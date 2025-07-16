@@ -475,7 +475,7 @@ class TranslateLanguageKeywords implements ShouldQueue
             LanguageDetail::create([
                 'language_id'   => $this->languageId,
                 'keyword'       => $keyword['keyword'],
-                'translated'    => $this->langCode === 'en' ? $keyword['translated'] : '',
+                'translated'    => Str::lower($this->langCode) === 'en' ? $keyword['translated'] : '',
                 'main_section'  => $keyword['main_section'],
                 'section_name'  => $keyword['section_name'],
             ]);
