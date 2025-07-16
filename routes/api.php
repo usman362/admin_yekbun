@@ -64,6 +64,7 @@ use App\Http\Controllers\Api\UserRolesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VotingReactionController;
 use App\Http\Controllers\Api\NotificationsController;
+use App\Http\Controllers\Api\ViewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -199,11 +200,18 @@ Route::middleware('jwt.custom')->group(function () {
     Route::delete('delete-playlist-music/{id}', [MultimediaController::class, 'deletePlaylist']);
     Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
 
+    //Views
+    Route::post('store-multimedia-views', [ViewsController::class, 'store_multimedia_views']);
+    Route::post('store-feeds-views', [ViewsController::class, 'store_feeds_views']);
+
     //Payments
     Route::post('post-transaction', [PaymentController::class, 'storeTransaction']);
-
     Route::get('notifications-center', [NotificationsController::class, 'index']);
 });
+
+//Views
+Route::get('get-multimedia-views', [ViewsController::class, 'get_multimedia_views']);
+Route::get('get-feeds-views', [ViewsController::class, 'get_feeds_views']);
 
 Route::post('notifications-center', [NotificationsController::class, 'store']);
 Route::get('notifications-center/{id}', [NotificationsController::class, 'read']);
