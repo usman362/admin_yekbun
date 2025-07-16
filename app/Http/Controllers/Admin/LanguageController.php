@@ -231,7 +231,7 @@ class LanguageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+       // dd($request->all());
         $language = Language::find($id);
         $language->title = $request->title;
         $language->status = $request->status;
