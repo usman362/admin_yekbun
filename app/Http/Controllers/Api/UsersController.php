@@ -29,10 +29,10 @@ class UsersController extends Controller
     public function users_may_you_know_list(Request $request)
     {
         $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
-            ->with(['friends' => function ($q) {
+            ->whereHas('friends', function ($q) {
                 $q->where('user_id', '!=', Auth::id())
                     ->where('friend_id', '!=', Auth::id());
-            }])
+            })
             ->where('_id', '!=', Auth::id())
             ->where('is_admin_user', 0)
             ->get();
