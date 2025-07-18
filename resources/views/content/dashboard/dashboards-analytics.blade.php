@@ -40,8 +40,7 @@ $configData = Helper::appClasses();
         height: 25px;
         margin-bottom: 10px;
     }
-
-    .custom-legend {
+  .custom-legend {
         display: flex;
         gap: 20px;
         margin-bottom: 15px;
@@ -57,7 +56,6 @@ $configData = Helper::appClasses();
         border-radius: 50%;
         margin-right: 5px;
     }
-
     .status-indicator {
         display: inline-block;
         width: 10px;
@@ -532,13 +530,12 @@ $configData = Helper::appClasses();
 
                 <div class="row mt-3 align-items-center">
                     <div class="col-md-2">
-                        <img src="{{ asset('assets/img/img_profile.svg') }}" class="rounded-circle"
+                        <img src="{{ asset('assets/img/img_profile.png') }}" class="rounded-circle"
                             style="width: 25px; display: flex; margin: auto;" alt="avatar">
                     </div>
-                    @foreach ($countries as $country)
                     <div class="col-md-10">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="fw-semibold">{{$country->name}}</div>
+                            <div class="fw-semibold">Kurdistan</div>
                             <div class="d-flex">
                                 <span class="text-primary fw-semibold me-2">1.258</span>
                                 <span class="text-danger fw-semibold">1.325</span>
@@ -549,9 +546,14 @@ $configData = Helper::appClasses();
                         </div>
                         <small class="text-muted">Name of cities will appear here</small>
                     </div>
-                    @endforeach
+
+
+
+
+
+
                 </div>
-                <!-- <div class="row mt-3 align-items-center">
+                <div class="row mt-3 align-items-center">
                     <div class="col-md-2">
                         <img src="{{ asset('assets/img/img_profile.png') }}" class="rounded-circle"
                             style="width: 25px; display: flex; margin: auto;" alt="avatar">
@@ -600,7 +602,7 @@ $configData = Helper::appClasses();
 
 
 
-                </div> -->
+                </div>
             </div>
 
             <!-- Duplicate the above div for more rows if needed -->
@@ -685,21 +687,39 @@ $configData = Helper::appClasses();
             <div class="bg-white p-3 rounded shadow-sm h-100 w-100">
                 <h6 class="fw-bold text-center">Android Devices</h6>
                 <div class="text-center">
-                    <img src="{{ asset('assets/img/img-02.svg') }}" style="width: 25px;" class="img-fluid">
-                    <div class="fw-bold">{{ $totalAndroidDevices }}</div>
+                    <img src="{{ asset('assets/img/img-02.png') }}" style="width: 25px;" class="img-fluid">
+                    <div class="fw-bold">15,258</div>
                 </div>
-                @foreach($androidDeviceStats as $type => $data)
                 <div class="small">
-                    <div class="d-flex justify-content-between">
-                        <span>{{ $type }}</span>
-                        <span>{{ $data['count'] }}</span>
-                    </div>
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
                     <div class="progress mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-success" style="width: {{ $data['percent'] }}%;"></div>
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
                     </div>
                 </div>
-                @endforeach
-
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3  ">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -709,20 +729,38 @@ $configData = Helper::appClasses();
                 <h6 class="fw-bold text-center">iOS Devices</h6>
                 <div class="text-center">
                     <img src="{{ asset('assets/img/img-03.svg') }}" style="width: 25px;" class="img-fluid">
-                    <div class="fw-bold">{{$totalIosDevices}}</div>
+                    <div class="fw-bold">15,258</div>
                 </div>
-                @foreach($iosDeviceStats as $type => $data)
                 <div class="small">
-                    <div class="d-flex justify-content-between">
-                        <span>{{ $type }}</span>
-                        <span>{{ $data['count'] }}</span>
-                    </div>
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
                     <div class="progress mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-info" style="width: {{ $data['percent'] }}%;"></div>
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
                     </div>
                 </div>
-                @endforeach
-
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -782,27 +820,27 @@ $configData = Helper::appClasses();
     </div>
 
     <!-- inco -->
-    <div class="card mt-4">
-        <div class="row p-3 mt-3">
+  <div class="card mt-4">
+    <div class="row p-3 mt-3">
 
-            <div class="col-md-9">
-                <div class="custom-legend">
-                    <span><span class="dot" style="background:#E74C3C;"></span> Users</span>
-                    <span><span class="dot" style="background:#3498DB;"></span> Tickets</span>
-                    <span><span class="dot" style="background:#3ddb60 ;"></span> Playlist</span>
-                    <span><span class="dot" style="background:#9B59B6 ;"></span> Market</span>
-                    <span><span class="dot" style="background:#3498DB;"></span> Shops</span>
-                    <span><span class="dot" style="background:#F39C12;"></span> G-Ads</span>
-                    <span><span class="dot" style="background:#A3D5FF;"></span> User Ads</span>
-                </div>
-
-                <canvas id="multiBarChart" height="150"></canvas>
+        <div class="col-md-9">
+            <div class="custom-legend">
+                <span><span class="dot" style="background:#E74C3C;"></span> Users</span>
+                <span><span class="dot" style="background:#3498DB;"></span> Tickets</span>
+                <span><span class="dot" style="background:#3ddb60 ;"></span> Playlist</span>
+                <span><span class="dot" style="background:#9B59B6 ;"></span> Market</span>
+                <span><span class="dot" style="background:#3498DB;"></span> Shops</span>
+                <span><span class="dot" style="background:#F39C12;"></span> G-Ads</span>
+                <span><span class="dot" style="background:#A3D5FF;"></span> User Ads</span>
             </div>
-            <div class="col-md-3" style="padding-top: 46px;">
-                <canvas id="incomeDonutChart" height="200"></canvas>
 
-                <div class="legend-wrapper" style="position: relative; display: flex; justify-content: center;">
-                    <div class="divider" style="
+            <canvas id="multiBarChart" height="150"></canvas>
+        </div>
+        <div class="col-md-3" style="padding-top: 46px;">
+            <canvas id="incomeDonutChart" height="200"></canvas>
+
+            <div class="legend-wrapper" style="position: relative; display: flex; justify-content: center;">
+                <div class="divider" style="
             position: absolute;
             top: 0;
             bottom: 0;
@@ -811,53 +849,53 @@ $configData = Helper::appClasses();
             background: #ddd;
         "></div>
 
-                    <div class="legend-container" style="
+                <div class="legend-container" style="
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px 40px;
             max-width: 300px;
         ">
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#ff4b4b;"></div> Users <span class="legend-percentage">46%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#6755ef;"></div> Service <span class="legend-percentage">46%</span>
-                        </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#ff4b4b;"></div> Users <span class="legend-percentage">46%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#6755ef;"></div> Service <span class="legend-percentage">46%</span>
+                    </div>
 
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#46b6fe;"></div> Events <span class="legend-percentage">46%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#ff7070;"></div> Bazaar <span class="legend-percentage">46%</span>
-                        </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#46b6fe;"></div> Events <span class="legend-percentage">46%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#ff7070;"></div> Bazaar <span class="legend-percentage">46%</span>
+                    </div>
 
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#3ddb60;"></div> Playlist <span class="legend-percentage">46%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#46b6fe;"></div> Shops <span class="legend-percentage">46%</span>
-                        </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#3ddb60;"></div> Playlist <span class="legend-percentage">46%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#46b6fe;"></div> Shops <span class="legend-percentage">46%</span>
+                    </div>
 
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#c94dd8;"></div> User Ads <span class="legend-percentage">46%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#6755ef;"></div> Sympathy <span class="legend-percentage">46%</span>
-                        </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#c94dd8;"></div> User Ads <span class="legend-percentage">46%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#6755ef;"></div> Sympathy <span class="legend-percentage">46%</span>
+                    </div>
 
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#ffaa46;"></div> Google Ads <span class="legend-percentage">46%</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background:#3ddb60;"></div> Channels <span class="legend-percentage">46%</span>
-                        </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#ffaa46;"></div> Google Ads <span class="legend-percentage">46%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#3ddb60;"></div> Channels <span class="legend-percentage">46%</span>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
+</div>
 
 
 </div>
@@ -875,22 +913,22 @@ $configData = Helper::appClasses();
                     <div class="d-flex pe-4 flex-column align-items-center border-end">
                         <img src="{{ asset('assets/img/img-04.svg') }}" alt="">
                         <h4 class="mb-0 mt-3">Total User</h4>
-                        <p>{{$totalUsers}}</p>
+                        <p>31,863 25% </p>
                     </div>
                     <div class="d-flex pe-4 flex-column align-items-center border-end">
                         <img src="{{ asset('assets/img/img-05.svg') }}" alt="">
                         <h4 class="mb-0 mt-3">Educated</h4>
-                        <p>{{ $counts['Educated'] ?? 0 }}</p>
+                        <p>31,863 25% </p>
                     </div>
                     <div class="d-flex pe-4 flex-column align-items-center border-end">
                         <img src="{{ asset('assets/img/img-06.svg') }}" alt="">
                         <h4 class="mb-0 mt-3">Cultivated</h4>
-                        <p>{{ $counts['Cultivated'] ?? 0 }}</p>
+                        <p>31,863 25% </p>
                     </div>
                     <div class="d-flex pe-4 flex-column align-items-center">
                         <img src="{{ asset('assets/img/img-07.svg') }}" alt="">
                         <h4 class="mb-0 mt-3">Academic</h4>
-                        <p>{{ $counts['Academic'] ?? 0 }} </p>
+                        <p>31,863 25% </p>
                     </div>
                 </div>
                 <!-- One user row example -->
@@ -1257,6 +1295,10 @@ $configData = Helper::appClasses();
 
             <!-- Duplicate the above div for more rows if needed -->
         </div>
+
+
+
+
         <!-- App Sections -->
         <div class="col-xl-2 col-lg-6 col-md-6 d-flex">
             <div class="bg-white p-3 rounded shadow-sm h-100 w-100">
@@ -1267,31 +1309,73 @@ $configData = Helper::appClasses();
                 <div class="d-flex justify-content-center align-items-center" style="gap: 20px;">
                     <div class="d-flex flex-column align-items-center text-center">
                         <h6 class="mb-0"><i class="bx bxs-circle fs-10"></i>&nbsp; Male</h6>
-                        <h6 class="text-center mb-0">{{ $male_account }}</h6>
+                        <h6 class="text-center mb-0">50,869</h6>
                     </div>
                     <div class="d-flex flex-column align-items-center">
                         <h6 class="mb-0"><i class="bx bxs-circle fs-8 "></i>&nbsp; Female</h6>
-                        <h6 class="text-center mb-0">{{ $male_account}}</h6>
+                        <h6 class="text-center mb-0">1,869</h6>
                     </div>
                 </div>
-                @foreach ($ageGroupStats as $group)
-                <div class="small mt-2">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span>{{ $group['range'] }}</span>
+                <div class="small">
+                    <div class="d-flex justify-content-between mb-1"><span>18-24</span>
                         <div class="d-flex">
-                            <span>{{ $group['male'] }}%</span>&nbsp;&nbsp;
-                            <span>{{ $group['female'] }}%</span>
+                            <span>25%</span> &nbsp; &nbsp;
+                            <span>25%</span>
                         </div>
                     </div>
                     <div class="progress mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-purple" style="width: {{ $group['bar'] }}%;"></div>
+                        <div class="progress-bar bg-purple" style="width: 25%;"></div>
                     </div>
                 </div>
-                @endforeach
-
+                <div class="small mt-2">
+                    <div class="d-flex justify-content-between mb-1"><span>25-34</span>
+                        <div class="d-flex">
+                            <span>25%</span> &nbsp; &nbsp;
+                            <span>25%</span>
+                        </div>
+                    </div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-2">
+                    <div class="d-flex justify-content-between mb-1"><span>35-44</span>
+                        <div class="d-flex">
+                            <span>25%</span> &nbsp; &nbsp;
+                            <span>25%</span>
+                        </div>
+                    </div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-2">
+                    <div class="d-flex justify-content-between mb-1"><span>45-64</span>
+                        <div class="d-flex">
+                            <span>25%</span> &nbsp; &nbsp;
+                            <span>25%</span>
+                        </div>
+                    </div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-2">
+                    <div class="d-flex justify-content-between mb-1"><span>65+</span>
+                        <div class="d-flex">
+                            <span>25%</span> &nbsp; &nbsp;
+                            <span>25%</span>
+                        </div>
+                    </div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-purple" style="width: 25%;"></div>
+                    </div>
+                </div>
 
             </div>
         </div>
+
+
         <!-- Android Devices -->
         <div class="col-xl-3 col-lg-6 col-md-6 d-flex">
             <div class="bg-white p-3 rounded shadow-sm h-100 w-100">
@@ -1422,6 +1506,8 @@ $configData = Helper::appClasses();
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 
@@ -1441,10 +1527,9 @@ $configData = Helper::appClasses();
                         <img src="{{ asset('assets/img/img_profile.svg') }}" class="rounded-circle"
                             style="width: 25px; display: flex; margin: auto;" alt="avatar">
                     </div>
-                    @foreach ($countries as $country)
                     <div class="col-md-10">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="fw-semibold">{{$country->name}}</div>
+                            <div class="fw-semibold">Kurdistan</div>
                             <div class="d-flex">
                                 <span class="text-primary fw-semibold me-2">1.258</span>
                                 <span class="text-danger fw-semibold">1.325</span>
@@ -1455,9 +1540,14 @@ $configData = Helper::appClasses();
                         </div>
                         <small class="text-muted">Name of cities will appear here</small>
                     </div>
-                    @endforeach
+
+
+
+
+
+
                 </div>
-                <!-- <div class="row mt-3 align-items-center">
+                <div class="row mt-3 align-items-center">
                     <div class="col-md-2">
                         <img src="{{ asset('assets/img/img_profile.svg') }}" class="rounded-circle"
                             style="width: 25px; display: flex; margin: auto;" alt="avatar">
@@ -1506,7 +1596,7 @@ $configData = Helper::appClasses();
 
 
 
-                </div> -->
+                </div>
             </div>
 
             <!-- Duplicate the above div for more rows if needed -->
@@ -1592,20 +1682,38 @@ $configData = Helper::appClasses();
                 <h6 class="fw-bold text-center">Android Devices</h6>
                 <div class="text-center">
                     <img src="{{ asset('assets/img/img-02.svg') }}" style="width: 25px;" class="img-fluid">
-                    <div class="fw-bold">{{ $totalAndroidDevices }}</div>
+                    <div class="fw-bold">15,258</div>
                 </div>
-                @foreach($androidDeviceStats as $type => $data)
                 <div class="small">
-                    <div class="d-flex justify-content-between">
-                        <span>{{ $type }}</span>
-                        <span>{{ $data['count'] }}</span>
-                    </div>
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
                     <div class="progress mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-success" style="width: {{ $data['percent'] }}%;"></div>
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
                     </div>
                 </div>
-                @endforeach
-
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3  ">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-success" style="width: 80%;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1615,20 +1723,38 @@ $configData = Helper::appClasses();
                 <h6 class="fw-bold text-center">iOS Devices</h6>
                 <div class="text-center">
                     <img src="{{ asset('assets/img/img-03.svg') }}" style="width: 25px;" class="img-fluid">
-                    <div class="fw-bold">{{$totalIosDevices}}</div>
+                    <div class="fw-bold">15,258</div>
                 </div>
-                @foreach($iosDeviceStats as $type => $data)
                 <div class="small">
-                    <div class="d-flex justify-content-between">
-                        <span>{{ $type }}</span>
-                        <span>{{ $data['count'] }}</span>
-                    </div>
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
                     <div class="progress mb-2" style="height: 6px;">
-                        <div class="progress-bar bg-info" style="width: {{ $data['percent'] }}%;"></div>
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
                     </div>
                 </div>
-                @endforeach
-
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="small mt-3">
+                    <div class="d-flex justify-content-between"><span>Device Type</span><span>1,200</span></div>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-info" style="width: 80%;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
