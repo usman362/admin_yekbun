@@ -10,6 +10,8 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserFriends;
 use App\Models\UserRequest;
+use App\Models\UserImage;
+use App\Models\UserVideo;
 use App\Models\UserVisitor;
 use Exception;
 use Illuminate\Http\Request;
@@ -565,5 +567,17 @@ class UsersController extends Controller
         }
         $user->save();
         return ResponseHelper::sendResponse($user, 'My Notifcation Updated Successfully!');
+    }
+
+    public function user_images()
+    {
+        $images = UserImage::with('user')->where('user_id', Auth::id())->get();
+        return ResponseHelper::sendResponse($images, 'User Images Fetched Successfully');
+    }
+
+    public function user_videos()
+    {
+        $videos = UserVideo::with('user')->where('user_id', Auth::id())->get();
+        return ResponseHelper::sendResponse($videos, 'User Videos Fetched Successfully');
     }
 }

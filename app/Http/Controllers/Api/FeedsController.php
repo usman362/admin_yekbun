@@ -15,6 +15,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CommentsLike;
 use App\Models\Event;
 use App\Models\Feed;
+use App\Models\UserImage;
+use App\Models\UserVideo;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
 use App\Models\UserFriends;
@@ -234,13 +236,19 @@ class FeedsController extends Controller
             }
             foreach ($request->file('images') as $image) {
                 $uniqueName = uniqid() . '___' . str_replace(' ', '_', $image->getClientOriginalName());
+                $storedImage = $image->storeAs("images/user_feeds", $uniqueName, "public");
                 $images[] = [
-                    'path' => $image->storeAs("images/user_feeds", $uniqueName, "public"),
+                    'path' => $storedImage,
                     'name' => $image->getClientOriginalName(),
                     'size' => $image->getSize(),
                 ];
+                UserImage::create([
+                    'user_id' => Auth::id(),
+                    'image' => $storedImage
+                ]);
             }
             $feeds->images = $images; // Store as an array of objects in MongoDB
+
         }
 
         // Handle multiple video uploads
@@ -251,12 +259,17 @@ class FeedsController extends Controller
             }
             foreach ($request->file('videos') as $video) {
                 $uniqueName = uniqid() . '___' . str_replace(' ', '_', $video->getClientOriginalName());
+                $storedVideo = $video->storeAs("videos/user_feeds", $uniqueName, "public");
                 $videos[] = [
-                    'path' => $video->storeAs("videos/user_feeds", $uniqueName, "public"),
+                    'path' => $storedVideo,
                     'name' => $video->getClientOriginalName(),
                     'size' => $video->getSize(),
                     // 'length' => $this->getMediaDuration($video), // Optional
                 ];
+                UserVideo::create([
+                    'user_id' => Auth::id(),
+                    'video' => $storedVideo
+                ]);
             }
             $feeds->videos = $videos; // Store as an array of objects in MongoDB
         }
@@ -485,7 +498,7 @@ class FeedsController extends Controller
                 $feed = History::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }])->find($id);
-            }elseif ($feedType == 'ai_videos') {
+            } elseif ($feedType == 'ai_videos') {
                 $feed = AIVideo::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }])->find($id);

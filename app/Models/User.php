@@ -306,4 +306,14 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     {
         return $this->hasMany(UserPlaylist::class, 'user_id')->where('type', 'video');
     }
+
+    public function images()
+    {
+        return $this->hasMany(UserImage::class, 'user_id');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(UserVideo::class, 'user_id');
+    }
 }
