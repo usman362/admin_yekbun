@@ -208,6 +208,10 @@ Route::middleware('jwt.custom')->group(function () {
     //Payments
     Route::post('post-transaction', [PaymentController::class, 'storeTransaction']);
     Route::get('notifications-center', [NotificationsController::class, 'index']);
+
+    //User Images/Videos
+    Route::get('user-images', [UsersController::class, 'user_images']);
+    Route::get('user-videos', [UsersController::class, 'user_videos']);
 });
 
 //Views

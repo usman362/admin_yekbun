@@ -7,6 +7,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Clips;
 use App\Models\ClipTemplates;
+use App\Models\UserVideo;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
@@ -88,12 +89,16 @@ class ClipsController extends Controller
         exec($command, $output, $return_var);
 
         if ($return_var === 0) {
-            $clip->clip = Str::after($outputPath, 'public/');;
+            $clip->clip = Str::after($outputPath, 'public/');
         }
         // else {
         //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
         // }
         $clip->save();
+        UserVideo::create([
+            'user_id' => Auth::id(),
+            'video' => Str::after($outputPath, 'public/')
+        ]);
         return ResponseHelper::sendResponse($clip, 'Clip has been Created Successfully!');
     }
 
