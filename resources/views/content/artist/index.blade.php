@@ -297,6 +297,7 @@
                         <th>Artist</th>
                         <th>Total Songs</th>
                         <th>Total Video Clips</th>
+                        <th>Status</th>
                         <th>Like</th>
                         <th>Actions</th>
                     </tr>
@@ -1067,6 +1068,10 @@
                     {
                         data: 'total_videos',
                         name: 'total_videos'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'like',

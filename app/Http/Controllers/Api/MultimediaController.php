@@ -82,6 +82,7 @@ class MultimediaController extends Controller
                 'videos',
                 'province.country'
             ])
+            ->where('status','1')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -100,6 +101,7 @@ class MultimediaController extends Controller
                 'videos',
                 'province.country'
             ])
+            ->where('status','1')
             ->orderBy('created_at', 'desc')
             ->get();
 

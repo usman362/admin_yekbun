@@ -78,12 +78,18 @@ class ArtistController extends Controller
                 ->addColumn('like', function () {
                     return '0';
                 })
+                ->addColumn('status', function ($row) {
+                    $statusClass = $row->status == '1' ? 'bg-success' : 'bg-danger';
+                    $statusText = $row->status == '1' ? 'Published' : 'UnPublished';
+
+                    return '<span class="badge ' . $statusClass . '">' . $statusText . '</span>';
+                })
                 ->addColumn('actions', function ($artist) {
                     $provinces = Region::get();
                     $actions = view('content.artist.actions', compact('artist', 'provinces'));
                     return $actions;
                 })
-                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'actions'])
+                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
                 ->make(true);
         }
 
@@ -135,7 +141,7 @@ class ArtistController extends Controller
                 [$request->name],
                 $notification->new_artist_description
             );
-            if ($notification->new_artist == 'true') {
+            if ($notification->new_artist == 'true' && $request->status == '1') {
                 try {
                     $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
@@ -210,6 +216,24 @@ class ArtistController extends Controller
         }
 
         if ($artist->save()) {
+            $notification = Notifications::first();
+            $description = str_replace(
+                ["[name]"],
+                [$request->name],
+                $notification->new_artist_description
+            );
+            if ($notification->new_artist == 'true' && $request->status == '1') {
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return back()->with("success", "Artist has been updated successfully.");
+                }
+            }
             return redirect()->route('artist.index')->with('success', 'Artist has been updated');
         } else {
             return redirect()->route('artist.index')->with('error', 'Artist not updated');
