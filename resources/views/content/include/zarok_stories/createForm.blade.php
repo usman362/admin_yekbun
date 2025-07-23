@@ -6,47 +6,94 @@
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
+            	<div class="col-md-12">
+                	<div class="form-group">
+                		<label>Story Title</label>
+                    	<input type="text" class="form-control" placeholder="Story title..." name="title" required="required" />
+                    </div>
+                </div>
+                
+                <!--<div class="col-md-12">
+                    <div class="card"> 
+                        <div class="card-body">
+                            <div class="dropzone needsclick" action="/" id="dropzone-image">
+                                <div class="dz-message needsclick">
+                                    Upload Banner
+                                    <small class="text-muted text-custom">png or jpg</small>
+                                </div>
+                                
+                                <div class="fallback">
+                                    <input type="file" name="images[]" accept="images/*" />
+                                </div>
+                            </div>
+                            <div class="hidden-videos"></div> 
+                        </div>
+                    </div>
+                </div>-->
+                
+                <div class="col-md-12">
+                <div class="card"> 
+                    <div class="card-body text-center dropzone needsclick">
+                    	
+                        <label for="bannerInput" style="cursor:pointer;" id="bannerLabel">
+                            <div id="bannerPreviewWrapper">
+                                <img id="bannerPreview" src="{{ asset('assets/img/uploadbanner.png') }}" alt="Click to upload" style="max-width: 300px; max-height: 200px;">
+                            </div>
+                        </label>
+                        
+                        <input type="file" id="bannerInput" name="images" accept="image/*" style="display: none;">
+                       
+                    </div>
+                </div>
+            </div>
+
+                
                 <div class="col-md-12">
                     <div class="card">
-                        {{-- <h5 class="card-header">Video Upload</h5> --}}
                         <div class="card-body">
                             <div class="dropzone needsclick" action="/" id="dropzone-video">
                                 <div class="dz-message needsclick">
-                                    Drop files here or click to upload
+                                    Upload Story
+                                    <small class="text-muted text-custom">MP4 or AVI</small>
                                 </div>
+                                
                                 <div class="fallback">
                                     <input type="file" name="video[]" accept="video/*" />
                                 </div>
                             </div>
-                            <div class="hidden-videos"></div> <!-- 🔹 Stores video hidden inputs -->
+                            <div class="hidden-videos"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div id="generated-thumbnails" style="display: block">
-                        <div class="card">
-                            {{-- <h5 class="card-header">Thumbnails</h5> --}}
-                            <div class="card-body">
+                        <div class="card0">
+                             <h5 class="card-header1 thumbnail-heading">Select Thumbnails</h5> 
+                            <div class="card-body1">
                                 <div class="row">
                                     <div id="thumbnail-history" style="display: block">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <img id="img1" class="generated-img"
-                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{asset('assets/img/plus-solid.svg')}}" alt="">
                                             </div>
                                             <div class="col-md-4">
                                                 <img id="img2" class="generated-img"
-                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{asset('assets/img/plus-solid.svg')}}" alt="">
                                             </div>
                                             <div class="col-md-4">
-                                                <img id="img3" class="generated-img"
-                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                <img id="img3" class="generated-img" 
+                                                    src="{{asset('assets/img/plus-solid.svg')}}" alt="">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row justify-content-center text-center">
+                                        <div class="col-md-4">
+                                            <div class="regnerate"><i class="fas fa-rotate-right"></i>&nbsp;New Thumbnail</div>
+                                        </div>
+                                        
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -125,6 +172,8 @@
             <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
         `;
                     generateThumbnails();
+					
+					$('.save-btn-custom').prop('disabled', false);
                 };
 
             },
@@ -161,6 +210,8 @@
                 $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
+				
+				$('.save-btn-custom').prop('disabled', true);
 
                 return this._updateMaxFilesReachedClass();
 
@@ -186,7 +237,7 @@
         }
 
         $.ajax({
-            url: "/generate-thumbnail", // Laravel route
+            url: "{{ url('/generate-thumbnail') }}", // Laravel route
             type: "POST",
             data: {
                 video_path: videoPath,
@@ -203,6 +254,12 @@
                 $("#thumbnail-history #img1").attr("src", newSrc1);
                 $("#thumbnail-history #img2").attr("src", newSrc2);
                 $("#thumbnail-history #img3").attr("src", newSrc3);
+
+                const thumbnailUrl = response.thumbnail[0];
+                const filename = thumbnailUrl.substring(thumbnailUrl.lastIndexOf('/') + 1);
+                const filenameWithoutExt = filename.replace(/\.jpg$/i, ''); 
+
+                $("#thumbnail").val(filenameWithoutExt);
             },
             error: function() {
                 $('#error-thumbnail').text("Failed to generate thumbnail.");
@@ -226,10 +283,27 @@
             $('.dz-thumbnail img').attr('src', src);
             $('#thumbnail').val(src);
         })
+		
+		
+		$('#bannerInput').on('change', function (e) {
+			const file = e.target.files[0];
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = function (event) {
+					$('#bannerPreview').attr('src', event.target.result);
+				};
+				reader.readAsDataURL(file);
+	
+				$('#bannerLabel').off('click'); 
+			}
+		});
+		
+		
+		
     });
 </script>
 
-<script>
+<script> 
     async function imageUrlToFile(imageUrl, fileName) {
         // Fetch the image
         const response = await fetch(imageUrl);

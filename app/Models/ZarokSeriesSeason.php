@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class ZarokMovies extends Model
+class ZarokSeriesSeason extends Model
 {
     use HasFactory;
 
     protected $connection = 'mongodb';
-    protected $collection = 'zarok_movies';
+    protected $collection = 'zarok_series_season';
 
     protected $fillable = [
         'name',
         'date',
         'description',
-        'banner',
-        'label',
         'is_hd',
         'is_4k',
         'is_uhd',
@@ -34,4 +32,15 @@ class ZarokMovies extends Model
         'video_file_length',
         'status',
     ];
+
+    public function series()
+    {
+        return $this->belongsTo(ZarokSeries::class, 'series_id', '_id');
+    }
+
+    public function episodes()
+    {
+        return $this->hasMany(ZarokSeriesEpisode::class, 'season_id', '_id');
+    }
+
 }

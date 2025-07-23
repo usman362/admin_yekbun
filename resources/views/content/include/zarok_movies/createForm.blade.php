@@ -2,56 +2,228 @@
     @csrf
     <input type="hidden" name="video_id">
     <input type="hidden" name="thumbnail" id="thumbnail">
+    <input type="hidden" name="is_trailer" value="1" />
     <div class="hidden-inputs"></div>
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
+                
+                <div class="col-md-7">
+                	<div class="form-group">
+                        <label>Trailer Title</label>
+                        <input class="form-control" placeholder="Trailer Title..." required="required" name="title" />
+                    </div>
+                </div>
+                <div class="col-md-1">
+                	&nbsp;
+                </div>
+                <div class="col-md-4">
+                	<div class="form-group">
+                        <label>Start Date</label>
+                        <input class="form-control" name="st_date" type="date" />
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                	<div class="form-group">
+                        <textarea placeholder="Describe the Movie"  class="form-control" name="description"></textarea>
+                    </div>
+                </div>
+                
+                <!--<div class="col-md-12">
+                    <div class="card1">
+                        <div class="card-body1">
+                            <div class="dropzone needsclick" action="/" id="dropzone-banner">
+                                <div class="dz-message1 needsclick text-center">
+                                    Movie Banner<br />
+                                    1920 X 1080
+                                </div>
+                                <div class="fallback">
+                                    <input type="file" name="banner" accept="images/*" />
+                                </div>
+                            </div>
+                            <div class="hidden-images"></div>
+                        </div>
+                    </div>
+                </div>
+                -->
+                
+                <div class="col-md-12">
+                    <div class="card1">
+                        <div class="card-body1">
+                            <div class="dropzone needsclick dropzone-images" id="dropzone-banner">
+                                <div class="dz-message1 needsclick text-center">
+                                    Movie Banner<br />
+                                    1920 X 1080
+                                </div>
+                                <input type="file" name="banner" accept="image/*" id="banner-input" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
                 <div class="col-md-12">
                     <div class="card">
-                        {{-- <h5 class="card-header">Video Upload</h5> --}}
+                        <div class="row card-body">
+                        	
+                           <!-- <div class="col-md-6">
+                                <div class="dropzone needsclick labelsectoin" action="/" id="dropzone-label">
+                                    <div class="dz-message1 needsclick text-center">
+                                        Upload Label<br />
+                                        1920 X 1080
+                                    </div>
+                                    <div class="fallback" style="display:none;">
+                                        <input type="file" name="label" accept="images/*" />
+                                    </div>
+                                </div>
+                                <div class="hidden-label"></div>
+                            </div>-->
+                            <div class="col-md-6">
+                                <div class="dropzone needsclick labelsectoin dropzone-label" id="dropzone-label">
+                                    <div class="dz-message1 needsclick text-center">
+                                        Upload Label<br />
+                                        1920 X 1080
+                                    </div>
+                                    <input type="file" name="label" accept="image/*" id="label-input" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            
+                                <div class="dropzone needsclick info" action="/" id="dropzone-info">
+                                	<h5>Video Info</h5>
+                                    <div class="row">
+                                    	<div class="col-md-6 text-center">
+                                            <div class="infbox" onclick="document.getElementById('hdcheck').click()">
+                                                <div  class="infhead">
+                                                       HD
+                                                </div>
+                                                <div class="form-check form-switch green-line">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_hd"  id="hdcheck"  onclick="event.stopPropagation()">
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <div class="infbox" onclick="document.getElementById('fkcheck').click()">
+                                                <div class="infhead">
+                                                       4K
+                                                </div>
+                                                <div class="form-check form-switch green-line">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_4k"  id="fkcheck"  onclick="event.stopPropagation()">
+                                                </div>
+                                             </div>
+                                        </div>
+                                        
+                                        <!-- 2nd row -->
+                                        
+                                        <div class="col-md-6 text-center">
+                                            <div class="infbox" onclick="document.getElementById('uhdcheck').click()">
+                                                <div  class="infhead">
+                                                       UHD
+                                                </div>
+                                                <div class="form-check form-switch green-line">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_uhd"  id="uhdcheck"  onclick="event.stopPropagation()">
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <div class="infbox" onclick="document.getElementById('qhdcheck').click()">
+                                                <div class="infhead">
+                                                       QHD
+                                                </div>
+                                                <div class="form-check form-switch green-line">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_qhd"  id="qhdcheck"  onclick="event.stopPropagation()">
+                                                </div>
+                                             </div>
+                                        </div>
+                                        
+                                        <!-- 2nd row ends -->
+                                        <!-- 3rd row -->
+                                        
+                                        <div class="col-md-6 text-center">
+                                            <div class="infbox" onclick="document.getElementById('atmcheck').click()">
+                                                <div  class="infhead">
+                                                       ATM
+                                                </div>
+                                                <div class="form-check form-switch green-line">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_atm"  id="atmcheck"  onclick="event.stopPropagation()">
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <div class="infbox" onclick="document.getElementById('v51check').click()">
+                                                <div class="infhead">
+                                                       5.1
+                                                </div>
+                                                <div class="form-check form-switch green-line">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_v5"  id="v51check"  onclick="event.stopPropagation()">
+                                                </div>
+                                             </div>
+                                        </div>
+                                        
+                                        <!-- 3rd row ends -->
+                                        
+                                        
+                                        
+                                    </div>
+                                    
+                                    <div class="row text-center">
+                                    	<!-- 4th row -->
+                                        
+                                        <div class="col-md-4 ">
+                                        	<div class="robox active" onclick="selectRobox(this)">
+                                            	6+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                        	<div class="robox" onclick="selectRobox(this)">
+                                            	8+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                        	<div class="robox" onclick="selectRobox(this)">
+                                            	12+
+                                            </div>
+                                        
+                                        </div>
+                                        <input type="hidden" name="selected_robox" id="selected_robox" value="6+">
+                                        
+                                        <!-- 4th row end -->
+                                    </div>
+                                	
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-md-12">
+                    <div class="card">
                         <div class="card-body">
                             <div class="dropzone needsclick" action="/" id="dropzone-video">
                                 <div class="dz-message needsclick">
-                                    Drop files here or click to upload
+                                    Upload Movie Trailer
+                                    <div class="text-muted font14">
+                                    	Select the Trailer
+                                    </div>
                                 </div>
+                               
                                 <div class="fallback">
                                     <input type="file" name="video[]" accept="video/*" />
                                 </div>
                             </div>
-                            <div class="hidden-videos"></div> <!-- 🔹 Stores video hidden inputs -->
+                            <div class="hidden-videos"></div> 
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div id="generated-thumbnails" style="display: block">
-                        <div class="card">
-                            {{-- <h5 class="card-header">Thumbnails</h5> --}}
-                            <div class="card-body">
-                                <div class="row">
-                                    <div id="thumbnail-history" style="display: block">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <img id="img1" class="generated-img"
-                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <img id="img2" class="generated-img"
-                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <img id="img3" class="generated-img"
-                                                    style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                
+                
             </div>
         </div>
     </div>
@@ -124,6 +296,7 @@
             <input type="hidden" name="video_durations[]" id="video_duration" value="${duration}" data-path="${response.path}">
             <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
         `;
+					$('.trailerbtn').prop('disabled', false);
                     generateThumbnails();
                 };
 
@@ -161,6 +334,8 @@
                 $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
+				
+				$('.trailerbtn').prop('disabled', true);
 
                 return this._updateMaxFilesReachedClass();
 
@@ -241,4 +416,43 @@
         });
         return file;
     }
+	
+	function selectRobox(selected) {
+		document.querySelectorAll('.robox').forEach(function(el) {
+			el.classList.remove('active');
+		});
+		selected.classList.add('active');
+	
+		// update hidden input
+		document.getElementById('selected_robox').value = selected.innerText.trim();
+	}
+	
+	function setupDropzone(dropzoneId, inputId) {
+        const dropzone = document.getElementById(dropzoneId);
+        const input = document.getElementById(inputId);
+
+        dropzone.addEventListener('click', () => input.click());
+
+        input.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    dropzone.style.backgroundImage = `url(${e.target.result})`;
+                    const message = dropzone.querySelector('.dz-message1');
+                    if (message) message.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    setupDropzone('dropzone-banner', 'banner-input');
+    setupDropzone('dropzone-label', 'label-input');
+	
+	//setupDropzone('dropzone-banner_m', 'banner-input_m');
+   // setupDropzone('dropzone-label_m', 'label-input_m');
+	
+	
+	
 </script>

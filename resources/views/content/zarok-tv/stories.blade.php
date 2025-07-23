@@ -4,6 +4,7 @@
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    
     <style>
         #DataTables_Table_0_wrapper .row:first-child {
             display: none;
@@ -225,6 +226,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/custom.css') }}?v={{time();}}" />
 @endsection
 @section('vendor-script')
     <!-- Fancybox -->
@@ -288,7 +290,7 @@
                 @foreach ($videos as $video)
                     <div class="col-md-3">
                         <div class="post-image">
-                            <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post"
+                            <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 postitem view-post card-post"
                                 data-fancybox="post1" data-lightbox-type="comments"
                                 data-thumb="{{ asset('storage/' . $video->video) }}"
                                 href="{{ asset('storage/' . $video->video) }}" data-id="{{ $video->id }}"
@@ -299,26 +301,37 @@
                                     <!-- Post body -->
                                     <div class="card-body p-0">
 
+                                    @php
+                                        $filenameOnly = pathinfo($video->video_file_name, PATHINFO_FILENAME);
+                                        $shortName = strlen($filenameOnly) > 40 ? substr($filenameOnly, 0, 40) . '...' : $filenameOnly;
+                                        $totalSeconds = floor($video->video_file_length); // Convert 3.3 to 3
+                                        $minutes = floor($totalSeconds / 60);
+                                        $seconds = $totalSeconds % 60;
+                                        $durationFormatted = sprintf('%02d:%02d', $minutes, $seconds);
+                                    @endphp
+
                                         <div style="background-image: url('{{ asset('storage/' . $video->thumbnail) }}');"
                                             class="card-post-thumbnail">
-                                            <span class="video-thumbnail-duration">04:49</span>
+                                            <div class="video-overlay-gradient">
+                                                <span class="video-thumbnail-title">{{$shortName}}</span>
+                                                <span class="video-thumbnail-duration">{{$durationFormatted}}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer mt-0">
+                                    <div class="card-footer card_foot mt-0">
                                         <div class="user-block">
                                             <div class="user-info">
                                                 <div class="row">
                                                     <div class="col-md-2 p-0">
                                                         <img src="{{asset('images/user-clips-report-user.png')}}"
-                                                            style="width: 100px !important;height:45px !important;">
+                                                            style="width: 100px !important;height:35px !important;">
                                                     </div>
                                                     <div class="col-md-10">
-                                                        <div class="mt-2">
-                                                            <p class="m-0" title="Şeyda Were">
+                                                        <div class="mt-0">
+                                                            <p class="m-0" title="Şeyda Were">
                                                                 <b>Admin User</b>
                                                             </p>
-                                                            <small class="time"><i>0 Views .
-                                                                    &nbsp;&nbsp;07 May 2025</i></small>
+                                                            <small class="time"><i>07 May 2025</i></small>
                                                         </div>
 
                                                     </div>
@@ -331,7 +344,7 @@
                                 <!-- /Main wrap -->
                             </div>
                             <div class="nav-item dropdown d-block"
-                                style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
+                                style="margin-top: 0;position: absolute;right: 24px;top: 230px;bottom: auto;">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <div class="d-flex align-items-center gap-2">
@@ -343,7 +356,7 @@
                                     <span style="font-family:Genos;color:#c0c0c0">Options</span>
                                     <div class="row ml-0" style="width:100px;">
 
-                                        <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
+                                        <div class="col-md-6" style="border-right: 1px solid #c0c0c0; display:none;">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$video->id}}"
                                                 data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
@@ -352,12 +365,31 @@
                                                 <img class="pop_action_image" style="height: 26px"
                                                     src="{{asset('assets/svg/edit.svg')}}"></a>
                                         </div>
-                                        <div class="col-md-6">
-                                            <button type="button" data-id="{{$video->id}}"
+                                        <div class="col-md-12">
+                                            <!--<button type="button" data-id="{{$video->id}}"
                                                 class="dropdown-item delete-video" style="padding: 0">
-                                                <img class="pop_action_image" style="height: 26px"
-                                                    src="{{asset('assets/svg/delete.svg')}}"></button>
+                                                </button> -->
+
+<form action="{{ route('zarokStories.destroy', $video->_id) }}"
+                                        onsubmit="confirmAction(event, () => event.target.submit())" method="post"
+                                        class="d-inline">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                            data-bs-original-title="Remove">
+                                            <img class="pop_action_image" style="height: 26px"
+                                                    src="{{asset('assets/svg/delete.svg')}}">
+                                        </button>
+                                        {{-- @can('donation.delete')
+                                        @endcan --}}
+                                    </form>
+
+
+
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -369,13 +401,15 @@
     </div>
 
     {{-- Video Clips Modal --}}
-    <x-modal id="createvideoModal" title="Create Stories" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createvideoForm" size="md">
+    <x-modal id="createvideoModal" title="Add Story" subtitle="MP4 or AVI" saveBtnText="Upload Story" saveBtnType="submit"
+        saveBtnForm="createvideoForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom" size="md" headerClass="custom-header" contentClass="content-custom">
         @include('content.include.zarok_stories.createForm', ['form' => 'createvideoForm'])
     </x-modal>
-
+ 
 @section('page-script')
     <script>
+		
+		
         function confirmAction(event, callback) {
             event.preventDefault();
             Swal.fire({
@@ -397,6 +431,9 @@
         }
 
         $(document).ready(function() {
+			
+			$('.save-btn-custom').prop('disabled', true);
+			
             $('table').on('click', '.delete-btn', function(event) {
                 event.preventDefault(); // Stop any default action
                 let form = $(this).closest('.delete-form'); // Get the closest form

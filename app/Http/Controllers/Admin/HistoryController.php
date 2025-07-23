@@ -322,6 +322,48 @@ class HistoryController extends Controller
 
     private function generateThumbnailFromPath($videoPath, $duration)
     {
+        $defaultThumbnail = asset('images/def.jpg'); // make sure this file exists in public/images/
+
+        try {
+            // Initialize FFMpeg
+            $ffmpeg = FFMpeg::create();
+            $fullPath = Storage::path('public/' . $videoPath);
+
+            // Get timestamps
+            $timestamps = [
+                round($duration * 0.25),
+                round($duration * 0.40),
+                round($duration * 0.75),
+            ];
+
+            $thumbnails = [];
+
+            foreach ($timestamps as $index => $time) {
+                $thumbnailPath = 'thumbnails/' . pathinfo($videoPath, PATHINFO_FILENAME) . "_thumb_{$index}.jpg";
+
+                if (Storage::exists($thumbnailPath)) {
+                    Storage::delete($thumbnailPath);
+                }
+
+                $video = $ffmpeg->open($fullPath);
+                $frame = $video->frame(TimeCode::fromSeconds($time));
+                $frame->save(storage_path('app/public/' . $thumbnailPath));
+
+                $thumbnails[] = asset('storage/' . $thumbnailPath);
+            }
+
+            return $thumbnails;
+
+        } catch (\Exception $e) {
+            // Log the error if needed: Log::error($e->getMessage());
+            // Return 3 default thumbnails (same image repeated)
+            return [$defaultThumbnail, $defaultThumbnail, $defaultThumbnail];
+        }
+    }
+
+
+    private function generateThumbnailFromPath_old($videoPath, $duration)
+    {
         // Initialize FFMpeg
         $ffmpeg = FFMpeg::create();
         $fullPath = Storage::path('public/' . $videoPath);

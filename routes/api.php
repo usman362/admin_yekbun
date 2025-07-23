@@ -62,6 +62,7 @@ use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VotingReactionController;
+use App\Http\Controllers\Api\TVController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,8 +75,18 @@ use App\Http\Controllers\Api\VotingReactionController;
 |
 */
 
+
+
 Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
 Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
+
+Route::get('/getzarokstories', [TVController::class, 'zarokStories']);
+Route::get('/getzarokvideos', [TVController::class, 'zarokVideos']);
+Route::get('/getzarokmovies', [TVController::class, 'zarokMovies']);
+Route::get('/getzarokseries', [TVController::class, 'zarokSeries']);
+Route::post('/zarokStoriesPost', [TVController::class, 'zarokStoriesPost']);
+
+
 
 Route::get('/ping', function () {
     return response()->json(['status' => 'ok']);
@@ -95,7 +106,7 @@ Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 Route::get('/user-imei', [AuthController::class, 'userImei']);
 Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
-
+ 
 //User Profile
 
 // Account Setting  Controller

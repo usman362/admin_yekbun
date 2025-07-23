@@ -14,6 +14,15 @@ class ZarokSeries extends Model
 
     protected $fillable = [
         'name',
+        'date',
+        'description',
+        'is_hd',
+        'is_4k',
+        'is_uhd',
+        'is_qhd',
+        'is_atm',
+        'is_v5',
+        'age_section',
         'video_file_name',
         'thumbnail',
         'video',
@@ -23,4 +32,16 @@ class ZarokSeries extends Model
         'video_file_length',
         'status',
     ];
+
+
+    public function seasons()
+    {
+        return $this->hasMany(ZarokSeriesSeason::class, 'series_id', '_id');
+    }
+
+    public function episodes()
+    {
+        return $this->hasMany(ZarokSeriesEpisode::class, 'series_id', '_id');
+    }
+    
 }

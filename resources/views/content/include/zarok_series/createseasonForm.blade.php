@@ -1,4 +1,4 @@
-<form id="createvideoForm" method="POST" action="{{ route('zarok.seriesStore') }}" enctype="multipart/form-data">
+<form id="createseasonForm" method="POST" action="{{ route('zarok.seriesStoreSeason') }}" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="video_id">
     <input type="hidden" name="thumbnail" id="thumbnail">
@@ -7,14 +7,23 @@
         <div class="col-lg-12 mx-auto">
             <div class="row g-3">
                 
-                <div class="col-md-7">
+                <div class="col-md-4">
                 	<div class="form-group">
-                        <label>Series Title</label>
-                        <input class="form-control" name="movie_title" />
+                        <label>Select Series</label>
+                        <select name="series" class="form-control" required>
+                        	<option value="">Select Series</option>
+                        	@foreach ($videos as $video)
+                            	<option value="{{$video->id}}" >{{$video->video_file_name}}</option>
+                            	
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <div class="col-md-1">
-                	&nbsp;
+                <div class="col-md-4">
+                	<div class="form-group">
+                        <label>Season Name</label>
+                        <input class="form-control" name="name" type="text" />
+                    </div>
                 </div>
                 <div class="col-md-4">
                 	<div class="form-group">
@@ -32,12 +41,12 @@
                 <div class="col-md-12">
                     <div class="card1">
                         <div class="card-body1">
-                            <div class="dropzone needsclick dropzone-images" id="dropzone-banner">
+                            <div class="dropzone needsclick dropzone-images" id="dropzone-banner_s">
                                 <div class="dz-message1 needsclick text-center">
                                     Movie Banner<br />
                                     1920 X 1080
                                 </div>
-                                <input type="file" name="banner" accept="image/*" id="banner-input" />
+                                <input type="file" name="banner" accept="image/*" id="banner-input_s" />
                             </div>
                         </div>
                     </div>
@@ -48,12 +57,12 @@
                         <div class="row card-body">
                         	
                             <div class="col-md-6">
-                                <div class="dropzone needsclick labelsectoin dropzone-label" id="dropzone-label">
+                                <div class="dropzone needsclick labelsectoin dropzone-label" id="dropzone-label_s">
                                     <div class="dz-message1 needsclick text-center">
                                         Upload Label<br />
                                         1920 X 1080
                                     </div>
-                                    <input type="file" name="label" accept="image/*" id="label-input" />
+                                    <input type="file" name="label" accept="image/*" id="label-input_s" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -62,22 +71,22 @@
                                 	<h5>Video Info</h5>
                                     <div class="row">
                                     	<div class="col-md-6 text-center">
-                                            <div class="infbox" onclick="document.getElementById('hdcheck').click()">
+                                            <div class="infbox" onclick="document.getElementById('hdcheck_s').click()">
                                                 <div  class="infhead">
                                                        HD
                                                 </div>
                                                 <div class="form-check form-switch green-line">
-                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_hd"  id="hdcheck"  onclick="event.stopPropagation()">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_hd"  id="hdcheck_s"  onclick="event.stopPropagation()">
                                                 </div>
                                              </div>
                                         </div>
                                         <div class="col-md-6 text-center">
-                                            <div class="infbox" onclick="document.getElementById('fkcheck').click()">
+                                            <div class="infbox" onclick="document.getElementById('fkcheck_s').click()">
                                                 <div class="infhead">
                                                        4K
                                                 </div>
                                                 <div class="form-check form-switch green-line">
-                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_4k"  id="fkcheck"  onclick="event.stopPropagation()">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_4k"  id="fkcheck_s"  onclick="event.stopPropagation()">
                                                 </div>
                                              </div>
                                         </div>
@@ -85,22 +94,22 @@
                                         <!-- 2nd row -->
                                         
                                         <div class="col-md-6 text-center">
-                                            <div class="infbox" onclick="document.getElementById('uhdcheck').click()">
+                                            <div class="infbox" onclick="document.getElementById('uhdcheck_s').click()">
                                                 <div  class="infhead">
                                                        UHD
                                                 </div>
                                                 <div class="form-check form-switch green-line">
-                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_uhd"  id="uhdcheck"  onclick="event.stopPropagation()">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_uhd"  id="uhdcheck_s"  onclick="event.stopPropagation()">
                                                 </div>
                                              </div>
                                         </div>
                                         <div class="col-md-6 text-center">
-                                            <div class="infbox" onclick="document.getElementById('qhdcheck').click()">
+                                            <div class="infbox" onclick="document.getElementById('qhdcheck_s').click()">
                                                 <div class="infhead">
                                                        QHD
                                                 </div>
                                                 <div class="form-check form-switch green-line">
-                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_qhd"  id="qhdcheck"  onclick="event.stopPropagation()">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_qhd"  id="qhdcheck_s"  onclick="event.stopPropagation()">
                                                 </div>
                                              </div>
                                         </div>
@@ -109,22 +118,22 @@
                                         <!-- 3rd row -->
                                         
                                         <div class="col-md-6 text-center">
-                                            <div class="infbox" onclick="document.getElementById('atmcheck').click()">
+                                            <div class="infbox" onclick="document.getElementById('atmcheck_s').click()">
                                                 <div  class="infhead">
                                                        ATM
                                                 </div>
                                                 <div class="form-check form-switch green-line">
-                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_atm"  id="atmcheck"  onclick="event.stopPropagation()">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_atm"  id="atmcheck_s"  onclick="event.stopPropagation()">
                                                 </div>
                                              </div>
                                         </div>
                                         <div class="col-md-6 text-center">
-                                            <div class="infbox" onclick="document.getElementById('v51check').click()">
+                                            <div class="infbox" onclick="document.getElementById('v51check_s').click()">
                                                 <div class="infhead">
                                                        QHD
                                                 </div>
                                                 <div class="form-check form-switch green-line">
-                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_v5"  id="v51check"  onclick="event.stopPropagation()">
+                                                    <input class="form-check-input closetogglebtn" type="checkbox" name="check_v5"  id="v51check_s"  onclick="event.stopPropagation()">
                                                 </div>
                                              </div>
                                         </div>
@@ -139,24 +148,24 @@
                                     	<!-- 4th row -->
                                         
                                         <div class="col-md-4 ">
-                                        	<div class="robox active" onclick="selectRobox(this)">
+                                        	<div class="robox active" onclick="selectRobox_s(this)">
                                             	6+
                                             </div>
                                         </div>
                                         
                                         <div class="col-md-4">
-                                        	<div class="robox" onclick="selectRobox(this)">
+                                        	<div class="robox" onclick="selectRobox_s(this)">
                                             	8+
                                             </div>
                                         </div>
                                         
                                         <div class="col-md-4">
-                                        	<div class="robox" onclick="selectRobox(this)">
+                                        	<div class="robox" onclick="selectRobox_s(this)">
                                             	12+
                                             </div>
                                         
                                         </div>
-                                        <input type="hidden" name="selected_robox" id="selected_robox" value="6+">
+                                        <input type="hidden" name="selected_robox" id="selected_robox_s" value="6+">
                                         
                                         <!-- 4th row end -->
                                     </div>
@@ -172,7 +181,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-video">
+                            <div class="dropzone needsclick" action="/" id="dropzone-video_s">
                                 <div class="dz-message needsclick">
                                     Upload Movie Trailer
                                     <div class="text-muted font14">
@@ -219,7 +228,7 @@
 </div></div></div>`;
 
 
-        let dropzoneMulti1 = new Dropzone('#dropzone-video', {
+        let dropzoneMulti12 = new Dropzone('#dropzone-video_s', {
             url: '{{ url('file/upload') }}',
             previewTemplate: previewTemplate,
             parallelUploads: 1,
@@ -263,7 +272,7 @@
             <input type="hidden" name="video_durations[]" id="video_duration" value="${duration}" data-path="${response.path}">
             <input type="hidden" name="video_name[]" value="${file.name}" data-path="${response.path}">
         `;
-					$('.seriesbtn').prop('disabled', false);
+					$('.seasonbtn').prop('disabled', false);
                     generateThumbnails();
                 };
 
@@ -301,7 +310,7 @@
                 $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
-				$('.seriesbtn').prop('disabled', true);
+				$('.seasonbtn').prop('disabled', true);
                 return this._updateMaxFilesReachedClass();
 
             }
@@ -310,109 +319,26 @@
 
     });
 
-    function generateThumbnails() {
-        let videoPath = $('#video_path').val();
-        let videoDuration = parseInt($('#video_duration').val());
-        let timestamp = $("#timestamp").val();
-
-        if (!videoPath) {
-            $('#error-thumbnail').text("Please Select Video first!");
-            return;
-        }
-
-        if (timestamp > videoDuration) {
-            $('#error-thumbnail').text("Video Duration is " + videoDuration + " seconds");
-            return;
-        }
-
-        $.ajax({
-            url: "/generate-thumbnail", // Laravel route
-            type: "POST",
-            data: {
-                video_path: videoPath,
-                duration: videoDuration,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                $('#error-thumbnail').text("");
-                $('#thumbnail-history').css('display', 'block');
-                $('#generated-thumbnails').css('display', 'block');
-                let newSrc1 = response.thumbnail[0] + "?t=" + new Date().getTime();
-                let newSrc2 = response.thumbnail[1] + "?t=" + new Date().getTime();
-                let newSrc3 = response.thumbnail[2] + "?t=" + new Date().getTime();
-                $("#thumbnail-history #img1").attr("src", newSrc1);
-                $("#thumbnail-history #img2").attr("src", newSrc2);
-                $("#thumbnail-history #img3").attr("src", newSrc3);
-            },
-            error: function() {
-                $('#error-thumbnail').text("Failed to generate thumbnail.");
-            }
-        });
-    };
+    
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $(document).ready(function() {
 
-        $('.add-history').click(function() {
-            $('#error-thumbnail').text("");
-            // $('#thumbnail-history').css('display', 'none');
-            // $('#generated-thumbnails').css('display', 'none');
-        })
-
-        $('.generated-img').click(function() {
-            let src = $(this).attr('src');
-            $('.dz-thumbnail img').attr('src', src);
-            $('#thumbnail').val(src);
-        })
-    });
-</script>
 
 <script>
-    async function imageUrlToFile(imageUrl, fileName) {
-        // Fetch the image
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-
-        // Create a File object
-        const file = new File([blob], fileName[1], {
-            type: blob.type
-        });
-        return file;
-    }
-	
-	function selectRobox(selected) {
+    
+	function selectRobox_s(selected) {
 		document.querySelectorAll('.robox').forEach(function(el) {
 			el.classList.remove('active');
 		});
 		selected.classList.add('active');
 	
 		// update hidden input
-		document.getElementById('selected_robox').value = selected.innerText.trim();
+		document.getElementById('selected_robox_s').value = selected.innerText.trim();
 	}
 	
-	function setupDropzone(dropzoneId, inputId) {
-        const dropzone = document.getElementById(dropzoneId);
-        const input = document.getElementById(inputId);
-
-        dropzone.addEventListener('click', () => input.click());
-
-        input.addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    dropzone.style.backgroundImage = `url(${e.target.result})`;
-                    const message = dropzone.querySelector('.dz-message1');
-                    if (message) message.style.display = 'none';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    setupDropzone('dropzone-banner', 'banner-input');
-    setupDropzone('dropzone-label', 'label-input');
+	
+    setupDropzone('dropzone-banner_s', 'banner-input_s');
+    setupDropzone('dropzone-label_s', 'label-input_s');
 	
 </script>

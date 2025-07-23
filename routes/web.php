@@ -235,20 +235,36 @@ Route::middleware('check.role:Super Admin')->group(function () {
     Route::get('system-status', [AdminProfileController::class, 'systemStatus'])->name('system.status');
 });
 
-
+ 
 //TV Section
 
 Route::get('zarok-videos', [TVController::class, 'zarokVideos'])->name('zarok.videos');
 Route::post('zarok-videos', [TVController::class, 'zarokVideosStore'])->name('zarok.videosStore');
+Route::delete('/delete_zarok-videos/{id}', [TVController::class, 'zarokVideos_delete'])->name('zarokVideos.destroy');
 
 Route::get('zarok-stories', [TVController::class, 'zarokStories'])->name('zarok.stories');
 Route::post('zarok-stories', [TVController::class, 'zarokStoriesStore'])->name('zarok.storiesStore');
+Route::delete('/delete_zarok-stories/{id}', [TVController::class, 'zarokStories_delete'])->name('zarokStories.destroy');
 
 Route::get('zarok-movies', [TVController::class, 'zarokMovies'])->name('zarok.movies');
 Route::post('zarok-movies', [TVController::class, 'zarokMoviesStore'])->name('zarok.moviesStore');
+Route::delete('/delete_zarok-movies/{id}', [TVController::class, 'zarokMovies_delete'])->name('zarokMovies.destroy');
 
 Route::get('zarok-series', [TVController::class, 'zarokSeries'])->name('zarok.series');
 Route::post('zarok-series', [TVController::class, 'zarokSeriesStore'])->name('zarok.seriesStore');
+Route::post('zarok-series-season', [TVController::class, 'zarokSeriesStoreSeason'])->name('zarok.seriesStoreSeason');
+Route::post('zarok-series-episode', [TVController::class, 'zarokSeriesStoreEpisode'])->name('zarok.seriesStoreEpisode');
+Route::delete('/delete_zarok-series/{id}', [TVController::class, 'zarokSeries_delete'])->name('zarokSeries.destroy');
+
+Route::delete('/delete_zarok-season/{id}', [TVController::class, 'zarokSeason_delete'])->name('zarokSeriesseason.destroy');
+Route::delete('/delete_zarok-episode/{id}', [TVController::class, 'zarokEpisode_delete'])->name('zarokSeriesepisodes.destroy');
+
+
+Route::get('/zarok/get-seasons', [TVController::class, 'getSeasonsBySeries'])->name('zarok.getSeasonsBySeries');
+
+Route::get('zarok-series-season/{id}', [TVController::class, 'zarokSeriesSeason'])->name('zarok.seriesseason');
+Route::get('zarok-series-episodes/{id}', [TVController::class, 'zarokSeriesEpisodes'])->name('zarok.seriesepisodes');
+
 
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');
 Route::get('/admin/profile/security', [AdminProfileController::class, 'security'])->name('admin_profile.security');
@@ -487,7 +503,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     //Ai Videos
     Route::resource('/ai-videos', AIVideosController::class);
 
-
+ 
     Route::post('/generate-thumbnail', [HistoryController::class, 'generateThumbnail']);
     // Route::resource('/history-category', HistoryCategoryController::class);
     // Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(
