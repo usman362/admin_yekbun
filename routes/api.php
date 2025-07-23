@@ -84,7 +84,12 @@ Route::get('/getzarokstories', [TVController::class, 'zarokStories']);
 Route::get('/getzarokvideos', [TVController::class, 'zarokVideos']);
 Route::get('/getzarokmovies', [TVController::class, 'zarokMovies']);
 Route::get('/getzarokseries', [TVController::class, 'zarokSeries']);
+Route::get('/zarok-series-season/{id}', [TVController::class, 'zarokSeriesSeason']);
+Route::get('/zarok-series-episodes/{id}', [TVController::class, 'zarokSeriesEpisodes']);
 Route::post('/zarokStoriesPost', [TVController::class, 'zarokStoriesPost']);
+
+
+
 
 
 

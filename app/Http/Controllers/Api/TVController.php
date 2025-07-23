@@ -41,6 +41,15 @@ class TVController extends Controller
         $videos = ZarokSeries::all();
         return ResponseHelper::sendResponse($videos, 'OK');
     }
+    public function zarokSeriesSeason($id){
+        $video = ZarokSeries::with('seasons')->where('_id', $id)->first();
+        return ResponseHelper::sendResponse($video, 'OK');
+    }
+    public function zarokSeriesEpisodes($id){
+        $video = ZarokSeries::with('episodes')->where('_id', $id)->first();
+        return ResponseHelper::sendResponse($video, 'OK');
+    }
+    
 
     public function zarokStoriesPost(Request $request){
         try {
