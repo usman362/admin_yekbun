@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\AdminFeedsComments;
 use App\Events\HistoryComments;
 use App\Events\UserFeedsComments;
+use App\Helpers\NotificationHelper;
 use App\Helpers\ResponseHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,7 @@ use App\Models\FlagUser;
 use App\Models\ReportComments;
 use App\Models\History;
 use App\Models\News;
+use App\Models\NotificationCenter;
 use App\Models\PopFeeds;
 use App\Models\User;
 use Exception;
@@ -74,6 +76,19 @@ class FeedsController extends Controller
                 'status' => 0,
                 'action_taken' => (int)$request->action_level,
             ]);
+
+            $users = User::where('id', $user->id)->whereIn('info_banner', ['banner', 'alert'])->first();
+            if ($users) {
+                NotificationHelper::sendNotification($users->id, 'Feed Deleted', "You're Feed has been Deleted & You've been Flagged");
+                NotificationCenter::create([
+                    'title' => 'Feed Deleted',
+                    'description' => "You're Feed has been Deleted & You've been Flagged",
+                    'user_id' => $feed->user_id,
+                    'user_image' => $users->image ?? null,
+                    'type' => 'feeds',
+                    'is_read' => 0,
+                ]);
+            }
         }
         return back();
     }
