@@ -41,11 +41,14 @@
         <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
             <!-- User Pills -->
             <ul class="nav nav-pills flex-column flex-md-row mb-3">
-
-                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/' . $user->id . '/account') }}"><i
-                            class="bx bx-user me-1"></i>Follower</a></li>
-                <li class="nav-item"><a class="nav-link " href="{{ url('app/user/' . $user->id . '/videos') }}"><i
-                            class="bx bx-video me-1"></i>Videos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/' . $user->id . '/friends') }}"><i
+                            class="bx bx-user me-1"></i>Friends</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/' . $user->id . '/family') }}"><i
+                            class="bx bx-user me-1"></i>Family</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/' . $user->id . '/feeds') }}"><i
+                            class="bx bx-images me-1"></i>Feeds</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/' . $user->id . '/playlist') }}"><i
+                            class="bx bx-music me-1"></i>Playlist</a></li>
                 <li class="nav-item"><a class="nav-link active" href="javascript:void(0)"><i
                             class="bx bx-bell me-1"></i>Activity</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('app/user/' . $user->id . '/location') }}"><i

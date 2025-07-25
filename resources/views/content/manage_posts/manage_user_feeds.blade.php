@@ -174,8 +174,11 @@
     .card-post-thumbnail {
         height: 200px;
         width: 100%;
-        background-size: 100% 230px;
+        /* background-size: 100% 230px; */
+        background-size: contain;
+        background-color: black;
         background-repeat: no-repeat;
+        background-position: center;
         position: relative;
         border-radius: 12px;
     }

@@ -14,7 +14,7 @@
                             src="{{asset('assets/img/germany-flag-png.png')}}"> Hannover
                     </p> --}}
                     <b>
-                        <p class="mb-2 "><img height="20px;width:20px"
+                        <p class="mb-2 "><img style="height:20px;width:20px"
                             src="{{asset('assets/svg/svg-dialog/'.($user->level == 0 ? 'cultivated' : ($user->level == 1 ? 'educated' : 'academic')).'.svg')}}"> {{$user->level == 0 ? 'Cultivated' : ($user->level == 1 ? 'Educated' : 'Academic')}} User</p>
                     </b>
                     @if ($user->user_id)

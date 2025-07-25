@@ -205,7 +205,7 @@
                                                             class="rounded-circle"></div>
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ url('app/user/' . $userr->id . '/account') }}"
+                                                    <a href="{{ url('app/user/' . $userr->id . '/friends') }}"
                                                         class="text-body text-truncate">
                                                         <span class="fw-semibold">{{ $userr->name }}</span>
                                                         <span class="fw-semibold">{{ $userr->last_name }}</span>

@@ -883,6 +883,10 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('musics/{music_id}', [MusicController::class, 'video']);
     Route::resource('/reasons', ReasonController::class);
     Route::get('/app/invoice/print', $controller_path . '\apps\InvoicePrint@index')->name('app-invoice-print');
+    Route::get('/app/user/{id}/friends', $controller_path . '\apps\UserViewAccount@friends')->name('app-user-view-friends');
+    Route::get('/app/user/{id}/family', $controller_path . '\apps\UserViewAccount@family')->name('app-user-view-family');
+    Route::get('/app/user/{id}/feeds', $controller_path . '\apps\UserViewAccount@feeds')->name('app-user-view-feeds');
+    Route::get('/app/user/{id}/playlist', $controller_path . '\apps\UserViewAccount@playlist')->name('app-user-view-playlist');
     Route::get('/app/user/{id}/account', $controller_path . '\apps\UserViewAccount@index')->name('app-user-view-account');
     Route::get('/app/user/{id}/videos', $controller_path . '\apps\UserViewAccount@videos')->name('app-user-view-videos');
     Route::get('/app/user/{id}/activity', $controller_path . '\apps\UserViewAccount@activity')->name('app-user-view-activity');
