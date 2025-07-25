@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\NotificationHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Feed;
+use App\Models\FeedComments;
+use App\Models\NotificationCenter;
 use App\Models\ReportComments;
 use App\Models\ReportFeeds;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -42,95 +47,119 @@ class ReportCommentsController extends Controller
             ]
         );
 
+            $feed = FeedComments::find($id);
+            $users = User::where('id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+            if ($users) {
+                NotificationHelper::sendNotification($users->id, 'Feed Comment Reported', "You're Feed Comment has been Reported");
+                NotificationCenter::create([
+                    'title' => 'Feed Comment Reported',
+                    'description' => "You're Feed Comment has been Reported",
+                    'user_id' => $feed->user_id,
+                    'user_image' => $users->image ?? null,
+                    'type' => 'feed_comments',
+                    'is_read' => 0,
+                ]);
+            }
+
         return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
     }
-public function getUserReportedComments($userId)
-{
-    $reportComments = ReportComments::with(['comments.feed.user', 'user'])
-        ->where('user_id', $userId)
-        ->get()
-        ->map(fn($item) => [
-            'type' => 'comment',
-            'data' => $item,
-            'created_at' => $item->created_at,  // For sorting
-        ]);
+    public function getUserReportedComments($userId)
+    {
+        $reportComments = ReportComments::with(['comments.feed.user', 'user'])
+            ->where('user_id', $userId)
+            ->get()
+            ->map(fn($item) => [
+                'type' => 'comment',
+                'data' => $item,
+                'created_at' => $item->created_at,  // For sorting
+            ]);
 
-    $reportFeeds = ReportFeeds::with(['feed.user', 'user']) // Ensure feed's user is loaded
-        ->where('user_id', $userId)
-        ->get()
-        ->map(fn($item) => [
-            'type' => 'feed',
-            'data' => $item,
-            'created_at' => $item->created_at,  // For sorting
-        ]);
+        $reportFeeds = ReportFeeds::with(['feed.user', 'user']) // Ensure feed's user is loaded
+            ->where('user_id', $userId)
+            ->get()
+            ->map(fn($item) => [
+                'type' => 'feed',
+                'data' => $item,
+                'created_at' => $item->created_at,  // For sorting
+            ]);
 
-    $mergedReports = $reportComments->merge($reportFeeds)
-        ->sortByDesc('created_at')
-        ->values()
-        ->map(fn($item) => [
-            'type' => $item['type'],
-            'data' => $item['data'],
-        ]);
+        $mergedReports = $reportComments->merge($reportFeeds)
+            ->sortByDesc('created_at')
+            ->values()
+            ->map(fn($item) => [
+                'type' => $item['type'],
+                'data' => $item['data'],
+            ]);
 
-    return ResponseHelper::sendResponse([
-        'reported_items' => $mergedReports,
-    ], 'Reported items fetched successfully');
-}
-
-
-
-
-
-
-
-public function reportfeedstore(Request $request, $id)
-{
-    $request->validate([
-        'report_type' => 'required',
-    ]);
-
-    $userId = Auth::id();
-
-    $exists = DB::table('report_feeds')
-        ->where('feed_id', $id)
-        ->where('user_id', $userId)
-        ->exists();
-
-    if ($exists) {
-        return response()->json([
-            'success' => false,
-            'message' => 'You have already reported this feed.',
-        ], 400);
+        return ResponseHelper::sendResponse([
+            'reported_items' => $mergedReports,
+        ], 'Reported items fetched successfully');
     }
 
-    $data = [
-        'feed_id' => $id,
-        'report_type' => $request->report_type,
-        'user_id' => $userId,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ];
 
-    $inserted = DB::table('report_feeds')->insert($data);
 
-    if ($inserted) {
-        return response()->json([
-            'success' => true,
-            'message' => 'Feed Report submitted successfully.',
-            'data' => [
-                'feed_id' => $data['feed_id'],
-                'report_type' => $data['report_type'],
-                'user_id' => $data['user_id'],
-            ]
-        ], 201);
-    } else {
-        return response()->json([
-            'success' => false,
-            'message' => 'Failed to submit report.',
-        ], 500);
+
+
+
+
+    public function reportfeedstore(Request $request, $id)
+    {
+        $request->validate([
+            'report_type' => 'required',
+        ]);
+
+        $userId = Auth::id();
+
+        $exists = DB::table('report_feeds')
+            ->where('feed_id', $id)
+            ->where('user_id', $userId)
+            ->exists();
+
+        if ($exists) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have already reported this feed.',
+            ], 400);
+        }
+
+        $data = [
+            'feed_id' => $id,
+            'report_type' => $request->report_type,
+            'user_id' => $userId,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        $inserted = DB::table('report_feeds')->insert($data);
+
+        if ($inserted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Feed Report submitted successfully.',
+                'data' => [
+                    'feed_id' => $data['feed_id'],
+                    'report_type' => $data['report_type'],
+                    'user_id' => $data['user_id'],
+                ]
+            ], 201);
+            $feed = Feed::find($id);
+            $users = User::where('id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+            if ($users) {
+                NotificationHelper::sendNotification($users->id, 'Feed Reported', "You're Feed has been Reported");
+                NotificationCenter::create([
+                    'title' => 'Feed Reported',
+                    'description' => "You're Feed has been Reported",
+                    'user_id' => $feed->user_id,
+                    'user_image' => $users->image ?? null,
+                    'type' => 'feeds',
+                    'is_read' => 0,
+                ]);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to submit report.',
+            ], 500);
+        }
     }
-}
-
-
-
 }

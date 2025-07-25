@@ -25,6 +25,7 @@ use App\Models\News;
 use App\Models\Notifications;
 use App\Models\AIVideo;
 use App\Models\PopFeeds;
+use App\Models\NotificationCenter;
 use Carbon\Carbon;
 use Exception;
 use FFMpeg\FFMpeg;
@@ -636,6 +637,22 @@ class FeedsController extends Controller
             'like_count' => $likeCount,
             'user' => $user
         ];
+
+        if (!empty($request->parent_id)) {
+            $parentCommennt = FeedComments::find($request->parent_id);
+            $users = User::where('id', $parentCommennt->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+            if ($users) {
+                NotificationHelper::sendNotification($user->id, 'Feeds Comment', Auth::user()->name . ' Replied to youre Comment');
+                NotificationCenter::create([
+                    'title' => 'Feeds Comment',
+                    'description' => Auth::user()->name . ' Replied to youre Comment',
+                    'user_id' => $parentCommennt->user_id,
+                    'user_image' => $parentCommennt->user->image ?? null,
+                    'type' => 'feed_comments',
+                    'is_read' => 0,
+                ]);
+            }
+        }
 
         return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         // } catch (Exception $e) {
