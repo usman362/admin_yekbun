@@ -496,7 +496,7 @@
                 </div>
             </div>
 
-            @if ($reportfeeds->count() > 3)
+            @if ($reportfeeds->count() > 4)
                 <a href="{{ route('manage.user.reportedfeeds') }}"
                     class="see-all-link d-flex align-items-center gap-2 text-dark">
                     See All
@@ -512,7 +512,7 @@
             <input type="hidden" name="comment_parent_id" id="comment_parent_id">
 
             <div id="main-feed" class="container main-feed">
-                <div class="row g-4">
+                <div class="row">
                     @foreach ($reportfeeds as $report)
                         @php $feed = $report->feed; @endphp
                         @if ($feed)
@@ -595,28 +595,32 @@
                                                             style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
                                                                 style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                            <span
+                                                                style="font-weight:400;font-family:Genos">{{ $feed->views->count() }}</span>
                                                         </div>
 
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
                                                                 style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                            <span
+                                                                style="font-weight:400;font-family:Genos">{{ $feed->shares->count() }}</span>
                                                         </div>
 
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
                                                                 style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                            <span
+                                                                style="font-weight:400;font-family:Genos">{{ $feed->comments->count() }}</span>
                                                         </div>
 
                                                         <div
                                                             style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
                                                             <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
                                                                 style="width:100%;height:100%;object-fit:cover">
-                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                            <span
+                                                                style="font-weight:400;font-family:Genos">{{ $feed->voice_comments->count() }}</span>
                                                         </div>
                                                     </div>
                                                     <div
@@ -625,7 +629,8 @@
                                                             style="width:100%;height:100%;object-fit:cover">
                                                         <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
                                                             style="width:100%;height:100%;object-fit:cover">
-                                                        <span style="font-weight:400;font-family:Genos">0</span>
+                                                        <span
+                                                            style="font-weight:400;font-family:Genos">{{ $feed->likes->count() }}</span>
                                                     </div>
                                                 </div>
                                                 <div style="background-color: pink; border-radius:6px" class="p-1">
@@ -807,7 +812,7 @@
                 </div>
             </div>
 
-            @if ($reportfeeds->count() > 3)
+            @if ($reportfeeds->count() > 4)
                 <a href="{{ route('reportedcommmentsindex') }}"
                     class="see-all-link d-flex align-items-center gap-2 text-dark">
                     See All <img src="{{ asset('assets/img/Multiple Forward Right.svg') }}" alt="arrow"
@@ -822,7 +827,7 @@
             <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
             <input type="hidden" name="comment_parent_id" id="comment_parent_id">
             <div id="main-feed" class="container main-feed">
-                <div class="row g-4">
+                <div class="row">
                     @foreach ($reportscomments as $reportcomments)
                         @php
                             $comment = $reportcomments->comments;
@@ -1169,7 +1174,7 @@
                 </div>
             </div>
 
-            @if ($feeds->count() > 3)
+            @if ($feeds->count() > 2)
 
                 <a href="{{ route('manage.user.latestfeed') }}"
                     class="see-all-link d-flex align-items-center gap-2 text-dark">
@@ -1184,7 +1189,7 @@
             <input type="hidden" name="feed_type" id="feed_type" value="user_feeds">
             <input type="hidden" name="comment_parent_id" id="comment_parent_id">
             <div id="main-feed" class="container main-feed">
-                <div class="row g-4">
+                <div class="row">
                     @foreach ($feeds as $feed)
                         <div class="col-md-3">
                             <div class="post-image">
@@ -1258,44 +1263,44 @@
                                                     <div
                                                         style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                         <img src="{{ asset('assets/svg/svg-dialog/Eye Scan.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span
+                                                            style="font-weight:400;font-family:Genos">{{ $feed->views->count() }}</span>
                                                     </div>
 
                                                     <div
                                                         style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                         <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span
+                                                            style="font-weight:400;font-family:Genos">{{ $feed->shares->count() }}</span>
                                                     </div>
 
-                                                    {{-- @if ($feed->is_comments == 1) --}}
                                                     <div
                                                         style="display:flex;align-items:center;gap:3px;height:100%;padding:5px;margin-right:2px">
                                                         <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span
+                                                            style="font-weight:400;font-family:Genos">{{ $feed->comments->count() }}</span>
                                                     </div>
-                                                    {{-- @endif --}}
-                                                    {{-- @if ($feed->is_share == 1) --}}
+
                                                     <div
                                                         style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;padding:5px;margin-left:2px">
                                                         <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span
+                                                            style="font-weight:400;font-family:Genos">{{ $feed->voice_comments->count() }}</span>
                                                     </div>
-                                                    {{-- @endif --}}
                                                 </div>
-                                                {{-- @if ($feed->is_emoji == 1) --}}
                                                 <div
                                                     style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover">
                                                     <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
                                                         style="width:100%;height:100%;object-fit:cover">
-                                                    <span style="font-weight:400;font-family:Genos">0</span>
+                                                    <span
+                                                        style="font-weight:400;font-family:Genos">{{ $feed->likes->count() }}</span>
                                                 </div>
-                                                {{-- @endif --}}
                                             </div>
                                         </div>
 

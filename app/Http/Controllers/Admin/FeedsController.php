@@ -38,14 +38,6 @@ class FeedsController extends Controller
         $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(4);
         $reportfeeds = ReportFeeds::with('feed')->latest()->paginate(4);
         $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(4);
-        $feeds->getCollection()->transform(function ($feed) {
-            $feed->comments_count = $feed->comments->count();
-            $feed->voice_comments_count = $feed->voice_comments->count();
-            $feed->likes_count = $feed->likes->count();
-            $feed->views_count = $feed->views->count();
-            $feed->shares_count = $feed->shares->count();
-            return $feed;
-        });
         return view('content.manage_posts.manage_user_feeds', compact('feeds', 'reportfeeds', 'reportscomments'));
     }
 
@@ -103,13 +95,13 @@ class FeedsController extends Controller
     public function allreportedfeedindex()
     {
 
-        $reportfeeds = ReportFeeds::with('feed')->paginate(20);
+        $reportfeeds = ReportFeeds::with('feed')->latest()->get();
         return view('content.manage_posts.reported_feeds', compact('reportfeeds'));
     }
 
     public function reportedcommmentsindex(Request $request)
     {
-        $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(20);
+        $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->get();
 
 
         return view('content.manage_posts.reportedcomments', compact('reportscomments'));
@@ -119,9 +111,9 @@ class FeedsController extends Controller
     public function latestfeedindex()
     {
 
-        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->get();
 
-        return view('content.manage_posts.reportedcomments', compact('feeds'));
+        return view('content.manage_posts.latest_feeds', compact('feeds'));
     }
 
 
