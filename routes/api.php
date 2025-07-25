@@ -131,6 +131,7 @@ Route::get('/get-artists-public', [MultimediaController::class, 'getArtistsPubli
 Route::get('/get-all-songs-public', [MultimediaController::class, 'getAllSongsPublic']);
 Route::get('/get-all-videos-public', [MultimediaController::class, 'getAllClipsPublic']);
 Route::post('/media-trimmer', [MultimediaController::class, 'mediaTrimmer']);
+Route::get('get-login-image',[UsersController::class,'getLoginImage']);
 Route::middleware('jwt.custom')->group(function () {
 
     Route::post('/change-password', [AccountSettingController::class, 'change_password'])

@@ -67,7 +67,7 @@
             <tr>
                <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
                <td>
-      {{ $flagged->user? $flagged->user->name: '' }}<br>
+      {{ $flagged->user? ($flagged->user->name.' '.$flagged->user->last_name) : '' }}<br>
       <small class="text-muted">{{ $flagged->user? $flagged->user->user_id : '' }}</small>
     </td>
               <td>{{ $flagged->reason }}</td>
@@ -93,7 +93,7 @@
                   </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="changeStatusModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal fade" id="changeStatusModal" style="z-index: 22" tabindex="-1" style="display: none;" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
                     <form action="{{ route('reports.flagged-users.update', $flagged->id) }}" method="post">
                       @method('PUT')

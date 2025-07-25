@@ -240,7 +240,7 @@ Route::middleware('check.role:Super Admin')->group(function () {
     Route::get('system-status', [AdminProfileController::class, 'systemStatus'])->name('system.status');
 });
 
- 
+
 //TV Section
 
 Route::get('zarok-videos', [TVController::class, 'zarokVideos'])->name('zarok.videos');
@@ -321,6 +321,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
 
     Route::get('/manage-user-feeds', [FeedsController::class, 'index'])->name('manage.user.feeds');
+    Route::post('/user-feeds-action', [FeedsController::class, 'actionFeed'])->name('user.feeds.action');
     Route::get('/manage-all-reportedfeeds', [FeedsController::class, 'allreportedfeedindex'])->name('manage.user.reportedfeeds');
     Route::get('/manage-all-latestfeed', [FeedsController::class, 'latestfeedindex'])->name('manage.user.latestfeed');
     Route::get('/reported-comments', [FeedsController::class, 'reportedcommmentsindex'])->name('reportedcommmentsindex');
@@ -504,7 +505,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     //Ai Videos
     Route::resource('/ai-videos', AIVideosController::class);
 
- 
+
     Route::post('/generate-thumbnail', [HistoryController::class, 'generateThumbnail']);
     // Route::resource('/history-category', HistoryCategoryController::class);
     // Route::get('/history_category/{id}/{status}', [HistoryCategoryController::class, 'status'])->name(

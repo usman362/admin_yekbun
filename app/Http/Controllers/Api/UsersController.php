@@ -580,4 +580,13 @@ class UsersController extends Controller
         $videos = UserVideo::with('user')->where('user_id', Auth::id())->get();
         return ResponseHelper::sendResponse($videos, 'User Videos Fetched Successfully');
     }
+
+    public function getLoginImage(Request $request)
+    {
+        if (empty($request->device_imei)) {
+            return ResponseHelper::sendResponse(null, 'Device Imei Not Found!', false, 404);
+        }
+        $user = User::where('device_imei', $request->device_imei)->first();
+        return ResponseHelper::sendResponse($user->image ?? null, 'User Image Fetched!');
+    }
 }

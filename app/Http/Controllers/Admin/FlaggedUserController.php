@@ -28,7 +28,7 @@ class FlaggedUserController extends Controller
      */
     public function index()
     {
-        $status = 1;
+        $status = 0;
         if (request()->status !== null) {
             switch(request()->status) {
                 case 'pending':
@@ -42,11 +42,11 @@ class FlaggedUserController extends Controller
                     break;
             }
         }
-            
-        $flaggedUsers = FlaggedUser::where("status", $status)->orderBy("updated_at", "DESC")->get();
+
+        $flaggedUsers = FlaggedUser::with('user')->where("status", $status)->orderBy("updated_at", "DESC")->get();
         return view("content.flagged_users.index", compact("flaggedUsers", "status"));
     }
-    
+
      public function flaggedfanpage()
     {
         $status = 1;
@@ -63,7 +63,7 @@ class FlaggedUserController extends Controller
                     break;
             }
         }
-            
+
         $flaggedUsers = FlaggedUser::where("status", $status)->orderBy("updated_at", "DESC")->get();
         return view("content.flagged_users.fanpage", compact("flaggedUsers", "status"));
     }
@@ -147,7 +147,7 @@ class FlaggedUserController extends Controller
 
         return back()->with("success", "Flagged  user successfully deleted.");
     }
-	
+
 	public function channelrequest(){
 		  $view = 'daily';
         if (request()->view) {
@@ -188,13 +188,13 @@ class FlaggedUserController extends Controller
         $music  = Music::where('type',$type)->with('music_category')->get();
         $music_category  = MusicCategory::get();
         $artists = Artist::get();
-        
+
         /* new code line */
         $channels = Channel::with('subcategories')->get();
         // dd($channels);
 		return view("content.flagged_users.addmanagechannel" , compact('music' , 'music_category' , 'artists' , 'type', 'channels'));
 	}
-    
+
 	// public function addmanagechannel(Request $request){
 	// 	$type  = $request->segments()[0];
     //     $music  = Music::where('type',$type)->with('music_category')->get();
@@ -203,6 +203,6 @@ class FlaggedUserController extends Controller
 
 	// 	return view("content.flagged_users.addmanagechannel" , compact('music' , 'music_category' , 'artists' , 'type'));
 	// }
-	
-	
+
+
 }

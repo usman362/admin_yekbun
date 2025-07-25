@@ -14,6 +14,8 @@ use App\Models\Feed;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
 use App\Models\FeedReason;
+use App\Models\FlaggedUser;
+use App\Models\FlagUser;
 use App\Models\ReportComments;
 use App\Models\History;
 use App\Models\News;
@@ -35,29 +37,67 @@ class FeedsController extends Controller
         $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(4);
 
         //dd($reportscomments);
-        return view('content.manage_posts.manage_user_feeds', compact('feeds','reportfeeds','reportscomments'));
+        return view('content.manage_posts.manage_user_feeds', compact('feeds', 'reportfeeds', 'reportscomments'));
     }
+
+    public function actionFeed(Request $request)
+    {
+        $request->validate([
+            'feed_id' => 'required',
+            'action_level' => 'required',
+        ]);
+        $feed = Feed::find($request->feed_id);
+        $user = User::find($feed->user_id);
+        if ($request->action_level === '1') {
+            if ($feed->images) {
+                foreach ($feed->images as $image) {
+                    $file_path = public_path('storage/' . $image['path']);
+                    if (file_exists($file_path)) {
+                        unlink($file_path);
+                    }
+                }
+            }
+            if ($feed->videos) {
+                foreach ($feed->videos as $video) {
+                    $file_path = public_path('storage/' . $video['path']);
+                    if (file_exists($file_path)) {
+                        unlink($file_path);
+                    }
+                }
+            }
+            $feed->delete();
+            $user->is_flagged = 1;
+            $user->save();
+            FlaggedUser::create([
+                'user_id' => $user->id,
+                'reason' => 'Posted Feed',
+                'status' => 0,
+                'action_taken' => (int)$request->action_level,
+            ]);
+        }
+        return back();
+    }
+
     public function allreportedfeedindex()
     {
 
-       $reportfeeds = ReportFeeds::with('feed')->paginate(20);
+        $reportfeeds = ReportFeeds::with('feed')->paginate(20);
         return view('content.manage_posts.reported_feeds', compact('reportfeeds'));
     }
 
- public function reportedcommmentsindex(Request $request)
+    public function reportedcommmentsindex(Request $request)
     {
-              $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(20);
+        $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(20);
 
 
-          return view('content.manage_posts.reportedcomments', compact('reportscomments'));
-
+        return view('content.manage_posts.reportedcomments', compact('reportscomments'));
     }
 
 
     public function latestfeedindex()
     {
 
-          $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('content.manage_posts.reportedcomments', compact('feeds'));
     }
@@ -519,9 +559,9 @@ class FeedsController extends Controller
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 
-    public function action(Request $request,$id)
+    public function action(Request $request, $id)
     {
-        try{
+        try {
             $feed = Feed::find($id);
             $feed->reason_id = $request->reason_id;
             $feed->save();
@@ -530,10 +570,9 @@ class FeedsController extends Controller
             $user->level = $request->user_type == 'cultivated' ? 1 : 0;
             $user->save();
             return back()->with(['success' => 'Feed Status has been Updated!']);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollback();
             return back()->with(['error' => 'Failed to Change Feed Status!']);
         }
-
     }
 }
