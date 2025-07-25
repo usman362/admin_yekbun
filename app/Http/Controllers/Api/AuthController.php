@@ -95,10 +95,10 @@ class AuthController extends Controller
         try {
             $validatedData = $request->validate([
                 'fname' => 'required|max:100',
-                'lname' => 'required|max:100',
+                'lname' => 'nullable|max:100',
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-                'phone' => 'required|min:11',
+                // 'phone' => 'required|min:11',
             ]);
             $email = strtolower($request->email);
             $emailTaken = User::where('email', $email)->first();
@@ -151,6 +151,7 @@ class AuthController extends Controller
                 'gender' => $request['gender'],
                 'origin' => $request['origin'],
                 'location' => $request['location'],
+                'country' => $request['country'],
                 'maritalStatus' => $request['maritalStatus'] ?? $request['marital_status'],
                 'dob' => $request['dob'],
                 'province' => $request['province'],
@@ -161,7 +162,6 @@ class AuthController extends Controller
                 'device_name' => $request['device_name'],
                 'device_model' => $request['device_model'],
                 'device_serial' => $request['device_serial'],
-                'user_id' => 'YB-US' . (User::count() + 1),
                 'user_type' => 'cultivated',
                 'is_else' => 'true',
                 'is_language' => 'true',
@@ -192,6 +192,7 @@ class AuthController extends Controller
                 'friends_request' => 'true',
                 'get_greetings' => 'true',
                 'search_option' => 'true',
+                'app_status' => 'online'
             ]);
 
             if ($request->has('image')) {
@@ -199,6 +200,25 @@ class AuthController extends Controller
                 $user->image = $image_path;
                 $user->save();
             }
+            $userId = '';
+            $randomId = $user->user_id;
+            if ($user->origin === 'kurdish') {
+                $prV = '';
+                if ($user->province === 'Rojava') {
+                    $prV = 'RA';
+                } elseif ($user->province === 'Bakûr') {
+                    $prV = 'BK';
+                } elseif ($user->province === 'Başûr') {
+                    $prV = 'BŞ';
+                } else {
+                    $prV = 'RH';
+                }
+                $userId = 'YB-KU' . $randomId . $prV;
+            } else {
+                $userId = 'YB-US' . $randomId . 'NK';
+            }
+            $user->user_id = $userId;
+            $user->save();
 
             if ($user->id) {
                 $code = rand(1000, 9999);
@@ -353,14 +373,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         if (!empty($request->status)) {
-            $user = User::find(auth()->user()->id);
+            $user = User::find(Auth::id());
             $user->app_status = $request->status;
             $user->save();
         }
         // dd(JWTAuth::getToken());
         JWTAuth::parseToken()->invalidate(true);
         // Return a response indicating success
-        return ResponseHelper::sendResponse([],'Logout Successfully!');
+        return ResponseHelper::sendResponse([], 'Logout Successfully!');
     }
 
     public function forgot_password(Request $request)
@@ -523,12 +543,12 @@ class AuthController extends Controller
     public function getMyDetails()
     {
         $user = User::find(Auth::id());
-        return ResponseHelper::sendResponse($user,'My Details has been Fetched Successfully!');
+        return ResponseHelper::sendResponse($user, 'My Details has been Fetched Successfully!');
     }
     public function deleteMyAccount()
     {
         $user = User::find(Auth::id());
         $user->delete();
-        return ResponseHelper::sendResponse([],'Account has been Deleted Successfully!');
+        return ResponseHelper::sendResponse([], 'Account has been Deleted Successfully!');
     }
 }

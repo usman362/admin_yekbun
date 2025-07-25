@@ -332,8 +332,7 @@
 
 
         <ul class="navbar-nav d-flex flex-row gap-3 align-items-center mb-0 justify-content-between">
-
-            <!-- Shortcuts -->
+  @can('manageshortcut.read')        
             <li class="nav-item dropdown-shortcuts dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -404,9 +403,10 @@
                     </div>
                 </div>
             </li>
-
+   @endcan
             {{-- asim --}}
             <!-- Notifications -->
+             @can('managenotification.read')  
             <li class="nav-item dropdown-notifications dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -439,7 +439,7 @@
                     </li>
                 </ul>
             </li>
-
+            @endcan
             <!-- User Profile -->
             <li class="nav-item dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"

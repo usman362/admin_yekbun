@@ -297,6 +297,7 @@
                         <th>Artist</th>
                         <th>Total Songs</th>
                         <th>Total Video Clips</th>
+                        <th>Status</th>
                         <th>Like</th>
                         <th>Actions</th>
                     </tr>
@@ -314,13 +315,13 @@
     </script>
     {{-- Artist Modal --}}
     <x-modal id="createartistModal" title="Create Artist" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createartistForm" size="md">
+        saveBtnForm="createartistForm" size="md" saveBtnClass="btn btn-primary submit-artist-btn">
         @include('content.include.artist.createForm', ['form' => 'createartistForm'])
     </x-modal>
 
     {{-- Songs Modal --}}
     <x-modal id="createmusicModal" title="Create Song" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createmusicForm" size="md">
+        saveBtnForm="createmusicForm" size="md" saveBtnClass="btn btn-primary submit-music-btn">
         @include('content.video_clips.createSong', ['form' => 'createmusicForm'])
     </x-modal>
 
@@ -381,7 +382,7 @@
 
     {{-- Video Clips Modal --}}
     <x-modal id="createvideoModal" title="Create Video Clips" saveBtnText="Create" saveBtnType="submit"
-        saveBtnForm="createvideoForm" size="md">
+        saveBtnForm="createvideoForm" size="md" saveBtnClass="btn btn-primary submit-video-btn">
         @include('content.include.video_clips.createForm', ['form' => 'createvideoForm'])
     </x-modal>
 @section('page-script')
@@ -522,27 +523,46 @@
                         '.hidden-inputs');
                     hiddenInputsContainer.innerHTML +=
                         `<input type="hidden" name="${hiddenInputName}" value="${response.path}" id="file_path" data-path="${response.path}">`;
+
                     let fileInputName = hiddenInputName.replace(/\w+\[\]/g, function(match) {
                         return match.slice(0, -2);
                     });
-                    if (limit == 1) {
 
-                        hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                    if (limit == 1) {
+                        if (folder === 'audios') {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${extractCleanTitle(response.path)}">`;
+                        } else {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        }
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_length" id="file_length" value="${response.duration}">`;
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_size" id="file_size" value="${response.size}">`;
                     } else {
-                        hiddenInputsContainer.innerHTML +=
-                            `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        if (folder === 'audios') {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name[]" value="${extractCleanTitle(response.path)}">`;
+                        } else {
+                            hiddenInputsContainer.innerHTML +=
+                                `<input type="hidden" name="${fileInputName}_file_name[]" value="${$('.dz-filename').eq(dropzoneKey).text()}">`;
+                        }
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_length[]" value="${response.duration}">`;
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_size[]" value="${response.size}">`;
                         dropzoneKey++;
                     }
-
+                    if (folder === 'images' && folder !== 'videos') {
+                        if ($('#createartistForm [name="status"]').val() !== '') {
+                            $('.submit-artist-btn').attr('disabled', false);
+                        }
+                    } else {
+                        if ($('#createmusicForm [name="status"]').val() !== '') {
+                            $('.submit-music-btn').attr('disabled', false);
+                        }
+                    }
                     if (hiddenInputName == 'video') {
                         // ✅ Get video duration
                         const video = document.createElement('video');
@@ -562,7 +582,7 @@
                         '.hidden-inputs');
                     hiddenInputsContainer.querySelector(
                         `input[data-path="${file.previewElement.dataset.path}"]`).remove();
-
+                    hiddenInputsContainer.innerHTML = '';
                     if (file.previewElement != null && file.previewElement.parentNode != null) {
                         file.previewElement.parentNode.removeChild(file.previewElement);
                     }
@@ -584,7 +604,7 @@
                     $('#error-thumbnail').text("");
                     $('#thumbnail-history').css('display', 'none');
                     $('#generated-thumbnails').css('display', 'none');
-
+                    // $('.submit-video-btn').attr('disabled', true);
                     return this._updateMaxFilesReachedClass();
                 }
             });
@@ -598,6 +618,20 @@
             initializeDropzone('#dropzone-audio', 'audio', 'audios', 'audio/*');
 
         });
+
+        function extractCleanTitle(filePath) {
+            // Get the filename only (remove path)
+            const fileName = filePath.split('/').pop().replace('.mp3', '');
+
+            // Get the part after the last triple underscore
+            const parts = fileName.split('___');
+            const titleRaw = parts[parts.length - 1];
+
+            // Replace underscores and dashes with spaces
+            const cleanTitle = titleRaw.replace(/[_-]+/g, ' ').trim();
+
+            return cleanTitle;
+        }
 
         function generateThumbnails(videoPath, videoDuration) {
             let timestamp = $("#timestamp").val();
@@ -636,6 +670,31 @@
                 }
             });
         };
+
+
+        $('#createartistForm [name="status"]').change(function() {
+            if ($('#createartistForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
+                $('.submit-artist-btn').attr('disabled', false);
+            } else {
+                $('.submit-artist-btn').attr('disabled', true);
+            }
+        })
+
+        $('#createvideoForm [name="status"]').change(function() {
+            if ($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
+                $('.submit-video-btn').attr('disabled', false);
+            } else {
+                $('.submit-video-btn').attr('disabled', true);
+            }
+        })
+
+        $('#createmusicForm [name="status"]').change(function() {
+            if ($('#createmusicForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
+                $('.submit-music-btn').attr('disabled', false);
+            } else {
+                $('.submit-music-btn').attr('disabled', true);
+            }
+        })
     </script>
 
     <script>
@@ -651,6 +710,9 @@
                 let src = $(this).attr('src');
                 $('.dz-thumbnail img').attr('src', src);
                 $('#thumbnail').val(src);
+                if ($('#createvideoForm [name="status"]').val() !== '') {
+                    $('.submit-video-btn').attr('disabled', false);
+                }
             })
         });
     </script>
@@ -658,6 +720,9 @@
     <script>
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
+            $('.submit-video-btn').attr('disabled', true);
+            $('.submit-music-btn').attr('disabled', true);
+            $('.submit-artist-btn').attr('disabled', true);
         }
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
@@ -912,16 +977,16 @@
                 $('#dropzone-video').css('background-size', 'cover');
             });
 
-            $(document).on('click', '[data-bs-dismiss="modal"]', function () {
+            $(document).on('click', '[data-bs-dismiss="modal"]', function() {
                 let modalElement = $(this).closest('.modal').attr('id');
-                $('#'+modalElement+' #artist_id').val('');
-                $('#'+modalElement+' #video_id').val('');
-                $('#'+modalElement+' #status').val('');
+                $('#' + modalElement + ' #artist_id').val('');
+                $('#' + modalElement + ' #video_id').val('');
+                $('#' + modalElement + ' #status').val('');
                 $('#createvideoModal .modal-header h4').text('Create Video Clips');
                 $('button[type="submit"]').text('Create');
                 $('#dropzone-video').css('background-image', 'unset');
                 $('#dropzone-video').css('background-size', 'unset');
-                $('#'+modalElement).hide();
+                $('#' + modalElement).hide();
                 $('.modal-backdrop:last').remove();
             });
 
@@ -1003,6 +1068,10 @@
                     {
                         data: 'total_videos',
                         name: 'total_videos'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'like',

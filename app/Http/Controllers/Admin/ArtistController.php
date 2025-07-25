@@ -28,18 +28,18 @@ class ArtistController extends Controller
 
         if ($request->ajax() && $request->table == 'dataTable') {
 
-            if($request->has('sort_by')){
-                if($request->sort_by == 'songs'){
+            if ($request->has('sort_by')) {
+                if ($request->sort_by == 'songs') {
                     $artists = Artist::with('songs')->get()->sortByDesc(function ($artist) {
                         return $artist->songs->count();
                     });
-                }else{
+                } else {
                     $artists = Artist::with('videos')->get()->sortByDesc(function ($artist) {
                         return $artist->videos->count();
                     });
                 }
-            }else{
-                $artists = Artist::with(['songs','videos'])->get()->orderByDesc('created_at');
+            } else {
+                $artists = Artist::with(['songs', 'videos'])->get()->orderByDesc('created_at');
             }
 
             return DataTables::of($artists)
@@ -56,7 +56,7 @@ class ArtistController extends Controller
                                 <a href="javascript:void(0)" class="text-body text-truncate">
                                     <span class="fw-semibold">' . e($artist->name) . '</span>
                                 </a>
-                                <small class="fw-semibold">'. ($artist->province->name ?? 'N/A') . '</small>
+                                <small class="fw-semibold">' . ($artist->province->name ?? 'N/A') . '</small>
                             </div>
                         </div>';
                     return $info;
@@ -78,12 +78,18 @@ class ArtistController extends Controller
                 ->addColumn('like', function () {
                     return '0';
                 })
+                ->addColumn('status', function ($row) {
+                    $statusClass = $row->status == '1' ? 'bg-success' : 'bg-danger';
+                    $statusText = $row->status == '1' ? 'Published' : 'UnPublished';
+
+                    return '<span class="badge ' . $statusClass . '">' . $statusText . '</span>';
+                })
                 ->addColumn('actions', function ($artist) {
                     $provinces = Region::get();
                     $actions = view('content.artist.actions', compact('artist', 'provinces'));
                     return $actions;
                 })
-                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'actions'])
+                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
                 ->make(true);
         }
 
@@ -130,12 +136,17 @@ class ArtistController extends Controller
         $artist->image = $request->image ?? '';
         if ($artist->save()) {
             $notification = Notifications::first();
-            if($notification->new_artist == 'true'){
+            $description = str_replace(
+                ["[name]"],
+                [$request->name],
+                $notification->new_artist_description
+            );
+            if ($notification->new_artist == 'true' && $request->status == '1') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Artist Notification', 'New Artist ' . $artist->name . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
                         }
                     }
                 } catch (\Exception $e) {
@@ -183,33 +194,53 @@ class ArtistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $artist = Artist::findorFail($id);
+
+        $artist = Artist::findOrFail($id);
+
         $artist->name = $request->name;
-        // $artist->last_name = $request->last_name;
         $artist->dob = $request->dob;
         $artist->gender = $request->gender;
-        $artist->image = $request->image ?? '';
         $artist->status = $request->status;
-        // $artist->city_id = $request->city;
         $artist->province_id = $request->province;
 
-        // if($request->hasFile('image')){
-        //    if(isset($artist->image)){
-        //        $image_path  = public_path('storage/'.$artist->image);
-        //        if(file_exists($image_path)){
-        //            unlink($image_path);
-        //        }
-        //        $path = $request->file('image')->store('/images/artist' , 'public');
-        //        $artist->image = $path;
-        //    }
-        // }
+        // Check if new image is different from old one
+        if ($request->image && $request->image !== $artist->image) {
+            $oldImagePath = public_path($artist->image);
 
-        if ($artist->update()) {
-            return redirect()->route('artist.index')->with('success', 'Artist Has been Updated');
+            // Unlink only if file exists and is local
+            if ($artist->image && file_exists($oldImagePath)) {
+                @unlink($oldImagePath); // Use @ to suppress errors in case of missing file
+            }
+
+            $artist->image = $request->image;
+        }
+
+        if ($artist->save()) {
+            $notification = Notifications::first();
+            $description = str_replace(
+                ["[name]"],
+                [$request->name],
+                $notification->new_artist_description
+            );
+            if ($notification->new_artist == 'true' && $request->status == '1') {
+                try {
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return back()->with("success", "Artist has been updated successfully.");
+                }
+            }
+            return redirect()->route('artist.index')->with('success', 'Artist has been updated');
         } else {
-            return redirect()->route('artist.index')->with('success', 'Artist not updated');
+            return redirect()->route('artist.index')->with('error', 'Artist not updated');
         }
     }
+
+
 
     /**
      * Remove the specified resource from storage.

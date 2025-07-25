@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Emoji;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class EmojiFeedController extends Controller
     public function index()
     {
         $emojis = Emoji::all();
-        return response()->json(['emojis' => $emojis], 200);
+        return ResponseHelper::sendResponse($emojis, 'Emojis has been Fetch Successfully!');
     }
 
     /**

@@ -32,41 +32,34 @@ class CityController extends Controller
 
     public function getCities(Request $request)
     {
-        // Start the query
-        $cities = City::orderBy("name", "ASC");
+        $query = City::orderBy('name', 'ASC');
 
-        // Flag to check if conditions are applied
-        $hasConditions = false;
-
+        // Apply region filter if provided
         if (!empty($request->region_id)) {
-            $cities->where('region_id', $request->region_id);
-            $hasConditions = false;
+            $query->where('region_id', $request->region_id);
         }
 
+        // Apply search by city name
         if (!empty($request->search)) {
-            $cities->where('name', 'LIKE', $request->search . '%');
-            $hasConditions = true;
+            $query->where('name', 'LIKE', $request->search . '%');
         }
 
-        $cities = $cities->paginate(15);
-        // if (!empty($request->limit)) {
+        // If limit is provided and not 'all', apply limit
+        if (!empty($request->limit)) {
+            if ($request->limit !== 'all') {
+                $limit = (int) $request->limit;
+                $data = $query->limit($limit)->get();
 
-        //     if ($request->limit !== 'all') {
-        //         $limit = (int)$request->limit;
-        //         $cities->limit($limit);
-        //     }
+                return ResponseHelper::sendResponse($data, 'Cities fetched successfully!');
+            } else {
+                $data = $query->get();
 
-        //     // Get results
-        //     $cities = $cities->get();
-        // } else {
-        //     // If no conditions applied, limit results to 15
-        //     if (!$hasConditions) {
-        //         $cities->limit(15);
-        //     }
+                return ResponseHelper::sendResponse($data, 'Cities fetched successfully!');
+            }
+        }
 
-        //     // Get results
-        //     $cities = $cities->get();
-        // }
+        // Otherwise use pagination
+        $cities = $query->paginate(15);
 
         $data = [
             'cities' => $cities->items(),
@@ -78,9 +71,8 @@ class CityController extends Controller
             ]
         ];
 
-        return ResponseHelper::sendResponse($data, 'Cities has been Fetch Successfully!');
+        return ResponseHelper::sendResponse($data, 'Cities fetched successfully!');
     }
-
 
     /**
      * Show the form for creating a new resource.

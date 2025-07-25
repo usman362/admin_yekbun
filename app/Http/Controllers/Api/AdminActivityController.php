@@ -46,6 +46,12 @@ class AdminActivityController extends Controller
         return ResponseHelper::sendResponse($popfeeds, 'All Admin Activity Feeds');
     }
 
+    public function getpublicpopFeeds(Request $request)
+    {
+        $popfeeds = PopFeeds::with('user')->orderBy('created_at', 'desc')->first();
+        return ResponseHelper::sendResponse($popfeeds, 'Public Admin Activity Feed');
+    }
+
     public function store_systemInfo(Request $request)
     {
         $validator = Validator::make($request->all(), [

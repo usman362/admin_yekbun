@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8978d617ee6c76b20fc120a5a8981161",
+    "content-hash": "49da2a0709caf4d0b7c56ca35dd6e3e1",
     "packages": [
         {
             "name": "brick/math",
@@ -4991,6 +4991,53 @@
             "time": "2024-12-14T21:12:59+00:00"
         },
         {
+            "name": "plesk/ext-laravel-integration",
+            "version": "7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/plesk/ext-laravel-integration.git",
+                "reference": "73dc4ea3f99e033396497f147aa033eb0602f943"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/plesk/ext-laravel-integration/zipball/73dc4ea3f99e033396497f147aa033eb0602f943",
+                "reference": "73dc4ea3f99e033396497f147aa033eb0602f943",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=7.0.0",
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PleskExtLaravel\\Providers\\ConsoleServiceProvider"
+                    ]
+                },
+                "component": "package"
+            },
+            "autoload": {
+                "psr-4": {
+                    "PleskExtLaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Plesk Laravel Toolkit integration with Laravel applications.",
+            "keywords": [
+                "laravel",
+                "plesk"
+            ],
+            "support": {
+                "issues": "https://github.com/plesk/ext-laravel-integration/issues",
+                "source": "https://github.com/plesk/ext-laravel-integration/tree/7.0.0"
+            },
+            "time": "2023-01-20T09:40:57+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "3.0.0",
             "source": {
@@ -6162,6 +6209,87 @@
                 "source": "https://github.com/stella-maris-solutions/clock/tree/0.1.7"
             },
             "time": "2022-11-25T16:15:06+00:00"
+        },
+        {
+            "name": "stichoza/google-translate-php",
+            "version": "v5.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stichoza/google-translate-php.git",
+                "reference": "2891310296cc115786d7c135a47a4ed53cd38df1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/2891310296cc115786d7c135a47a4ed53cd38df1",
+                "reference": "2891310296cc115786d7c135a47a4ed53cd38df1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "^7.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stichoza\\GoogleTranslate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Levan Velijanashvili",
+                    "email": "me@stichoza.com"
+                }
+            ],
+            "description": "Free Google Translate API PHP Package",
+            "homepage": "https://github.com/Stichoza/google-translate-php",
+            "keywords": [
+                "google",
+                "php",
+                "translate",
+                "translating",
+                "translator"
+            ],
+            "support": {
+                "issues": "https://github.com/Stichoza/google-translate-php/issues",
+                "source": "https://github.com/Stichoza/google-translate-php/tree/v5.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://btc.com/bc1qc25j4x7yahghm8nnn6lypnw59nptylsw32nkfl",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.paypal.me/stichoza",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://ko-fi.com/stichoza",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://liberapay.com/stichoza",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://opencollective.com/stichoza",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/stichoza",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-05-20T08:38:25+00:00"
         },
         {
             "name": "stripe/stripe-php",
@@ -11679,12 +11807,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

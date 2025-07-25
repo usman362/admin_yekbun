@@ -23,7 +23,6 @@ class LanguageKeywordsSeeder extends Seeder
 
         foreach ($languages as $language) {
             LanguagesHelpers::languages_keywords($language->id, $language->code);
-            LanguagesHelpers::languages_settings_keywords($language->id, $language->code);
         }
     }
 }

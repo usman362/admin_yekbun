@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\Admin\Donation\DonationController as DonationDonationController;
 use App\Http\Controllers\Api\FanPageController;
 use App\Http\Controllers\Api\HistoryController;
+use App\Http\Controllers\Api\AIVideoController;
 use App\Http\Controllers\Api\PolicyAndTermsController;
 use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\DiamondUserController;
@@ -62,6 +63,8 @@ use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\UserRolesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VotingReactionController;
+use App\Http\Controllers\Api\NotificationsController;
+use App\Http\Controllers\Api\ViewsController;
 use App\Http\Controllers\Api\TVController;
 
 /*
@@ -111,7 +114,7 @@ Route::post('2fa', [TwoFactorController::class, 'store'])->name('2fa.post');
 Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
 Route::get('/user-imei', [AuthController::class, 'userImei']);
 Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
- 
+
 //User Profile
 
 // Account Setting  Controller
@@ -168,14 +171,15 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('accept-users-request', [UsersController::class, 'acceptRequest']);
     Route::post('user-online/{id}', [UsersController::class, 'store_user_online']);
     Route::get('get-users-list', [UsersController::class, 'users_list']);
+    Route::get('get-users-may-you-know-list', [UsersController::class, 'users_may_you_know_list']);
     Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
     Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
     Route::post('update-friends-list', [UsersController::class, 'update_freind_list']);
     Route::get('get-family-list/{id}', [UsersController::class, 'family_list']);
     Route::get('unfriend-user/{id}', [UsersController::class, 'unfriend_user']);
     Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
-    Route::get('user-visitor/{id}', [UsersController::class, 'vistor']);
-    Route::get('get-user-visitor/{id}', [UsersController::class, 'get_vistor']);
+    Route::post('user-visitor', [UsersController::class, 'vistor']);
+    Route::get('get-user-visitor', [UsersController::class, 'get_vistor']);
     Route::post('update-fcm-token', [UsersController::class, 'updateDeviceToken']);
     Route::post('send-fcm-notification', [UsersController::class, 'sendNotification']);
     Route::post('my-service', [UsersController::class, 'storeMyService']);
@@ -192,17 +196,17 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
 
     //Clips
-    Route::get('get-clips',[ClipsController::class,'index']);
-    Route::get('get-clips-templates',[ClipsController::class,'get_templates']);
-    Route::post('store-clips',[ClipsController::class,'store_clips']);
-    Route::post('store-clips-templates',[ClipsController::class,'store_templates']);
+    Route::get('get-clips', [ClipsController::class, 'index']);
+    Route::get('get-clips-templates', [ClipsController::class, 'get_templates']);
+    Route::post('store-clips', [ClipsController::class, 'store_clips']);
+    Route::post('store-clips-templates', [ClipsController::class, 'store_templates']);
 
     //Playlist
     Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
     Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);
     Route::get('/get-all-videos', [MultimediaController::class, 'getAllClips']);
-    Route::get('/play-music/{id}',[MultimediaController::class, 'playMusic']);
-    Route::get('/play-video/{id}',[MultimediaController::class, 'playVideo']);
+    Route::get('/play-music/{id}', [MultimediaController::class, 'playMusic']);
+    Route::get('/play-video/{id}', [MultimediaController::class, 'playVideo']);
     Route::get('get-songs-playlist', [MultimediaController::class, 'getSongsPlaylist']);
     Route::get('get-playlist/{id}', [MultimediaController::class, 'getPlaylistDetail']);
     Route::post('edit-playlist/{id}', [MultimediaController::class, 'editPlaylist']);
@@ -212,7 +216,27 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('move-playlist-music/{id}', [MultimediaController::class, 'movePlaylist']);
     Route::delete('delete-playlist-music/{id}', [MultimediaController::class, 'deletePlaylist']);
     Route::delete('delete-playlist-group/{id}', [MultimediaController::class, 'deletePlaylistGroup']);
+
+    //Views
+    Route::post('store-multimedia-views', [ViewsController::class, 'store_multimedia_views']);
+    Route::post('store-feeds-views', [ViewsController::class, 'store_feeds_views']);
+
+    //Payments
+    Route::post('post-transaction', [PaymentController::class, 'storeTransaction']);
+    Route::get('notifications-center', [NotificationsController::class, 'index']);
+
+    //User Images/Videos
+    Route::get('user-images', [UsersController::class, 'user_images']);
+    Route::get('user-videos', [UsersController::class, 'user_videos']);
 });
+
+//Views
+Route::get('get-multimedia-views', [ViewsController::class, 'get_multimedia_views']);
+Route::get('get-feeds-views', [ViewsController::class, 'get_feeds_views']);
+
+Route::post('notifications-center', [NotificationsController::class, 'store']);
+Route::get('notifications-center/{id}', [NotificationsController::class, 'read']);
+Route::delete('notifications-center/{id}/delete', [NotificationsController::class, 'delete']);
 
 Route::post('send-test-notification', [UsersController::class, 'testNotification']);
 
@@ -227,6 +251,7 @@ Route::post("/admin-activity/surveys", [AdminActivityController::class, 'store_s
 Route::post("/admin-activity/greetings", [AdminActivityController::class, 'store_greetings']);
 
 Route::get("/admin-activity/get-feeds", [AdminActivityController::class, 'getpopFeeds']);
+Route::get("/admin-activity/get-public-feeds", [AdminActivityController::class, 'getpublicpopFeeds']);
 Route::post("/admin-activity/delete-feeds", [AdminActivityController::class, 'delete_pops']);
 
 Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
@@ -465,7 +490,7 @@ Route::prefix('paypal')->group(function () {
 
 
 //Payment List
-Route::get('get-payment-list',[PaymentController::class,'paymentList']);
+Route::get('get-payment-list', [PaymentController::class, 'paymentList']);
 
 // Stripe
 Route::post('/stripe/checkout', [StripeController::class, 'index']);
@@ -491,6 +516,9 @@ Route::get('/history-cover', [HistoryController::class, 'cover_history']);
 Route::get('/history-category', [HistoryController::class, 'categories']);
 Route::get('/history-detail/{id}', [HistoryController::class, 'detail']);
 Route::post('/history-search', [HistoryController::class, 'search']);
+
+//AI Videos
+Route::get('/ai-videos', [AIVideoController::class, 'index']);
 
 // Voting
 Route::get('/voting-cover/{id?}', [VotingController::class, 'get_cover']);

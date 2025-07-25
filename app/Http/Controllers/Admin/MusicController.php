@@ -264,12 +264,17 @@ class MusicController extends Controller
                 $song->save();
             }
             $notification = Notifications::first();
-            if($notification->new_music == 'true'){
+            $description = str_replace(
+                ["[name]"],
+                [$prettyName],
+                $notification->new_music_description
+            );
+            if ($notification->new_music == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Music Notification', 'New Music ' . $name . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_music_title, $description);
                         }
                     }
                 } catch (\Exception $e) {

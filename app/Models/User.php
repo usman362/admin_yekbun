@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Mail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Maklad\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
@@ -48,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'city',
         'province_city',
         'country',
+        'location',
         'role_id',
         'roles',
         'user_id',
@@ -92,6 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'friends_request',
         'get_greetings',
         'search_option',
+        'app_status',
     ];
 
     /**
@@ -117,6 +120,37 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     {
         return LogOptions::defaults();
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->user_id = self::generateCustomId();
+        });
+    }
+
+    public static function generateCustomId()
+    {
+        $length = 4;
+
+        while (true) {
+            $min = pow(10, $length - 1);
+            $max = pow(10, $length) - 1;
+
+            $customId = (string) random_int($min, $max);
+
+            if (!self::where('custom_id', $customId)->exists()) {
+                return $customId;
+            }
+
+            // If too many IDs exist, increase the length
+            if (self::whereBetween('custom_id', [$min, $max])->count() >= ($max - $min + 1)) {
+                $length++;
+            }
+        }
+    }
+
 
     public function stories()
     {
@@ -145,7 +179,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function feeds()
     {
-        return $this->hasMany(Feed::class);
+        return $this->hasMany(Feed::class, 'user_id');
     }
 
     public function user_feeds()
@@ -153,9 +187,9 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(Feed::class, 'id', 'user_id');
     }
     public function reportFeeds()
-{
-    return $this->hasMany(ReportFeeds::class, 'user_id', '_id');
-}
+    {
+        return $this->hasMany(ReportFeeds::class, 'user_id', '_id');
+    }
 
 
     public function user()
@@ -166,9 +200,9 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
 
     public function role()
-{
-    return $this->belongsToMany(Role::class)->limit(1);
-}
+    {
+        return $this->belongsToMany(Role::class)->limit(1);
+    }
 
     public function permissions()
     {
@@ -211,7 +245,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         $code = rand(100000, 999999);
 
         UserCode::updateOrCreate(
-            ['user_id' => auth()->user()->id],
+            ['user_id' => Auth::id()],
             ['code' => $code]
         );
 
@@ -222,7 +256,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
                 'code' => $code
             ];
 
-            Mail::to(auth()->user()->email)->send(new SendCodeMail($details));
+            Mail::to(Auth::user()->email)->send(new SendCodeMail($details));
         } catch (Exception $e) {
             info("Error: " . $e->getMessage());
         }
@@ -271,5 +305,15 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function clips_playlist()
     {
         return $this->hasMany(UserPlaylist::class, 'user_id')->where('type', 'video');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(UserImage::class, 'user_id');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(UserVideo::class, 'user_id');
     }
 }

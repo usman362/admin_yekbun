@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class MultimediaController extends Controller
 {
@@ -81,6 +82,7 @@ class MultimediaController extends Controller
                 'videos',
                 'province.country'
             ])
+            ->where('status','1')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -99,6 +101,7 @@ class MultimediaController extends Controller
                 'videos',
                 'province.country'
             ])
+            ->where('status','1')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -107,7 +110,7 @@ class MultimediaController extends Controller
 
     public function getFavArtists()
     {
-        $artist_ids = ArtistFavorite::where('user_id', auth()->user()->id)->pluck('artist_id');
+        $artist_ids = ArtistFavorite::where('user_id', Auth::id())->pluck('artist_id');
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
 
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
@@ -222,7 +225,7 @@ class MultimediaController extends Controller
         }])->with(['videos' => function ($q) {
             $q->with('playlists');
         }])->find($id);
-        $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', auth()->user()->id)->get();
+        $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', Auth::id())->get();
         $favourites = ArtistFavorite::where('artist_id', $id)->get();
         if ($fav->count() > 0) {
             $is_favorite = 1;
@@ -235,12 +238,12 @@ class MultimediaController extends Controller
     public function playMusic(Request $request, $id)
     {
 
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'music_allow_music');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'music_allow_music');
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not Allowed to Use Musics.', false, 409);
         }
 
-        $userId = auth()->id();
+        $userId = Auth::id();
         $today = Carbon::today();
 
         // 1. Delete old records (only keep today’s)
@@ -260,7 +263,7 @@ class MultimediaController extends Controller
             ->whereDate('created_at', $today)
             ->exists();
 
-        $musicCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'music_daily_songs');
+        $musicCounnt = PermissionHelper::checkPermission(Auth::user()->level, 'music_daily_songs');
         // 4. If not played and limit reached, reject
         if (!$alreadyPlayed && $todayPlayCount >= $musicCounnt) {
             return ResponseHelper::sendResponse([], 'Your daily music play limit has been exceeded.', false, 409);
@@ -277,12 +280,12 @@ class MultimediaController extends Controller
 
     public function playVideo(Request $request, $id)
     {
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'video_allow_video');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'video_allow_video');
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not Allowed to Use Videos.', false, 409);
         }
 
-        $userId = auth()->id();
+        $userId = Auth::id();
         $today = Carbon::today();
 
         // 1. Delete old records (only keep today’s)
@@ -302,7 +305,7 @@ class MultimediaController extends Controller
             ->whereDate('created_at', $today)
             ->exists();
 
-        $videoCounnt = PermissionHelper::checkPermission(auth()->user()->level, 'video_daily_videos');
+        $videoCounnt = PermissionHelper::checkPermission(Auth::user()->level, 'video_daily_videos');
         // 4. If not played and limit reached, reject
         if (!$alreadyPlayed && $todayPlayCount >= $videoCounnt) {
             return ResponseHelper::sendResponse([], 'Your daily video play limit has been exceeded.', false, 409);
@@ -321,8 +324,8 @@ class MultimediaController extends Controller
     {
         try {
             $views = SongViews::updateOrCreate(
-                ['user_id' => auth()->user()->id, 'artist_id' => $id],
-                ['user_id' => auth()->user()->id, 'artist_id' => $id]
+                ['user_id' => Auth::id(), 'artist_id' => $id],
+                ['user_id' => Auth::id(), 'artist_id' => $id]
             );
 
             $songViews = SongViews::where('artist_id', $id)->get();
@@ -342,8 +345,8 @@ class MultimediaController extends Controller
     {
         try {
             $views = VideoClipViews::updateOrCreate(
-                ['user_id' => auth()->user()->id, 'artist_id' => $id],
-                ['user_id' => auth()->user()->id, 'artist_id' => $id]
+                ['user_id' => Auth::id(), 'artist_id' => $id],
+                ['user_id' => Auth::id(), 'artist_id' => $id]
             );
 
             $songViews = SongViews::where('artist_id', $id)->get();
@@ -361,18 +364,18 @@ class MultimediaController extends Controller
 
     public function store_artist_favorites(Request $request, $id)
     {
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'music_favorite_artist');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'music_favorite_artist');
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not Allowed to Add Artist as Favorite.', false, 409);
         }
         try {
-            $exists = ArtistFavorite::where('user_id', auth()->user()->id)->where('artist_id', $id)->first();
+            $exists = ArtistFavorite::where('user_id', Auth::id())->where('artist_id', $id)->first();
             if (!empty($exists)) {
                 $exists->delete();
             } else {
                 $favorites = ArtistFavorite::updateOrCreate(
-                    ['user_id' => auth()->user()->id, 'artist_id' => $id],
-                    ['user_id' => auth()->user()->id, 'artist_id' => $id]
+                    ['user_id' => Auth::id(), 'artist_id' => $id],
+                    ['user_id' => Auth::id(), 'artist_id' => $id]
                 );
             }
             return ResponseHelper::sendResponse([], 'Artist Favorites has been Successfully Saved!');
@@ -383,7 +386,7 @@ class MultimediaController extends Controller
 
     public function getSongsPlaylist(Request $request)
     {
-        $userId = auth()->user()->id;
+        $userId = Auth::id();
 
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
             $q->with(['song' => function ($a) {
@@ -395,8 +398,26 @@ class MultimediaController extends Controller
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
-                'bg_image' => 'assets/img/playlistCover.jpg',
+                'bg_image' => 'assets/img/playlistCover1.png',
                 'type' => 'free',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover2.png',
+                'type' => 'paid',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover3.png',
+                'type' => 'paid',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover4.png',
+                'type' => 'paid',
             ]);
 
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
@@ -411,7 +432,7 @@ class MultimediaController extends Controller
 
     public function getPlaylistDetail(Request $request, $id)
     {
-        $userId = auth()->user()->id;
+        $userId = Auth::id();
 
         $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
             $q->with(['song' => function ($a) {
@@ -431,7 +452,7 @@ class MultimediaController extends Controller
         ]);
         try {
             $playlist = UserPlaylistGroup::updateOrCreate(['id' => $request->id], [
-                'user_id' => auth()->user()->id,
+                'user_id' => Auth::id(),
                 'playlist_id' => $request->playlist_id,
                 'type' => $request->type
             ]);
@@ -448,12 +469,12 @@ class MultimediaController extends Controller
             'playlist_id' => 'required',
         ]);
         try {
-            $exists = UserPlaylist::where('user_id', auth()->user()->id)->where('media_id', $request->media_id)->where('playlist_id', $request->playlist_id)->first();
+            $exists = UserPlaylist::where('user_id', Auth::id())->where('media_id', $request->media_id)->where('playlist_id', $request->playlist_id)->first();
             if (!empty($exists)) {
                 return ResponseHelper::sendResponse([], 'Already Added in Playlist!', false, 403);
             }
             $playlist = UserPlaylist::create([
-                'user_id' => auth()->user()->id,
+                'user_id' => Auth::id(),
                 'media_id' => $request->media_id,
                 'playlist_id' => $request->playlist_id,
                 'type' => 'audio'
@@ -462,7 +483,7 @@ class MultimediaController extends Controller
                 $q->with(['song' => function ($a) {
                     $a->with('artist');
                 }]);
-            }])->where('user_id', auth()->user()->id)->get();
+            }])->where('user_id', Auth::id())->get();
             return ResponseHelper::sendResponse($playlists, 'Songs Playlist has been Created Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Failed to Create Playlist!', false, 403);
@@ -471,7 +492,7 @@ class MultimediaController extends Controller
 
     public function getClipsPlaylist(Request $request)
     {
-        $userId = auth()->user()->id;
+        $userId = Auth::id();
 
         $playlists = UserPlaylistGroup::with(['clip_playlists' => function ($q) {
             $q->with(['video' => function ($a) {
@@ -483,8 +504,26 @@ class MultimediaController extends Controller
             UserPlaylistGroup::create([
                 'title' => 'My Playlist',
                 'user_id' => $userId,
-                'bg_image' => 'assets/img/playlistCover.jpg',
+                'bg_image' => 'assets/img/playlistCover1.png',
                 'type' => 'free',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover2.png',
+                'type' => 'paid',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover3.png',
+                'type' => 'paid',
+            ]);
+            UserPlaylistGroup::create([
+                'title' => 'My Playlist',
+                'user_id' => $userId,
+                'bg_image' => 'assets/img/playlistCover4.png',
+                'type' => 'paid',
             ]);
 
             $playlists = UserPlaylistGroup::with(['clip_playlists' => function ($q) {
@@ -504,12 +543,12 @@ class MultimediaController extends Controller
             'playlist_id' => 'required',
         ]);
         try {
-            $exists = UserPlaylist::where('user_id', auth()->user()->id)->where('media_id', $request->media_id)->where('playlist_id', $request->playlist_id)->first();
+            $exists = UserPlaylist::where('user_id', Auth::id())->where('media_id', $request->media_id)->where('playlist_id', $request->playlist_id)->first();
             if (!empty($exists)) {
                 return ResponseHelper::sendResponse([], 'Already Added in Playlist!', false, 403);
             }
             $playlist = UserPlaylist::create([
-                'user_id' => auth()->user()->id,
+                'user_id' => Auth::id(),
                 'media_id' => $request->media_id,
                 'playlist_id' => $request->playlist_id,
                 'type' => 'video'
@@ -518,7 +557,7 @@ class MultimediaController extends Controller
                 $q->with(['video' => function ($a) {
                     $a->with('artist');
                 }]);
-            }])->where('user_id', auth()->user()->id)->get();
+            }])->where('user_id', Auth::id())->get();
             return ResponseHelper::sendResponse($playlists, 'Clips Playlist has been Created Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Failed to Create Playlist!', false, 403);
@@ -588,7 +627,12 @@ class MultimediaController extends Controller
     {
         try {
             $group = UserPlaylistGroup::find($id);
-            $group->title = $request->title;
+            if (!empty($request->title)) {
+                $group->title = $request->title;
+            }
+            if (!empty($request->type)) {
+                $group->type = $request->type;
+            }
             $group->save();
             return ResponseHelper::sendResponse($group, 'Playlist has been Updated Successfully!');
         } catch (Exception $e) {

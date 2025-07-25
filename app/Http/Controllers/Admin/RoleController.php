@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Models\Role;
-use App\Models\Permission;
+use Maklad\Permission\Models\Role;
+use Maklad\Permission\Models\Permission;
+ 
+// use App\Models\Role;
+// use App\Models\Permission;
 use MongoDB\BSON\ObjectId;
 //use Spatie\Permission\Traits\HasRoles;
 //use Spatie\Permission\Models\Role as SpatieRole;
@@ -116,27 +119,34 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, $id)
-    {
-        
-        $validated = $request->validated();
-        if (array_key_exists('permissions', $validated)) {
-            $permissions = $validated['permissions'];
-        } else {
-            $permissions = [];
-        }
 
-        $role = Role::find($id);
-        if ($role->name === 'Super Admin')
-            abort(403);
-        $role->name = $validated['name'];
-        $role->permission = $permissions;
-        $role->save();
+ 
 
-        session(['permissions' => $permissions]);
+public function update(UpdateRoleRequest $request, $id)
+{
+    $validated = $request->validated();
+    $permissions = $validated['permissions'] ?? [];
 
-        return back()->with("success", "Role successfully updated.");
+    $role = Role::find($id);
+    if (!$role || $role->name === 'Super Admin') {
+        abort(403);
     }
+
+    $role->name = $validated['name'];
+
+    // Sync via package (updates permission_ids)
+    $role->syncPermissions($permissions);
+
+    // Manually update `permission` array
+    $role->permission = $permissions;
+    $role->save();
+
+    session(['permissions' => $permissions]);
+
+    return back()->with("success", "Role successfully updated.");
+}
+
+
 
     /**
      * Remove the specified resource from storage.

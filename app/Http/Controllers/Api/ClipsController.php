@@ -7,11 +7,13 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Clips;
 use App\Models\ClipTemplates;
+use App\Models\UserVideo;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use FFMpeg\Media\Clip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -47,7 +49,7 @@ class ClipsController extends Controller
         $uid = uniqid();
         $clip->emoji = $request->emoji;
         $clip->share_with = $request->share_with;
-        $clip->user_id = auth()->user()->id;
+        $clip->user_id = Auth::id();
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
         $videoPath = $request->video;
@@ -87,12 +89,16 @@ class ClipsController extends Controller
         exec($command, $output, $return_var);
 
         if ($return_var === 0) {
-            $clip->clip = Str::after($outputPath, 'public/');;
+            $clip->clip = Str::after($outputPath, 'public/');
         }
         // else {
         //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
         // }
         $clip->save();
+        UserVideo::create([
+            'user_id' => Auth::id(),
+            'video' => Str::after($outputPath, 'public/')
+        ]);
         return ResponseHelper::sendResponse($clip, 'Clip has been Created Successfully!');
     }
 

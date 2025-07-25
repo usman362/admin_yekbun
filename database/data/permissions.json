@@ -1935,11 +1935,35 @@
       "updated_at": "29/3/2024 17:33:08.973"
     },
     {
+    "_id": "6706fb54259adb7a4a09c301",
+    "created_at": "07/7/2025 12:00:00.000",
+    "guard_name": "web",
+    "label": "Manage Shortcut",
+    "name": "manageshortcut",
+    "parent_child_id": null,
+    "parent_id": null,
+    "role_ids": null,
+    "order": 0,
+    "updated_at": "07/7/2025 12:00:00.000"
+  },
+  {
+    "_id": "6706fb54259adb7a4a09c302",
+    "created_at": "07/7/2025 12:00:00.005",
+    "guard_name": "web",
+    "label": "Read",
+    "name": "manageshortcut.read",
+    "parent_child_id": null,
+    "parent_id": "6706fb54259adb7a4a09c301",
+    "role_ids": "[ \"663e84fa96f497f4a30daf52\", \"660416972e6d0dc1480293a1\" ]",
+    "order": 0,
+    "updated_at": "07/7/2025 12:00:00.005"
+  },
+    {
       "_id": "6606fb54259adb7a4a09c208",
       "created_at": "29/3/2024 17:33:08.969",
       "guard_name": "web",
       "label": "App info",
-      "name": "manageorigin",
+      "name": "appinfo",
       "parent_child_id": null,
       "parent_id": null,
       "role_ids": null,
@@ -1947,11 +1971,35 @@
       "updated_at": "29/3/2024 17:33:08.969"
     },
     {
+    "_id": "xyz123456789000000000003",
+    "created_at": "07/07/2025 10:00:00.000",
+    "guard_name": "web",
+    "label": "Manage Notification",
+    "name": "managenotification",
+    "parent_child_id": null,
+    "parent_id": null,
+    "role_ids": null,
+    "order": 0,
+    "updated_at": "07/07/2025 10:00:00.000"
+  },
+  {
+    "_id": "xyz123456789000000000004",
+    "created_at": "07/07/2025 10:00:00.000",
+    "guard_name": "web",
+    "label": "Read",
+    "name": "managenotification.read",
+    "parent_child_id": null,
+    "parent_id": "xyz123456789000000000003",
+    "role_ids": "[\"686c0b8f46e7035e22099d96\"]",
+    "order": 0,
+    "updated_at": "07/07/2025 10:00:00.000"
+  },
+    {
       "_id": "6606fb54259adb7a4a09c209",
       "created_at": "29/3/2024 17:33:08.973",
       "guard_name": "web",
       "label": "Read",
-      "name": "manageorigin.read",
+      "name": "appinfo.read",
       "parent_child_id": null,
       "parent_id": "6606fb54259adb7a4a09c208",
       "role_ids": "[ \"663e84fa96f497f4a30daf52\", \"660416972e6d0dc1480293a1\" ]",

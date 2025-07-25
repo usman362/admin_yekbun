@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\NotificationHelper;
 use App\Models\AIVideo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Notifications;
+use App\Models\User;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Storage;
@@ -72,7 +75,25 @@ class AIVideosController extends Controller
         }
 
         if ($ai_video->save()) {
-            return redirect()->route('ai-videos.index')->with('success', 'AIVideo Has been inserted');
+            $notification = Notifications::first();
+            $description = str_replace(
+                ["[name]"],
+                [$request->title],
+                $notification->new_ai_videos_description
+            );
+            if ($notification->new_ai_videos == 'true') {
+                try {
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    if ($users) {
+                        foreach ($users as $user) {
+                            NotificationHelper::sendNotification($user->id, $notification->new_ai_videos_title, $description);
+                        }
+                    }
+                } catch (\Exception $e) {
+                    return redirect()->route('ai-videos.index')->with('success', 'AI Video Has been inserted');
+                }
+            }
+            return redirect()->route('ai-videos.index')->with('success', 'AI  Video Has been inserted');
         } else {
             return redirect()->route('ai-videos.index')->with('error', 'Failed to add ai_video');
         }
