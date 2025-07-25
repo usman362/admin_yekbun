@@ -69,7 +69,7 @@
                 @foreach ($user->friends as $friend)
                     <div class="col-md-2">
                         <div class="card mt-4">
-                            <div class="card-body" style="padding:20px 10px;height:48vh">
+                            <div class="card-body" style="padding:20px 10px;height:200px">
                                 <div class="user-avatar-section">
                                     <div class=" d-flex align-items-center flex-column">
                                         <img style="border-radius: 100%;width:50px" class="img-fluid my-2 profile-img"
