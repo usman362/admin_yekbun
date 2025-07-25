@@ -83,7 +83,6 @@
                                                     src="{{ asset('assets/svg/svg-dialog/' . ($user->level == 0 ? 'cultivated' : ($user->level == 1 ? 'educated' : 'academic')) . '.svg') }}">
                                                 {{ $user->level == 0 ? 'Cultivated' : ($user->level == 1 ? 'Educated' : 'Academic') }}
                                                 </p>
-                                            <span style="font-size: 12px">{{ $family->user->user_id }}</span>
                                         </div>
                                         {{-- <div class="user-info text-center mt-2">
                                             <h6 style="margin-top:4px" class="mb-2"><b><img height="20px;width:20px"
