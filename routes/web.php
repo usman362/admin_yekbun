@@ -108,9 +108,9 @@ use App\Jobs\TestJob;
 $controller_path = 'App\Http\Controllers';
 
 Route::get('/cmd/{cmd}', function ($cmd) {
-    \Artisan::call($cmd);
+    Artisan::call($cmd);
     echo '<pre>';
-    return \Artisan::output();
+    return Artisan::output();
 });
 
 Route::get('/db-seed/{cmd}', function ($cmd) {
