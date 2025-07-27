@@ -60,11 +60,20 @@ class FeedsController extends Controller
                     ->paginate(5);
             }
         } else {
-            $feeds = $feedsQuery
-            ->whereHas('user', function ($q) {
-                $q->where('origin', Auth::user()->origin);
-            })
-            ->paginate(5);
+            if (!empty($request->user_id)) {
+                $feeds = $feedsQuery
+                    ->where('user_id', $request->user_id)
+                    ->whereHas('user', function ($q) {
+                        $q->where('origin', Auth::user()->origin);
+                    })
+                    ->paginate(5);
+            } else {
+                $feeds = $feedsQuery
+                    ->whereHas('user', function ($q) {
+                        $q->where('origin', Auth::user()->origin);
+                    })
+                    ->paginate(5);
+            }
         }
 
         $feeds->getCollection()->transform(function ($feed) {
