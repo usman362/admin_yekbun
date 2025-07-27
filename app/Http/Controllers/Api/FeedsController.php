@@ -63,14 +63,14 @@ class FeedsController extends Controller
             $feeds = $feedsQuery->paginate(5);
         }
 
-        $feeds->getCollection()->transform(function ($feed) {
-            $feed->comments_count = $feed->comments->count();
-            $feed->voice_comments_count = $feed->voice_comments->count();
-            $feed->likes_count = $feed->likes->count();
-            $feed->views_count = $feed->views->count();
-            $feed->shares_count = $feed->shares->count();
-            return $feed;
-        });
+        // $feeds->getCollection()->transform(function ($feed) {
+        //     $feed->comments_count = $feed->comments->count();
+        //     $feed->voice_comments_count = $feed->voice_comments->count();
+        //     $feed->likes_count = $feed->likes->count();
+        //     $feed->views_count = $feed->views->count();
+        //     $feed->shares_count = $feed->shares->count();
+        //     return $feed;
+        // });
 
         // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
         $feedItems = $feeds->items();
