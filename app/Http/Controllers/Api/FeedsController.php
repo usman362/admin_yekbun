@@ -43,26 +43,18 @@ class FeedsController extends Controller
         $feedsQuery = Feed::with('user')
             ->orderBy('created_at', 'desc');
 
-        $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
-
-        if ($authFeed) {
-            if (!empty($request->user_id)) {
-                $feeds = $feedsQuery
-                    ->where('user_id', $request->user_id)
-                    ->where('_id', '!=', $authFeed->id)
-                    ->paginate(5);
-            } else {
+        if (!empty($request->user_id)) {
+            $feeds = $feedsQuery
+                ->where('user_id', $request->user_id)
+                ->paginate(5);
+        } else {
+            $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
+            if ($authFeed) {
                 $feeds = $feedsQuery
                     ->where('_id', '!=', $authFeed->id)
                     ->whereHas('user', function ($q) {
                         $q->where('origin', Auth::user()->origin);
                     })
-                    ->paginate(5);
-            }
-        } else {
-            if (!empty($request->user_id)) {
-                $feeds = $feedsQuery
-                    ->where('user_id', $request->user_id)
                     ->paginate(5);
             } else {
                 $feeds = $feedsQuery
