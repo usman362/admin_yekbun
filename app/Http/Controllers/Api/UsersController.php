@@ -569,15 +569,15 @@ class UsersController extends Controller
         return ResponseHelper::sendResponse($user, 'My Notifcation Updated Successfully!');
     }
 
-    public function user_images()
+    public function user_images(Request $request)
     {
-        $images = UserImage::with('user')->where('user_id', Auth::id())->get();
+        $images = UserImage::with('user')->where('user_id', $request->user_id)->get();
         return ResponseHelper::sendResponse($images, 'User Images Fetched Successfully');
     }
 
-    public function user_videos()
+    public function user_videos(Request $request)
     {
-        $videos = UserVideo::with('user')->where('user_id', Auth::id())->get();
+        $videos = UserVideo::with('user')->where('user_id', $request->user_id)->get();
         return ResponseHelper::sendResponse($videos, 'User Videos Fetched Successfully');
     }
 
