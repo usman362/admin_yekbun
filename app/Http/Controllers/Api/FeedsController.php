@@ -292,24 +292,20 @@ class FeedsController extends Controller
         $feed = Feed::with('user')->find($feeds->id);
         if ($feeds->save()) {
             $notification = Notifications::first();
-            $description = str_replace(
-                ["[name]"],
-                [$request->text],
-                $notification->new_donation_description
-            );
+            $description = Auth::user()->name.' '.Auth::user()->last_name.' has posted new Feed.';
             if ($notification->new_donation == 'true') {
                 if ($request->user_type === 'friends' || $request->user_type === 'family') {
                     $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->user_id, $notification->new_donation_title, $description);
+                            NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', $description);
                         }
                     }
                 } else {
                     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, $notification->new_donation_title, $description);
+                            NotificationHelper::sendNotification($user->id, 'Feeds Notification', $description);
                         }
                     }
                 }
