@@ -41,9 +41,6 @@ class FeedsController extends Controller
 
         // Get authenticated user's latest feed
         $feedsQuery = Feed::with('user')
-            ->whereHas('user', function ($q) {
-                $q->where('origin', Auth::user()->origin);
-            })
             ->orderBy('created_at', 'desc');
 
         $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
@@ -57,10 +54,17 @@ class FeedsController extends Controller
             } else {
                 $feeds = $feedsQuery
                     ->where('_id', '!=', $authFeed->id)
+                    ->whereHas('user', function ($q) {
+                        $q->where('origin', Auth::user()->origin);
+                    })
                     ->paginate(5);
             }
         } else {
-            $feeds = $feedsQuery->paginate(5);
+            $feeds = $feedsQuery
+            ->whereHas('user', function ($q) {
+                $q->where('origin', Auth::user()->origin);
+            })
+            ->paginate(5);
         }
 
         $feeds->getCollection()->transform(function ($feed) {
