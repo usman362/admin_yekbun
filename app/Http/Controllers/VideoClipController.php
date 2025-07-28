@@ -59,11 +59,11 @@ class VideoClipController extends Controller
         ]);
 
         try {
-            $vc = VideoClip::updateOrCreate(['_id' => $request->video_id],[
+            $vc = VideoClip::updateOrCreate(['_id' => $request->video_id], [
                 'artist_id' => $request->artist_id,
                 'status' => $request->status,
             ]);
-            if($request->video){
+            if ($request->video) {
                 $vc->video_file_name = Str::after($request->video, '___');
                 $vc->video = $request->video;
                 $vc->video_file_size = $request->video_file_size;
@@ -75,12 +75,18 @@ class VideoClipController extends Controller
             }
 
             $notification = Notifications::first();
+            $description = str_replace(
+                ["[name]"],
+                [$vc->video_file_name],
+                $notification->new_video_clips_description
+            );
             if ($notification->new_video_clips == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Clips Notification', 'New Video Clip ' . $vc->video_file_name . ' has been added!');
+
+                            NotificationHelper::sendNotification($user->id, $notification->new_video_clips_title, $description);
                         }
                     }
                 } catch (\Exception $e) {

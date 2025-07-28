@@ -85,12 +85,17 @@ class HistoryController extends Controller
         if ($history->save()) {
 
             $notification = Notifications::first();
-            if($notification->new_history == 'true'){
+            $description = str_replace(
+                ["[name]"],
+                [$request->title],
+                $notification->new_history_description
+            );
+            if ($notification->new_history == 'true') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_history','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_history', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'History Notification', 'New History ' . $history->title . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->new_history_title, $description);
                         }
                     }
                 } catch (\Exception $e) {

@@ -50,17 +50,17 @@
                                             <div class="col-md-12">
                                                 <img id="img1" class="generated-img"
                                                     style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{ asset('assets/img/thumbnail.svg') }}" alt="">
                                             </div>
                                             <div class="col-md-12">
                                                 <img id="img2" class="generated-img"
                                                     style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{ asset('assets/img/thumbnail.svg') }}" alt="">
                                             </div>
                                             <div class="col-md-12">
                                                 <img id="img3" class="generated-img"
                                                     style="width: 100%;height: 85px;margin: 12px 0 0 4px;border-radius: 5px;border: 2px solid #0000004f;cursor:pointer;"
-                                                    src="{{asset('assets/img/thumbnail.svg')}}" alt="">
+                                                    src="{{ asset('assets/img/thumbnail.svg') }}" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -230,12 +230,12 @@
                 });
 
                 $('#error-thumbnail').text("");
-                $('.generated-img').attr('src','{{asset("assets/img/thumbnail.svg")}}');
+                $('.generated-img').attr('src', '{{ asset('assets/img/thumbnail.svg') }}');
                 // $('#thumbnail-history').css('display', 'none');
                 // $('#generated-thumbnails').css('display', 'none');
-
+                $('#thumbnail').val("");
+                $('.submit-clip-template').attr('disabled', true);
                 return this._updateMaxFilesReachedClass();
-
             }
 
         });
@@ -294,10 +294,36 @@
         })
 
         $('.generated-img').click(function() {
-            let src = $(this).attr('src');
-            $('.dz-thumbnail img').attr('src', src);
-            $('#thumbnail').val(src);
+            if($(this).attr('src') !== "{{ asset('assets/img/thumbnail.svg') }}"){
+                let src = $(this).attr('src');
+                $('.dz-thumbnail img').attr('src', src);
+                $('#thumbnail').val(src);
+                if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "") {
+                    $('.submit-clip-template').attr('disabled', false);
+                }
+            }
         })
+
+        $('[name="title"]').on('input', function() {
+            validateClipTemplateForm();
+        });
+
+        $('[name="source"]').on('input', function() {
+            validateClipTemplateForm();
+        });
+
+        function validateClipTemplateForm() {
+            const thumbnail = $('#thumbnail').val();
+            const title = $('[name="title"]').val();
+            const source = $('[name="source"]').val();
+
+            if (thumbnail !== "" && title !== "" && source !== "") {
+                $('.submit-clip-template').attr('disabled', false);
+            } else {
+                $('.submit-clip-template').attr('disabled', true);
+            }
+        }
+
     });
 </script>
 

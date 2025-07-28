@@ -88,7 +88,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
-
+use App\Jobs\TestJob;
 //use App\Http\Controllers\GreetingsController;
 
 //use App\Http\Controllers\StateController;
@@ -159,10 +159,15 @@ Route::get('/test-fcm', function () {
 Route::get('test', function () {
 
     foreach (App\Models\User::all() as $user) {
-        $user->gender = 'male';
+        $user->app_status = 'online';
         $user->save();
     }
     return 'success';
+});
+
+Route::get('/test-job', function () {
+    TestJob::dispatch();
+    return 'TestJob dispatched!';
 });
 
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
@@ -494,17 +499,13 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::delete('/destroy_policy_section/{id}', [ChannelPolicyController::class, 'destroy_section'])->name('destroy.section');
     Route::get('setting/music/pricing', [MusicController::class, 'pricing'])->name('music.pricing');
 
-    Route::resource('/vote', VotingController::class);
-    Route::get('/vote/{id}/statistic', [VotingController::class, 'statistic'])->name('vote.statistics');
-    Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
-    Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
+    Route::resource('/surveys', VotingController::class);
+    Route::get('/surveys/{id}/statistic', [VotingController::class, 'statistic'])->name('surveys.statistics');
+    Route::get('/surveys/{id}/banner', [VotingController::class, 'deleteImage'])->name('surveys.delete-banner');
+    Route::get('/surveys/{id}/{status}', [VotingController::class, 'status'])->name('surveys-status');
 
     // Route::resource('/vote-category', VotingCategoryController::class);
     // Route::get('/vote_category/{id}/{status}', [VotingCategoryController::class, 'status'])->name('votecat-status');
-
-    Route::resource('/vote', VotingController::class);
-    Route::get('/vote/{id}/{status}', [VotingController::class, 'status'])->name('votes-status');
-    Route::get('/vote/{id}/banner', [VotingController::class, 'deleteImage'])->name('vote.delete-banner');
 
     Route::delete('/history/{id}/image', [HistoryController::class, 'deleteImage'])->name('history.delete-image');
     Route::delete('/history/{id}/video', [HistoryController::class, 'deleteVideo'])->name('history.delete-video');
@@ -614,6 +615,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::post('/languages/app_policy', [LanguageController::class, 'saveappp_policy'])->name('languages.saveappp_policy');
     Route::post('/languages/guest', [LanguageController::class, 'storeguest'])->name('languages.storeguest');
 
+    Route::post('/languages/{language_id}/keywords/{section_name}/upload-json', [LanguageController::class, 'upload_json']);
+    Route::get('/languages/{language_id}/download-json/{section_name}', [LanguageController::class, 'downloadJson'])->name('languages.download-json');
 
 
 
@@ -907,6 +910,10 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
     Route::get('musics/{music_id}', [MusicController::class, 'video']);
     Route::resource('/reasons', ReasonController::class);
     Route::get('/app/invoice/print', $controller_path . '\apps\InvoicePrint@index')->name('app-invoice-print');
+    Route::get('/app/user/{id}/friends', $controller_path . '\apps\UserViewAccount@friends')->name('app-user-view-friends');
+    Route::get('/app/user/{id}/family', $controller_path . '\apps\UserViewAccount@family')->name('app-user-view-family');
+    Route::get('/app/user/{id}/feeds', $controller_path . '\apps\UserViewAccount@feeds')->name('app-user-view-feeds');
+    Route::get('/app/user/{id}/playlist', $controller_path . '\apps\UserViewAccount@playlist')->name('app-user-view-playlist');
     Route::get('/app/user/{id}/account', $controller_path . '\apps\UserViewAccount@index')->name('app-user-view-account');
     Route::get('/app/user/{id}/videos', $controller_path . '\apps\UserViewAccount@videos')->name('app-user-view-videos');
     Route::get('/app/user/{id}/activity', $controller_path . '\apps\UserViewAccount@activity')->name('app-user-view-activity');

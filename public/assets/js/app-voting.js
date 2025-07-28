@@ -14,12 +14,12 @@ $(document).ready(function() {
 
         if(voteType == 'single_vote') {
             createModal.find("input[name='vote_type']").val('single');
-            createModal.find(".vote-header .title").text("Single Vote");
+            createModal.find(".vote-header .title").text("Single Survey");
             hidden_div.appendChild(individual_vote_options);
             options_container.appendChild(single_vote_options);
         } else {
             createModal.find("input[name='vote_type']").val('individual');
-            createModal.find(".vote-header .title").text("Individual Vote");
+            createModal.find(".vote-header .title").text("Individual Survey");
             hidden_div.appendChild(single_vote_options);
             options_container.appendChild(individual_vote_options);
         }
@@ -37,7 +37,7 @@ $(document).ready(function() {
         editModal.find("input[name='vote_type']").val(vote.vote_type);
         editModal.find("input[name='id']").val(vote_id);
         editModal.find("#fullname").val(vote.name);
-        editModal.find("#editForm").attr('action', `/vote/${vote_id}`)
+        editModal.find("#editForm").attr('action', `/surveys/${vote_id}`)
 
         const options_container = editModal.find(".allowed-reactions")[0];
         const hidden_div = editModal.find("#hidden_div")[0];
@@ -97,8 +97,9 @@ $(document).ready(function() {
         const vote_name = $(e.target).closest('button').attr('data-vote-name');
         $('#statisticVotingModal .modal-header h4').text(vote_name);
         $.ajax({
-            url: `/vote/${vote_id}/statistic`,
+            url: `/surveys/${vote_id}/statistic`,
             success: function(response) {
+                console.log(response);
                 $("#statisticVotingModal .modal-body").html(response);
                 $("#statisticVotingModal").modal('show');
             },

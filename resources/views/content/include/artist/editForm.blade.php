@@ -14,9 +14,7 @@
     enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="hidden-inputs">
-        <input type="hidden" name="image" value="{{ $artist->image }}" data-path="{{ $artist->image }}">
-    </div>
+
     <div class="row">
 
 
@@ -52,9 +50,13 @@
                 value="{{ $artist->name ?? '' }}">
         </div>
 
-        <div class="col-12">
+        <div class="dropzone-container">
+            <div class="hidden-inputs">
+                <input type="hidden" name="image" value="{{ $artist->image }}" data-path="{{ $artist->image }}">
+            </div>
+
             <div class="card">
-                <h5 class="card-header">Image</h5>
+                <h5 style="margin-left: 12px; margin-top: 9px;">Image</h5>
                 <div class="card-body">
                     <div class="dropzone needsclick" action="/" id="dropzone-img{{ $artist->id }}">
                         <div class="dz-message needsclick">
@@ -68,6 +70,7 @@
             </div>
         </div>
 
+
         <div class="col-md-12">
             <label class="form-label" for="status">Status</label>
             <select class="form-select" name="status">
@@ -80,8 +83,7 @@
         </div>
     </div>
 </form>
-
-<script>
+ <script>
     'use strict';
 
     function initializeDropzones() {
@@ -120,24 +122,40 @@
                 },
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
+
                 sending: function(file, xhr, formData) {
                     formData.append('folder', 'music');
                 },
+
                 success: function(file, response) {
                     file.previewElement.classList.add("dz-success");
                     file.previewElement.dataset.path = response.path;
-                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container')
-                        .querySelector('.hidden-inputs');
-                    hiddenInputsContainer.innerHTML +=
-                        `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
-                },
-                removedfile: function(file) {
-                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container')
-                        .querySelector('.hidden-inputs');
-                    hiddenInputsContainer.querySelector(
-                        `input[data-path="${file.previewElement.dataset.path}"]`).remove();
 
-                    file.previewElement.parentNode.removeChild(file.previewElement);
+                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container')
+                        .querySelector('.hidden-inputs');
+
+                    // Remove any existing input
+                    hiddenInputsContainer.querySelectorAll('input[name="image"]').forEach(input =>
+                        input.remove());
+
+                    // Add the new one
+                    hiddenInputsContainer.innerHTML += `
+                        <input type="hidden" name="image" value="${response.path}" data-path="${response.path}">
+                    `;
+                },
+
+                removedfile: function(file) {
+                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container').querySelector('.hidden-inputs');
+                    const input = hiddenInputsContainer.querySelector('input[name="image"]');
+
+                    if (input) {
+                        input.value = '';
+                        input.dataset.path = '';
+                    }
+
+                    if (file.previewElement && file.previewElement.parentNode) {
+                        file.previewElement.parentNode.removeChild(file.previewElement);
+                    }
 
                     $.ajax({
                         url: '{{ route('artists.delete-img', $artist->id) }}',
@@ -146,21 +164,41 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                         data: {
-                            path: file.previewElement.dataset.path
-                        },
-                        success: function() {}
+                            path: file.previewElement?.dataset.path
+                        }
                     });
 
                     return this._updateMaxFilesReachedClass();
                 }
-
             });
+
+            // ✅ Load existing image if present
+            const existingImagePath = dropzoneElement.closest('.dropzone-container')
+                .querySelector('input[name="image"]')?.value;
+
+            if (existingImagePath) {
+                const imageUrl = '{{ asset('storage') }}/' + existingImagePath.replace(/^\/?/, '');
+
+                const mockFile = {
+                    name: existingImagePath.split('/').pop(),
+                    size: 123456, // You can update this with real size if known
+                    dataURL: imageUrl
+                };
+
+                dropzoneInstance.emit("addedfile", mockFile);
+                dropzoneInstance.emit("thumbnail", mockFile, imageUrl);
+                dropzoneInstance.emit("complete", mockFile);
+
+                mockFile.previewElement.classList.add("dz-success", "dz-complete");
+                mockFile.previewElement.dataset.path = existingImagePath;
+            }
         });
     }
+
+    // Call the function
     initializeDropzones();
-    // Attach event listener to the button
-    // document.getElementById("initDropzones").addEventListener("click", initializeDropzones);
 </script>
+
 <script>
     async function imageUrlToFile(imageUrl, fileName) {
         // Fetch the image

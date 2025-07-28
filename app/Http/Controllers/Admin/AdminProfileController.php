@@ -356,11 +356,16 @@ class AdminProfileController extends Controller
                 ]);
 
                 $notification = Notifications::first();
-                if($notification->new_donation == 'true'){
-                    $users = User::whereNotNull('fcm_token')->where('new_donation','true')->whereIn('info_banner',['banner','alert'])->get();
+                $description = str_replace(
+                    ["[name]"],
+                    [$request->title],
+                    $notification->admin_donation_description
+                );
+                if ($notification->admin_donation == 'true') {
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Donation Notification', 'New Donation ' . $request->title . ' has been added!');
+                            NotificationHelper::sendNotification($user->id, $notification->admin_donation_title, $description);
                         }
                     }
                 }
@@ -395,6 +400,55 @@ class AdminProfileController extends Controller
                     ],
                 ]);
 
+                if ($request->type == 'System') {
+                    $notification = Notifications::first();
+                    $description = str_replace(
+                        ["[name]"],
+                        [$request->title],
+                        $notification->admin_system_info_description
+                    );
+                    if ($notification->admin_system_info == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, $notification->admin_system_info_title, $description);
+                            }
+                        }
+                    }
+                }
+                if ($request->type == 'Surveys') {
+                    $notification = Notifications::first();
+                    $description = str_replace(
+                        ["[name]"],
+                        [$request->title],
+                        $notification->admin_surveys_description
+                    );
+                    if ($notification->admin_surveys == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, $notification->admin_surveys_title, $description);
+                            }
+                        }
+                    }
+                }
+                if ($request->type == 'Greetings') {
+                    $notification = Notifications::first();
+                    $description = str_replace(
+                        ["[name]"],
+                        [$request->title],
+                        $notification->admin_greetings_description
+                    );
+                    if ($notification->admin_greetings == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        if ($users) {
+                            foreach ($users as $user) {
+                                NotificationHelper::sendNotification($user->id, $notification->admin_greetings_title, $description);
+                            }
+                        }
+                    }
+                }
+
                 if ($request->type == "Event") {
                     $postpop->start_time = $request->start_time;
                     $postpop->end_time = $request->end_time;
@@ -404,11 +458,16 @@ class AdminProfileController extends Controller
                     $postpop->save();
 
                     $notification = Notifications::first();
-                    if($notification->new_events == 'true'){
-                        $users = User::whereNotNull('fcm_token')->where('new_events','true')->whereIn('info_banner',['banner','alert'])->get();
+                    $description = str_replace(
+                        ["[name]"],
+                        [$request->title],
+                        $notification->admin_events_description
+                    );
+                    if ($notification->admin_events == 'true') {
+                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                         if ($users) {
                             foreach ($users as $user) {
-                                NotificationHelper::sendNotification($user->id, 'Event Notification', 'New Event ' . $request->title . ' has been added!');
+                                NotificationHelper::sendNotification($user->id, $notification->admin_events_title, $description);
                             }
                         }
                     }

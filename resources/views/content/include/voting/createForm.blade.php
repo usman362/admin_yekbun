@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="p-2">
-        <form id="createForm" method="POST" action="{{ route('vote.store') }}" enctype="multipart/form-data">
+        <form id="createForm" method="POST" action="{{ route('surveys.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="hidden-inputs">
                 {{-- <input type="hidden" name="vote_category_id" value="{{$vote_categories[0]->id ?? ''}}" requried /> --}}
@@ -45,18 +45,18 @@
                 </div>
 
                 <div class="vote-title mt-3">
-                    <div class="fw-bold" style="color:#333;">Vote Title</div>
+                    <div class="fw-bold" style="color:#333;">Survey Title</div>
                     <div style="background:white;">
                         <input type="text" id="fullname" class="form-control" placeholder="title" name="name" required>
                     </div>
                 </div>
 
-                <div class="vote-description mt-3">
-                    <div class="fw-bold" style="color:#333;">Vote Description</div>
+                {{-- <div class="vote-description mt-3">
+                    <div class="fw-bold" style="color:#333;">Survey Description</div>
                     <div style="background:white;">
                         <textarea name="description" class="form-control" id="description" cols="30" rows="5"></textarea>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="mt-3 vote-audio">
                 </div>

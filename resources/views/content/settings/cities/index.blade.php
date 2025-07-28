@@ -86,13 +86,46 @@
     </div>
 
     <div class="card">
-        <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="m-0">City List</h5>
+  <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+    <h5 class="m-0">City List</h5>
+    
 
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i
-                    class="bx bx-plus me-0 me-sm-1"></i> Add City</button>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+       
+        <!-- Filter & Search Form -->
+        <form method="GET" action="{{ route('settings.cities.index') }}" class="d-flex gap-2 align-items-center mb-0">
+    <!-- Province Filter -->
+    <select name="region_id" class="form-select form-select-sm" onchange="this.form.submit()" style="height: 34px;">
+        <option value="">Sort by Provinces</option>
+        @foreach($regions as $region)
+            <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
+                {{ $region->name }}
+            </option>
+        @endforeach
+    </select>
+ 
+</form>
+  <form method="GET" action="{{ route('settings.cities.index') }}" id="perPageForm">
+            <input type="hidden" name="region_id" value="{{ request('region_id') }}">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <select name="per_page" class="form-select form-select-sm" onchange="document.getElementById('perPageForm').submit()" style="height: 34px;">
+                @foreach([10, 20, 50, 100] as $size)
+                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>
+                         {{ $size }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
 
-        </div>
+
+        <!-- Add City Button (Right beside filters) -->
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createModal">
+            <i class="bx bx-plus me-0 me-sm-1"></i> Add City
+        </button>
+    </div>
+</div>
+
+
         <div class="card-datatable table-responsive">
 
             <table class="table data-table dt-multilingual border-top no-footer dtr-column">

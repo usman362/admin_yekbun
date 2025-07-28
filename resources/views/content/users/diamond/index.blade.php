@@ -177,7 +177,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>User ID</th>
+                                    <th>#</th>
                                     <th>User</th>
                                     <th>Username</th>
                                     <th>Device Type</th>
@@ -193,7 +193,7 @@
                             <tbody class="table-border-bottom-0">
                                 @forelse($users as $userr)
                                     <tr>
-                                        <td>{{ $userr->user_id }}</td>
+                                        <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
                                         <td>
                                             <div class="d-flex justify-content-start align-items-center user-name">
                                                 <div class="avatar-wrapper">
@@ -204,7 +204,7 @@
                                                             class="rounded-circle"></div>
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <a href="{{ url('app/user/' . $userr->id . '/account') }}"
+                                                    <a href="{{ url('app/user/' . $userr->id . '/friends') }}"
                                                         class="text-body text-truncate">
                                                         <span class="fw-semibold">{{ $userr->name }}</span>
                                                         <span class="fw-semibold">{{ $userr->last_name }}</span>
@@ -213,7 +213,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ $userr->username }}</td>
+                                       <td>
+                                        {{ $userr->username }}<br>
+                                    <small class="text-muted">{{ $userr->user_id }}</small>
+                                </td>
                                         <td>{{ $userr->device_type }}</td>
                                         <td>{{ $userr->device_imei }}</td>
                                         <td>{{ $userr->device_model }}</td>
@@ -379,7 +382,7 @@
                             <span class="custom-option-body">
                                 <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" width="20"> Educated</span>
                             </span>
-                            <input name="level" class="form-check-input" type="radio" value="0"
+                            <input name="level" class="form-check-input" type="radio" value="1"
                                 id="customRadioIcon1">
                         </label>
                     </div>
@@ -388,9 +391,9 @@
                     <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon2">
                             <span class="custom-option-body">
-                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Educated" width="20"> Cultivated</span>
+                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" width="20"> Cultivated</span>
                             </span>
-                            <input name="level" class="form-check-input" type="radio" value="1"
+                            <input name="level" class="form-check-input" type="radio" value="0"
                                 id="customRadioIcon2">
                         </label>
                     </div>
@@ -400,7 +403,7 @@
                     <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon3">
                             <span class="custom-option-body">
-                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/academic.svg')}}" alt="Educated" width="20"> Academic</span>
+                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" width="20"> Academic</span>
                             </span>
                             <input name="level" class="form-check-input" type="radio" value="2"
                                 id="customRadioIcon3" checked="">
@@ -410,7 +413,7 @@
             </div>
             <div>
                 <label class="form-label" for="inputPassword">Admin Password</label>
-                <input type="text" id="inputPassword" name="password" class="form-control" placeholder="Password">
+                <input type="text" id="inputPassword" name="password" class="form-control" placeholder="Password" autocomplete="off">
                 @error('warning_cause')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror

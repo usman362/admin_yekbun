@@ -243,29 +243,27 @@
                 </div>
 
                 <!-- Password -->
-                <div class="col-md-6">
-                    <label class="form-label" for="inputPassword">Password</label>
-                    <div class="input-group">
-                        <input type="password" id="inputPassword" name="password" class="form-control" autocomplete="new-password">
-                        <span class="input-group-text toggle-password1" style="cursor: pointer">
-                            <i class="fas fa-eye"></i>
-                        </span>
-                    </div>
-                    @error('password')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
+               <!-- Password -->
+<div class="col-md-6">
+    <label class="form-label" for="inputPassword">Password</label>
+    <div class="input-group">
+        <input type="password" id="inputPassword" name="password" class="form-control" autocomplete="new-password">
+        <span class="input-group-text toggle-password" data-target="inputPassword" style="cursor: pointer">
+            <i class="fas fa-eye"></i>
+        </span>
+    </div>
+</div>
 
-                <!-- Confirm Password -->
-                <div class="col-md-6">
-                    <label class="form-label" for="inputPasswordConfirmation">Confirm Password</label>
-                    <div class="input-group">
-                        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
-                        <span class="input-group-text toggle-password1" style="cursor: pointer">
-                            <i class="fas fa-eye"></i>
-                        </span>
-                    </div>
-                </div>
+<!-- Confirm Password -->
+<div class="col-md-6">
+    <label class="form-label" for="inputPasswordConfirmation">Confirm Password</label>
+    <div class="input-group">
+        <input type="password" id="inputPasswordConfirmation" name="password_confirmation" class="form-control">
+        <span class="input-group-text toggle-password" data-target="inputPasswordConfirmation" style="cursor: pointer">
+            <i class="fas fa-eye"></i>
+        </span>
+    </div>
+</div>
 
                 <!-- Roles -->
                 <div class="col-md-6">
@@ -297,19 +295,32 @@
     </div>
 </form>
 
-<!-- JS -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Toggle password visibility
-        document.querySelectorAll('.toggle-password1').forEach(function (element) {
+        document.querySelectorAll('.toggle-password').forEach(function (element) {
             element.addEventListener('click', function () {
-                const input = this.previousElementSibling;
+                const inputId = this.getAttribute('data-target');
+                const input = document.getElementById(inputId);
                 const icon = this.querySelector('i');
-                input.type = input.type === 'password' ? 'text' : 'password';
-                icon.classList.toggle('fa-eye');
-                icon.classList.toggle('fa-eye-slash');
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
             });
         });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
 
         // Avatar upload and preview
         const dropzone = document.getElementById('avatarDropzone{{ $user->id }}');

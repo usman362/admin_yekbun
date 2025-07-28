@@ -10,30 +10,48 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserFriends;
 use App\Models\UserRequest;
+use App\Models\UserImage;
+use App\Models\UserVideo;
 use App\Models\UserVisitor;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Google\Client as GoogleClient;
 
 class UsersController extends Controller
 {
     public function users_list(Request $request)
     {
-        $users = User::select('id', 'user_id', 'username', 'image', 'is_online')->where('_id', '!=', auth()->user()->id)->where('is_admin_user', 0)->get();
+        $users = User::select('id', 'user_id', 'username', 'image', 'is_online')->where('_id', '!=', Auth::id())->where('is_admin_user', 0)->get();
+        return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
+    }
+
+    public function users_may_you_know_list(Request $request)
+    {
+        $authId = Auth::id();
+
+        $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
+            ->where('_id', '!=', $authId)
+            ->where('is_admin_user', 0)
+            ->whereDoesntHave('friends', function ($q) use ($authId) {
+                $q->where('user_id', $authId)->where('user_type', 'friends');
+            })
+            ->get();
+
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
 
     public function users_details(Request $request, $id)
     {
-        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'is_online', 'public_image', 'friends_image', 'family_image')
+        $user = User::select('id', 'user_id', 'user_type', 'name', 'last_name', 'username', 'image', 'dob', 'gender', 'origin', 'province', 'city', 'expired_at', 'subscription_type', 'is_online', 'public_image', 'friends_image', 'family_image')
             ->with(['user_feeds', 'friends', 'family', 'user_requests'])->find($id);
 
-        $friend = UserFriends::where('friend_id', $user->id)->where('type', 'friends')->where('user_id', auth()->user()->id)->first();
-        $family = UserFriends::where('friend_id', $user->id)->where('type', 'family')->where('user_id', auth()->user()->id)->first();
-        $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', auth()->user()->id)->first();
-        $comingrequest = UserRequest::where('user_id', $user->id)->where('request_id', auth()->user()->id)->first();
+        $friend = UserFriends::where('friend_id', $user->id)->where('type', 'friends')->where('user_id', Auth::id())->first();
+        $family = UserFriends::where('friend_id', $user->id)->where('type', 'family')->where('user_id', Auth::id())->first();
+        $requestfriend = UserRequest::where('request_id', $user->id)->where('user_id', Auth::id())->first();
+        $comingrequest = UserRequest::where('user_id', $user->id)->where('request_id', Auth::id())->first();
 
         $is_request = $requestfriend ? 1 : 0;
         $is_coming = $comingrequest ? 1 : 0;
@@ -66,13 +84,13 @@ class UsersController extends Controller
         if (!$friendUser) {
             return ResponseHelper::sendResponse([], 'User Not Available!', false, 409);
         }
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'friends_allow_request');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'friends_allow_request');
         $allowRequest2 = PermissionHelper::checkPermission($friendUser->level, 'friends_allow_request');
-        $familyLimit = PermissionHelper::checkPermission(auth()->user()->level, 'friends_total_family');
-        $friendLimit = PermissionHelper::checkPermission(auth()->user()->level, 'friends_total_friends');
+        $familyLimit = PermissionHelper::checkPermission(Auth::user()->level, 'friends_total_family');
+        $friendLimit = PermissionHelper::checkPermission(Auth::user()->level, 'friends_total_friends');
 
-        $totalFamily = UserFriends::where('friend_id', auth()->user()->id)->where('user_type', 'family')->count();
-        $totalFriends = UserFriends::where('friend_id', auth()->user()->id)->where('user_type', 'friends')->count();
+        $totalFamily = UserFriends::where('friend_id', Auth::id())->where('user_type', 'family')->count();
+        $totalFriends = UserFriends::where('friend_id', Auth::id())->where('user_type', 'friends')->count();
 
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not allowed to send friend requests.', false, 409);
@@ -92,12 +110,12 @@ class UsersController extends Controller
 
         try {
             $user_request = UserRequest::updateOrCreate(
-                ['request_id' => $request->user_id, 'user_id' => auth()->user()->id],
-                ['request_id' => $request->user_id, 'user_id' => auth()->user()->id, 'status' => $status]
+                ['request_id' => $request->user_id, 'user_id' => Auth::id()],
+                ['request_id' => $request->user_id, 'user_id' => Auth::id(), 'status' => $status]
             );
             $user = User::select('name', 'last_name', 'username', 'image', 'is_online', 'fcm_token')->find($request->user_id);
             $username = $user->name . ' ' . $user->last_name;
-            $current_user = User::find(auth()->user()->id);
+            $current_user = User::find(Auth::id());
             if ($request->status == 1) {
                 NotificationHelper::sendNotification($request->user_id, ($current_user->name . ' ' . $current_user->last_name), 'You have a New Friend Request!');
                 $data = [
@@ -122,7 +140,7 @@ class UsersController extends Controller
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString(),
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'request_data' => $request->all()
             ]);
 
@@ -137,12 +155,12 @@ class UsersController extends Controller
             'user_type' => 'required'
         ]);
 
-        $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'friends_allow_request');
-        $familyLimit = PermissionHelper::checkPermission(auth()->user()->level, 'friends_total_family');
-        $friendLimit = PermissionHelper::checkPermission(auth()->user()->level, 'friends_total_friends');
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'friends_allow_request');
+        $familyLimit = PermissionHelper::checkPermission(Auth::user()->level, 'friends_total_family');
+        $friendLimit = PermissionHelper::checkPermission(Auth::user()->level, 'friends_total_friends');
 
-        $totalFamily = UserFriends::where('friend_id', auth()->user()->id)->where('user_type', 'family')->count();
-        $totalFriends = UserFriends::where('friend_id', auth()->user()->id)->where('user_type', 'friends')->count();
+        $totalFamily = UserFriends::where('friend_id', Auth::id())->where('user_type', 'family')->count();
+        $totalFriends = UserFriends::where('friend_id', Auth::id())->where('user_type', 'friends')->count();
 
         if ($allowRequest !== true) {
             return ResponseHelper::sendResponse([], 'You are not allowed to accept friend requests.', false, 409);
@@ -161,15 +179,15 @@ class UsersController extends Controller
         try {
             if ($request->user_type !== 'rejected') {
                 $user_request = UserFriends::updateOrCreate(
-                    ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
-                    ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
+                    ['friend_id' => $request->user_id, 'user_id' => Auth::id()],
+                    ['friend_id' => $request->user_id, 'user_id' => Auth::id(), 'user_type' => $request->user_type]
                 );
 
                 $user_request_to = UserFriends::updateOrCreate(
-                    ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id],
-                    ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id, 'user_type' => $request->user_type]
+                    ['user_id' => $request->user_id, 'friend_id' => Auth::id()],
+                    ['user_id' => $request->user_id, 'friend_id' => Auth::id(), 'user_type' => $request->user_type]
                 );
-                $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
+                $oldRequests = UserRequest::where('request_id', Auth::id())->where('user_id', $request->user_id)->get();
                 if ($oldRequests) {
                     foreach ($oldRequests as $request) {
                         $request->delete();
@@ -180,14 +198,14 @@ class UsersController extends Controller
                     $user->is_online = 1;
                     $user->save();
                 }
-                $user = User::find(auth()->user()->id);
+                $user = User::find(Auth::id());
                 if ($user) {
                     $user->is_online = 1;
                     $user->save();
                 }
                 return ResponseHelper::sendResponse($user_request, 'Request Accept Successfully');
             } else {
-                $oldRequests = UserRequest::where('request_id', auth()->user()->id)->where('user_id', $request->user_id)->get();
+                $oldRequests = UserRequest::where('request_id', Auth::id())->where('user_id', $request->user_id)->get();
                 if ($oldRequests) {
                     foreach ($oldRequests as $request) {
                         $request->delete();
@@ -203,14 +221,14 @@ class UsersController extends Controller
     public function unfriend_user(Request $request, $id)
     {
         try {
-            $friend = UserFriends::where('user_id', $id)->where('friend_id', auth()->user()->id)->first();
-            $friend_to = UserFriends::where('friend_id', $id)->where('user_id', auth()->user()->id)->first();
+            $friend = UserFriends::where('user_id', $id)->where('friend_id', Auth::id())->first();
+            $friend_to = UserFriends::where('friend_id', $id)->where('user_id', Auth::id())->first();
             // $user = User::find($id);
             // if ($user) {
             //     $user->is_online = 0;
             //     $user->save();
             // }
-            // $user = User::find(auth()->user()->id);
+            // $user = User::find(Auth::id());
             // if ($user) {
             //     $user->is_online = 0;
             //     $user->save();
@@ -252,13 +270,13 @@ class UsersController extends Controller
         ]);
         try {
             $user_request = UserFriends::updateOrCreate(
-                ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id],
-                ['friend_id' => $request->user_id, 'user_id' => auth()->user()->id, 'user_type' => $request->user_type]
+                ['friend_id' => $request->user_id, 'user_id' => Auth::id()],
+                ['friend_id' => $request->user_id, 'user_id' => Auth::id(), 'user_type' => $request->user_type]
             );
 
             $user_request_to = UserFriends::updateOrCreate(
-                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id],
-                ['user_id' => $request->user_id, 'friend_id' => auth()->user()->id, 'user_type' => $request->user_type]
+                ['user_id' => $request->user_id, 'friend_id' => Auth::id()],
+                ['user_id' => $request->user_id, 'friend_id' => Auth::id(), 'user_type' => $request->user_type]
             );
 
             return ResponseHelper::sendResponse($user_request, 'Friends/Family Updated Successfully!');
@@ -318,8 +336,8 @@ class UsersController extends Controller
 
         try {
             $visitor = UserVisitor::updateOrCreate(
-                ['user_id' => $request->user_id, 'visitor_id' => auth()->user()->id],
-                ['user_id' => $request->user_id, 'visitor_id' => auth()->user()->id]
+                ['user_id' => $request->user_id, 'visitor_id' => Auth::id()],
+                ['user_id' => $request->user_id, 'visitor_id' => Auth::id()]
             );
             $totalVisitors = UserVisitor::where('user_id', $request->user_id)->count();
             $user = User::find($request->user_id);
@@ -331,12 +349,12 @@ class UsersController extends Controller
         }
     }
 
-    public function get_vistor($id)
+    public function get_vistor()
     {
 
         try {
-            $visitors = UserVisitor::with(['user', 'visitor'])->where('user_id', $id)->get();
-            $totalVisitors = UserVisitor::where('user_id', $id)->count();
+            $visitors = UserVisitor::with(['visitor'])->where('user_id', Auth::id())->get();
+            $totalVisitors = UserVisitor::where('user_id', Auth::id())->count();
             $data = ['visitors' => $visitors, 'total_views' => $totalVisitors];
             return ResponseHelper::sendResponse($data, 'User Visit has been Successfully!');
         } catch (Exception $e) {
@@ -489,7 +507,7 @@ class UsersController extends Controller
 
     public function storeMyService(Request $request)
     {
-        $user = User::find(auth()->user()->id);
+        $user = User::find(Auth::id());
         $user->my_service = (int)$request->my_service;
         $user->save();
         return ResponseHelper::sendResponse($user, 'Service Updated Successfully!');
@@ -497,7 +515,7 @@ class UsersController extends Controller
 
     public function storeMyNetwork(Request $request)
     {
-        $user = User::find(auth()->user()->id);
+        $user = User::find(Auth::id());
         if (!empty($request->live_stream) && $request->live_stream !== "") {
             $user->live_stream  = $request->live_stream;
         }
@@ -522,7 +540,7 @@ class UsersController extends Controller
 
     public function storeMyNotification(Request $request)
     {
-        $user = User::find(auth()->user()->id);
+        $user = User::find(Auth::id());
         if (!empty($request->new_news) && $request->new_news !== "") {
             $user->new_news  = $request->new_news;
         }
@@ -549,5 +567,17 @@ class UsersController extends Controller
         }
         $user->save();
         return ResponseHelper::sendResponse($user, 'My Notifcation Updated Successfully!');
+    }
+
+    public function user_images()
+    {
+        $images = UserImage::with('user')->where('user_id', Auth::id())->get();
+        return ResponseHelper::sendResponse($images, 'User Images Fetched Successfully');
+    }
+
+    public function user_videos()
+    {
+        $videos = UserVideo::with('user')->where('user_id', Auth::id())->get();
+        return ResponseHelper::sendResponse($videos, 'User Videos Fetched Successfully');
     }
 }

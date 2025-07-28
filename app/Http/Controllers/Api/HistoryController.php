@@ -12,6 +12,7 @@ use App\Models\HistoryCategory;
 use App\Models\HistoryComments;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
@@ -22,11 +23,12 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        // $allowRequest = PermissionHelper::checkPermission(auth()->user()->level, 'history_allow_history');
+        // $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'history_allow_history');
         // if ($allowRequest !== true) {
         //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
         // }
-        return response()->json(['History' => History::get(), 'success' => true], 200);
+        $histories = History::orderBy('created_by','desc')->get();
+        return ResponseHelper::sendResponse($histories, 'History has been Fetch Successfully!');
     }
 
     /**

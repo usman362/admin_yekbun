@@ -12,6 +12,10 @@ use App\Models\ApplePay;
 use App\Models\BankTransfer;
 use App\Models\GooglePay;
 use App\Models\Paypal;
+use App\Models\Transaction;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
@@ -50,10 +54,10 @@ class PaymentController extends Controller
                 'amount' => $request->input('amount'),
                 'items' => array(
                     array(
-                        'name'=>'Yekbun',
+                        'name' => 'Yekbun',
                         'price' => $request->input('amount'),
                         'description' => 'Account Upgrade',
-                        'quantity' =>1,
+                        'quantity' => 1,
                     )
                 ),
                 'currency' => env('PAYPAL_CURRENCY'),
@@ -153,6 +157,51 @@ class PaymentController extends Controller
             'paypal' => $payPal,
         ];
 
-        return ResponseHelper::sendResponse($payments,'Payments List Fetch');
+        return ResponseHelper::sendResponse($payments, 'Payments List Fetch');
+    }
+
+    public function storeTransaction(Request $request)
+    {
+        try {
+            $transaction = new Transaction();
+            $transaction->tId = $request->tId;
+            $transaction->amount = $request->amount;
+            $transaction->status = $request->status;
+            $transaction->subscription_type = $request->subscription_type;
+            $transaction->transaction_type = $request->transaction_type;
+            $transaction->userType = $request->userType;
+            $transaction->user_id = $request->user_id;
+            $transaction->save();
+
+            if ($request->status === 'COMPLETED') {
+                $level = [
+                    'Cultivated' => 0,
+                    'Educated' => 1,
+                    'Academic' => 2,
+                ];
+                $user = User::find($request->user_id);
+
+                if ($user) {
+                    $current = Carbon::now();
+
+                    if($request->subscription_type === 'monthly'){
+                        $newExpiry = Carbon::parse($current->copy()->addMonth())->format('Y-m-d');
+                    }else{
+                        $newExpiry = Carbon::parse($current->copy()->addYear())->format('Y-m-d');
+                    }
+
+                    if ($newExpiry) {
+                        $user->expired_at = $newExpiry;
+                        $user->level = $level[$request->userType];
+                        $user->user_type = Str::lower($request->userType);
+                        $user->subscription_type = $request->subscription_type;
+                        $user->save();
+                    }
+                }
+            }
+            return ResponseHelper::sendResponse($transaction, 'Transaction stored successfully.');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse([], 'Failed to stored Transaction.', false, 403);
+        }
     }
 }

@@ -379,7 +379,7 @@
                                         <div class="dropdown-menu text-center dropdown-menu-end"
                                             style="min-width: unset; width: 100px;">
                                             <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                            <form action="{{ route('history.destroy', $feed->id) }}"
+                                            <form action="{{ route('ai-videos.destroy', $feed->id) }}"
                                                 onsubmit="confirmAction(event, () => event.target.submit())"
                                                 method="post" class="d-inline">
                                                 @csrf
@@ -425,7 +425,7 @@
         <div class="content-backdrop fade"></div>
 
         <x-modal id="createhistoryModal" title="Create AI Video" saveBtnText="Create" saveBtnType="submit"
-            saveBtnForm="createForm" size="md">
+            saveBtnForm="createForm" size="md" saveBtnClass="btn btn-primary submit-clip-template">
             @include('content.include.ai_video.createForm')
         </x-modal>
     </div>
@@ -926,6 +926,7 @@
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
         }
+        $('.submit-clip-template').attr('disabled', 'true');
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 

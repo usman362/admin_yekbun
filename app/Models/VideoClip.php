@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class VideoClip extends Model
 {
@@ -61,6 +62,6 @@ class VideoClip extends Model
 
     public function playlists()
     {
-        return $this->hasMany(UserPlaylist::class, 'media_id')->where('user_id',auth()->user()->id);
+        return $this->hasMany(UserPlaylist::class, 'media_id')->where('user_id',Auth::id());
     }
 }

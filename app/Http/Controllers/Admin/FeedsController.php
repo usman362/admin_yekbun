@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\DB;
 class FeedsController extends Controller
 {
 
- 
+
     public function index()
     {
         $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(4);
@@ -39,7 +39,7 @@ class FeedsController extends Controller
     }
     public function allreportedfeedindex()
     {
-         
+
        $reportfeeds = ReportFeeds::with('feed')->paginate(20);
         return view('content.manage_posts.reported_feeds', compact('reportfeeds'));
     }
@@ -48,7 +48,7 @@ class FeedsController extends Controller
     {
               $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(20);
 
-       
+
           return view('content.manage_posts.reportedcomments', compact('reportscomments'));
 
     }
@@ -56,7 +56,7 @@ class FeedsController extends Controller
 
     public function latestfeedindex()
     {
-         
+
           $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('content.manage_posts.reportedcomments', compact('feeds'));
@@ -389,6 +389,10 @@ class FeedsController extends Controller
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }])->find($request->feed_id);
             } elseif ($feedType == 'history') {
+                $feed = History::with(['user' => function ($q) {
+                    $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
+                }])->find($request->feed_id);
+            } elseif ($feedType == 'ai_videos') {
                 $feed = History::with(['user' => function ($q) {
                     $q->select(['name', 'last_name', 'email', 'dob', 'image', 'username']);
                 }])->find($request->feed_id);
