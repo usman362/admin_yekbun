@@ -55,6 +55,23 @@ class History extends Model
         return $this->hasMany(FeedComments::class)->where('feed_type','history');
     }
 
+    public function voice_comments()
+    {
+        return $this->hasMany(FeedComments::class,'feed_id')->where('comment_type','audio');
+    }
+    public function shares()
+    {
+        return $this->hasMany(FeedShare::class,'feed_id');
+    }
+    public function likes()
+    {
+        return $this->hasMany(FeedLikes::class,'feed_id');
+    }
+    public function views()
+    {
+        return $this->hasMany(FeedViews::class,'feed_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
