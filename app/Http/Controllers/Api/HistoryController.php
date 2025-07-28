@@ -28,7 +28,7 @@ class HistoryController extends Controller
         //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
         // }
         $histories = History::orderBy('created_by', 'desc')->get();
-        $histories->getCollection()->transform(function ($history) {
+        $histories->transform(function ($history) {
             $history->comments_count = $history->comments->count();
             $history->voice_comments_count = $history->voice_comments->count();
             $history->likes_count = $history->likes->count();
