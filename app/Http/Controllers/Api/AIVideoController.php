@@ -19,7 +19,7 @@ class AIVideoController extends Controller
         // if ($allowRequest !== true) {
         //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
         // }
-        $ai_videos = AIVideo::orderBy('created_by', 'desc');
+        $ai_videos = AIVideo::orderBy('created_by', 'desc')->get();
         $ai_videos->getCollection()->transform(function ($ai_video) {
             $ai_video->comments_count = $ai_video->comments->count();
             $ai_video->voice_comments_count = $ai_video->voice_comments->count();
@@ -28,7 +28,6 @@ class AIVideoController extends Controller
             $ai_video->shares_count = $ai_video->shares->count();
             return $ai_video;
         });
-        $ai_videos = $ai_videos->get();
         return ResponseHelper::sendResponse($ai_videos, 'AI Videos has been Fetch Successfully!');
     }
 }

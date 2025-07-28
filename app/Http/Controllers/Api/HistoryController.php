@@ -27,7 +27,7 @@ class HistoryController extends Controller
         // if ($allowRequest !== true) {
         //     return ResponseHelper::sendResponse([], 'You are not Allowed to See History.', false, 409);
         // }
-        $histories = History::orderBy('created_by', 'desc');
+        $histories = History::orderBy('created_by', 'desc')->get();
         $histories->getCollection()->transform(function ($history) {
             $history->comments_count = $history->comments->count();
             $history->voice_comments_count = $history->voice_comments->count();
@@ -36,7 +36,6 @@ class HistoryController extends Controller
             $history->shares_count = $history->shares->count();
             return $history;
         });
-        $histories = $histories->get();
         return ResponseHelper::sendResponse($histories, 'History has been Fetch Successfully!');
     }
 
