@@ -496,6 +496,55 @@
 
         $(document).ready(function() {
 			
+			
+			const uploadBannerImg = "{{ asset('assets/img/uploadbanner.png') }}";
+			const plusImg = "{{ asset('assets/img/plus-solid.svg') }}";
+		
+			const createVideoModal = document.getElementById('createvideoModal');
+			const createVideoForm = document.getElementById('createvideoForm');
+			createVideoModal.addEventListener('hidden.bs.modal', function () {
+				createVideoForm.reset();
+				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			});
+			
+			const createSeasonModal = document.getElementById('createseasonModal');
+			const createSeasonForm = document.getElementById('createseasonForm');
+			createSeasonModal.addEventListener('hidden.bs.modal', function () {
+				createSeasonForm.reset();
+				const generatedImgs = createSeasonModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			});
+			
+			const createEpisodeModal = document.getElementById('createepisodeModal');
+			const createEpisodeForm = document.getElementById('createepisodeForm');
+			createEpisodeModal.addEventListener('hidden.bs.modal', function () {
+				createEpisodeForm.reset();
+				const generatedImgs = createEpisodeModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			});
+			
 			$('.seriesbtn').prop('disabled', true);
 			$('.seasonbtn').prop('disabled', true);
 			$('.episodebtn').prop('disabled', true);

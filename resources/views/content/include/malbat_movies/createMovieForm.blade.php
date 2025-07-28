@@ -1,4 +1,4 @@
-<form id="createmovieForm" method="POST" action="{{ route('zarok.moviesStore') }}" enctype="multipart/form-data">
+<form id="createmovieForm" method="POST" action="{{ route('malbat.moviesStore') }}" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="video_id">
     <input type="hidden" name="thumbnail" id="thumbnail">
@@ -255,7 +255,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             sending: function(file, xhr, formData) {
-                formData.append('folder', 'zarok-movies');
+                formData.append('folder', 'malbat-movies');
             },
             success: function(file, response) {
                 if (this.files.length > 1) {
@@ -367,7 +367,7 @@
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
         sending: function (file, xhr, formData) {
-            formData.append('folder', 'zarok-movie-real');
+            formData.append('folder', 'malbat-movie-real');
         },
         success: function (file, response) {
             if (this.files.length > 1) {

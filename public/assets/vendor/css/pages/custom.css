@@ -26,6 +26,10 @@
 	border-radius:10px;
 }
 
+.robox{
+	cursor: pointer;
+}
+
 .card-post-thumbnail {
     position: relative;
     width: 100%;

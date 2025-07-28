@@ -1,11 +1,43 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'ZarokTV Videos')
+@section('title', 'MalbatTV Movies')
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
-    
     <style>
+	
+		 .dropzone {
+			position: relative;
+			border: 2px dashed #ccc;
+			padding: 40px;
+			text-align: center;
+			cursor: pointer;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	
+		.dropzone input[type="file"] {
+			display: none;
+		}
+		.dropzone-images{
+			height:200px;
+			display: grid; 
+			place-items: center; 
+			cursor:pointer !important;
+		}
+		.dropzone-label{
+			cursor:pointer !important;
+			place-items: center; 
+			display: grid;
+		}
+		
+	
+		.dz-message1 {
+			font-weight: bold;
+			color: #999;
+		}
+	
         #DataTables_Table_0_wrapper .row:first-child {
             display: none;
         }
@@ -248,15 +280,15 @@
     <div class="d-flex justify-content-between">
         <div>
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">ZarokTV /</span> Videos
+                <span class="text-muted fw-light">MalbatTV /</span> Movies
             </h4>
         </div>
         <div class="">
 
             {{-- @can('artist.create') --}}
             <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createvideoModal">Add
-                Video
-                Clips</button>
+               a Trailer</button>
+            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createmovieModal">Upload Movie</button>
             {{-- @endcan --}}
         </div>
     </div>
@@ -290,7 +322,7 @@
             <div class="row pb-4">
                 @foreach ($videos as $video)
                 
-                	<div class="col-md-3">
+                <div class="col-md-3">
                         <div class="post-image">
                             <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 postitem view-post card-post"
                                 data-fancybox="post1" data-lightbox-type="comments"
@@ -312,11 +344,16 @@
                                         $durationFormatted = sprintf('%02d:%02d', $minutes, $seconds);
                                     @endphp
 
-                                        <div style="background-image: url('{{ asset('storage/' . $video->thumbnail) }}');"
+                                        <div style="background-image: url('{{ asset('storage/' . $video->banner) }}');"
                                             class="card-post-thumbnail">
+                                            	
+                                                	<span class="video-thumbnail-views">
+                                                    <i class="fa fa-eye"></i>150K
+                                                    </span>
                                             <div class="video-overlay-gradient">
-                                                <span class="video-thumbnail-title">{{$shortName}}</span>
-                                                <span class="video-thumbnail-duration">{{$durationFormatted}}</span>
+                                            	
+                                                <!-- <span class="video-thumbnail-title">{{$shortName}}</span>
+                                                <span class="video-thumbnail-duration">{{$durationFormatted}}</span> -->
                                             </div>
                                         </div>
                                     </div>
@@ -333,7 +370,7 @@
                                                             <p class="m-0" title="Şeyda Were">
                                                                 <b>Admin User</b>
                                                             </p>
-                                                            <small class="time"><i>07 May 2025</i></small>
+                                                            <small class="time"><i>{{ \Carbon\Carbon::parse($video->created_at)->format('d M Y') }}</i></small>
                                                         </div>
 
                                                     </div>
@@ -372,7 +409,7 @@
                                                 class="dropdown-item delete-video" style="padding: 0">
                                                 </button> -->
 
-<form action="{{ route('zarokVideos.destroy', $video->_id) }}"
+<form action="{{ route('malbatMovies.destroy', $video->_id) }}"
                                         onsubmit="confirmAction(event, () => event.target.submit())" method="post"
                                         class="d-inline">
                                         @method('DELETE')
@@ -398,103 +435,77 @@
                         </div>
                     </div>
                 
-                
-                <?php
-				/*
-                    <div class="col-md-3">
-                        <div class="post-image">
-                            <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post"
-                                data-fancybox="post1" data-lightbox-type="comments"
-                                data-thumb="{{ asset('storage/' . $video->video) }}"
-                                href="{{ asset('storage/' . $video->video) }}" data-id="{{ $video->id }}"
-                                data-demo-href="{{ asset('storage/' . $video->video) }}">
-                                <!-- Main wrap -->
-                                <div class="content-wrap">
-
-                                    <!-- Post body -->
-                                    <div class="card-body p-0">
-
-                                        <div style="background-image: url('{{ asset('storage/' . $video->thumbnail) }}');"
-                                            class="card-post-thumbnail">
-                                            <span class="video-thumbnail-duration">04:49</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer mt-0">
-                                        <div class="user-block">
-                                            <div class="user-info">
-                                                <div class="row">
-                                                    <div class="col-md-2 p-0">
-                                                        <img src="{{asset('images/user-clips-report-user.png')}}"
-                                                            style="width: 100px !important;height:45px !important;">
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="mt-2">
-                                                            <p class="m-0" title="Şeyda Were">
-                                                                <b>Admin User</b>
-                                                            </p>
-                                                            <small class="time"><i>0 Views .
-                                                                    &nbsp;&nbsp;07 May 2025</i></small>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Post body -->
-                                </div>
-                                <!-- /Main wrap -->
-                            </div>
-                            <div class="nav-item dropdown d-block"
-                                style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <i class="fas fa-cog"></i>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu text-center dropdown-menu-end"
-                                    style="min-width: unset; width: 100px;">
-                                    <span style="font-family:Genos;color:#c0c0c0">Options</span>
-                                    <div class="row ml-0" style="width:100px;">
-
-                                        <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                            <a class="dropdown-item edit-video" style="padding: 0"
-                                                href="javascript:void(0)" data-id="{{$video->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
-                                                data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
-                                                for="customRadioPrime">
-                                                <img class="pop_action_image" style="height: 26px"
-                                                    src="{{asset('assets/svg/edit.svg')}}"></a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="button" data-id="{{$video->id}}"
-                                                class="dropdown-item delete-video" style="padding: 0">
-                                                <img class="pop_action_image" style="height: 26px"
-                                                    src="{{asset('assets/svg/delete.svg')}}"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					*/
-					?>
                 @endforeach
             </div>
         </div>
     </div>
 
     {{-- Video Clips Modal --}}
-    <x-modal id="createvideoModal" title="Add New Video" subtitle="MP4 or AVI" saveBtnText="Create Video" saveBtnType="submit"
-        saveBtnForm="createvideoForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom" size="md" headerClass="custom-header" contentClass="content-custom">
-        @include('content.include.zarok_videos.createForm', ['form' => 'createvideoForm'])
+    <x-modal id="createvideoModal" title="Add Trailer" subtitle="MP4 or AVI" saveBtnText="Upload Movie" saveBtnType="submit"
+        saveBtnForm="createvideoForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom trailerbtn" size="lg" headerClass="custom-header" contentClass="content-custom">
+        @include('content.include.malbat_movies.createForm', ['form' => 'createvideoForm'])
     </x-modal>
-
     
+    <x-modal id="createmovieModal" title="Add Movie" subtitle="MP4 or AVI" saveBtnText="Upload Movie" saveBtnType="submit"
+        saveBtnForm="createmovieForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom moviewbtn" size="md" headerClass="custom-header" contentClass="content-custom">
+        @include('content.include.malbat_movies.createMovieForm', ['form' => 'createmovieForm'])
+    </x-modal>
+    
+  
 
 @section('page-script')
     <script>
+		
+		$(document).ready(function() {
+			
+			const uploadBannerImg = "{{ asset('assets/img/uploadbanner.png') }}";
+			const plusImg = "{{ asset('assets/img/plus-solid.svg') }}";
+			const createVideoModal = document.getElementById('createvideoModal');
+			const createVideoForm = document.getElementById('createvideoForm');
+			// Use Bootstrap's modal hidden event
+			createVideoModal.addEventListener('hidden.bs.modal', function () {
+				// Reset form fields
+				createVideoForm.reset();
+				
+				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+		
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			   
+			});
+			
+			
+			const createMoveModal = document.getElementById('createmovieModal');
+			const createMovieForm = document.getElementById('createmovieForm');
+			// Use Bootstrap's modal hidden event
+			createMoveModal.addEventListener('hidden.bs.modal', function () {
+				// Reset form fields
+				createMovieForm.reset();
+				
+				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+		
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			   
+			});
+			
+			$('.trailerbtn').prop('disabled', true);
+			$('.moviewbtn').prop('disabled', true);
+			
+		});
+		
         function confirmAction(event, callback) {
             event.preventDefault();
             Swal.fire({
@@ -516,45 +527,6 @@
         }
 
         $(document).ready(function() {
-			
-			const uploadBannerImg = "{{ asset('assets/img/uploadbanner.png') }}";
-			const plusImg = "{{ asset('assets/img/plus-solid.svg') }}";
-		
-			// Trigger reset after modal is fully hidden
-			const createVideoModal = document.getElementById('createvideoModal');
-			const createVideoForm = document.getElementById('createvideoForm');
-		
-			// Use Bootstrap's modal hidden event
-			createVideoModal.addEventListener('hidden.bs.modal', function () {
-				// Reset form fields
-				createVideoForm.reset();
-				
-				// Reset preview image
-				document.getElementById('bannerPreview').src = uploadBannerImg;
-		
-				// Reset hidden thumbnail input
-				document.getElementById('thumbnail').value = '';
-		
-				// Reset thumbnail previews
-				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
-				generatedImgs.forEach(img => {
-					img.src = plusImg;
-				});
-		
-				// Clear dynamic fields
-			   // createVideoModal.querySelector('.hidden-videos')?.innerHTML = '';
-			   // createVideoModal.querySelector('.hidden-inputs')?.innerHTML = '';
-			   
-			   if (Dropzone.instances.length > 0) {
-					Dropzone.instances.forEach(instance => {
-						instance.removeAllFiles(true); // true = remove from preview and cancel upload
-					});
-				}
-			   
-			});
-			
-			$('.save-btn-custom').prop('disabled', true);
-			
             $('table').on('click', '.delete-btn', function(event) {
                 event.preventDefault(); // Stop any default action
                 let form = $(this).closest('.delete-form'); // Get the closest form

@@ -1371,24 +1371,24 @@
             </ul>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('malbat-documentry',  'malbat-movies', 'malbat-series') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-tv"></i>
                 <div>Malbat TV</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                <li class="menu-item {{ Request::is('malbat-documentry') ? 'active' : '' }}">
+                    <a href="{{ route('malbat.documentry') }}" class="menu-link">
                         <div>Add Documentary</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                <li class="menu-item {{ Request::is('malbat-movies') ? 'active' : '' }}">
+                    <a href="{{ route('malbat.movies') }}" class="menu-link">
                         <div>Add Movies</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link">
+                <li class="menu-item {{ Request::is('malbat-series') ? 'active' : '' }}">
+                    <a href="{{ route('malbat.series') }}" class="menu-link">
                         <div>Add Series</div>
                     </a>
                 </li>

@@ -9,6 +9,13 @@ use App\Models\ZarokSeriesSeason;
 use App\Models\ZarokSeriesEpisode;
 use App\Models\ZarokStories;
 use App\Models\ZarokVideos;
+
+use App\Models\MalbatMovies;
+use App\Models\MalbatSeries;
+use App\Models\MalbatSeriesSeason;
+use App\Models\MalbatSeriesEpisode;
+use App\Models\MalbatDocumentry;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +27,8 @@ class TVController extends Controller
         $videos = ZarokVideos::all();
         return view('content.zarok-tv.videos',compact('videos'));
     }
+
+    
 
     public function zarokVideosStore(Request $request)
     {
@@ -64,6 +73,8 @@ class TVController extends Controller
             return redirect()->back()->with('error', 'Failed to add video clip');
         }
     }
+
+    
  
     public function zarokStories()
     {
@@ -564,4 +575,478 @@ class TVController extends Controller
             return redirect()->back()->with('error', 'Failed to add Series');
         }
     }
+
+
+    //Malbat TV Section starts
+
+    public function malbatDocumentry()
+    {
+        $videos = MalbatDocumentry::all();
+        return view('content.malbat-tv.documentry',compact('videos'));
+    }
+    
+    public function malbatDocumentryStore(Request $request)
+    {
+        try {
+            $vc = new malbatDocumentry();
+            if ($request->video_id) {
+                $vc = malbatDocumentry::find($request->video_id);
+            }
+            //$vc->video_file_name = $request->title; // $request->video_name[0];
+
+            if ($request->hasFile('images')) {
+                $image = $request->file('images');
+
+                // Create a unique filename
+                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+                // Target directory inside storage/app/public/
+                $folder = 'malbat-documentary';
+
+                // Ensure the folder exists
+                if (!Storage::exists('public/' . $folder)) {
+                    Storage::makeDirectory('public/' . $folder);
+                }
+
+                // Save the image
+                $image->storeAs('public/' . $folder, $imageName);
+
+                // Save the relative path to DB
+                $vc->banner = $folder . '/' . $imageName;
+            }
+
+            $vc->video_file_name = !empty($request->title) ? $request->title : ($request->video_name[0] ?? null);
+            $vc->video = $request->video_paths[0];
+            $vc->video_file_size = $request->video_sizes[0];
+            $vc->video_file_length = $request->video_durations[0];
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $vc->thumbnail = $cleanedThumbnail;
+            $vc->save();
+            return redirect()->back()->with('success', 'Documentary Clip Has been added');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add Documentary clip');
+        }
+    }
+
+    public function malbatDocumentry_delete($id)
+    {
+        try {
+            $story = malbatDocumentry::findOrFail($id);
+
+            // Delete video file
+            if ($story->video && Storage::disk('public')->exists($story->video)) {
+                Storage::disk('public')->delete($story->video);
+            }
+
+            // Delete thumbnail file
+            if ($story->thumbnail && $story->thumbnail !== 'def.jpg' && Storage::disk('public')->exists($story->thumbnail)) {
+                Storage::disk('public')->delete($story->thumbnail);
+            }
+
+            if ($story->banner && Storage::disk('public')->exists($story->banner)) {
+                Storage::disk('public')->delete($story->banner);
+            }
+
+            // Delete record from DB
+            $story->delete();
+
+            return redirect()->back()->with('success', 'Documentary deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete Documentary.');
+        }
+    }
+
+    
+    
+    public function malbatMovies()
+    {
+        $videos = MalbatMovies::all();
+        return view('content.malbat-tv.movies',compact('videos'));
+    }
+
+    
+    public function malbatMoviesStore(Request $request)
+    {
+        try {
+            $vc = new MalbatMovies();
+            if ($request->video_id) {
+                $vc = MalbatMovies::find($request->video_id);
+            }
+            //$vc->video_file_name = $request->video_name[0];
+            $vc->video_file_name = !empty($request->title) ? $request->title : ($request->video_name[0] ?? null);
+            $vc->date = $request->st_date;
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $vc->description = $request->description;
+            $vc->video = $request->video_paths[0];
+            $vc->video_file_size = $request->video_sizes[0];
+            $vc->video_file_length = $request->video_durations[0];
+            $vc->is_trailer = $request->is_trailer;
+
+            if ($request->is_trailer == "0") {
+                $vc->movie = $request->movie_real_path[0] ?? null;
+                $vc->movie_file_size = $request->movie_real_size[0] ?? null;
+                $vc->movie_file_length = $request->movie_real_name[0] ?? null;
+            }
+            
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $vc->thumbnail = $cleanedThumbnail;
+            //banner images
+            $vc->banner = "";
+            $vc->label = "";
+
+            $folder = 'malbat-movies';
+            if (!Storage::exists('public/' . $folder)) {
+                Storage::makeDirectory('public/' . $folder);
+            }
+
+            if ($request->hasFile('banner')) {
+                $banner = $request->file('banner');
+                $bannerName = 'banner_' . time() . '_' . uniqid() . '.' . $banner->getClientOriginalExtension();
+                $banner->storeAs('public/' . $folder, $bannerName);
+                $vc->banner = $folder . '/' . $bannerName;
+            }
+
+            if ($request->hasFile('label')) {
+                $label = $request->file('label');
+                $labelName = 'label_' . time() . '_' . uniqid() . '.' . $label->getClientOriginalExtension();
+                $label->storeAs('public/' . $folder, $labelName);
+                $vc->label = $folder . '/' . $labelName;
+            }
+
+            $vc->save();
+            return redirect()->back()->with('success', 'Movie Has been added');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add Movie');
+        }
+    }
+    
+    public function malbatMovies_delete($id)
+    {
+        try {
+            $story = MalbatMovies::findOrFail($id);
+
+            // Delete video file
+            if ($story->video && Storage::disk('public')->exists($story->video)) {
+                Storage::disk('public')->delete($story->video);
+            }
+
+            // Delete thumbnail file
+            if ($story->thumbnail && $story->thumbnail !== 'def.jpg' && Storage::disk('public')->exists($story->thumbnail)) {
+                Storage::disk('public')->delete($story->thumbnail);
+            }
+
+            // Delete record from DB
+            $story->delete();
+
+            return redirect()->back()->with('success', 'Movie deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete Movie.');
+        }
+    }
+
+    
+   
+    public function malbatSeries()
+    {
+        $videos = MalbatSeries::all();
+        return view('content.malbat-tv.series',compact('videos'));
+    }
+    public function malbatSeriesStore(Request $request)
+    {
+        try {
+            $vc = new MalbatSeries();
+            if ($request->video_id) {
+                $vc = MalbatSeries::find($request->video_id);
+            }
+            $vc->video_file_name = !empty($request->movie_title) ? $request->movie_title : ($request->video_name[0] ?? null);
+            $vc->date = $request->st_date;
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $vc->description = $request->description;
+            $vc->video = $request->video_paths[0];
+            $vc->video_file_size = $request->video_sizes[0];
+            $vc->video_file_length = $request->video_durations[0];
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $vc->thumbnail = $cleanedThumbnail;
+
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $folder = 'malbat-series';
+            if (!Storage::exists('public/' . $folder)) {
+                Storage::makeDirectory('public/' . $folder);
+            }
+
+            if ($request->hasFile('banner')) {
+                $banner = $request->file('banner');
+                $bannerName = 'banner_' . time() . '_' . uniqid() . '.' . $banner->getClientOriginalExtension();
+                $banner->storeAs('public/' . $folder, $bannerName);
+                $vc->banner = $folder . '/' . $bannerName;
+            }
+
+            if ($request->hasFile('label')) {
+                $label = $request->file('label');
+                $labelName = 'label_' . time() . '_' . uniqid() . '.' . $label->getClientOriginalExtension();
+                $label->storeAs('public/' . $folder, $labelName);
+                $vc->label = $folder . '/' . $labelName;
+            }
+
+            $vc->save();
+            return redirect()->back()->with('success', 'Series Has been added');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add Series');
+        }
+    }
+
+    public function malbatSeriesStoreSeason(Request $request){
+        try {
+            $vc = new MalbatSeriesSeason();
+            if ($request->video_id) {
+                $vc = MalbatSeriesSeason::find($request->video_id);
+            }
+            $vc->video_file_name = !empty($request->name) ? $request->name : ($request->video_name[0] ?? null);
+            $vc->series_id = $request->series;
+            $vc->date = $request->st_date;
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $vc->description = $request->description;
+            $vc->video = $request->video_paths[0];
+            $vc->video_file_size = $request->video_sizes[0];
+            $vc->video_file_length = $request->video_durations[0];
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $vc->thumbnail = $cleanedThumbnail;
+
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $folder = 'malbat-series';
+            if (!Storage::exists('public/' . $folder)) {
+                Storage::makeDirectory('public/' . $folder);
+            }
+
+            if ($request->hasFile('banner')) {
+                $banner = $request->file('banner');
+                $bannerName = 'banner_' . time() . '_' . uniqid() . '.' . $banner->getClientOriginalExtension();
+                $banner->storeAs('public/' . $folder, $bannerName);
+                $vc->banner = $folder . '/' . $bannerName;
+            }
+
+            if ($request->hasFile('label')) {
+                $label = $request->file('label');
+                $labelName = 'label_' . time() . '_' . uniqid() . '.' . $label->getClientOriginalExtension();
+                $label->storeAs('public/' . $folder, $labelName);
+                $vc->label = $folder . '/' . $labelName;
+            }
+
+            $vc->save();
+            return redirect()->back()->with('success', 'Series Has been added');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add Series');
+        }
+    }
+
+    
+
+    
+   
+
+    public function malbatSeriesStoreEpisode(Request $request){
+        try {
+            $vc = new MalbatSeriesEpisode();
+            if ($request->video_id) {
+                $vc = MalbatSeriesEpisode::find($request->video_id);
+            }
+            $vc->video_file_name = !empty($request->name) ? $request->name : ($request->video_name[0] ?? null);
+            $vc->series_id = $request->series;
+            $vc->season_id = $request->season;
+            $vc->date = $request->st_date;
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $vc->description = $request->description;
+            $vc->video = $request->video_paths[0];
+            $vc->video_file_size = $request->video_sizes[0];
+            $vc->video_file_length = $request->video_durations[0];
+            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
+            $vc->thumbnail = $cleanedThumbnail;
+
+            $vc->is_hd = $request->has('check_hd') ? 1 : 0;
+            $vc->is_4k = $request->has('check_4k') ? 1 : 0;
+            $vc->is_uhd = $request->has('check_uhd') ? 1 : 0;
+            $vc->is_qhd = $request->has('check_qhd') ? 1 : 0;
+            $vc->is_atm = $request->has('check_atm') ? 1 : 0;
+            $vc->is_v5 = $request->has('check_v5') ? 1 : 0;
+            $vc->age_section = $request->selected_robox;
+
+            $vc->save();
+
+            return redirect()->back()->with('success', 'Episode Has been added');
+        } catch (\Exception $e) {
+            
+            return redirect()->back()->with('error', 'Failed to add Series');
+        }
+    }
+
+    
+    public function malbatSeries_delete($id){
+        try {
+            $story = MalbatSeries::findOrFail($id);
+
+            // Delete video file
+            if ($story->video && Storage::disk('public')->exists($story->video)) {
+                Storage::disk('public')->delete($story->video);
+            }
+
+            // Delete thumbnail file
+            if ($story->thumbnail && $story->thumbnail !== 'def.jpg' && Storage::disk('public')->exists($story->thumbnail)) {
+                Storage::disk('public')->delete($story->thumbnail);
+            }
+
+            // Delete record from DB
+            $story->delete();
+
+            return redirect()->back()->with('success', 'Story deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete story.');
+        }
+    }
+
+    public function malbatSeason_delete($id){
+        try {
+            $story = MalbatseriesSeason::findOrFail($id);
+
+            // Delete video file
+            if ($story->video && Storage::disk('public')->exists($story->video)) {
+                Storage::disk('public')->delete($story->video);
+            }
+
+            // Delete thumbnail file
+            if ($story->thumbnail && $story->thumbnail !== 'def.jpg' && Storage::disk('public')->exists($story->thumbnail)) {
+                Storage::disk('public')->delete($story->thumbnail);
+            }
+
+            // Delete record from DB
+            $story->delete();
+
+            return redirect()->back()->with('success', 'Season deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete story.');
+        }
+    }
+
+    public function malbatEpisode_delete($id){
+        try {
+            $story = MalbatSeriesEpisode::findOrFail($id);
+
+            // Delete video file
+            if ($story->video && Storage::disk('public')->exists($story->video)) {
+                Storage::disk('public')->delete($story->video);
+            }
+
+            // Delete thumbnail file
+            if ($story->thumbnail && $story->thumbnail !== 'def.jpg' && Storage::disk('public')->exists($story->thumbnail)) {
+                Storage::disk('public')->delete($story->thumbnail);
+            }
+
+            // Delete record from DB
+            $story->delete();
+
+            return redirect()->back()->with('success', 'Episode deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete story.');
+        }
+    }
+
+    public function getSeasonsBySeriesMaltab(Request $request)
+    {
+        $seasons = MalbatSeriesSeason::where('series_id', $request->series_id)->get();
+
+        return response()->json($seasons);
+    }
+
+    public function malbatSeriesEpisodes($id){
+        
+        $video = MalbatSeries::with('episodes') // Ensure seasons is a relation
+                ->where('_id', $id)
+                ->first();
+
+        if (!$video || !$video->seasons) {
+            return response()->json(['html' => '<p>No Episodes found.</p>']);
+        }
+
+            //$html = view('content.zarok-tv.series_season', ['name', $vide->video_file_name, 'seasons' => $video->seasons])->render();
+        $html = view('content.malbat-tv.series_episodes', [
+            'name'    => $video->video_file_name,
+            'seasons' => $video->episodes
+        ])->render();
+
+        return response()->json(['html' => $html]);
+    }
+
+    public function malbatSeriesSeason($id){
+        
+        $video = MalbatSeries::with('seasons') // Ensure seasons is a relation
+                ->where('_id', $id)
+                ->first();
+
+        if (!$video || !$video->seasons) {
+            return response()->json(['html' => '<p>No seasons found.</p>']);
+        }
+
+            //$html = view('content.zarok-tv.series_season', ['name', $vide->video_file_name, 'seasons' => $video->seasons])->render();
+        $html = view('content.malbat-tv.series_season', [
+            'name'    => $video->video_file_name,
+            'seasons' => $video->seasons
+        ])->render();
+
+        return response()->json(['html' => $html]);
+    }
+
+    
+    
 }

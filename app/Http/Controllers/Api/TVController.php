@@ -10,6 +10,10 @@ use App\Models\ZarokMovies;
 use App\Models\ZarokSeries;
 use App\Models\ZarokStories;
 use App\Models\ZarokVideos;
+use App\Models\MalbatMovies;
+use App\Models\MalbatSeries;
+use App\Models\MalbatDocumentry;
+
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -47,6 +51,27 @@ class TVController extends Controller
     }
     public function zarokSeriesEpisodes($id){
         $video = ZarokSeries::with('episodes')->where('_id', $id)->first();
+        return ResponseHelper::sendResponse($video, 'OK');
+    }
+
+    public function malbatDoumentary(){
+        $videos = MalbatDocumentry::all();
+        return ResponseHelper::sendResponse($videos, 'OK');
+    }
+    public function malbatMovies(){
+        $videos = MalbatMovies::all();
+        return ResponseHelper::sendResponse($videos, 'OK');
+    }
+    public function malbatSeries(){
+        $videos = MalbatSeries::all();
+        return ResponseHelper::sendResponse($videos, 'OK');
+    }
+    public function malbatSeriesSeason($id){
+        $video = MalbatSeries::with('seasons')->where('_id', $id)->first();
+        return ResponseHelper::sendResponse($video, 'OK');
+    }
+    public function malbatSeriesEpisodes($id){
+        $video = MalbatSeries::with('episodes')->where('_id', $id)->first();
         return ResponseHelper::sendResponse($video, 'OK');
     }
     

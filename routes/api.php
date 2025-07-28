@@ -88,9 +88,11 @@ Route::get('/zarok-series-season/{id}', [TVController::class, 'zarokSeriesSeason
 Route::get('/zarok-series-episodes/{id}', [TVController::class, 'zarokSeriesEpisodes']);
 Route::post('/zarokStoriesPost', [TVController::class, 'zarokStoriesPost']);
 
-
-
-
+Route::get('/getmalbatdocumentary', [TVController::class, 'malbatDoumentary']);
+Route::get('/getmalbatmovies', [TVController::class, 'malbatMovies']);
+Route::get('/getmalbatseries', [TVController::class, 'malbatSeries']);
+Route::get('/malbat-series-season/{id}', [TVController::class, 'malbatSeriesSeason']);
+Route::get('/malbat-series-episodes/{id}', [TVController::class, 'malbatSeriesEpisodes']);
 
 
 Route::get('/ping', function () {

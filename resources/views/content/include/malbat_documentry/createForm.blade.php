@@ -1,75 +1,63 @@
-<form id="createvideoForm" method="POST" action="{{ route('zarok.storiesStore') }}" enctype="multipart/form-data">
+<form id="createvideoForm" method="POST" action="{{ route('malbat.documentryStore') }}" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="video_id">
     <input type="hidden" name="thumbnail" id="thumbnail">
     <div class="hidden-inputs"></div>
     <div class="row">
-        <div class="col-lg-12 mx-auto">
+        <div class="col-lg-12 mx-auto"> 
             <div class="row g-3">
             	<div class="col-md-12">
                 	<div class="form-group">
-                		<label>Story Title</label>
-                    	<input type="text" class="form-control" placeholder="Story title..." name="title" required="required" />
+                		<label>Documentary Title</label>
+                    	<input type="text" class="form-control" placeholder="Documentary title..." name="title" required="required" />
                     </div>
                 </div>
                 
-                <!--<div class="col-md-12">
+                <div class="col-md-12">
                     <div class="card"> 
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-image">
-                                <div class="dz-message needsclick">
-                                    Upload Banner
-                                    <small class="text-muted text-custom">png or jpg</small>
+                        <div class="card-body text-center dropzone needsclick">
+                            
+                            <label for="bannerInput" style="cursor:pointer;" id="bannerLabel">
+                                <div id="bannerPreviewWrapper">
+                                    <img id="bannerPreview" src="{{ asset('assets/img/uploadbanner.png') }}" alt="Click to upload" style="max-width: 300px; max-height: 200px;">
                                 </div>
+                            </label>
+                            
+                            <input type="file" id="bannerInput" name="images" accept="image/*" style="display: none;">
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="card">
+                        {{-- <h5 class="card-header">Video Upload</h5> --}}
+                        <div class="card-body">
+                            <div class="dropzone needsclick" action="/" id="dropzone-video">
                                 
+                                <div class="dz-message needsclick">
+                                    Upload Video
+                                    <small class="text-muted text-custom">MP4 or AVI</small>
+                                </div>
+
+
+
                                 <div class="fallback">
-                                    <input type="file" name="images[]" accept="images/*" />
+                                    <input type="file" name="video[]" accept="video/*" />
                                 </div>
                             </div>
                             <div class="hidden-videos"></div> 
                         </div>
                     </div>
-                </div>-->
-                
-                <div class="col-md-12">
-                <div class="card"> 
-                    <div class="card-body text-center dropzone needsclick">
-                    	
-                        <label for="bannerInput" style="cursor:pointer;" id="bannerLabel">
-                            <div id="bannerPreviewWrapper">
-                                <img id="bannerPreview" src="{{ asset('assets/img/uploadbanner.png') }}" alt="Click to upload" style="max-width: 300px; max-height: 200px;">
-                            </div>
-                        </label>
-                        
-                        <input type="file" id="bannerInput" name="images" accept="image/*" style="display: none;">
-                       
-                    </div>
                 </div>
-            </div>
-
                 
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropzone needsclick" action="/" id="dropzone-video">
-                                <div class="dz-message needsclick">
-                                    Upload Story
-                                    <small class="text-muted text-custom">MP4 or AVI</small>
-                                </div>
-                                
-                                <div class="fallback">
-                                    <input type="file" name="video[]" accept="video/*" />
-                                </div>
-                            </div>
-                            <div class="hidden-videos"></div>
-                        </div>
-                    </div>
-                </div>
+                
+                
                 <div class="col-md-12">
                     <div id="generated-thumbnails" style="display: block">
-                        <div class="card0">
-                             <h5 class="card-header1 thumbnail-heading">Select Thumbnails</h5> 
-                            <div class="card-body1">
+                        <div class="card">
+                            <h5 class="card-header1 thumbnail-heading">Select Thumbnails</h5> 
+                            <div class="card-body">
                                 <div class="row">
                                     <div id="thumbnail-history" style="display: block">
                                         <div class="row">
@@ -87,12 +75,15 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row justify-content-center text-center">
                                         <div class="col-md-4">
                                             <div class="regnerate"><i class="fas fa-rotate-right"></i>&nbsp;New Thumbnail</div>
                                         </div>
                                         
                                     </div>
+
+
 
                                 </div>
                             </div>
@@ -139,7 +130,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             sending: function(file, xhr, formData) {
-                formData.append('folder', 'zarok-stories');
+                formData.append('folder', 'malbat-documentary');
             },
             success: function(file, response) {
                 if (this.files.length > 1) {
@@ -174,6 +165,7 @@
                     generateThumbnails();
 					
 					$('.save-btn-custom').prop('disabled', false);
+					
                 };
 
             },
@@ -254,12 +246,13 @@
                 $("#thumbnail-history #img1").attr("src", newSrc1);
                 $("#thumbnail-history #img2").attr("src", newSrc2);
                 $("#thumbnail-history #img3").attr("src", newSrc3);
-
-                const thumbnailUrl = response.thumbnail[0];
+				
+				const thumbnailUrl = response.thumbnail[0];
                 const filename = thumbnailUrl.substring(thumbnailUrl.lastIndexOf('/') + 1);
                 const filenameWithoutExt = filename.replace(/\.jpg$/i, ''); 
 
                 $("#thumbnail").val(filenameWithoutExt);
+				
             },
             error: function() {
                 $('#error-thumbnail').text("Failed to generate thumbnail.");
@@ -271,7 +264,8 @@
 
 <script>
     $(document).ready(function() {
-
+		
+		
         $('.add-history').click(function() {
             $('#error-thumbnail').text("");
             // $('#thumbnail-history').css('display', 'none');
@@ -283,7 +277,6 @@
             $('.dz-thumbnail img').attr('src', src);
             $('#thumbnail').val(src);
         })
-		
 		
 		$('#bannerInput').on('change', function (e) {
 			const file = e.target.files[0];
@@ -298,15 +291,10 @@
 			}
 		});
 		
-		
-		
-		
-		
-		
     });
 </script>
 
-<script> 
+<script>
     async function imageUrlToFile(imageUrl, fileName) {
         // Fetch the image
         const response = await fetch(imageUrl);

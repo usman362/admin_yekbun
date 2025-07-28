@@ -408,6 +408,7 @@
  
 @section('page-script')
     <script>
+	
 		
 		
         function confirmAction(event, callback) {
@@ -431,6 +432,43 @@
         }
 
         $(document).ready(function() {
+			
+			
+			const uploadBannerImg = "{{ asset('assets/img/uploadbanner.png') }}";
+			const plusImg = "{{ asset('assets/img/plus-solid.svg') }}";
+		
+			// Trigger reset after modal is fully hidden
+			const createVideoModal = document.getElementById('createvideoModal');
+			const createVideoForm = document.getElementById('createvideoForm');
+		
+			// Use Bootstrap's modal hidden event
+			createVideoModal.addEventListener('hidden.bs.modal', function () {
+				// Reset form fields
+				createVideoForm.reset();
+				
+				// Reset preview image
+				document.getElementById('bannerPreview').src = uploadBannerImg;
+		
+				// Reset hidden thumbnail input
+				document.getElementById('thumbnail').value = '';
+		
+				// Reset thumbnail previews
+				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+		
+				// Clear dynamic fields
+			   // createVideoModal.querySelector('.hidden-videos')?.innerHTML = '';
+			   // createVideoModal.querySelector('.hidden-inputs')?.innerHTML = '';
+			   
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			   
+			});
 			
 			$('.save-btn-custom').prop('disabled', true);
 			
@@ -456,7 +494,18 @@
                     }
                 });
             });
+			
+			
         });
+		
+		
+		
+		
+		
+		
+		
+		
+		
     </script>
     <script>
         function drpzone_init() {

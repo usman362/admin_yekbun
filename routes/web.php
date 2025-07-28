@@ -236,16 +236,13 @@ Route::middleware('check.role:Super Admin')->group(function () {
 });
 
  
-//TV Section
-
+//Zarok TV Section
 Route::get('zarok-videos', [TVController::class, 'zarokVideos'])->name('zarok.videos');
 Route::post('zarok-videos', [TVController::class, 'zarokVideosStore'])->name('zarok.videosStore');
 Route::delete('/delete_zarok-videos/{id}', [TVController::class, 'zarokVideos_delete'])->name('zarokVideos.destroy');
-
 Route::get('zarok-stories', [TVController::class, 'zarokStories'])->name('zarok.stories');
 Route::post('zarok-stories', [TVController::class, 'zarokStoriesStore'])->name('zarok.storiesStore');
 Route::delete('/delete_zarok-stories/{id}', [TVController::class, 'zarokStories_delete'])->name('zarokStories.destroy');
-
 Route::get('zarok-movies', [TVController::class, 'zarokMovies'])->name('zarok.movies');
 Route::post('zarok-movies', [TVController::class, 'zarokMoviesStore'])->name('zarok.moviesStore');
 Route::delete('/delete_zarok-movies/{id}', [TVController::class, 'zarokMovies_delete'])->name('zarokMovies.destroy');
@@ -255,15 +252,29 @@ Route::post('zarok-series', [TVController::class, 'zarokSeriesStore'])->name('za
 Route::post('zarok-series-season', [TVController::class, 'zarokSeriesStoreSeason'])->name('zarok.seriesStoreSeason');
 Route::post('zarok-series-episode', [TVController::class, 'zarokSeriesStoreEpisode'])->name('zarok.seriesStoreEpisode');
 Route::delete('/delete_zarok-series/{id}', [TVController::class, 'zarokSeries_delete'])->name('zarokSeries.destroy');
-
 Route::delete('/delete_zarok-season/{id}', [TVController::class, 'zarokSeason_delete'])->name('zarokSeriesseason.destroy');
 Route::delete('/delete_zarok-episode/{id}', [TVController::class, 'zarokEpisode_delete'])->name('zarokSeriesepisodes.destroy');
-
-
 Route::get('/zarok/get-seasons', [TVController::class, 'getSeasonsBySeries'])->name('zarok.getSeasonsBySeries');
-
 Route::get('zarok-series-season/{id}', [TVController::class, 'zarokSeriesSeason'])->name('zarok.seriesseason');
 Route::get('zarok-series-episodes/{id}', [TVController::class, 'zarokSeriesEpisodes'])->name('zarok.seriesepisodes');
+
+//Malbat TV Section
+Route::get('malbat-documentry', [TVController::class, 'malbatDocumentry'])->name('malbat.documentry');
+Route::post('malbat-documentry', [TVController::class, 'malbatDocumentryStore'])->name('malbat.documentryStore');
+Route::delete('/delete_malbat-documentry/{id}', [TVController::class, 'malbatDocumentry_delete'])->name('malbatDocumentry.destroy');
+Route::get('malbat-movies', [TVController::class, 'malbatMovies'])->name('malbat.movies');
+Route::post('malbat-movies', [TVController::class, 'malbatMoviesStore'])->name('malbat.moviesStore');
+Route::delete('/delete_malbat-movies/{id}', [TVController::class, 'malbatMovies_delete'])->name('malbatMovies.destroy');
+Route::get('malbat-series', [TVController::class, 'malbatSeries'])->name('malbat.series');
+Route::post('malbat-series', [TVController::class, 'malbatSeriesStore'])->name('malbat.seriesStore');
+Route::post('malbat-series-season', [TVController::class, 'malbatSeriesStoreSeason'])->name('malbat.seriesStoreSeason');
+Route::post('malbat-series-episode', [TVController::class, 'malbatSeriesStoreEpisode'])->name('malbat.seriesStoreEpisode');
+Route::delete('/delete_malbat-series/{id}', [TVController::class, 'malbatSeries_delete'])->name('malbatSeries.destroy');
+Route::delete('/delete_malbat-season/{id}', [TVController::class, 'malbatSeason_delete'])->name('malbatSeriesseason.destroy');
+Route::delete('/delete_malbat-episode/{id}', [TVController::class, 'malbatEpisode_delete'])->name('malbatSeriesepisodes.destroy');
+Route::get('/malbat/get-seasons', [TVController::class, 'getSeasonsBySeriesMaltab'])->name('malbat.getSeasonsBySeries');
+Route::get('malbat-series-season/{id}', [TVController::class, 'malbatSeriesSeason'])->name('malbat.seriesseason');
+Route::get('malbat-series-episodes/{id}', [TVController::class, 'malbatSeriesEpisodes'])->name('malbat.seriesepisodes');
 
 
 Route::post('/admin/profile/store', [AdminProfileController::class, 'store'])->name('admin_profile.store');

@@ -539,6 +539,49 @@
 		
 		$(document).ready(function() {
 			
+			const uploadBannerImg = "{{ asset('assets/img/uploadbanner.png') }}";
+			const plusImg = "{{ asset('assets/img/plus-solid.svg') }}";
+			const createVideoModal = document.getElementById('createvideoModal');
+			const createVideoForm = document.getElementById('createvideoForm');
+			// Use Bootstrap's modal hidden event
+			createVideoModal.addEventListener('hidden.bs.modal', function () {
+				// Reset form fields
+				createVideoForm.reset();
+				
+				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+		
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			   
+			});
+			
+			
+			const createMoveModal = document.getElementById('createmovieModal');
+			const createMovieForm = document.getElementById('createmovieForm');
+			// Use Bootstrap's modal hidden event
+			createMoveModal.addEventListener('hidden.bs.modal', function () {
+				// Reset form fields
+				createMovieForm.reset();
+				
+				const generatedImgs = createVideoModal.querySelectorAll('.generated-img');
+				generatedImgs.forEach(img => {
+					img.src = plusImg;
+				});
+		
+			   if (Dropzone.instances.length > 0) {
+					Dropzone.instances.forEach(instance => {
+						instance.removeAllFiles(true); // true = remove from preview and cancel upload
+					});
+				}
+			   
+			});
+			
 			$('.trailerbtn').prop('disabled', true);
 			$('.moviewbtn').prop('disabled', true);
 			
