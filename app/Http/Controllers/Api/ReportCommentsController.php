@@ -130,7 +130,12 @@ class ReportCommentsController extends Controller
             'updated_at' => now(),
         ];
 
-        $inserted = DB::table('report_feeds')->insert($data);
+        // $inserted = DB::table('report_feeds')->insert($data);
+        $inserted = ReportFeeds::create([
+             'feed_id' => $id,
+            'report_type' => $request->report_type,
+            'user_id' => $userId,
+        ]);
 
         if ($inserted) {
             return response()->json([
