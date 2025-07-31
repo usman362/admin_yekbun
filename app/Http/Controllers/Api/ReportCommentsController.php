@@ -47,19 +47,19 @@ class ReportCommentsController extends Controller
             ]
         );
 
-            $feed = FeedComments::find($id);
-            $users = User::where('id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
-            if ($users) {
-                NotificationHelper::sendNotification($users->id, 'Feed Comment Reported', "You're Feed Comment has been Reported");
-                NotificationCenter::create([
-                    'title' => 'Feed Comment Reported',
-                    'description' => "You're Feed Comment has been Reported",
-                    'user_id' => $feed->user_id,
-                    'user_image' => $users->image ?? null,
-                    'type' => 'feed_comments',
-                    'is_read' => 0,
-                ]);
-            }
+        $feed = FeedComments::find($id);
+        $users = User::where('id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+        if ($users) {
+            NotificationHelper::sendNotification($users->id, 'Feed Comment Reported', "You're Feed Comment has been Reported");
+            NotificationCenter::create([
+                'title' => 'Feed Comment Reported',
+                'description' => "You're Feed Comment has been Reported",
+                'user_id' => $feed->user_id,
+                'user_image' => $users->image ?? null,
+                'type' => 'feed_comments',
+                'is_read' => 0,
+            ]);
+        }
 
         return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
     }
@@ -82,17 +82,20 @@ class ReportCommentsController extends Controller
                 'data' => $item,
                 'created_at' => $item->created_at,  // For sorting
             ]);
-
-        $mergedReports = $reportComments->merge($reportFeeds)
+        $mergedReports = '';
+        // dd($reportFeeds->count());
+        if ($reportComments->count() > 0 && $reportFeeds->count() > 0) {
+            $mergedReports = $reportComments->merge($reportFeeds)
             ->sortByDesc('created_at')
             ->values()
             ->map(fn($item) => [
                 'type' => $item['type'],
                 'data' => $item['data'],
             ]);
+        }
 
         return ResponseHelper::sendResponse([
-            'reported_items' => $mergedReports,
+            'reported_items' => $mergedReports !== '' ? $mergedReports : ($reportComments->count() > 0 ? $reportComments : $reportFeeds),
         ], 'Reported items fetched successfully');
     }
 
@@ -132,7 +135,7 @@ class ReportCommentsController extends Controller
 
         // $inserted = DB::table('report_feeds')->insert($data);
         $inserted = ReportFeeds::create([
-             'feed_id' => $id,
+            'feed_id' => $id,
             'report_type' => $request->report_type,
             'user_id' => $userId,
         ]);
