@@ -614,7 +614,8 @@
 
                                     {{-- Default Visible Video/Lottie --}}
                                     <div class="card-body p-t">
-                                        <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails" style="margin-top: -2px;"></div>
+                                        <video src="{{ asset('storage/' . $clip->video_paths) }}" autoplay style="width: 100%;position: absolute;left: 0;top: -2px;border-radius: 12px;"></video>
+                                        <div id="lottie-animation-{{ $clip->id }}" class="template-thumbnails" style="margin-top: -2px;position: absolute;top: 0;left: 0;"></div>
                                     </div>
 
                                     <div class="hover-price-info"
