@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use FFMpeg;
 use App\Http\Requests\StoreSongRequest;
 use App\Http\Controllers\Admin\FileController;
+use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
 use Carbon\Carbon;
@@ -275,6 +276,14 @@ class MusicController extends Controller
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_music_title, $description);
+                            NotificationCenter::create([
+                                'title' => $notification->new_music_title,
+                                'description' => $description,
+                                'user_id' => $user->id,
+                                'user_image' => $user->image ?? null,
+                                'type' => 'music',
+                                'is_read' => 0,
+                            ]);
                         }
                     }
                 } catch (\Exception $e) {

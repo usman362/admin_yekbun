@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Helpers;
 use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
+use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\PostGallery;
 use App\Models\User;
@@ -103,10 +104,18 @@ class VotingController extends Controller
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_votes_title, $description);
+                            NotificationCenter::create([
+                                'title' => $notification->new_votes_title,
+                                'description' => $description,
+                                'user_id' => $user->id,
+                                'user_image' => $user->image ?? null,
+                                'type' => 'surveys',
+                                'is_read' => 0,
+                            ]);
                         }
                     }
                 } catch (\Exception $e) {
-                    return redirect()->route('surveys.index')->with('success', 'Vote Has been inserted');
+                    return redirect()->route('surveys.index')->with('success', 'Survey Has been inserted');
                 }
             }
 

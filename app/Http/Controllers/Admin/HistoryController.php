@@ -11,6 +11,7 @@ use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
 use App\Models\HistoryComments;
 use App\Models\HistoryLikes;
+use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
 use Exception;
@@ -96,6 +97,14 @@ class HistoryController extends Controller
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_history_title, $description);
+                            NotificationCenter::create([
+                                'title' => $notification->new_history_title,
+                                'description' => $description,
+                                'user_id' => $user->id,
+                                'user_image' => $user->image ?? null,
+                                'type' => 'history',
+                                'is_read' => 0,
+                            ]);
                         }
                     }
                 } catch (\Exception $e) {
@@ -358,7 +367,6 @@ class HistoryController extends Controller
             }
 
             return $thumbnails;
-
         } catch (\Exception $e) {
             // Log the error if needed: Log::error($e->getMessage());
             // Return 3 default thumbnails (same image repeated)

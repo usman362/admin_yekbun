@@ -9,6 +9,7 @@ use App\Models\VideoClip;
 use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Models\MusicCategory;
+use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
 use Carbon\Carbon;
@@ -85,8 +86,15 @@ class VideoClipController extends Controller
                     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
-
                             NotificationHelper::sendNotification($user->id, $notification->new_video_clips_title, $description);
+                            NotificationCenter::create([
+                            'title' => $notification->new_video_clips_title,
+                            'description' => $description,
+                            'user_id' => $user->id,
+                            'user_image' => $user->image ?? null,
+                            'type' => 'video_clips',
+                            'is_read' => 0,
+                        ]);
                         }
                     }
                 } catch (\Exception $e) {

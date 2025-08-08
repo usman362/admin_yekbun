@@ -77,7 +77,7 @@ class FeedsController extends Controller
         // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
         $feedItems = $feeds->items();
 
-        if(isset($authFeed)){
+        if (isset($authFeed)) {
             if ($authFeed && $feeds->currentPage() == 1) {
                 $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
                 if (!$alreadyExists) {
@@ -293,24 +293,40 @@ class FeedsController extends Controller
         $feed = Feed::with('user')->find($feeds->id);
         if ($feeds->save()) {
             $notification = Notifications::first();
-            $description = Auth::user()->name.' '.Auth::user()->last_name.' has posted new Feed.';
-            if ($notification->new_donation == 'true') {
-                if ($request->user_type === 'friends' || $request->user_type === 'family') {
-                    $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
-                    if ($users) {
-                        foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', $description);
-                        }
+            $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Feed.';
+            // if ($notification->new_donation == 'true') {
+            if ($request->user_type === 'friends' || $request->user_type === 'family') {
+                $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
+                if ($users) {
+                    foreach ($users as $user) {
+                        NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', $description);
+                        NotificationCenter::create([
+                            'title' => 'Feeds Notification',
+                            'description' => $description,
+                            'user_id' => $user->id,
+                            'user_image' => $user->image ?? null,
+                            'type' => 'user_feeds',
+                            'is_read' => 0,
+                        ]);
                     }
-                } else {
-                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
-                    if ($users) {
-                        foreach ($users as $user) {
-                            NotificationHelper::sendNotification($user->id, 'Feeds Notification', $description);
-                        }
+                }
+            } else {
+                $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                if ($users) {
+                    foreach ($users as $user) {
+                        NotificationHelper::sendNotification($user->id, 'Feeds Notification', $description);
+                        NotificationCenter::create([
+                            'title' => 'Feeds Notification',
+                            'description' => $description,
+                            'user_id' => $user->id,
+                            'user_image' => $user->image ?? null,
+                            'type' => 'user_feeds',
+                            'is_read' => 0,
+                        ]);
                     }
                 }
             }
+            // }
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feed, 'success' => true], 201);
         } else {
             return response()->json(['message' => 'Something went Wrong!', 'success' => false], 403);

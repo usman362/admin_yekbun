@@ -6,6 +6,7 @@ use App\Helpers\NotificationHelper;
 use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Models\NotificationCenter;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserFriends;
@@ -130,6 +131,14 @@ class UsersController extends Controller
                         "sender" => $current_user
                     ]
                 ];
+                NotificationCenter::create([
+                    'title' => $current_user->name . ' ' . $current_user->last_name,
+                    'description' => 'You have a New Friend Request!',
+                    'user_id' => $user->id,
+                    'user_image' => $user->image ?? null,
+                    'type' => 'friend_request',
+                    'is_read' => 0,
+                ]);
                 return ResponseHelper::sendResponse($data, 'User Request Send Successfully');
             } else {
                 return ResponseHelper::sendResponse([], 'User Request Cancelled Successfully');

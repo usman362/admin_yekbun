@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
+use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\PopFeeds;
 use Illuminate\Support\Facades\Auth;
@@ -366,6 +367,14 @@ class AdminProfileController extends Controller
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->admin_donation_title, $description);
+                            NotificationCenter::create([
+                                'title' => $notification->admin_donation_title,
+                                'description' => $description,
+                                'user_id' => $user->id,
+                                'user_image' => $user->image ?? null,
+                                'type' => 'admin_donation',
+                                'is_read' => 0,
+                            ]);
                         }
                     }
                 }
@@ -412,6 +421,14 @@ class AdminProfileController extends Controller
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_system_info_title, $description);
+                                NotificationCenter::create([
+                                    'title' => $notification->admin_system_info_title,
+                                    'description' => $description,
+                                    'user_id' => $user->id,
+                                    'user_image' => $user->image ?? null,
+                                    'type' => 'admin_system_info',
+                                    'is_read' => 0,
+                                ]);
                             }
                         }
                     }
@@ -428,6 +445,14 @@ class AdminProfileController extends Controller
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_surveys_title, $description);
+                                NotificationCenter::create([
+                                    'title' => $notification->admin_surveys_title,
+                                    'description' => $description,
+                                    'user_id' => $user->id,
+                                    'user_image' => $user->image ?? null,
+                                    'type' => 'admin_surveys',
+                                    'is_read' => 0,
+                                ]);
                             }
                         }
                     }
@@ -444,6 +469,14 @@ class AdminProfileController extends Controller
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_greetings_title, $description);
+                                NotificationCenter::create([
+                                    'title' => $notification->admin_greetings_title,
+                                    'description' => $description,
+                                    'user_id' => $user->id,
+                                    'user_image' => $user->image ?? null,
+                                    'type' => 'admin_greetings',
+                                    'is_read' => 0,
+                                ]);
                             }
                         }
                     }
@@ -468,6 +501,14 @@ class AdminProfileController extends Controller
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_events_title, $description);
+                                NotificationCenter::create([
+                                    'title' => $notification->admin_events_title,
+                                    'description' => $description,
+                                    'user_id' => $user->id,
+                                    'user_image' => $user->image ?? null,
+                                    'type' => 'admin_events',
+                                    'is_read' => 0,
+                                ]);
                             }
                         }
                     }

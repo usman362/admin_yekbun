@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\MusicCategory;
+use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\Song;
 use App\Models\User;
@@ -147,6 +148,14 @@ class ArtistController extends Controller
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
+                            NotificationCenter::create([
+                                'title' => $notification->new_artist_title,
+                                'description' => $description,
+                                'user_id' => $user->id,
+                                'user_image' => $user->image ?? null,
+                                'type' => 'artist',
+                                'is_read' => 0,
+                            ]);
                         }
                     }
                 } catch (\Exception $e) {
@@ -228,6 +237,14 @@ class ArtistController extends Controller
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
+                            NotificationCenter::create([
+                                'title' => $notification->new_artist_title,
+                                'description' => $description,
+                                'user_id' => $user->id,
+                                'user_image' => $user->image ?? null,
+                                'type' => 'artist',
+                                'is_read' => 0,
+                            ]);
                         }
                     }
                 } catch (\Exception $e) {
