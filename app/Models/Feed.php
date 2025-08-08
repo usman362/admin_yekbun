@@ -15,6 +15,7 @@ class Feed extends Model
         'feed_text_color',
         'grid_style',
         'user_id',
+        'emoji',
         'image_type',
         'description',
         'user_type',

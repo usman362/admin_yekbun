@@ -228,6 +228,7 @@ class FeedsController extends Controller
         if ($request->feed_type == 'text') {
             $feeds->background_image = $request->background_image;
             $feeds->text_color = $request->text_color;
+            $feeds->emoji = $request->emoji;
         }
 
         $feeds->grid_style = $request->grid_style;
