@@ -40,50 +40,10 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="content-left">
-                            <span>Session</span>
+                            <span>Total Users</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">21,459</h4>
-                                <small class="text-success">(+29%)</small>
+                                <h4 class="mb-0 me-2">{{$totalUsers}}</h4>
                             </div>
-                            <small>Total Users</small>
-                        </div>
-                        <span class="badge bg-label-primary rounded p-2">
-                            <i class="bx bx-user bx-sm"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between">
-                        <div class="content-left">
-                            <span>Paid Users</span>
-                            <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">4,567</h4>
-                                <small class="text-success">(+18%)</small>
-                            </div>
-                            <small>Last week analytics </small>
-                        </div>
-                        <span class="badge bg-label-danger rounded p-2">
-                            <i class="bx bx-user-plus bx-sm"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between">
-                        <div class="content-left">
-                            <span>Active Users</span>
-                            <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">19,860</h4>
-                                <small class="text-danger">(-14%)</small>
-                            </div>
-                            <small>Last week analytics</small>
                         </div>
                         <span class="badge bg-label-success rounded p-2">
                             <i class="bx bx-group bx-sm"></i>
@@ -97,15 +57,47 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="content-left">
-                            <span>Pending Users</span>
+                            <span>Male Users</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">237</h4>
-                                <small class="text-success">(+42%)</small>
+                                <h4 class="mb-0 me-2">{{$maleUsers}}</h4>
                             </div>
-                            <small>Last week analytics</small>
                         </div>
-                        <span class="badge bg-label-warning rounded p-2">
-                            <i class="bx bx-user-voice bx-sm"></i>
+                        <span class="badge bg-label-primary rounded p-2">
+                            <i class="bx bx-group bx-sm"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Female Users</span>
+                            <div class="d-flex align-items-end mt-2">
+                                <h4 class="mb-0 me-2">{{$femaleUsers}}</h4>
+                            </div>
+                        </div>
+                        <span class="badge bg-label-info rounded p-2">
+                            <i class="bx bx-group bx-sm"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Closed Users</span>
+                            <div class="d-flex align-items-end mt-2">
+                                <h4 class="mb-0 me-2">{{$closedUsers}}</h4>
+                            </div>
+                        </div>
+                        <span class="badge bg-label-danger rounded p-2">
+                            <i class="bx bx-group bx-sm"></i>
                         </span>
                     </div>
                 </div>
@@ -163,11 +155,11 @@
                         aria-selected="false" tabindex="-1"><i class="tf-icons bx bx-female me-1"></i> Female User</a>
                     <div class="{{ $view === 'female' ? 'tab--selected' : '' }} tab__slider"></div>
                 </li>
-                {{-- <li class="nav-item" role="presentation">
-                    <a type="button" class="nav-link {{ $view === 'blocked' ? 'active' : '' }}" href="?view=blocked"
-                        aria-selected="false" tabindex="-1"><i class="tf-icons bx bx-block me-1"></i> Blocked User</a>
-                    <div class="{{ $view === 'blocked' ? 'tab--selected' : '' }} tab__slider"></div>
-                </li> --}}
+                <li class="nav-item" role="presentation">
+                    <a type="button" class="nav-link {{ $view === 'closed' ? 'active' : '' }}" href="?view=closed"
+                        aria-selected="false" tabindex="-1"><i class="tf-icons bx bx-block me-1"></i> Closed User</a>
+                    <div class="{{ $view === 'closed' ? 'tab--selected' : '' }} tab__slider"></div>
+                </li>
             </ul>
 
             <div class="tab-content p-0">
