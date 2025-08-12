@@ -34,7 +34,7 @@ class ClipsController extends Controller
     public function store_clips(Request $request)
     {
         $request->validate([
-            'video' => 'required|file|mimes:mp4,webm,ogg,mov'
+            'video' => 'required|file'
         ]);
 
         $clip = new Clips();
@@ -56,10 +56,7 @@ class ClipsController extends Controller
         $clip->user_id = Auth::id();
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
-        // $videoPath = $request->video;
-        // $tempVideo = Helpers::fileUpload($request->video, 'clips-videos-temp');
-        $videoPath = storage_path('app/public/clips-videos-temp/689b5e7edffcb___1755012712294.mp4');
-        //  . $tempVideo);
+        $videoPath = $request->video;
         $audioPath = storage_path('app/public/' . $request->audio);
         if (empty($request->audio)) {
             $audioPath = public_path('audios/empty.mp3');
