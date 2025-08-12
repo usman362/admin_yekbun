@@ -33,9 +33,10 @@ class ClipsController extends Controller
 
     public function store_clips(Request $request)
     {
-        if (empty($request->video)) {
-            return ResponseHelper::sendResponse([], 'Video file Required', false, 404);
-        }
+        $request->validate([
+            'video' => 'required|file'
+        ]);
+
         $clip = new Clips();
         $clip->template_id = $request->template_id;
         if ($request->hasFile('thumbnail')) {
