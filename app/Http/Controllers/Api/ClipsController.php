@@ -58,11 +58,8 @@ class ClipsController extends Controller
         $clip->text_properties = $request->text_properties;
         $videoPath = $request->video;
         $audioPath = storage_path('app/public/' . $request->audio);
-        if (!Storage::exists($audioPath)) {
-            dd('not founnd');
+        if (!Storage::exists('public/' . $request->audio)) {
             $audioPath = public_path('audios/empty.mp3');
-        }else{
-            dd('founnd');
         }
         $outputPath = storage_path('app/public/videos/clip_' . $uid . '.mp4');
 
