@@ -36,7 +36,8 @@ class ClipsController extends Controller
         $request->validate([
             'video' => 'required|file|mimes:mp4,webm,ogg,mov'
         ]);
-
+$videoPath = storage_path('app/public/clips-videos-temp/689b5e7edffcb___1755012712294.mp4');
+dd($videoPath);
         $clip = new Clips();
         $clip->template_id = $request->template_id;
         if ($request->hasFile('thumbnail')) {
@@ -57,8 +58,9 @@ class ClipsController extends Controller
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
         // $videoPath = $request->video;
-        $tempVideo = Helpers::fileUpload($request->video, 'clips-videos-temp');
-        $videoPath = storage_path('app/public/' . $tempVideo);
+        // $tempVideo = Helpers::fileUpload($request->video, 'clips-videos-temp');
+        $videoPath = storage_path('app/public/clips-videos-temp/689b5e7edffcb___1755012712294.mp4');
+        //  . $tempVideo);
         $audioPath = storage_path('app/public/' . $request->audio);
         if (empty($request->audio)) {
             $audioPath = public_path('audios/empty.mp3');
