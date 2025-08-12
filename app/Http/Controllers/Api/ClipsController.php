@@ -36,8 +36,7 @@ class ClipsController extends Controller
         $request->validate([
             'video' => 'required|file|mimes:mp4,webm,ogg,mov'
         ]);
-$videoPath = storage_path('app/public/clips-videos-temp/689b5e7edffcb___1755012712294.mp4');
-dd($videoPath);
+
         $clip = new Clips();
         $clip->template_id = $request->template_id;
         if ($request->hasFile('thumbnail')) {
