@@ -544,7 +544,7 @@
                                 data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
                                 data-id="{{ $clip->id }}"
                                 data-demo-href="{{ asset('storage/' . $clip->thumbnail) }}"
-                                style="height:335px; width:210px; background-size:cover; position: relative;">
+                                style="height:335px; width:210px; background-size:cover; position: relative;border:none">
                                 <!-- card -->
                                 <div class="content-wrap p-2" style="position: relative; height: 100%;">
                                     {{-- Hover Info Block --}}
@@ -714,7 +714,7 @@
 
                     <div class="col-md-2">
                         <div class="post-image text-white">
-                            <div id="feed-post-1" class="card is-post mt-4 p-1 mb-0 view-post card-post"
+                            <div id="feed-post-1" class="card is-post mt-4 mb-0 view-post card-post"
                                 data-fancybox data-src="#video-popup" href="javascript:;"
                                 data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
                                 data-json="{{ $clip->template ? asset('storage/' . $clip->template->json_paths) : 'null' }}"
@@ -726,66 +726,68 @@
                                 data-user_level="{{ $clip->user->level ?? 0 }}" data-text="{{ $clip->text }}"
                                 data-emoji="{{ asset('emojis/' . $clip->emoji . '.gif') }}"
                                 data-text_properties="{{ $clip->text_properties }}"
-                                style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;">
-                                <!-- Main wrap -->
-                                <div class="content-wrap">
-                                    <div class="mt-2 mb-0">
-                                        <div
-                                            style="height:29px;display:flex;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
-                                            <div style="display:flex;align-items:center;width:34%;height:100%">
-                                            </div>
+                                style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;border:none">
 
-                                            <div
-                                                style="align-items:center;gap:2px;height:100%;width:66%;padding:5px 16px 5px 5px;">
-                                                <div style="display: flex">
-                                                    <img src="{{ asset('images/user-clips-artist.png') }}"
-                                                        style="width: 17px;height: 17px;border-radius: 100%;margin-top:6px">
-                                                    <h6 class="ml-2 text-white">
-                                                        {{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}
-                                                    </h6>
+                                <div style="border-radius: 14px;background-color: #0000001f;width: 100%;height: 100%;">
+                                    <div class="content-wrap">
+                                        <div class="mt-2 mb-0">
+                                            <div class="row"
+                                                style="height:29px;justify-content:space-between;align-items:center;width:100%;border-radius:5px;">
+                                                <div class="col-sm-6" style="align-items:center;">
                                                 </div>
-                                                <div style="display: flex;margin-top:-6px">
-                                                    <img src="{{ asset('images/user-clips-flag.png') }}"
-                                                        style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
-                                                    <p style="font-size: 9px" class="ml-2 text-white">Rojava
-                                                    </p>
-                                                </div>
-                                            </div>
 
-                                        </div>
-                                    </div>
-                                    <!-- Post body -->
-                                    <div class="card-body p-0">
-                                        <!-- /Post body -->
-                                        <div class="mt-2 mb-0"
-                                            style="top: 250px;position: relative;bottom: auto;">
-                                            <div
-                                                style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
-                                                <div
-                                                    style="display:flex;align-items:center;width:100%;height:100%">
-
-
-                                                    <div class="text-white"
-                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover">
-                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                            style="width:100%;height:100%;object-fit:cover">
-                                                        <span style="font-weight:400;font-family:Genos">0</span>
+                                                <div class="col-sm-6"
+                                                    style="align-items:center;gap:2px;padding:5px 16px 5px 5px;">
+                                                    <div style="display: flex">
+                                                        <img src="{{ asset('images/user-clips-artist.png') }}"
+                                                            style="width: 17px;height: 17px;border-radius: 100%;">
+                                                        <h6 class="ml-2 text-white">
+                                                            {{ ($clip->user->name ?? 'N/A') }}
+                                                        </h6>
+                                                    </div>
+                                                    <div style="display: flex;">
+                                                        <img src="{{ asset('images/user-clips-flag.png') }}"
+                                                            style="width: 9px;height: 9px;border-radius: 100%;margin-top:2px;margin-left:20px">
+                                                        <p style="font-size: 12px;margin-top:-4px" class="ml-2 text-white">Rojava
+                                                        </p>
                                                     </div>
                                                 </div>
 
-                                                <div class="text-white"
-                                                    style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
-
-                                                    <i class="fas fa-play"></i>
-                                                </div>
-
                                             </div>
+                                        </div>
+                                        <!-- Post body -->
+                                        <div class="card-body p-0">
+                                            <!-- /Post body -->
+                                            <div class="mt-2 mb-0"
+                                                style="top: 250px;position: relative;bottom: auto;">
+                                                <div
+                                                    style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border-radius:5px;">
+                                                    <div
+                                                        style="display:flex;align-items:center;width:100%;height:100%">
+
+
+                                                        <div class="text-white"
+                                                            style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover">
+                                                            <span style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-white"
+                                                        style="display:flex;align-items:center;gap:2px;height:100%;padding:5px 16px 5px 5px;">
+
+                                                        <i class="fas fa-play"></i>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
 
                             </div>
@@ -827,10 +829,10 @@
             <!-- Left Column: Video -->
             <div style="position: relative;">
                 <div id="lottie-text"></div>
-                <div id="lottie-animation-video" style="height: auto;width: 350px;position: absolute;">
+                <div id="lottie-animation-video" style="height: 630px;width: 350px;position: absolute;">
                 </div>
                 <video class="fancybox-video" controls controlsList="nodownload" poster=""
-                    style="width: 335px; height: auto;outline:none">
+                    style="width: 350px; height: 630px;outline:none;position:relative;z-index:-1;">
                     <source src="" class="fancybox-source" type="video/mp4">
                     Your browser doesn't support video.
                 </video>
@@ -1076,7 +1078,7 @@
                 path: $(this).attr('data-json'),
             });
         }
-
+$('#lottie-animation-video').html('');
         const text = $(this).attr('data-text');
         const props = JSON.parse($(this).attr('data-text_properties'));
 
