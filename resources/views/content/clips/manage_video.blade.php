@@ -1080,6 +1080,7 @@
         }
 $('#lottie-animation-video').html('');
         const text = $(this).attr('data-text');
+        console.log(text);
         const props = JSON.parse($(this).attr('data-text_properties'));
 
         const $container = $('<div>').css({
