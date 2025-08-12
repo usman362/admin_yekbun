@@ -34,7 +34,7 @@ class ClipsController extends Controller
     public function store_clips(Request $request)
     {
         $request->validate([
-            'video' => 'required|file'
+            'video' => 'required|file|mimes:mp4,webm,ogg,mov'
         ]);
 
         $clip = new Clips();
