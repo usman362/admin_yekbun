@@ -33,6 +33,10 @@ class ClipsController extends Controller
 
     public function store_clips(Request $request)
     {
+        $request->validate([
+            'video' => 'file'
+        ]);
+        
         $clip = new Clips();
         $clip->template_id = $request->template_id;
         if ($request->hasFile('thumbnail')) {
