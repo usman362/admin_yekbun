@@ -56,7 +56,9 @@ class ClipsController extends Controller
         $clip->user_id = Auth::id();
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
-        $videoPath = $request->video;
+        // $videoPath = $request->video;
+        $tempVideo = Helpers::fileUpload($request->video, 'clips-videos-temp');
+        $videoPath = storage_path('app/public/' . $tempVideo);
         $audioPath = storage_path('app/public/' . $request->audio);
         if (empty($request->audio)) {
             $audioPath = public_path('audios/empty.mp3');
