@@ -21,7 +21,7 @@ class ClipsController extends Controller
 {
     public function index()
     {
-        $videos = Clips::with(['template','user'])->orderBy('created_at','desc')->get();
+        $videos = Clips::with(['template', 'user'])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
@@ -54,6 +54,9 @@ class ClipsController extends Controller
         $clip->text_properties = $request->text_properties;
         $videoPath = $request->video;
         $audioPath = storage_path('app/public/' . $request->audio);
+        if (empty($request->audio)) {
+            $audioPath = public_path('audios/empty.mp3');
+        }
         $outputPath = storage_path('app/public/videos/clip_' . $uid . '.mp4');
 
         $text = $request->text ?? 'Default Text';
@@ -81,9 +84,9 @@ class ClipsController extends Controller
 
         // FFmpeg command WITHOUT custom font
         $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
-                "\"[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
-                "[a1][a2]amix=inputs=2:duration=first[a]\" " .
-                "-map 0:v -map \"[a]\" -shortest {$outputPath}";
+            "\"[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
+            "[a1][a2]amix=inputs=2:duration=first[a]\" " .
+            "-map 0:v -map \"[a]\" -shortest {$outputPath}";
 
 
         exec($command, $output, $return_var);
