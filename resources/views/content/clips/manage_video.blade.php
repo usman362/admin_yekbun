@@ -1113,7 +1113,8 @@ $('#lottie-animation-video').html('');
             height: props.fontSize + 'px'
         });
 
-        $container.append($imgBefore, $textSpan, $imgAfter);
+        // $container.append($imgBefore, $textSpan, $imgAfter);
+        $container.append($textSpan);
         $('#lottie-text').html($container);
 
         $('#user_id').val($(this).attr('data-user_id'));
