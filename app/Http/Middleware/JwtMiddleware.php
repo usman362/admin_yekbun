@@ -21,8 +21,11 @@ class JwtMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
+            if(!$user){
+                return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 403);
+            }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 200);
+            return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 403);
         }
 
         return $next($request);
