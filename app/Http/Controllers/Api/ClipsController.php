@@ -57,12 +57,20 @@ class ClipsController extends Controller
         $clip->text = $request->text;
         $clip->text_properties = $request->text_properties;
         $videoPath = $request->video;
-        $audioPath = storage_path('app/public/' . $request->audio);
-        if (empty($request->audio) || !Storage::exists('public/' . $request->audio)) {
-            $audioPath = public_path('audios/empty.mp3');
+        $audioPath = public_path('audios/empty.mp3');
+        if ($request->hasFile('audio')) {
+            // If uploading a new file
+            $audioPath = $request->audio;
+        } else {
+            // If no new file, check if the given audio exists in storage
+            if (!empty($request->audio) && Storage::exists('public/' . $request->audio)) {
+                $audioPath = storage_path('app/public/' . $request->audio);
+            } else {
+                // fallback audio
+                $audioPath = public_path('audios/empty.mp3');
+            }
         }
         $outputPath = storage_path('app/public/videos/clip_' . $uid . '.mp4');
-
         $text = $request->text ?? 'Default Text';
         $videoVolume = $request->video_volume ?? 0.8; // 80% of original video volume
         $audioVolume = $request->audio_volume ?? 0.5; // 50% of added background audio

@@ -4,6 +4,7 @@
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap4.css">
 @endsection
 
 @section('vendor-style')
@@ -28,8 +29,8 @@
         </div>
         <div class="">
             <!-- <a href="{{ route('users.educated.create') }}">
-                <button class="btn btn-primary">Add User</button>
-              </a> -->
+                    <button class="btn btn-primary">Add User</button>
+                  </a> -->
             {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add User</button> --}}
         </div>
     </div>
@@ -42,7 +43,7 @@
                         <div class="content-left">
                             <span>Total Users</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{$totalUsers}}</h4>
+                                <h4 class="mb-0 me-2">{{ $totalUsers }}</h4>
                             </div>
                         </div>
                         <span class="badge bg-label-success rounded p-2">
@@ -59,7 +60,7 @@
                         <div class="content-left">
                             <span>Male Users</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{$maleUsers}}</h4>
+                                <h4 class="mb-0 me-2">{{ $maleUsers }}</h4>
                             </div>
                         </div>
                         <span class="badge bg-label-primary rounded p-2">
@@ -76,7 +77,7 @@
                         <div class="content-left">
                             <span>Female Users</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{$femaleUsers}}</h4>
+                                <h4 class="mb-0 me-2">{{ $femaleUsers }}</h4>
                             </div>
                         </div>
                         <span class="badge bg-label-info rounded p-2">
@@ -93,7 +94,7 @@
                         <div class="content-left">
                             <span>Closed Users</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">{{$closedUsers}}</h4>
+                                <h4 class="mb-0 me-2">{{ $closedUsers }}</h4>
                             </div>
                         </div>
                         <span class="badge bg-label-danger rounded p-2">
@@ -117,32 +118,6 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header border-bottom">
-            <h5 class="card-title">Search Filter</h5>
-            <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                <div class="col-md-4 user_role"><select id="UserRole" class="form-select text-capitalize">
-                        <option value=""> Select Role </option>
-                        <option value="Admin">Admin</option>
-                        <option value="Author">Author</option>
-                        <option value="Editor">Editor</option>
-                        <option value="Maintainer">Maintainer</option>
-                        <option value="Subscriber">Subscriber</option>
-                    </select></div>
-                <div class="col-md-4 user_plan"><select id="UserPlan" class="form-select text-capitalize">
-                        <option value=""> Select Plan </option>
-                        <option value="Basic">Basic</option>
-                        <option value="Company">Company</option>
-                        <option value="Enterprise">Enterprise</option>
-                        <option value="Team">Team</option>
-                    </select></div>
-                <div class="col-md-4 user_status"><select id="FilterTransaction" class="form-select text-capitalize">
-                        <option value=""> Select Status </option>
-                        <option value="Pending" class="text-capitalize">Pending</option>
-                        <option value="Active" class="text-capitalize">Active</option>
-                        <option value="Inactive" class="text-capitalize">Inactive</option>
-                    </select></div>
-            </div>
-        </div>
         <div class="nav-align-top mb-4">
             <ul class="nav nav-tabs nav-fill" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -161,8 +136,6 @@
                     <div class="{{ $view === 'closed' ? 'tab--selected' : '' }} tab__slider"></div>
                 </li>
             </ul>
-
-            <div class="tab-content p-0">
 
                 <div class="tab-pane fade show active" id="solovedReportsTab" role="tabpanel">
                     <div class="table-responsive text-nowrap pd-t-24px">
@@ -206,10 +179,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                       <td>
-    {{ $userr->username }}<br>
-    <small class="text-muted">{{ $userr->user_id }}</small>
-</td>
+                                        <td>
+                                            {{ $userr->username }}<br>
+                                            <small class="text-muted">{{ $userr->user_id }}</small>
+                                        </td>
 
 
                                         </td>
@@ -248,7 +221,9 @@
                                                 </span>
                                                  --}}
                                                 <span data-bs-toggle="modal" class="upgradeUser"
-                                                    data-bs-target="#upgradeModal" data-name="{{$userr->name}}" data-id="{{$userr->id}}" data-image="{{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}">
+                                                    data-bs-target="#upgradeModal" data-name="{{ $userr->name }}"
+                                                    data-id="{{ $userr->id }}"
+                                                    data-image="{{ $userr->image ? asset('storage/' . $userr->image) : 'https://www.w3schools.com/w3images/avatar2.png' }}">
                                                     @can('users.write')
                                                         <button class="btn btn-sm btn-icon" data-bs-toggle="tooltip"
                                                             data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
@@ -270,28 +245,27 @@
                                                     {{-- @endcan --}}
                                                 </form>
                                                 {{-- <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                      <div class="dropdown-menu">
-                        <!-- <a class="dropdown-item" href="{{ route('users.educated.edit', $userr->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a> -->
-                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $userr->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
-                        <form action="{{ route('users.educated.destroy', $userr->id) }}" method="post">
-                          @method('DELETE')
-                          @csrf
-                          <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i></button>
-                        </form>
-                      </div> --}}
+                                                    <div class="dropdown-menu">
+                                                        <!-- <a class="dropdown-item" href="{{ route('users.educated.edit', $userr->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a> -->
+                                                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $userr->id }}"><i class="bx bx-edit-alt me-1"></i> Edit</button>
+                                                        <form action="{{ route('users.educated.destroy', $userr->id) }}" method="post">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i></button>
+                                                        </form>
+                                                    </div> --}}
                                             </div>
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
+                                    {{-- <tr>
                                         <td class="text-center" colspan="6"><b>No users found.<b></td>
-                                    </tr>
+                                    </tr> --}}
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 
@@ -354,14 +328,15 @@
     </x-modal>
 
     <!-- Upgrade Modal -->
-    <x-modal id="upgradeModal" :centered="false" title="Upgrade User" closeBtnText="Cancel"
-        saveBtnText="Upgrade" saveBtnForm="upgradeForm" saveBtnType="submit">
+    <x-modal id="upgradeModal" :centered="false" title="Upgrade User" closeBtnText="Cancel" saveBtnText="Upgrade"
+        saveBtnForm="upgradeForm" saveBtnType="submit">
         <form id="upgradeForm" action="{{ route('users.upgrade', $user->id) }}" method="post">
             @csrf
             <div class="d-flex justify-content-start align-items-center upgrade-user-section mb-4">
                 <div class="avatar-wrapper">
                     <div class="avatar avatar-sm me-3"><img src="{{ 'https://www.w3schools.com/howto/img_avatar.png' }}"
-                            alt="Avatar" class="rounded-circle" onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'"></div>
+                            alt="Avatar" class="rounded-circle"
+                            onerror="this.src='https://www.w3schools.com/w3images/avatar2.png'"></div>
                 </div>
                 <div class="d-flex flex-column">
                     <a href="javascript:void(0)" class="text-body text-truncate">
@@ -375,7 +350,9 @@
                     <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon1">
                             <span class="custom-option-body">
-                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/educated.svg')}}" alt="Educated" width="20"> Educated</span>
+                                <span class="custom-option-title"><img
+                                        src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated"
+                                        width="20"> Educated</span>
                             </span>
                             <input name="level" class="form-check-input" type="radio" value="1"
                                 id="customRadioIcon1">
@@ -386,7 +363,9 @@
                     <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon2">
                             <span class="custom-option-body">
-                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/cultivated.svg')}}" alt="Cultivated" width="20"> Cultivated</span>
+                                <span class="custom-option-title"><img
+                                        src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                        width="20"> Cultivated</span>
                             </span>
                             <input name="level" class="form-check-input" type="radio" value="0"
                                 id="customRadioIcon2" checked="">
@@ -398,7 +377,9 @@
                     <div class="form-check custom-option custom-option-icon checked">
                         <label class="form-check-label custom-option-content" for="customRadioIcon3">
                             <span class="custom-option-body">
-                                <span class="custom-option-title"><img src="{{asset('assets/svg/svg-dialog/academic.svg')}}" alt="Academic" width="20"> Academic</span>
+                                <span class="custom-option-title"><img
+                                        src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic"
+                                        width="20"> Academic</span>
                             </span>
                             <input name="level" class="form-check-input" type="radio" value="2"
                                 id="customRadioIcon3">
@@ -408,7 +389,8 @@
             </div>
             <div>
                 <label class="form-label" for="inputPassword">Admin Password</label>
-                <input type="text" id="inputPassword" name="password" class="form-control" placeholder="Password" autocomplete="off">
+                <input type="text" id="inputPassword" name="password" class="form-control" placeholder="Password"
+                    autocomplete="off">
                 @error('warning_cause')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
@@ -424,6 +406,11 @@
 @endsection
 
 @section('page-script')
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap4.js"></script>
     <script>
         function confirmAction(event, callback) {
             event.preventDefault();
@@ -450,5 +437,7 @@
             $('.upgrade-user-section img').attr('src', $(this).attr('data-image'));
             $('.upgrade-user-section a span').text($(this).attr('data-name'));
         });
+
+        new DataTable('table');
     </script>
 @endsection
