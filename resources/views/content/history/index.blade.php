@@ -192,6 +192,18 @@
         .fancybox__thumbs {
             display: none !important;
         }
+
+        .video-source {
+            position: absolute;
+            top: auto;
+            bottom: 4rem;
+            z-index: 999999;
+            color: #fff;
+            left: 34rem;
+        }
+        .video-source span{
+            font-size: 14px;
+        }
     </style>
 @endsection
 
@@ -295,7 +307,7 @@
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-thumb="{{ asset('storage/' . $feed->video[0]['path']) }}"
                                         href="{{ asset('storage/' . $feed->video[0]['path']) }}"
-                                        data-id="{{ $feed->_id }}"
+                                        data-id="{{ $feed->_id }}" data-source="{{$feed->source}}"
                                         data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
@@ -423,7 +435,9 @@
         </div>
         <!-- / Content -->
         <div class="content-backdrop fade"></div>
-
+        <div class="video-source d-none">
+            <i class="fas fa-circle-info"></i> <span></span>
+        </div>
         <x-modal id="createhistoryModal" title="Create History" saveBtnText="Create" saveBtnType="submit"
             saveBtnForm="createForm" size="md" saveBtnClass="btn btn-primary submit-clip-template">
             @include('content.include.history.createForm')
@@ -764,10 +778,13 @@
         function closeFancyBox() {
             $('body').css('position', 'relative');
             $('.comments-list').html('');
+            $('.video-source').addClass('d-none');
         }
 
         $('.view-post').click(function() {
             $('#feed_id').val($(this).attr('data-id'));
+            $('.video-source span').text($(this).attr('data-source'));
+            $('.video-source').removeClass('d-none');
             $.ajax({
                 url: "{{ route('get.comments') }}",
                 type: 'GET',
