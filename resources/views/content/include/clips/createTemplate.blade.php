@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="text_color">Text Color</label>
-                    <input type="text" id="text_color" class="form-control" placeholder="Text Color" value="black"
+                    <input type="color" id="text_color" class="form-control" placeholder="Text Color" style="height: 34px" value="black"
                         name="text_color" required>
                     @error('text_color')
                         <span class="text-danger">{{ $message }}</span>
