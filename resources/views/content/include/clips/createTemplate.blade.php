@@ -147,6 +147,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                 <div class="col-md-6">
+                    <label class="form-label" for="text_font_size">Font Size</label>
+                    <input type="text" id="text_font_size" class="form-control" placeholder="Font Size" value="24px"
+                        name="text_font_size" required>
+                    @error('text_font_size')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
         </div>
     </div>

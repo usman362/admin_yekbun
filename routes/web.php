@@ -162,6 +162,7 @@ Route::get('test', function () {
         $clip->text = 'Default Text';
         $clip->text_position  = 'bottom';
         $clip->text_font  = 'Genos-Bold';
+        $clip->text_font_size  = '24px';
         $clip->text_color  = 'black';
         $clip->save();
     }
