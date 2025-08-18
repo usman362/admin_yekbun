@@ -116,16 +116,33 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="text_color">Text Color</label>
-                    <input type="text" id="text_color" class="form-control" placeholder="Text Color" value="black" name="text_color"
-                        required>
+                    <input type="text" id="text_color" class="form-control" placeholder="Text Color" value="black"
+                        name="text_color" required>
                     @error('text_color')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="text_font">Text Font</label>
-                    <input type="text" id="text_font" class="form-control" value="Roboto-Bold" placeholder="Text Font" name="text_font"
-                        required>
+                    <select class="form-control" name="text_font" id="text_font">
+                        <option value="Genos-Bold">Genos-Bold</option>
+                        <option value="Genos-BoldItalic">Genos-BoldItalic</option>
+                        <option value="Genos-Italic">Genos-Italic</option>
+                        <option value="Genos-Medium">Genos-Medium</option>
+                        <option value="Genos-MediumItalic">Genos-MediumItalic</option>
+                        <option value="Genos-Regular">Genos-Regular</option>
+                        <option value="Genos-SemiBold">Genos-SemiBold</option>
+                        <option value="Genos-SemiBoldItalic">Genos-SemiBoldItalic</option>
+                        <option value="ElMessiri-Bold">ElMessiri-Bold</option>
+                        <option value="ElMessiri-Medium">ElMessiri-Medium</option>
+                        <option value="ElMessiri-Regular">ElMessiri-Regular</option>
+                        <option value="ElMessiri-SemiBold">ElMessiri-SemiBold</option>
+                        <option value="Poppins-SemiBold">Poppins-SemiBold</option>
+                        <option value="Poppins-Medium">Poppins-Medium</option>
+                        <option value="Poppins-Bold">Poppins-Bold</option>
+                        <option value="Poppins-Light">Poppins-Light</option>
+                        <option value="Poppins-Regular">Poppins-Regular</option>
+                    </select>
                     @error('text_font')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

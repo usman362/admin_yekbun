@@ -160,8 +160,8 @@ Route::get('test', function () {
 
     foreach (App\Models\ClipTemplates::all() as $clip) {
         $clip->text = 'Default Text';
-        $clip->text_position  = 'top';
-        $clip->text_font  = 'Roboto-Bold';
+        $clip->text_position  = 'bottom';
+        $clip->text_font  = 'Genos-Bold';
         $clip->text_color  = 'black';
         $clip->save();
     }
