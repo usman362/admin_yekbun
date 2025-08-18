@@ -103,6 +103,14 @@
                     @enderror
                 </div>
                 <div class="col-md-6">
+                    <label class="form-label" for="text_color">Text Color</label>
+                    <input type="text" id="text_color" class="form-control" placeholder="Text Color" value="black"
+                        name="text_color" required>
+                    @error('text_color')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-3">
                     <label class="form-label" for="text_position">Text Position</label>
                     <select class="form-control" name="text_position" id="text_position">
                         <option value="top">Top</option>
@@ -111,14 +119,6 @@
                         <option value="left">Left</option>
                     </select>
                     @error('text_position')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label" for="text_color">Text Color</label>
-                    <input type="text" id="text_color" class="form-control" placeholder="Text Color" value="black"
-                        name="text_color" required>
-                    @error('text_color')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -147,7 +147,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                 <div class="col-md-6">
+                 <div class="col-md-3">
                     <label class="form-label" for="text_font_size">Font Size</label>
                     <input type="text" id="text_font_size" class="form-control" placeholder="Font Size" value="24px"
                         name="text_font_size" required>
