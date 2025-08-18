@@ -110,7 +110,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <label class="form-label" for="text_position">Text Position</label>
                     <select class="form-control" name="text_position" id="text_position">
                         <option value="top">Top</option>
@@ -122,7 +122,7 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <label class="form-label" for="text_font">Text Font</label>
                     <select class="form-control" name="text_font" id="text_font">
                         <option value="Genos-Bold">Genos-Bold</option>
@@ -146,8 +146,8 @@
                     @error('text_font')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                 <div class="col-md-3">
+                </div> --}}
+                 <div class="col-md-6">
                     <label class="form-label" for="text_font_size">Font Size</label>
                     <input type="text" id="text_font_size" class="form-control" placeholder="Font Size" value="24px"
                         name="text_font_size" required>

@@ -107,7 +107,7 @@ class ClipsController extends Controller
         $clip->cultivated_price = $request->cultivated_price;
         $clip->text = $request->text;
         $clip->text_position  = $request->text_position;
-        $clip->text_font  = $request->text_font;
+        // $clip->text_font  = $request->text_font;
         $clip->text_font_size  = $request->text_font_size;
         $clip->text_color  = $request->text_color;
         $clip->save();
