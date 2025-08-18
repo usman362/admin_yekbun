@@ -158,9 +158,12 @@ Route::get('/test-fcm', function () {
 
 Route::get('test', function () {
 
-    foreach (App\Models\User::all() as $user) {
-        $user->app_status = 'online';
-        $user->save();
+    foreach (App\Models\ClipTemplates::all() as $clip) {
+        $clip->text = 'Default Text';
+        $clip->text_position  = 'top';
+        $clip->text_font  = 'Roboto-Bold';
+        $clip->text_color  = 'black';
+        $clip->save();
     }
     return 'success';
 });

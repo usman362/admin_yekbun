@@ -95,6 +95,41 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="text">Text</label>
+                    <textarea class="form-control" name="text" id="text" cols="28" rows="2">Default Text</textarea>
+                    @error('text')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="text_position">Text Position</label>
+                    <select class="form-control" name="text_position" id="text_position">
+                        <option value="top">Top</option>
+                        <option value="right">Right</option>
+                        <option value="bottom">Bottom</option>
+                        <option value="left">Left</option>
+                    </select>
+                    @error('text_position')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="text_color">Text Color</label>
+                    <input type="text" id="text_color" class="form-control" placeholder="Text Color" value="black" name="text_color"
+                        required>
+                    @error('text_color')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="text_font">Text Font</label>
+                    <input type="text" id="text_font" class="form-control" value="Roboto-Bold" placeholder="Text Font" name="text_font"
+                        required>
+                    @error('text_font')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
         </div>
     </div>

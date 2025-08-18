@@ -51,7 +51,6 @@ class ClipsController extends Controller
                 $video->thumbnail = $cleanedThumbnail;
             }
         }
-
         if ($video->save()) {
             return redirect()->route('manage_video')->with('success', 'Video Has been inserted');
         } else {
@@ -106,6 +105,10 @@ class ClipsController extends Controller
         }
         $clip->educated_price = $request->educated_price;
         $clip->cultivated_price = $request->cultivated_price;
+        $clip->text = $request->text;
+        $clip->text_position  = $request->text_position;
+        $clip->text_font  = $request->text_font;
+        $clip->text_color  = $request->text_color;
         $clip->save();
         // if ($request->hasFile('json_file')) {
         //     $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
