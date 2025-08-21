@@ -50,14 +50,13 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = Language::with('translation')->get();
-
+        $languages = Language::with('translation')->where('status','1')->get();
         $response = [];
 
         foreach ($languages as $language) {
             $translations = [];
             foreach ($language->translation as $translation) {
-                $translations[$translation->keyword] = $translation->translated;
+                $translations[$translation->keyword] = $translation->translated !== '' ? $translation->translated : $translation->keyword;
             }
 
             $response[$language->code] = [
@@ -80,7 +79,7 @@ class LanguageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {    
+    {
         //
     }
 
