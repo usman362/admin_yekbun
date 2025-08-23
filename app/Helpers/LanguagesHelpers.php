@@ -457,6 +457,48 @@ class LanguagesHelpers
             ['keyword' => 'Notes', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Setting About Us'],
 
 
+            //Multimedia Artist
+            ['keyword' => 'Latest', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Popular', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Favorite', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Artist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Latest Songs', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Popular Artist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Favorite Artist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+
+            //Multimedia Songs
+            ['keyword' => 'Latest Upload', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Songs'],
+            ['keyword' => 'New Upload', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Songs'],
+            ['keyword' => 'Previous Upload', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Songs'],
+            ['keyword' => 'New', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Songs'],
+
+            //Multimedia Playlist
+            ['keyword' => 'My Playlist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Notification', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Each Playlist 50 Tracks only', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Unlike', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Like', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'More Videos', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Only Me', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Music Options', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Edit Playlist Title', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Playlist Privacy', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+
+            //Multimedia Card
+            ['keyword' => 'My Cart', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'My Portal Cart', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'PayPal Payment', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'Account Upgrade', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'Thank you for your upgrade! We are pleased to welcome you as an ', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'User', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'Enjoy the enhanced features and new opportunities on our portal. Please remember to treat other users with respect.', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'I strictly adhere to the portal rules.', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'I treat all members with respect.', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+            ['keyword' => 'I refrain from any form of insults.', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
+
+
+
+
 
         ];
 
