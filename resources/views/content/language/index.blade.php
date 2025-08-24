@@ -65,7 +65,7 @@
                         <th>Language</th>
                         <th>Icon</th>
                         <th>Code</th>
-                        {{-- <th>Progress</th> --}}
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -87,6 +87,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $language->code ?? '' }}</td>
+                                <td><span class="badge bg-{{ $language->status == '1' ? 'success' : 'danger' }}">{{ $language->status == '1' ? 'Published' : 'Unpublished' }}</span></td>
                                 <td>
                                     <div class="">
                                         <span data-bs-toggle="modal" data-bs-target="#editDetailsModal">
