@@ -2141,47 +2141,47 @@ class LanguageController extends Controller
             return response()->json(['error' => 'Invalid JSON format'], 400);
         }
 
-        // TranslateKeywordsJSON::dispatch(
-        //     $request->language_id,
-        //     $languageCode,
-        //     $cleanMainSectionTitle,
-        //     $request->section_name,
-        //     $data
-        // );
+        TranslateKeywordsJSON::dispatch(
+            $request->language_id,
+            $languageCode,
+            $cleanMainSectionTitle,
+            $request->section_name,
+            $data
+        );
 
 
-        foreach ($data as $item) {
-            $keyword = $item['keyword'] ?? null;
-            $translated = $item['translated'] ?? null;
+        // foreach ($data as $item) {
+        //     $keyword = $item['keyword'] ?? null;
+        //     $translated = $item['translated'] ?? null;
 
-            if (!$keyword || !$translated) {
-                continue; // Skip if missing data
-            }
+        //     if (!$keyword || !$translated) {
+        //         continue; // Skip if missing data
+        //     }
 
-            // Check if the record already exists
-            $existing = \App\Models\LanguageDetail::where([
-                'language_id'  => $request->language_id,
-                'keyword'      => $keyword,
-                'main_section' => $cleanMainSectionTitle,
-                'section_name' => $request->section_name,
-            ])->first();
+        //     // Check if the record already exists
+        //     $existing = \App\Models\LanguageDetail::where([
+        //         'language_id'  => $request->language_id,
+        //         'keyword'      => $keyword,
+        //         'main_section' => $cleanMainSectionTitle,
+        //         'section_name' => $request->section_name,
+        //     ])->first();
 
-            if ($existing) {
-                // Update the translated value
-                $existing->update([
-                    'translated' => $translated,
-                ]);
-            } else {
-                // Insert new keyword
-                \App\Models\LanguageDetail::create([
-                    'language_id'   => $request->language_id,
-                    'keyword'       => $keyword,
-                    'translated'    => $translated,
-                    'main_section'  => $cleanMainSectionTitle,
-                    'section_name'  => $request->section_name,
-                ]);
-            }
-        }
+        //     if ($existing) {
+        //         // Update the translated value
+        //         $existing->update([
+        //             'translated' => $translated,
+        //         ]);
+        //     } else {
+        //         // Insert new keyword
+        //         \App\Models\LanguageDetail::create([
+        //             'language_id'   => $request->language_id,
+        //             'keyword'       => $keyword,
+        //             'translated'    => $translated,
+        //             'main_section'  => $cleanMainSectionTitle,
+        //             'section_name'  => $request->section_name,
+        //         ]);
+        //     }
+        // }
 
         return back()->with('success', 'Translation job dispatched');
     }
