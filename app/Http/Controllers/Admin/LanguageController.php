@@ -126,14 +126,26 @@ class LanguageController extends Controller
             return $collection->aggregate([
                 ['$match' => ['language_id' => $id]],
                 ['$group' => ['_id' => '$main_section']],
-                ['$sort' => ['_id' => 1]] // Sort in ascending order (alphabetical)
+                ['$sort' => ['_id' => 1]] // still alphabetical for now
             ]);
         });
 
-        // Convert raw aggregation result to an array
-        $main_sections = array_map(function ($item) {
+        // Convert to array
+        $main_sections = collect($main_sections)->map(function ($item) {
             return ['main_section' => $item->_id];
-        }, iterator_to_array($main_sections));
+        })->toArray();
+
+        // Reorder so "Home Page" comes first
+        usort($main_sections, function ($a, $b) {
+            if ($a['main_section'] === 'Home Page') return -1;
+            if ($b['main_section'] === 'Home Page') return 1;
+            return strcmp($a['main_section'], $b['main_section']); // fallback alphabetical
+        });
+
+        // Convert raw aggregation result to an array
+        // $main_sections = array_map(function ($item) {
+        //     return ['main_section' => $item->_id];
+        // }, iterator_to_array($main_sections));
         $sections = LanguageDetail::raw(function ($collection) use ($id, $sectionName) {
             return $collection->aggregate([
                 ['$match' => ['language_id' => $id, 'main_section' => $sectionName]], // Added main_section filter
