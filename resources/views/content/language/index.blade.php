@@ -45,7 +45,7 @@
         top: 0;
         font-size: 9px;
         font-weight: bold;
-        color: black;
+        color: #262626;
     }
 </style>
 @section('content')
