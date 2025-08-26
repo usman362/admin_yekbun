@@ -29,6 +29,24 @@
         vertical-align: middle !important;
         height: 48px !important;
     }
+
+    html:not([dir=rtl]) .progress .progress-bar:first-child {
+        border-top-right-radius: 10rem;
+        border-bottom-right-radius: 10rem;
+    }
+
+    .progessDiv {
+        position: relative;
+    }
+
+    .progessDiv span {
+        position: absolute;
+        left: 32;
+        top: 0;
+        font-size: 9px;
+        font-weight: bold;
+        color: black;
+    }
 </style>
 @section('content')
 
@@ -403,8 +421,11 @@
                 <tr>
                     <td>${section.section_name}</td>
                     <td>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>
+                        <div class="progessDiv">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <span>${progress}%</span>
                         </div>
                     </td>
                     <td>${section.done}</td>
@@ -532,7 +553,8 @@
                             `<span class="text-danger">Something Went Wrong!</span>`);
                     },
                     complete: function() {
-                        submitBtn.prop('disabled', false).text('Save Changes'); // re-enable button
+                        submitBtn.prop('disabled', false).text(
+                            'Save Changes'); // re-enable button
                     }
                 });
             });
