@@ -87,7 +87,9 @@
                                     @endif
                                 </td>
                                 <td>{{ $language->code ?? '' }}</td>
-                                <td><span class="badge bg-{{ $language->status == '1' ? 'success' : 'danger' }}">{{ $language->status == '1' ? 'Published' : 'Unpublished' }}</span></td>
+                                <td><span
+                                        class="badge bg-{{ $language->status == '1' ? 'success' : 'danger' }}">{{ $language->status == '1' ? 'Published' : 'Unpublished' }}</span>
+                                </td>
                                 <td>
                                     <div class="">
                                         <span data-bs-toggle="modal" data-bs-target="#editDetailsModal">
@@ -258,6 +260,7 @@
                 <form id="updateKeywordsForm" action="{{ route('languages.keywords.store') }}" method="POST">
                     @csrf
                     <input type="hidden" id="keyword_language_id" name="language_id">
+                    <input type="hidden" id="keyword_section_name" name="language_section">
                     <div class="modal-body">
                         {{-- <div class="container"> --}}
                         <div class="row mb-4">
@@ -277,10 +280,14 @@
                         </div>
                         {{-- </div> --}}
                     </div>
+                    <div class="container-fluid">
+                        <div class="ajax_status" style="text-align: right"></div>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-label-primary">Save Changes</button>
                         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -391,7 +398,7 @@
         $(document).ready(function() {
             function renderSectionRow(section, languageId) {
                 const progress = section.total > 0 ? Math.round((section.done / section.total) * 100) : 0;
-
+                console.log(section)
                 return `
                 <tr>
                     <td>${section.section_name}</td>
@@ -503,23 +510,29 @@
 
             $('#updateKeywordsForm').on('submit', function(e) {
                 e.preventDefault();
+                let form = this;
                 const formData = new FormData(this);
-
+                let submitBtn = $(form).find(':submit');
+                submitBtn.prop('disabled', true).text('Please wait...');
                 $.ajax({
                     url: $(this).attr('action'),
                     method: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function() {
-                        window.location.reload();
+                    success: function(response) {
+                        // window.location.reload();
                         $('.ajax_status').html(
                             `<span class="text-success">Keywords Created Successfully!</span>`
                         );
+                        $('#pills-' + response.main_section + '-tab').trigger('click');
                     },
                     error: function() {
                         $('.ajax_status').html(
                             `<span class="text-danger">Something Went Wrong!</span>`);
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).text('Save Changes'); // re-enable button
                     }
                 });
             });
@@ -544,6 +557,41 @@
                     backdrop: 'static',
                     keyboard: false
                 }).show();
+            });
+
+            $('#uploadFileForm').on('submit', function(e) {
+                e.preventDefault();
+
+                let form = this;
+                let formData = new FormData(form);
+                let submitBtn = $(form).find(':submit');
+                submitBtn.prop('disabled', true).text('Please wait...');
+
+                $.ajax({
+                    url: form.action, // 👈 use form's action
+                    type: form.method, // 👈 use form's method (POST/GET)
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log('Success:', response);
+                        $('.ajax_upload_status').html(`
+                        <div class="alert alert-success" role="alert">
+                            Keywords Translated has been Successfully!
+                        </div>`);
+                        $('#pills-' + response.main_section + '-tab').trigger('click');
+                    },
+                    error: function(xhr) {
+                        $('.ajax_upload_status').html(`
+                        <div class="alert alert-danger" role="alert">
+                            Something went wrong!
+                        </div>`);
+                        console.error('Error:', xhr.responseText);
+                    },
+                    complete: function() {
+                        submitBtn.prop('disabled', false).text('Upload');
+                    }
+                });
             });
 
             // ✅ Handle download JSON with main_section

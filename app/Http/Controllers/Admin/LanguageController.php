@@ -207,8 +207,9 @@ class LanguageController extends Controller
                 ]
             );
         }
-
-        return response()->json(['message' => 'Language Keyword has Successfully Created!'], 201);
+        $detail = LanguageDetail::where('language_id', $request->language_id)->where('section_name', $request->language_section)->first();
+        $main_section = strtolower(str_replace(' ', '-', $detail->main_section));
+        return response()->json(['message' => 'Language Keyword has Successfully Created!', 'main_section' => $main_section], 201);
     }
 
 
@@ -2128,7 +2129,7 @@ class LanguageController extends Controller
         $cleanMainSectionTitle = ucwords(str_replace('-', ' ', $rawSection));
         $cleanMainSectionTitle = Str::replaceFirst('Publish ', '', $cleanMainSectionTitle);
 
-        //dd($cleanMainSectionTitle); // will be "Home Page"
+        // dd($cleanMainSectionTitle); // will be "Home Page"
 
         $fileName = $languageCode . '_publish-' . $rawSection . '_' . Str::slug($request->section_name) . '.json';
 
@@ -2141,49 +2142,50 @@ class LanguageController extends Controller
             return response()->json(['error' => 'Invalid JSON format'], 400);
         }
 
-        TranslateKeywordsJSON::dispatch(
-            $request->language_id,
-            $languageCode,
-            $cleanMainSectionTitle,
-            $request->section_name,
-            $data
-        );
+        // TranslateKeywordsJSON::dispatch(
+        //     $request->language_id,
+        //     $languageCode,
+        //     $cleanMainSectionTitle,
+        //     $request->section_name,
+        //     $data
+        // );
 
+        foreach ($data as $item) {
+            $keyword = $item['keyword'] ?? null;
+            $translated = $item['translated'] ?? null;
 
-        // foreach ($data as $item) {
-        //     $keyword = $item['keyword'] ?? null;
-        //     $translated = $item['translated'] ?? null;
+            // if (!$keyword || !$translated) {
+            //     dd($translated);
+            //     continue;
+            // }
+            // dd($data);
 
-        //     if (!$keyword || !$translated) {
-        //         continue; // Skip if missing data
-        //     }
+            // Check if the record already exists
+            $existing = \App\Models\LanguageDetail::where([
+                'language_id'  => $request->language_id,
+                'keyword'      => $keyword,
+                'main_section' => $cleanMainSectionTitle,
+                'section_name' => $request->section_name,
+            ])->first();
 
-        //     // Check if the record already exists
-        //     $existing = \App\Models\LanguageDetail::where([
-        //         'language_id'  => $request->language_id,
-        //         'keyword'      => $keyword,
-        //         'main_section' => $cleanMainSectionTitle,
-        //         'section_name' => $request->section_name,
-        //     ])->first();
+            if ($existing) {
+                // Update the translated value
+                $existing->update([
+                    'translated' => $translated,
+                ]);
+            } else {
+                // Insert new keyword
+                \App\Models\LanguageDetail::create([
+                    'language_id'   => $request->language_id,
+                    'keyword'       => $keyword,
+                    'translated'    => $translated,
+                    'main_section'  => $cleanMainSectionTitle,
+                    'section_name'  => $request->section_name,
+                ]);
+            }
+        }
 
-        //     if ($existing) {
-        //         // Update the translated value
-        //         $existing->update([
-        //             'translated' => $translated,
-        //         ]);
-        //     } else {
-        //         // Insert new keyword
-        //         \App\Models\LanguageDetail::create([
-        //             'language_id'   => $request->language_id,
-        //             'keyword'       => $keyword,
-        //             'translated'    => $translated,
-        //             'main_section'  => $cleanMainSectionTitle,
-        //             'section_name'  => $request->section_name,
-        //         ]);
-        //     }
-        // }
-
-        return back()->with('success', 'Translation job dispatched');
+        return response()->json(['main_section' => strtolower(str_replace(' ', '-', $cleanMainSectionTitle)), 'success' => 'Keywords has been Translated Successfully'], 201);
     }
 
 
