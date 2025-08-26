@@ -331,8 +331,8 @@
                         <div class="ajax_upload_status mt-2"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Upload</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary json-btn-submit">Upload</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </form>
@@ -574,7 +574,7 @@
 
                 const formActionUrl = `/languages/${languageId}/keywords/${sectionName}/upload-json`;
                 $('#uploadFileForm').attr('action', formActionUrl);
-
+                $('.json-btn-submit').css('display', 'block');
                 new bootstrap.Modal(document.getElementById('uploadFileModal'), {
                     backdrop: 'static',
                     keyboard: false
@@ -599,7 +599,7 @@
                         console.log('Success:', response);
                         $('.ajax_upload_status').html(`
                         <div class="alert alert-success" role="alert">
-                            Keywords Translated has been Successfully!
+                            Upload is done. Thank you for your effort. Please check the app to see if all the words are translated correctly.
                         </div>`);
                         $('#pills-' + response.main_section + '-tab').trigger('click');
                     },
@@ -611,7 +611,7 @@
                         console.error('Error:', xhr.responseText);
                     },
                     complete: function() {
-                        submitBtn.prop('disabled', false).text('Upload');
+                        submitBtn.css('display', 'none');
                     }
                 });
             });
