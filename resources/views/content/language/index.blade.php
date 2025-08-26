@@ -575,6 +575,7 @@
                 const formActionUrl = `/languages/${languageId}/keywords/${sectionName}/upload-json`;
                 $('#uploadFileForm').attr('action', formActionUrl);
                 $('.json-btn-submit').css('display', 'block');
+                $('.json-btn-submit').prop('disabled', false).text('Save Changes');
                 new bootstrap.Modal(document.getElementById('uploadFileModal'), {
                     backdrop: 'static',
                     keyboard: false
