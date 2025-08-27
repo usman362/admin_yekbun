@@ -19,7 +19,7 @@ class LanguageKeywordsSeeder extends Seeder
     {
         $languages = Language::select(['_id', 'code'])->get();
 
-        LanguageDetail::truncate();
+        // LanguageDetail::truncate();
 
         foreach ($languages as $language) {
             LanguagesHelpers::languages_keywords($language->id, $language->code);

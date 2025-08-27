@@ -18,9 +18,9 @@
     'closeBtnText' => 'Close',
     'btnimg'       =>  '',
     'onSaveBtnClick' => '',
-    'headerClass' => '', 
-    'contentClass' => '', 
-    'hideClose' => false 
+    'headerClass' => '',
+    'contentClass' => '',
+    'hideClose' => false
 ])
 
 
@@ -76,7 +76,7 @@
                             <button type="{{ $saveBtnType ?? 'button' }}" form="{{ $saveBtnForm }}"
                                 class="{{ $saveBtnClass ? $saveBtnClass : 'btn btn-primary' }}"
                                 onclick="{{ $onSaveBtnClick }}">
-                                @if(isset($btnimg))
+                                @if($btnimg)
                                     <img src="{{$btnimg}}" class="uplobtn"/>
                                 @endif
 

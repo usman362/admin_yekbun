@@ -41,6 +41,7 @@ class LanguagesHelpers
             ['keyword' => 'Create Account', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Join to us, and enjoy our Platform', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Sign In', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
+            ['keyword' => 'Sign Up', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Please use your Login Details for Access', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Close', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
             ['keyword' => 'Select Your Language', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page Landing Page'],
@@ -150,7 +151,7 @@ class LanguagesHelpers
             ['keyword' => 'Has password matched', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Select Gender', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => "I'm Female", 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
-            ['keyword' => 'imMale', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => "I'm Male", 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Back', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Next', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Create Account Error', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
@@ -605,20 +606,25 @@ class LanguagesHelpers
             ['keyword' => 'Thanks for Accepting', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
             ['keyword' => 'Start Now', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
             ['keyword' => 'Search', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
+            ['keyword' => 'Terms', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
+            ['keyword' => 'User not Found!', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
+            ['keyword' => 'No policy content available.', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
 
 
 
         ];
 
         foreach ($homekeywords as $keyword) {
-
-            LanguageDetail::create([
-                'language_id'   => $language_id,
-                'keyword'       => $keyword['keyword'],
-                'translated'    => Str::lower($code) !== 'en' ? $keyword['translated'] : $keyword['keyword'],
-                'main_section'  => $keyword['main_section'],
-                'section_name'  => $keyword['section_name'],
-            ]);
+            $exists = LanguageDetail::where('language_id', $language_id)->where('keyword', $keyword['keyword'])->where('main_section', $keyword['main_section'])->first();
+            if (!$exists) {
+                LanguageDetail::create([
+                    'language_id'   => $language_id,
+                    'keyword'       => $keyword['keyword'],
+                    'translated'    => Str::lower($code) !== 'en' ? $keyword['translated'] : $keyword['keyword'],
+                    'main_section'  => $keyword['main_section'],
+                    'section_name'  => $keyword['section_name'],
+                ]);
+            }
         }
     }
 }

@@ -599,7 +599,7 @@
                     success: function(response) {
                         console.log('Success:', response);
                         $('.ajax_upload_status').html(`
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success text-dark" role="alert">
                             Upload is done. Thank you for your effort. Please check the app to see if all the words are translated correctly.
                         </div>`);
                         $('#pills-' + response.main_section + '-tab').trigger('click');
