@@ -79,13 +79,13 @@ class AuthController extends Controller
                     return ResponseHelper::sendResponse([], 'Invalid Creadentials!', false, 400);
                 }
             } catch (JWTException $e) {
-                return ResponseHelper::sendResponse([], 'Could not create token!', false, 500);
+                return ResponseHelper::sendResponse([], 'Invalid Creadentials!', false, 500);
             }
 
-            return ResponseHelper::sendResponse(['user' => $user, 'token' => $token], 'User Successfully Login!');
+            return ResponseHelper::sendResponse(['user' => $user, 'token' => $token], 'You have logged in successfully!');
         } else {
             // If credentials are incorrect, return an error
-            return ResponseHelper::sendResponse([], 'Email or password is incorrect', false, 403);
+            return ResponseHelper::sendResponse([], 'Email or Password is Incorrect!', false, 403);
         }
     }
 
@@ -114,7 +114,7 @@ class AuthController extends Controller
             if ($emailTaken) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Email is already taken.',
+                    'message' => 'This Email is already taken!',
                 ]);
             }
 
@@ -123,7 +123,7 @@ class AuthController extends Controller
             if ($usernameTaken) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Username is already taken.',
+                    'message' => 'Username is already taken!',
                 ]);
             }
 
@@ -132,7 +132,7 @@ class AuthController extends Controller
             if ($deviceImei) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Imei is already taken.',
+                    'message' => 'Imei is already taken!',
                 ]);
             }
 
@@ -239,17 +239,17 @@ class AuthController extends Controller
                         'username' => $request->username,
                     ];
                     Mail::to($request['email'])->send(new SendCodeMail($details));
-                    return response()->json(['success' => true, "message" => "Verfication Code sent to your email", 'user' => $user->id], 201);
-                    return response()->json(['success' => true, "message" => "User has been Successfully Created!", 'user' => $user->id], 201);
+                    return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
+                    // return response()->json(['success' => true, "message" => "User has been Successfully Created!", 'user' => $user->id], 201);
                 } catch (\Exception $e) {
-                    info("Error: " . $e->getMessage());
-                    return response()->json(['success' => false, 'message' => $e->getMessage()], 505);
+                    // info("Error: " . $e->getMessage());
+                    return response()->json(['success' => false, 'message' => 'Something went wrong'], 505);
                 }
             }
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'errors' => $e->getMessage(),
+                'errors' => 'Something went wrong',
             ], 422);
         }
     }
@@ -296,9 +296,9 @@ class AuthController extends Controller
                 ];
                 Mail::to($request['email'])->send(new SendCodeMail($details));
                 $data = ['user' => $user, 'otp' => $code];
-                return ResponseHelper::sendResponse($data, 'Verfication Code sent to your email');
+                return ResponseHelper::sendResponse($data, 'Verification Code has been sent to your email!');
             } catch (\Exception $e) {
-                return ResponseHelper::sendResponse([], $e->getMessage(), false, 505);
+                return ResponseHelper::sendResponse([], 'Something went wrong', false, 505);
             }
         }
     }
@@ -334,7 +334,7 @@ class AuthController extends Controller
                 'user_id' => $createdUser->id,
                 'device_imei' => $request['device_imei'],
             ]);
-            return ResponseHelper::sendResponse($createdUser, 'New device registered successfully.');
+            return ResponseHelper::sendResponse($createdUser, 'New device has been registered successfully.');
         } catch (\Exception $e) {
             return ResponseHelper::sendResponse([], 'Failed to register device', false, 403);
         }
@@ -364,7 +364,7 @@ class AuthController extends Controller
             $user->email_verified_at = Carbon::now();
             $user->is_verfied = (int)1;
             $user->save();
-            return ResponseHelper::sendResponse($user, 'Valid Code');
+            return ResponseHelper::sendResponse($user, 'Valid Code!');
         } else {
             return ResponseHelper::sendResponse([], 'Invalid Code!', false, 403);
         }
@@ -380,7 +380,7 @@ class AuthController extends Controller
         // dd(JWTAuth::getToken());
         JWTAuth::parseToken()->invalidate(true);
         // Return a response indicating success
-        return ResponseHelper::sendResponse([], 'Logout Successfully!');
+        return ResponseHelper::sendResponse([], 'Logout successful!');
     }
 
     public function forgot_password(Request $request)
@@ -392,7 +392,7 @@ class AuthController extends Controller
         $email = strtolower($request->email);
         $user = User::where('email', '=', $email)->first();
         if (!$user) {
-            return response()->json(['success' => false, 'message' => 'No user found with the email.']);
+            return response()->json(['success' => false, 'message' => 'User not found!']);
         }
 
         // Generate Random Code
@@ -413,7 +413,7 @@ class AuthController extends Controller
                 'username' => $user->username
             ];
             Mail::to($user->email)->send(new SendCodeMail($details));
-            return response()->json(['success' => true, 'message' => 'A verification email has been sent to ' . $user->email . '!', 'data' => ['user_id' => $user->id, 'email' => $user->email, 'token' => $token]], 201);
+            return response()->json(['success' => true, 'message' => 'Verification Code has been sent to your email!', 'data' => ['user_id' => $user->id, 'email' => $user->email, 'token' => $token]], 201);
         } catch (\Exception $e) {
 
             return $e->getMessage();
@@ -437,7 +437,7 @@ class AuthController extends Controller
         // Find the user
         $user = User::find($request->user_id);
         if (!$user) {
-            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+            return response()->json(['success' => false, 'message' => 'User not found!'], 404);
         }
 
         // Update password
@@ -461,7 +461,7 @@ class AuthController extends Controller
         // Find the reset entry
         $resetEntry = ResetUserPassword::where('user_id', $request->user_id)->first();
         if (!$resetEntry) {
-            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+            return response()->json(['success' => false, 'message' => 'User not found!'], 404);
         }
 
         // Validate the token and OTP
@@ -476,7 +476,7 @@ class AuthController extends Controller
 
             return response()->json(['success' => true, 'data' => ['token' => $password_token, 'user_id' => $resetEntry->user_id]], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'OTP code is incorrect.'], 400);
+            return response()->json(['success' => false, 'message' => 'Invalid OTP. Please try again.'], 400);
         }
     }
 
@@ -536,7 +536,7 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Privacy Policy has been Rejected!', 'user' => $user, 'success' => true], 200);
             }
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something Went Wrong', 'success' => false], 403);
+            return response()->json(['message' => 'Something went wrong', 'success' => false], 403);
         }
     }
 

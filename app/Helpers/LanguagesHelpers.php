@@ -91,7 +91,15 @@ class LanguagesHelpers
             ['keyword' => 'Connecting the Server', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
             ['keyword' => 'Connecting the DB', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
             ['keyword' => 'Request Changes', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
-
+            ['keyword' => 'Device IMEI is not registered', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Invalid Creadentials!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Youre Email is not verified!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'You have logged in successfully!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Email or Password is Incorrect!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'This E-Mail address not exist in our System', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Logout successful!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'User not found!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Privacy Policy has been Accepted!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
 
             // Lost Device
 
@@ -112,6 +120,13 @@ class LanguagesHelpers
             ['keyword' => 'Error', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
             ['keyword' => "Didn't receive code?", 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
             ['keyword' => 'Resent Now', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Imei not found!.', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'New device has been registered successfully.', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Failed to register device', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Invalid Code!', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Your password has been changed.', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+            ['keyword' => 'Email successfully resent.', 'translated' => '', 'main_section' => 'Lost Device', 'section_name' => 'Lost Device'],
+
             //Header Section
 
             ['keyword' => 'News', 'translated' => '', 'main_section' => 'Header', 'section_name' => 'Header'],
@@ -225,6 +240,16 @@ class LanguagesHelpers
             ['keyword' => 'OTP expired. Please request a new one.', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Code sent successfully!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Maximum attempts reached. Please try again later.', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Setup a new device', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Selected', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Select a Country', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Search cities', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Your Data', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Accept policy and', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'This Email is already taken!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Username is already taken!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Imei is already taken!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Verification Code has been sent to your email!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
 
             //Multimedia Artist
             ['keyword' => 'Latest', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
