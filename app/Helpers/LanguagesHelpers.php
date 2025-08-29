@@ -100,6 +100,8 @@ class LanguagesHelpers
             ['keyword' => 'Logout successful!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
             ['keyword' => 'User not found!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
             ['keyword' => 'Privacy Policy has been Accepted!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Login failed. Please try again.', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
+            ['keyword' => 'Forgot Password failed!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn'],
 
             // Lost Device
 
@@ -250,6 +252,13 @@ class LanguagesHelpers
             ['keyword' => 'Username is already taken!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Imei is already taken!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
             ['keyword' => 'Verification Code has been sent to your email!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Allow Access', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Allow Camera', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Allow camera and Microphone access to complete registration and upload a profile picture. You can change this in settings anytime.', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Allow Microphone', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Please Allow Access for whole Section', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Close the App', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
+            ['keyword' => 'Please fill all fields and accept the terms.', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignUp'],
 
             //Multimedia Artist
             ['keyword' => 'Latest', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
