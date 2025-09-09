@@ -176,7 +176,7 @@
                                             </button>
                                         </span>
 
-                                        @if ($language->title != 'English')
+                                        {{-- @if ($language->title != 'English')
                                             <form action="{{ route('language.destroy', $language->id) }}"
                                                 onsubmit="confirmAction(event, () => event.target.submit())"
                                                 method="post" class="d-inline">
@@ -202,7 +202,7 @@
                                                     </svg>
                                                 </button>
                                             </form>
-                                        @endif
+                                        @endif --}}
 
                                         @include('content.include.language.editForm', [
                                             'language' => $language,
