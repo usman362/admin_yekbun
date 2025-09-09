@@ -61,13 +61,24 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = Language::all();
+        // $languages = Language::all();
         $languageData = LanguageData::all();
-
         $textCounts = Text::count();
 
+        // Fetch all languages with their translations
+        $languages = Language::with('translation')->get();
+
         foreach ($languages as $language) {
-            $language->texts_count = $textCounts;
+            // Get all translations for this language
+            $translations = LanguageDetail::where('language_id', $language->_id)->get();
+
+            $total = $translations->count();
+            $translatedCount = $translations->where('translated', '!=', '')->count();
+
+            $progress = $total > 0 ? round(($translatedCount / $total) * 100, 2) : 0;
+
+            // attach progress dynamically
+            $language->progress = $progress;
         }
 
         return view('content.language.index', compact('languages', 'languageData'));

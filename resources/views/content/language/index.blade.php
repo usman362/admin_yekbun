@@ -84,6 +84,7 @@
                         <th>Icon</th>
                         <th>Code</th>
                         <th>Status</th>
+                        <th>Progress</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -107,6 +108,17 @@
                                 <td>{{ $language->code ?? '' }}</td>
                                 <td><span
                                         class="badge bg-{{ $language->status == '1' ? 'success' : 'danger' }}">{{ $language->status == '1' ? 'Published' : 'Unpublished' }}</span>
+                                </td>
+                                <td>
+                                    <div class="progessDiv">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                style="width: {{ $language->progress }}%" aria-valuenow="{{ $language->progress }}" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                        <span style="left: 65">{{ $language->progress }}%</span>
+                                    </div>
+
                                 </td>
                                 <td>
                                     <div class="">
