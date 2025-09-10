@@ -8,10 +8,11 @@
 
 <head>
     <style>
-        img, svg {
-    vertical-align: middle;
-    height: 25px;
-}
+        img,
+        svg {
+            vertical-align: middle;
+            height: 25px;
+        }
     </style>
     <meta charset="utf-8" />
     <meta name="viewport"
@@ -30,7 +31,7 @@
     <!-- Canonical SEO -->
     <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
     <!-- Favicon -->
-   <link rel="icon" type="image/x-icon" sizes="180x180" href="{{ asset('assets/svg/yekbun_logo.svg') }}">
+    <link rel="icon" type="image/x-icon" sizes="180x180" href="{{ asset('assets/svg/yekbun_logo.svg') }}">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +67,6 @@
     @include('layouts/sections/scripts')
 
     @if (env('LOGIN_TIMEOUT') == true)
-
         <script>
             // Inactivity Timer Script
             let inactivityTime = function() {
@@ -77,10 +77,11 @@
                 document.onmousemove = resetTimer;
                 document.onkeypress = resetTimer;
                 $('#inactivityModal').modal('hide');
+
                 function showLogoutModal() {
                     console.log("Inactivity detected. Showing modal.");
                     // Display the modal
-                    $('#inactivityModal').css('z-index',99999);
+                    $('#inactivityModal').css('z-index', 99999);
                     $('#inactivityModal').modal('show');
                     // Start a secondary timer for 30 seconds until auto-logout
                     startAutoLogoutTimer();

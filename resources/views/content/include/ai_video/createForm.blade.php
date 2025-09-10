@@ -2,6 +2,9 @@
     .ck {
         height: 150px;
     }
+    .modal-footer{
+        margin-top: -72px;
+    }
 </style>
 
 <form id="createForm" method="POST" action="{{ route('ai-videos.store') }}" enctype="multipart/form-data">
@@ -107,15 +110,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12" bis_skin_checked="1">
-                    <label class="form-label" for="status">Status</label>
-                    <select class="form-select" name="status">
-                        <option selected="" value="">Select</option>
-                        <option value="1">Publish</option>
-                        <option value="0">UnPublish</option>
-
-                    </select>
-                </div>
                 {{-- <div class="col-md-12">
                     <label class="form-label" for="inputDescription">Description</label>
                     <textarea class="form-control" name="description" rows="6" id="inputDescription" placeholder="Type..."></textarea>
@@ -123,7 +117,14 @@
             </div>
         </div>
     </div>
-
+    <div class="col-md-12" style="width: 50%;" bis_skin_checked="1">
+        <label class="form-label" for="status">Status</label>
+        <select class="form-select" name="status">
+            <option selected="" value="">Select</option>
+            <option value="1">Publish</option>
+            <option value="0">UnPublish</option>
+        </select>
+    </div>
 </form>
 
 

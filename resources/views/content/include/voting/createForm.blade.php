@@ -1,3 +1,8 @@
+<style>
+    .modal-footer{
+        margin-top: -55px;
+    }
+</style>
 <div class="nav-align-top edit-vote-modal">
     <div class="vote-header d-flex justify-content-center">
         <div class="vote-header1">
@@ -81,7 +86,7 @@
                 $optionLabels = ['Left Button Title', 'Middle Button Title', 'Right Button Title'];
             @endphp
 
-            <div class="col-md-12" bis_skin_checked="1">
+            <div class="col-md-12" style="width: 50%;margin-left:12px;" bis_skin_checked="1">
                 <label class="form-label" for="status">Status</label>
                 <select class="form-select" name="status">
                     <option selected="" value="">Select</option>
