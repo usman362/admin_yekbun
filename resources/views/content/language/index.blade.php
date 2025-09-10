@@ -113,7 +113,8 @@
                                     <div class="progessDiv">
                                         <div class="progress">
                                             <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: {{ $language->progress }}%" aria-valuenow="{{ $language->progress }}" aria-valuemin="0"
+                                                style="width: {{ $language->progress }}%"
+                                                aria-valuenow="{{ $language->progress }}" aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
                                         <span style="left: 65">{{ $language->progress }}%</span>
@@ -278,11 +279,24 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">
-                        Edit <span class="text-primary">"<span class="sectionName"></span>"</span>
-                        <span class="text-info languageName">- {{ $language->title }}</span>
-                        Language
-                    </h5>
+                    <div class="row w-100">
+                        <div class="col-md-8">
+                            <h5 class="modal-title" id="modalCenterTitle">
+                                Edit <span class="text-primary">"<span class="sectionName"></span>"</span>
+                                <span class="text-info languageName">- {{ $language->title }}</span>
+                                Language
+                            </h5>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- Select for sorting -->
+                            <select id="sortSelect" class="form-control" onchange="sortKeywords()">
+                                <option value="">-- Sort By --</option>
+                                <option value="name">Sort by Name</option>
+                                <option value="empty">Sort by Empty Translation</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -651,6 +665,38 @@
         });
     </script>
 
+    <script>
+        function sortKeywords() {
+            const sortType = document.getElementById("sortSelect").value;
+            const container = document.getElementById("keywordsTable");
+
+            // Get all rows (excluding <hr>)
+            let rows = Array.from(container.querySelectorAll(".row"));
+
+            rows.sort((a, b) => {
+                let nameA = a.querySelector("h6").innerText.trim().toLowerCase();
+                let nameB = b.querySelector("h6").innerText.trim().toLowerCase();
+                let valA = a.querySelector("input[name='translated[]']").value.trim();
+                let valB = b.querySelector("input[name='translated[]']").value.trim();
+
+                if (sortType === "name") {
+                    return nameA.localeCompare(nameB);
+                } else if (sortType === "empty") {
+                    if (valA === "" && valB !== "") return -1;
+                    if (valA !== "" && valB === "") return 1;
+                    return 0;
+                }
+                return 0;
+            });
+
+            // Re-append rows + their following <hr>
+            container.innerHTML = "";
+            rows.forEach(row => {
+                container.appendChild(row);
+                container.appendChild(document.createElement("hr"));
+            });
+        }
+    </script>
 
 @endsection
 @endsection
