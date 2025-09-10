@@ -543,6 +543,11 @@ class LanguagesHelpers
             ['keyword' => "User is Blocked, he can't contact or follow you", 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
             ['keyword' => 'User is Active and can follow you', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
             ['keyword' => 'Image', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
+            ['keyword' => 'Accept Request', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
+            ['keyword' => 'Requested', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
+            ['keyword' => 'Unfriend', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
+            ['keyword' => 'Be Friend', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
+            ['keyword' => 'Undo Request', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
 
             // User Profile - Violation section
             ['keyword' => 'Voilations', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
