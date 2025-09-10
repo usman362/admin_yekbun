@@ -16,7 +16,7 @@
             {{-- <div class="vote-categories p-3 pt-2">
                 <div class="p-1 select-category fw-bold" style="" for="category">Select Category</div>
                 <div class="d-flex">
-                    @foreach ($vote_categories as $index => $category )
+                    @foreach ($vote_categories as $index => $category)
                     <div class="vote-category {{$index==0 ? 'selected':''}}" data-id="{{$category->id}}">
                         <div class="p-2">
                             <div class="d-flex justify-content-center">
@@ -40,14 +40,15 @@
                         <div style="font-size: 0.8rem">JPG or PNG</div>
                     </div>
                     <div class="fallback">
-                        <input type="file" name="image"  id="image" accept="image/*"/>
+                        <input type="file" name="image" id="image" accept="image/*" />
                     </div>
                 </div>
 
                 <div class="vote-title mt-3">
                     <div class="fw-bold" style="color:#333;">Survey Title</div>
                     <div style="background:white;">
-                        <input type="text" id="fullname" class="form-control" placeholder="title" name="name" required>
+                        <input type="text" id="fullname" class="form-control" placeholder="title" name="name"
+                            required>
                     </div>
                 </div>
 
@@ -77,32 +78,37 @@
             </div>
 
             @php
-                $optionLabels = ["Left Button Title","Middle Button Title","Right Button Title"];
+                $optionLabels = ['Left Button Title', 'Middle Button Title', 'Right Button Title'];
             @endphp
+
+            <div class="col-md-12" bis_skin_checked="1">
+                <label class="form-label" for="status">Status</label>
+                <select class="form-select" name="status">
+                    <option selected="" value="">Select</option>
+                    <option value="1">Publish</option>
+                    <option value="0">UnPublish</option>
+
+                </select>
+            </div>
         </form>
     </div>
 
     <div class="hidden" id='hidden_div'>
         <div id="individual-vote-options">
             <div class="fw-bold" style="color:black;">Allowed Reaction</div>
-            @foreach($optionLabels as $index => $optionLabel)
-                <div class="d-flex align-items-center mt-4 individual-reaction-option" data-index="{{$index}}">
+            @foreach ($optionLabels as $index => $optionLabel)
+                <div class="d-flex align-items-center mt-4 individual-reaction-option" data-index="{{ $index }}">
                     <div class="max-10-letters">Max. 10 Letters</div>
                     <div class="individual-vote-react-option-image">
-                        <img src='{{asset('/assets/img/icons/others/6icon.png')}}' style='width:30px;height:30px' />
-                        <input type="file" class="hidden" name="reaction_option[{{$index}}][image]" />
+                        <img src='{{ asset('/assets/img/icons/others/6icon.png') }}' style='width:30px;height:30px' />
+                        <input type="file" class="hidden" name="reaction_option[{{ $index }}][image]" />
                         <div class="remove-image justify-content-center align-items-center">
                             <button class="btn btn-danger p-0"><i class='bx bx-trash bx-sm'></i></button>
                         </div>
                     </div>
                     <div class="ms-2 flex-fluid">
-                        <input
-                            type="text"
-                            class="form-control w-100"
-                            placeholder="{{$optionLabel}}"
-                            name="reaction_option[{{$index}}][title]"
-                            required
-                        />
+                        <input type="text" class="form-control w-100" placeholder="{{ $optionLabel }}"
+                            name="reaction_option[{{ $index }}][title]" required />
                     </div>
                 </div>
             @endforeach

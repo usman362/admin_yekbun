@@ -61,6 +61,7 @@ class HistoryController extends Controller
         $history = History::findOrNew($request->history_id);
         $history->title  = $request->title;
         $history->source  = $request->source;
+        $history->status  = $request->status;
         $history->is_comments  = $request->comments ?? 0;
         $history->is_share  = $request->share ?? 0;
         $history->is_emoji  = $request->emoji ?? 0;
@@ -161,6 +162,7 @@ class HistoryController extends Controller
 
         $history = History::find($request->id);
         $history->title  = $request->title;
+        $history->status  = $request->status;
         $history->is_comments  = $request->comments ?? 0;
         $history->is_share  = $request->share ?? 0;
         $history->is_emoji  = $request->emoji ?? 0;

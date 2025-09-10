@@ -120,6 +120,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12" bis_skin_checked="1">
+                    <label class="form-label" for="status">Status</label>
+                    <select class="form-select" name="status">
+                        <option selected="" value="">Select</option>
+                        <option value="1">Publish</option>
+                        <option value="0">UnPublish</option>
+
+                    </select>
+                </div>
                 {{-- <div class="col-md-12">
                     <label class="form-label" for="inputDescription">Description</label>
                     <textarea class="form-control" name="description" rows="6" id="inputDescription" placeholder="Type..."></textarea>
@@ -294,7 +303,7 @@
         })
 
         $('.generated-img').click(function() {
-            if($(this).attr('src') !== "{{ asset('assets/img/thumbnail.svg') }}"){
+            if ($(this).attr('src') !== "{{ asset('assets/img/thumbnail.svg') }}") {
                 let src = $(this).attr('src');
                 $('.dz-thumbnail img').attr('src', src);
                 $('#thumbnail').val(src);

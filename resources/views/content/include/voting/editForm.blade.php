@@ -19,7 +19,7 @@
             {{-- <div class="vote-categories p-3 pt-2">
                 <div class="p-1 select-category" for="category">Select Category</div>
                 <div class="d-flex">
-                    @foreach ($vote_categories as $index => $category )
+                    @foreach ($vote_categories as $index => $category)
                     <div class="vote-category" data-id="{{$category->id}}">
                         <div class="p-2">
                             <div class="d-flex justify-content-center">
@@ -38,14 +38,15 @@
                         <img src='' style="height:100px; width:auto;" />
                     </div>
                     <div class="fallback">
-                        <input type="file" name="image"  id="image" />
+                        <input type="file" name="image" id="image" />
                     </div>
                 </div>
 
                 <div class="vote-title mt-3">
                     <div>Vote Title</div>
                     <div style="background:white;">
-                        <input type="text" id="fullname" class="form-control" placeholder="title" name="name" required>
+                        <input type="text" id="fullname" class="form-control" placeholder="title" name="name"
+                            required>
                     </div>
                 </div>
 
@@ -54,32 +55,27 @@
             </div>
 
             @php
-                $optionLabels = ["Left Button Title","Middle Button Title","Right Button Title"];
+                $optionLabels = ['Left Button Title', 'Middle Button Title', 'Right Button Title'];
             @endphp
 
             <div class="allowed-reactions mt-4 p-3">
                 <div id="individual-vote-options">
                     <div class="fw-bold">Allowed Reaction</div>
-                    @foreach($optionLabels as $index => $optionLabel)
-                        <div class="d-flex align-items-center mt-4 individual-reaction-option" data-index="{{$index}}">
+                    @foreach ($optionLabels as $index => $optionLabel)
+                        <div class="d-flex align-items-center mt-4 individual-reaction-option"
+                            data-index="{{ $index }}">
                             <div class="max-10-letters">Max. 10 Letters</div>
                             <div class="individual-vote-react-option-image uploaded">
                                 <img src="" style='width:30px;height:30px' />
                                 <input type="file" class="hidden" />
-                                <input type='hidden' name="reaction_option[{{$index}}][image]" />
+                                <input type='hidden' name="reaction_option[{{ $index }}][image]" />
                                 <div class="remove-image justify-content-center align-items-center">
                                     <button class="btn btn-danger p-0"><i class='bx bx-trash bx-sm'></i></button>
                                 </div>
                             </div>
                             <div class="ms-2 flex-fluid">
-                                <input
-                                    type="text"
-                                    class="form-control w-100"
-                                    placeholder="{{$optionLabel}}"
-                                    name="reaction_option[{{$index}}][title]"
-                                    value="11"
-                                    required
-                                />
+                                <input type="text" class="form-control w-100" placeholder="{{ $optionLabel }}"
+                                    name="reaction_option[{{ $index }}][title]" value="11" required />
                             </div>
                         </div>
                     @endforeach
@@ -95,6 +91,16 @@
                         <div class="reaction-option">No idea</div>
                         <div class="reaction-option">No</div>
                     </div>
+                </div>
+
+                <div class="col-md-12" bis_skin_checked="1">
+                    <label class="form-label" for="status">Status</label>
+                    <select class="form-select" name="status">
+                        <option selected="" value="">Select</option>
+                        <option value="1">Publish</option>
+                        <option value="0">UnPublish</option>
+
+                    </select>
                 </div>
             </div>
         </form>

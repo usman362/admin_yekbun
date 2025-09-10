@@ -69,7 +69,7 @@ class VotingController extends Controller
         $vote->description = $request->description;
         $vote->options = $options;
         $vote->banner = $request->image ?? null;
-        $vote->description = $request->description;
+        $vote->status = $request->status;
         $vote->vote_type = $request->vote_type ?? 'single';
         if ($request->hasFile('audio_file')) {
             $vote->audio = Helpers::fileUpload($request->audio_file, 'voting');
@@ -313,6 +313,7 @@ class VotingController extends Controller
         $vote->name = $request->name;
         $vote->category_id = $request->vote_category_id;
         $vote->description = $request->description;
+        $vote->status = $request->status;
 
         $options = [];
         if ($request->{'reaction_option'}) {

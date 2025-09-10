@@ -53,6 +53,7 @@ class AIVideosController extends Controller
         $ai_video = AIVideo::findOrNew($request->ai_video_id);
         $ai_video->title  = $request->title;
         $ai_video->source  = $request->source;
+        $ai_video->status  = $request->status;
         $ai_video->is_comments  = $request->comments ?? 0;
         $ai_video->is_share  = $request->share ?? 0;
         $ai_video->is_emoji  = $request->emoji ?? 0;
@@ -151,6 +152,7 @@ class AIVideosController extends Controller
 
         $ai_video = AIVideo::find($request->id);
         $ai_video->title  = $request->title;
+        $ai_video->status  = $request->status;
         $ai_video->is_comments  = $request->comments ?? 0;
         $ai_video->is_share  = $request->share ?? 0;
         $ai_video->is_emoji  = $request->emoji ?? 0;

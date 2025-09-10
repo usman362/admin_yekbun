@@ -201,7 +201,8 @@
             color: #fff;
             left: 34rem;
         }
-        .video-source span{
+
+        .video-source span {
             font-size: 14px;
         }
     </style>
@@ -308,7 +309,7 @@
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-thumb="{{ asset('storage/' . $feed->video[0]['path']) }}"
                                         href="{{ asset('storage/' . $feed->video[0]['path']) }}"
-                                        data-id="{{ $feed->_id }}" data-source="{{$feed->source}}"
+                                        data-id="{{ $feed->_id }}" data-source="{{ $feed->source }}"
                                         data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
@@ -405,6 +406,7 @@
                                                             data-id="{{ $feed->id }}"
                                                             data-name="{{ $feed->title }}"
                                                             data-source="{{ $feed->source }}"
+                                                            data-status="{{ $feed->status }}"
                                                             data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
                                                             data-video="{{ $feed->video[0]['path'] }}"
                                                             data-comments="{{ $feed->is_comments }}"
@@ -897,6 +899,10 @@
         $('.add-history').click(function() {
             $('.modal-header h4').text('Create AI Video');
             $('.modal-footer [type="submit"]').text('Create');
+            $('[name="status"]').val('');
+            $('[name="status"]').trigger('change');
+            $('#dropzone-video').css('background-image', 'none');
+            $('#dropzone-video').css('background-size', 'cover');
             $('[name="history_id"]').val('');
             $('#createForm')[0].reset();
         })
@@ -908,11 +914,14 @@
             let video = $(this).attr('data-video');
             let comments = $(this).attr('data-comments');
             let share = $(this).attr('data-share');
+            let status = $(this).attr('data-status');
             let emoji = $(this).attr('data-emoji');
             let id = $(this).attr('data-id');
 
             $('[name="history_id"]').val(id);
             $('[name="title"]').val(name);
+            $('[name="status"]').val(status);
+            $('[name="status"]').trigger('change');
             comments == true ? $('[name="comments"]').attr('checked', true) : $('[name="comments"]').attr('checked',
                 false);
             share == true ? $('[name="share"]').attr('checked', true) : $('[name="share"]').attr('checked', false);
