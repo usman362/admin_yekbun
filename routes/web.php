@@ -158,13 +158,17 @@ Route::get('/test-fcm', function () {
 
 Route::get('test', function () {
 
-    foreach (App\Models\ClipTemplates::all() as $clip) {
-        $clip->text = 'Default Text';
-        $clip->text_position  = 'bottom';
-        $clip->text_font  = 'Genos-Bold';
-        $clip->text_font_size  = '24px';
-        $clip->text_color  = 'black';
-        $clip->save();
+    foreach (App\Models\History::all() as $history) {
+        $history->status = '1';
+        $history->save();
+    }
+    foreach (App\Models\AIVideo::all() as $history) {
+        $history->status = '1';
+        $history->save();
+    }
+    foreach (App\Models\Voting::all() as $history) {
+        $history->status = '1';
+        $history->save();
     }
     return 'success';
 });

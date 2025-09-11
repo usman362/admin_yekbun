@@ -201,7 +201,8 @@
             color: #fff;
             left: 34rem;
         }
-        .video-source span{
+
+        .video-source span {
             font-size: 14px;
         }
     </style>
@@ -307,7 +308,7 @@
                                         data-fancybox="post1" data-lightbox-type="comments"
                                         data-thumb="{{ asset('storage/' . $feed->video[0]['path']) }}"
                                         href="{{ asset('storage/' . $feed->video[0]['path']) }}"
-                                        data-id="{{ $feed->_id }}" data-source="{{$feed->source}}"
+                                        data-id="{{ $feed->_id }}" data-source="{{ $feed->source }}"
                                         data-demo-href="{{ asset('storage/' . $feed->video[0]['path']) }}">
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
@@ -375,6 +376,11 @@
                                                             <span style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
                                                     @endif --}}
+                                                    @if ($feed->status == '1')
+                                                        <span style="font-size: 12px;" class="badge bg-success"><small>Published</small></span>
+                                                    @else
+                                                        <span style="font-size: 12px;" class="badge bg-danger"><small>Unpublished</small></span>
+                                                    @endif
                                                 </div>
                                             </div>
 

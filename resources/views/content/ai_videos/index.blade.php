@@ -346,7 +346,7 @@
                                             <div class="mt-2 mb-2">
                                                 <div
                                                     style="height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;">
-                                                    <div style="display:flex;align-items:center;width:100%;height:100%">
+                                                    <div style="display:flex;align-items:center;height:100%;width:50%">
                                                         @if ($feed->is_comments == 1)
                                                             <div
                                                                 style="display:flex;align-items:center;gap:3px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-right:2px">
@@ -357,7 +357,7 @@
                                                         @endif
                                                         @if ($feed->is_share == 1)
                                                             <div
-                                                                style="display:flex;align-items:center;gap:3px;height:100%;margin-right:12px;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-left:2px">
+                                                                style="display:flex;align-items:center;gap:3px;height:100%;background-color:#f8f9fa;border-radius:5px;padding:5px;margin-left:2px">
                                                                 <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
                                                                     style="width:100%;height:100%;object-fit:cover"><span
                                                                     style="font-weight:400;font-family:Genos">0</span>
@@ -373,6 +373,11 @@
                                                                 style="width:100%;height:100%;object-fit:cover">
                                                             <span style="font-weight:400;font-family:Genos">0</span>
                                                         </div>
+                                                    @endif
+                                                    @if ($feed->status == '1')
+                                                        <span style="font-size: 12px;" class="badge bg-success"><small>Published</small></span>
+                                                    @else
+                                                        <span style="font-size: 12px;" class="badge bg-danger"><small>Unpublished</small></span>
                                                     @endif
                                                 </div>
                                             </div>

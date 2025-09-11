@@ -20,7 +20,7 @@ class VotingController extends Controller
      */
     public function index()
     {
-        $votings = Voting::with('reactions')->get();
+        $votings = Voting::where('status','1')->with('reactions')->get();
         return ResponseHelper::sendResponse($votings,'Votings Fetch Successfully!');
     }
 

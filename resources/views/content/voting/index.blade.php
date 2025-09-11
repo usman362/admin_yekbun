@@ -300,6 +300,7 @@
                         <th>Survey Banner</th>
                         <th>Created Date</th>
                         <th>Statistic</th>
+                        <th>Status</th>
                         <th>Option</th>
                     </tr>
                 </thead>
@@ -381,6 +382,13 @@
                                 </div>
                             </td>
                             <td>
+                                @if ($vote->status == '1')
+                                    <span class="badge bg-success"><small>Published</small></span>
+                                @else
+                                    <span class="badge bg-danger"><small>Unpublished</small></span>
+                                @endif
+                            </td>
+                            <td>
                                 <div class="dropdown d-inline-block">
                                     <!-- Edit -->
                                     <span>
@@ -409,8 +417,7 @@
 
                                     <span>
                                         <button class="btn btn-sm btn-icon btn-statistic-vote" data-bs-toggle="modal"
-                                            {{-- data-bs-target="#statisticVotingModal" --}}
-                                             data-bs-offset="0,4" data-bs-placement="top"
+                                            {{-- data-bs-target="#statisticVotingModal" --}} data-bs-offset="0,4" data-bs-placement="top"
                                             data-bs-html="true" data-vote-id="{{ $vote->id }}"
                                             data-vote-name="{{ 'Survey for ' . $vote->name }}"
                                             data-bs-original-title="Statistic" aria-describedby="tooltip557134">
@@ -430,7 +437,7 @@
         </div>
     </div>
 
-{{-- Stastics Model Form --}}
+    {{-- Stastics Model Form --}}
 
     <div class="modal fade" id="statisticVotingModal" tabindex="-1">
         <div class="modal-dialog">
