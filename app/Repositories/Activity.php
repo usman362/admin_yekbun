@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-
+use App\Models\User;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDBModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -130,5 +130,15 @@ class Activity extends MongoDBModel implements ActivityContract
     public function scopeForBatch(Builder $query, string $batchUuid): Builder
     {
         return $query->where('batch_uuid', $batchUuid);
+    }
+
+    /**
+     * Get the user associated with the Activity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'causer_id')->where('is_admin_user',1);
     }
 }
