@@ -5,6 +5,7 @@
 
     .modal-footer {
         margin-top: -72px;
+        z-index: 2;
     }
 </style>
 
