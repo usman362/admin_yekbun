@@ -336,7 +336,7 @@
                                             <!-- Post body -->
                                             <div class="card-body p-0">
 
-                                                <div style="background-image: url({{ asset('storage/' . $feed->thumbnail) }});"
+                                                <div style="background-image: url('{{ asset('storage/' . $feed->thumbnail) }}');"
                                                     class="card-post-thumbnail">
                                                     {{-- <span class="video-thumbnail-duration">04:49</span> --}}
                                                 </div>

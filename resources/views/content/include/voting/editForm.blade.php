@@ -2,6 +2,12 @@
     .modal-footer{
         margin-top: -55px;
     }
+    .modal-footer a{
+        z-index: 2;
+    }
+    .modal-footer button{
+        z-index: 2;
+    }
 </style>
 <div class="nav-align-top edit-vote-modal">
     <div class="vote-header d-flex justify-content-center">

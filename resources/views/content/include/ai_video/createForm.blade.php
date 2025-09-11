@@ -4,6 +4,11 @@
     }
     .modal-footer{
         margin-top: -72px;
+    }
+    .modal-footer a{
+        z-index: 2;
+    }
+    .modal-footer button{
         z-index: 2;
     }
 </style>

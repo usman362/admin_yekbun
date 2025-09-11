@@ -5,6 +5,13 @@
 
     .modal-footer {
         margin-top: -72px;
+    }
+
+    .modal-footer a {
+        z-index: 2;
+    }
+
+    .modal-footer button {
         z-index: 2;
     }
 </style>
@@ -311,7 +318,8 @@
                 let src = $(this).attr('src');
                 $('.dz-thumbnail img').attr('src', src);
                 $('#thumbnail').val(src);
-                if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "" && $('#inputStatus').val() !== "") {
+                if ($('[name="title"]').val() !== "" && $('[name="source"]').val() !== "" && $(
+                        '#inputStatus').val() !== "") {
                     $('.submit-clip-template').attr('disabled', false);
                 }
             }
