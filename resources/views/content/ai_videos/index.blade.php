@@ -901,14 +901,18 @@
             });
         });
 
-        $('.add-history').click(function() {
+         $('.add-history').click(function() {
             $('.modal-header h4').text('Create AI Video');
             $('.modal-footer [type="submit"]').text('Create');
+            $('[name="history_id"]').val('');
+            $('[name="title"]').val('');
             $('[name="status"]').val('');
             $('[name="status"]').trigger('change');
+            $('[name="source"]').val('');
+            $('.dz-remove').trigger('click');
             $('#dropzone-video').css('background-image', 'none');
-            $('#dropzone-video').css('background-size', 'cover');
-            $('[name="history_id"]').val('');
+            $('#dropzone-video').css('background-size', 'unset');
+            Dropzone.forElement("#dropzone-video").removeAllFiles(true);
             $('#createForm')[0].reset();
         })
 

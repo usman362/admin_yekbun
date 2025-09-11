@@ -119,7 +119,7 @@
     </div>
     <div class="col-md-12" style="width: 50%;" bis_skin_checked="1">
         <label class="form-label" for="status">Status</label>
-        <select class="form-select" name="status">
+        <select class="form-select" id="inputStatus" name="status">
             <option selected="" value="">Select</option>
             <option value="1">Publish</option>
             <option value="0">UnPublish</option>
@@ -310,12 +310,17 @@
             validateClipTemplateForm();
         });
 
+        $('#inputStatus').on('change', function() {
+            validateClipTemplateForm();
+        });
+
         function validateClipTemplateForm() {
             const thumbnail = $('#thumbnail').val();
             const title = $('[name="title"]').val();
             const source = $('[name="source"]').val();
+            const status = $('#inputStatus').val();
 
-            if (thumbnail !== "" && title !== "" && source !== "") {
+            if (thumbnail !== "" && title !== "" && source !== "" && status !== "") {
                 $('.submit-clip-template').attr('disabled', false);
             } else {
                 $('.submit-clip-template').attr('disabled', true);

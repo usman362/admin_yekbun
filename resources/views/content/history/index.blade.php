@@ -377,9 +377,11 @@
                                                         </div>
                                                     @endif --}}
                                                     @if ($feed->status == '1')
-                                                        <span style="font-size: 12px;" class="badge bg-success"><small>Published</small></span>
+                                                        <span style="font-size: 12px;"
+                                                            class="badge bg-success"><small>Published</small></span>
                                                     @else
-                                                        <span style="font-size: 12px;" class="badge bg-danger"><small>Unpublished</small></span>
+                                                        <span style="font-size: 12px;"
+                                                            class="badge bg-danger"><small>Unpublished</small></span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -400,8 +402,8 @@
                                             style="min-width: unset; width: 100px;">
                                             <span style="font-family:Genos;color:#c0c0c0">Options</span>
                                             <form action="{{ route('history.destroy', $feed->id) }}"
-                                                onsubmit="confirmAction(event, () => event.target.submit())" method="post"
-                                                class="d-inline">
+                                                onsubmit="confirmAction(event, () => event.target.submit())"
+                                                method="post" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="row ml-0" style="width:100px;">
@@ -905,21 +907,14 @@
             $('.modal-header h4').text('Create History');
             $('.modal-footer [type="submit"]').text('Create');
             $('[name="history_id"]').val('');
-            $('#dropzone-video').css('background-image', 'unset');
-            $('#dropzone-video').css('background-size', 'unset');
-            $('#createForm')[0].reset();
-        })
-
-        $('.add-history').click(function() {
-            $('.modal-header h4').text('Create History');
-            $('.modal-footer [type="submit"]').text('Create');
-            $('[name="history_id"]').val('');
             $('[name="title"]').val('');
             $('[name="status"]').val('');
             $('[name="status"]').trigger('change');
             $('[name="source"]').val('');
             $('#dropzone-video').css('background-image', 'none');
-            $('#dropzone-video').css('background-size', 'cover');
+            $('#dropzone-video').css('background-size', 'unset');
+            $('#createForm')[0].reset();
+            Dropzone.forElement("#dropzone-video").removeAllFiles(true);
         })
 
         $('.edit-history').click(function() {
