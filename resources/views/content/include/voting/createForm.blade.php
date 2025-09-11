@@ -1,6 +1,7 @@
 <style>
     .modal-footer{
         margin-top: -55px;
+        z-index: 2;
     }
 </style>
 <div class="nav-align-top edit-vote-modal">
