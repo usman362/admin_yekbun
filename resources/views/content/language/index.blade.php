@@ -493,6 +493,7 @@
 
                     $('.sections-tabs').html(tabs);
                     $('#sectionsTable').html(rows);
+                    sortKeywordsSectionn();
                 });
             });
 
@@ -504,6 +505,7 @@
                     const rows = data.sections.map(s => renderSectionRow(s, data.language_id)).join(
                         '');
                     $('#sectionsTable').html(rows);
+                    sortKeywordsSectionn();
                 });
             });
 
@@ -695,6 +697,51 @@
                 container.appendChild(row);
                 container.appendChild(document.createElement("hr"));
             });
+        }
+
+        function sortKeywords() {
+            const sortType = document.getElementById("sortSelect").value;
+            const container = document.getElementById("keywordsTable");
+
+            // Get all rows (excluding <hr>)
+            let rows = Array.from(container.querySelectorAll(".row"));
+
+            rows.sort((a, b) => {
+                let nameA = a.querySelector("h6").innerText.trim().toLowerCase();
+                let nameB = b.querySelector("h6").innerText.trim().toLowerCase();
+                let valA = a.querySelector("input[name='translated[]']").value.trim();
+                let valB = b.querySelector("input[name='translated[]']").value.trim();
+
+                if (sortType === "name") {
+                    return nameA.localeCompare(nameB);
+                } else if (sortType === "empty") {
+                    if (valA === "" && valB !== "") return -1;
+                    if (valA !== "" && valB === "") return 1;
+                    return 0;
+                }
+                return 0;
+            });
+
+            // Re-append rows + their following <hr>
+            container.innerHTML = "";
+            rows.forEach(row => {
+                container.appendChild(row);
+                container.appendChild(document.createElement("hr"));
+            });
+        }
+
+        function sortKeywordsSectionn() {
+            let tbody = document.getElementById("sectionsTable");
+            let rows = Array.from(tbody.querySelectorAll("tr"));
+
+            rows.sort((a, b) => {
+                let nameA = a.querySelector("td").innerText.toLowerCase();
+                let nameB = b.querySelector("td").innerText.toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
         }
     </script>
 
