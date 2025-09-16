@@ -21,7 +21,7 @@
 </style>
 <div class="modal fade" id="editUserRolesModal{{ $role->id }}" tabindex="-1" aria-hidden="true">
 
-    <div class="modal-dialog modal-simple modal-dialog-centered modal-add-new-role">
+    <div style="max-width: 750px" class="modal-dialog modal-simple modal-dialog-centered modal-add-new-role">
         <div class="modal-content p-0">
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -81,7 +81,7 @@
                                                                 {{ $childPermission->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermission->name))) }}
                                                             </label>
                                                         </div>
-                                                    @break
+                                                    {{-- @break --}}
                                                 @endforeach
                                             </div>
                                         </td>

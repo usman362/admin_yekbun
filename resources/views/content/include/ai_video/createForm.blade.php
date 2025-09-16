@@ -326,10 +326,18 @@
             const source = $('[name="source"]').val();
             const status = $('#inputStatus').val();
 
-            if (thumbnail !== "" && title !== "" && source !== "" && status !== "") {
-                $('.submit-clip-template').attr('disabled', false);
+            if ($('[name="ai_video_id"]').val() !== "") {
+                if (title !== "" && source !== "" && status !== "") {
+                    $('.submit-clip-template').attr('disabled', false);
+                } else {
+                    $('.submit-clip-template').attr('disabled', true);
+                }
             } else {
-                $('.submit-clip-template').attr('disabled', true);
+                if (thumbnail !== "" && title !== "" && source !== "" && status !== "") {
+                    $('.submit-clip-template').attr('disabled', false);
+                } else {
+                    $('.submit-clip-template').attr('disabled', true);
+                }
             }
         }
     });

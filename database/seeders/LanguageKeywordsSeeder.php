@@ -20,7 +20,7 @@ class LanguageKeywordsSeeder extends Seeder
         $languages = Language::select(['_id', 'code'])->get();
 
         // Clear all language details before seeding again
-        LanguageDetail::truncate();
+        //LanguageDetail::truncate();
 
         // Create a progress bar for the number of languages
         $bar = $this->command->getOutput()->createProgressBar($languages->count());

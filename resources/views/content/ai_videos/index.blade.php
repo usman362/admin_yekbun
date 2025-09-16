@@ -282,7 +282,7 @@
         <div class="">
 
             {{-- @can('artist.create') --}}
-            <button class="btn btn-primary add-video-clips" data-bs-toggle="modal" data-bs-target="#createhistoryModal">Add
+            <button class="btn btn-primary add-ai-videos" data-bs-toggle="modal" data-bs-target="#createhistoryModal">Add
                 AI Video</button>
             {{-- @endcan --}}
         </div>
@@ -405,7 +405,7 @@
                                                 <div class="row ml-0" style="width:100px;">
 
                                                     <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
-                                                        <a class="dropdown-item edit-history" style="padding: 0"
+                                                        <a class="dropdown-item edit-ai-video" style="padding: 0"
                                                             href="javascript:void(0)" data-bs-toggle="modal"
                                                             data-bs-target="#createhistoryModal"
                                                             data-id="{{ $feed->id }}"
@@ -901,7 +901,7 @@
             });
         });
 
-         $('.add-history').click(function() {
+         $('.add-ai-videos').click(function() {
             $('.modal-header h4').text('Create AI Video');
             $('.modal-footer [type="submit"]').text('Create');
             $('[name="history_id"]').val('');
@@ -916,7 +916,7 @@
             $('#createForm')[0].reset();
         })
 
-        $('.edit-history').click(function() {
+        $('.edit-ai-video').click(function() {
             $('.modal-header h4').text('Edit AI Video');
             $('.modal-footer [type="submit"]').text('Update');
             let name = $(this).attr('data-name');
@@ -927,8 +927,11 @@
             let emoji = $(this).attr('data-emoji');
             let id = $(this).attr('data-id');
 
-            $('[name="history_id"]').val(id);
+            $('[name="ai_video_id"]').val(id);
             $('[name="title"]').val(name);
+            $('[name="source"]').val($(this).attr('data-source'));
+            $('#dropzone-video').css('background-image', 'url(' + $(this).attr("data-thumbnail") + ')');
+            $('#dropzone-video').css('background-size', 'cover');
             $('[name="status"]').val(status);
             $('[name="status"]').trigger('change');
             comments == true ? $('[name="comments"]').attr('checked', true) : $('[name="comments"]').attr('checked',
