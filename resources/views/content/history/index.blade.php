@@ -416,7 +416,7 @@
                                                             data-name="{{ $feed->title }}"
                                                             data-source="{{ $feed->source }}"
                                                             data-status="{{ $feed->status }}"
-                                                            data-thumbnail="{{ asset('storage/' . $feed->thumbnail) }}"
+                                                            data-thumbnail="'{{ asset('storage/' . $feed->thumbnail) }}'"
                                                             data-video="{{ $feed->video[0]['path'] }}"
                                                             data-comments="{{ $feed->is_comments }}"
                                                             data-share="{{ $feed->is_share }}"
