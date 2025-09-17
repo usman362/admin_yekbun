@@ -110,7 +110,7 @@ class VotingController extends Controller
                 [$request->name],
                 $notification->new_votes_description
             );
-            if ($notification->new_votes == 'true') {
+            if ($notification->new_votes == 'true' && $request->status == '1') {
                 try {
                     $users = User::whereNotNull('fcm_token')->where('new_votes', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

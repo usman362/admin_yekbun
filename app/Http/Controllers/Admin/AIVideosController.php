@@ -95,7 +95,7 @@ class AIVideosController extends Controller
                 [$request->title],
                 $notification->new_ai_videos_description
             );
-            if ($notification->new_ai_videos == 'true') {
+            if ($notification->new_ai_videos == 'true' && $request->status == '1') {
                 try {
                     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

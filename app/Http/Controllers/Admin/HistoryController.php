@@ -104,7 +104,7 @@ class HistoryController extends Controller
                 [$request->title],
                 $notification->new_history_description
             );
-            if ($notification->new_history == 'true') {
+            if ($notification->new_history == 'true' && $request->status == '1') {
                 try {
                     $users = User::whereNotNull('fcm_token')->where('new_history', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
