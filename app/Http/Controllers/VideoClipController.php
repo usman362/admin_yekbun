@@ -81,7 +81,7 @@ class VideoClipController extends Controller
                 [$vc->video_file_name],
                 $notification->new_video_clips_description
             );
-            if ($notification->new_video_clips == 'true') {
+            if ($notification->new_video_clips == 'true' && $request->status == '1') {
                 try {
                     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

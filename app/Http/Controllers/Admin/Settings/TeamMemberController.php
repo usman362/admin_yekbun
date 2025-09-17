@@ -46,7 +46,6 @@ public function index()
  public function store(StoreTeamMemberRequest $request)
 {
     $validated = $request->validated();
-
     if ($request->hasFile('image')) {
         $imagePath = $request->file('image')->store('team-members', 'public'); // Save in storage/app/public/team-members
         $validated['image'] = $imagePath; // Now it's a string (e.g., "team-members/avatar.jpg")
@@ -83,7 +82,6 @@ public function index()
     {
         $validated = $request->validated();
         $validated['image'] = $request->image??null;
-
         $user = User::find($id);
         if (! ($validated['password']?? null)) {
             $validated['password'] = $user->password;
@@ -110,28 +108,28 @@ public function index()
     public function destroy($id)
     {
         $user = User::find($id);
-    
+
         // Check if the user exists
         if (!$user) {
             return back()->with("error", "User not found.");
         }
-    
+
         // Loop through all roles assigned to this user and delete them
         foreach ($user->roles as $role) {
             // Delete the role from the roles collection
             Role::where('_id', $role->id)->delete();
         }
-    
+
         // Remove the user's image if it exists
         $imagePath = public_path('storage/' . $user->image);
         if ($user->image != NULL && file_exists($imagePath)) {
             unlink($imagePath);
         }
-    
+
         // Delete the user from the database
         $user->delete();
-    
+
         return back()->with("success", "User and associated roles successfully deleted.");
     }
-    
+
 }

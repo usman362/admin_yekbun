@@ -68,9 +68,15 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex">
+                                                    @php
+                                                        $childkey = 0;
+                                                    @endphp
                                                     @foreach ($permissions->where('parent_id', $permission->id) as $childPermission)
                                                         <div class="form-check me-3 me-lg-5">
                                                             {{-- {{dd($role->permission)}} --}}
+                                                            @php
+                                                                $childkey++;
+                                                            @endphp
                                                             <input class="form-check-input" type="checkbox"
                                                                 name="permissions[]"
                                                                 value="{{ $childPermission->name }}"
@@ -81,53 +87,65 @@
                                                                 {{ $childPermission->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermission->name))) }}
                                                             </label>
                                                         </div>
-                                                    {{-- @break --}}
-                                                @endforeach
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @foreach ($permissions->where('parent_child_id', '1') as $childpermissiontop)
-                                        @if ($childpermissiontop->parent_id === $permission->id)
-                                            <tr>
-                                                <td class="pl-3">▪
-                                                    {{ $childpermissiontop->label ?? ucfirst(str_replace('_', ' ', $childpermissiontop->name)) }}
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
-                                                            <div class="form-check me-3 me-lg-5">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="permissions[]"
-                                                                    value="{{ $childPermissionbottom->name }}"
-                                                                    id="permission{{ $childPermissionbottom->id }}"
-                                                                    {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $role->permission) ? 'checked' : '' }} />
-                                                                <label class="form-check-label"
-                                                                    for="permission{{ $childPermissionbottom->id }}">
-                                                                    {{ $childPermissionbottom->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermissionbottom->name))) }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                            </tr>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Permission table -->
-                </div>
+                                                        @if (
+                                                            $permission->label !== 'Languages' &&
+                                                                $permission->label !== 'Music' &&
+                                                                $permission->label !== 'History' &&
+                                                                $permission->label !== 'AI Videos' &&
+                                                                $permission->label !== 'Surveys')
+                                                            @break
 
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                    <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
-                </div>
-            </form>
-            <!--/ Add role form -->
+                                                        @else
+                                                            @if ($childkey > 1)
+                                                                @break
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @foreach ($permissions->where('parent_child_id', '1') as $childpermissiontop)
+                                            @if ($childpermissiontop->parent_id === $permission->id)
+                                                <tr>
+                                                    <td class="pl-3">▪
+                                                        {{ $childpermissiontop->label ?? ucfirst(str_replace('_', ' ', $childpermissiontop->name)) }}
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            @foreach ($permissions->where('parent_id', $childpermissiontop->id) as $childPermissionbottom)
+                                                                <div class="form-check me-3 me-lg-5">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="permissions[]"
+                                                                        value="{{ $childPermissionbottom->name }}"
+                                                                        id="permission{{ $childPermissionbottom->id }}"
+                                                                        {{ \App\Helpers\Helpers::array_in($childPermissionbottom->name, $role->permission) ? 'checked' : '' }} />
+                                                                    <label class="form-check-label"
+                                                                        for="permission{{ $childPermissionbottom->id }}">
+                                                                        {{ $childPermissionbottom->label ?? ucfirst(str_replace('_', ' ', str_replace($permission->name . '.', '', $childPermissionbottom->name))) }}
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                </tr>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Permission table -->
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                            aria-label="Close">Cancel</button>
+                    </div>
+                </form>
+                <!--/ Add role form -->
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!--/ Add Role Modal -->

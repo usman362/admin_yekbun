@@ -36,7 +36,7 @@ use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\StandardUserController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\MusicCategoryController;;
-
+use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Http\Controllers\Admin\UploadMovieCategoryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PaymentOfficeController;
@@ -1060,3 +1060,10 @@ Route::delete('/list-prays-card/{card}', [WishesReasonController::class, 'destro
 Route::post('/list-sympathy-cards-store', [WishesReasonController::class, 'sympathyStore'])->name('list.sympathy-cards.store');
 Route::delete('/list-sympathy-card/{card}', [WishesReasonController::class, 'destroysympathy'])->name('list.sympathy-cards.delete');
 Route::get('/settings/team/roles/{id}/edit', [RoleController::class, 'edit2'])->name('settings.team.roles.edit');
+
+Route::get('test-translator/{code}/{keyword}', function ($code,$keyword) {
+    $tr = new GoogleTranslate();
+    $tr->setTarget($code);
+    $translated = $tr->translate($keyword);
+    dd($translated);
+});

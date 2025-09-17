@@ -8,7 +8,7 @@ use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use Maklad\Permission\Models\Role;
 use Maklad\Permission\Models\Permission;
- 
+
 // use App\Models\Role;
 // use App\Models\Permission;
 use MongoDB\BSON\ObjectId;
@@ -30,8 +30,8 @@ class RoleController extends Controller
 
         //$role = Role::first();
        // $role->givePermissionTo('dashboard.read');
-        
-        
+
+
    // die("");
 //$permissions = Permission::whereIn('name', ['dashboard.read'])->first();
 
@@ -42,7 +42,7 @@ class RoleController extends Controller
 //$role->permissions()->sync($permissions->pluck('_id'));
 
     //   $role->syncPermissions(['dashboard.read']);
-        
+
 //$permissions = Permission::whereIn('name', ['dashboard.read'])->get();
 
 //print_r($permissions);
@@ -66,11 +66,10 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-       // dd($request->all());
 
         $permissions = Permission::whereIn('name', ['dashboard.read'])->get();
 
-        
+
         $validated = $request->validated();
 
         $role = new Role();
@@ -87,11 +86,11 @@ class RoleController extends Controller
        // $role = Role::create($validated);
 
         $permissions = [];
-        
-        
+
+
         $post_permissions = $request->input('permissions');
-        
-        
+
+
         foreach ($post_permissions as $key => $val) {
             $permissions[intval($val)] = intval($val);
         }
@@ -120,7 +119,7 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
 
- 
+
 
 public function update(UpdateRoleRequest $request, $id)
 {

@@ -229,7 +229,7 @@
                 <div class="modal-header">
                     <div class="d-flex justify-content-between">
                         <h5 class="modal-title" id="modalCenterTitle">Edit
-                            <span class="text-info languageName">{{ $language->title }}</span>
+                            <span class="text-info languageName">{{ @$language->title }}</span>
                             Language
                         </h5>
                     </div>
@@ -283,7 +283,7 @@
                         <div class="col-md-8">
                             <h5 class="modal-title" id="modalCenterTitle">
                                 Edit <span class="text-primary">"<span class="sectionName"></span>"</span>
-                                <span class="text-info languageName">- {{ $language->title }}</span>
+                                <span class="text-info languageName">- {{ @$language->title }}</span>
                                 Language
                             </h5>
                         </div>
@@ -312,7 +312,7 @@
                                 <h5>English Language</h5>
                             </div>
                             <div class="col-md-6">
-                                <h5><span class="languageName">{{ $language->title }}</span> Language</h5>
+                                <h5><span class="languageName">{{ @$language->title }}</span> Language</h5>
                             </div>
                         </div>
                         <div id="keywordsTable">

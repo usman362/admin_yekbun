@@ -270,7 +270,7 @@ class MusicController extends Controller
                 [$prettyName],
                 $notification->new_music_description
             );
-            if ($notification->new_music == 'true') {
+            if ($notification->new_music == 'true' && $request->status == '1') {
                 try {
                     $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

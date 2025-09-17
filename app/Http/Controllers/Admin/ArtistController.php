@@ -26,21 +26,55 @@ class ArtistController extends Controller
      */
     public function index(Request $request)
     {
-
+        if (!auth()->user()->can('music.published') && !auth()->user()->can('music.unpublished')) {
+            return redirect('/');
+        }
         if ($request->ajax() && $request->table == 'dataTable') {
-
-            if ($request->has('sort_by')) {
-                if ($request->sort_by == 'songs') {
-                    $artists = Artist::with('songs')->get()->sortByDesc(function ($artist) {
-                        return $artist->songs->count();
-                    });
+            if (auth()->user()->can('music.published') && auth()->user()->can('music.unpublished')) {
+                // Can view both
+                if ($request->has('sort_by')) {
+                    if ($request->sort_by == 'songs') {
+                        $artists = Artist::with('songs')->get()->sortByDesc(function ($artist) {
+                            return $artist->songs->count();
+                        });
+                    } else {
+                        $artists = Artist::with('videos')->get()->sortByDesc(function ($artist) {
+                            return $artist->videos->count();
+                        });
+                    }
                 } else {
-                    $artists = Artist::with('videos')->get()->sortByDesc(function ($artist) {
-                        return $artist->videos->count();
-                    });
+                    $artists = Artist::with(['songs', 'videos'])->get()->orderByDesc('created_at');
                 }
-            } else {
-                $artists = Artist::with(['songs', 'videos'])->get()->orderByDesc('created_at');
+            } elseif (auth()->user()->can('music.published')) {
+                // Can view only published
+                if ($request->has('sort_by')) {
+                    if ($request->sort_by == 'songs') {
+                        $artists = Artist::with('songs')->where('status', '1')->get()->sortByDesc(function ($artist) {
+                            return $artist->songs->count();
+                        });
+                    } else {
+                        $artists = Artist::with('videos')->where('status', '1')->get()->sortByDesc(function ($artist) {
+                            return $artist->videos->count();
+                        });
+                    }
+                } else {
+                    $artists = Artist::with(['songs', 'videos'])->where('status', '1')->get()->orderByDesc('created_at');
+                }
+            } elseif (auth()->user()->can('music.unpublished')) {
+                // Can view only unpublished
+                if ($request->has('sort_by')) {
+                    if ($request->sort_by == 'songs') {
+                        $artists = Artist::with('songs')->where('status', '0')->get()->sortByDesc(function ($artist) {
+                            return $artist->songs->count();
+                        });
+                    } else {
+                        $artists = Artist::with('videos')->where('status', '0')->get()->sortByDesc(function ($artist) {
+                            return $artist->videos->count();
+                        });
+                    }
+                } else {
+                    $artists = Artist::with(['songs', 'videos'])->where('status', '0')->get()->orderByDesc('created_at');
+                }
             }
 
             return DataTables::of($artists)

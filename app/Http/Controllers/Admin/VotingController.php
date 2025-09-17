@@ -24,7 +24,19 @@ class VotingController extends Controller
      */
     public function index()
     {
-        $votes = Voting::with('voting_category')->get();
+         if (auth()->user()->can('surveys.published') && auth()->user()->can('surveys.unpublished')) {
+            // Can view both
+            $votes = Voting::with('voting_category')->get();
+        } elseif (auth()->user()->can('surveys.published')) {
+            // Can view only published
+            $votes = Voting::with('voting_category')->where('status','1')->get();
+        } elseif (auth()->user()->can('surveys.unpublished')) {
+            // Can view only unpublished
+            $votes = Voting::with('voting_category')->where('status','0')->get();
+        } else {
+            // No permission
+            return redirect('/');
+        }
         $vote_categories = VotingCategory::get();
         return view('content.voting.index', compact('votes', 'vote_categories'));
     }

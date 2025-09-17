@@ -37,7 +37,7 @@
 
 
 
-        @can('music.read')
+        @canany(['music.published','music.unpublished'])
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Content Adds</span>
             </li>
@@ -74,7 +74,7 @@
             </li>
         @endcan
 
-        @can('voting.read')
+        @canany(['surveys.published','surveys.unpublished'])
             <li class="menu-item {{ Request::is('surveys') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-sort"></i>
@@ -90,7 +90,7 @@
             </li>
         @endcan
 
-        @can('history.read')
+        @canany(['history.published','history.unpublished'])
             <li
                 class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -130,7 +130,7 @@
                 </ul>
             </li>
         @endcan
-        @can('videos.read')
+        @canany(['aivideos.published','aivideos.unpublished'])
             <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
@@ -1617,7 +1617,7 @@
             </a>
         </li>
     @endcan
-    @can('languages.read')
+    @canany(['languages.published','languages.unpublished'])
         <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
             <a href="{{ url('/language') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-transfer"></i>

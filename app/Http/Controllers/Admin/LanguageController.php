@@ -66,21 +66,36 @@ class LanguageController extends Controller
         $textCounts = Text::count();
 
         // Fetch all languages with their translations
-        $languages = Language::with('translation')->get();
 
-        foreach ($languages as $language) {
-            // Get all translations for this language
-            $translations = LanguageDetail::where('language_id', $language->_id)->get();
 
-            $total = $translations->count();
-            $translatedCount = $translations->where('translated', '!=', '')->count();
-
-            $progress = $total > 0 ? round(($translatedCount / $total) * 100, 2) : 0;
-
-            // attach progress dynamically
-            $language->progress = $progress;
+        if (auth()->user()->can('languages.published') && auth()->user()->can('languages.unpublished')) {
+            // Can view both
+            $languages = Language::with('translation')->get();
+        } elseif (auth()->user()->can('languages.published')) {
+            // Can view only published
+            $languages = Language::with('translation')->where('status', '1')->get();
+        } elseif (auth()->user()->can('languages.unpublished')) {
+            // Can view only unpublished
+            $languages = Language::with('translation')->where('status', '0')->get();
+        } else {
+            // No permission
+            return redirect('/');
         }
 
+        if($languages->count() > 0){
+            foreach ($languages as $language) {
+                // Get all translations for this language
+                $translations = LanguageDetail::where('language_id', $language->_id)->get();
+
+                $total = $translations->count();
+                $translatedCount = $translations->where('translated', '!=', '')->count();
+
+                $progress = $total > 0 ? round(($translatedCount / $total) * 100, 2) : 0;
+
+                // attach progress dynamically
+                $language->progress = $progress;
+            }
+        }
         return view('content.language.index', compact('languages', 'languageData'));
     }
 

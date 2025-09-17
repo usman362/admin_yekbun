@@ -23,7 +23,19 @@ class AIVideosController extends Controller
      */
     public function index()
     {
-        $ai_video = AIVideo::all();
+        if (auth()->user()->can('aivideos.published') && auth()->user()->can('aivideos.unpublished')) {
+            // Can view both
+            $ai_video = AIVideo::all();
+        } elseif (auth()->user()->can('aivideos.published')) {
+            // Can view only published
+            $ai_video = AIVideo::where('status', '1')->get();
+        } elseif (auth()->user()->can('aivideos.unpublished')) {
+            // Can view only unpublished
+            $ai_video = AIVideo::where('status', '0')->get();
+        } else {
+            // No permission
+            return redirect('/');
+        }
         return view('content.ai_videos.index', compact('ai_video'));
     }
 

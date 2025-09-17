@@ -30,7 +30,19 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $history = History::with('history_category')->get();
+        if (auth()->user()->can('history.published') && auth()->user()->can('history.unpublished')) {
+            // Can view both
+            $history = History::with('history_category')->get();
+        } elseif (auth()->user()->can('history.published')) {
+            // Can view only published
+            $history = History::with('history_category')->where('status', '1')->get();
+        } elseif (auth()->user()->can('history.unpublished')) {
+            // Can view only unpublished
+            $history = History::with('history_category')->where('status', '0')->get();
+        } else {
+            // No permission
+            return redirect('/');
+        }
         $history_category = HistoryCategory::get();
         return view('content.history.index', compact('history', 'history_category'));
     }

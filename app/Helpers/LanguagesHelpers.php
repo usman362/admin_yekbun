@@ -597,6 +597,7 @@ class LanguagesHelpers
             ['keyword' => 'Decide who can see your Collection', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
             ['keyword' => 'Create', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
             ['keyword' => 'Report the User', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
+            ['keyword' => 'type here...', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
             ['keyword' => 'Friends & Family', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Social'],
             ['keyword' => 'Friends', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Social'],
             ['keyword' => 'Family', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Social'],
