@@ -375,9 +375,11 @@
                                                         </div>
                                                     @endif
                                                     @if ($feed->status == '1')
-                                                        <span style="font-size: 12px;" class="badge bg-success"><small>Published</small></span>
+                                                        <span style="font-size: 12px;"
+                                                            class="badge bg-success"><small>Published</small></span>
                                                     @else
-                                                        <span style="font-size: 12px;" class="badge bg-danger"><small>Unpublished</small></span>
+                                                        <span style="font-size: 12px;"
+                                                            class="badge bg-danger"><small>Unpublished</small></span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -536,7 +538,7 @@
                                 <div class="comment-line"></div>
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/storage/${data?.user?.image}" onerror="this.onerror=null;this.src='{{ asset('images/icons/user-icon.png') }}';" alt="" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
@@ -597,7 +599,7 @@
                                     <div class="arrow-line 3"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/storage/${child?.user?.image}" onerror="this.onerror=null;this.src='{{ asset('images/icons/user-icon.png') }}';" alt="" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -650,7 +652,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${childUltra?.user?.image}" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" alt="" data-user-popover="${childUltra?.user?.id}">
+                                            <img src="/storage/${childUltra?.user?.image}" onerror="this.onerror=null;this.src='{{ asset('images/icons/user-icon.png') }}';" alt="" data-user-popover="${childUltra?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -675,7 +677,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/storage/${child?.user?.image}" onerror="this.onerror=null;this.src='{{ asset('images/icons/user-icon.png') }}';" alt="" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -696,7 +698,7 @@
                             <div class="media is-comment" data-id="${data._id}">
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/storage/${data?.user?.image}" onerror="this.onerror=null;this.src='{{ asset('images/icons/user-icon.png') }}';" alt="" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
@@ -874,6 +876,10 @@
             $('#comment_parent_id').val($(this).attr('data-parent_id'));
         });
 
+        $('img').on('error', function() {
+            $(this).attr('src', '{{asset("images/icons/user-icon.png")}}');
+        });
+
 
         $(document).on('click', '.like-btn', function() {
             let button = $(this);
@@ -901,7 +907,7 @@
             });
         });
 
-         $('.add-ai-videos').click(function() {
+        $('.add-ai-videos').click(function() {
             $('.modal-header h4').text('Create AI Video');
             $('.modal-footer [type="submit"]').text('Create');
             $('[name="history_id"]').val('');
