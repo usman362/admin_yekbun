@@ -25,5 +25,6 @@ class PermissionsSeeder extends Seeder
         $jsonData = json_decode(file_get_contents($jsonFile), true);
         DB::connection('mongodb')->collection('permissions')->truncate();
         DB::connection('mongodb')->collection('permissions')->insert($jsonData);
+        $this->command->info("\n✅ Permission seeding completed!");
     }
 }
