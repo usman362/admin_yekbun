@@ -482,13 +482,16 @@
                     const rows = data.sections.map(s => renderSectionRow(s, data.language_id)).join(
                         '');
                     const tabs = data.main_sections.map((s, i) => {
-                        const slug = s.main_section.toLowerCase().replace(/\s+/g, '-');
-                        return `
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link ${i === 0 ? 'active' : ''} change-section-tab" id="pills-${slug}-tab" data-bs-toggle="pill" data-bs-target="#pills-${slug}" type="button" role="tab" aria-controls="pills-${slug}" aria-selected="true" data-id="${id}" data-section_name="${slug}">
-                                ${s.main_section}
-                            </button>
-                        </li>`;
+                        // console.log('main',s.main_section);
+                        if(s.main_section !== null){
+                            const slug = s.main_section.toLowerCase().replace(/\s+/g, '-');
+                            return `
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link ${i === 0 ? 'active' : ''} change-section-tab" id="pills-${slug}-tab" data-bs-toggle="pill" data-bs-target="#pills-${slug}" type="button" role="tab" aria-controls="pills-${slug}" aria-selected="true" data-id="${id}" data-section_name="${slug}">
+                                    ${s.main_section}
+                                </button>
+                            </li>`;
+                        }
                     }).join('');
 
                     $('.sections-tabs').html(tabs);
