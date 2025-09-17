@@ -5,7 +5,7 @@
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
     <style>
-	
+
 		 .dropzone {
 			position: relative;
 			border: 2px dashed #ccc;
@@ -16,28 +16,28 @@
 			background-position: center;
 			background-repeat: no-repeat;
 		}
-	
+
 		.dropzone input[type="file"] {
 			display: none;
 		}
 		.dropzone-images{
 			height:200px;
-			display: grid; 
-			place-items: center; 
+			display: grid;
+			place-items: center;
 			cursor:pointer !important;
 		}
 		.dropzone-label{
 			cursor:pointer !important;
-			place-items: center; 
+			place-items: center;
 			display: grid;
 		}
-		
-	
+
+
 		.dz-message1 {
 			font-weight: bold;
 			color: #999;
 		}
-	
+
         #DataTables_Table_0_wrapper .row:first-child {
             display: none;
         }
@@ -321,7 +321,7 @@
             </div>
             <div class="row pb-4">
                 @foreach ($videos as $video)
-                
+
                 <div class="col-md-3">
                         <div class="post-image">
                             <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 postitem view-post card-post"
@@ -346,12 +346,12 @@
 
                                         <div style="background-image: url('{{ asset('storage/' . $video->banner) }}');"
                                             class="card-post-thumbnail">
-                                            	
+
                                                 	<span class="video-thumbnail-views">
                                                     <i class="fa fa-eye"></i>150K
                                                     </span>
                                             <div class="video-overlay-gradient">
-                                            	
+
                                                 <!-- <span class="video-thumbnail-title">{{$shortName}}</span>
                                                 <span class="video-thumbnail-duration">{{$durationFormatted}}</span> -->
                                             </div>
@@ -398,7 +398,7 @@
                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0; display:none;">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$video->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                                data-thumbnail="https://admin.yekbun.net/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
                                                 data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
                                                 for="customRadioPrime">
                                                 <img class="pop_action_image" style="height: 26px"
@@ -434,7 +434,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                 <?php
 				/*
                     <div class="col-md-3">
@@ -497,7 +497,7 @@
                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$video->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                                data-thumbnail="https://admin.yekbun.net/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
                                                 data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
                                                 for="customRadioPrime">
                                                 <img class="pop_action_image" style="height: 26px"
@@ -526,24 +526,24 @@
         saveBtnForm="createvideoForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom trailerbtn" size="lg" headerClass="custom-header" contentClass="content-custom">
         @include('content.include.zarok_movies.createForm', ['form' => 'createvideoForm'])
     </x-modal>
-    
+
     <x-modal id="createmovieModal" title="Add Movie" subtitle="MP4 or AVI" saveBtnText="Upload Movie" saveBtnType="submit"
         saveBtnForm="createmovieForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom moviewbtn" size="md" headerClass="custom-header" contentClass="content-custom">
         @include('content.include.zarok_movies.createMovieForm', ['form' => 'createmovieForm'])
     </x-modal>
-    
-  
+
+
 
 @section('page-script')
     <script>
-		
+
 		$(document).ready(function() {
-			
+
 			$('.trailerbtn').prop('disabled', true);
 			$('.moviewbtn').prop('disabled', true);
-			
+
 		});
-		
+
         function confirmAction(event, callback) {
             event.preventDefault();
             Swal.fire({

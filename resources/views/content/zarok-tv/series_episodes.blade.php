@@ -3,17 +3,17 @@
 @foreach ($seasons as $season)
     <div class="col-md-3">
         <div class="post-image">
-        
+
         <div id="feed-post-1" class=""
                                 data-fancybox="post1" data-lightbox-type="comments"
                                 data-thumb="{{ asset('storage/' . $season->video) }}"
                                 href="{{ asset('storage/' . $season->video) }}" data-id="{{ $season->id }}"
                                 data-demo-href="{{ asset('storage/' . $season->video) }}">
-        
+
             <div class="card is-post mt-4 pt-3 pl-4 pr-4 postitem view-post card-post">
                 <div class="content-wrap">
                     <div class="card-body p-0">
-                    
+
                     	@php
                                         $filenameOnly = pathinfo($season->video_file_name, PATHINFO_FILENAME);
                                         $shortName = strlen($filenameOnly) > 40 ? substr($filenameOnly, 0, 40) . '...' : $filenameOnly;
@@ -23,7 +23,7 @@
                                         $durationFormatted = sprintf('%02d:%02d', $minutes, $seconds);
                                     @endphp
 
-                    
+
                         <div style="background-image: url('{{ asset('storage/' . $season->banner) }}');"
                              class="card-post-thumbnail">
                             <div class="video-overlay-gradient">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="nav-item dropdown d-block"
                                 style="margin-top: 0;position: absolute;right: 24px;top: 240px;bottom: auto;">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown"
@@ -69,7 +69,7 @@
                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0; display:none;">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$season->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                                data-thumbnail="https://admin.yekbun.net/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
                                                 data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
                                                 for="customRadioPrime">
                                                 <img class="pop_action_image" style="height: 26px"
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                 </div>
             </div>
             </div>

@@ -4,7 +4,7 @@
 
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
-    
+
     <style>
         #DataTables_Table_0_wrapper .row:first-child {
             display: none;
@@ -289,7 +289,7 @@
             </div>
             <div class="row pb-4">
                 @foreach ($videos as $video)
-                
+
                 	<div class="col-md-3">
                         <div class="post-image">
                             <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 postitem view-post card-post"
@@ -361,7 +361,7 @@
                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0; display:none;">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$video->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                                data-thumbnail="https://admin.yekbun.net/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
                                                 data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
                                                 for="customRadioPrime">
                                                 <img class="pop_action_image" style="height: 26px"
@@ -397,8 +397,8 @@
                             </div>
                         </div>
                     </div>
-                
-                
+
+
                 <?php
 				/*
                     <div class="col-md-3">
@@ -461,7 +461,7 @@
                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$video->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                                data-thumbnail="https://admin.yekbun.net/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
                                                 data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
                                                 for="customRadioPrime">
                                                 <img class="pop_action_image" style="height: 26px"
@@ -491,7 +491,7 @@
         @include('content.include.zarok_videos.createForm', ['form' => 'createvideoForm'])
     </x-modal>
 
-    
+
 
 @section('page-script')
     <script>
@@ -516,9 +516,9 @@
         }
 
         $(document).ready(function() {
-			
+
 			$('.save-btn-custom').prop('disabled', true);
-			
+
             $('table').on('click', '.delete-btn', function(event) {
                 event.preventDefault(); // Stop any default action
                 let form = $(this).closest('.delete-form'); // Get the closest form

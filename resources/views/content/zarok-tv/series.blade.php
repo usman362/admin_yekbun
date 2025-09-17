@@ -25,23 +25,23 @@
 			background-position: center;
 			background-repeat: no-repeat;
 		}
-	
+
 		.dropzone input[type="file"] {
 			display: none;
 		}
 		.dropzone-images{
 			height:200px;
-			display: grid; 
-			place-items: center; 
+			display: grid;
+			place-items: center;
 			cursor:pointer !important;
 		}
 		.dropzone-label{
 			cursor:pointer !important;
-			place-items: center; 
+			place-items: center;
 			display: grid;
 		}
-		
-	
+
+
 		.dz-message1 {
 			font-weight: bold;
 			color: #999;
@@ -352,9 +352,9 @@
                                                     </span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="card-footer mt-0" style="padding-top:0px; padding-bottom:0px;">
-                                    
+
                                     	<div class="user-block">
                                         	<div class="row">
                                             	<div class="col-md-6 col-xs-6">
@@ -370,10 +370,10 @@
                                             </div>
                                         </div>
                                       </div>
-                                    
+
                                     <div class="card-footer mt-0" style="">
-                                    
-                                    
+
+
                                         <div class="user-block">
                                             <div class="user-info">
                                                 <div class="row">
@@ -414,7 +414,7 @@
                                         <div class="col-md-6" style="border-right: 1px solid #c0c0c0; display:none;">
                                             <a class="dropdown-item edit-video" style="padding: 0"
                                                 href="javascript:void(0)" data-id="{{$video->id}}"
-                                                data-thumbnail="https://admin.yekbun.net/public/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
+                                                data-thumbnail="https://admin.yekbun.net/storage/thumbnails/6812114dabdb3___Şeyda_-_Were_thumb_2.jpg"
                                                 data-artist_id="68109b6fcca2aa23040cf172" data-status="1"
                                                 for="customRadioPrime">
                                                 <img class="pop_action_image" style="height: 26px"
@@ -443,32 +443,32 @@
                     </div>
                 @endforeach
             </div>
-            
+
             <div class="row" id="seasonContainer"></div><br />
 			<div class="row" id="episodesContainer"></div>
-            
+
         </div>
     </div>
-    
-    
+
+
 
     {{-- Video Clips Modal --}}
     <x-modal id="createvideoModal" title="Add New Series" subtitle="MP4 or AVI" saveBtnText="Upload Series" saveBtnType="submit"
         saveBtnForm="createvideoForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom seriesbtn" size="md" headerClass="custom-header" contentClass="content-custom">
         @include('content.include.zarok_series.createForm', ['form' => 'createvideoForm'])
     </x-modal>
-    
+
     <x-modal id="createseasonModal" title="Add New Season" subtitle="MP4 or AVI" saveBtnText="Upload Season" saveBtnType="submit"
         saveBtnForm="createseasonForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom seasonbtn" size="md" headerClass="custom-header" contentClass="content-custom">
         @include('content.include.zarok_series.createseasonForm', ['form' => 'createseasonForm'])
     </x-modal>
-    
+
     <x-modal id="createepisodeModal" title="Add New Episode" subtitle="Pnly Trailer and Banner will appear" saveBtnText="Upload Episode" saveBtnType="submit"
         saveBtnForm="createepisodeForm" btnimg="{{asset('assets/img/upload.png')}}" saveBtnClass="btn save-btn-custom episodebtn" size="md" headerClass="custom-header" contentClass="content-custom">
         @include('content.include.zarok_series.createEpisodeForm', ['form' => 'createepisodeForm'])
     </x-modal>
-    
-    
+
+
 
 @section('page-script')
     <script>
@@ -491,30 +491,30 @@
                 }
             });
         }
-		
-		
+
+
 
         $(document).ready(function() {
-			
+
 			$('.seriesbtn').prop('disabled', true);
 			$('.seasonbtn').prop('disabled', true);
 			$('.episodebtn').prop('disabled', true);
-			
-			
+
+
 			$('.season-btn, .episode-btn').on('click', function (event) {
 				event.stopPropagation(); // Prevent card click
 				const videoId = $(this).data('id');
-		
+
 				// Decide which button was clicked
 				if ($(this).hasClass('season-btn')) {
 					showSeasonDetails(videoId);
 				} else if ($(this).hasClass('episode-btn')) {
-					showEpisodeDetails(videoId); 
+					showEpisodeDetails(videoId);
 				}
 			});
-			
-			
-			
+
+
+
             $('table').on('click', '.delete-btn', function(event) {
                 event.preventDefault(); // Stop any default action
                 let form = $(this).closest('.delete-form'); // Get the closest form
@@ -543,11 +543,11 @@
         function drpzone_init() {
             dropZoneInitFunctions.forEach(callback => callback());
         }
-		
+
 		function handleDeleteSubmit(event) {
 			confirmAction(event, () => event.target.submit());
 		}
-		
+
 		function showSeasonDetails(videoId) {
 			$('#seasonContainer').html("Loading...");
 			$('#episodesContainer').html("");
@@ -563,13 +563,13 @@
 				}
 			});
 		}
-		
+
 		function rebindConfirmAction() {
 			$('.delete-confirm-form').off('submit').on('submit', function(e) {
 				confirmAction(e, () => e.target.submit());
 			});
 		}
-		
+
 		function showEpisodeDetails(videoId) {
 			$('#episodesContainer').html("Loading...");
 			$('#seasonContainer').html("");
@@ -585,8 +585,8 @@
 				}
 			});
 		}
-		
-		
+
+
     </script>
     <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js" onload="drpzone_init()"></script>
 @endsection
