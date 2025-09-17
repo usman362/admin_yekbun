@@ -445,7 +445,9 @@
                 console.log(section)
                 return `
                 <tr>
-                    <td>${section.section_name}</td>
+                    <td>
+                        <input type="checkbox" class="row-check">
+                        ${section.section_name}</td>
                     <td>
                         <div class="progessDiv">
                             <div class="progress">
@@ -483,7 +485,7 @@
                         '');
                     const tabs = data.main_sections.map((s, i) => {
                         // console.log('main',s.main_section);
-                        if(s.main_section !== null){
+                        if (s.main_section !== null) {
                             const slug = s.main_section.toLowerCase().replace(/\s+/g, '-');
                             return `
                             <li class="nav-item" role="presentation">
@@ -612,6 +614,18 @@
                     keyboard: false
                 }).show();
             });
+
+            $('body').on('click', '.edit_section_details, .add_section_details, .download_section_details',
+                function(e) {
+                    e.preventDefault();
+
+                    // Uncheck all
+                    $('.row-check').prop('checked', false);
+
+                    // Check only in the clicked row
+                    $(this).closest('tr').find('.row-check').prop('checked', true);
+                });
+
 
             $('#uploadFileForm').on('submit', function(e) {
                 e.preventDefault();
