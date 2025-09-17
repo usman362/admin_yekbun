@@ -3,7 +3,7 @@
         var
             n = feather.icons["more-vertical"].toSvg(), s = feather.icons["thumbs-up"].toSvg(), a = feather.icons.lock.toSvg(), i = feather.icons.user.toSvg(), e = feather.icons.users.toSvg(), d = feather.icons.globe.toSvg(), t = feather.icons.heart.toSvg(), c = feather.icons.smile.toSvg(), o = feather.icons["message-circle"].toSvg(), l = `
 <div class="header">
-     <img style="display:none" src="assets/img/avatars/4.png" alt="" />
+     <img style="display:none" src="/images/icons/user-icon.png" onerror="this.onerror=null;this.src='/images/icons/user-icon.png';" alt="" />
     <div class="user-meta">
          <span class="name"></span> <span><small class="post-date"></small></span>
     </div>
@@ -130,7 +130,7 @@
 <div class="comment-controls has-lightbox-emojis">
 
     <div class="controls-inner">
-        <img style="display:none" src="" alt="" />
+        <img style="display:none" src="" alt=""  onerror="this.onerror=null;this.src='/images/icons/user-icon.png';"/>
         <div class="control"> <textarea class="textarea comment-textarea is-rounded" rows="1"></textarea> <button class="emoji-button"> `+ c + `</button>
         <button class="send-comment"><i class="fas fa-paper-plane"></i></button>
         </div>

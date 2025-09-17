@@ -1162,7 +1162,7 @@
                                 <div class="comment-line"></div>
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/storage/${data?.user?.image}" alt="" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
@@ -1223,7 +1223,7 @@
                                     <div class="arrow-line 3"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/storage/${child?.user?.image}" alt="" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -1276,7 +1276,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${childUltra?.user?.image}" alt="" data-user-popover="${childUltra?.user?.id}">
+                                            <img src="/storage/${childUltra?.user?.image}" alt="" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" data-user-popover="${childUltra?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -1301,7 +1301,7 @@
                                     <div class="arrow-line"></div>
                                     <figure class="media-left">
                                         <p class="image is-32x32">
-                                            <img src="/storage/${child?.user?.image}" alt="" data-user-popover="${child?.user?.id}">
+                                            <img src="/storage/${child?.user?.image}" alt="" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" data-user-popover="${child?.user?.id}">
                                         </p>
                                     </figure>
 
@@ -1322,7 +1322,7 @@
                             <div class="media is-comment" data-id="${data._id}">
                                 <figure class="media-left">
                                     <p class="image is-32x32">
-                                        <img src="/storage/${data?.user?.image}" alt="" data-user-popover="${data?.user?.id}">
+                                        <img src="/storage/${data?.user?.image}" alt="" onerror="this.onerror=null;this.src='{{asset('images/icons/user-icon.png')}}';" data-user-popover="${data?.user?.id}">
                                     </p>
                                 </figure>
 
