@@ -2194,6 +2194,18 @@
       "order":0,
       "updated_at": "29/3/2024 17:33:08.973"
     },
+    {
+      "_id": "6606fb54259adb7a4a09c815",
+      "created_at": "29/3/2024 17:33:08.973",
+      "guard_name": "web",
+      "label": "Read",
+      "name": "languages.read",
+      "parent_child_id": null,
+      "parent_id": "6606fb54259adb7a4a09c212",
+      "role_ids": "[ \"663e84fa96f497f4a30daf52\", \"660416972e6d0dc1480293a1\" ]",
+      "order":0,
+      "updated_at": "29/3/2024 17:33:08.973"
+    },
 
 
 
