@@ -876,8 +876,12 @@
             $('#comment_parent_id').val($(this).attr('data-parent_id'));
         });
 
-        $('img').on('error', function() {
-            $(this).attr('src', '{{asset("images/icons/user-icon.png")}}');
+        // $('img').on('error', function() {
+        //     $(this).attr('src', '{{ asset('images/icons/user-icon.png') }}');
+        // });
+
+        $(document).on('error', 'img', function() {
+            $(this).attr('src', '{{ asset("images/icons/user-icon.png") }}');
         });
 
 
