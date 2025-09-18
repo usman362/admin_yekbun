@@ -224,7 +224,7 @@
     </div>
 
     <div class="modal fade" id="editDetailsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width:52rem" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex justify-content-between">

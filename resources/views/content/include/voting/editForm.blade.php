@@ -46,7 +46,7 @@
             <div class="vote-content mt-2 p-2">
                 <div class="vote-banner dropzone needsclick dropzone-img p-2" action="/">
                     <div class="dz-message needsclick">
-                        <img src='' style="height:100px; width:auto;" />
+                        <img src='' style="height:100px; width:100%;" />
                     </div>
                     <div class="fallback">
                         <input type="file" name="image" id="image" />
