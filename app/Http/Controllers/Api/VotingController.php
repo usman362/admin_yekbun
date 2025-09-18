@@ -34,9 +34,19 @@ class VotingController extends Controller
 
     public function waitingVote()
     {
-        $votings = Voting::where('status', '1')->whereHas('reactions', function ($r) {
-            $r->where('user_id','!=', Auth::id());
-        })->get();
+        $userId = Auth::id();
+
+        $votings = Voting::where('status', '1')
+            ->where(function ($q) use ($userId) {
+                // Case 1: has reactions, but not by this user
+                $q->whereHas('reactions', function ($r) use ($userId) {
+                    $r->where('user_id', '!=', $userId);
+                })
+                    // Case 2: no reactions at all
+                    ->orWhereDoesntHave('reactions');
+            })
+            ->get();
+
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
