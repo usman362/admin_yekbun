@@ -141,9 +141,13 @@ Route::middleware('jwt.custom')->group(function () {
     Route::delete('/delete-my-account', [AuthController::class, 'deleteMyAccount']);
     Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
 
-    Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
-    Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
     Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
+    Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
+    Route::get('/most-view-votes', [VotingController::class, 'mostViews']);
+    Route::get('/already-voted-votes', [VotingController::class, 'alreadyVoted']);
+    Route::get('/waiting-votes', [VotingController::class, 'waitingVote']);
+    Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);
+    Route::post('/voting-views', [VotingReactionController::class, 'votingViews']);
     Route::delete('/voting/reaction/{id}', [VotingReactionController::class, 'destroy']);
     Route::post('/accept-privacy-policy', [AuthController::class, 'acceptPrivacyPolicy']);
 

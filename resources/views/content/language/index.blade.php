@@ -76,6 +76,7 @@
     <div class="card">
         <h5 class="card-header">List of Language</h5>
         <div class="card-datatable table-responsive">
+            <input type="hidden" id="checkbox_value">
             <table class="datatables-basic table border-top">
                 <thead>
                     <tr>
@@ -442,11 +443,10 @@
         $(document).ready(function() {
             function renderSectionRow(section, languageId) {
                 const progress = section.total > 0 ? Math.round((section.done / section.total) * 100) : 0;
-                console.log(section)
                 return `
                 <tr>
                     <td>
-                        <input type="checkbox" class="row-check">
+                        <input type="checkbox" class="row-check" id="chk-${section.section_name.toLowerCase().replace(/\s+/g, '-')}">
                         ${section.section_name}</td>
                     <td>
                         <div class="progessDiv">
@@ -499,7 +499,9 @@
                     $('.sections-tabs').html(tabs);
                     $('#sectionsTable').html(rows);
                     sortKeywordsSectionn();
+                    $('#'+$('#checkbox_value').val()).prop('checked', true);
                 });
+
             });
 
             $('body').on('click', '.change-section-tab', function() {
@@ -511,7 +513,9 @@
                         '');
                     $('#sectionsTable').html(rows);
                     sortKeywordsSectionn();
+                    $('#'+$('#checkbox_value').val()).prop('checked', true);
                 });
+
             });
 
             $('table').on('click', '.edit_section_details', function(e) {
@@ -624,6 +628,8 @@
 
                     // Check only in the clicked row
                     $(this).closest('tr').find('.row-check').prop('checked', true);
+
+                    $('#checkbox_value').val($(this).closest('tr').find('.row-check').attr('id'));
                 });
 
 

@@ -20,14 +20,36 @@ class VotingController extends Controller
      */
     public function index()
     {
-        $votings = Voting::where('status','1')->with('reactions')->get();
-        return ResponseHelper::sendResponse($votings,'Votings Fetch Successfully!');
+        $votings = Voting::where('status', '1')->with('reactions')->get();
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
+    }
+
+    public function alreadyVoted()
+    {
+        $votings = Voting::where('status', '1')->whereHas('reactions', function ($r) {
+            $r->where('user_id', Auth::id());
+        })->get();
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
+    }
+
+    public function waitingVote()
+    {
+        $votings = Voting::where('status', '1')->whereHas('reactions', function ($r) {
+            $r->where('user_id','!=', Auth::id());
+        })->get();
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
+    }
+
+    public function mostViews()
+    {
+        $votings = Voting::where('status', '1')->with('reactions')->orderBy('views', 'desc')->get();
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
     public function votingPublic()
     {
         $votings = Voting::all();
-        return ResponseHelper::sendResponse($votings,'Votings Fetch Successfully!');
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
     /**
