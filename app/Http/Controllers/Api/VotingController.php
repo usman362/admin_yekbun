@@ -28,7 +28,7 @@ class VotingController extends Controller
     {
         $votings = Voting::where('status', '1')->whereHas('reactions', function ($r) {
             $r->where('user_id', Auth::id());
-        })->get();
+        })->with('reactions')->get();
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
@@ -45,7 +45,7 @@ class VotingController extends Controller
                     // Case 2: no reactions at all
                     ->orWhereDoesntHave('reactions');
             })
-            ->get();
+            ->with('reactions')->get();
 
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
