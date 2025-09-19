@@ -2168,47 +2168,28 @@ class LanguageController extends Controller
             return response()->json(['error' => 'Invalid JSON format'], 400);
         }
 
-        // TranslateKeywordsJSON::dispatch(
-        //     $request->language_id,
-        //     $languageCode,
-        //     $cleanMainSectionTitle,
-        //     $request->section_name,
-        //     $data
-        // );
+        $existings = \App\Models\LanguageDetail::where([
+            'language_id'  => $request->language_id,
+            'main_section' => $cleanMainSectionTitle,
+            'section_name' => $request->section_name,
+        ])->get();
+
+        foreach($existings as $existing){
+            $existing->delete();
+        }
 
         foreach ($data as $item) {
             $keyword = $item['keyword'] ?? null;
             $translated = $item['translated'] ?? null;
 
-            // if (!$keyword || !$translated) {
-            //     dd($translated);
-            //     continue;
-            // }
-            // dd($data);
-
-            // Check if the record already exists
-            $existing = \App\Models\LanguageDetail::where([
-                'language_id'  => $request->language_id,
-                'keyword'      => $keyword,
-                'main_section' => $cleanMainSectionTitle,
-                'section_name' => $request->section_name,
-            ])->first();
-
-            if ($existing) {
-                // Update the translated value
-                $existing->update([
-                    'translated' => $translated,
-                ]);
-            } else {
-                // Insert new keyword
-                \App\Models\LanguageDetail::create([
-                    'language_id'   => $request->language_id,
-                    'keyword'       => $keyword,
-                    'translated'    => $translated,
-                    'main_section'  => $cleanMainSectionTitle,
-                    'section_name'  => $request->section_name,
-                ]);
-            }
+            // Insert new keyword
+            \App\Models\LanguageDetail::create([
+                'language_id'   => $request->language_id,
+                'keyword'       => $keyword,
+                'translated'    => $translated,
+                'main_section'  => $cleanMainSectionTitle,
+                'section_name'  => $request->section_name,
+            ]);
         }
 
         $nullKeywords = LanguageDetail::where('keyword', null)->where('translated', null)->get();
