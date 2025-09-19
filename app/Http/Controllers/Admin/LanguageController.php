@@ -82,7 +82,7 @@ class LanguageController extends Controller
             return redirect('/');
         }
 
-        if($languages->count() > 0){
+        if ($languages->count() > 0) {
             foreach ($languages as $language) {
                 // Get all translations for this language
                 $translations = LanguageDetail::where('language_id', $language->_id)->get();
@@ -2209,6 +2209,11 @@ class LanguageController extends Controller
                     'section_name'  => $request->section_name,
                 ]);
             }
+        }
+
+        $nullKeywords = LanguageDetail::where('keyword', null)->where('translated', null)->get();
+        foreach ($nullKeywords as $fkeyword) {
+            $fkeyword->delete();
         }
 
         return response()->json(['main_section' => strtolower(str_replace(' ', '-', $cleanMainSectionTitle)), 'success' => 'Keywords has been Translated Successfully'], 201);
