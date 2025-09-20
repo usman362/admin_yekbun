@@ -52,15 +52,15 @@ class FeedsController extends Controller
             if ($authFeed) {
                 $feeds = $feedsQuery
                     ->where('_id', '!=', $authFeed->id)
-                    ->whereHas('user', function ($q) {
-                        $q->where('origin', Auth::user()->origin);
-                    })
+                    // ->whereHas('user', function ($q) {
+                    //     $q->where('origin', Auth::user()->origin);
+                    // })
                     ->paginate(5);
             } else {
                 $feeds = $feedsQuery
-                    ->whereHas('user', function ($q) {
-                        $q->where('origin', Auth::user()->origin);
-                    })
+                    // ->whereHas('user', function ($q) {
+                    //     $q->where('origin', Auth::user()->origin);
+                    // })
                     ->paginate(5);
             }
         }
