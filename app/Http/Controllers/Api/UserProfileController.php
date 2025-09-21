@@ -134,7 +134,11 @@ class UserProfileController extends Controller
                 $banner_path = Helpers::fileUpload($request->banner_image, 'images/user');
                 try {
                     $existing_banner = public_path('storage/' . $profile->banner_image);
-                    if (file_exists($existing_banner)) {
+                    if (
+                        !empty($profile->banner_image) &&
+                        file_exists($existing_banner) &&
+                        strpos($profile->banner_image, 'images/user/') !== false
+                    ) {
                         unlink($existing_banner);
                     }
                 } catch (Exception $e) {
