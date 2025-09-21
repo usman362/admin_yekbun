@@ -22,7 +22,8 @@ class UserProfileController extends Controller
         return view('content.pages.pages-account-settings-account', compact('activity'));
     }
 
-    public function welcome(){
+    public function welcome()
+    {
         return view('content.welcome');
     }
 
@@ -31,7 +32,7 @@ class UserProfileController extends Controller
         $events = Event::all();
         $news = News::all();
         $feeds = Feed::all();
-        return view('content.pages.admin_activity',compact('events','news','feeds'));
+        return view('content.pages.admin_activity', compact('events', 'news', 'feeds'));
     }
 
     public function store(Request $request)
@@ -51,8 +52,8 @@ class UserProfileController extends Controller
             $profile->last_name = $request->last_name;
         }
         if (!empty($request->email) && $request->email !== "") {
-            if($request->old_email != $profile->email){
-                return response()->json(['message', 'Invalid Old Email Address'],403);
+            if ($request->old_email != $profile->email) {
+                return response()->json(['message', 'Invalid Old Email Address'], 403);
             }
             $profile->email  = $request->email;
         }
@@ -107,21 +108,39 @@ class UserProfileController extends Controller
         }
 
         if (!empty($request->password) && $request->password !== "") {
-            if(!Hash::check($request->old_password,$profile->password)){
-                return response()->json(['message', 'Invalid Old Password'],403);
+            if (!Hash::check($request->old_password, $profile->password)) {
+                return response()->json(['message', 'Invalid Old Password'], 403);
             }
             $profile->password  = Hash::make($request->password);
         }
         // unlink($profile->image);
-        if ($request->has('image')) {
+        if ($request->hasFile('image')) {
             $image_path = Helpers::fileUpload($request->image, 'images/user');
+            $existing_image = public_path('storage/' . $profile->image);
+            if (file_exists($existing_image)) {
+                unlink($existing_image);
+            }
             $profile->image = $image_path;
         }
 
+        if ($request->has('banner_image')) {
+            $banner_path = '';
+            if ($request->hasFile('banner_image')) {
+                $banner_path = Helpers::fileUpload($request->banner_image, 'images/user');
+                $existing_banner = public_path('storage/' . $profile->banner_image);
+                if (file_exists($existing_banner)) {
+                    unlink($existing_banner);
+                }
+            } else {
+                $banner_path = $request->banner_image;
+            }
+            $profile->banner_image = $banner_path;
+        }
+
         if ($profile->update()) {
-            return response()->json(['message', 'Your profile has been updated'],201);
+            return response()->json(['message', 'Your profile has been updated'], 201);
         } else {
-            return response()->json(['message', 'Failed to Update your profile'],403);
+            return response()->json(['message', 'Failed to Update your profile'], 403);
         }
     }
 
