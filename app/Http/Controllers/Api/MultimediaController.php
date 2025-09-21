@@ -111,6 +111,7 @@ class MultimediaController extends Controller
     public function getFavArtists()
     {
         $artist_ids = ArtistFavorite::where('user_id', Auth::id())->pluck('artist_id');
+        dd($artist_ids);
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
 
         $artists = Artist::
