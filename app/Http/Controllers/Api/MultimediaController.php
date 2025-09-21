@@ -113,9 +113,11 @@ class MultimediaController extends Controller
         $artist_ids = ArtistFavorite::where('user_id', Auth::id())->pluck('artist_id');
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
 
-        $artists = Artist::when($alphabet, function ($query, $alphabet) {
-            $query->where('name', 'LIKE', $alphabet . '%');
-        })->whereIn('id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
+        $artists = Artist::
+        // when($alphabet, function ($query, $alphabet) {
+        //     $query->where('name', 'LIKE', $alphabet . '%');
+        // })->
+        whereIn('id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
             $q->with('country');
         }])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
