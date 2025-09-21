@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
@@ -116,9 +117,13 @@ class UserProfileController extends Controller
         // unlink($profile->image);
         if ($request->hasFile('image')) {
             $image_path = Helpers::fileUpload($request->image, 'images/user');
-            $existing_image = public_path('storage/' . $profile->image);
-            if (file_exists($existing_image)) {
-                unlink($existing_image);
+            try {
+                $existing_image = public_path('storage/' . $profile->image);
+                if (file_exists($existing_image)) {
+                    unlink($existing_image);
+                }
+            } catch (Exception $e) {
+                //
             }
             $profile->image = $image_path;
         }
@@ -127,9 +132,13 @@ class UserProfileController extends Controller
             $banner_path = '';
             if ($request->hasFile('banner_image')) {
                 $banner_path = Helpers::fileUpload($request->banner_image, 'images/user');
-                $existing_banner = public_path('storage/' . $profile->banner_image);
-                if (file_exists($existing_banner)) {
-                    unlink($existing_banner);
+                try {
+                    $existing_banner = public_path('storage/' . $profile->banner_image);
+                    if (file_exists($existing_banner)) {
+                        unlink($existing_banner);
+                    }
+                } catch (Exception $e) {
+                    //
                 }
             } else {
                 $banner_path = $request->banner_image;
