@@ -82,7 +82,7 @@ class MultimediaController extends Controller
                 'videos',
                 'province.country'
             ])
-            ->where('status','1')
+            ->where('status', '1')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -101,7 +101,7 @@ class MultimediaController extends Controller
                 'videos',
                 'province.country'
             ])
-            ->where('status','1')
+            ->where('status', '1')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -369,18 +369,24 @@ class MultimediaController extends Controller
             return ResponseHelper::sendResponse([], 'You are not Allowed to Add Artist as Favorite.', false, 409);
         }
         try {
-            $exists = ArtistFavorite::where('user_id', Auth::id())->where('artist_id', $id)->first();
-            if (!empty($exists)) {
+            $exists = ArtistFavorite::where('user_id', Auth::id())
+                ->where('artist_id', $id)
+                ->first();
+
+            if ($exists) {
                 $exists->delete();
+                $message = 'Artist removed from favorites successfully!';
             } else {
-                $favorites = ArtistFavorite::updateOrCreate(
-                    ['user_id' => Auth::id(), 'artist_id' => $id],
-                    ['user_id' => Auth::id(), 'artist_id' => $id]
-                );
+                ArtistFavorite::create([
+                    'user_id'   => Auth::id(),
+                    'artist_id' => $id,
+                ]);
+                $message = 'Artist added to favorites successfully!';
             }
-            return ResponseHelper::sendResponse([], 'Artist Favorites has been Successfully Saved!');
-        } catch (Exception $e) {
-            return ResponseHelper::sendResponse([], 'Failed to Save Artist Favorites', false, 403);
+
+            return ResponseHelper::sendResponse([], $message);
+        } catch (\Exception $e) {
+            return ResponseHelper::sendResponse([], 'Failed to toggle artist favorite', false, 500);
         }
     }
 
