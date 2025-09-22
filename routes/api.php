@@ -205,6 +205,10 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('store-clips', [ClipsController::class, 'store_clips']);
     Route::post('store-clips-templates', [ClipsController::class, 'store_templates']);
 
+    //Cart
+    Route::get('add-to-cart', [PaymentController::class, 'addtoCart']);
+    Route::post('add-to-cart', [PaymentController::class, 'storeaddtoCart']);
+
     //Playlist
     Route::get('/get-artists', [MultimediaController::class, 'getArtists']);
     Route::get('/get-all-songs', [MultimediaController::class, 'getAllSongs']);

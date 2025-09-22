@@ -10,11 +10,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ApplePay;
 use App\Models\BankTransfer;
+use App\Models\Cart;
 use App\Models\GooglePay;
 use App\Models\Paypal;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PaymentController extends Controller
@@ -184,9 +186,9 @@ class PaymentController extends Controller
                 if ($user) {
                     $current = Carbon::now();
 
-                    if($request->subscription_type === 'monthly'){
+                    if ($request->subscription_type === 'monthly') {
                         $newExpiry = Carbon::parse($current->copy()->addMonth())->format('Y-m-d');
-                    }else{
+                    } else {
                         $newExpiry = Carbon::parse($current->copy()->addYear())->format('Y-m-d');
                     }
 
@@ -203,5 +205,31 @@ class PaymentController extends Controller
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Failed to stored Transaction.', false, 403);
         }
+    }
+
+    public function addtoCart(Request $request)
+    {
+        $cart = Cart::where('user_id', Auth::id())->get()->groupBy('type');
+        return ResponseHelper::sendResponse($cart, 'Cart fetched successfully!');
+    }
+
+
+    public function storeaddtoCart(Request $request)
+    {
+        $request->validate([
+            'data_id' => 'required'
+        ]);
+        $exist = Cart::where('user_id', Auth::id())->where('data_id', $request->data_id)->get();
+        if (!empty($exist)) {
+            return ResponseHelper::sendResponse([], 'Cart already added!', false, 409);
+        }
+        $cart = new Cart();
+        $cart->type = $request->type;
+        $cart->title = $request->title;
+        $cart->data_id = $request->data_id;
+        $cart->price = $request->price;
+        $cart->user_id = Auth::id();
+        $cart->save();
+        return ResponseHelper::sendResponse($cart, 'Cart has been added successfully!');
     }
 }
