@@ -219,8 +219,11 @@ class PaymentController extends Controller
         $request->validate([
             'data_id' => 'required'
         ]);
-        $exist = Cart::where('user_id', Auth::id())->where('data_id', $request->data_id)->get();
-        if (!empty($exist)) {
+        $exist = Cart::where('user_id', Auth::id())
+            ->where('data_id', $request->data_id)
+            ->exists();
+
+        if ($exist) {
             return ResponseHelper::sendResponse([], 'Cart already added!', false, 409);
         }
         $cart = new Cart();
