@@ -17,7 +17,7 @@ class VotingCategoryController extends Controller
     public function index()
     {
         $vote_category = VotingCategory::get();
-        return view('content.voting_category.index' , compact('vote_category'));
+        return view('content.voting_category.index', compact('vote_category'));
     }
 
     /**
@@ -44,13 +44,13 @@ class VotingCategoryController extends Controller
 
         $model = new VotingCategory();
         $model->name = $request->vote_category;
-        if(!empty($request->vote_category_image)){
+        if ($request->hasFile('vote_category_image')) {
             $imgPath = Helpers::fileUpload($request->vote_category_image, "images/voting_category");
             $model->image = $imgPath;
         }
-        if($model->save()){
+        if ($model->save()) {
             return redirect()->route('vote-category.index')->with('success', 'Voting Category Has been inserted');
-        }else{
+        } else {
             return redirect()->route('vote-category.index')->with('error', 'Failed to add vote category');
         }
     }
@@ -90,15 +90,21 @@ class VotingCategoryController extends Controller
 
         $vote = VotingCategory::findorFail($id);
         $vote->name = $request->vote_category;
-        if(!empty($request->vote_category_image)){
+        if ($request->hasFile('vote_category_image')) {
             $imgPath = Helpers::fileUpload($request->vote_category_image, "images/voting_category");
+            if ($vote->image) {
+                $file_path = public_path('storage/' . $vote->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
             $vote->image = $imgPath;
         }
-        if($vote->update()){
-           return redirect()->route('vote-category.index')->with('success', 'Voting Category Has been Updated');
-       }else{
-           return redirect()->route('vote-category.index')->with('error', 'Failed to update vote category');
-       }
+        if ($vote->update()) {
+            return redirect()->route('vote-category.index')->with('success', 'Voting Category Has been Updated');
+        } else {
+            return redirect()->route('vote-category.index')->with('error', 'Failed to update vote category');
+        }
     }
 
     /**
@@ -110,21 +116,21 @@ class VotingCategoryController extends Controller
     public function destroy($id)
     {
         $vote = VotingCategory::findorFail($id);
-        if($vote->delete($vote->id)){
+        if ($vote->delete($vote->id)) {
             return redirect()->route('vote-category.index')->with('success', 'Vote Category Has been Deleted');
-        }else{
+        } else {
             return redirect()->route('vote-category.index')->with('error', 'Failed to delete vote category');
         }
     }
 
-    public function status($id , $status){
+    public function status($id, $status)
+    {
         $vote = VotingCategory::find($id);
         $vote->status = $status;
-        if($vote->update()){
+        if ($vote->update()) {
             return redirect()->route('vote-category.index')->with('success', 'Status Has been Updated');
-        }else{
+        } else {
             return redirect()->route('vote-category.index')->with('error', 'Status is not changed');
-
         }
     }
 }

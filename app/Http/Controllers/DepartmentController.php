@@ -15,8 +15,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::with(['departments'])->where('parent_id',0)->get();
-        return view('content.apps.department',compact('departments'));
+        $departments = Department::with(['departments'])->where('parent_id', 0)->get();
+        return view('content.apps.department', compact('departments'));
     }
 
     /**
@@ -39,22 +39,24 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string'],
-            'thumbnail_path' => ['nullable','file']
+            'thumbnail_path' => ['nullable', 'file']
         ]);
         $departmentFile = Department::find($request->id);
-        if(!empty($request->thumbnail_path)){
+        if (!empty($request->thumbnail_path)) {
             $thumbnailPath = Helpers::fileUpload($request->thumbnail_path, "images/department_thumbnail");
-        }elseif(!empty($departmentFile) && empty($request->thumbnail_path)){
+        } elseif (!empty($departmentFile) && empty($request->thumbnail_path)) {
             $thumbnailPath = $departmentFile->thumbnail_path;
-        }else{
+        } else {
             $thumbnailPath = null;
         }
-        $department = Department::updateOrCreate(['_id' => $request->id],
-        [
-            'name' => $request->name,
-            'thumbnail_path' => $thumbnailPath,
-            'parent_id' =>   $request->parent_id ? $request->parent_id : 0
-        ]);
+        $department = Department::updateOrCreate(
+            ['_id' => $request->id],
+            [
+                'name' => $request->name,
+                'thumbnail_path' => $thumbnailPath,
+                'parent_id' =>   $request->parent_id ? $request->parent_id : 0
+            ]
+        );
 
         return back();
     }
@@ -102,17 +104,23 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         $department = Department::find($id);
-        if(!empty($department)){
+        if (!empty($department)) {
+            if ($department->thumbnail_path) {
+                $file_path = public_path('storage/' . $department->thumbnail_path);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
             $department->delete();
         }
         return back();
     }
 
-    public function getSubDepartments(Request $request,$id)
+    public function getSubDepartments(Request $request, $id)
     {
-        $departments = Department::with(['department'])->where('parent_id',$id)->get();
+        $departments = Department::with(['department'])->where('parent_id', $id)->get();
         return response()->json([
-           'departments'=>$departments
-        ],200);
+            'departments' => $departments
+        ], 200);
     }
 }

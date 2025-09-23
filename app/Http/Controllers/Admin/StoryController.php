@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Facades\Log;
 
 use App\Models\Story;
@@ -29,7 +30,7 @@ class StoryController extends Controller
         if (request()->app)
             $app = request()->app;
 
-        $stories = Story::where('app', $app?? 'main')->get();
+        $stories = Story::where('app', $app ?? 'main')->get();
 
         return view("content.stories.index", compact("stories", "app"));
     }
@@ -39,10 +40,7 @@ class StoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -54,13 +52,13 @@ class StoryController extends Controller
     {
         $validated = $request->validated();
 
-        $thumbnailPath = $validated["thumbnail_path"]?? null; // Get thumbnail path if exists in request
+        $thumbnailPath = $validated["thumbnail_path"] ?? null; // Get thumbnail path if exists in request
         if ($request->hasFile('thumbnail')) { // Store actual thumbnail if thumbnail file exists
             $thumbnailPath = $request->thumbnail->store("/stories", "public");
             $validated["thumbnail_path"] = $thumbnailPath;
         }
 
-        $mediaPath = $validated["media_path"]?? null; // Get media path if exists in request
+        $mediaPath = $validated["media_path"] ?? null; // Get media path if exists in request
         if ($request->hasFile('media')) { // Store actual media if media file exists
             $mediaPath = $request->media->store("/stories", "public");
             $validated["media_path"] = $mediaPath;
@@ -104,13 +102,13 @@ class StoryController extends Controller
     {
         $validated = $request->validated();
 
-        $thumbnailPath = $validated["thumbnail_path"]?? null; // Get thumbnail path if exists in request
+        $thumbnailPath = $validated["thumbnail_path"] ?? null; // Get thumbnail path if exists in request
         if ($request->hasFile('thumbnail')) { // Store actual thumbnail if thumbnail file exists
             $thumbnailPath = $request->thumbnail->store("/stories", "public");
             $validated["thumbnail_path"] = $thumbnailPath;
         }
 
-        $mediaPath = $validated["media_path"]?? null; // Get media path if exists in request
+        $mediaPath = $validated["media_path"] ?? null; // Get media path if exists in request
         if ($request->hasFile('media')) { // Store actual media if media file exists
             $mediaPath = $request->media->store("/stories", "public");
             $validated["media_path"] = $mediaPath;
@@ -154,12 +152,12 @@ class StoryController extends Controller
             if (file_exists($path)) {
                 unlink($path);
             }
-    
+
             // Remove the image filename from the model attribute
             $story->thumbnail_path = null;
             $story->save();
         }
-        
+
         return [
             'status' => true
         ];
@@ -173,98 +171,104 @@ class StoryController extends Controller
             if (file_exists($path)) {
                 unlink($path);
             }
-    
+
             // Remove the image filename from the model attribute
             $story->media_path = null;
             $story->save();
         }
-        
+
         return [
             'status' => true
         ];
     }
-    public function ManageStories(){
-        $cards=Cards::get();
-       return view('content.stories.ManageStories',compact('cards'));
+    public function ManageStories()
+    {
+        $cards = Cards::get();
+        return view('content.stories.ManageStories', compact('cards'));
     }
- 
-    
+
+
     public function deleteCard(Request $request, $id)
-{
-    //dd($request->all()); 
-    $card = Cards::find($id);
-    if (!$card) {
-        return redirect()->back()->with('error', 'Card not found.');
-    }
+    {
+        //dd($request->all());
+        $card = Cards::find($id);
+        if (!$card) {
+            return redirect()->back()->with('error', 'Card not found.');
+        }
 
-    // Fetch the reason from the request
-    $reasonId = $request->input('reason');
-    $reasonTitle = $request->input('reason_title');
-    $reason_description = $request->input('reason_description');
+        // Fetch the reason from the request
+        $reasonId = $request->input('reason');
+        $reasonTitle = $request->input('reason_title');
+        $reason_description = $request->input('reason_description');
 
-    $reason = FeedReason::find($reasonId);
+        $reason = FeedReason::find($reasonId);
 
-    if (!$reason) {
-        return redirect()->back()->with('error', 'Reason not found.');
-    }
+        if (!$reason) {
+            return redirect()->back()->with('error', 'Reason not found.');
+        }
 
-    // Store the deletion log with reason and additional details
-    DeletionCards::create([
-        'card_id' => $id,
-        'reason_id' => $reasonId,
-        'reason_title' => $reasonTitle, // Store reason title
-        'reason_description' => $reason_description,   // Store reason text
-    ]);
+        // Store the deletion log with reason and additional details
+        DeletionCards::create([
+            'card_id' => $id,
+            'reason_id' => $reasonId,
+            'reason_title' => $reasonTitle, // Store reason title
+            'reason_description' => $reason_description,   // Store reason text
+        ]);
 
-    // Delete the card
-    $card->delete();
-
-    return redirect()->back()->with('success', 'Card deleted successfully.');
-}
-
-     public function ReportedStories(){
-        $cards=Cards::get();
-       return view('content.stories.ReportedStories',compact('cards'));
-    }
- 
-public function Listcard()
-{
-    $cards=Cards::get();
-
-    return view('content.stories.cards.index',compact('cards'));
-}
-public function Cardstore(Request $request)
-{
-    $request->validate([
-        'card_name' => 'required'
-    ]);
-
-    $model = new Cards();
-    $model->name = $request->card_name;
-    if (!empty($request->card_image)) {
-        $imgPath = Helpers::fileUpload($request->card_image, "images/card_image");
-        $model->image = $imgPath;
-    }
-    if ($model->save()) {
-        return redirect()->route('list.cards')->with('success', 'Card   Has been inserted');
-    } else {
-        return redirect()->route('list.cards')->with('error', ' Failed to add Cards');
-    }
-}
-
-public function destroycard(Cards $card)
-{
-   // dd('helo');
-    try {
-        Log::info('Attempting to delete card with ID: ' . $card->_id);
+        // Delete the card
         $card->delete();
-        Log::info('Successfully deleted card with ID: ' . $card->_id);
-        return redirect()->route('list.cards')->with('success', 'Card has been deleted!');
-    } catch (\Exception $e) {
-        Log::error('Error deleting Card: ' . $e->getMessage());
-        return redirect()->route('list.cards')->with('error', 'Something went wrong!');
+
+        return redirect()->back()->with('success', 'Card deleted successfully.');
     }
-}
 
+    public function ReportedStories()
+    {
+        $cards = Cards::get();
+        return view('content.stories.ReportedStories', compact('cards'));
+    }
 
+    public function Listcard()
+    {
+        $cards = Cards::get();
+
+        return view('content.stories.cards.index', compact('cards'));
+    }
+    public function Cardstore(Request $request)
+    {
+        $request->validate([
+            'card_name' => 'required'
+        ]);
+
+        $model = new Cards();
+        $model->name = $request->card_name;
+        if ($request->hasFile('card_image')) {
+            $imgPath = Helpers::fileUpload($request->card_image, "images/card_image");
+            $model->image = $imgPath;
+        }
+        if ($model->save()) {
+            return redirect()->route('list.cards')->with('success', 'Card   Has been inserted');
+        } else {
+            return redirect()->route('list.cards')->with('error', ' Failed to add Cards');
+        }
+    }
+
+    public function destroycard(Cards $card)
+    {
+        // dd('helo');
+        try {
+            Log::info('Attempting to delete card with ID: ' . $card->_id);
+            if ($card->image) {
+                $file_path = public_path('storage/' . $card->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+            $card->delete();
+            Log::info('Successfully deleted card with ID: ' . $card->_id);
+            return redirect()->route('list.cards')->with('success', 'Card has been deleted!');
+        } catch (\Exception $e) {
+            Log::error('Error deleting Card: ' . $e->getMessage());
+            return redirect()->route('list.cards')->with('error', 'Something went wrong!');
+        }
+    }
 }

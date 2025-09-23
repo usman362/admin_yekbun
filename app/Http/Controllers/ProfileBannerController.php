@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Helpers\Helpers;
 use App\Models\AnimationEmoji;
 use App\Models\ProfileBanner;
 use App\Models\Post;
 use Illuminate\Support\Facades\Log;
- 
+
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -98,6 +99,12 @@ class ProfileBannerController extends Controller
     {
         try {
             Log::info('Attempting to delete banner with ID: ' . $profilebanner->_id);
+            if ($profilebanner->image) {
+                $file_path = public_path('storage/' . $profilebanner->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
             $profilebanner->delete();
             Log::info('Successfully deleted banner with ID: ' . $profilebanner->_id);
             return redirect()->route('profile.banner')->with('success', 'Banner has been deleted!');

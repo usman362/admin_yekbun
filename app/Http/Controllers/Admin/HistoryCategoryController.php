@@ -45,13 +45,13 @@ class HistoryCategoryController extends Controller
 
         $model = new HistoryCategory();
         $model->name = $request->history_category;
-        if(!empty($request->history_category_image)){
+        if ($request->hasFile('history_category_image')) {
             $imgPath = Helpers::fileUpload($request->history_category_image, "images/history_category");
             $model->image = $imgPath;
         }
-        if($model->save()){
+        if ($model->save()) {
             return redirect()->route('history-category.index')->with('success', 'History Category Has been inserted');
-        }else{
+        } else {
             return redirect()->route('history-category.index')->with('error', 'Failed to add history category');
         }
     }
@@ -76,7 +76,7 @@ class HistoryCategoryController extends Controller
     public function edit($id)
     {
         $history_category = HistoryCategory::find($id);
-        return view('content.history_category.edit' , compact('history_category'));
+        return view('content.history_category.edit', compact('history_category'));
     }
 
     /**
@@ -90,15 +90,21 @@ class HistoryCategoryController extends Controller
     {
         $history = HistoryCategory::findorFail($id);
         $history->name = $request->history_category;
-        if(!empty($request->history_category_image)){
+        if ($request->hasFile('history_category_image')) {
             $imgPath = Helpers::fileUpload($request->history_category_image, "images/history_category");
+            if ($history->image) {
+                $file_path = public_path('storage/' . $history->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
             $history->image = $imgPath;
         }
-        if($history->update()){
-           return redirect()->route('history-category.index')->with('success', 'History Category Has been Updated');
-       }else{
-           return redirect()->route('history-category.index')->with('error', 'Failed to update history category');
-       }
+        if ($history->update()) {
+            return redirect()->route('history-category.index')->with('success', 'History Category Has been Updated');
+        } else {
+            return redirect()->route('history-category.index')->with('error', 'Failed to update history category');
+        }
     }
 
     /**
@@ -110,21 +116,28 @@ class HistoryCategoryController extends Controller
     public function destroy($id)
     {
         $history = HistoryCategory::findorFail($id);
-        if($history->delete($history->id)){
-           return redirect()->route('history-category.index')->with('success', 'History Category Has been Deleted');
-       }else{
-           return redirect()->route('history-category.index')->with('error', 'Failed to delete history category');
-       }
+        if ($history) {
+            if ($history->image) {
+                $file_path = public_path('storage/' . $history->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+            $history->delete();
+            return redirect()->route('history-category.index')->with('success', 'History Category Has been Deleted');
+        } else {
+            return redirect()->route('history-category.index')->with('error', 'Failed to delete history category');
+        }
     }
 
-    public function status($id , $status){
+    public function status($id, $status)
+    {
         $history = HistoryCategory::find($id);
         $history->status = $status;
-        if($history->update()){
+        if ($history->update()) {
             return redirect()->route('history-category.index')->with('success', 'Status Has been Updated');
-        }else{
+        } else {
             return redirect()->route('history-category.index')->with('error', 'Status is not changed');
-
         }
     }
 }

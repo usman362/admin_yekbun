@@ -97,9 +97,16 @@ class EmojiFeedController extends Controller
      */
     public function destroy(Emoji $emoji)
     {
-        if($emoji->delete()){
+        if ($emoji) {
+            if ($emoji->image) {
+                $file_path = public_path('storage/' . $emoji->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+            $emoji->delete();
             return redirect()->route('feed.emoji')->with('success', 'Emoji Feed Has been Deleted!');
-        }else{
+        } else {
             return redirect()->route('feed.emoji')->with('error', 'Something Went Wrong!');
         }
     }

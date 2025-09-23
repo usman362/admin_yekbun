@@ -2,7 +2,7 @@
     @csrf
     <div class="col mb-3">
         <label for="banner_name" class="form-label">Banner Name</label>
-        <input type="text" id="banner_name" class="form-control" placeholder="Banner Name" name="banner_name" required>
+        <input type="text" id="banner_name" class="form-control" placeholder="Banner Name" name="banner_name" autocomplete="off" required>
     </div>
     <div class="col mb-3">
         <label for="banner_image" class="form-label">Banner Image</label>

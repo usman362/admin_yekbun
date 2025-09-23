@@ -148,9 +148,16 @@ class BackgroundFeedController extends Controller
      */
     public function destroy(BackgroundFeed $backgroundFeed)
     {
-        if($backgroundFeed->delete()){
+        if ($backgroundFeed) {
+            if ($backgroundFeed->image) {
+                $file_path = public_path('storage/' . $backgroundFeed->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+            $backgroundFeed->delete();
             return redirect()->route('feed.background')->with('success', 'Background Feed Has been Deleted!');
-        }else{
+        } else {
             return redirect()->route('feed.background')->with('error', 'Something Went Wrong!');
         }
     }

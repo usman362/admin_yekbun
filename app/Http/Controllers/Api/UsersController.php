@@ -7,6 +7,7 @@ use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\NotificationCenter;
+use App\Models\ProfileBanner;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserFriends;
@@ -597,5 +598,11 @@ class UsersController extends Controller
         }
         $user = User::where('device_imei', $request->device_imei)->first();
         return ResponseHelper::sendResponse($user->image ?? null, 'User Image Fetched!');
+    }
+
+    public function getProfileBanners()
+    {
+        $banner = ProfileBanner::get();
+        return ResponseHelper::sendResponse($banner, 'User Banners Fetched!');
     }
 }

@@ -58,7 +58,13 @@ class AdminProfileController extends Controller
             $profile->password  = Hash::make($request->password);
         }
         // unlink($profile->image);
-        if ($request->has('image')) {
+        if ($request->hasFile('image')) {
+            if ($profile->image) {
+                $file_path = public_path('storage/' . $profile->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
             $image_path = Helpers::fileUpload($request->image, 'images/user');
             $profile->image = $image_path;
         }
