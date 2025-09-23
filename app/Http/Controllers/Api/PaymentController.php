@@ -224,7 +224,7 @@ class PaymentController extends Controller
             ->exists();
 
         if ($exist) {
-            return ResponseHelper::sendResponse([], 'Cart already added!', false, 409);
+            return ResponseHelper::sendResponse([], 'Cart already added!', false, 403);
         }
         $cart = new Cart();
         $cart->type = $request->type;
