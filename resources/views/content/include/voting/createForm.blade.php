@@ -1,11 +1,13 @@
 <style>
-    .modal-footer{
+    .modal-footer {
         margin-top: -55px;
     }
-    .modal-footer a{
+
+    .modal-footer a {
         z-index: 2;
     }
-    .modal-footer button{
+
+    .modal-footer button {
         z-index: 2;
     }
 </style>
@@ -47,14 +49,30 @@
                             {{-- <i class='bx bx-plus bx-md'></i> --}}
                             <img src="{{ asset('assets/svg/icons/gallery-add.svg') }}" alt="" />
                         </div>
-                        <div style="font-size: 1rem">Upload banner</div>
+                        <div style="font-size: 1rem">Upload Main Banner</div>
                         <div style="font-size: 0.8rem">JPG or PNG</div>
                     </div>
                     <div class="fallback">
                         <input type="file" name="image" id="image" accept="image/*" />
                     </div>
                 </div>
-
+            </div>
+            <div class="vote-content mt-2 p-3">
+                <div class="vote-banner dropzone needsclick dropzone-view-img pt-2" action="/">
+                    <div class="dz-message needsclick">
+                        <div>
+                            {{-- <i class='bx bx-plus bx-md'></i> --}}
+                            <img src="{{ asset('assets/svg/icons/gallery-add.svg') }}" alt="" />
+                        </div>
+                        <div style="font-size: 1rem">Upload View Banner</div>
+                        <div style="font-size: 0.8rem">JPG or PNG</div>
+                    </div>
+                    <div class="fallback">
+                        <input type="file" name="view_image" id="view_image" accept="image/*" />
+                    </div>
+                </div>
+            </div>
+            <div class="vote-content mt-2 p-3">
                 <div class="vote-title mt-3">
                     <div class="fw-bold" style="color:#333;">Survey Title</div>
                     <div style="background:white;">
@@ -74,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="allowed-reactions mt-4 p-3">
+            <div class="allowed-reactions mt-2 p-3">
                 <div id="single-vote-options">
                     <div class="fw-bold" style="color:#333;">Allowed Reaction</div>
                     <div class="d-flex justify-content-between mt-1">

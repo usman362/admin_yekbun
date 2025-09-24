@@ -48,8 +48,8 @@
 
 .vote-banner-image {
     border-radius: 5px;
-    max-width: 80px;
-    max-height: 80px;
+    width: auto;
+    height: 72px;
 }
 
 .edit-vote-modal .vote-header,

@@ -69,6 +69,7 @@ class FileController extends Controller
         return [
             'status' => true,
             'path' => $filePath,
+            // 'fullpath' => asset('storage/'.$filePath),
             'size' => $fileSize,
             'duration' => $formattedDuration ?? '',
         ];

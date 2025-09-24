@@ -46,13 +46,26 @@
             <div class="vote-content mt-2 p-2">
                 <div class="vote-banner dropzone needsclick dropzone-img p-2" action="/">
                     <div class="dz-message needsclick">
-                        <img src='' style="height:100px; width:100%;" />
+                        <img src='' style="height:100px; width:auto;" />
                     </div>
                     <div class="fallback">
                         <input type="file" name="image" id="image" />
                     </div>
                 </div>
+                </div>
 
+                <div class="vote-content mt-2 p-2">
+                <div class="vote-banner dropzone needsclick dropzone-view-img p-2" action="/">
+                    <div class="dz-message needsclick">
+                        <img src='' style="height:100px; width:100%;" />
+                    </div>
+                    <div class="fallback">
+                        <input type="file" name="view_image" id="view_image" />
+                    </div>
+                </div>
+                </div>
+
+                <div class="vote-content mt-2 p-2">
                 <div class="vote-title mt-3">
                     <div>Vote Title</div>
                     <div style="background:white;">
@@ -69,14 +82,14 @@
                 $optionLabels = ['Left Button Title', 'Middle Button Title', 'Right Button Title'];
             @endphp
 
-            <div class="allowed-reactions mt-4 p-3">
+            <div class="allowed-reactions mt-2 p-3">
                 <div id="individual-vote-options">
                     <div class="fw-bold">Allowed Reaction</div>
                     @foreach ($optionLabels as $index => $optionLabel)
                         <div class="d-flex align-items-center mt-4 individual-reaction-option"
                             data-index="{{ $index }}">
                             <div class="max-10-letters">Max. 10 Letters</div>
-                            <div class="individual-vote-react-option-image uploaded">
+                            <div class="individual-vote-react-option-image">
                                 <img src="" style='width:30px;height:30px' />
                                 <input type="file" class="hidden" />
                                 <input type='hidden' name="reaction_option[{{ $index }}][image]" />

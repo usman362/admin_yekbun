@@ -59,6 +59,7 @@ class VotingController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'name' => 'required',
             'image' => 'required',
@@ -81,6 +82,7 @@ class VotingController extends Controller
         $vote->description = $request->description;
         $vote->options = $options;
         $vote->banner = $request->image ?? null;
+        $vote->view_banner = $request->view_image ?? null;
         $vote->status = $request->status;
         $vote->vote_type = $request->vote_type ?? 'single';
         if ($request->hasFile('audio_file')) {
@@ -338,6 +340,7 @@ class VotingController extends Controller
         $vote->options = $options;
 
         if ($request->image) $vote->banner = $request->image;
+        if ($request->view_image) $vote->view_banner = $request->view_image;
         if ($request->audio) $vote->audio = $request->audio;
 
         if ($vote->update()) {

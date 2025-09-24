@@ -46,8 +46,12 @@
             margin-top: -38px !important;
         }
 
+        .dz-filename {
+            margin-left: 0 !important;
+        }
+
         .dz-thumbnail>img {
-            width: 375px;
+            width: auto;
             height: 330px;
         }
 

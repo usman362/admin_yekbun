@@ -1,18 +1,18 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const editModal = $("#editvotingModal");
     const createModal = $("#createvotingModal");
 
     // To open create-vote modal
-    $(document).on('click', '.btn-create-vote', function(e){
+    $(document).on('click', '.btn-create-vote', function (e) {
         let voteType = $(e.target).closest('button').data('vote-type');
-        if(!voteType) return;
+        if (!voteType) return;
 
         const options_container = createModal.find(".allowed-reactions")[0];
         const hidden_div = createModal.find("#hidden_div")[0];
         const single_vote_options = createModal.find("#single-vote-options")[0];
         const individual_vote_options = createModal.find("#individual-vote-options")[0];
 
-        if(voteType == 'single_vote') {
+        if (voteType == 'single_vote') {
             createModal.find("input[name='vote_type']").val('single');
             createModal.find(".vote-header .title").text("Single Survey");
             hidden_div.appendChild(individual_vote_options);
@@ -30,9 +30,9 @@ $(document).ready(function() {
     });
 
     // To open edit-vote modal
-    $(document).on('click', '.btn-edit-vote', function(e) {
+    $(document).on('click', '.btn-edit-vote', function (e) {
         const vote_id = $(e.target).closest('button').data('vote-id');
-        const vote = votes.find(v=>v._id==vote_id);
+        const vote = votes.find(v => v._id == vote_id);
         editModal.find("input[name='vote_category_id']").val(vote.category_id);
         editModal.find("input[name='vote_type']").val(vote.vote_type);
         editModal.find("input[name='id']").val(vote_id);
@@ -52,15 +52,21 @@ $(document).ready(function() {
         const banner_container = editModal.find(".vote-banner.dropzone");
         banner_container.find("img")[0].src = storagePath(vote.banner);
 
-        if(vote.vote_type == 'individual') {
+        if (vote.vote_type == 'individual') {
             editModal.find(".vote-header .title").text('Individual Vote')
             options_container.appendChild(individual_vote_options);
             hidden_div.appendChild(single_vote_options);
-            for(let i=0; i<3; i++) {
+            for (let i = 0; i < 3; i++) {
                 const option = $(individual_vote_options).find(`div.individual-reaction-option[data-index='${i}']`);
+                let smImage = '';
                 option.find("img")[0].src = storagePath(vote.options[i].image);
                 option.find(`input[name='reaction_option[${i}][title]']`).val(vote.options[i].title);
-                option.find(`input[name='reaction_option[${i}][image]']`).val(vote.options[i].image);
+                console.log(vote.options[i].image);
+                if(vote.options[i].image !== '' && vote.options[i].image !== null){
+                    option.find(`input[name='reaction_option[${i}][image]']`).val(vote.options[i].image);
+                }else{
+                    option.find(`input[name='reaction_option[${i}][image]']`).val('/assets/img/icons/others/6icon.png');
+                }
             }
         } else {
             editModal.find(".vote-header .title").text('Single Vote')
@@ -74,17 +80,17 @@ $(document).ready(function() {
         editModal.modal('show');
     });
 
-    editModal.on('submit', function() {
+    editModal.on('submit', function () {
 
     });
-    createModal.on('submit', function() {
+    createModal.on('submit', function () {
         // const category_id = createModal.find("input[name='vote_category_id']").val();
         // if(!category_id) {
         //     toastr['warning']('', 'Please selecte category');
         //     return false;
         // }
         const banner = createModal.find("input[name='image']")[0];
-        if(!banner) {
+        if (!banner) {
             toastr['warning']('', 'Please upload banner.');
             return false;
         }
@@ -92,24 +98,24 @@ $(document).ready(function() {
 
 
     // To show statistic of a vote
-    $(document).on('click', '.btn-statistic-vote', function(e) {
+    $(document).on('click', '.btn-statistic-vote', function (e) {
         const vote_id = $(e.target).closest('button').attr('data-vote-id');
         const vote_name = $(e.target).closest('button').attr('data-vote-name');
         $('#statisticVotingModal .modal-header h4').text(vote_name);
         $.ajax({
             url: `/surveys/${vote_id}/statistic`,
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
                 $("#statisticVotingModal .modal-body").html(response);
                 $("#statisticVotingModal").modal('show');
             },
-            error: function() {
+            error: function () {
             }
         })
     })
 
     // category selected event handler
-    $(document).on('click', '.edit-vote-modal .vote-categories .vote-category', function(e) {
+    $(document).on('click', '.edit-vote-modal .vote-categories .vote-category', function (e) {
         // To remove .selected class from .vote-category
         $(".edit-vote-modal .vote-categories .vote-category").removeClass("selected");
 
@@ -138,20 +144,20 @@ $(document).ready(function() {
 
     // for image
     const dropzoneImages = $(".dropzone-img");
-    for(let i=0; i<dropzoneImages.length; i++) {
+    for (let i = 0; i < dropzoneImages.length; i++) {
         const dropzoneMulti1 = new Dropzone(dropzoneImages[i], {
             url: '/file/upload',
             previewTemplate: previewTemplate,
             parallelUploads: 1,
             maxFilesize: 100,
-            maxFiles:1,
-            acceptedFiles:'image/*',
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             sending: function (file, xhr, formData) {
-                formData.append('folder', 'music');
+                formData.append('folder', 'surveys');
             },
             success: function (file, response) {
                 if (file.previewElement) {
@@ -159,6 +165,7 @@ $(document).ready(function() {
                 }
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
+                $('.dropzone-img .dz-thumbnail img').attr('src', response.fullpath);
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
@@ -172,8 +179,8 @@ $(document).ready(function() {
                 $.ajax({
                     url: '/file/delete',
                     method: 'delete',
-                    data: {path: file.previewElement.dataset.path},
-                    success: function () {}
+                    data: { path: file.previewElement.dataset.path },
+                    success: function () { }
                 });
 
                 return this._updateMaxFilesReachedClass();
@@ -181,60 +188,112 @@ $(document).ready(function() {
         });
     }
 
-    $(document).on('click', '.individual-vote-react-option-image img', function(e) {
+    const dropzoneViewImages = $(".dropzone-view-img");
+    for (let i = 0; i < dropzoneViewImages.length; i++) {
+        const dropzoneMulti2 = new Dropzone(dropzoneViewImages[i], {
+            url: '/file/upload',
+            previewTemplate: previewTemplate,
+            parallelUploads: 1,
+            maxFilesize: 100,
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            sending: function (file, xhr, formData) {
+                formData.append('folder', 'surveys');
+            },
+            success: function (file, response) {
+                if (file.previewElement) {
+                    file.previewElement.classList.add("dz-success");
+                }
+                file.previewElement.dataset.path = response.path;
+                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
+                $('.dropzone-view-img .dz-thumbnail img').attr('src', response.fullpath);
+                hiddenInputsContainer.innerHTML += `<input type="hidden" name="view_image" value="${response.path}" data-path="${response.path}">`;
+            },
+            removedfile: function (file) {
+                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
+                hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
+
+                if (file.previewElement != null && file.previewElement.parentNode != null) {
+                    file.previewElement.parentNode.removeChild(file.previewElement);
+                }
+
+                $.ajax({
+                    url: '/file/delete',
+                    method: 'delete',
+                    data: { path: file.previewElement.dataset.path },
+                    success: function () { }
+                });
+
+                return this._updateMaxFilesReachedClass();
+            }
+        });
+    }
+
+    $(document).on('click', '.individual-vote-react-option-image img', function (e) {
         const option = $(e.target).closest(".individual-reaction-option");
         option.find("input[type='file'").trigger('click');
     })
 
-    $(document).on('change', ".individual-vote-react-option-image input[type='file']", function(e){
+    $(document).on('change', ".individual-vote-react-option-image input[type='file']", function (e) {
         const file = e.target.files[0];
-        if(!file) return;
+        if (!file) return;
 
         const option = $(e.target).closest('.individual-reaction-option');
         const index = option.data('index');
 
         const data = new FormData();
-        data.append('folder', 'music');
+        data.append('folder', 'surveys');
         data.append('file', file);
+
         $.ajax({
             url: '/file/upload',
             type: 'post',
             data,
             processData: false,
             contentType: false,
-            success: function(response) {
-                option.find("img")[0].src = `/storage/${response.path}`;
-                option.find(`input[name='reaction_option[${index}][image]'`).val(response.path);
-                option.find(".individual-vote-react-option-image").addClass("uploaded")
-                e.target.value = '';
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            error: function(xhr, status, error) {
-                console.error('failed to send');
+            success: function (response) {
+                option.find("img")[0].src = `/storage/${response.path}`;
+                option.find(`input[name='reaction_option[${index}][image]']`).val(response.path);
+                option.find(".individual-vote-react-option-image").addClass("uploaded");
+                e.target.value = ''; // reset input so same file can be re-uploaded
+            },
+            error: function (xhr, status, error) {
+                console.error('failed to send', error);
             }
-        })
-    })
+        });
+    });
 
-    $(document).on('click', '.individual-vote-react-option-image .remove-image', function(e) {
+
+    $(document).on('click', '.individual-vote-react-option-image .remove-image', function (e) {
         e.preventDefault();
 
         const option = $(e.target).closest('.individual-reaction-option');
         const index = option.data('index');
-        const imagePath = option.find(`input[name='reaction_option[${index}][image]'`).val();
-        const data = {
-            path: imagePath
-        }
+        const imagePath = option.find(`input[name='reaction_option[${index}][image]']`).val();
+
         $.ajax({
             url: '/file/delete',
-            type: 'delete',
-            data,
-            success: function(response) {
-                option.find("img")[0].src = '/assets/img/icons/others/gallery_add.png';
-                option.find(".individual-vote-react-option-image").removeClass('uploaded');
-                option.find(`input[name='reaction_option[${index}][image]'`).val('');
+            type: 'post', // use post + _method if Laravel
+            data: { path: imagePath, _method: 'DELETE' },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            error: function(xhr, status, error) {
-                console.error('failed to delete file');
+            success: function (response) {
+                option.find("img")[0].src = '/assets/img/icons/others/6icon.png';
+                option.find(".individual-vote-react-option-image").removeClass('uploaded');
+                option.find(`input[name='reaction_option[${index}][image]']`).val('');
+            },
+            error: function (xhr, status, error) {
+                console.error('failed to delete file', error);
             }
-        })
+        });
     });
+
 });
