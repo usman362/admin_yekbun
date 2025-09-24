@@ -59,7 +59,6 @@ class VotingController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'name' => 'required',
             'image' => 'required',
