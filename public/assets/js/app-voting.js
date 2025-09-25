@@ -23,7 +23,8 @@ $(document).ready(function () {
             hidden_div.appendChild(single_vote_options);
             options_container.appendChild(individual_vote_options);
         }
-
+        Dropzone.forElement(".dropzone-img").removeAllFiles(true);
+        Dropzone.forElement(".dropzone-view-img").removeAllFiles(true);
         let va = new UploadAudio(createModal.find('.vote-audio')[0]);
 
         createModal.modal('show');
@@ -39,6 +40,10 @@ $(document).ready(function () {
         editModal.find("input[name='id']").val(vote_id);
         editModal.find("#fullname").val(vote.name);
         editModal.find("#editForm").attr('action', `/surveys/${vote_id}`)
+        Dropzone.forElement("#editForm .dropzone-img").removeAllFiles(true);
+        Dropzone.forElement("#editForm .dropzone-view-img").removeAllFiles(true);
+        $('.drop-img-edit1').css('height','180px');
+        $('.drop-img-edit2').css('height','180px');
         $("#editStatus").trigger('change');
 
         const options_container = editModal.find(".allowed-reactions")[0];
@@ -133,7 +138,7 @@ $(document).ready(function () {
 
     const previewTemplate = `<div class="row"><di class="col-md-12 d-flex justify-content-center"><div class="dz-preview dz-file-preview w-100">
                                 <div class="dz-details">
-                                <div class="dz-thumbnail" style="width:95%">
+                                <div class="dz-thumbnail">
                                     <img data-dz-thumbnail >
                                     <span class="dz-nopreview">No preview</span>
                                     <div class="dz-success-mark"></div>
@@ -143,8 +148,6 @@ $(document).ready(function () {
                                     <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
                                     </div>
                                 </div>
-                                <div class="dz-filename" data-dz-name></div>
-                                <div class="dz-size" data-dz-size></div>
                                 </div>
                             </div></div></di>`;
 
@@ -187,7 +190,8 @@ $(document).ready(function () {
                 }
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                $('.dropzone-img .dz-thumbnail img').attr('src', response.fullpath);
+                $('.dropzone-img .dz-thumbnail img').attr('src', '/storage/' + response.path);
+                $('.drop-img-edit1').css('height','212px');
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
@@ -207,7 +211,9 @@ $(document).ready(function () {
                         url: '/file/delete',
                         method: 'delete',
                         data: { path: previewElement.dataset.path },
-                        success: function () { }
+                        success: function () {
+                            $('.drop-img-edit1').css('height','180px');
+                        }
                     });
                 }
 
@@ -259,7 +265,8 @@ $(document).ready(function () {
                 }
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                $('.dropzone-view-img .dz-thumbnail img').attr('src', response.fullpath);
+                $('.dropzone-view-img .dz-thumbnail img').attr('src', '/storage/' + response.path);
+                $('.drop-img-edit2').css('height','212px');
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="view_image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
@@ -279,7 +286,9 @@ $(document).ready(function () {
                         url: '/file/delete',
                         method: 'delete',
                         data: { path: previewElement.dataset.path },
-                        success: function () { }
+                        success: function () {
+                            $('.drop-img-edit2').css('height','180px');
+                        }
                     });
                 }
 

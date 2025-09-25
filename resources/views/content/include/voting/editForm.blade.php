@@ -46,20 +46,20 @@
             </div> --}}
 
             <div class="vote-content mt-2 p-2">
-                <div class="vote-banner dropzone needsclick dropzone-view-img p-2" action="/">
+                <div class="vote-banner drop-img-edit2 dropzone needsclick dropzone-view-img p-2" action="/">
                     <div class="dz-message needsclick">
-                        <img src='' style="height:100px; width:auto;" />
+                        <img src='' style="height:auto; width:100%;" />
                     </div>
                     <div class="fallback">
                         <input type="file" name="view_image" id="view_image" />
                     </div>
                 </div>
             </div>
-            
+
             <div class="vote-content mt-2 p-2">
-                <div class="vote-banner dropzone needsclick dropzone-img p-2" action="/">
+                <div class="vote-banner drop-img-edit1 dropzone needsclick dropzone-img p-2" action="/">
                     <div class="dz-message needsclick">
-                        <img src='' style="height:100px; width:auto;" />
+                        <img src='' style="height:auto; width:100%;" />
                     </div>
                     <div class="fallback">
                         <input type="file" name="image" id="image" />

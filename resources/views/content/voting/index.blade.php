@@ -42,6 +42,11 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
+        .vote-banner{
+            padding: 0 !important;
+            padding-top: 0 !important;
+        }
+
         #createvotingModal .modal-body {
             margin-top: -38px !important;
         }
@@ -51,8 +56,10 @@
         }
 
         .dz-thumbnail>img {
-            width: auto;
-            height: 330px;
+            width: 100%;
+            height: auto;
+            max-width: unset !important;
+            max-height: unset !important;
         }
 
         .bg-tropy-column {
@@ -238,6 +245,18 @@
 
         .btn-close {
             z-index: 2;
+        }
+
+        .dz-thumbnail {
+            padding: 0 !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            height: 180px !important;
+        }
+
+        #editForm .vote-banner{
+            height: 180px;
+            overflow: hidden !important;
         }
     </style>
     <div class="row g-4 mb-4">
