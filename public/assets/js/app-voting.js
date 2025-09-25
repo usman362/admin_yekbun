@@ -35,9 +35,11 @@ $(document).ready(function () {
         const vote = votes.find(v => v._id == vote_id);
         editModal.find("input[name='vote_category_id']").val(vote.category_id);
         editModal.find("input[name='vote_type']").val(vote.vote_type);
+        editModal.find("#editStatus").val(vote.status);
         editModal.find("input[name='id']").val(vote_id);
         editModal.find("#fullname").val(vote.name);
         editModal.find("#editForm").attr('action', `/surveys/${vote_id}`)
+        $("#editStatus").trigger('change');
 
         const options_container = editModal.find(".allowed-reactions")[0];
         const hidden_div = editModal.find("#hidden_div")[0];
@@ -51,6 +53,9 @@ $(document).ready(function () {
         // To show banner
         const banner_container = editModal.find(".vote-banner.dropzone");
         banner_container.find("img")[0].src = storagePath(vote.banner);
+
+        const banner_view_container = editModal.find(".vote-banner.dropzone");
+        banner_view_container.find("img")[1].src = storagePath(vote.view_banner);
 
         if (vote.vote_type == 'individual') {
             editModal.find(".vote-header .title").text('Individual Vote')

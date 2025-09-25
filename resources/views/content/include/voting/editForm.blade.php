@@ -57,7 +57,7 @@
                 <div class="vote-content mt-2 p-2">
                 <div class="vote-banner dropzone needsclick dropzone-view-img p-2" action="/">
                     <div class="dz-message needsclick">
-                        <img src='' style="height:100px; width:100%;" />
+                        <img src='' style="height:100px; width:auto;" />
                     </div>
                     <div class="fallback">
                         <input type="file" name="view_image" id="view_image" />
@@ -120,7 +120,7 @@
             </div>
             <div class="col-md-12" style="width: 50%;margin-left:12px;" bis_skin_checked="1">
                 <label class="form-label" for="status">Status</label>
-                <select class="form-select" name="status">
+                <select class="form-select" name="status" id="editStatus">
                     <option selected="" value="">Select</option>
                     <option value="1">Publish</option>
                     <option value="0">UnPublish</option>
