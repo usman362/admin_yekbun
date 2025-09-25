@@ -167,10 +167,10 @@ $(document).ready(function () {
                 const _URL = window.URL || window.webkitURL;
                 const img = new Image();
                 img.onload = function () {
-                    if (this.width === 375 && this.height === 170) {
+                    if (this.width === 375 && this.height === 330) {
                         done(); // valid
                     } else {
-                        done("Image must be exactly 375x170 pixels."); // reject
+                        done("Image must be exactly 375x330 pixels."); // reject
                     }
                 };
                 img.onerror = function () {
@@ -239,10 +239,10 @@ $(document).ready(function () {
                 const _URL = window.URL || window.webkitURL;
                 const img = new Image();
                 img.onload = function () {
-                    if (this.width === 375 && this.height === 330) {
+                    if (this.width === 375 && this.height === 170) {
                         done(); // valid
                     } else {
-                        done("Image must be exactly 375x330 pixels."); // reject
+                        done("Image must be exactly 375x170 pixels."); // reject
                     }
                 };
                 img.onerror = function () {
