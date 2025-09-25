@@ -43,21 +43,6 @@
             </div> --}}
 
             <div class="vote-content mt-2 p-3">
-                <div class="vote-banner dropzone needsclick dropzone-img pt-2" action="/">
-                    <div class="dz-message needsclick">
-                        <div>
-                            {{-- <i class='bx bx-plus bx-md'></i> --}}
-                            <img src="{{ asset('assets/svg/icons/gallery-add.svg') }}" alt="" />
-                        </div>
-                        <div style="font-size: 1rem">Upload Main Banner</div>
-                        <div style="font-size: 0.8rem">JPG or PNG</div>
-                    </div>
-                    <div class="fallback">
-                        <input type="file" name="image" id="image" accept="image/*" />
-                    </div>
-                </div>
-            </div>
-            <div class="vote-content mt-2 p-3">
                 <div class="vote-banner dropzone needsclick dropzone-view-img pt-2" action="/">
                     <div class="dz-message needsclick">
                         <div>
@@ -69,6 +54,21 @@
                     </div>
                     <div class="fallback">
                         <input type="file" name="view_image" id="view_image" accept="image/*" />
+                    </div>
+                </div>
+            </div>
+            <div class="vote-content mt-2 p-3">
+                <div class="vote-banner dropzone needsclick dropzone-img pt-2" action="/">
+                    <div class="dz-message needsclick">
+                        <div>
+                            {{-- <i class='bx bx-plus bx-md'></i> --}}
+                            <img src="{{ asset('assets/svg/icons/gallery-add.svg') }}" alt="" />
+                        </div>
+                        <div style="font-size: 1rem">Upload Main Banner</div>
+                        <div style="font-size: 0.8rem">JPG or PNG</div>
+                    </div>
+                    <div class="fallback">
+                        <input type="file" name="image" id="image" accept="image/*" />
                     </div>
                 </div>
             </div>

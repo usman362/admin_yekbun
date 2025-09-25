@@ -1,11 +1,13 @@
 <style>
-    .modal-footer{
+    .modal-footer {
         margin-top: -55px;
     }
-    .modal-footer a{
+
+    .modal-footer a {
         z-index: 2;
     }
-    .modal-footer button{
+
+    .modal-footer button {
         z-index: 2;
     }
 </style>
@@ -44,17 +46,6 @@
             </div> --}}
 
             <div class="vote-content mt-2 p-2">
-                <div class="vote-banner dropzone needsclick dropzone-img p-2" action="/">
-                    <div class="dz-message needsclick">
-                        <img src='' style="height:100px; width:auto;" />
-                    </div>
-                    <div class="fallback">
-                        <input type="file" name="image" id="image" />
-                    </div>
-                </div>
-                </div>
-
-                <div class="vote-content mt-2 p-2">
                 <div class="vote-banner dropzone needsclick dropzone-view-img p-2" action="/">
                     <div class="dz-message needsclick">
                         <img src='' style="height:100px; width:auto;" />
@@ -63,9 +54,20 @@
                         <input type="file" name="view_image" id="view_image" />
                     </div>
                 </div>
+            </div>
+            
+            <div class="vote-content mt-2 p-2">
+                <div class="vote-banner dropzone needsclick dropzone-img p-2" action="/">
+                    <div class="dz-message needsclick">
+                        <img src='' style="height:100px; width:auto;" />
+                    </div>
+                    <div class="fallback">
+                        <input type="file" name="image" id="image" />
+                    </div>
                 </div>
+            </div>
 
-                <div class="vote-content mt-2 p-2">
+            <div class="vote-content mt-2 p-2">
                 <div class="vote-title mt-3">
                     <div>Vote Title</div>
                     <div style="background:white;">

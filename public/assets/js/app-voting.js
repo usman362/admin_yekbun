@@ -52,10 +52,10 @@ $(document).ready(function () {
 
         // To show banner
         const banner_container = editModal.find(".vote-banner.dropzone");
-        banner_container.find("img")[0].src = storagePath(vote.banner);
+        banner_container.find("img")[1].src = storagePath(vote.banner);
 
         const banner_view_container = editModal.find(".vote-banner.dropzone");
-        banner_view_container.find("img")[1].src = storagePath(vote.view_banner);
+        banner_view_container.find("img")[0].src = storagePath(vote.view_banner);
 
         if (vote.vote_type == 'individual') {
             editModal.find(".vote-header .title").text('Individual Vote')
@@ -67,9 +67,9 @@ $(document).ready(function () {
                 option.find("img")[0].src = storagePath(vote.options[i].image);
                 option.find(`input[name='reaction_option[${i}][title]']`).val(vote.options[i].title);
                 console.log(vote.options[i].image);
-                if(vote.options[i].image !== '' && vote.options[i].image !== null){
+                if (vote.options[i].image !== '' && vote.options[i].image !== null) {
                     option.find(`input[name='reaction_option[${i}][image]']`).val(vote.options[i].image);
-                }else{
+                } else {
                     option.find(`input[name='reaction_option[${i}][image]']`).val('/assets/img/icons/others/6icon.png');
                 }
             }
@@ -94,8 +94,9 @@ $(document).ready(function () {
         //     toastr['warning']('', 'Please selecte category');
         //     return false;
         // }
+        const view_banner = createModal.find("input[name='image']")[0];
         const banner = createModal.find("input[name='image']")[0];
-        if (!banner) {
+        if (!banner && !view_banner) {
             toastr['warning']('', 'Please upload banner.');
             return false;
         }
@@ -161,6 +162,22 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            // ✅ Validate dimensions
+            accept: function (file, done) {
+                const _URL = window.URL || window.webkitURL;
+                const img = new Image();
+                img.onload = function () {
+                    if (this.width === 375 && this.height === 170) {
+                        done(); // valid
+                    } else {
+                        done("Image must be exactly 375x170 pixels."); // reject
+                    }
+                };
+                img.onerror = function () {
+                    done("Not a valid image.");
+                };
+                img.src = _URL.createObjectURL(file);
+            },
             sending: function (file, xhr, formData) {
                 formData.append('folder', 'surveys');
             },
@@ -174,19 +191,30 @@ $(document).ready(function () {
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
+                const previewElement = file.previewElement;
 
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
+                // Remove hidden input only if file was uploaded
+                if (previewElement && previewElement.dataset.path) {
+                    const hiddenInputsContainer = previewElement.closest('form').querySelector('.hidden-inputs');
+                    const input = hiddenInputsContainer.querySelector(`input[data-path="${previewElement.dataset.path}"]`);
+                    if (input) input.remove();
+
+                    // delete from storage if it was uploaded
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: '/file/delete',
+                        method: 'delete',
+                        data: { path: previewElement.dataset.path },
+                        success: function () { }
+                    });
                 }
 
-                $.ajax({
-                    url: '/file/delete',
-                    method: 'delete',
-                    data: { path: file.previewElement.dataset.path },
-                    success: function () { }
-                });
+                // ✅ Always remove the preview from DOM (even for error files)
+                if (previewElement != null && previewElement.parentNode != null) {
+                    previewElement.parentNode.removeChild(previewElement);
+                }
 
                 return this._updateMaxFilesReachedClass();
             }
@@ -206,6 +234,22 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            // ✅ Validate dimensions
+            accept: function (file, done) {
+                const _URL = window.URL || window.webkitURL;
+                const img = new Image();
+                img.onload = function () {
+                    if (this.width === 375 && this.height === 330) {
+                        done(); // valid
+                    } else {
+                        done("Image must be exactly 375x330 pixels."); // reject
+                    }
+                };
+                img.onerror = function () {
+                    done("Not a valid image.");
+                };
+                img.src = _URL.createObjectURL(file);
+            },
             sending: function (file, xhr, formData) {
                 formData.append('folder', 'surveys');
             },
@@ -219,22 +263,34 @@ $(document).ready(function () {
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="view_image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
-                const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`).remove();
+                const previewElement = file.previewElement;
 
-                if (file.previewElement != null && file.previewElement.parentNode != null) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
+                // Remove hidden input only if file was uploaded
+                if (previewElement && previewElement.dataset.path) {
+                    const hiddenInputsContainer = previewElement.closest('form').querySelector('.hidden-inputs');
+                    const input = hiddenInputsContainer.querySelector(`input[data-path="${previewElement.dataset.path}"]`);
+                    if (input) input.remove();
+
+                    // delete from storage if it was uploaded
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: '/file/delete',
+                        method: 'delete',
+                        data: { path: previewElement.dataset.path },
+                        success: function () { }
+                    });
                 }
 
-                $.ajax({
-                    url: '/file/delete',
-                    method: 'delete',
-                    data: { path: file.previewElement.dataset.path },
-                    success: function () { }
-                });
+                // ✅ Always remove the preview from DOM (even for error files)
+                if (previewElement != null && previewElement.parentNode != null) {
+                    previewElement.parentNode.removeChild(previewElement);
+                }
 
                 return this._updateMaxFilesReachedClass();
             }
+
         });
     }
 

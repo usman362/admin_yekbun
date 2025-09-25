@@ -24,15 +24,15 @@ class VotingController extends Controller
      */
     public function index()
     {
-         if (auth()->user()->can('surveys.published') && auth()->user()->can('surveys.unpublished')) {
+        if (auth()->user()->can('surveys.published') && auth()->user()->can('surveys.unpublished')) {
             // Can view both
             $votes = Voting::with('voting_category')->get();
         } elseif (auth()->user()->can('surveys.published')) {
             // Can view only published
-            $votes = Voting::with('voting_category')->where('status','1')->get();
+            $votes = Voting::with('voting_category')->where('status', '1')->get();
         } elseif (auth()->user()->can('surveys.unpublished')) {
             // Can view only unpublished
-            $votes = Voting::with('voting_category')->where('status','0')->get();
+            $votes = Voting::with('voting_category')->where('status', '0')->get();
         } else {
             // No permission
             return redirect('/');
@@ -328,15 +328,17 @@ class VotingController extends Controller
         $vote->description = $request->description;
         $vote->status = $request->status;
 
-        $options = [];
-        if ($request->{'reaction_option'}) {
-            $options = array_map(function ($option) {
-                $ret = ["title" => $option['title']];
-                if (isset($option['image'])) $ret['image'] = $option['image'];
-                return $ret;
-            }, $request->{'reaction_option'});
+        if ($request->vote_type !== 'single') {
+            $options = [];
+            if ($request->{'reaction_option'}) {
+                $options = array_map(function ($option) {
+                    $ret = ["title" => $option['title']];
+                    if (isset($option['image'])) $ret['image'] = $option['image'];
+                    return $ret;
+                }, $request->{'reaction_option'});
+            }
+            $vote->options = $options;
         }
-        $vote->options = $options;
 
         if ($request->image) $vote->banner = $request->image;
         if ($request->view_image) $vote->view_banner = $request->view_image;
@@ -360,6 +362,12 @@ class VotingController extends Controller
         $vote = Voting::find($id);
         if ($vote->banner) {
             $image_path = public_path('storage/' . $vote->banner);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+        if ($vote->view_banner) {
+            $image_path = public_path('storage/' . $vote->view_banner);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }

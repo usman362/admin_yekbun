@@ -320,7 +320,7 @@
                             </td>
                             <td>
                                 @if (!empty($vote->banner))
-                                    <img class="vote-banner-image" src='{{ asset('storage/' . $vote->banner) }}'
+                                    <img class="vote-banner-image" src='{{ asset('storage/' . $vote->view_banner) }}'
                                         width="100" />
                                 @endif
                             </td>
