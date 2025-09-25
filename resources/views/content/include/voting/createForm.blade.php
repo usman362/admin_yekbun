@@ -50,7 +50,7 @@
                             <img src="{{ asset('assets/svg/icons/gallery-add.svg') }}" alt="" />
                         </div>
                         <div style="font-size: 1rem">Upload View Banner</div>
-                        <div style="font-size: 0.8rem">JPG or PNG (375 X 330)</div>
+                        <div style="font-size: 0.8rem">JPG or PNG (375x330)</div>
                     </div>
                     <div class="fallback">
                         <input type="file" name="view_image" id="view_image" accept="image/*" />
@@ -65,7 +65,7 @@
                             <img src="{{ asset('assets/svg/icons/gallery-add.svg') }}" alt="" />
                         </div>
                         <div style="font-size: 1rem">Upload Main Banner</div>
-                        <div style="font-size: 0.8rem">JPG or PNG (375 X 170)</div>
+                        <div style="font-size: 0.8rem">JPG or PNG (375x170)</div>
                     </div>
                     <div class="fallback">
                         <input type="file" name="image" id="image" accept="image/*" />
