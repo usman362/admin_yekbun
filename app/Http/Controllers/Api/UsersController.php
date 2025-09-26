@@ -325,7 +325,6 @@ class UsersController extends Controller
     {
         $request->validate([
             'user_id' => 'required',
-            'user_type' => 'required'
         ]);
         try {
             $user_request = UserFriends::updateOrCreate(
