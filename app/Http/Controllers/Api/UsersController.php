@@ -228,6 +228,19 @@ class UsersController extends Controller
         }
     }
 
+    public function unblock_user(Request $request, $id)
+    {
+        try {
+            $friend = UserFriends::where('user_id', $id)->where('friend_id', Auth::id())->first();
+            $friend_to = UserFriends::where('friend_id', $id)->where('user_id', Auth::id())->first();
+            $friend->delete();
+            $friend_to->delete();
+            return ResponseHelper::sendResponse([], 'Unblock has been Successfully');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse([], 'Failed to Unblock!', false, 403);
+        }
+    }
+
     public function unfriend_user(Request $request, $id)
     {
         try {
@@ -248,6 +261,19 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse([], 'Unfriend has been Successfully');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Failed to Unfriend!', false, 403);
+        }
+    }
+
+    public function block_list(Request $request, $id)
+    {
+        try {
+            $user = User::select('_id')->with(['block' => function ($q) {
+                $q->with('user');
+            }])->find($id);
+            $block_list = $user->block ?? [];
+            return ResponseHelper::sendResponse(['block_list' => $block_list], 'Block List Fetch Successfully');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse([], 'Error to Fetch Block List', false, 403);
         }
     }
 
@@ -292,6 +318,29 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse($user_request, 'Friends/Family Updated Successfully!');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Fail to Update Friends/Family!', false, 403);
+        }
+    }
+
+    public function update_block_list(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'user_type' => 'required'
+        ]);
+        try {
+            $user_request = UserFriends::updateOrCreate(
+                ['friend_id' => $request->user_id, 'user_id' => Auth::id()],
+                ['friend_id' => $request->user_id, 'user_id' => Auth::id(), 'user_type' => 'block']
+            );
+
+            $user_request_to = UserFriends::updateOrCreate(
+                ['user_id' => $request->user_id, 'friend_id' => Auth::id()],
+                ['user_id' => $request->user_id, 'friend_id' => Auth::id(), 'user_type' => 'block']
+            );
+
+            return ResponseHelper::sendResponse($user_request, 'Blocked Successfully!');
+        } catch (Exception $e) {
+            return ResponseHelper::sendResponse([], 'Fail to Update Block!', false, 403);
         }
     }
 

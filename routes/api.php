@@ -180,6 +180,9 @@ Route::middleware('jwt.custom')->group(function () {
     Route::get('get-users-details/{id}', [UsersController::class, 'users_details']);
     Route::get('get-friends-list/{id}', [UsersController::class, 'freind_list']);
     Route::post('update-friends-list', [UsersController::class, 'update_freind_list']);
+    Route::get('get-block-friends-list/{id}', [UsersController::class, 'block_list']);
+    Route::post('block-friends', [UsersController::class, 'update_block_list']);
+    Route::get('unblock-user/{id}', [UsersController::class, 'unblock_user']);
     Route::get('get-family-list/{id}', [UsersController::class, 'family_list']);
     Route::get('unfriend-user/{id}', [UsersController::class, 'unfriend_user']);
     Route::get('get-requests-list/{id}', [UsersController::class, 'request_list']);
