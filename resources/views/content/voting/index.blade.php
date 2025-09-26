@@ -396,7 +396,7 @@
                                                     </svg>
                                                 @endif
                                             @endif
-                                            <div class="ms-3">
+                                            <div class="ms-1">
                                                 <div>{{ ucwords(str_replace('-', ' ', $option['title'])) }}</div>
                                                 {{-- <div style="font-size:80%">215</div> --}}
                                             </div>
