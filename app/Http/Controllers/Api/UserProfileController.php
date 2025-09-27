@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -151,9 +152,9 @@ class UserProfileController extends Controller
         }
 
         if ($profile->update()) {
-            return response()->json(['message', 'Your profile has been updated'], 201);
+            return ResponseHelper::sendResponse(Auth::user(),'Your profile has been updated');
         } else {
-            return response()->json(['message', 'Failed to Update your profile'], 403);
+            return ResponseHelper::sendResponse(Auth::user(),'Failed to Update your profile',false,403);
         }
     }
 
