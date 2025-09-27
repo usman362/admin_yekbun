@@ -42,7 +42,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .vote-banner{
+        .vote-banner {
             padding: 0 !important;
             padding-top: 0 !important;
         }
@@ -254,7 +254,7 @@
             height: 180px !important;
         }
 
-        #editForm .vote-banner{
+        #editForm .vote-banner {
             height: 180px;
             overflow: hidden !important;
         }
@@ -715,7 +715,8 @@
         @include('content.include.voting.editForm')
     </x-modal>
 
-
+    <input type="hidden" id="is_valid_view" value="" />
+    <input type="hidden" id="is_valid_main" value="" />
 
 @endsection
 

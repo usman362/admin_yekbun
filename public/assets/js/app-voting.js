@@ -42,8 +42,8 @@ $(document).ready(function () {
         editModal.find("#editForm").attr('action', `/surveys/${vote_id}`)
         Dropzone.forElement("#editForm .dropzone-img").removeAllFiles(true);
         Dropzone.forElement("#editForm .dropzone-view-img").removeAllFiles(true);
-        $('.drop-img-edit1').css('height','180px');
-        $('.drop-img-edit2').css('height','180px');
+        $('.drop-img-edit1').css('height', '180px');
+        $('.drop-img-edit2').css('height', '180px');
         $("#editStatus").trigger('change');
 
         const options_container = editModal.find(".allowed-reactions")[0];
@@ -103,6 +103,16 @@ $(document).ready(function () {
         const banner = createModal.find("input[name='image']")[0];
         if (!banner && !view_banner) {
             toastr['warning']('', 'Please upload banner.');
+            return false;
+        }
+
+        if ($('#is_valid_main').val() !== 'yes') {
+            toastr['warning']('', 'Main Banner must be exactly 375x330 pixels.');
+            return false;
+        }
+
+        if ($('#is_valid_view').val() !== 'yes') {
+            toastr['warning']('', 'View Banner must be exactly 375x170 pixels.');
             return false;
         }
     })
@@ -172,8 +182,10 @@ $(document).ready(function () {
                 img.onload = function () {
                     if (this.width === 375 && this.height === 330) {
                         done(); // valid
+                        $('#is_valid_main').val('yes');
                     } else {
                         done("Image must be exactly 375x330 pixels."); // reject
+                        $('#is_valid_main').val('no');
                     }
                 };
                 img.onerror = function () {
@@ -191,7 +203,7 @@ $(document).ready(function () {
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
                 $('.dropzone-img .dz-thumbnail img').attr('src', '/storage/' + response.path);
-                $('.drop-img-edit1').css('height','212px');
+                $('.drop-img-edit1').css('height', '212px');
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
@@ -212,7 +224,7 @@ $(document).ready(function () {
                         method: 'delete',
                         data: { path: previewElement.dataset.path },
                         success: function () {
-                            $('.drop-img-edit1').css('height','180px');
+                            $('.drop-img-edit1').css('height', '180px');
                         }
                     });
                 }
@@ -247,8 +259,10 @@ $(document).ready(function () {
                 img.onload = function () {
                     if (this.width === 375 && this.height === 170) {
                         done(); // valid
+                        $('#is_valid_view').val('yes');
                     } else {
                         done("Image must be exactly 375x170 pixels."); // reject
+                        $('#is_valid_view').val('no');
                     }
                 };
                 img.onerror = function () {
@@ -266,7 +280,7 @@ $(document).ready(function () {
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
                 $('.dropzone-view-img .dz-thumbnail img').attr('src', '/storage/' + response.path);
-                $('.drop-img-edit2').css('height','212px');
+                $('.drop-img-edit2').css('height', '212px');
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="view_image" value="${response.path}" data-path="${response.path}">`;
             },
             removedfile: function (file) {
@@ -287,7 +301,7 @@ $(document).ready(function () {
                         method: 'delete',
                         data: { path: previewElement.dataset.path },
                         success: function () {
-                            $('.drop-img-edit2').css('height','180px');
+                            $('.drop-img-edit2').css('height', '180px');
                         }
                     });
                 }
