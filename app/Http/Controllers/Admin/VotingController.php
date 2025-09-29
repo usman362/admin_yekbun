@@ -331,8 +331,11 @@ class VotingController extends Controller
         if ($request->vote_type !== 'single') {
             $options = [];
             if ($request->{'reaction_option'}) {
-                $options = array_map(function ($option) {
-                    $ret = ["title" => $option['title']];
+                $options = array_map(function ($option, $key) {
+                    $ret = [
+                        "title" => $option['title'],
+                        "type"  => $key + 1, // 1,2,3,...
+                    ];
                     if (isset($option['image'])) $ret['image'] = $option['image'];
                     return $ret;
                 }, $request->{'reaction_option'});
