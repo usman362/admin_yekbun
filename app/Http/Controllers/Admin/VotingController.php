@@ -268,20 +268,19 @@ class VotingController extends Controller
             ];
         }
 
-        // Step 1: Get all user_ids who reacted to this voting
+        $userTypes = ['academic', 'cultivated', 'educated'];
+
+        // get all user IDs who reacted to this voting
         $reactedUserIds = DB::table('voting_reactions')
             ->where('voting_id', $id)
             ->pluck('user_id')
-            ->toArray();
-
-        // Step 2: User type order
-        $userTypes = ['academic', 'cultivated', 'educated'];
+            ->toArray();   // <-- force into array here
 
         // All counts
         $allCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
             return $collection->aggregate([
                 ['$match' => [
-                    '_id' => ['$in' => $reactedUserIds->toArray()],
+                    '_id' => ['$in' => $reactedUserIds],
                     'user_type' => ['$in' => $userTypes]
                 ]],
                 ['$group' => [
@@ -295,7 +294,7 @@ class VotingController extends Controller
         $femaleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
             return $collection->aggregate([
                 ['$match' => [
-                    '_id' => ['$in' => $reactedUserIds->toArray()],
+                    '_id' => ['$in' => $reactedUserIds],
                     'user_type' => ['$in' => $userTypes],
                     'gender' => 'female'
                 ]],
@@ -310,7 +309,7 @@ class VotingController extends Controller
         $maleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
             return $collection->aggregate([
                 ['$match' => [
-                    '_id' => ['$in' => $reactedUserIds->toArray()],
+                    '_id' => ['$in' => $reactedUserIds],
                     'user_type' => ['$in' => $userTypes],
                     'gender' => 'male'
                 ]],
