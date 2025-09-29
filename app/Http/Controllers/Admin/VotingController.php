@@ -41,7 +41,7 @@ class VotingController extends Controller
             return redirect('/');
         }
         $vote_categories = VotingCategory::get();
-        return view('content.voting.index', compact('publishvotes', 'unpublishvotes','vote_categories'));
+        return view('content.voting.index', compact('publishvotes', 'unpublishvotes', 'vote_categories'));
     }
 
     /**
@@ -268,32 +268,41 @@ class VotingController extends Controller
             ];
         }
 
-        // User type order: academic → cultivated → educated
+        // Step 1: Get all user_ids who reacted to this voting
+        $reactedUserIds = DB::table('voting_reactions')
+            ->where('voting_id', $id)
+            ->pluck('user_id')
+            ->toArray();
+
+        // Step 2: User type order
         $userTypes = ['academic', 'cultivated', 'educated'];
 
-        // All users count by user_type
+        // Step 3: All users count by user_type (only those who reacted)
         $allCounts = DB::table('users')
             ->select('user_type', DB::raw('count(*) as total'))
+            ->whereIn('_id', $reactedUserIds)
             ->whereIn('user_type', $userTypes)
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
-            dd($allCounts);
-
-        // Female users count by user_type
+dd($allCounts);
+        // Step 4: Female users count by user_type
         $femaleCounts = DB::table('users')
             ->select('user_type', DB::raw('count(*) as total'))
+            ->whereIn('_id', $reactedUserIds)
             ->whereIn('user_type', $userTypes)
             ->where('gender', 'female')
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
 
-        // You can also calculate male counts if needed
+        // Step 5: Male users count by user_type
         $maleCounts = DB::table('users')
             ->select('user_type', DB::raw('count(*) as total'))
+            ->whereIn('_id', $reactedUserIds)
             ->whereIn('user_type', $userTypes)
             ->where('gender', 'male')
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
+
         // dd([
         //     $vote,
         //     $statistics,
