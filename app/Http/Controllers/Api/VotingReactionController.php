@@ -27,7 +27,7 @@ class VotingReactionController extends Controller
             $reactions->where('user_id', $request->user_id);
         }
         $reactions = $reactions->get();
-        return response()->json(['success' => true, 'data' => $reactions]);
+        return ResponseHelper::sendResponse($reactions,'Reactions Fetched Successfully');
     }
 
     /**
@@ -55,10 +55,10 @@ class VotingReactionController extends Controller
         // Check if user already reacted
         $reaction = VotingReaction::updateOrCreate(
             ['user_id' => $user_id, 'voting_id' => $request->voting_id],
-            ['type' => $request->type]
+            ['type' => (int)$request->type]
         );
 
-        return response()->json(['success' => true, 'data' => $reaction]);
+        return ResponseHelper::sendResponse($reaction,'Reaction Stored Successfully!');
     }
 
     public function votingViews(Request $request)
