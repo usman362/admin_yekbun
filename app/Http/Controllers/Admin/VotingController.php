@@ -284,7 +284,7 @@ class VotingController extends Controller
             ->whereIn('user_type', $userTypes)
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
-// dd($allCounts);
+        // dd($allCounts);
         // Step 4: Female users count by user_type
         $femaleCounts = DB::table('users')
             ->select('user_type', DB::raw('count(*) as total'))
@@ -302,19 +302,23 @@ class VotingController extends Controller
             ->where('gender', 'male')
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
+        // Normalize
+        $allCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $allCounts[$t] ?? 0]);
+        $femaleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $femaleCounts[$t] ?? 0]);
+        $maleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $maleCounts[$t] ?? 0]);
 
         dd([
-        //     $vote,
-        //     $statistics,
-        //     $province_statistics,
-        //     $total_reviews,
-        //     $total_likes,
-        //     $total_dislikes,
-        //     $total_neutrals,
+            //     $vote,
+            //     $statistics,
+            //     $province_statistics,
+            //     $total_reviews,
+            //     $total_likes,
+            //     $total_dislikes,
+            //     $total_neutrals,
             $allCounts,
             $femaleCounts,
             $maleCounts,
-        //     $userTypes
+            //     $userTypes
         ]);
         return view('content.include.voting.statistic', compact(
             'vote',
