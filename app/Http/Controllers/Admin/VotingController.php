@@ -14,6 +14,7 @@ use App\Models\VotingCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use MongoDB\BSON\ObjectId;
 
 class VotingController extends Controller
 {
@@ -242,107 +243,127 @@ class VotingController extends Controller
             $total_neutrals += $stat['male']['neutrals'] + $stat['female']['neutrals'];
         }
 
-        // Fetch only Kurdish users
-        $users = DB::table('users')
-            ->where('origin', 'kurdish')
-            ->select('_id', 'province')
-            ->get();
+        $province_statistics = DB::collection('voting_reactions')->raw(function ($collection) use ($id) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        'voting_id' => $id // make sure this matches type (ObjectId or string)
+                    ]
+                ],
+                [
+                    '$addFields' => [
+                        'user_id' => ['$toObjectId' => '$user_id']
+                    ]
+                ],
+                [
+                    '$lookup' => [
+                        'from' => 'users',
+                        'localField' => 'user_id',
+                        'foreignField' => '_id',
+                        'as' => 'user'
+                    ]
+                ],
+                ['$unwind' => '$user'],
+                [
+                    '$match' => [
+                        'user.origin' => 'kurdish'
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user.province',
+                        'total_votes' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
 
-        // Group users by province
-        $usersByProvince = $users->groupBy('province');
-
-        $province_statistics = [];
-
-        foreach ($usersByProvince as $province => $provinceUsers) {
-            $userIds = $provinceUsers->pluck('_id')->toArray();
-
-            // Fetch reactions for users in this province
-            $province_reactions = DB::table('voting_reactions')
-                ->whereIn('user_id', $userIds)
-                ->where('voting_id', $id)
-                ->count();
-
-            $province_statistics[] = [
-                'province' => $province,
-                'total_votes' => $province_reactions
+        $province_statistics = collect($province_statistics)->map(function ($item) {
+            return [
+                'province' => $item->_id ?? 'Unknown',
+                'total_votes' => $item->total_votes
             ];
-        }
+        });
 
-        $userTypes = ['academic', 'cultivated', 'educated'];
-
-        // get all user IDs who reacted to this voting
         $reactedUserIds = DB::table('voting_reactions')
             ->where('voting_id', $id)
             ->pluck('user_id')
-            ->toArray();   // <-- force into array here
+            ->map(fn($id) => new ObjectId($id))
+            ->toArray();
 
-        // All counts
+        $userTypes = ['academic', 'cultivated', 'educated'];
+
         $allCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
             return $collection->aggregate([
-                ['$match' => [
-                    '_id' => ['$in' => $reactedUserIds],
-                    'user_type' => ['$in' => $userTypes]
-                ]],
-                ['$group' => [
-                    '_id' => '$user_type',
-                    'total' => ['$sum' => 1]
-                ]]
-            ]);
-        });
-
-        // Female counts
-        $femaleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
-            return $collection->aggregate([
-                ['$match' => [
-                    '_id' => ['$in' => $reactedUserIds],
-                    'user_type' => ['$in' => $userTypes],
-                    'gender' => 'female'
-                ]],
-                ['$group' => [
-                    '_id' => '$user_type',
-                    'total' => ['$sum' => 1]
-                ]]
-            ]);
-        });
-
-        // Male counts
-        $maleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
-            return $collection->aggregate([
-                ['$match' => [
-                    '_id' => ['$in' => $reactedUserIds],
-                    'user_type' => ['$in' => $userTypes],
-                    'gender' => 'male'
-                ]],
-                ['$group' => [
-                    '_id' => '$user_type',
-                    'total' => ['$sum' => 1]
-                ]]
+                [
+                    '$match' => [
+                        '_id' => ['$in' => $reactedUserIds],
+                        'user_type' => ['$in' => $userTypes],
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user_type',
+                        'total' => ['$sum' => 1]
+                    ]
+                ]
             ]);
         });
 
         $allCounts = collect($allCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+
+        // Fill missing types with 0
+        $allCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $allCounts[$t] ?? 0]);
+
+        $femaleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        '_id' => ['$in' => $reactedUserIds],
+                        'user_type' => ['$in' => $userTypes],
+                        'gender' => 'female'
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user_type',
+                        'total' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
+
         $femaleCounts = collect($femaleCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+
+        // Fill missing with 0
+        $femaleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $femaleCounts[$t] ?? 0]);
+
+
+        $maleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        '_id' => ['$in' => $reactedUserIds],
+                        'user_type' => ['$in' => $userTypes],
+                        'gender' => 'male'
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user_type',
+                        'total' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
+
         $maleCounts = collect($maleCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
 
-        // ensure missing userTypes show as 0
-        $allCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $allCounts[$t] ?? 0]);
-        $femaleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $femaleCounts[$t] ?? 0]);
+        // Fill missing with 0
         $maleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $maleCounts[$t] ?? 0]);
 
+        // dd($province_statistics);
 
-        dd([
-            //     $vote,
-            //     $statistics,
-            //     $province_statistics,
-            //     $total_reviews,
-            //     $total_likes,
-            //     $total_dislikes,
-            //     $total_neutrals,
-            $allCounts,
-            $femaleCounts,
-            $maleCounts,
-            //     $userTypes
-        ]);
         return view('content.include.voting.statistic', compact(
             'vote',
             'statistics',

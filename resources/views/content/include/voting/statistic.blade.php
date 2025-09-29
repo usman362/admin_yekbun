@@ -11,7 +11,11 @@
 @foreach ($userTypes as $type)
     <p>{{ ucfirst($type) }}: {{ $maleCounts[$type] ?? 0 }}</p>
 @endforeach --}}
-
+<style>
+    #statisticVotingModal .modal-footer{
+        margin-top: 0 !important;
+    }
+</style>
     <!-- Top Trophy Section -->
     <div class="bg-trophy-loader">
         <div class="d-flex justify-content-between">
@@ -27,7 +31,9 @@
                             style="transform: translate(3px, -55px);height: 57px;">
                     </div>
 
-                    <div class="trophy-count">{{ $allCounts[$type] ?? 0 }}</div>
+                    <div class="trophy-count">
+                        {{ $allCounts[$type] ?? 0 }}
+                    </div>
                 </div>
             @endforeach
         </div>

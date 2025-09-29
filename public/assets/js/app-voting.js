@@ -123,10 +123,10 @@ $(document).ready(function () {
         const vote_id = $(e.target).closest('button').attr('data-vote-id');
         const vote_name = $(e.target).closest('button').attr('data-vote-name');
         $('#statisticVotingModal .modal-header h4').text(vote_name);
+        $('.para-vote').text($(this).attr('data-vote-type'));
         $.ajax({
             url: `/surveys/${vote_id}/statistic`,
             success: function (response) {
-                console.log(response);
                 $("#statisticVotingModal .modal-body").html(response);
                 $("#statisticVotingModal").modal('show');
             },

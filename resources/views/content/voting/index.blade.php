@@ -239,7 +239,7 @@
 
         .para-vote {
             font-family: "Genos", sans-serif;
-            font-weight: 400 !important;
+            font-weight: 600 !important;
             color: #000000;
         }
 
@@ -445,6 +445,7 @@
                                                 {{-- data-bs-target="#statisticVotingModal" --}} data-bs-offset="0,4" data-bs-placement="top"
                                                 data-bs-html="true" data-vote-id="{{ $vote->id }}"
                                                 data-vote-name="{{ 'Survey for ' . $vote->name }}"
+                                                data-vote-type="{{ $vote->vote_type }}"
                                                 data-bs-original-title="Statistic" aria-describedby="tooltip557134">
                                                 <i class="bx bx-bar-chart-alt-2"></i>
                                             </button>
@@ -597,6 +598,7 @@
                                                 {{-- data-bs-target="#statisticVotingModal" --}} data-bs-offset="0,4" data-bs-placement="top"
                                                 data-bs-html="true" data-vote-id="{{ $vote->id }}"
                                                 data-vote-name="{{ 'Survey for ' . $vote->name }}"
+                                                data-vote-type="{{ $vote->vote_type }}"
                                                 data-bs-original-title="Statistic" aria-describedby="tooltip557134">
                                                 <i class="bx bx-bar-chart-alt-2"></i>
                                             </button>
