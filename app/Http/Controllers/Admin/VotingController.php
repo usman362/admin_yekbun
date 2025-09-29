@@ -277,35 +277,49 @@ class VotingController extends Controller
         // Step 2: User type order
         $userTypes = ['academic', 'cultivated', 'educated'];
 
-        // Step 3: All users count by user_type (only those who reacted)
-        $allCounts = DB::table('users')
-            ->select('user_type', DB::raw('count(*) as total'))
-            ->whereIn('_id', $reactedUserIds)
-            ->whereIn('user_type', $userTypes)
-            ->groupBy('user_type')
-            ->pluck('total', 'user_type');
-        // dd($allCounts);
-        // Step 4: Female users count by user_type
-        $femaleCounts = DB::table('users')
-            ->select('user_type', DB::raw('count(*) as total'))
-            ->whereIn('_id', $reactedUserIds)
-            ->whereIn('user_type', $userTypes)
-            ->where('gender', 'female')
-            ->groupBy('user_type')
-            ->pluck('total', 'user_type');
+        // All counts
+        $allCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                ['$match' => [
+                    '_id' => ['$in' => $reactedUserIds->toArray()],
+                    'user_type' => ['$in' => $userTypes]
+                ]],
+                ['$group' => [
+                    '_id' => '$user_type',
+                    'total' => ['$sum' => 1]
+                ]]
+            ]);
+        });
 
-        // Step 5: Male users count by user_type
-        $maleCounts = DB::table('users')
-            ->select('user_type', DB::raw('count(*) as total'))
-            ->whereIn('_id', $reactedUserIds)
-            ->whereIn('user_type', $userTypes)
-            ->where('gender', 'male')
-            ->groupBy('user_type')
-            ->pluck('total', 'user_type');
-        // Normalize
-        $allCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $allCounts[$t] ?? 0]);
-        $femaleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $femaleCounts[$t] ?? 0]);
-        $maleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $maleCounts[$t] ?? 0]);
+        // Female counts
+        $femaleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                ['$match' => [
+                    '_id' => ['$in' => $reactedUserIds->toArray()],
+                    'user_type' => ['$in' => $userTypes],
+                    'gender' => 'female'
+                ]],
+                ['$group' => [
+                    '_id' => '$user_type',
+                    'total' => ['$sum' => 1]
+                ]]
+            ]);
+        });
+
+        // Male counts
+        $maleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                ['$match' => [
+                    '_id' => ['$in' => $reactedUserIds->toArray()],
+                    'user_type' => ['$in' => $userTypes],
+                    'gender' => 'male'
+                ]],
+                ['$group' => [
+                    '_id' => '$user_type',
+                    'total' => ['$sum' => 1]
+                ]]
+            ]);
+        });
 
         dd([
             //     $vote,
