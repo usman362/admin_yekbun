@@ -290,7 +290,19 @@ class VotingController extends Controller
             ->where('gender', 'male')
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
-
+        dd([
+            $vote,
+            $statistics,
+            $province_statistics,
+            $total_reviews,
+            $total_likes,
+            $total_dislikes,
+            $total_neutrals,
+            $allCounts,
+            $femaleCounts,
+            $maleCounts,
+            $userTypes
+        ]);
         return view('content.include.voting.statistic', compact(
             'vote',
             'statistics',
