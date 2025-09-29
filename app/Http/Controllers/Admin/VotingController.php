@@ -320,6 +320,16 @@ class VotingController extends Controller
             ]);
         });
 
+        $allCounts = collect($allCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+        $femaleCounts = collect($femaleCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+        $maleCounts = collect($maleCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+
+        // ensure missing userTypes show as 0
+        $allCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $allCounts[$t] ?? 0]);
+        $femaleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $femaleCounts[$t] ?? 0]);
+        $maleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $maleCounts[$t] ?? 0]);
+
+
         dd([
             //     $vote,
             //     $statistics,
