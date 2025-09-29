@@ -284,7 +284,7 @@ class VotingController extends Controller
             ->whereIn('user_type', $userTypes)
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
-dd($allCounts);
+// dd($allCounts);
         // Step 4: Female users count by user_type
         $femaleCounts = DB::table('users')
             ->select('user_type', DB::raw('count(*) as total'))
