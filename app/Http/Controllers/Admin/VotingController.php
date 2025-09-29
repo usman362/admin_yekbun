@@ -26,19 +26,22 @@ class VotingController extends Controller
     {
         if (auth()->user()->can('surveys.published') && auth()->user()->can('surveys.unpublished')) {
             // Can view both
-            $votes = Voting::with('voting_category')->get();
+            $publishvotes = Voting::with('voting_category')->where('status', '1')->get();
+            $unpublishvotes = Voting::with('voting_category')->where('status', '0')->get();
         } elseif (auth()->user()->can('surveys.published')) {
             // Can view only published
-            $votes = Voting::with('voting_category')->where('status', '1')->get();
+            $publishvotes = Voting::with('voting_category')->where('status', '1')->get();
+            $publishvotes = '';
         } elseif (auth()->user()->can('surveys.unpublished')) {
             // Can view only unpublished
-            $votes = Voting::with('voting_category')->where('status', '0')->get();
+            $unpublishvotes = Voting::with('voting_category')->where('status', '0')->get();
+            $publishvotes = '';
         } else {
             // No permission
             return redirect('/');
         }
         $vote_categories = VotingCategory::get();
-        return view('content.voting.index', compact('votes', 'vote_categories'));
+        return view('content.voting.index', compact('publishvotes', 'unpublishvotes','vote_categories'));
     }
 
     /**
@@ -290,19 +293,19 @@ class VotingController extends Controller
             ->where('gender', 'male')
             ->groupBy('user_type')
             ->pluck('total', 'user_type');
-        dd([
-            $vote,
-            $statistics,
-            $province_statistics,
-            $total_reviews,
-            $total_likes,
-            $total_dislikes,
-            $total_neutrals,
-            $allCounts,
-            $femaleCounts,
-            $maleCounts,
-            $userTypes
-        ]);
+        // dd([
+        //     $vote,
+        //     $statistics,
+        //     $province_statistics,
+        //     $total_reviews,
+        //     $total_likes,
+        //     $total_dislikes,
+        //     $total_neutrals,
+        //     $allCounts,
+        //     $femaleCounts,
+        //     $maleCounts,
+        //     $userTypes
+        // ]);
         return view('content.include.voting.statistic', compact(
             'vote',
             'statistics',
