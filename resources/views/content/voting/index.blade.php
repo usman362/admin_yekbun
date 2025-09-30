@@ -265,16 +265,13 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="content-left">
-                            <span>Total Category</span>
+                            <span>Total Single</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">21,459</h4>
+                                <h4 class="mb-0 me-2">{{\App\Models\Voting::where('vote_type','single')->count()}}</h4>
                                 {{-- <small class="text-success">(+29%)</small> --}}
                             </div>
                             {{-- <small>Last week analytics</small> --}}
                         </div>
-                        {{-- <span class="badge bg-label-primary rounded p-2">
-                            <i class="bx bx-user bx-sm"></i>
-                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -284,16 +281,13 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="content-left">
-                            <span>Total Survey</span>
+                            <span>Total Individual</span>
                             <div class="d-flex align-items-end mt-2">
-                                <h4 class="mb-0 me-2">4,567</h4>
+                                <h4 class="mb-0 me-2">{{\App\Models\Voting::where('vote_type','individual')->count()}}</h4>
                                 {{-- <small class="text-success">(+18%)</small> --}}
                             </div>
                             {{-- <small>Last week analytics </small> --}}
                         </div>
-                        {{-- <span class="badge bg-label-danger rounded p-2">
-                            <i class="bx bx-user-plus bx-sm"></i>
-                        </span> --}}
                     </div>
                 </div>
             </div>
