@@ -56,9 +56,15 @@ class VotingController extends Controller
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
+    public function latestVotes()
+    {
+        $votings = Voting::where('status', '1')->with('reactions')->orderBy('created_at', 'desc')->get();
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
+    }
+
     public function votingPublic()
     {
-        $votings = Voting::all();
+        $votings = Voting::where('status', '1')->with('reactions')->get();
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
