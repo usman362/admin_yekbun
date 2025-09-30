@@ -291,7 +291,7 @@ class VotingController extends Controller
             ->map(fn($id) => new ObjectId($id))
             ->toArray();
 
-        $userTypes = ['academic', 'cultivated', 'educated'];
+        $userTypes = ['cultivated', 'educated', 'academic'];
 
         $allCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
             return $collection->aggregate([

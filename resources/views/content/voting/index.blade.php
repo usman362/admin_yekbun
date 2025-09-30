@@ -268,13 +268,13 @@
                             <span>Total Category</span>
                             <div class="d-flex align-items-end mt-2">
                                 <h4 class="mb-0 me-2">21,459</h4>
-                                <small class="text-success">(+29%)</small>
+                                {{-- <small class="text-success">(+29%)</small> --}}
                             </div>
-                            <small>Last week analytics</small>
+                            {{-- <small>Last week analytics</small> --}}
                         </div>
-                        <span class="badge bg-label-primary rounded p-2">
+                        {{-- <span class="badge bg-label-primary rounded p-2">
                             <i class="bx bx-user bx-sm"></i>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
@@ -287,13 +287,13 @@
                             <span>Total Survey</span>
                             <div class="d-flex align-items-end mt-2">
                                 <h4 class="mb-0 me-2">4,567</h4>
-                                <small class="text-success">(+18%)</small>
+                                {{-- <small class="text-success">(+18%)</small> --}}
                             </div>
-                            <small>Last week analytics </small>
+                            {{-- <small>Last week analytics </small> --}}
                         </div>
-                        <span class="badge bg-label-danger rounded p-2">
+                        {{-- <span class="badge bg-label-danger rounded p-2">
                             <i class="bx bx-user-plus bx-sm"></i>
-                        </span>
+                        </span> --}}
                     </div>
                 </div>
             </div>
