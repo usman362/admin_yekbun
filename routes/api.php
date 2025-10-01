@@ -146,6 +146,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
     Route::get('/most-view-votes', [VotingController::class, 'mostViews']);
     Route::get('/latest-votes', [VotingController::class, 'latestVotes']);
+    Route::get('/previous-votes', [VotingController::class, 'previousVotes']);
     Route::get('/already-voted-votes', [VotingController::class, 'alreadyVoted']);
     Route::get('/waiting-votes', [VotingController::class, 'waitingVote']);
     Route::get('/voting/{voting_id}/reactions', [VotingReactionController::class, 'index']);

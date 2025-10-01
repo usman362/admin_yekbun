@@ -62,6 +62,29 @@ class VotingController extends Controller
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
+    public function previousVotes()
+    {
+        $userId = Auth::id();
+
+        $startOfPreviousMonth = \Carbon\Carbon::now()->subMonth()->startOfMonth();
+        $endOfPreviousMonth   = \Carbon\Carbon::now()->subMonth()->endOfMonth();
+
+        $votings = Voting::where('status', '1')
+            ->whereBetween('created_at', [$startOfPreviousMonth, $endOfPreviousMonth]) // 👈 filter by previous month
+            ->where(function ($q) use ($userId) {
+                // Case 1: has reactions, but not by this user
+                $q->whereHas('reactions', function ($r) use ($userId) {
+                    $r->where('user_id', '!=', $userId);
+                })
+                    // Case 2: no reactions at all
+                    ->orWhereDoesntHave('reactions');
+            })
+            ->with('reactions')
+            ->get();
+
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
+    }
+
     public function votingPublic()
     {
         $votings = Voting::where('status', '1')->with('reactions')->get();
