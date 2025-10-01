@@ -66,6 +66,7 @@ use App\Http\Controllers\Api\VotingReactionController;
 use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\ViewsController;
 use App\Http\Controllers\Api\TVController;
+use App\Http\Controllers\Api\UserSuggestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -195,6 +196,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('my-service', [UsersController::class, 'storeMyService']);
     Route::post('my-network', [UsersController::class, 'storeMyNetwork']);
     Route::post('my-notification', [UsersController::class, 'storeMyNotification']);
+
+    Route::get('/user-suggestions', [UserSuggestionController::class, 'index']);
 
     Route::get('/get-artist-songs/{id}', [MultimediaController::class, 'getSongByArtists']);
     Route::get('/get-artist-videos/{id}', [MultimediaController::class, 'getClipsByArtists']);
