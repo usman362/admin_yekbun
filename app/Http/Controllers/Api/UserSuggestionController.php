@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Services\UserSuggestionService;
@@ -20,10 +21,7 @@ class UserSuggestionController extends Controller
         $currentUser = Auth::user();
 
         if (!$currentUser) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized'
-            ], 401);
+            return ResponseHelper::sendResponse([], 'Unauthorized', false, 401);
         }
 
         $suggestions = $this->suggestionService->getSuggestions($currentUser, 10);
