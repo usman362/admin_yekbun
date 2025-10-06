@@ -129,32 +129,30 @@ class UserProfileController extends Controller
             $profile->image = $image_path;
         }
 
-        if ($request->has('banner_image')) {
-            $banner_path = '';
-            if ($request->hasFile('banner_image')) {
-                $banner_path = Helpers::fileUpload($request->banner_image, 'images/user');
-                try {
-                    $existing_banner = public_path('storage/' . $profile->banner_image);
-                    if (
-                        !empty($profile->banner_image) &&
-                        file_exists($existing_banner) &&
-                        strpos($profile->banner_image, 'images/user/') !== false
-                    ) {
-                        unlink($existing_banner);
-                    }
-                } catch (Exception $e) {
-                    //
+        if ($request->hasFile('banner_image')) {
+            $banner_path = Helpers::fileUpload($request->banner_image, 'images/user');
+            try {
+                $existing_banner = public_path('storage/' . $profile->banner_image);
+                if (
+                    !empty($profile->banner_image) &&
+                    file_exists($existing_banner) &&
+                    strpos($profile->banner_image, 'images/user/') !== false
+                ) {
+                    unlink($existing_banner);
                 }
-            } else {
-                $banner_path = $request->banner_image;
+            } catch (Exception $e) {
+                //
             }
+            $profile->banner_image = $banner_path;
+        } else {
+            $banner_path = $request->banner_image;
             $profile->banner_image = $banner_path;
         }
 
         if ($profile->update()) {
-            return ResponseHelper::sendResponse(Auth::user(),'Your profile has been updated');
+            return ResponseHelper::sendResponse(Auth::user(), 'Your profile has been updated');
         } else {
-            return ResponseHelper::sendResponse(Auth::user(),'Failed to Update your profile',false,403);
+            return ResponseHelper::sendResponse(Auth::user(), 'Failed to Update your profile', false, 403);
         }
     }
 
