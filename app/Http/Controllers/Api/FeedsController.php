@@ -342,6 +342,7 @@ class FeedsController extends Controller
         }
 
         $feed = Feed::find($request);
+        dd($feed->toArray());
         // duplicate the record
         $newFeed = $feed->replicate();  // clones all attributes except the primary key
 
