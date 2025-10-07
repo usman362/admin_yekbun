@@ -40,7 +40,7 @@ class FeedsController extends Controller
     {
 
         // Get authenticated user's latest feed
-        $feedsQuery = Feed::with('user')
+        $feedsQuery = Feed::with(['user', 'shareUser'])
             ->orderBy('created_at', 'desc');
 
         if (!empty($request->user_id)) {
@@ -333,7 +333,7 @@ class FeedsController extends Controller
         }
     }
 
-    public function share(Request $request,$id)
+    public function share(Request $request, $id)
     {
 
         $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_allow_feeds');
@@ -347,7 +347,7 @@ class FeedsController extends Controller
 
         // set the duplicate flag
         $newFeed->share_by = Auth::id();
-        $newFeed->parent_id = $request->feed_id;
+        $newFeed->parent_id = $id;
         $newFeed->is_deleted = 0;
 
         // optionally, modify timestamps or unique fields if needed
@@ -357,7 +357,8 @@ class FeedsController extends Controller
         // save duplicated record
         $newFeed->save();
 
-        return response()->json(['message' => 'Feed has been shared Successfully', 'feed' => $newFeed, 'success' => true], 201);
+        $sharedFeed = Feed::with(['user', 'shareUser'])->find($newFeed->_id);
+        return response()->json(['message' => 'Feed has been shared Successfully', 'feed' => $sharedFeed, 'success' => true], 201);
     }
 
     public function search_user(Request $request)
@@ -398,6 +399,11 @@ class FeedsController extends Controller
                     unlink($file_path);
                 }
             }
+        }
+        $shared = Feed::where('parent_id', $id)->get();
+        foreach ($shared as $share) {
+            $share->is_deleted = 1;
+            $share->save();
         }
         $feed->delete();
         return ResponseHelper::sendResponse([], 'Feed has been Deleted Successfully!');
