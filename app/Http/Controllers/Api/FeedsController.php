@@ -333,7 +333,7 @@ class FeedsController extends Controller
         }
     }
 
-    public function share(Request $request)
+    public function share(Request $request,$id)
     {
 
         $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_allow_feeds');
@@ -341,8 +341,7 @@ class FeedsController extends Controller
             return ResponseHelper::sendResponse([], 'You are not allowed to share feeds.', false, 409);
         }
 
-        $feed = Feed::find($request);
-        dd($feed->toArray());
+        $feed = Feed::find($id);
         // duplicate the record
         $newFeed = $feed->replicate();  // clones all attributes except the primary key
 
