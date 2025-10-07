@@ -132,6 +132,12 @@ class ClipsController extends Controller
                 unlink($file_path);
             }
         }
+        if ($clip->video_paths) {
+            $file_path = public_path('storage/' . $clip->video_paths);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+        }
         $clips = Clips::where('template_id', $id)->get();
         if ($clips) {
             foreach ($clips as $cl) {
