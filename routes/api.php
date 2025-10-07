@@ -170,6 +170,7 @@ Route::middleware('jwt.custom')->group(function () {
     //Feeds Section
     Route::get('feeds', [FeedsController::class, 'index']);
     Route::post('feeds', [FeedsController::class, 'store']);
+    Route::get('share-feeds/{id}', [FeedsController::class, 'share']);
     Route::post('search-feeds-users', [FeedsController::class, 'search_user']);
     Route::post('feeds-permission/{id}', [FeedsController::class, 'change_permission']);
     Route::delete('feeds/{id}', [FeedsController::class, 'delete']);

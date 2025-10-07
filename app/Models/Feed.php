@@ -52,6 +52,9 @@ class Feed extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function shareUser(){
+        return $this->belongsTo(User::class, 'share_by');
+    }
     public function collections()
     {
         return $this->belongsToMany(Collection::class, 'collection_feeds', 'feed_id', 'collection_id');
@@ -88,4 +91,5 @@ class Feed extends Model
     {
         return $this->hasMany(Report::class, 'reported_post_id', 'id');
     }
+
 }

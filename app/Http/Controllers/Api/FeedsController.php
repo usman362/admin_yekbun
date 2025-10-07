@@ -333,6 +333,33 @@ class FeedsController extends Controller
         }
     }
 
+    public function share(Request $request)
+    {
+
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_allow_feeds');
+        if ($allowRequest !== true) {
+            return ResponseHelper::sendResponse([], 'You are not allowed to share feeds.', false, 409);
+        }
+
+        $feed = Feed::find($request);
+        // duplicate the record
+        $newFeed = $feed->replicate();  // clones all attributes except the primary key
+
+        // set the duplicate flag
+        $newFeed->share_by = Auth::id();
+        $newFeed->parent_id = $request->feed_id;
+        $newFeed->is_deleted = 0;
+
+        // optionally, modify timestamps or unique fields if needed
+        $newFeed->created_at = now();
+        $newFeed->updated_at = now();
+
+        // save duplicated record
+        $newFeed->save();
+
+        return response()->json(['message' => 'Feed has been shared Successfully', 'feed' => $newFeed, 'success' => true], 201);
+    }
+
     public function search_user(Request $request)
     {
         $users = User::whereHas('feeds')->with('country')
