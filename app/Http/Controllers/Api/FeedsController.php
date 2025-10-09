@@ -40,7 +40,7 @@ class FeedsController extends Controller
     {
 
         // Get authenticated user's latest feed
-        $feedsQuery = Feed::with(['user', 'shareUser'])
+        $feedsQuery = Feed::with(['user', 'shareUser','parentFeed'])
             ->orderBy('created_at', 'desc');
 
         if (!empty($request->user_id)) {
@@ -352,7 +352,7 @@ class FeedsController extends Controller
         $newFeed->is_deleted = 0;
 
         // optionally, modify timestamps or unique fields if needed
-        $newFeed->share_created_at = now();
+        $newFeed->created_at = now();
         $newFeed->updated_at = now();
 
         // save duplicated record

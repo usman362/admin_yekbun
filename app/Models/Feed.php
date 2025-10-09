@@ -10,7 +10,7 @@ class Feed extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'feed_background_image',
         'feed_text_color',
         'grid_style',
@@ -45,51 +45,58 @@ class Feed extends Model
     {
         return $this->hasMany(ReportFeeds::class, 'feed_id', '_id');
     }
-    public function background(){
-        return $this->hasMany(BackgroundFeed::class  , 'id' , 'background_id');
+    public function background()
+    {
+        return $this->hasMany(BackgroundFeed::class, 'id', 'background_id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function shareUser(){
+    public function parentFeed()
+    {
+        return $this->belongsTo(Feed::class, 'parent_id');
+    }
+    public function shareUser()
+    {
         return $this->belongsTo(User::class, 'share_by');
     }
     public function collections()
     {
         return $this->belongsToMany(Collection::class, 'collection_feeds', 'feed_id', 'collection_id');
     }
-    public function reactions(){
+    public function reactions()
+    {
 
-        return $this->hasMany(Reaction::class , 'feed_id');
+        return $this->hasMany(Reaction::class, 'feed_id');
     }
     public function comments()
     {
-        return $this->hasMany(FeedComments::class,'feed_id')->where('comment_type','normal');
+        return $this->hasMany(FeedComments::class, 'feed_id')->where('comment_type', 'normal');
     }
     public function voice_comments()
     {
-        return $this->hasMany(FeedComments::class,'feed_id')->where('comment_type','audio');
+        return $this->hasMany(FeedComments::class, 'feed_id')->where('comment_type', 'audio');
     }
     public function shares()
     {
-        return $this->hasMany(Feed::class,'parent_id','_id');
+        return $this->hasMany(Feed::class, 'parent_id', '_id');
     }
     public function likes()
     {
-        return $this->hasMany(FeedLikes::class,'feed_id');
+        return $this->hasMany(FeedLikes::class, 'feed_id');
     }
     public function views()
     {
-        return $this->hasMany(FeedViews::class,'feed_id');
+        return $this->hasMany(FeedViews::class, 'feed_id');
     }
     public function users()
     {
-        return $this->hasMany(User::class , 'id' , 'user_id');
+        return $this->hasMany(User::class, 'id', 'user_id');
     }
     public function reports()
     {
         return $this->hasMany(Report::class, 'reported_post_id', 'id');
     }
-
 }
