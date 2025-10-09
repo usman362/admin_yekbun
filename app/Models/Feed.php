@@ -73,7 +73,7 @@ class Feed extends Model
     }
     public function shares()
     {
-        return $this->hasMany(self::class,'parent_id');
+        return $this->hasMany(Feed::class,'parent_id','_id');
     }
     public function likes()
     {
