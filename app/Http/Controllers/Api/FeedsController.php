@@ -341,7 +341,7 @@ class FeedsController extends Controller
             return ResponseHelper::sendResponse([], 'You are not allowed to share feeds.', false, 409);
         }
 
-        $feed = Feed::find($request->feed_id);
+        $feed = Feed::find($request->feed_id); 
         // duplicate the record
         $newFeed = $feed->replicate();  // clones all attributes except the primary key
 
