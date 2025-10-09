@@ -341,7 +341,7 @@ class FeedsController extends Controller
             return ResponseHelper::sendResponse([], 'You are not allowed to share feeds.', false, 409);
         }
 
-        $feed = Feed::find($request->feed_id); 
+        $feed = Feed::find($request->feed_id);
         // duplicate the record
         $newFeed = $feed->replicate();  // clones all attributes except the primary key
 
@@ -352,7 +352,7 @@ class FeedsController extends Controller
         $newFeed->is_deleted = 0;
 
         // optionally, modify timestamps or unique fields if needed
-        $newFeed->created_at = now();
+        $newFeed->share_created_at = now();
         $newFeed->updated_at = now();
 
         // save duplicated record
