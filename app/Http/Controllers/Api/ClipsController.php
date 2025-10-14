@@ -199,14 +199,18 @@ class ClipsController extends Controller
             $like->clip_id = $clip_id;
             $like->emoji = $request->emoji ?? null;
             $like->save();
-
+            $clip = Clips::find($request->clip_id);
+            $clip->likes_count = $clip->likes->count();
+            $clip->save();
             return ResponseHelper::sendResponse([], 'Clip Liked Successfully');
         }
 
         if ($request->filled('emoji')) {
             $existingLike->emoji = $request->emoji;
             $existingLike->save();
-
+            $clip = Clips::find($request->clip_id);
+            $clip->likes_count = $clip->likes->count();
+            $clip->save();
             return ResponseHelper::sendResponse([], 'Like Updated Successfully');
         }
 
