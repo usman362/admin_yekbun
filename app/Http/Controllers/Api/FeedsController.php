@@ -40,7 +40,15 @@ class FeedsController extends Controller
     {
 
         // Get authenticated user's latest feed
-        $feedsQuery = Feed::with(['user', 'shareUser','parentFeed'])
+        $feedsQuery = Feed::with(['user', 'shareUser', 'parentFeed' => function ($pf) {
+            $pf->with(['comments_count', 'voice_comments_count', 'likes_count', 'views_count', 'shares_count']);
+            $pf->comments_count = $pf->comments->count();
+            $pf->voice_comments_count = $pf->voice_comments->count();
+            $pf->likes_count = $pf->likes->count();
+            $pf->views_count = $pf->views->count();
+            $pf->shares_count = $pf->shares->count();
+            return $pf;
+        }])
             ->orderBy('created_at', 'desc');
 
         if (!empty($request->user_id)) {
