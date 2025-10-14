@@ -68,19 +68,19 @@ class FeedsController extends Controller
         $allIds = array_values(array_unique(array_merge($feedIds, $parentIds)));
 
         // 4. Query related models and count grouped by feed_id
-        $commentsGrouped = \App\Models\Comment::whereIn('feed_id', $allIds)->get()
+        $commentsGrouped = \App\Models\FeedComments::whereIn('feed_id', $allIds)->where('comment_type', 'normal')->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
-        $likesGrouped = \App\Models\Like::whereIn('feed_id', $allIds)->get()
+        $likesGrouped = \App\Models\FeedLikes::whereIn('feed_id', $allIds)->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
-        $viewsGrouped = \App\Models\View::whereIn('feed_id', $allIds)->get()
+        $viewsGrouped = \App\Models\FeedViews::whereIn('feed_id', $allIds)->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
-        $sharesGrouped = \App\Models\Share::whereIn('feed_id', $allIds)->get()
+        $sharesGrouped = \App\Models\FeedShare::whereIn('feed_id', $allIds)->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
-        $voiceCommentsGrouped = \App\Models\VoiceComment::whereIn('feed_id', $allIds)->get()
+        $voiceCommentsGrouped = \App\Models\FeedComments::whereIn('feed_id', $allIds)->where('comment_type', 'audio')->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
         // 5. Attach counts to each feed and its parentFeed
