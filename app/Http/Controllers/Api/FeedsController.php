@@ -72,6 +72,7 @@ class FeedsController extends Controller
             $feed->views_count = $feed->views->count();
             $feed->shares_count = $feed->shares->count();
             $feed->save();
+            dd($feed);
             return $feed;
         });
 
