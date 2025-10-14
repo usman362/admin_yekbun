@@ -22,4 +22,13 @@ class Clips extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function views()
+    {
+        return $this->hasMany(ClipsViews::class, 'clip_id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(ClipsLikes::class, 'clip_id');
+    }
 }

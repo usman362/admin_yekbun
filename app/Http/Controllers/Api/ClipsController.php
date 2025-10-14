@@ -6,6 +6,8 @@ use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Clips;
+use App\Models\ClipsViews;
+use App\Models\ClipsLikes;
 use App\Models\ClipTemplates;
 use App\Models\UserVideo;
 use App\Models\Video;
@@ -21,7 +23,7 @@ class ClipsController extends Controller
 {
     public function index()
     {
-        $videos = Clips::with(['template', 'user'])->orderBy('created_at', 'desc')->get();
+        $videos = Clips::with(['template', 'user', 'likes', 'views'])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
@@ -136,28 +138,79 @@ class ClipsController extends Controller
 
     public function destroy($id)
     {
-        $video = Video::find($id);
-        if (isset($video->images)) {
-            foreach ($video->images as $video_file) {
-                $image_path = 'public/' . $video_file['path']; // Relative path in storage
-                // ✅ Check using Storage::exists()
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path); // ✅ Delete the file properly
-                }
+        $clip = Clips::find($id);
+        if (isset($clip->thumbnail)) {
+            if (Storage::exists($clip->thumbnail)) {
+                Storage::delete($clip->thumbnail);
             }
         }
-        if (isset($video->video)) {
-            foreach ($video->video as $video_file) {
-                $image_path = 'public/' . $video_file['path']; // Relative path in storage
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path); // ✅ Delete the file properly
-                }
+        if (isset($clip->clip)) {
+            if (Storage::exists($clip->clip)) {
+                Storage::delete($clip->clip);
             }
         }
-        if ($video->delete($video->id)) {
-            return redirect()->route('manage_video')->with('success', 'Video Has been Deleted');
+        if ($clip->delete()) {
+            return ResponseHelper::sendResponse([], 'Clip has been Deleted Successfully');
         } else {
-            return redirect()->route('manage_video')->with('error', 'Failed to delete Video');
+            return ResponseHelper::sendResponse([], 'Failed to Delete Clip', false, 401);
         }
+    }
+
+    public function view_clips(Request $request)
+    {
+        if (!$request->clip_id) {
+            return ResponseHelper::sendResponse([], 'Clip Id is Required', false, 401);
+        }
+        $user_id = Auth::id();
+        $clip_id = $request->clip_id;
+        $existingView = ClipsViews::where('user_id', $user_id)->where('clip_id', $clip_id)->first();
+        if (!$existingView) {
+            $views = new ClipsViews();
+            $views->user_id = $user_id;
+            $views->clip_id = $request->clip_id;
+            $views->save();
+        }
+        $clip = Clips::find($request->clip_id);
+        $clip->views_count = $clip->views->count();
+        $clip->save();
+        return ResponseHelper::sendResponse([], 'Clip Viewed Successfully');
+    }
+
+    public function like_clips(Request $request)
+    {
+        if (!$request->clip_id) {
+            return ResponseHelper::sendResponse([], 'Clip Id is Required', false, 401);
+        }
+
+        $user_id = Auth::id();
+        $clip_id = $request->clip_id;
+
+        // Check if user already liked this clip
+        $existingLike = ClipsLikes::where('user_id', $user_id)
+            ->where('clip_id', $clip_id)
+            ->first();
+
+        if (!$existingLike) {
+            $like = new ClipsLikes();
+            $like->user_id = $user_id;
+            $like->clip_id = $clip_id;
+            $like->emoji = $request->emoji ?? null;
+            $like->save();
+
+            return ResponseHelper::sendResponse([], 'Clip Liked Successfully');
+        }
+
+        if ($request->filled('emoji')) {
+            $existingLike->emoji = $request->emoji;
+            $existingLike->save();
+
+            return ResponseHelper::sendResponse([], 'Like Updated Successfully');
+        }
+
+        $existingLike->delete();
+        $clip = Clips::find($request->clip_id);
+        $clip->views_count = $clip->likes->count();
+        $clip->save();
+        return ResponseHelper::sendResponse([], 'Clip Unliked Successfully');
     }
 }
