@@ -77,7 +77,7 @@ class FeedsController extends Controller
         $viewsGrouped = \App\Models\FeedViews::whereIn('feed_id', $allIds)->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
-        $sharesGrouped = \App\Models\FeedShare::whereIn('feed_id', $allIds)->get()
+        $sharesGrouped = \App\Models\Feed::whereIn('parent_id', $allIds)->get()
             ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
 
         $voiceCommentsGrouped = \App\Models\FeedComments::whereIn('feed_id', $allIds)->where('comment_type', 'audio')->get()
