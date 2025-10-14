@@ -46,6 +46,7 @@ class FeedsController extends Controller
             $pf->likes_count = 0;
             $pf->views_count = 0;
             $pf->shares_count = 0;
+            return $pf;
         }])
             ->orderBy('created_at', 'desc');
 
