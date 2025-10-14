@@ -40,14 +40,6 @@ class FeedsController extends Controller
     {
 
         $tempFeeds = Feed::all();
-        foreach ($tempFeeds as $tempfeed) {
-            $tempfeed->comments_count = $tempfeed->comments->count();
-            $tempfeed->voice_comments_count = $tempfeed->voice_comments->count();
-            $tempfeed->likes_count = $tempfeed->likes->count();
-            $tempfeed->views_count = $tempfeed->views->count();
-            $tempfeed->shares_count = $tempfeed->shares->count();
-            $tempfeed->save();
-        };
         // Get authenticated user's latest feed
         $feedsQuery = Feed::with(['user', 'shareUser', 'parentFeed'])
             ->orderBy('created_at', 'desc');
@@ -367,6 +359,13 @@ class FeedsController extends Controller
 
         // save duplicated record
         $newFeed->save();
+
+        $feed->comments_count = $feed->comments->count();
+        $feed->voice_comments_count = $feed->voice_comments->count();
+        $feed->likes_count = $feed->likes->count();
+        $feed->views_count = $feed->views->count();
+        $feed->shares_count = $feed->shares->count();
+        $feed->save();
 
         $sharedFeed = Feed::with(['user', 'shareUser'])->find($newFeed->_id);
         return response()->json(['message' => 'Feed has been shared Successfully', 'feed' => $sharedFeed, 'success' => true], 201);
@@ -724,6 +723,14 @@ class FeedsController extends Controller
             }
         }
 
+        $feed = Feed::find($id);
+        $feed->comments_count = $feed->comments->count();
+        $feed->voice_comments_count = $feed->voice_comments->count();
+        $feed->likes_count = $feed->likes->count();
+        $feed->views_count = $feed->views->count();
+        $feed->shares_count = $feed->shares->count();
+        $feed->save();
+
         return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         // } catch (Exception $e) {
         //     return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
@@ -935,6 +942,13 @@ class FeedsController extends Controller
             'liked' => $liked,
             'like_count' => $likeCount
         ];
+        $feed = Feed::find($id);
+        $feed->comments_count = $feed->comments->count();
+        $feed->voice_comments_count = $feed->voice_comments->count();
+        $feed->likes_count = $feed->likes->count();
+        $feed->views_count = $feed->views->count();
+        $feed->shares_count = $feed->shares->count();
+        $feed->save();
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 }

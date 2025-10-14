@@ -6,6 +6,7 @@ use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\FeedViews;
+use App\Models\Feed;
 use App\Models\MultimediaViews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -21,6 +22,9 @@ class ViewsController extends Controller
     }
     public function store_feeds_views(Request $request)
     {
+        if (!$request->feed_id) {
+            return ResponseHelper::sendResponse([], 'Feed Id is Required', false, 401);
+        }
         $feeds = FeedViews::where('user_id', Auth::id())->where('feed_id', $request->feed_id)->first();
         if (!$feeds) {
             $feeds = FeedViews::create([
@@ -29,6 +33,13 @@ class ViewsController extends Controller
                 'feed_type' => $request->feed_type,
             ]);
         }
+        $feed = Feed::find($request->feed_id);
+        $feed->comments_count = $feed->comments->count();
+        $feed->voice_comments_count = $feed->voice_comments->count();
+        $feed->likes_count = $feed->likes->count();
+        $feed->views_count = $feed->views->count();
+        $feed->shares_count = $feed->shares->count();
+        $feed->save();
         return ResponseHelper::sendResponse($feeds, 'Feeds View Succeed');
     }
 
