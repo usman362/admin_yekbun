@@ -159,7 +159,6 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('feeds/{id}/comments', [FeedsController::class, 'storeComments']);
     Route::post('comments/{id}/edit', [FeedsController::class, 'editComments']);
     Route::post('feeds/{id}/likes', [FeedsController::class, 'feedLike']);
-    Route::post('feeds-views', [FeedsController::class, 'feedView']);
     Route::post('comments/{id}/likes', [FeedsController::class, 'commentLike']);
     Route::delete('comments/{id}/delete', [FeedsController::class, 'commentDelete']);
     Route::get('comments/{id}/report', [ReportCommentsController::class, 'index']);
