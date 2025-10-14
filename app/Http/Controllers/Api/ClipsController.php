@@ -212,7 +212,7 @@ class ClipsController extends Controller
 
         $existingLike->delete();
         $clip = Clips::find($request->clip_id);
-        $clip->views_count = $clip->likes->count();
+        $clip->likes_count = $clip->likes->count();
         $clip->save();
         return ResponseHelper::sendResponse([], 'Clip Unliked Successfully');
     }
