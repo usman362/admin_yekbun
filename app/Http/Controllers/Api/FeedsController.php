@@ -40,16 +40,16 @@ class FeedsController extends Controller
     {
 
         $tempFeeds = Feed::all();
-        $tempFeeds->getCollection()->transform(function ($tempfeed) {
+        foreach ($tempFeeds as $tempfeed) {
             $tempfeed->comments_count = $tempfeed->comments->count();
             $tempfeed->voice_comments_count = $tempfeed->voice_comments->count();
             $tempfeed->likes_count = $tempfeed->likes->count();
             $tempfeed->views_count = $tempfeed->views->count();
             $tempfeed->shares_count = $tempfeed->shares->count();
             $tempfeed->save();
-        });
+        };
         // Get authenticated user's latest feed
-        $feedsQuery = Feed::with(['user', 'shareUser','parentFeed'])
+        $feedsQuery = Feed::with(['user', 'shareUser', 'parentFeed'])
             ->orderBy('created_at', 'desc');
 
         if (!empty($request->user_id)) {
