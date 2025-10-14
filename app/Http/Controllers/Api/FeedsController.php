@@ -39,6 +39,15 @@ class FeedsController extends Controller
     public function index(Request $request)
     {
 
+        $tempFeeds = Feed::all();
+        $tempFeeds->getCollection()->transform(function ($tempfeed) {
+            $tempfeed->comments_count = $tempfeed->comments->count();
+            $tempfeed->voice_comments_count = $tempfeed->voice_comments->count();
+            $tempfeed->likes_count = $tempfeed->likes->count();
+            $tempfeed->views_count = $tempfeed->views->count();
+            $tempfeed->shares_count = $tempfeed->shares->count();
+            $tempfeed->save();
+        });
         // Get authenticated user's latest feed
         $feedsQuery = Feed::with(['user', 'shareUser','parentFeed'])
             ->orderBy('created_at', 'desc');
@@ -65,16 +74,15 @@ class FeedsController extends Controller
             }
         }
 
-        $feeds->getCollection()->transform(function ($feed) {
-            $feed->comments_count = $feed->comments->count();
-            $feed->voice_comments_count = $feed->voice_comments->count();
-            $feed->likes_count = $feed->likes->count();
-            $feed->views_count = $feed->views->count();
-            $feed->shares_count = $feed->shares->count();
-            $feed->save();
-            dd($feed);
-            return $feed;
-        });
+        // $feeds->getCollection()->transform(function ($feed) {
+        //     $feed->comments_count = $feed->comments->count();
+        //     $feed->voice_comments_count = $feed->voice_comments->count();
+        //     $feed->likes_count = $feed->likes->count();
+        //     $feed->views_count = $feed->views->count();
+        //     $feed->shares_count = $feed->shares->count();
+        //     $feed->save();
+        //     return $feed;
+        // });
 
         // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
         $feedItems = $feeds->items();
