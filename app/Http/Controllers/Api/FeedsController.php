@@ -38,101 +38,68 @@ class FeedsController extends Controller
 
     public function index(Request $request)
     {
-        // 1. Build query with base relationships (no withCount here)
-        $feedsQuery = Feed::with(['user', 'shareUser', 'parentFeed'])
+
+        // Get authenticated user's latest feed
+        $feedsQuery = Feed::with(['user', 'shareUser','parentFeed'])
             ->orderBy('created_at', 'desc');
 
-        // 2. Handle filters (user_id / authenticated user)
         if (!empty($request->user_id)) {
-            $feeds = $feedsQuery->where('user_id', $request->user_id)->paginate(5);
+            $feeds = $feedsQuery
+                ->where('user_id', $request->user_id)
+                ->paginate(5);
         } else {
-            $authFeed = (clone $feedsQuery)->where('user_id', Auth::id())->first();
+            $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
             if ($authFeed) {
-                $feeds = $feedsQuery->where('_id', '!=', $authFeed->_id)->paginate(5);
+                $feeds = $feedsQuery
+                    ->where('_id', '!=', $authFeed->id)
+                    // ->whereHas('user', function ($q) {
+                    //     $q->where('origin', Auth::user()->origin);
+                    // })
+                    ->paginate(5);
             } else {
-                $feeds = $feedsQuery->paginate(5);
+                $feeds = $feedsQuery
+                    // ->whereHas('user', function ($q) {
+                    //     $q->where('origin', Auth::user()->origin);
+                    // })
+                    ->paginate(5);
             }
         }
 
-        // 3. Gather all feed + parentFeed IDs to fetch counts in bulk
-        $feedsCollection = $feeds->getCollection();
-        $feedIds = $feedsCollection->pluck('_id')->map(fn($id) => (string)$id)->toArray();
-
-        $parentIds = $feedsCollection
-            ->pluck('parentFeed')
-            ->filter()
-            ->map(fn($pf) => (string)$pf->_id)
-            ->unique()
-            ->toArray();
-
-        $allIds = array_values(array_unique(array_merge($feedIds, $parentIds)));
-
-        // 4. Query related models and count grouped by feed_id
-        $commentsGrouped = \App\Models\FeedComments::whereIn('feed_id', $allIds)->where('comment_type', 'normal')->get()
-            ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
-
-        $likesGrouped = \App\Models\FeedLikes::whereIn('feed_id', $allIds)->get()
-            ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
-
-        $viewsGrouped = \App\Models\FeedViews::whereIn('feed_id', $allIds)->get()
-            ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
-
-        $sharesGrouped = \App\Models\Feed::whereIn('parent_id', $allIds)->get()
-            ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
-
-        $voiceCommentsGrouped = \App\Models\FeedComments::whereIn('feed_id', $allIds)->where('comment_type', 'audio')->get()
-            ->groupBy(fn($row) => (string)$row->feed_id)->map->count();
-
-        // 5. Attach counts to each feed and its parentFeed
-        $feedsCollection->transform(function ($feed) use (
-            $commentsGrouped,
-            $likesGrouped,
-            $viewsGrouped,
-            $sharesGrouped,
-            $voiceCommentsGrouped
-        ) {
-            $fid = (string)$feed->_id;
-
-            $feed->comments_count = $commentsGrouped[$fid] ?? 0;
-            $feed->likes_count = $likesGrouped[$fid] ?? 0;
-            $feed->views_count = $viewsGrouped[$fid] ?? 0;
-            $feed->shares_count = $sharesGrouped[$fid] ?? 0;
-            $feed->voice_comments_count = $voiceCommentsGrouped[$fid] ?? 0;
-
-            if (!empty($feed->parentFeed)) {
-                $pid = (string)$feed->parentFeed->_id;
-                $feed->parentFeed->comments_count = $commentsGrouped[$pid] ?? 0;
-                $feed->parentFeed->likes_count = $likesGrouped[$pid] ?? 0;
-                $feed->parentFeed->views_count = $viewsGrouped[$pid] ?? 0;
-                $feed->parentFeed->shares_count = $sharesGrouped[$pid] ?? 0;
-                $feed->parentFeed->voice_comments_count = $voiceCommentsGrouped[$pid] ?? 0;
-            }
-
+        $feeds->getCollection()->transform(function ($feed) {
+            $feed->comments_count = $feed->comments->count();
+            $feed->voice_comments_count = $feed->voice_comments->count();
+            $feed->likes_count = $feed->likes->count();
+            $feed->views_count = $feed->views->count();
+            $feed->shares_count = $feed->shares->count();
             return $feed;
         });
 
-        // 6. Inject authenticated user feed at top of page 1 if needed
-        $feedItems = $feedsCollection->toArray();
-        if (isset($authFeed) && $authFeed && $feeds->currentPage() == 1) {
-            $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
-            if (!$alreadyExists) {
-                array_unshift($feedItems, $authFeed);
+        // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
+        $feedItems = $feeds->items();
+
+        if (isset($authFeed)) {
+            if ($authFeed && $feeds->currentPage() == 1) {
+                $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
+                if (!$alreadyExists) {
+                    array_unshift($feedItems, $authFeed);
+                }
             }
         }
 
-        // 7. Final response structure
         $data = [
             'feeds' => $feedItems,
+            // 'auth_feed' => $authFeed,
             'pagination' => [
                 'page' => $feeds->currentPage(),
                 'count' => $feeds->perPage(),
                 'totalItems' => $feeds->total(),
                 'totalPages' => $feeds->lastPage(),
-            ],
+            ]
         ];
 
         return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
     }
+
 
     public function public_index(Request $request)
     {
