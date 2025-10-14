@@ -139,6 +139,9 @@ class ClipsController extends Controller
     public function destroy($id)
     {
         $clip = Clips::find($id);
+        if (!$clip) {
+            return ResponseHelper::sendResponse([], 'Clip Not Found', false, 401);
+        }
         if (isset($clip->thumbnail)) {
             if (Storage::exists($clip->thumbnail)) {
                 Storage::delete($clip->thumbnail);
