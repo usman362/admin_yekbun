@@ -709,17 +709,19 @@ class FeedsController extends Controller
 
         if (!empty($request->parent_id)) {
             $parentCommennt = FeedComments::find($request->parent_id);
-            $users = User::where('id', $parentCommennt->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
-            if ($users) {
-                NotificationHelper::sendNotification($user->id, 'Feeds Comment', Auth::user()->name . ' Replied to youre Comment');
-                NotificationCenter::create([
-                    'title' => 'Feeds Comment',
-                    'description' => Auth::user()->name . ' Replied to youre Comment',
-                    'user_id' => $parentCommennt->user_id,
-                    'user_image' => $parentCommennt->user->image ?? null,
-                    'type' => 'feed_comments',
-                    'is_read' => 0,
-                ]);
+            if (isset($parentCommennt->user_id)) {
+                $users = User::where('id', $parentCommennt->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+                if ($users) {
+                    NotificationHelper::sendNotification($user->id, 'Feeds Comment', Auth::user()->name . ' Replied to youre Comment');
+                    NotificationCenter::create([
+                        'title' => 'Feeds Comment',
+                        'description' => Auth::user()->name . ' Replied to youre Comment',
+                        'user_id' => $parentCommennt->user_id,
+                        'user_image' => $parentCommennt->user->image ?? null,
+                        'type' => 'feed_comments',
+                        'is_read' => 0,
+                    ]);
+                }
             }
         }
 
