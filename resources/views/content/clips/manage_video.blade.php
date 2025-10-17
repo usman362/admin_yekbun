@@ -1106,7 +1106,7 @@
             if ($(this).attr('data-text_properties') !== '' && $(this).attr('data-text_properties') !== null) {
                 props = JSON.parse($(this).attr('data-text_properties'));
             }
-
+            console.log(text);
             const $container = $('<div>').css({
                 width: '100%',
                 position: 'absolute',
@@ -1114,7 +1114,8 @@
                 alignItems: 'center',
                 gap: '5px',
                 marginTop: '12px',
-                padding: '0 12px'
+                padding: '0 12px',
+                zIndex: '2'
             });
 
             const $imgBefore = $('<img>').attr('src', $(this).attr('data-emoji')).css({
@@ -1131,7 +1132,7 @@
                     fontSize: props.fontSize + 'px',
                     fontFamily: props.fontFamily,
                     textAlign: props.textAlign,
-                    textShadow: `${props.textShadowOffset.width}px ${props.textShadowOffset.height}px ${props.textShadowRadius}px ${props.textShadowColor}`
+                    // textShadow: `${props.textShadowOffset.width}px ${props.textShadowOffset.height}px ${props.textShadowRadius}px ${props.textShadowColor}`
                 });
             } else {
                 $textSpan = $('<span>').text(text).css({
