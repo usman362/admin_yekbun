@@ -42,7 +42,8 @@ class VotingController extends Controller
             return redirect('/');
         }
         $vote_categories = VotingCategory::get();
-        return view('content.voting.index', compact('publishvotes', 'unpublishvotes', 'vote_categories'));
+        $votes = Voting::with('voting_category')->get();
+        return view('content.voting.index', compact('publishvotes', 'unpublishvotes','votes','vote_categories'));
     }
 
     /**
