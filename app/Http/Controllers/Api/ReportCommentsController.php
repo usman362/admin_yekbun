@@ -23,98 +23,104 @@ class ReportCommentsController extends Controller
         $reports = ReportComments::where('comment_id', $id)->get();
         return ResponseHelper::sendResponse($reports, 'Report Comments');
     }
-
-    public function store(Request $request, $id)
+    public function getUserReportedComments()
     {
-        $request->validate([
-            'report_type' => 'required'
-        ]);
-
-        $existingReport = ReportComments::where('user_id', Auth::id())
-            ->where('comment_id', $id)
-            ->exists();
-
-        if ($existingReport) {
-            return ResponseHelper::sendResponse([], 'You have already reported this comment.', false, 400);
-        }
-
-        $report = ReportComments::create(
-
-            [
-                'comment_id' => $id,
-                'report_type' => Str::slug($request->report_type),
-                'user_id' => Auth::id(),
-            ]
-        );
-
-        $feed = FeedComments::find($id);
-        $users = User::where('_id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
-        if ($users) {
-            NotificationHelper::sendNotification($users->_id, 'Feed Comment Reported', "You're Feed Comment has been Reported");
-            NotificationCenter::create([
-                'title' => 'Feed Comment Reported',
-                'description' => "You're Feed Comment has been Reported",
-                'user_id' => $feed->user_id,
-                'user_image' => $users->image ?? null,
-                'type' => 'feed_comments',
-                'is_read' => 0,
-            ]);
-        }
-
-        return ResponseHelper::sendResponse($report, 'Report Comments Successfully');
-    }
-    public function getUserReportedComments($userId)
-    {
-        $reportComments = ReportComments::with(['comments.feed.user', 'user'])
-            ->where('user_id', $userId)
+        $userId = Auth::id();
+        // Comments that belong to this user and have been reported
+        $reportComments = ReportComments::with(['comment.feed', 'user'])
+            ->whereHas('comment', function ($q) use ($userId) {
+                $q->where('user_id', $userId); // Comment belongs to the user
+            })
             ->get()
             ->map(fn($item) => [
                 'type' => 'comment',
                 'data' => $item,
-                'created_at' => $item->created_at,  // For sorting
+                'created_at' => $item->created_at,
             ]);
 
-        $reportFeeds = ReportFeeds::with(['feed.user', 'user']) // Ensure feed's user is loaded
-            ->where('user_id', $userId)
+        // Feeds that belong to this user and have been reported
+        $reportFeeds = ReportFeeds::with(['feed', 'user'])
+            ->whereHas('feed', function ($q) use ($userId) {
+                $q->where('user_id', $userId); // Feed belongs to the user
+            })
             ->get()
             ->map(fn($item) => [
                 'type' => 'feed',
                 'data' => $item,
-                'created_at' => $item->created_at,  // For sorting
+                'created_at' => $item->created_at,
             ]);
-        $mergedReports = '';
-        // dd($reportFeeds->count());
-        if ($reportComments->count() > 0 && $reportFeeds->count() > 0) {
-            $mergedReports = $reportComments->merge($reportFeeds)
-                ->sortByDesc('created_at')
-                ->values()
-                ->map(fn($item) => [
-                    'type' => $item['type'],
-                    'data' => $item['data'],
-                ]);
-        }
+
+        // Merge both
+        $mergedReports = collect()
+            ->merge($reportComments)
+            ->merge($reportFeeds)
+            ->sortByDesc('created_at')
+            ->values();
 
         return ResponseHelper::sendResponse([
-            'reported_items' => $mergedReports !== '' ? $mergedReports : ($reportComments->count() > 0 ? $reportComments : $reportFeeds),
+            'reported_items' => $mergedReports,
         ], 'Reported items fetched successfully');
     }
 
-
-
-
-
-
-
-    public function reportfeedstore(Request $request, $id)
+    public function store(Request $request, $id)
     {
         $request->validate([
-            'report_type' => 'required',
+            'report_type' => 'required|string|max:255',
         ]);
 
         $userId = Auth::id();
 
-        $exists = DB::table('report_feeds')
-            ->where('feed_id', $id)
+        $exists = ReportComments::where('user_id', $userId)
+            ->where('comment_id', $id)
+            ->exists();
+
+        if ($exists) {
+            return ResponseHelper::sendResponse([], 'You have already reported this comment.', false, 400);
+        }
+
+        $report = ReportComments::create([
+            'comment_id' => $id,
+            'report_type' => Str::slug($request->report_type),
+            'user_id' => $userId,
+        ]);
+
+        // Notify the comment owner
+        $comment = FeedComments::find($id);
+        if ($comment) {
+            $owner = User::where('_id', $comment->user_id)
+                ->whereIn('info_banner', ['banner', 'alert'])
+                ->first();
+
+            if ($owner) {
+                NotificationHelper::sendNotification(
+                    $owner->_id,
+                    'Feed Comment Reported',
+                    "Your comment has been reported"
+                );
+
+                NotificationCenter::create([
+                    'title' => 'Feed Comment Reported',
+                    'description' => "Your comment has been reported",
+                    'user_id' => $owner->_id,
+                    'user_image' => $owner->image ?? null,
+                    'type' => 'feed_comments',
+                    'is_read' => 0,
+                ]);
+            }
+        }
+
+        return ResponseHelper::sendResponse($report, 'Comment reported successfully');
+    }
+
+    public function reportfeedstore(Request $request, $id)
+    {
+        $request->validate([
+            'report_type' => 'required|string|max:255',
+        ]);
+
+        $userId = Auth::id();
+
+        $exists = ReportFeeds::where('feed_id', $id)
             ->where('user_id', $userId)
             ->exists();
 
@@ -122,49 +128,37 @@ class ReportCommentsController extends Controller
             return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
         }
 
-        $data = [
+        $report = ReportFeeds::create([
             'feed_id' => $id,
-            'report_type' => $request->report_type,
-            'user_id' => $userId,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-
-        // $inserted = DB::table('report_feeds')->insert($data);
-        $inserted = ReportFeeds::create([
-            'feed_id' => $id,
-            'report_type' => $request->report_type,
+            'report_type' => Str::slug($request->report_type),
             'user_id' => $userId,
         ]);
 
-        if ($inserted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Feed Report submitted successfully.',
-                'data' => [
-                    'feed_id' => $data['feed_id'],
-                    'report_type' => $data['report_type'],
-                    'user_id' => $data['user_id'],
-                ]
-            ], 201);
-            $feed = Feed::find($id);
-            $users = User::where('_id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
-            if ($users) {
-                NotificationHelper::sendNotification($users->_id, 'Feed Reported', "You're Feed has been Reported");
+        // Notify the feed owner
+        $feed = Feed::find($id);
+        if ($feed) {
+            $owner = User::where('_id', $feed->user_id)
+                ->whereIn('info_banner', ['banner', 'alert'])
+                ->first();
+
+            if ($owner) {
+                NotificationHelper::sendNotification(
+                    $owner->_id,
+                    'Feed Reported',
+                    "Your feed has been reported"
+                );
+
                 NotificationCenter::create([
                     'title' => 'Feed Reported',
-                    'description' => "You're Feed has been Reported",
-                    'user_id' => $feed->user_id,
-                    'user_image' => $users->image ?? null,
+                    'description' => "Your feed has been reported",
+                    'user_id' => $owner->_id,
+                    'user_image' => $owner->image ?? null,
                     'type' => 'feeds',
                     'is_read' => 0,
                 ]);
             }
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to submit report.',
-            ], 500);
         }
+
+        return ResponseHelper::sendResponse($report, 'Feed reported successfully');
     }
 }
