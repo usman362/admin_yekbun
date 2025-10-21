@@ -48,9 +48,9 @@ class ReportCommentsController extends Controller
         );
 
         $feed = FeedComments::find($id);
-        $users = User::where('id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+        $users = User::where('_id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
         if ($users) {
-            NotificationHelper::sendNotification($users->id, 'Feed Comment Reported', "You're Feed Comment has been Reported");
+            NotificationHelper::sendNotification($users->_id, 'Feed Comment Reported', "You're Feed Comment has been Reported");
             NotificationCenter::create([
                 'title' => 'Feed Comment Reported',
                 'description' => "You're Feed Comment has been Reported",
@@ -86,12 +86,12 @@ class ReportCommentsController extends Controller
         // dd($reportFeeds->count());
         if ($reportComments->count() > 0 && $reportFeeds->count() > 0) {
             $mergedReports = $reportComments->merge($reportFeeds)
-            ->sortByDesc('created_at')
-            ->values()
-            ->map(fn($item) => [
-                'type' => $item['type'],
-                'data' => $item['data'],
-            ]);
+                ->sortByDesc('created_at')
+                ->values()
+                ->map(fn($item) => [
+                    'type' => $item['type'],
+                    'data' => $item['data'],
+                ]);
         }
 
         return ResponseHelper::sendResponse([
@@ -119,10 +119,7 @@ class ReportCommentsController extends Controller
             ->exists();
 
         if ($exists) {
-            return response()->json([
-                'success' => false,
-                'message' => 'You have already reported this feed.',
-            ], 400);
+            return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
         }
 
         $data = [
@@ -151,9 +148,9 @@ class ReportCommentsController extends Controller
                 ]
             ], 201);
             $feed = Feed::find($id);
-            $users = User::where('id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
+            $users = User::where('_id', $feed->user_id)->whereIn('info_banner', ['banner', 'alert'])->first();
             if ($users) {
-                NotificationHelper::sendNotification($users->id, 'Feed Reported', "You're Feed has been Reported");
+                NotificationHelper::sendNotification($users->_id, 'Feed Reported', "You're Feed has been Reported");
                 NotificationCenter::create([
                     'title' => 'Feed Reported',
                     'description' => "You're Feed has been Reported",
