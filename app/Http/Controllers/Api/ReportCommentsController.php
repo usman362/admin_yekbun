@@ -27,8 +27,8 @@ class ReportCommentsController extends Controller
     {
         $userId = Auth::id();
         // Comments that belong to this user and have been reported
-        $reportComments = ReportComments::with(['comment.feed', 'user'])
-            ->whereHas('comment', function ($q) use ($userId) {
+        $reportComments = ReportComments::with(['comments.feed', 'user'])
+            ->whereHas('comments', function ($q) use ($userId) {
                 $q->where('user_id', $userId); // Comment belongs to the user
             })
             ->get()
