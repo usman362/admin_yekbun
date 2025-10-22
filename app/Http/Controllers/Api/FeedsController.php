@@ -40,31 +40,41 @@ class FeedsController extends Controller
     {
 
         $tempFeeds = Feed::all();
-        // Get authenticated user's latest feed
+
+        $userId = Auth::id();
+        $user = User::with(['friends', 'family'])->find($userId);
+
+        // Collect friend and family IDs
+        $friendIds = $user->friends->pluck('user_id')->toArray();
+        $familyIds = $user->family->pluck('user_id')->toArray();
+
+        // Start building query
         $feedsQuery = Feed::with(['user', 'shareUser', 'parentFeed'])
             ->orderBy('created_at', 'desc');
 
+        // ✅ If a specific user_id is provided
         if (!empty($request->user_id)) {
             $feeds = $feedsQuery
                 ->where('user_id', $request->user_id)
                 ->paginate(5);
         } else {
-            $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
-            if ($authFeed) {
-                $feeds = $feedsQuery
-                    ->where('_id', '!=', $authFeed->id)
-                    // ->whereHas('user', function ($q) {
-                    //     $q->where('origin', Auth::user()->origin);
-                    // })
-                    ->paginate(5);
-            } else {
-                $feeds = $feedsQuery
-                    // ->whereHas('user', function ($q) {
-                    //     $q->where('origin', Auth::user()->origin);
-                    // })
-                    ->paginate(5);
-            }
+            // ✅ Otherwise, filter based on user type visibility
+            $feeds = $feedsQuery
+                ->where(function ($query) use ($userId, $friendIds, $familyIds) {
+                    $query->where('user_id', $userId) // Own feeds
+                        ->orWhere(function ($q) use ($friendIds) {
+                            $q->whereIn('user_id', $friendIds)
+                                ->whereIn('user_type', ['friends', 'friends & family']);
+                        })
+                        ->orWhere(function ($q) use ($familyIds) {
+                            $q->whereIn('user_id', $familyIds)
+                                ->whereIn('user_type', ['family', 'friends & family']);
+                        });
+                })
+                ->paginate(5);
         }
+
+        $feedItems = $feeds->items();
 
         // $feeds->getCollection()->transform(function ($feed) {
         //     $feed->comments_count = $feed->comments->count();
@@ -77,7 +87,6 @@ class FeedsController extends Controller
         // });
 
         // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
-        $feedItems = $feeds->items();
 
         if (isset($authFeed)) {
             if ($authFeed && $feeds->currentPage() == 1) {
