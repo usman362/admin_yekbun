@@ -58,6 +58,17 @@ class FeedsController extends Controller
                 ->where('user_id', $request->user_id)
                 ->paginate(5);
         } else {
+
+            // $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
+            // if ($authFeed) {
+            //     $feeds = $feedsQuery
+            //         ->where('_id', '!=', $authFeed->id)
+            //         ->paginate(5);
+            // } else {
+            //     $feeds = $feedsQuery
+            //         ->paginate(5);
+            // }
+
             // ✅ Otherwise, filter based on user type visibility
             $feeds = $feedsQuery
                 ->where(function ($query) use ($userId, $friendIds, $familyIds) {
