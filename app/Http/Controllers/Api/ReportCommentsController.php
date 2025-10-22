@@ -31,6 +31,7 @@ class ReportCommentsController extends Controller
             ->whereHas('comments', function ($q) use ($userId) {
                 $q->where('user_id', $userId); // Comment belongs to the user
             })
+            ->where('status', 1)
             ->get()
             ->map(fn($item) => [
                 'type' => 'comment',
@@ -43,6 +44,7 @@ class ReportCommentsController extends Controller
             ->whereHas('feed', function ($q) use ($userId) {
                 $q->where('user_id', $userId); // Feed belongs to the user
             })
+            ->where('status', 1)
             ->get()
             ->map(fn($item) => [
                 'type' => 'feed',
@@ -72,16 +74,20 @@ class ReportCommentsController extends Controller
 
         $exists = ReportComments::where('user_id', $userId)
             ->where('comment_id', $id)
-            ->exists();
+            ->first();
 
         if ($exists) {
-            return ResponseHelper::sendResponse([], 'You have already reported this comment.', false, 400);
+            if ($exists->status == 1) {
+                return ResponseHelper::sendResponse([], 'You have already reported this comment.', false, 400);
+            }
+            $exists->delete();
         }
 
         $report = ReportComments::create([
             'comment_id' => $id,
             'report_type' => Str::slug($request->report_type),
             'user_id' => $userId,
+            'status' => 1,
         ]);
 
         // Notify the comment owner
@@ -122,16 +128,21 @@ class ReportCommentsController extends Controller
 
         $exists = ReportFeeds::where('feed_id', $id)
             ->where('user_id', $userId)
-            ->exists();
+            ->first();
 
         if ($exists) {
-            return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
+            if ($exists->status == 1) {
+                return ResponseHelper::sendResponse([], 'You have already reported this feed.', false, 400);
+            }
+            $exists->delete();
         }
 
         $report = ReportFeeds::create([
             'feed_id' => $id,
             'report_type' => Str::slug($request->report_type),
             'user_id' => $userId,
+            'status' => 1
+
         ]);
 
         // Notify the feed owner
@@ -160,5 +171,33 @@ class ReportCommentsController extends Controller
         }
 
         return ResponseHelper::sendResponse($report, 'Feed reported successfully');
+    }
+
+    public function resolveReportViolation(Request $request)
+    {
+        if (!$request->report_id) {
+            return ResponseHelper::sendResponse([], 'Report Id is required!', false, 404);
+        }
+
+        $reportFeed = ReportFeeds::find($request->report_id);
+        $reportComments = ReportComments::find($request->report_id);
+
+        if (!$reportFeed && !$reportComments) {
+            return ResponseHelper::sendResponse([], 'Reported Item Not Found!', false, 404);
+        }
+
+        if ($reportFeed) {
+            $reportFeed->status = 0;
+            $reportFeed->resolved_reason = $request->resolved_reason;
+            $reportFeed->save();
+            return ResponseHelper::sendResponse($reportFeed, 'Violation Resolved Successfully!');
+        }
+
+        if ($reportComments) {
+            $reportComments->status = 0;
+            $reportComments->resolved_reason = $request->resolved_reason;
+            $reportComments->save();
+            return ResponseHelper::sendResponse($reportComments, 'Violation Resolved Successfully!');
+        }
     }
 }

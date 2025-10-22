@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -15,6 +15,7 @@ class ReportFeeds extends Eloquent // ✅ Use MongoDB Eloquent Model
         'user_id',
         'report_type',
         'feed_id',
+        'status'
     ];
     protected $casts = [
     'created_at' => 'datetime',
@@ -30,5 +31,5 @@ class ReportFeeds extends Eloquent // ✅ Use MongoDB Eloquent Model
     {
         return $this->belongsTo(Feed::class, 'feed_id', '_id');
     }
-    
+
 }

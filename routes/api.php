@@ -165,6 +165,7 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('comments/{id}/report', [ReportCommentsController::class, 'store']);
     Route::post('feed/{id}/report', [ReportCommentsController::class, 'reportfeedstore']);
     Route::get('/reported-comments', [ReportCommentsController::class, 'getUserReportedComments']);
+    Route::post('/resolve-report-violation', [ReportCommentsController::class, 'resolveReportViolation']);
 
 
     //Feeds Section
