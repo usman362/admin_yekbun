@@ -743,11 +743,21 @@
                                         <strong>Level #2</strong>
                                         <p class="m-0">Delete Clip, Downgrade User</p>
                                         <div class="dropdowns">
-                                            <select>
-                                                <option>Select Reason</option>
+                                            <select name="reason">
+                                                <option value="">Select Reason</option>
+                                                <option value="Insult">Insult</option>
+                                                <option value="Spam">Spam</option>
+                                                <option value="Illegality">Illegality</option>
+                                                <option value="Annoyance">Annoyance</option>
+                                                <option value="Bullying - Harrasment">Bullying - Harrasment</option>
+                                                <option value="Racism">Racism</option>
                                             </select>
-                                            <select>
-                                                <option>Select Duration</option>
+                                            <select name="duration">
+                                                <option value="">Select Duration</option>
+                                                <option value="15">15 Days</option>
+                                                <option value="1">1 Month</option>
+                                                <option value="2">2 Months</option>
+                                                <option value="3">3 Months</option>
                                             </select>
                                         </div>
                                         <div class="warning">⚡ User Account will be downgraded to Educated</div>
@@ -761,34 +771,26 @@
                                     <div style="line-height: 1">
                                         <strong>Level #3</strong>
                                         <p class="m-0">Delete Clip, Suspend User</p>
-                                        <div class="dropdowns">
-                                            <select>
-                                                <option>Select Reason</option>
+                                         <div class="dropdowns">
+                                            <select name="reason">
+                                                <option value="">Select Reason</option>
+                                                <option value="Insult">Insult</option>
+                                                <option value="Spam">Spam</option>
+                                                <option value="Illegality">Illegality</option>
+                                                <option value="Annoyance">Annoyance</option>
+                                                <option value="Bullying - Harrasment">Bullying - Harrasment</option>
+                                                <option value="Racism">Racism</option>
                                             </select>
-                                            <select>
-                                                <option>Select Duration</option>
+                                            <select name="duration">
+                                                <option value="">Select Duration</option>
+                                                <option value="15">15 Days</option>
+                                                <option value="1">1 Month</option>
+                                                <option value="2">2 Months</option>
+                                                <option value="3">3 Months</option>
                                             </select>
                                         </div>
                                     </div>
                                     <input type="radio" name="action_level" value="3" />
-                                </label>
-
-                                <label class="action level4">
-                                    <div class="icon"><img src="{{ asset('images/user-clips-level-4.svg') }}"
-                                            alt=""></div>
-                                    <div style="line-height: 1">
-                                        <strong>Level #4</strong>
-                                        <p class="m-0">Remove Account, Block User</p>
-                                        <div class="dropdowns">
-                                            <select>
-                                                <option>Select Reason</option>
-                                            </select>
-                                            <select>
-                                                <option>Select Device</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <input type="radio" name="action_level" value="4" />
                                 </label>
 
                                 <button type="submit" class="submit-btn">Submit</button>

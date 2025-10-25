@@ -68,6 +68,42 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $request->password], true)) {
             $user = Auth::user();
 
+            if ($user->action_type === 'suspend') {
+                if (Carbon::now()->lt($user->action_duration)) {
+                    $remainingDays = Carbon::now()->diffInDays($user->action_duration);
+                    $remainingHours = Carbon::now()->diffInHours($user->action_duration) % 24;
+
+                    $remainingText = $remainingDays > 0
+                        ? "{$remainingDays} day(s) and {$remainingHours} hour(s)"
+                        : "{$remainingHours} hour(s)";
+
+                    return ResponseHelper::sendResponse(
+                        [],
+                        "Your account is suspended for another {$remainingText}.",
+                        false,
+                        403
+                    );
+                } else {
+                    // ✅ Suspension expired — reactivate
+                    $user->status = 1;
+                    $user->action_type = null;
+                    $user->action_duration = null;
+                    $user->save();
+                }
+            }
+
+            // --- 🧩 Handle Downgrade ---
+            if ($user->action_type === 'downgrade') {
+                if (Carbon::now()->gte($user->action_duration)) {
+                    // ✅ Downgrade expired — restore old level & type
+                    $user->level = $user->old_level ?? $user->level;
+                    $user->user_type = $user->old_user_type ?? $user->user_type;
+                    $user->action_type = null;
+                    $user->action_duration = null;
+                    $user->save();
+                }
+            }
+
             // Ensure the user's email is verified
             if ($user->email_verified_at == null || $user->email_verified_at == '') {
                 return ResponseHelper::sendResponse([], 'Youre Email is not verified!', false, 403);
