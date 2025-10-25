@@ -760,7 +760,7 @@
                                                 <option value="3">3 Months</option>
                                             </select>
                                         </div>
-                                        <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                                        <div class="warning">⚡ User Account will be downgraded to Cultivated</div>
                                     </div>
                                     <input type="radio" name="action_level" value="2" />
                                 </label>
@@ -1109,7 +1109,7 @@
                                                 <option>Select Duration</option>
                                             </select>
                                         </div>
-                                        <div class="warning">⚡ User Account will be downgraded to Educated</div>
+                                        <div class="warning">⚡ User Account will be downgraded to Cultivated</div>
                                     </div>
                                     <input type="radio" name="action_level" value="2" />
                                 </label>
