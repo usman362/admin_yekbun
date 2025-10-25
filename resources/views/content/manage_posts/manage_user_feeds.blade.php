@@ -749,7 +749,7 @@
                                                 <option value="Spam">Spam</option>
                                                 <option value="Illegality">Illegality</option>
                                                 <option value="Annoyance">Annoyance</option>
-                                                <option value="Bullying - Harrasment">Bullying - Harrasment</option>
+                                                <option value="Harrasment">Harrasment</option>
                                                 <option value="Racism">Racism</option>
                                             </select>
                                             <select name="level_2_duration">
@@ -778,7 +778,7 @@
                                                 <option value="Spam">Spam</option>
                                                 <option value="Illegality">Illegality</option>
                                                 <option value="Annoyance">Annoyance</option>
-                                                <option value="Bullying - Harrasment">Bullying - Harrasment</option>
+                                                <option value="Harrasment">Harrasment</option>
                                                 <option value="Racism">Racism</option>
                                             </select>
                                             <select name="level_3_duration">
