@@ -407,6 +407,13 @@ class LanguagesHelpers
             ['keyword' => 'Type 1', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
             ['keyword' => 'Type 2', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
             ['keyword' => 'Type your Text', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'They are the pioneers of progress, using their expertise to break barriers and shape civilizations. Academics are more than university graduates: they are visionaries, innovators, and trailblazers of an enlightened world.', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'Violent, sexual, or offensive content is not allowed on our platform. Any incitement to violence, unrest, or criminal acts is strictly prohibited. Violations may lead to account suspension.', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'No sexual content.', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'No violence or weapons.', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'No insults or hate speech.', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'No incitement to unrest or crime.', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
+            ['keyword' => 'I Commit that my actvity has', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Feed'],
 
             //Sharing Launcher Share Sympathy
             ['keyword' => 'Share a Clip', 'translated' => '', 'main_section' => 'Sharing Launcher', 'section_name' => 'Share Sympathy'],
@@ -568,6 +575,46 @@ class LanguagesHelpers
             ['keyword' => 'Fax:', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'About Us section'],
             ['keyword' => 'St.-Nr.:', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'About Us section'],
 
+            // Settings - Components Section
+            ['keyword' => "U need more Playlist?", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Reply", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "See less", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "See more", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Liked", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Start", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Expire", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Donate", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Help Us", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Public", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Measures", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Down", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Duration", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Days", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Flag", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Flags", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Select the Playlist", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Move Now", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "You don't have enough Playlists", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Song", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Due to your inappropriate behavior toward our users and our platform, we are compelled to take preventive measures against you.", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Reason", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Solve it now", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Confirmation", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Are you sure you wanna perform this action?", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "This feature is exclusively available to premium members. To unlock access and enjoy its full benefits, please upgrade your account.", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "month", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+            ['keyword' => "Upgrade Now", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Components'],
+
+            // Settings - Payment Section
+            ['keyword' => "Apple Pay", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Google Pay", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Bank Transfer", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Pay Now", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Total items:", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Payment Recieved", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Thank you for the Payment. We received your Order. You can find the Invoice as PDF in your Account and in your Mail Account.", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Please select payment methed", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+
 
             // User Profile - Home section
             ['keyword' => 'New Violate', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Home'],
@@ -585,6 +632,7 @@ class LanguagesHelpers
             ['keyword' => 'Upload', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Home'],
             ['keyword' => 'Images Gallery', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Home'],
             ['keyword' => 'Videos Gallery', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Home'],
+            ['keyword' => 'Done', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Home'],
 
             // User Profile - Friends & Family section
             ['keyword' => 'My Family', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Friends & Family'],
@@ -621,6 +669,10 @@ class LanguagesHelpers
             ['keyword' => "We're not allowed", 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
             ['keyword' => 'on Platfrorm', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
             ['keyword' => 'Close Voilations', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
+            ['keyword' => 'Educated Info', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
+            ['keyword' => 'Academic Info', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
+            ['keyword' => 'Educated User are the knowledgeable thinkers, distinguished by their intellectual curiosity and dedication to learning even without academic titles. To be educated is not merely about book smarts, but life wisdom, critical reflection, and cultural engagement.', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
+            ['keyword' => 'They are the pioneers of progress, using their expertise to break barriers and shape civilizations. Academics are more than university graduates: they are visionaries, innovators, and trailblazers of an enlightened world.', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Violation'],
 
 
             // News Section
@@ -646,6 +698,7 @@ class LanguagesHelpers
             ['keyword' => 'Create', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
             ['keyword' => 'Report the User', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
             ['keyword' => 'type here...', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
+            ['keyword' => 'Report the Comment', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Feeds'],
             ['keyword' => 'Friends & Family', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Social'],
             ['keyword' => 'Friends', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Social'],
             ['keyword' => 'Family', 'translated' => '', 'main_section' => 'News', 'section_name' => 'Social'],
