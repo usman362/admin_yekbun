@@ -79,10 +79,10 @@ class FeedsController extends Controller
                 ]);
                 $notifyMsg = "You're Feed has been Deleted & You've been Flagged";
             } elseif ($request->action_level === '2') {
-                $user->level = 0;
-                $user->user_type = 'cultivated';
                 $user->old_level = $user->level;
                 $user->old_user_type = $user->user_type;
+                $user->level = 0;
+                $user->user_type = 'cultivated';
                 $user->action_type = 'downgrade';
                 switch ($request->level_2_duration) {
                     case '1':

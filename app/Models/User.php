@@ -114,6 +114,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'action_duration' => 'datetime',
     ];
 
     public function getActivitylogOptions(): LogOptions
