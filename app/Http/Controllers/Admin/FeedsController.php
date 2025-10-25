@@ -51,23 +51,23 @@ class FeedsController extends Controller
         $user = User::find($feed->user_id);
         $user->is_flagged = 0;
         if ($request->action_level !== '0') {
-            // if ($feed->images) {
-            //     foreach ($feed->images as $image) {
-            //         $file_path = public_path('storage/' . $image['path']);
-            //         if (file_exists($file_path)) {
-            //             unlink($file_path);
-            //         }
-            //     }
-            // }
-            // if ($feed->videos) {
-            //     foreach ($feed->videos as $video) {
-            //         $file_path = public_path('storage/' . $video['path']);
-            //         if (file_exists($file_path)) {
-            //             unlink($file_path);
-            //         }
-            //     }
-            // }
-            // $feed->delete();
+            if ($feed->images) {
+                foreach ($feed->images as $image) {
+                    $file_path = public_path('storage/' . $image['path']);
+                    if (file_exists($file_path)) {
+                        unlink($file_path);
+                    }
+                }
+            }
+            if ($feed->videos) {
+                foreach ($feed->videos as $video) {
+                    $file_path = public_path('storage/' . $video['path']);
+                    if (file_exists($file_path)) {
+                        unlink($file_path);
+                    }
+                }
+            }
+            $feed->delete();
             $notifyMsg = '';
             if ($request->action_level === '1') {
                 $user->is_flagged = 1;
@@ -119,7 +119,7 @@ class FeedsController extends Controller
                 $notifyMsg = "You're Feed has been Deleted & You've been Suspended";
             }
 
-            $users = User::where('id', $user->id)->whereIn('info_banner', ['banner', 'alert'])->first();
+            $users = User::where('_id', $user->id)->whereIn('info_banner', ['banner', 'alert'])->first();
             if ($users) {
                 NotificationHelper::sendNotification($users->id, 'Feed Deleted', $notifyMsg);
                 NotificationCenter::create([
