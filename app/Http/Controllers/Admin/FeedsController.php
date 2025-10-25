@@ -84,7 +84,7 @@ class FeedsController extends Controller
                 $user->old_level = $user->level;
                 $user->old_user_type = $user->user_type;
                 $user->action_type = 'downgrade';
-                switch ($request->duration) {
+                switch ($request->level_2_duration) {
                     case '1':
                         $user->action_duration = Carbon::now()->addMonth(); // 1 month
                         break;
@@ -102,7 +102,7 @@ class FeedsController extends Controller
             } elseif ($request->action_level === '3') {
                 $user->status = 0;
                 $user->action_type = 'suspend';
-                switch ($request->duration) {
+                switch ($request->level_3_duration) {
                     case '1':
                         $user->action_duration = Carbon::now()->addMonth(); // 1 month
                         break;

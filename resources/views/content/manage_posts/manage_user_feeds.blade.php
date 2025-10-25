@@ -743,7 +743,7 @@
                                         <strong>Level #2</strong>
                                         <p class="m-0">Delete Clip, Downgrade User</p>
                                         <div class="dropdowns">
-                                            <select name="reason">
+                                            <select name="level_2_reason">
                                                 <option value="">Select Reason</option>
                                                 <option value="Insult">Insult</option>
                                                 <option value="Spam">Spam</option>
@@ -752,7 +752,7 @@
                                                 <option value="Bullying - Harrasment">Bullying - Harrasment</option>
                                                 <option value="Racism">Racism</option>
                                             </select>
-                                            <select name="duration">
+                                            <select name="level_2_duration">
                                                 <option value="">Select Duration</option>
                                                 <option value="15">15 Days</option>
                                                 <option value="1">1 Month</option>
@@ -772,7 +772,7 @@
                                         <strong>Level #3</strong>
                                         <p class="m-0">Delete Clip, Suspend User</p>
                                          <div class="dropdowns">
-                                            <select name="reason">
+                                            <select name="level_3_reason">
                                                 <option value="">Select Reason</option>
                                                 <option value="Insult">Insult</option>
                                                 <option value="Spam">Spam</option>
@@ -781,7 +781,7 @@
                                                 <option value="Bullying - Harrasment">Bullying - Harrasment</option>
                                                 <option value="Racism">Racism</option>
                                             </select>
-                                            <select name="duration">
+                                            <select name="level_3_duration">
                                                 <option value="">Select Duration</option>
                                                 <option value="15">15 Days</option>
                                                 <option value="1">1 Month</option>
