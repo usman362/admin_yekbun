@@ -1,793 +1,548 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VideoCall App UI - Navid Dev</title>
 
-<html lang="en" class="light-style  layout-menu-fixed   " dir="ltr" data-theme="theme-default"
-    data-framework="laravel"
-    data-template="vertical-menu-theme-default-light">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-    <title>Live Meeting</title>
-    <meta name="description"
-        content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-    <!-- laravel CRUD token -->
-    <meta name="csrf-token" content="U0EUTYRFkKWlnq6ZIpkI4nNb8KnTSYeTz2w2RB7X">
-    <!-- Canonical SEO -->
-    <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-html-laravel-admin-template/">
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon/favicon.ico')}}" />
-
-
-
-    <!-- Include Styles -->
-    <!-- BEGIN: Theme CSS-->
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Add Google Font -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{asset('assets/css/live-meeting.css')}}" />
+  </head>
+  <body>
+    <div class="app-container">
+      <button class="mode-switch">
+        <!-- sun icon -->
+        <svg
+          class="sun"
+          fill="none"
+          stroke="#fbb046"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-sun"
+          viewBox="0 0 24 24"
+        >
+          <defs />
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          />
+        </svg>
+        <!-- sun icon -->
 
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/fonts/boxicons.css')}}" />
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/fonts/fontawesome.css')}}" />
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/fonts/flag-icons.css')}}" />
+        <!-- moon icon -->
+        <svg
+          class="moon"
+          fill="none"
+          stroke="#ffffff"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-moon"
+          viewBox="0 0 24 24"
+        >
+          <defs />
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+        </svg>
+        <!-- moon icon -->
+      </button>
+      <div class="left-side">
+        <div class="navigation">
+          <a href="#" class="nav-link icon">
+            <!-- Home icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-home"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <path d="M9 22V12h6v10" />
+            </svg>
+            <!-- Home icon -->
+          </a>
 
-    <!-- Core CSS -->
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/css/rtl/core.css')}}"
-        class="template-customizer-core-css" />
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/css/rtl/theme-default.css')}}"
-        class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}" />
-
-
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/libs/typeahead-js/typeahead.css')}}" />
-
-    <!-- Vendor Styles -->
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/bs-stepper/bs-stepper.css')}}" />
-
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/tagify/tagify.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/dropzone/dropzone.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/friendkit/css/app.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/friendkit/css/core.css')}}" />
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/libs/toastr/toastr.css')}}" />
-    <link rel="stylesheet"
-        href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
-
-    <!-- Page Styles -->
-
-    <style>
-        .custom-option-icon .form-check-input {
-            background-color: transparent !important;
-            border: none !important;
-        }
-
-        #wizard-create-deal-form .form-check-input:checked,
-        #wizard-create-deal-form .form-check-input[type=checkbox] {
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            background-image: none !important;
-        }
-
-        .dropdown.is-right .dropdown-menu {
-            left: 56px;
-            right: auto;
-            padding: 0;
-            top: -22px;
-        }
-
-        .dropdown-item h6,
-        .h6,
-        h5,
-        .h5,
-        h4,
-        .h4,
-        h3,
-        .h3,
-        h2,
-        .h2,
-        h1,
-        .h1 {
-            margin-bottom: 0 !important;
-        }
-
-        .modal-content,
-        .modal-card {
-            overflow-x: hidden !important;
-        }
-
-        .modal-header .btn-close {
-            top: 10px;
-            position: relative;
-            right: 14px;
-        }
-
-        .modal-body .btn-close {
-            top: -20px !important;
-            right: -20px !important;
-        }
-    </style>
-
-    <link rel="stylesheet"
-        href="{{asset('assets/dreamschat/css/bootstrap.min.css')}}">
-
-    <!-- Fontawesome CSS -->
-
-    <link rel="stylesheet"
-        href="{{asset('assets/dreamschat/css/fontawesome.min.css')}}">
-
-    <!-- Feather CSS -->
-    <link rel="stylesheet"
-        href="{{asset('assets/dreamschat/css/feather.css')}}">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet"
-        href="{{asset('assets/dreamschat/css/style.css')}}">
-
-    <!-- Include Scripts for customizer, helper, analytics, config -->
-    <!-- laravel style -->
-    <script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
-    <!-- beautify ignore:start -->
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-  {{-- <script src="{{asset('assets/vendor/js/template-customizer.js')}}"></script> --}}
-
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="{{asset('assets/js/config.js')}}"></script>
-
-</head>
-
-<body>
-
-
-      <!-- Main Wrapper -->
-      <div class="main-wrapper">
-
-          <!-- Join Call -->
-          <div class="page-content">
-              <div class="meeting">
-                  <div class="meeting-wrapper">
-                      <div class="meeting-list">
-
-                          <!-- Horizontal View -->
-                          <div class="join-contents horizontal-view fade-whiteboard">
-                              <div class="join-video user-active">
-                                  <img src="{{asset('assets/dreamschat/images/video-call.jpg')}}"
-                                      class="img-fluid" alt="Logo">
-                                  <div class="video-avatar">
-                                      <div class="text-avatar">
-                                          <div class="text-box">
-                                              S
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="part-name">
-                                      <h4>Shira</h4>
-                                  </div>
-                                  <div class="more-icon">
-                                      <a href="#" class="handraise-on">
-                                          <i class="fas fa-hand-paper"></i>
-                                      </a>
-                                      <a href="#" class="mic-off">
-                                          <i class="fa fa-microphone-slash"></i>
-                                      </a>
-                                  </div>
-                                  <div class="overlay-icon">
-                                      <a href="#">
-                                          <i class="fas fa-thumbtack"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-microphone-slash"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-circle-minus"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="join-video single-user">
-                                  <img src="{{asset('assets/dreamschat/images/user-01.jpg')}}"
-                                      class="img-fluid" alt="Logo">
-                                  <div class="part-name">
-                                      <h4>Saba G</h4>
-                                  </div>
-                                  <div class="more-icon">
-                                      <a href="#">
-                                          <i class="fa fa-microphone-slash"></i>
-                                      </a>
-                                  </div>
-                                  <div class="overlay-icon">
-                                      <a href="#">
-                                          <i class="fas fa-thumbtack"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-microphone-slash"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-circle-minus"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="join-video single-user">
-                                  <div class="d-block">
-                                      <div class="text-avatar">
-                                          <div class="text-box">
-                                              L
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="part-name">
-                                      <h4>Linnea</h4>
-                                  </div>
-                                  <div class="overlay-icon">
-                                      <a href="#">
-                                          <i class="fas fa-thumbtack"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-microphone-slash"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-circle-minus"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                              <div class="join-video single-user">
-                                  <img src="{{asset('assets/dreamschat/images/user-02.jpg')}}"
-                                      class="img-fluid" alt="Logo">
-                                  <div class="part-name">
-                                      <h4>Elsie</h4>
-                                  </div>
-                                  <div class="overlay-icon">
-                                      <a href="#">
-                                          <i class="fas fa-thumbtack"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-microphone-slash"></i>
-                                      </a>
-                                      <a href="#">
-                                          <i class="fa fa-circle-minus"></i>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- /Horizontal View -->
-
-                          <!-- Whiteboard View -->
-                          <div class="join-contents vertical-view show-whiteboard">
-                              <div class="join-video user-active">
-                                  <div class="whiteboard-sec">
-                                      <div id='my-holder'></div>
-                                  </div>
-                              </div>
-                              <div class="vertical-sec">
-                                  <div class="join-video single-user">
-                                      <img src="{{asset('assets/dreamschat/images/user-01.jpg')}}"
-                                          class="img-fluid" alt="Logo">
-                                      <div class="part-name">
-                                          <h4>Saba G</h4>
-                                      </div>
-                                      <div class="more-icon">
-                                          <a href="#">
-                                              <i class="fa fa-microphone-slash"></i>
-                                          </a>
-                                      </div>
-                                      <div class="overlay-icon">
-                                          <a href="#">
-                                              <i class="fas fa-thumbtack"></i>
-                                          </a>
-                                          <a href="#">
-                                              <i class="fa fa-microphone-slash"></i>
-                                          </a>
-                                          <a href="#">
-                                              <i class="fa fa-circle-minus"></i>
-                                          </a>
-                                      </div>
-                                  </div>
-                                  <div class="join-video single-user">
-                                      <div class="d-block">
-                                          <div class="text-avatar">
-                                              <div class="text-box">
-                                                  L
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="part-name">
-                                          <h4>Linnea</h4>
-                                      </div>
-                                      <div class="overlay-icon">
-                                          <a href="#">
-                                              <i class="fas fa-thumbtack"></i>
-                                          </a>
-                                          <a href="#">
-                                              <i class="fa fa-microphone-slash"></i>
-                                          </a>
-                                          <a href="#">
-                                              <i class="fa fa-circle-minus"></i>
-                                          </a>
-                                      </div>
-                                  </div>
-                                  <div class="join-video single-user">
-                                      <img src="{{asset('assets/dreamschat/images/user-02.jpg')}}"
-                                          class="img-fluid" alt="Logo">
-                                      <div class="part-name">
-                                          <h4>Elsie</h4>
-                                      </div>
-                                      <div class="overlay-icon">
-                                          <a href="#">
-                                              <i class="fas fa-thumbtack"></i>
-                                          </a>
-                                          <a href="#">
-                                              <i class="fa fa-microphone-slash"></i>
-                                          </a>
-                                          <a href="#">
-                                              <i class="fa fa-circle-minus"></i>
-                                          </a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- /Whiteboard View -->
-
-                      </div>
-
-                      <!-- Meet Footer -->
-                      <div class="meet-footer">
-                          <div class="meet-icons">
-                              <div class="view-more">
-                                  <ul class="meet-items">
-                                      <li class="meet-item  dropdown dropdown-action">
-                                          <a href="#" class="nav-link dropdown-toggle"
-                                              data-bs-toggle="dropdown" aria-expanded="false">
-                                              <i class="feather-more-vertical"></i>
-                                          </a>
-                                          <ul class="dropdown-menu settings-menu">
-                                              <li><a class="dropdown-item showInviteList"
-                                                      href="#"><i
-                                                          class="feather-user-plus"></i> Invite
-                                                      People</a></li>
-                                              <li><a class="dropdown-item showChatList"
-                                                      href="#"><i
-                                                          class="feather-message-circle"></i>
-                                                      Chat</a></li>
-                                              <li><a class="dropdown-item whiteboard"
-                                                      href="#"><i
-                                                          class="feather-edit-3"></i> Whiteboard</a>
-                                              </li>
-                                              <li><a class="dropdown-item record-icon"
-                                                      href="#"><i
-                                                          class="far fa-dot-circle"></i> Start
-                                                      Recording</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="fa fa-microphone-slash"></i> Mute
-                                                      Everyone</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="fa fa-camera-off"></i> Disable
-                                                      Everyone’s Camera</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="fa fa-youtube"></i> Share a
-                                                      Video</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="fa fa-cog"></i> Settings</a></li>
-                                          </ul>
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div class="met-icons">
-                                  <ul class="meet-items">
-                                      <li class="meet-item  dropdown dropdown-action">
-                                          <a href="#" class="nav-link dropdown-toggle"
-                                              data-bs-toggle="dropdown" aria-expanded="false">
-                                              <i class="fa fa-cog"></i>
-                                          </a>
-                                          <ul class="dropdown-menu settings-menu">
-                                              <li><a class="dropdown-item" href="#"><span
-                                                          class="user-img"><img
-                                                              src="{{asset('assets/dreamschat/images/user.jpg')}}"
-                                                              alt="user"> Carl Kelly</span></a>
-                                              </li>
-                                              <li><a class="dropdown-item showInviteList"
-                                                      href="#"><i
-                                                          class="feather-user-plus"></i> Invite
-                                                      People</a></li>
-                                              <li><a class="dropdown-item  win-maximize"
-                                                      href="#"><i
-                                                          class="feather-maximize"></i> View Full
-                                                      Screen</a></li>
-                                              <li><a class="dropdown-item record-icon"
-                                                      href="#"><i
-                                                          class="far fa-dot-circle"></i> Start
-                                                      Recording</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="fa fa-microphone-slash"></i> Mute
-                                                      Everyone</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="feather-camera-off"></i> Disable
-                                                      Everyone’s Camera</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="feather-youtube"></i> Share a
-                                                      Video</a></li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="feather-settings"></i> Settings</a>
-                                              </li>
-                                              <li><a class="dropdown-item" href="#"><i
-                                                          class="feather-code"></i> Embed
-                                                      meeting</a></li>
-                                          </ul>
-                                      </li>
-                                      <li class="meet-item">
-                                          <a href="#" class="mute-video">
-                                              <i class="fa fa-video"></i>
-                                          </a>
-                                      </li>
-                                      <li class="meet-item">
-                                          <a href="#" class="mute-bt">
-                                              <i class="fas fa-microphone"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div class="action-icons">
-                                  <ul class="action-items">
-                                      <li class="action-item">
-                                          <a href="{{url('app/join-now')}}" class="callend-icon">
-                                              <i class="fa fa-phone"
-                                                  style="transform: rotate(136deg)"></i>
-                                          </a>
-                                      </li>
-                                      <li class="action-item">
-                                          <a href="#" class="share-icon">
-                                              <i class="fas fa-share"></i>
-                                          </a>
-                                      </li>
-                                      <li class="action-item">
-                                          <a href="#" class="record-icon">
-                                              <i class="far fa-dot-circle"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div class="end-call">
-                                  <ul class="meet-items">
-                                      <li class="meet-item">
-                                          <a href="#" class="hand-raise">
-                                              <i class="fas fa-hand-paper"></i>
-                                          </a>
-                                      </li>
-                                      <li class="meet-item">
-                                          <a href="#" class="showInviteList">
-                                              <i class="fa fa-users"></i>
-                                          </a>
-                                      </li>
-                                      <li class="meet-item">
-                                          <a href="#" class="whiteboard">
-                                              <i class="fa fa-edit"></i>
-                                          </a>
-                                      </li>
-                                      <li class="meet-item">
-                                          <a href="#" class="showChatList">
-                                              <i class="fa fa-comment"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- /Meet Footer -->
-                  </div>
-              </div>
-          </div>
-          <!-- /Join Call -->
-
-          <!-- Record -->
-          <div class="show-record">
-              <p><i class="far fa-dot-circle text-danger"></i> Recording
-              <p>
-          </div>
-          <!-- /Record -->
-
-          <!-- Chat Right -->
-          <div class="chat-cont-right user-sidebar-right">
-              <div class="chat-header">
-                  <a href="#" class="close-btn" id="chatClose">
-                      <i class="fa fa-close"></i>
-                  </a>
-              </div>
-              <div class="message-body">
-                  <div class="chat-body">
-                      <div class="chat-scroll">
-                          <ul class="list-unstyled">
-                              <li class="media received">
-                                  <div class="avatar">
-                                      <img src="{{asset('assets/dreamschat/images/user-02.jpg')}}"
-                                          alt="User Image" class="avatar-img">
-                                  </div>
-                                  <div class="media-body">
-                                      <div class="msg-box">
-                                          <ul class="chat-msg-info">
-                                              <li>
-                                                  <div class="chat-time">
-                                                      Linnea <span>8:35 AM</span>
-                                                  </div>
-                                              </li>
-                                          </ul>
-                                          <div>
-                                              <p>Lorem Ipsum is simply dummy text of the printing and
-                                                  typesetting industry</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="media received">
-                                  <div class="avatar">
-                                      <img src="{{asset('assets/dreamschat/images/user-01.jpg')}}"
-                                          alt="User Image" class="avatar-img">
-                                  </div>
-                                  <div class="media-body">
-                                      <div class="msg-box">
-                                          <ul class="chat-msg-info">
-                                              <li>
-                                                  <div class="chat-time">
-                                                      Saba G <span>12:00 PM</span>
-                                                  </div>
-                                              </li>
-                                          </ul>
-                                          <div>
-                                              <p>Lorem Ipsum has been the industry's standard dummy
-                                                  text ever since the 1500s, when an unknown printer
-                                                  took a galley of type and scrambled it to make a
-                                                  type specimen book. </p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="media received">
-                                  <div class="avatar person-view">
-                                      A
-                                  </div>
-                                  <div class="media-body">
-                                      <div class="msg-box">
-                                          <ul class="chat-msg-info">
-                                              <li>
-                                                  <div class="chat-time">
-                                                      Akshay <span>12:00 PM</span>
-                                                  </div>
-                                              </li>
-                                          </ul>
-                                          <div>
-                                              <p>Lorem Ipsum is simply dummy text of the printing and
-                                                  typesetting industry</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                              <li class="media sent">
-                                  <div class="media-body">
-                                      <div class="msg-box">
-                                          <ul class="chat-msg-info">
-                                              <li>
-                                                  <div class="chat-time">
-                                                      You <span>12:00 PM</span>
-                                                  </div>
-                                              </li>
-                                          </ul>
-                                          <div>
-                                              <p>Lorem Ipsum is simply dummy text of the printing and
-                                                  typesetting industry</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="chat-footer">
-                      <div class="input-group">
-                          <input type="text" class="input-msg-send form-control"
-                              placeholder="Type Message...">
-                          <div class="input-group-append">
-                              <button type="button" class="btn msg-send-btn"><i
-                                      class="fab fa-telegram-plane"></i></button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- /Chat Right -->
-
-          <!-- Invite People -->
-          <div class="chat-cont-right invite-sidebar-right">
-              <div class="chat-header">
-                  <div class="heading-text">Invite Someone</div>
-                  <a href="#" class="close-btn" id="InviteClose">
-                      <i class="fa fa-close"></i>
-                  </a>
-              </div>
-              <div class="message-body">
-                  <div class="chat-body">
-                      <div class="chat-scroll">
-                          <ul class="add-list">
-                              <li class="add-listitem user-active">
-                                  <div class="person-info">
-                                      <img src="{{asset('assets/dreamschat/images/video-call.jpg')}}"
-                                          alt="User Image" class="avatar-img">
-                                      <div class="person-name">Shira</div>
-                                  </div>
-                                  <div class="list-body">
-                                      <ul class="action-info">
-                                          <li>
-                                              <a href="#" class="mute-vid">
-                                                  <i class="fa fa-video"></i>
-                                              </a>
-                                          </li>
-                                          <li>
-                                              <a href="#" class="mute-mic voice-act">
-                                                  <i class="fa fa-microphone"></i>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </li>
-                              <li class="add-listitem">
-                                  <div class="person-info">
-                                      <img src="{{asset('assets/dreamschat/images/user-02.jpg')}}"
-                                          alt="User Image" class="avatar-img">
-                                      <div class="person-name">Linnea</div>
-                                  </div>
-                                  <div class="list-body">
-                                      <ul class="action-info">
-                                          <li>
-                                              <a href="#" class="mute-vid">
-                                                  <i class="fa fa-video"></i>
-                                              </a>
-                                          </li>
-                                          <li>
-                                              <a href="#" class="mute-mic">
-                                                  <i class="fa fa-microphone-slash"></i>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </li>
-                              <li class="add-listitem">
-                                  <div class="person-info">
-                                      <img src="{{asset('assets/dreamschat/images/user-01.jpg')}}"
-                                          alt="User Image" class="avatar-img">
-                                      <div class="person-name">Saba G</div>
-                                  </div>
-                                  <div class="list-body">
-                                      <ul class="action-info">
-                                          <li>
-                                              <a href="#" class="mute-vid">
-                                                  <i class="fa fa-video"></i>
-                                              </a>
-                                          </li>
-                                          <li>
-                                              <a href="#" class="mute-mic">
-                                                  <i class="fa fa-microphone-slash"></i>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </li>
-                              <li class="add-listitem">
-                                  <div class="person-info">
-                                      <div class="person-view">A</div>
-                                      <div class="person-name">Akshay</div>
-                                  </div>
-                                  <div class="list-body">
-                                      <ul class="action-info">
-                                          <li>
-                                              <a href="#" class="mute-vid text-primary">
-                                                  <i class="fa fa-video-slash"></i>
-                                              </a>
-                                          </li>
-                                          <li>
-                                              <a href="#" class="mute-mic">
-                                                  <i class="fa fa-microphone-slash"></i>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="chat-footer d-grid">
-                      <button type="button" class="btn heading-text">Invite Someone</button>
-                  </div>
-              </div>
-          </div>
-          <!-- /Invite People -->
-
+          <a href="#" class="nav-link icon">
+            <!-- comment icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-message-square"
+            >
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              />
+            </svg>
+            <!-- comment icon -->
+          </a>
+          <a href="#" class="nav-link icon">
+            <!-- ringing phone icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-phone-call"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15.05 5A5 5 0 0119 8.95M15.05 1A9 9 0 0123 8.94m-1 7.98v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
+              />
+            </svg>
+            <!-- ringing phone icon -->
+          </a>
+          <a href="#" class="nav-link icon">
+            <!-- disk icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-hard-drive"
+            >
+              <line x1="22" y1="12" x2="2" y2="12" />
+              <path
+                d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"
+              />
+              <line x1="6" y1="16" x2="6.01" y2="16" />
+              <line x1="10" y1="16" x2="10.01" y2="16" />
+            </svg>
+            <!-- disk icon -->
+          </a>
+          <a href="#" class="nav-link icon">
+            <!-- people icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-users"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <!-- people icon -->
+          </a>
+          <a href="#" class="nav-link icon">
+            <!-- Folder icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-folder"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"
+              />
+            </svg>
+            <!-- Folder icon -->
+          </a>
+          <a href="#" class="nav-link icon">
+            <!-- Setting icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-settings"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+              />
+            </svg>
+            <!-- Setting icon -->
+          </a>
+        </div>
       </div>
-      <!-- /Main Wrapper -->
+      <div class="app-main">
+        <div class="video-call-wrapper">
+          <!-- Video Participant 1 -->
+          <div class="video-participant">
+            <div class="participant-action">
+              <button class="btn-mute"></button>
+              <button class="btn-camera"></button>
+            </div>
+            <a href="#" class="name-tag">Andy Will</a>
+            <img
+              src="https://images.unsplash.com/photo-1566821582776-92b13ab46bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+              alt="participant"
+            />
+          </div>
+          <!-- Video Participant 2 -->
+          <div class="video-participant">
+            <div class="participant-action">
+              <button class="btn-mute"></button>
+              <button class="btn-camera"></button>
+            </div>
+            <a href="#" class="name-tag">Emmy Lou</a>
+            <img
+              src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+              alt="participant"
+            />
+          </div>
+          <!-- Video Participant 3 -->
+          <div class="video-participant">
+            <div class="participant-action">
+              <button class="btn-mute"></button>
+              <button class="btn-camera"></button>
+            </div>
+            <a href="#" class="name-tag">Tim Russel</a>
+            <img
+              src="https://images.unsplash.com/photo-1576110397661-64a019d88a98?ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80"
+              alt="participant"
+            />
+          </div>
+          <!-- Video Participant 4 -->
+          <div class="video-participant">
+            <div class="participant-action">
+              <button class="btn-mute"></button>
+              <button class="btn-camera"></button>
+            </div>
+            <a href="#" class="name-tag">Jessica Bell</a>
+            <img
+              src="https://images.unsplash.com/photo-1600207438283-a5de6d9df13e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80"
+              alt="participant"
+            />
+          </div>
+          <!-- Video Participant 5 -->
+          <div class="video-participant">
+            <div class="participant-action">
+              <button class="btn-mute"></button>
+              <button class="btn-camera"></button>
+            </div>
+            <a href="#" class="name-tag">Ryan Patrick</a>
+            <img
+              src="https://images.unsplash.com/photo-1581824283135-0666cf353f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1276&q=80"
+              alt="participant"
+            />
+          </div>
+          <!-- Video Participant 6 -->
+          <div class="video-participant">
+            <div class="participant-action">
+              <button class="btn-mute"></button>
+              <button class="btn-camera"></button>
+            </div>
+            <a href="#" class="name-tag">Tina Cate</a>
+            <img
+              src="https://images.unsplash.com/photo-1542596594-649edbc13630?ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80"
+              alt="participant"
+            />
+          </div>
+        </div>
 
+        <div class="video-call-actions">
+          <button class="video-action-button mic"></button>
+          <button class="video-action-button camera"></button>
+          <button class="video-action-button maximize"></button>
+          <button class="video-action-button endcall">Leave</button>
+          <button class="video-action-button magnifier">
+            <!-- ZoomIn icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-zoom-in"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35M11 8v6M8 11h6" />
+            </svg>
 
+            <!-- ZoomIn icon -->
+            <span>100%</span>
+            <!-- ZoomOut Icon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-zoom-out"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              <line x1="8" y1="11" x2="14" y2="11" />
+            </svg>
+            <!-- ZoomOut Icon -->
+          </button>
+        </div>
+      </div>
 
-    <!-- Include Scripts -->
-    <!-- BEGIN: Vendor JS-->
-    <script src="{{asset('assets/vendor/libs/jquery/jquery.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/popper/popper.js')}}"></script>
-    <script src="{{asset('assets/vendor/js/bootstrap.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/hammer/hammer.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/i18n/i18n.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
-    <script src="{{asset('assets/vendor/js/menu.js')}}"></script>
-    <script src="{{asset('assets/js/main.js')}}"></script>
-    <script src="{{asset('assets/js/wizard-ex-property-listing.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/bs-stepper/bs-stepper.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/tagify/tagify.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
-    <!-- Concatenated js plugins and jQuery -->
-    <script src="{{asset('assets/friendkit/js/app.js')}}"></script>
+      <!-- Right Side -->
+      <div class="right-side">
+        <button class="btn-close-right">
+          <!-- Close Icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="feather feather-x-circle"
+            viewBox="0 0 24 24"
+          >
+            <defs></defs>
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M15 9l-6 6M9 9l6 6"></path>
+          </svg>
+          <!-- Close Icon -->
+        </button>
+        <div class="chat-container">
+          <div class="chat-header">
+            <button class="chat-header-button">Live Chat</button>
+          </div>
+          <div class="chat-area">
+            <!-- Message 1 -->
+            <div class="message-wrapper">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1581824283135-0666cf353f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1276&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Ryan Patrick</p>
+                <div class="message">Helloo team!😍</div>
+              </div>
+            </div>
+            <!-- Message 2 -->
+            <div class="message-wrapper">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1566821582776-92b13ab46bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Andy Will</p>
+                <div class="message">
+                  Hello! Can you hear me?🤯 <a class="mention">@ryanpatrick</a>
+                </div>
+              </div>
+            </div>
+            <!-- Message 3 -->
+            <div class="message-wrapper">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1600207438283-a5de6d9df13e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Jessica Bell</p>
+                <div class="message">Hi team! Let's get started it.</div>
+              </div>
+            </div>
+            <!-- Message 4 -->
+            <div class="message-wrapper reverse">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Emmy Lou</p>
+                <div class="message">Good morning!🌈</div>
+              </div>
+            </div>
+            <!-- Message 5 -->
+            <div class="message-wrapper">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1576110397661-64a019d88a98?ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Tim Russel</p>
+                <div class="message">New design document⬇️</div>
+                <div class="message-file">
+                  <div class="icon sketch">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="#ffd54f"
+                        d="M96 191.02v-144l160-30.04 160 30.04v144z"
+                      />
+                      <path
+                        fill="#ffecb3"
+                        d="M96 191.02L256 16.98l160 174.04z"
+                      />
+                      <path fill="#ffa000" d="M0 191.02l256 304 256-304z" />
+                      <path fill="#ffca28" d="M96 191.02l160 304 160-304z" />
+                      <g fill="#ffc107">
+                        <path d="M0 191.02l96-144v144zM416 47.02v144h96z" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="file-info">
+                    <div class="file-name">NewYear.sketch</div>
+                    <div class="file-size">120 MB</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Message 6 -->
+            <div class="message-wrapper">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1581824283135-0666cf353f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1276&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Ryan Patrick</p>
+                <div class="message">Hi team!❤️</div>
+                <div class="message">
+                  I downloaded the file <a class="mention">@timrussel</a>
+                </div>
+              </div>
+            </div>
 
-    <!-- Core js -->
-    <script src="{{asset('assets/friendkit/js/global.js')}}"></script>
-
-    <!-- Navigation options js -->
-    <script src="{{asset('assets/friendkit/js/navbar-v1.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/navbar-v2.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/navbar-mobile.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/navbar-options.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/sidebar-v1.js')}}"></script>
-
-    <!-- Core instance js -->
-    <script src="{{asset('assets/friendkit/js/main.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/chat.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/touch.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/tour.js')}}"></script>
-
-    <!-- Components js -->
-    <script src="{{asset('assets/friendkit/js/explorer.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/widgets.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/modal-uploader.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/popovers-users.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/popovers-pages.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/lightbox.js')}}"></script>
-
-    <!-- Landing page js -->
-
-    <!-- Signup page js -->
-
-    <!-- Feed pages js -->
-    <script src="{{asset('assets/friendkit/js/feed.js')}}"></script>
-
-    <script src="{{asset('assets/friendkit/js/webcam.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/compose.js')}}"></script>
-    <script src="{{asset('assets/friendkit/js/autocompletes.js')}}"></script>
-    <script src="{{asset('assets/vendor/libs/toastr/toastr.js')}}"></script>
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Theme JS-->
-    <script src="{{asset('assets/js/main.js')}}"></script>
-
-		<!-- Bootstrap Core JS -->
-		<script src="{{asset('assets/dreamschat/js/bootstrap.bundle.min.js')}}"></script>
-
-		<!-- Painterro JS -->
-		<script src="{{asset('assets/dreamschat/js/painterro.min.js')}}"></script>
-
-		<!-- Custom JS -->
-		<script src="{{asset('assets/dreamschat/js/script.js')}}"></script>
-
-
-
-</body>
-
+            <!-- Message 7 -->
+            <div class="message-wrapper reverse">
+              <div class="profile-picture">
+                <img
+                  src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="message-content">
+                <p class="name">Emmy Lou</p>
+                <div class="message">Woooww! Awesome❤️</div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-typing-area-wrapper">
+            <div class="chat-typing-area">
+              <input
+                type="text"
+                placeholder="Type your message..."
+                class="chat-input"
+              />
+              <button class="send-button">
+                <!-- Send icon -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-send"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+                <!-- Send icon -->
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="participants">
+          <!-- Participant pic 1 -->
+          <div class="participant profile-picture">
+            <img
+              src="https://images.unsplash.com/photo-1576110397661-64a019d88a98?ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80"
+              alt=""
+            />
+          </div>
+          <!-- Participant pic 2 -->
+          <div class="participant profile-picture">
+            <img
+              src="https://images.unsplash.com/photo-1566821582776-92b13ab46bb4?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
+              alt=""
+            />
+          </div>
+          <!-- Participant pic 3 -->
+          <div class="participant profile-picture">
+            <img
+              src="https://images.unsplash.com/photo-1600207438283-a5de6d9df13e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80"
+              alt=""
+            />
+          </div>
+          <!-- Participant pic 4 -->
+          <div class="participant profile-picture">
+            <img
+              src="https://images.unsplash.com/photo-1581824283135-0666cf353f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1276&q=80"
+              alt=""
+            />
+          </div>
+          <div class="participant-more">2+</div>
+        </div>
+      </div>
+      <button class="expand-btn">
+        <!-- expand icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-message-circle"
+        >
+          <path
+            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+          />
+        </svg>
+        <!-- expand icon -->
+      </button>
+    </div>
+    <script src="{{asset('assets/js/live-meeting.js')}}"></script>
+  </body>
 </html>
