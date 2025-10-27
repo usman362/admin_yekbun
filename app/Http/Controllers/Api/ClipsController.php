@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helpers;
+use App\Helpers\NotificationHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Clips;
 use App\Models\ClipsViews;
 use App\Models\ClipsLikes;
 use App\Models\ClipTemplates;
+use App\Models\NotificationCenter;
+use App\Models\User;
 use App\Models\UserVideo;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
@@ -120,6 +123,21 @@ class ClipsController extends Controller
             'user_id' => Auth::id(),
             'video' => Str::after($outputPath, 'public/')
         ]);
+        $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Clip.';
+        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+        if ($users) {
+            foreach ($users as $user) {
+                NotificationHelper::sendNotification($user->id, 'Clips Notification', $description);
+                NotificationCenter::create([
+                    'title' => 'Clips Notification',
+                    'description' => $description,
+                    'user_id' => $user->id,
+                    'user_image' => $user->image ?? null,
+                    'type' => 'clips',
+                    'is_read' => 0,
+                ]);
+            }
+        }
         return ResponseHelper::sendResponse($clip, 'Clip has been Created Successfully!');
     }
 

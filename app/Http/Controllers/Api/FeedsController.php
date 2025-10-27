@@ -317,37 +317,37 @@ class FeedsController extends Controller
             $notification = Notifications::first();
             $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Feed.';
             // if ($notification->new_donation == 'true') {
-            if ($request->user_type === 'friends' || $request->user_type === 'family') {
-                $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
-                if ($users) {
-                    foreach ($users as $user) {
-                        NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', $description);
-                        NotificationCenter::create([
-                            'title' => 'Feeds Notification',
-                            'description' => $description,
-                            'user_id' => $user->id,
-                            'user_image' => $user->image ?? null,
-                            'type' => 'user_feeds',
-                            'is_read' => 0,
-                        ]);
-                    }
-                }
-            } else {
-                $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
-                if ($users) {
-                    foreach ($users as $user) {
-                        NotificationHelper::sendNotification($user->id, 'Feeds Notification', $description);
-                        NotificationCenter::create([
-                            'title' => 'Feeds Notification',
-                            'description' => $description,
-                            'user_id' => $user->id,
-                            'user_image' => $user->image ?? null,
-                            'type' => 'user_feeds',
-                            'is_read' => 0,
-                        ]);
-                    }
+            // if ($request->user_type === 'friends' || $request->user_type === 'family') {
+            $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
+            if ($users) {
+                foreach ($users as $user) {
+                    NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', $description);
+                    NotificationCenter::create([
+                        'title' => 'Feeds Notification',
+                        'description' => $description,
+                        'user_id' => $user->id,
+                        'user_image' => $user->image ?? null,
+                        'type' => 'user_feeds',
+                        'is_read' => 0,
+                    ]);
                 }
             }
+            // } else {
+            //     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+            //     if ($users) {
+            //         foreach ($users as $user) {
+            //             NotificationHelper::sendNotification($user->id, 'Feeds Notification', $description);
+            //             NotificationCenter::create([
+            //                 'title' => 'Feeds Notification',
+            //                 'description' => $description,
+            //                 'user_id' => $user->id,
+            //                 'user_image' => $user->image ?? null,
+            //                 'type' => 'user_feeds',
+            //                 'is_read' => 0,
+            //             ]);
+            //         }
+            //     }
+            // }
             // }
             return response()->json(['message' => 'Feed has been created Successfully', 'feed' => $feed, 'success' => true], 201);
         } else {
