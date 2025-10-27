@@ -64,9 +64,9 @@ class VotingController extends Controller
                 // Case 1: has reactions, but not by this user
                 $q->whereHas('reactions', function ($r) use ($userId) {
                     $r->where('user_id', '!=', $userId);
-                })
+                });
                     // Case 2: no reactions at all
-                    ->orWhereDoesntHave('reactions');
+                    // ->orWhereDoesntHave('reactions');
             })
             ->with('reactions')->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
