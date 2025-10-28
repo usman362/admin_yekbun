@@ -655,7 +655,7 @@ class UsersController extends Controller
         return ResponseHelper::sendResponse($banner, 'User Banners Fetched!');
     }
 
-    public function reportfeedstore(Request $request, $id)
+    public function reportstore(Request $request, $id)
     {
         $request->validate([
             'report_type' => 'required|string|max:255',
