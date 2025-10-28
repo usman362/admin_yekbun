@@ -198,6 +198,8 @@ Route::middleware('jwt.custom')->group(function () {
     Route::post('my-service', [UsersController::class, 'storeMyService']);
     Route::post('my-network', [UsersController::class, 'storeMyNetwork']);
     Route::post('my-notification', [UsersController::class, 'storeMyNotification']);
+    Route::post('user/{id}/report', [UsersController::class, 'reportstore']);
+    Route::get('user-report', [UsersController::class, 'getReport']);
 
     Route::get('/user-suggestions', [UserSuggestionController::class, 'index']);
 

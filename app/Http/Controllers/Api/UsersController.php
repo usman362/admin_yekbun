@@ -8,6 +8,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\NotificationCenter;
 use App\Models\ProfileBanner;
+use App\Models\ReportUsers;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserFriends;
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Google\Client as GoogleClient;
 
 class UsersController extends Controller
@@ -651,5 +653,67 @@ class UsersController extends Controller
     {
         $banner = ProfileBanner::get();
         return ResponseHelper::sendResponse($banner, 'User Banners Fetched!');
+    }
+
+    public function reportfeedstore(Request $request, $id)
+    {
+        $request->validate([
+            'report_type' => 'required|string|max:255',
+        ]);
+
+        $userId = Auth::id();
+
+        $exists = ReportUsers::where('user_id', $id)
+            ->where('report_by', $userId)
+            ->first();
+
+        if ($exists) {
+            if ($exists->status == 1) {
+                return ResponseHelper::sendResponse([], 'You have already reported this User.', false, 400);
+            }
+            $exists->delete();
+        }
+
+        $report = ReportUsers::create([
+            'user_id' => $id,
+            'report_type' => Str::slug($request->report_type),
+            'report_by' => $userId,
+            'status' => 1
+
+        ]);
+
+        // Notify the feed owner
+        $owner = User::where('_id', $id)
+            ->whereIn('info_banner', ['banner', 'alert'])
+            ->first();
+
+        if ($owner) {
+            NotificationHelper::sendNotification(
+                $owner->_id,
+                'Feed Reported',
+                "You have been reported"
+            );
+
+            NotificationCenter::create([
+                'title' => 'User Reported',
+                'description' => "You have been reported",
+                'user_id' => $owner->_id,
+                'user_image' => $owner->image ?? null,
+                'type' => 'user_reports',
+                'is_read' => 0,
+            ]);
+        }
+
+        return ResponseHelper::sendResponse($report, 'User reported successfully');
+    }
+
+    public function getReport()
+    {
+        $reports = ReportUsers::select([
+            'user_id',
+            'report_type',
+            'status'
+        ])->where('user_id', Auth::id())->get();
+        return ResponseHelper::sendResponse($reports, 'Reports fetch successfully');
     }
 }

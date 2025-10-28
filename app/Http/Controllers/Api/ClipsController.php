@@ -24,13 +24,21 @@ use Illuminate\Support\Str;
 
 class ClipsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
-            $likes->with('user');
-        }, 'views' => function ($views) {
-            $views->with('user');
-        }])->orderBy('created_at', 'desc')->get();
+        if (!empty($request->clip_id)) {
+            $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
+                $likes->with('user');
+            }, 'views' => function ($views) {
+                $views->with('user');
+            }])->orderBy('created_at', 'desc')->find($request->clip_id);
+        } else {
+            $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
+                $likes->with('user');
+            }, 'views' => function ($views) {
+                $views->with('user');
+            }])->orderBy('created_at', 'desc')->get();
+        }
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
