@@ -14,6 +14,7 @@ use App\Models\Cart;
 use App\Models\GooglePay;
 use App\Models\Paypal;
 use App\Models\Transaction;
+use App\Models\UserPlaylistGroup;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -234,5 +235,21 @@ class PaymentController extends Controller
         $cart->user_id = Auth::id();
         $cart->save();
         return ResponseHelper::sendResponse($cart, 'Cart has been added successfully!');
+    }
+
+    public function cartPayment(Request $request)
+    {
+        $carts = Cart::where('user_id', Auth::id())->get();
+        if ($carts) {
+            foreach ($carts as $cart) {
+                $playlist = UserPlaylistGroup::find($cart->data_id);
+                $playlist->type = 'free';
+                $playlist->save();
+                $cart->delete();
+            }
+            return ResponseHelper::sendResponse($cart, 'Cart Payment has been paid successfully!');
+        } else {
+            return ResponseHelper::sendResponse([], 'Cart is Empty!', false, 404);
+        }
     }
 }
