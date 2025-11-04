@@ -5,6 +5,11 @@
 @section('page-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
     <style>
+        #snow-editor .ql-editor {
+            min-height: 200px;
+            line-height: 0.5 !important;
+        }
+
         .card>.profile-cover,
         .card>.profile-cover .profile-cover-img,
         .card>.profile-cover .profile-cover-img-wrapper {
@@ -284,7 +289,8 @@
                                     <div class="d-flex justify-content-end gap-3 mt-4">
                                         <!-- Only one button (initially "Edit") -->
                                         <button type="button" id="toggle-btn" class="btn btn-secondary">Edit</button>
-                                        <button type="submit" id="btn-app-info" class="btn btn-primary" style="display: none;">Save</button>
+                                        <button type="submit" id="btn-app-info" class="btn btn-primary"
+                                            style="display: none;">Save</button>
 
 
 
@@ -322,26 +328,26 @@
             readURL(this);
         });
     </script>
- <script>
-    $(document).ready(function () {
-        // Initially, make fields read-only
-        $('input, textarea').prop('disabled', true);
+    <script>
+        $(document).ready(function() {
+            // Initially, make fields read-only
+            $('input, textarea').prop('disabled', true);
 
-        // Only Edit button visible
-        $('#btn-app-info').hide();
+            // Only Edit button visible
+            $('#btn-app-info').hide();
 
-        $('#toggle-btn').click(function () {
-            // Enable all form fields
-            $('input, textarea').prop('disabled', false);
+            $('#toggle-btn').click(function() {
+                // Enable all form fields
+                $('input, textarea').prop('disabled', false);
 
-            // Hide Edit button
-            $(this).hide();
+                // Hide Edit button
+                $(this).hide();
 
-            // Show Save (submit) button
-            $('#btn-app-info').show();
+                // Show Save (submit) button
+                $('#btn-app-info').show();
+            });
         });
-    });
-</script>
+    </script>
 
 
 @endsection
