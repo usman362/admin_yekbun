@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
     '2fa' => \App\Http\Middleware\Check2FA::class,
     'jwt.custom' => \App\Http\Middleware\JwtMiddleware::class,
     'validate.device' => \App\Http\Middleware\ValidateDevice::class,
+    'verify.mobile' => \App\Http\Middleware\VerifyMobileRequest::class,
   ];
 }
