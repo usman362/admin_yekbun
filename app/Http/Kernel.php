@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
 
     'api' => [
       // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-      'throttle:api',
+      'throttle:60,1',
       \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ],
   ];
@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
     'permission' => \App\Http\Middleware\CustomPermissionMiddleware::class,
     '2fa' => \App\Http\Middleware\Check2FA::class,
     'jwt.custom' => \App\Http\Middleware\JwtMiddleware::class,
+    'validate.device' => \App\Http\Middleware\ValidateDevice::class,
   ];
 }

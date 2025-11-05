@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\StandardUserController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\MusicCategoryController;;
+
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Http\Controllers\Admin\UploadMovieCategoryController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -72,6 +73,7 @@ use App\Http\Controllers\Admin\EmojiFeedController;
 use App\Http\Controllers\Admin\FeedsController;
 use App\Http\Controllers\Admin\liveStream\livestreamController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\Admin\VideoController;
@@ -1061,7 +1063,11 @@ Route::post('/list-sympathy-cards-store', [WishesReasonController::class, 'sympa
 Route::delete('/list-sympathy-card/{card}', [WishesReasonController::class, 'destroysympathy'])->name('list.sympathy-cards.delete');
 Route::get('/settings/team/roles/{id}/edit', [RoleController::class, 'edit2'])->name('settings.team.roles.edit');
 
-Route::get('test-translator/{code}/{keyword}', function ($code,$keyword) {
+Route::get('/security-events', [SecurityController::class, 'events']);
+Route::get('/suspicious-devices', [SecurityController::class, 'suspiciousDevices']);
+Route::post('/block-device', [SecurityController::class, 'blockDevice']);
+
+Route::get('test-translator/{code}/{keyword}', function ($code, $keyword) {
     $tr = new GoogleTranslate();
     $tr->setTarget($code);
     $translated = $tr->translate($keyword);
