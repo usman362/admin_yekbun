@@ -43,7 +43,8 @@ class FeedsController extends Controller
 
         $userId = Auth::id();
         $user = User::with(['friends', 'family'])->find($userId);
-
+        $user->access_from = $request->userAgent();
+        $user->save();
         // Collect friend and family IDs
         $friendIds = $user->friends->pluck('user_id')->toArray();
         $familyIds = $user->family->pluck('user_id')->toArray();
@@ -118,7 +119,6 @@ class FeedsController extends Controller
                 'totalPages' => $feeds->lastPage(),
             ]
         ];
-
         return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
     }
 
