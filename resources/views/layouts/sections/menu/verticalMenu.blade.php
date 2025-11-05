@@ -1650,6 +1650,24 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock"></i>
+                <div>Security Section</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item ">
+                    <a href="{{route('security-events')}}" class="menu-link">
+                        <div>Security Events</div>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a href="{{route('suspicious.devices')}}" class="menu-link">
+                        <div>Suspicious Devices</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li
             class="menu-item {{ Request::is('settings/team/members') ? 'active open' : '' }}{{ Request::is('settings/team/roles') ? 'active open' : '' }}{{ Request::is('app/task/list') ? 'active open' : '' }}{{ Request::is('settings/team/members') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">

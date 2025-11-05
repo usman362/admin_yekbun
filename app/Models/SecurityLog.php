@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class SecurityLog extends Model
 {
     use HasFactory;
 
     protected $collection = 'security_logs';
+
+    protected $casts = [
+        'timestamp' => 'datetime',
+    ];
 
     protected $fillable = [
         'user_id',
@@ -20,4 +24,9 @@ class SecurityLog extends Model
         'details',
         'timestamp',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

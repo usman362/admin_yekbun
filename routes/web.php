@@ -1063,9 +1063,16 @@ Route::post('/list-sympathy-cards-store', [WishesReasonController::class, 'sympa
 Route::delete('/list-sympathy-card/{card}', [WishesReasonController::class, 'destroysympathy'])->name('list.sympathy-cards.delete');
 Route::get('/settings/team/roles/{id}/edit', [RoleController::class, 'edit2'])->name('settings.team.roles.edit');
 
-Route::get('/security-events', [SecurityController::class, 'events']);
-Route::get('/suspicious-devices', [SecurityController::class, 'suspiciousDevices']);
-Route::post('/block-device', [SecurityController::class, 'blockDevice']);
+Route::get('/security-events', [SecurityController::class, 'events'])->name('security-events');
+Route::post('/block-device', [SecurityController::class, 'blockDevice'])->name('block-device');
+Route::controller(SecurityController::class)->group(function () {
+    Route::get('/suspicious-devices', 'suspiciousDevices')->name('suspicious.devices');
+    Route::post('/suspicious-devices/store', 'storeDevice')->name('devices.store');
+    Route::post('/suspicious-devices/update/{id}', 'updateDevice')->name('devices.update');
+    Route::post('/suspicious-devices/block/{id}', 'blockDevice')->name('devices.block');
+    Route::delete('/suspicious-devices/delete/{id}', 'deleteDevice')->name('devices.delete');
+});
+
 
 Route::get('test-translator/{code}/{keyword}', function ($code, $keyword) {
     $tr = new GoogleTranslate();
