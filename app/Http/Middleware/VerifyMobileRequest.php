@@ -23,7 +23,7 @@ class VerifyMobileRequest
             str_contains($userAgent, 'safari') ||
             str_contains($userAgent, 'edge')
         ) {
-            return ResponseHelper::sendResponse([], 'Access allowed only from mobile apps.', false, 403);
+            abort(403);
         }
 
         // Allow only known mobile UA keywords
@@ -38,7 +38,7 @@ class VerifyMobileRequest
         }
 
         if (!$isMobile) {
-            return ResponseHelper::sendResponse([], 'Mobile access only', false, 403);
+            abort(403);
         }
 
         return $next($request);
