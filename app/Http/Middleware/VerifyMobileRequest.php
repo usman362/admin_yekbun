@@ -27,7 +27,7 @@ class VerifyMobileRequest
         }
 
         // Allow only known mobile UA keywords
-        $allowedAgents = ['okhttp', 'android', 'cfnetwork', 'iphone', 'ios', 'mobile'];
+        $allowedAgents = ['okhttp', 'android', 'cfnetwork', 'iphone', 'ios', 'flutter', 'reactnative', 'mobile'];
 
         $isMobile = false;
         foreach ($allowedAgents as $keyword) {
