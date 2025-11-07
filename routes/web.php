@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\UploadMovieController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\StandardUserController;
+use App\Http\Controllers\Admin\AllUserController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\MusicCategoryController;;
 
@@ -54,6 +55,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\Settings\TeamMemberController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\ManageAdController;
 use App\Http\Controllers\Admin\TicketServiceController;
@@ -316,6 +318,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
             Route::resource('educated', StandardUserController::class);
             Route::resource('cultivated', PremiumUserController::class);
             Route::resource('academic', DiamondUserController::class);
+            Route::resource('all',AllUserController::class);
         });
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
@@ -1073,6 +1076,9 @@ Route::controller(SecurityController::class)->group(function () {
     Route::delete('/suspicious-devices/delete/{id}', 'deleteDevice')->name('devices.delete');
 });
 
+Route::get('/backups/list', [BackupController::class, 'listBackups'])->name('backup.list');
+Route::post('/create-backup', [BackupController::class, 'createBackup'])->name('backup.create');
+Route::get('/download-backup/{filename}', [BackupController::class, 'downloadBackup'])->name('backup.download');
 
 Route::get('test-translator/{code}/{keyword}', function ($code, $keyword) {
     $tr = new GoogleTranslate();
