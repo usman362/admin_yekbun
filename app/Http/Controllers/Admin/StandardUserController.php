@@ -28,12 +28,12 @@ class StandardUserController extends Controller
             $users = User::where("level", 1)->where('is_verfied', 1)->where('is_admin_user', 0)->where('status', 0)->orderBy("updated_at", "DESC")->get();
         else
             $users = User::where("level", 1)->where('is_verfied', 1)->where('is_admin_user', 0)->where('gender', $view)->orderBy("updated_at", "DESC")->get();
-
+        $users = User::all();
         $totalUsers = User::where("level", 1)->where('is_verfied', 1)->where('is_admin_user', 0)->count();
         $closedUsers = User::where("level", 1)->where('is_verfied', 1)->where('status', 0)->where('is_admin_user', 0)->count();
         $maleUsers = User::where("level", 1)->where('is_verfied', 1)->where('gender', 'male')->where('is_admin_user', 0)->count();
         $femaleUsers = User::where("level", 1)->where('is_verfied', 1)->where('gender', 'female')->where('is_admin_user', 0)->count();
-        return view("content.users.standard.index", compact("users", "view","totalUsers","closedUsers","maleUsers","femaleUsers"));
+        return view("content.users.standard.index", compact("users", "view", "totalUsers", "closedUsers", "maleUsers", "femaleUsers"));
     }
 
     /**
