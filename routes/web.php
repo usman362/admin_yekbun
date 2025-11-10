@@ -186,8 +186,9 @@ Route::get('/test-job', function () {
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
 
-Route::get('api-list', [ApiStatusController::class, 'index'])->name('api.list');;
-Route::get('api-status', [ApiStatusController::class, 'checkApi'])->name('api.check');;
+Route::get('api-list', [ApiStatusController::class, 'index'])->name('api.list');
+Route::get('tv-api-list', [ApiStatusController::class, 'indexOnlyZarok'])->name('tv.api.list');
+Route::get('api-status', [ApiStatusController::class, 'checkApi'])->name('api.check');
 
 
 Route::group(['middleware' => 'permission:avatars.read'], function () {

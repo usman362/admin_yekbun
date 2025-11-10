@@ -1233,7 +1233,7 @@
         </li>
 
         <li
-            class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series') ? 'active open' : '' }}">
+            class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series','tv-api-list') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-tv"></i>
                 <div>Zarok TV</div>
@@ -1257,6 +1257,11 @@
                 <li class="menu-item {{ Request::is('zarok-series') ? 'active' : '' }}">
                     <a href="{{ route('zarok.series') }}" class="menu-link">
                         <div>Add Series</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('tv-api-list') ? 'active' : '' }}">
+                    <a href="{{ route('tv.api.list') }}" class="menu-link">
+                        <div>API List</div>
                     </a>
                 </li>
             </ul>

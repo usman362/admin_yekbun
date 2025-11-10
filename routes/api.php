@@ -93,13 +93,9 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::post('/zarokStoriesPost', [TVController::class, 'zarokStoriesPost']);
 
 
-
-
-
-
-    Route::get('/ping', function () {
-        return response()->json(['status' => 'ok']);
-    });
+    // Route::get('/ping', function () {
+    //     return response()->json(['status' => 'ok']);
+    // });
     // Authentication
     Route::post('/signup', [AuthController::class, 'signup']);
     Route::post('/login', [AuthController::class, 'login']);
