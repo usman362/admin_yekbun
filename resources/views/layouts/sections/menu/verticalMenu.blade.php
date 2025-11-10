@@ -37,7 +37,7 @@
 
 
 
-        @canany(['music.published','music.unpublished'])
+        @canany(['music.published', 'music.unpublished'])
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Content Adds</span>
             </li>
@@ -74,7 +74,7 @@
             </li>
         @endcan
 
-        @canany(['surveys.published','surveys.unpublished'])
+        @canany(['surveys.published', 'surveys.unpublished'])
             <li class="menu-item {{ Request::is('surveys') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-sort"></i>
@@ -90,7 +90,7 @@
             </li>
         @endcan
 
-        @canany(['history.published','history.unpublished'])
+        @canany(['history.published', 'history.unpublished'])
             <li
                 class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -130,7 +130,7 @@
                 </ul>
             </li>
         @endcan
-        @canany(['aivideos.published','aivideos.unpublished'])
+        @canany(['aivideos.published', 'aivideos.unpublished'])
             <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
@@ -1617,14 +1617,20 @@
             </a>
         </li>
     @endcan
-    @canany(['languages.published','languages.unpublished'])
+    @canany(['languages.published', 'languages.unpublished'])
         <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
             <a href="{{ url('/language') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-transfer"></i>
+                <i class="menu-icon tf-icons bx bx-world"></i>
                 <div>Languages</div>
             </a>
         </li>
     @endcan
+    <li class="menu-item {{ Request::is('api-list') ? 'active' : '' }}">
+        <a href="{{ url('/api-list') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-refresh"></i>
+            <div>API Status</div>
+        </a>
+    </li>
     @can('admins.read')
         <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">
             <a href="{{ url('/app/ftp/list') }}" class="menu-link">
@@ -1657,12 +1663,12 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item ">
-                    <a href="{{route('security-events')}}" class="menu-link">
+                    <a href="{{ route('security-events') }}" class="menu-link">
                         <div>Security Events</div>
                     </a>
                 </li>
                 <li class="menu-item ">
-                    <a href="{{route('suspicious.devices')}}" class="menu-link">
+                    <a href="{{ route('suspicious.devices') }}" class="menu-link">
                         <div>Suspicious Devices</div>
                     </a>
                 </li>
