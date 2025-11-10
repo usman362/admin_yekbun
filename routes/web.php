@@ -79,6 +79,7 @@ use App\Http\Controllers\Admin\SecurityController;
 use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\ApiStatusController;
 use App\Http\Controllers\apps\income\Income;
 use App\Http\Controllers\apps\transaction\Transaction;
 use App\Http\Controllers\BackgroundFeedController;
@@ -185,7 +186,8 @@ Route::get('/test-job', function () {
 //Route::get('/avatars/', [AvatarsController::class, 'index']);
 //Route::get('/avatars/{id}', [AvatarsController::class, 'edit']);
 
-
+Route::get('api-list', [ApiStatusController::class, 'index'])->name('api.list');;
+Route::get('api-status', [ApiStatusController::class, 'checkApi'])->name('api.check');;
 
 
 Route::group(['middleware' => 'permission:avatars.read'], function () {
@@ -318,7 +320,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
             Route::resource('educated', StandardUserController::class);
             Route::resource('cultivated', PremiumUserController::class);
             Route::resource('academic', DiamondUserController::class);
-            Route::resource('all',AllUserController::class);
+            Route::resource('all', AllUserController::class);
         });
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
