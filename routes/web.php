@@ -1084,6 +1084,7 @@ Route::controller(SecurityController::class)->group(function () {
 Route::get('/backups/list', [BackupController::class, 'listBackups'])->name('backup.list');
 Route::post('/create-backup', [BackupController::class, 'createBackup'])->name('backup.create');
 Route::get('/download-backup/{filename}', [BackupController::class, 'downloadBackup'])->name('backup.download');
+Route::post('/delete-backup', [BackupController::class, 'deleteBackup'])->name('backup.delete');
 
 Route::get('test-translator/{code}/{keyword}', function ($code, $keyword) {
     $tr = new GoogleTranslate();

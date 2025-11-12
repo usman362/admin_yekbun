@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\SystemBackup;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class BackupController extends Controller
@@ -146,5 +148,28 @@ class BackupController extends Controller
         }
 
         return response()->download($filePath)->deleteFileAfterSend(false);
+    }
+
+    public function deleteBackup(Request $request)
+    {
+        // Sanitize filename (prevent directory traversal)
+        $filename = basename($request->filename);
+
+        $filePath = storage_path('app/backups/' . $filename);
+
+        if (!file_exists($filePath)) {
+            return ResponseHelper::sendResponse([], 'File not found!', false, 404);
+        }
+
+        try {
+            $backup = SystemBackup::where('filename', $filename)->first();
+            if($backup){
+                $backup->delete();
+            }
+            unlink($filePath);
+            return ResponseHelper::sendResponse([], 'Backup deleted successfully');
+        } catch (\Throwable $e) {
+            return ResponseHelper::sendResponse([], 'Error deleting file', false, 500);
+        }
     }
 }
