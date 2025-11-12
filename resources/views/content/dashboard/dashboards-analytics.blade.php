@@ -469,7 +469,7 @@
                             <h4>System Settings</h4>
                         </div>
 
-                        {{-- <div class="settings-list">
+                        <div class="settings-list">
                             <div class="setting-item">
                                 <div class="setting-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -493,7 +493,7 @@
                                     </div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="screenshots" class="system-settings" data-type="screenshots" {{optional($notification)->screenshots == 1 ? 'checked' : '' }}>
+                                    
                                     <label for="screenshots"></label>
                                 </div>
                             </div>
@@ -521,7 +521,7 @@
                                     </div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="recording" class="system-settings" data-type="recording" {{optional($notification)->recording == 1 ? 'checked' : '' }}>
+                                    
                                     <label for="recording"></label>
                                 </div>
                             </div>
@@ -546,7 +546,7 @@
                                     <div class="setting-subtitle">Disable Sign up</div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="signup" class="system-settings" data-type="signup" {{optional($notification)->signup == 1 ? 'checked' : '' }}>
+                                    
                                     <label for="signup"></label>
                                 </div>
                             </div>
@@ -565,11 +565,11 @@
                                     <div class="setting-subtitle">Disable Login</div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="login" class="system-settings" data-type="login" {{optional($notification)->login == 1 ? 'checked' : '' }}>
+                                    
                                     <label for="login"></label>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
