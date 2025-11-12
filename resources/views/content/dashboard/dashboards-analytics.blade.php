@@ -209,7 +209,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" >
+                                    <div data-status="stop" data-name="friend">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -219,7 +219,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="start" data-name="friend">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -229,7 +229,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="restart" data-name="friend">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -252,7 +252,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" >
+                                    <div data-status="stop" data-name="music">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -262,7 +262,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="start" data-name="music">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -272,7 +272,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="restart" data-name="music">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -295,7 +295,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" >
+                                    <div data-status="stop" data-name="history">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -305,7 +305,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="start" data-name="history">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -315,7 +315,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="restart" data-name="history">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -338,7 +338,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" >
+                                    <div data-status="stop" data-name="ai_video">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -348,7 +348,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="start" data-name="ai_video">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -358,7 +358,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="restart" data-name="ai_video">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -381,7 +381,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" >
+                                    <div data-status="stop" data-name="feeds">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -391,7 +391,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="start" data-name="feeds">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -401,7 +401,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="restart" data-name="feeds">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -424,7 +424,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" >
+                                    <div data-status="stop" data-name="admin">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -434,7 +434,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="start" data-name="admin">
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -444,7 +444,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" >
+                                    <div data-status="restart" data-name="admin">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -1154,7 +1154,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="notification-controls w-100">
-                                                        <div class="control-btn" data-status="stop" data-name="otp">
+                                                        <div data-status="stop" data-name="otp">
                                                             <svg width="26" height="26" viewBox="0 0 26 26"
                                                                 fill="none">
                                                                 <rect width="26" height="26" rx="5"
@@ -1168,7 +1168,7 @@
                                                                 </path>
                                                             </svg>
                                                         </div>
-                                                        <div class="control-btn" data-status="start" data-name="otp">
+                                                        <div data-status="start" data-name="otp">
                                                             <svg width="26" height="26" viewBox="0 0 26 26"
                                                                 fill="none">
                                                                 <rect width="26" height="26" rx="5"
@@ -1182,7 +1182,7 @@
                                                                 </path>
                                                             </svg>
                                                         </div>
-                                                        <div class="control-btn" data-status="restart" data-name="otp">
+                                                        <div data-status="restart" data-name="otp">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="26"
                                                                 height="26" viewBox="0 0 26 26" fill="none">
                                                                 <rect width="26" height="26" rx="5"
