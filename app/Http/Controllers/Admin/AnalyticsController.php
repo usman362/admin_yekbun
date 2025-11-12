@@ -125,21 +125,21 @@ class AnalyticsController extends Controller
         $logs = Activity::latest()->take(5)->get();
         $backups = SystemBackup::latest()->get();
         $notification = AdminNotification::first();
-        if($notification === null){
-            $notification = new AdminNotification();
-            $notification->friend = 0;
-            $notification->music = 0;
-            $notification->history = 0;
-            $notification->ai_video = 0;
-            $notification->feeds = 0;
-            $notification->admin = 0;
-            $notification->screenshots = 0;
-            $notification->recording = 0;
-            $notification->signup = 0;
-            $notification->login = 0;
-            $notification->otp = 0;
-            $notification->save();
-        }
+        // if($notification === null){
+        //     $notification = new AdminNotification();
+        //     $notification->friend = 0;
+        //     $notification->music = 0;
+        //     $notification->history = 0;
+        //     $notification->ai_video = 0;
+        //     $notification->feeds = 0;
+        //     $notification->admin = 0;
+        //     $notification->screenshots = 0;
+        //     $notification->recording = 0;
+        //     $notification->signup = 0;
+        //     $notification->login = 0;
+        //     $notification->otp = 0;
+        //     $notification->save();
+        // }
         // dd($notification);
         return view('content.dashboard.dashboards-analytics', compact(
             'male_account',
