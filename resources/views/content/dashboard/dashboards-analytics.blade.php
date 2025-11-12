@@ -209,7 +209,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" data-status="stop" data-name="friend">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -219,7 +219,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="start" data-name="friend">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -229,7 +229,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="restart" data-name="friend">
+                                    <div class="control-btn" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -252,7 +252,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" data-status="stop" data-name="music">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -262,7 +262,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="start" data-name="music">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -272,7 +272,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="restart" data-name="music">
+                                    <div class="control-btn" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -295,7 +295,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" data-status="stop" data-name="history">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -305,7 +305,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="start" data-name="history">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -315,7 +315,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="restart" data-name="history">
+                                    <div class="control-btn" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -338,7 +338,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" data-status="stop" data-name="ai_video">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -348,7 +348,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="start" data-name="ai_video">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -358,7 +358,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="restart" data-name="ai_video">
+                                    <div class="control-btn" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -381,7 +381,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" data-status="stop" data-name="feeds">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -391,7 +391,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="start" data-name="feeds">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -401,7 +401,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="restart" data-name="feeds">
+                                    <div class="control-btn" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -424,7 +424,7 @@
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
-                                    <div class="control-btn" data-status="stop" data-name="admin">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -434,7 +434,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="start" data-name="admin">
+                                    <div class="control-btn" >
                                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
                                             <circle opacity="0.5" cx="13" cy="13" r="9" stroke="#1C274C"
@@ -444,7 +444,7 @@
                                                 stroke="#1C274C" stroke-width="1.5"></path>
                                         </svg>
                                     </div>
-                                    <div class="control-btn" data-status="restart" data-name="admin">
+                                    <div class="control-btn" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
                                             viewBox="0 0 26 26" fill="none">
                                             <rect width="26" height="26" rx="5" fill="white"></rect>
@@ -469,7 +469,7 @@
                             <h4>System Settings</h4>
                         </div>
 
-                        <div class="settings-list">
+                        {{-- <div class="settings-list">
                             <div class="setting-item">
                                 <div class="setting-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -569,7 +569,7 @@
                                     <label for="login"></label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
