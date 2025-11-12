@@ -140,6 +140,7 @@ class AnalyticsController extends Controller
             $notification->otp = 0;
             $notification->save();
         }
+        dd($notification);
         return view('content.dashboard.dashboards-analytics', compact(
             'male_account',
             'female_account',
