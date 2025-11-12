@@ -10,6 +10,52 @@
     {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/friendkit/css/dashboard.css') }}">
+    <style>
+
+    .backup-menu {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .backup-menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        margin: -6px;
+        border-radius: 6px;
+        transition: background 0.2s;
+    }
+
+    .backup-dropdown {
+        position: absolute;
+        right: 0;
+        top: 120%;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        list-style: none;
+        padding: 0 0;
+        margin: 0;
+        width: 130px;
+        display: none; /* hidden by default */
+        z-index: 100;
+    }
+
+    .backup-dropdown li {
+        padding: 8px 14px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+        transition: background 0.2s;
+    }
+
+    .backup-dropdown li:hover {
+        background: #f6f6f6;
+    }
+    </style>
 @endsection
 
 @section('vendor-script')
@@ -93,11 +139,15 @@
                                                 <div class="backup-subtitle">${b.filesize ? b.filesize : 'N/A'} - ${new Date(b.created_at).toLocaleString('en-US', {year: 'numeric',month: 'short',day: '2-digit',hour: '2-digit',minute: '2-digit',hour12: true})}</div>
                                             </div>
                                             <div class="backup-menu">
-                                                <a href="/storage/app/backups/${b.filename}" download>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                                                    <path d="M8.42017 0C4.00883 0 0.420166 3.58867 0.420166 8C0.420166 12.4113 4.00883 16 8.42017 16C12.8315 16 16.4202 12.4113 16.4202 8C16.4202 3.58867 12.8315 0 8.42017 0ZM8.42017 15.3333C4.37683 15.3333 1.08683 12.0433 1.08683 8C1.08683 3.95667 4.37683 0.666667 8.42017 0.666667C12.4635 0.666667 15.7535 3.95667 15.7535 8C15.7535 12.0433 12.4635 15.3333 8.42017 15.3333ZM5.08683 8C5.08683 8.368 4.78817 8.66667 4.42017 8.66667C4.05217 8.66667 3.7535 8.368 3.7535 8C3.7535 7.632 4.05217 7.33333 4.42017 7.33333C4.78817 7.33333 5.08683 7.632 5.08683 8ZM13.0868 8C13.0868 8.368 12.7882 8.66667 12.4202 8.66667C12.0522 8.66667 11.7535 8.368 11.7535 8C11.7535 7.632 12.0522 7.33333 12.4202 7.33333C12.7882 7.33333 13.0868 7.632 13.0868 8ZM9.08683 8C9.08683 8.368 8.78817 8.66667 8.42017 8.66667C8.05217 8.66667 7.7535 8.368 7.7535 8C7.7535 7.632 8.05217 7.33333 8.42017 7.33333C8.78817 7.33333 9.08683 7.632 9.08683 8Z" fill="#000000"></path>
-                                                </svg>
-                                                </a>
+                                                <div class="backup-menu-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                                        <path d="M8.42017 0C4.00883 0 0.420166 3.58867 0.420166 8C0.420166 12.4113 4.00883 16 8.42017 16C12.8315 16 16.4202 12.4113 16.4202 8C16.4202 3.58867 12.8315 0 8.42017 0ZM8.42017 15.3333C4.37683 15.3333 1.08683 12.0433 1.08683 8C1.08683 3.95667 4.37683 0.666667 8.42017 0.666667C12.4635 0.666667 15.7535 3.95667 15.7535 8C15.7535 12.0433 12.4635 15.3333 8.42017 15.3333ZM5.08683 8C5.08683 8.368 4.78817 8.66667 4.42017 8.66667C4.05217 8.66667 3.7535 8.368 3.7535 8C3.7535 7.632 4.05217 7.33333 4.42017 7.33333C4.78817 7.33333 5.08683 7.632 5.08683 8ZM13.0868 8C13.0868 8.368 12.7882 8.66667 12.4202 8.66667C12.0522 8.66667 11.7535 8.368 11.7535 8C11.7535 7.632 12.0522 7.33333 12.4202 7.33333C12.7882 7.33333 13.0868 7.632 13.0868 8ZM9.08683 8C9.08683 8.368 8.78817 8.66667 8.42017 8.66667C8.05217 8.66667 7.7535 8.368 7.7535 8C7.7535 7.632 8.05217 7.33333 8.42017 7.33333C8.78817 7.33333 9.08683 7.632 9.08683 8Z" fill="#000000"></path>
+                                                    </svg>
+                                                </div>
+                                                <ul class="backup-dropdown">
+                                                    <li><a class="text-dark" href="/storage/app/backups/${b.filename}" download>Download</a></li>
+                                                    <li>Delete</li>
+                                                </ul>
                                             </div>
                                         </div>
                                     `;
@@ -177,6 +227,18 @@
                     toastr.error('Something Went Wrong');
                 }
             });
+        });
+
+        $(document).on('click', '.backup-menu-icon', function (e) {
+            e.stopPropagation();
+            const $menu = $(this).closest('.backup-menu').find('.backup-dropdown');
+            $('.backup-dropdown').not($menu).hide(); // hide others
+            $menu.toggle(); // toggle this one
+        });
+
+        // Hide dropdown if clicked outside
+        $(document).on('click', function () {
+            $('.backup-dropdown').hide();
         });
     </script>
 @endsection
@@ -530,11 +592,15 @@
                                 </div>
                             </div>
                             <div class="backup-menu">
-                                <a href="/storage/app/backups/{{$backup->filename}}" download>
+                                <div class="backup-menu-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                                         <path d="M8.42017 0C4.00883 0 0.420166 3.58867 0.420166 8C0.420166 12.4113 4.00883 16 8.42017 16C12.8315 16 16.4202 12.4113 16.4202 8C16.4202 3.58867 12.8315 0 8.42017 0ZM8.42017 15.3333C4.37683 15.3333 1.08683 12.0433 1.08683 8C1.08683 3.95667 4.37683 0.666667 8.42017 0.666667C12.4635 0.666667 15.7535 3.95667 15.7535 8C15.7535 12.0433 12.4635 15.3333 8.42017 15.3333ZM5.08683 8C5.08683 8.368 4.78817 8.66667 4.42017 8.66667C4.05217 8.66667 3.7535 8.368 3.7535 8C3.7535 7.632 4.05217 7.33333 4.42017 7.33333C4.78817 7.33333 5.08683 7.632 5.08683 8ZM13.0868 8C13.0868 8.368 12.7882 8.66667 12.4202 8.66667C12.0522 8.66667 11.7535 8.368 11.7535 8C11.7535 7.632 12.0522 7.33333 12.4202 7.33333C12.7882 7.33333 13.0868 7.632 13.0868 8ZM9.08683 8C9.08683 8.368 8.78817 8.66667 8.42017 8.66667C8.05217 8.66667 7.7535 8.368 7.7535 8C7.7535 7.632 8.05217 7.33333 8.42017 7.33333C8.78817 7.33333 9.08683 7.632 9.08683 8Z" fill="#000000"></path>
                                     </svg>
-                                </a>
+                                </div>
+                                <ul class="backup-dropdown">
+                                    <li><a class="text-dark" href="/storage/app/backups/{{$backup->filename}}" download>Download</a></li>
+                                    <li>Delete</li>
+                                </ul>
                             </div>
                         </div>
                         @endforeach
