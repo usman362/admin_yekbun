@@ -16,7 +16,7 @@ class VerifyMobileRequest
         // Reject empty or suspicious user-agents
         if (
             !$userAgent ||
-            str_contains($userAgent, 'postman') ||
+            // str_contains($userAgent, 'postman') ||
             str_contains($userAgent, 'insomnia') ||
             str_contains($userAgent, 'mozilla') ||
             str_contains($userAgent, 'chrome') ||
