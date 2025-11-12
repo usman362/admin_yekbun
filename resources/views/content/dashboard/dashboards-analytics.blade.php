@@ -1211,7 +1211,7 @@
                                     </div>
 
                                     <div class="admins-grid">
-                                        {{-- <div class="admin-card admin-card-large">
+                                        <div class="admin-card admin-card-large">
                                             <div class="admin-bg"></div>
                                             <div class="admin-avatar">
                                                 <img src="{{asset('storage/'.auth()->user()->image)}}"
@@ -1221,7 +1221,7 @@
                                                 <div class="admin-name">{{auth()->user()->name.' '.auth()->user()->last_name}}</div>
                                                 <div class="admin-role">Owner - Admin</div>
                                             </div>
-                                        </div> --}}
+                                        </div>
 
                                         {{-- <div class="admin-card admin-placeholder"></div>
 
