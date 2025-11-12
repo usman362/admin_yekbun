@@ -469,7 +469,7 @@
                             <h4>System Settings</h4>
                         </div>
 
-                        <div class="settings-list">
+                        {{-- <div class="settings-list">
                             <div class="setting-item">
                                 <div class="setting-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -569,7 +569,7 @@
                                     <label for="login"></label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
