@@ -113,7 +113,7 @@
 
         $('.system-settings').click(function() {
             let action = 'start';
-            let type = $(this).data('type');
+            let type = $(this).attr('data-type');
             if($(this).prop('checked') !== true){
                 action = 'stop';
             }
@@ -136,8 +136,8 @@
         });
 
         $('.control-btn').click(function() {
-            let action = $(this).data('action');
-            let type = $(this).data('type');
+            let action = $(this).attr('data-action');
+            let type = $(this).attr('data-type');
             let card = $(this).closest('.notification-card');
             let badge = card.find('.status-badge');
             $.ajax({
@@ -200,7 +200,7 @@
                             <h4>Notifications</h4>
                         </div>
 
-                        {{-- <div class="notifications-grid">
+                        <div class="notifications-grid">
                             <!-- Friend Notifications -->
                             <div class="notification-card">
                                 <div class="notification-header">
@@ -458,7 +458,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
@@ -469,7 +469,7 @@
                             <h4>System Settings</h4>
                         </div>
 
-                        {{-- <div class="settings-list">
+                        <div class="settings-list">
                             <div class="setting-item">
                                 <div class="setting-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -569,7 +569,7 @@
                                     <label for="login"></label>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
@@ -1151,50 +1151,6 @@
                                                         <div class="metric-status">
                                                             <span>Status</span>
                                                             <span class="otp-status status-badge {{optional($notification)->otp == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->otp == 1 ? 'ON' : 'OFF' }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="notification-controls w-100">
-                                                        <div class="control-btn" data-action="stop" data-type="otp">
-                                                            <svg width="26" height="26" viewBox="0 0 26 26"
-                                                                fill="none">
-                                                                <rect width="26" height="26" rx="5"
-                                                                    fill="white"></rect>
-                                                                <circle opacity="0.5" cx="13" cy="13"
-                                                                    r="9" stroke="#1C274C" stroke-width="1.5">
-                                                                </circle>
-                                                                <path
-                                                                    d="M9.39999 13C9.39999 11.303 9.39999 10.4544 9.9272 9.92723C10.4544 9.40002 11.3029 9.40002 13 9.40002C14.6971 9.40002 15.5456 9.40002 16.0728 9.92723C16.6 10.4544 16.6 11.303 16.6 13C16.6 14.6971 16.6 15.5456 16.0728 16.0728C15.5456 16.6 14.6971 16.6 13 16.6C11.3029 16.6 10.4544 16.6 9.9272 16.0728C9.39999 15.5456 9.39999 14.6971 9.39999 13Z"
-                                                                    stroke="#1C274C" stroke-width="1.5">
-                                                                </path>
-                                                            </svg>
-                                                        </div>
-                                                        <div class="control-btn" data-action="start" data-type="otp">
-                                                            <svg width="26" height="26" viewBox="0 0 26 26"
-                                                                fill="none">
-                                                                <rect width="26" height="26" rx="5"
-                                                                    fill="white"></rect>
-                                                                <circle opacity="0.5" cx="13" cy="13"
-                                                                    r="9" stroke="#1C274C" stroke-width="1.5">
-                                                                </circle>
-                                                                <path
-                                                                    d="M14.6988 11.1413C15.6663 11.9305 16.15 12.3251 16.15 13C16.15 13.6749 15.6663 14.0695 14.6988 14.8587C14.4318 15.0766 14.1669 15.2817 13.9235 15.4526C13.71 15.6025 13.4681 15.7577 13.2177 15.9099C12.2526 16.4968 11.77 16.7903 11.3372 16.4654C10.9044 16.1405 10.865 15.4603 10.7863 14.1C10.7641 13.7153 10.75 13.3381 10.75 13C10.75 12.6619 10.7641 12.2848 10.7863 11.9001C10.865 10.5397 10.9044 9.85957 11.3372 9.53466C11.77 9.20975 12.2526 9.50322 13.2177 10.0901C13.4681 10.2424 13.71 10.3975 13.9235 10.5475C14.1669 10.7184 14.4318 10.9235 14.6988 11.1413Z"
-                                                                    stroke="#1C274C" stroke-width="1.5">
-                                                                </path>
-                                                            </svg>
-                                                        </div>
-                                                        <div class="control-btn" data-action="restart" data-type="otp">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="26"
-                                                                height="26" viewBox="0 0 26 26" fill="none">
-                                                                <rect width="26" height="26" rx="5"
-                                                                    fill="white"></rect>
-                                                                <path opacity="0.5" fill-rule="evenodd"
-                                                                    clip-rule="evenodd"
-                                                                    d="M7.72701 8.34981C9.93081 6.24228 13.1722 5.72904 15.8808 6.81241L17.0433 5.70068C13.6701 4.07857 9.45266 4.61293 6.63604 7.3065C3.12132 10.6677 3.12132 16.1172 6.63604 19.4784C10.1508 22.8396 15.8493 22.8396 19.364 19.4784C21.4082 17.5235 22.263 14.8614 21.93 12.3177C21.877 11.9134 21.4914 11.6267 21.0687 11.6773C20.6459 11.7279 20.3461 12.0967 20.3991 12.501C20.6755 14.6123 19.9663 16.8158 18.273 18.4351C15.3608 21.2201 10.6392 21.2201 7.72701 18.4351C4.81481 15.6501 4.81481 11.1348 7.72701 8.34981Z"
-                                                                    fill="#1C274C"></path>
-                                                                <path
-                                                                    d="M19.914 4.73775C19.914 4.43937 19.726 4.17036 19.4378 4.05618C19.1495 3.94199 18.8177 4.00511 18.5971 4.2161L17.0445 5.70082L15.882 6.81255L14.2332 8.38933C14.0126 8.60032 13.9466 8.91763 14.066 9.1933C14.1854 9.46897 14.4667 9.64871 14.7787 9.64871H19.1426C19.5686 9.64871 19.914 9.31842 19.914 8.91098V4.73775Z"
-                                                                    fill="#1C274C"></path>
-                                                            </svg>
                                                         </div>
                                                     </div>
                                                     <div class="notification-controls w-100">
