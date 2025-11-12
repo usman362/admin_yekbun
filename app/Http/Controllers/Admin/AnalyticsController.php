@@ -10,6 +10,7 @@ use App\Repositories\Activity;
 use App\Models\Song;
 use App\Models\Country;
 use App\Models\SystemBackup;
+use App\Models\AdminNotification;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -123,6 +124,7 @@ class AnalyticsController extends Controller
         }
         $logs = Activity::latest()->take(5)->get();
         $backups = SystemBackup::latest()->get();
+        $notification = AdminNotification::first();
         return view('content.dashboard.dashboards-analytics', compact(
             'male_account',
             'female_account',
@@ -139,7 +141,8 @@ class AnalyticsController extends Controller
             'totalDevices',
             'totalIosDevices',
             'iosDeviceModels',
-            'backups'
+            'backups',
+            'notification'
         ));
     }
 }

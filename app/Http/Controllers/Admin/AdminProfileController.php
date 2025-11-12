@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
 use App\Helpers\NotificationHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use App\Models\News;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\PopFeeds;
+use App\Models\AdminNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -658,5 +660,20 @@ class AdminProfileController extends Controller
         $bytes /= pow(1024, $pow);
 
         return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+
+    public function store_notifications(Request $request)
+    {
+        try {
+            $notification = AdminNotification::first();
+            if (!$notification) {
+                $notification = new AdminNotification();
+            }
+            $notification->{$request->type} = $request->status == 'stop' ? 0 : 1;
+            $notification->save();
+            return ResponseHelper::sendResponse($notification, 'Status has been Changed');
+        } catch (\Exception $e) {
+            return ResponseHelper::sendResponse([], 'Something Went Wrong', false, 400);
+        }
     }
 }

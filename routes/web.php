@@ -325,6 +325,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         });
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
+    Route::post('admin-notification',[AdminProfileController::class,'store_notifications'])->name('admin.store.notification');
+
     Route::get('/', [AnalyticsController::class, 'index'])->name('adminpanel');
     // analystics
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('dashboard-analytics');
