@@ -118,7 +118,7 @@
                 action = 'stop';
             }
             $.ajax({
-                url: '{{route('admin.store.notification')}}',
+                url: "{{route('admin.store.notification')}}",
                 type: 'POST',
                 data: {
                     type: type,
@@ -141,7 +141,7 @@
             let card = $(this).closest('.notification-card');
             let badge = card.find('.status-badge');
             $.ajax({
-                url: '{{route('admin.store.notification')}}',
+                url: "{{route('admin.store.notification')}}",
                 type: 'POST',
                 data: {
                     type: type,
@@ -200,7 +200,7 @@
                             <h4>Notifications</h4>
                         </div>
 
-                        {{-- <div class="notifications-grid">
+                        <div class="notifications-grid">
                             <!-- Friend Notifications -->
                             <div class="notification-card">
                                 <div class="notification-header">
@@ -458,7 +458,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
@@ -469,7 +469,7 @@
                             <h4>System Settings</h4>
                         </div>
 
-                        {{-- <div class="settings-list">
+                        <div class="settings-list">
                             <div class="setting-item">
                                 <div class="setting-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -569,7 +569,7 @@
                                     <label for="login"></label>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
