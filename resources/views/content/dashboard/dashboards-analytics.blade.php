@@ -200,7 +200,7 @@
                             <h4>Notifications</h4>
                         </div>
 
-                        {{-- <div class="notifications-grid">
+                        <div class="notifications-grid">
                             <!-- Friend Notifications -->
                             <div class="notification-card">
                                 <div class="notification-header">
@@ -458,7 +458,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
