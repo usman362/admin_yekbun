@@ -205,7 +205,7 @@
                             <div class="notification-card">
                                 <div class="notification-header">
                                     <span class="notification-title">Friend Notifications</span>
-                                    <span class="status-badge {{isset($notification) && @$notification->friend == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->friend == 1 ? 'ON' : 'OFF' }}</span>
+                                    <span class="status-badge {{optional($notification)->friend == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->friend == 1 ? 'ON' : 'OFF' }}</span>
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
@@ -248,7 +248,7 @@
                             <div class="notification-card">
                                 <div class="notification-header">
                                     <span class="notification-title">Music Notifications</span>
-                                    <span class="status-badge {{isset($notification) && @$notification->music == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->music == 1 ? 'ON' : 'OFF' }}</span>
+                                    <span class="status-badge {{optional($notification)->music == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->music == 1 ? 'ON' : 'OFF' }}</span>
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
@@ -291,7 +291,7 @@
                             <div class="notification-card">
                                 <div class="notification-header">
                                     <span class="notification-title">History Notifications</span>
-                                    <span class="status-badge {{isset($notification) && @$notification->history == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->history == 1 ? 'ON' : 'OFF' }}</span>
+                                    <span class="status-badge {{optional($notification)->history == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->history == 1 ? 'ON' : 'OFF' }}</span>
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
@@ -334,7 +334,7 @@
                             <div class="notification-card">
                                 <div class="notification-header">
                                     <span class="notification-title">Ai-Video Notifications</span>
-                                    <span class="status-badge {{isset($notification) && @$notification->ai_video == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->ai_video == 1 ? 'ON' : 'OFF' }}</span>
+                                    <span class="status-badge {{optional($notification)->ai_video == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->ai_video == 1 ? 'ON' : 'OFF' }}</span>
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
@@ -377,7 +377,7 @@
                             <div class="notification-card">
                                 <div class="notification-header">
                                     <span class="notification-title">Feeds Notifications</span>
-                                    <span class="status-badge {{isset($notification) && @$notification->feeds == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->feeds == 1 ? 'ON' : 'OFF' }}</span>
+                                    <span class="status-badge {{optional($notification)->feeds == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->feeds == 1 ? 'ON' : 'OFF' }}</span>
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
@@ -420,7 +420,7 @@
                             <div class="notification-card">
                                 <div class="notification-header">
                                     <span class="notification-title">Admin Notifications</span>
-                                    <span class="status-badge {{isset($notification) && @$notification->admin == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->admin == 1 ? 'ON' : 'OFF' }}</span>
+                                    <span class="status-badge {{optional($notification)->admin == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->admin == 1 ? 'ON' : 'OFF' }}</span>
                                 </div>
                                 <p class="notification-subtitle">Change Status</p>
                                 <div class="notification-controls">
@@ -469,7 +469,7 @@
                             <h4>System Settings</h4>
                         </div>
 
-                        {{-- <div class="settings-list">
+                        <div class="settings-list">
                             <div class="setting-item">
                                 <div class="setting-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -493,7 +493,7 @@
                                     </div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="screenshots" class="system-settings" data-type="screenshots" {{isset($notification) && @$notification->screenshots == 1 ? 'checked' : '' }}>
+                                    <input type="checkbox" id="screenshots" class="system-settings" data-type="screenshots" {{optional($notification)->screenshots == 1 ? 'checked' : '' }}>
                                     <label for="screenshots"></label>
                                 </div>
                             </div>
@@ -521,7 +521,7 @@
                                     </div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="recording" class="system-settings" data-type="recording" {{isset($notification) && @$notification->recording == 1 ? 'checked' : '' }}>
+                                    <input type="checkbox" id="recording" class="system-settings" data-type="recording" {{optional($notification)->recording == 1 ? 'checked' : '' }}>
                                     <label for="recording"></label>
                                 </div>
                             </div>
@@ -546,7 +546,7 @@
                                     <div class="setting-subtitle">Disable Sign up</div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="signup" class="system-settings" data-type="signup" {{isset($notification) && @$notification->signup == 1 ? 'checked' : '' }}>
+                                    <input type="checkbox" id="signup" class="system-settings" data-type="signup" {{optional($notification)->signup == 1 ? 'checked' : '' }}>
                                     <label for="signup"></label>
                                 </div>
                             </div>
@@ -565,11 +565,11 @@
                                     <div class="setting-subtitle">Disable Login</div>
                                 </div>
                                 <div class="toggle-switch">
-                                    <input type="checkbox" id="login" class="system-settings" data-type="login" {{isset($notification) && @$notification->login == 1 ? 'checked' : '' }}>
+                                    <input type="checkbox" id="login" class="system-settings" data-type="login" {{optional($notification)->login == 1 ? 'checked' : '' }}>
                                     <label for="login"></label>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
@@ -1137,7 +1137,7 @@
                                                         <div class="metric-title">OTP Status</div>
                                                         <div class="metric-status">
                                                             <span>Status</span>
-                                                            <span class="otp-status status-badge {{isset($notification) && @$notification->otp == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->otp == 1 ? 'ON' : 'OFF' }}</span>
+                                                            <span class="otp-status status-badge {{optional($notification)->otp == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->otp == 1 ? 'ON' : 'OFF' }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1150,7 +1150,7 @@
                                                         <div class="metric-title">OTP Status</div>
                                                         <div class="metric-status">
                                                             <span>Status</span>
-                                                            <span class="otp-status status-badge {{isset($notification) && @$notification->otp == 1 ? 'status-on' : 'status-off' }}">{{isset($notification) && @$notification->otp == 1 ? 'ON' : 'OFF' }}</span>
+                                                            <span class="otp-status status-badge {{optional($notification)->otp == 1 ? 'status-on' : 'status-off' }}">{{optional($notification)->otp == 1 ? 'ON' : 'OFF' }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="notification-controls w-100">
