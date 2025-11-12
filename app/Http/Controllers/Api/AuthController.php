@@ -378,10 +378,19 @@ class AuthController extends Controller
 
     public function getCode(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'otp' => 'required',
+        // $request->validate([
+        //     'email' => 'required',
+        //     'otp' => 'required',
+        // ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'otp' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return ResponseHelper::sendResponse([], $validator->errors()->first(), false, 404);
+        }
+        
         $email = strtolower($request->email);
         $user = User::where('email', $email)->first();
 

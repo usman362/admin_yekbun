@@ -125,6 +125,7 @@ class AnalyticsController extends Controller
         $logs = Activity::latest()->take(5)->get();
         $backups = SystemBackup::latest()->get();
         $notification = AdminNotification::first();
+        dd($notification);
         return view('content.dashboard.dashboards-analytics', compact(
             'male_account',
             'female_account',
