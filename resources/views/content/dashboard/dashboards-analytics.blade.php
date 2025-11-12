@@ -111,73 +111,7 @@
             // loadBackups();
         });
 
-        $('.system-settings').click(function() {
-            let action = 'start';
-            let type = $(this).data('type');
-            if($(this).prop('checked') !== true){
-                action = 'stop';
-            }
-            $.ajax({
-                url: "{{route('admin.store.notification')}}",
-                type: 'POST',
-                data: {
-                    type: type,
-                    status: action,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    console.log('✅ Success:', response);
-                    toastr.success(response.message);
-                },
-                error: function(xhr) {
-                    toastr.error('Something Went Wrong');
-                }
-            });
-        });
-
-        $('.control-btn').click(function() {
-            let action = $(this).data('action');
-            let type = $(this).data('type');
-            let card = $(this).closest('.notification-card');
-            let badge = card.find('.status-badge');
-            $.ajax({
-                url: "{{route('admin.store.notification')}}",
-                type: 'POST',
-                data: {
-                    type: type,
-                    status: action,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    console.log('✅ Success:', response);
-                    if(type == 'otp'){
-                        if(action == 'stop'){
-                            $('.otp-status').removeClass('status-on');
-                            $('.otp-status').addClass('status-off');
-                            $('.otp-status').text('OFF');
-                        }else{
-                            $('.otp-status').removeClass('status-off');
-                            $('.otp-status').addClass('status-on');
-                            $('.otp-status').text('ON');
-                        }
-                    }else{
-                        if(action == 'stop'){
-                            badge.removeClass('status-on');
-                            badge.addClass('status-off');
-                            badge.text('OFF');
-                        }else{
-                            badge.removeClass('status-off');
-                            badge.addClass('status-on');
-                            badge.text('ON');
-                        }
-                    }
-                    toastr.success(response.message);
-                },
-                error: function(xhr) {
-                    toastr.error('Something Went Wrong');
-                }
-            });
-        });
+        
     </script>
 @endsection
 
