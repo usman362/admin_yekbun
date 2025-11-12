@@ -200,7 +200,7 @@
                             <h4>Notifications</h4>
                         </div>
 
-                        {{-- <div class="notifications-grid">
+                        <div class="notifications-grid">
                             <!-- Friend Notifications -->
                             <div class="notification-card">
                                 <div class="notification-header">
@@ -458,12 +458,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
 
                 <!-- System Settings -->
-                {{-- <div class="col-xl-3 col-lg-6">
+                <div class="col-xl-3 col-lg-6">
                     <div class="card-container">
                         <div class="card-header">
                             <h4>System Settings</h4>
@@ -571,7 +571,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 <!-- System Backups -->
                 <div class="col-xl-4 col-lg-6">
@@ -1145,7 +1145,7 @@
                                                 <div class="metrics-separator"></div>
 
                                                 <!-- CPU Metric -->
-                                                {{-- <div class="metric-item">
+                                                <div class="metric-item">
                                                     <div class="metric-info">
                                                         <div class="metric-title">OTP Status</div>
                                                         <div class="metric-status">
@@ -1197,7 +1197,7 @@
                                                             </svg>
                                                         </div>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
