@@ -125,6 +125,8 @@ class AnalyticsController extends Controller
         $logs = Activity::latest()->take(5)->get();
         $backups = SystemBackup::latest()->get();
         $notification = AdminNotification::first();
+        $activity = Activity::whereHas('user')->orderBy('created_at', 'DESC')->paginate(20);
+        // dd($activity);
         return view('content.dashboard.dashboards-analytics', compact(
             'male_account',
             'female_account',
@@ -142,7 +144,8 @@ class AnalyticsController extends Controller
             'totalIosDevices',
             'iosDeviceModels',
             'backups',
-            'notification'
+            'notification',
+            'activity'
         ));
     }
 }

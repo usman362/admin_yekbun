@@ -58,6 +58,10 @@
         opacity: 0.1;
         cursor: default;
     }
+    .logs-list{
+        height: 330px;
+        overflow-y: scroll;
+    }
     </style>
 @endsection
 
@@ -1014,117 +1018,58 @@
                                 <div class="card-header">
                                     <h4>Systems Logs</h4>
                                 </div>
-
                                 <div class="logs-list">
-                                    <div class="log-entry">
-                                        <div class="log-avatar">
-                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&amp;h=40&amp;fit=crop&amp;crop=face" alt="Admin">
-                                        </div>
-                                        <div class="log-info">
-                                            <div class="log-admin">Admin Name</div>
-                                            <div class="log-role">Autor</div>
-                                        </div>
-                                        <div class="log-task">
-                                            <div class="log-action">Task</div>
-                                            <div class="log-description">Edit Surveys</div>
-                                        </div>
-                                        <div class="log-login">
-                                            <div class="log-time">Login</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                        <div class="log-logout">
-                                            <div class="log-time">Logout</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                    </div>
+                                    @foreach ($activity as $action)
+                                    @php
+                                        $name = $description = '';
+                                        $modelEvents = ['created', 'updated', 'deleted'];
 
-                                    <div class="log-entry">
-                                        <div class="log-avatar">
-                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&amp;h=40&amp;fit=crop&amp;crop=face" alt="Admin">
-                                        </div>
-                                        <div class="log-info">
-                                            <div class="log-admin">Admin Name</div>
-                                            <div class="log-role">Autor</div>
-                                        </div>
-                                        <div class="log-task">
-                                            <div class="log-action">Task</div>
-                                            <div class="log-description">Edit Surveys</div>
-                                        </div>
-                                        <div class="log-login">
-                                            <div class="log-time">Login</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                        <div class="log-logout">
-                                            <div class="log-time">Logout</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                    </div>
+                                        $event = $action->event;
 
-                                    <div class="log-entry">
-                                        <div class="log-avatar">
-                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&amp;h=40&amp;fit=crop&amp;crop=face" alt="Admin">
-                                        </div>
-                                        <div class="log-info">
-                                            <div class="log-admin">Admin Name</div>
-                                            <div class="log-role">Autor</div>
-                                        </div>
-                                        <div class="log-task">
-                                            <div class="log-action">Task</div>
-                                            <div class="log-description">Edit Surveys</div>
-                                        </div>
-                                        <div class="log-login">
-                                            <div class="log-time">Login</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                        <div class="log-logout">
-                                            <div class="log-time">Logout</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                    </div>
+                                        $causer = $action->causer()->first();
 
-                                    <div class="log-entry">
-                                        <div class="log-avatar">
-                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&amp;h=40&amp;fit=crop&amp;crop=face" alt="Admin">
+                                        if(!$causer){
+                                            $causer = json_decode(json_encode([
+                                                'id' => '',
+                                                'name' => '',
+                                                'image' => '',
+                                                'email' => ''
+                                        ]));
+                                        }
+                                        // if ($event === 'logged_in' || $event === 'logged_out') {
+                                        //     $causerName = auth()->user()->id === $causer->id? 'You': $causer->name;
+                                        //     $name = "<strong>$causerName</strong> " . str_replace('_', ' ', $event);
+                                        // } else
+                                        if (in_array($event, $modelEvents)) {
+                                            $subjectTypeArr = explode("\\", $action->subject_type);
+                                            $subjectName = $subjectTypeArr[count($subjectTypeArr) - 1];
+                                            $name = "<strong><i>$subjectName</i></strong> $event";
+                                        }else{
+                                            $name = 'N/A';
+                                        }
+                                    @endphp
+                                        <div class="log-entry">
+                                            <div class="log-avatar">
+                                                <img src="{{$causer->image ? asset('storage/' . $causer->image): 'https://www.w3schools.com/howto/img_avatar.png' }}" alt="{{ $causer->name }}">
+                                            </div>
+                                            <div class="log-info">
+                                                <div class="log-admin">{{ $causer->name.' '.$causer->last_name }}</div>
+                                                <div class="log-role">Autor</div>
+                                            </div>
+                                            <div class="log-task">
+                                                <div class="log-action">Task</div>
+                                                <div class="log-description">{!! $name !!}</div>
+                                            </div>
+                                            <div class="log-login">
+                                                <div class="log-time">Login</div>
+                                                <div class="log-datetime">Date &amp; Time</div>
+                                            </div>
+                                            <div class="log-logout">
+                                                <div class="log-time">Logout</div>
+                                                <div class="log-datetime">Date &amp; Time</div>
+                                            </div>
                                         </div>
-                                        <div class="log-info">
-                                            <div class="log-admin">Admin Name</div>
-                                            <div class="log-role">Autor</div>
-                                        </div>
-                                        <div class="log-task">
-                                            <div class="log-action">Task</div>
-                                            <div class="log-description">Edit Surveys</div>
-                                        </div>
-                                        <div class="log-login">
-                                            <div class="log-time">Login</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                        <div class="log-logout">
-                                            <div class="log-time">Logout</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="log-entry">
-                                        <div class="log-avatar">
-                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&amp;h=40&amp;fit=crop&amp;crop=face" alt="Admin">
-                                        </div>
-                                        <div class="log-info">
-                                            <div class="log-admin">Admin Name</div>
-                                            <div class="log-role">Autor</div>
-                                        </div>
-                                        <div class="log-task">
-                                            <div class="log-action">Task</div>
-                                            <div class="log-description">Edit Surveys</div>
-                                        </div>
-                                        <div class="log-login">
-                                            <div class="log-time">Login</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                        <div class="log-logout">
-                                            <div class="log-time">Logout</div>
-                                            <div class="log-datetime">Date &amp; Time</div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
