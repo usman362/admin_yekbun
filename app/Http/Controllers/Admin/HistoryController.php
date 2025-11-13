@@ -9,6 +9,7 @@ use App\Models\PostGallery;
 use Illuminate\Http\Request;
 use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
+use App\Models\AdminNotification;
 use App\Models\HistoryComments;
 use App\Models\HistoryLikes;
 use App\Models\NotificationCenter;
@@ -99,12 +100,13 @@ class HistoryController extends Controller
         if ($history->save()) {
 
             $notification = Notifications::first();
+            $notify = AdminNotification::first();
             $description = str_replace(
                 ["[name]"],
                 [$request->title],
                 $notification->new_history_description
             );
-            if ($notification->new_history == 'true' && $request->status == '1') {
+            if ($notification->new_history == 'true' && $request->status == '1' && $notify->history == 1) {
                 try {
                     $users = User::whereNotNull('fcm_token')->where('new_history', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

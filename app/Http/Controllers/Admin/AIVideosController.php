@@ -6,6 +6,7 @@ use App\Helpers\NotificationHelper;
 use App\Models\AIVideo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AdminNotification;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
@@ -90,12 +91,13 @@ class AIVideosController extends Controller
 
         if ($ai_video->save()) {
             $notification = Notifications::first();
+            $notify = AdminNotification::first();
             $description = str_replace(
                 ["[name]"],
                 [$request->title],
                 $notification->new_ai_videos_description
             );
-            if ($notification->new_ai_videos == 'true' && $request->status == '1') {
+            if ($notification->new_ai_videos == 'true' && $request->status == '1' && $notify->ai_video == 1) {
                 try {
                     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

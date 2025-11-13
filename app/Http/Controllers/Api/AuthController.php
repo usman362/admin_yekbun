@@ -15,6 +15,7 @@ use App\Models\ResetUserPassword;
 use App\Http\Controllers\Controller;
 use App\Models\OtpVerification;
 use App\Models\UserImei;
+use App\Models\AdminNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -274,7 +275,10 @@ class AuthController extends Controller
                         'code' => $code,
                         'username' => $request->username,
                     ];
-                    Mail::to($request['email'])->send(new SendCodeMail($details));
+                    $notify = AdminNotification::first();
+                    if($notify->otp == 1){
+                        Mail::to($request['email'])->send(new SendCodeMail($details));
+                    }
                     return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
                     // return response()->json(['success' => true, "message" => "User has been Successfully Created!", 'user' => $user->id], 201);
                 } catch (\Exception $e) {
@@ -330,7 +334,10 @@ class AuthController extends Controller
                     'code' => $code,
                     'username' => $user->username ?? 'User',
                 ];
-                Mail::to($request['email'])->send(new SendCodeMail($details));
+                $notify = AdminNotification::first();
+                if($notify->otp == 1){
+                    Mail::to($request['email'])->send(new SendCodeMail($details));
+                }
                 $data = ['user' => $user, 'otp' => $code];
                 return ResponseHelper::sendResponse($data, 'Verification Code has been sent to your email!');
             } catch (\Exception $e) {
@@ -454,7 +461,10 @@ class AuthController extends Controller
                 'code' => $code,
                 'username' => $user->username
             ];
-            Mail::to($user->email)->send(new SendCodeMail($details));
+            $notify = AdminNotification::first();
+            if($notify->otp == 1){
+                Mail::to($user->email)->send(new SendCodeMail($details));
+            }
             return response()->json(['success' => true, 'message' => 'Verification Code has been sent to your email!', 'data' => ['user_id' => $user->id, 'email' => $user->email, 'token' => $token]], 201);
         } catch (\Exception $e) {
 
@@ -534,9 +544,10 @@ class AuthController extends Controller
                 'code' => $code,
                 'username' => $user->username
             ];
-
-            Mail::to($user->email)->send(new SendCodeMail($details));
-
+            $notify = AdminNotification::first();
+            if($notify->otp == 1){
+                Mail::to($user->email)->send(new SendCodeMail($details));
+            }
             $user->code = $code;
             $user->save();
 

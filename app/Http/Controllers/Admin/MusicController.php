@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use FFMpeg;
 use App\Http\Requests\StoreSongRequest;
 use App\Http\Controllers\Admin\FileController;
+use App\Models\AdminNotification;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
@@ -265,12 +266,13 @@ class MusicController extends Controller
                 $song->save();
             }
             $notification = Notifications::first();
+            $notify = AdminNotification::first();
             $description = str_replace(
                 ["[name]"],
                 [$prettyName],
                 $notification->new_music_description
             );
-            if ($notification->new_music == 'true' && $request->status == '1') {
+            if ($notification->new_music == 'true' && $request->status == '1' && $notify->music == 1) {
                 try {
                     $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {

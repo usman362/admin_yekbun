@@ -12,6 +12,7 @@ use App\Helpers\ResponseHelper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AdminNotification;
 use App\Models\CommentsLike;
 use App\Models\Event;
 use App\Models\Feed;
@@ -315,11 +316,12 @@ class FeedsController extends Controller
         $feed = Feed::with('user')->find($feeds->id);
         if ($feeds->save()) {
             $notification = Notifications::first();
+            $notify = AdminNotification::first();
             $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Feed.';
             // if ($notification->new_donation == 'true') {
             // if ($request->user_type === 'friends' || $request->user_type === 'family') {
             $users = UserFriends::where('friend_id', Auth::id())->where('user_type', $request->user_type)->get();
-            if ($users) {
+            if ($users && $notify->feeds == 1) {
                 foreach ($users as $user) {
                     NotificationHelper::sendNotification($user->user_id, 'Feeds Notification', $description);
                     NotificationCenter::create([
