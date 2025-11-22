@@ -51,11 +51,16 @@ class AdminActivityController extends Controller
             ->get()
             ->groupBy('type');
 
-        // Ensure even empty groups appear
-        $data = [];
-        foreach ($types as $type) {
-            $data[$type] = $feeds->has($type) ? $feeds[$type] : [];
+        if($feeds->count() > 0){
+            $data = [];
+            foreach ($types as $type) {
+                $data[$type] = $feeds->has($type) ? $feeds[$type] : [];
+            }
+        }else{
+            $data = null;
         }
+
+        // Ensure even empty groups appear
 
         return ResponseHelper::sendResponse($data, 'All Admin Activity Feeds');
     }
