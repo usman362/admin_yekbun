@@ -3029,13 +3029,13 @@
             data.data.comments.forEach(function(data, index) {
                 let child = '';
                 if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
-                    commentData = `<img src="{{ env('BUNNY_CDN_URL')${data.image}" width="80" height="80">`;
+                    commentData = `<img src="{{ env('BUNNY_CDN_URL') }}${data.image}" width="80" height="80">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData =
-                        `<img src="{{ env('BUNNY_CDN_URL')${data?.emoji_data?.image}" width="80" height="80">`;
+                        `<img src="{{ env('BUNNY_CDN_URL') }}${data?.emoji_data?.image}" width="80" height="80">`;
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                   <audio src="{{ env('BUNNY_CDN_URL')${data.audio}" id="comment-audio-input"></audio>
+                                   <audio src="{{ env('BUNNY_CDN_URL') }}${data.audio}" id="comment-audio-input"></audio>
                                         <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                             <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                             <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3080,15 +3080,15 @@
                         if (child.image && child.image.trim() !== "" && child.image !== "null" && child
                             .image !== null) {
                             commentData =
-                                `<img src="{{ env('BUNNY_CDN_URL')${child.image}" width="80" height="80">`;
+                                `<img src="{{ env('BUNNY_CDN_URL') }}${child.image}" width="80" height="80">`;
                         } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" &&
                             child.emoji !== null) {
                             commentData =
-                                `<img src="{{ env('BUNNY_CDN_URL')${child?.emoji_data?.image}" width="80" height="80">`;
+                                `<img src="{{ env('BUNNY_CDN_URL') }}${child?.emoji_data?.image}" width="80" height="80">`;
                         } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" &&
                             child.audio !== null) {
                             commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                        <audio src="{{ env('BUNNY_CDN_URL')${child.audio}" id="comment-audio-input"></audio>
+                                        <audio src="{{ env('BUNNY_CDN_URL') }}${child.audio}" id="comment-audio-input"></audio>
                                                 <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3139,15 +3139,15 @@
                                 if (childUltra.image && childUltra.image.trim() !== "" && childUltra
                                     .image !== "null" && childUltra.image !== null) {
                                     commentData =
-                                        `<img src="{{ env('BUNNY_CDN_URL')${childUltra.image}" width="80" height="80">`;
+                                        `<img src="{{ env('BUNNY_CDN_URL') }}${childUltra.image}" width="80" height="80">`;
                                 } else if (childUltra.emoji && childUltra.emoji.trim() !== "" &&
                                     childUltra.emoji !== "null" && childUltra.emoji !== null) {
                                     commentData =
-                                        `<img src="{{ env('BUNNY_CDN_URL')${childUltra?.emoji_data?.image}" width="80" height="80">`;
+                                        `<img src="{{ env('BUNNY_CDN_URL') }}${childUltra?.emoji_data?.image}" width="80" height="80">`;
                                 } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
                                     childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                                <audio src="{{ env('BUNNY_CDN_URL')${childUltra.audio}" id="comment-audio-input"></audio>
+                                                <audio src="{{ env('BUNNY_CDN_URL') }}${childUltra.audio}" id="comment-audio-input"></audio>
                                                         <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
