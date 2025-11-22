@@ -42,8 +42,22 @@ class AdminActivityController extends Controller
 
     public function getpopFeeds(Request $request)
     {
-        $popfeeds = PopFeeds::with('user')->orderBy('created_at', 'desc')->get()->groupBy('type');
-        return ResponseHelper::sendResponse($popfeeds, 'All Admin Activity Feeds');
+        // All possible feed types
+        $types = ['System', 'Donation', 'Surveys', 'Greetings', 'Event'];
+
+        // Group data by type
+        $feeds = PopFeeds::with('user')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('type');
+
+        // Ensure even empty groups appear
+        $data = [];
+        foreach ($types as $type) {
+            $data[$type] = $feeds->has($type) ? $feeds[$type] : [];
+        }
+
+        return ResponseHelper::sendResponse($data, 'All Admin Activity Feeds');
     }
 
     public function getpublicpopFeeds(Request $request)
