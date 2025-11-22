@@ -27,6 +27,7 @@ use App\Models\Notifications;
 use App\Models\AIVideo;
 use App\Models\PopFeeds;
 use App\Models\NotificationCenter;
+use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Exception;
 use FFMpeg\FFMpeg;
@@ -273,7 +274,7 @@ class FeedsController extends Controller
             }
             foreach ($request->file('images') as $image) {
                 $uniqueName = uniqid() . '___' . str_replace(' ', '_', $image->getClientOriginalName());
-                $storedImage = $image->storeAs("images/user_feeds", $uniqueName, "public");
+                $storedImage = Helpers::fileCDNUpload($image, 'images/user_feeds');
                 $images[] = [
                     'path' => $storedImage,
                     'name' => $image->getClientOriginalName(),
@@ -296,7 +297,7 @@ class FeedsController extends Controller
             }
             foreach ($request->file('videos') as $video) {
                 $uniqueName = uniqid() . '___' . str_replace(' ', '_', $video->getClientOriginalName());
-                $storedVideo = $video->storeAs("videos/user_feeds", $uniqueName, "public");
+                $storedVideo = Helpers::fileCDNUpload($video, 'videos/user_feeds');
                 $videos[] = [
                     'path' => $storedVideo,
                     'name' => $video->getClientOriginalName(),
@@ -417,19 +418,15 @@ class FeedsController extends Controller
         $feed = Feed::find($id);
         if (!empty($feed->images)) {
             foreach ($feed->images as $image) {
-                $file_path = public_path('storage/' . $image['path']);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
+                $bunny = new BunnyCDNService();
+                $bunny->delete($image['path']);
             }
         }
 
         if (!empty($feed->videos)) {
             foreach ($feed->videos as $video) {
-                $file_path = public_path('storage/' . $video['path']);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
+                $bunny = new BunnyCDNService();
+                $bunny->delete($video['path']);
             }
         }
         $shared = Feed::where('parent_id', $id)->get();
@@ -653,7 +650,7 @@ class FeedsController extends Controller
 
         // try {
         if ($request->file('image')) {
-            $image = Helpers::fileUpload($request->image, 'feeds/image');
+            $image = Helpers::fileCDNupload($request->image, 'images/comments/'.$request->feed_type);
         } else {
             $image = null;
         }
@@ -673,7 +670,7 @@ class FeedsController extends Controller
                     return ResponseHelper::sendResponse([], 'You are not Allowed to Voice Comments.', false, 409);
                 }
             }
-            $audio = Helpers::fileUpload($request->audio, 'feeds/audio');
+            $audio = Helpers::fileCDNUpload($request->audio, 'audios/comments/'.$request->feed_type);
         } else {
             $audio = null;
         }
@@ -768,16 +765,16 @@ class FeedsController extends Controller
             // 'feed_type' => 'required',
             'emoji' => 'nullable|string',
         ]);
-
+        $comment = FeedComments::find($id);
         // try {
         if ($request->file('image')) {
-            $image = Helpers::fileUpload($request->image, 'feeds/image');
+            $image = Helpers::fileCDNUpload($request->image, 'images/comments/'.($comment->feed_type ?? 'user_feeds') );
         } else {
             $image = null;
         }
 
         if ($request->file('audio')) {
-            $audio = Helpers::fileUpload($request->audio, 'feeds/audio');
+            $audio = Helpers::fileCDNUpload($request->audio, 'audios/comments/'.($comment->feed_type ?? 'user_feeds') );
         } else {
             $audio = null;
         }
@@ -785,8 +782,6 @@ class FeedsController extends Controller
         if ($image == null && $audio == null && ($request->comment == "" || $request->comment == null) && ($request->emoji == "" || $request->emoji == null)) {
             return ResponseHelper::sendResponse([], 'Select Content Before Comment!', false, 403);
         }
-
-        $comment = FeedComments::find($id);
 
         $comment->comment = $request->comment;
         if ($request->file('audio')) {
@@ -882,34 +877,26 @@ class FeedsController extends Controller
             if ($childs) {
                 foreach ($childs as $child) {
                     if ($child->audio) {
-                        $file_path = public_path('storage/' . $child->audio);
-                        if (file_exists($file_path)) {
-                            unlink($file_path);
-                        }
+                        $bunny = new BunnyCDNService();
+                        $bunny->delete($child->audio);
                     }
 
                     if ($child->image) {
-                        $file_path = public_path('storage/' . $child->image);
-                        if (file_exists($file_path)) {
-                            unlink($file_path);
-                        }
+                        $bunny = new BunnyCDNService();
+                        $bunny->delete($child->image);
                     }
                     $child->delete();
                 }
             }
 
             if ($comment->audio) {
-                $file_path = public_path('storage/' . $comment->audio);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
+                $bunny = new BunnyCDNService();
+                $bunny->delete($comment->audio);
             }
 
             if ($comment->image) {
-                $file_path = public_path('storage/' . $comment->image);
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
+                $bunny = new BunnyCDNService();
+                $bunny->delete($comment->image);
             }
             $comment->delete();
 

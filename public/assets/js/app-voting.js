@@ -57,10 +57,10 @@ $(document).ready(function () {
 
         // To show banner
         const banner_container = editModal.find(".vote-banner.dropzone");
-        banner_container.find("img")[1].src = storagePath(vote.banner);
+        banner_container.find("img")[1].src = base_url + vote.banner;
 
         const banner_view_container = editModal.find(".vote-banner.dropzone");
-        banner_view_container.find("img")[0].src = storagePath(vote.view_banner);
+        banner_view_container.find("img")[0].src = base_url + vote.view_banner;
 
         if (vote.vote_type == 'individual') {
             editModal.find(".vote-header .title").text('Individual Vote')
@@ -69,7 +69,7 @@ $(document).ready(function () {
             for (let i = 0; i < 3; i++) {
                 const option = $(individual_vote_options).find(`div.individual-reaction-option[data-index='${i}']`);
                 let smImage = '';
-                option.find("img")[0].src = storagePath(vote.options[i].image);
+                option.find("img")[0].src = base_url + vote.options[i].image;
                 option.find(`input[name='reaction_option[${i}][title]']`).val(vote.options[i].title);
                 console.log(vote.options[i].image);
                 if (vote.options[i].image !== '' && vote.options[i].image !== null) {
@@ -202,7 +202,7 @@ $(document).ready(function () {
                 }
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                $('.dropzone-img .dz-thumbnail img').attr('src', '/storage/' + response.path);
+                $('.dropzone-img .dz-thumbnail img').attr('src', base_url + response.path);
                 $('.drop-img-edit1').css('height', '212px');
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="image" value="${response.path}" data-path="${response.path}">`;
             },
@@ -279,7 +279,7 @@ $(document).ready(function () {
                 }
                 file.previewElement.dataset.path = response.path;
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
-                $('.dropzone-view-img .dz-thumbnail img').attr('src', '/storage/' + response.path);
+                $('.dropzone-view-img .dz-thumbnail img').attr('src', base_url + response.path);
                 $('.drop-img-edit2').css('height', '212px');
                 hiddenInputsContainer.innerHTML += `<input type="hidden" name="view_image" value="${response.path}" data-path="${response.path}">`;
             },
@@ -343,7 +343,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
-                option.find("img")[0].src = `/storage/${response.path}`;
+                option.find("img")[0].src = base_url+`${response.path}`;
                 option.find(`input[name='reaction_option[${index}][image]']`).val(response.path);
                 option.find(".individual-vote-react-option-image").addClass("uploaded");
                 e.target.value = ''; // reset input so same file can be re-uploaded

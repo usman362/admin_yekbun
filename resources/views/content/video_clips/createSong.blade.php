@@ -15,12 +15,11 @@
 
                 <div class="col-md-6">
                     <label class="form-label" for="fullname">Choose Artist</label>
-                    <select class="form-select" aria-label="Default select example" name="artist_id">
-                        <option selected>Select</option>
+                    <select class="form-select" aria-label="Default select example" id="select_song_artist" name="artist_id">
+                        <option value="" selected>Select</option>
                         @isset($artists)
                             @foreach ($artists as $artist)
-                                <option value="{{ $artist->id }}">{{ $artist->name ?? '' }}
-                                </option>
+                                <option value="{{ $artist->id }}">{{ $artist->name ?? '' }}</option>
                             @endforeach
                         @endisset
                     </select>

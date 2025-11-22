@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
@@ -17,9 +18,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-
         $countries = Country::select('name','flag_path')->orderBy("name", "ASC")->get();
-
         return view("content.settings.countries.index", compact("countries"));
     }
 
@@ -32,31 +31,15 @@ class CountryController extends Controller
     public function store(StoreCountryRequest $request)
     {
         $validated = $request->validated();
-
-
         $flagpath = "";
-
         if ($request->hasFile('dp')) {
-            $randomize = rand(111111, 999999);
-            $extension = $request->file('dp')->extension();
-            $filename = $randomize . '.' . $extension;
-            $image = $request->file('dp')->move('public/images/flags/', $filename);
-            $flagpath = $filename;
+            $file = Helpers::fileCDNUpload($request->dp,'images/countries');
+            $flagpath = $file;
         }
-
-
-
         $cont = new Country();
         $cont->name = $request->name;
-
         $cont->flag_path = $flagpath;
-
-
         $cont->save();
-
-
-        //$country = Country::create($validated);
-
         return back()->with("success", "Country successfully added.");
     }
 
@@ -70,29 +53,15 @@ class CountryController extends Controller
     public function update(UpdateCountryRequest $request, $id)
     {
         $validated = $request->validated();
-
         $country = Country::find($id);
-
         $country->name = $request->name;
-
         $flagpath = "";
-
         if ($request->hasFile('dp')) {
-            $randomize = rand(111111, 999999);
-            $extension = $request->file('dp')->extension();
-            $filename = $randomize . '.' . $extension;
-            $image = $request->file('dp')->move('public/images/flags/', $filename);
-            $flagpath = $filename;
-
+            $file = Helpers::fileCDNUpload($request->dp,'images/countries');
+            $flagpath = $file;
             $country->flag_path = $flagpath;
         }
-
-
-        //$cont->save();
-
-        //$country->fill($validated);
         $country->update();
-
         return back()->with("success", "Country successfully updated.");
     }
 
@@ -105,9 +74,7 @@ class CountryController extends Controller
     public function destroy($id)
     {
         $country = Country::find($id);
-
         $country->delete();
-
         return back()->with("success", "Country successfully deleted.");
     }
 }

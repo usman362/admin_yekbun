@@ -570,3 +570,58 @@ if (typeof $ !== 'undefined') {
     }
   });
 }
+
+// // Disable Right Click
+// document.addEventListener('contextmenu', event => event.preventDefault());
+
+// // Block Shortcuts (Windows + macOS)
+// document.addEventListener('keydown', function(e) {
+//     // General DevTools keys
+//     if (e.key === "F12") e.preventDefault();
+
+//     if (e.key === "Dead") e.preventDefault();
+
+//     // Windows combinations
+//     if (e.ctrlKey && e.shiftKey && ["i", "j", "c", "k"].includes(e.key)) e.preventDefault();
+//     if (e.ctrlKey && e.key === "u") e.preventDefault();
+
+//     if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].includes(e.key)) e.preventDefault();
+//     if (e.ctrlKey && e.key === "U") e.preventDefault();
+
+
+//     // macOS combinations
+//     if (e.metaKey && e.altKey && ["i", "j", "c", "k", "u"].includes(e.key)) e.preventDefault(); // ⌘ + ⌥ + I/J/C/K
+//     if (e.metaKey && e.key === "u") e.preventDefault(); // ⌘ + U
+
+//     if (e.metaKey && e.altKey && ["I", "J", "C", "K", "U"].includes(e.key)) e.preventDefault(); // ⌘ + ⌥ + I/J/C/K
+//     if (e.metaKey && e.key === "U") e.preventDefault(); // ⌘ + U
+// });
+
+// if (window.location.href.startsWith("view-source:")) {
+//     window.location.href = "/403";
+// }
+
+// // DevTools Detection (works on macOS & Windows)
+// (function devtoolsDetector() {
+//     let threshold = 160; // strict for macOS retina screens
+//     function check() {
+//         let widthDiff  = window.outerWidth - window.innerWidth;
+//         let heightDiff = window.outerHeight - window.innerHeight;
+
+//         if (widthDiff > threshold || heightDiff > threshold) {
+//             window.location.href = "/403";
+//         }
+//     }
+//     setInterval(check, 500);
+// })();
+
+// // DevTools Check On Load (debugger trick)
+// (function() {
+//     let start = performance.now();
+//     debugger;
+//     let end = performance.now();
+
+//     if (end - start > 80) { // macOS Safari is faster, so 80ms is safe
+//         window.location.href = "/403";
+//     }
+// })();

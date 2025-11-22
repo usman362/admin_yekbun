@@ -124,7 +124,7 @@
                 maxFiles: 1,
 
                 sending: function(file, xhr, formData) {
-                    formData.append('folder', 'music');
+                    formData.append('folder', 'artist');
                 },
 
                 success: function(file, response) {
@@ -177,7 +177,7 @@
                 .querySelector('input[name="image"]')?.value;
 
             if (existingImagePath) {
-                const imageUrl = '{{ asset('storage') }}/' + existingImagePath.replace(/^\/?/, '');
+                const imageUrl = '{{ env('BUNNY_CDN_URL') }}' + existingImagePath.replace(/^\/?/, '');
 
                 const mockFile = {
                     name: existingImagePath.split('/').pop(),

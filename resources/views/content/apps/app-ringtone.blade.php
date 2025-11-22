@@ -89,7 +89,7 @@
                                     </td>
                                     <td>
                                         <audio controls>
-                                            <source src="{{ asset('storage/' . $ringtone->filePath) }}" type="audio/mpeg">
+                                            <source src="{{ env('BUNNY_CDN_URL') . $ringtone->filePath }}" type="audio/mpeg">
                                             Your browser does not support the audio element.
                                         </audio>
                                     </td>
@@ -215,7 +215,13 @@
                                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                         },
                                         sending: function(file, xhr, formData) {
-                                            formData.append('folder', 'ringtone');
+                                            if($('[name="ringType"]').val() === 1){
+                                                formData.append('folder', 'message_ringtone');
+                                            }else if($('[name="ringType"]').val() === 2){
+                                                formData.append('folder', 'call_ringtone');
+                                            }else{
+                                                formData.append('folder', 'notification_ringtone');
+                                            }
                                         },
                                         success: function(file, response) {
                                             if (file.previewElement) {

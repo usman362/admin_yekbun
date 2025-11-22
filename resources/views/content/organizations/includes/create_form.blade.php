@@ -116,7 +116,7 @@
                 <!-- File Upload Section -->
                 <div class="col-12">
                     <div class="card" style="background: #f2f2f2">
-                        <h5 class="card-header fs-5">Upload Files</h5>
+                        <h5 class="card-header fs-5">Upload File</h5>
                         @error('files')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
@@ -167,6 +167,7 @@
             previewTemplate: previewTemplate,
             parallelUploads: 1,
             maxFilesize: 100,
+            maxFiles: 1,
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'

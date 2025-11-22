@@ -493,7 +493,7 @@
                                     <!-- Banner upload -->
                                     <div style="background-color: #F2F2F2;"
                                         class="limited-banner col-md-12 bg-custom-grey rounded-3 py-2 border-secondary border-dashed banner-wrapper cursor-pointer">
-                                        <div 
+                                        <div
                                             class="d-flex flex-column align-items-center justify-content-center dummy-banner">
                                             <img src="{{ asset('assets/img/icons/donations/plus.png') }}" alt="">
                                             <span class="">Upload Banner</span>

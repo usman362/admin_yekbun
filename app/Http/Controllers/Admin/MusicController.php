@@ -19,6 +19,7 @@ use App\Models\AdminNotification;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
+use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 // use Illuminate\Support\Facades\Storage;
@@ -302,10 +303,8 @@ class MusicController extends Controller
     {
         $music = Song::find($id);
         if ($music->audio) {
-            $file_path = public_path('storage/' . $music->audio);
-            if (file_exists($file_path)) {
-                unlink($file_path);
-            }
+            $bunny = new BunnyCDNService();
+            $bunny->delete($music->audio);
         }
         $music->delete();
         return back()->with("success", "Song successfully deleted.");

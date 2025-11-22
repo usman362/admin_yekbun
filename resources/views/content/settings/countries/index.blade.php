@@ -83,7 +83,7 @@
             <td>{{$loop->iteration}}</td>
             <td>
             @if($country->flag_path != "")
-              <img src="{{asset('/images/flags/' . $country->flag_path)}}" class="flag" onerror="this.src='{{asset('assets/img/sample-flag.png')}}'"/>
+              <img src="{{env('BUNNY_CDN_URL').$country->flag_path}}" class="flag" onerror="this.src='{{asset('assets/img/sample-flag.png')}}'"/>
             @else
             <img src="{{asset('/images/flags/flag.png')}}" class="flag" onerror="this.src='{{asset('assets/img/sample-flag.png')}}'"/>
             @endif

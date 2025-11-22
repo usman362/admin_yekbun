@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Donation;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\MongoDonation;
 use App\Models\MongoOrganization;
@@ -27,26 +28,25 @@ class OrganizationController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-    
+
             /* Check if file is valid */
             if ($file->isValid()) {
-                $originalFileName = $file->getClientOriginalName(); 
-                $imagePath = $file->storeAs('organizations/logo', $originalFileName, 'public'); 
+                $imagePath = Helpers::fileCDNUpload($file, 'images/organizations/logo');
                 $organization->image = $imagePath;
-    
+
             } else {
                 return back()->with('error', 'Uploaded file is not valid');
             }
         } else {
             return back()->with('error', 'No file was uploaded');
         }
-    
+
         if ($organization->save()) {
             return redirect()->back()->with('success', 'Your Organization has been created');
         } else {
             return redirect()->back()->with('error', 'Failed to create Organization');
         }
-        
+
     }
 
     public function organization_destroy($id) {
@@ -87,23 +87,21 @@ class OrganizationController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-    
+
             /* Check if file is valid */
             if ($file->isValid()) {
-                $originalFileName = $file->getClientOriginalName(); 
-                $imagePath = $file->storeAs('organizations/logo', $originalFileName, 'public'); 
+                $imagePath = Helpers::fileCDNUpload($file, 'images/organizations/logo');
                 $organization->image = $imagePath;
-    
             } else {
                 return back()->with('error', 'Uploaded file is not valid');
             }
         }
-    
+
         if ($organization->save()) {
             return redirect()->back()->with('success', 'Your Organization has been created');
         } else {
             return redirect()->back()->with('error', 'Failed to create Organization');
         }
-        
+
     }
 }

@@ -335,7 +335,7 @@
                                 </td>
                                 <td>
                                     @if (!empty($vote->banner))
-                                        <img class="vote-banner-image" src='{{ asset('storage/' . $vote->view_banner) }}'
+                                        <img class="vote-banner-image" src='{{ env('BUNNY_CDN_URL') . $vote->view_banner }}'
                                             width="100" />
                                     @endif
                                 </td>
@@ -351,7 +351,7 @@
                                             <div class="d-flex align-items-center {{ $index > 0 ? 'ms-3' : '' }}"
                                                 style="background:#f5f5f5; border-radius:5px; padding: 5px 10px;">
                                                 @if (!empty($option['image']))
-                                                    <img src="{{ asset('storage/' . $option['image']) }}"
+                                                    <img src="{{ env('BUNNY_CDN_URL') . $option['image'] }}"
                                                         class="vote-option-image" />
                                                 @else
                                                     @if ($index == 0)
@@ -488,7 +488,7 @@
                                 </td>
                                 <td>
                                     @if (!empty($vote->banner))
-                                        <img class="vote-banner-image" src='{{ asset('storage/' . $vote->view_banner) }}'
+                                        <img class="vote-banner-image" src='{{ env('BUNNY_CDN_URL') . $vote->view_banner }}'
                                             width="100" />
                                     @endif
                                 </td>
@@ -504,7 +504,7 @@
                                             <div class="d-flex align-items-center {{ $index > 0 ? 'ms-3' : '' }}"
                                                 style="background:#f5f5f5; border-radius:5px; padding: 5px 10px;">
                                                 @if (!empty($option['image']))
-                                                    <img src="{{ asset('storage/' . $option['image']) }}"
+                                                    <img src="{{ env('BUNNY_CDN_URL') . $option['image'] }}"
                                                         class="vote-option-image" />
                                                 @else
                                                     @if ($index == 0)
@@ -676,8 +676,7 @@
                                                 alt>&nbsp;
                                             1258</span>
                                         <div class="progress mt-1"
-                                            style="width: 60px; height: 8px; background: #1BC4694D;
-">
+                                            style="width: 60px; height: 8px; background: #1BC4694D;">
                                             <div class="progress-bar bg-success-01" role="progressbar" style="width: 50%"
                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
@@ -696,8 +695,7 @@
                                     <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18"
                                             alt>&nbsp;
                                         1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #1CA2ED4D;
-">
+                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #1CA2ED4D;">
                                         <div class="progress-bar bg-info-01" role="progressbar" style="width: 80%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -713,8 +711,7 @@
                                                 alt>&nbsp;
                                             1258</span>
                                         <div class="progress mt-1"
-                                            style="width: 60px; height: 8px; background: #1BC4694D;
-">
+                                            style="width: 60px; height: 8px; background: #1BC4694D;">
                                             <div class="progress-bar bg-success-01" role="progressbar" style="width: 50%"
                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
@@ -733,15 +730,12 @@
                                     <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18"
                                             alt>&nbsp;
                                         1258</span>
-                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #1CA2ED4D;
-">
+                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #1CA2ED4D;">
                                         <div class="progress-bar bg-info-01" role="progressbar" style="width: 80%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
                         <!-- Age and Gender Stats -->
@@ -873,6 +867,9 @@
 
 @section('page-script')
 
+    <script>
+        const base_url = "{{env('BUNNY_CDN_URL')}}";
+    </script>
     @if (config('app.asset_mode') === 'public')
         <script src="assets/js/app-voting.js"></script>
         <script src="assets/js/app-upload-audio.js"></script>

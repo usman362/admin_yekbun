@@ -477,6 +477,9 @@
 
             });
         });
+        // $('[name="artist_id"]').change(function(){
+        //     $('#selected_artist').val($(this).find('option:selected').text());
+        // });
     </script>
 
     <script>
@@ -512,7 +515,15 @@
                 acceptedFiles: acceptedFiles, // Accept specified file types
                 maxFiles: limit, // Allow only one file to be selected
                 sending: function(file, xhr, formData) {
-                    formData.append('folder', folder);
+                    if(folder == 'audios/artist'){
+                        let folderNew = 'artist/' + $('#select_song_artist').find('option:selected').text();
+                        formData.append('folder', folderNew);
+                    }else if(folder == 'videos/artist'){
+                        let folderNew = 'artist/' + $('#createvideoForm #artist_id').find('option:selected').text();
+                        formData.append('folder', folderNew);
+                    } else{
+                        formData.append('folder', folder);
+                    }
                 },
                 success: function(file, response) {
                     if (file.previewElement) {
@@ -529,7 +540,7 @@
                     });
 
                     if (limit == 1) {
-                        if (folder === 'audios') {
+                        if (folder === 'audios/artist') {
                             hiddenInputsContainer.innerHTML +=
                                 `<input type="hidden" name="${fileInputName}_file_name" id="file_name" value="${extractCleanTitle(response.path)}">`;
                         } else {
@@ -541,7 +552,7 @@
                         hiddenInputsContainer.innerHTML +=
                             `<input type="hidden" name="${fileInputName}_file_size" id="file_size" value="${response.size}">`;
                     } else {
-                        if (folder === 'audios') {
+                        if (folder === 'audios/artist') {
                             hiddenInputsContainer.innerHTML +=
                                 `<input type="hidden" name="${fileInputName}_file_name[]" value="${extractCleanTitle(response.path)}">`;
                         } else {
@@ -554,7 +565,7 @@
                             `<input type="hidden" name="${fileInputName}_file_size[]" value="${response.size}">`;
                         dropzoneKey++;
                     }
-                    if (folder === 'images' && folder !== 'videos') {
+                    if (folder === 'images/artist' && folder !== 'videos/artist') {
                         if ($('#createartistForm [name="status"]').val() !== '') {
                             $('.submit-artist-btn').attr('disabled', false);
                         }
@@ -612,11 +623,9 @@
 
         // Initialize multiple Dropzones
         document.addEventListener('DOMContentLoaded', function() {
-            initializeDropzone('#dropzone-artist-img', 'image', 'images', 'image/*');
-            initializeDropzone('#dropzone-video', 'video', 'videos', 'video/*');
-            initializeDropzone('#dropzone-song', 'songs[]', 'audios', 'audio/*', 100);
-            initializeDropzone('#dropzone-audio', 'audio', 'audios', 'audio/*');
-
+            initializeDropzone('#dropzone-artist-img', 'image', 'images/artist', 'image/*');
+            initializeDropzone('#dropzone-video', 'video', 'videos/artist', 'video/*');
+            initializeDropzone('#dropzone-song', 'songs[]', 'audios/artist', 'audio/*', 100);
         });
 
         function extractCleanTitle(filePath) {
@@ -681,7 +690,15 @@
         })
 
         $('#createvideoForm [name="status"]').change(function() {
-            if ($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== '') {
+            if ($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== '' && $('#createvideoForm #artist_id').val() !== '') {
+                $('.submit-video-btn').attr('disabled', false);
+            } else {
+                $('.submit-video-btn').attr('disabled', true);
+            }
+        })
+
+        $('#createvideoForm #artist_id').change(function() {
+            if ($('#createvideoForm .hidden-inputs').html() !== "" && $(this).val() !== '' && $('#createvideoForm [name="status"]').val() !== '') {
                 $('.submit-video-btn').attr('disabled', false);
             } else {
                 $('.submit-video-btn').attr('disabled', true);
@@ -710,7 +727,7 @@
                 let src = $(this).attr('src');
                 $('.dz-thumbnail img').attr('src', src);
                 $('#thumbnail').val(src);
-                if ($('#createvideoForm [name="status"]').val() !== '') {
+                if ($('#createvideoForm [name="status"]').val() !== '' && $('#createvideoForm artist_id').val() !== '') {
                     $('.submit-video-btn').attr('disabled', false);
                 }
             })
@@ -777,7 +794,9 @@
                                         <td><p class="m-0">${song.name}</p>
                                             <small><i>${song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB'}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
-                                        <td><audio src="{{ asset('storage/${song.audio}') }}" controls></audio></td>
+                                        <td>
+                                            <audio src="{{ env('BUNNY_CDN_URL').'${song.audio}' }}" controls></audio>
+                                        </td>
                                         <td>${song.total_listen || 'N/A'}</td>
                                         <td>
                                             <div class="d-flex justify-content-start align-items-center">
@@ -821,7 +840,7 @@
                                 var photoThumbnail;
                                 if (video.thumbnail !== null) {
                                     photoThumbnail = `
-                                        <div style="background-image: url('{{ asset('storage/${video.thumbnail}') }}');" class="card-post-thumbnail">
+                                        <div style="background-image: url('{{ env('BUNNY_CDN_URL').'${video.thumbnail}' }}');" class="card-post-thumbnail">
                                             <span class="video-thumbnail-duration">${video.video_file_length || '00:00'}</span>
                                         </div>`;
                                 } else {
@@ -834,7 +853,7 @@
 
                                 <div class="col-md-4">
                                     <div class="post-image">
-                                        <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post" data-fancybox="post1" data-lightbox-type="comments" data-thumb="{{ asset('storage/${video.video}') }}" href="{{ asset('storage/${video.video}') }}" data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ asset('storage/${video.video}') }}">
+                                        <div id="feed-post-1" class="card is-post mt-4 pt-3 pl-4 pr-4 view-post card-post" data-fancybox="post1" data-lightbox-type="comments" data-thumb="{{ env('BUNNY_CDN_URL').'${video.video}'}}" href="{{ env('BUNNY_CDN_URL').'${video.video}'}}" data-id="67ef066938c58e2bce0a4d72" data-demo-href="{{ env('BUNNY_CDN_URL').'${video.video}'}}">
                                             <!-- Main wrap -->
                                             <div class="content-wrap">
 
@@ -880,7 +899,7 @@
                                                     <div class="col-md-6" style="border-right: 1px solid #c0c0c0">
                                                         <a class="dropdown-item edit-video" style="padding: 0" href="javascript:void(0)"
                                                         data-id="${video._id}"
-                                                        data-thumbnail="{{ asset('storage/${video.thumbnail}') }}"
+                                                        data-thumbnail="{{ env('BUNNY_CDN_URL').'${video.thumbnail}' }}"
                                                         data-artist_id="${video.artist_id}"
                                                         data-status="${video.status}"
                                                         for="customRadioPrime">
@@ -959,7 +978,15 @@
             });
 
             $('[name="music_type"]').change(function() {
-                if ($(this).val() !== "" && $(this).val() !== null) {
+                if ($(this).val() !== "" && $('#select_song_artist').val() !== "") {
+                    $('#song-upload').css('display', 'block');
+                } else {
+                    $('#song-upload').css('display', 'none');
+                }
+            })
+
+            $('#select_song_artist').change(function() {
+                if ($(this).val() !== "" && $('#music_type').val() !== "") {
                     $('#song-upload').css('display', 'block');
                 } else {
                     $('#song-upload').css('display', 'none');

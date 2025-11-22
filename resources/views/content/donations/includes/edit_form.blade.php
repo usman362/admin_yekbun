@@ -20,31 +20,31 @@
                                 <div class="category-wrapper bg-white rounded-3 p-3 d-flex flex-column gap-2 align-items-center cursor-pointer border border-2 border-primary">
                                     <input type="hidden" class="organization-id" value="{{$org->_id}}">
                                     <div class="rounded-circle banner-cover-div" style="width: 5vw;height: 5vw;">
-                                        <img class="rounded-circle bg-secondary" style="object-fit:cover; height: 100%; width: 100%;" src="{{asset('storage/'.$org->image)}}" alt="{{$org->organization_name}}">
+                                        <img class="rounded-circle bg-secondary" style="object-fit:cover; height: 100%; width: 100%;" src="{{env('BUNNY_CDN_URL').$org->image}}" alt="{{$org->organization_name}}">
                                     </div>
                                     <div class="d-flex flex-column align-items-center">
                                         <span class="organization-name text-primary fs-5">{{$org->organization_name}}</span>
                                         <small class="text-light small join-date">{{$org->created_at->format('F j, Y')}}</small>
                                     </div>
-                                </div> 
+                                </div>
                             @else
                                 <div class="category-wrapper bg-white rounded-3 p-3 d-flex flex-column gap-2 align-items-center cursor-pointer">
                                     <input type="hidden" class="organization-id" value="{{$org->_id}}">
                                     <div class="rounded-circle banner-cover-div" style="width: 5vw;height: 5vw;">
-                                        <img class="rounded-circle bg-secondary" style="object-fit:cover; height: 100%; width: 100%;" src="{{asset('storage/'.$org->image)}}" alt="{{$org->organization_name}}">
+                                        <img class="rounded-circle bg-secondary" style="object-fit:cover; height: 100%; width: 100%;" src="{{env('BUNNY_CDN_URL').$org->image}}" alt="{{$org->organization_name}}">
                                     </div>
                                     <div class="d-flex flex-column align-items-center">
                                         <span class="organization-name fs-5">{{$org->organization_name}}</span>
                                         <small class="text-light small join-date">{{$org->created_at->format('F j, Y')}}</small>
                                     </div>
-                                </div> 
+                                </div>
                             @endif
                         @endforeach
                     </div>
                 </div>
                 @if ($donation->image)
                     <div class="col-md-12 editDonation-banner bg-custom-grey rounded-3 py-2 border-secondary border-dashed banner-wrapper cursor-pointer">
-                        <img src="{{asset('storage/'.$donation->image)}}" alt="{{$donation->title}}" class="w-100 h-100 object-fit-cover">
+                        <img src="{{env('BUNNY_CDN_URL').$donation->image}}" alt="{{$donation->title}}" class="w-100 h-100 object-fit-cover">
                     </div>
                 @else
                     <div class="col-md-12 editDonation-banner bg-custom-grey rounded-3 py-2 border-secondary border-dashed banner-wrapper cursor-pointer">
@@ -53,7 +53,7 @@
                             <span class="">Upload Banner</span>
                             <small class="text-light">JPG or PNG</small>
                         </div>
-                    </div>   
+                    </div>
                 @endif
                 <input type="file" name="banner" id="banner_files" class="d-none" accept="image/jpeg, image/png">
                 <div class="col-md-12 bg-custom-grey rounded-3 py-2">
@@ -91,7 +91,7 @@
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                         <div class="col-6">
-                            <select type="text" class="form-select" name="currency"> 
+                            <select type="text" class="form-select" name="currency">
                                 <option value="" selected> Currency</option>
                                 <option value="$"{{$donation->currency == "$"? "selected": ""}}>$</option>
                             </select>
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-sm-6 p-1">
                                 <div style="background-color: #fff;border-radius: 20px;" class="d-flex justify-content-between py-1 px-2 align-items-center">
                                     <span class="time d-flex justify-content-center align-items-center fs-5">G Pay</span>
@@ -130,7 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-sm-6 p-1">
                                 <div style="background-color: #fff;border-radius: 20px;" class="d-flex justify-content-between py-1 px-2 align-items-center">
                                     <span class="time d-flex justify-content-center align-items-center fs-5">Others</span>

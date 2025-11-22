@@ -82,7 +82,7 @@
                                 <div class="d-flex justify-content-start align-items-center user-name">
                                     <div class="avatar-wrapper">
                                         <div class="avatar me-2">
-                                            <img src="{{ asset('storage/' . $organization->image) }}" alt="Avatar"
+                                            <img src="{{ env('BUNNY_CDN_URL') . $organization->image }}" alt="{{ $organization->organization_name }}"
                                                 class="rounded-circle">
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                     @include('content.organizations.includes.create_form')
                 </div>
                 <div class="modal-footer p-5 d-flex justify-content-center">
- 
+
 
                             <button type="submit" class="btn btn-light fs-3" style="background-color: #F2F2F2;" form="createOrgForm">Create <img
                                 src="{{ asset('assets/img/icons/donations/send.png') }}" alt="send btn"

@@ -1365,9 +1365,9 @@
                                                     class="pop_action edit_popup1" data-bs-toggle="modal"
                                                     data-bs-target="#modal{{ $modalnumber }}" for="customRadioPrime"
                                                     data-id="{{ $feed->_id }}" data-name="{{ $feed->title }}"
-                                                    data-image="{{ asset('storage/' . $feed->image) }}"
-                                                    data-video="{{ asset('storage/' . $feed->video) }}"
-                                                    data-audio="{{ asset('storage/' . $feed->audio) }}"
+                                                    data-image="{{ env('BUNNY_CDN_URL') . $feed->image }}"
+                                                    data-video="{{ env('BUNNY_CDN_URL') . $feed->video }}"
+                                                    data-audio="{{ env('BUNNY_CDN_URL') . $feed->audio }}"
                                                     data-start="{{ $feed->date_start }}"
                                                     data-end="{{ $feed->date_ends }}" data-type="{{ $feed->type }}"
                                                     data-option="{{ $feed->share_option }}"
@@ -1391,31 +1391,31 @@
                                                 <!-- Custom controls are defined here -->
                                                 {{-- <video src="{{ asset('storage/' . $feed->video) }}" style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block"></video> --}}
                                                 <a class="view-post" data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{ asset('storage/' . $feed->video) }}"
-                                                    href="{{ asset('storage/' . $feed->video) }}"
+                                                    data-thumb="{{ env('BUNNY_CDN_URL') . $feed->video }}"
+                                                    href="{{ env('BUNNY_CDN_URL') . $feed->video }}"
                                                     data-id="{{ $feed->_id }}"
-                                                    data-demo-href="{{ asset('storage/' . $feed->video) }}">
+                                                    data-demo-href="{{ env('BUNNY_CDN_URL') . $feed->video }}">
                                                     <video id="my-player" class="video-js" controls preload="auto"
                                                         {{-- poster="//vjs.zencdn.net/v/oceans.png" --}} data-setup='{}'
                                                         style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                                        <source src="{{ asset('storage/' . $feed->video) }}"
+                                                        <source src="{{ env('BUNNY_CDN_URL') . $feed->video }}"
                                                             type="video/mp4">
                                                         </source>
                                                     </video>
                                                 </a>
                                             @else
                                                 <a class="view-post" data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{ asset('storage/' . $feed->image) }}"
-                                                    href="{{ asset('storage/' . $feed->image) }}"
+                                                    data-thumb="{{ env('BUNNY_CDN_URL'). $feed->image }}"
+                                                    href="{{ env('BUNNY_CDN_URL'). $feed->image }}"
                                                     data-id="{{ $feed->_id }}"
-                                                    data-demo-href="{{ asset('storage/' . $feed->image) }}">
-                                                    <img src="{{ asset('storage/' . $feed->image) }}"
+                                                    data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->image}}">
+                                                    <img src="{{ env('BUNNY_CDN_URL'). $feed->image }}"
                                                         style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block">
                                                 </a>
                                                 {{-- <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008129.svg') }}"
                                                 style="width:20px;height:20px;margin:5px;border-radius:5px;object-fit:cover;color:#fff"> --}}
                                                 @if ($feed->audio !== '' && $feed->audio !== null)
-                                                    <audio src="{{ asset('storage/' . $feed->audio) }}"
+                                                    <audio src="{{ env('BUNNY_CDN_URL') . $feed->audio }}"
                                                         id="feed-audio-{{ $feed->id }}"></audio>
                                                     <div class="audio-icon-play d-none"
                                                         id="audio-icon-play{{ $feed->id }}"
@@ -3029,13 +3029,13 @@
             data.data.comments.forEach(function(data, index) {
                 let child = '';
                 if (data.image && data.image.trim() !== "" && data.image !== "null" && data.image !== null) {
-                    commentData = `<img src="{{ asset('storage') }}/${data.image}" width="80" height="80">`;
+                    commentData = `<img src="{{ env('BUNNY_CDN_URL')${data.image}" width="80" height="80">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData =
-                        `<img src="{{ asset('/') }}storage/${data?.emoji_data?.image}" width="80" height="80">`;
+                        `<img src="{{ env('BUNNY_CDN_URL')${data?.emoji_data?.image}" width="80" height="80">`;
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                   <audio src="{{ asset('storage') }}/${data.audio}" id="comment-audio-input"></audio>
+                                   <audio src="{{ env('BUNNY_CDN_URL')${data.audio}" id="comment-audio-input"></audio>
                                         <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                             <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                             <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3080,15 +3080,15 @@
                         if (child.image && child.image.trim() !== "" && child.image !== "null" && child
                             .image !== null) {
                             commentData =
-                                `<img src="{{ asset('storage') }}/${child.image}" width="80" height="80">`;
+                                `<img src="{{ env('BUNNY_CDN_URL')${child.image}" width="80" height="80">`;
                         } else if (child.emoji && child.emoji.trim() !== "" && child.emoji !== "null" &&
                             child.emoji !== null) {
                             commentData =
-                                `<img src="{{ asset('/') }}storage/${child?.emoji_data?.image}" width="80" height="80">`;
+                                `<img src="{{ env('BUNNY_CDN_URL')${child?.emoji_data?.image}" width="80" height="80">`;
                         } else if (child.audio && child.audio.trim() !== "" && child.audio !== "null" &&
                             child.audio !== null) {
                             commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                        <audio src="{{ asset('storage') }}/${child.audio}" id="comment-audio-input"></audio>
+                                        <audio src="{{ env('BUNNY_CDN_URL')${child.audio}" id="comment-audio-input"></audio>
                                                 <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                                     <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">
@@ -3139,15 +3139,15 @@
                                 if (childUltra.image && childUltra.image.trim() !== "" && childUltra
                                     .image !== "null" && childUltra.image !== null) {
                                     commentData =
-                                        `<img src="{{ asset('storage') }}/${childUltra.image}" width="80" height="80">`;
+                                        `<img src="{{ env('BUNNY_CDN_URL')${childUltra.image}" width="80" height="80">`;
                                 } else if (childUltra.emoji && childUltra.emoji.trim() !== "" &&
                                     childUltra.emoji !== "null" && childUltra.emoji !== null) {
                                     commentData =
-                                        `<img src="{{ asset('/') }}storage/${childUltra?.emoji_data?.image}" width="80" height="80">`;
+                                        `<img src="{{ env('BUNNY_CDN_URL')${childUltra?.emoji_data?.image}" width="80" height="80">`;
                                 } else if (childUltra.audio && childUltra.audio.trim() !== "" &&
                                     childUltra.audio !== "null" && childUltra.audio !== null) {
                                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
-                                                <audio src="{{ asset('storage') }}/${childUltra.audio}" id="comment-audio-input"></audio>
+                                                <audio src="{{ env('BUNNY_CDN_URL')${childUltra.audio}" id="comment-audio-input"></audio>
                                                         <div style="height: 37px;width:100%; display: flex; align-items: center; justify-content: start; margin-top: 40px; border-radius: 10px; margin: 7px; align-self: flex-end;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Play" class="img-fluid" id="comment-audio-play" style="height: 14px; width: 19px;">
                                                             <img src="{{ asset('assets/svg/svg-dialog/Eo_circle_green_pause.svg') }}" alt="Pause" class="img-fluid" id="comment-audio-pause" style="height: 14px; width: 19px; display: none;">

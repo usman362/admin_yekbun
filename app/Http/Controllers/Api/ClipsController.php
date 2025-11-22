@@ -13,6 +13,7 @@ use App\Models\ClipTemplates;
 use App\Models\NotificationCenter;
 use App\Models\User;
 use App\Models\UserVideo;
+use App\Services\BunnyCDNService;
 use App\Models\Video;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
@@ -51,103 +52,135 @@ class ClipsController extends Controller
     public function store_clips(Request $request)
     {
         $request->validate([
-            'video' => 'required|file'
+            'video' => 'required'
         ]);
 
-        $clip = new Clips();
+        $bunny = new BunnyCDNService();
+        $clip  = new Clips();
+        $uid   = uniqid();
+
         $clip->template_id = $request->template_id;
+        $clip->emoji       = $request->emoji;
+        $clip->share_with  = $request->share_with;
+        $clip->user_id     = Auth::id();
+        $clip->text        = $request->text;
+        $clip->text_properties = $request->text_properties;
+
+        // ------------------------------------
+        // Upload Thumbnail to Bunny
+        // ------------------------------------
         if ($request->hasFile('thumbnail')) {
-            $thumbnail =  Helpers::fileUpload($request->thumbnail, 'clips-thumbnail');
+            $thumbnail = Helpers::fileCDNUpload($request->thumbnail, 'images/thumbnails/clips');
         } else {
             $thumbnail = '';
         }
         $clip->thumbnail = $thumbnail;
-        // if ($request->hasFile('video')) {
-        //     $video =  Helpers::fileUpload($request->video, 'clips-video');
-        // } else {
-        //     $video = '';
-        // }
-        $uid = uniqid();
-        $clip->emoji = $request->emoji;
-        $clip->share_with = $request->share_with;
-        $clip->user_id = Auth::id();
-        $clip->text = $request->text;
-        $clip->text_properties = $request->text_properties;
-        $videoPath = $request->video;
+
+        // ------------------------------------
+        // Download the main video from BunnyCDN
+        // Because request->video is RELATIVE PATH e.g. "videos/xyz.mp4"
+        // ------------------------------------
+        $videoPath = $this->downloadFromBunny($request->video);
+
+        // ------------------------------------
+        // Determine Audio Track
+        // ------------------------------------
         $audioPath = public_path('audios/empty.mp3');
+
         if ($request->hasFile('audio')) {
-            // If uploading a new file
-            $audioPath = $request->audio;
-        } else {
-            // If no new file, check if the given audio exists in storage
-            if (!empty($request->audio) && Storage::exists('public/' . $request->audio)) {
-                $audioPath = storage_path('app/public/' . $request->audio);
-            } else {
-                // fallback audio
-                $audioPath = public_path('audios/empty.mp3');
-            }
+            // Upload new audio to Bunny
+            $audioPath = Helpers::fileCDNUpload($request->audio, 'audios/clips');
+
+            // Download that audio back for FFmpeg processing
+            $audioPath = $this->downloadFromBunny($audioPath);
         }
-        $outputPath = storage_path('app/public/videos/clip_' . $uid . '.mp4');
-        $text = $request->text ?? 'Default Text';
-        $videoVolume = $request->video_volume ?? 0.8; // 80% of original video volume
-        $audioVolume = $request->audio_volume ?? 0.5; // 50% of added background audio
 
-        $x = $request->x ?? '(w-text_w)/2';
-        $y = $request->y ?? '(h-text_h)/2';
-        $fontSize = $request->fontSize ?? 36;
-        $fontColor = $request->color ?? 'white';
-        // Escape text properly for shell
-        $escapedText = escapeshellarg($text);
+        // ------------------------------------
+        // FFmpeg merge (Video + Audio)
+        // ------------------------------------
+        $outputFilename = 'clip_' . $uid . '.mp4';
+        $outputPath     = storage_path('app/temp/' . $outputFilename);
 
-        // 👉 Get font file name from request
-        $fontFileName = $request->fontFamily; // Example: 'Roboto-Bold'
-        $fontPath = $fontFileName ? public_path('fonts/' . $fontFileName . '.tff') : null;
+        $videoVolume = $request->video_volume ?? 0.8;
+        $audioVolume = $request->audio_volume ?? 0.5;
 
-        // Optional: Validate file exists
-        // if ($fontPath && !file_exists($fontPath)) {
-        //     return response()->json(['error' => 'Font file not found.'], 400);
-        // }
+        // Render text properties (optional)
+        $text = escapeshellarg($request->text ?? 'Default Text');
 
-        // Fontfile option
-        $fontOption = $fontPath ? "fontfile={$fontPath}:" : '';
-
-        // FFmpeg command WITHOUT custom font
-        $command = "ffmpeg -i {$videoPath} -i {$audioPath} -filter_complex " .
+        $command = "ffmpeg -i \"$videoPath\" -i \"$audioPath\" -filter_complex " .
             "\"[1:a]volume={$audioVolume}[a1];[0:a]volume={$videoVolume}[a2];" .
             "[a1][a2]amix=inputs=2:duration=first[a]\" " .
-            "-map 0:v -map \"[a]\" -shortest {$outputPath}";
+            "-map 0:v -map \"[a]\" -shortest \"$outputPath\" -y";
 
+        exec($command, $output, $returnCode);
 
-        exec($command, $output, $return_var);
-
-        if ($return_var === 0) {
-            $clip->clip = Str::after($outputPath, 'public/');
+        if ($returnCode !== 0) {
+            return response()->json(['error' => 'FFmpeg processing failed'], 500);
         }
-        // else {
-        //     return response()->json(['error' => 'FFmpeg processing failed.'], 500);
-        // }
+
+        // ------------------------------------
+        // Upload FINAL clip to BunnyCDN
+        // ------------------------------------
+        $content = file_get_contents($outputPath);
+        $mime    = mime_content_type($outputPath);
+
+        $finalCDNPath = $bunny->upload(
+            'clips-video',
+            $outputFilename,
+            $content,
+            $mime
+        );
+
+        // Remove local temp file
+        unlink($outputPath);
+
+        // Save relative path only
+        $clip->clip = $finalCDNPath;       // e.g. "clips-video/clip_1234.mp4"
         $clip->save();
+
+        // ------------------------------------
+        // Save in UserVideo table
+        // ------------------------------------
         UserVideo::create([
             'user_id' => Auth::id(),
-            'video' => Str::after($outputPath, 'public/')
+            'video'   => $finalCDNPath,
         ]);
-        $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Clip.';
+
+        // ------------------------------------
+        // Send notifications
+        // ------------------------------------
+        $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted a new Clip.';
+
         $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
-        if ($users) {
-            foreach ($users as $user) {
-                NotificationHelper::sendNotification($user->id, 'Clips Notification', $description);
-                NotificationCenter::create([
-                    'title' => 'Clips Notification',
-                    'description' => $description,
-                    'user_id' => $user->id,
-                    'user_image' => $user->image ?? null,
-                    'type' => 'clips',
-                    'is_read' => 0,
-                ]);
-            }
+
+        foreach ($users as $user) {
+            NotificationHelper::sendNotification($user->id, 'Clips Notification', $description);
+
+            NotificationCenter::create([
+                'title'       => 'Clips Notification',
+                'description' => $description,
+                'user_id'     => $user->id,
+                'user_image'  => $user->image ?? null,
+                'type'        => 'clips',
+                'is_read'     => 0,
+            ]);
         }
-        return ResponseHelper::sendResponse($clip, 'Clip has been Created Successfully!');
+
+        return ResponseHelper::sendResponse($clip, 'Clip has been created successfully!');
     }
+
+
+    public function downloadFromBunny($relativePath)
+    {
+        $temp = storage_path('app/temp/' . uniqid() . '_' . basename($relativePath));
+
+        $fullUrl = env('BUNNY_CDN_URL') . ltrim($relativePath, '/');
+
+        file_put_contents($temp, file_get_contents($fullUrl));
+
+        return $temp;
+    }
+
 
     public function store_templates(Request $request)
     {
@@ -158,10 +191,10 @@ class ClipsController extends Controller
         $clip->json_name = $request->json_name[0] ?? '';
         $clip->save();
         if ($request->hasFile('json_file')) {
-            $clip->json_file = Helpers::fileUpload($request->json_file, 'json_files');
+            $clip->json_file = Helpers::fileCDNUpload($request->json_file, 'files/clip_template_json');
         }
         if ($request->hasFile('video')) {
-            $clip->video = Helpers::fileUpload($request->video, 'videos');
+            $clip->video = Helpers::fileCDNUpload($request->video, 'videos/clip_template');
         }
         return back();
     }
@@ -173,14 +206,12 @@ class ClipsController extends Controller
             return ResponseHelper::sendResponse([], 'Clip Not Found', false, 401);
         }
         if (isset($clip->thumbnail)) {
-            if (Storage::exists($clip->thumbnail)) {
-                Storage::delete($clip->thumbnail);
-            }
+            $bunny = new BunnyCDNService();
+            $bunny->delete($clip->thumbnail);
         }
         if (isset($clip->clip)) {
-            if (Storage::exists($clip->clip)) {
-                Storage::delete($clip->clip);
-            }
+            $bunny = new BunnyCDNService();
+            $bunny->delete($clip->clip);
         }
         if ($clip->delete()) {
             return ResponseHelper::sendResponse([], 'Clip has been Deleted Successfully');

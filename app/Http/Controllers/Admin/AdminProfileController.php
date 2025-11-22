@@ -200,12 +200,12 @@ class AdminProfileController extends Controller
                         // Check if the file is a video (e.g., MP4)
                         if (in_array($fileExtension, ['mp4', 'mov', 'avi'])) {
                             // Save the file in the "videos" directory
-                            $filePath = $file->storeAs("/videos", $fileName, "public");
+                            $filePath = Helpers::fileCDNUpload($file,'admin_activity/videos/'.$poptyp);
                             $postpop->video = $filePath; // Assuming you have a `video` column in your database
                             $postpop->image = '';
                         } else {
                             // Assume it's an image and save it in the "images" directory
-                            $filePath = $file->storeAs("/images", $fileName, "public");
+                            $filePath = Helpers::fileCDNUpload($file,'admin_activity/images/'.$poptyp);
                             $postpop->image = $filePath; // Assuming you have an `image` column in your database
                             $postpop->video = '';
                         }
@@ -214,7 +214,7 @@ class AdminProfileController extends Controller
                     if ($request->hasFile('audio')) {
                         $audio = $request->file('audio');
                         $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
-                        $audioPath =  $audio->storeAs("/audio", $audioName, "public");
+                        $audioPath = Helpers::fileCDNUpload($audio,'admin_activity/audios/'.$poptyp);
                         $postpop->audio = $audioPath;
                     }
 
@@ -245,21 +245,21 @@ class AdminProfileController extends Controller
                     if ($request->hasFile('icon1')) {
                         $image = $request->file('icon1');
                         $icon1 = time() . '-icon1.' . $image->getClientOriginalExtension();
-                        $icon1Path =  $image->storeAs("/images/icons", $icon1, "public");
+                        $icon1Path  = Helpers::fileCDNUpload($image,'admin_activity/icons/'.$poptyp);
                         $data[0]['icon'] = $icon1Path;
                         // $postpop->icon1 = $icon1Path;
                     }
                     if ($request->hasFile('icon2')) {
                         $image = $request->file('icon2');
                         $icon2 = time()  . '-icon2.' . $image->getClientOriginalExtension();
-                        $icon2Path =  $image->storeAs("/images/icons", $icon2, "public");
+                        $icon2Path  = Helpers::fileCDNUpload($image,'admin_activity/icons/'.$poptyp);
                         // $postpop->icon2 = $icon2Path;
                         $data[1]['icon'] = $icon2Path;
                     }
                     if ($request->hasFile('icon3')) {
                         $image = $request->file('icon3');
                         $icon3 = time()  . '-icon3.' . $image->getClientOriginalExtension();
-                        $icon3Path =  $image->storeAs("/images/icons", $icon3, "public");
+                        $icon3Path  = Helpers::fileCDNUpload($image,'admin_activity/icons/'.$poptyp);
                         // $postpop->icon3 = $icon3Path;
                         $data[2]['icon'] = $icon3Path;
                     }
@@ -272,12 +272,12 @@ class AdminProfileController extends Controller
                         // Check if the file is a video (e.g., MP4)
                         if (in_array($fileExtension, ['mp4', 'mov', 'avi'])) {
                             // Save the file in the "videos" directory
-                            $filePath = $file->storeAs("/videos", $fileName, "public");
+                            $filePath = Helpers::fileCDNUpload($file,'admin_activity/videos/'.$poptyp);
                             $postpop->video = $filePath; // Assuming you have a `video` column in your database
                             $postpop->image = '';
                         } else {
                             // Assume it's an image and save it in the "images" directory
-                            $filePath = $file->storeAs("/images", $fileName, "public");
+                            $filePath = Helpers::fileCDNUpload($file,'admin_activity/images/'.$poptyp);
                             $postpop->image = $filePath; // Assuming you have an `image` column in your database
                             $postpop->video = '';
                         }
@@ -287,7 +287,7 @@ class AdminProfileController extends Controller
                     if ($request->hasFile('audio')) {
                         $audio = $request->file('audio');
                         $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
-                        $audioPath =  $audio->storeAs("/audio", $audioName, "public");
+                        $audioPath = Helpers::fileCDNUpload($audio,'admin_activity/audios/'.$poptyp);
                         $postpop->audio = $audioPath;
                     }
                     $postpop->survey_data = $data;
@@ -310,11 +310,11 @@ class AdminProfileController extends Controller
                 // Check if the file is a video (e.g., MP4)
                 if (in_array($fileExtension, ['mp4', 'mov', 'avi'])) {
                     // Save the file in the "videos" directory
-                    $filePath = $file->storeAs("/videos", $fileName, "public");
+                    $filePath = Helpers::fileCDNUpload($file,'admin_activity/videos/'.$poptyp);
                     $fileType = 'video';
                 } else {
                     // Assume it's an image and save it in the "images" directory
-                    $filePath = $file->storeAs("/images", $fileName, "public");
+                   $filePath = Helpers::fileCDNUpload($file,'admin_activity/images/'.$poptyp);
                     $fileType = 'image';
                 }
             }
@@ -322,23 +322,23 @@ class AdminProfileController extends Controller
             if ($request->hasFile('audio')) {
                 $audio = $request->file('audio');
                 $audioName = time() . '-audio.' . $audio->getClientOriginalExtension();
-                $audioPath =  $audio->storeAs("/audio", $audioName, "public");
+                $audioPath = Helpers::fileCDNUpload($audio,'admin_activity/audios/'.$poptyp);
             }
 
             if ($request->hasFile('icon1')) {
                 $icon1Image = $request->file('icon1');
                 $icon1 = time() . '-icon1.' . $icon1Image->getClientOriginalExtension();
-                $icon1Path =  $icon1Image->storeAs("/images/icons", $icon1, "public");
+                $icon1Path = Helpers::fileCDNUpload($icon1Image,'admin_activity/icons/'.$poptyp);
             }
             if ($request->hasFile('icon2')) {
                 $icon2Image = $request->file('icon2');
                 $icon2 = time()  . '-icon2.' . $icon2Image->getClientOriginalExtension();
-                $icon2Path =  $icon2Image->storeAs("/images/icons", $icon2, "public");
+                $icon2Path = Helpers::fileCDNUpload($icon2Image,'admin_activity/icons/'.$poptyp);
             }
             if ($request->hasFile('icon3')) {
                 $icon3Image = $request->file('icon3');
                 $icon3 = time()  . '-icon3.' . $icon3Image->getClientOriginalExtension();
-                $icon3Path =  $icon3Image->storeAs("/images/icons", $icon3, "public");
+                $icon3Path = Helpers::fileCDNUpload($icon3Image,'admin_activity/icons/'.$poptyp);
             }
 
             if ($request->type == "Donation") {

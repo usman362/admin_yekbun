@@ -12,6 +12,7 @@ use App\Models\MusicCategory;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
+use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -69,7 +70,7 @@ class VideoClipController extends Controller
                 $vc->video = $request->video;
                 $vc->video_file_size = $request->video_file_size;
                 $vc->video_file_length = $request->video_file_length;
-                $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+                $cleanedThumbnail = Str::after($request->thumbnail, env('BUNNY_CDN_URL'));
                 $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
                 $vc->thumbnail = $cleanedThumbnail;
                 $vc->save();
@@ -187,18 +188,13 @@ class VideoClipController extends Controller
         // dd(public_path('storage/' . $video->video));
 
         if ($video->video) {
-            $file_path = public_path('storage/' . $video->video);
-            if (file_exists($file_path)) {
-                unlink($file_path);
-            }
+            $bunny = new BunnyCDNService();
+            $bunny->delete($video->video);
         }
 
-
         if ($video->thumbnail) {
-            $file_path = public_path('storage/' . $video->thumbnail);
-            if (file_exists($file_path)) {
-                unlink($file_path);
-            }
+            $bunny = new BunnyCDNService();
+            $bunny->delete($video->thumbnail);
         }
 
         if ($video->delete()) {

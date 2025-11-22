@@ -167,7 +167,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             sending: function(file, xhr, formData) {
-                formData.append('folder', 'history');
+                formData.append('folder', 'ai_videos');
             },
             success: function(file, response) {
                 if (this.files.length > 1) {

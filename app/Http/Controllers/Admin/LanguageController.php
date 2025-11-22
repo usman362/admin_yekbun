@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Helpers\LanguagesHelpers;
 use App\Models\Text;
 use App\Models\Language;
@@ -128,8 +129,8 @@ class LanguageController extends Controller
         $language->status = $request->status;
         $language->code = $request->code;
 
-        if ($request->has('icon')) {
-            $image_path = $request->file('icon')->store('/images/language/icon', 'public');
+        if ($request->hasFile('icon')) {
+            $image_path = Helpers::fileCDNUpload($request->icon,'images/languages/icon');
             $language->icon = $image_path;
         }
         if ($language->save()) {
@@ -275,8 +276,8 @@ class LanguageController extends Controller
         $language->title = $request->title;
         $language->status = $request->status;
         $language->code = $request->code;
-        if ($request->has('icon')) {
-            $image_path = $request->file('icon')->store('/images/language/icon', 'public');
+        if ($request->hasFile('icon')) {
+            $image_path = Helpers::fileCDNUpload($request->icon,'images/languages/icon');
             $language->icon = $image_path;
         }
         if ($language->update()) {

@@ -12,82 +12,144 @@ class FileController extends Controller
 {
     public function upload(Request $request)
     {
-        // dd($request);
-
         if (!$request->hasFile('file')) {
             return response('', 400);
         }
 
-        // $path = $request->file->store("/" . $request->folder?? 'files', "public");
+        $bunny = new \App\Services\BunnyCDNService(); // our service
 
-        // Get the uploaded file from the request
         $uploadedFile = $request->file('file');
 
-        // Generate a unique name for the file, or use the original file name
-        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
+        $extension = strtolower($uploadedFile->getClientOriginalExtension());
 
-        // Get the folder name from the request or use 'files' as the default folder
-        $folder = $request->folder ?? 'files';
+        // File categories
+        $videoExtensions = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
+        $audioExtensions = ['mp3', 'wav', 'aac', 'm4a', 'flac'];
+        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
-        // Store the file in the 'public' disk (configured in config/filesystems.php)
-        $filePath = $uploadedFile->storeAs("/{$folder}", $uniqueName, "public");
+        // dd($request->folder);
+        // $folder = trim($request->folder ?? 'files', '/');
 
-        $fileSize = $this->formatFileSizeMB($uploadedFile->getSize());
-        // $filtered_path = url('/') . '/storage/' .  $filePath;
-        $durationType = '';
+        if (in_array($extension, $videoExtensions)) {
+            $folder = 'videos/'.$request->folder;
+        } elseif (in_array($extension, $audioExtensions)) {
+            $folder = 'audios/'.$request->folder;
+        } elseif (in_array($extension, $imageExtensions)) {
+            $folder = 'images/'.$request->folder;
+        } else {
+            $folder = 'files/'.$request->folder;
+        }
+
+        // Unique filename
+        $uniqueName = uniqid() . '__' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
+
+        // Temporary local storage path
+        $ext = strtolower($uploadedFile->getClientOriginalExtension());
+        $tempLocalPath = storage_path('app/uploads/' . uniqid() . '.' . $ext);
+
+        // Move original uploaded file to temp
+        $uploadedFile->move(dirname($tempLocalPath), basename($tempLocalPath));
+
+        // ==============================
+        // CONVERSION (AUDIO + VIDEO)
+        // ==============================
+        if ($ext === 'mp3') {
+            $convertedPath = str_replace('.mp3', '.m4a', $tempLocalPath);
+            Helpers::convertToM4A($tempLocalPath, $convertedPath);
+
+            unlink($tempLocalPath);
+            $finalLocalFile = $convertedPath;
+        } elseif ($ext === 'mp4') {
+
+            $convertedPath = str_replace('.mp4', '_h265.mp4', $tempLocalPath);
+            Helpers::convertToH265($tempLocalPath, $convertedPath);
+
+            unlink($tempLocalPath);
+            $finalLocalFile = $convertedPath;
+        }else{
+            $finalLocalFile = $tempLocalPath;
+        }
+
+        // File size formatting
+        $fileSize = $this->formatFileSizeMB(filesize($finalLocalFile));
+
+        // ==============================
+        // GET DURATION (audio/video)
+        // ==============================
         try {
-            $audio = new \wapmorgan\Mp3Info\Mp3Info($request->file('file'), true);
+            $audio = new \wapmorgan\Mp3Info\Mp3Info($uploadedFile, true);
             $durationInSeconds = $audio->duration;
             $durationType = 'audio';
         } catch (\Exception $e) {
-            $durationInSeconds = '';
             $durationType = 'video';
+            $durationInSeconds = '';
         }
 
-        if ($durationType == 'video' && $request->folder !== 'json_files') {
-            if (env('FFMPEG') == true) {
-                // Initialize FFMpeg
-                $ffmpeg = FFMpeg::create();
-                // Open the media file (you need to get the real path of the uploaded file)
-                $media = $ffmpeg->open($request->file('file'));
-                // Get the format of the file to retrieve metadata, including the duration
-                $format = $media->getFormat();
-                // Get duration in seconds (or any other format you want)
-                $duration = $format->get('duration'); // Duration is in seconds
+        // If video and not json_files
+        // if ($durationType === 'video' && $request->folder !== 'json_files') {
+        //     if (env('FFMPEG')) {
+        //         $ffmpeg = \FFMpeg\FFMpeg::create();
+        //         $media = $ffmpeg->open($uploadedFile->getRealPath());
+        //         $format = $media->getFormat();
+        //         $durationInSeconds = $format->get('duration');
+        //     } else {
+        //         $durationInSeconds = 120; // fallback
+        //     }
+        // }
+        $durationInSeconds = 120; // fallback
 
-                $durationInSeconds = $duration;
-            } else {
-                $durationInSeconds = 12345;
-            }
-        }
+        $formattedDuration = $durationInSeconds ? Helpers::formatDuration($durationInSeconds) : '';
 
-        if ($durationInSeconds !== '') {
-            // Format duration in minutes:seconds
-            $formattedDuration = Helpers::formatDuration($durationInSeconds);
-        }
+        // ==============================
+        // Upload to BunnyCDN
+        // ==============================
+        $content = file_get_contents($finalLocalFile);
+        $mime = mime_content_type($finalLocalFile);
+
+        // Create folder if needed + upload
+        $cdnUrl = $bunny->upload(
+            $folder,
+            $uniqueName,
+            $content,
+            $mime
+        );
+
+        // Delete local converted file
+        unlink($finalLocalFile);
 
         return [
             'status' => true,
-            'path' => $filePath,
-            // 'fullpath' => asset('storage/'.$filePath),
+            'path' => $folder . '/' . $uniqueName,            // CDN URL
             'size' => $fileSize,
-            'duration' => $formattedDuration ?? '',
+            'duration' => $formattedDuration,
         ];
     }
 
     public function delete(Request $request)
     {
         if (!$request->path) {
-            return response('', 400);
+            return response([
+                'status' => false,
+                'message' => 'File path required.'
+            ], 400);
         }
-        unlink(public_path('storage/' . $request->path));
-        if (Storage::delete($request->path)) {
+
+        $bunny = new \App\Services\BunnyCDNService();
+
+        // Bunny paths look like: images/users/file.jpg
+        $filePath = trim($request->path, '/');
+        // dd($filePath);
+
+        try {
+            $deleted = $bunny->delete($filePath);
+
             return [
-                'status' => true
+                'status' => $deleted,
             ];
-        } else {
+        } catch (\Exception $e) {
             return [
-                'status' => false
+                'status' => false,
+                'error' => $e->getMessage()
             ];
         }
     }

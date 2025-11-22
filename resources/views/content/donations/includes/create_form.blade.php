@@ -19,13 +19,13 @@
                             <div class="category-cover bg-white rounded-3 p-3 d-flex flex-column gap-2 align-items-center cursor-pointer">
                                 <input type="hidden" class="organization-id" value="{{$org->_id}}">
                                 <div class="rounded-circle banner-cover-div" style="width: 5vw;height: 5vw;">
-                                    <img class="rounded-circle bg-secondary" style="object-fit:cover; height: 100%; width: 100%;" src="{{asset('storage/'.$org->image)}}" alt="{{$org->organization_name}}">
+                                    <img class="rounded-circle bg-secondary" style="object-fit:cover; height: 100%; width: 100%;" src="{{env('BUNNY_CDN_URL').$org->image}}" alt="{{$org->organization_name}}">
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
                                     <span class="organization-name fs-5">{{$org->organization_name}}</span>
                                     <small class="text-light small join-date">{{$org->created_at->format('F j, Y')}}</small>
                                 </div>
-                            </div> 
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                         <div class="col-6">
-                            <select type="text" class="form-select" name="currency" required> 
+                            <select type="text" class="form-select" name="currency" required>
                                 <option value="" selected> Currency</option>
                                 <option value="$">$</option>
                             </select>
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-sm-6 p-1">
                                 <div style="background-color: #fff;border-radius: 20px;" class="d-flex justify-content-between py-1 px-2 align-items-center">
                                     <span class="time d-flex justify-content-center align-items-center fs-5">G Pay</span>
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-sm-6 p-1">
                                 <div style="background-color: #fff;border-radius: 20px;" class="d-flex justify-content-between py-1 px-2 align-items-center">
                                     <span class="time d-flex justify-content-center align-items-center fs-5">Others</span>
@@ -184,7 +184,7 @@
   $("#inputOrganizationId").select2();
 
 </script> --}}
-{{-- const tagsEl = document.querySelector('#inputTags');           
+{{-- const tagsEl = document.querySelector('#inputTags');
 const TagifyBasic = new Tagify(tagsEl, {
   // originalInputValueFormat: valuesArr => valuesArr.map(item => item.value)
 }); --}}

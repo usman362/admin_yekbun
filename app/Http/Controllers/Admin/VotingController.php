@@ -11,6 +11,7 @@ use App\Models\PostGallery;
 use App\Models\User;
 use App\Models\Voting;
 use App\Models\VotingCategory;
+use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -76,7 +77,7 @@ class VotingController extends Controller
                 return [
                     "title" => $option['title'] ? strtolower(str_replace(' ', '-', $option['title'])) : ($key == 0 ? 'yes' : ($key == 1 ? 'no-idea' : 'no')),
                     "type" => ++$key,
-                    "image" => isset($option['image']) ? Helpers::fileUpload($option['image'], 'voting-reactions') : null,
+                    "image" => isset($option['image']) ? Helpers::fileCDNUpload($option['image'], 'voting-reactions') : null,
                 ];
             }, $reactionOptions, array_keys($reactionOptions));
         }
@@ -90,7 +91,7 @@ class VotingController extends Controller
         $vote->status = $request->status;
         $vote->vote_type = $request->vote_type ?? 'single';
         if ($request->hasFile('audio_file')) {
-            $vote->audio = Helpers::fileUpload($request->audio_file, 'voting');
+            $vote->audio = Helpers::fileCDNUpload($request->audio_file, 'audios/surveys');
         }
         if ($vote->save()) {
             // $id  = $vote->id;
@@ -423,7 +424,9 @@ class VotingController extends Controller
 
         if ($request->image) $vote->banner = $request->image;
         if ($request->view_image) $vote->view_banner = $request->view_image;
-        if ($request->audio) $vote->audio = $request->audio;
+        if ($request->hasFile('audio_file')) {
+            $vote->audio = Helpers::fileCDNUpload($request->audio_file, 'audios/surveys');
+        }
 
         if ($vote->update()) {
             return redirect()->route('surveys.index')->with('success', 'Survey Has been Updated');
@@ -442,15 +445,24 @@ class VotingController extends Controller
     {
         $vote = Voting::find($id);
         if ($vote->banner) {
-            $image_path = public_path('storage/' . $vote->banner);
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
+            $bunny = new BunnyCDNService();
+            $bunny->delete($vote->banner);
         }
         if ($vote->view_banner) {
-            $image_path = public_path('storage/' . $vote->view_banner);
-            if (file_exists($image_path)) {
-                unlink($image_path);
+            $bunny = new BunnyCDNService();
+            $bunny->delete($vote->view_banner);
+        }
+        if ($vote->audio) {
+            $bunny = new BunnyCDNService();
+            $bunny->delete($vote->audio);
+        }
+
+        if ($vote->options) {
+            foreach($vote->options as $option){
+                if($option['image']){
+                    $bunny = new BunnyCDNService();
+                    $bunny->delete($option['image']);
+                }
             }
         }
         if ($vote->delete($vote->id)) {

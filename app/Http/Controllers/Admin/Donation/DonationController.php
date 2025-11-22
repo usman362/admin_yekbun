@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Donation;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\MongoDonation;
 use Illuminate\Http\Request;
@@ -21,30 +22,29 @@ class DonationController extends Controller
         if($request->input('donation_type') === 'Limited Donation') {
             $donation->amount           = $request->input('amount');
             $donation->currency         = $request->input('currency');
-        } 
-        
+        }
+
         if($request->input('donation_type') === 'Unlimited Donation') {
-            
+
             $donation->start_date = $request->input('start_date');
             $donation->expired_date = $request->input('expired_date');
         }
-        
+
         if ($request->hasFile('banner')) {
             $file = $request->file('banner');
-            
+
             /* Check if file is valid */
             if ($file->isValid()) {
-                $originalFileName = $file->getClientOriginalName(); 
-                $imagePath = $file->storeAs('donations/banner', $originalFileName, 'public'); 
+                $imagePath = Helpers::fileCDNUpload($file, 'images/donations');
                 $donation->image = $imagePath;
-                
+
             } else {
                 return back()->with('error', 'Uploaded file is not valid');
             }
         } else {
             return back()->with('error', 'No file was uploaded');
         }
-        
+
         if($donation->save()) {
             return redirect()->back()->with('success', 'Your Donation has been created');
         } else {
@@ -55,7 +55,7 @@ class DonationController extends Controller
     public function destroy_donation($id) {
         $donation = MongoDonation::findOrFail($id);
         $donation->delete();
-    
+
         return redirect()->route('donations.index')->with('success', 'Donation deleted successfully');
     }
 
@@ -73,8 +73,8 @@ class DonationController extends Controller
         if($request->input('donation_type') === 'Limited Donation') {
             $donation->amount           = $request->input('amount');
             $donation->currency         = $request->input('currency');
-        } 
-        
+        }
+
         if($request->input('donation_type') === 'Unlimited Donation') {
             $donation->start_date = $request->input('start_date');
             $donation->expired_date = $request->input('expired_date');
@@ -82,13 +82,12 @@ class DonationController extends Controller
 
         if ($request->hasFile('banner')) {
             $file = $request->file('banner');
-            
+
             /* Check if file is valid */
             if ($file->isValid()) {
-                $originalFileName = $file->getClientOriginalName(); 
-                $imagePath = $file->storeAs('donations/banner', $originalFileName, 'public'); 
+                $imagePath = Helpers::fileCDNUpload($file, 'images/donations');
                 $donation->image = $imagePath;
-                
+
             } else {
                 return back()->with('error', 'Uploaded file is not valid');
             }

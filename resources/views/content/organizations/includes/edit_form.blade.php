@@ -11,7 +11,7 @@
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <div class="edit-logo-image logo-div-wrapper cursor-pointer position-relative rounded-circle">
                         <div class="logo-preview-div">
-                            <img src="{{asset('storage/'. $organization->image)}}" alt="organization logo" class='w-100 h-100 object-fit-cover rounded-circle'>
+                            <img src="{{env('BUNNY_CDN_URL'). $organization->image}}" alt="organization logo" class='w-100 h-100 object-fit-cover rounded-circle'>
                         </div>
                         <div class="position-absolute bottom-0 end-0">
                             <div class="logo-camera-cover d-flex justify-content-center align-items-center me-3 mb-1">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Contact Info Inputs -->
                 <div class="col-md-12 bg-custom-gray rounded py-2">
                     <label class="form-label fs-5 text-capitalize" for="inputBankAccount">Contact Info</label>
@@ -142,7 +142,7 @@
                                                 <div class="dz-preview dz-file-preview w-100">
                                                     <div class="dz-details">
                                                         <div class="dz-thumbnail" style="width:95%">
-                                                            <img data-dz-thumbnail class="w-100" >
+                                                            <img data-dz-thumbnail class="w-100" onerror="this.onerror=null; this.src='{{asset('assets/svg/upload-file.svg')}}';">
                                                             <span class="dz-nopreview">No preview</span>
                                                             <div class="dz-success-mark"></div>
                                                             <div class="dz-error-mark"></div>
@@ -163,6 +163,7 @@
             previewTemplate: previewTemplate,
             parallelUploads: 1,
             maxFilesize: 100,
+            maxFiles: 1,
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -185,7 +186,7 @@
             removedfile: function(file) {
                 const hiddenInputsContainer = file.previewElement.closest('form').querySelector('.hidden-inputs');
                 const hiddenInput = hiddenInputsContainer.querySelector(`input[data-path="${file.previewElement.dataset.path}"]`);
-    
+
                 if (hiddenInput) {
                     hiddenInput.remove();
                 } else {
@@ -212,10 +213,10 @@
             }
         });
 
-        @if ($organization->image)
+        @if ($organization->files)
         window.addEventListener('load', () => {
-            var path = "{{ asset('storage/' . $organization->image) }}";
-            var rpath = "{{ $organization->image }}";
+            var path = "{{ env('BUNNY_CDN_URL') . $organization->files }}";
+            var rpath = "{{ $organization->files }}";
             const parts = rpath.split("___");
 
             imageUrlToFile(path,parts).then((file) => {

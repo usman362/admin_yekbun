@@ -91,7 +91,7 @@ class HistoryController extends Controller
                     ];
                 }
                 $history->video = $videos;
-                $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+                $cleanedThumbnail = Str::after($request->thumbnail, env('BUNNY_CDN_URL'));
                 $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
                 $history->thumbnail = $cleanedThumbnail;
             }
@@ -272,19 +272,14 @@ class HistoryController extends Controller
         $history = History::find($id);
         if (isset($history->images)) {
             foreach ($history->images as $history_file) {
-                $image_path = 'public/' . $history_file['path']; // Relative path in storage
-                // ✅ Check using Storage::exists()
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path); // ✅ Delete the file properly
-                }
+                $bunny = new \App\Services\BunnyCDNService();
+                $deleted = $bunny->delete($history_file['path']);
             }
         }
         if (isset($history->video)) {
             foreach ($history->video as $history_file) {
-                $image_path = 'public/' . $history_file['path']; // Relative path in storage
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path); // ✅ Delete the file properly
-                }
+                $bunny = new \App\Services\BunnyCDNService();
+                $deleted = $bunny->delete($history_file['path']);
             }
         }
         if ($history->delete($history->id)) {
@@ -352,14 +347,16 @@ class HistoryController extends Controller
 
     private function generateThumbnailFromPath($videoPath, $duration)
     {
-        $defaultThumbnail = asset('images/def.jpg'); // make sure this file exists in public/images/
+        $defaultThumbnail = asset('images/def.jpg');
+        $bunny = new \App\Services\BunnyCDNService();
 
         try {
-            // Initialize FFMpeg
             $ffmpeg = FFMpeg::create();
-            $fullPath = Storage::path('public/' . $videoPath);
 
-            // Get timestamps
+            // CDN video full path
+            $fullPath = env('BUNNY_CDN_URL').$videoPath;
+
+            // timestamps
             $timestamps = [
                 round($duration * 0.25),
                 round($duration * 0.40),
@@ -369,27 +366,43 @@ class HistoryController extends Controller
             $thumbnails = [];
 
             foreach ($timestamps as $index => $time) {
-                $thumbnailPath = 'thumbnails/' . pathinfo($videoPath, PATHINFO_FILENAME) . "_thumb_{$index}.jpg";
 
-                if (Storage::exists($thumbnailPath)) {
-                    Storage::delete($thumbnailPath);
-                }
+                // Thumbnail path on CDN
+                $thumbnailCdnPath = 'thumbnails/' . pathinfo($videoPath, PATHINFO_FILENAME)
+                                    . "_thumb_{$index}.jpg";
 
+                // Temporary local file for FFMPEG
+                $localTemp = storage_path('app/tmp_thumb_' . uniqid() . '.jpg');
+
+                // Extract frame
                 $video = $ffmpeg->open($fullPath);
                 $frame = $video->frame(TimeCode::fromSeconds($time));
-                $frame->save(storage_path('app/public/' . $thumbnailPath));
+                $frame->save($localTemp);
 
-                $thumbnails[] = asset('storage/' . $thumbnailPath);
+                // Read file content
+                $content = file_get_contents($localTemp);
+                $mime = mime_content_type($localTemp);
+
+                // Upload to BunnyCDN
+                $bunny->upload(
+                    'thumbnails',                             // folder
+                    pathinfo($thumbnailCdnPath, PATHINFO_BASENAME), // filename only
+                    $content,
+                    $mime
+                );
+
+                // Delete local temp file
+                @unlink($localTemp);
+
+                // Only return path like: thumbnails/video_thumb_0.jpg
+                $thumbnails[] = env('BUNNY_CDN_URL').$thumbnailCdnPath;
             }
 
             return $thumbnails;
         } catch (\Exception $e) {
-            // Log the error if needed: Log::error($e->getMessage());
-            // Return 3 default thumbnails (same image repeated)
             return [$defaultThumbnail, $defaultThumbnail, $defaultThumbnail];
         }
     }
-
 
     private function generateThumbnailFromPath_old($videoPath, $duration)
     {

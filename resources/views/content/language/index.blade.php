@@ -97,10 +97,10 @@
                                 <td>{{ $language->title ?? '' }}</td>
                                 <td>
                                     @if (is_array($language->icon) && isset($language->icon['path']))
-                                        <img src="{{ asset('storage/' . $language->icon['path']) }}" width="50"
+                                        <img src="{{ env('BUNNY_CDN_URL') . $language->icon['path'] }}" width="50"
                                             height="50">
                                     @elseif(is_string($language->icon))
-                                        <img src="{{ asset('storage/' . $language->icon) }}" width="50" height="50">
+                                        <img src="{{ env('BUNNY_CDN_URL') . $language->icon }}" width="50" height="50">
                                     @else
                                         <!-- Handle the case where $language->icon is neither a valid array nor a string -->
                                         <img src="{{ asset('path/to/default/icon.png') }}" width="50" height="50">

@@ -7,6 +7,7 @@ use App\Models\LanguageDetail;
 use Config;
 use App\Models\Text;
 use App\Models\Translation;
+use App\Services\BunnyCDNService;
 use Exception;
 use Illuminate\Support\Str;
 
@@ -217,6 +218,72 @@ class Helpers
         return $filePath;
     }
 
+    public static function fileCDNUpload($uploadedFile, $folder = 'files')
+    {
+        $bunny = new BunnyCDNService();
+        $folder = trim($folder, '/');
+
+        // -------------------------------
+        // STEP 1: Move original uploaded file to temp
+        // -------------------------------
+        $ext = strtolower($uploadedFile->getClientOriginalExtension());
+        $tempLocalPath = storage_path('app/uploads/' . uniqid() . '.' . $ext);
+
+        // Move original file into our temp path
+        $uploadedFile->move(dirname($tempLocalPath), basename($tempLocalPath));
+
+        // -------------------------------
+        // STEP 2: Conversion
+        // -------------------------------
+        $finalLocalFile = $tempLocalPath; // default
+
+        if ($ext === 'mp3') {
+
+            $convertedPath = str_replace('.mp3', '.m4a', $tempLocalPath);
+            if (static::convertToM4A($tempLocalPath, $convertedPath)) {
+                unlink($tempLocalPath);
+                $finalLocalFile = $convertedPath;
+            }
+
+        } elseif ($ext === 'mp4') {
+
+            $convertedPath = str_replace('.mp4', '_h265.mp4', $tempLocalPath);
+            if (static::convertToH265($tempLocalPath, $convertedPath)) {
+                unlink($tempLocalPath);
+                $finalLocalFile = $convertedPath;
+            }
+
+        }
+
+        // -------------------------------
+        // STEP 3: Generate Filename
+        // -------------------------------
+        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
+
+        // -------------------------------
+        // STEP 4: Upload to Bunny CDN
+        // -------------------------------
+        $content = file_get_contents($finalLocalFile);
+        $mime    = mime_content_type($finalLocalFile);
+
+        $cdnPath = $bunny->upload(
+            $folder,
+            $uniqueName,
+            $content,
+            $mime
+        );
+
+        // -------------------------------
+        // STEP 5: Cleanup
+        // -------------------------------
+        if (file_exists($finalLocalFile)) {
+            unlink($finalLocalFile);
+        }
+
+        $cleanedcdnPath = Str::after($cdnPath, env('BUNNY_CDN_URL'));
+        return $cleanedcdnPath;
+    }
+
     public static function formatDuration($durationInSeconds)
     {
         // Convert the duration to an integer to handle whole seconds
@@ -244,5 +311,20 @@ class Helpers
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    public static function convertToM4A($inputPath, $outputPath)
+    {
+        $cmd = "ffmpeg -i \"$inputPath\" -vn -c:a aac -b:a 64k -movflags +faststart \"$outputPath\" -y";
+        exec($cmd, $output, $returnCode);
+        return $returnCode === 0;
+    }
+
+    // Convert MP4 (H.264) → MP4 (H.265 HEVC)
+    public static function convertToH265($inputPath, $outputPath)
+    {
+        $cmd = "ffmpeg -i {$inputPath} -c:v libx265 -crf 28 -preset fast -c:a aac {$outputPath} -y";
+        exec($cmd, $output, $returnCode);
+        return $returnCode === 0;
     }
 }
