@@ -12,6 +12,7 @@ use App\Models\Notifications;
 use App\Models\User;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -99,7 +100,7 @@ class AIVideosController extends Controller
             );
             if ($notification->new_ai_videos == 'true' && $request->status == '1' && $notify->ai_video == 1) {
                 try {
-                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_ai_videos_title, $description);

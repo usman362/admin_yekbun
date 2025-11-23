@@ -14,6 +14,7 @@ use App\Models\VotingCategory;
 use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use MongoDB\BSON\ObjectId;
 
@@ -119,7 +120,7 @@ class VotingController extends Controller
             );
             if ($notification->new_votes == 'true' && $request->status == '1') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_votes', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_votes', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_votes_title, $description);

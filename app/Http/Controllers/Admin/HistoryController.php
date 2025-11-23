@@ -108,7 +108,7 @@ class HistoryController extends Controller
             );
             if ($notification->new_history == 'true' && $request->status == '1' && $notify->history == 1) {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_history', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_history', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_history_title, $description);

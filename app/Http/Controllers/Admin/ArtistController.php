@@ -15,6 +15,7 @@ use App\Models\Notifications;
 use App\Models\Song;
 use App\Models\User;
 use App\Models\VideoClip;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class ArtistController extends Controller
@@ -178,7 +179,7 @@ class ArtistController extends Controller
             );
             if ($notification->new_artist == 'true' && $request->status == '1') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
@@ -267,7 +268,7 @@ class ArtistController extends Controller
             );
             if ($notification->new_artist == 'true' && $request->status == '1') {
                 try {
-                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);

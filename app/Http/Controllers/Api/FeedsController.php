@@ -336,7 +336,7 @@ class FeedsController extends Controller
                 }
             }
             // } else {
-            //     $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+            //     $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
             //     if ($users) {
             //         foreach ($users as $user) {
             //             NotificationHelper::sendNotification($user->id, 'Feeds Notification', $description);

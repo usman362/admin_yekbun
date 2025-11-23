@@ -372,7 +372,7 @@ class AdminProfileController extends Controller
                     $notification->admin_donation_description
                 );
                 if ($notification->admin_donation == 'true' && $notify->admin == 1) {
-                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->admin_donation_title, $description);
@@ -427,7 +427,7 @@ class AdminProfileController extends Controller
                         $notification->admin_system_info_description
                     );
                     if ($notification->admin_system_info == 'true' && $notify->admin == 1) {
-                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_system_info_title, $description);
@@ -452,7 +452,7 @@ class AdminProfileController extends Controller
                         $notification->admin_surveys_description
                     );
                     if ($notification->admin_surveys == 'true' && $notify->admin == 1) {
-                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_surveys_title, $description);
@@ -477,7 +477,7 @@ class AdminProfileController extends Controller
                         $notification->admin_greetings_description
                     );
                     if ($notification->admin_greetings == 'true' && $notify->admin == 1) {
-                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_greetings_title, $description);
@@ -510,7 +510,7 @@ class AdminProfileController extends Controller
                         $notification->admin_events_description
                     );
                     if ($notification->admin_events == 'true' && $notify->admin == 1) {
-                        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                        $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                         if ($users) {
                             foreach ($users as $user) {
                                 NotificationHelper::sendNotification($user->id, $notification->admin_events_title, $description);
