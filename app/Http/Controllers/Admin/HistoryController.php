@@ -15,6 +15,7 @@ use App\Models\HistoryLikes;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
+use App\Services\BunnyCDNService;
 use Exception;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
@@ -272,16 +273,24 @@ class HistoryController extends Controller
         $history = History::find($id);
         if (isset($history->images)) {
             foreach ($history->images as $history_file) {
-                $bunny = new \App\Services\BunnyCDNService();
+                $bunny = new BunnyCDNService();
                 $deleted = $bunny->delete($history_file['path']);
             }
         }
         if (isset($history->video)) {
             foreach ($history->video as $history_file) {
-                $bunny = new \App\Services\BunnyCDNService();
+                $bunny = new BunnyCDNService();
                 $deleted = $bunny->delete($history_file['path']);
             }
         }
+        $comments = History::where('feed_id',$history->_id)->get();
+            foreach($comments as $comment){
+                $bunny = new BunnyCDNService();
+                if($comment->comment_type == 'audio'){
+                    $bunny->delete($comment->audio);
+                }
+                $comment->delete();
+            }
         if ($history->delete($history->id)) {
             return redirect()->route('history.index')->with('success', 'History Has been Deleted');
         } else {

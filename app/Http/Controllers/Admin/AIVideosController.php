@@ -7,9 +7,11 @@ use App\Models\AIVideo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AdminNotification;
+use App\Models\FeedComments;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
+use App\Services\BunnyCDNService;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\Auth;
@@ -263,21 +265,33 @@ class AIVideosController extends Controller
         $ai_video = AIVideo::find($id);
         if (isset($ai_video->images)) {
             foreach ($ai_video->images as $ai_video_file) {
-                $image_path = 'public/' . $ai_video_file['path']; // Relative path in storage
+                $image_path = $ai_video_file['path']; // Relative path in storage
+                $bunny = new BunnyCDNService();
                 // ✅ Check using Storage::exists()
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path); // ✅ Delete the file properly
+                $bunny->delete($image_path);
+                if (Storage::exists('public/' .$image_path)) {
+                    Storage::delete('public/' .$image_path); // ✅ Delete the file properly
                 }
             }
         }
         if (isset($ai_video->video)) {
             foreach ($ai_video->video as $ai_video_file) {
-                $image_path = 'public/' . $ai_video_file['path']; // Relative path in storage
-                if (Storage::exists($image_path)) {
-                    Storage::delete($image_path); // ✅ Delete the file properly
+                $bunny = new BunnyCDNService();
+                $image_path = $ai_video_file['path']; // Relative path in storage
+                $bunny->delete($image_path);
+                if (Storage::exists('public/' .$image_path)) {
+                    Storage::delete('public/' .$image_path); // ✅ Delete the file properly
                 }
             }
         }
+        $comments = FeedComments::where('feed_id',$ai_video->_id)->get();
+            foreach($comments as $comment){
+                $bunny = new BunnyCDNService();
+                if($comment->comment_type == 'audio'){
+                    $bunny->delete($comment->audio);
+                }
+                $comment->delete();
+            }
         if ($ai_video->delete($ai_video->id)) {
             return redirect()->route('ai-videos.index')->with('success', 'AIVideo Has been Deleted');
         } else {

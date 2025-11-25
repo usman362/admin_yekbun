@@ -23,6 +23,7 @@ use App\Models\News;
 use App\Models\NotificationCenter;
 use App\Models\PopFeeds;
 use App\Models\User;
+use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Exception;
 use FFMpeg\FFMpeg;
@@ -53,21 +54,25 @@ class FeedsController extends Controller
         if ($request->action_level !== '0') {
             if ($feed->images) {
                 foreach ($feed->images as $image) {
-                    $file_path = public_path('storage/' . $image['path']);
-                    if (file_exists($file_path)) {
-                        unlink($file_path);
-                    }
+                    $bunny = new BunnyCDNService();
+                    $bunny->delete($image['path']);
                 }
             }
             if ($feed->videos) {
                 foreach ($feed->videos as $video) {
-                    $file_path = public_path('storage/' . $video['path']);
-                    if (file_exists($file_path)) {
-                        unlink($file_path);
-                    }
+                    $bunny = new BunnyCDNService();
+                    $bunny->delete($video['path']);
                 }
             }
             $feed->delete();
+            $comments = FeedComments::where('feed_id',$feed->_id)->get();
+            foreach($comments as $comment){
+                $bunny = new BunnyCDNService();
+                if($comment->comment_type == 'audio'){
+                    $bunny->delete($comment->audio);
+                }
+                $comment->delete();
+            }
             $notifyMsg = '';
             if ($request->action_level === '1') {
                 $user->is_flagged = 1;
