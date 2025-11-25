@@ -86,7 +86,7 @@ class AIVideosController extends Controller
                     ];
                 }
                 $ai_video->video = $videos;
-                $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+                $cleanedThumbnail = Str::after($request->thumbnail, env('BUNNY_CDN_URL'));
                 $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
                 $ai_video->thumbnail = $cleanedThumbnail;
             }
