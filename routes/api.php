@@ -258,6 +258,7 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::post('notifications-center', [NotificationsController::class, 'store']);
     Route::get('notifications-center/{id}', [NotificationsController::class, 'read']);
     Route::delete('notifications-center/{id}/delete', [NotificationsController::class, 'delete']);
+    Route::get('system-settings', [NotificationsController::class, 'getSystemSettings']);
 
     Route::post('send-test-notification', [UsersController::class, 'testNotification']);
 

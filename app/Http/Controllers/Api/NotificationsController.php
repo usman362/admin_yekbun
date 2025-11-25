@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Models\AdminNotification;
 use App\Models\NotificationCenter;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,5 +56,11 @@ class NotificationsController extends Controller
         $notification = NotificationCenter::find($id);
         $notification->delete();
         return ResponseHelper::sendResponse([], 'Notification has been Deleted Successfully!');
+    }
+
+    public function getSystemSettings()
+    {
+        $notify = AdminNotification::select(['screenshots','recording'])->first();
+        return ResponseHelper::sendResponse($notify,'System Settings has fetch Successfully!');
     }
 }
