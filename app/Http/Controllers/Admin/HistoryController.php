@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
 use App\Models\AdminNotification;
+use App\Models\FeedComments;
 use App\Models\HistoryComments;
 use App\Models\HistoryLikes;
 use App\Models\NotificationCenter;
@@ -283,7 +284,7 @@ class HistoryController extends Controller
                 $deleted = $bunny->delete($history_file['path']);
             }
         }
-        $comments = History::where('feed_id',$history->_id)->get();
+        $comments = FeedComments::where('feed_id',$history->_id)->get();
             foreach($comments as $comment){
                 $bunny = new BunnyCDNService();
                 if($comment->comment_type == 'audio'){
