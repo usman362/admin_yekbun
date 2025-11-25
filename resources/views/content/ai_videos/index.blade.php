@@ -297,7 +297,7 @@
                 <div id="main-feed" class="container">
 
                     <input type="hidden" name="feed_id" id="feed_id">
-                    <input type="hidden" name="feed_type" id="feed_type" value="history">
+                    <input type="hidden" name="feed_type" id="feed_type" value="ai_videos">
                     <input type="hidden" name="comment_parent_id" id="comment_parent_id">
 
                     <div class="row pb-4">
@@ -904,7 +904,7 @@
          $('.add-ai-videos').click(function() {
             $('.modal-header h4').text('Create AI Video');
             $('.modal-footer [type="submit"]').text('Create');
-            $('[name="history_id"]').val('');
+            $('[name="ai_video_id"]').val('');
             $('[name="title"]').val('');
             $('[name="status"]').val('');
             $('[name="status"]').trigger('change');
