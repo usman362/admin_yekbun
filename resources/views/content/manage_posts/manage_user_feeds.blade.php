@@ -536,13 +536,13 @@
                                     <div id="feed-post-{{ $feed->id }}"
                                         class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
                                         data-lightbox-type="comments" data-id="{{ $feed->_id }}"
-                                        @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                        href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                        data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                        @if (isset($feed->images[0])) data-thumb="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
+                                        href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
+                                        data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
                                     @elseif (isset($feed->videos[0]))
-                                        data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                        href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                        data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}" @endif>
+                                        data-thumb="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
+                                        href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
+                                        data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}" @endif>
 
                                         <div class="content-wrap">
                                             <!-- User Info Section -->
@@ -578,7 +578,7 @@
                                             <!-- Feed Content -->
                                             <div class="card-body p-0">
                                                 @if (isset($feed->images[0]))
-                                                    <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                    <div style="background-image: url({{  env('BUNNY_CDN_URL'). $feed->images[0]['path'] }});"
                                                         class="card-post-thumbnail"></div>
                                                 @else
                                                     <div style="background-image: url('https://st2.depositphotos.com/4202565/7675/v/450/depositphotos_76756387-stock-illustration-video-player-with-black.jpg');"
@@ -854,13 +854,13 @@
                                     <div id="feed-card-{{ $feed->id }}"
                                         class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
                                         data-lightbox-type="comments" data-id="{{ $feed->_id }}"
-                                        @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                    href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                    data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                        @if (isset($feed->images[0])) data-thumb="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
+                                    href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
+                                    data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
                                 @elseif (isset($feed->videos[0]))
-                                    data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                    href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                    data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}" @endif>
+                                    data-thumb="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
+                                    href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
+                                    data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}" @endif>
                                         <!-- Main wrap -->
                                         <div class="content-wrap">
                                             <div class="card-footer pb-2 pt-0 mt-0 pl-0 pr-0">
@@ -891,7 +891,7 @@
                                             <!-- Post body -->
                                             <div class="card-body p-0">
                                                 @if (isset($feed->images[0]))
-                                                    <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                    <div style="background-image: url({{ env('BUNNY_CDN_URL') . $feed->images[0]['path'] }});"
                                                         class="card-post-thumbnail">
                                                     </div>
                                                 @else
@@ -1198,14 +1198,14 @@
                                 <div id="feed-post-{{ $feed->id }}"
                                     class="card is-post mt-4 p-1 mb-0 view-post card-post" data-fancybox="post1"
                                     data-lightbox-type="comments" data-id="{{ $feed->_id }}"
-                                    @if (isset($feed->images[0])) data-thumb="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        href="{{ asset('storage/' . $feed->images[0]['path']) }}"
-                                                        data-demo-href="{{ asset('storage/' . $feed->images[0]['path']) }}"
+                                    @if (isset($feed->images[0])) data-thumb="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
+                                                        href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
+                                                        data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
                                                     @else
-                                                        @if (isset($feed->videos[0]))
-                                                            data-thumb="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
-                                                            data-demo-href="{{ asset('storage/' . $feed->videos[0]['path']) }}"
+                                                        @if (isset($feed->videos[0])
+                                                            data-thumb="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
+                                                            href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
+                                                            data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
                                                     @else @endif
                                     @endif
                                     >
@@ -1247,7 +1247,7 @@
                                                     </div> --}}
 
                                             @if (isset($feed->images[0]))
-                                                <div style="background-image: url({{ asset('storage/' . $feed->images[0]['path']) }});"
+                                                <div style="background-image: url({{ env('BUNNY_CDN_URL') . $feed->images[0]['path'] }});"
                                                     class="card-post-thumbnail">
                                                 </div>
                                             @else
