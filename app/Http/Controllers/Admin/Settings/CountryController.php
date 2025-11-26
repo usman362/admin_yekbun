@@ -33,7 +33,7 @@ class CountryController extends Controller
         $validated = $request->validated();
         $flagpath = "";
         if ($request->hasFile('dp')) {
-            $file = Helpers::fileCDNUpload($request->dp,'images/countries');
+            $file = Helpers::fileUpload($request->dp,'images/countries');
             $flagpath = $file;
         }
         $cont = new Country();
@@ -57,7 +57,7 @@ class CountryController extends Controller
         $country->name = $request->name;
         $flagpath = "";
         if ($request->hasFile('dp')) {
-            $file = Helpers::fileCDNUpload($request->dp,'images/countries');
+            $file = Helpers::fileUpload($request->dp,'images/countries');
             $flagpath = $file;
             $country->flag_path = $flagpath;
         }
