@@ -130,7 +130,7 @@ class LanguageController extends Controller
         $language->code = $request->code;
 
         if ($request->hasFile('icon')) {
-            $image_path = Helpers::fileCDNUpload($request->icon,'images/languages/icon');
+            $image_path = Helpers::fileUpload($request->icon,'images/languages/icon');
             $language->icon = $image_path;
         }
         if ($language->save()) {
@@ -277,7 +277,7 @@ class LanguageController extends Controller
         $language->status = $request->status;
         $language->code = $request->code;
         if ($request->hasFile('icon')) {
-            $image_path = Helpers::fileCDNUpload($request->icon,'images/languages/icon');
+            $image_path = Helpers::fileUpload($request->icon,'images/languages/icon');
             $language->icon = $image_path;
         }
         if ($language->update()) {

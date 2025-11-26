@@ -735,17 +735,17 @@
                                 <div class="post-image text-white">
                                     <div id="feed-post-1" class="card is-post mt-4 mb-0 view-post card-post" data-fancybox
                                         data-src="#video-popup" href="javascript:;"
-                                        data-thumb="{{ asset('storage/' . $clip->thumbnail) }}"
-                                        data-json="{{ $clip->template ? asset('storage/' . $clip->template->json_paths) : 'null' }}"
+                                        data-thumb="{{ env('BUNNY_CDN_URL') . $clip->thumbnail }}"
+                                        data-json="{{ $clip->template ? env('BUNNY_CDN_URL') . $clip->template->json_paths : 'null' }}"
                                         data-id="{{ $clip->id }}"
-                                        data-demo-href="{{ asset('storage/' . $clip->clip) }}"
+                                        data-demo-href="{{ env('BUNNY_CDN_URL') . $clip->clip }}"
                                         data-user_id="{{ $clip->user_id }}"
                                         data-user_name="{{ ($clip->user->name ?? 'N/A') . ' ' . ($clip->user->last_name ?? '') }}"
                                         data-user_image="{{ $userImage }}"
                                         data-user_level="{{ $clip->user->level ?? 0 }}" data-text="{{ $clip->text }}"
                                         data-emoji="{{ asset('emojis/' . $clip->emoji . '.gif') }}"
                                         data-text_properties="{{ $clip->text_properties }}"
-                                        style="background-image: url({{ !empty($clip->thumbnail) ? asset('storage/' . $clip->thumbnail) : asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;border:none">
+                                        style="background-image: url({{ !empty($clip->thumbnail) ? env('BUNNY_CDN_URL') . $clip->thumbnail): asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;border:none">
 
                                         <div
                                             style="border-radius: 14px;background-color: #0000001f;width: 100%;height: 100%;">

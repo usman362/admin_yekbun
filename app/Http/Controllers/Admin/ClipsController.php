@@ -46,7 +46,7 @@ class ClipsController extends Controller
                     ];
                 }
                 $video->video = $videos;
-                $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+                $cleanedThumbnail = Str::after($request->thumbnail, env('BUNNY_CDN_URL'));
                 $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
                 $video->thumbnail = $cleanedThumbnail;
             }
@@ -69,7 +69,7 @@ class ClipsController extends Controller
         $clip->video_sizes = $request->video_sizes[0] ?? '';
         $clip->video_name = $request->video_name[0] ?? '';
         if (!empty($request->thumbnail)) {
-            $cleanedThumbnail = Str::after($request->thumbnail, 'storage/');
+            $cleanedThumbnail = Str::after($request->thumbnail, env('BUNNY_CDN_URL'));
             $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';
             $clip->thumbnail = $cleanedThumbnail;
         }
