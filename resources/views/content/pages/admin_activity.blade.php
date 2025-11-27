@@ -1365,9 +1365,9 @@
                                                     class="pop_action edit_popup1" data-bs-toggle="modal"
                                                     data-bs-target="#modal{{ $modalnumber }}" for="customRadioPrime"
                                                     data-id="{{ $feed->_id }}" data-name="{{ $feed->title }}"
-                                                    data-image="{{ env('BUNNY_CDN_URL') . $feed->image }}"
-                                                    data-video="{{ env('BUNNY_CDN_URL') . $feed->video }}"
-                                                    data-audio="{{ env('BUNNY_CDN_URL') . $feed->audio }}"
+                                                    data-image="{{ asset('storage/' . $feed->image) }}"
+                                                    data-video="{{ asset('storage/' . $feed->video) }}"
+                                                    data-audio="{{ asset('storage/' . $feed->audio) }}"
                                                     data-start="{{ $feed->date_start }}"
                                                     data-end="{{ $feed->date_ends }}" data-type="{{ $feed->type }}"
                                                     data-option="{{ $feed->share_option }}"
@@ -1391,31 +1391,31 @@
                                                 <!-- Custom controls are defined here -->
                                                 {{-- <video src="{{ asset('storage/' . $feed->video) }}" style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block"></video> --}}
                                                 <a class="view-post" data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{ env('BUNNY_CDN_URL') . $feed->video }}"
-                                                    href="{{ env('BUNNY_CDN_URL') . $feed->video }}"
+                                                    data-thumb="{{ asset('storage/' . $feed->video) }}"
+                                                    href="{{ asset('storage/' . $feed->video) }}"
                                                     data-id="{{ $feed->_id }}"
-                                                    data-demo-href="{{ env('BUNNY_CDN_URL') . $feed->video }}">
+                                                    data-demo-href="{{ asset('storage/' . $feed->video) }}">
                                                     <video id="my-player" class="video-js" controls preload="auto"
                                                         {{-- poster="//vjs.zencdn.net/v/oceans.png" --}} data-setup='{}'
                                                         style="width:100%;height:350px;object-fit:cover;border-radius:7px;padding:0;display:block">
-                                                        <source src="{{ env('BUNNY_CDN_URL') . $feed->video }}"
+                                                        <source src="{{ asset('storage/' . $feed->video) }}"
                                                             type="video/mp4">
                                                         </source>
                                                     </video>
                                                 </a>
                                             @else
                                                 <a class="view-post" data-fancybox="post1" data-lightbox-type="comments"
-                                                    data-thumb="{{ env('BUNNY_CDN_URL'). $feed->image }}"
-                                                    href="{{ env('BUNNY_CDN_URL'). $feed->image }}"
+                                                    data-thumb="{{ asset('storage/' . $feed->image) }}"
+                                                    href="{{ asset('storage/' . $feed->image) }}"
                                                     data-id="{{ $feed->_id }}"
-                                                    data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->image}}">
-                                                    <img src="{{ env('BUNNY_CDN_URL'). $feed->image }}"
+                                                    data-demo-href="{{ asset('storage/' . $feed->image) }}">
+                                                    <img src="{{ asset('storage/' . $feed->image) }}"
                                                         style="width:100%;object-fit:cover;border-radius:7px;padding:0;display:block">
                                                 </a>
                                                 {{-- <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group 1000008129.svg') }}"
                                                 style="width:20px;height:20px;margin:5px;border-radius:5px;object-fit:cover;color:#fff"> --}}
                                                 @if ($feed->audio !== '' && $feed->audio !== null)
-                                                    <audio src="{{ env('BUNNY_CDN_URL') . $feed->audio }}"
+                                                    <audio src="{{ asset('storage/' . $feed->audio) }}"
                                                         id="feed-audio-{{ $feed->id }}"></audio>
                                                     <div class="audio-icon-play d-none"
                                                         id="audio-icon-play{{ $feed->id }}"
@@ -1571,7 +1571,6 @@
             </div>
         </div>
     </div>
-
 
     <script>
         function delete_service(el) {
