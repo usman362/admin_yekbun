@@ -79,7 +79,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
 |
 */
 
-// Route::middleware(['verify.mobile'])->group(function () {
+Route::middleware(['verify.mobile'])->group(function () {
 
     Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
     Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
@@ -573,4 +573,4 @@ use App\Http\Controllers\Api\UserSuggestionController;
     });
     // });
 
-//  });
+ });
