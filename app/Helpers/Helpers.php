@@ -207,7 +207,7 @@ class Helpers
     {
 
         // Generate a unique name for the file, or use the original file name
-        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
+        $uniqueName = $uploadedFile->getClientOriginalName();
 
         // Get the folder name from the request or use 'files' as the default folder
         $folder = $folder ?? 'files';
@@ -258,7 +258,7 @@ class Helpers
         // -------------------------------
         // STEP 3: Generate Filename
         // -------------------------------
-        $uniqueName = uniqid() . '___' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
+        $uniqueName = $uploadedFile->getClientOriginalName();
 
         // -------------------------------
         // STEP 4: Upload to Bunny CDN

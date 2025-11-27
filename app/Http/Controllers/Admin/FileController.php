@@ -41,7 +41,7 @@ class FileController extends Controller
         }
 
         // Unique filename
-        $uniqueName = uniqid() . '__' . str_replace(' ', '_', $uploadedFile->getClientOriginalName());
+        $uniqueName = $uploadedFile->getClientOriginalName();
 
         // Temporary local storage path
         $ext = strtolower($uploadedFile->getClientOriginalExtension());
