@@ -79,7 +79,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
 |
 */
 
-Route::middleware(['verify.mobile'])->group(function () {
+// Route::middleware(['verify.mobile'])->group(function () {
 
     Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
     Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
@@ -296,6 +296,9 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::delete('cities/{id}', [CityController::class, 'destroy'])->name('cities.destroy');
     Route::get('get-cities', [CityController::class, 'getCities']);
 
+    //Non Kurdistan Countries and Cities
+    Route::get('all-countries', [CountryController::class, 'allCountries']);
+    Route::get('all-cities', [CityController::class, 'allCities']);
 
     //Emojis Section
     Route::get('emojis', [EmojiFeedController::class, 'index']);
@@ -570,4 +573,4 @@ Route::middleware(['verify.mobile'])->group(function () {
     });
     // });
 
- });
+//  });

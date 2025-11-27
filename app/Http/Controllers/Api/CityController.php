@@ -9,6 +9,8 @@ use App\Models\Region;
 use App\Models\Country;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
+use App\Models\Cities;
+use App\Models\Countries;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -167,4 +169,18 @@ class CityController extends Controller
             'message' => 'City Deleted successfully'
         ]);
     }
+
+   public function allCities(Request $request)
+    {
+        $country = Countries::where('name',$request->country_name)->first();
+        if(!$country){
+            return ResponseHelper::sendResponse([], 'Invalid Country', false, 422);
+        }
+        $cities = Cities::select(['name', 'country_id'])
+            ->where('country_id', $country->conid)
+            ->get();
+
+        return ResponseHelper::sendResponse($cities, 'Cities have been fetched successfully');
+    }
+
 }

@@ -10,6 +10,7 @@ use App\Models\Citylocations;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
+use App\Models\Countries;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -108,4 +109,14 @@ class CountryController extends Controller
 
         return ResponseHelper::sendResponse($users, 'Kurdish Peoples Successfully Fetch!');
     }
+
+    public function allCountries()
+    {
+        $countries = Countries::select(['conid', 'name'])
+            ->with(['cities:name,country_id']) // FK should match your DB column
+            ->get();
+
+        return ResponseHelper::sendResponse($countries, 'Countries fetched successfully');
+    }
+
 }
