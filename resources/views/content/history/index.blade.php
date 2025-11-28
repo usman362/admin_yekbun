@@ -283,6 +283,9 @@
             {{-- @can('artist.create') --}}
             <button class="btn btn-primary add-history" data-bs-toggle="modal" data-bs-target="#createhistoryModal">Add
                 History</button>
+
+                <audio controls src="{{\App\Helpers\BunnyOptimizer::optimize('audios/artist/Zuber%20Salih/6926d3bd06a42__Zuber-Salih-Fermane.mp3')}}"></audio>
+                <p>File Size: rand(1, 9) . " KB"</p>
             {{-- @endcan --}}
         </div>
     </div>

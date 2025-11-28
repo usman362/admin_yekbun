@@ -263,6 +263,7 @@ class MusicController extends Controller
                 $song->artist_id = $request->artist_id;
                 $song->audio = $audioPath;
                 $song->file_size = $request->songs_file_size[$key] ?? '';
+                $song->short_size = rand(18, 32);
                 $song->length = $request->songs_file_length[$key] ?? '';
                 $song->status = (int)$request->status;
                 $song->save();

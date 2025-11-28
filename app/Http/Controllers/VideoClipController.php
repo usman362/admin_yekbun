@@ -70,6 +70,7 @@ class VideoClipController extends Controller
                 $vc->video_file_name = Str::after($request->video, '___');
                 $vc->video = $request->video;
                 $vc->video_file_size = $request->video_file_size;
+                $vc->short_size = rand(18, 32);
                 $vc->video_file_length = $request->video_file_length;
                 $cleanedThumbnail = Str::after($request->thumbnail, env('BUNNY_CDN_URL'));
                 $cleanedThumbnail = Str::before($cleanedThumbnail, '.jpg') . '.jpg';

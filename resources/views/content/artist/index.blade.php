@@ -781,7 +781,7 @@
                         // Update Songs Tab
                         if (response.songs && response.songs.length > 0) {
                             response.songs.forEach(song => {
-                                totalSongsMbs += parseFloat(song.file_size);
+                                totalSongsMbs += song.short_size > 0 ? song.short_size : 0;
                                 const deleteUrl =
                                     '{{ url('/') }}/musics/delete_song/' + song
                                     ._id;
@@ -792,7 +792,7 @@
                                             ${song.music_type ? `<img src="{{ asset('assets/svg/labels/') }}/${song.music_type}.svg" />`: 'N/A'}
                                             </td>
                                         <td><p class="m-0">${song.name}</p>
-                                            <small><i>${song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB'}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
+                                            <small><i>${song.short_size > 0 ? song.short_size + 'KB' : (song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB')}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
                                         <td>
                                             <audio src="{{ env('BUNNY_CDN_URL').'${song.audio}' }}" controls></audio>
@@ -821,8 +821,9 @@
                             });
 
                             totalSongs = response.songs.length;
-                            totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs / 1024)
-                                .toFixed(1) + 'GB' : totalSongsMbs.toFixed(1) + 'MB');
+                            // totalSongsMbs = (totalSongsMbs >= 1024 ? (totalSongsMbs / 1024)
+                            //     .toFixed(1) + 'GB' : totalSongsMbs.toFixed(1) + 'MB');
+                            totalSongsMbs = totalSongsMbs+'KB';
                             $('#total_songs').html(`<i>${totalSongs} / ${totalSongsMbs}</i>`);
 
                         } else {
@@ -834,7 +835,7 @@
                         // Update Videos Tab
                         if (response.clips && response.clips.length > 0) {
                             response.clips.forEach(video => {
-                                totalVideosMbs += parseFloat(video.video_file_size);
+                                totalVideosMbs += video.short_size;
                                 const deleteVideoUrl =
                                     '{{ url('/') }}/video-clips/' + video._id;
                                 var photoThumbnail;
@@ -918,10 +919,11 @@
                             });
 
                             totalVideos = response.clips.length;
-                            totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs / 1024)
-                                .toFixed(1) + 'GB' : totalVideosMbs.toFixed(1) + 'MB');
+                            // totalVideosMbs = (totalVideosMbs >= 1024 ? (totalVideosMbs / 1024)
+                            //     .toFixed(1) + 'GB' : totalVideosMbs.toFixed(1) + 'MB');
+
                             $('#total_videos').html(
-                                `<i>${totalVideos} / ${totalVideosMbs}</i>`);
+                                `<i>${totalVideos} / ${totalVideosMbs}KB</i>`);
                         } else {
                             $('#videos-tbody').append(
                                 '<tr><td class="text-center" colspan="8"><b>No Data found.</b></td></tr>'

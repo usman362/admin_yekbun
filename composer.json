@@ -54,7 +54,8 @@
       "app/Helpers/Helpers.php",
       "app/Helpers/ResponseHelper.php",
       "app/Helpers/PermissionHelper.php",
-      "app/Helpers/LanguagesHelpers.php"
+      "app/Helpers/LanguagesHelpers.php",
+      "app/Helpers/BunnyOptimizer.php"
     ]
   },
   "autoload-dev": {
