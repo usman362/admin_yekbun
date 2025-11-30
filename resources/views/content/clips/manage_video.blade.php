@@ -745,7 +745,7 @@
                                         data-user_level="{{ $clip->user->level ?? 0 }}" data-text="{{ $clip->text }}"
                                         data-emoji="{{ asset('emojis/' . $clip->emoji . '.gif') }}"
                                         data-text_properties="{{ $clip->text_properties }}"
-                                        style="background-image: url({{ !empty($clip->thumbnail) ? env('BUNNY_CDN_URL') . $clip->thumbnail): asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;border:none">
+                                        style="background-image: url({{ !empty($clip->thumbnail) ? env('BUNNY_CDN_URL') . $clip->thumbnail: asset('images/user-clips-bg.jpg') }});height:335px;width:210px;background-size:cover;border:none">
 
                                         <div
                                             style="border-radius: 14px;background-color: #0000001f;width: 100%;height: 100%;">
