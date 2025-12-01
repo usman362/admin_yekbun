@@ -130,7 +130,7 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::post('/media-trimmer', [MultimediaController::class, 'mediaTrimmer']);
     Route::get('get-login-image', [UsersController::class, 'getLoginImage']);
     Route::get('profile-banners', [UsersController::class, 'getProfileBanners']);
-    // Route::middleware('jwt.custom')->group(function () {
+    Route::middleware('jwt.custom')->group(function () {
 
         Route::post('/change-password', [AccountSettingController::class, 'change_password'])
             ->name('change-password');
@@ -573,4 +573,4 @@ Route::middleware(['verify.mobile'])->group(function () {
     });
     // });
 
-//  });
+ });
