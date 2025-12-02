@@ -39,7 +39,11 @@ class UserSuggestionService
      */
     public function getSuggestions(User $currentUser, $limit = 10)
     {
-        $users = User::where('_id', '!=', $currentUser->id)->get();
+        $users = User::where('_id', '!=', $currentUser->id)
+        ->whereDoesntHave('friends')
+        ->whereDoesntHave('family')
+        ->get();
+
 
         $suggestions = $users->map(function ($user) use ($currentUser) {
             $user->suggestion_score = $this->calculateMatchScore($currentUser, $user);
