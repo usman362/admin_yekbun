@@ -324,7 +324,7 @@ class Helpers
     public static function convertToH265($inputPath, $outputPath)
     {
         // $cmd = "ffmpeg -i {$inputPath} -c:v libx265 -crf 28 -preset fast -c:a aac {$outputPath} -y";
-        $cmd = "ffmpeg -i {$inputPath} -vcodec libx264 -crf 28 -preset veryslow -acodec aac {$outputPath}";
+        $cmd = "ffmpeg -i {$inputPath} -vcodec libx264 -crf 28 -preset fast -acodec aac {$outputPath}";
         exec($cmd, $output, $returnCode);
         return $returnCode === 0;
     }
