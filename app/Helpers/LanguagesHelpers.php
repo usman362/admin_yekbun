@@ -497,6 +497,10 @@ class LanguagesHelpers
             ['keyword' => 'Notification preferences saved', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
             ['keyword' => 'Something went wrong', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
             ['keyword' => 'Ringtone', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
+            ['keyword' => 'Update Required', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
+            ['keyword' => 'A new version of this app is available. Please update to continue using it.": "A new version of this app is available. Please update to continue using it.', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
+            ['keyword' => 'Installed', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
+            ['keyword' => 'Update Now', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Notification section'],
 
             // Settings - Network section
             ['keyword' => 'Network', 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Network section'],
@@ -793,6 +797,7 @@ class LanguagesHelpers
             ['keyword' => 'Terms', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
             ['keyword' => 'User not Found!', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
             ['keyword' => 'No policy content available.', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
+            ['keyword' => "Welcome to your upcoming management hub for your shop and channels. Please be advised that the 'Location' and 'Channel' features are currently in development. We appreciate your patience and understanding.", 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
 
 
 
