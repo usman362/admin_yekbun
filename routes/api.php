@@ -102,6 +102,7 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::post('/register-verify-device', [AuthController::class, 'verifyDevice']);
     Route::post('/register-device', [AuthController::class, 'registerDevice']);
     Route::post('forgot-password', [AuthController::class, 'forgot_password']);
+    Route::post('reactivate-account', [AuthController::class, 'reactivateAccount']);
     // Route::post('change-password', [AuthController::class, 'change_password']);
     Route::post('/reset', [AuthController::class, 'reset'])->name('password.reset');
     Route::post('/reset/password', [AuthController::class, 'resetpassword'])->name('reset.complete');
@@ -138,6 +139,7 @@ Route::middleware(['verify.mobile'])->group(function () {
         Route::get('/get-my-details', [AuthController::class, 'getMyDetails']);
         Route::delete('/delete-my-account', [AuthController::class, 'deleteMyAccount']);
         Route::post('/user/profile/store', [UserProfileController::class, 'store'])->name('user_profile.store');
+        Route::get('deactivate-account', [AuthController::class, 'deactivateAccount']);
 
         Route::post('/voting/reaction', [VotingReactionController::class, 'store']);
         Route::resource('voting', VotingController::class)->only(['index', 'store', 'show', 'destroy', 'update']);

@@ -646,7 +646,11 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse(null, 'Device Imei Not Found!', false, 404);
         }
         $user = User::where('device_imei', $request->device_imei)->first();
-        return ResponseHelper::sendResponse($user->image ?? null, 'User Image Fetched!');
+        $data = [
+            'image' => $user->image ?? null,
+            'status' => $user->status,
+        ];
+        return ResponseHelper::sendResponse($data, 'User Image Fetched!');
     }
 
     public function getProfileBanners()

@@ -294,6 +294,53 @@ class AuthController extends Controller
         }
     }
 
+    public function reactivateAccount(Request $request)
+    {
+        try {
+            if(!$request->email){
+                return response()->json(['success' => false, 'message' => 'Email is Requred!'], 404);
+            }
+            $email = strtolower($request->email);
+            $user = User::where('email',$email)->first();
+            if ($user) {
+                $code = rand(1000, 9999);
+                UserCode::updateOrCreate(
+                    ['user_id' => $user->id],
+                    ['code' => $code]
+                );
+                try {
+                    $details = [
+                        'title' => 'Mail from Yekbun.org',
+                        'code' => $code,
+                        'username' => $request->username,
+                    ];
+                    $notify = AdminNotification::first();
+                    if($notify->otp == 1){
+                        Mail::to($request['email'])->send(new SendCodeMail($details));
+                    }
+                    return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
+                } catch (\Exception $e) {
+                    return response()->json(['success' => false, 'message' => 'Something went wrong'], 505);
+                }
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'Something went wrong',
+            ], 422);
+        }
+    }
+
+    public function deactivateAccount()
+    {
+        $user = User::where('email',Auth::user()->email)->first();
+        if($user){
+            $user->status = (int)0;
+            $user->save();
+        }
+        return ResponseHelper::sendResponse([], 'Youre Account has been Deactivated Successfully');
+    }
+
     public function userImei(Request $request)
     {
         $deviceImei = User::where('device_imei', $request['device_imei'])->first();
@@ -412,6 +459,7 @@ class AuthController extends Controller
             $user->email = $email;
             $user->email_verified_at = Carbon::now();
             $user->is_verfied = (int)1;
+            $user->status = (int)1;
             $user->save();
             return ResponseHelper::sendResponse($user, 'Valid Code!');
         } else {
