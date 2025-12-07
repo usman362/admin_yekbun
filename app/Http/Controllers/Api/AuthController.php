@@ -61,6 +61,10 @@ class AuthController extends Controller
                     }
                 }
             }
+
+            if($user->status == 0){
+                return ResponseHelper::sendResponse([],'Your Account is deactivated, kindly click Recover my Account', false, 404);
+            }
         } else {
             return ResponseHelper::sendResponse([], 'User not Found!', false, 404);
         }
