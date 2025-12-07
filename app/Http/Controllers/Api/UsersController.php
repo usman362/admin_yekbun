@@ -650,6 +650,7 @@ class UsersController extends Controller
                 $data = [
                 'image' => $user->image ?? null,
                 'status' => $user->status,
+                'email' => $user->email,
             ];
             return ResponseHelper::sendResponse($data, 'User Image Fetched!');
         }else{
