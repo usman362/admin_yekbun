@@ -24,9 +24,9 @@ class AccountSettingController extends Controller
         if (!Hash::check($request->oldPassword, Auth::user()->password)) {
             return ResponseHelper::sendResponse([], 'Current password is incorrect!', false, 403);
         } else {
-            User::where('id', Auth::id())->update([
-                'password' => Hash::make($request->password)
-            ]);
+            $user = User::find(Auth::id());
+            $user->password = Hash::make($request->password);
+            $user->save();
             return ResponseHelper::sendResponse([], 'Password successfully updated!');
         }
     }
