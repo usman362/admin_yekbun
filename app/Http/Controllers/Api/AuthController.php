@@ -338,7 +338,7 @@ class AuthController extends Controller
             $user->status = (int)0;
             $user->save();
         }
-        return ResponseHelper::sendResponse([], 'Youre Account has been Deactivated Successfully');
+        return ResponseHelper::sendResponse([], 'Your account is deactived and will be deleted in 90 days. You can reactivate any time in Singin');
     }
 
     public function userImei(Request $request)
