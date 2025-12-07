@@ -27,7 +27,7 @@ class AccountSettingController extends Controller
             $user = User::find(Auth::id());
             $user->password = Hash::make($request->password);
             $user->save();
-            return ResponseHelper::sendResponse([], 'Password successfully updated!'.$request->password);
+            return ResponseHelper::sendResponse([], 'Password successfully updated!');
         }
     }
 
