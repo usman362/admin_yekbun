@@ -354,12 +354,14 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Imei is already taken.',
+                'status' => $deviceImei->status ?? 0,
             ], 200);
         }
 
         return response()->json([
             'success' => true,
             'message' => 'Imei not found!.',
+            'status' => 0,
         ], 200);
     }
 
