@@ -129,8 +129,12 @@ class StandardUserController extends Controller
         $user = User::find($id);
 
         // Delete Image
-        if ($user->image)
-            Storage::delete($user->image);
+        // if ($user->image)
+        //     Storage::delete($user->image);
+        $file_path = public_path('storage/' . $user->image);
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
 
         $user->delete();
 
