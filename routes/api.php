@@ -247,6 +247,7 @@ Route::middleware(['verify.mobile'])->group(function () {
         //Payments
         Route::post('post-transaction', [PaymentController::class, 'storeTransaction']);
         Route::get('notifications-center', [NotificationsController::class, 'index']);
+        Route::post('notifications-center', [NotificationsController::class, 'store']);
 
         //User Images/Videos
         Route::get('user-images', [UsersController::class, 'user_images']);
@@ -257,7 +258,6 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::get('get-multimedia-views', [ViewsController::class, 'get_multimedia_views']);
     Route::get('get-feeds-views', [ViewsController::class, 'get_feeds_views']);
 
-    Route::post('notifications-center', [NotificationsController::class, 'store']);
     Route::get('notifications-center/{id}', [NotificationsController::class, 'read']);
     Route::delete('notifications-center/{id}/delete', [NotificationsController::class, 'delete']);
     Route::get('system-settings', [NotificationsController::class, 'getSystemSettings']);

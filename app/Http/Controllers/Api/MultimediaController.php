@@ -227,6 +227,12 @@ class MultimediaController extends Controller
         }])->find($id);
         $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', Auth::id())->get();
         $favourites = ArtistFavorite::where('artist_id', $id)->get();
+        foreach($favourites as $favourite){
+            $favUser = User::find($favourite->user_id);
+            if(!$favUser){
+                $favourite->delete();
+            }
+        }
         if ($fav->count() > 0) {
             $is_favorite = 1;
         } else {
