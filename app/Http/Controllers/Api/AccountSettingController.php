@@ -93,7 +93,7 @@ class AccountSettingController extends Controller
         $user = User::where('email', $request->oldEmail)->first();
 
         // Check OTP for new email
-        $newOtp = UserCode::where('email', $request->newEmail)->where('code', (int)$request->newOtp)
+        $newOtp = UserCode::where('email', $request->oldEmail)->where('code', (int)$request->newOtp)
         // ->where('expires_at', '>=', now())
         ->first();
 
