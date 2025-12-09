@@ -198,6 +198,7 @@ Route::middleware(['verify.mobile'])->group(function () {
         Route::post('my-notification', [UsersController::class, 'storeMyNotification']);
         Route::post('user/{id}/report', [UsersController::class, 'reportstore']);
         Route::get('user-report', [UsersController::class, 'getReport']);
+        Route::post('search-users', [UsersController::class, 'search_user']);
 
         Route::get('/user-suggestions', [UserSuggestionController::class, 'index']);
 

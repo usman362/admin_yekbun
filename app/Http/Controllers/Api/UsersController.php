@@ -658,6 +658,17 @@ class UsersController extends Controller
         }
     }
 
+    public function search_user(Request $request)
+    {
+        $users = User::with('country')
+            ->where(function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
+            })
+            ->get();
+        return ResponseHelper::sendResponse($users, 'Users has been Fetched Successfully!');
+    }
+
     public function getProfileBanners()
     {
         $banner = ProfileBanner::get();
