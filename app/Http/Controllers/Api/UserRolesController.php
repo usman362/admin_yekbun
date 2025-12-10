@@ -34,6 +34,18 @@ class UserRolesController extends Controller
         return response()->json(['permissions' => $permissions['value'] ?? []], 200);
     }
 
+    public function prices($userLevel)
+    {
+        $permissions = Setting::where('name', $userLevel)->first();
+        $monthly_price = $permissions['value']['monthly_price'] ?? 0;
+        $yearly_price = $permissions['value']['yearly_price'] ?? 0;
+        $music_playlist_price_amount = $permissions['value']['music_playlist_price_amount'] ?? 0;
+        $video_playlist_price_amount = $permissions['value']['video_playlist_price_amount'] ?? 0;
+        $data = ['monthly_price' => $monthly_price,'yearly_price' => $yearly_price,
+        'music_playlist_price' => $music_playlist_price_amount, 'video_playlist_price' => $video_playlist_price_amount];
+        return response()->json($data, 200);
+    }
+
     protected function getModules($userLevel = 'standard')
     {
         $modules = json_decode(file_get_contents(base_path('resources/data/modules.json')));

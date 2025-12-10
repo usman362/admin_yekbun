@@ -203,17 +203,31 @@ https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css
                         </div>
                         <!-- <hr class="m-0"> -->
                         <div class="d-flex">
-                            <div class="up-down-group">
-                                <i class="bx bx-chevron-down bx-xs down-icon" data-permission="price"></i>
-                                <input type="text" class="value-input" data-permission="price"
-                                    value="{{ $permissions['value']['price'] ?? 0 }}">
-                                <i class="bx bx-chevron-up bx-xs up-icon" data-permission="price"></i>
+                            <div class="text-center">
+                                <small class="text-muted">Monthly Price</small>
+                                <div class="up-down-group">
+                                    <i class="bx bx-chevron-down bx-xs down-icon" data-permission="monthly_price"></i>
+                                    <input type="text" class="value-input" data-permission="monthly_price"
+                                        value="{{ $permissions['value']['monthly_price'] ?? 0 }}">
+                                    <i class="bx bx-chevron-up bx-xs up-icon" data-permission="monthly_price"></i>
+                                </div>
                             </div>
-                            <div class="up-down-group">
+
+                            <div class="text-center">
+                                <small class="text-muted">Yearly Price</small>
+                                <div class="up-down-group">
+                                    <i class="bx bx-chevron-down bx-xs down-icon" data-permission="yearly_price"></i>
+                                    <input type="text" class="value-input" data-permission="yearly_price"
+                                        value="{{ $permissions['value']['yearly_price'] ?? 0 }}">
+                                    <i class="bx bx-chevron-up bx-xs up-icon" data-permission="yearly_price"></i>
+                                </div>
+                            </div>
+
+                            {{-- <div class="up-down-group">
                                 <i class="bx bx-chevron-down bx-xs down-currency" data-permission="currency"></i>
                                 <span data-permission="currency">{{ $permissions['value']['currency'] ?? '$' }}</span>
                                 <i class="bx bx-chevron-up bx-xs up-currency" data-permission="currency"></i>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

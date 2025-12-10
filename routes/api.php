@@ -79,7 +79,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
 |
 */
 
-Route::middleware(['verify.mobile'])->group(function () {
+// Route::middleware(['verify.mobile'])->group(function () {
 
     Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
     Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
@@ -372,6 +372,9 @@ Route::middleware(['verify.mobile'])->group(function () {
             Route::get('/academic', [UserRolesController::class, 'academic'])->name('academic');
         });
 
+
+    Route::get('user-prices/{userLevel}', [UserRolesController::class, 'prices']);
+
     // News
     Route::resource('news', NewsController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
     Route::resource('news-category', NewsCategoryController::class)->only([
@@ -576,4 +579,4 @@ Route::middleware(['verify.mobile'])->group(function () {
     });
     // });
 
- });
+//  });
