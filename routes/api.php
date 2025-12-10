@@ -79,7 +79,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
 |
 */
 
-Route::middleware(['verify.mobile'])->group(function () {
+// Route::middleware(['verify.mobile'])->group(function () {
 
     Route::get('/getfeeds', [AvatarsController::class, 'getfeeds']);
     Route::post('/postfeed', [AvatarsController::class, 'postfeed']);
@@ -516,6 +516,7 @@ Route::middleware(['verify.mobile'])->group(function () {
     Route::prefix('paypal')->group(function () {
         Route::post('create-order', [PayPalController::class, 'createOrder']);
         Route::post('capture-order', [PayPalController::class, 'captureOrder']);
+        Route::get('keys', [PayPalController::class, 'keys']);
     });
 
 
@@ -579,4 +580,4 @@ Route::middleware(['verify.mobile'])->group(function () {
     });
     // });
 
-});
+// });

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Paypal as PaypalModel;
 use Illuminate\Http\Request;
 use App\Services\PayPalService;
 
@@ -13,6 +15,12 @@ class PayPalController extends Controller
     public function __construct(PayPalService $paypal)
     {
         $this->paypal = $paypal;
+    }
+
+    public function keys()
+    {
+        $paypal = PaypalModel::orderBy('id' , 'desc')->first();
+        return ResponseHelper::sendResponse($paypal,'Paypal keys has been fetch successfully');
     }
 
     public function createOrder(Request $request)
