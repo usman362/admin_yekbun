@@ -278,7 +278,8 @@ class FeedsController extends Controller
                 $images[] = [
                     'path' => $storedImage,
                     'name' => $image->getClientOriginalName(),
-                    'size' => $image->getSize() ?? 0,
+                    // 'size' => $image->getSize(),
+                    'size' => 0,
                 ];
                 UserImage::create([
                     'user_id' => Auth::id(),
@@ -301,7 +302,8 @@ class FeedsController extends Controller
                 $videos[] = [
                     'path' => $storedVideo,
                     'name' => $video->getClientOriginalName(),
-                    'size' => $video->getSize() ?? 0,
+                    // 'size' => $video->getSize(),
+                    'size' => 0,
                     // 'length' => $this->getMediaDuration($video), // Optional
                 ];
                 UserVideo::create([
