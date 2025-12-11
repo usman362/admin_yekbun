@@ -214,6 +214,12 @@ class PaymentController extends Controller
         return ResponseHelper::sendResponse($cart, 'Cart fetched successfully!');
     }
 
+    public function deleteCart($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+        return ResponseHelper::sendResponse([], 'Cart deleted successfully!');
+    }
 
     public function storeaddtoCart(Request $request)
     {

@@ -223,6 +223,7 @@ Route::middleware(['verify.mobile'])->group(function () {
         //Cart
         Route::get('add-to-cart', [PaymentController::class, 'addtoCart']);
         Route::post('add-to-cart', [PaymentController::class, 'storeaddtoCart']);
+        Route::delete('delete-cart/{id}', [PaymentController::class, 'deleteCart']);
         Route::post('cart-payment', [PaymentController::class, 'cartPayment']);
 
         //Playlist
