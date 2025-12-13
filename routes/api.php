@@ -254,6 +254,13 @@ use App\Http\Controllers\Api\UserSuggestionController;
         //User Images/Videos
         Route::get('user-images', [UsersController::class, 'user_images']);
         Route::get('user-videos', [UsersController::class, 'user_videos']);
+
+        // collectoin feed
+        Route::post('/create-collection', [CollectionController::class, 'insert']);
+        Route::post('/add-to-collection', [CollectionController::class, 'add_to_collection']);
+        Route::get('/list-collections', [CollectionController::class, 'get_collection']);
+        Route::delete('/remove-collection/{id}', [CollectionController::class, 'destroy']);
+        Route::get('/list-collection-items/{collection_id}', [CollectionController::class, 'listCollectionItems']);
     });
 
     //Views
@@ -503,11 +510,6 @@ use App\Http\Controllers\Api\UserSuggestionController;
     // Feed image background
     Route::post('/upload-background', [FeedBackgroundImageController::class, 'upload'])->name('upload-background');
     Route::get('/get-background', [FeedBackgroundImageController::class, 'get'])->name('get-background');
-
-    // collectoin feed
-    Route::post('/add-collection', [CollectionController::class, 'insert'])->name('add-collection');
-    Route::get('/get_collection/{user_id}', [CollectionController::class, 'get_collection'])->name('get-collection');
-    Route::delete('/remove-collection/{id}', [CollectionController::class, 'destroy'])->name('remove-collection');
 
     // Paypal
     Route::post('charge', [PaymentController::class, 'charge']);

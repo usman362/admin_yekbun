@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Helpers;
+use App\Helpers\ResponseHelper;
 use App\Models\Collection;
 use App\Traits\UploadMedia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Feed;
+use Illuminate\Support\Facades\Auth;
 
 class CollectionController extends Controller
 {
@@ -19,31 +23,40 @@ class CollectionController extends Controller
         $collection = new Collection();
         $collection->title = $request->title;
         if ($request->hasFile('image')) {
-            $path = UploadMedia::index($request->file('image) ?? '));
+            $path = Helpers::fileCDNUpload($request->image,'images/collections');
             $collection->image = $path;
         }
 
-        $collection->user_id  = $request->user_id;
+        $collection->user_id  = Auth::id();
 
         $collection->save();
 
-        return response()->json(['success' => true, 'message' => 'Collection successfully created.']);
+        return ResponseHelper::sendResponse($collection,'Collection successfully created.');
     }
 
     public function add_to_collection(Request $request)
     {
         $collection = Collection::find($request->collection_id);
+        if(!$collection){
+            return ResponseHelper::sendResponse([],'Collection Not Found!',false,404);
+        }
 
-        $collection->feeds()->sync($request->feed_id);
+        $feed = Feed::find($request->feed_id);
 
-        return response()->json(['success' => true, 'message' => 'Successfully added to collection.']);
+        if(!$feed){
+            return ResponseHelper::sendResponse([],'Feed Not Found!',false,404);
+        }
+
+        $collection->feeds()->sync([$request->feed_id]);
+
+        return ResponseHelper::sendResponse($collection,'Successfully added to collection.');
     }
 
-    public function get_collection($user_id)
+    public function get_collection()
     {
-        $collection = Collection::where('user_id', $user_id)->get();
+        $collection = Collection::where('user_id', Auth::id())->get();
         if (isset($collection)) {
-            return response()->json(['success' => true, 'data' => $collection]);
+            return ResponseHelper::sendResponse($collection,'Collections has been Fetched Successfully.');
         }
     }
 
@@ -53,8 +66,26 @@ class CollectionController extends Controller
         $collection = Collection::find($id);
         if (isset($collection)) {
             if ($collection->delete($collection->id)) {
-                return response()->json(['success' => true, 'data' => $collection]);
+                return ResponseHelper::sendResponse($collection,'Collection has been Deleted Successfully.');
             }
+        }else{
+            return ResponseHelper::sendResponse([],'Collection Not Found!',false,404);
         }
     }
+
+    public function listCollectionItems($collection_id)
+    {
+        $collection = Collection::with('feeds.user')
+            ->find  ($collection_id);
+
+        if(!$collection){
+            return ResponseHelper::sendResponse([],'Collection Not Found!',false,404);
+        }
+
+        return ResponseHelper::sendResponse(
+            $collection->feeds,
+            'Collection feeds fetched successfully.'
+        );
+    }
+
 }
