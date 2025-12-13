@@ -261,6 +261,8 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::get('/list-collections', [CollectionController::class, 'get_collection']);
         Route::delete('/remove-collection/{id}', [CollectionController::class, 'destroy']);
         Route::get('/list-collection-items/{collection_id}', [CollectionController::class, 'listCollectionItems']);
+        Route::delete('/collections/{collection_id}/feeds/{feed_id}',[CollectionController::class, 'destroyCollectionFeed']);
+
     });
 
     //Views

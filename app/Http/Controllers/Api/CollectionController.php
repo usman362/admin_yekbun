@@ -88,4 +88,31 @@ class CollectionController extends Controller
         );
     }
 
+    public function destroyCollectionFeed($collection_id, $feed_id)
+    {
+        $collection = Collection::find($collection_id);
+
+        // Optional: ownership / permission check
+        // if ($collection->user_id !== Auth::id()) {
+        //     return ResponseHelper::sendResponse([], 'Unauthorized', false, 403);
+        // }
+
+        if(!$collection){
+            return ResponseHelper::sendResponse([],'Collection Not Found!',false,404);
+        }
+
+        $feed = Feed::find($feed_id);
+
+        if(!$feed){
+            return ResponseHelper::sendResponse([],'Feed Not Found!',false,404);
+        }
+
+        $collection->feeds()->detach($feed_id);
+
+        return ResponseHelper::sendResponse(
+            null,
+            'Feed removed from collection successfully.'
+        );
+    }
+
 }
