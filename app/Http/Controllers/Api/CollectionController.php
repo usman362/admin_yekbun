@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Feed;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CollectionController extends Controller
 {
@@ -54,10 +55,54 @@ class CollectionController extends Controller
 
     public function get_collection()
     {
-        $collection = Collection::where('user_id', Auth::id())->get();
-        if (isset($collection)) {
-            return ResponseHelper::sendResponse($collection,'Collections has been Fetched Successfully.');
-        }
+        $collections = Collection::with('feeds')
+            ->where('user_id', Auth::id())
+            ->get();
+
+        $collections = $collections->map(function ($collection) {
+
+            $feeds = $collection->feeds ?? collect([]);
+
+            $relativePath = 'images/collection_feed_empty/empty_feed_collection.jpeg';
+
+            // Source file (usually in public/)
+            $sourcePath = public_path($relativePath);
+
+            // Destination file (storage/app/public)
+            $destinationPath = 'public/' . $relativePath;
+
+            // Ensure directory exists
+            Storage::makeDirectory(dirname($destinationPath));
+
+            // Copy & replace if exists
+            if (file_exists($sourcePath)) {
+                Storage::put($destinationPath, file_get_contents($sourcePath));
+            }
+            // ✅ Case 1: No feeds → default image
+            if ($feeds->isEmpty()) {
+                $collection->image = $relativePath;
+            }
+
+            // ✅ Case 2: Feeds exist & collection image is empty
+            elseif (empty($collection->image) && $feeds->isNotEmpty()) {
+                foreach ($feeds as $feed) {
+                    if (!empty($feed->images) && is_array($feed->images)) {
+                        $collection->image = $feed->images[0]['path'] ?? $relativePath;
+                        break;
+                    }
+                }
+            }
+
+            // ✅ Always return feeds as array (or empty)
+            $collection->feed_id = $feeds->pluck('_id')->values();
+
+            return $collection;
+        });
+
+        return ResponseHelper::sendResponse(
+            $collections,
+            'Collections has been Fetched Successfully.'
+        );
     }
 
     public function destroy($id)
