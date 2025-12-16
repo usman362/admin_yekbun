@@ -970,11 +970,11 @@ class FeedsController extends Controller
     {
         $feed = Feed::find($id);
         $data = [
-        'comments_count' => isset($feed->comments) ? $feed->comments->count() : 0,
-        'voice_comments_count' => isset($feed->voice_comments) ? $feed->voice_comments->count() : 0,
-        'likes_count' =>  $feed->likes->count() ,
-        'views_count' => isset($feed->views) ? $feed->views->count() : 0,
-        'shares_count' => isset($feed->shares) ? $feed->shares->count() : 0,
+        'comments_count' => $feed->comments->count(),
+        'voice_comments_count' => $feed->voice_comments->count(),
+        'likes_count' => $feed->likes->count(),
+        'views_count' => $feed->views->count(),
+        'shares_count' => $feed->shares->count(),
         ];
         return ResponseHelper::sendResponse($data, 'Like has been successfully fetched');
     }
