@@ -972,7 +972,7 @@ class FeedsController extends Controller
         $data = [
         'comments_count' => isset($feed->comments) ? $feed->comments->count() : 0,
         'voice_comments_count' => isset($feed->voice_comments) ? $feed->voice_comments->count() : 0,
-        'likes_count' => isset($feed->likes) ? $feed->likes->count() : 0,
+        'likes_count' =>  $feed->likes->count() ,
         'views_count' => isset($feed->views) ? $feed->views->count() : 0,
         'shares_count' => isset($feed->shares) ? $feed->shares->count() : 0,
         ];
