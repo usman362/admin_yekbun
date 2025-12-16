@@ -965,4 +965,14 @@ class FeedsController extends Controller
         $feed->save();
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
+
+    public function getfeedLike($id)
+    {
+        $likeCount = FeedLikes::where('feed_id', $id)->count();
+
+        $data = [
+            'like_count' => $likeCount
+        ];
+        return ResponseHelper::sendResponse($data, 'Like has been successfully fetched');
+    }
 }

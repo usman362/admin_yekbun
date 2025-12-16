@@ -157,6 +157,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::post('feeds/{id}/comments', [FeedsController::class, 'storeComments']);
         Route::post('comments/{id}/edit', [FeedsController::class, 'editComments']);
         Route::post('feeds/{id}/likes', [FeedsController::class, 'feedLike']);
+        Route::get('feeds/{id}/likes', [FeedsController::class, 'getfeedLike']);
         Route::post('comments/{id}/likes', [FeedsController::class, 'commentLike']);
         Route::delete('comments/{id}/delete', [FeedsController::class, 'commentDelete']);
         Route::get('comments/{id}/report', [ReportCommentsController::class, 'index']);
@@ -247,9 +248,13 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::post('store-feeds-views', [ViewsController::class, 'store_feeds_views']);
 
         //Payments
+        Route::get('get-transaction-list', [PaymentController::class, 'getTransactionList']);
         Route::post('post-transaction', [PaymentController::class, 'storeTransaction']);
         Route::get('notifications-center', [NotificationsController::class, 'index']);
         Route::post('notifications-center', [NotificationsController::class, 'store']);
+
+        //Invoice
+        Route::get('get-invoice/{tId}', [PaymentController::class, 'getInvoice']);
 
         //User Images/Videos
         Route::get('user-images', [UsersController::class, 'user_images']);

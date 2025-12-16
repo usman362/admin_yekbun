@@ -164,17 +164,17 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(Report::class, 'reported_user_id', 'id');
     }
 
-    public function country()
+    public function user_country()
     {
         return $this->belongsTo(Country::class);
     }
 
-    public function region()
+    public function user_region()
     {
         return $this->belongsTo(Region::class);
     }
 
-    public function City()
+    public function user_city()
     {
         return $this->belongsTo(City::class);
     }

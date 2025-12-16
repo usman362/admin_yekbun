@@ -12,6 +12,7 @@ use App\Models\ApplePay;
 use App\Models\BankTransfer;
 use App\Models\Cart;
 use App\Models\GooglePay;
+use App\Models\Invoice;
 use App\Models\Paypal;
 use App\Models\Transaction;
 use App\Models\UserPlaylistGroup;
@@ -176,13 +177,9 @@ class PaymentController extends Controller
             $transaction->user_id = $request->user_id;
             $transaction->save();
 
+            $user = User::find($request->user_id);
+
             if ($request->status === 'COMPLETED') {
-                $level = [
-                    'Cultivated' => 0,
-                    'Educated' => 1,
-                    'Academic' => 2,
-                ];
-                $user = User::find($request->user_id);
 
                 if ($user) {
                     $current = Carbon::now();
@@ -193,6 +190,12 @@ class PaymentController extends Controller
                         $newExpiry = Carbon::parse($current->copy()->addYear())->format('Y-m-d');
                     }
 
+                        $level = [
+                            'Cultivated' => 0,
+                            'Educated' => 1,
+                            'Academic' => 2,
+                        ];
+
                     if ($newExpiry) {
                         $user->expired_at = $newExpiry;
                         $user->level = $level[$request->userType];
@@ -202,6 +205,27 @@ class PaymentController extends Controller
                     }
                 }
             }
+
+            $invoice = new Invoice();
+            $invoice->user_id = $user->_id;
+            $invoice->first_name = $user->name;
+            $invoice->last_name = $user->last_name;
+            $invoice->email = $user->email;
+            $invoice->city = $user->city;
+            $invoice->country = $user->country;
+            $invoice->transaction_id = $request->tId;
+            $invoice->status = $request->status;
+            $invoice->transaction_type = $request->transaction_type;
+            $item = [[
+                'amount' => $request->amount,
+                'title' => 'Subscription Plan',
+                'subscription_type' => $request->subscription_type,
+                'userType' => $request->userType,
+                'description' => $request->userType . ' - ' . ucfirst($request->subscription_type) . ' Subscription',
+                'quantity' => 1,
+            ]];
+            $invoice->items = $item;
+            $invoice->save();
             return ResponseHelper::sendResponse($transaction, 'Transaction stored successfully.');
         } catch (Exception $e) {
             return ResponseHelper::sendResponse([], 'Failed to stored Transaction.', false, 403);
@@ -257,5 +281,17 @@ class PaymentController extends Controller
         } else {
             return ResponseHelper::sendResponse([], 'Cart is Empty!', false, 404);
         }
+    }
+
+    public function getTransactionList()
+    {
+        $transaction = Transaction::where('user_id',Auth::id())->get();
+        return ResponseHelper::sendResponse($transaction, 'Transaction list has been fetched successfully!');
+    }
+
+    public function getInvoice($tId)
+    {
+        $invoice = Invoice::where('transaction_id',$tId)->first();
+        return ResponseHelper::sendResponse($invoice, 'Invoice has been fetched successfully!');
     }
 }

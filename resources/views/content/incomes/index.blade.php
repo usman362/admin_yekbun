@@ -163,39 +163,25 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td style="font-size: 15px;">01</td>
-                                <td style="font-size: 15px ">Date</td>
-                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome"
-                                        role="button">10</a></td>
-                                <td style="font-size: 15px ">Bank Transfer</td>
-                                <td style="font-size: 15px ">Paypal</td>
-                                <td style="font-size: 15px ">Apple Pay</td>
-                                <td style="font-size: 15px ">Google Pay</td>
-                                <td style="font-size: 15px ">Total€</td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 15px;">01</td>
-                                <td style="font-size: 15px ">Date</td>
-                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome"
-                                        role="button">10</a></td>
-                                <td style="font-size: 15px ">Bank Transfer</td>
-                                <td style="font-size: 15px ">Paypal</td>
-                                <td style="font-size: 15px ">Apple Pay</td>
-                                <td style="font-size: 15px ">Google Pay</td>
-                                <td style="font-size: 15px ">Total€</td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 15px;">01</td>
-                                <td style="font-size: 15px ">Date</td>
-                                <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome"
-                                        role="button">10</a></td>
-                                <td style="font-size: 15px ">Bank Transfer</td>
-                                <td style="font-size: 15px ">Paypal</td>
-                                <td style="font-size: 15px ">Apple Pay</td>
-                                <td style="font-size: 15px ">Google Pay</td>
-                                <td style="font-size: 15px ">Total€</td>
-                            </tr>
+                            @php
+                                $index = 01;
+                            @endphp
+                            @foreach ($transactions as $date => $transaction)
+                                <tr>
+                                    <td style="font-size: 15px;">{{$index}}</td>
+                                    <td style="font-size: 15px ">{{$date}}</td>
+                                    <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome"
+                                            role="button">{{$transaction->count()}}</a></td>
+                                    <td style="font-size: 15px ">Bank Transfer</td>
+                                    <td style="font-size: 15px ">Paypal</td>
+                                    <td style="font-size: 15px ">Apple Pay</td>
+                                    <td style="font-size: 15px ">Google Pay</td>
+                                    <td style="font-size: 15px ">{{$transaction->sum('amount')}}€</td>
+                                </tr>
+                                @php
+                                    $index++
+                                @endphp
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -225,7 +211,7 @@
                     margin-top: 2px;
                 ">DD-MM-
                         Total  Transactions 15
-                    </span></small> 
+                    </span></small>
                         </h5>
                         <div class="d-flex align-items-center flex-wrap gap-2 mt-2 mt-md-0">
 
