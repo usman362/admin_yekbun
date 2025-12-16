@@ -972,7 +972,7 @@ class FeedsController extends Controller
         if(!$feed){
             $feed = History::find($id);
             if(!$feed){
-                $feed = AIVideo::fid($id);
+                $feed = AIVideo::find($id);
             }else{
                 return ResponseHelper::sendResponse([], 'Feed Not Found!',false,404);
             }
