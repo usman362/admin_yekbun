@@ -956,7 +956,9 @@ class FeedsController extends Controller
             'liked' => $liked,
             'like_count' => $likeCount
         ];
-        $feed = Feed::find($id);
+        $feed = Feed::find($id)
+                ?? History::find($id)
+                ?? AIVideo::find($id);
         $feed->comments_count = $feed->comments->count();
         $feed->voice_comments_count = $feed->voice_comments->count();
         $feed->likes_count = $feed->likes->count();
@@ -968,20 +970,20 @@ class FeedsController extends Controller
 
     public function getfeedLike($id)
     {
-        $feed = Feed::find($id)
-            ?? History::find($id)
-            ?? AIVideo::find($id);
+            $feed = Feed::find($id)
+                ?? History::find($id)
+                ?? AIVideo::find($id);
 
-        if (!$feed) {
-            return ResponseHelper::sendResponse([], 'Feed Not Found!', false, 404);
-        }
-        $data = [
-        'comments_count' => $feed->comments->count(),
-        'voice_comments_count' => $feed->voice_comments->count(),
-        'likes_count' => $feed->likes->count(),
-        'views_count' => $feed->views->count(),
-        'shares_count' => $feed->shares->count(),
-        ];
+            if (!$feed) {
+                return ResponseHelper::sendResponse([], 'Feed Not Found!', false, 404);
+            }
+            $data = [
+            'comments_count' => $feed->comments->count(),
+            'voice_comments_count' => $feed->voice_comments->count(),
+            'likes_count' => $feed->likes->count(),
+            'views_count' => $feed->views->count(),
+            'shares_count' => $feed->shares->count(),
+            ];
         return ResponseHelper::sendResponse($data, 'Like has been successfully fetched');
     }
 }
