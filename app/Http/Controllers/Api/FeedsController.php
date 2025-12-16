@@ -969,6 +969,14 @@ class FeedsController extends Controller
     public function getfeedLike($id)
     {
         $feed = Feed::find($id);
+        if(!$feed){
+            $feed = History::find($id);
+            if(!$feed){
+                $feed = AIVideo::fid($id);
+            }else{
+                return ResponseHelper::sendResponse([], 'Feed Not Found!',false,404);
+            }
+        }
         $data = [
         'comments_count' => $feed->comments->count(),
         'voice_comments_count' => $feed->voice_comments->count(),
