@@ -976,6 +976,8 @@ class FeedsController extends Controller
             }else{
                 return ResponseHelper::sendResponse([], 'Feed Not Found!',false,404);
             }
+        }else{
+            return ResponseHelper::sendResponse([], 'Feed Not Found!',false,404);
         }
         $data = [
         'comments_count' => $feed->comments->count(),
