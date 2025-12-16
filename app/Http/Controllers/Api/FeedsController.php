@@ -968,10 +968,13 @@ class FeedsController extends Controller
 
     public function getfeedLike($id)
     {
-        $likeCount = FeedLikes::where('feed_id', $id)->count();
-
+        $feed = Feed::find($id);
         $data = [
-            'like_count' => $likeCount
+        'comments_count' => $feed->comments->count(),
+        'voice_comments_count' => $feed->voice_comments->count(),
+        'likes_count' => $feed->likes->count(),
+        'views_count' => $feed->views->count(),
+        'shares_count' => $feed->shares->count(),
         ];
         return ResponseHelper::sendResponse($data, 'Like has been successfully fetched');
     }
