@@ -30,7 +30,9 @@ class MultimediaController extends Controller
 {
     public function getAllSongs()
     {
-        $songs = Song::with(['artist', 'playlists'])->orderBy('created_at', 'desc')->get();
+        $songs = Song::with(['artist', 'playlists'])->whereHas('artist',function($q){
+            $q->where('status','1');
+        })->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($songs, 'All Songs Fetch Successfully!');
     }
 
@@ -56,7 +58,10 @@ class MultimediaController extends Controller
     {
         $artist = Artist::with(['province' => function ($q) {
             $q->with('country');
-        }])->find($id);
+        }])->where('status','1')->find($id);
+        if(!$artist){
+            return ResponseHelper::sendResponse([], 'Artist not found!',false,404);
+        }
         $songs = Song::with('playlists')->where('artist_id', $id)->get();
         return ResponseHelper::sendResponse(['artist' => $artist, 'songs' => $songs], 'Songs Fetch Successfully!');
     }
