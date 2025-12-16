@@ -130,7 +130,7 @@ class ClipsController extends Controller
             'video' => Str::after($outputPath, 'public/')
         ]);
         $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Clip.';
-        $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+        $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
         if ($users) {
             foreach ($users as $user) {
                 NotificationHelper::sendNotification($user->id, 'Clips Notification', $description);

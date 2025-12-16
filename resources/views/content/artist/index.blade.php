@@ -792,10 +792,10 @@
                                             ${song.music_type ? `<img src="{{ asset('assets/svg/labels/') }}/${song.music_type}.svg" />`: 'N/A'}
                                             </td>
                                         <td><p class="m-0">${song.name}</p>
-                                            <small><i>${song.short_size > 0 ? song.short_size + 'KB' : (song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB')}&nbsp; - &nbsp;${formatDate(song.created_at)}</i></small>
+                                            <small><i>${song.short_size > 0 ? song.short_size + 'KB' : (song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB')}&nbsp; - &nbsp;<span class="audio-duration">0:00</span>&nbsp; - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
                                         <td>
-                                            <audio src="{{ env('BUNNY_CDN_URL').'${song.audio}' }}" controls></audio>
+                                            <audio class="audio-player" src="{{ env('BUNNY_CDN_URL').'${song.audio}' }}" controls></audio>
                                         </td>
                                         <td>${song.total_listen || 'N/A'}</td>
                                         <td>
@@ -825,6 +825,31 @@
                             //     .toFixed(1) + 'GB' : totalSongsMbs.toFixed(1) + 'MB');
                             totalSongsMbs = totalSongsMbs+'KB';
                             $('#total_songs').html(`<i>${totalSongs} / ${totalSongsMbs}</i>`);
+
+                            $('.audio-player').each(function () {
+                                let audio = this;
+                                let durationSpan = $(this).closest('tr').find('.audio-duration');
+
+                                audio.addEventListener('loadedmetadata', function () {
+                                    if (!isNaN(audio.duration) && isFinite(audio.duration)) {
+                                        durationSpan.text(formatDuration(audio.duration));
+                                    } else {
+                                        durationSpan.text('0:00');
+                                    }
+                                });
+
+                                audio.addEventListener('error', function () {
+                                    durationSpan.text('0:00');
+                                });
+                            });
+
+                            function formatDuration(seconds) {
+                                seconds = Math.floor(seconds);
+                                let mins = Math.floor(seconds / 60);
+                                let secs = seconds % 60;
+                                return mins + ':' + (secs < 10 ? '0' : '') + secs;
+                            }
+
 
                         } else {
                             $('#songs-tbody').append(
