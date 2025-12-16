@@ -127,7 +127,7 @@ class MultimediaController extends Controller
 
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
-        })->where('status','0')->with(['songs', 'videos', 'province' => function ($q) {
+        })->where('status','1')->with(['songs', 'videos', 'province' => function ($q) {
             $q->with('country');
         }])->orderBy('total_views', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
