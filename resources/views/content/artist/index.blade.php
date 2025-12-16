@@ -792,7 +792,7 @@
                                             ${song.music_type ? `<img src="{{ asset('assets/svg/labels/') }}/${song.music_type}.svg" />`: 'N/A'}
                                             </td>
                                         <td><p class="m-0">${song.name}</p>
-                                            <small><i>${song.short_size > 0 ? song.short_size + 'KB' : (song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB')}&nbsp; - ${song.length} - &nbsp;${formatDate(song.created_at)}</i></small>
+                                            <small><i>${song.short_size > 0 ? song.short_size + 'KB' : (song.file_size >= 1024 ? (song.file_size/1024)+'GB' : song.file_size+'MB')}&nbsp; - &nbsp;${formatDate(song.created_at)}</i></small>
                                         </td>
                                         <td>
                                             <audio src="{{ env('BUNNY_CDN_URL').'${song.audio}' }}" controls></audio>
