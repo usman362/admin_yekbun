@@ -169,9 +169,11 @@
                             @foreach ($transactions as $date => $transaction)
                                 <tr>
                                     <td style="font-size: 15px;">{{$index}}</td>
-                                    <td style="font-size: 15px ">{{$date}}</td>
-                                    <td style="font-size: 15px "><a data-bs-toggle="modal" href="#dailyIncome"
-                                            role="button">{{$transaction->count()}}</a></td>
+                                    <td style="font-size: 15px ">{{\Carbon\Carbon::parse($date)->format('d.m.Y')}}</td>
+                                    <td style="font-size: 15px "><a data-bs-toggle="modal" class="view-transaction"
+                                    href="#dailyIncome"  data-date="{{\Carbon\Carbon::parse($date)->format('Y-m-d')}}" data-dm="{{\Carbon\Carbon::parse($date)->format('d.m.Y')}}"
+                                    data-total="{{$transaction->count()}}"
+                                    data-url="{{ route('transactions.daily') }}" role="button">{{$transaction->count()}}</a></td>
                                     <td style="font-size: 15px ">Bank Transfer</td>
                                     <td style="font-size: 15px ">Paypal</td>
                                     <td style="font-size: 15px ">Apple Pay</td>
@@ -209,7 +211,7 @@
                     font-size: 16px;
                     font-weight: 500;
                     margin-top: 2px;
-                ">DD-MM-
+                " id="daily-transaction-title">DD-MM-
                         Total  Transactions 15
                     </span></small>
                         </h5>
@@ -283,53 +285,9 @@
                                         <th style="font-size: 15px;">Options</th>
                                     </tr>
                                 </thead>
-                                <tbody class="table-border-bottom-0">
+                                <tbody id="transactions-tbody" class="table-border-bottom-0">
                                     <tr>
-                                        <td>01</td>
-                                        <td>Order ID</td>
-                                        <td class="line-height-1">
-                                            <p class="m-0"><strong>DD.MM.YYYY</strong></p>
-                                            <small>HH:MM</small>
-                                        </td>
-                                        <td class="line-height-1 user-area">
-                                            <div class="d-flex">
-                                                <img class="user-avatar" src="{{ asset('images/user-clips-artist.png') }}"
-                                                    alt="">
-                                                <div>
-                                                    <h5 class="m-0"><strong>Username</strong></h5>
-                                                    <div class="d-flex">
-                                                        <img src="{{ asset('images/kurdistan-flag-sm.png') }}"
-                                                            alt="">
-                                                        <span>Rojava . Qamishlo</span>
-                                                        <img src="{{ asset('images/germany-flag-sm.png') }}"
-                                                            alt="">
-                                                        <span>Hannover</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="line-height-1">
-                                            <p class="m-0"><strong>Upgrades</strong></p>
-                                            <small>Educated</small>
-                                        </td>
-                                        <td class="line-height-1">
-                                            <p class="m-0"><strong>Bank Transfer</strong></p>
-                                            <small>Transaction ID</small>
-                                        </td>
-                                        <td class="line-height-1">
-                                            <p class="m-0"><strong>15,00€</strong></p>
-                                            <small>-0% Discount</small>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a class="text-body" data-bs-placement="top" aria-label="Preview Invoice"
-                                                    data-bs-toggle="modal" data-bs-target="#sub-categories"
-                                                    data-bs-offset="0,4" href="javascript:void(0)" data-bs-html="true"
-                                                    data-bs-original-title="Edit">
-                                                    <img src="{{ asset('assets/svg/eye.svg') }}" alt="">
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <td colspan="8" class="text-center">Loading...</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -608,6 +566,151 @@
 });
 
 </script>
+
+<script>
+$('body').on('click', '.view-transaction', function () {
+
+    let url  = $(this).data('url');
+    let date = $(this).data('date');
+    $('#daily-transaction-title').text(`
+    ${$(this).data('dm')} Total Transactions ${$(this).data('total')}
+    `)
+    // 🔹 Show loading
+    $('#transactions-tbody').html(`
+        <tr>
+            <td colspan="8" class="text-center">Loading...</td>
+        </tr>
+    `);
+
+    // 🔹 AJAX call
+    $.ajax({
+        url: url,
+        method: 'GET',
+        data: { date: date },
+        success: function (res) {
+
+            let rows = '';
+
+            if (res.data.length === 0) {
+                rows = `
+                    <tr>
+                        <td colspan="8" class="text-center"><b>No transactions found</b></td>
+                    </tr>
+                `;
+            } else {
+                res.data.forEach((item, index) => {
+                    index++;
+                    console.log(item);
+                    const dateTime = formatDateTimeUTC(item.created_at);
+                    rows += `
+                        <tr>
+                            <td>${index}</td>
+                            <td>${item?.invoice?.invoice_id}</td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>${dateTime.date}</strong></p>
+                                <small>${dateTime.time}</small>
+                            </td>
+                            <td class="line-height-1 user-area">
+                                <div class="d-flex">
+                                    <img class="user-avatar" src="{{ asset('/') }}storage/${item?.user?.image}"
+                                        alt="">
+                                    <div>
+                                        <h5 class="m-0"><strong>${item?.user?.username}</strong></h5>
+                                        <div class="d-flex">
+                                            <img src="{{ asset('images/kurdistan-flag-sm.png') }}"
+                                                alt="">
+                                            <span>Rojava . Qamishlo</span>
+                                            <img src="{{ asset('images/germany-flag-sm.png') }}"
+                                                alt="">
+                                            <span>Hannover</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>${item?.invoice?.items[0]?.title}</strong></p>
+                                <small>${item?.invoice?.items[0]?.description}</small>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>${item.transaction_type}</strong></p>
+                                <small>${item.tId}</small>
+                            </td>
+                            <td class="line-height-1">
+                                <p class="m-0"><strong>${item.amount}€</strong></p>
+                                <small>-0% Discount</small>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <a class="text-body" data-bs-placement="top" aria-label="Preview Invoice"
+                                        data-bs-toggle="modal" data-bs-target="#sub-categories"
+                                        data-bs-offset="0,4" href="javascript:void(0)" data-bs-html="true"
+                                        data-bs-original-title="Edit">
+                                        <img src="{{ asset('assets/svg/eye.svg') }}" alt="">
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            $('#transactions-tbody').html(rows);
+        },
+        error: function () {
+            $('#transactions-tbody').html(`
+                <tr>
+                    <td colspan="8" class="text-danger text-center">
+                        Failed to load transactions
+                    </td>
+                </tr>
+            `);
+        }
+    });
+
+    function formatDateTime(timestamp) {
+        if (!timestamp) {
+            return { date: '-', time: '-' };
+        }
+
+        const dateObj = new Date(timestamp);
+        console.log('date',dateObj);
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const year = dateObj.getFullYear();
+
+        const hours = String(dateObj.getHours()).padStart(2, '0');
+        const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+        return {
+            date: `${day}.${month}.${year}`,
+            time: `${hours}:${minutes}`
+        };
+    }
+
+    function formatDateTimeUTC(timestamp) {
+        if (!timestamp) {
+            return { date: '-', time: '-' };
+        }
+
+        const dateObj = new Date(timestamp);
+
+        const day = String(dateObj.getUTCDate()).padStart(2, '0');
+        const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+        const year = dateObj.getUTCFullYear();
+
+        const hours = String(dateObj.getUTCHours()).padStart(2, '0');
+        const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');
+
+        return {
+            date: `${day}.${month}.${year}`,
+            time: `${hours}:${minutes}`
+        };
+    }
+
+
+});
+</script>
+
 
 
 @endsection

@@ -175,6 +175,7 @@ class PaymentController extends Controller
             $transaction->transaction_type = $request->transaction_type;
             $transaction->userType = $request->userType;
             $transaction->user_id = $request->user_id;
+            $transaction->date = Carbon::now()->format('Y-m-d');
             $transaction->save();
 
             $user = User::find($request->user_id);
@@ -215,7 +216,9 @@ class PaymentController extends Controller
             $invoice->country = $user->country;
             $invoice->transaction_id = $request->tId;
             $invoice->status = $request->status;
+            $invoice->date = $transaction->date;
             $invoice->transaction_type = $request->transaction_type;
+            $invoice->invoice_id = $this->generateInvoiceId();
             $item = [[
                 'amount' => $request->amount,
                 'title' => 'Subscription Plan',
@@ -294,4 +297,20 @@ class PaymentController extends Controller
         $invoice = Invoice::where('transaction_id',$tId)->first();
         return ResponseHelper::sendResponse($invoice, 'Invoice has been fetched successfully!');
     }
+
+    private function generateInvoiceId()
+    {
+        $lastInvoice = Invoice::orderBy('created_at', 'desc')->first();
+
+        if (!$lastInvoice || empty($lastInvoice->invoice_id)) {
+            return 'INV-001';
+        }
+
+        // Extract number from INV-001
+        $lastNumber = (int) str_replace('INV-', '', $lastInvoice->invoice_id);
+        $nextNumber = $lastNumber + 1;
+
+        return 'INV-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+    }
+
 }

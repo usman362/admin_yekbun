@@ -755,6 +755,8 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
         Route::get('transactions', [Transaction::class, 'index'])->name('transactions.index');
 
+        Route::get('transactions-daily', [Transaction::class, 'daily'])->name('transactions.daily');
+
         Route::get('/app/online-shop-income', $controller_path . '\apps\income\Income@onlineShopIncome')->name(
             'app-online-shop-income'
         );
@@ -929,6 +931,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::get('/app/invoice/list', $controller_path . '\apps\InvoiceList@index')->name('app-invoice-list');
     Route::get('/app/invoice/preview', $controller_path . '\apps\InvoicePreview@index')->name('app-invoice-preview');
+    Route::get('/app/invoice/{tId}/preview', $controller_path . '\apps\InvoicePreview@view')->name('app-invoice-view');
     Route::get('/app/invoice/print', $controller_path . '\apps\InvoicePrint@index')->name('app-invoice-print');
     Route::get('/app/invoice/edit', $controller_path . '\apps\InvoiceEdit@index')->name('app-invoice-edit');
     Route::get('/app/create_bills', $controller_path . '\apps\InvoiceAdd@index')->name('app-invoice-add');
