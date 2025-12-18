@@ -15,6 +15,10 @@ class Invoice extends Model
         'phone'
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

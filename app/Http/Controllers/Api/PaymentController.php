@@ -302,15 +302,16 @@ class PaymentController extends Controller
     {
         $lastInvoice = Invoice::orderBy('created_at', 'desc')->first();
 
+        // ✅ Start from 1001 if no invoice exists
         if (!$lastInvoice || empty($lastInvoice->invoice_id)) {
-            return 'INV-001';
+            return 'INV-1001';
         }
 
-        // Extract number from INV-001
+        // Extract numeric part
         $lastNumber = (int) str_replace('INV-', '', $lastInvoice->invoice_id);
         $nextNumber = $lastNumber + 1;
 
-        return 'INV-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+        return 'INV-' . $nextNumber;
     }
 
 }

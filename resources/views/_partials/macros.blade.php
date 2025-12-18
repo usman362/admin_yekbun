@@ -46,6 +46,6 @@
         }
     </style>
 
-    <label class="avatar avatar-xxl avatar-circle avatar-border-lg" for="">
-        <img id="viewer" class="avatar-img" src="{{ Auth::user() && Auth::user()->image && Auth::user()->image != "NULL" ? asset('storage/'.Auth::user()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}" alt="Image">
+    <label class="avatar avatar-xxl avatar-border-lg" for="" style="border-radius: 8px;">
+        <img id="viewer" class="avatar-img" src="{{ \App\Models\AppInfo::first() && \App\Models\AppInfo::first()->image && \App\Models\AppInfo::first()->image != "NULL" ? asset('storage/'.\App\Models\AppInfo::first()->image) : asset('https://www.w3schools.com/howto/img_avatar.png') }}" alt="Image">
     </label>
