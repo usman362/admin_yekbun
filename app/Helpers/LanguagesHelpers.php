@@ -800,6 +800,15 @@ class LanguagesHelpers
             ['keyword' => "Welcome to your upcoming management hub for your shop and channels. Please be advised that the 'Location' and 'Channel' features are currently in development. We appreciate your patience and understanding.", 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
 
 
+            ['keyword' => "Sample Word Locations", 'translated' => '', 'main_section' => 'Locations', 'section_name' => 'Locations'],
+
+            ['keyword' => "Sample Word E-Wallet", 'translated' => '', 'main_section' => 'E-Wallet', 'section_name' => 'E-Wallet'],
+
+            ['keyword' => "Sample Word Channels", 'translated' => '', 'main_section' => 'Channels', 'section_name' => 'Channels'],
+
+            ['keyword' => "Sample Word Yekbun Web", 'translated' => '', 'main_section' => 'Yekbun Web', 'section_name' => 'Yekbun Web'],
+
+
 
         ];
         foreach ($homekeywords as $keyword) {
