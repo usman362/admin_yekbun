@@ -36,8 +36,11 @@ use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\StandardUserController;
 use App\Http\Controllers\Admin\AllUserController;
 use App\Http\Controllers\Admin\FileController;
-use App\Http\Controllers\Admin\MusicCategoryController;;
-
+use App\Http\Controllers\Admin\MusicCategoryController;
+use App\Http\Controllers\Admin\ComplaintsController;
+use App\Http\Controllers\Admin\AgenciesController;
+use App\Http\Controllers\Admin\LocationsController;
+use App\Http\Controllers\Admin\LogipayController;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Http\Controllers\Admin\UploadMovieCategoryController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -975,6 +978,20 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
             Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
             Route::get('policy_and_terms', [PolicyAndTermsController::class, 'index'])->name('policy_and_terms');
         });
+
+
+        Route::get('complaints-overview',[ComplaintsController::class,'index'])->name('complaints.index');
+        Route::get('complaints-settings',[ComplaintsController::class,'settings'])->name('complaints.settings');
+
+        Route::get('manage-agencies',[AgenciesController::class,'index'])->name('agencies.index');
+
+        Route::get('manage-locations',[LocationsController::class,'index'])->name('locations.index');
+        Route::get('locations-settings',[LocationsController::class,'settings'])->name('locations.settings');
+
+        Route::get('zercash-overview',[LogipayController::class,'zer_overview'])->name('zercash.index');
+        Route::get('zercash-transactions',[LogipayController::class,'transactions'])->name('zercash.transactions');
+        Route::get('zercash-cashback',[LogipayController::class,'cashback'])->name('zercash.cashback');
+        Route::get('zercash-settings',[LogipayController::class,'zer_settings'])->name('zercash.settings');
 });
 
 Route::get('stories_time', [SettingController::class, 'storage_setting'])->name('stories23.time');
