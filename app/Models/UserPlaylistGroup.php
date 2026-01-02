@@ -14,6 +14,7 @@ class UserPlaylistGroup extends Model
         'title',
         'bg_image',
         'type',
+        'limit'
     ];
 
 
