@@ -413,28 +413,32 @@ class MultimediaController extends Controller
 
         if ($playlists->isEmpty()) {
             UserPlaylistGroup::create([
-                'title' => 'My Playlist',
+                'title' => 'Free Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover1.png',
                 'type' => 'free',
+                'limit' => 25,
             ]);
             UserPlaylistGroup::create([
-                'title' => 'My Playlist',
+                'title' => 'Bronze Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover2.png',
                 'type' => 'paid',
+                'limit' => 50,
             ]);
             UserPlaylistGroup::create([
-                'title' => 'My Playlist',
+                'title' => 'Silver Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover3.png',
                 'type' => 'paid',
+                'limit' => 75,
             ]);
             UserPlaylistGroup::create([
-                'title' => 'My Playlist',
+                'title' => 'Gold Playlist',
                 'user_id' => $userId,
                 'bg_image' => 'assets/img/playlistCover4.png',
                 'type' => 'paid',
+                'limit' => 100,
             ]);
 
             $playlists = UserPlaylistGroup::with(['playlists' => function ($q) {
