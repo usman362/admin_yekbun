@@ -1693,6 +1693,14 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">System Settings</span>
         </li>
+
+        <li class="menu-item {{ Request::is('web-app') ? 'active' : '' }}">
+            <a href="javascript:void(0)" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div>Yekbûn WebApp</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ Request::is('logs') ? 'active' : '' }}">
             <a href="{{ url('/logs') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
