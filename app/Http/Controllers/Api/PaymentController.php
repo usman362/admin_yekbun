@@ -202,6 +202,7 @@ class PaymentController extends Controller
                         $user->level = $level[$request->userType];
                         $user->user_type = Str::lower($request->userType);
                         $user->subscription_type = $request->subscription_type;
+                        $user->congrats_popup = 1;
                         $user->save();
                     }
                 }

@@ -179,6 +179,7 @@ class StandardUserController extends Controller
         $user = User::find($request->user_id);
         $user->level = (int) $request->level;
         $user->user_type = strtolower($levels[$request->level]);
+        $user->congrats_popup = 1;
         $user->save();
 
 

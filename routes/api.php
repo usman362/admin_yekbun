@@ -200,6 +200,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::post('user/{id}/report', [UsersController::class, 'reportstore']);
         Route::get('user-report', [UsersController::class, 'getReport']);
         Route::post('search-users', [UsersController::class, 'search_user']);
+        Route::get('congrats-popup',[UsersController::class, 'congrats_popup_off']);
 
         Route::get('/user-suggestions', [UserSuggestionController::class, 'index']);
 

@@ -737,4 +737,12 @@ class UsersController extends Controller
         ])->where('user_id', Auth::id())->get();
         return ResponseHelper::sendResponse($reports, 'Reports fetch successfully');
     }
+
+    public function congrats_popup_off()
+    {
+        $user = User::find(Auth::id());
+        $user->congrats_popup = 0;
+        $user->save();
+        return ResponseHelper::sendResponse($user, 'Congrats Popup Disabled Successfully');
+    }
 }
