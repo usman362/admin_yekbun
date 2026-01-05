@@ -317,6 +317,10 @@ class LanguagesHelpers
             ['keyword' => 'Music Options', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
             ['keyword' => 'Edit Playlist Title', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
             ['keyword' => 'Playlist Privacy', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Free Playlist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Bronze Playlist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Silver Playlist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
+            ['keyword' => 'Gold Playlist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Playlist'],
 
             //Multimedia Card
             ['keyword' => 'My Cart', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Card'],
