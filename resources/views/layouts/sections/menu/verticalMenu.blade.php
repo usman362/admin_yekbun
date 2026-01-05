@@ -1694,11 +1694,24 @@
             <span class="menu-header-text">System Settings</span>
         </li>
 
-        <li class="menu-item {{ Request::is('web-app') ? 'active' : '' }}">
-            <a href="javascript:void(0)" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
+         <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active open' : (Request::is('web-app/manage-items') ? 'active open' : '') }}"
+            style="">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
                 <div>Yekbûn WebApp</div>
             </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('web-app/manage-items') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Items</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Transactions</div>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li class="menu-item {{ Request::is('logs') ? 'active' : '' }}">
