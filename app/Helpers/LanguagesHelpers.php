@@ -841,6 +841,8 @@ class LanguagesHelpers
             ['keyword' => "Just now", 'translated' => '', 'main_section' => 'Dashboard', 'section_name' => 'Dashboard'],
             ['keyword' => "2 Flags", 'translated' => '', 'main_section' => 'Dashboard', 'section_name' => 'Dashboard'],
             ['keyword' => "Don't show", 'translated' => '', 'main_section' => 'Dashboard', 'section_name' => 'Dashboard'],
+            ['keyword' => "We're thrilled to welcome you as an", 'translated' => '', 'main_section' => 'Dashboard', 'section_name' => 'Dashboard'],
+            ['keyword' => "With this upgrade, you now have access to enhanced features and exciting new opportunities on our platform.", 'translated' => '', 'main_section' => 'Dashboard', 'section_name' => 'Dashboard'],
 
             ['keyword' => "Sample Word Locations", 'translated' => '', 'main_section' => 'Locations', 'section_name' => 'Locations'],
 
