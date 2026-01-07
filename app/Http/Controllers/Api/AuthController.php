@@ -187,6 +187,7 @@ class AuthController extends Controller
                 'level' => (int)'0',
                 'is_verfied' => (int)'0',
                 'is_superadmin' => (int)'0',
+                'congrats_popup' => (int)'1',
                 'last_name' => $request['lname'],
                 'language' => $request['language'],
                 'gender' => $request['gender'],

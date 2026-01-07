@@ -95,6 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'get_greetings',
         'search_option',
         'app_status',
+        'congrats_popup'
     ];
 
     /**
