@@ -297,6 +297,8 @@ class LanguagesHelpers
             ['keyword' => 'Latest Songs', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
             ['keyword' => 'Popular Artist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
             ['keyword' => 'Favorite Artist', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Popular Artists', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
+            ['keyword' => 'Favorite Artists', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
             ['keyword' => 'Songs', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
             ['keyword' => 'Follow', 'translated' => '', 'main_section' => 'Multimedia', 'section_name' => 'Multimedia Artist'],
 
@@ -627,7 +629,8 @@ class LanguagesHelpers
             ['keyword' => "Payment Recieved", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
             ['keyword' => "Thank you for the Payment. We received your Order. You can find the Invoice as PDF in your Account and in your Mail Account.", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
             ['keyword' => "Please select payment methed", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
-
+            ['keyword' => "No Items yet", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
+            ['keyword' => "Get Cashback now", 'translated' => '', 'main_section' => 'Settings', 'section_name' => 'Payment'],
 
             // User Profile - Home section
             ['keyword' => 'New Violate', 'translated' => '', 'main_section' => 'User Profile', 'section_name' => 'Home'],
