@@ -176,6 +176,7 @@ class AuthController extends Controller
                     'message' => 'Imei is already taken!',
                 ]);
             }
+            $current = Carbon::now();
             $newExpiry = Carbon::parse($current->copy()->addMonth())->format('Y-m-d');
 
             $user = User::create([
