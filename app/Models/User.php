@@ -303,6 +303,16 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->hasMany(UserFriends::class, 'friend_id');
     }
 
+    public function relationsAsFriend()
+    {
+        return $this->hasMany(UserFriends::class, 'friend_id');
+    }
+
+    public function relationsAsUser()
+    {
+        return $this->hasMany(UserFriends::class, 'user_id');
+    }
+
     public function block()
     {
         return $this->hasMany(UserFriends::class, 'friend_id')->where('user_type', 'block')->limit(5);
