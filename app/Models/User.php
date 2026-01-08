@@ -95,7 +95,9 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'get_greetings',
         'search_option',
         'app_status',
-        'congrats_popup'
+        'congrats_popup',
+        'expired_at',
+        'subscription_type'
     ];
 
     /**
@@ -117,6 +119,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'email_verified_at' => 'datetime',
         'action_duration' => 'datetime',
         'deactivated_at' => 'datetime',
+        'expired_at' => 'datetime',
     ];
 
     public function getActivitylogOptions(): LogOptions

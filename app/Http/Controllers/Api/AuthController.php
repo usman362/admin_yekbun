@@ -176,6 +176,7 @@ class AuthController extends Controller
                     'message' => 'Imei is already taken!',
                 ]);
             }
+            $newExpiry = Carbon::parse($current->copy()->addMonth())->format('Y-m-d');
 
             $user = User::create([
                 'name' => $request['fname'],
@@ -184,7 +185,7 @@ class AuthController extends Controller
                 'password' => bcrypt($request['password']),
                 'status' => (int)'1',
                 'is_admin_user' => (int)'0',
-                'level' => (int)'0',
+                'level' => (int)'1',
                 'is_verfied' => (int)'0',
                 'is_superadmin' => (int)'0',
                 'congrats_popup' => (int)'1',
@@ -199,12 +200,14 @@ class AuthController extends Controller
                 'province' => $request['province'],
                 'city' => $request['city'],
                 'phone' => $request['phone'],
+                'expired_at' => $newExpiry,
+                'subscription_type' => 'trial',
                 'device_type' => $request['device_type'],
                 'device_imei' => $request['device_imei'],
                 'device_name' => $request['device_name'],
                 'device_model' => $request['device_model'],
                 'device_serial' => $request['device_serial'],
-                'user_type' => 'cultivated',
+                'user_type' => 'educated',
                 'is_else' => 'true',
                 'is_language' => 'true',
                 'is_music' => 'true',
