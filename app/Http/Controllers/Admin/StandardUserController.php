@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\UserRequest;
+use App\Models\UserFriends;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -138,6 +140,22 @@ class StandardUserController extends Controller
 
         $user->delete();
 
+        $userRequest1 = UserRequest::where('user_id',$id)->get();
+        $userRequest2 = UserRequest::where('request_id',$id)->get();
+        $userFriend1 = UserFriends::where('user_id',$id)->get();
+        $userFriend12 = UserFriends::where('friend_id:',$id)->get();
+        foreach($userRequest1 as $del){
+            $del->delete();
+        }
+        foreach($userRequest2 as $del){
+            $del->delete();
+        }
+        foreach($userFriend1 as $del){
+            $del->delete();
+        }
+        foreach($userFriend2 as $del){
+            $del->delete();
+        }
         return back()->with("success", "User successfully deleted.");
     }
 

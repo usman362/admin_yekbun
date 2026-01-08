@@ -6,6 +6,8 @@ use App\Helpers\Helpers;
 use App\Helpers\ResponseHelper;
 use session;
 use App\Models\User;
+use App\Models\UserRequest;
+use App\Models\UserFriends;
 use App\Models\UserCode;
 use App\Mail\SendCodeMail;
 use App\Mail\YekhbunMail;
@@ -347,6 +349,23 @@ class AuthController extends Controller
             $user->status = (int)0;
             $user->deactivated_at = Carbon::now();
             $user->save();
+
+            $userRequest1 = UserRequest::where('user_id',$user->_id)->get();
+            $userRequest2 = UserRequest::where('request_id',$user->_id)->get();
+            $userFriend1 = UserFriends::where('user_id',$user->_id)->get();
+            $userFriend12 = UserFriends::where('friend_id:',$user->_id)->get();
+            foreach($userRequest1 as $del){
+                $del->delete();
+            }
+            foreach($userRequest2 as $del){
+                $del->delete();
+            }
+            foreach($userFriend1 as $del){
+                $del->delete();
+            }
+            foreach($userFriend2 as $del){
+                $del->delete();
+            }
         }
         return ResponseHelper::sendResponse([], 'Your account is deactived and will be deleted in 90 days. You can reactivate any time in Singin');
     }
