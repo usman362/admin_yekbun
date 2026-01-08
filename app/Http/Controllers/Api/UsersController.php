@@ -39,8 +39,12 @@ class UsersController extends Controller
         $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
             ->where('_id', '!=', $authId)
             ->where('is_admin_user', 0)
-            ->whereDoesntHave('friends_all')
-            ->whereDoesntHave('family_all')
+            ->whereDoesntHave('friends', function ($q) use ($authId) {
+                $q->where('user_id', $authId)->where('user_type', 'friends');
+            })
+             ->whereDoesntHave('family', function ($q) use ($authId) {
+                $q->where('user_id', $authId)->where('user_type', 'family');
+            })
             ->get();
 
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
