@@ -36,29 +36,17 @@ class UsersController extends Controller
     {
         $authId = Auth::id();
 
-        // Get all related user IDs (friends + family)
-        $excludedUserIds = UserFriends::where('user_id', $authId)
-            ->orWhere('friend_id', $authId)
-            ->whereIn('user_type', ['friends', 'family'])
-            ->get()
-            ->flatMap(function ($row) use ($authId) {
-                return $row->user_id === $authId
-                    ? [$row->friend_id]
-                    : [$row->user_id];
-            })
-            ->unique()
-            ->values()
-            ->toArray();
-
         $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
             ->where('_id', '!=', $authId)
-            ->whereDoesntHave('relationsAsFriend', function ($q) use ($authId) {
-            $q->where('user_id', $authId);
-        })
-        ->whereDoesntHave('relationsAsUser', function ($q) use ($authId) {
-            $q->where('friend_id', $authId);
-        })
-        ->get();
+            ->where('is_admin_user', 0)
+            ->whereDoesntHave('relations', function ($q) use ($authId) {
+                $q->whereIn('user_type', ['friends', 'family'])
+                ->where(function ($q) use ($authId) {
+                    $q->where('user_id', $authId)
+                        ->orWhere('friend_id', $authId);
+                });
+            })
+            ->get();
 
         return ResponseHelper::sendResponse($users, 'User Fetch Successfully');
     }
