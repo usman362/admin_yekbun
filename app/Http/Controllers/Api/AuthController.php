@@ -349,23 +349,6 @@ class AuthController extends Controller
             $user->status = (int)0;
             $user->deactivated_at = Carbon::now();
             $user->save();
-
-            $userRequest1 = UserRequest::where('user_id',$user->_id)->get();
-            $userRequest2 = UserRequest::where('request_id',$user->_id)->get();
-            $userFriend1 = UserFriends::where('user_id',$user->_id)->get();
-            $userFriend12 = UserFriends::where('friend_id:',$user->_id)->get();
-            foreach($userRequest1 as $del){
-                $del->delete();
-            }
-            foreach($userRequest2 as $del){
-                $del->delete();
-            }
-            foreach($userFriend1 as $del){
-                $del->delete();
-            }
-            foreach($userFriend2 as $del){
-                $del->delete();
-            }
         }
         return ResponseHelper::sendResponse([], 'Your account is deactived and will be deleted in 90 days. You can reactivate any time in Singin');
     }
