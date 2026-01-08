@@ -39,11 +39,12 @@ class UsersController extends Controller
         $users = User::select('_id', 'user_id', 'username', 'image', 'is_online')
             ->where('_id', '!=', $authId)
             ->where('is_admin_user', 0)
-            ->whereDoesntHave('friends', function ($q) use ($authId) {
-                $q->where('user_id', $authId)->where('user_type', 'friends');
-            })
-             ->whereDoesntHave('family', function ($q) use ($authId) {
-                $q->where('user_id', $authId)->where('user_type', 'family');
+            ->whereDoesntHave('relations', function ($q) use ($authId) {
+                $q->whereIn('user_type', ['friends', 'family'])
+                ->where(function ($q) use ($authId) {
+                    $q->where('user_id', $authId)
+                        ->orWhere('friend_id', $authId);
+                });
             })
             ->get();
 
