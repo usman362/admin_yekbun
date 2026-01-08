@@ -40,8 +40,7 @@ class UserSuggestionService
     public function getSuggestions(User $currentUser, $limit = 10)
     {
         $users = User::where('_id', '!=', $currentUser->id)
-        ->whereDoesntHave('friends')
-        ->whereDoesntHave('family')
+        ->whereDoesntHave('relations')
         ->get();
 
 
