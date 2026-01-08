@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('users:delete-deactivated')->daily();
+        $schedule->command('users:downgrade-trial')->hourly();
     }
 
     /**
