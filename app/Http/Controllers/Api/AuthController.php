@@ -133,7 +133,7 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
 
-        // try {
+        try {
             $validatedData = $request->validate([
                 'fname' => 'required|max:100',
                 'lname' => 'nullable|max:100',
@@ -295,12 +295,12 @@ class AuthController extends Controller
                     return response()->json(['success' => false, 'message' => 'Something went wrong'], 505);
                 }
             }
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'errors' => 'Something went wrong',
-        //     ], 422);
-        // }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'Something went wrong',
+            ], 422);
+        }
     }
 
     public function reactivateAccount(Request $request)
