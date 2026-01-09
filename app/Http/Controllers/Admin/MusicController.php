@@ -277,7 +277,7 @@ class MusicController extends Controller
             );
             if ($notification->new_music == 'true' && $request->status == '1' && $notify->music == 1) {
                 try {
-                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_music_title, $description);
