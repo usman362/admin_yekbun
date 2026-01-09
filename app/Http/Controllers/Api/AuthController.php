@@ -53,6 +53,8 @@ class AuthController extends Controller
 
         // If user exists, check the device IMEI
         if ($user) {
+            $user->force_logout = 0;
+            $user->save();
             if ($user->email !== 'test_yekbun@gmail.com') {
                 if ($user->device_imei != $request->device_imei) {
                     $imeis = UserImei::where('user_id', $user->id)->pluck('device_imei');
