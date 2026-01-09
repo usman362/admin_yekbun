@@ -86,7 +86,7 @@ class VideoClipController extends Controller
             );
             if ($notification->new_video_clips == 'true' && $request->status == '1') {
                 try {
-                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_video_clips_title, $description);
