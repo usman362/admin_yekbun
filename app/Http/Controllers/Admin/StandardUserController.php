@@ -143,18 +143,26 @@ class StandardUserController extends Controller
         $userRequest1 = UserRequest::where('user_id',$id)->get();
         $userRequest2 = UserRequest::where('request_id',$id)->get();
         $userFriend1 = UserFriends::where('user_id',$id)->get();
-        $userFriend12 = UserFriends::where('friend_id:',$id)->get();
-        foreach($userRequest1 as $del){
-            $del->delete();
+        $userFriend2 = UserFriends::where('friend_id:',$id)->get();
+        if($userRequest1){
+            foreach($userRequest1 as $del){
+                $del->delete();
+            }
         }
-        foreach($userRequest2 as $del){
-            $del->delete();
+        if($userRequest2){
+            foreach($userRequest2 as $del){
+                $del->delete();
+            }
         }
-        foreach($userFriend1 as $del){
-            $del->delete();
+        if($userFriend1){
+            foreach($userFriend1 as $del){
+                $del->delete();
+            }
         }
-        foreach($userFriend2 as $del){
-            $del->delete();
+        if($userFriend2){
+            foreach($userFriend2 as $del){
+                $del->delete();
+            }
         }
         return back()->with("success", "User successfully deleted.");
     }
