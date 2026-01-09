@@ -291,7 +291,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
     Route::post("/admin-activity/surveys", [AdminActivityController::class, 'store_surveys']);
     Route::post("/admin-activity/greetings", [AdminActivityController::class, 'store_greetings']);
 
-    Route::get("/admin-activity/get-public-feeds", [AdminActivityController::class, 'getpublicpopFeeds']);
+    Route::get("/admin-activity/get-public-feedss", [AdminActivityController::class, 'getpublicpopFeeds']);
     Route::post("/admin-activity/delete-feeds", [AdminActivityController::class, 'delete_pops']);
 
     Route::get('countries', [CountryController::class, 'index'])->name('countries.index');

@@ -69,7 +69,7 @@ class AdminActivityController extends Controller
 
     public function getpublicpopFeeds(Request $request)
     {
-        $popfeeds = PopFeeds::with('user')->orderBy('created_at', 'desc')->first();
+        $popfeeds = PopFeeds::with('user')->where('share_option','all-users')->orderBy('created_at', 'desc')->first();
         return ResponseHelper::sendResponse($popfeeds, 'Public Admin Activity Feed');
     }
 
