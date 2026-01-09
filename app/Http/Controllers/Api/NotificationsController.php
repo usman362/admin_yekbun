@@ -35,7 +35,7 @@ class NotificationsController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'user_id' => $request->user_id,
-            'send_by' => Auth::id(),
+            'send_by_id' => Auth::id(),
             'user_image' => $userImage,
             'type' => $request->type,
             'is_read' => 0,

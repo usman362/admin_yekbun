@@ -16,7 +16,7 @@ class NotificationCenter extends Model
         'title',
         'description',
         'user_id',
-        'send_by',
+        'send_by_id',
         'user_image',
         'type',
         'is_read',
@@ -30,6 +30,6 @@ class NotificationCenter extends Model
 
     public function send_by()
     {
-        return $this->belongsTo(User::class, 'send_by');
+        return $this->belongsTo(User::class, 'send_by_id');
     }
 }
