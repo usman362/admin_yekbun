@@ -171,6 +171,7 @@ class StandardUserController extends Controller
     {
         $user = User::find($id);
         $user->status = 0;
+        $user->force_logout = 1;
         $user->block_for_days = $request->block_for_days;
         $user->save();
 
@@ -208,6 +209,7 @@ class StandardUserController extends Controller
         }
         $user->level = (int) $request->level;
         $user->user_type = strtolower($levels[$request->level]);
+        $user->force_logout = 1;
         $user->save();
         return back()->with("success", "User upgraded to {$levels[$request->level]}.");
     }

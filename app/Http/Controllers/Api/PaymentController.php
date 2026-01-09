@@ -203,6 +203,7 @@ class PaymentController extends Controller
                         $user->user_type = Str::lower($request->userType);
                         $user->subscription_type = $request->subscription_type;
                         $user->congrats_popup = 1;
+                        $user->force_logout = 1;
                         $user->save();
                     }
                 }

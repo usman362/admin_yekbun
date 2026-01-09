@@ -24,6 +24,10 @@ class JwtMiddleware
             if(!$user){
                 return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 403);
             }
+            if($user->force_logout == 1){
+                auth()->logout();
+                session()->invalidate();
+            }
         } catch (JWTException $e) {
             return response()->json(['error' => 'UnAuthorised User, Login again.', 'success' => false], 403);
         }
