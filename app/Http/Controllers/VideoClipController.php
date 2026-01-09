@@ -67,7 +67,7 @@ class VideoClipController extends Controller
                 'status' => $request->status,
             ]);
             if ($request->video) {
-                $vc->video_file_name = Str::after($request->video, '___');
+                $vc->video_file_name = Str::afterLast($request->video, '/');
                 $vc->video = $request->video;
                 $vc->video_file_size = $request->video_file_size;
                 $vc->short_size = rand(18, 32);
