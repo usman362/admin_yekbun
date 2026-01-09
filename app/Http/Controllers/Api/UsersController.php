@@ -744,8 +744,14 @@ class UsersController extends Controller
 
     public function congrats_popup_off()
     {
+        $current = Carbon::now();
+        $newExpiry = Carbon::parse($current->copy()->addMonth())->format('Y-m-d');
         $user = User::find(Auth::id());
         $user->congrats_popup = 0;
+        $user->level = (int)'1';
+        $user->user_type = 'educated';
+        $user->expired_at => $newExpiry,
+        $user->subscription_type => 'trial',
         $user->save();
         return ResponseHelper::sendResponse($user, 'Congrats Popup Disabled Successfully');
     }

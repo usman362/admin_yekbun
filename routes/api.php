@@ -268,7 +268,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::delete('/remove-collection/{id}', [CollectionController::class, 'destroy']);
         Route::get('/list-collection-items/{collection_id}', [CollectionController::class, 'listCollectionItems']);
         Route::delete('/collections/{collection_id}/feeds/{feed_id}',[CollectionController::class, 'destroyCollectionFeed']);
-
+        Route::get("/admin-activity/get-feeds", [AdminActivityController::class, 'getpopFeeds']);
     });
 
     //Views
@@ -291,7 +291,6 @@ use App\Http\Controllers\Api\UserSuggestionController;
     Route::post("/admin-activity/surveys", [AdminActivityController::class, 'store_surveys']);
     Route::post("/admin-activity/greetings", [AdminActivityController::class, 'store_greetings']);
 
-    Route::get("/admin-activity/get-feeds", [AdminActivityController::class, 'getpopFeeds']);
     Route::get("/admin-activity/get-public-feeds", [AdminActivityController::class, 'getpublicpopFeeds']);
     Route::post("/admin-activity/delete-feeds", [AdminActivityController::class, 'delete_pops']);
 

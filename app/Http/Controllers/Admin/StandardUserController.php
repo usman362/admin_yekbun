@@ -203,12 +203,12 @@ class StandardUserController extends Controller
         ];
 
         $user = User::find($request->user_id);
+        if ($request->level > $user->level) {
+            $user->congrats_popup = 1;
+        }
         $user->level = (int) $request->level;
         $user->user_type = strtolower($levels[$request->level]);
-        $user->congrats_popup = 1;
         $user->save();
-
-
         return back()->with("success", "User upgraded to {$levels[$request->level]}.");
     }
 }

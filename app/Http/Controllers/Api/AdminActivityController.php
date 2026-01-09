@@ -9,6 +9,7 @@ use App\Models\PopFeedComments;
 use App\Models\PopFeedLikes;
 use App\Models\PopFeeds;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -48,6 +49,7 @@ class AdminActivityController extends Controller
         // Group data by type
         $feeds = PopFeeds::with('user')
             ->orderBy('created_at', 'desc')
+            ->whereIn('share_option',['all-users',Auth::user()->user_type])
             ->get()
             ->groupBy('type');
 
