@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Google\Client as GoogleClient;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -750,8 +751,8 @@ class UsersController extends Controller
         $user->congrats_popup = 0;
         $user->level = (int)'1';
         $user->user_type = 'educated';
-        $user->expired_at => $newExpiry,
-        $user->subscription_type => 'trial',
+        $user->expired_at = $newExpiry;
+        $user->subscription_type = 'trial';
         $user->save();
         return ResponseHelper::sendResponse($user, 'Congrats Popup Disabled Successfully');
     }
