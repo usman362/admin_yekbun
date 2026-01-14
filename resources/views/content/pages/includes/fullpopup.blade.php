@@ -2256,8 +2256,8 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -3507,8 +3507,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -3636,7 +3636,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 <div class="modal fade" id="modal60" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-model-image container" style="background: #e0e0e0;width: 375px;
+        <div class="modal-content bg-model-image container"
+            style="background: #e0e0e0;width: 375px;
 height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
             <form method="post" action="{{ route('postpops') }}" enctype="multipart/form-data">
@@ -3645,19 +3646,26 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                 <input type="hidden" name="type" value="SOS" />
 
                 <div class="modal-body" style="  width: 360px; height: 400px; padding: 0; top: 8px; left: 5px; ">
-                    <div style="width: 360px; height2: 423px; background-color: white; border-radius: 10px; padding: 5px;">
+                    <div
+                        style="width: 360px; height2: 423px; background-color: white; border-radius: 10px; padding: 5px;">
 
 
-                        <div style=" width: 350px; height: 30; display: flex; justify-content: space-between; align-items: center;
+                        <div
+                            style=" width: 350px; height: 30; display: flex; justify-content: space-between; align-items: center;
                   margin: 0; top: 10px; ">
 
 
 
-                            <div style=" width: 360px; height: 65px; display: flex; align-items: center; gap: 10px;
+                            <div
+                                style=" width: 360px; height: 65px; display: flex; align-items: center; gap: 10px;
                 background-color: #e47a7d3f; border-radius: 10px; padding: 5px; ">
-                                <img style="width: 50px; height: 50px; border-radius: 50%" src="{{ asset('assets/svg/svg-dialog/donations/Check%20Circle.svg') }}" alt="">
-                                <div style="width: 250px;height: 53px;display: flex;flex-direction: column; align-items: center;text-align: center;padding: 0;">
-                                    <div style="width: 210px;height: 26px;display: flex;align-items: center;text-align: center; gap: 5px;font-weight: 500;font-size: 22px;color: #64748B;">
+                                <img style="width: 50px; height: 50px; border-radius: 50%"
+                                    src="{{ asset('assets/svg/svg-dialog/donations/Check%20Circle.svg') }}"
+                                    alt="">
+                                <div
+                                    style="width: 250px;height: 53px;display: flex;flex-direction: column; align-items: center;text-align: center;padding: 0;">
+                                    <div
+                                        style="width: 210px;height: 26px;display: flex;align-items: center;text-align: center; gap: 5px;font-weight: 500;font-size: 22px;color: #64748B;">
                                         <div style="width: 2px;height: 2px;border-radius: 45%;background: #00000066;">
                                         </div>
                                         User
@@ -3666,7 +3674,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     </div>
 
 
-                                    <div style="width: 248px; height: 24px;font-size:  14px;  color: #ed1c24; font-weight: 400; line-height: 14px;">
+                                    <div
+                                        style="width: 248px; height: 24px;font-size:  14px;  color: #ed1c24; font-weight: 400; line-height: 14px;">
                                         Warn SOS
                                     </div>
 
@@ -3678,34 +3687,49 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                         </div>
                         <!-- here need to put image option -->
 
-                        <div id="previewContainerWrapperModel2" class="previewContainerWrapperModel2" style="width: 350px; height: 213px; border: 2px dashed gray;
+                        <div id="previewContainerWrapperModel2_23"
+                            style="width: 350px; height: 213px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 10px;margin-bottom: 10px;">
                             <!-- Preview Container -->
-                            <div class="previewContainerModel6" style="display: flex; flex-direction: column; justify-content: space-between;
+                            <div class="previewContainerModel6"
+                                style="display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;">
 
                                 <!-- Add Image Button (top-aligned) -->
-                                <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg') }}" alt="Illustration" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px" class="addImageButtonModel2" id="addImageButtonModel2">
+                                <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Object.svg') }}"
+                                    alt="Illustration" data-target="#modal17" data-bs-dismiss="modal"
+                                    style="height: 57px; width: 41px; align-self: flex-start;margin-left: 150px;margin-top: 10px"
+                                    class="addImageButtonModel2" id="addImageButtonModel2_23">
 
                                 <!-- Input Field (covering the entire container) -->
-                                <input type="file" name="image" required class="fileInput18" accept="image/jpg,image/png,image/jpeg,video/mp4" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+                                <input type="file" name="image" required class="fileInput18_23"
+                                    accept="image/jpg,image/png,image/jpeg,video/mp4"
+                                    style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
                                 <!-- Image Preview Section -->
-                                <div id="image-preview-containerModal2" class="image-preview-container image-preview-containerModal2" style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
+                                <div id="image-preview-containerModal2_23"
+                                    class="image-preview-container image-preview-containerModal2"
+                                    style="width: 100%; height: 100%; visibility: visible;border-radius: 10px;"></div>
 
                                 <!-- Description Text (bottom-aligned) -->
-                                <div id="descriptionTextContainerModal2" class="descriptionTextContainerModal2" style="width: 340px; height: 90px; display: flex;
+                                <div id="descriptionTextContainerModal2_23" class="descriptionTextContainerModal2"
+                                    style="width: 340px; height: 90px; display: flex;
               align-items: center; justify-content: start;
               gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
-                                    <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
+                                    <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg') }}"
+                                        alt="Illustration" class="img-fluid" data-target="#modal17"
+                                        data-bs-dismiss="modal"
+                                        style="height: 41px; width: 37px;margin-left: 10px;">
                                     <div style="width: 275px; height: 65px; text-align: center;">
 
-                                        <h6 style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">
+                                        <h6
+                                            style="font-size: 22px; font-weight: 500; line-height: 15px; color: #64748B;">
                                             File Size H 812 - W
                                             350</h6>
-                                        <p style="font-family: Genos; font-size: 18px; font-weight: 400;
+                                        <p
+                                            style="font-family: Genos; font-size: 18px; font-weight: 400;
              line-height: 10px; letter-spacing: 0.02em; text-align: center;
              color: #64748B;">
                                             MP4-JPG Or PNG - <span style="color: red;">Max 1 Image</span>
@@ -3718,84 +3742,70 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                     <!-- here image option end -->
 
-
-
-
-
-                    <div class="mb-1 card border-0" style=" background-color: #fff; margin-top:10px; padding: 10px; border-radius: 5px;">
+                    <div class="mb-1 card border-0"
+                        style=" background-color: #fff; margin-top:10px; padding: 10px; border-radius: 5px;">
                         <label for="title_field" class="form-label" style="font-weight: bold">Type Title</label>
-                        <input type="text" class="form-control title_field" name="title" id="title_field" placeholder="Type Title" style="background-color: #e0e0e0" />
+                        <input type="text" class="form-control title_field" name="title" id="title_field"
+                            placeholder="Type Title" style="background-color: #e0e0e0" />
                     </div>
                     <!-- ali hassan -->
 
-
-
-                    <div style="
-            width: 360px;
-            height: 117px;
-            background-color: #fff;
-            margin-top: 10px;
-            border-radius: 5px;
-            padding: 5px;
-          ">
+                    <div
+                        style="width: 360px;height: 117px;background-color: #fff;margin-top: 10px;border-radius: 5px;padding: 5px;">
                         <div style="display: flex; align-items: center; gap: 5px; width: 130px; height: 18px;">
-                            <div style="
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background-color: #4e4e4e;
-              ">
+                            <div
+                                style="width: 2px;height: 2px;border-radius: 50%;background-color: #4e4e4e;">
                             </div>
-                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}" style="width: 18px; height: 18px; object-fit: cover" />
-                            <div style="
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background-color: #4e4e4e;
-              ">
+                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
+                                style="width: 18px; height: 18px; object-fit: cover" />
+                            <div style="width: 2px;height: 2px;border-radius: 50%;background-color: #4e4e4e;">
                             </div>
                             <span style="font-family: Genos; text-align: left; font-size: 12px;">Share Option</span>
                             <div style=" width: 2px; height: 2; border-radius: 50%; background-color: #4e4e4e; ">
                             </div>
                         </div>
 
-
-
-
-                        <div style="
-  width: 347px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 10px;
-  margin-top: 5px;
-">
-                            <label id="button1Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button1Modal8')">
-                                <input class="options_btns button1Modal8" checked="checked" type="radio" name="option" value="all-users">
-                                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg') }}" alt="All Users" style="width: 55px; height: 55px;" />
-                                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All
+                        <div
+                            style="width: 347px;height: 80px;display: flex;align-items: center;justify-content: space-around;gap: 10px;margin-top: 5px;">
+                            <label id="button1Modal8_23" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button1Modal8_23')">
+                                <input class="options_btns button1Modal8" checked="checked" type="radio"
+                                    name="option_6" value="all-users">
+                                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg') }}" alt="All Users"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All
                                     Users</span>
                             </label>
 
-                            <label id="button3Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button3Modal8')">
-                                <input class="options_btns button3Modal8" type="radio" name="option" value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated" style="width: 55px; height: 55px;" />
-                                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
-                            <label id="button2Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button2Modal8')">
-                                <input class="options_btns button2Modal8" type="radio" name="option" value="educated">
-
-
-                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated" style="width: 55px; height: 55px;" />
-                                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                            <label id="button3Modal8_23" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button3Modal8_23')">
+                                <input class="options_btns button3Modal8_23" type="radio" name="option_6"
+                                    value="cultivated">
+                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
                             </label>
 
+                            <label id="button2Modal8_23" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button2Modal8_23')">
+                                <input class="options_btns button2Modal8_23" type="radio" name="option_6"
+                                    value="educated">
+                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
+                            </label>
 
-                            <label id="button4Modal8" class="toggle-buttonModal8 " onclick="toggleColor('button4Modal8')">
-                                <input class="options_btns button4Modal8" type="radio" name="option" value="academic">
-                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic" style="width: 55px; height: 55px;" />
-                                <span style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
+                            <label id="button4Modal8_23" class="toggle-buttonModal8 "
+                                onclick="toggleColor('button4Modal8_23')">
+                                <input class="options_btns button4Modal8_23" type="radio" name="option_6"
+                                    value="academic">
+                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic"
+                                    style="width: 55px; height: 55px;" />
+                                <span
+                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
                             </label>
                         </div>
                     </div>
@@ -3805,7 +3815,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 1 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Rojava" class="form-check-input" name="provinces[]" id="rojava" />
+                                    <input type="checkbox" value="Rojava" class="form-check-input"
+                                        name="provinces[]" id="rojava" />
                                     <label for="rojava" class="form-check-label"></label>
                                 </div>
                                 <span>Rojava</span>
@@ -3814,7 +3825,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input" name="provinces[]" id="bakur" />
+                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                        name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
                                 <span>Bakûr</span>
@@ -3823,7 +3835,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input" name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -3832,7 +3845,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 4 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Rojhilat" class="form-check-input" name="provinces[]" id="rojhilat" />
+                                    <input type="checkbox" value="Rojhilat" class="form-check-input"
+                                        name="provinces[]" id="rojhilat" />
                                     <label for="rojhilat" class="form-check-label"></label>
                                 </div>
                                 <span>Rojhilat</span>
@@ -3844,21 +3858,27 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                     <!-- custom audio section -->
 
                     <div style="width: 360px; height: 79px; border: 2px dashed gray;
-          border-radius: 10px; position: relative;margin-top: 20px; " id="previewContainerMp3Modal2">
+          border-radius: 10px; position: relative;margin-top: 20px; "
+                        id="previewContainerMp3Modal5">
                         <!-- Preview Container -->
                         <div style="display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; background-size: contain; cursor: pointer;
-            border-radius: 10px; position: relative; height: 100%;" id="Mp3InputModal2">
-                            <input type="file" class="fileInputModal2" accept=".mp3, .wav" name="audio" style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
+            border-radius: 10px; position: relative; height: 100%;"
+                            id="Mp3InputModal5">
+                            <input type="file" class="fileInputModal5" accept=".mp3, .wav" name="audio"
+                                style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
 
                             <!-- Description Text (bottom-aligned) -->
-                            <div id="description" style="width: 345px; height: 64px; display: flex;
+                            <div id="description"
+                                style="width: 345px; height: 64px; display: flex;
               align-items: center; justify-content: start;
               gap: 10px; background-color: #fff; margin-top: 40px; border-radius: 10px;
               margin: 7px; align-self: flex-end;">
-                                <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
+                                <img src="{{ asset('assets/svg/svg-dialog/first-svg-dialog/Group%201000008026.svg') }}"
+                                    alt="Illustration" class="img-fluid" data-target="#modal17"
+                                    data-bs-dismiss="modal" style="height: 41px; width: 37px;margin-left: 10px;">
                                 <div style="width: 275px; height: 47px; text-align: center;">
                                     <h4 style="font-size: 26px; font-weight: 500; line-height: 20px;">Upload Audio
                                     </h4>
@@ -3868,29 +3888,46 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             </div>
                         </div>
 
-                        <div style="width: 350px;height: 56px;border-radius: 10px;position: relative;margin-bottom: 10px;margin-left: 3px;margin-top: 10px;background-color: rgb(255, 255, 255); display: none;" id="Mp3uploadModal2">
+                        <div style="width: 350px;height: 56px;border-radius: 10px;position: relative;margin-bottom: 10px;margin-left: 3px;margin-top: 10px;background-color: rgb(255, 255, 255);display: none;"
+                            id="Mp3uploadModal5">
                             <!-- Preview Container -->
-                            <div style="display: flex; flex-direction: column; justify-content: space-between;
+                            <div
+                                style="display: flex; flex-direction: column; justify-content: space-between;
          align-items: center; background-size: contain; cursor: pointer;
          border-radius: 10px; position: relative; height: 100%;">
 
 
                                 <!-- Description Text (bottom-aligned) -->
-                                <div style="width: 340px; height: 37px; display: flex;
+                                <div
+                                    style="width: 340px; height: 37px; display: flex;
            align-items: center; justify-content: start;
           margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
-                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}" alt="Illustration" class="img-fluid" id="playModal2" style="height: 14px; width: 19px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}"
+                                        alt="Illustration" class="img-fluid" id="playModal5"
+                                        style="height: 14px; width: 19px">
 
-                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
-                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
-                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
-                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
-                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}" alt="Illustration" class="img-fluid" data-target="#modal17" data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}"
+                                        alt="Illustration" class="img-fluid" data-target="#modal17"
+                                        data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}"
+                                        alt="Illustration" class="img-fluid" data-target="#modal17"
+                                        data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}"
+                                        alt="Illustration" class="img-fluid" data-target="#modal17"
+                                        data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}"
+                                        alt="Illustration" class="img-fluid" data-target="#modal17"
+                                        data-bs-dismiss="modal" style="height: 57px; width: 40px">
+                                    <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}"
+                                        alt="Illustration" class="img-fluid" data-target="#modal17"
+                                        data-bs-dismiss="modal" style="height: 57px; width: 40px">
 
-                                    <span style="color: gray;margin-left: 5px; " id="DurationModal2">00:00</span>
+                                    <span style="color: gray;margin-left: 5px; " id="DurationModal5">00:00</span>
 
-                                    <img id="deleteButtonMp3Modal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}" style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
+                                    <img id="deleteButtonMp3Modal5"
+                                        src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
+                                        style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
                                 </div>
                             </div>
@@ -3899,16 +3936,23 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                     <!-- custom audio section ends -->
 
+
+
                 </div>
         </div>
 
 
 
         <div class="modal8-right">
-            <img id="deleteButtonModal2" class="deleteButtonModal2" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}" style="width: 50px; height: 50px" />
+            <img id="deleteButtonModal2_23"
+                src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
+                style="width: 50px; height: 50px" />
             <button type="submit">
-                <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg') }}" style="width: 50px; height: 50px" />
+                <img src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg') }}"
+                    style="width: 50px; height: 50px" />
             </button>
+            <!--<img id="backButtonToModal7" data-target="#modal7" src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008247.svg') }}"
+            style="width: 50px; height: 50px" />-->
         </div>
 
         </form>
@@ -3916,8 +3960,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
     </div>
 </div>
-
-
 
 <!-- Donation model -->
 
@@ -4217,8 +4259,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -4849,8 +4891,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -5275,8 +5317,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -5402,6 +5444,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 </div>
 
 <!-- Greeting working Modals -->
+
+
 
 
 
@@ -6461,8 +6505,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -6714,8 +6758,8 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -8449,8 +8493,8 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>
@@ -8821,8 +8865,8 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                        name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
                                 <span>Başûr</span>

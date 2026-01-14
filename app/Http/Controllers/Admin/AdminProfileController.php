@@ -166,6 +166,9 @@ class AdminProfileController extends Controller
         if ($poptyp == "Event") {
             $optons = $request->option_5;
         }
+        if ($poptyp == "SOS") {
+            $optons = $request->option_6;
+        }
 
         //die("154");
 

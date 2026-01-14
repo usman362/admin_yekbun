@@ -187,7 +187,7 @@ class AuthController extends Controller
                 'name' => $request['fname'],
                 'username' => $request['username'],
                 'email' => $email,
-                'password' => bcrypt($request['password']),
+                'password' => Hash::make(trim($request->password)),
                 'status' => (int)'1',
                 'is_admin_user' => (int)'0',
                 'is_verfied' => (int)'0',

@@ -1433,13 +1433,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileInput_4 = document.querySelector(".fileInput18_4");
     const deleteButton_4 = document.getElementById("deleteButtonModal2_4");
 
+    const addImageButton_23 = document.getElementById("addImageButtonModel2_23");
+    const previewContainerWrapper_23 = document.getElementById("image-preview-containerModal2_23");
+    const previewContainerWrapperModel6_23 = document.getElementById("previewContainerWrapperModel2_23");
+    const descriptionTextContainer_23 = document.getElementById("descriptionTextContainerModal2_23");
+    const fileInput_23 = document.querySelector(".fileInput18_23");
+    const deleteButton_23 = document.getElementById("deleteButtonModal2_23");
+
     // Constants
     const MAX_IMAGES = 1;
     const MAX_IMAGES_3 = 1;
     const MAX_IMAGES_4 = 1;
+    const MAX_IMAGES_23 = 1;
     let imageCount = 0;
     let imageCount_3 = 0;
     let imageCount_4 = 0;
+    let imageCount_23 = 0;
 
     // Function to validate the file type and size
     function validateFile(file, callback) {
@@ -1567,11 +1576,13 @@ document.addEventListener("DOMContentLoaded", () => {
     handleFileInputChange(fileInput, previewContainerWrapper, addImageButton, descriptionTextContainer, previewContainerWrapperModel6, { value: imageCount }, MAX_IMAGES);
     handleFileInputChange(fileInput_3, previewContainerWrapper_3, addImageButton_3, descriptionTextContainer_3, previewContainerWrapperModel6_3, { value: imageCount_3 }, MAX_IMAGES_3);
     handleFileInputChange(fileInput_4, previewContainerWrapper_4, addImageButton_4, descriptionTextContainer_4, previewContainerWrapperModel6_4, { value: imageCount_4 }, MAX_IMAGES_4);
+    handleFileInputChange(fileInput_23, previewContainerWrapper_23, addImageButton_23, descriptionTextContainer_23, previewContainerWrapperModel6_23, { value: imageCount_23 }, MAX_IMAGES_23);
 
     // Initialize file deletion handlers
     handleFileDeletion(deleteButton, previewContainerWrapper, addImageButton, fileInput, descriptionTextContainer, previewContainerWrapperModel6, { value: imageCount });
     handleFileDeletion(deleteButton_3, previewContainerWrapper_3, addImageButton_3, fileInput_3, descriptionTextContainer_3, previewContainerWrapperModel6_3, { value: imageCount_3 });
     handleFileDeletion(deleteButton_4, previewContainerWrapper_4, addImageButton_4, fileInput_4, descriptionTextContainer_4, previewContainerWrapperModel6_4, { value: imageCount_4 });
+    handleFileDeletion(deleteButton_23, previewContainerWrapper_23, addImageButton_23, fileInput_23, descriptionTextContainer_23, previewContainerWrapperModel6_23, { value: imageCount_23 });
 });
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -142,7 +142,7 @@
 
         .modal8-right {
             position: absolute;
-            top: 0%;
+            top: 6%;
             width: 50px;
             height: 168;
             right: -17%;
