@@ -148,8 +148,9 @@ class AdminProfileController extends Controller
             // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $poptyp = $request->type;
-        $optons = "";
+        $provinces = $request->input('provinces'); // array or null
 
+        $optons = "";
         if ($poptyp == "System") {
             $optons = $request->option;
         }
@@ -165,7 +166,6 @@ class AdminProfileController extends Controller
         if ($poptyp == "Event") {
             $optons = $request->option_5;
         }
-
 
         //die("154");
 
@@ -188,6 +188,7 @@ class AdminProfileController extends Controller
                     $postpop->date_start = Str::before($request->duration, ' -');
                     $postpop->date_ends = Str::after($request->duration, '- ');
                     $postpop->share_option = $optons;
+                    $postpop->allowed_provinces = empty($provinces) ? null : json_encode($provinces);
                     $postpop->is_comments = $request->comments ?? 0;
                     $postpop->is_share = $request->share ?? 0;
                     $postpop->is_emoji = $request->emoji ?? 0;
@@ -225,6 +226,7 @@ class AdminProfileController extends Controller
                     $postpop->date_start = Str::before($request->duration, ' -');
                     $postpop->date_ends = Str::after($request->duration, '- ');
                     $postpop->share_option = $optons;
+                    $postpop->allowed_provinces = empty($provinces) ? null : json_encode($provinces);
                     $postpop->is_comments = $request->comments ?? 0;
                     $postpop->is_share = $request->share ?? 0;
                     $postpop->is_emoji = $request->emoji ?? 0;
@@ -357,6 +359,7 @@ class AdminProfileController extends Controller
                     'video' => $fileType == 'video' ? $filePath : '',
                     'audio' => $audioPath ?? '',
                     'share_option' => $optons,
+                    'allowed_provinces' => empty($provinces) ? null : json_encode($provinces),
                     'status' => 1,
                     'is_comments' => $request->comments ?? 0,
                     'is_share' => $request->share ?? 0,
@@ -397,6 +400,7 @@ class AdminProfileController extends Controller
                     'video' => $fileType == 'video' ? $filePath : '',
                     'audio' => $audioPath ?? '',
                     'share_option' => $optons,
+                    'allowed_provinces' => empty($provinces) ? null : json_encode($provinces),
                     'status' => 1,
                     'is_comments' => $request->comments ?? 0,
                     'is_share' => $request->share ?? 0,
@@ -676,7 +680,9 @@ class AdminProfileController extends Controller
             }
             $notification->{$request->type} = $request->status == 'stop' ? 0 : 1;
             $notification->save();
-            return ResponseHelper::sendResponse($notification, 'Status has been Changed');
+            $typeName = $request->type == 'screenshots' ? 'Screenshots' : ($request->type == 'recording' ? 'Screen Recording' : ($request->type == 'signup' ? 'SignUp' : 'Login'));
+            $message = $typeName.' has been '.($request->status == 'stop' ? 'Disabled' : 'Enabled');
+            return ResponseHelper::sendResponse($notification, $message);
         } catch (\Exception $e) {
             return ResponseHelper::sendResponse([], 'Something Went Wrong', false, 400);
         }

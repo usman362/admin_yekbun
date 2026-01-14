@@ -953,7 +953,7 @@
                                 <div class="col-md mb-md-0 mb-4">
                                     <div class="form-check card custom-option-icon hki custom-options"><a
                                             href="javascript:void(0)" class="form-check-label custom-option-content"
-                                            data-bs-toggle="modal" data-bs-target="#system_popup"
+                                            data-bs-toggle="modal" data-bs-target="#modal60"
                                             for="customRadioPrime"><span class="custom-option-body"><img
                                                     src="{{ asset('assets/svg/svg-dialog/Group 1000008478.svg') }}"
                                                     class="my-2 pop-img" width="40" alt=""><span

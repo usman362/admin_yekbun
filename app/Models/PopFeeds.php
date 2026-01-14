@@ -42,6 +42,7 @@ class PopFeeds extends Model
         'txt1',
         'txt2',
         'txt3',
+        'allowed_provinces',
         'survey_data'
     ];
 
