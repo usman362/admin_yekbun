@@ -557,7 +557,7 @@ class AuthController extends Controller
         }
 
         // Update password
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make(trim($request->password));
         $user->save();
 
         // Remove the reset entry
