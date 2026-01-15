@@ -52,7 +52,9 @@ class FeedsController extends Controller
         ]);
         $feed = Feed::find($request->feed_id);
         $user = User::find($feed->user_id);
-        $user->is_flagged = 0;
+        if ($user) {
+            $user->is_flagged = 0;
+        }
         if ($request->action_level !== '0') {
             if ($feed->images) {
                 foreach ($feed->images as $image) {
@@ -67,79 +69,83 @@ class FeedsController extends Controller
                 }
             }
             $feed->delete();
-            $comments = FeedComments::where('feed_id',$feed->_id)->get();
-            foreach($comments as $comment){
+            $comments = FeedComments::where('feed_id', $feed->_id)->get();
+            foreach ($comments as $comment) {
                 $bunny = new BunnyCDNService();
-                if($comment->comment_type == 'audio'){
+                if ($comment->comment_type == 'audio') {
                     $bunny->delete($comment->audio);
                 }
                 $comment->delete();
             }
-            $notifyMsg = '';
-            if ($request->action_level === '1') {
-                $user->is_flagged = 1;
-                FlaggedUser::create([
-                    'user_id' => $user->id,
-                    'reason' => 'Posted Feed',
-                    'status' => 0,
-                    'action_taken' => (int)$request->action_level,
-                ]);
-                $notifyMsg = "You're Feed has been Deleted & You've been Flagged";
-            } elseif ($request->action_level === '2') {
-                $user->old_level = $user->level;
-                $user->old_user_type = $user->user_type;
-                $user->level = 0;
-                $user->user_type = 'cultivated';
-                $user->action_type = 'downgrade';
-                switch ($request->level_2_duration) {
-                    case '1':
-                        $user->action_duration = Carbon::now()->addMonth(); // 1 month
-                        break;
-                    case '2':
-                        $user->action_duration = Carbon::now()->addMonths(2);
-                        break;
-                    case '3':
-                        $user->action_duration = Carbon::now()->addMonths(3);
-                        break;
-                    default:
-                        $user->action_duration = Carbon::now()->addDays(15);
-                        break;
+            if ($user) {
+                $notifyMsg = '';
+                if ($request->action_level === '1') {
+                    $user->is_flagged = 1;
+                    FlaggedUser::create([
+                        'user_id' => $user->id,
+                        'reason' => 'Posted Feed',
+                        'status' => 0,
+                        'action_taken' => (int)$request->action_level,
+                    ]);
+                    $notifyMsg = "You're Feed has been Deleted & You've been Flagged";
+                } elseif ($request->action_level === '2') {
+                    $user->old_level = $user->level;
+                    $user->old_user_type = $user->user_type;
+                    $user->level = 0;
+                    $user->user_type = 'cultivated';
+                    $user->action_type = 'downgrade';
+                    switch ($request->level_2_duration) {
+                        case '1':
+                            $user->action_duration = Carbon::now()->addMonth(); // 1 month
+                            break;
+                        case '2':
+                            $user->action_duration = Carbon::now()->addMonths(2);
+                            break;
+                        case '3':
+                            $user->action_duration = Carbon::now()->addMonths(3);
+                            break;
+                        default:
+                            $user->action_duration = Carbon::now()->addDays(15);
+                            break;
+                    }
+                    $notifyMsg = "You're Feed has been Deleted & You've been Downgraded to Cultivated";
+                } elseif ($request->action_level === '3') {
+                    $user->status = 0;
+                    $user->action_type = 'suspend';
+                    switch ($request->level_3_duration) {
+                        case '1':
+                            $user->action_duration = Carbon::now()->addMonth(); // 1 month
+                            break;
+                        case '2':
+                            $user->action_duration = Carbon::now()->addMonths(2);
+                            break;
+                        case '3':
+                            $user->action_duration = Carbon::now()->addMonths(3);
+                            break;
+                        default:
+                            $user->action_duration = Carbon::now()->addDays(15);
+                            break;
+                    }
+                    $notifyMsg = "You're Feed has been Deleted & You've been Suspended";
                 }
-                $notifyMsg = "You're Feed has been Deleted & You've been Downgraded to Cultivated";
-            } elseif ($request->action_level === '3') {
-                $user->status = 0;
-                $user->action_type = 'suspend';
-                switch ($request->level_3_duration) {
-                    case '1':
-                        $user->action_duration = Carbon::now()->addMonth(); // 1 month
-                        break;
-                    case '2':
-                        $user->action_duration = Carbon::now()->addMonths(2);
-                        break;
-                    case '3':
-                        $user->action_duration = Carbon::now()->addMonths(3);
-                        break;
-                    default:
-                        $user->action_duration = Carbon::now()->addDays(15);
-                        break;
-                }
-                $notifyMsg = "You're Feed has been Deleted & You've been Suspended";
-            }
 
-            $users = User::where('_id', $user->id)->whereIn('info_banner', ['banner', 'alert'])->first();
-            if ($users) {
-                NotificationHelper::sendNotification($users->id, 'Feed Deleted', $notifyMsg);
-                NotificationCenter::create([
-                    'title' => 'Feed Deleted',
-                    'description' => $notifyMsg,
-                    'user_id' => $feed->user_id,
-                    'user_image' => $users->image ?? null,
-                    'type' => 'feeds',
-                    'is_read' => 0,
-                ]);
+                $users = User::where('_id', $user->id)->whereIn('info_banner', ['banner', 'alert'])->first();
+                if ($users) {
+                    NotificationHelper::sendNotification($users->id, 'Feed Deleted', $notifyMsg);
+                    NotificationCenter::create([
+                        'title' => 'Feed Deleted',
+                        'description' => $notifyMsg,
+                        'user_id' => $feed->user_id,
+                        'user_image' => $users->image ?? null,
+                        'type' => 'feeds',
+                        'is_read' => 0,
+                    ]);
+                }
             }
         }
-        $user->save();
+        if ($user) {
+            $user->save();
+        }
         return back();
     }
 
