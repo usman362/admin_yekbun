@@ -42,10 +42,10 @@ class UsersController extends Controller
             ->where('is_admin_user', 0)
             ->whereDoesntHave('relations', function ($q) use ($authId) {
                 $q->whereIn('user_type', ['friends', 'family'])
-                ->where(function ($q) use ($authId) {
-                    $q->where('user_id', $authId)
-                        ->orWhere('friend_id', $authId);
-                });
+                    ->where(function ($q) use ($authId) {
+                        $q->where('user_id', $authId)
+                            ->orWhere('friend_id', $authId);
+                    });
             })
             ->get();
 
@@ -651,27 +651,32 @@ class UsersController extends Controller
             return ResponseHelper::sendResponse(null, 'Device Imei Not Found!', false, 404);
         }
         $user = User::where('device_imei', $request->device_imei)->first();
-        if($user){
-                $data = [
+        if ($user) {
+            $data = [
                 'image' => $user->image ?? null,
                 'status' => $user->status,
                 'email' => $user->email,
             ];
             return ResponseHelper::sendResponse($data, 'User Image Fetched!');
-        }else{
-            return ResponseHelper::sendResponse(null, 'User Not Found!',false,404);
+        } else {
+            return ResponseHelper::sendResponse(null, 'User Not Found!', false, 404);
         }
     }
 
     public function search_user(Request $request)
     {
-        $users = User::with('user_country')->where('_id','!=',Auth::id())
-            ->where('status',1)
+        $users = User::with('user_country')
+            ->where('_id', '!=', Auth::id())
+            ->where('status', 1)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%')
                     ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
             })
+            ->when($request->origin, function ($query) use ($request) {
+                $query->where('origin', $request->origin);
+            })
             ->get();
+
         return ResponseHelper::sendResponse($users, 'Users has been Fetched Successfully!');
     }
 
