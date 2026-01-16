@@ -665,7 +665,7 @@ class UsersController extends Controller
 
     public function search_user(Request $request)
     {
-        $users = User::with('country')->where('_id','!=',Auth::id())
+        $users = User::with('user_country')->where('_id','!=',Auth::id())
             ->where('status',1)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%')
