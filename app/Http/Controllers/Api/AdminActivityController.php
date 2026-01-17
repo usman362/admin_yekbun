@@ -43,13 +43,14 @@ class AdminActivityController extends Controller
 
     public function getpopFeeds(Request $request)
 	{
-		$types = ['System', 'Donation', 'Surveys', 'Greetings', 'Event'];
+		$types = ['System', 'Donation', 'Surveys', 'Greetings', 'Event','SOS'];
         $userProvince = auth()->user()->province;
 		$feeds = PopFeeds::with('user')
 			->whereIn('share_option', ['all-users', Auth::user()->user_type])
             ->where(function ($q) use ($userProvince) {
                 $q->whereNull('allowed_provinces')
-                ->orWhereJsonContains('allowed_provinces', $userProvince);
+                // ->orWhereJsonContains('allowed_provinces', $userProvince)
+                ;
             })
 			->orderBy('created_at', 'desc')
 			->get()
