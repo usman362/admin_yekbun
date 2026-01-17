@@ -58,7 +58,7 @@ class PopFeeds extends Model
 
     public function comments()
     {
-        return $this->hasMany(FeedComments::class)->where('feed_type','admin_feeds');
+        return $this->hasMany(FeedComments::class)->where('feed_type', 'admin_feeds');
     }
 
     public function reports()
@@ -66,8 +66,9 @@ class PopFeeds extends Model
         return $this->hasMany(Report::class, 'reported_post_id', 'id');
     }
 
-    public function user(){
-        return $this->belongsTo(User::class );
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /*
@@ -81,6 +82,4 @@ class PopFeeds extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-
 }

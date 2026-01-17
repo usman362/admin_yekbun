@@ -2246,21 +2246,21 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -3497,21 +3497,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -3825,21 +3825,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -4249,21 +4249,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -4881,21 +4881,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -5307,21 +5307,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -6495,21 +6495,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -6748,21 +6748,21 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -8483,21 +8483,21 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -8855,21 +8855,21 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Başûr" class="form-check-input"
+                                    <input type="checkbox" value="Basur" class="form-check-input"
                                         name="provinces[]" id="basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->
@@ -9154,21 +9154,21 @@ text-decoration-skip-ink: none;
                             <!-- Toggle 2 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
-                                    <input type="checkbox" value="Bakûr" class="form-check-input"
+                                    <input type="checkbox" value="Bakur" class="form-check-input"
                                         name="provinces[]" id="bakur" />
                                     <label for="bakur" class="form-check-label"></label>
                                 </div>
-                                <span>Bakûr</span>
+                                <span>Bakur</span>
                             </div>
 
                             <!-- Toggle 3 -->
                             <div class="toggle-item" style="width: 80px">
                                 <div class="form-switch">
                                     <input type="checkbox" value="1" class="form-check-input"
-                                        name="provinces[]" id="Başûr" />
+                                        name="provinces[]" id="Basur" />
                                     <label for="basur" class="form-check-label"></label>
                                 </div>
-                                <span>Başûr</span>
+                                <span>Basur</span>
                             </div>
 
                             <!-- Toggle 4 -->

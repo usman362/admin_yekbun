@@ -42,32 +42,37 @@ class AdminActivityController extends Controller
     }
 
     public function getpopFeeds(Request $request)
-	{
-		$types = ['System', 'Donation', 'Surveys', 'Greetings', 'Event','SOS'];
+    {
+        $types = ['System', 'Donation', 'Surveys', 'Greetings', 'Event', 'SOS'];
         $userProvince = auth()->user()->province;
-		$feeds = PopFeeds::with('user')
-			->whereIn('share_option', ['all-users', Auth::user()->user_type])
-            // ->where(function ($q) use ($userProvince) {
-            //     $q->whereNull('allowed_provinces')
-            //     ->orWhereJsonContains('allowed_provinces', $userProvince)
-            //     ;
-            // })
-			->orderBy('created_at', 'desc')
-			->get()
-			->groupBy('type');
+        if ($userProvince == 'Bakûr') {
+            $userProvince = 'Bakur';
+        }
+        if ($userProvince == 'Başûr') {
+            $userProvince = 'Basur';
+        }
+        $feeds = PopFeeds::with('user')
+            ->whereIn('share_option', ['all-users', Auth::user()->user_type])
+            ->where(function ($q) use ($userProvince) {
+                $q->whereNull('allowed_provinces')
+                ->orWhere('allowed_provinces', $userProvince); // ✅ MongoDB way
+            })
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('type');
 
-		$data = [];
+        $data = [];
 
-		foreach ($types as $type) {
-			$data[$type] = $feeds->get($type, collect());
-		}
+        foreach ($types as $type) {
+            $data[$type] = $feeds->get($type, collect());
+        }
 
-		return ResponseHelper::sendResponse($data, 'All Admin Activity Feeds');
-	}
+        return ResponseHelper::sendResponse($data, 'All Admin Activity Feeds');
+    }
 
     public function getpublicpopFeeds(Request $request)
     {
-        $popfeeds = PopFeeds::with('user')->where('share_option','all-users')->orderBy('created_at', 'desc')->first();
+        $popfeeds = PopFeeds::with('user')->where('share_option', 'all-users')->orderBy('created_at', 'desc')->first();
         return ResponseHelper::sendResponse($popfeeds, 'Public Admin Activity Feed');
     }
 
@@ -311,5 +316,4 @@ class AdminActivityController extends Controller
         }
         return response()->json(['message' => 'Popup Feed Not Found!'], 404);
     }
-
 }
