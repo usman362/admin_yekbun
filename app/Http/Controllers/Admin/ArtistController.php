@@ -81,21 +81,21 @@ class ArtistController extends Controller
             return DataTables::of($artists)
                 ->addIndexColumn() // Adds the index column (auto-increment)
                 ->addColumn('artist_info', function ($artist) {
-                    $image = $artist->image ? env('BUNNY_CDN_URL') . $artist->image : 'https://www.w3schools.com/w3images/avatar2.png';
-                    $info = '<div class="d-flex justify-content-start align-items-center user-name">
-                            <div class="avatar-wrapper">
-                                <div class="avatar avatar-sm me-3">
-                                    <img src="' . $image . '" alt="' . e($artist->name) . '" class="rounded-circle">
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <a href="javascript:void(0)" class="text-body text-truncate">
-                                    <span class="fw-semibold">' . e($artist->name) . '</span>
-                                </a>
-                                <small class="fw-semibold">' . ($artist->province->name ?? 'N/A') . '</small>
-                            </div>
-                        </div>';
-                    return $info;
+                    // $image = $artist->image ? env('BUNNY_CDN_URL') . $artist->image : 'https://www.w3schools.com/w3images/avatar2.png';
+                    // $info = '<div class="d-flex justify-content-start align-items-center user-name">
+                    //         <div class="avatar-wrapper">
+                    //             <div class="avatar avatar-sm me-3">
+                    //                 <img src="' . $image . '" alt="' . e($artist->name) . '" class="rounded-circle">
+                    //             </div>
+                    //         </div>
+                    //         <div class="d-flex flex-column">
+                    //             <a href="javascript:void(0)" class="text-body text-truncate">
+                    //                 <span class="fw-semibold">' . e($artist->name) . '</span>
+                    //             </a>
+                    //             <small class="fw-semibold">' . ($artist->province->name ?? 'N/A') . '</small>
+                    //         </div>
+                    //     </div>';
+                    return 'test';
                 })
                 ->addColumn('total_songs', function ($artist) {
                     return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="songs" data-bs-toggle="modal"
