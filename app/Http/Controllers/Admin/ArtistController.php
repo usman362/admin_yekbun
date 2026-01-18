@@ -79,7 +79,7 @@ class ArtistController extends Controller
             }
 
             return DataTables::of($artists)
-                ->addIndexColumn() // Adds the index column (auto-increment)
+                ->addIndexColumn()
                 ->addColumn('artist_info', function ($artist) {
                     $image = $artist->image ? env('BUNNY_CDN_URL') . $artist->image : 'https://www.w3schools.com/w3images/avatar2.png';
                     $info = '<div class="d-flex justify-content-start align-items-center user-name">
@@ -102,14 +102,14 @@ class ArtistController extends Controller
                                 data-image="' . env('BUNNY_CDN_URL') . $artist->image . '" data-name="' . $artist->name . '"
                                 data-gender="' . $artist->gender . '"
                                 data-province="' . ($artist->province->name ?? 'N/A') . '"
-                                data-bs-target="#artistDetailModal">0</a>';
+                                data-bs-target="#artistDetailModal">' . $artist->songs->count() . '</a>';
                 })
                 ->addColumn('total_videos', function ($artist) {
                     return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="videos" data-bs-toggle="modal"
                                 data-name="' . $artist->name . '" data-image="' . env('BUNNY_CDN_URL') . $artist->image . '"
                                 data-gender="' . $artist->gender . '"
                                 data-province="' . ($artist->province->name ?? 'N/A') . '"
-                                data-bs-target="#artistDetailModal">0</a>';
+                                data-bs-target="#artistDetailModal">' . $artist->videos->count() . '</a>';
                 })
                 ->addColumn('like', function () {
                     return '0';
@@ -121,10 +121,10 @@ class ArtistController extends Controller
                     return '<span class="badge ' . $statusClass . '">' . $statusText . '</span>';
                 })
                 ->addColumn('actions', function ($artist) {
-                    // $provinces = Region::get();
-                    // $actions = view('content.artist.actions', compact('artist', 'provinces'));
-                    return '0';
+                    $provinces = Region::get();
+                    return view('content.artist.actions', compact('artist', 'provinces'))->render();
                 })
+
                 ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
                 ->make(true);
         }
@@ -179,7 +179,7 @@ class ArtistController extends Controller
             );
             if ($notification->new_artist == 'true' && $request->status == '1') {
                 try {
-                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id', '!==', Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
@@ -268,7 +268,7 @@ class ArtistController extends Controller
             );
             if ($notification->new_artist == 'true' && $request->status == '1') {
                 try {
-                    $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
+                    $users = User::where('_id', '!==', Auth::id())->whereNotNull('fcm_token')->where('new_music', 'true')->whereIn('info_banner', ['banner', 'alert'])->get();
                     if ($users) {
                         foreach ($users as $user) {
                             NotificationHelper::sendNotification($user->id, $notification->new_artist_title, $description);
