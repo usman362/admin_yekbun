@@ -52,7 +52,12 @@
 
         <div class="dropzone-container">
             <div class="hidden-inputs">
-                <input type="hidden" name="image" value="{{ @$artist->image }}" data-path="{{ @$artist->image }}">
+                @php
+                    $imagePath = is_string($artist->image) ? $artist->image : '';
+                @endphp
+
+                <input type="hidden" name="image" value="{{ $imagePath }}" data-path="{{ $imagePath }}">
+
             </div>
 
             <div class="card">
@@ -83,7 +88,7 @@
         </div>
     </div>
 </form>
- <script>
+<script>
     'use strict';
 
     function initializeDropzones() {
@@ -145,7 +150,8 @@
                 },
 
                 removedfile: function(file) {
-                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container').querySelector('.hidden-inputs');
+                    const hiddenInputsContainer = dropzoneElement.closest('.dropzone-container')
+                        .querySelector('.hidden-inputs');
                     const input = hiddenInputsContainer.querySelector('input[name="image"]');
 
                     if (input) {
