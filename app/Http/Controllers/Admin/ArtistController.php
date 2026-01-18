@@ -134,7 +134,7 @@ class ArtistController extends Controller
                     $imagePath = is_string($artist->image) && !empty($artist->image)
                         ? env('BUNNY_CDN_URL') . $artist->image
                         : 'https://www.w3schools.com/w3images/avatar2.png';
-                    return '';
+                    return view('content.artist.actions', compact('artist', 'provinces','imagePath'))->render();
                 })
 
                 ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
