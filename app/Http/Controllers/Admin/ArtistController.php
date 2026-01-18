@@ -122,10 +122,10 @@ class ArtistController extends Controller
                 })
                 ->addColumn('actions', function ($artist) {
                     $provinces = Region::get();
-                    return '';
+                    return view('content.artist.actions', compact('artist', 'provinces'))->render();
                 })
 
-                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status'])
+                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
                 ->make(true);
         }
 
