@@ -81,11 +81,14 @@ class ArtistController extends Controller
             return DataTables::of($artists)
                 ->addIndexColumn()
                 ->addColumn('artist_info', function ($artist) {
-                    $image = $artist->image ? env('BUNNY_CDN_URL') . $artist->image : 'https://www.w3schools.com/w3images/avatar2.png';
+                    $imagePath = is_string($artist->image) && !empty($artist->image)
+                        ? env('BUNNY_CDN_URL') . $artist->image
+                        : 'https://www.w3schools.com/w3images/avatar2.png';
+
                     $info = '<div class="d-flex justify-content-start align-items-center user-name">
                             <div class="avatar-wrapper">
                                 <div class="avatar avatar-sm me-3">
-                                    <img src="' . $image . '" alt="' . e($artist->name) . '" class="rounded-circle">
+                                    <img src="' . $imagePath . '" alt="' . e($artist->name) . '" class="rounded-circle">
                                 </div>
                             </div>
                             <div class="d-flex flex-column">
@@ -98,15 +101,21 @@ class ArtistController extends Controller
                     return $info;
                 })
                 ->addColumn('total_songs', function ($artist) {
+                    $imagePath = is_string($artist->image) && !empty($artist->image)
+                        ? env('BUNNY_CDN_URL') . $artist->image
+                        : 'https://www.w3schools.com/w3images/avatar2.png';
                     return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="songs" data-bs-toggle="modal"
-                                data-image="' . env('BUNNY_CDN_URL') . $artist->image . '" data-name="' . $artist->name . '"
+                                data-image="' . $imagePath . '" data-name="' . $artist->name . '"
                                 data-gender="' . $artist->gender . '"
                                 data-province="' . ($artist->province->name ?? 'N/A') . '"
                                 data-bs-target="#artistDetailModal">' . $artist->songs->count() . '</a>';
                 })
                 ->addColumn('total_videos', function ($artist) {
+                    $imagePath = is_string($artist->image) && !empty($artist->image)
+                        ? env('BUNNY_CDN_URL') . $artist->image
+                        : 'https://www.w3schools.com/w3images/avatar2.png';
                     return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="videos" data-bs-toggle="modal"
-                                data-name="' . $artist->name . '" data-image="' . env('BUNNY_CDN_URL') . $artist->image . '"
+                                data-name="' . $artist->name . '" data-image="' . $imagePath . '"
                                 data-gender="' . $artist->gender . '"
                                 data-province="' . ($artist->province->name ?? 'N/A') . '"
                                 data-bs-target="#artistDetailModal">' . $artist->videos->count() . '</a>';
@@ -122,7 +131,10 @@ class ArtistController extends Controller
                 })
                 ->addColumn('actions', function ($artist) {
                     $provinces = Region::get();
-                    return view('content.artist.actions', compact('artist', 'provinces'))->render();
+                    $imagePath = is_string($artist->image) && !empty($artist->image)
+                        ? env('BUNNY_CDN_URL') . $artist->image
+                        : 'https://www.w3schools.com/w3images/avatar2.png';
+                    return '';
                 })
 
                 ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
