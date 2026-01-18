@@ -101,11 +101,7 @@ class ArtistController extends Controller
                     return 'test';
                 })
                 ->addColumn('total_videos', function ($artist) {
-                    return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="videos" data-bs-toggle="modal"
-                                data-name="' . $artist->name . '" data-image="' . env('BUNNY_CDN_URL') . $artist->image . '"
-                                data-gender="' . $artist->gender . '"
-                                data-province="' . ($artist->province->name ?? 'N/A') . '"
-                                data-bs-target="#artistDetailModal">' . $artist->videos->count() . '</a>';
+                    return 'test';
                 })
                 ->addColumn('like', function () {
                     return '0';
