@@ -82,14 +82,34 @@ class ArtistController extends Controller
                 ->addIndexColumn()
                 ->addColumn('artist_info', function ($artist) {
                     $image = $artist->image ? env('BUNNY_CDN_URL') . $artist->image : 'https://www.w3schools.com/w3images/avatar2.png';
-                    $info = '';
+                    $info = '<div class="d-flex justify-content-start align-items-center user-name">
+                            <div class="avatar-wrapper">
+                                <div class="avatar avatar-sm me-3">
+                                    <img src="' . $image . '" alt="' . e($artist->name) . '" class="rounded-circle">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <a href="javascript:void(0)" class="text-body text-truncate">
+                                    <span class="fw-semibold">' . e($artist->name) . '</span>
+                                </a>
+                                <small class="fw-semibold">' . ($artist->province->name ?? 'N/A') . '</small>
+                            </div>
+                        </div>';
                     return $info;
                 })
                 ->addColumn('total_songs', function ($artist) {
-                    return '';
+                    return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="songs" data-bs-toggle="modal"
+                                data-image="' . env('BUNNY_CDN_URL') . $artist->image . '" data-name="' . $artist->name . '"
+                                data-gender="' . $artist->gender . '"
+                                data-province="' . ($artist->province->name ?? 'N/A') . '"
+                                data-bs-target="#artistDetailModal">' . $artist->songs->count() . '</a>';
                 })
                 ->addColumn('total_videos', function ($artist) {
-                    return '';
+                    return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="videos" data-bs-toggle="modal"
+                                data-name="' . $artist->name . '" data-image="' . env('BUNNY_CDN_URL') . $artist->image . '"
+                                data-gender="' . $artist->gender . '"
+                                data-province="' . ($artist->province->name ?? 'N/A') . '"
+                                data-bs-target="#artistDetailModal">' . $artist->videos->count() . '</a>';
                 })
                 ->addColumn('like', function () {
                     return '0';
