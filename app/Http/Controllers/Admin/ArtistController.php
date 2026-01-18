@@ -125,7 +125,7 @@ class ArtistController extends Controller
                     return '';
                 })
 
-                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
+                ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status'])
                 ->make(true);
         }
 
