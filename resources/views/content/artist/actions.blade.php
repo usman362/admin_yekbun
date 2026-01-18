@@ -50,6 +50,6 @@
 {{-- @can('artist.write') --}}
 <x-modal id="editModal{{ $artist->id }}" title="Edit Artist" saveBtnText="Update" saveBtnType="submit"
     saveBtnForm="editForm{{ $artist->id }}" size="md" :show="old('showEditFormModal' . $artist->id) ? true : false">
-    @include('content.include.artist.editForm')
+    {{-- @include('content.include.artist.editForm') --}}
 </x-modal>
 {{-- @endcan --}}
