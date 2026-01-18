@@ -121,9 +121,9 @@ class ArtistController extends Controller
                     return '<span class="badge ' . $statusClass . '">' . $statusText . '</span>';
                 })
                 ->addColumn('actions', function ($artist) {
-                    $provinces = Region::get();
-                    $actions = view('content.artist.actions', compact('artist', 'provinces'));
-                    return $actions;
+                    // $provinces = Region::get();
+                    // $actions = view('content.artist.actions', compact('artist', 'provinces'));
+                    return '0';
                 })
                 ->rawColumns(['image', 'artist_info', 'total_songs', 'total_videos', 'status', 'actions'])
                 ->make(true);
