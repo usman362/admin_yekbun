@@ -52,7 +52,7 @@
 
         <div class="dropzone-container">
             <div class="hidden-inputs">
-                <input type="hidden" name="image" value="{{ $artist->image }}" data-path="{{ $artist->image }}">
+                <input type="hidden" name="image" value="{{ @$artist->image }}" data-path="{{ @$artist->image }}">
             </div>
 
             <div class="card">
