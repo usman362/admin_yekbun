@@ -98,10 +98,18 @@ class ArtistController extends Controller
                     return $info;
                 })
                 ->addColumn('total_songs', function ($artist) {
-                    return '0';
+                    return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="songs" data-bs-toggle="modal"
+                                data-image="' . env('BUNNY_CDN_URL') . $artist->image . '" data-name="' . $artist->name . '"
+                                data-gender="' . $artist->gender . '"
+                                data-province="' . ($artist->province->name ?? 'N/A') . '"
+                                data-bs-target="#artistDetailModal">0</a>';
                 })
                 ->addColumn('total_videos', function ($artist) {
-                    return '0';
+                    return '<a href="javascript:void(0)" class="text-black artistDetail" data-id="' . $artist->id . '" data-section="videos" data-bs-toggle="modal"
+                                data-name="' . $artist->name . '" data-image="' . env('BUNNY_CDN_URL') . $artist->image . '"
+                                data-gender="' . $artist->gender . '"
+                                data-province="' . ($artist->province->name ?? 'N/A') . '"
+                                data-bs-target="#artistDetailModal">0</a>';
                 })
                 ->addColumn('like', function () {
                     return '0';
