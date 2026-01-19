@@ -29,16 +29,16 @@ class VotingController extends Controller
     {
         if (auth()->user()->can('surveys.published') && auth()->user()->can('surveys.unpublished')) {
             // Can view both
-            $publishvotes = Voting::with('voting_category')->where('status', '1')->get();
-            $unpublishvotes = Voting::with('voting_category')->where('status', '0')->get();
-        } elseif (auth()->user()->can('surveys.published')) {
-            // Can view only published
-            $publishvotes = Voting::with('voting_category')->where('status', '1')->get();
-            $publishvotes = '';
-        } elseif (auth()->user()->can('surveys.unpublished')) {
-            // Can view only unpublished
-            $unpublishvotes = Voting::with('voting_category')->where('status', '0')->get();
-            $publishvotes = '';
+            $publishvotes = Voting::with('voting_category')->where('vote_type', 'single')->get();
+            $unpublishvotes = Voting::with('voting_category')->where('vote_type', 'individual')->get();
+        // } elseif (auth()->user()->can('surveys.published')) {
+        //     // Can view only published
+        //     $publishvotes = Voting::with('voting_category')->where('status', '1')->get();
+        //     $publishvotes = '';
+        // } elseif (auth()->user()->can('surveys.unpublished')) {
+        //     // Can view only unpublished
+        //     $unpublishvotes = Voting::with('voting_category')->where('status', '0')->get();
+        //     $publishvotes = '';
         } else {
             // No permission
             return redirect('/');
