@@ -299,7 +299,7 @@
     <!-- Basic Bootstrap Table -->
     <div class="card">
         <div class="card-header d-flex align-items-center">
-            <h5 class="m-0">Individual Survey List</h5>
+            <h5 class="m-0">Individual Surveys</h5>
             {{-- @can('surveys.unpublished') --}}
             <div class="flex-fluid d-flex justify-content-end align-items-center">
                 <button class="btn btn-primary btn-create-vote ms-2" data-vote-type='individual_vote'><i
@@ -458,7 +458,7 @@
     {{-- @can('surveys.published') --}}
     <div class="card mt-5">
         <div class="card-header d-flex align-items-center">
-            <h5 class="m-0">Single Survey List</h5>
+            <h5 class="m-0">Single Surveys</h5>
             <div class="flex-fluid d-flex justify-content-end align-items-center">
                 <button class="btn btn-primary btn-create-vote" data-vote-type='single_vote'><i
                         class="bx bx-plus me-0 me-sm-1"></i>Single Survey</button>
