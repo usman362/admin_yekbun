@@ -92,18 +92,31 @@ class VotingController extends Controller
         //     ->with('reactions')
         //     ->get();
         $voting = Voting::where('status', '1')
-            ->with('reactions')->orderBy('created_at', 'desc')->limit(1);
-        $votings = Voting::where('status', '1')
-            ->where('_id','!=',$voting->_id)
-            // ->where(function ($q) use ($userId) {
-            //     // Case 1: has reactions, but not by this user
-            //     $q->whereHas('reactions', function ($r) use ($userId) {
-            //         $r->where('user_id', '!=', $userId);
-            //     })
-            //         // Case 2: no reactions at all
-            //          ->orWhereDoesntHave('reactions');
-            // })
-            ->with('reactions')->orderBy('created_at', 'desc')->get();
+            ->with('reactions')->orderBy('created_at', 'desc')->first();
+        if ($voting) {
+            $votings = Voting::where('status', '1')
+                ->where('_id', '!=', $voting->_id)
+                // ->where(function ($q) use ($userId) {
+                //     // Case 1: has reactions, but not by this user
+                //     $q->whereHas('reactions', function ($r) use ($userId) {
+                //         $r->where('user_id', '!=', $userId);
+                //     })
+                //         // Case 2: no reactions at all
+                //          ->orWhereDoesntHave('reactions');
+                // })
+                ->with('reactions')->orderBy('created_at', 'desc')->get();
+        } else {
+            $votings = Voting::where('status', '1')
+                // ->where(function ($q) use ($userId) {
+                //     // Case 1: has reactions, but not by this user
+                //     $q->whereHas('reactions', function ($r) use ($userId) {
+                //         $r->where('user_id', '!=', $userId);
+                //     })
+                //         // Case 2: no reactions at all
+                //          ->orWhereDoesntHave('reactions');
+                // })
+                ->with('reactions')->orderBy('created_at', 'desc')->get();
+        }
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
