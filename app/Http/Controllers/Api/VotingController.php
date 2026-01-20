@@ -24,13 +24,6 @@ class VotingController extends Controller
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
-    public function alreadyVoted()
-    {
-        $votings = Voting::where('status', '1')->whereHas('reactions', function ($r) {
-            $r->where('user_id', Auth::id());
-        })->with('reactions')->get();
-        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
-    }
 
     public function waitingVote()
     {
@@ -56,20 +49,20 @@ class VotingController extends Controller
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
+    public function alreadyVoted()
+    {
+        $votings = Voting::where('status', '1')->whereHas('reactions', function ($r) {
+            $r->where('user_id', Auth::id());
+        })->with('reactions')->get();
+        return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
+    }
+
     public function latestVotes()
     {
         $userId = Auth::id();
         $votings = Voting::where('status', '1')
-            // ->where(function ($q) use ($userId) {
-            //     // Case 1: has reactions, but not by this user
-            //     $q->whereHas('reactions', function ($r) use ($userId) {
-            //         $r->where('user_id', '!=', $userId);
-            //     })
-            //         // Case 2: no reactions at all
-            //          ->orWhereDoesntHave('reactions');
-            // })
             ->with('reactions')->orderBy('created_at', 'desc')->first();
-        if(!$votings){
+        if (!$votings) {
             return ResponseHelper::sendResponse([], 'Votings Fetch Successfully!');
         }
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
@@ -78,46 +71,30 @@ class VotingController extends Controller
     public function previousVotes()
     {
         $userId = Auth::id();
-
-        // $startOfPreviousMonth = \Carbon\Carbon::now()->subMonth()->startOfMonth();
-        // $endOfPreviousMonth   = \Carbon\Carbon::now()->subMonth()->endOfMonth();
-
-        // $votings = Voting::where('status', '1')
-        //     ->whereBetween('created_at', [$startOfPreviousMonth, $endOfPreviousMonth]) // 👈 filter by previous month
-        //     ->where(function ($q) use ($userId) {
-        //         // Case 1: has reactions, but not by this user
-        //         $q->whereHas('reactions', function ($r) use ($userId) {
-        //             $r->where('user_id', '!=', $userId);
-        //         })
-        //             // Case 2: no reactions at all
-        //             ->orWhereDoesntHave('reactions');
-        //     })
-        //     ->with('reactions')
-        //     ->get();
         $voting = Voting::where('status', '1')
             ->with('reactions')->orderBy('created_at', 'desc')->first();
         if ($voting) {
             $votings = Voting::where('status', '1')
                 ->where('_id', '!=', $voting->_id)
-                // ->where(function ($q) use ($userId) {
-                //     // Case 1: has reactions, but not by this user
-                //     $q->whereHas('reactions', function ($r) use ($userId) {
-                //         $r->where('user_id', '!=', $userId);
-                //     })
-                //         // Case 2: no reactions at all
-                //          ->orWhereDoesntHave('reactions');
-                // })
+                ->where(function ($q) use ($userId) {
+                    // Case 1: has reactions, but not by this user
+                    $q->whereHas('reactions', function ($r) use ($userId) {
+                        $r->where('user_id', '!=', $userId);
+                    })
+                        // Case 2: no reactions at all
+                        ->orWhereDoesntHave('reactions');
+                })
                 ->with('reactions')->orderBy('created_at', 'desc')->get();
         } else {
             $votings = Voting::where('status', '1')
-                // ->where(function ($q) use ($userId) {
-                //     // Case 1: has reactions, but not by this user
-                //     $q->whereHas('reactions', function ($r) use ($userId) {
-                //         $r->where('user_id', '!=', $userId);
-                //     })
-                //         // Case 2: no reactions at all
-                //          ->orWhereDoesntHave('reactions');
-                // })
+                ->where(function ($q) use ($userId) {
+                    // Case 1: has reactions, but not by this user
+                    $q->whereHas('reactions', function ($r) use ($userId) {
+                        $r->where('user_id', '!=', $userId);
+                    })
+                        // Case 2: no reactions at all
+                        ->orWhereDoesntHave('reactions');
+                })
                 ->with('reactions')->orderBy('created_at', 'desc')->get();
         }
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
