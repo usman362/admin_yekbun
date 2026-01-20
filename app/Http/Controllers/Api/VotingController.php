@@ -68,7 +68,7 @@ class VotingController extends Controller
             //         // Case 2: no reactions at all
             //          ->orWhereDoesntHave('reactions');
             // })
-            ->with('reactions')->orderBy('created_at', 'desc')->limit(1);
+            ->orderBy('created_at', 'desc')->limit(1);
         return ResponseHelper::sendResponse($votings, 'Votings Fetch Successfully!');
     }
 
