@@ -398,8 +398,8 @@ class FeedsController extends Controller
 
     public function search_user(Request $request)
     {
-        $users = User::whereHas('feeds')->with('country')->where('_id','!=',Auth::id())
-            ->where('status',1)
+        $users = User::whereHas('feeds')->with('country')->where('_id', '!=', Auth::id())
+            ->where('status', 1)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%')
                     ->orWhere('last_name', 'LIKE', '%' . $request->search . '%');
@@ -653,7 +653,7 @@ class FeedsController extends Controller
 
         // try {
         if ($request->file('image')) {
-            $image = Helpers::fileCDNupload($request->image, 'images/comments/'.$request->feed_type);
+            $image = Helpers::fileCDNupload($request->image, 'images/comments/' . $request->feed_type);
         } else {
             $image = null;
         }
@@ -673,7 +673,7 @@ class FeedsController extends Controller
                     return ResponseHelper::sendResponse([], 'You are not Allowed to Voice Comments.', false, 409);
                 }
             }
-            $audio = Helpers::fileCDNUpload($request->audio, 'audios/comments/'.$request->feed_type);
+            $audio = Helpers::fileCDNUpload($request->audio, 'audios/comments/' . $request->feed_type);
         } else {
             $audio = null;
         }
@@ -748,12 +748,25 @@ class FeedsController extends Controller
         }
 
         $feed = Feed::find($id);
-        $feed->comments_count = isset($feed->comments) ? $feed->comments->count() : 0;
-        $feed->voice_comments_count = isset($feed->voice_comments) ? $feed->voice_comments->count() : 0;
-        $feed->likes_count = isset($feed->likes) ? $feed->likes->count() : 0;
-        $feed->views_count = isset($feed->views) ? $feed->views->count() : 0;
-        $feed->shares_count = isset($feed->shares) ? $feed->shares->count() : 0;
-        $feed->save();
+        if ($request->feed_type == 'admin_feeds') {
+            $feed = PopFeeds::find($id);
+        }
+
+        if ($request->feed_type == 'history') {
+            $feed = History::find($id);
+        }
+
+        if ($request->feed_type == 'ai_videos') {
+            $feed = AIVideo::find($id);
+        }
+        if ($feed) {
+            $feed->comments_count = isset($feed->comments) ? $feed->comments->count() : 0;
+            $feed->voice_comments_count = isset($feed->voice_comments) ? $feed->voice_comments->count() : 0;
+            $feed->likes_count = isset($feed->likes) ? $feed->likes->count() : 0;
+            $feed->views_count = isset($feed->views) ? $feed->views->count() : 0;
+            $feed->shares_count = isset($feed->shares) ? $feed->shares->count() : 0;
+            $feed->save();
+        }
 
         return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         // } catch (Exception $e) {
@@ -771,13 +784,13 @@ class FeedsController extends Controller
         $comment = FeedComments::find($id);
         // try {
         if ($request->file('image')) {
-            $image = Helpers::fileCDNUpload($request->image, 'images/comments/'.($comment->feed_type ?? 'user_feeds') );
+            $image = Helpers::fileCDNUpload($request->image, 'images/comments/' . ($comment->feed_type ?? 'user_feeds'));
         } else {
             $image = null;
         }
 
         if ($request->file('audio')) {
-            $audio = Helpers::fileCDNUpload($request->audio, 'audios/comments/'.($comment->feed_type ?? 'user_feeds') );
+            $audio = Helpers::fileCDNUpload($request->audio, 'audios/comments/' . ($comment->feed_type ?? 'user_feeds'));
         } else {
             $audio = null;
         }
@@ -957,8 +970,8 @@ class FeedsController extends Controller
             'like_count' => $likeCount
         ];
         $feed = Feed::find($id)
-                ?? History::find($id)
-                ?? AIVideo::find($id);
+            ?? History::find($id)
+            ?? AIVideo::find($id);
         $feed->comments_count = $feed->comments->count();
         $feed->voice_comments_count = $feed->voice_comments->count();
         $feed->likes_count = $feed->likes->count();
@@ -968,70 +981,70 @@ class FeedsController extends Controller
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 
-    public function getfeedLike(Request $request,$id)
+    public function getfeedLike(Request $request, $id)
     {
-            $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_like_button');
-            $allowHistoryRequest = PermissionHelper::checkPermission(Auth::user()->level, 'history_like_button');
-            if ($request->feed_type == 'user_feeds') {
-                if ($allowRequest !== true) {
-                    return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
-                }
+        $allowRequest = PermissionHelper::checkPermission(Auth::user()->level, 'feed_like_button');
+        $allowHistoryRequest = PermissionHelper::checkPermission(Auth::user()->level, 'history_like_button');
+        if ($request->feed_type == 'user_feeds') {
+            if ($allowRequest !== true) {
+                return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
             }
+        }
 
-            if ($request->feed_type == 'history') {
-                if ($allowHistoryRequest !== true) {
-                    return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
-                }
+        if ($request->feed_type == 'history') {
+            if ($allowHistoryRequest !== true) {
+                return ResponseHelper::sendResponse([], 'You are not Allowed to Like Feed.', false, 409);
             }
+        }
 
-            $request->validate([
-                'feed_type' => 'required',
+        $request->validate([
+            'feed_type' => 'required',
+        ]);
+
+        $user = Auth::user();
+        $postId = $id;
+
+        if (!$user) {
+            return ResponseHelper::sendResponse([], 'User not authenticated!', false, 403);
+        }
+
+        $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $postId)->where('feed_type', $request->feed_type)->first();
+
+        if ($like) {
+            $like->delete();
+            $liked = false;
+        } else {
+            FeedLikes::create([
+                'user_id' => $user->id,
+                'feed_id' => $postId,
+                'feed_type' => $request->feed_type,
             ]);
+            $liked = true;
+        }
 
-            $user = Auth::user();
-            $postId = $id;
+        $likeCount = FeedLikes::where('feed_id', $postId)->where('feed_type', $request->feed_type)->count();
 
-            if (!$user) {
-                return ResponseHelper::sendResponse([], 'User not authenticated!', false, 403);
-            }
+        $data = [
+            'liked' => $liked,
+            'like_count' => $likeCount
+        ];
+        $feed = Feed::find($id)
+            ?? History::find($id)
+            ?? AIVideo::find($id);
+        $feed->comments_count = $feed->comments->count();
+        $feed->voice_comments_count = $feed->voice_comments->count();
+        $feed->likes_count = $feed->likes->count();
+        $feed->views_count = $feed->views->count();
+        $feed->shares_count = $feed->shares->count();
+        $feed->save();
 
-            $like = FeedLikes::where('user_id', $user->id)->where('feed_id', $postId)->where('feed_type', $request->feed_type)->first();
-
-            if ($like) {
-                $like->delete();
-                $liked = false;
-            } else {
-                FeedLikes::create([
-                    'user_id' => $user->id,
-                    'feed_id' => $postId,
-                    'feed_type' => $request->feed_type,
-                ]);
-                $liked = true;
-            }
-
-            $likeCount = FeedLikes::where('feed_id', $postId)->where('feed_type', $request->feed_type)->count();
-
-            $data = [
-                'liked' => $liked,
-                'like_count' => $likeCount
-            ];
-            $feed = Feed::find($id)
-                    ?? History::find($id)
-                    ?? AIVideo::find($id);
-            $feed->comments_count = $feed->comments->count();
-            $feed->voice_comments_count = $feed->voice_comments->count();
-            $feed->likes_count = $feed->likes->count();
-            $feed->views_count = $feed->views->count();
-            $feed->shares_count = $feed->shares->count();
-            $feed->save();
-
-            $data = [
+        $data = [
             'comments_count' => $feed->comments->count(),
             'voice_comments_count' => $feed->voice_comments->count(),
             'likes_count' => $feed->likes->count(),
             'views_count' => $feed->views->count(),
             'shares_count' => $feed->shares->count(),
-            ];
+        ];
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 }
