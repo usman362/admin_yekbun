@@ -3425,6 +3425,79 @@
         });
     </script>
 
+    <script>
+        $('.fileInput18').on('change', function () {
+            const file = this.files[0];
+            const modal = $(this).closest('.modal');
+            const targetDiv = modal.find('#previewContainerMp3Modal2');
+
+            if (!file) return;
+
+            if (file.type.startsWith('video/')) {
+                targetDiv.addClass('d-none');
+            } else if (file.type.startsWith('image/')) {
+                targetDiv.removeClass('d-none');
+            }
+        });
+
+        $('.fileInput10').on('change', function () {
+            const file = this.files[0];
+            const modal = $(this).closest('.modal');
+            const targetDiv = modal.find('#previewContainerMp3Modal10');
+
+            if (!file) return;
+
+            if (file.type.startsWith('video/')) {
+                targetDiv.addClass('d-none');
+            } else if (file.type.startsWith('image/')) {
+                targetDiv.removeClass('d-none');
+            }
+        });
+
+        $('.fileInput18_3').on('change', function () {
+            const file = this.files[0];
+            const modal = $(this).closest('.modal');
+            const targetDiv = modal.find('#previewContainerMp3Modal4');
+
+            if (!file) return;
+
+            if (file.type.startsWith('video/')) {
+                targetDiv.addClass('d-none');
+            } else if (file.type.startsWith('image/')) {
+                targetDiv.removeClass('d-none');
+            }
+        });
+
+        $('.fileInput18_4').on('change', function () {
+            const file = this.files[0];
+            const modal = $(this).closest('.modal');
+            const targetDiv = modal.find('#previewContainerMp3Modal5');
+
+            if (!file) return;
+
+            if (file.type.startsWith('video/')) {
+                targetDiv.addClass('d-none');
+            } else if (file.type.startsWith('image/')) {
+                targetDiv.removeClass('d-none');
+            }
+        });
+
+        $('.fileInput18_23').on('change', function () {
+            const file = this.files[0];
+            const modal = $(this).closest('.modal');
+            const targetDiv = modal.find('#previewContainerMp3Modal5');
+
+            if (!file) return;
+
+            if (file.type.startsWith('video/')) {
+                targetDiv.addClass('d-none');
+            } else if (file.type.startsWith('image/')) {
+                targetDiv.removeClass('d-none');
+            }
+        });
+    </script>
+
+
     {{-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production

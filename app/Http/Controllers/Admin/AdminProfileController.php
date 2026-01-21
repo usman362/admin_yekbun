@@ -172,12 +172,10 @@ class AdminProfileController extends Controller
         }
 
         //die("154");
-
-
+        dd($request->all());
         if ($request->upid > 0) {
 
             $postpop = PopFeeds::where('_id', $request->upid)->first();
-
             if ($postpop != null) {
 
 
@@ -191,6 +189,8 @@ class AdminProfileController extends Controller
                     $postpop->title = $request->title;
                     $postpop->date_start = Str::before($request->duration, ' -');
                     $postpop->date_ends = Str::after($request->duration, '- ');
+                    $postpop->donation_amount = $request->donation_amount;
+                    $postpop->donation_amount_type = $request->donation_amount_type;
                     $postpop->share_option = $optons;
                     $postpop->allowed_provinces = $allowedProvinces;
                     $postpop->is_comments = $request->comments ?? 0;
@@ -359,6 +359,8 @@ class AdminProfileController extends Controller
                     'title' => $request->title,
                     'date_start' => Str::before($request->duration, ' -'),
                     'date_ends' => Str::after($request->duration, '- '),
+                    'donation_amount' => $request->donation_amount,
+                    'donation_amount_type' => $request->donation_amount_type,
                     'image' => $fileType == 'image' ? $filePath : '',
                     'video' => $fileType == 'video' ? $filePath : '',
                     'audio' => $audioPath ?? '',

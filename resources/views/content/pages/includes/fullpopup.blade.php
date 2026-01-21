@@ -1715,6 +1715,10 @@ height: 812px; padding: 0px;border-radius: 10px;">
                 <input type="hidden" name="upid" value="0" class="upid" />
                 <input type="hidden" name="type" value="Donation" />
                 <input type="hidden" name="limit" value="limited" id="limit" />
+                <input type="hidden" name="donation_amount" value="" id="donation_amount_2" />
+                <input type="hidden" name="donation_amount_type" value="" id="donation_amount_type_2" />
+                <input type="hidden" name="duration" value="" id="donation_duration_2" />
+
 
                 <div class="modal-body"
                     style="
@@ -3859,13 +3863,13 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                     <div style="width: 360px; height: 79px; border: 2px dashed gray;
           border-radius: 10px; position: relative;margin-top: 20px; "
-                        id="previewContainerMp3Modal5">
+                        id="previewContainerMp3Modal23">
                         <!-- Preview Container -->
                         <div style="display: flex; flex-direction: column; justify-content: space-between;
             align-items: center; background-size: contain; cursor: pointer;
             border-radius: 10px; position: relative; height: 100%;"
-                            id="Mp3InputModal5">
-                            <input type="file" class="fileInputModal5" accept=".mp3, .wav" name="audio"
+                            id="Mp3InputModal23">
+                            <input type="file" class="fileInputModal23" accept=".mp3, .wav" name="audio"
                                 style="opacity: 0; width: 100%; height: 100%; position: absolute; cursor: pointer;">
 
 
@@ -3889,7 +3893,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                         </div>
 
                         <div style="width: 350px;height: 56px;border-radius: 10px;position: relative;margin-bottom: 10px;margin-left: 3px;margin-top: 10px;background-color: rgb(255, 255, 255);display: none;"
-                            id="Mp3uploadModal5">
+                            id="Mp3uploadModal23">
                             <!-- Preview Container -->
                             <div
                                 style="display: flex; flex-direction: column; justify-content: space-between;
@@ -3904,7 +3908,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
           margin-top: 40px; border-radius: 10px;
            margin: 7px; align-self: flex-end;">
                                     <img src="{{ asset('assets/svg/svg-dialog/Group%201000002312.svg') }}"
-                                        alt="Illustration" class="img-fluid" id="playModal5"
+                                        alt="Illustration" class="img-fluid" id="playModal23"
                                         style="height: 14px; width: 19px">
 
                                     <img src="{{ asset('assets/svg/svg-dialog/Group%201.svg') }}"
@@ -3923,9 +3927,9 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                         alt="Illustration" class="img-fluid" data-target="#modal17"
                                         data-bs-dismiss="modal" style="height: 57px; width: 40px">
 
-                                    <span style="color: gray;margin-left: 5px; " id="DurationModal5">00:00</span>
+                                    <span style="color: gray;margin-left: 5px; " id="DurationModal23">00:00</span>
 
-                                    <img id="deleteButtonMp3Modal5"
+                                    <img id="deleteButtonMp3Modal23"
                                         src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
                                         style="width: 37px; height: 37px; cursor: pointer;background-color: #F2F2F2;
              border-radius: 10px; margin-left: 40px;">
@@ -6360,7 +6364,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
         <div class="modal8-right" style="top: 8%;"><img id="deleteButtonModal19"
                 src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
                 style="width:100%;height:100%;cursor:pointer"> <img id="backButtonToeventPreviewModal"
-                data-target="#eventPreviewModal" data-bs-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#eventPreviewModal"
                 src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008249.svg') }}"
                 style="width:100%;height:100%;cursor:pointer"></div>
         <div class="modal-content bg-model-image container"
@@ -6457,7 +6461,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="background-color:#e0e0e0;color:black;">
                                     <option value="N/A">Select Country</option>
                                     @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}">{{ ucwords($country->name) }}</option>
+                                        <option value="{{ ucwords($country->name) }}">{{ ucwords($country->name) }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -6468,61 +6472,17 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     style="background-color:#e0e0e0;color:black;">
                                     <option value="N/A">Select City</option>
                                     @foreach ($cities as $city)
-                                        <option value="{{ $city->id }}">{{ ucwords($city->name) }}</option>
+                                        <option value="{{ ucwords($city->name) }}">{{ ucwords($city->name) }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="input-group mt-4 mb-2" style=""><input type="text"
                                 class="form-control" style="background-color:#e0e0e0;color:black;"
-                                placeholder="Type the Amount" name="event_address" id="event_address"
-                                aria-label="Type the Amount" autocomplete="off" form="event_form"></div>
+                                placeholder="Address" name="event_address" id="event_address"
+                                aria-label="Address" autocomplete="off" form="event_form"></div>
                     </div>
                 </div>
-
-                <div>
-                        <div class="toggle-card">
-                            <!-- Toggle 1 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojava" class="form-check-input"
-                                        name="provinces[]" id="rojava" />
-                                    <label for="rojava" class="form-check-label"></label>
-                                </div>
-                                <span>Rojava</span>
-                            </div>
-
-                            <!-- Toggle 2 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Bakur" class="form-check-input"
-                                        name="provinces[]" id="bakur" />
-                                    <label for="bakur" class="form-check-label"></label>
-                                </div>
-                                <span>Bakur</span>
-                            </div>
-
-                            <!-- Toggle 3 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Basur" class="form-check-input"
-                                        name="provinces[]" id="basur" />
-                                    <label for="basur" class="form-check-label"></label>
-                                </div>
-                                <span>Basur</span>
-                            </div>
-
-                            <!-- Toggle 4 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojhilat" class="form-check-input"
-                                        name="provinces[]" id="rojhilat" />
-                                    <label for="rojhilat" class="form-check-label"></label>
-                                </div>
-                                <span>Rojhilat</span>
-                            </div>
-                        </div>
-                    </div>
             </div>
         </div>
     </div>
@@ -6607,18 +6567,14 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                                     align-items: center;
                                     width: 100%;
                                   ">
-                                    <span style="font-weight: bold; font-size: 16px">. <span id="event_st_date">14 .
-                                            12 . 2024</span> - . <span id="event_end_date">14 . 12 .
-                                            2024</span></span>
+                                    <span style="font-weight: bold; font-size: 16px" id="event_date_st"></span>
                                     <div style="display: flex; align-items: center; gap: 10px">
                                         <img src="{{ asset('assets/svg/svg-dialog/donations/Group%201000002871.svg') }}"
                                             class="img-thumbnail"
                                             style="width: 12px; height: 12px; object-fit: cover" />
 
-                                        <span style="font-size: 14px">. Start: <span id="event_st_time">16:00</span>
-                                            .</span>
-                                        <span style="font-size: 14px">. End: <span id="event_end_time">16:00</span>
-                                            .</span>
+                                        <span style="font-size: 14px" id="event_st_time"></span>
+                                        <span style="font-size: 14px" id="event_end_time"></span>
                                     </div>
                                 </div>
                             </div>
