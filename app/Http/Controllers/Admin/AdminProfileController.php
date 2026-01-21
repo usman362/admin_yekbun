@@ -172,7 +172,7 @@ class AdminProfileController extends Controller
         }
 
         //die("154");
-        dd($request->all());
+        // dd($request->all());
         if ($request->upid > 0) {
 
             $postpop = PopFeeds::where('_id', $request->upid)->first();
