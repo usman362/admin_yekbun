@@ -748,11 +748,11 @@ class FeedsController extends Controller
         }
 
         $feed = Feed::find($id);
-        $feed->comments_count = $feed->comments->count();
-        $feed->voice_comments_count = $feed->voice_comments->count();
-        $feed->likes_count = $feed->likes->count();
-        $feed->views_count = $feed->views->count();
-        $feed->shares_count = $feed->shares->count();
+        $feed->comments_count = isset($feed->comments) ? $feed->comments->count() : 0;
+        $feed->voice_comments_count = isset($feed->voice_comments) ? $feed->voice_comments->count() : 0;
+        $feed->likes_count = isset($feed->likes) ? $feed->likes->count() : 0;
+        $feed->views_count = isset($feed->views) ? $feed->views->count() : 0;
+        $feed->shares_count = isset($feed->shares) ? $feed->shares->count() : 0;
         $feed->save();
 
         return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
