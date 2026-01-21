@@ -510,7 +510,7 @@
                         `<img src="{{ env('BUNNY_CDN_URL') }}${data.image}" style="width:100px;height:100px">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData =
-                        `<img src="{{ env('BUNNY_CDN_URL') }}${data?.emoji_data?.image}" style="width:100px;height:100px">`;
+                        `<img src="{{ asset('/') }}/storage/${data?.emoji_data?.image}" style="width:100px;height:100px">`;
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
                                    <audio src="{{ env('BUNNY_CDN_URL') }}${data.audio}" id="comment-audio-input"></audio>

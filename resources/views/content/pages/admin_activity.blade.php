@@ -3031,7 +3031,7 @@
                     commentData = `<img src="{{ env('BUNNY_CDN_URL') }}${data.image}" width="80" height="80">`;
                 } else if (data.emoji && data.emoji.trim() !== "" && data.emoji !== "null" && data.emoji !== null) {
                     commentData =
-                        `<img src="{{ env('BUNNY_CDN_URL') }}${data?.emoji_data?.image}" width="80" height="80">`;
+                        `<img src="{{ asset('/') }}/storage/${data?.emoji_data?.image}" width="80" height="80">`;
                 } else if (data.audio && data.audio.trim() !== "" && data.audio !== "null" && data.audio !== null) {
                     commentData = `<div id="comment-audio" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-size: contain; cursor: pointer; border-radius: 10px; position: relative; height: 100%;">
                                    <audio src="{{ env('BUNNY_CDN_URL') }}${data.audio}" id="comment-audio-input"></audio>
