@@ -158,7 +158,11 @@ class VotingController extends Controller
      */
     public function show($id)
     {
-        //
+        $votings = Voting::where('status', '1')->with('reactions')->find($id);
+        if (!$votings) {
+            return ResponseHelper::sendResponse([], 'Voting Fetch Successfully!');
+        }
+        return ResponseHelper::sendResponse($votings, 'Voting Fetch Successfully!');
     }
 
     /**
