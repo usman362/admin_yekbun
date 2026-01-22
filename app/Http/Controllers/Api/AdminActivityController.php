@@ -51,7 +51,7 @@ class AdminActivityController extends Controller
         if ($userProvince == 'Başûr') {
             $userProvince = 'Basur';
         }
-        $feeds = PopFeeds::with('user')
+        $feeds = PopFeeds::with(['user','sos_popup'])
             ->whereIn('share_option', ['all-users', Auth::user()->user_type])
             ->where(function ($q) use ($userProvince) {
                 $q->whereNull('allowed_provinces')

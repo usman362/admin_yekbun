@@ -82,4 +82,9 @@ class PopFeeds extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function sos_popup()
+    {
+        return $this->belongsTo(SosPopup::class, 'sos_id');
+    }
 }
