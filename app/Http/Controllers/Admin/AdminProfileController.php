@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Feed;
 use App\Models\News;
+use App\Models\SosPopup;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\PopFeeds;
@@ -534,6 +535,26 @@ class AdminProfileController extends Controller
                                 ]);
                             }
                         }
+                    }
+                }
+            }
+
+            if ($poptyp === 'SOS') {
+
+                $options = (array) $request->option_6; // ensure array
+
+                if (!empty($options)) {
+
+                    $users = User::whereIn('user_type', $options)->get();
+
+                    foreach ($users as $user) {
+                        SosPopup::updateOrCreate(
+                            [
+                                'user_id' => $user->_id,
+                                'sos_id'  => $postpop->_id,
+                            ],
+                            [] // no extra fields to update
+                        );
                     }
                 }
             }
