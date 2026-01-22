@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PopFeedComments;
 use App\Models\PopFeedLikes;
 use App\Models\PopFeeds;
+use App\Models\SosPopup;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -68,6 +69,15 @@ class AdminActivityController extends Controller
         }
 
         return ResponseHelper::sendResponse($data, 'All Admin Activity Feeds');
+    }
+
+    public function deactivateSOS($id)
+    {
+        $popup = SosPopup::where('user_id',Auth::id())->where('sos_id',$id)->first();
+        if($popup){
+            $popup->delete();
+        }
+        return ResponseHelper::sendResponse([], 'Popup Deactivated Successfully!');
     }
 
     public function getpublicpopFeeds(Request $request)

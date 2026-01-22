@@ -269,6 +269,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::get('/list-collection-items/{collection_id}', [CollectionController::class, 'listCollectionItems']);
         Route::delete('/collections/{collection_id}/feeds/{feed_id}',[CollectionController::class, 'destroyCollectionFeed']);
         Route::get("/admin-activity/get-feeds", [AdminActivityController::class, 'getpopFeeds']);
+        Route::get("/deactivate-sos/{id}", [AdminActivityController::class, 'deactivateSOS']);
     });
 
     //Views
