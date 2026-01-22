@@ -7,6 +7,7 @@ use Spatie\Activitylog\LogOptions;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class PopFeeds extends Model
 {
@@ -84,7 +85,7 @@ class PopFeeds extends Model
     }
 
     public function sosPopups()
-{
-    return $this->hasMany(SosPopup::class, 'sos_id', '_id');
-}
+    {
+        return $this->hasMany(SosPopup::class, 'sos_id', '_id')->where('user_id',Auth::id());
+    }
 }
