@@ -9,7 +9,7 @@ class SosPopup extends Model
 {
     use HasFactory;
 
-    protected $table = 'sos_popup';
+    protected $table = 'sos_popups';
 
     protected $fillable = [
         'user_id',
