@@ -23,6 +23,7 @@ class SosPopup extends Model
 
     public function sos()
     {
-        return $this->belongsTo(PopFeeds::class, 'sos_id')->where('type','SOS');
+        return $this->belongsTo(PopFeeds::class, 'sos_id', '_id')
+            ->where('type', 'SOS');
     }
 }
