@@ -151,7 +151,6 @@ class AdminProfileController extends Controller
         $poptyp = $request->type;
         $provinces = $request->input('provinces', []);
         $allowedProvinces = empty($provinces) ? null : array_values($provinces);
-
         $optons = "";
         if ($poptyp == "System") {
             $optons = $request->option;
@@ -544,8 +543,11 @@ class AdminProfileController extends Controller
                 $options = (array) $request->option_6; // ensure array
 
                 if (!empty($options)) {
-
-                    $users = User::whereIn('user_type', $options)->get();
+                    if($options == 'all-users'){
+                        $users = User::all();
+                    }else{
+                        $users = User::where('user_type', $options)->get();
+                    }
 
                     foreach ($users as $user) {
                         SosPopup::updateOrCreate(
