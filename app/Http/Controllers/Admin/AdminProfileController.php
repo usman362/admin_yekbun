@@ -540,7 +540,7 @@ class AdminProfileController extends Controller
 
             if ($poptyp === 'SOS') {
 
-                $options = (array) $request->option_6; // ensure array
+                $options = $request->option_6; // ensure array
 
                 if (!empty($options)) {
                     if($options == 'all-users'){
