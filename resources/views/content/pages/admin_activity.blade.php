@@ -754,6 +754,223 @@
                 min-height: calc(100% - 3.5rem);
             }
         }
+
+        .vote-banner {
+            padding: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        #createvotingModal .modal-body {
+            margin-top: -38px !important;
+        }
+
+        .dz-filename {
+            margin-left: 0 !important;
+        }
+
+        .dz-thumbnail>img {
+            width: 100%;
+            height: auto;
+            max-width: unset !important;
+            max-height: unset !important;
+        }
+
+        .bg-tropy-column {
+            /* border: 1px dashed #d1d1d1; */
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
+
+        .gender-status {
+            border-radius: 15px;
+            padding: 8px;
+            background: #F2F2F2;
+        }
+
+        .trophy-count {
+            font-family: "Genos", sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .detail-progress span {
+            font-family: "Genos", sans-serif;
+            font-weight: 500;
+        }
+
+        .trophy-card {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mini-stat-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+
+        .age-bar {
+            height: 12px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .age-bar .male {
+            background: #3d2dd6;
+            height: 100%;
+            width: 50%;
+            border-radius: 5px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            position: absolute;
+            z-index: 11111;
+        }
+
+        .age-bar .female {
+            background: #cc8ff5;
+            height: 100%;
+            width: 50%;
+            left: auto;
+            right: 0;
+            position: absolute;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .province-2 {}
+
+        .province-item {
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            /* margin-bottom: 5px; */
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+
+        }
+
+
+        .province-1 {
+            background: #F72585;
+            width: 90%;
+            border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+        }
+
+        .province-2 {
+            background: #B5179E;
+            border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+            /* border-top-right-radius: 0px !important; */
+            width: 85%;
+        }
+
+        .province-3 {
+            background: #7209B7;
+            border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+            /* border-top-right-radius: 0px !important; */
+            width: 80%;
+        }
+
+        .province-4 {
+            background: #560BAD;
+            border-top-left-radius: 0px !important;
+            /* border-bottom-left-radius: 0px !important; */
+            /* border-top-right-radius: 0px !important; */
+            width: 70%;
+        }
+
+        .bg-trophy-loader {
+            background: #F2F2F2;
+            padding: 8px;
+            border-radius: 15px;
+        }
+
+        .text-states {
+            color: #9291A5;
+            font-family: 'Poppins';
+            font-weight: 500 !important;
+        }
+
+        .text-gender {
+            font-family: 'Poppins';
+            font-weight: 600 !important;
+        }
+
+        .text-male {
+            font-family: 'Poppins';
+            font-weight: 500 !important;
+        }
+
+        .text-age {
+            font-family: "Inter", sans-serif;
+            font-weight: 500;
+            color: #615E83;
+            font-size: 14px;
+        }
+
+        .text-province {
+            font-family: "Genos", sans-serif;
+            font-weight: 500 !important;
+            color: #000;
+        }
+
+        .province-item span {
+            font-family: "Genos", sans-serif;
+            font-weight: 500 !important;
+            font-size: 20px;
+        }
+
+        .bg-success-01 {
+            background: #1BC469;
+        }
+
+        .bg-warning-01 {
+            background: #F1C21B;
+        }
+
+        .bg-info-01 {
+            background: #1CA2ED;
+        }
+
+        .text-vote {
+            font-family: "Genos", sans-serif;
+            font-weight: 500 !important;
+            color: #000000;
+        }
+
+        .para-vote {
+            font-family: "Genos", sans-serif;
+            font-weight: 600 !important;
+            color: #000000;
+        }
+
+        .btn-close {
+            z-index: 2;
+        }
+
+        .dz-thumbnail {
+            padding: 0 !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            height: 180px !important;
+        }
+
+        #editForm .vote-banner {
+            height: 180px;
+            overflow: hidden !important;
+        }
     </style>
 @endsection
 
@@ -839,6 +1056,7 @@
     <!--hero-->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+    <script src="{{ asset('assets/js/admin-voting.js') }}"></script>
 @endsection
 
 @section('content')
@@ -1304,7 +1522,11 @@
                                                             style="width:32px;height:32px;object-fit:cover">
                                                         <div class="pop_heading" style="">
                                                             <div class="pop_head_line" style="">
-                                                                <div class="pop_title" style=""></div>YekBun Team
+                                                                <div
+                                                                    style="width:2px;height:2px;border-radius:45%;background:#00000066;margin:0;">
+                                                                </div>
+                                                                {{-- <div class="pop_title" style=""></div> --}}
+                                                                {{$feed->type}}
                                                                 <div
                                                                     style="width:2px;height:2px;border-radius:45%;background:#00000066">
                                                                 </div>
@@ -1352,12 +1574,12 @@
                                                         $limited = $feed->is_pay_other;
                                                     } elseif ($feed->type == 'Surveys') {
                                                         $modalnumber = 3;
-                                                        $txt1 = $feed->txt1;
-                                                        $txt2 = $feed->txt2;
-                                                        $txt3 = $feed->txt3;
-                                                        $icon1 = $feed->icon1;
-                                                        $icon2 = $feed->icon2;
-                                                        $icon3 = $feed->icon3;
+                                                        $txt1 = $feed->survey_data[0]['text'];
+                                                        $txt2 = $feed->survey_data[1]['text'];
+                                                        $txt3 = $feed->survey_data[2]['text'];
+                                                        $icon1 = $feed->survey_data[0]['icon'];
+                                                        $icon2 = $feed->survey_data[1]['icon'];
+                                                        $icon3 = $feed->survey_data[2]['icon'];
                                                     } elseif ($feed->type == 'Greetings') {
                                                         $modalnumber = 4;
                                                     }
@@ -1429,48 +1651,114 @@
                                                 @endif
                                             @endif
                                         </div>
+                                        @if ($feed->type == 'Surveys')
+                                        <div class="row mt-2">
+                                            <div class="col-md-8">
+                                                <div style="display:flex;align-items:center;gap:20px;">
+                                                    <div class="d-flex align-items-center " style="background:#f5f5f5;border-radius:5px;padding: 2px 5px;" bis_skin_checked="1">
+                                                        @if (!empty($icon1))
+                                                            <img style="border-radius: 8px;width: 25px;height:30px" src="{{asset('storage/'.$icon1)}}" alt="">
+                                                        @else
+                                                            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M25.7788 21.2912L26.6608 16.1914C26.881 14.9177 25.9015 13.7527 24.6103 13.7527H18.1339C17.4921 13.7527 17.0033 13.1766 17.1072 12.5424L17.9355 7.48674C18.0701 6.6654 18.0316 5.82496 17.8227 5.01937C17.6496 4.35201 17.1347 3.81615 16.4575 3.59862L16.2763 3.5404C15.8671 3.40894 15.4204 3.43953 15.0346 3.62545C14.6099 3.8301 14.2992 4.20338 14.184 4.64732L13.5894 6.93964C13.4002 7.669 13.1246 8.37303 12.7693 9.03823C12.2501 10.0102 11.4473 10.788 10.6129 11.5071L8.8145 13.0568C8.30743 13.4938 8.04113 14.1482 8.09883 14.8155L9.11404 26.5563C9.20716 27.6332 10.1075 28.46 11.1873 28.46H16.998C21.3496 28.46 25.0634 25.428 25.7788 21.2912Z" fill="#4BB543"></path>
+                                                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M4.15148 12.8163C4.65306 12.7947 5.08266 13.172 5.12591 13.6722L6.34041 27.7178C6.41842 28.6201 5.70775 29.3977 4.80028 29.3977C3.94551 29.3977 3.25439 28.7043 3.25439 27.8511V13.7529C3.25439 13.2509 3.6499 12.838 4.15148 12.8163Z" fill="#4BB543"></path>
+                                                            </svg>
+                                                        @endif
+                                                            <div class="ms-1" bis_skin_checked="1">
+                                                                <div bis_skin_checked="1">{{ !empty($txt1) ? $txt1 : 'Yes' }}</div>
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center " style="background:#f5f5f5;border-radius:5px;padding: 2px 5px;" bis_skin_checked="1">
+                                                        @if (!empty($icon2))
+                                                            <img style="border-radius: 8px;width: 25px;height:30px" src="{{asset('storage/'.$icon2)}}" alt="">
+                                                        @else
+                                                           <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.01367 15.4048C3.01367 21.2973 3.01367 24.2436 4.84425 26.0742L26.1831 4.73537C24.3525 2.90479 21.4062 2.90479 15.5137 2.90479C9.62112 2.90479 6.67484 2.90479 4.84425 4.73537C3.01367 6.56595 3.01367 9.51223 3.01367 15.4048Z" fill="#1BC469"></path>
+                                                                <path d="M10.5137 6.34229C11.0314 6.34229 11.4512 6.76202 11.4512 7.27979L11.4512 9.46731H13.6387C14.1564 9.46731 14.5762 9.88704 14.5762 10.4048C14.5762 10.9226 14.1564 11.3423 13.6387 11.3423H11.4512L11.4512 13.5298C11.4512 14.0476 11.0314 14.4673 10.5137 14.4673C9.9959 14.4673 9.57617 14.0476 9.57617 13.5298L9.57617 11.3423H7.38867C6.87091 11.3423 6.45117 10.9226 6.45117 10.4048C6.45117 9.88704 6.8709 9.46731 7.38867 9.46731H9.57617V7.27979C9.57617 6.76202 9.99591 6.34229 10.5137 6.34229Z" fill="white"></path>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5137 27.9048C9.6211 27.9048 6.67482 27.9048 4.84424 26.0742L26.1831 4.73535C28.0137 6.56593 28.0137 9.51221 28.0137 15.4048C28.0137 21.2973 28.0137 24.2436 26.1831 26.0742C24.3525 27.9048 21.4062 27.9048 15.5137 27.9048ZM23.0138 22.5924C23.5316 22.5924 23.9513 22.1727 23.9513 21.6549C23.9513 21.1371 23.5316 20.7174 23.0138 20.7174H16.7638C16.246 20.7174 15.8263 21.1371 15.8263 21.6549C15.8263 22.1727 16.246 22.5924 16.7638 22.5924H23.0138Z" fill="#ED1C24"></path>
+                                                            </svg>
+                                                        @endif
+                                                            <div class="ms-1" bis_skin_checked="1">
+                                                                <div bis_skin_checked="1">{{ !empty($txt2) ? $txt2 : 'No Idea' }}</div>
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center " style="background:#f5f5f5;border-radius:5px;padding: 2px 5px;" bis_skin_checked="1">
+                                                        @if (!empty($icon3))
+                                                            <img style="border-radius: 8px;width: 25px;height:30px" src="{{asset('storage/'.$icon3)}}" alt="">
+                                                        @else
+                                                            <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M25.7791 11.5663L26.661 16.666C26.8813 17.9397 25.9018 19.1047 24.6105 19.1047H18.1342C17.4923 19.1047 17.0035 19.6809 17.1074 20.315L17.9358 25.3707C18.0703 26.192 18.0319 27.0325 17.8229 27.8381C17.6498 28.5054 17.1349 29.0413 16.4578 29.2588L16.2766 29.317C15.8673 29.4485 15.4207 29.4179 15.0348 29.232C14.6101 29.0273 14.2994 28.654 14.1843 28.2101L13.5896 25.9178C13.4004 25.1884 13.1248 24.4844 12.7695 23.8192C12.2503 22.8472 11.4476 22.0694 10.6132 21.3503L8.81474 19.8006C8.30767 19.3636 8.04137 18.7093 8.09908 18.042L9.11428 6.30112C9.2074 5.2242 10.1078 4.39746 11.1875 4.39746H16.9983C21.3499 4.39746 25.0637 7.42947 25.7791 11.5663Z" fill="red"></path>
+                                                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M4.15148 20.0413C4.65306 20.063 5.08266 19.6857 5.12591 19.1855L6.34041 5.13982C6.41842 4.23758 5.70775 3.45996 4.80028 3.45996C3.94551 3.45996 3.25439 4.15339 3.25439 5.00653V19.1047C3.25439 19.6068 3.6499 20.0197 4.15148 20.0413Z" fill="red"></path>
+                                                            </svg>
+                                                        @endif
+                                                            <div class="ms-1" bis_skin_checked="1">
+                                                                <div bis_skin_checked="1">{{ !empty($txt3) ? $txt3 : 'No' }}</div>
+                                                            </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div style="display:flex;align-items:center;gap:10px;float:right;margin-right:12px">
+                                                    {{-- <a href="javascript:void(0)" class="text-secondary"><i class="bx bx-bar-chart-alt-2"></i></a> --}}
+                                                     <button class="btn btn-sm btn-icon btn-statistic-vote" data-bs-toggle="modal"
+                                                        data-bs-offset="0,4" data-bs-placement="top"
+                                                        data-bs-html="true" data-vote-id="{{ $feed->id }}"
+                                                        data-vote-name="{{ 'Surveys for ' . $feed->title }}"
+                                                        {{-- data-vote-type="{{ $vote->vote_type }}" --}}
+                                                         data-bs-original-title="Statistic"
+                                                        aria-describedby="tooltip557134">
+                                                        <i class="bx bx-bar-chart-alt-2"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @else
                                         <div
                                             style="height:29px;display:flex;align-items:center;background-color:#f8f9fa;border-radius:5px;padding:5px;gap:10px;margin-top:7px">
-                                            <div
-                                                style="display:flex;align-items:center;height:100%;gap:10px">
+                                                <div
+                                                    style="display:flex;align-items:center;height:100%;gap:10px">
 
-                                                {{-- <div style="display:flex;align-items:center;gap:3px;height:100%"><img
-                                                        src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Eye%20Scan.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover"><span
-                                                        style="font-weight:400;font-family:Genos">123</span>
-                                                </div>
-
-                                                <div style="display:flex;align-items:center;gap:3px;height:100%"><img
-                                                        src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover"><span
-                                                        style="font-weight:400;font-family:Genos">123</span>
-                                                </div> --}}
-
-                                                @if ($feed->is_comments == 1)
-                                                    <div style="display:flex;align-items:center;gap:3px;height:100%"><img
-                                                            src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                    {{-- <div style="display:flex;align-items:center;gap:3px;height:100%"><img
+                                                            src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Eye%20Scan.svg') }}"
                                                             style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                            style="font-weight:400;font-family:Genos">123</span>
                                                     </div>
-                                                @endif
-                                                @if ($feed->is_share == 1)
+
                                                     <div style="display:flex;align-items:center;gap:3px;height:100%"><img
-                                                            src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                            src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
                                                             style="width:100%;height:100%;object-fit:cover"><span
-                                                            style="font-weight:400;font-family:Genos">0</span>
+                                                            style="font-weight:400;font-family:Genos">123</span>
+                                                    </div> --}}
+
+                                                    @if ($feed->is_comments == 1)
+                                                        <div style="display:flex;align-items:center;gap:3px;height:100%"><img
+                                                                src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Pen%202.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    @endif
+                                                    @if ($feed->is_share == 1)
+                                                        <div style="display:flex;align-items:center;gap:3px;height:100%"><img
+                                                                src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/microphone-2.svg') }}"
+                                                                style="width:100%;height:100%;object-fit:cover"><span
+                                                                style="font-weight:400;font-family:Genos">0</span>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                @if ($feed->is_emoji == 1)
+                                                    <div style="display:flex;align-items:center;gap:2px;height:100%">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
+                                                            style="width:100%;height:100%;object-fit:cover">
+                                                        <span style="font-weight:400;font-family:Genos">0</span>
                                                     </div>
                                                 @endif
                                             </div>
-                                            @if ($feed->is_emoji == 1)
-                                                <div style="display:flex;align-items:center;gap:2px;height:100%">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002356.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover">
-                                                    <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/Group%201000002630.svg') }}"
-                                                        style="width:100%;height:100%;object-fit:cover">
-                                                    <span style="font-weight:400;font-family:Genos">0</span>
-                                                </div>
                                             @endif
-                                        </div>
                                         {{-- <div
                                             style="height:30px;display:flex;background-color:#fff;justify-content:space-between;align-items:center;margin-top:10px">
                                             <div
@@ -1518,6 +1806,211 @@
     <x-modal id="requestpopup" size="lg">@include('content.include.live_stream.createnews')</x-modal>
     <x-modal id="requestpopuptwo" size="md">@include('content.include.live_stream.createmusictwo')</x-modal>
     <x-modal id="requestpopupnew" size="lg">@include('content.include.live_stream.golive')</x-modal>
+
+    {{-- Stastics Model Form --}}
+
+    <div class="modal fade" id="statisticVotingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-0" style="width: 552px !important">
+                <div class="modal-header flex-column align-items-start border-bottom-0 p-3 pt-1"
+                    style="background: #0000000D;">
+                    <h4 class="modal-title text-muted text-vote mb-0"></h4>
+                    {{-- <p class="text-muted mb-0 para-vote">Category Name</p> --}}
+                </div>
+                <div class="modal-body p-0 pt-0">
+                    <div class="bg-tropy-column p-3">
+                        <!-- Top Trophy Section -->
+                        <div class="bg-trophy-loader">
+                            <div class="d-flex justify-content-between">
+                                <div class="trophy-card">
+                                    <div class="spinner-border text-success" style="width: 110px; height: 110px;"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}"
+                                            class="d-flex justify-content-center position-absolute" width="50"
+                                            style="transform: translate(3px, -55px);height: 57px;">
+                                    </div>
+
+                                    <div class="trophy-count">10,258</div>
+                                </div>
+                                <div class="trophy-card">
+                                    <div class="spinner-border text-warning" style="width: 110px; height: 110px;"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}"
+                                            class="d-flex justify-content-center position-absolute" width="50"
+                                            style="transform: translate(3px, -55px);height: 57px;">
+                                    </div>
+                                    <div class="trophy-count">5,258</div>
+
+                                </div>
+                                <div class="trophy-card">
+                                    <div class="spinner-border text-info" style="width: 110px; height: 110px;"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}"
+                                            class="d-flex justify-content-center position-absolute" width="50"
+                                            style="transform: translate(3px, -55px);height: 57px;">
+                                    </div>
+                                    <div class="trophy-count">15,258</div>
+                                </div>
+                            </div>
+                            <!-- Medal Bars -->
+                            <div class="mini-stat-box mt-1">
+                                <div class="d-flex">
+                                    <img src="{{ asset('assets/svg/svg-dialog/male.svg') }}" width="35"
+                                        style="height: 30px">
+                                    <div class="detail-progress mx-2">
+                                        <span><img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="18"
+                                                alt>&nbsp;
+                                            1258</span>
+                                        <div class="progress mt-1"
+                                            style="width: 60px; height: 8px; background: #1BC4694D;">
+                                            <div class="progress-bar bg-success-01" role="progressbar" style="width: 50%"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail-progress ">
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18"
+                                            alt>&nbsp;
+                                        1258</span>
+                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #F9E59E80;">
+                                        <div class="progress-bar bg-warning-01" role="progressbar" style="width: 80%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="detail-progress">
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18"
+                                            alt>&nbsp;
+                                        1258</span>
+                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #1CA2ED4D;">
+                                        <div class="progress-bar bg-info-01" role="progressbar" style="width: 80%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mini-stat-box mt-1">
+                                <div class="d-flex">
+                                    <img src="{{ asset('assets/svg/svg-dialog/female.svg') }}" width="35"
+                                        style="height: 30px">
+                                    <div class="detail-progress mx-2">
+                                        <span><img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" width="18"
+                                                alt>&nbsp;
+                                            1258</span>
+                                        <div class="progress mt-1"
+                                            style="width: 60px; height: 8px; background: #1BC4694D;">
+                                            <div class="progress-bar bg-success-01" role="progressbar" style="width: 50%"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail-progress ">
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" width="18"
+                                            alt>&nbsp;
+                                        1258</span>
+                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #F9E59E80;">
+                                        <div class="progress-bar bg-warning-01" role="progressbar" style="width: 80%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="detail-progress">
+                                    <span><img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" width="18"
+                                            alt>&nbsp;
+                                        1258</span>
+                                    <div class="progress mt-1" style="width: 60px; height: 8px; background: #1CA2ED4D;">
+                                        <div class="progress-bar bg-info-01" role="progressbar" style="width: 80%"
+                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Age and Gender Stats -->
+                        <div class="gender-status mt-1">
+                            <h6 class="text-muted text-states fw-bold">Statistics</h6>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fw-bold text-gender">Age and
+                                    gender</p>
+                                <div class="d-flex justify-content-end mb-2">
+                                    <small class="me-3 text-male"><span class="me-1"
+                                            style="color:#3d2dd6; font-size: 20px;">●</span>Male</small>
+                                    <small class="text-male"><span class="me-1 "
+                                            style="color:#cc8ff5;font-size: 20px;">●</span>Female</small>
+                                </div>
+                            </div>
+                            <!-- Bar 1 -->
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="me-2 text-age" style="width: 50px;">18–24</span>
+                                <div class="flex-grow-1 age-bar mb-0">
+                                    <div class="male" style="width: 25%"></div>
+                                    <div class="female" style="width: 30%"></div>
+                                </div>
+                                <span class="ms-2">12.7%</span>
+                            </div>
+                            <!-- Repeat for more bars -->
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="me-2 text-age" style="width: 50px;">18–24</span>
+                                <div class="flex-grow-1 age-bar mb-0">
+                                    <div class="male" style="width: 60%"></div>
+                                    <div class="female" style="width: 60%"></div>
+                                </div>
+                                <span class="ms-2">12.7%</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="me-2 text-age" style="width: 50px;">18–24</span>
+                                <div class="flex-grow-1 age-bar mb-0">
+                                    <div class="male" style="width: 35%"></div>
+                                    <div class="female" style="width: 35%"></div>
+                                </div>
+                                <span class="ms-2">12.7%</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="me-2 text-age" style="width: 50px;">18–24</span>
+                                <div class="flex-grow-1 age-bar mb-0">
+                                    <div class="male" style="width: 20%"></div>
+                                    <div class="female" style="width: 25%"></div>
+                                </div>
+                                <span class="ms-2">12.7%</span>
+                            </div>
+                        </div>
+
+                        <!-- Province List -->
+                        <div class="gender-status mt-1">
+                            <h6 class="fw-bold text-province">List of
+                                Provinces</h6>
+                            <div class="province-item province-1">
+                                <span>Kurdistan – Rojava</span>
+                                <span>1,200</span>
+                            </div>
+                            <div class="province-item province-2">
+                                <span>Kurdistan – Bakûr</span>
+                                <span>1,200</span>
+                            </div>
+                            <div class="province-item province-3">
+                                <span>Kurdistan – Rojhilat</span>
+                                <span>1,200</span>
+                            </div>
+                            <div class="province-item province-4">
+                                <span>Kurdistan – Başûr</span>
+                                <span>950</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center border-top-0 p-0">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @include('content.pages.includes.fullpopup')
 

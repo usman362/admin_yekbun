@@ -512,6 +512,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
     Route::resource('/surveys', VotingController::class);
     Route::get('/surveys/{id}/statistic', [VotingController::class, 'statistic'])->name('surveys.statistics');
+    Route::get('/admin-surveys/{id}/statistic', [VotingController::class, 'admin_statistic'])->name('admin_surveys.statistics');
     Route::get('/surveys/{id}/banner', [VotingController::class, 'deleteImage'])->name('surveys.delete-banner');
     Route::get('/surveys/{id}/{status}', [VotingController::class, 'status'])->name('surveys-status');
 

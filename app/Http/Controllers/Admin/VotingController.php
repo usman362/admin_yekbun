@@ -7,6 +7,7 @@ use App\Helpers\NotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
+use App\Models\PopFeeds;
 use App\Models\PostGallery;
 use App\Models\User;
 use App\Models\Voting;
@@ -167,6 +168,224 @@ class VotingController extends Controller
     {
 
         $vote = Voting::with('voting_category')->findOrFail($id);
+        $ageGroups = [
+            '18-24' => [18, 24],
+            '25-30' => [25, 30],
+            '31-35' => [31, 35],
+            '36-40' => [36, 40]
+        ];
+
+        $statistics = [];
+
+        foreach ($ageGroups as $ageRange => [$minAge, $maxAge]) {
+            // Fetch users within this age range
+            $users = DB::table('users')->get()->filter(function ($user) use ($minAge, $maxAge) {
+                if (!isset($user['dob'])) {
+                    return false;
+                }
+                $age = Carbon::parse($user['dob'])->age; // Calculate age from DOB
+                return $age >= $minAge && $age <= $maxAge;
+            });
+
+            // Extract user IDs
+            $userIds = $users->map(fn($user) => (string) $user['_id'])->toArray();
+
+            // Fetch reactions for these users
+            $reactions = DB::table('voting_reactions')->whereIn('user_id', $userIds)->where('voting_id', $id)->get();
+
+            // Initialize gender-based stats
+            // $genderStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+            $maleStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+            $femaleStats = ['reviews' => 0, 'likes' => 0, 'neutrals' => 0, 'dislikes' => 0];
+
+            foreach ($reactions as $reaction) {
+                $user = $users->where('_id', $reaction['user_id'])->first();
+                $gender = $user['gender'] ?? 'male'; // Default male if missing
+                // Determine the category
+                if ($gender == 'male') {
+                    if ($reaction['type'] == 1) {
+                        $maleStats['likes']++;
+                    } elseif ($reaction['type'] == 2) {
+                        $maleStats['neutrals']++;
+                    } elseif ($reaction['type'] == 3) {
+                        $maleStats['dislikes']++;
+                    }
+                    $maleStats['reviews']++;
+                } else {
+                    if ($reaction['type'] == 1) {
+                        $femaleStats['likes']++;
+                    } elseif ($reaction['type'] == 2) {
+                        $femaleStats['neutrals']++;
+                    } elseif ($reaction['type'] == 3) {
+                        $femaleStats['dislikes']++;
+                    }
+                    $femaleStats['reviews']++;
+                }
+            }
+            // Find max value for percentage calculations
+            $max = max($maleStats['reviews'], $femaleStats['reviews'], 1); // Avoid division by zero
+
+            // dd($max);
+            $statistics[] = [
+                'age' => $ageRange,
+                'max' => $max,
+                'male' => $maleStats,
+                'female' => $femaleStats
+            ];
+        }
+
+        // Calculate total values
+        $total_reviews = 0;
+        $total_likes = 0;
+        $total_dislikes = 0;
+        $total_neutrals = 0;
+
+        foreach ($statistics as $stat) {
+            $total_reviews += $stat['male']['reviews'] + $stat['female']['reviews'];
+            $total_likes += $stat['male']['likes'] + $stat['female']['likes'];
+            $total_dislikes += $stat['male']['dislikes'] + $stat['female']['dislikes'];
+            $total_neutrals += $stat['male']['neutrals'] + $stat['female']['neutrals'];
+        }
+
+        $province_statistics = DB::collection('voting_reactions')->raw(function ($collection) use ($id) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        'voting_id' => $id // make sure this matches type (ObjectId or string)
+                    ]
+                ],
+                [
+                    '$addFields' => [
+                        'user_id' => ['$toObjectId' => '$user_id']
+                    ]
+                ],
+                [
+                    '$lookup' => [
+                        'from' => 'users',
+                        'localField' => 'user_id',
+                        'foreignField' => '_id',
+                        'as' => 'user'
+                    ]
+                ],
+                ['$unwind' => '$user'],
+                [
+                    '$match' => [
+                        'user.origin' => 'kurdish'
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user.province',
+                        'total_votes' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
+
+        $province_statistics = collect($province_statistics)->map(function ($item) {
+            return [
+                'province' => $item->_id ?? 'Unknown',
+                'total_votes' => $item->total_votes
+            ];
+        });
+
+        $reactedUserIds = DB::table('voting_reactions')
+            ->where('voting_id', $id)
+            ->pluck('user_id')
+            ->map(fn($id) => new ObjectId($id))
+            ->toArray();
+
+        $userTypes = ['cultivated', 'educated', 'academic'];
+
+        $allCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        '_id' => ['$in' => $reactedUserIds],
+                        'user_type' => ['$in' => $userTypes],
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user_type',
+                        'total' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
+
+        $allCounts = collect($allCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+
+        // Fill missing types with 0
+        $allCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $allCounts[$t] ?? 0]);
+
+        $femaleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        '_id' => ['$in' => $reactedUserIds],
+                        'user_type' => ['$in' => $userTypes],
+                        'gender' => 'female'
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user_type',
+                        'total' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
+
+        $femaleCounts = collect($femaleCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+
+        // Fill missing with 0
+        $femaleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $femaleCounts[$t] ?? 0]);
+
+
+        $maleCounts = DB::collection('users')->raw(function ($collection) use ($reactedUserIds, $userTypes) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        '_id' => ['$in' => $reactedUserIds],
+                        'user_type' => ['$in' => $userTypes],
+                        'gender' => 'male'
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$user_type',
+                        'total' => ['$sum' => 1]
+                    ]
+                ]
+            ]);
+        });
+
+        $maleCounts = collect($maleCounts)->mapWithKeys(fn($i) => [$i->_id => $i->total]);
+
+        // Fill missing with 0
+        $maleCounts = collect($userTypes)->mapWithKeys(fn($t) => [$t => $maleCounts[$t] ?? 0]);
+
+        // dd($province_statistics);
+
+        return view('content.include.voting.statistic', compact(
+            'vote',
+            'statistics',
+            'province_statistics',
+            'total_reviews',
+            'total_likes',
+            'total_dislikes',
+            'total_neutrals',
+            'allCounts',
+            'femaleCounts',
+            'maleCounts',
+            'userTypes'
+        ));
+    }
+
+    public function admin_statistic($id)
+    {
+        $vote = PopFeeds::findOrFail($id);
         $ageGroups = [
             '18-24' => [18, 24],
             '25-30' => [25, 30],
