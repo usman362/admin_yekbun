@@ -43,6 +43,24 @@ class ClipsController extends Controller
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
 
+    public function getMyClips(Request $request)
+    {
+        if (!empty($request->clip_id)) {
+            $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
+                $likes->with('user');
+            }, 'views' => function ($views) {
+                $views->with('user');
+            }])->where('user_id',Auth::id())->orderBy('created_at', 'desc')->find($request->clip_id);
+        } else {
+            $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
+                $likes->with('user');
+            }, 'views' => function ($views) {
+                $views->with('user');
+            }])->where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
+        }
+        return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
+    }
+
     public function get_templates()
     {
         $videos = ClipTemplates::all();

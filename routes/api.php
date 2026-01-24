@@ -215,6 +215,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
 
         //Clips
         Route::get('get-clips', [ClipsController::class, 'index']);
+        Route::get('get-my-clips', [ClipsController::class, 'getMyClips']);
         Route::post('store-clips', [ClipsController::class, 'store_clips']);
         Route::delete('delete-clips/{id}', [ClipsController::class, 'destroy']);
         Route::post('view-clips', [ClipsController::class, 'view_clips']);
