@@ -665,6 +665,11 @@ class UsersController extends Controller
 
     public function search_user(Request $request)
     {
+        if ($request->origin) {
+            if ($request->origin !== 'kurdish' && $request->origin !== 'non-kurdish') {
+                return ResponseHelper::sendResponse([], 'Origin Not Found!', false, 404);
+            }
+        }
         $users = User::with('user_country')
             ->where('_id', '!=', Auth::id())
             ->where('status', 1)
