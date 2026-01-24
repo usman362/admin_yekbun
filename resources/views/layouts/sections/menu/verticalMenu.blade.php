@@ -33,6 +33,102 @@
             </li>
         @endcan
 
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Channel Section</span>
+        </li>
+
+        <li
+            class="menu-item {{ Request::is('Feeds/*') ? 'active open' : '' }} {{ Request::is('manage-user-feeds') ? 'active open' : '' }}  {{ Request::is('manage-fanpage-feeds') ? 'active open' : '' }}  {{ Request::is('feed-background') ? 'active open' : '' }}{{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-book-content"></i>
+                <div>Feeds</div>
+            </a>
+
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('manage-user-feeds') ? 'active' : '' }}">
+                    <a href="{{ url('/manage-user-feeds') }}" class="menu-link">
+                        <div>Manage User Feeds</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ Request::is('manage-channel-feeds') ? 'active' : '' }}">
+                    <a href="{{ url('/manage-channel-feeds') }}" class="menu-link">
+                        <div>Manage Channel Feed</div>
+                    </a>
+                </li>
+
+                <li
+                    class="menu-item  {{ Request::is('feed-background') ? 'active open' : '' }} {{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
+
+
+                    <ul class="menu-sub">
+
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                <div>Post Filter</div>
+                            </a>
+
+
+                            <ul class="menu-sub">
+                                <li class="menu-item ">
+                                    <a href="javascript:void(0)" class="menu-link">
+                                        <div>Image Filter</div>
+                                    </a>
+                                </li>
+
+
+
+                                <li class="menu-item ">
+                                    <a href="javascript:void(0)" class="menu-link">
+                                        <div>Video Filter</div>
+                                    </a>
+                                </li>
+
+
+
+                                <li class="menu-item ">
+                                    <a href="javascript:void(0)" class="menu-link">
+                                        <div>Keywords Filter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="menu-item {{ Request::is('feed-background') ? 'active' : '' }}">
+                            <a href="{{ url('/feed-background') }}" class="menu-link">
+                                <div>Feed Background</div>
+                            </a>
+                        </li>
+
+
+
+                        <li class="menu-item {{ Request::is('feed-emoji') ? 'active' : '' }}">
+                            <a href="{{ url('feed-emoji') }}" class="menu-link">
+                                <div>Add Emojis</div>
+                            </a>
+                        </li>
+
+
+
+                        <li class="menu-item {{ Request::is('feeds-reasons') ? 'active' : '' }}">
+                            <a href="{{ url('feeds-reasons') }}" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
+
+
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
         @can('feeds.read')
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">News Section</span>
@@ -635,7 +731,7 @@
                         <div>Manage Complaints</div>
                     </a>
                 </li>
-                 <li class="menu-item {{ Request::is('complaints-settings') ? 'active' : '' }} ">
+                <li class="menu-item {{ Request::is('complaints-settings') ? 'active' : '' }} ">
                     <a href="{{ route('complaints.settings') }}" class="menu-link">
                         <div>Complaints Settings</div>
                     </a>
@@ -643,7 +739,7 @@
             </ul>
         </li>
 
-         <li class="menu-item {{ Request::is('manage-agencies') ? 'active open' : '' }}">
+        <li class="menu-item {{ Request::is('manage-agencies') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-sort"></i>
                 <div>Agencies</div>
@@ -1694,7 +1790,7 @@
             <span class="menu-header-text">System Settings</span>
         </li>
 
-         <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active open' : (Request::is('web-app/manage-items') ? 'active open' : '') }}"
+        <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active open' : (Request::is('web-app/manage-items') ? 'active open' : '') }}"
             style="">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-devices"></i>

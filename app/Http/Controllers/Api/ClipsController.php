@@ -125,10 +125,10 @@ class ClipsController extends Controller
         }
 
         $clip->save();
-        UserVideo::create([
-            'user_id' => Auth::id(),
-            'video' => Str::after($outputPath, 'public/')
-        ]);
+        // UserVideo::create([
+        //     'user_id' => Auth::id(),
+        //     'video' => Str::after($outputPath, 'public/')
+        // ]);
         $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Clip.';
         $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
         if ($users) {
