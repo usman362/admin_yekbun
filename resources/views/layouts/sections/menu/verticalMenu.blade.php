@@ -38,95 +38,45 @@
         </li>
 
         <li
-            class="menu-item {{ Request::is('Feeds/*') ? 'active open' : '' }} {{ Request::is('manage-user-feeds') ? 'active open' : '' }}  {{ Request::is('manage-fanpage-feeds') ? 'active open' : '' }}  {{ Request::is('feed-background') ? 'active open' : '' }}{{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
+            class="menu-item {{ Request::is('managecategories/*') ? 'active open' : '' }} {{ Request::is('channelrequest') ? 'active open' : '' }}  {{ Request::is('managechannel') ? 'active open' : '' }}  {{ Request::is('channeladmin') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-book-content"></i>
-                <div>Feeds</div>
+                <i class="menu-icon tf-icons bx bx-tv"></i>
+                <div>Channels</div>
             </a>
 
 
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('manage-user-feeds') ? 'active' : '' }}">
-                    <a href="{{ url('/manage-user-feeds') }}" class="menu-link">
-                        <div>Manage User Feeds</div>
+                <li class="menu-item {{ Request::is('managecategories') ? 'active' : '' }}">
+                    <a href="{{ url('/managecategories') }}" class="menu-link">
+                        <div>Manage Categories</div>
                     </a>
                 </li>
 
-                <li class="menu-item {{ Request::is('manage-channel-feeds') ? 'active' : '' }}">
-                    <a href="{{ url('/manage-channel-feeds') }}" class="menu-link">
-                        <div>Manage Channel Feed</div>
+                <li class="menu-item {{ Request::is('channelrequest') ? 'active' : '' }}">
+                    <a href="{{ url('/channelrequest') }}" class="menu-link">
+                        <div>Channel Request</div>
                     </a>
                 </li>
 
-                <li
-                    class="menu-item  {{ Request::is('feed-background') ? 'active open' : '' }} {{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
-                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                        <div>Settings</div>
+                <li class="menu-item {{ Request::is('managechannel') ? 'active' : '' }}">
+                    <a href="{{ url('/managechannel') }}" class="menu-link">
+                        <div>Manage Channel</div>
                     </a>
+                </li>
 
-
-                    <ul class="menu-sub">
-
-                        <li class="menu-item ">
-                            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                <div>Post Filter</div>
-                            </a>
-
-
-                            <ul class="menu-sub">
-                                <li class="menu-item ">
-                                    <a href="javascript:void(0)" class="menu-link">
-                                        <div>Image Filter</div>
-                                    </a>
-                                </li>
-
-
-
-                                <li class="menu-item ">
-                                    <a href="javascript:void(0)" class="menu-link">
-                                        <div>Video Filter</div>
-                                    </a>
-                                </li>
-
-
-
-                                <li class="menu-item ">
-                                    <a href="javascript:void(0)" class="menu-link">
-                                        <div>Keywords Filter</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-
-
-                        <li class="menu-item {{ Request::is('feed-background') ? 'active' : '' }}">
-                            <a href="{{ url('/feed-background') }}" class="menu-link">
-                                <div>Feed Background</div>
-                            </a>
-                        </li>
-
-
-
-                        <li class="menu-item {{ Request::is('feed-emoji') ? 'active' : '' }}">
-                            <a href="{{ url('feed-emoji') }}" class="menu-link">
-                                <div>Add Emojis</div>
-                            </a>
-                        </li>
-
-
-
-                        <li class="menu-item {{ Request::is('feeds-reasons') ? 'active' : '' }}">
-                            <a href="{{ url('feeds-reasons') }}" class="menu-link">
-                                <div>Reasons</div>
-                            </a>
-
-
-                        </li>
-
-                    </ul>
+                <li class="menu-item {{ Request::is('channeladmin') ? 'active' : '' }}">
+                    <a href="{{ url('/channeladmin') }}" class="menu-link">
+                        <div>Channel Admin</div>
+                    </a>
                 </li>
             </ul>
+        </li>
+
+        <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active' : '' }}">
+            <a href="{{ url('flaggedfanpage') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-flag"></i>
+                <div>Flag Channels</div>
+            </a>
         </li>
 
         @can('feeds.read')
