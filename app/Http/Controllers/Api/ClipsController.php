@@ -27,18 +27,42 @@ class ClipsController extends Controller
 {
     public function index(Request $request)
     {
+        $userId = Auth::id();
+        $user = User::with(['friends', 'family'])->find($userId);
+        $friendIds = $user->friends->pluck('user_id')->toArray();
+        $familyIds = $user->family->pluck('user_id')->toArray();
         if (!empty($request->clip_id)) {
             $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
                 $likes->with('user');
             }, 'views' => function ($views) {
                 $views->with('user');
-            }])->orderBy('created_at', 'desc')->find($request->clip_id);
+            }])->where(function ($query) use ($userId, $friendIds, $familyIds) {
+            $query->where('user_id', $userId) // Own feeds
+                ->orWhere(function ($q) use ($friendIds) {
+                    $q->whereIn('user_id', $friendIds)
+                        ->whereIn('share_with', ['friends', 'friends & family']);
+                })
+                ->orWhere(function ($q) use ($familyIds) {
+                    $q->whereIn('user_id', $familyIds)
+                        ->whereIn('share_with', ['family', 'friends & family']);
+                });
+            })->orderBy('created_at', 'desc')->find($request->clip_id);
         } else {
             $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
                 $likes->with('user');
             }, 'views' => function ($views) {
                 $views->with('user');
-            }])->orderBy('created_at', 'desc')->get();
+            }])->where(function ($query) use ($userId, $friendIds, $familyIds) {
+            $query->where('user_id', $userId) // Own feeds
+                ->orWhere(function ($q) use ($friendIds) {
+                    $q->whereIn('user_id', $friendIds)
+                        ->whereIn('share_with', ['friends', 'friends & family']);
+                })
+                ->orWhere(function ($q) use ($familyIds) {
+                    $q->whereIn('user_id', $familyIds)
+                        ->whereIn('share_with', ['family', 'friends & family']);
+                });
+            })->orderBy('created_at', 'desc')->get();
         }
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
@@ -50,13 +74,13 @@ class ClipsController extends Controller
                 $likes->with('user');
             }, 'views' => function ($views) {
                 $views->with('user');
-            }])->where('user_id',Auth::id())->orderBy('created_at', 'desc')->find($request->clip_id);
+            }])->where('user_id', Auth::id())->orderBy('created_at', 'desc')->find($request->clip_id);
         } else {
             $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
                 $likes->with('user');
             }, 'views' => function ($views) {
                 $views->with('user');
-            }])->where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
+            }])->where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         }
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
     }
@@ -107,7 +131,7 @@ class ClipsController extends Controller
         }
 
         // $outputPath = storage_path('app/public/videos/clip_' . $uid . '.mp4');
-        $outputPath = storage_path('app/public/videos/clip_' .$videoPath->getClientOriginalName());
+        $outputPath = storage_path('app/public/videos/clip_' . $videoPath->getClientOriginalName());
         $text = $request->text ?? 'Default Text';
         $videoVolume = $request->video_volume ?? 0.8; // 80% of original video volume
         $audioVolume = $request->audio_volume ?? 0.5; // 50% of added background audio
@@ -126,7 +150,7 @@ class ClipsController extends Controller
         exec($command, $output, $return_var);
 
         if ($return_var === 0) {
-        // dd(new \Illuminate\Http\File($outputPath));
+            // dd(new \Illuminate\Http\File($outputPath));
             // Upload FFmpeg output to BunnyCDN
             $uploadedVideo = Helpers::fileCDNUpload2(
                 new \Illuminate\Http\File($outputPath),   // <<< wrap local file
@@ -148,7 +172,7 @@ class ClipsController extends Controller
         //     'video' => Str::after($outputPath, 'public/')
         // ]);
         $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Clip.';
-        $users = User::where('_id','!==',Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
+        $users = User::where('_id', '!==', Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
         if ($users) {
             foreach ($users as $user) {
                 NotificationHelper::sendNotification($user->id, 'Clips Notification', $description);
