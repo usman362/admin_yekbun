@@ -771,6 +771,87 @@ class LanguagesHelpers
             ['keyword' => 'Discover a vibrant marketplace where shopping, services, and opportunities come together under one roof. Stroll through our bustling bazaar filled with unique finds, from handcrafted goods to fresh local produce. Need a service? We’ve got you covered with everything from tailoring to tech support.', 'translated' => '', 'main_section' => 'Kurdistan', 'section_name' => 'Kurdistan'],
             ['keyword' => 'Explore a wide range of shops, services, and daily essentials in your neighborhood. From fresh groceries and cozy cafés to handy banking and more—all just moments away. Enjoy the ease of having everything you need within easy reach!', 'translated' => '', 'main_section' => 'Kurdistan', 'section_name' => 'Kurdistan'],
 
+            //Officials
+            [
+                'keyword' => 'The Constitution of Kurdistan',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Grundordnung, Werte, Gleichheit, Souveränität, Bindung aller Institutionen.',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'People & Territory of Kurdistan',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Bürgerschaft als zivile Zugehörigkeit, Regionen, Städte, föderale Einheit.',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'State Structure & Ministries',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Moderne, transparente Verwaltung, Ministerien unter demokratischer Aufsicht.',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Justice, Human Rights & Civil',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Unabhängige Gerichte, Menschenrechte, freie Organisationen, Schutz vor Konflikten.',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Civil Law & Daily Life',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Zivilrecht für Alltag: Verträge, Eigentum, Familie, Erbe, säkular & gleich für alle.',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Public Holidays & Memory',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Common holidays reflecting remembrance and cultural identity, inclusive and secular.',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+            [
+                'keyword' => 'Stand on',
+                'translated' => '',
+                'main_section' => 'Kurdistan',
+                'section_name' => 'Officials'
+            ],
+
+
             // Footer
             ['keyword' => 'Music Cart', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
             ['keyword' => 'Ads Cart', 'translated' => '', 'main_section' => 'Footer', 'section_name' => 'Footer'],
