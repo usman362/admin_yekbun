@@ -194,7 +194,8 @@
                                             </a>
 
                                             <!-- Delete -->
-                                            <form action="{{ route('channels.destroy', $item->_id) }}" method="POST">
+                                            <form>
+                                            {{-- <form action="{{ route('channels.destroy', $item->_id) }}" method="POST"> --}}
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-icon delete"
@@ -234,7 +235,8 @@
                         </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('add.channel.category') }}" enctype="multipart/form-data" method="POST">
+                    <form>
+                    {{-- <form action="{{ route('add.channel.category') }}" enctype="multipart/form-data" method="POST"> --}}
                         @csrf
                         <div class="modal-body">
                             <div class="bg-custom-grey p-3 rounded-3">
@@ -288,8 +290,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <form action="{{ route('channel.subcategory') }}" method="POST" enctype="multipart/form-data"
-                        id="subcatForm">
+                    {{-- <form action="{{ route('channel.subcategory') }}" method="POST" enctype="multipart/form-data"
+                        id="subcatForm"> --}}
+                        <form>
                         @csrf
                         <div class="modal-body">
                             <div class="row">
@@ -525,7 +528,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <form enctype="multipart/form-data" method="POST" action="{{ route('edit.category') }}">
+                        {{-- <form enctype="multipart/form-data" method="POST" action="{{ route('edit.category') }}"> --}}
+                        <form>
                             @csrf
                             <input type="hidden" name="id" value="{{ $item->_id }}">
                             <div class="modal-body">
@@ -673,9 +677,10 @@
                                                                         </a>
 
                                                                         <!-- Delete -->
-                                                                        <form
+                                                                        {{-- <form
                                                                             action="{{ route('channels.subcat.destroy', $sub->_id) }}"
-                                                                            method="POST">
+                                                                            method="POST"> --}}
+                                                                        <form>
                                                                             @csrf
                                                                             @method('DELETE')
                                                                             <button type="submit"
