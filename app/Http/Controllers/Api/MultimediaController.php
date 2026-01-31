@@ -78,18 +78,16 @@ class MultimediaController extends Controller
     public function getArtists()
     {
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
+        $search = request('query');
 
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
         })
-            ->with([
-                'songs',
-                'videos',
-                'province.country'
-            ])
-            ->where('status', '1')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        ->when($search, function ($query, $search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        })
+        ->with(['songs','videos','province.country'])
+        ->where('status', '1')->orderBy('created_at', 'desc')->get();
 
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
@@ -117,10 +115,15 @@ class MultimediaController extends Controller
     {
         $artist_ids = ArtistFavorite::where('user_id', Auth::id())->pluck('artist_id');
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
+        $search = request('query');
 
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
-        })->whereIn('_id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
+        })
+        ->when($search, function ($query, $search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        })
+        ->whereIn('_id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
             $q->with('country');
         }])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
@@ -129,10 +132,15 @@ class MultimediaController extends Controller
     public function getPopularArtists()
     {
         $alphabet = request('alphabet'); // e.g., ?alphabet=A
+        $search = request('query');
 
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
-        })->where('status','1')->with(['songs', 'videos', 'province' => function ($q) {
+        })
+        ->when($search, function ($query, $search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        })
+        ->where('status','1')->with(['songs', 'videos', 'province' => function ($q) {
             $q->with('country');
         }])->orderBy('total_views', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
