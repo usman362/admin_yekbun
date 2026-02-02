@@ -692,12 +692,37 @@
         <li class="menu-item {{ Request::is('manage-agencies') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-sort"></i>
-                <div>Agencies</div>
+                <div>Officials</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('manage-agencies') ? 'active' : '' }} ">
+                {{-- <li class="menu-item {{ Request::is('manage-agencies') ? 'active' : '' }} ">
                     <a href="{{ route('agencies.index') }}" class="menu-link">
                         <div>Manage Agencies</div>
+                    </a>
+                </li> --}}
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Constitions</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>People Territory</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Structure Minister</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Civil Law</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Memories</div>
                     </a>
                 </li>
             </ul>
