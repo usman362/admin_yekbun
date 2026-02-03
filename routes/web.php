@@ -98,6 +98,8 @@ use Illuminate\Support\Facades\Mail;
 use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
 use App\Jobs\TestJob;
+use Illuminate\Support\Facades\Hash;
+
 //use App\Http\Controllers\GreetingsController;
 
 //use App\Http\Controllers\StateController;
@@ -167,19 +169,7 @@ Route::get('/test-fcm', function () {
 
 Route::get('test', function () {
 
-    foreach (App\Models\History::all() as $history) {
-        $history->status = '1';
-        $history->save();
-    }
-    foreach (App\Models\AIVideo::all() as $history) {
-        $history->status = '1';
-        $history->save();
-    }
-    foreach (App\Models\Voting::all() as $history) {
-        $history->status = '1';
-        $history->save();
-    }
-    return 'success';
+    dd(Hash::make('Test@test'));
 });
 
 Route::get('/test-job', function () {
