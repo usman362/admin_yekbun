@@ -83,6 +83,7 @@ use App\Http\Controllers\Admin\Settings\AppInfoController;
 use App\Http\Controllers\Admin\Settings\RingtoneController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\ApiStatusController;
+use App\Http\Controllers\Admin\KurdistanController;
 use App\Http\Controllers\apps\income\Income;
 use App\Http\Controllers\apps\transaction\Transaction;
 use App\Http\Controllers\BackgroundFeedController;
@@ -710,7 +711,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         Route::delete('/list-reels-card/{card}', [ReelController::class, 'destroycard'])->name('list.reel-cards.delete');
 
 
-
+        Route::get('officials', [KurdistanController::class, "officials"])->name('officials.index');
 
         Route::post('saveFileds', [PolicyAndTermsController::class, 'saveFileds'])->name('policy_and_terms.saveFileds');
         Route::get('/feed-background', [BackgroundFeedController::class, 'index'])->name('feed.background');
