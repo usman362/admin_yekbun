@@ -52,7 +52,6 @@
         }
 
         .officials-menu-item.active {
-            border: 2px solid #dc3545;
             border-radius: 10px;
             color: #00A86B;
             font-weight: 600;
@@ -74,7 +73,6 @@
             background: white;
             border-radius: 16px;
             padding: 30px;
-            border: 2px solid #dc3545;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
         }
 
@@ -209,7 +207,6 @@
             width: 300px;
             background: white;
             padding: 25px;
-            border: 2px solid #dc3545;
             border-radius: 16px;
             margin: 20px;
             height: fit-content;
