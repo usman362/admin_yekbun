@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Feed;
+use App\Models\ReportComments;
+use App\Models\ReportFeeds;
 use Illuminate\Support\Facades\Storage;
 
 class ComplaintsController extends Controller
@@ -15,7 +18,10 @@ class ComplaintsController extends Controller
      */
     public function index()
     {
-        return view('content.compaints.index');
+        $feeds = Feed::with('user')->orderBy('created_at', 'desc')->paginate(4);
+        $reportfeeds = ReportFeeds::with('feed')->latest()->paginate(4);
+        $reportscomments = ReportComments::with(['comments.feed', 'user'])->latest()->paginate(4);
+        return view('content.compaints.index', compact('feeds', 'reportfeeds', 'reportscomments'));
     }
 
     /**
