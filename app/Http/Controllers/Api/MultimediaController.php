@@ -774,8 +774,8 @@ class MultimediaController extends Controller
         return [
             'uri' => $this->resolveVideoUri($item, $type),
 
-            'commentCount' => $type !== 'clips' ? ($item->comments_count ?? 0) : null,
-            'voiceCount'   => $type !== 'clips' ? ($item->voice_comments_count ?? 0) : null,
+            'commentCount' => $type !== 'clips' ? ($item->comments_count ?? 0) : 0,
+            'voiceCount'   => $type !== 'clips' ? ($item->voice_comments_count ?? 0) : 0,
 
             'emojisCount'  => $item->likes_count ?? 0,
             'seenCount'    => $item->views_count ?? 0,
