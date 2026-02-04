@@ -731,60 +731,91 @@ class MultimediaController extends Controller
 
     public function allMediaRecord(Request $request)
     {
-        $perPage = (int) $request->get('per_page', 10);
-        $page = (int) $request->get('page', 1);
+        $perPage = $request->get('per_page', 40);
+        $page    = $request->get('page', 1);
 
-        $clips = Clips::all()->map(function ($item) {
-            $item->type = 'clips';
-            return $item;
-        });
+        // Fetch all collections
+        $clips     = Clips::all()->map(fn($item) => $this->mapMedia($item, 'clips'));
+        $histories = History::all()->map(fn($item) => $this->mapMedia($item, 'history'));
+        $aiVideos  = AIVideo::all()->map(fn($item) => $this->mapMedia($item, 'ai_videos'));
+        $feeds     = Feed::where('feed_type', 'videos')->get()
+            ->map(fn($item) => $this->mapMedia($item, 'user_feeds'));
 
-        $histories = History::all()->map(function ($item) {
-            $item->type = 'history';
-            return $item;
-        });
-
-        $aiVideos = AIVideo::all()->map(function ($item) {
-            $item->type = 'ai_videos';
-            return $item;
-        });
-
-        $feeds = Feed::where('feed_type', 'video')->get()->map(function ($item) {
-            $item->type = 'user_feeds';
-            return $item;
-        });
-
-        // Merge all collections
+        // Merge all
         $merged = collect()
+            ->merge($feeds)
+            ->merge($clips)
             ->merge($aiVideos)
             ->merge($histories)
-            ->merge($clips)
-            ->merge($feeds)
             ->sortByDesc('created_at')
             ->values();
 
-        // Manual pagination
-        $paginated = new LengthAwarePaginator(
-            $merged->slice(($page - 1) * $perPage, $perPage)->values(),
-            $merged->count(),
-            $perPage,
-            $page,
-            [
-                'path' => $request->url(),
-                'query' => $request->query(),
-            ]
-        );
+        // Pagination manually (Mongo friendly)
+        $total = $merged->count();
+        $data  = $merged->forPage($page, $perPage)->values();
 
         return response()->json([
             'success' => true,
             'message' => 'All Media Videos Successfully Fetch!',
             'meta' => [
-                'current_page' => $paginated->currentPage(),
-                'per_page' => $paginated->perPage(),
-                'total' => $paginated->total(),
-                'last_page' => $paginated->lastPage(),
+                'current_page' => (int)$page,
+                'per_page'     => (int)$perPage,
+                'total'        => $total,
+                'last_page'    => (int)ceil($total / $perPage),
             ],
-            'data' => $paginated->items(),
-        ], 200);
+            'data' => $data,
+        ]);
+    }
+
+    private function mapMedia($item, string $type): array
+    {
+        $user = User::find($item->user_id);
+
+        return [
+            'uri' => $this->resolveVideoUri($item, $type),
+
+            'commentCount' => $type !== 'clips' ? ($item->comments_count ?? 0) : null,
+            'voiceCount'   => $type !== 'clips' ? ($item->voice_comments_count ?? 0) : null,
+
+            'emojisCount'  => $item->likes_count ?? 0,
+            'seenCount'    => $item->views_count ?? 0,
+
+            'user_id' => $item->user_id,
+            'text' => $type === 'clips' ? $item->text : null,
+            'text_properties' => $type === 'clips'
+                ? json_decode($item->text_properties ?? '{}', true)
+                : null,
+
+            'user' => $user ? [
+                'id'     => $user->_id,
+                'name'   => $user->name,
+                'email'  => $user->email,
+                'avatar' => $user->avatar,
+            ] : null,
+
+            'type' => $type,
+            'created_at' => $item->created_at,
+        ];
+    }
+
+    private function resolveVideoUri($item, string $type): ?string
+    {
+        // $base = config('app.url');
+
+        return match ($type) {
+            'clips' => $item->clip
+                ? $item->clip
+                : null,
+
+            'ai_videos', 'history' => isset($item->video[0]['path'])
+                ? $item->video[0]['path']
+                : null,
+
+            'user_feeds' => isset($item->videos[0]['path'])
+                ? $item->videos[0]['path']
+                : null,
+
+            default => null,
+        };
     }
 }
