@@ -112,7 +112,6 @@ use App\Http\Controllers\Api\UserSuggestionController;
     Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
     Route::get('/user-imei', [AuthController::class, 'userImei']);
     Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
-
     //User Profile
 
     // Account Setting  Controller
@@ -212,6 +211,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::post('store-artist-song-views/{id}', [MultimediaController::class, 'store_artist_song_views']);
         Route::post('store-artist-video-views/{id}', [MultimediaController::class, 'store_artist_video_views']);
         Route::post('store-artist-favorites/{id}', [MultimediaController::class, 'store_artist_favorites']);
+        Route::get('get-all-media-videos', [MultimediaController::class, 'allMediaRecord']);
 
         //Clips
         Route::get('get-clips', [ClipsController::class, 'index']);

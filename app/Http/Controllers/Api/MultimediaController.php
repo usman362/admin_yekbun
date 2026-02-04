@@ -6,8 +6,12 @@ use App\Helpers\Helpers;
 use App\Helpers\PermissionHelper;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Models\AIVideo;
 use App\Models\Artist;
 use App\Models\ArtistFavorite;
+use App\Models\Clips;
+use App\Models\Feed;
+use App\Models\History;
 use App\Models\MusicPlay;
 use App\Models\Song;
 use App\Models\SongViews;
@@ -21,6 +25,7 @@ use App\Models\VideoPlay;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -30,8 +35,8 @@ class MultimediaController extends Controller
 {
     public function getAllSongs()
     {
-        $songs = Song::with(['artist', 'playlists'])->whereHas('artist',function($q){
-            $q->where('status','1');
+        $songs = Song::with(['artist', 'playlists'])->whereHas('artist', function ($q) {
+            $q->where('status', '1');
         })->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($songs, 'All Songs Fetch Successfully!');
     }
@@ -58,9 +63,9 @@ class MultimediaController extends Controller
     {
         $artist = Artist::with(['province' => function ($q) {
             $q->with('country');
-        }])->where('status','1')->find($id);
-        if(!$artist){
-            return ResponseHelper::sendResponse([], 'Artist not found!',false,404);
+        }])->where('status', '1')->find($id);
+        if (!$artist) {
+            return ResponseHelper::sendResponse([], 'Artist not found!', false, 404);
         }
         $songs = Song::with('playlists')->where('artist_id', $id)->get();
         return ResponseHelper::sendResponse(['artist' => $artist, 'songs' => $songs], 'Songs Fetch Successfully!');
@@ -83,11 +88,11 @@ class MultimediaController extends Controller
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
         })
-        ->when($search, function ($query, $search) {
-            $query->where('name', 'LIKE', '%' . $search . '%');
-        })
-        ->with(['songs','videos','province.country'])
-        ->where('status', '1')->orderBy('created_at', 'desc')->get();
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->with(['songs', 'videos', 'province.country'])
+            ->where('status', '1')->orderBy('created_at', 'desc')->get();
 
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
@@ -120,12 +125,12 @@ class MultimediaController extends Controller
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
         })
-        ->when($search, function ($query, $search) {
-            $query->where('name', 'LIKE', '%' . $search . '%');
-        })
-        ->whereIn('_id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
-            $q->with('country');
-        }])->orderBy('created_at', 'desc')->get();
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->whereIn('_id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
+                $q->with('country');
+            }])->orderBy('created_at', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
 
@@ -137,12 +142,12 @@ class MultimediaController extends Controller
         $artists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
         })
-        ->when($search, function ($query, $search) {
-            $query->where('name', 'LIKE', '%' . $search . '%');
-        })
-        ->where('status','1')->with(['songs', 'videos', 'province' => function ($q) {
-            $q->with('country');
-        }])->orderBy('total_views', 'desc')->get();
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->where('status', '1')->with(['songs', 'videos', 'province' => function ($q) {
+                $q->with('country');
+            }])->orderBy('total_views', 'desc')->get();
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
 
@@ -240,9 +245,9 @@ class MultimediaController extends Controller
         }])->find($id);
         $fav = ArtistFavorite::where('artist_id', $id)->where('user_id', Auth::id())->get();
         $favourites = ArtistFavorite::where('artist_id', $id)->get();
-        foreach($favourites as $favourite){
+        foreach ($favourites as $favourite) {
             $favUser = User::find($favourite->user_id);
-            if(!$favUser){
+            if (!$favUser) {
                 $favourite->delete();
             }
         }
@@ -722,5 +727,64 @@ class MultimediaController extends Controller
         // Return trimmed file URL
         $url = 'media/trimmed/' . $trimmedName;
         return ResponseHelper::sendResponse($url, 'Trimmed file uploaded successfully!');
+    }
+
+    public function allMediaRecord(Request $request)
+    {
+        $perPage = (int) $request->get('per_page', 10);
+        $page = (int) $request->get('page', 1);
+
+        $clips = Clips::all()->map(function ($item) {
+            $item->type = 'clips';
+            return $item;
+        });
+
+        $histories = History::all()->map(function ($item) {
+            $item->type = 'history';
+            return $item;
+        });
+
+        $aiVideos = AIVideo::all()->map(function ($item) {
+            $item->type = 'ai_videos';
+            return $item;
+        });
+
+        $feeds = Feed::where('feed_type', 'videos')->get()->map(function ($item) {
+            $item->type = 'user_feeds';
+            return $item;
+        });
+
+        // Merge all collections
+        $merged = collect()
+            ->merge($aiVideos)
+            ->merge($histories)
+            ->merge($clips)
+            ->merge($feeds)
+            ->sortByDesc('created_at')
+            ->values();
+
+        // Manual pagination
+        $paginated = new LengthAwarePaginator(
+            $merged->slice(($page - 1) * $perPage, $perPage)->values(),
+            $merged->count(),
+            $perPage,
+            $page,
+            [
+                'path' => $request->url(),
+                'query' => $request->query(),
+            ]
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'All Media Videos Successfully Fetch!',
+            'meta' => [
+                'current_page' => $paginated->currentPage(),
+                'per_page' => $paginated->perPage(),
+                'total' => $paginated->total(),
+                'last_page' => $paginated->lastPage(),
+            ],
+            'data' => $paginated->items(),
+        ], 200);
     }
 }
