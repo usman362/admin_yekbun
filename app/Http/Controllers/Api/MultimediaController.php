@@ -749,7 +749,7 @@ class MultimediaController extends Controller
             return $item;
         });
 
-        $feeds = Feed::where('feed_type', 'videos')->get()->map(function ($item) {
+        $feeds = Feed::where('feed_type', 'video')->get()->map(function ($item) {
             $item->type = 'user_feeds';
             return $item;
         });

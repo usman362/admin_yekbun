@@ -1202,7 +1202,7 @@
                                                         href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
                                                         data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->images[0]['path'] }}"
                                                     @else
-                                                        @if (isset($feed->videos[0])
+                                                        @if (isset($feed->videos[0]))
                                                             data-thumb="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
                                                             href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
                                                             data-demo-href="{{ env('BUNNY_CDN_URL'). $feed->videos[0]['path'] }}"
