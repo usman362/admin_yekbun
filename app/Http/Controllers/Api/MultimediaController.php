@@ -731,7 +731,7 @@ class MultimediaController extends Controller
 
     public function allMediaRecord(Request $request)
     {
-        $perPage = $request->get('per_page', 40);
+        $perPage = $request->get('per_page', 10);
         $page    = $request->get('page', 1);
 
         // Fetch all collections
