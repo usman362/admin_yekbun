@@ -781,7 +781,7 @@ class MultimediaController extends Controller
             'seenCount'    => $item->views_count ?? 0,
 
             'user_id' => $item->user_id,
-            'text' => $type === 'clips' ? $item->text : null,
+            'text' => $type === 'clips' ? $item->text : $item->description,
             'text_properties' => $type === 'clips'
                 ? json_decode($item->text_properties ?? '{}', true)
                 : null,
@@ -790,7 +790,7 @@ class MultimediaController extends Controller
                 'id'     => $user->_id,
                 'name'   => $user->name,
                 'email'  => $user->email,
-                'avatar' => $user->avatar,
+                'avatar' => $user->image,
             ] : null,
 
             'type' => $type,
