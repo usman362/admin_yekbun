@@ -772,6 +772,8 @@ class MultimediaController extends Controller
         $user = User::find($item->user_id);
 
         return [
+            'id' => $item->_id,
+            
             'uri' => $this->resolveVideoUri($item, $type),
 
             'commentCount' => $type !== 'clips' ? ($item->comments_count ?? 0) : 0,

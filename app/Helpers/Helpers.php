@@ -391,7 +391,19 @@ class Helpers
     public static function convertToH265($inputPath, $outputPath)
     {
         // $cmd = "ffmpeg -i {$inputPath} -c:v libx265 -crf 28 -preset fast -c:a aac {$outputPath} -y";
-        $cmd = "ffmpeg -i {$inputPath} -vcodec libx264 -crf 28 -preset fast -acodec aac {$outputPath}";
+        // $cmd = "ffmpeg -i {$inputPath} -vcodec libx264 -crf 28 -preset fast -acodec aac {$outputPath}";
+        $cmd = "ffmpeg -y -i {$inputPath} \
+                -map 0:v:0 -map 0:a? \
+                -c:v libx264 \
+                -profile:v baseline \
+                -level 3.1 \
+                -pix_fmt yuv420p \
+                -x264-params keyint=48:min-keyint=48:scenecut=0 \
+                -crf 23 \
+                -preset medium \
+                -c:a aac -b:a 128k \
+                -movflags +faststart \
+                {$outputPath}";
         exec($cmd, $output, $returnCode);
         return $returnCode === 0;
     }
