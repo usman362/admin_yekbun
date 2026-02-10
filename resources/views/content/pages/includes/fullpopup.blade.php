@@ -3220,7 +3220,7 @@ text-decoration-skip-ink: none;
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-model-image container"
             style="background: #e0e0e0;width: 375px;
-height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
+height: 676px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
             <form method="post" action="{{ route('postpops') }}" enctype="multipart/form-data">
                 @csrf
@@ -3356,101 +3356,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                     <!-- ends -->
 
-
-
-                    <div
-                        style="
-            width: 360px;
-            height: 117px;
-            background-color: #fff;
-            margin-top: 10px;
-            border-radius: 5px;
-            padding: 5px;
-          ">
-                        <div style="display: flex; align-items: center; gap: 5px; width: 130px; height: 18px;">
-                            <div
-                                style="
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background-color: #4e4e4e;
-              ">
-                            </div>
-                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                style="width: 18px; height: 18px; object-fit: cover" />
-                            <div
-                                style="
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background-color: #4e4e4e;
-              ">
-                            </div>
-                            <span style="font-family: Genos; text-align: left; font-size: 12px;">Share Option</span>
-                            <div style=" width: 2px; height: 2; border-radius: 50%; background-color: #4e4e4e; ">
-                            </div>
-                        </div>
-
-
-
-
-                        <div
-                            style="
-  width: 347px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 10px;
-  margin-top: 5px;
-">
-                            <label id="button1Modal8" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button1Modal8')">
-                                <input class="options_btns button1Modal8" checked="checked" type="radio"
-                                    name="option" value="all-users">
-                                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg') }}" alt="All Users"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All
-                                    Users</span>
-                            </label>
-
-                            <label id="button3Modal8" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8')">
-                                <input class="options_btns button3Modal8" type="radio" name="option"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
-                            <label id="button2Modal8" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button2Modal8')">
-                                <input class="options_btns button2Modal8" type="radio" name="option"
-                                    value="educated">
-
-
-                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
-                            </label>
-
-
-                            <label id="button4Modal8" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button4Modal8')">
-                                <input class="options_btns button4Modal8" type="radio" name="option"
-                                    value="academic">
-                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
-                            </label>
-                        </div>
-
-
-
-                    </div>
+                    <input type="hidden" name="option" value="all-users">
 
                     <div>
                         <div class="toggle-card">
@@ -3485,51 +3391,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             </div>
                         </div>
                     </div>
-
-                    <div>
-                        <div class="toggle-card">
-                            <!-- Toggle 1 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojava" class="form-check-input"
-                                        name="provinces[]" id="rojava" />
-                                    <label for="rojava" class="form-check-label"></label>
-                                </div>
-                                <span>Rojava</span>
-                            </div>
-
-                            <!-- Toggle 2 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Bakur" class="form-check-input"
-                                        name="provinces[]" id="bakur" />
-                                    <label for="bakur" class="form-check-label"></label>
-                                </div>
-                                <span>Bakur</span>
-                            </div>
-
-                            <!-- Toggle 3 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Basur" class="form-check-input"
-                                        name="provinces[]" id="basur" />
-                                    <label for="basur" class="form-check-label"></label>
-                                </div>
-                                <span>Basur</span>
-                            </div>
-
-                            <!-- Toggle 4 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojhilat" class="form-check-input"
-                                        name="provinces[]" id="rojhilat" />
-                                    <label for="rojhilat" class="form-check-label"></label>
-                                </div>
-                                <span>Rojhilat</span>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <!-- custom audio section -->
 
@@ -3617,7 +3478,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
 
-        <div class="modal8-right">
+        <div class="modal8-right" style="top: 10% !important;">
             <img id="deleteButtonModal2" class="deleteButtonModal2"
                 src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
                 style="width: 50px; height: 50px" />
@@ -3642,7 +3503,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-model-image container"
             style="background: #e0e0e0;width: 375px;
-height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
+height: 520px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
             <form method="post" action="{{ route('postpops') }}" enctype="multipart/form-data">
                 @csrf
@@ -3754,110 +3615,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                     </div>
                     <!-- ali hassan -->
 
-                    <div
-                        style="width: 360px;height: 117px;background-color: #fff;margin-top: 10px;border-radius: 5px;padding: 5px;">
-                        <div style="display: flex; align-items: center; gap: 5px; width: 130px; height: 18px;">
-                            <div
-                                style="width: 2px;height: 2px;border-radius: 50%;background-color: #4e4e4e;">
-                            </div>
-                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                style="width: 18px; height: 18px; object-fit: cover" />
-                            <div style="width: 2px;height: 2px;border-radius: 50%;background-color: #4e4e4e;">
-                            </div>
-                            <span style="font-family: Genos; text-align: left; font-size: 12px;">Share Option</span>
-                            <div style=" width: 2px; height: 2; border-radius: 50%; background-color: #4e4e4e; ">
-                            </div>
-                        </div>
-
-                        <div
-                            style="width: 347px;height: 80px;display: flex;align-items: center;justify-content: space-around;gap: 10px;margin-top: 5px;">
-                            <label id="button1Modal8_23" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button1Modal8_23')">
-                                <input class="options_btns button1Modal8" checked="checked" type="radio"
-                                    name="option_6" value="all-users">
-                                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg') }}" alt="All Users"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All
-                                    Users</span>
-                            </label>
-
-                            <label id="button3Modal8_23" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8_23')">
-                                <input class="options_btns button3Modal8_23" type="radio" name="option_6"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
-
-                            <label id="button2Modal8_23" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button2Modal8_23')">
-                                <input class="options_btns button2Modal8_23" type="radio" name="option_6"
-                                    value="educated">
-                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
-                            </label>
-
-                            <label id="button4Modal8_23" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button4Modal8_23')">
-                                <input class="options_btns button4Modal8_23" type="radio" name="option_6"
-                                    value="academic">
-                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="toggle-card">
-                            <!-- Toggle 1 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojava" class="form-check-input"
-                                        name="provinces[]" id="rojava" />
-                                    <label for="rojava" class="form-check-label"></label>
-                                </div>
-                                <span>Rojava</span>
-                            </div>
-
-                            <!-- Toggle 2 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Bakur" class="form-check-input"
-                                        name="provinces[]" id="bakur" />
-                                    <label for="bakur" class="form-check-label"></label>
-                                </div>
-                                <span>Bakur</span>
-                            </div>
-
-                            <!-- Toggle 3 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Basur" class="form-check-input"
-                                        name="provinces[]" id="basur" />
-                                    <label for="basur" class="form-check-label"></label>
-                                </div>
-                                <span>Basur</span>
-                            </div>
-
-                            <!-- Toggle 4 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojhilat" class="form-check-input"
-                                        name="provinces[]" id="rojhilat" />
-                                    <label for="rojhilat" class="form-check-label"></label>
-                                </div>
-                                <span>Rojhilat</span>
-                            </div>
-                        </div>
-                    </div>
-
+                    <input type="hidden" name="option_6" value="all-users">
 
                     <!-- custom audio section -->
 
@@ -3947,7 +3705,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
 
-        <div class="modal8-right">
+        <div class="modal8-right" style="top: 20% !important">
             <img id="deleteButtonModal2_23"
                 src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
                 style="width: 50px; height: 50px" />
@@ -5029,7 +4787,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-model-image container"
             style="background: #e0e0e0;width: 375px;
-height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
+height: 676px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
             <form method="post" action="{{ route('postpops') }}" enctype="multipart/form-data">
                 @csrf
@@ -5165,102 +4923,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
                     <!-- ends -->
 
-
-
-                    <div
-                        style="
-            width: 360px;
-            height: 117px;
-            background-color: #fff;
-            margin-top: 10px;
-            border-radius: 5px;
-            padding: 5px;
-          ">
-                        <div style="display: flex; align-items: center; gap: 5px; width: 130px; height: 18px;">
-                            <div
-                                style="
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background-color: #4e4e4e;
-              ">
-                            </div>
-                            <img src="{{ asset('assets/svg/svg-dialog/third-svg-dialog/share.svg') }}"
-                                style="width: 18px; height: 18px; object-fit: cover" />
-                            <div
-                                style="
-                width: 2px;
-                height: 2px;
-                border-radius: 50%;
-                background-color: #4e4e4e;
-              ">
-                            </div>
-                            <span style="font-family: Genos; text-align: left; font-size: 12px;">Share Option</span>
-                            <div style=" width: 2px; height: 2; border-radius: 50%; background-color: #4e4e4e; ">
-                            </div>
-                        </div>
-
-
-
-
-                        <div
-                            style="
-  width: 347px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 10px;
-  margin-top: 5px;
-">
-                            <label id="button1Modal8_4" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button1Modal8_4')">
-                                <input class="options_btns button1Modal8" checked="checked" type="radio"
-                                    name="option_4" value="all-users">
-                                <img src="{{ asset('assets/svg/svg-dialog/all-users.svg') }}" alt="All Users"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: white;">All
-                                    Users</span>
-                            </label>
-
-                            <label id="button3Modal8_4" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button3Modal8_4')">
-                                <input class="options_btns button3Modal8_4" type="radio" name="option_4"
-                                    value="cultivated">
-                                <img src="{{ asset('assets/svg/svg-dialog/cultivated.svg') }}" alt="Cultivated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Cultivated</span>
-                            </label>
-
-                            <label id="button2Modal8_4" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button2Modal8_4')">
-                                <input class="options_btns button2Modal8_4" type="radio" name="option_4"
-                                    value="educated">
-
-
-                                <img src="{{ asset('assets/svg/svg-dialog/educated.svg') }}" alt="Educated"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Educated</span>
-                            </label>
-
-
-                            <label id="button4Modal8_4" class="toggle-buttonModal8 "
-                                onclick="toggleColor('button4Modal8_4')">
-                                <input class="options_btns button4Modal8_4" type="radio" name="option_4"
-                                    value="academic">
-                                <img src="{{ asset('assets/svg/svg-dialog/academic.svg') }}" alt="Academic"
-                                    style="width: 55px; height: 55px;" />
-                                <span
-                                    style="font-size: 12px; font-weight:bold; margin-top: 5px; font-family: Genos; color: gray;">Academic</span>
-                            </label>
-                        </div>
-
-
-
-                    </div>
+                    <input type="hidden" name="option_4" value="all-users">
 
                     <div>
                         <div class="toggle-card">
@@ -5295,51 +4958,6 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
                             </div>
                         </div>
                     </div>
-
-                    <div>
-                        <div class="toggle-card">
-                            <!-- Toggle 1 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojava" class="form-check-input"
-                                        name="provinces[]" id="rojava" />
-                                    <label for="rojava" class="form-check-label"></label>
-                                </div>
-                                <span>Rojava</span>
-                            </div>
-
-                            <!-- Toggle 2 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Bakur" class="form-check-input"
-                                        name="provinces[]" id="bakur" />
-                                    <label for="bakur" class="form-check-label"></label>
-                                </div>
-                                <span>Bakur</span>
-                            </div>
-
-                            <!-- Toggle 3 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Basur" class="form-check-input"
-                                        name="provinces[]" id="basur" />
-                                    <label for="basur" class="form-check-label"></label>
-                                </div>
-                                <span>Basur</span>
-                            </div>
-
-                            <!-- Toggle 4 -->
-                            <div class="toggle-item" style="width: 80px">
-                                <div class="form-switch">
-                                    <input type="checkbox" value="Rojhilat" class="form-check-input"
-                                        name="provinces[]" id="rojhilat" />
-                                    <label for="rojhilat" class="form-check-label"></label>
-                                </div>
-                                <span>Rojhilat</span>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <!-- custom audio section -->
 
@@ -5429,7 +5047,7 @@ height: 812px; padding: 0px;border-radius: 10px; gap: 0px; opacity: 0px;">
 
 
 
-        <div class="modal8-right">
+        <div class="modal8-right" style="top: 10% !important">
             <img id="deleteButtonModal2_4"
                 src="{{ asset('assets/svg/svg-dialog/second-svg-dialog/Group%201000008246.svg') }}"
                 style="width: 50px; height: 50px" />

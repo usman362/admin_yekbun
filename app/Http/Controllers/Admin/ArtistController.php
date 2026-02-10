@@ -261,6 +261,8 @@ class ArtistController extends Controller
 
         // Check if new image is different from old one
         if ($request->image && $request->image !== $artist->image) {
+            $artist->image = null;
+            $artist->save();
             $oldImagePath = public_path($artist->image);
 
             // Unlink only if file exists and is local
