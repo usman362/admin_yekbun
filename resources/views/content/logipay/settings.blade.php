@@ -11,7 +11,7 @@
 @section('content')
     <!-- Main Content -->
     <main class="flex-1 bg-gradient-to-br from-slate-50 to-slate-100 p-6 overflow-auto">
-        <div class="flex gap-6 max-w-4xl mx-auto">
+        <div class="flex gap-6 mx-auto">
 
             <!-- Left Menu Card -->
             <div class="w-48 shrink-0 bg-white rounded-xl shadow-md p-4 h-fit">
