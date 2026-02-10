@@ -37,6 +37,9 @@
 <!-- Form Validation -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/@form-validation/form-validation.css') }}" />
 
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <style>
     div.dataTables_wrapper div.dataTables_processing {
         background-color: #696eff !important;
