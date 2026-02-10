@@ -34,9 +34,9 @@ class LogipayController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function cashback()
+    public function products()
     {
-       return view('content.logipay.cashback');
+       return view('content.logipay.products');
     }
 
     /**

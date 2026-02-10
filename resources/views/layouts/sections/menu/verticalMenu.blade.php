@@ -719,25 +719,29 @@
 
     <li class="menu-item {{ Request::is('zercash-overview') ? 'active' : '' }}">
         <a href="{{ route('zercash.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-tv"></i>
+            <span class="menu-icon tf-icons">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true" class="lucide lucide-layout-dashboard w-4 h-4"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+            </span>
             <div>Zercash Overview</div>
         </a>
     </li>
     <li class="menu-item {{ Request::is('zercash-transactions') ? 'active' : '' }}">
         <a href="{{ route('zercash.transactions') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-tv"></i>
+            <span class="menu-icon tf-icons bx bx-arrow-down-up">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-left-right" aria-hidden="true" class="lucide lucide-arrow-left-right w-4 h-4"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg>
+            </span>
             <div>Transactions</div>
         </a>
     </li>
-    <li class="menu-item {{ Request::is('zercash-cashback') ? 'active' : '' }}">
-        <a href="{{ route('zercash.cashback') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-tv"></i>
-            <div>Cashback</div>
+    <li class="menu-item {{ Request::is('zercash-products') ? 'active' : '' }}">
+        <a href="{{ route('zercash.products') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-package"></i>
+            <div>Products</div>
         </a>
     </li>
     <li class="menu-item {{ Request::is('zercash-settings') ? 'active' : '' }}">
         <a href="{{ route('zercash.settings') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-tv"></i>
+            <i class="menu-icon tf-icons bx bx-cog"></i>
             <div>Zercash Settings</div>
         </a>
     </li>

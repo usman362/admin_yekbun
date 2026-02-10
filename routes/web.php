@@ -982,7 +982,7 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
 
         Route::get('zercash-overview',[LogipayController::class,'zer_overview'])->name('zercash.index');
         Route::get('zercash-transactions',[LogipayController::class,'transactions'])->name('zercash.transactions');
-        Route::get('zercash-cashback',[LogipayController::class,'cashback'])->name('zercash.cashback');
+        Route::get('zercash-products',[LogipayController::class,'products'])->name('zercash.products');
         Route::get('zercash-settings',[LogipayController::class,'zer_settings'])->name('zercash.settings');
 });
 
