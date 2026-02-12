@@ -31,6 +31,7 @@ use App\Services\BunnyCDNService;
 use Carbon\Carbon;
 use Exception;
 use FFMpeg\FFMpeg;
+use MongoDB\BSON\ObjectId;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
@@ -40,90 +41,58 @@ class FeedsController extends Controller
 
     public function index(Request $request)
     {
-
-        $tempFeeds = Feed::all();
+        $perPage = (int) $request->get('per_page', 5);
+        $cursor  = $request->get('cursor');
 
         $userId = Auth::id();
         $user = User::with(['friends', 'family'])->find($userId);
-        $user->access_from = $request->userAgent();
-        $user->save();
-        // Collect friend and family IDs
+
         $friendIds = $user->friends->pluck('user_id')->toArray();
         $familyIds = $user->family->pluck('user_id')->toArray();
 
-        // Start building query
         $feedsQuery = Feed::with(['user', 'shareUser', 'parentFeed'])
-            ->orderBy('created_at', 'desc');
+            ->orderBy('_id', 'desc'); // 🔥 changed
 
-        // ✅ If a specific user_id is provided
+        if ($cursor) {
+            $feedsQuery->where('_id', '<', new ObjectId($cursor));
+        }
+
         if (!empty($request->user_id)) {
-            $feeds = $feedsQuery
-                ->where('user_id', $request->user_id)
-                ->paginate(5);
+
+            $feedsQuery->where('user_id', $request->user_id);
         } else {
 
-            // $authFeed = $feedsQuery->clone()->where('user_id', Auth::id())->first();
-            // if ($authFeed) {
-            //     $feeds = $feedsQuery
-            //         ->where('_id', '!=', $authFeed->id)
-            //         ->paginate(5);
-            // } else {
-            //     $feeds = $feedsQuery
-            //         ->paginate(5);
-            // }
+            $feedsQuery->where(function ($query) use ($userId, $friendIds, $familyIds) {
 
-            // ✅ Otherwise, filter based on user type visibility
-            $feeds = $feedsQuery
-                ->where(function ($query) use ($userId, $friendIds, $familyIds) {
-                    $query->where('user_id', $userId) // Own feeds
-                        ->orWhere(function ($q) use ($friendIds) {
-                            $q->whereIn('user_id', $friendIds)
-                                ->whereIn('user_type', ['friends', 'friends & family']);
-                        })
-                        ->orWhere(function ($q) use ($familyIds) {
-                            $q->whereIn('user_id', $familyIds)
-                                ->whereIn('user_type', ['family', 'friends & family']);
-                        });
-                })
-                ->paginate(5);
+                $query->where('user_id', $userId)
+
+                    ->orWhere(function ($q) use ($friendIds) {
+                        $q->whereIn('user_id', $friendIds)
+                            ->whereIn('user_type', ['friends', 'friends & family']);
+                    })
+
+                    ->orWhere(function ($q) use ($familyIds) {
+                        $q->whereIn('user_id', $familyIds)
+                            ->whereIn('user_type', ['family', 'friends & family']);
+                    });
+            });
         }
 
-        $feedItems = $feeds->items();
+        $feeds = $feedsQuery
+            ->limit($perPage)
+            ->get();
 
-        // $feeds->getCollection()->transform(function ($feed) {
-        //     $feed->comments_count = $feed->comments->count();
-        //     $feed->voice_comments_count = $feed->voice_comments->count();
-        //     $feed->likes_count = $feed->likes->count();
-        //     $feed->views_count = $feed->views->count();
-        //     $feed->shares_count = $feed->shares->count();
-        //     $feed->save();
-        //     return $feed;
-        // });
+        $nextCursor = optional($feeds->last())->_id;
 
-        // Convert paginated feeds to array and insert $authFeed at the beginning (if not null)
-
-        if (isset($authFeed)) {
-            if ($authFeed && $feeds->currentPage() == 1) {
-                $alreadyExists = collect($feedItems)->pluck('_id')->contains($authFeed->_id);
-                if (!$alreadyExists) {
-                    array_unshift($feedItems, $authFeed);
-                }
-            }
-        }
-
-        $data = [
-            'feeds' => $feedItems,
-            // 'auth_feed' => $authFeed,
+        return ResponseHelper::sendResponse([
+            'feeds' => $feeds,
             'pagination' => [
-                'page' => $feeds->currentPage(),
-                'count' => $feeds->perPage(),
-                'totalItems' => $feeds->total(),
-                'totalPages' => $feeds->lastPage(),
+                'per_page' => $perPage,
+                'next_cursor' => $nextCursor,
+                'has_more' => $feeds->count() === $perPage,
             ]
-        ];
-        return ResponseHelper::sendResponse($data, 'Feeds fetch successfully');
+        ], 'Feeds fetch successfully');
     }
-
 
     public function public_index(Request $request)
     {
