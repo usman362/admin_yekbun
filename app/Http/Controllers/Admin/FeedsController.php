@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\ReportFeeds;
 use App\Models\Feed;
+use App\Models\Media;
 use App\Models\FeedComments;
 use App\Models\FeedLikes;
 use App\Models\FeedReason;
@@ -69,6 +70,10 @@ class FeedsController extends Controller
                 }
             }
             $feed->delete();
+            $media = Media::where('media_id',$feed->_id)->first();
+            if($media){
+                $media->delete();
+            }
             $comments = FeedComments::where('feed_id', $feed->_id)->get();
             foreach ($comments as $comment) {
                 $bunny = new BunnyCDNService();

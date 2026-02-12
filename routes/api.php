@@ -418,14 +418,6 @@ use App\Http\Controllers\Api\UserSuggestionController;
         'destroy',
         'update',
     ]);
-    Route::resource('media-category', MediaCategoryController::class)->only([
-        'index',
-        'store',
-        'show',
-        'destroy',
-        'update',
-    ]);
-    Route::resource('media', MediaController::class)->only(['index', 'store', 'show', 'destroy', 'update']);
     Route::resource('history-category', HistoryCategoryController::class)->only([
         'index',
         'store',

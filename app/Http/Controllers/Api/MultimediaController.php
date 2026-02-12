@@ -12,6 +12,7 @@ use App\Models\ArtistFavorite;
 use App\Models\Clips;
 use App\Models\Feed;
 use App\Models\History;
+use App\Models\Media;
 use App\Models\MusicPlay;
 use App\Models\Song;
 use App\Models\SongViews;
@@ -22,6 +23,7 @@ use App\Models\UserPlaylistGroup;
 use App\Models\VideoClip;
 use App\Models\VideoClipViews;
 use App\Models\VideoPlay;
+use MongoDB\BSON\ObjectId;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -731,40 +733,33 @@ class MultimediaController extends Controller
 
     public function allMediaRecord(Request $request)
     {
-        $perPage = $request->get('per_page', 10);
-        $page    = $request->get('page', 1);
+        $perPage = (int) $request->get('per_page', 10);
+        $cursor  = $request->get('cursor');
 
-        // Fetch all collections
-        $clips     = Clips::all()->map(fn($item) => $this->mapMedia($item, 'clips'));
-        $histories = History::all()->map(fn($item) => $this->mapMedia($item, 'history'));
-        $aiVideos  = AIVideo::all()->map(fn($item) => $this->mapMedia($item, 'ai_videos'));
-        $feeds     = Feed::where('feed_type', 'videos')->get()
-            ->map(fn($item) => $this->mapMedia($item, 'user_feeds'));
+        $userId = Auth::id();
 
-        // Merge all
-        $merged = collect()
-            ->merge($feeds)
-            ->merge($clips)
-            ->merge($aiVideos)
-            ->merge($histories)
-            ->sortByDesc('created_at')
-            ->values();
+        $query = Media::where('user_id', $userId)
+            ->orderBy('_id', 'desc'); // 🔥 best for Mongo
 
-        // Pagination manually (Mongo friendly)
-        $total = $merged->count();
-        $data  = $merged->forPage($page, $perPage)->values();
+        // Apply cursor filter
+        if ($cursor) {
+            $query->where('_id', '<', new ObjectId($cursor));
+        }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'All Media Videos Successfully Fetch!',
-            'meta' => [
-                'current_page' => (int)$page,
-                'per_page'     => (int)$perPage,
-                'total'        => $total,
-                'last_page'    => (int)ceil($total / $perPage),
-            ],
-            'data' => $data,
-        ]);
+        $media = $query
+            ->limit($perPage)
+            ->get();
+
+        $nextCursor = optional($media->last())->_id;
+
+        return ResponseHelper::sendResponse([
+            'media' => $media,
+            'pagination' => [
+                'per_page' => $perPage,
+                'next_cursor' => $nextCursor,
+                'has_more' => $media->count() === $perPage,
+            ]
+        ], 'Media fetched successfully');
     }
 
     private function mapMedia($item, string $type): array

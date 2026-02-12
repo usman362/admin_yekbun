@@ -10,6 +10,7 @@ use App\Models\Clips;
 use App\Models\ClipsViews;
 use App\Models\ClipsLikes;
 use App\Models\ClipTemplates;
+use App\Models\Media;
 use App\Models\NotificationCenter;
 use App\Models\User;
 use App\Models\UserVideo;
@@ -37,15 +38,15 @@ class ClipsController extends Controller
             }, 'views' => function ($views) {
                 $views->with('user');
             }])->where(function ($query) use ($userId, $friendIds, $familyIds) {
-            $query->where('user_id', $userId) // Own feeds
-                ->orWhere(function ($q) use ($friendIds) {
-                    $q->whereIn('user_id', $friendIds)
-                        ->whereIn('share_with', ['friends', 'friends & family']);
-                })
-                ->orWhere(function ($q) use ($familyIds) {
-                    $q->whereIn('user_id', $familyIds)
-                        ->whereIn('share_with', ['family', 'friends & family']);
-                });
+                $query->where('user_id', $userId) // Own feeds
+                    ->orWhere(function ($q) use ($friendIds) {
+                        $q->whereIn('user_id', $friendIds)
+                            ->whereIn('share_with', ['friends', 'friends & family']);
+                    })
+                    ->orWhere(function ($q) use ($familyIds) {
+                        $q->whereIn('user_id', $familyIds)
+                            ->whereIn('share_with', ['family', 'friends & family']);
+                    });
             })->orderBy('created_at', 'desc')->find($request->clip_id);
         } else {
             $videos = Clips::with(['template', 'user', 'likes' => function ($likes) {
@@ -53,15 +54,15 @@ class ClipsController extends Controller
             }, 'views' => function ($views) {
                 $views->with('user');
             }])->where(function ($query) use ($userId, $friendIds, $familyIds) {
-            $query->where('user_id', $userId) // Own feeds
-                ->orWhere(function ($q) use ($friendIds) {
-                    $q->whereIn('user_id', $friendIds)
-                        ->whereIn('share_with', ['friends', 'friends & family']);
-                })
-                ->orWhere(function ($q) use ($familyIds) {
-                    $q->whereIn('user_id', $familyIds)
-                        ->whereIn('share_with', ['family', 'friends & family']);
-                });
+                $query->where('user_id', $userId) // Own feeds
+                    ->orWhere(function ($q) use ($friendIds) {
+                        $q->whereIn('user_id', $friendIds)
+                            ->whereIn('share_with', ['friends', 'friends & family']);
+                    })
+                    ->orWhere(function ($q) use ($familyIds) {
+                        $q->whereIn('user_id', $familyIds)
+                            ->whereIn('share_with', ['family', 'friends & family']);
+                    });
             })->orderBy('created_at', 'desc')->get();
         }
         return ResponseHelper::sendResponse($videos, 'Clips has been Fetch Successfully!');
@@ -166,11 +167,28 @@ class ClipsController extends Controller
             }
         }
 
+        $clip->likes_count = 0;
+        $clip->views_count = 0;
+        $clip->comments_count = 0;
+        $clip->voice_comments_count = 0;
+
         $clip->save();
         // UserVideo::create([
         //     'user_id' => Auth::id(),
         //     'video' => Str::after($outputPath, 'public/')
         // ]);
+        Helpers::userMedia(
+            $clip->_id, //media_id
+            $clip->clip, //uri
+            $clip->comments_count, //commentCount
+            $clip->voice_comments_count, //voiceCount
+            $clip->likes_count, //emojisCount
+            $clip->views_count, //seenCount
+            $clip->user_id, //user_id
+            $clip->text, //text
+            $request->text_properties, //text_properties
+            'clips' //type
+        );
         $description = Auth::user()->name . ' ' . Auth::user()->last_name . ' has posted new Clip.';
         $users = User::where('_id', '!==', Auth::id())->whereNotNull('fcm_token')->whereIn('info_banner', ['banner', 'alert'])->get();
         if ($users) {
@@ -233,6 +251,10 @@ class ClipsController extends Controller
             $bunny->delete($clip->clip);
         }
         if ($clip->delete()) {
+            $media = Media::where('media_id',$id)->first();
+            if($media){
+                $media->delete();
+            }
             return ResponseHelper::sendResponse([], 'Clip has been Deleted Successfully');
         } else {
             return ResponseHelper::sendResponse([], 'Failed to Delete Clip', false, 401);
@@ -256,6 +278,18 @@ class ClipsController extends Controller
         $clip = Clips::find($request->clip_id);
         $clip->views_count = $clip->views->count();
         $clip->save();
+        Helpers::userMedia(
+            $clip->_id, //media_id
+            $clip->clip, //uri
+            $clip->comments_count, //commentCount
+            $clip->voice_comments_count, //voiceCount
+            $clip->likes_count, //emojisCount
+            $clip->views_count, //seenCount
+            $clip->user_id, //user_id
+            $clip->text, //text
+            $clip->text_properties, //text_properties
+            'clips' //type
+        );
         return ResponseHelper::sendResponse([], 'Clip Viewed Successfully');
     }
 
@@ -298,6 +332,19 @@ class ClipsController extends Controller
         $clip = Clips::find($request->clip_id);
         $clip->likes_count = $clip->likes->count();
         $clip->save();
+
+        Helpers::userMedia(
+            $clip->_id, //media_id
+            $clip->clip, //uri
+            $clip->comments_count, //commentCount
+            $clip->voice_comments_count, //voiceCount
+            $clip->likes_count, //emojisCount
+            $clip->views_count, //seenCount
+            $clip->user_id, //user_id
+            $clip->text, //text
+            $clip->text_properties, //text_properties
+            'clips' //type
+        );
         return ResponseHelper::sendResponse([], 'Clip Unliked Successfully');
     }
 }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Helpers\NotificationHelper;
 use App\Models\AIVideo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AdminNotification;
 use App\Models\FeedComments;
+use App\Models\Media;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
@@ -74,6 +76,11 @@ class AIVideosController extends Controller
         $ai_video->is_share  = $request->share ?? 0;
         $ai_video->is_emoji  = $request->emoji ?? 0;
         $ai_video->user_id = auth()->user()->id;
+        $ai_video->comments_count = 0;
+        $ai_video->likes_count = 0;
+        $ai_video->shares_count = 0;
+        $ai_video->views_count = 0;
+        $ai_video->voice_comments_count = 0;
 
         if (!empty($request->thumbnail)) {
             if ($request->has('video_paths')) {
@@ -93,6 +100,22 @@ class AIVideosController extends Controller
         }
 
         if ($ai_video->save()) {
+            if ($request->has('video_paths')) {
+                foreach ($request->video_paths as $key => $video) {
+                    Helpers::userMedia(
+                        $ai_video->_id, //media_id
+                        $video, //uri
+                        $ai_video->comments_count, //commentCount
+                        $ai_video->voice_comments_count, //voiceCount
+                        $ai_video->likes_count, //emojisCount
+                        $ai_video->views_count, //seenCount
+                        $ai_video->user_id, //user_id
+                        $ai_video->description, //text
+                        null, //text_properties
+                        'ai_videos' //type
+                    );
+                }
+            }
             $notification = Notifications::first();
             $notify = AdminNotification::first();
             $description = str_replace(
@@ -293,6 +316,10 @@ class AIVideosController extends Controller
                 $comment->delete();
             }
         if ($ai_video->delete($ai_video->id)) {
+            $media = Media::where('media_id',$id)->first();
+            if($media){
+                $media->delete();
+            }
             return redirect()->route('ai-videos.index')->with('success', 'AIVideo Has been Deleted');
         } else {
             return redirect()->route('ai-videos.index')->with('error', 'Failed to delete ai_video');

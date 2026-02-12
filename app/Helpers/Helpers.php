@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Emoji;
 use App\Models\LanguageDetail;
+use App\Models\Media;
 use Config;
 use App\Models\Text;
 use App\Models\Translation;
@@ -244,7 +245,6 @@ class Helpers
                 unlink($tempLocalPath);
                 $finalLocalFile = $convertedPath;
             }
-
         } elseif ($ext === 'mp4') {
 
             $convertedPath = str_replace('.mp4', '_h265.mp4', $tempLocalPath);
@@ -252,7 +252,6 @@ class Helpers
                 unlink($tempLocalPath);
                 $finalLocalFile = $convertedPath;
             }
-
         }
 
         // -------------------------------
@@ -311,7 +310,6 @@ class Helpers
                 unlink($tempLocalPath);
                 $finalLocalFile = $convertedPath;
             }
-
         } elseif ($ext === 'mp4') {
 
             $convertedPath = str_replace('.mp4', '_h265.mp4', $tempLocalPath);
@@ -319,7 +317,6 @@ class Helpers
                 unlink($tempLocalPath);
                 $finalLocalFile = $convertedPath;
             }
-
         }
 
         // -------------------------------
@@ -406,5 +403,34 @@ class Helpers
                 {$outputPath}";
         exec($cmd, $output, $returnCode);
         return $returnCode === 0;
+    }
+
+    public static function userMedia(
+        $media_id,
+        $uri,
+        $commentCount,
+        $voiceCount,
+        $emojisCount,
+        $seenCount,
+        $user_id,
+        $text,
+        $text_properties,
+        $type
+    ) {
+        $media = Media::where('media_id', $media_id)->first();
+        if (!$media) {
+            $media = new Media();
+        }
+        $media->media_id = $media_id;
+        $media->uri = $uri == 'exists' ? $media->uri : $uri;
+        $media->commentCount = $commentCount;
+        $media->voiceCount = $voiceCount;
+        $media->emojisCount = $emojisCount;
+        $media->seenCount = $seenCount;
+        $media->user_id = $user_id;
+        $media->text = $text;
+        $media->text_properties = $text_properties;
+        $media->type = $type;
+        $media->save();
     }
 }

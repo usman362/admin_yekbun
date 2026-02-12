@@ -6,6 +6,7 @@ use App\Helpers\NotificationHelper;
 use App\Helpers\ResponseHelper;
 use App\Models\History;
 use App\Models\PostGallery;
+use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use App\Models\HistoryCategory;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,7 @@ use App\Models\AdminNotification;
 use App\Models\FeedComments;
 use App\Models\HistoryComments;
 use App\Models\HistoryLikes;
+use App\Models\Media;
 use App\Models\NotificationCenter;
 use App\Models\Notifications;
 use App\Models\User;
@@ -81,6 +83,11 @@ class HistoryController extends Controller
         $history->is_share  = $request->share ?? 0;
         $history->is_emoji  = $request->emoji ?? 0;
         $history->user_id = auth()->user()->id;
+        $history->comments_count = 0;
+        $history->likes_count = 0;
+        $history->shares_count = 0;
+        $history->views_count = 0;
+        $history->voice_comments_count = 0;
 
         if (!empty($request->thumbnail)) {
             if ($request->has('video_paths')) {
@@ -100,6 +107,22 @@ class HistoryController extends Controller
         }
 
         if ($history->save()) {
+            if ($request->has('video_paths')) {
+                foreach ($request->video_paths as $key => $video) {
+                    Helpers::userMedia(
+                        $history->_id, //media_id
+                        $video, //uri
+                        $history->comments_count, //commentCount
+                        $history->voice_comments_count, //voiceCount
+                        $history->likes_count, //emojisCount
+                        $history->views_count, //seenCount
+                        $history->user_id, //user_id
+                        $history->description, //text
+                        null, //text_properties
+                        'history' //type
+                    );
+                }
+            }
 
             $notification = Notifications::first();
             $notify = AdminNotification::first();
@@ -284,15 +307,19 @@ class HistoryController extends Controller
                 $deleted = $bunny->delete($history_file['path']);
             }
         }
-        $comments = FeedComments::where('feed_id',$history->_id)->get();
-            foreach($comments as $comment){
-                $bunny = new BunnyCDNService();
-                if($comment->comment_type == 'audio'){
-                    $bunny->delete($comment->audio);
-                }
-                $comment->delete();
+        $comments = FeedComments::where('feed_id', $history->_id)->get();
+        foreach ($comments as $comment) {
+            $bunny = new BunnyCDNService();
+            if ($comment->comment_type == 'audio') {
+                $bunny->delete($comment->audio);
             }
+            $comment->delete();
+        }
         if ($history->delete($history->id)) {
+            $media = Media::where('media_id',$id)->first();
+            if($media){
+                $media->delete();
+            }
             return redirect()->route('history.index')->with('success', 'History Has been Deleted');
         } else {
             return redirect()->route('history.index')->with('error', 'Failed to delete history');
@@ -364,7 +391,7 @@ class HistoryController extends Controller
             $ffmpeg = FFMpeg::create();
 
             // CDN video full path
-            $fullPath = env('BUNNY_CDN_URL').$videoPath;
+            $fullPath = env('BUNNY_CDN_URL') . $videoPath;
 
             // timestamps
             $timestamps = [
@@ -379,7 +406,7 @@ class HistoryController extends Controller
 
                 // Thumbnail path on CDN
                 $thumbnailCdnPath = 'thumbnails/' . pathinfo($videoPath, PATHINFO_FILENAME)
-                                    . "_thumb_{$index}.jpg";
+                    . "_thumb_{$index}.jpg";
 
                 // Temporary local file for FFMPEG
                 $localTemp = storage_path('app/tmp_thumb_' . uniqid() . '.jpg');
@@ -405,7 +432,7 @@ class HistoryController extends Controller
                 @unlink($localTemp);
 
                 // Only return path like: thumbnails/video_thumb_0.jpg
-                $thumbnails[] = env('BUNNY_CDN_URL').$thumbnailCdnPath;
+                $thumbnails[] = env('BUNNY_CDN_URL') . $thumbnailCdnPath;
             }
 
             return $thumbnails;

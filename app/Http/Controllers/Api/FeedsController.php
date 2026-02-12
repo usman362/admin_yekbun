@@ -22,6 +22,7 @@ use App\Models\FeedComments;
 use App\Models\FeedLikes;
 use App\Models\UserFriends;
 use App\Models\History;
+use App\Models\Media;
 use App\Models\News;
 use App\Models\Notifications;
 use App\Models\AIVideo;
@@ -286,6 +287,21 @@ class FeedsController extends Controller
         // Save the feed
         $feeds->save();
         $feed = Feed::with('user')->find($feeds->id);
+
+        foreach ($request->file('videos') as $video) {
+            Helpers::userMedia(
+                $feeds->_id, //media_id
+                $video, //uri
+                $feeds->comments_count, //commentCount
+                $feeds->voice_comments_count, //voiceCount
+                $feeds->likes_count, //emojisCount
+                $feeds->views_count, //seenCount
+                $feeds->user_id, //user_id
+                $feeds->description, //text
+                $request->text_properties, //text_properties
+                'user_feeds' //type
+            );
+        }
         if ($feeds->save()) {
             $notification = Notifications::first();
             $notify = AdminNotification::first();
@@ -361,6 +377,19 @@ class FeedsController extends Controller
         $feed->shares_count = $feed->shares->count();
         $feed->save();
 
+        Helpers::userMedia(
+            $feed->_id, //media_id
+            'exists', //uri
+            $feed->comments_count, //commentCount
+            $feed->voice_comments_count, //voiceCount
+            $feed->likes_count, //emojisCount
+            $feed->views_count, //seenCount
+            $feed->user_id, //user_id
+            $feed->description, //text
+            $feed->text_properties, //text_properties
+            'user_feeds' //type
+        );
+
         $sharedFeed = Feed::with(['user', 'shareUser'])->find($newFeed->_id);
         return response()->json(['message' => 'Feed has been shared Successfully', 'feed' => $sharedFeed, 'success' => true], 201);
     }
@@ -407,6 +436,10 @@ class FeedsController extends Controller
             $share->save();
         }
         $feed->delete();
+        $media = Media::where('media_id', $id)->first();
+        if ($media) {
+            $media->delete();
+        }
         return ResponseHelper::sendResponse([], 'Feed has been Deleted Successfully!');
     }
 
@@ -737,6 +770,21 @@ class FeedsController extends Controller
             $feed->save();
         }
 
+        if ($request->feed_type !== 'admin_feeds') {
+            Helpers::userMedia(
+                $feed->_id, //media_id
+                'exists', //uri
+                $feed->comments_count, //commentCount
+                $feed->voice_comments_count, //voiceCount
+                $feed->likes_count, //emojisCount
+                $feed->views_count, //seenCount
+                $feed->user_id, //user_id
+                $feed->description, //text
+                null, //text_properties
+                $request->feed_type //type
+            );
+        }
+
         return ResponseHelper::sendResponse($data, 'Comment has been successfully sent');
         // } catch (Exception $e) {
         //     return ResponseHelper::sendResponse([], 'Failed to send Comment!', false, 403);
@@ -947,6 +995,20 @@ class FeedsController extends Controller
         $feed->views_count = $feed->views->count();
         $feed->shares_count = $feed->shares->count();
         $feed->save();
+        if ($request->feed_type !== 'admin_feeds') {
+            Helpers::userMedia(
+                $feed->_id, //media_id
+                'exists', //uri
+                $feed->comments_count, //commentCount
+                $feed->voice_comments_count, //voiceCount
+                $feed->likes_count, //emojisCount
+                $feed->views_count, //seenCount
+                $feed->user_id, //user_id
+                $feed->description, //text
+                null, //text_properties
+                $request->feed_type //type
+            );
+        }
         return ResponseHelper::sendResponse($data, 'Like has been successfully Saved');
     }
 
@@ -1006,6 +1068,21 @@ class FeedsController extends Controller
         $feed->views_count = $feed->views->count();
         $feed->shares_count = $feed->shares->count();
         $feed->save();
+
+        if ($request->feed_type !== 'admin_feeds') {
+            Helpers::userMedia(
+                $feed->_id, //media_id
+                'exists', //uri
+                $feed->comments_count, //commentCount
+                $feed->voice_comments_count, //voiceCount
+                $feed->likes_count, //emojisCount
+                $feed->views_count, //seenCount
+                $feed->user_id, //user_id
+                $feed->description, //text
+                null, //text_properties
+                $request->feed_type //type
+            );
+        }
 
         $data = [
             'comments_count' => $feed->comments->count(),
