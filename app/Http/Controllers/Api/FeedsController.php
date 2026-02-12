@@ -57,26 +57,26 @@ class FeedsController extends Controller
             $feedsQuery->where('_id', '<', new ObjectId($cursor));
         }
 
-        if (!empty($request->user_id)) {
+        // if (!empty($request->user_id)) {
 
-            $feedsQuery->where('user_id', $request->user_id);
-        } else {
+        //     $feedsQuery->where('user_id', $request->user_id);
+        // } else {
 
-            $feedsQuery->where(function ($query) use ($userId, $friendIds, $familyIds) {
+        //     $feedsQuery->where(function ($query) use ($userId, $friendIds, $familyIds) {
 
-                $query->where('user_id', $userId)
+        //         $query->where('user_id', $userId)
 
-                    ->orWhere(function ($q) use ($friendIds) {
-                        $q->whereIn('user_id', $friendIds)
-                            ->whereIn('user_type', ['friends', 'friends & family']);
-                    })
+        //             ->orWhere(function ($q) use ($friendIds) {
+        //                 $q->whereIn('user_id', $friendIds)
+        //                     ->whereIn('user_type', ['friends', 'friends & family']);
+        //             })
 
-                    ->orWhere(function ($q) use ($familyIds) {
-                        $q->whereIn('user_id', $familyIds)
-                            ->whereIn('user_type', ['family', 'friends & family']);
-                    });
-            });
-        }
+        //             ->orWhere(function ($q) use ($familyIds) {
+        //                 $q->whereIn('user_id', $familyIds)
+        //                     ->whereIn('user_type', ['family', 'friends & family']);
+        //             });
+        //     });
+        // }
 
         $feeds = $feedsQuery
             ->limit($perPage)
