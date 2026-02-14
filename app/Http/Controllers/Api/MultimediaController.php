@@ -747,7 +747,7 @@ class MultimediaController extends Controller
 
         // query media for current user + admins
         $query = Media::with('user')
-            ->whereIn('user_id', $userIds)
+            // ->whereIn('user_id', $userIds)
             ->orderBy('_id', 'desc');
 
         // Apply cursor filter
