@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Media extends Model
 {
     use HasFactory, LogsActivity;
-    
+
     protected $fillable=[
         'title',
         'category_id',
@@ -25,5 +25,10 @@ class Media extends Model
 
     public function media_category(){
         return $this->belongsTo(MediaCategory::class, 'category_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -738,9 +738,13 @@ class MultimediaController extends Controller
 
         $userId = Auth::id();
 
-        $query = Media::
-        // where('user_id', $userId)->
-            orderBy('_id', 'desc'); // 🔥 best for Mongo
+        $query = Media::with('user')
+            ->where(function ($q) use ($userId) {
+                $q->where('user_id', $userId)
+                    ->whereNotIn('type', ['history', 'ai_videos'])
+                    ->orWhereIn('type', ['history', 'ai_videos']);
+            })
+            ->orderBy('_id', 'desc');
 
         // Apply cursor filter
         if ($cursor) {
