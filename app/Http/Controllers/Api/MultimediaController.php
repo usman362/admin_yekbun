@@ -736,14 +736,18 @@ class MultimediaController extends Controller
         $perPage = (int) $request->get('per_page', 10);
         $cursor  = $request->get('cursor');
 
+        // current user ID
         $userId = Auth::id();
 
+        // get admin user IDs
+        $adminIds = User::where('is_admin_user', 1)->pluck('_id')->toArray();
+
+        // merge current user ID with admin IDs
+        $userIds = array_merge([$userId], $adminIds);
+
+        // query media for current user + admins
         $query = Media::with('user')
-            ->where(function ($q) use ($userId) {
-                $q->where('user_id', $userId)
-                    ->whereNotIn('type', ['history', 'ai_videos'])
-                    ->orWhereIn('type', ['history', 'ai_videos']);
-            })
+            ->whereIn('user_id', $userIds)
             ->orderBy('_id', 'desc');
 
         // Apply cursor filter
