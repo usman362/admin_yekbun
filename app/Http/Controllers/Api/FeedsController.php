@@ -288,19 +288,21 @@ class FeedsController extends Controller
         $feeds->save();
         $feed = Feed::with('user')->find($feeds->id);
 
-        foreach ($request->file('videos') as $video) {
-            Helpers::userMedia(
-                $feeds->_id, //media_id
-                $video, //uri
-                $feeds->comments_count, //commentCount
-                $feeds->voice_comments_count, //voiceCount
-                $feeds->likes_count, //emojisCount
-                $feeds->views_count, //seenCount
-                $feeds->user_id, //user_id
-                $feeds->description, //text
-                $request->text_properties, //text_properties
-                'user_feeds' //type
-            );
+        if (!empty($feed->videos)) {
+            foreach ($feed->videos as $video) {
+                Helpers::userMedia(
+                    $feed->_id, //media_id
+                    $video->path ?? $video['path'], //uri
+                    $feed->comments_count, //commentCount
+                    $feed->voice_comments_count, //voiceCount
+                    $feed->likes_count, //emojisCount
+                    $feed->views_count, //seenCount
+                    $feed->user_id, //user_id
+                    $feed->description, //text
+                    null, //text_properties
+                    'user_feeds' //type
+                );
+            }
         }
         if ($feeds->save()) {
             $notification = Notifications::first();
