@@ -79,7 +79,7 @@ class AllMediaSeeder extends Seeder
         }
 
         foreach ($feeds as $key => $feed) {
-            if(!empty($feed->video)){
+            if(!empty($feed->videos)){
                 foreach($feed->videos as $video){
                     Helpers::userMedia(
                         $feed->_id, //media_id
