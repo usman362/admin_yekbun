@@ -697,54 +697,86 @@
         </li>
     @endcan
 
-    <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">⁠Location Section</span>
-    </li>
-    <li class="menu-item {{ Request::is('manage-locations') ? 'active' : '' }}">
-        <a href="{{ route('locations.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-tv"></i>
-            <div>Manage Locations</div>
-        </a>
-    </li>
-    <li class="menu-item {{ Request::is('locations-settings') ? 'active' : '' }}">
-        <a href="{{ route('locations.settings') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-tv"></i>
-            <div>Locations Settings</div>
-        </a>
-    </li>
+    @canany(['managelocations.read', 'locationssettings.read'])
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">⁠Location Section</span>
+        </li>
+        @can('managelocations.read')
+            <li class="menu-item {{ Request::is('manage-locations') ? 'active' : '' }}">
+                <a href="{{ route('locations.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-tv"></i>
+                    <div>Manage Locations</div>
+                </a>
+            </li>
+        @endcan
+        @can('locationssettings.read')
+            <li class="menu-item {{ Request::is('locations-settings') ? 'active' : '' }}">
+                <a href="{{ route('locations.settings') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-tv"></i>
+                    <div>Locations Settings</div>
+                </a>
+            </li>
+        @endcan
+    @endcan
 
-    <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">⁠Logipay Section</span>
-    </li>
+    @canany(['zercashoverview.read', 'zercashtransactions.read', 'zercashproducts.read', 'zercashsettings.read'])
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">⁠Logipay Section</span>
+        </li>
 
-    <li class="menu-item {{ Request::is('zercash-overview') ? 'active' : '' }}">
-        <a href="{{ route('zercash.index') }}" class="menu-link">
-            <span class="menu-icon tf-icons">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true" class="lucide lucide-layout-dashboard w-4 h-4"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
-            </span>
-            <div>Zercash Overview</div>
-        </a>
-    </li>
-    <li class="menu-item {{ Request::is('zercash-transactions') ? 'active' : '' }}">
-        <a href="{{ route('zercash.transactions') }}" class="menu-link">
-            <span class="menu-icon tf-icons bx bx-arrow-down-up">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-left-right" aria-hidden="true" class="lucide lucide-arrow-left-right w-4 h-4"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg>
-            </span>
-            <div>Transactions</div>
-        </a>
-    </li>
-    <li class="menu-item {{ Request::is('zercash-products') ? 'active' : '' }}">
-        <a href="{{ route('zercash.products') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-package"></i>
-            <div>Products</div>
-        </a>
-    </li>
-    <li class="menu-item {{ Request::is('zercash-settings') ? 'active' : '' }}">
-        <a href="{{ route('zercash.settings') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-cog"></i>
-            <div>Zercash Settings</div>
-        </a>
-    </li>
+        @can('zercashoverview.read')
+            <li class="menu-item {{ Request::is('zercash-overview') ? 'active' : '' }}">
+                <a href="{{ route('zercash.index') }}" class="menu-link">
+                    <span class="menu-icon tf-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true"
+                            class="lucide lucide-layout-dashboard w-4 h-4">
+                            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                        </svg>
+                    </span>
+                    <div>Zercash Overview</div>
+                </a>
+            </li>
+        @endcan
+        @can('zercashtransactions.read')
+            <li class="menu-item {{ Request::is('zercash-transactions') ? 'active' : '' }}">
+                <a href="{{ route('zercash.transactions') }}" class="menu-link">
+                    <span class="menu-icon tf-icons bx bx-arrow-down-up">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" data-lucide="arrow-left-right" aria-hidden="true"
+                            class="lucide lucide-arrow-left-right w-4 h-4">
+                            <path d="M8 3 4 7l4 4"></path>
+                            <path d="M4 7h16"></path>
+                            <path d="m16 21 4-4-4-4"></path>
+                            <path d="M20 17H4"></path>
+                        </svg>
+                    </span>
+                    <div>Transactions</div>
+                </a>
+            </li>
+        @endcan
+        @can('zercashproducts.read')
+            <li class="menu-item {{ Request::is('zercash-products') ? 'active' : '' }}">
+                <a href="{{ route('zercash.products') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-package"></i>
+                    <div>Products</div>
+                </a>
+            </li>
+        @endcan
+        @can('zercashsettings.read')
+            <li class="menu-item {{ Request::is('zercash-settings') ? 'active' : '' }}">
+                <a href="{{ route('zercash.settings') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-cog"></i>
+                    <div>Zercash Settings</div>
+                </a>
+            </li>
+        @endcan
+    @endcan
 
     {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Assistent</span>
@@ -1772,12 +1804,14 @@
             </a>
         </li>
     @endcan
-    <li class="menu-item {{ Request::is('api-list') ? 'active' : '' }}">
-        <a href="{{ url('/api-list') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-refresh"></i>
-            <div>API Status</div>
-        </a>
-    </li>
+    @can('apistatus.read')
+        <li class="menu-item {{ Request::is('api-list') ? 'active' : '' }}">
+            <a href="{{ url('/api-list') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-refresh"></i>
+                <div>API Status</div>
+            </a>
+        </li>
+    @endcan
     @can('admins.read')
         <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">
             <a href="{{ url('/app/ftp/list') }}" class="menu-link">
