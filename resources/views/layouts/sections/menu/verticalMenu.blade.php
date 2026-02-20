@@ -35,372 +35,388 @@
 
         @canany(['channelcategories.read', 'channelrequest.read', 'managechannel.read', 'channeladmin.read',
             'flagchannels.read'])
+
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Channel Section</span>
             </li>
+
             @canany(['channelcategories.read', 'channelrequest.read', 'managechannel.read', 'channeladmin.read'])
                 <li
-                    class="menu-item {{ Request::is('managecategories/*') ? 'active open' : '' }} {{ Request::is('channelrequest') ? 'active open' : '' }}  {{ Request::is('managechannel') ? 'active open' : '' }}  {{ Request::is('channeladmin') ? 'active open' : '' }}">
+                    class="menu-item
+            {{ Request::is('managecategories/*') ? 'active open' : '' }}
+            {{ Request::is('channelrequest') ? 'active open' : '' }}
+            {{ Request::is('managechannel') ? 'active open' : '' }}
+            {{ Request::is('channeladmin') ? 'active open' : '' }}">
+
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-tv"></i>
                         <div>Channels</div>
                     </a>
 
-
                     <ul class="menu-sub">
+
                         @can('channelcategories.read')
                             <li class="menu-item {{ Request::is('managecategories') ? 'active' : '' }}">
                                 <a href="{{ url('/managecategories') }}" class="menu-link">
                                     <div>Manage Categories</div>
                                 </a>
                             </li>
-                            @can('channelrequest.read')
-                                <li class="menu-item {{ Request::is('channelrequest') ? 'active' : '' }}">
-                                    <a href="{{ url('/channelrequest') }}" class="menu-link">
-                                        <div>Channel Request</div>
-                                    </a>
-                                </li>
-                                @can('managechannel.read')
-                                    <li class="menu-item {{ Request::is('managechannel') ? 'active' : '' }}">
-                                        <a href="{{ url('/managechannel') }}" class="menu-link">
-                                            <div>Manage Channel</div>
-                                        </a>
-                                    </li>
-                                    @can('channeladmin.read')
-                                        <li class="menu-item {{ Request::is('channeladmin') ? 'active' : '' }}">
-                                            <a href="{{ url('/channeladmin') }}" class="menu-link">
-                                                <div>Channel Admin</div>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </li>
                         @endcan
 
-                        @can('flagchannels.read')
-                            <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active' : '' }}">
-                                <a href="{{ url('flaggedfanpage') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-flag"></i>
-                                    <div>Flag Channels</div>
+                        @can('channelrequest.read')
+                            <li class="menu-item {{ Request::is('channelrequest') ? 'active' : '' }}">
+                                <a href="{{ url('/channelrequest') }}" class="menu-link">
+                                    <div>Channel Request</div>
                                 </a>
                             </li>
                         @endcan
-                    @endcan
 
-                    @can('feeds.read')
-                        <li class="menu-header small text-uppercase">
-                            <span class="menu-header-text">News Section</span>
-                        </li>
+                        @can('managechannel.read')
+                            <li class="menu-item {{ Request::is('managechannel') ? 'active' : '' }}">
+                                <a href="{{ url('/managechannel') }}" class="menu-link">
+                                    <div>Manage Channel</div>
+                                </a>
+                            </li>
+                        @endcan
 
-                        <li
-                            class="menu-item {{ Request::is('Feeds/*') ? 'active open' : '' }} {{ Request::is('manage-user-feeds') ? 'active open' : '' }}  {{ Request::is('manage-fanpage-feeds') ? 'active open' : '' }}  {{ Request::is('feed-background') ? 'active open' : '' }}{{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-book-content"></i>
-                                <div>Feeds</div>
-                            </a>
+                        @can('channeladmin.read')
+                            <li class="menu-item {{ Request::is('channeladmin') ? 'active' : '' }}">
+                                <a href="{{ url('/channeladmin') }}" class="menu-link">
+                                    <div>Channel Admin</div>
+                                </a>
+                            </li>
+                        @endcan
 
+                    </ul>
+                </li>
+            @endcanany
 
-                            <ul class="menu-sub">
-                                <li class="menu-item {{ Request::is('manage-user-feeds') ? 'active' : '' }}">
-                                    <a href="{{ url('/manage-user-feeds') }}" class="menu-link">
-                                        <div>Manage User Feeds</div>
-                                    </a>
-                                </li>
 
-                                <li class="menu-item {{ Request::is('manage-channel-feeds') ? 'active' : '' }}">
-                                    <a href="{{ url('/manage-channel-feeds') }}" class="menu-link">
-                                        <div>Manage Channel Feed</div>
-                                    </a>
-                                </li>
+            @can('flagchannels.read')
+                <li class="menu-item {{ Request::is('flaggedfanpage') ? 'active' : '' }}">
+                    <a href="{{ url('flaggedfanpage') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-flag"></i>
+                        <div>Flag Channels</div>
+                    </a>
+                </li>
+            @endcan
 
-                                <li
-                                    class="menu-item  {{ Request::is('feed-background') ? 'active open' : '' }} {{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
-                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                        <div>Settings</div>
-                                    </a>
+        @endcanany
 
+        @can('feeds.read')
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">News Section</span>
+            </li>
 
-                                    <ul class="menu-sub">
+            <li
+                class="menu-item {{ Request::is('Feeds/*') ? 'active open' : '' }} {{ Request::is('manage-user-feeds') ? 'active open' : '' }}  {{ Request::is('manage-fanpage-feeds') ? 'active open' : '' }}  {{ Request::is('feed-background') ? 'active open' : '' }}{{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                    <div>Feeds</div>
+                </a>
 
-                                        <li class="menu-item ">
-                                            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                                <div>Post Filter</div>
-                                            </a>
 
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::is('manage-user-feeds') ? 'active' : '' }}">
+                        <a href="{{ url('/manage-user-feeds') }}" class="menu-link">
+                            <div>Manage User Feeds</div>
+                        </a>
+                    </li>
 
-                                            <ul class="menu-sub">
-                                                <li class="menu-item ">
-                                                    <a href="javascript:void(0)" class="menu-link">
-                                                        <div>Image Filter</div>
-                                                    </a>
-                                                </li>
+                    <li class="menu-item {{ Request::is('manage-channel-feeds') ? 'active' : '' }}">
+                        <a href="{{ url('/manage-channel-feeds') }}" class="menu-link">
+                            <div>Manage Channel Feed</div>
+                        </a>
+                    </li>
 
+                    <li
+                        class="menu-item  {{ Request::is('feed-background') ? 'active open' : '' }} {{ Request::is('feed-emoji') ? 'active open' : '' }} {{ Request::is('feeds-reasons') ? 'active open' : '' }} {{ Request::is('feeds-policy_and_terms') ? 'active open' : '' }} {{ Request::is('feeds-prefix') ? 'active open' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <div>Settings</div>
+                        </a>
 
 
-                                                <li class="menu-item ">
-                                                    <a href="javascript:void(0)" class="menu-link">
-                                                        <div>Video Filter</div>
-                                                    </a>
-                                                </li>
+                        <ul class="menu-sub">
 
+                            <li class="menu-item ">
+                                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                    <div>Post Filter</div>
+                                </a>
 
 
-                                                <li class="menu-item ">
-                                                    <a href="javascript:void(0)" class="menu-link">
-                                                        <div>Keywords Filter</div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                <ul class="menu-sub">
+                                    <li class="menu-item ">
+                                        <a href="javascript:void(0)" class="menu-link">
+                                            <div>Image Filter</div>
+                                        </a>
+                                    </li>
 
 
 
-                                        <li class="menu-item {{ Request::is('feed-background') ? 'active' : '' }}">
-                                            <a href="{{ url('/feed-background') }}" class="menu-link">
-                                                <div>Feed Background</div>
-                                            </a>
-                                        </li>
+                                    <li class="menu-item ">
+                                        <a href="javascript:void(0)" class="menu-link">
+                                            <div>Video Filter</div>
+                                        </a>
+                                    </li>
 
 
 
-                                        <li class="menu-item {{ Request::is('feed-emoji') ? 'active' : '' }}">
-                                            <a href="{{ url('feed-emoji') }}" class="menu-link">
-                                                <div>Add Emojis</div>
-                                            </a>
-                                        </li>
+                                    <li class="menu-item ">
+                                        <a href="javascript:void(0)" class="menu-link">
+                                            <div>Keywords Filter</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
 
 
-                                        <li class="menu-item {{ Request::is('feeds-reasons') ? 'active' : '' }}">
-                                            <a href="{{ url('feeds-reasons') }}" class="menu-link">
-                                                <div>Reasons</div>
-                                            </a>
+                            <li class="menu-item {{ Request::is('feed-background') ? 'active' : '' }}">
+                                <a href="{{ url('/feed-background') }}" class="menu-link">
+                                    <div>Feed Background</div>
+                                </a>
+                            </li>
 
 
-                                        </li>
 
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    @endcan
+                            <li class="menu-item {{ Request::is('feed-emoji') ? 'active' : '' }}">
+                                <a href="{{ url('feed-emoji') }}" class="menu-link">
+                                    <div>Add Emojis</div>
+                                </a>
+                            </li>
 
 
 
-                    @can('videos.read')
-                        <li
-                            class="menu-item {{ Request::is('videos/*') ? 'active open' : '' }} {{ Request::is('manage_video') ? 'active open' : '' }}  {{ Request::is('video_request') ? 'active open' : '' }} {{ Request::is('reason') ? 'active open' : '' }} {{ Request::is('prefix') ? 'active open' : '' }} {{ Request::is('policyterms') ? 'active open' : '' }}">
+                            <li class="menu-item {{ Request::is('feeds-reasons') ? 'active' : '' }}">
+                                <a href="{{ url('feeds-reasons') }}" class="menu-link">
+                                    <div>Reasons</div>
+                                </a>
 
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-video"></i>
-                                <div>User Videos</div>
-                            </a>
 
+                            </li>
 
-                            <ul class="menu-sub">
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
 
 
-                                <li class="menu-item  {{ Request::is('manage_video') ? 'active' : '' }}">
-                                    <a href="{{ url('/manage_video') }}" class="menu-link">
-                                        <div>Manage Videos</div>
-                                    </a>
+        @can('videos.read')
+            <li
+                class="menu-item {{ Request::is('videos/*') ? 'active open' : '' }} {{ Request::is('manage_video') ? 'active open' : '' }}  {{ Request::is('video_request') ? 'active open' : '' }} {{ Request::is('reason') ? 'active open' : '' }} {{ Request::is('prefix') ? 'active open' : '' }} {{ Request::is('policyterms') ? 'active open' : '' }}">
 
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-video"></i>
+                    <div>User Videos</div>
+                </a>
 
-                                </li>
 
+                <ul class="menu-sub">
 
-                                <li
-                                    class="menu-item {{ Request::is('reason') ? 'active open' : '' }} {{ Request::is('prefix') ? 'active open' : '' }} {{ Request::is('policyterms') ? 'active open' : '' }}">
-                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                        <div>Settings</div>
-                                    </a>
 
 
-                                    <ul class="menu-sub">
+                    <li class="menu-item  {{ Request::is('manage_video') ? 'active' : '' }}">
+                        <a href="{{ url('/manage_video') }}" class="menu-link">
+                            <div>Manage Videos</div>
+                        </a>
 
-                                        <li class="menu-item">
-                                            <a href="javascript:void(0)" class="menu-link">
-                                                <div>Max. Upload Page</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    @endcan
 
+                    </li>
 
 
-                    @can('events.read')
-                        <li
-                            class="menu-item {{ Request::is('events/*') ? 'active open' : '' }} {{ Request::is('events') ? 'active open' : '' }}">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                                <div>Events</div>
-                            </a>
+                    <li
+                        class="menu-item {{ Request::is('reason') ? 'active open' : '' }} {{ Request::is('prefix') ? 'active open' : '' }} {{ Request::is('policyterms') ? 'active open' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <div>Settings</div>
+                        </a>
 
 
-                            <ul class="menu-sub">
+                        <ul class="menu-sub">
 
+                            <li class="menu-item">
+                                <a href="javascript:void(0)" class="menu-link">
+                                    <div>Max. Upload Page</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
 
-                                <li class="menu-item {{ Request::is('events') ? 'active' : '' }}">
-                                    <a href="{{ url('/events?view=new_request') }}" class="menu-link">
 
-                                        <div>Add a Event</div>
-                                    </a>
+        @can('events.read')
+            <li
+                class="menu-item {{ Request::is('events/*') ? 'active open' : '' }} {{ Request::is('events') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                    <div>Events</div>
+                </a>
 
 
-                                </li>
+                <ul class="menu-sub">
 
 
 
+                    <li class="menu-item {{ Request::is('events') ? 'active' : '' }}">
+                        <a href="{{ url('/events?view=new_request') }}" class="menu-link">
 
+                            <div>Add a Event</div>
+                        </a>
 
-                                <li class="menu-item {{ Request::is('events/manage') ? 'active' : '' }}">
-                                    <a href=" {{ url('/events/manage?view=new_request') }}" class="menu-link">
-                                        <div>Manage Event</div>
-                                    </a>
 
+                    </li>
 
-                                </li>
 
 
 
-                                <li class="menu-item {{ Request::is('events/tickets') ? 'active' : '' }}">
-                                    <a href="{{ url('/events/tickets') }}" class="menu-link">
-                                        <div>Event Tickets</div>
-                                    </a>
 
+                    <li class="menu-item {{ Request::is('events/manage') ? 'active' : '' }}">
+                        <a href=" {{ url('/events/manage?view=new_request') }}" class="menu-link">
+                            <div>Manage Event</div>
+                        </a>
 
-                                </li>
 
+                    </li>
 
 
-                                <li class="menu-item {{ Request::is('ticket-service') ? 'active' : '' }}">
-                                    <a href=" {{ url('/ticket-service') }}" class="menu-link">
-                                        <div>Event Services</div>
-                                    </a>
 
+                    <li class="menu-item {{ Request::is('events/tickets') ? 'active' : '' }}">
+                        <a href="{{ url('/events/tickets') }}" class="menu-link">
+                            <div>Event Tickets</div>
+                        </a>
 
-                                </li>
 
+                    </li>
 
 
 
-                                <li class="menu-item {{ Request::is('events/*') ? 'active' : '' }}">
-                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                        <div>Settings</div>
-                                    </a>
+                    <li class="menu-item {{ Request::is('ticket-service') ? 'active' : '' }}">
+                        <a href=" {{ url('/ticket-service') }}" class="menu-link">
+                            <div>Event Services</div>
+                        </a>
 
 
-                                    <ul class="menu-sub">
+                    </li>
 
 
 
-                                        <li class="menu-item {{ Request::is('events/reasons') ? 'active' : '' }}">
-                                            <a href=" {{ url('/events/reasons') }}" class="menu-link">
 
-                                                <div>Reasons</div>
-                                            </a>
+                    <li class="menu-item {{ Request::is('events/*') ? 'active' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <div>Settings</div>
+                        </a>
 
 
-                                        </li>
+                        <ul class="menu-sub">
 
 
 
-                                        <li class="menu-item {{ Request::is('events/policy_and_terms') ? 'active' : '' }}">
-                                            <a href="{{ url('/events/policy_and_terms') }}" class="menu-link">
-                                                <div>Policy and Terms</div>
-                                            </a>
+                            <li class="menu-item {{ Request::is('events/reasons') ? 'active' : '' }}">
+                                <a href=" {{ url('/events/reasons') }}" class="menu-link">
 
+                                    <div>Reasons</div>
+                                </a>
 
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    @endcan
 
-                    @can('wishesthanks.read')
-                        <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }} ">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-credit-card"></i>
-                                <div>Sympathie</div>
-                            </a>
+                            </li>
 
 
-                            <ul class="menu-sub">
 
-                                <!--first add-->
-                                <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
-                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                        <div>Greetings</div>
-                                    </a>
+                            <li class="menu-item {{ Request::is('events/policy_and_terms') ? 'active' : '' }}">
+                                <a href="{{ url('/events/policy_and_terms') }}" class="menu-link">
+                                    <div>Policy and Terms</div>
+                                </a>
 
 
-                                    <ul class="menu-sub">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        @endcan
 
+        @can('wishesthanks.read')
+            <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }} ">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                    <div>Sympathie</div>
+                </a>
 
 
-                                        <li class="menu-item {{ Request::is('wishes/manage_greeting') ? 'active' : '' }}">
+                <ul class="menu-sub">
 
-                                            <a href="{{ url('wishes/manage_greeting?view=new_request') }} " class="menu-link">
-                                                <div>Manage Greeting</div>
-                                            </a>
+                    <!--first add-->
+                    <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <div>Greetings</div>
+                        </a>
 
 
-                                        </li>
+                        <ul class="menu-sub">
 
 
-                                        <li class="menu-item {{ Request::is('wishes/upload_cardtwo') ? 'active' : '' }}">
 
-                                            <a href="{{ url('wishes/upload_cardtwo?view=new_request') }} " class="menu-link">
-                                                <div>Upload Cards</div>
-                                            </a>
+                            <li class="menu-item {{ Request::is('wishes/manage_greeting') ? 'active' : '' }}">
 
+                                <a href="{{ url('wishes/manage_greeting?view=new_request') }} " class="menu-link">
+                                    <div>Manage Greeting</div>
+                                </a>
 
-                                        </li>
 
+                            </li>
 
 
+                            <li class="menu-item {{ Request::is('wishes/upload_cardtwo') ? 'active' : '' }}">
 
+                                <a href="{{ url('wishes/upload_cardtwo?view=new_request') }} " class="menu-link">
+                                    <div>Upload Cards</div>
+                                </a>
 
-                                    </ul>
-                                </li>
 
+                            </li>
 
 
 
 
 
-                                <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
-                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                        <div>Prays</div>
-                                    </a>
+                        </ul>
+                    </li>
 
 
-                                    <ul class="menu-sub">
 
 
-                                        <li class="menu-item {{ Request::is('wishes/manage_pray') ? 'active' : '' }}">
-                                            <a href="{{ url('wishes/manage_pray?view=new_request') }}" class="menu-link">
-                                                <div>Manage Prays</div>
-                                            </a>
-                                        </li>
 
-                                        <li class="menu-item {{ Request::is('wishes/upload_card') ? 'active' : '' }}">
 
-                                            <a href="{{ url('wishes/upload_card?view=new_request') }} " class="menu-link">
-                                                <div>Upload Cards</div>
-                                            </a>
+                    <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <div>Prays</div>
+                        </a>
 
 
-                                        </li>
+                        <ul class="menu-sub">
 
 
-                                        {{-- <li class="menu-item {{ Request::is('wishes/add_prays') ? 'active' : '' }}">
+                            <li class="menu-item {{ Request::is('wishes/manage_pray') ? 'active' : '' }}">
+                                <a href="{{ url('wishes/manage_pray?view=new_request') }}" class="menu-link">
+                                    <div>Manage Prays</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item {{ Request::is('wishes/upload_card') ? 'active' : '' }}">
+
+                                <a href="{{ url('wishes/upload_card?view=new_request') }} " class="menu-link">
+                                    <div>Upload Cards</div>
+                                </a>
+
+
+                            </li>
+
+
+                            {{-- <li class="menu-item {{ Request::is('wishes/add_prays') ? 'active' : '' }}">
 
   <a href="{{url('wishes/add_prays?view=new_request')}} " class="menu-link">
         <div>Add Prays</div>
@@ -411,44 +427,44 @@
 
 
 
-                                    </ul>
-                                </li>
+                        </ul>
+                    </li>
 
-                                <!--sec add-->
-
-
+                    <!--sec add-->
 
 
 
-                                <!--thi add-->
-                                <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
-                                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                        <div>Sympathy</div>
-                                    </a>
 
 
-                                    <ul class="menu-sub">
+                    <!--thi add-->
+                    <li class="menu-item {{ Request::is('wishes/*') ? 'active open' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                            <div>Sympathy</div>
+                        </a>
 
 
-                                        <li class="menu-item {{ Request::is('wishes/manage_sympathy') ? 'active' : '' }}">
-                                            <a href="{{ url('wishes/manage_sympathy?view=new_request') }}" class="menu-link">
-                                                <div>Manage Sympathy</div>
-                                            </a>
+                        <ul class="menu-sub">
 
 
-                                        </li>
-
-                                        <li class="menu-item {{ Request::is('wishes/upload_cardone') ? 'active' : '' }}">
-
-                                            <a href="{{ url('wishes/upload_cardone?view=new_request') }} " class="menu-link">
-                                                <div>Upload Cards</div>
-                                            </a>
+                            <li class="menu-item {{ Request::is('wishes/manage_sympathy') ? 'active' : '' }}">
+                                <a href="{{ url('wishes/manage_sympathy?view=new_request') }}" class="menu-link">
+                                    <div>Manage Sympathy</div>
+                                </a>
 
 
-                                        </li>
+                            </li>
+
+                            <li class="menu-item {{ Request::is('wishes/upload_cardone') ? 'active' : '' }}">
+
+                                <a href="{{ url('wishes/upload_cardone?view=new_request') }} " class="menu-link">
+                                    <div>Upload Cards</div>
+                                </a>
 
 
-                                        {{-- <li class="menu-item {{ Request::is('wishes/add_verses') ? 'active' : '' }}">
+                            </li>
+
+
+                            {{-- <li class="menu-item {{ Request::is('wishes/add_verses') ? 'active' : '' }}">
 
   <a href="{{url('wishes/add_verses?view=new_request')}} " class="menu-link">
         <div>Add verses</div>
@@ -459,334 +475,334 @@
 
 
 
-                                    </ul>
-                                </li>
+                        </ul>
+                    </li>
 
 
 
-                        </li>
+            </li>
 
 
 
 
 
-                        <li class="menu-item {{ Request::is('wishes/setting/*') ? 'active open' : '' }}">
-                            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                <div>Setting</div>
+            <li class="menu-item {{ Request::is('wishes/setting/*') ? 'active open' : '' }}">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <div>Setting</div>
+                </a>
+
+
+                <ul class="menu-sub">
+
+
+
+                    <li class="menu-item {{ Request::is('wishes/setting/pricing') ? 'active open' : '' }}">
+                        <a href="{{ url('wishes/setting/pricing') }}" class="menu-link">
+                            <div>Pricing</div>
+                        </a>
+
+
+                    </li>
+
+                    <li class="menu-item {{ Request::is('wishes/setting/reasons') ? 'active' : '' }} ">
+                        <a href="{{ url('wishes/setting/reasons') }}" class="menu-link">
+                            <div>Reasons</div>
+                        </a>
+
+
+                    </li>
+
+                    <li class="menu-item {{ Request::is('wishes/setting/policy_terms') ? 'active' : '' }}">
+                        <a href="{{ url('wishes/setting/policy_terms') }}" class="menu-link">
+                            <div>Wishes Policy </div>
+                        </a>
+
+
+                    </li>
+
+
+                </ul>
+            </li>
+        </ul>
+        </li>
+    @endcan
+
+    @can('reels.read')
+        <li
+            class="menu-item {{ Request::is('settings/reels/*') ||
+            Request::is('reel/*') ||
+            Request::is('list-reels-cards*') ||
+            Request::is('reels/song*') ||
+            Request::is('reels/stories_time*') ||
+            Request::is('reels/reasons*')
+                ? 'active open'
+                : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-videos"></i>
+                <div>User Clips</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('manage-clips') ? 'active' : '' }}">
+                    <a href="{{ url('manage-clips') }}" class="menu-link">
+                        <div>Manage Clips</div>
+                    </a>
+                </li>
+                <li
+                    class="menu-item {{ Request::is('settings/stories/*') ||
+                    Request::is('reels/song*') ||
+                    Request::is('reels/stories_time*') ||
+                    Request::is('reels/reasons*')
+                        ? 'active open'
+                        : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('reels/song*') ? 'active' : '' }}">
+                            <a href="{{ route('reels.song') }}" class="menu-link">
+                                <div>Add Manage/Songs</div>
                             </a>
-
-
-                            <ul class="menu-sub">
-
-
-
-                                <li class="menu-item {{ Request::is('wishes/setting/pricing') ? 'active open' : '' }}">
-                                    <a href="{{ url('wishes/setting/pricing') }}" class="menu-link">
-                                        <div>Pricing</div>
-                                    </a>
-
-
-                                </li>
-
-                                <li class="menu-item {{ Request::is('wishes/setting/reasons') ? 'active' : '' }} ">
-                                    <a href="{{ url('wishes/setting/reasons') }}" class="menu-link">
-                                        <div>Reasons</div>
-                                    </a>
-
-
-                                </li>
-
-                                <li class="menu-item {{ Request::is('wishes/setting/policy_terms') ? 'active' : '' }}">
-                                    <a href="{{ url('wishes/setting/policy_terms') }}" class="menu-link">
-                                        <div>Wishes Policy </div>
-                                    </a>
-
-
-                                </li>
-
-
-                            </ul>
+                        </li>
+                        <li class="menu-item {{ Request::is('reels/stories_time*') ? 'active' : '' }}">
+                            <a href="{{ url('reels/stories_time') }}" class="menu-link">
+                                <div>Stories Time</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('reels/reasons*') ? 'active' : '' }}">
+                            <a href="{{ route('reels.reasons') }}" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
                         </li>
                     </ul>
-                    </li>
-                @endcan
+                </li>
+            </ul>
+        </li>
+    @endcan
 
-                @can('reels.read')
-                    <li
-                        class="menu-item {{ Request::is('settings/reels/*') ||
-                        Request::is('reel/*') ||
-                        Request::is('list-reels-cards*') ||
-                        Request::is('reels/song*') ||
-                        Request::is('reels/stories_time*') ||
-                        Request::is('reels/reasons*')
-                            ? 'active open'
-                            : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bxs-videos"></i>
-                            <div>User Clips</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('manage-clips') ? 'active' : '' }}">
-                                <a href="{{ url('manage-clips') }}" class="menu-link">
-                                    <div>Manage Clips</div>
-                                </a>
-                            </li>
-                            <li
-                                class="menu-item {{ Request::is('settings/stories/*') ||
-                                Request::is('reels/song*') ||
-                                Request::is('reels/stories_time*') ||
-                                Request::is('reels/reasons*')
-                                    ? 'active open'
-                                    : '' }}">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Settings</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item {{ Request::is('reels/song*') ? 'active' : '' }}">
-                                        <a href="{{ route('reels.song') }}" class="menu-link">
-                                            <div>Add Manage/Songs</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('reels/stories_time*') ? 'active' : '' }}">
-                                        <a href="{{ url('reels/stories_time') }}" class="menu-link">
-                                            <div>Stories Time</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('reels/reasons*') ? 'active' : '' }}">
-                                        <a href="{{ route('reels.reasons') }}" class="menu-link">
-                                            <div>Reasons</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-
-                @canany(['music.published', 'music.unpublished'])
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">⁠Multimedia Section</span>
-                    </li>
-                    <li
-                        class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-music"></i>
-                            <div>Music</div>
-                        </a>
+    @canany(['music.published', 'music.unpublished'])
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">⁠Multimedia Section</span>
+        </li>
+        <li
+            class="menu-item {{ Request::is('music/*') ? 'active open' : '' }} {{ Request::is('music-category') ? 'active open' : '' }} {{ Request::is('artist') ? 'active open' : '' }} {{ Request::is('video-clips') ? 'active open' : '' }} {{ Request::is('music') ? 'active open' : '' }} {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/policy_and_terms') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-music"></i>
+                <div>Music</div>
+            </a>
 
 
-                        <ul class="menu-sub">
+            <ul class="menu-sub">
 
-                            <li class="menu-item  {{ Request::is('artist') ? 'active' : '' }}">
-                                <a href="{{ url('/artist') }}" class="menu-link">
-                                    <div>Add Artist</div>
-                                </a>
-                            </li>
+                <li class="menu-item  {{ Request::is('artist') ? 'active' : '' }}">
+                    <a href="{{ url('/artist') }}" class="menu-link">
+                        <div>Add Artist</div>
+                    </a>
+                </li>
 
-                            <li
-                                class="menu-item {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/*') ? 'active open' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Settings</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item {{ Request::is('setting/music/pricing') ? 'active' : '' }}">
-                                        <a href="{{ url('/setting/music/pricing') }}" class="menu-link">
-                                            <div>Pricing</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-
-                @canany(['history.published', 'history.unpublished'])
-                    <li
-                        class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-history"></i>
-                            <div>History</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('history') ? 'active' : '' }}  ">
-                                <a href="{{ url('/history') }}" class="menu-link">
-                                    <div>Add Manage History</div>
-                                </a>
-
-
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-
-                @can('donation.read')
-                    <li
-                        class="menu-item {{ Request::is('donations/*') ? 'active open' : '' }} {{ Request::is('donations') ? 'active open' : '' }}{{ Request::is('settings/donation/*') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-donate-heart"></i>
-                            <div>Donation</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('donations') ? 'active' : '' }}">
-                                <a href="{{ url('/donations') }}" class="menu-link">
-                                    <div>Add Manage Donation</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('donations/organizations') ? 'active' : '' }}">
-                                <a href="{{ url('/donations/organizations') }}" class="menu-link">
-                                    <div>Add Manage Organization</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-                @canany(['aivideos.published', 'aivideos.unpublished'])
-                    <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
-                                style="width: 20px; height: 20px;margin-right: 0.5rem;">
-                            <div>AI Videos</div>
-                        </a>
-
-
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('ai-videos') ? 'active' : '' }}  ">
-                                <a href="{{ url('/ai-videos') }}" class="menu-link">
-                                    <div>Manage AI Videos</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-
-                @canany(['surveys.published', 'surveys.unpublished'])
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">⁠Kurdistan Section</span>
-                    </li>
-                    <li class="menu-item {{ Request::is('surveys') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-sort"></i>
-                            <div>Surveys</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('surveys') ? 'active' : '' }} ">
-                                <a href="{{ url('/surveys') }}" class="menu-link">
-                                    <div>Manage Surveys</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item {{ Request::is('complaints-*') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-sort"></i>
-                            <div>Complaints</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('complaints-overview') ? 'active' : '' }} ">
-                                <a href="{{ route('complaints.index') }}" class="menu-link">
-                                    <div>Manage Complaints</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('complaints-settings') ? 'active' : '' }} ">
-                                <a href="{{ route('complaints.settings') }}" class="menu-link">
-                                    <div>Complaints Settings</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item {{ Request::is('officials') ? 'active' : '' }}">
-                        <a href="{{ route('officials.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-sort"></i>
-                            <div>Officials</div>
-                        </a>
-                    </li>
-                @endcan
-
-                @canany(['managelocations.read', 'locationssettings.read'])
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">⁠Location Section</span>
-                    </li>
-                    @can('managelocations.read')
-                        <li class="menu-item {{ Request::is('manage-locations') ? 'active' : '' }}">
-                            <a href="{{ route('locations.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-tv"></i>
-                                <div>Manage Locations</div>
+                <li
+                    class="menu-item {{ Request::is('setting/music/*') ? 'active open' : '' }} {{ Request::is('musics/*') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('setting/music/pricing') ? 'active' : '' }}">
+                            <a href="{{ url('/setting/music/pricing') }}" class="menu-link">
+                                <div>Pricing</div>
                             </a>
                         </li>
-                    @endcan
-                    @can('locationssettings.read')
-                        <li class="menu-item {{ Request::is('locations-settings') ? 'active' : '' }}">
-                            <a href="{{ route('locations.settings') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-tv"></i>
-                                <div>Locations Settings</div>
-                            </a>
-                        </li>
-                    @endcan
-                @endcan
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
-                @canany(['zercashoverview.read', 'zercashtransactions.read', 'zercashproducts.read', 'zercashsettings.read'])
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">⁠Logipay Section</span>
-                    </li>
+    @canany(['history.published', 'history.unpublished'])
+        <li
+            class="menu-item {{ Request::is('history-category') ? 'active open' : '' }} {{ Request::is('settings/history/*') ? 'active open' : '' }} {{ Request::is('history') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-history"></i>
+                <div>History</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('history') ? 'active' : '' }}  ">
+                    <a href="{{ url('/history') }}" class="menu-link">
+                        <div>Add Manage History</div>
+                    </a>
 
-                    @can('zercashoverview.read')
-                        <li class="menu-item {{ Request::is('zercash-overview') ? 'active' : '' }}">
-                            <a href="{{ route('zercash.index') }}" class="menu-link">
-                                <span class="menu-icon tf-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true"
-                                        class="lucide lucide-layout-dashboard w-4 h-4">
-                                        <rect width="7" height="9" x="3" y="3" rx="1"></rect>
-                                        <rect width="7" height="5" x="14" y="3" rx="1"></rect>
-                                        <rect width="7" height="9" x="14" y="12" rx="1"></rect>
-                                        <rect width="7" height="5" x="3" y="16" rx="1"></rect>
-                                    </svg>
-                                </span>
-                                <div>Zercash Overview</div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('zercashtransactions.read')
-                        <li class="menu-item {{ Request::is('zercash-transactions') ? 'active' : '' }}">
-                            <a href="{{ route('zercash.transactions') }}" class="menu-link">
-                                <span class="menu-icon tf-icons bx bx-arrow-down-up">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" data-lucide="arrow-left-right" aria-hidden="true"
-                                        class="lucide lucide-arrow-left-right w-4 h-4">
-                                        <path d="M8 3 4 7l4 4"></path>
-                                        <path d="M4 7h16"></path>
-                                        <path d="m16 21 4-4-4-4"></path>
-                                        <path d="M20 17H4"></path>
-                                    </svg>
-                                </span>
-                                <div>Transactions</div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('zercashproducts.read')
-                        <li class="menu-item {{ Request::is('zercash-products') ? 'active' : '' }}">
-                            <a href="{{ route('zercash.products') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-package"></i>
-                                <div>Products</div>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('zercashsettings.read')
-                        <li class="menu-item {{ Request::is('zercash-settings') ? 'active' : '' }}">
-                            <a href="{{ route('zercash.settings') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-cog"></i>
-                                <div>Zercash Settings</div>
-                            </a>
-                        </li>
-                    @endcan
-                @endcan
 
-                {{-- <li class="menu-header small text-uppercase">
+                </li>
+            </ul>
+        </li>
+    @endcan
+
+    @can('donation.read')
+        <li
+            class="menu-item {{ Request::is('donations/*') ? 'active open' : '' }} {{ Request::is('donations') ? 'active open' : '' }}{{ Request::is('settings/donation/*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-donate-heart"></i>
+                <div>Donation</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('donations') ? 'active' : '' }}">
+                    <a href="{{ url('/donations') }}" class="menu-link">
+                        <div>Add Manage Donation</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('donations/organizations') ? 'active' : '' }}">
+                    <a href="{{ url('/donations/organizations') }}" class="menu-link">
+                        <div>Add Manage Organization</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endcan
+    @canany(['aivideos.published', 'aivideos.unpublished'])
+        <li class="menu-item {{ Request::is('ai-videos') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <img src="{{ asset('assets/img/Avatar.svg') }}" alt="avatars"
+                    style="width: 20px; height: 20px;margin-right: 0.5rem;">
+                <div>AI Videos</div>
+            </a>
+
+
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('ai-videos') ? 'active' : '' }}  ">
+                    <a href="{{ url('/ai-videos') }}" class="menu-link">
+                        <div>Manage AI Videos</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endcan
+
+    @canany(['surveys.published', 'surveys.unpublished'])
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">⁠Kurdistan Section</span>
+        </li>
+        <li class="menu-item {{ Request::is('surveys') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-sort"></i>
+                <div>Surveys</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('surveys') ? 'active' : '' }} ">
+                    <a href="{{ url('/surveys') }}" class="menu-link">
+                        <div>Manage Surveys</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item {{ Request::is('complaints-*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-sort"></i>
+                <div>Complaints</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('complaints-overview') ? 'active' : '' }} ">
+                    <a href="{{ route('complaints.index') }}" class="menu-link">
+                        <div>Manage Complaints</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('complaints-settings') ? 'active' : '' }} ">
+                    <a href="{{ route('complaints.settings') }}" class="menu-link">
+                        <div>Complaints Settings</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item {{ Request::is('officials') ? 'active' : '' }}">
+            <a href="{{ route('officials.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-sort"></i>
+                <div>Officials</div>
+            </a>
+        </li>
+    @endcan
+
+    @canany(['managelocations.read', 'locationssettings.read'])
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">⁠Location Section</span>
+        </li>
+        @can('managelocations.read')
+            <li class="menu-item {{ Request::is('manage-locations') ? 'active' : '' }}">
+                <a href="{{ route('locations.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-tv"></i>
+                    <div>Manage Locations</div>
+                </a>
+            </li>
+        @endcan
+        @can('locationssettings.read')
+            <li class="menu-item {{ Request::is('locations-settings') ? 'active' : '' }}">
+                <a href="{{ route('locations.settings') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-tv"></i>
+                    <div>Locations Settings</div>
+                </a>
+            </li>
+        @endcan
+    @endcan
+
+    @canany(['zercashoverview.read', 'zercashtransactions.read', 'zercashproducts.read', 'zercashsettings.read'])
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">⁠Logipay Section</span>
+        </li>
+
+        @can('zercashoverview.read')
+            <li class="menu-item {{ Request::is('zercash-overview') ? 'active' : '' }}">
+                <a href="{{ route('zercash.index') }}" class="menu-link">
+                    <span class="menu-icon tf-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true"
+                            class="lucide lucide-layout-dashboard w-4 h-4">
+                            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                        </svg>
+                    </span>
+                    <div>Zercash Overview</div>
+                </a>
+            </li>
+        @endcan
+        @can('zercashtransactions.read')
+            <li class="menu-item {{ Request::is('zercash-transactions') ? 'active' : '' }}">
+                <a href="{{ route('zercash.transactions') }}" class="menu-link">
+                    <span class="menu-icon tf-icons bx bx-arrow-down-up">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" data-lucide="arrow-left-right" aria-hidden="true"
+                            class="lucide lucide-arrow-left-right w-4 h-4">
+                            <path d="M8 3 4 7l4 4"></path>
+                            <path d="M4 7h16"></path>
+                            <path d="m16 21 4-4-4-4"></path>
+                            <path d="M20 17H4"></path>
+                        </svg>
+                    </span>
+                    <div>Transactions</div>
+                </a>
+            </li>
+        @endcan
+        @can('zercashproducts.read')
+            <li class="menu-item {{ Request::is('zercash-products') ? 'active' : '' }}">
+                <a href="{{ route('zercash.products') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-package"></i>
+                    <div>Products</div>
+                </a>
+            </li>
+        @endcan
+        @can('zercashsettings.read')
+            <li class="menu-item {{ Request::is('zercash-settings') ? 'active' : '' }}">
+                <a href="{{ route('zercash.settings') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-cog"></i>
+                    <div>Zercash Settings</div>
+                </a>
+            </li>
+        @endcan
+    @endcan
+
+    {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Assistent</span>
         </li>
 
@@ -940,7 +956,7 @@
             <div>Prefix</div>
           </a>
         </li> --}}
-                {{-- <li class="menu-item {{ Request::is('channels/policy_terms') ? 'active' : '' }}">
+    {{-- <li class="menu-item {{ Request::is('channels/policy_terms') ? 'active' : '' }}">
                                 <a href="{{ url('channels/policy_terms') }}" class="menu-link">
                                     <div>Channels Policy </div>
                                 </a>
@@ -969,586 +985,586 @@
 
 
 
-                @can('onlineshop.read')
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">E-Commerce</span>
-                    </li>
+    @can('onlineshop.read')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">E-Commerce</span>
+        </li>
 
 
-                    <li class="menu-item ">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-store"></i>
-                            <div>Online Shop</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Add Online Shop</div>
-                                </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>New Shop Request</div>
-                                </a>
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div>Online Shop</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Online Shop</div>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>New Shop Request</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Online Shops</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Online Shops</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Items</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Items</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Commission Setting</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Commission Setting</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Tax Settings</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Tax Settings</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Shipping</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Shipping</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Currency</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Currency</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Payment Method</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Payment Method</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Additional Services</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Additional Services</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Settings</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
 
 
-                                <ul class="menu-sub">
+                    <ul class="menu-sub">
 
 
 
-                                    <li class="menu-item ">
-                                        <a href="javascript:void(0)" class="menu-link">
-                                            <div>Reasons</div>
-                                        </a>
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
 
 
-                                    </li>
+                        </li>
 
-                                    <li class="menu-item ">
-                                        <a href="javascript:void(0)" class="menu-link">
-                                            <div>Policy and Terms</div>
-                                        </a>
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <div>Policy and Terms</div>
+                            </a>
 
 
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
 
 
 
-                @can('bazar.read')
-                    <li class="menu-item ">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-store"></i>
-                            <div>Bazar</div>
-                        </a>
+    @can('bazar.read')
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div>Bazar</div>
+            </a>
 
 
-                        <ul class="menu-sub">
+            <ul class="menu-sub">
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Category - Subcategory</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Category - Subcategory</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage for Sale Items</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage for Sale Items</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Search Items</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Search Items</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Pricing Plan</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Pricing Plan</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Settings</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
 
 
-                                <ul class="menu-sub">
+                    <ul class="menu-sub">
 
 
 
-                                    <li class="menu-item ">
-                                        <a href="javascript:void(0)" class="menu-link">
-                                            <div>Reasons</div>
-                                        </a>
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
 
 
-                                    </li>
+                        </li>
 
 
-                                    <li class="menu-item ">
-                                        <a href="javascript:void(0)" class="menu-link">
-                                            <div>Policy and Terms</div>
-                                        </a>
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <div>Policy and Terms</div>
+                            </a>
 
 
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
 
 
 
 
-                @can('serviceportal.read')
-                    <li class="menu-item ">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-intersect"></i>
-                            <div>Service Portal</div>
-                        </a>
+    @can('serviceportal.read')
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-intersect"></i>
+                <div>Service Portal</div>
+            </a>
 
 
-                        <ul class="menu-sub">
+            <ul class="menu-sub">
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Add/Manage Categories</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add/Manage Categories</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Service Offers</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Service Offers</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Search Services</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Search Services</div>
+                    </a>
 
 
-                            </li>
+                </li>
 
 
 
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Settings</div>
-                                </a>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
 
 
-                                <ul class="menu-sub">
+                    <ul class="menu-sub">
 
 
 
-                                    <li class="menu-item ">
-                                        <a href="javascript:void(0)" class="menu-link">
-                                            <div>Reasons</div>
-                                        </a>
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
 
 
-                                    </li>
+                        </li>
 
 
-                                    <li class="menu-item ">
-                                        <a href="javascript:void(0)" class="menu-link">
-                                            <div>Policy and Terms</div>
-                                        </a>
+                        <li class="menu-item ">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <div>Policy and Terms</div>
+                            </a>
 
 
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
-                @can('advertisment.read')
-                    <li
-                        class="menu-item {{ Request::is('specialcards', 'businesscards', 'Servicecards', 'FoodDrinkcards', 'specialAds', 'businessAds', 'ServiceAds', 'FoodDrinkAds') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-intersect"></i>
-                            <div>Advertisment</div>
-                        </a>
+    @can('advertisment.read')
+        <li
+            class="menu-item {{ Request::is('specialcards', 'businesscards', 'Servicecards', 'FoodDrinkcards', 'specialAds', 'businessAds', 'ServiceAds', 'FoodDrinkAds') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-intersect"></i>
+                <div>Advertisment</div>
+            </a>
 
-                        <ul class="menu-sub">
-                            <li
-                                class="menu-item {{ Request::is('specialcards', 'businesscards', 'Servicecards', 'FoodDrinkcards') ? 'active open' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Add / Manage Cards</div>
-                                </a>
+            <ul class="menu-sub">
+                <li
+                    class="menu-item {{ Request::is('specialcards', 'businesscards', 'Servicecards', 'FoodDrinkcards') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Add / Manage Cards</div>
+                    </a>
 
-                                <ul class="menu-sub">
-                                    <li class="menu-item {{ Request::is('specialcards') ? 'active' : '' }}">
-                                        <a href="{{ url('specialcards') }}" class="menu-link">
-                                            <div>Manage Special Cards</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('businesscards') ? 'active' : '' }}">
-                                        <a href="{{ url('businesscards') }}" class="menu-link">
-                                            <div>Manage Business Cards</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('Servicecards') ? 'active' : '' }}">
-                                        <a href="{{ url('Servicecards') }}" class="menu-link">
-                                            <div>Manage Services Cards</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('FoodDrinkcards') ? 'active' : '' }}">
-                                        <a href="{{ url('FoodDrinkcards') }}" class="menu-link">
-                                            <div>Manage Food & Drinks Cards</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('specialcards') ? 'active' : '' }}">
+                            <a href="{{ url('specialcards') }}" class="menu-link">
+                                <div>Manage Special Cards</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('businesscards') ? 'active' : '' }}">
+                            <a href="{{ url('businesscards') }}" class="menu-link">
+                                <div>Manage Business Cards</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('Servicecards') ? 'active' : '' }}">
+                            <a href="{{ url('Servicecards') }}" class="menu-link">
+                                <div>Manage Services Cards</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('FoodDrinkcards') ? 'active' : '' }}">
+                            <a href="{{ url('FoodDrinkcards') }}" class="menu-link">
+                                <div>Manage Food & Drinks Cards</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-                            <li
-                                class="menu-item {{ Request::is('specialAds', 'businessAds', 'ServiceAds', 'FoodDrinkAds') ? 'active open' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Add / Manage Ads</div>
-                                </a>
+                <li
+                    class="menu-item {{ Request::is('specialAds', 'businessAds', 'ServiceAds', 'FoodDrinkAds') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Add / Manage Ads</div>
+                    </a>
 
-                                <ul class="menu-sub">
-                                    <li class="menu-item {{ Request::is('specialAds') ? 'active' : '' }}">
-                                        <a href="{{ url('specialAds') }}" class="menu-link">
-                                            <div>Manage Special Ads</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('businessAds') ? 'active' : '' }}">
-                                        <a href="{{ url('businessAds') }}" class="menu-link">
-                                            <div>Manage Business Ads</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('ServiceAds') ? 'active' : '' }}">
-                                        <a href="{{ url('ServiceAds') }}" class="menu-link">
-                                            <div>Manage Services Ads</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ Request::is('FoodDrinkAds') ? 'active' : '' }}">
-                                        <a href="{{ url('FoodDrinkAds') }}" class="menu-link">
-                                            <div>Manage Food & Drinks Ads</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('specialAds') ? 'active' : '' }}">
+                            <a href="{{ url('specialAds') }}" class="menu-link">
+                                <div>Manage Special Ads</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('businessAds') ? 'active' : '' }}">
+                            <a href="{{ url('businessAds') }}" class="menu-link">
+                                <div>Manage Business Ads</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('ServiceAds') ? 'active' : '' }}">
+                            <a href="{{ url('ServiceAds') }}" class="menu-link">
+                                <div>Manage Services Ads</div>
+                            </a>
+                        </li>
+                        <li class="menu-item {{ Request::is('FoodDrinkAds') ? 'active' : '' }}">
+                            <a href="{{ url('FoodDrinkAds') }}" class="menu-link">
+                                <div>Manage Food & Drinks Ads</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-                            <li
-                                class="menu-item {{ Request::is('adver-manage-song*', 'advertisement_time', 'adver-reason', 'advertisement-policy', 'advertisement/advert/pricing') ? 'active open' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <div>Settings</div>
-                                </a>
+                <li
+                    class="menu-item {{ Request::is('adver-manage-song*', 'advertisement_time', 'adver-reason', 'advertisement-policy', 'advertisement/advert/pricing') ? 'active open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <div>Settings</div>
+                    </a>
 
-                                <ul class="menu-sub">
-                                    <li class="menu-item {{ Request::is('adver-manage-song*') ? 'active' : '' }}">
-                                        <a href="{{ url('adver-manage-song') }}" class="menu-link">
-                                            <div>Add Manage/Songs</div>
-                                        </a>
-                                    </li>
+                    <ul class="menu-sub">
+                        <li class="menu-item {{ Request::is('adver-manage-song*') ? 'active' : '' }}">
+                            <a href="{{ url('adver-manage-song') }}" class="menu-link">
+                                <div>Add Manage/Songs</div>
+                            </a>
+                        </li>
 
-                                    <li class="menu-item {{ Request::is('advertisement_time') ? 'active' : '' }}">
-                                        <a href="{{ url('advertisement_time') }}" class="menu-link">
-                                            <div>Ads Time</div>
-                                        </a>
-                                    </li>
+                        <li class="menu-item {{ Request::is('advertisement_time') ? 'active' : '' }}">
+                            <a href="{{ url('advertisement_time') }}" class="menu-link">
+                                <div>Ads Time</div>
+                            </a>
+                        </li>
 
-                                    <li class="menu-item {{ Request::is('adver-reason') ? 'active' : '' }}">
-                                        <a href="{{ url('adver-reason') }}" class="menu-link">
-                                            <div>Reasons</div>
-                                        </a>
-                                    </li>
+                        <li class="menu-item {{ Request::is('adver-reason') ? 'active' : '' }}">
+                            <a href="{{ url('adver-reason') }}" class="menu-link">
+                                <div>Reasons</div>
+                            </a>
+                        </li>
 
-                                    <li class="menu-item {{ Request::is('advertisement-policy') ? 'active' : '' }}">
-                                        <a href="{{ url('advertisement-policy') }}" class="menu-link">
-                                            <div>Add Policy</div>
-                                        </a>
-                                    </li>
+                        <li class="menu-item {{ Request::is('advertisement-policy') ? 'active' : '' }}">
+                            <a href="{{ url('advertisement-policy') }}" class="menu-link">
+                                <div>Add Policy</div>
+                            </a>
+                        </li>
 
-                                    <li class="menu-item {{ Request::is('advertisement/advert/pricing') ? 'active' : '' }}">
-                                        <a href="{{ url('advertisement/advert/pricing') }}" class="menu-link">
-                                            <div>Pricing</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+                        <li class="menu-item {{ Request::is('advertisement/advert/pricing') ? 'active' : '' }}">
+                            <a href="{{ url('advertisement/advert/pricing') }}" class="menu-link">
+                                <div>Pricing</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
 
 
 
-                @can('admins.read')
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Yekbun TV</span>
-                    </li>
+    @can('admins.read')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Yekbun TV</span>
+        </li>
 
-                    <li
-                        class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-tv"></i>
-                            <div>Zarok TV</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('zarok-stories') ? 'active' : '' }}">
-                                <a href="{{ route('zarok.stories') }}" class="menu-link">
-                                    <div>Add Stories</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('zarok-videos') ? 'active' : '' }}">
-                                <a href="{{ route('zarok.videos') }}" class="menu-link">
-                                    <div>Add Videos</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('zarok-movies') ? 'active' : '' }}">
-                                <a href="{{ route('zarok.movies') }}" class="menu-link">
-                                    <div>Add Movies</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('zarok-series') ? 'active' : '' }}">
-                                <a href="{{ route('zarok.series') }}" class="menu-link">
-                                    <div>Add Series</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+        <li
+            class="menu-item {{ Request::is('zarok-stories', 'zarok-videos', 'zarok-movies', 'zarok-series') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-tv"></i>
+                <div>Zarok TV</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('zarok-stories') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.stories') }}" class="menu-link">
+                        <div>Add Stories</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('zarok-videos') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.videos') }}" class="menu-link">
+                        <div>Add Videos</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('zarok-movies') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.movies') }}" class="menu-link">
+                        <div>Add Movies</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('zarok-series') ? 'active' : '' }}">
+                    <a href="{{ route('zarok.series') }}" class="menu-link">
+                        <div>Add Series</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-tv"></i>
-                            <div>Malbat TV</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Add Documentary</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Add Movies</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Add Series</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item {{ Request::is('tv-api-list') ? 'active' : '' }}">
-                        <a href="{{ url('/tv-api-list') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-tv"></i>
-                            <div>Yekbun TV API</div>
-                        </a>
-                    </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-tv"></i>
+                <div>Malbat TV</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Documentary</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Movies</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add Series</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item {{ Request::is('tv-api-list') ? 'active' : '' }}">
+            <a href="{{ url('/tv-api-list') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-tv"></i>
+                <div>Yekbun TV API</div>
+            </a>
+        </li>
 
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cog"></i>
-                            <div>Settings</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Zarok TV</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Malbat TV</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div>Settings</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Zarok TV</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Malbat TV</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
-                @can('admins.read')
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Bank &amp; Payments</span>
-                    </li>
-                    <li class="menu-item {{ Request::is('transactions') ? 'active' : '' }}">
-                        <a href="{{ url('/transactions') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Transactions</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ Request::is('incomes') ? 'active' : '' }}">
-                        <a href="{{ url('/incomes') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Income</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ Request::is('app/subscription') ? 'active' : '' }}">
-                        <a href="{{ url('/app/subscription') }}" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Subscription</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
-                        <a href="{{ url('/app/create_bills') }}" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Create Bills</div>
-                        </a>
-                    </li>
+    @can('admins.read')
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Bank &amp; Payments</span>
+        </li>
+        <li class="menu-item {{ Request::is('transactions') ? 'active' : '' }}">
+            <a href="{{ url('/transactions') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Transactions</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('incomes') ? 'active' : '' }}">
+            <a href="{{ url('/incomes') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Income</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('app/subscription') ? 'active' : '' }}">
+            <a href="{{ url('/app/subscription') }}" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Subscription</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('app/create_bills') ? 'active' : '' }}">
+            <a href="{{ url('/app/create_bills') }}" class="menu-link ">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Create Bills</div>
+            </a>
+        </li>
 
 
-                    <li
-                        class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
+        <li
+            class="menu-item {{ Request::is('currency_discount') || Request::is('settings/*') || Request::is('app/edit_invoice') ? 'active open' : '' }}">
 
 
 
 
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-money"></i>
-                            <div>Settings</div>
-                        </a>
-                        <ul class="menu-sub">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-money"></i>
+                <div>Settings</div>
+            </a>
+            <ul class="menu-sub">
 
-                            <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
-                                <a href="{{ url('/currency_discount') }}" class="menu-link">
-                                    <div>Currency & Discount</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
-                                <a href="{{ url('app/edit_invoice') }}" class="menu-link">
-                                    <div>Edit Invoice</div>
-                                </a>
-                            </li>
-                            <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/bank-transfer') }}" class="menu-link">
-                                    <div> Manage Bank</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/paypal') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/paypal') }}" class="menu-link">
-                                    <div> Manage PayPal </div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/applepay') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/applepay') }}" class="menu-link">
-                                    <div> Manage ApplePay</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/googlepay') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/googlepay') }}" class="menu-link">
-                                    <div> Manage GooglePay</div>
-                                </a>
-                            </li>
+                <li class="menu-item {{ Request::is('currency_discount') ? 'active' : '' }}">
+                    <a href="{{ url('/currency_discount') }}" class="menu-link">
+                        <div>Currency & Discount</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('app/edit_invoice') ? 'active' : '' }}">
+                    <a href="{{ url('app/edit_invoice') }}" class="menu-link">
+                        <div>Edit Invoice</div>
+                    </a>
+                </li>
+                <li class="menu-item  {{ Request::is('settings/bank-transfer') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/bank-transfer') }}" class="menu-link">
+                        <div> Manage Bank</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/paypal') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/paypal') }}" class="menu-link">
+                        <div> Manage PayPal </div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/applepay') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/applepay') }}" class="menu-link">
+                        <div> Manage ApplePay</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/googlepay') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/googlepay') }}" class="menu-link">
+                        <div> Manage GooglePay</div>
+                    </a>
+                </li>
 
-                        </ul>
-                    </li>
+            </ul>
+        </li>
 
-                    {{-- <li class="menu-item {{ Request::is('app/*') ? (Request::is('app/ftp/list') ? '' : 'active open') : '' }}">
+        {{-- <li class="menu-item {{ Request::is('app/*') ? (Request::is('app/ftp/list') ? '' : 'active open') : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-money"></i>
                 <div>Income</div>
@@ -1676,231 +1692,231 @@
             </ul>
         </li> --}}
 
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">App Settings</span>
-                    </li>
-                    <li class="menu-item {{ Request::is('app/portal-notification') ? 'active' : '' }}">
-                        <a href="{{ url('/app/portal-notification') }}" class="menu-link">
-                            <i class='menu-icon tf-icons bx bx-notification'></i>
-                            <div>Portal Notifications</div>
-                        </a>
-                    </li>
-                @endcan
-                @can('addpolicy.read')
-                    <li class="menu-item {{ Request::is('app-policy') ? 'active' : '' }}">
-                        <a href="{{ url('/app-policy') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-list-ul"></i>
-                            <div>App Policy</div>
-                        </a>
-                    </li>
-                @endcan
-                @can('manageorigin.read')
-                    <li
-                        class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-map"></i>
-                            <div>Manage Origin</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('settings/countries') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/countries') }}" class="menu-link">
-                                    <div>Add Country</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/provinces') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/provinces') }}" class="menu-link">
-                                    <div>Add Provinces</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/cities') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/cities') }}" class="menu-link">
-                                    <div>Add City and Zipcode</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">App Settings</span>
+        </li>
+        <li class="menu-item {{ Request::is('app/portal-notification') ? 'active' : '' }}">
+            <a href="{{ url('/app/portal-notification') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-notification'></i>
+                <div>Portal Notifications</div>
+            </a>
+        </li>
+    @endcan
+    @can('addpolicy.read')
+        <li class="menu-item {{ Request::is('app-policy') ? 'active' : '' }}">
+            <a href="{{ url('/app-policy') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                <div>App Policy</div>
+            </a>
+        </li>
+    @endcan
+    @can('manageorigin.read')
+        <li
+            class="menu-item {{ Request::is('settings/countries') ? 'active open' : '' }}{{ Request::is('settings/provinces') ? 'active open' : '' }}{{ Request::is('settings/cities') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-map"></i>
+                <div>Manage Origin</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('settings/countries') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/countries') }}" class="menu-link">
+                        <div>Add Country</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/provinces') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/provinces') }}" class="menu-link">
+                        <div>Add Provinces</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/cities') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/cities') }}" class="menu-link">
+                        <div>Add City and Zipcode</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
-                {{-- // @can('manageorigin.read') wrong calling here --}}
-                @can('appinfo.read')
-                    <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
-                        <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-info-square"></i>
-                            <div>App Info</div>
-                        </a>
-                    </li>
-                @endcan
+    {{-- // @can('manageorigin.read') wrong calling here --}}
+    @can('appinfo.read')
+        <li class="menu-item {{ Request::is('settings/app-setting/app-info') ? 'active' : '' }}">
+            <a href="{{ url('/settings/app-setting/app-info') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-info-square"></i>
+                <div>App Info</div>
+            </a>
+        </li>
+    @endcan
 
-                @can('addringtone.read')
-                    <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active open' : (Request::is('settings/app-setting/call-ringtone') ? 'active open' : '') }}"
-                        style="">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Add Ringtone</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active' : '' }}">
-                                <a href="{{ route('settings.appsetting.message.ringtone') }}" class="menu-link">
-                                    <div>Message Ringtone</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/app-setting/call-ringtone') ? 'active' : '' }} ">
-                                <a href="{{ route('settings.appsetting.call.ringtone') }}" class="menu-link">
-                                    <div>Calls Ringtone</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('settings/app-setting/notification-ringtone') ? 'active' : '' }} ">
-                                <a href="{{ route('settings.appsetting.notification.ringtone') }}" class="menu-link">
-                                    <div>Notifications Ringtone</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+    @can('addringtone.read')
+        <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active open' : (Request::is('settings/app-setting/call-ringtone') ? 'active open' : '') }}"
+            style="">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Add Ringtone</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('settings/app-setting/message-ringtone') ? 'active' : '' }}">
+                    <a href="{{ route('settings.appsetting.message.ringtone') }}" class="menu-link">
+                        <div>Message Ringtone</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/app-setting/call-ringtone') ? 'active' : '' }} ">
+                    <a href="{{ route('settings.appsetting.call.ringtone') }}" class="menu-link">
+                        <div>Calls Ringtone</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('settings/app-setting/notification-ringtone') ? 'active' : '' }} ">
+                    <a href="{{ route('settings.appsetting.notification.ringtone') }}" class="menu-link">
+                        <div>Notifications Ringtone</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endcan
 
-                @can('admins.read')
-                    <li class="menu-item {{ Request::is('settings/app-setting/maintainance') ? 'active' : '' }}">
-                        <a href="{{ url('/settings/app-setting/maintainance') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-wrench"></i>
-                            <div>Maintainance</div>
-                        </a>
-                    </li>
+    @can('admins.read')
+        <li class="menu-item {{ Request::is('settings/app-setting/maintainance') ? 'active' : '' }}">
+            <a href="{{ url('/settings/app-setting/maintainance') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-wrench"></i>
+                <div>Maintainance</div>
+            </a>
+        </li>
 
-                    <li class="menu-item {{ Request::is('nationality') ? 'active' : '' }}">
-                        <a href="{{ url('/nationality') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-flag"></i>
-                            <div>Manage Nationality</div>
-                        </a>
-                    </li>
+        <li class="menu-item {{ Request::is('nationality') ? 'active' : '' }}">
+            <a href="{{ url('/nationality') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-flag"></i>
+                <div>Manage Nationality</div>
+            </a>
+        </li>
 
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">System Settings</span>
-                    </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">System Settings</span>
+        </li>
 
-                    <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active open' : (Request::is('web-app/manage-items') ? 'active open' : '') }}"
-                        style="">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Yekbûn WebApp</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('web-app/manage-items') ? 'active' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Items</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Manage Transactions</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+        <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active open' : (Request::is('web-app/manage-items') ? 'active open' : '') }}"
+            style="">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Yekbûn WebApp</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('web-app/manage-items') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Items</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::is('web-app/manage-transactions') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Manage Transactions</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-                    <li class="menu-item {{ Request::is('logs') ? 'active' : '' }}">
-                        <a href="{{ url('/logs') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-file"></i>
-                            <div>System Log</div>
-                        </a>
-                    </li>
-                @endcan
-                @canany(['languages.published', 'languages.unpublished'])
-                    <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
-                        <a href="{{ url('/language') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-world"></i>
-                            <div>Languages</div>
-                        </a>
-                    </li>
-                @endcan
-                @can('apistatus.read')
-                    <li class="menu-item {{ Request::is('api-list') ? 'active' : '' }}">
-                        <a href="{{ url('/api-list') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-refresh"></i>
-                            <div>API Status</div>
-                        </a>
-                    </li>
-                @endcan
-                @can('admins.read')
-                    <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">
-                        <a href="{{ url('/app/ftp/list') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-network-chart"></i>
-                            <div>FTP Settings</div>
-                        </a>
-                    </li>
-                    <li class="menu-item ">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cloud-upload"></i>
-                            <div>Backup Section</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Add/Manage Backup Plan</div>
-                                </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="javascript:void(0)" class="menu-link">
-                                    <div>Backup Setting</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item ">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock"></i>
-                            <div>Security Section</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item ">
-                                <a href="{{ route('security-events') }}" class="menu-link">
-                                    <div>Security Events</div>
-                                </a>
-                            </li>
-                            <li class="menu-item ">
-                                <a href="{{ route('suspicious.devices') }}" class="menu-link">
-                                    <div>Suspicious Devices</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li
-                        class="menu-item {{ Request::is('settings/team/members') ? 'active open' : '' }}{{ Request::is('settings/team/roles') ? 'active open' : '' }}{{ Request::is('app/task/list') ? 'active open' : '' }}{{ Request::is('settings/team/members') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-file"></i>
-                            <div>Team &amp; Role</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('settings/team/members') ? 'active' : '' }}">
-                                <a href="{{ url('/settings/team/members') }}" class="menu-link">
-                                    <div>Add/Manage Team</div>
-                                </a>
-                            </li>
-                            {{-- <li class="menu-item {{ Request::is('settings/team/roles') ? 'active ' : '' }}">
+        <li class="menu-item {{ Request::is('logs') ? 'active' : '' }}">
+            <a href="{{ url('/logs') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div>System Log</div>
+            </a>
+        </li>
+    @endcan
+    @canany(['languages.published', 'languages.unpublished'])
+        <li class="menu-item {{ Request::is('language') ? 'active' : '' }}">
+            <a href="{{ url('/language') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-world"></i>
+                <div>Languages</div>
+            </a>
+        </li>
+    @endcan
+    @can('apistatus.read')
+        <li class="menu-item {{ Request::is('api-list') ? 'active' : '' }}">
+            <a href="{{ url('/api-list') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-refresh"></i>
+                <div>API Status</div>
+            </a>
+        </li>
+    @endcan
+    @can('admins.read')
+        <li class="menu-item {{ Request::is('app/ftp/list') ? 'active' : '' }}">
+            <a href="{{ url('/app/ftp/list') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-network-chart"></i>
+                <div>FTP Settings</div>
+            </a>
+        </li>
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cloud-upload"></i>
+                <div>Backup Section</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Add/Manage Backup Plan</div>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a href="javascript:void(0)" class="menu-link">
+                        <div>Backup Setting</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock"></i>
+                <div>Security Section</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item ">
+                    <a href="{{ route('security-events') }}" class="menu-link">
+                        <div>Security Events</div>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a href="{{ route('suspicious.devices') }}" class="menu-link">
+                        <div>Suspicious Devices</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li
+            class="menu-item {{ Request::is('settings/team/members') ? 'active open' : '' }}{{ Request::is('settings/team/roles') ? 'active open' : '' }}{{ Request::is('app/task/list') ? 'active open' : '' }}{{ Request::is('settings/team/members') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div>Team &amp; Role</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::is('settings/team/members') ? 'active' : '' }}">
+                    <a href="{{ url('/settings/team/members') }}" class="menu-link">
+                        <div>Add/Manage Team</div>
+                    </a>
+                </li>
+                {{-- <li class="menu-item {{ Request::is('settings/team/roles') ? 'active ' : '' }}">
                     <a href="{{ url('/settings/team/roles') }}" class="menu-link">
                         <div>Add/Manage Roles</div>
                     </a>
                 </li> --}}
-                        </ul>
-                    </li>
-                    <li class="menu-item {{ Request::is('app-setting/department') ? 'active open' : '' }}">
-                        <a href="{{ route('department.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Departments</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ Request::is('storage_setting') ? 'active' : '' }}">
-                        <a href="{{ url('storage_setting') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-devices"></i>
-                            <div>Storage Setting</div>
-                        </a>
-                    </li>
-                @endcan
-                <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                </div>
-                <div class="ps__rail-y" style="top: 0px; height: 298px; right: 4px;">
-                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 37px;"></div>
-                </div>
-                </ul>
+            </ul>
+        </li>
+        <li class="menu-item {{ Request::is('app-setting/department') ? 'active open' : '' }}">
+            <a href="{{ route('department.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Departments</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::is('storage_setting') ? 'active' : '' }}">
+            <a href="{{ url('storage_setting') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <div>Storage Setting</div>
+            </a>
+        </li>
+    @endcan
+    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+    </div>
+    <div class="ps__rail-y" style="top: 0px; height: 298px; right: 4px;">
+        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 37px;"></div>
+    </div>
+    </ul>
 
-            </aside>
+</aside>
