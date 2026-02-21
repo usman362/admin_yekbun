@@ -390,16 +390,17 @@ class Helpers
         // $cmd = "ffmpeg -i {$inputPath} -c:v libx265 -crf 28 -preset fast -c:a aac {$outputPath} -y";
         // $cmd = "ffmpeg -i {$inputPath} -vcodec libx264 -crf 28 -preset fast -acodec aac {$outputPath}";
         $cmd = "ffmpeg -y -i {$inputPath} \
-                -map 0:v:0 -map 0:a? \
-                -vf scale='min(1280,iw)':-2 \
                 -c:v libx264 \
                 -profile:v baseline \
                 -level 3.0 \
                 -pix_fmt yuv420p \
-                -preset veryfast \
                 -crf 28 \
+                -preset fast \
                 -movflags +faststart \
-                -c:a aac -b:a 96k \
+                -c:a aac \
+                -b:a 96k \
+                -ar 44100 \
+                -ac 2 \
                 {$outputPath}";
         exec($cmd, $output, $returnCode);
         return $returnCode === 0;
