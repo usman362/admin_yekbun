@@ -66,8 +66,8 @@ class AuthController extends Controller
                 }
             }
 
-            if($user->status == 0){
-                return ResponseHelper::sendResponse([],'Your Account is deactivated, kindly click Recover my Account', false, 404);
+            if ($user->status == 0) {
+                return ResponseHelper::sendResponse([], 'Your Account is deactivated, kindly click Recover my Account', false, 404);
             }
         } else {
             return ResponseHelper::sendResponse([], 'User not Found!', false, 404);
@@ -115,6 +115,23 @@ class AuthController extends Controller
 
             // Ensure the user's email is verified
             if ($user->email_verified_at == null || $user->email_verified_at == '') {
+                if ($user->email) {
+                    $code = rand(1000, 9999);
+                    UserCode::updateOrCreate(
+                        ['user_id' => $user->_id],
+                        ['code' => $code]
+                    );
+
+                    $details = [
+                        'title' => 'Mail from Yekbun.org',
+                        'code' => $code,
+                        'username' => $user->username,
+                    ];
+                    $notify = AdminNotification::first();
+                    if ($notify->otp == 1) {
+                        Mail::to($user->email)->send(new SendCodeMail($details));
+                    }
+                }
                 return ResponseHelper::sendResponse([], 'Youre Email is not verified!', false, 403);
             }
 
@@ -289,7 +306,7 @@ class AuthController extends Controller
                         'username' => $request->username,
                     ];
                     $notify = AdminNotification::first();
-                    if($notify->otp == 1){
+                    if ($notify->otp == 1) {
                         Mail::to($request['email'])->send(new SendCodeMail($details));
                     }
                     return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
@@ -310,11 +327,11 @@ class AuthController extends Controller
     public function reactivateAccount(Request $request)
     {
         try {
-            if(!$request->email){
+            if (!$request->email) {
                 return response()->json(['success' => false, 'message' => 'Email is Requred!'], 404);
             }
             $email = strtolower($request->email);
-            $user = User::where('email',$email)->first();
+            $user = User::where('email', $email)->first();
             if ($user) {
                 $code = rand(1000, 9999);
                 UserCode::updateOrCreate(
@@ -328,7 +345,7 @@ class AuthController extends Controller
                         'username' => $request->username,
                     ];
                     $notify = AdminNotification::first();
-                    if($notify->otp == 1){
+                    if ($notify->otp == 1) {
                         Mail::to($request['email'])->send(new SendCodeMail($details));
                     }
                     return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
@@ -346,8 +363,8 @@ class AuthController extends Controller
 
     public function deactivateAccount()
     {
-        $user = User::where('email',Auth::user()->email)->first();
-        if($user){
+        $user = User::where('email', Auth::user()->email)->first();
+        if ($user) {
             $user->status = (int)0;
             $user->deactivated_at = Carbon::now();
             $user->save();
@@ -398,7 +415,7 @@ class AuthController extends Controller
                     'username' => $user->username ?? 'User',
                 ];
                 $notify = AdminNotification::first();
-                if($notify->otp == 1){
+                if ($notify->otp == 1) {
                     Mail::to($request['email'])->send(new SendCodeMail($details));
                 }
                 $data = ['user' => $user, 'otp' => $code];
@@ -452,10 +469,10 @@ class AuthController extends Controller
         //     'email' => 'required',
         //     'otp' => 'required',
         // ]);
-        if(empty($request->email)){
+        if (empty($request->email)) {
             return ResponseHelper::sendResponse([], 'Email is Required!', false, 404);
         }
-        if(empty($request->otp)){
+        if (empty($request->otp)) {
             return ResponseHelper::sendResponse([], 'OTP is Required!', false, 404);
         }
         $email = strtolower($request->email);
@@ -526,7 +543,7 @@ class AuthController extends Controller
                 'username' => $user->username
             ];
             $notify = AdminNotification::first();
-            if($notify->otp == 1){
+            if ($notify->otp == 1) {
                 Mail::to($user->email)->send(new SendCodeMail($details));
             }
             return response()->json(['success' => true, 'message' => 'Verification Code has been sent to your email!', 'data' => ['user_id' => $user->id, 'email' => $user->email, 'token' => $token]], 201);
@@ -609,7 +626,7 @@ class AuthController extends Controller
                 'username' => $user->username
             ];
             $notify = AdminNotification::first();
-            if($notify->otp == 1){
+            if ($notify->otp == 1) {
                 Mail::to($user->email)->send(new SendCodeMail($details));
             }
             $user->code = $code;
