@@ -96,7 +96,7 @@ class LanguagesHelpers
             ['keyword' => 'Request Changes', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
             ['keyword' => 'Device IMEI is not registered', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
             ['keyword' => 'Invalid Creadentials!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
-            ['keyword' => 'Youre Email is not verified!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
+            ['keyword' => "You're Email is not verified!", 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
             ['keyword' => 'You have logged in successfully!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
             ['keyword' => 'Email or Password is Incorrect!', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],
             ['keyword' => 'This E-Mail address not exist in our System', 'translated' => '', 'main_section' => 'Home Page', 'section_name' => 'Home Page SignIn 2'],

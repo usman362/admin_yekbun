@@ -132,7 +132,7 @@ class AuthController extends Controller
                         Mail::to($user->email)->send(new SendCodeMail($details));
                     }
                 }
-                return ResponseHelper::sendResponse([], 'Youre Email is not verified!', false, 403);
+                return ResponseHelper::sendResponse([], "You're Email is not verified!", false, 403);
             }
 
             // Generate a JWT token for the authenticated user
