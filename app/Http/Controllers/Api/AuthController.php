@@ -685,4 +685,92 @@ class AuthController extends Controller
         $user->delete();
         return ResponseHelper::sendResponse([], 'Account has been Deleted Successfully!');
     }
+
+    public function currenceyLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $email = strtolower($request->email);
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return ResponseHelper::sendResponse([], 'User not found!', false, 404);
+        }
+
+        if ($user->status == 0) {
+            return ResponseHelper::sendResponse([], 'Your account is deactivated.', false, 403);
+        }
+
+        // Generate 4 digit OTP
+        $otp = rand(1000, 9999);
+
+        UserCode::updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'code' => $otp,
+                'expires_at' => now()->addMinutes(5) // optional expiry
+            ]
+        );
+
+        $details = [
+            'code' => $otp,
+            'username' => $user->username,
+        ];
+
+        Mail::to($user->email)->send(new SendCodeMail($details));
+
+        return ResponseHelper::sendResponse(
+            [],
+            'OTP has been sent to your email.',
+            true,
+            200
+        );
+    }
+
+    public function verifyCurrenceyLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'otp'   => 'required'
+        ]);
+
+        $user = User::where('email', strtolower($request->email))->first();
+
+        if (!$user) {
+            return ResponseHelper::sendResponse([], 'User not found!', false, 404);
+        }
+
+        $userCode = UserCode::where('user_id', $user->id)
+            ->where('code', $request->otp)
+            ->first();
+
+        if (!$userCode) {
+            return ResponseHelper::sendResponse([], 'Invalid OTP!', false, 403);
+        }
+
+        if ($userCode->expires_at && now()->gt($userCode->expires_at)) {
+            return ResponseHelper::sendResponse([], 'OTP expired!', false, 403);
+        }
+
+        // Generate JWT token
+        try {
+            if (!$token = JWTAuth::fromUser($user)) {
+                return ResponseHelper::sendResponse([], 'Login failed!', false, 400);
+            }
+        } catch (JWTException $e) {
+            return ResponseHelper::sendResponse([], 'Token error!', false, 500);
+        }
+
+        // Delete OTP after success
+        $userCode->delete();
+
+        return ResponseHelper::sendResponse(
+            ['user' => $user, 'token' => $token],
+            'Login successful!',
+            true,
+            200
+        );
+    }
 }

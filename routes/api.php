@@ -112,6 +112,11 @@ use App\Http\Controllers\Api\UserSuggestionController;
     Route::post('2fa/reset', [TwoFactorController::class, 'resend'])->name('2fa.resend');
     Route::get('/user-imei', [AuthController::class, 'userImei']);
     Route::post('/check-email-exists', [AuthController::class, 'existsEmail']);
+
+    //Currency Login
+    Route::post('/currency-login', [AuthController::class, 'currenceyLogin']);
+    Route::post('/verify-currency-login', [AuthController::class, 'verifyCurrenceyLogin']);
+
     //User Profile
 
     // Account Setting  Controller
