@@ -703,8 +703,8 @@ class AuthController extends Controller
             return ResponseHelper::sendResponse([], 'Your account is deactivated.', false, 403);
         }
 
-        // Generate 4 digit OTP
-        $otp = rand(1000, 9999);
+        // Generate 6 digit OTP
+        $otp = rand(100000, 999999);
 
         UserCode::updateOrCreate(
             ['user_id' => $user->id],
