@@ -742,7 +742,7 @@ class AuthController extends Controller
             return ResponseHelper::sendResponse([], 'User not found!', false, 404);
         }
 
-        $userCode = UserCode::where('user_id', $user->id)
+        $userCode = UserCode::where('user_id', $user->_id)
             ->where('code', $request->otp)
             ->first();
 
