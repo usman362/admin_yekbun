@@ -140,37 +140,42 @@ class MultimediaController extends Controller
         $alphabet = $request->alphabet;
         $search   = $request->query;
         $userId   = Auth::id();
+        $artist_ids = ArtistFavorite::where('user_id', Auth::id())->pluck('artist_id');
 
-        $baseQuery = Artist::when($alphabet, function ($query, $alphabet) {
+        // 1️⃣ All Artists
+        $allArtists = Artist::when($alphabet, function ($query, $alphabet) {
             $query->where('name', 'LIKE', $alphabet . '%');
         })
             ->when($search, function ($query, $search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             })
             ->with(['songs', 'videos', 'province.country'])
-            ->where('status', '1');
-
-        // 1️⃣ All Artists
-        $allArtists = (clone $baseQuery)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->where('status', '1')->orderBy('created_at', 'desc')->get();
 
         // 2️⃣ Favourite Artists
-        $favArtistIds = ArtistFavorite::where('user_id', $userId)
-            ->pluck('artist_id');
-
-        $favArtists = (clone $baseQuery)
-            ->whereIn('_id', $favArtistIds)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $favArtists = Artist::when($alphabet, function ($query, $alphabet) {
+            $query->where('name', 'LIKE', $alphabet . '%');
+        })
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->whereIn('_id', $artist_ids)->with(['songs', 'videos', 'province' => function ($q) {
+                $q->with('country');
+            }])->orderBy('created_at', 'desc')->get();
 
         // 3️⃣ Popular Artists
-        $popularArtists = (clone $baseQuery)
-            ->orderBy('total_views', 'desc')
-            ->get();
+        $popularArtists = Artist::when($alphabet, function ($query, $alphabet) {
+            $query->where('name', 'LIKE', $alphabet . '%');
+        })
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->where('status', '1')->with(['songs', 'videos', 'province' => function ($q) {
+                $q->with('country');
+            }])->orderBy('total_views', 'desc')->get();
 
         $data = [
-            'all_artists'      => $allArtists,
+            'latest_artists'      => $allArtists,
             'favourite_artists' => $favArtists,
             'popular_artists'  => $popularArtists,
         ];
