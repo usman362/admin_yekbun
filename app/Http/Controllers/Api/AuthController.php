@@ -743,7 +743,7 @@ class AuthController extends Controller
             }
 
             $userCode = UserCode::where('user_id', $user->_id)
-            ->where('code', $request->otp)
+            ->where('code', (int)$request->otp)
             ->first();
             dd(['_id'=> $user->_id, 'user_code'=>$userCode]);
 
