@@ -750,9 +750,9 @@ class AuthController extends Controller
             return ResponseHelper::sendResponse([], 'Invalid OTP!', false, 403);
         }
 
-        if ($userCode->expires_at && now()->gt($userCode->expires_at)) {
-            return ResponseHelper::sendResponse([], 'OTP expired!', false, 403);
-        }
+        // if ($userCode->expires_at && now()->gt($userCode->expires_at)) {
+        //     return ResponseHelper::sendResponse([], 'OTP expired!', false, 403);
+        // }
 
         // Generate JWT token
         try {
