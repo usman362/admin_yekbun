@@ -737,15 +737,15 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', strtolower($request->email))->first();
-        dd($user);
 
         if (!$user) {
             return ResponseHelper::sendResponse([], 'User not found!', false, 404);
-        }
+            }
 
-        $userCode = UserCode::where('user_id', $user->_id)
+            $userCode = UserCode::where('user_id', $user->_id)
             ->where('code', $request->otp)
             ->first();
+            dd(['_id'=> $user->_id, 'user_code'=>$userCode]);
 
         if (!$userCode) {
             return ResponseHelper::sendResponse([], 'Invalid OTP!', false, 403);
