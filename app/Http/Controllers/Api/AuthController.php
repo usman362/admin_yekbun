@@ -737,6 +737,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', strtolower($request->email))->first();
+        dd($user);
 
         if (!$user) {
             return ResponseHelper::sendResponse([], 'User not found!', false, 404);
