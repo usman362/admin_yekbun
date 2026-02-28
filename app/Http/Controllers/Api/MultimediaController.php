@@ -138,7 +138,7 @@ class MultimediaController extends Controller
     public function getArtistsGrouped(Request $request)
     {
         $alphabet = $request->input('alphabet');
-        $search   = $request->input('query'); // renamed from query
+        $search   = $request->input('query');
         $userId   = Auth::id();
 
         $baseQuery = Artist::when($alphabet, function ($query) use ($alphabet) {
@@ -150,27 +150,46 @@ class MultimediaController extends Controller
             ->with(['songs', 'videos', 'province.country'])
             ->where('status', '1');
 
+        // Get All Artists
         $allArtists = (clone $baseQuery)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($artist) {
+                $artist->type = 'all';
+                return $artist;
+            });
 
+        // Get Favourite Artist IDs
         $favArtistIds = ArtistFavorite::where('user_id', $userId)
-            ->pluck('artist_id');
+            ->pluck('artist_id')
+            ->toArray();
 
-        $favArtists = (clone $baseQuery)
-            ->whereIn('_id', $favArtistIds)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
+        // Get Popular Artists
         $popularArtists = (clone $baseQuery)
             ->orderBy('total_views', 'desc')
-            ->get();
+            ->limit(20)
+            ->get()
+            ->pluck('_id')
+            ->toArray();
 
-        return ResponseHelper::sendResponse([
-            'all_artists'       => $allArtists,
-            'favourite_artists' => $favArtists,
-            'popular_artists'   => $popularArtists,
-        ], 'Artists fetched successfully!');
+        // Merge Types
+        $finalData = $allArtists->map(function ($artist) use ($favArtistIds, $popularArtists) {
+
+            if (in_array($artist->_id, $favArtistIds)) {
+                $artist->type = 'favourite';
+            }
+
+            if (in_array($artist->_id, $popularArtists)) {
+                $artist->type = 'popular';
+            }
+
+            return $artist;
+        });
+
+        return ResponseHelper::sendResponse(
+            $finalData,
+            'Artists fetched successfully!'
+        );
     }
 
     public function getArtistsPublic()
