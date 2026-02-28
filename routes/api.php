@@ -211,6 +211,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
         Route::get('/get-artist-songs/{id}', [MultimediaController::class, 'getSongByArtists']);
         Route::get('/get-artist-videos/{id}', [MultimediaController::class, 'getClipsByArtists']);
         Route::get('/get-popular-artists', [MultimediaController::class, 'getPopularArtists']);
+        Route::get('/artists-grouped', [MultimediaController::class, 'getArtistsGrouped']);
         Route::get('/get-artists-details/{id}', [MultimediaController::class, 'getArtistDetail']);
         Route::get('get-favorite-artists', [MultimediaController::class, 'getFavArtists']);
         Route::post('store-artist-song-views/{id}', [MultimediaController::class, 'store_artist_song_views']);

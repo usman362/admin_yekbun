@@ -99,24 +99,6 @@ class MultimediaController extends Controller
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
 
-    public function getArtistsPublic()
-    {
-        $alphabet = request('alphabet'); // e.g., ?alphabet=A
-
-        $artists = Artist::when($alphabet, function ($query, $alphabet) {
-            $query->where('name', 'LIKE', $alphabet . '%');
-        })
-            ->with([
-                'songs',
-                'videos',
-                'province.country'
-            ])
-            ->where('status', '1')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
-    }
 
     public function getFavArtists()
     {
@@ -153,6 +135,67 @@ class MultimediaController extends Controller
         return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
     }
 
+    public function getArtistsGrouped(Request $request)
+    {
+        $alphabet = $request->alphabet;
+        $search   = $request->query;
+        $userId   = Auth::id();
+
+        $baseQuery = Artist::when($alphabet, function ($query, $alphabet) {
+            $query->where('name', 'LIKE', $alphabet . '%');
+        })
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->with(['songs', 'videos', 'province.country'])
+            ->where('status', '1');
+
+        // 1️⃣ All Artists
+        $allArtists = (clone $baseQuery)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // 2️⃣ Favourite Artists
+        $favArtistIds = ArtistFavorite::where('user_id', $userId)
+            ->pluck('artist_id');
+
+        $favArtists = (clone $baseQuery)
+            ->whereIn('_id', $favArtistIds)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // 3️⃣ Popular Artists
+        $popularArtists = (clone $baseQuery)
+            ->orderBy('total_views', 'desc')
+            ->get();
+
+        $data = [
+            'all_artists'      => $allArtists,
+            'favourite_artists' => $favArtists,
+            'popular_artists'  => $popularArtists,
+        ];
+
+        return ResponseHelper::sendResponse($data, 'Artists fetched successfully!');
+    }
+
+    public function getArtistsPublic()
+    {
+        $alphabet = request('alphabet'); // e.g., ?alphabet=A
+
+        $artists = Artist::when($alphabet, function ($query, $alphabet) {
+            $query->where('name', 'LIKE', $alphabet . '%');
+        })
+            ->with([
+                'songs',
+                'videos',
+                'province.country'
+            ])
+            ->where('status', '1')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return ResponseHelper::sendResponse($artists, 'All Artists Fetch Successfully!');
+    }
     public function storeArtist(Request $request)
     {
         $request->validate([
