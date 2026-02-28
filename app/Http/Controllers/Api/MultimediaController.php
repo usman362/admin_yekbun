@@ -138,7 +138,7 @@ class MultimediaController extends Controller
     public function getArtistsGrouped(Request $request)
     {
         $alphabet = $request->input('alphabet');
-        $search   = $request->input('search'); // renamed from query
+        $search   = $request->input('query'); // renamed from query
         $userId   = Auth::id();
 
         $baseQuery = Artist::when($alphabet, function ($query) use ($alphabet) {
