@@ -128,7 +128,7 @@ class AuthController extends Controller
                         'username' => $user->username,
                     ];
                     $notify = AdminNotification::first();
-                    if ($notify->otp == 1) {
+                    if ($notify && $notify->otp == 1) {
                         Mail::to($user->email)->send(new SendCodeMail($details));
                     }
                 }
@@ -306,14 +306,14 @@ class AuthController extends Controller
                         'username' => $request->username,
                     ];
                     $notify = AdminNotification::first();
-                    if ($notify->otp == 1) {
+                    if ($notify && $notify->otp == 1) {
                         Mail::to($request['email'])->send(new SendCodeMail($details));
                     }
                     return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
                     // return response()->json(['success' => true, "message" => "User has been Successfully Created!", 'user' => $user->id], 201);
                 } catch (\Exception $e) {
                     // info("Error: " . $e->getMessage());
-                    return response()->json(['success' => false, 'message' => 'Something went wrong'], 505);
+                    return response()->json(['success' => false, 'message' => 'Something went wrong'], 500);
                 }
             }
         } catch (\Exception $e) {
@@ -345,12 +345,12 @@ class AuthController extends Controller
                         'username' => $request->username,
                     ];
                     $notify = AdminNotification::first();
-                    if ($notify->otp == 1) {
+                    if ($notify && $notify->otp == 1) {
                         Mail::to($request['email'])->send(new SendCodeMail($details));
                     }
                     return response()->json(['success' => true, "message" => "Verification Code has been sent to your email!", 'user' => $user->id], 201);
                 } catch (\Exception $e) {
-                    return response()->json(['success' => false, 'message' => 'Something went wrong'], 505);
+                    return response()->json(['success' => false, 'message' => 'Something went wrong'], 500);
                 }
             }
         } catch (\Exception $e) {
@@ -415,7 +415,7 @@ class AuthController extends Controller
                     'username' => $user->username ?? 'User',
                 ];
                 $notify = AdminNotification::first();
-                if ($notify->otp == 1) {
+                if ($notify && $notify->otp == 1) {
                     Mail::to($request['email'])->send(new SendCodeMail($details));
                 }
                 $data = ['user' => $user, 'otp' => $code];
@@ -543,7 +543,7 @@ class AuthController extends Controller
                 'username' => $user->username
             ];
             $notify = AdminNotification::first();
-            if ($notify->otp == 1) {
+            if ($notify && $notify->otp == 1) {
                 Mail::to($user->email)->send(new SendCodeMail($details));
             }
             return response()->json(['success' => true, 'message' => 'Verification Code has been sent to your email!', 'data' => ['user_id' => $user->id, 'email' => $user->email, 'token' => $token]], 201);
@@ -626,7 +626,7 @@ class AuthController extends Controller
                 'username' => $user->username
             ];
             $notify = AdminNotification::first();
-            if ($notify->otp == 1) {
+            if ($notify && $notify->otp == 1) {
                 Mail::to($user->email)->send(new SendCodeMail($details));
             }
             $user->code = $code;
