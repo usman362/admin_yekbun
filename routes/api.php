@@ -49,6 +49,7 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\UpgradeAccountController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\AnimationEmojiController;
+use App\Http\Controllers\Api\AppVersionController;
 use App\Http\Controllers\Api\MarketServiceContorller;
 use App\Http\Controllers\Api\ReactionController;
 use App\Http\Controllers\Api\PostGalleryController;
@@ -116,6 +117,8 @@ use App\Http\Controllers\Api\UserSuggestionController;
     //Currency Login
     Route::post('/currency-login', [AuthController::class, 'currenceyLogin']);
     Route::post('/verify-currency-login', [AuthController::class, 'verifyCurrenceyLogin']);
+
+    Route::get('get-version', [AppVersionController::class, 'getVersion']);
 
     //User Profile
 
