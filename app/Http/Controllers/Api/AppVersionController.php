@@ -35,4 +35,25 @@ class AppVersionController extends Controller
 
         return ResponseHelper::sendResponse($version->version_number, 'Version fetched Successfully');
     }
+
+    public function updateVersion(Request $request)
+    {
+        $version = AppVersion::first();
+
+        // Agar record exist nahi karta to create kar do
+        if (!$version) {
+            $version = AppVersion::create([
+                'version_number' => '0.00'
+            ]);
+        }
+
+        // Agar request me version_number aaya hai to update kar do
+        if ($request->filled('version_number')) {
+            $version->update([
+                'version_number' => $request->version_number
+            ]);
+        }
+
+        return ResponseHelper::sendResponse($version->version_number, 'Version fetched Successfully');
+    }
 }

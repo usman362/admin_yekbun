@@ -119,6 +119,7 @@ use App\Http\Controllers\Api\UserSuggestionController;
     Route::post('/verify-currency-login', [AuthController::class, 'verifyCurrenceyLogin']);
 
     Route::get('get-version', [AppVersionController::class, 'getVersion']);
+    Route::post('update-version', [AppVersionController::class, 'updateVersion']);
 
     //User Profile
 
