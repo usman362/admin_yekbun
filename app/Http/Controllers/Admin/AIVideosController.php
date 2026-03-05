@@ -110,7 +110,7 @@ class AIVideosController extends Controller
                         $ai_video->likes_count, //emojisCount
                         $ai_video->views_count, //seenCount
                         $ai_video->user_id, //user_id
-                        $ai_video->description, //text
+                        $ai_video->source, //text
                         null, //text_properties
                         'ai_videos' //type
                     );

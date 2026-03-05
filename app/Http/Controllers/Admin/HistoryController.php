@@ -117,7 +117,7 @@ class HistoryController extends Controller
                         $history->likes_count, //emojisCount
                         $history->views_count, //seenCount
                         $history->user_id, //user_id
-                        $history->description, //text
+                        $history->source, //text
                         null, //text_properties
                         'history' //type
                     );
