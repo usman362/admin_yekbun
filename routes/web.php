@@ -983,7 +983,16 @@ Route::middleware(['admin.auth', '2fa'])->group(function () use ($controller_pat
         Route::get('zercash-overview',[LogipayController::class,'zer_overview'])->name('zercash.index');
         Route::get('zercash-transactions',[LogipayController::class,'transactions'])->name('zercash.transactions');
         Route::get('zercash-products',[LogipayController::class,'products'])->name('zercash.products');
+        Route::post('zercash-products',[LogipayController::class,'storeProduct'])->name('zercash.products.store');
+        Route::put('zercash-products/{id}',[LogipayController::class,'updateProduct'])->name('zercash.products.update');
+        Route::delete('zercash-products/{id}',[LogipayController::class,'destroyProduct'])->name('zercash.products.destroy');
+        Route::post('zercash-sale-managers',[LogipayController::class,'storeSaleManager'])->name('zercash.sale_managers.store');
+        Route::put('zercash-sale-managers/{id}',[LogipayController::class,'updateSaleManager'])->name('zercash.sale_managers.update');
+        Route::delete('zercash-sale-managers/{id}',[LogipayController::class,'destroySaleManager'])->name('zercash.sale_managers.destroy');
         Route::get('zercash-settings',[LogipayController::class,'zer_settings'])->name('zercash.settings');
+        Route::post('zercash-settings',[LogipayController::class,'storeSetting'])->name('zercash.settings.store');
+        Route::put('zercash-settings/{id}',[LogipayController::class,'updateSetting'])->name('zercash.settings.update');
+        Route::delete('zercash-settings/{id}',[LogipayController::class,'destroySetting'])->name('zercash.settings.destroy');
 });
 
 Route::get('stories_time', [SettingController::class, 'storage_setting'])->name('stories23.time');

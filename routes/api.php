@@ -68,6 +68,10 @@ use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\ViewsController;
 use App\Http\Controllers\Api\TVController;
 use App\Http\Controllers\Api\UserSuggestionController;
+use App\Http\Controllers\Api\ZercashApiController;
+use App\Http\Controllers\Api\CartApiController;
+use App\Http\Controllers\Api\CheckoutApiController;
+use App\Http\Controllers\Api\WalletApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -592,6 +596,81 @@ use App\Http\Controllers\Api\UserSuggestionController;
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    // });
 
-// });
+    /*
+    |--------------------------------------------------------------------------
+    | Zercash / YekBûn Frontend API Routes (Public)
+    |--------------------------------------------------------------------------
+    */
+
+    // Products & Plans (public — no auth needed)
+    Route::get('zercash/products', [ZercashApiController::class, 'products']);
+    Route::get('zercash/products/{id}', [ZercashApiController::class, 'productDetail']);
+    Route::get('zercash/categories', [ZercashApiController::class, 'categories']);
+    Route::get('zercash/plans', [ZercashApiController::class, 'plans']);
+    Route::get('zercash/settings', [ZercashApiController::class, 'settings']);
+    Route::get('zercash/shops', [ZercashApiController::class, 'shops']);
+    Route::get('zercash/sale-managers', [ZercashApiController::class, 'saleManagers']);
+    Route::get('zercash/faqs', [ZercashApiController::class, 'faqs']);
+    Route::get('zercash/site-settings', [ZercashApiController::class, 'siteSettings']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Zercash / YekBûn Frontend API Routes (Authenticated)
+    |--------------------------------------------------------------------------
+    */
+
+    Route::middleware('jwt.custom')->group(function () {
+
+        // Cart (aligned with frontend expectations)
+        Route::get('cart', [CartApiController::class, 'index']);
+        Route::post('cart/items', [CartApiController::class, 'store']);
+        Route::put('cart/items/{id}', [CartApiController::class, 'update']);
+        Route::delete('cart/items/{id}', [CartApiController::class, 'destroy']);
+        Route::post('cart/clear', [CartApiController::class, 'clear']);
+
+        // Checkout & Payment
+        Route::post('checkout/prepare', [CheckoutApiController::class, 'prepare']);
+        Route::post('checkout/pay', [CheckoutApiController::class, 'pay']);
+
+        // Orders
+        Route::get('orders', [CheckoutApiController::class, 'orders']);
+        Route::get('orders/{id}', [CheckoutApiController::class, 'orderDetail']);
+
+        // Wallet
+        Route::get('zercash/wallet', [ZercashApiController::class, 'wallet']);
+        Route::get('zercash/wallet/transactions', [ZercashApiController::class, 'walletTransactions']);
+
+        // Subscription
+        Route::post('zercash/subscription/update', [ZercashApiController::class, 'updateSubscription']);
+
+        // ── Wallet Management (Mobile App) ──
+
+        // Wallet Creation & PIN
+        Route::post('wallet/create', [WalletApiController::class, 'createWallet']);
+        Route::post('wallet/verify-pin', [WalletApiController::class, 'verifyPin']);
+        Route::post('wallet/change-pin', [WalletApiController::class, 'changePin']);
+
+        // Wallet Status
+        Route::get('wallet/status', [WalletApiController::class, 'walletStatus']);
+
+        // Wallet Dashboard (Home Screen)
+        Route::get('wallet/dashboard', [WalletApiController::class, 'dashboard']);
+        Route::get('wallet/quick-access', [WalletApiController::class, 'quickAccess']);
+        Route::get('wallet/chart', [WalletApiController::class, 'chartData']);
+
+        // Wallet Transactions (Deposits, Cashbacks, Payouts)
+        Route::get('wallet/deposits', [WalletApiController::class, 'deposits']);
+        Route::get('wallet/cashbacks', [WalletApiController::class, 'cashbacks']);
+        Route::get('wallet/payouts', [WalletApiController::class, 'payouts']);
+        Route::get('wallet/transactions', [WalletApiController::class, 'transactions']);
+
+        // Wallet Deposit / Top-up
+        Route::post('wallet/deposit', [WalletApiController::class, 'deposit']);
+
+        // Admin: Wallet Activation & Status Management
+        Route::post('wallet/activate', [WalletApiController::class, 'activateWallet']);
+        Route::post('wallet/update-status', [WalletApiController::class, 'updateWalletStatus']);
+    });
+
+    // });
