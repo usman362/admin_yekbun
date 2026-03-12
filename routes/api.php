@@ -72,6 +72,7 @@ use App\Http\Controllers\Api\ZercashApiController;
 use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\Api\CheckoutApiController;
 use App\Http\Controllers\Api\WalletApiController;
+use App\Http\Controllers\Api\KycApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -647,7 +648,7 @@ use App\Http\Controllers\Api\WalletApiController;
         // ── Wallet Management (Mobile App) ──
 
         // Wallet Creation & PIN
-        Route::post('wallet/create', [WalletApiController::class, 'createWallet']);
+        Route::post('wallet/create-pin', [WalletApiController::class, 'createWallet']);
         Route::post('wallet/verify-pin', [WalletApiController::class, 'verifyPin']);
         Route::post('wallet/change-pin', [WalletApiController::class, 'changePin']);
 
@@ -671,6 +672,23 @@ use App\Http\Controllers\Api\WalletApiController;
         // Admin: Wallet Activation & Status Management
         Route::post('wallet/activate', [WalletApiController::class, 'activateWallet']);
         Route::post('wallet/update-status', [WalletApiController::class, 'updateWalletStatus']);
+
+        // ── KYC Verification (Mobile App) ──
+
+        // KYC Document Types (public info but needs auth)
+        Route::get('kyc/document-types', [KycApiController::class, 'documentTypes']);
+
+        // KYC OTP (before uploading documents)
+        Route::post('kyc/send-otp', [KycApiController::class, 'sendOtp']);
+        Route::post('kyc/verify-otp', [KycApiController::class, 'verifyOtp']);
+
+        // KYC Submit (upload all docs + info in one request, multipart/form-data)
+        Route::post('kyc/submit', [KycApiController::class, 'submit']);
+        Route::get('kyc/status', [KycApiController::class, 'status']);
+
+        // Admin: KYC Review
+        Route::post('kyc/review', [KycApiController::class, 'review']);
+        Route::get('kyc/pending', [KycApiController::class, 'pendingList']);
     });
 
     // });
