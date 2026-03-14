@@ -149,6 +149,41 @@ class WalletApiController extends Controller
         return ResponseHelper::sendResponse(null, 'PIN changed successfully.');
     }
 
+    public function walletStatus()
+    {
+        $user = User::find(Auth::id());
+
+        if (!$user) {
+            return ResponseHelper::sendResponse(null, 'User not found.', false, 404);
+        }
+
+        $wallet = Wallet::where('user_id', $user->_id)->first();
+
+        if (!$wallet) {
+            return ResponseHelper::sendResponse([
+                'has_wallet' => false,
+            ], 'No wallet found. Please create one.');
+        }
+
+        $statusMessages = [
+            'under_review' => 'We will review your request. We will get back soon.',
+            'activated'    => 'Wallet is activated. Enjoy...',
+            'on_hold'      => 'Wallet is on Hold. See the reason here.',
+            'closed'       => 'Wallet is Closed. The account will be removed after 90 Days.',
+        ];
+
+        $status = $wallet->status ?? 'under_review';
+
+        return ResponseHelper::sendResponse([
+            'has_wallet'      => true,
+            'wallet_id'       => $this->maskWalletId($wallet->_id),
+            'wallet_status'   => $status,
+            'status_message'  => $statusMessages[$status] ?? 'Unknown status.',
+            'hold_reason'     => $wallet->status_reason ?? null,
+            'expire_at'       => $wallet->expire_at ?? null,
+            'created_at'      => $wallet->created_at ?? null,
+        ], 'Wallet status fetched.');
+    }
 
     public function updateWalletStatus(Request $request)
     {
@@ -223,5 +258,4 @@ class WalletApiController extends Controller
             'balance' => $wallet->balance
         ], 'Deposit successful.');
     }
-
 }
