@@ -182,9 +182,9 @@ class KycApiController extends Controller
             $rules['document_back'] = 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120';
         }
 
-        $request->validate($rules, [
-            'document_back.required' => 'Back of document is required for ' . str_replace('_', ' ', $docType ?? '') . '.',
-        ]);
+        // $request->validate($rules, [
+        //     'document_back.required' => 'Back of document is required for ' . str_replace('_', ' ', $docType ?? '') . '.',
+        // ]);
 
         $user = User::find(Auth::id());
         if (!$user) {
