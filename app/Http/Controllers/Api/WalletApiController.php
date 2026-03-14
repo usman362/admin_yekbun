@@ -151,13 +151,13 @@ class WalletApiController extends Controller
 
     public function walletStatus()
     {
-        $user = User::find(Auth::id());
+        $user = Auth::user();
 
         if (!$user) {
             return ResponseHelper::sendResponse(null, 'User not found.', false, 404);
         }
 
-        $wallet = Wallet::where('user_id', Auth::id())->first();
+        $wallet = Wallet::where('user_id', $user->_id)->first();
 
         if (!$wallet) {
             return ResponseHelper::sendResponse([
