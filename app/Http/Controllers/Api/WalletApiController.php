@@ -258,4 +258,14 @@ class WalletApiController extends Controller
             'balance' => $wallet->balance
         ], 'Deposit successful.');
     }
+
+    private function maskWalletId($walletId)
+    {
+        if (strlen($walletId) < 10) return $walletId;
+        $parts = explode(' ', $walletId);
+        if (count($parts) >= 4) {
+            return $parts[0] . ' **** **** ' . $parts[3];
+        }
+        return $walletId;
+    }
 }
