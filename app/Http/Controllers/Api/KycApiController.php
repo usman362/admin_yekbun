@@ -17,6 +17,38 @@ use Illuminate\Support\Facades\Validator;
 class KycApiController extends Controller
 {
 
+
+    public function sendOtp()
+    {
+        $user = User::find(Auth::id());
+        if (!$user) {
+            return ResponseHelper::sendResponse(null, 'User not found.', false, 404);
+        }
+        // Generate 6-digit OTP
+        $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        // Store OTP on user (expires in 10 minutes)
+        $user->kyc_otp = $otp;
+        $user->kyc_otp_expires_at = Carbon::now()->addMinutes(10)->toDateTimeString();
+        $user->save();
+        // Send OTP via email (using existing mail setup)
+        $email = $user->email;
+        if ($email) {
+            try {
+                Mail::raw("Your KYC verification code is: {$otp}\n\nThis code expires in 10 minutes.", function ($message) use ($email, $user) {
+                    $message->to($email)->subject('YekBûn KYC Verification Code');
+                });
+            } catch (\Exception $e) {
+                // Log error but don't fail - OTP is still stored
+            }
+        }
+        // Mask email for response
+        $maskedEmail = $this->maskEmail($email ?? '');
+        return ResponseHelper::sendResponse([
+            'sent_to' => $maskedEmail,
+            'expires_in' => 600, // seconds
+        ], 'OTP sent to your registered email.');
+    }
+
     public function verifyOtp(Request $request)
     {
 
@@ -54,7 +86,6 @@ class KycApiController extends Controller
         return ResponseHelper::sendResponse([
             'verified' => true
         ], 'OTP verified successfully.');
-
     }
 
 
@@ -150,7 +181,6 @@ class KycApiController extends Controller
             'kyc_id' => $kyc->_id,
             'status' => 'pending'
         ], 'KYC submitted.');
-
     }
 
 
@@ -196,7 +226,6 @@ class KycApiController extends Controller
             return ResponseHelper::sendResponse([
                 'kyc_status' => 'approved'
             ], 'KYC approved');
-
         } else {
 
             $kyc->status = 'rejected';
@@ -210,9 +239,38 @@ class KycApiController extends Controller
             return ResponseHelper::sendResponse([
                 'kyc_status' => 'rejected'
             ], 'KYC rejected');
-
         }
-
     }
 
+    public function status()
+    {
+        $user = User::find(Auth::id());
+        if (!$user) {
+            return ResponseHelper::sendResponse(null, 'User not found.', false, 404);
+        }
+        $kyc = KycVerification::where('user_id', $user->_id)->orderBy('created_at', 'desc')->first();
+        if (!$kyc) {
+            return ResponseHelper::sendResponse(['has_kyc' => false, 'kyc_status' => null,], 'No KYC submission found.');
+        }
+        $statusMessages = ['draft' => 'KYC documents are being uploaded.', 'pending' => 'Your documents are submitted and waiting for review.', 'under_review' => 'Our team is currently reviewing your documents.', 'approved' => 'Your KYC is approved. Your wallet is now active!', 'rejected' => 'Your KYC was rejected. Please resubmit.',];
+        return ResponseHelper::sendResponse(['has_kyc' => true, 'kyc_id' => $kyc->_id, 'kyc_status' => $kyc->status, 'status_message' => $statusMessages[$kyc->status] ?? 'Unknown status.', 'document_type' => $kyc->document_type, 'full_name' => $kyc->full_name, 'rejection_reason' => $kyc->rejection_reason, 'submitted_at' => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null, 'reviewed_at' => $kyc->reviewed_at ? Carbon::parse($kyc->reviewed_at)->format('d M Y H:i') : null,], 'KYC status fetched.');
+    }
+
+    public function pendingList(Request $request)
+    {
+        $perPage = $request->query('per_page', 20);
+        $status = $request->query('status', 'pending');
+        $query = KycVerification::whereIn('status', $status === 'all' ? ['pending', 'under_review', 'approved', 'rejected'] : [$status])->orderBy('submitted_at', 'desc');
+        $kycs = $query->paginate($perPage);
+        $items = $kycs->map(function ($kyc) {
+            return ['kyc_id' => $kyc->_id, 'user_id' => $kyc->user_id, 'full_name' => $kyc->full_name, 'document_type' => $kyc->document_type, 'document_number' => $kyc->document_number, 'status' => $kyc->status, 'submitted_at' => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null, 'document_front' => $kyc->document_front ? asset('storage/' . $kyc->document_front) : null, 'document_back' => $kyc->document_back ? asset('storage/' . $kyc->document_back) : null, 'selfie_with_id' => $kyc->selfie_with_id ? asset('storage/' . $kyc->selfie_with_id) : null,];
+        });
+        return ResponseHelper::sendResponse(['items' => $items, 'current_page' => $kycs->currentPage(), 'last_page' => $kycs->lastPage(), 'total' => $kycs->total(),], 'KYC list fetched.');
+    }
+
+    public function documentTypes()
+    {
+        $types = [['key' => 'national_id', 'label' => 'National ID Card', 'description' => 'Government-issued national identity card.', 'requires_back' => true,], ['key' => 'passport', 'label' => 'Passport', 'description' => 'Valid international passport.', 'requires_back' => false,], ['key' => 'driver_license', 'label' => 'Driver License', 'description' => 'Valid driving license with photo.', 'requires_back' => true,], ['key' => 'work_company_license', 'label' => 'Work & Company License', 'description' => 'Official work permit or company license.', 'requires_back' => false,],];
+        return ResponseHelper::sendResponse($types, 'Document types fetched.');
+    }
 }
