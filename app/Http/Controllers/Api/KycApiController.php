@@ -268,6 +268,28 @@ class KycApiController extends Controller
         return ResponseHelper::sendResponse(['items' => $items, 'current_page' => $kycs->currentPage(), 'last_page' => $kycs->lastPage(), 'total' => $kycs->total(),], 'KYC list fetched.');
     }
 
+    private function maskEmail($email)
+    {
+        if (empty($email) || !str_contains($email, '@')) {
+            return '***@***.***';
+        }
+
+        [$name, $domain] = explode('@', $email);
+        $domainParts = explode('.', $domain);
+
+        $maskedName = strlen($name) <= 2
+            ? str_repeat('*', strlen($name))
+            : substr($name, 0, 2) . str_repeat('*', strlen($name) - 2);
+
+        $maskedDomain = strlen($domainParts[0]) <= 2
+            ? str_repeat('*', strlen($domainParts[0]))
+            : substr($domainParts[0], 0, 2) . str_repeat('*', strlen($domainParts[0]) - 2);
+
+        $domainParts[0] = $maskedDomain;
+
+        return $maskedName . '@' . implode('.', $domainParts);
+    }
+
     public function documentTypes()
     {
         $types = [['key' => 'national_id', 'label' => 'National ID Card', 'description' => 'Government-issued national identity card.', 'requires_back' => true,], ['key' => 'passport', 'label' => 'Passport', 'description' => 'Valid international passport.', 'requires_back' => false,], ['key' => 'driver_license', 'label' => 'Driver License', 'description' => 'Valid driving license with photo.', 'requires_back' => true,], ['key' => 'work_company_license', 'label' => 'Work & Company License', 'description' => 'Official work permit or company license.', 'requires_back' => false,],];
