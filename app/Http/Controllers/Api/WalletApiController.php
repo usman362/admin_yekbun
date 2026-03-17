@@ -50,6 +50,11 @@ class WalletApiController extends Controller
         $wallet->created_at = Carbon::now();
         $wallet->save();
 
+        // Save wallet_id on user for userDetails response
+        $user->wallet_id = $wallet->_id;
+        $user->wallet_status = 'under_review';
+        $user->save();
+
         return ResponseHelper::sendResponse($wallet, 'Wallet created successfully.');
     }
 
@@ -78,6 +83,13 @@ class WalletApiController extends Controller
         $wallet->status = 'activated';
         $wallet->activated_at = Carbon::now();
         $wallet->save();
+
+        // Sync wallet status on user
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->wallet_status = 'activated';
+            $user->save();
+        }
 
         return ResponseHelper::sendResponse($wallet, 'Wallet activated.');
     }
@@ -162,11 +174,18 @@ class WalletApiController extends Controller
 
         if (!$wallet) {
             return ResponseHelper::sendResponse([
-                'has_wallet' => false,
+                'has_wallet'      => false,
+                'wallet_id'       => null,
+                'wallet_status'   => 'not_found',
+                'status_message'  => 'No wallet found. Please create one.',
+                'hold_reason'     => null,
+                'expire_at'       => null,
+                'created_at'      => null,
             ], 'No wallet found. Please create one.');
         }
 
         $statusMessages = [
+            'not_found'    => 'No wallet found. Please create one.',
             'under_review' => 'We will review your request. We will get back soon.',
             'activated'    => 'Wallet is activated. Enjoy...',
             'on_hold'      => 'Wallet is on Hold. See the reason here.',
@@ -213,6 +232,13 @@ class WalletApiController extends Controller
         $wallet->status_reason = $request->reason;
         $wallet->updated_at = Carbon::now();
         $wallet->save();
+
+        // Sync wallet status on user
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->wallet_status = $request->status;
+            $user->save();
+        }
 
         return ResponseHelper::sendResponse($wallet, 'Wallet status updated.');
     }
