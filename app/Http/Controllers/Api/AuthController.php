@@ -18,6 +18,8 @@ use App\Http\Controllers\Controller;
 use App\Models\OtpVerification;
 use App\Models\UserImei;
 use App\Models\AdminNotification;
+use App\Models\Wallet;
+use App\Models\KycVerification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -144,7 +146,87 @@ class AuthController extends Controller
                 return ResponseHelper::sendResponse([], 'Invalid Creadentials!', false, 500);
             }
 
-            return ResponseHelper::sendResponse(['user' => $user, 'token' => $token], 'You have logged in successfully!');
+            // Wallet details
+            $wallet = Wallet::where('user_id', $user->_id)->first();
+            $walletStatusMessages = [
+                'not_found'    => 'No wallet found. Please create one.',
+                'under_review' => 'We will review your request. We will get back soon.',
+                'activated'    => 'Wallet is activated. Enjoy...',
+                'on_hold'      => 'Wallet is on Hold. See the reason here.',
+                'closed'       => 'Wallet is Closed. The account will be removed after 90 Days.',
+            ];
+
+            if ($wallet) {
+                $wStatus = $wallet->status ?? 'under_review';
+                $walletId = $wallet->_id;
+                // Mask wallet_id: show first 4 & last 4 chars
+                $maskedWalletId = strlen($walletId) >= 10
+                    ? strtoupper(substr($walletId, 0, 4)) . ' **** **** ' . strtoupper(substr($walletId, -4))
+                    : $walletId;
+
+                $walletData = [
+                    'has_wallet'     => true,
+                    'wallet_id'      => $maskedWalletId,
+                    'wallet_status'  => $wStatus,
+                    'status_message' => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
+                    'hold_reason'    => $wallet->status_reason ?? null,
+                    'balance'        => round($wallet->balance ?? 0, 2),
+                    'expire_at'      => $wallet->expire_at ?? null,
+                    'created_at'     => $wallet->created_at ?? null,
+                ];
+            } else {
+                $walletData = [
+                    'has_wallet'     => false,
+                    'wallet_id'      => null,
+                    'wallet_status'  => 'not_found',
+                    'status_message' => $walletStatusMessages['not_found'],
+                    'hold_reason'    => null,
+                    'balance'        => 0,
+                    'expire_at'      => null,
+                    'created_at'     => null,
+                ];
+            }
+
+            // KYC details
+            $kyc = KycVerification::where('user_id', $user->_id)->orderBy('created_at', 'desc')->first();
+            $kycStatusMessages = [
+                'not_submitted' => 'KYC not submitted yet.',
+                'pending'       => 'Your documents are submitted and waiting for review.',
+                'under_review'  => 'Our team is currently reviewing your documents.',
+                'approved'      => 'Your KYC is approved. Your wallet is now active!',
+                'rejected'      => 'Your KYC was rejected. Please resubmit.',
+            ];
+
+            if ($kyc) {
+                $kycData = [
+                    'has_kyc'          => true,
+                    'kyc_id'           => $kyc->_id,
+                    'kyc_status'       => $kyc->status,
+                    'status_message'   => $kycStatusMessages[$kyc->status] ?? 'Unknown status.',
+                    'document_type'    => $kyc->document_type,
+                    'rejection_reason' => $kyc->rejection_reason ?? null,
+                    'submitted_at'     => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null,
+                    'reviewed_at'      => $kyc->reviewed_at ? Carbon::parse($kyc->reviewed_at)->format('d M Y H:i') : null,
+                ];
+            } else {
+                $kycData = [
+                    'has_kyc'          => false,
+                    'kyc_id'           => null,
+                    'kyc_status'       => 'not_submitted',
+                    'status_message'   => $kycStatusMessages['not_submitted'],
+                    'document_type'    => null,
+                    'rejection_reason' => null,
+                    'submitted_at'     => null,
+                    'reviewed_at'      => null,
+                ];
+            }
+
+            return ResponseHelper::sendResponse([
+                'user'   => $user,
+                'token'  => $token,
+                'wallet' => $walletData,
+                'kyc'    => $kycData,
+            ], 'You have logged in successfully!');
         } else {
             // If credentials are incorrect, return an error
             return ResponseHelper::sendResponse([], 'Email or Password is Incorrect!', false, 403);
