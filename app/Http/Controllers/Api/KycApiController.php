@@ -352,11 +352,12 @@ class KycApiController extends Controller
             ];
         }
 
-        return [
-            'user'   => $user,
-            'wallet' => $walletData,
-            'kyc'    => $kycData,
-        ];
+        // Embed wallet & kyc inside user object
+        $userData = $user->toArray();
+        $userData['wallet'] = $walletData;
+        $userData['kyc'] = $kycData;
+
+        return $userData;
     }
 
     private function maskEmail($email)

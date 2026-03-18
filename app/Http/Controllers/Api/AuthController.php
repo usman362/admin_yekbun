@@ -221,11 +221,14 @@ class AuthController extends Controller
                 ];
             }
 
+            // Embed wallet & kyc inside user object
+            $userData = $user->toArray();
+            $userData['wallet'] = $walletData;
+            $userData['kyc'] = $kycData;
+
             return ResponseHelper::sendResponse([
-                'user'   => $user,
-                'token'  => $token,
-                'wallet' => $walletData,
-                'kyc'    => $kycData,
+                'user'  => $userData,
+                'token' => $token,
             ], 'You have logged in successfully!');
         } else {
             // If credentials are incorrect, return an error
