@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Transaction;
+use App\Models\KycVerification;
 use App\Models\ZercashSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,7 +56,10 @@ class WalletApiController extends Controller
         $user->wallet_status = 'under_review';
         $user->save();
 
-        return ResponseHelper::sendResponse($wallet, 'Wallet created successfully.');
+        return ResponseHelper::sendResponse([
+            'wallet'      => $wallet,
+            'userDetails' => $this->getUserDetails($user),
+        ], 'Wallet created successfully.');
     }
 
 
@@ -91,7 +95,10 @@ class WalletApiController extends Controller
             $user->save();
         }
 
-        return ResponseHelper::sendResponse($wallet, 'Wallet activated.');
+        return ResponseHelper::sendResponse([
+            'wallet'      => $wallet,
+            'userDetails' => $user ? $this->getUserDetails($user) : null,
+        ], 'Wallet activated.');
     }
 
 
@@ -172,6 +179,8 @@ class WalletApiController extends Controller
 
         $wallet = Wallet::where('user_id', $user->_id)->first();
 
+        $userDetails = $this->getUserDetails($user);
+
         if (!$wallet) {
             return ResponseHelper::sendResponse([
                 'has_wallet'      => false,
@@ -181,6 +190,7 @@ class WalletApiController extends Controller
                 'hold_reason'     => null,
                 'expire_at'       => null,
                 'created_at'      => null,
+                'userDetails'     => $userDetails,
             ], 'No wallet found. Please create one.');
         }
 
@@ -202,6 +212,7 @@ class WalletApiController extends Controller
             'hold_reason'     => $wallet->status_reason ?? null,
             'expire_at'       => $wallet->expire_at ?? null,
             'created_at'      => $wallet->created_at ?? null,
+            'userDetails'     => $userDetails,
         ], 'Wallet status fetched.');
     }
 
@@ -240,7 +251,10 @@ class WalletApiController extends Controller
             $user->save();
         }
 
-        return ResponseHelper::sendResponse($wallet, 'Wallet status updated.');
+        return ResponseHelper::sendResponse([
+            'wallet'      => $wallet,
+            'userDetails' => $user ? $this->getUserDetails($user) : null,
+        ], 'Wallet status updated.');
     }
 
 
@@ -282,8 +296,89 @@ class WalletApiController extends Controller
         $transaction->save();
 
         return ResponseHelper::sendResponse([
-            'balance' => $wallet->balance
+            'balance'     => $wallet->balance,
+            'userDetails' => $this->getUserDetails($user),
         ], 'Deposit successful.');
+    }
+
+    private function getUserDetails($user)
+    {
+        $user = $user->fresh();
+
+        // Wallet info
+        $wallet = Wallet::where('user_id', $user->_id)->first();
+        $walletStatusMessages = [
+            'not_found'    => 'No wallet found. Please create one.',
+            'under_review' => 'We will review your request. We will get back soon.',
+            'activated'    => 'Wallet is activated. Enjoy...',
+            'on_hold'      => 'Wallet is on Hold. See the reason here.',
+            'closed'       => 'Wallet is Closed. The account will be removed after 90 Days.',
+        ];
+
+        if ($wallet) {
+            $wStatus = $wallet->status ?? 'under_review';
+            $walletData = [
+                'has_wallet'     => true,
+                'wallet_id'      => $this->maskWalletId($wallet->_id),
+                'wallet_status'  => $wStatus,
+                'status_message' => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
+                'hold_reason'    => $wallet->status_reason ?? null,
+                'balance'        => round($wallet->balance ?? 0, 2),
+                'expire_at'      => $wallet->expire_at ?? null,
+                'created_at'     => $wallet->created_at ?? null,
+            ];
+        } else {
+            $walletData = [
+                'has_wallet'     => false,
+                'wallet_id'      => null,
+                'wallet_status'  => 'not_found',
+                'status_message' => $walletStatusMessages['not_found'],
+                'hold_reason'    => null,
+                'balance'        => 0,
+                'expire_at'      => null,
+                'created_at'     => null,
+            ];
+        }
+
+        // KYC info
+        $kyc = KycVerification::where('user_id', $user->_id)->orderBy('created_at', 'desc')->first();
+        $kycStatusMessages = [
+            'not_submitted' => 'KYC not submitted yet.',
+            'pending'       => 'Your documents are submitted and waiting for review.',
+            'under_review'  => 'Our team is currently reviewing your documents.',
+            'approved'      => 'Your KYC is approved. Your wallet is now active!',
+            'rejected'      => 'Your KYC was rejected. Please resubmit.',
+        ];
+
+        if ($kyc) {
+            $kycData = [
+                'has_kyc'          => true,
+                'kyc_id'           => $kyc->_id,
+                'kyc_status'       => $kyc->status,
+                'status_message'   => $kycStatusMessages[$kyc->status] ?? 'Unknown status.',
+                'document_type'    => $kyc->document_type,
+                'rejection_reason' => $kyc->rejection_reason ?? null,
+                'submitted_at'     => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null,
+                'reviewed_at'      => $kyc->reviewed_at ? Carbon::parse($kyc->reviewed_at)->format('d M Y H:i') : null,
+            ];
+        } else {
+            $kycData = [
+                'has_kyc'          => false,
+                'kyc_id'           => null,
+                'kyc_status'       => 'not_submitted',
+                'status_message'   => $kycStatusMessages['not_submitted'],
+                'document_type'    => null,
+                'rejection_reason' => null,
+                'submitted_at'     => null,
+                'reviewed_at'      => null,
+            ];
+        }
+
+        return [
+            'user'   => $user,
+            'wallet' => $walletData,
+            'kyc'    => $kycData,
+        ];
     }
 
     private function maskWalletId($walletId)

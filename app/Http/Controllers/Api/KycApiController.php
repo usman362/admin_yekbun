@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KycVerification;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Models\ZercashSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -84,7 +85,8 @@ class KycApiController extends Controller
         $user->save();
 
         return ResponseHelper::sendResponse([
-            'verified' => true
+            'verified'    => true,
+            'userDetails' => $this->getUserDetails($user),
         ], 'OTP verified successfully.');
     }
 
@@ -178,8 +180,9 @@ class KycApiController extends Controller
         $user->save();
 
         return ResponseHelper::sendResponse([
-            'kyc_id' => $kyc->_id,
-            'status' => 'pending'
+            'kyc_id'      => $kyc->_id,
+            'status'      => 'pending',
+            'userDetails' => $this->getUserDetails($user),
         ], 'KYC submitted.');
     }
 
@@ -224,7 +227,8 @@ class KycApiController extends Controller
             $user->save();
 
             return ResponseHelper::sendResponse([
-                'kyc_status' => 'approved'
+                'kyc_status'  => 'approved',
+                'userDetails' => $this->getUserDetails($user),
             ], 'KYC approved');
         } else {
 
@@ -237,7 +241,8 @@ class KycApiController extends Controller
             $user->save();
 
             return ResponseHelper::sendResponse([
-                'kyc_status' => 'rejected'
+                'kyc_status'  => 'rejected',
+                'userDetails' => $this->getUserDetails($user),
             ], 'KYC rejected');
         }
     }
@@ -248,12 +253,13 @@ class KycApiController extends Controller
         if (!$user) {
             return ResponseHelper::sendResponse(null, 'User not found.', false, 404);
         }
+        $userDetails = $this->getUserDetails($user);
         $kyc = KycVerification::where('user_id', $user->_id)->orderBy('created_at', 'desc')->first();
         if (!$kyc) {
-            return ResponseHelper::sendResponse(['has_kyc' => false, 'kyc_status' => null,], 'No KYC submission found.');
+            return ResponseHelper::sendResponse(['has_kyc' => false, 'kyc_status' => null, 'userDetails' => $userDetails,], 'No KYC submission found.');
         }
         $statusMessages = ['draft' => 'KYC documents are being uploaded.', 'pending' => 'Your documents are submitted and waiting for review.', 'under_review' => 'Our team is currently reviewing your documents.', 'approved' => 'Your KYC is approved. Your wallet is now active!', 'rejected' => 'Your KYC was rejected. Please resubmit.',];
-        return ResponseHelper::sendResponse(['has_kyc' => true, 'kyc_id' => $kyc->_id, 'kyc_status' => $kyc->status, 'status_message' => $statusMessages[$kyc->status] ?? 'Unknown status.', 'document_type' => $kyc->document_type, 'full_name' => $kyc->full_name, 'rejection_reason' => $kyc->rejection_reason, 'submitted_at' => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null, 'reviewed_at' => $kyc->reviewed_at ? Carbon::parse($kyc->reviewed_at)->format('d M Y H:i') : null,], 'KYC status fetched.');
+        return ResponseHelper::sendResponse(['has_kyc' => true, 'kyc_id' => $kyc->_id, 'kyc_status' => $kyc->status, 'status_message' => $statusMessages[$kyc->status] ?? 'Unknown status.', 'document_type' => $kyc->document_type, 'full_name' => $kyc->full_name, 'rejection_reason' => $kyc->rejection_reason, 'submitted_at' => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null, 'reviewed_at' => $kyc->reviewed_at ? Carbon::parse($kyc->reviewed_at)->format('d M Y H:i') : null, 'userDetails' => $userDetails,], 'KYC status fetched.');
     }
 
     public function pendingList(Request $request)
@@ -266,6 +272,91 @@ class KycApiController extends Controller
             return ['kyc_id' => $kyc->_id, 'user_id' => $kyc->user_id, 'full_name' => $kyc->full_name, 'document_type' => $kyc->document_type, 'document_number' => $kyc->document_number, 'status' => $kyc->status, 'submitted_at' => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null, 'document_front' => $kyc->document_front ? asset('storage/' . $kyc->document_front) : null, 'document_back' => $kyc->document_back ? asset('storage/' . $kyc->document_back) : null, 'selfie_with_id' => $kyc->selfie_with_id ? asset('storage/' . $kyc->selfie_with_id) : null,];
         });
         return ResponseHelper::sendResponse(['items' => $items, 'current_page' => $kycs->currentPage(), 'last_page' => $kycs->lastPage(), 'total' => $kycs->total(),], 'KYC list fetched.');
+    }
+
+    private function getUserDetails($user)
+    {
+        $user = $user->fresh();
+
+        // Wallet info
+        $wallet = Wallet::where('user_id', $user->_id)->first();
+        $walletStatusMessages = [
+            'not_found'    => 'No wallet found. Please create one.',
+            'under_review' => 'We will review your request. We will get back soon.',
+            'activated'    => 'Wallet is activated. Enjoy...',
+            'on_hold'      => 'Wallet is on Hold. See the reason here.',
+            'closed'       => 'Wallet is Closed. The account will be removed after 90 Days.',
+        ];
+
+        if ($wallet) {
+            $wStatus = $wallet->status ?? 'under_review';
+            $walletId = $wallet->_id;
+            $maskedWalletId = strlen($walletId) >= 10
+                ? strtoupper(substr($walletId, 0, 4)) . ' **** **** ' . strtoupper(substr($walletId, -4))
+                : $walletId;
+
+            $walletData = [
+                'has_wallet'     => true,
+                'wallet_id'      => $maskedWalletId,
+                'wallet_status'  => $wStatus,
+                'status_message' => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
+                'hold_reason'    => $wallet->status_reason ?? null,
+                'balance'        => round($wallet->balance ?? 0, 2),
+                'expire_at'      => $wallet->expire_at ?? null,
+                'created_at'     => $wallet->created_at ?? null,
+            ];
+        } else {
+            $walletData = [
+                'has_wallet'     => false,
+                'wallet_id'      => null,
+                'wallet_status'  => 'not_found',
+                'status_message' => $walletStatusMessages['not_found'],
+                'hold_reason'    => null,
+                'balance'        => 0,
+                'expire_at'      => null,
+                'created_at'     => null,
+            ];
+        }
+
+        // KYC info
+        $kyc = KycVerification::where('user_id', $user->_id)->orderBy('created_at', 'desc')->first();
+        $kycStatusMessages = [
+            'not_submitted' => 'KYC not submitted yet.',
+            'pending'       => 'Your documents are submitted and waiting for review.',
+            'under_review'  => 'Our team is currently reviewing your documents.',
+            'approved'      => 'Your KYC is approved. Your wallet is now active!',
+            'rejected'      => 'Your KYC was rejected. Please resubmit.',
+        ];
+
+        if ($kyc) {
+            $kycData = [
+                'has_kyc'          => true,
+                'kyc_id'           => $kyc->_id,
+                'kyc_status'       => $kyc->status,
+                'status_message'   => $kycStatusMessages[$kyc->status] ?? 'Unknown status.',
+                'document_type'    => $kyc->document_type,
+                'rejection_reason' => $kyc->rejection_reason ?? null,
+                'submitted_at'     => $kyc->submitted_at ? Carbon::parse($kyc->submitted_at)->format('d M Y H:i') : null,
+                'reviewed_at'      => $kyc->reviewed_at ? Carbon::parse($kyc->reviewed_at)->format('d M Y H:i') : null,
+            ];
+        } else {
+            $kycData = [
+                'has_kyc'          => false,
+                'kyc_id'           => null,
+                'kyc_status'       => 'not_submitted',
+                'status_message'   => $kycStatusMessages['not_submitted'],
+                'document_type'    => null,
+                'rejection_reason' => null,
+                'submitted_at'     => null,
+                'reviewed_at'      => null,
+            ];
+        }
+
+        return [
+            'user'   => $user,
+            'wallet' => $walletData,
+            'kyc'    => $kycData,
+        ];
     }
 
     private function maskEmail($email)
