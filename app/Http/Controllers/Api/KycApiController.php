@@ -297,6 +297,7 @@ class KycApiController extends Controller
 
             $walletData = [
                 'has_wallet'     => true,
+                'has_pin'        => !empty($wallet->pin),
                 'wallet_id'      => $maskedWalletId,
                 'wallet_status'  => $wStatus,
                 'status_message' => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
@@ -308,6 +309,7 @@ class KycApiController extends Controller
         } else {
             $walletData = [
                 'has_wallet'     => false,
+                'has_pin'        => false,
                 'wallet_id'      => null,
                 'wallet_status'  => 'not_found',
                 'status_message' => $walletStatusMessages['not_found'],
