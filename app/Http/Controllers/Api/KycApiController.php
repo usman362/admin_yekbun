@@ -296,27 +296,29 @@ class KycApiController extends Controller
                 : $walletId;
 
             $walletData = [
-                'has_wallet'     => true,
-                'has_pin'        => !empty($wallet->pin),
-                'wallet_id'      => $maskedWalletId,
-                'wallet_status'  => $wStatus,
-                'status_message' => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
-                'hold_reason'    => $wallet->status_reason ?? null,
-                'balance'        => round($wallet->balance ?? 0, 2),
-                'expire_at'      => $wallet->expire_at ?? null,
-                'created_at'     => $wallet->created_at ?? null,
+                'has_wallet'            => true,
+                'has_pin'               => !empty($wallet->pin),
+                'welcome_bonus_claimed' => !empty($wallet->welcome_bonus_claimed),
+                'wallet_id'             => $maskedWalletId,
+                'wallet_status'         => $wStatus,
+                'status_message'        => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
+                'hold_reason'           => $wallet->status_reason ?? null,
+                'balance'               => round($wallet->balance ?? 0, 2),
+                'expire_at'             => $wallet->expire_at ?? null,
+                'created_at'            => $wallet->created_at ?? null,
             ];
         } else {
             $walletData = [
-                'has_wallet'     => false,
-                'has_pin'        => false,
-                'wallet_id'      => null,
-                'wallet_status'  => 'not_found',
-                'status_message' => $walletStatusMessages['not_found'],
-                'hold_reason'    => null,
-                'balance'        => 0,
-                'expire_at'      => null,
-                'created_at'     => null,
+                'has_wallet'            => false,
+                'has_pin'               => false,
+                'welcome_bonus_claimed' => false,
+                'wallet_id'             => null,
+                'wallet_status'         => 'not_found',
+                'status_message'        => $walletStatusMessages['not_found'],
+                'hold_reason'           => null,
+                'balance'               => 0,
+                'expire_at'             => null,
+                'created_at'            => null,
             ];
         }
 

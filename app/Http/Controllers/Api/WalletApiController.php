@@ -129,9 +129,38 @@ class WalletApiController extends Controller
             return ResponseHelper::sendResponse(null, 'Invalid PIN.', false, 401);
         }
 
+        // Welcome bonus on first verify-pin
+        $bonusGiven = false;
+        if (empty($wallet->welcome_bonus_claimed)) {
+            $bonusAmount = 300;
+            $wallet->balance = ($wallet->balance ?? 0) + $bonusAmount;
+            $wallet->welcome_bonus_claimed = true;
+            $wallet->welcome_bonus_amount = $bonusAmount;
+            $wallet->welcome_bonus_at = Carbon::now();
+            $wallet->save();
+
+            // Create bonus transaction
+            $transaction = new Transaction();
+            $transaction->user_id = $user->_id;
+            $transaction->transaction_type = 'deposit';
+            $transaction->category = 'welcome_bonus';
+            $transaction->amount = $bonusAmount;
+            $transaction->currency = 'ZER';
+            $transaction->status = 'COMPLETED';
+            $transaction->description = 'Welcome Bonus';
+            $transaction->date = Carbon::now()->format('Y-m-d');
+            $transaction->created_at = Carbon::now();
+            $transaction->save();
+
+            $bonusGiven = true;
+        }
+
         return ResponseHelper::sendResponse([
-            'verified' => true
-        ], 'PIN verified.');
+            'verified'     => true,
+            'bonus_given'  => $bonusGiven,
+            'bonus_amount' => $bonusGiven ? 300 : 0,
+            'userDetails'  => $this->getUserDetails($user),
+        ], $bonusGiven ? 'PIN verified. Welcome bonus added!' : 'PIN verified.');
     }
 
 
@@ -318,27 +347,29 @@ class WalletApiController extends Controller
         if ($wallet) {
             $wStatus = $wallet->status ?? 'under_review';
             $walletData = [
-                'has_wallet'     => true,
-                'has_pin'        => !empty($wallet->pin),
-                'wallet_id'      => $this->maskWalletId($wallet->_id),
-                'wallet_status'  => $wStatus,
-                'status_message' => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
-                'hold_reason'    => $wallet->status_reason ?? null,
-                'balance'        => round($wallet->balance ?? 0, 2),
-                'expire_at'      => $wallet->expire_at ?? null,
-                'created_at'     => $wallet->created_at ?? null,
+                'has_wallet'            => true,
+                'has_pin'               => !empty($wallet->pin),
+                'welcome_bonus_claimed' => !empty($wallet->welcome_bonus_claimed),
+                'wallet_id'             => $this->maskWalletId($wallet->_id),
+                'wallet_status'         => $wStatus,
+                'status_message'        => $walletStatusMessages[$wStatus] ?? 'Unknown status.',
+                'hold_reason'           => $wallet->status_reason ?? null,
+                'balance'               => round($wallet->balance ?? 0, 2),
+                'expire_at'             => $wallet->expire_at ?? null,
+                'created_at'            => $wallet->created_at ?? null,
             ];
         } else {
             $walletData = [
-                'has_wallet'     => false,
-                'has_pin'        => false,
-                'wallet_id'      => null,
-                'wallet_status'  => 'not_found',
-                'status_message' => $walletStatusMessages['not_found'],
-                'hold_reason'    => null,
-                'balance'        => 0,
-                'expire_at'      => null,
-                'created_at'     => null,
+                'has_wallet'            => false,
+                'has_pin'               => false,
+                'welcome_bonus_claimed' => false,
+                'wallet_id'             => null,
+                'wallet_status'         => 'not_found',
+                'status_message'        => $walletStatusMessages['not_found'],
+                'hold_reason'           => null,
+                'balance'               => 0,
+                'expire_at'             => null,
+                'created_at'            => null,
             ];
         }
 
