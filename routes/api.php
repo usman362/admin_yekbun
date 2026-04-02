@@ -73,6 +73,7 @@ use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\Api\CheckoutApiController;
 use App\Http\Controllers\Api\WalletApiController;
 use App\Http\Controllers\Api\KycApiController;
+use App\Http\Controllers\Api\PurchaseVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +146,9 @@ use App\Http\Controllers\Api\KycApiController;
     Route::get('get-login-image', [UsersController::class, 'getLoginImage']);
     Route::get('profile-banners', [UsersController::class, 'getProfileBanners']);
     Route::middleware('jwt.custom')->group(function () {
+
+        // Purchases
+        Route::post('purchases/verify', [PurchaseVerificationController::class, 'verify']);
 
         Route::post('/change-password', [AccountSettingController::class, 'change_password'])
             ->name('change-password');
